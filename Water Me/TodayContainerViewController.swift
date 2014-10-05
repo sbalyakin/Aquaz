@@ -8,13 +8,15 @@
 
 import UIKit
 
-class TodayContainerViewController: UIViewController, UIPageViewControllerDataSource {
+class TodayContainerViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
   
   var pageViewController: UIPageViewController!
   
   var pages: [UIViewController] = []
+  var pageTitles = ["Stat", "Today"]
   
   @IBOutlet weak var revealButton: UIBarButtonItem!
+  @IBOutlet weak var modeButton: UIBarButtonItem!
   
   
   override func viewDidLoad() {
@@ -29,6 +31,7 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
     // Create page view controller
     pageViewController = storyboard!.instantiateViewControllerWithIdentifier("TodayPageViewController") as UIPageViewController
     pageViewController.dataSource = self
+    pageViewController.delegate = self
     pageViewController.setViewControllers([todayViewController], direction: .Forward, animated: false, completion: nil)
     
     addChildViewController(pageViewController)
@@ -42,7 +45,9 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
   
   func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
     if let index = find(pages, viewController) {
-      return (index > 0) ? pages[index - 1] : nil
+      if index > 0 {
+        return pages[index - 1]
+      }
     }
     
     return nil
@@ -50,7 +55,9 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
   
   func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
     if let index = find(pages, viewController) {
-      return (index < pages.count - 1) ? pages[index + 1] : nil
+      if index < pages.count - 1 {
+        return pages[index + 1]
+      }
     }
     
     return nil
@@ -62,6 +69,26 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
       revealButton.action = "revealToggle:"
       navigationController!.navigationBar.addGestureRecognizer(revealViewController.panGestureRecognizer())
       view.addGestureRecognizer(revealViewController.panGestureRecognizer())
+    }
+  }
+  
+  @IBAction func toggleCurrentPage(sender: AnyObject) {
+    let currentPage = pageViewController.viewControllers.last as UIViewController
+    if currentPage == pages[0] {
+      pageViewController.setViewControllers([pages[1]], direction: .Forward, animated: true, completion: nil)
+      modeButton.title = pageTitles[1]
+    } else if currentPage == pages[1] {
+      pageViewController.setViewControllers([pages[0]], direction: .Reverse, animated: true, completion: nil)
+      modeButton.title = pageTitles[0]
+    }
+  }
+  
+  func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
+    let currentPage = pageViewController.viewControllers.last as UIViewController
+    if currentPage == pages[0] {
+      modeButton.title = pageTitles[0]
+    } else if currentPage == pages[1] {
+      modeButton.title = pageTitles[1]
     }
   }
   

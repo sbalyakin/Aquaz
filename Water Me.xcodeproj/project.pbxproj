@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8424224F19DE60D100EC1C81 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8424224E19DE60D100EC1C81 /* SWRevealViewController.m */; };
-		8424225219DE65B100EC1C81 /* MainMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424225119DE65B100EC1C81 /* MainMenuTableViewController.swift */; };
 		8424228619DE691000EC1C81 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424228519DE691000EC1C81 /* TodayViewController.swift */; };
 		8424228819DE695800EC1C81 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424228719DE695800EC1C81 /* StatisticsViewController.swift */; };
 		8424228A19DE737B00EC1C81 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424228919DE737B00EC1C81 /* SettingsTableViewController.swift */; };
@@ -35,7 +34,6 @@
 		8424224D19DE60D100EC1C81 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		8424224E19DE60D100EC1C81 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		8424225019DE614400EC1C81 /* Water Me-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Water Me-Bridging-Header.h"; sourceTree = "<group>"; };
-		8424225119DE65B100EC1C81 /* MainMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewController.swift; sourceTree = "<group>"; };
 		8424228519DE691000EC1C81 /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		8424228719DE695800EC1C81 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		8424228919DE737B00EC1C81 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				84669A6E19DAD78D003C2263 /* AppDelegate.swift */,
-				8424225119DE65B100EC1C81 /* MainMenuTableViewController.swift */,
 				8424228919DE737B00EC1C81 /* SettingsTableViewController.swift */,
 				8424228719DE695800EC1C81 /* StatisticsViewController.swift */,
 				843AC0B419DEEEB000D8F471 /* TodayContainerViewController.swift */,
@@ -245,7 +242,6 @@
 				843AC0B519DEEEB000D8F471 /* TodayContainerViewController.swift in Sources */,
 				84669A6F19DAD78D003C2263 /* AppDelegate.swift in Sources */,
 				8424228619DE691000EC1C81 /* TodayViewController.swift in Sources */,
-				8424225219DE65B100EC1C81 /* MainMenuTableViewController.swift in Sources */,
 				8424228A19DE737B00EC1C81 /* SettingsTableViewController.swift in Sources */,
 				84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */,
 				8424224F19DE60D100EC1C81 /* SWRevealViewController.m in Sources */,
