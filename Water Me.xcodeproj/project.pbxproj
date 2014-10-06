@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8424224F19DE60D100EC1C81 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8424224E19DE60D100EC1C81 /* SWRevealViewController.m */; };
-		8424228619DE691000EC1C81 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424228519DE691000EC1C81 /* TodayViewController.swift */; };
-		8424228819DE695800EC1C81 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424228719DE695800EC1C81 /* StatisticsViewController.swift */; };
-		8424228A19DE737B00EC1C81 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424228919DE737B00EC1C81 /* SettingsTableViewController.swift */; };
-		843AC0B519DEEEB000D8F471 /* TodayContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843AC0B419DEEEB000D8F471 /* TodayContainerViewController.swift */; };
-		84669A6F19DAD78D003C2263 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84669A6E19DAD78D003C2263 /* AppDelegate.swift */; };
+		843B055E19E2D7800097A833 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055319E2D7800097A833 /* AppDelegate.swift */; };
+		843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055519E2D7800097A833 /* SettingsTableViewController.swift */; };
+		843B056019E2D7800097A833 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055619E2D7800097A833 /* StatisticsViewController.swift */; };
+		843B056119E2D7800097A833 /* TodayContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055719E2D7800097A833 /* TodayContainerViewController.swift */; };
+		843B056219E2D7800097A833 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055819E2D7800097A833 /* TodayViewController.swift */; };
+		843B056319E2D7800097A833 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B055B19E2D7800097A833 /* SWRevealViewController.m */; };
+		843B056519E2D7F70097A833 /* Consumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056419E2D7F70097A833 /* Consumption.swift */; };
+		843B056719E2D7F70097A833 /* RecentAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056619E2D7F70097A833 /* RecentAmount.swift */; };
+		843B056919E2D80E0097A833 /* ExtraConsumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056819E2D80E0097A833 /* ExtraConsumption.swift */; };
+		843B056B19E2D80E0097A833 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056A19E2D80E0097A833 /* Drink.swift */; };
 		84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Water_Me.xcdatamodeld */; };
 		84669A7719DAD78D003C2263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7519DAD78D003C2263 /* Main.storyboard */; };
 		84669A7919DAD78D003C2263 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7819DAD78D003C2263 /* Images.xcassets */; };
@@ -31,16 +35,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8424224D19DE60D100EC1C81 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		8424224E19DE60D100EC1C81 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		8424225019DE614400EC1C81 /* Water Me-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Water Me-Bridging-Header.h"; sourceTree = "<group>"; };
-		8424228519DE691000EC1C81 /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		8424228719DE695800EC1C81 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
-		8424228919DE737B00EC1C81 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
-		843AC0B419DEEEB000D8F471 /* TodayContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayContainerViewController.swift; sourceTree = "<group>"; };
+		843B055319E2D7800097A833 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		843B055519E2D7800097A833 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		843B055619E2D7800097A833 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		843B055719E2D7800097A833 /* TodayContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayContainerViewController.swift; sourceTree = "<group>"; };
+		843B055819E2D7800097A833 /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		843B055A19E2D7800097A833 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		843B055B19E2D7800097A833 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		843B055C19E2D7800097A833 /* Water Me-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Water Me-Bridging-Header.h"; sourceTree = "<group>"; };
+		843B056419E2D7F70097A833 /* Consumption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consumption.swift; sourceTree = "<group>"; };
+		843B056619E2D7F70097A833 /* RecentAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentAmount.swift; sourceTree = "<group>"; };
+		843B056819E2D80E0097A833 /* ExtraConsumption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraConsumption.swift; sourceTree = "<group>"; };
+		843B056A19E2D80E0097A833 /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		84669A6919DAD78D003C2263 /* Water Me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Water Me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84669A6D19DAD78D003C2263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84669A6E19DAD78D003C2263 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84669A7119DAD78D003C2263 /* Water_Me.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Water_Me.xcdatamodel; sourceTree = "<group>"; };
 		84669A7619DAD78D003C2263 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84669A7819DAD78D003C2263 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -68,14 +76,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8424224819DE601500EC1C81 /* SWRevealViewController */ = {
+		843B055219E2D7800097A833 /* AppDelegates */ = {
 			isa = PBXGroup;
 			children = (
-				8424224D19DE60D100EC1C81 /* SWRevealViewController.h */,
-				8424224E19DE60D100EC1C81 /* SWRevealViewController.m */,
-				8424225019DE614400EC1C81 /* Water Me-Bridging-Header.h */,
+				843B055319E2D7800097A833 /* AppDelegate.swift */,
 			);
-			name = SWRevealViewController;
+			path = AppDelegates;
+			sourceTree = "<group>";
+		};
+		843B055419E2D7800097A833 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				843B055519E2D7800097A833 /* SettingsTableViewController.swift */,
+				843B055619E2D7800097A833 /* StatisticsViewController.swift */,
+				843B055719E2D7800097A833 /* TodayContainerViewController.swift */,
+				843B055819E2D7800097A833 /* TodayViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		843B055919E2D7800097A833 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				843B055A19E2D7800097A833 /* SWRevealViewController.h */,
+				843B055B19E2D7800097A833 /* SWRevealViewController.m */,
+				843B055C19E2D7800097A833 /* Water Me-Bridging-Header.h */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		843B055D19E2D7800097A833 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				843B056619E2D7F70097A833 /* RecentAmount.swift */,
+				843B056419E2D7F70097A833 /* Consumption.swift */,
+				843B056A19E2D80E0097A833 /* Drink.swift */,
+				843B056819E2D80E0097A833 /* ExtraConsumption.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		84669A6019DAD78D003C2263 = {
@@ -99,16 +137,14 @@
 		84669A6B19DAD78D003C2263 /* Water Me */ = {
 			isa = PBXGroup;
 			children = (
-				84669A6E19DAD78D003C2263 /* AppDelegate.swift */,
-				8424228919DE737B00EC1C81 /* SettingsTableViewController.swift */,
-				8424228719DE695800EC1C81 /* StatisticsViewController.swift */,
-				843AC0B419DEEEB000D8F471 /* TodayContainerViewController.swift */,
-				8424228519DE691000EC1C81 /* TodayViewController.swift */,
+				843B055419E2D7800097A833 /* Controllers */,
+				843B055D19E2D7800097A833 /* Models */,
+				843B055219E2D7800097A833 /* AppDelegates */,
+				843B055919E2D7800097A833 /* External */,
 				84669A7819DAD78D003C2263 /* Images.xcassets */,
 				84669A7A19DAD78D003C2263 /* LaunchScreen.xib */,
 				84669A7519DAD78D003C2263 /* Main.storyboard */,
 				84669A6C19DAD78D003C2263 /* Supporting Files */,
-				8424224819DE601500EC1C81 /* SWRevealViewController */,
 				84669A7019DAD78D003C2263 /* Water_Me.xcdatamodeld */,
 			);
 			path = "Water Me";
@@ -239,13 +275,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				843AC0B519DEEEB000D8F471 /* TodayContainerViewController.swift in Sources */,
-				84669A6F19DAD78D003C2263 /* AppDelegate.swift in Sources */,
-				8424228619DE691000EC1C81 /* TodayViewController.swift in Sources */,
-				8424228A19DE737B00EC1C81 /* SettingsTableViewController.swift in Sources */,
+				843B056319E2D7800097A833 /* SWRevealViewController.m in Sources */,
+				843B056719E2D7F70097A833 /* RecentAmount.swift in Sources */,
+				843B055E19E2D7800097A833 /* AppDelegate.swift in Sources */,
+				843B056B19E2D80E0097A833 /* Drink.swift in Sources */,
+				843B056119E2D7800097A833 /* TodayContainerViewController.swift in Sources */,
+				843B056919E2D80E0097A833 /* ExtraConsumption.swift in Sources */,
+				843B056519E2D7F70097A833 /* Consumption.swift in Sources */,
+				843B056219E2D7800097A833 /* TodayViewController.swift in Sources */,
 				84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */,
-				8424224F19DE60D100EC1C81 /* SWRevealViewController.m in Sources */,
-				8424228819DE695800EC1C81 /* StatisticsViewController.swift in Sources */,
+				843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */,
+				843B056019E2D7800097A833 /* StatisticsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
