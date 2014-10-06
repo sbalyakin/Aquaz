@@ -12,24 +12,20 @@ class SettingsTableViewController: UITableViewController {
   
   @IBOutlet weak var revealButton: UIBarButtonItem!
   
+  @IBOutlet weak var volume: UISegmentedControl!
+  @IBOutlet weak var weight: UISegmentedControl!
+  @IBOutlet weak var height: UISegmentedControl!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    
+    // Getting actual settings
+    volume.selectedSegmentIndex = Settings.General.isMetricVolume ? 0 : 1
+    weight.selectedSegmentIndex = Settings.General.isMetricWeight ? 0 : 1
+    height.selectedSegmentIndex = Settings.General.isMetricHeight ? 0 : 1
     
     // Additional setup for revealing
     revealButtonSetup()
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
   }
   
   func revealButtonSetup() {
@@ -41,4 +37,15 @@ class SettingsTableViewController: UITableViewController {
     }
   }
   
+  @IBAction func volumeSettingChanged(sender: UISegmentedControl) {
+    Settings.General.isMetricVolume = sender.selectedSegmentIndex == 0
+  }
+  
+  @IBAction func weightSettingChanged(sender: UISegmentedControl) {
+    Settings.General.isMetricWeight = sender.selectedSegmentIndex == 0
+  }
+  
+  @IBAction func heightSettingChanged(sender: UISegmentedControl) {
+    Settings.General.isMetricHeight = sender.selectedSegmentIndex == 0
+  }
 }

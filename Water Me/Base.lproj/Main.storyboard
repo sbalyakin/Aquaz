@@ -507,6 +507,9 @@
                                                         <segment title="litres"/>
                                                         <segment title="fl oz"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="volumeSettingChanged:" destination="wjj-WP-iN6" eventType="valueChanged" id="5d1-0y-jls"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -530,6 +533,9 @@
                                                         <segment title="kg"/>
                                                         <segment title="lb"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="weightSettingChanged:" destination="wjj-WP-iN6" eventType="valueChanged" id="BMR-vs-Wya"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -553,6 +559,9 @@
                                                         <segment title="cm"/>
                                                         <segment title="ft"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="heightSettingChanged:" destination="wjj-WP-iN6" eventType="valueChanged" id="fsQ-gi-6rr"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -569,7 +578,10 @@
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="KeX-Vu-ERa"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="height" destination="vJl-ea-rcR" id="bqc-tu-8T9"/>
                         <outlet property="revealButton" destination="KeX-Vu-ERa" id="L1u-H5-iqH"/>
+                        <outlet property="volume" destination="nsz-ys-Fh0" id="Esw-hK-hc3"/>
+                        <outlet property="weight" destination="VzI-KD-5U6" id="jRI-0W-QbV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BKT-j2-BSs" userLabel="First Responder" sceneMemberID="firstResponder"/>

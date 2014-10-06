@@ -22,6 +22,7 @@
 		84669A7919DAD78D003C2263 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7819DAD78D003C2263 /* Images.xcassets */; };
 		84669A7C19DAD78D003C2263 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7A19DAD78D003C2263 /* LaunchScreen.xib */; };
 		84669A8819DAD78D003C2263 /* Water_MeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84669A8719DAD78D003C2263 /* Water_MeTests.swift */; };
+		A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		84669A8119DAD78D003C2263 /* Water MeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Water MeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84669A8619DAD78D003C2263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84669A8719DAD78D003C2263 /* Water_MeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Water_MeTests.swift; sourceTree = "<group>"; };
+		A5E70A6F19E30BEE006E5FC0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				843B056419E2D7F70097A833 /* Consumption.swift */,
 				843B056A19E2D80E0097A833 /* Drink.swift */,
 				843B056819E2D80E0097A833 /* ExtraConsumption.swift */,
+				A5E70A6F19E30BEE006E5FC0 /* Settings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				843B056B19E2D80E0097A833 /* Drink.swift in Sources */,
 				843B056119E2D7800097A833 /* TodayContainerViewController.swift in Sources */,
 				843B056919E2D80E0097A833 /* ExtraConsumption.swift in Sources */,
+				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
 				843B056519E2D7F70097A833 /* Consumption.swift in Sources */,
 				843B056219E2D7800097A833 /* TodayViewController.swift in Sources */,
 				84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */,
