@@ -7,21 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84380C2819E4195A0026398E /* Consumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2719E4195A0026398E /* Consumption.swift */; };
+		84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2919E4195A0026398E /* RecentAmount.swift */; };
+		84380C2C19E4195A0026398E /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2B19E4195A0026398E /* Drink.swift */; };
 		843B055E19E2D7800097A833 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055319E2D7800097A833 /* AppDelegate.swift */; };
 		843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055519E2D7800097A833 /* SettingsTableViewController.swift */; };
 		843B056019E2D7800097A833 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055619E2D7800097A833 /* StatisticsViewController.swift */; };
 		843B056119E2D7800097A833 /* TodayContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055719E2D7800097A833 /* TodayContainerViewController.swift */; };
 		843B056219E2D7800097A833 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055819E2D7800097A833 /* TodayViewController.swift */; };
 		843B056319E2D7800097A833 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B055B19E2D7800097A833 /* SWRevealViewController.m */; };
-		843B056519E2D7F70097A833 /* Consumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056419E2D7F70097A833 /* Consumption.swift */; };
-		843B056719E2D7F70097A833 /* RecentAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056619E2D7F70097A833 /* RecentAmount.swift */; };
 		843B056919E2D80E0097A833 /* ExtraConsumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056819E2D80E0097A833 /* ExtraConsumption.swift */; };
-		843B056B19E2D80E0097A833 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056A19E2D80E0097A833 /* Drink.swift */; };
 		84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Water_Me.xcdatamodeld */; };
 		84669A7719DAD78D003C2263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7519DAD78D003C2263 /* Main.storyboard */; };
 		84669A7919DAD78D003C2263 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7819DAD78D003C2263 /* Images.xcassets */; };
 		84669A7C19DAD78D003C2263 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7A19DAD78D003C2263 /* LaunchScreen.xib */; };
 		84669A8819DAD78D003C2263 /* Water_MeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84669A8719DAD78D003C2263 /* Water_MeTests.swift */; };
+		84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */; };
 		A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84380C2719E4195A0026398E /* Consumption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consumption.swift; sourceTree = "<group>"; };
+		84380C2919E4195A0026398E /* RecentAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentAmount.swift; sourceTree = "<group>"; };
+		84380C2B19E4195A0026398E /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		843B055319E2D7800097A833 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		843B055519E2D7800097A833 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		843B055619E2D7800097A833 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -44,10 +48,7 @@
 		843B055A19E2D7800097A833 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		843B055B19E2D7800097A833 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		843B055C19E2D7800097A833 /* Water Me-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Water Me-Bridging-Header.h"; sourceTree = "<group>"; };
-		843B056419E2D7F70097A833 /* Consumption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consumption.swift; sourceTree = "<group>"; };
-		843B056619E2D7F70097A833 /* RecentAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentAmount.swift; sourceTree = "<group>"; };
 		843B056819E2D80E0097A833 /* ExtraConsumption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraConsumption.swift; sourceTree = "<group>"; };
-		843B056A19E2D80E0097A833 /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		84669A6919DAD78D003C2263 /* Water Me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Water Me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84669A6D19DAD78D003C2263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84669A7119DAD78D003C2263 /* Water_Me.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Water_Me.xcdatamodel; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 		84669A8119DAD78D003C2263 /* Water MeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Water MeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84669A8619DAD78D003C2263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84669A8719DAD78D003C2263 /* Water_MeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Water_MeTests.swift; sourceTree = "<group>"; };
+		84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPrePopulation.swift; sourceTree = "<group>"; };
 		A5E70A6F19E30BEE006E5FC0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,11 +112,12 @@
 		843B055D19E2D7800097A833 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				843B056619E2D7F70097A833 /* RecentAmount.swift */,
-				843B056419E2D7F70097A833 /* Consumption.swift */,
-				843B056A19E2D80E0097A833 /* Drink.swift */,
 				843B056819E2D80E0097A833 /* ExtraConsumption.swift */,
 				A5E70A6F19E30BEE006E5FC0 /* Settings.swift */,
+				84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */,
+				84380C2B19E4195A0026398E /* Drink.swift */,
+				84380C2919E4195A0026398E /* RecentAmount.swift */,
+				84380C2719E4195A0026398E /* Consumption.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -279,16 +282,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				843B056319E2D7800097A833 /* SWRevealViewController.m in Sources */,
-				843B056719E2D7F70097A833 /* RecentAmount.swift in Sources */,
 				843B055E19E2D7800097A833 /* AppDelegate.swift in Sources */,
-				843B056B19E2D80E0097A833 /* Drink.swift in Sources */,
+				84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */,
 				843B056119E2D7800097A833 /* TodayContainerViewController.swift in Sources */,
 				843B056919E2D80E0097A833 /* ExtraConsumption.swift in Sources */,
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
-				843B056519E2D7F70097A833 /* Consumption.swift in Sources */,
 				843B056219E2D7800097A833 /* TodayViewController.swift in Sources */,
+				84380C2C19E4195A0026398E /* Drink.swift in Sources */,
 				84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */,
+				84380C2819E4195A0026398E /* Consumption.swift in Sources */,
 				843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */,
+				84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */,
 				843B056019E2D7800097A833 /* StatisticsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
