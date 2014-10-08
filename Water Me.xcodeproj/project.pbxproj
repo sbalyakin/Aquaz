@@ -23,6 +23,8 @@
 		84669A7C19DAD78D003C2263 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7A19DAD78D003C2263 /* LaunchScreen.xib */; };
 		84669A8819DAD78D003C2263 /* Water_MeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84669A8719DAD78D003C2263 /* Water_MeTests.swift */; };
 		84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */; };
+		A5B75A1419E5686C00D0477B /* ModelHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1319E5686C00D0477B /* ModelHelpers.swift */; };
+		A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1519E57D3500D0477B /* NamedEntity.swift */; };
 		A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +61,8 @@
 		84669A8619DAD78D003C2263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84669A8719DAD78D003C2263 /* Water_MeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Water_MeTests.swift; sourceTree = "<group>"; };
 		84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPrePopulation.swift; sourceTree = "<group>"; };
+		A5B75A1319E5686C00D0477B /* ModelHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelHelpers.swift; sourceTree = "<group>"; };
+		A5B75A1519E57D3500D0477B /* NamedEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedEntity.swift; sourceTree = "<group>"; };
 		A5E70A6F19E30BEE006E5FC0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +122,7 @@
 				84380C2B19E4195A0026398E /* Drink.swift */,
 				84380C2919E4195A0026398E /* RecentAmount.swift */,
 				84380C2719E4195A0026398E /* Consumption.swift */,
+				A5B75A1519E57D3500D0477B /* NamedEntity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -143,6 +148,7 @@
 		84669A6B19DAD78D003C2263 /* Water Me */ = {
 			isa = PBXGroup;
 			children = (
+				A5B75A1219E55CBB00D0477B /* Helpers */,
 				843B055419E2D7800097A833 /* Controllers */,
 				843B055D19E2D7800097A833 /* Models */,
 				843B055219E2D7800097A833 /* AppDelegates */,
@@ -179,6 +185,14 @@
 				84669A8619DAD78D003C2263 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A5B75A1219E55CBB00D0477B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A5B75A1319E5686C00D0477B /* ModelHelpers.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +298,7 @@
 				843B056319E2D7800097A833 /* SWRevealViewController.m in Sources */,
 				843B055E19E2D7800097A833 /* AppDelegate.swift in Sources */,
 				84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */,
+				A5B75A1419E5686C00D0477B /* ModelHelpers.swift in Sources */,
 				843B056119E2D7800097A833 /* TodayContainerViewController.swift in Sources */,
 				843B056919E2D80E0097A833 /* ExtraConsumption.swift in Sources */,
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
@@ -291,6 +306,7 @@
 				84380C2C19E4195A0026398E /* Drink.swift in Sources */,
 				84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */,
 				84380C2819E4195A0026398E /* Consumption.swift in Sources */,
+				A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */,
 				843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */,
 				84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */,
 				843B056019E2D7800097A833 /* StatisticsViewController.swift in Sources */,

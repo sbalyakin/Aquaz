@@ -9,12 +9,15 @@
 import Foundation
 import CoreData
 
-class Drink: NSManagedObject {
-
-    @NSManaged var color: AnyObject
-    @NSManaged var name: String
-    @NSManaged var waterPercent: NSNumber
-    @NSManaged var consumptions: NSSet
-    @NSManaged var recentAmount: RecentAmount
-
+class Drink: NSManagedObject, NamedEntity {
+  
+  @NSManaged var color: AnyObject
+  @NSManaged var name: String
+  @NSManaged var waterPercent: NSNumber
+  @NSManaged var consumptions: NSSet
+  @NSManaged var recentAmount: RecentAmount
+  
+  class func getEntityName() -> String {
+    return "Drink"
+  }
 }

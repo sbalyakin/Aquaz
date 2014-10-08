@@ -9,10 +9,14 @@
 import Foundation
 import CoreData
 
-class ExtraConsumption: NSManagedObject {
+class ExtraConsumption: NSManagedObject, NamedEntity {
   
   @NSManaged var date: NSDate
   @NSManaged var hot: NSNumber
   @NSManaged var highActivity: NSNumber
+  
+  class func getEntityName() -> String {
+    return "ExtraConsumption"
+  }
   
 }
