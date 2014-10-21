@@ -38,11 +38,11 @@ class Consumption: NSManagedObject, NamedEntity {
   
   /// Deletes the consumption from Core Data.
   func deleteEntity(saveImmediately: Bool = true) {
-    managedObjectContext.deleteObject(self)
+    managedObjectContext!.deleteObject(self)
     
     if saveImmediately {
       var error: NSError? = nil
-      if !managedObjectContext.save(&error) {
+      if !managedObjectContext!.save(&error) {
         NSLog("Failed to delete consumption. Error: \(error!.localizedDescription)")
       }
     }

@@ -104,14 +104,14 @@ class Settings {
     class var activityLevel: ActivityLevel {
       get {
         if let value = NSUserDefaults.standardUserDefaults().objectForKey("User.activityLevel") as? Int {
-          if let activityLevel = ActivityLevel.fromRaw(value) {
+          if let activityLevel = ActivityLevel(rawValue: value) {
             return activityLevel
           }
         }
         return .Medium
       }
       set {
-        NSUserDefaults.standardUserDefaults().setInteger(newValue.toRaw(), forKey: "User.activityLevel")
+        NSUserDefaults.standardUserDefaults().setInteger(newValue.rawValue, forKey: "User.activityLevel")
       }
     }
     
