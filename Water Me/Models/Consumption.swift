@@ -16,10 +16,10 @@ class Consumption: NSManagedObject, NamedEntity {
   @NSManaged var drink: Drink
   
   class func getEntityName() -> String {
-    return "Comsumption"
+    return "Consumption"
   }
   
-  /// Adds new consumption entity into Core Data.
+  /// Adds a new consumption entity into Core Data
   class func addEntity(#drink: Drink, amount: NSNumber, date: NSDate, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Consumption {
     let consumption = NSEntityDescription.insertNewObjectForEntityForName(getEntityName(), inManagedObjectContext: managedObjectContext) as Consumption
     consumption.amount = amount
@@ -36,7 +36,7 @@ class Consumption: NSManagedObject, NamedEntity {
     return consumption
   }
   
-  /// Deletes the consumption from Core Data.
+  /// Deletes the consumption from Core Data
   func deleteEntity(saveImmediately: Bool = true) {
     managedObjectContext!.deleteObject(self)
     
