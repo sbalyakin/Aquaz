@@ -14,10 +14,10 @@ class DrinkViewController: UIViewController {
   @IBOutlet weak var amountSlider: UISlider!
   @IBOutlet weak var amountLabel: UILabel!
   
-  let amountSliderMultiplier: Float = 10.0
-  let smallAmount: Float = 100.0
-  let mediumAmount: Float = 200.0
-  let largeAmount: Float = 500.0
+  let amountSliderMultiplier: Double = 10.0
+  let smallAmount: Double = 100.0
+  let mediumAmount: Double = 200.0
+  let largeAmount: Double = 500.0
   
   var drink: Drink!
   var todayViewController: TodayViewController!
@@ -25,14 +25,14 @@ class DrinkViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     drinkName.text = drink.name
-    setAmount(Float(drink.recentAmount.amount))
+    setAmount(Double(drink.recentAmount.amount))
   }
   
   @IBAction func amountSliderValueChanged(sender: AnyObject) {
     setAmountLabel(amountSlider.value * amountSliderMultiplier)
   }
   
-  func addConsumption(amount: Float) {
+  func addConsumption(amount: Double) {
     // Store the consumption into Core Data
     drink.recentAmount.amount = amount
     Consumption.addEntity(drink: drink, amount: amount, date: NSDate(), managedObjectContext: ModelHelper.sharedInstance.managedObjectContext)
@@ -44,7 +44,7 @@ class DrinkViewController: UIViewController {
   }
   
   @IBAction func addCustomConsumption(sender: AnyObject) {
-    let amount = Float(amountSlider.value * amountSliderMultiplier)
+    let amount = Double(amountSlider.value * amountSliderMultiplier)
     addConsumption(amount)
   }
   
@@ -64,11 +64,11 @@ class DrinkViewController: UIViewController {
     dismissViewControllerAnimated(true, completion: nil)
   }
   
-  func setAmountLabel(amount: Float) {
+  func setAmountLabel(amount: Double) {
     amountLabel.text = "\(Int(amount)) ml"
   }
   
-  func setAmount(amount: Float) {
+  func setAmount(amount: Double) {
     setAmountLabel(amount)
     amountSlider.value = amount / amountSliderMultiplier
   }

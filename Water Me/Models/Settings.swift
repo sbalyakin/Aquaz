@@ -45,27 +45,27 @@ class Settings {
       }
     }
 
-    class var extraConsumptionHot: Float {
+    class var extraConsumptionHot: Double {
       get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.extraConsumptionHot") as? Float {
+        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.extraConsumptionHot") as? Double {
           return value
         }
         return 0.5
       }
       set {
-        NSUserDefaults.standardUserDefaults().setFloat(newValue, forKey: "General.extraConsumptionHot")
+        NSUserDefaults.standardUserDefaults().setDouble(newValue, forKey: "General.extraConsumptionHot")
       }
     }
     
-    class var extraConsumptionHighActivity: Float {
+    class var extraConsumptionHighActivity: Double {
       get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.extraConsumptionHighActivity") as? Float {
+        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.extraConsumptionHighActivity") as? Double {
           return value
         }
         return 0.5
       }
       set {
-        NSUserDefaults.standardUserDefaults().setFloat(newValue, forKey: "General.extraConsumptionHighActivity")
+        NSUserDefaults.standardUserDefaults().setDouble(newValue, forKey: "General.extraConsumptionHighActivity")
       }
     }
   }

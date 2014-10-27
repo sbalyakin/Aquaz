@@ -13,9 +13,9 @@ class TodayViewController: UIViewController {
   @IBOutlet weak var consumptionProgressView: UIProgressView!
   @IBOutlet weak var consumptionLabel: UILabel!
   
-  var todayConsumption: Float = 0.0 {
+  var todayConsumption: Double = 0.0 {
     didSet {
-      setTodayConsumption(todayConsumption, maximum: Float(Settings.User.waterPerDay))
+      setTodayConsumption(todayConsumption, maximum: Double(Settings.User.waterPerDay))
     }
   }
   
@@ -32,7 +32,7 @@ class TodayViewController: UIViewController {
     presentViewController(drinkViewController, animated: true, completion: nil)
   }
   
-  func setTodayConsumption(amount: Float, maximum: Float) {
+  func setTodayConsumption(amount: Double, maximum: Double) {
     assert(maximum > 0, "Maximum of recommended consumption is specified to 0")
     let progress = amount / maximum
     consumptionProgressView.progress = progress
@@ -41,7 +41,7 @@ class TodayViewController: UIViewController {
     consumptionLabel.text = consumptionText
   }
   
-  func addConsumptionForToday(drink: Drink, amount: Float) {
+  func addConsumptionForToday(drink: Drink, amount: Double) {
     todayConsumption += amount
   }
 }
