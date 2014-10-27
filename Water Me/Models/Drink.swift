@@ -35,7 +35,7 @@ class Drink: NSManagedObject, NamedEntity {
     
     // Fetch the drink from Core Data
     let predicate = NSPredicate(format: "%K = %@", argumentArray: ["index", index])
-    let drink: Drink? = fetchManagedObject(predicate: predicate)
+    let drink: Drink? = ModelHelper.sharedInstance.fetchManagedObject(predicate: predicate)
     
     assert(drink != nil, "Requested drink with index \(index) is not found")
     if drink == nil {

@@ -35,7 +35,7 @@ class DrinkViewController: UIViewController {
   func addConsumption(amount: Float) {
     // Store the consumption into Core Data
     drink.recentAmount.amount = amount
-    Consumption.addEntity(drink: drink, amount: amount, date: NSDate(), managedObjectContext: getDefaultManagedObjectContext())
+    Consumption.addEntity(drink: drink, amount: amount, date: NSDate(), managedObjectContext: ModelHelper.sharedInstance.managedObjectContext)
     
     // Update parent controller
     todayViewController.addConsumptionForToday(drink, amount: amount)
