@@ -9,39 +9,46 @@
 class Settings {
   
   class General {
-    class var isMetricWeight: Bool {
+    
+    class var weightUnits: Units.Weight {
       get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.isMetricWeight") as? Bool {
-          return value
+        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.weightUnits") as? Int {
+          if let weightUnits = Units.Weight(rawValue: value) {
+            return weightUnits
+          }
         }
-        return true
+        return .kilograms
       }
       set {
-        NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "General.isMetricWeight")
+        NSUserDefaults.standardUserDefaults().setInteger(newValue.rawValue, forKey: "General.weightUnits")
       }
     }
     
-    class var isMetricHeight: Bool {
+    class var heightUnits: Units.Length {
       get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.isMetricHeight") as? Bool {
-          return value
+        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.heightUnits") as? Int {
+          if let heightUnits = Units.Length(rawValue: value) {
+            return heightUnits
+          }
         }
-        return true
+        return .centimeters
       }
       set {
-        NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "General.isMetricHeight")
+        NSUserDefaults.standardUserDefaults().setInteger(newValue.rawValue, forKey: "General.heightUnits")
       }
     }
     
-    class var isMetricVolume: Bool {
+    class var volumeUnits: Units.Volume {
       get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.isMetricVolume") as? Bool {
-          return value
+        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.volumeUnits") as? Int {
+          if let volumeUnits = Units.Volume(rawValue: value) {
+            return volumeUnits
+          }
         }
-        return true
+        return .millilitres
       }
       set {
-        NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "General.isMetricVolume")
+        NSUserDefaults.standardUserDefaults().setInteger(newValue.rawValue, forKey: "General.volumeUnits")
       }
     }
 

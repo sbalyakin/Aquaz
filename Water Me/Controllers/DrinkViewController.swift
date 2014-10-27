@@ -29,7 +29,8 @@ class DrinkViewController: UIViewController {
   }
   
   @IBAction func amountSliderValueChanged(sender: AnyObject) {
-    setAmountLabel(amountSlider.value * amountSliderMultiplier)
+    let amount = Double(amountSlider.value) * amountSliderMultiplier
+    setAmountLabel(amount)
   }
   
   func addConsumption(amount: Double) {
@@ -44,7 +45,7 @@ class DrinkViewController: UIViewController {
   }
   
   @IBAction func addCustomConsumption(sender: AnyObject) {
-    let amount = Double(amountSlider.value * amountSliderMultiplier)
+    let amount = Double(amountSlider.value) * amountSliderMultiplier
     addConsumption(amount)
   }
   
@@ -70,6 +71,6 @@ class DrinkViewController: UIViewController {
   
   func setAmount(amount: Double) {
     setAmountLabel(amount)
-    amountSlider.value = amount / amountSliderMultiplier
+    amountSlider.value = Float(amount / amountSliderMultiplier)
   }
 }

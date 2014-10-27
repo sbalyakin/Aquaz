@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8406D78119FE9875001C54BF /* UnitsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406D78019FE9875001C54BF /* UnitsHelper.swift */; };
+		8406D78119FE9875001C54BF /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406D78019FE9875001C54BF /* Units.swift */; };
 		84380C2819E4195A0026398E /* Consumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2719E4195A0026398E /* Consumption.swift */; };
 		84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2919E4195A0026398E /* RecentAmount.swift */; };
 		84380C2C19E4195A0026398E /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2B19E4195A0026398E /* Drink.swift */; };
@@ -41,7 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8406D78019FE9875001C54BF /* UnitsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UnitsHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		8406D78019FE9875001C54BF /* Units.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Units.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84380C2719E4195A0026398E /* Consumption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consumption.swift; sourceTree = "<group>"; };
 		84380C2919E4195A0026398E /* RecentAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentAmount.swift; sourceTree = "<group>"; };
 		84380C2B19E4195A0026398E /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				A5B75A1319E5686C00D0477B /* ModelHelper.swift */,
-				8406D78019FE9875001C54BF /* UnitsHelper.swift */,
+				8406D78019FE9875001C54BF /* Units.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -305,7 +305,7 @@
 				843B055E19E2D7800097A833 /* AppDelegate.swift in Sources */,
 				84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */,
 				A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */,
-				8406D78119FE9875001C54BF /* UnitsHelper.swift in Sources */,
+				8406D78119FE9875001C54BF /* Units.swift in Sources */,
 				843B056119E2D7800097A833 /* TodayContainerViewController.swift in Sources */,
 				843B056919E2D80E0097A833 /* ExtraConsumption.swift in Sources */,
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,

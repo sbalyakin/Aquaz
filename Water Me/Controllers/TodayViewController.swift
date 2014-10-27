@@ -35,7 +35,7 @@ class TodayViewController: UIViewController {
   func setTodayConsumption(amount: Double, maximum: Double) {
     assert(maximum > 0, "Maximum of recommended consumption is specified to 0")
     let progress = amount / maximum
-    consumptionProgressView.progress = progress
+    consumptionProgressView.progress = Float(progress)
 
     let consumptionText = "\(Int(amount)) ml"
     consumptionLabel.text = consumptionText

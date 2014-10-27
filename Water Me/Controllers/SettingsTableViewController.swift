@@ -20,9 +20,9 @@ class SettingsTableViewController: UITableViewController {
     super.viewDidLoad()
     
     // Getting actual settings
-    volume.selectedSegmentIndex = Settings.General.isMetricVolume ? 0 : 1
-    weight.selectedSegmentIndex = Settings.General.isMetricWeight ? 0 : 1
-    height.selectedSegmentIndex = Settings.General.isMetricHeight ? 0 : 1
+    volume.selectedSegmentIndex = Settings.General.volumeUnits.rawValue
+    weight.selectedSegmentIndex = Settings.General.weightUnits.rawValue
+    height.selectedSegmentIndex = Settings.General.heightUnits.rawValue
     
     // Additional setup for revealing
     revealButtonSetup()
@@ -38,14 +38,14 @@ class SettingsTableViewController: UITableViewController {
   }
   
   @IBAction func volumeSettingChanged(sender: UISegmentedControl) {
-    Settings.General.isMetricVolume = sender.selectedSegmentIndex == 0
+    Settings.General.volumeUnits = Units.Volume(rawValue: sender.selectedSegmentIndex)!
   }
   
   @IBAction func weightSettingChanged(sender: UISegmentedControl) {
-    Settings.General.isMetricWeight = sender.selectedSegmentIndex == 0
+    Settings.General.weightUnits = Units.Weight(rawValue: sender.selectedSegmentIndex)!
   }
   
   @IBAction func heightSettingChanged(sender: UISegmentedControl) {
-    Settings.General.isMetricHeight = sender.selectedSegmentIndex == 0
+    Settings.General.heightUnits = Units.Length(rawValue: sender.selectedSegmentIndex)!
   }
 }
