@@ -21,6 +21,7 @@ class Settings {
       }
       set {
         NSUserDefaults.standardUserDefaults().setInteger(newValue.rawValue, forKey: "General.weightUnits")
+        Units.sharedInstance.updateCache()
       }
     }
     
@@ -35,6 +36,7 @@ class Settings {
       }
       set {
         NSUserDefaults.standardUserDefaults().setInteger(newValue.rawValue, forKey: "General.heightUnits")
+        Units.sharedInstance.updateCache()
       }
     }
     
@@ -49,6 +51,7 @@ class Settings {
       }
       set {
         NSUserDefaults.standardUserDefaults().setInteger(newValue.rawValue, forKey: "General.volumeUnits")
+        Units.sharedInstance.updateCache()
       }
     }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -290,8 +290,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="cancelButtonTapped:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="suV-bo-nFa"/>
-                                    <action selector="cancelConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="0uX-Qg-3Nm"/>
+                                    <action selector="cancelConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="Qsd-oU-Uii"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="A5t-FE-O50">
@@ -304,7 +303,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hoF-aO-Mum">
-                                <rect key="frame" x="232" y="123" width="64" height="40"/>
+                                <rect key="frame" x="32" y="315" width="64" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.74848152810000002" green="0.90442710280000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="100 ml"/>
@@ -313,21 +312,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vXw-gW-sSA">
-                                <rect key="frame" x="232" y="190" width="64" height="40"/>
+                                <rect key="frame" x="124" y="315" width="64" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.74848152810000002" green="0.90442710280000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="200 ml"/>
                                 <connections>
                                     <action selector="addMediumConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="ETd-UG-trC"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7xm-eq-yWQ">
-                                <rect key="frame" x="232" y="254" width="64" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.74848152810000002" green="0.90442710280000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="500 ml"/>
-                                <connections>
-                                    <action selector="addLargeConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="tVC-Z2-Ic1"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volume" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IVh-g5-6lW">
@@ -337,13 +327,22 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="52" minValue="5" maxValue="100" id="Ajg-rM-Vkb">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="275" minValue="50" maxValue="500" id="Ajg-rM-Vkb">
                                 <rect key="frame" x="14" y="438" width="284" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="amountSliderValueChanged:" destination="JfU-Cw-4n3" eventType="valueChanged" id="skc-CB-qEK"/>
                                 </connections>
                             </slider>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7xm-eq-yWQ">
+                                <rect key="frame" x="215" y="315" width="64" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.74848152810000002" green="0.90442710280000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="500 ml"/>
+                                <connections>
+                                    <action selector="addLargeConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="tVC-Z2-Ic1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -351,6 +350,9 @@
                         <outlet property="amountLabel" destination="IVh-g5-6lW" id="Ua6-W1-yLG"/>
                         <outlet property="amountSlider" destination="Ajg-rM-Vkb" id="I7n-YL-Yg5"/>
                         <outlet property="drinkName" destination="nbP-4Q-26P" id="Ohe-2J-PdE"/>
+                        <outlet property="largeAmountButton" destination="7xm-eq-yWQ" id="RQm-AW-Ubf"/>
+                        <outlet property="mediumAmountButton" destination="vXw-gW-sSA" id="Wov-pS-zpI"/>
+                        <outlet property="smallAmountButton" destination="hoF-aO-Mum" id="24Z-Dt-iaO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huJ-Ju-VE1" userLabel="First Responder" sceneMemberID="firstResponder"/>

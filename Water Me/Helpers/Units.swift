@@ -13,22 +13,76 @@ class Units {
   enum Volume: Int {
     case millilitres = 0
     case fluidOunces = 1
+    
+    static let metric = millilitres
+    
+    var unit: Unit {
+      switch self {
+      case millilitres: return MilliliterUnit()
+      case fluidOunces: return FluidOunceUnit()
+      }
+    }
   }
   
   enum Weight: Int {
     case kilograms = 0
     case pounds = 1
+
+    static let metric = kilograms
+
+    var unit: Unit {
+      switch self {
+      case kilograms: return KilogramUnit()
+      case pounds: return PoundUnit()
+      }
+    }
   }
   
   enum Length: Int {
     case centimeters = 0
     case feet = 1
+    
+    static let metric = centimeters
+    
+    var unit: Unit {
+      switch self {
+      case centimeters: return CentimeterUnit()
+      case feet: return FootUnit()
+      }
+    }
   }
   
+  class var sharedInstance: Units {
+    struct Instance {
+      static let instance = Units()
+    }
+    return Instance.instance
+  }
+  
+  /// Returns specified amount as formatted string taking into units settings.
+  /// Amount should be specified in metric units.
+  func formatAmountToText(#amount: Double, unitType: UnitType) -> String {
+    let units = self.units[unitType.rawValue]
+    let quantity = Quantity(ownUnit: units.settingsUnit, fromUnit: units.internalUnit, fromAmount: amount)
+    return quantity.description
+  }
+  
+  func updateCache() {
+    // Items order should correspond to UnitType elements order
+    units = [(internalUnit: Volume.metric.unit, settingsUnit: Settings.General.volumeUnits.unit), // volume
+             (internalUnit: Weight.metric.unit, settingsUnit: Settings.General.weightUnits.unit), // weight
+             (internalUnit: Length.metric.unit, settingsUnit: Settings.General.heightUnits.unit)] // height
+  }
+  
+  private var units: [(internalUnit: Unit, settingsUnit: Unit)] = []
+
+  private init() {
+    updateCache()
+  }
 }
 
-enum UnitType {
-  case volume
+enum UnitType: Int {
+  case volume = 0
   case weight
   case length
 }
@@ -45,11 +99,18 @@ protocol Unit {
 }
 
 class Quantity {
+  /// Initalizes quantity with specified unit and amount
   init(unit: Unit, amount: Double = 0.0) {
     self.unit = unit
     self.amount = amount
   }
 
+  /// Initializes quantity using conversion from another amount of units
+  init(ownUnit: Unit, fromUnit: Unit, fromAmount: Double) {
+    self.unit = ownUnit
+    convertFrom(amount: fromAmount, unit: fromUnit)
+  }
+  
   var description: String {
     return getDescription(0)
   }

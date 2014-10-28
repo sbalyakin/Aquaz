@@ -22,6 +22,7 @@
         <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="drink" maxCount="1" deletionRule="Deny" destinationEntity="Drink" inverseName="recentAmount" inverseEntity="Drink" syncable="YES"/>
     </entity>
+    <fetchRequest name="DrinksForDay" entity="Consumption"/>
     <elements>
         <element name="Consumption" positionX="-36" positionY="27" width="128" height="90"/>
         <element name="Drink" positionX="-63" positionY="-18" width="128" height="135"/>

@@ -37,11 +37,16 @@ class TodayViewController: UIViewController {
     let progress = amount / maximum
     consumptionProgressView.progress = Float(progress)
 
-    let consumptionText = "\(Int(amount)) ml"
+    let consumptionText = Units.sharedInstance.formatAmountToText(amount: amount, unitType: .volume)
     consumptionLabel.text = consumptionText
   }
   
   func addConsumptionForToday(drink: Drink, amount: Double) {
     todayConsumption += amount
+  }
+  
+  func getTodayConsumption() -> Double {
+    // TODO:
+    return 0.0
   }
 }
