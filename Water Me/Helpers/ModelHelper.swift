@@ -50,11 +50,49 @@ class ModelHelper {
     return nil
   }
   
+  // Fetches all consumptions grouped by drinks for whole day of the specified date
+  func fetchConsumptionsForDay(date: NSDate) -> [Drink: Double]? {
+    // Determine start and end of specified day
+    let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
+    NSCalendarUnit.DayCalendarUnit
+    var dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+    dateComponents.hour = 0
+    dateComponents.minute = 0
+    dateComponents.second = 0
+    let startDate = calendar.dateFromComponents(dateComponents)!
+    dateComponents.hour = 23
+    dateComponents.minute = 59
+    dateComponents.second = 59
+    let endDate = calendar.dateFromComponents(dateComponents)!
+    
+    // Fetch all consumptions for the day
+    let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", argumentArray: [startDate, endDate])
+    let rawConsumptions: [Consumption]? = fetchManagedObjects(predicate: predicate)
+
+    if rawConsumptions == nil {
+      return nil
+    }
+
+    // Group consumptions by drinks
+    var consumptionsMap: [Drink: Double] = [:]
+    
+    for consumption in rawConsumptions! {
+      if let amount = consumptionsMap[consumption.drink] {
+        consumptionsMap[consumption.drink] = amount + Double(consumption.amount)
+      } else {
+        consumptionsMap[consumption.drink] = Double(consumption.amount)
+      }
+    }
+    
+    return consumptionsMap
+  }
+
   let managedObjectContext: NSManagedObjectContext!
-  
+
   // Hiding initializer, clients should use sharedInstance property to get instance of ModelHelper
   private init() {
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     managedObjectContext = appDelegate.managedObjectContext!
   }
+  
 }

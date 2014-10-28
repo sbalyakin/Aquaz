@@ -21,7 +21,7 @@ class TodayViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    todayConsumption = 0.0
+    todayConsumption = getTodayConsumption()
   }
   
   @IBAction func drinkTapped(sender: AnyObject) {
@@ -46,7 +46,14 @@ class TodayViewController: UIViewController {
   }
   
   func getTodayConsumption() -> Double {
-    // TODO:
-    return 0.0
+    if let consumptions = ModelHelper.sharedInstance.fetchConsumptionsForDay(NSDate()) {
+      var overallAmount = 0.0
+      for (drink, amount) in consumptions {
+        overallAmount += amount
+      }
+      return overallAmount
+    } else {
+      return 0.0
+    }
   }
 }
