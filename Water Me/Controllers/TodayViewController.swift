@@ -15,7 +15,7 @@ class TodayViewController: UIViewController {
   
   var todayConsumption: Double = 0.0 {
     didSet {
-      setTodayConsumption(todayConsumption, maximum: Double(Settings.User.waterPerDay))
+      setTodayConsumption(todayConsumption, maximum: Double(Settings.sharedInstance.userDailyWaterIntake.value))
     }
   }
   
@@ -37,7 +37,7 @@ class TodayViewController: UIViewController {
     let progress = amount / maximum
     consumptionProgressView.progress = Float(progress)
 
-    let consumptionText = Units.sharedInstance.formatAmountToText(amount: amount, unitType: .volume)
+    let consumptionText = Units.sharedInstance.formatAmountToText(amount: amount, unitType: .Volume)
     consumptionLabel.text = consumptionText
   }
   

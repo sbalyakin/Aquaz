@@ -6,160 +6,177 @@
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.
 //
 
+/// Generic class allows its clients to add/remove observers and notify them
+class Observable<ValueType> {
+  typealias ObserverFunction = (ValueType) -> Void
+  
+  /// Adds an observer and returns it unique identifier (in a scope of class instance)
+  func addObserver(observerFunction: ObserverFunction) -> Int {
+    observerFunctions[observerIdentitfer] = observerFunction
+    return observerIdentitfer++
+  }
+  
+  /// Removes an observer using its identifier
+  func removeObserver(observerIdentifier: Int) {
+    observerFunctions[observerIdentifier] = nil
+  }
+  
+  /// Notifies all observers
+  private func notify(value: ValueType) {
+    for (_, observerFunction) in observerFunctions {
+      observerFunction(value)
+    }
+  }
+  
+  private var observerIdentitfer = 0
+  private var observerFunctions: [Int: ObserverFunction] = [:]
+}
+
+/// Generic class for settings item. Automatically writes changes of a value to user defaults. Provides possibility to observe changes of a value by observers.
+class SettingsItemBase<ValueType>: Observable<ValueType> {
+
+  let key: String
+  let userDefaults: NSUserDefaults
+
+  var value: ValueType {
+    didSet {
+      writeValue(value)
+      notify(value)
+    }
+  }
+  
+  init(key: String, initialValue: ValueType, userDefaults: NSUserDefaults) {
+    self.value = initialValue
+    self.key = key
+    self.userDefaults = userDefaults
+    
+    super.init()
+    
+    readFromUserDefaults()
+  }
+
+  /// Reads the value from user defaults
+  func readFromUserDefaults() {
+    readValue(&value)
+  }
+  
+  /// Write the value to user defaults
+  func writeToUserDefaults() {
+    writeValue(value)
+  }
+  
+  private func readValue(inout outValue: ValueType) {
+    assert(false, "readValue function must be overriden")
+  }
+  
+  private func writeValue(value: ValueType) {
+    assert(false, "writeValue function must be overriden")
+  }
+  
+}
+
+/// Settings item class for enumerations
+class SettingsEnumItem<T: RawRepresentable where T.RawValue == Int>: SettingsItemBase<T> {
+  
+  override init(key: String, initialValue: T, userDefaults: NSUserDefaults) {
+    super.init(key: key, initialValue: initialValue, userDefaults: userDefaults)
+  }
+
+  private override func readValue(inout outValue: T) {
+    if let rawValue = userDefaults.objectForKey(key) as? T.RawValue {
+      if let value = T(rawValue: rawValue) {
+        outValue = value
+      }
+    }
+  }
+  
+  private override func writeValue(value: T) {
+    userDefaults.setInteger(value.rawValue, forKey: key)
+  }
+  
+}
+
+/// Settings item class for ordinal types (Int, Bool etc.)
+class SettingsOrdinalItem<T>: SettingsItemBase<T> {
+
+  override init(key: String, initialValue: T, userDefaults: NSUserDefaults) {
+    super.init(key: key, initialValue: initialValue, userDefaults: userDefaults)
+  }
+
+  private override func readValue(inout outValue: T) {
+    if let value = userDefaults.objectForKey(key) as? T {
+      outValue = value
+    }
+  }
+
+  private override func writeValue(value: T) {
+    if value is Float {
+      userDefaults.setFloat(value as Float, forKey: key)
+    } else if value is Double {
+      userDefaults.setDouble(value as Double, forKey: key)
+    } else if value is Int {
+      userDefaults.setInteger(value as Int, forKey: key)
+    } else if value is Bool {
+      userDefaults.setBool(value as Bool, forKey: key)
+    } else if value is String {
+      userDefaults.setValue(value as String, forKey: key)
+    } else {
+      super.writeValue(value)
+    }
+  }
+
+}
+
 class Settings {
-  
-  class General {
-    
-    class var weightUnits: Units.Weight {
-      get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.weightUnits") as? Int {
-          if let weightUnits = Units.Weight(rawValue: value) {
-            return weightUnits
-          }
-        }
-        return .kilograms
-      }
-      set {
-        NSUserDefaults.standardUserDefaults().setInteger(newValue.rawValue, forKey: "General.weightUnits")
-        Units.sharedInstance.updateCache()
-      }
-    }
-    
-    class var heightUnits: Units.Length {
-      get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.heightUnits") as? Int {
-          if let heightUnits = Units.Length(rawValue: value) {
-            return heightUnits
-          }
-        }
-        return .centimeters
-      }
-      set {
-        NSUserDefaults.standardUserDefaults().setInteger(newValue.rawValue, forKey: "General.heightUnits")
-        Units.sharedInstance.updateCache()
-      }
-    }
-    
-    class var volumeUnits: Units.Volume {
-      get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.volumeUnits") as? Int {
-          if let volumeUnits = Units.Volume(rawValue: value) {
-            return volumeUnits
-          }
-        }
-        return .millilitres
-      }
-      set {
-        NSUserDefaults.standardUserDefaults().setInteger(newValue.rawValue, forKey: "General.volumeUnits")
-        Units.sharedInstance.updateCache()
-      }
-    }
 
-    class var extraConsumptionHot: Double {
-      get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.extraConsumptionHot") as? Double {
-          return value
-        }
-        return 0.5
-      }
-      set {
-        NSUserDefaults.standardUserDefaults().setDouble(newValue, forKey: "General.extraConsumptionHot")
-      }
+  class var sharedInstance: Settings {
+    struct Instance {
+      static let instance = Settings()
     }
-    
-    class var extraConsumptionHighActivity: Double {
-      get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("General.extraConsumptionHighActivity") as? Double {
-          return value
-        }
-        return 0.5
-      }
-      set {
-        NSUserDefaults.standardUserDefaults().setDouble(newValue, forKey: "General.extraConsumptionHighActivity")
-      }
-    }
+    return Instance.instance
   }
 
-  class User {
-    class var height: Int {
-      get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("User.height") as? Int {
-          return value
-        }
-        return 170
-      }
-      set {
-        NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "User.height")
-      }
-    }
-
-    class var weight: Int {
-      get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("User.weight") as? Int {
-          return value
-        }
-        return 70
-      }
-      set {
-        NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "User.weight")
-      }
-    }
-    
-    enum ActivityLevel: Int {
-      case Low = 0
-      case Medium
-      case High
-    }
-    
-    class var activityLevel: ActivityLevel {
-      get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("User.activityLevel") as? Int {
-          if let activityLevel = ActivityLevel(rawValue: value) {
-            return activityLevel
-          }
-        }
-        return .Medium
-      }
-      set {
-        NSUserDefaults.standardUserDefaults().setInteger(newValue.rawValue, forKey: "User.activityLevel")
-      }
-    }
-    
-    class var isMale: Bool {
-      get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("User.isMale") as? Bool {
-          return value
-        }
-        return true
-      }
-      set {
-        NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "User.isMale")
-      }
-    }
-    
-    class var age: Int {
-      get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("User.age") as? Int {
-          return value
-        }
-        return 30
-      }
-      set {
-        NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "User.age")
-      }
-    }
-    
-    class var waterPerDay: Int {
-      get {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("User.waterPerDay") as? Int {
-          return value
-        }
-        return 2000
-      }
-      set {
-        NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "User.waterPerDay")
-      }
-    }
+  enum ActivityLevel: Int {
+    case Low = 0
+    case Medium
+    case High
   }
   
+  lazy var generalWeightUnits: SettingsEnumItem<Units.Weight> = SettingsEnumItem(
+    key: "General weight units",initialValue: .Kilograms, userDefaults: self.standardUserDefaults)
+  
+  lazy var generalHeightUnits: SettingsEnumItem<Units.Length> = SettingsEnumItem(
+    key: "General height units", initialValue: .Centimeters, userDefaults: self.standardUserDefaults)
+  
+  lazy var generalVolumeUnits: SettingsEnumItem<Units.Volume> = SettingsEnumItem(
+    key: "General volume units", initialValue: .Millilitres, userDefaults: self.standardUserDefaults)
+  
+  lazy var generalExtraConsumptionHot: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
+    key: "General extra consumption hot", initialValue: 0.5, userDefaults: self.standardUserDefaults)
+  
+  lazy var generalExtraConsumptionHighActivity: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
+    key: "General extra consumption high activity", initialValue: 0.5, userDefaults: self.standardUserDefaults)
+  
+  lazy var userHeight: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
+    key: "User height", initialValue: 170, userDefaults: self.standardUserDefaults)
+  
+  lazy var userWeight: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
+    key: "User weight", initialValue: 70, userDefaults: self.standardUserDefaults)
+  
+  lazy var userActivityLevel: SettingsEnumItem<ActivityLevel> = SettingsEnumItem(
+    key: "User activity level", initialValue: .Medium, userDefaults: self.standardUserDefaults)
+  
+  lazy var userIsMale: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
+    key: "User is male", initialValue: true, userDefaults: self.standardUserDefaults)
+  
+  lazy var userAge: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
+    key: "User age", initialValue: 30, userDefaults: self.standardUserDefaults)
+  
+  lazy var userDailyWaterIntake: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
+    key: "User daily water intake", initialValue: 2000.0, userDefaults: self.standardUserDefaults)
+
+  private let standardUserDefaults = NSUserDefaults.standardUserDefaults()
+
+  private init() { }
+
 }

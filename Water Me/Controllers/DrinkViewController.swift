@@ -11,15 +11,15 @@ import UIKit
 private extension Units.Volume {
   var precision: Double {
     switch self {
-    case millilitres: return 10.0
-    case fluidOunces: return 1.0
+    case Millilitres: return 10.0
+    case FluidOunces: return 1.0
     }
   }
   
   var predefinedAmounts: (small: Double, medium: Double, large: Double) {
     switch self {
-    case millilitres: return (small: 100.0, medium: 200.0, large: 500.0)
-    case fluidOunces: return (small: 118.29411825, medium: 236.5882365 , large: 502.7500025625) // 4, 8 and 17 fl oz
+    case Millilitres: return (small: 100.0, medium: 200.0, large: 500.0)
+    case FluidOunces: return (small: 118.29411825, medium: 236.5882365 , large: 502.7500025625) // 4, 8 and 17 fl oz
     }
   }
 }
@@ -33,8 +33,8 @@ class DrinkViewController: UIViewController {
   @IBOutlet weak var mediumAmountButton: UIButton!
   @IBOutlet weak var largeAmountButton: UIButton!
   
-  let amountRoundPrecision = Settings.General.volumeUnits.precision
-  let predefinedAmounts = Settings.General.volumeUnits.predefinedAmounts
+  let amountRoundPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
+  let predefinedAmounts = Settings.sharedInstance.generalVolumeUnits.value.predefinedAmounts
   
   var drink: Drink!
   var todayViewController: TodayViewController!
@@ -97,7 +97,7 @@ class DrinkViewController: UIViewController {
   }
   
   func formatAmount(amount: Double) -> String {
-    return Units.sharedInstance.formatAmountToText(amount: amount, unitType: .volume)
+    return Units.sharedInstance.formatAmountToText(amount: amount, unitType: .Volume)
   }
   
   func setAmountLabel(amount: Double) {

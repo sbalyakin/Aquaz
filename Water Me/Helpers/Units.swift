@@ -11,43 +11,43 @@ import Foundation
 class Units {
   
   enum Volume: Int {
-    case millilitres = 0
-    case fluidOunces = 1
+    case Millilitres = 0
+    case FluidOunces = 1
     
-    static let metric = millilitres
+    static let metric = Millilitres
     
     var unit: Unit {
       switch self {
-      case millilitres: return MilliliterUnit()
-      case fluidOunces: return FluidOunceUnit()
+      case Millilitres: return MilliliterUnit()
+      case FluidOunces: return FluidOunceUnit()
       }
     }
   }
   
   enum Weight: Int {
-    case kilograms = 0
-    case pounds = 1
+    case Kilograms = 0
+    case Pounds = 1
 
-    static let metric = kilograms
+    static let metric = Kilograms
 
     var unit: Unit {
       switch self {
-      case kilograms: return KilogramUnit()
-      case pounds: return PoundUnit()
+      case Kilograms: return KilogramUnit()
+      case Pounds: return PoundUnit()
       }
     }
   }
   
   enum Length: Int {
-    case centimeters = 0
-    case feet = 1
+    case Centimeters = 0
+    case Feet = 1
     
-    static let metric = centimeters
+    static let metric = Centimeters
     
     var unit: Unit {
       switch self {
-      case centimeters: return CentimeterUnit()
-      case feet: return FootUnit()
+      case Centimeters: return CentimeterUnit()
+      case Feet: return FootUnit()
       }
     }
   }
@@ -67,24 +67,41 @@ class Units {
     return quantity.description
   }
   
-  func updateCache() {
-    // Items order should correspond to UnitType elements order
-    units = [(internalUnit: Volume.metric.unit, settingsUnit: Settings.General.volumeUnits.unit), // volume
-             (internalUnit: Weight.metric.unit, settingsUnit: Settings.General.weightUnits.unit), // weight
-             (internalUnit: Length.metric.unit, settingsUnit: Settings.General.heightUnits.unit)] // height
-  }
-  
   private var units: [(internalUnit: Unit, settingsUnit: Unit)] = []
 
+  private func onUpdateVolumeUnitsSettings(value: Units.Volume) {
+    units[UnitType.Volume.rawValue] = (internalUnit: Volume.metric.unit, settingsUnit: value.unit)
+  }
+  
+  private func onUpdateWeightUnitsSettings(value: Units.Weight) {
+    units[UnitType.Weight.rawValue] = (internalUnit: Weight.metric.unit, settingsUnit: value.unit)
+  }
+  
+  private func onUpdateHeightUnitsSettings(value: Units.Length) {
+    units[UnitType.Length.rawValue] = (internalUnit: Length.metric.unit, settingsUnit: value.unit)
+  }
+  
   private init() {
-    updateCache()
+    let settingsVolumeUnits = Settings.sharedInstance.generalVolumeUnits
+    let settingsWeightUnits = Settings.sharedInstance.generalWeightUnits
+    let settingsHeightUnits = Settings.sharedInstance.generalHeightUnits
+    
+    // Subscribe for changes of the settings
+    settingsVolumeUnits.addObserver(onUpdateVolumeUnitsSettings)
+    settingsWeightUnits.addObserver(onUpdateWeightUnitsSettings)
+    settingsHeightUnits.addObserver(onUpdateHeightUnitsSettings)
+    
+    // Items order should correspond to UnitType elements order
+    units = [(internalUnit: Volume.metric.unit, settingsUnit: settingsVolumeUnits.value.unit), // volume
+             (internalUnit: Weight.metric.unit, settingsUnit: settingsWeightUnits.value.unit), // weight
+             (internalUnit: Length.metric.unit, settingsUnit: settingsHeightUnits.value.unit)] // height
   }
 }
 
 enum UnitType: Int {
-  case volume = 0
-  case weight
-  case length
+  case Volume = 0
+  case Weight
+  case Length
 }
 
 protocol Unit {
@@ -148,37 +165,37 @@ func -=(inout left: Quantity, right: Quantity) {
 }
 
 class MilliliterUnit: Unit {
-  var type: UnitType = .volume
+  var type: UnitType = .Volume
   var factor: Double = 0.001
   var contraction: String = "ml"
 }
 
 class FluidOunceUnit: Unit {
-  var type: UnitType = .volume
+  var type: UnitType = .Volume
   var factor: Double = 0.0295735295625
   var contraction: String = "fl oz"
 }
 
 class KilogramUnit: Unit {
-  var type: UnitType = .weight
+  var type: UnitType = .Weight
   var factor: Double = 1
   var contraction: String = "kg"
 }
 
 class PoundUnit: Unit {
-  var type: UnitType = .weight
+  var type: UnitType = .Weight
   var factor: Double = 0.45359237
   var contraction: String = "lb"
 }
 
 class CentimeterUnit: Unit {
-  var type: UnitType = .length
+  var type: UnitType = .Length
   var factor: Double = 0.01
   var contraction: String = "cm"
 }
 
 class FootUnit: Unit {
-  var type: UnitType = .length
+  var type: UnitType = .Length
   var factor: Double = 0.3048
   var contraction: String = "ft"
 }
