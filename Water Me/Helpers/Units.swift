@@ -12,7 +12,7 @@ class Units {
   
   enum Volume: Int {
     case Millilitres = 0
-    case FluidOunces = 1
+    case FluidOunces
     
     static let metric = Millilitres
     
@@ -26,7 +26,7 @@ class Units {
   
   enum Weight: Int {
     case Kilograms = 0
-    case Pounds = 1
+    case Pounds
 
     static let metric = Kilograms
 
@@ -40,7 +40,7 @@ class Units {
   
   enum Length: Int {
     case Centimeters = 0
-    case Feet = 1
+    case Feet
     
     static let metric = Centimeters
     
@@ -59,12 +59,25 @@ class Units {
     return Instance.instance
   }
   
-  /// Returns specified amount as formatted string taking into units settings.
-  /// Amount should be specified in metric units.
-  func formatAmountToText(#amount: Double, unitType: UnitType) -> String {
+  /// Prepares specified amount for storing into Core Data. It converts metric units of amount to current units from settings.
+  /// Then it rounds converted amount and makes reverse conversion to metric units.
+  /// This methods allows getting amount equals to formatted amount (formatAmountToText) but represented in metric units.
+  func prepareAmountForStoring(#amount: Double, unitType: UnitType, precision: Double = 1) -> Double {
     let units = self.units[unitType.rawValue]
-    let quantity = Quantity(ownUnit: units.settingsUnit, fromUnit: units.internalUnit, fromAmount: amount)
-    return quantity.description
+    let currentQuantity = Quantity(ownUnit: units.settingsUnit, fromUnit: units.internalUnit, fromAmount: amount)
+    let currentAmount = round(currentQuantity.amount / precision) * precision
+    let metricQuantity = Quantity(ownUnit: units.internalUnit, fromUnit: units.settingsUnit, fromAmount: currentAmount)
+    return metricQuantity.amount
+  }
+  
+  /// Returns specified amount as formatted string taking into account current units settings.
+  /// Amount should be specified in metric units.
+  // It's possible to specify final precision and numbers of decimals of formatted text.
+  func formatAmountToText(#amount: Double, unitType: UnitType, precision: Double = 1, decimals: Int = 0) -> String {
+    let units = self.units[unitType.rawValue]
+    var quantity = Quantity(ownUnit: units.settingsUnit, fromUnit: units.internalUnit, fromAmount: amount)
+    quantity.amount = round(quantity.amount / precision) * precision
+    return quantity.getDescription(decimals)
   }
   
   private var units: [(internalUnit: Unit, settingsUnit: Unit)] = []
@@ -132,8 +145,17 @@ class Quantity {
     return getDescription(0)
   }
 
-  func getDescription(precision: Int) -> String {
-    return String(format: "%.\(precision)f %@", arguments: [ amount, unit.contraction ])
+  func getDescription(decimals: Int) -> String {
+    struct Static {
+      static let numberFormatter = NSNumberFormatter()
+    }
+
+    Static.numberFormatter.minimumFractionDigits = decimals
+    Static.numberFormatter.maximumFractionDigits = decimals
+    // TODO: Test locale
+    Static.numberFormatter.locale = NSLocale.currentLocale()
+
+    return "\(Static.numberFormatter.stringFromNumber(amount)!) \(unit.contraction)"
   }
   
   func convertFrom(#amount:Double, unit: Unit) {

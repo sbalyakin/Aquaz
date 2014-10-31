@@ -8,6 +8,22 @@
 
 import UIKit
 
+private extension Units.Volume {
+  var precision: Double {
+    switch self {
+    case Millilitres: return 1.0
+    case FluidOunces: return 0.1
+    }
+  }
+
+  var decimals: Int {
+    switch self {
+    case Millilitres: return 0
+    case FluidOunces: return 1
+    }
+  }
+}
+
 class TodayViewController: UIViewController {
   
   @IBOutlet weak var consumptionProgressView: UIProgressView!
@@ -32,21 +48,21 @@ class TodayViewController: UIViewController {
     presentViewController(drinkViewController, animated: true, completion: nil)
   }
   
-  func setTodayConsumption(amount: Double, maximum: Double) {
-    assert(maximum > 0, "Maximum of recommended consumption is specified to 0")
-    let progress = amount / maximum
-    consumptionProgressView.progress = Float(progress)
-
-    let consumptionText = Units.sharedInstance.formatAmountToText(amount: amount, unitType: .Volume)
-    consumptionLabel.text = consumptionText
-  }
-  
   func addConsumptionForToday(drink: Drink, amount: Double) {
     todayConsumption += amount
   }
   
-  func getTodayConsumption() -> Double {
-    if let consumptions = ModelHelper.sharedInstance.fetchConsumptionsForDay(NSDate()) {
+  private func setTodayConsumption(amount: Double, maximum: Double) {
+    assert(maximum > 0, "Maximum of recommended consumption is specified to 0")
+    let progress = amount / maximum
+    consumptionProgressView.progress = Float(progress)
+    
+    let consumptionText = Units.sharedInstance.formatAmountToText(amount: amount, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals)
+    consumptionLabel.text = consumptionText
+  }
+  
+  private func getTodayConsumption() -> Double {
+    if let consumptions = ModelHelper.sharedInstance.computeDrinkAmountsForDay(NSDate()) {
       var overallAmount = 0.0
       for (drink, amount) in consumptions {
         overallAmount += amount
@@ -56,4 +72,8 @@ class TodayViewController: UIViewController {
       return 0.0
     }
   }
+  
+  private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
+  private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
+
 }

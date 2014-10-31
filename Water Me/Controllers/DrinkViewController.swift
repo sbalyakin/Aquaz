@@ -12,7 +12,14 @@ private extension Units.Volume {
   var precision: Double {
     switch self {
     case Millilitres: return 10.0
-    case FluidOunces: return 1.0
+    case FluidOunces: return 0.5
+    }
+  }
+  
+  var decimals: Int {
+    switch self {
+    case Millilitres: return 0
+    case FluidOunces: return 1
     }
   }
   
@@ -33,36 +40,32 @@ class DrinkViewController: UIViewController {
   @IBOutlet weak var mediumAmountButton: UIButton!
   @IBOutlet weak var largeAmountButton: UIButton!
   
-  let amountRoundPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   let predefinedAmounts = Settings.sharedInstance.generalVolumeUnits.value.predefinedAmounts
   
   var drink: Drink!
   var todayViewController: TodayViewController!
-  
-  var roundedSliderValue: Double {
-    return roundAmount(Double(amountSlider.value))
-  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     drinkName.text = drink.name
 
-    let recentAmount = roundAmount(Double(drink.recentAmount.amount))
+    let recentAmount = Double(drink.recentAmount.amount)
     setAmountLabel(recentAmount)
     amountSlider.value = Float(recentAmount)
 
-    smallAmountButton.setTitle(formatAmount(predefinedAmounts.small), forState: .Normal)
-    mediumAmountButton.setTitle(formatAmount(predefinedAmounts.medium), forState: .Normal)
-    largeAmountButton.setTitle(formatAmount(predefinedAmounts.large), forState: .Normal)
+    // Predefined amount is always non-fractional values, so we will format amount skipping fraction part
+    smallAmountButton.setTitle(formatAmount(predefinedAmounts.small, precision: 1.0, decimals: 0), forState: .Normal)
+    mediumAmountButton.setTitle(formatAmount(predefinedAmounts.medium, precision: 1.0, decimals: 0), forState: .Normal)
+    largeAmountButton.setTitle(formatAmount(predefinedAmounts.large, precision: 1.0, decimals: 0), forState: .Normal)
   }
   
   @IBAction func amountSliderValueChanged(sender: AnyObject) {
-    setAmountLabel(roundedSliderValue)
+    setAmountLabel(Double(amountSlider.value))
   }
   
   @IBAction func addCustomConsumption(sender: AnyObject) {
-    addConsumption(roundedSliderValue)
+    addConsumption(Double(amountSlider.value))
   }
   
   @IBAction func addSmallConsumption(sender: AnyObject) {
@@ -81,26 +84,32 @@ class DrinkViewController: UIViewController {
     dismissViewControllerAnimated(true, completion: nil)
   }
   
-  func addConsumption(amount: Double) {
+  private func addConsumption(amount: Double) {
+    // Prepare amount for storing
+    let precision = Settings.sharedInstance.generalVolumeUnits.value.precision
+    let processedAmount = Units.sharedInstance.prepareAmountForStoring(amount: amount, unitType: .Volume, precision: precision)
+      
     // Store the consumption into Core Data
-    drink.recentAmount.amount = amount
-    Consumption.addEntity(drink: drink, amount: amount, date: NSDate(), managedObjectContext: ModelHelper.sharedInstance.managedObjectContext)
+    drink.recentAmount.amount = processedAmount
+    Consumption.addEntity(drink: drink, amount: processedAmount, date: NSDate(), managedObjectContext: ModelHelper.sharedInstance.managedObjectContext)
     
     // Update parent controller
-    todayViewController.addConsumptionForToday(drink, amount: amount)
+    todayViewController.addConsumptionForToday(drink, amount: processedAmount)
     
     dismissViewControllerAnimated(true, completion: nil)
   }
-  
-  func roundAmount(amount: Double) -> Double {
-    return round(amount / amountRoundPrecision) * amountRoundPrecision
+
+  private func formatAmount(amount: Double, precision: Double? = nil, decimals: Int? = nil) -> String {
+    let finalPrecision = precision != nil ? precision! : amountPrecision
+    let finalDecimals = decimals != nil ? decimals! : amountDecimals
+    return Units.sharedInstance.formatAmountToText(amount: amount, unitType: .Volume, precision: finalPrecision, decimals: finalDecimals)
   }
   
-  func formatAmount(amount: Double) -> String {
-    return Units.sharedInstance.formatAmountToText(amount: amount, unitType: .Volume)
-  }
-  
-  func setAmountLabel(amount: Double) {
+  private func setAmountLabel(amount: Double) {
     amountLabel.text = formatAmount(amount)
   }
+
+  private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
+  private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
+
 }
