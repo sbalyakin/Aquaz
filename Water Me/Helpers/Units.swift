@@ -152,8 +152,8 @@ class Quantity {
 
     Static.numberFormatter.minimumFractionDigits = decimals
     Static.numberFormatter.maximumFractionDigits = decimals
-    // TODO: Test locale
-    Static.numberFormatter.locale = NSLocale.currentLocale()
+    Static.numberFormatter.minimumIntegerDigits = 1
+    Static.numberFormatter.numberStyle = .DecimalStyle
 
     return "\(Static.numberFormatter.stringFromNumber(amount)!) \(unit.contraction)"
   }
