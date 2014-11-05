@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8406D78119FE9875001C54BF /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406D78019FE9875001C54BF /* Units.swift */; };
+		8424AA011A0A7009009C5C47 /* ConsumptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA001A0A7009009C5C47 /* ConsumptionViewController.swift */; };
 		84380C2819E4195A0026398E /* Consumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2719E4195A0026398E /* Consumption.swift */; };
 		84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2919E4195A0026398E /* RecentAmount.swift */; };
 		84380C2C19E4195A0026398E /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2B19E4195A0026398E /* Drink.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		8406D78019FE9875001C54BF /* Units.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Units.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		8424AA001A0A7009009C5C47 /* ConsumptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionViewController.swift; sourceTree = "<group>"; };
 		84380C2719E4195A0026398E /* Consumption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consumption.swift; sourceTree = "<group>"; };
 		84380C2919E4195A0026398E /* RecentAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentAmount.swift; sourceTree = "<group>"; };
 		84380C2B19E4195A0026398E /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				843B055719E2D7800097A833 /* TodayContainerViewController.swift */,
 				843B055819E2D7800097A833 /* TodayViewController.swift */,
 				8478253619EAC8C200588FE3 /* DrinkViewController.swift */,
+				8424AA001A0A7009009C5C47 /* ConsumptionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
 				843B056219E2D7800097A833 /* TodayViewController.swift in Sources */,
 				84380C2C19E4195A0026398E /* Drink.swift in Sources */,
+				8424AA011A0A7009009C5C47 /* ConsumptionViewController.swift in Sources */,
 				84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */,
 				84380C2819E4195A0026398E /* Consumption.swift in Sources */,
 				8478253719EAC8C200588FE3 /* DrinkViewController.swift in Sources */,

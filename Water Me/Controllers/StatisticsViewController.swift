@@ -11,6 +11,8 @@ import UIKit
 class StatisticsViewController: UIViewController {
   
   @IBOutlet weak var segmentedControl: UISegmentedControl!
+  @IBOutlet weak var revealButton: UIBarButtonItem!
+  
   var viewControllers: [UIViewController] = []
   
   override func viewDidLoad() {
@@ -27,13 +29,11 @@ class StatisticsViewController: UIViewController {
     
     // TODO: Controller index for activation should be taken from saved settings
     activateViewController(0)
+    
+    // Additional setup for revealing
+    revealButtonSetup()
   }
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-
   func activateViewController(index: Int) {
     for viewController in viewControllers {
       viewController.view.removeFromSuperview()
@@ -55,4 +55,14 @@ class StatisticsViewController: UIViewController {
   @IBAction func segmentChanged(sender: UISegmentedControl) {
     activateViewController(sender.selectedSegmentIndex)
   }
+  
+  private func revealButtonSetup() {
+    if let revealViewController = self.revealViewController() {
+      revealButton.target = revealViewController
+      revealButton.action = "revealToggle:"
+      navigationController!.navigationBar.addGestureRecognizer(revealViewController.panGestureRecognizer())
+      view.addGestureRecognizer(revealViewController.panGestureRecognizer())
+    }
+  }
+
 }

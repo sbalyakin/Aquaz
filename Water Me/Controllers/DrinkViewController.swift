@@ -43,7 +43,7 @@ class DrinkViewController: UIViewController {
   let predefinedAmounts = Settings.sharedInstance.generalVolumeUnits.value.predefinedAmounts
   
   var drink: Drink!
-  var todayViewController: TodayViewController!
+  var todayContainerViewController: TodayContainerViewController!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -94,7 +94,7 @@ class DrinkViewController: UIViewController {
     Consumption.addEntity(drink: drink, amount: processedAmount, date: NSDate(), managedObjectContext: ModelHelper.sharedInstance.managedObjectContext)
     
     // Update parent controller
-    todayViewController.addConsumptionForToday(drink, amount: processedAmount)
+    todayContainerViewController.addConsumptionForToday(drink, amount: processedAmount)
     
     dismissViewControllerAnimated(true, completion: nil)
   }

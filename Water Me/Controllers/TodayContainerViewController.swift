@@ -8,31 +8,64 @@
 
 import UIKit
 
+private extension Units.Volume {
+  var precision: Double {
+    switch self {
+    case Millilitres: return 1.0
+    case FluidOunces: return 0.1
+    }
+  }
+  
+  var decimals: Int {
+    switch self {
+    case Millilitres: return 0
+    case FluidOunces: return 1
+    }
+  }
+}
+
 class TodayContainerViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
   
   var pageViewController: UIPageViewController!
   
   var pages: [UIViewController] = []
-  var pageTitles = ["Stat", "Today"]
+  var pageTitles = ["Drinked", "Add"]
   
   @IBOutlet weak var revealButton: UIBarButtonItem!
   @IBOutlet weak var modeButton: UIBarButtonItem!
+  @IBOutlet weak var summaryNavigationBar: UIView!
+  @IBOutlet weak var consumptionProgressView: UIProgressView!
+  @IBOutlet weak var consumptionLabel: UILabel!
   
+  var todayConsumption: Double = 0.0 {
+    didSet {
+      setTodayConsumption(todayConsumption, maximum: Double(Settings.sharedInstance.userDailyWaterIntake.value))
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Create view controllers for pages
-    let todayViewController = storyboard!.instantiateViewControllerWithIdentifier("TodayViewController") as UIViewController
-    let statisticsViewController = storyboard!.instantiateViewControllerWithIdentifier("StatisticsViewController") as UIViewController
+    // Add today view controller
+    let todayViewController = storyboard!.instantiateViewControllerWithIdentifier("TodayViewController") as TodayViewController
+    todayViewController.todayContainerViewController = self
     pages.append(todayViewController)
-    pages.append(statisticsViewController)
+
+    // Add consumption view controller
+    let consumptionViewController = storyboard!.instantiateViewControllerWithIdentifier("ConsumptionViewController") as UIViewController
+    pages.append(consumptionViewController)
     
-    // Create page view controller
+    // Add page view controller
     pageViewController = storyboard!.instantiateViewControllerWithIdentifier("TodayPageViewController") as UIPageViewController
     pageViewController.dataSource = self
     pageViewController.delegate = self
     pageViewController.setViewControllers([todayViewController], direction: .Forward, animated: false, completion: nil)
+    
+    let summaryNavigationBarHeight = summaryNavigationBar.bounds.height
+    var pageViewControllerRect = view.frame
+    pageViewControllerRect.size.height -= summaryNavigationBarHeight
+    pageViewControllerRect.offset(dx: 0.0, dy: summaryNavigationBarHeight)
+    pageViewController.view.frame = pageViewControllerRect
     
     addChildViewController(pageViewController)
     view.addSubview(pageViewController.view)
@@ -41,6 +74,9 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
     
     // Additional setup for revealing
     revealButtonSetup()
+    
+    // Specify existing consumptions
+    todayConsumption = getTodayConsumption()
   }
   
   func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
@@ -63,15 +99,6 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
     return nil
   }
   
-  func revealButtonSetup() {
-    if let revealViewController = self.revealViewController() {
-      revealButton.target = revealViewController
-      revealButton.action = "revealToggle:"
-      navigationController!.navigationBar.addGestureRecognizer(revealViewController.panGestureRecognizer())
-      view.addGestureRecognizer(revealViewController.panGestureRecognizer())
-    }
-  }
-  
   @IBAction func toggleCurrentPage(sender: AnyObject) {
     let currentPage = pageViewController.viewControllers.last as UIViewController
     if currentPage == pages[0] {
@@ -92,9 +119,41 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
     }
   }
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+  func addConsumptionForToday(drink: Drink, amount: Double) {
+    todayConsumption += amount
   }
   
+  private func revealButtonSetup() {
+    if let revealViewController = self.revealViewController() {
+      revealButton.target = revealViewController
+      revealButton.action = "revealToggle:"
+      navigationController!.navigationBar.addGestureRecognizer(revealViewController.panGestureRecognizer())
+      view.addGestureRecognizer(revealViewController.panGestureRecognizer())
+    }
+  }
+  
+  private func setTodayConsumption(amount: Double, maximum: Double) {
+    assert(maximum > 0, "Maximum of recommended consumption is specified to 0")
+    let progress = amount / maximum
+    consumptionProgressView.progress = Float(progress)
+    
+    let consumptionText = Units.sharedInstance.formatAmountToText(amount: amount, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals)
+    consumptionLabel.text = consumptionText
+  }
+  
+  private func getTodayConsumption() -> Double {
+    if let consumptions = ModelHelper.sharedInstance.computeDrinkAmountsForDay(NSDate()) {
+      var overallAmount = 0.0
+      for (drink, amount) in consumptions {
+        overallAmount += amount
+      }
+      return overallAmount
+    } else {
+      return 0.0
+    }
+  }
+  
+  private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
+  private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
+
 }
