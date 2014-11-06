@@ -67,34 +67,43 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="byd-yV-Sp4">
-                                        <rect key="frame" x="115" y="50" width="90" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Today">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ruO-Mw-fgx">
-                                        <rect key="frame" x="77" y="48" width="30" height="30"/>
+                                        <rect key="frame" x="16" y="48" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="&lt;">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="switchToPreviousDay:" destination="x3I-fN-BQH" eventType="touchUpInside" id="vlm-n8-oOu"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8dM-xv-rh9">
-                                        <rect key="frame" x="213" y="48" width="30" height="30"/>
+                                        <rect key="frame" x="274" y="48" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title=">">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="switchToNextDay:" destination="x3I-fN-BQH" eventType="touchUpInside" id="dpq-AB-j9a"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="Ulp-MK-urk" customClass="MultiProgressView" customModule="Water_Me" customModuleProvider="target">
                                         <rect key="frame" x="16" y="40" width="288" height="10"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.95645805027173914" green="0.95645805027173914" blue="0.95645805027173914" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="byd-yV-Sp4">
+                                        <rect key="frame" x="54" y="50" width="212" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Today">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showCalendar:" destination="x3I-fN-BQH" eventType="touchUpInside" id="agd-6n-Pia"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -112,7 +121,10 @@
                     <connections>
                         <outlet property="consumptionLabel" destination="nDO-TA-hsA" id="GVR-mw-sp2"/>
                         <outlet property="consumptionProgressView" destination="Ulp-MK-urk" id="1el-H8-1VO"/>
+                        <outlet property="currentDayButton" destination="byd-yV-Sp4" id="WQn-rJ-p5C"/>
+                        <outlet property="nextDayButton" destination="8dM-xv-rh9" id="IRn-l4-S59"/>
                         <outlet property="pageButton" destination="GKO-c9-CDb" id="UxO-im-4tz"/>
+                        <outlet property="previousDayButton" destination="ruO-Mw-fgx" id="klE-Fy-Vuq"/>
                         <outlet property="revealButton" destination="clr-IS-YXe" id="aru-fe-QzG"/>
                         <outlet property="summaryNavigationBar" destination="KHN-d8-Fus" id="VXk-fc-ak3"/>
                     </connections>
@@ -124,7 +136,7 @@
         <!--Page View Controller-->
         <scene sceneID="S4K-DL-5yS">
             <objects>
-                <pageViewController storyboardIdentifier="TodayPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="vertical" spineLocation="none" id="bT2-56-xxf" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="DayPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="vertical" spineLocation="none" id="bT2-56-xxf" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="GLy-9V-SKp"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OQf-Wh-57M" userLabel="First Responder" sceneMemberID="firstResponder"/>

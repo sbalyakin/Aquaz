@@ -26,20 +26,26 @@ private extension Units.Volume {
 
 class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
   
-  var pageViewController: UIPageViewController!
-  
-  var pages: [UIViewController] = []
-  var pageTitles = ["Drinked", "Add"]
-  
   @IBOutlet weak var revealButton: UIBarButtonItem!
   @IBOutlet weak var pageButton: UIBarButtonItem!
   @IBOutlet weak var summaryNavigationBar: UIView!
   @IBOutlet weak var consumptionProgressView: MultiProgressView!
   @IBOutlet weak var consumptionLabel: UILabel!
+  @IBOutlet weak var previousDayButton: UIButton!
+  @IBOutlet weak var nextDayButton: UIButton!
+  @IBOutlet weak var currentDayButton: UIButton!
   
-  var todayOverallConsumption: Double = 0.0 {
+  /// Current date for managing water intake
+  var currentDate: NSDate = NSDate() {
     didSet {
-      setTodayOverallConsumption(todayOverallConsumption, maximum: getRecommendedWaterIntake())
+      adjustCurrentDayButton()
+      fetchConsumptions()
+    }
+  }
+  
+  var overallConsumption: Double = 0.0 {
+    didSet {
+      setOverallConsumption(overallConsumption, maximum: getRecommendedWaterIntake())
     }
   }
   
@@ -56,7 +62,7 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     pages.append(diaryViewController)
     
     // Add page view controller for a current day
-    pageViewController = storyboard!.instantiateViewControllerWithIdentifier("TodayPageViewController") as UIPageViewController
+    pageViewController = storyboard!.instantiateViewControllerWithIdentifier("DayPageViewController") as UIPageViewController
     pageViewController.dataSource = self
     pageViewController.delegate = self
     pageViewController.setViewControllers([selectDrinkViewController], direction: .Forward, animated: false, completion: nil)
@@ -84,7 +90,18 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     revealButtonSetup()
     
     // Fetch existing consumptions for current day
-    fetchTodayConsumptions()
+    fetchConsumptions()
+  }
+  
+  @IBAction func switchToPreviousDay(sender: AnyObject) {
+    currentDate = NSDate(timeInterval: -secondsPerDay, sinceDate: currentDate)
+  }
+
+  @IBAction func switchToNextDay(sender: AnyObject) {
+    currentDate = NSDate(timeInterval: secondsPerDay, sinceDate: currentDate)
+  }
+  
+  @IBAction func showCalendar(sender: AnyObject) {
   }
   
   func getRecommendedWaterIntake() -> Double {
@@ -131,23 +148,23 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     }
   }
   
-  func addConsumptionForToday(drink: Drink, amount: Double) {
+  func addConsumption(drink: Drink, amount: Double) {
     if let section = multiProgressSections[drink] {
       section.factor += amount
     }
     consumptionProgressView.setNeedsDisplay()
-    todayOverallConsumption += amount
+    overallConsumption += amount
   }
   
-  private func setTodayOverallConsumption(amount: Double, maximum: Double) {
+  private func setOverallConsumption(amount: Double, maximum: Double) {
     assert(maximum > 0, "Maximum of recommended consumption is specified to 0")
     let consumptionText = Units.sharedInstance.formatAmountToText(amount: amount, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals)
     consumptionLabel.text = consumptionText
   }
   
-  private func fetchTodayConsumptions() {
+  private func fetchConsumptions() {
     var overallAmount = 0.0
-    if let consumptions = ModelHelper.sharedInstance.computeDrinkAmountsForDay(NSDate()) {
+    if let consumptions = ModelHelper.sharedInstance.computeDrinkAmountsForDay(currentDate) {
       for (drink, amount) in consumptions {
         overallAmount += amount
         if let section = multiProgressSections[drink] {
@@ -156,7 +173,12 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
       }
     }
     consumptionProgressView.setNeedsDisplay()
-    todayOverallConsumption = overallAmount
+    overallConsumption = overallAmount
+  }
+  
+  private func adjustCurrentDayButton() {
+    let text = NSDateFormatter.localizedStringFromDate(currentDate, dateStyle: .MediumStyle, timeStyle: .NoStyle)
+    currentDayButton.setTitle(text, forState: .Normal)
   }
   
   private func revealButtonSetup() {
@@ -167,10 +189,14 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
       view.addGestureRecognizer(revealViewController.panGestureRecognizer())
     }
   }
-  
+
+  private var pageViewController: UIPageViewController!
+  private var pages: [UIViewController] = []
+  private var multiProgressSections: [Drink: MultiProgressView.Section] = [:]
+
+  private let pageTitles = ["Drinked", "Add"]
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
   private let drinkTypesCount = 9 // number of supported drinks types: water, tea etc.
-  private var multiProgressSections: [Drink: MultiProgressView.Section] = [:]
-
+  private let secondsPerDay: NSTimeInterval = 60.0 * 60 * 24
 }

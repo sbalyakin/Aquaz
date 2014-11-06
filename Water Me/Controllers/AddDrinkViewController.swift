@@ -94,7 +94,7 @@ class AddDrinkViewController: UIViewController {
     Consumption.addEntity(drink: drink, amount: processedAmount, date: NSDate(), managedObjectContext: ModelHelper.sharedInstance.managedObjectContext)
     
     // Update day view controller
-    dayViewController.addConsumptionForToday(drink, amount: processedAmount)
+    dayViewController.addConsumption(drink, amount: processedAmount)
     
     dismissViewControllerAnimated(true, completion: nil)
   }
