@@ -163,6 +163,12 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   }
   
   private func fetchConsumptions() {
+    // Clear all drink sections
+    for (_, section) in multiProgressSections {
+      section.factor = 0.0
+    }
+    
+    // Fill sections with fetched amounts and compute overall consumption
     var overallAmount = 0.0
     if let consumptions = ModelHelper.sharedInstance.computeDrinkAmountsForDay(currentDate) {
       for (drink, amount) in consumptions {
@@ -172,13 +178,52 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
         }
       }
     }
+    
     consumptionProgressView.setNeedsDisplay()
     overallConsumption = overallAmount
   }
+
+  private func compareDateComponentsWithoutTime(component1: NSDateComponents, _ component2: NSDateComponents) -> Bool {
+    return component1.day == component2.day &&
+           component1.month == component2.month &&
+           component1.year == component2.year
+  }
+  
+  private func formatDate(date: NSDate) -> String {
+    let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
+    NSCalendarUnit.DayCalendarUnit
+
+    let today = NSDate()
+    let yesterday = NSDate(timeInterval: -secondsPerDay, sinceDate: today)
+    let tomorrow = NSDate(timeInterval: secondsPerDay, sinceDate: today)
+
+    let todayComponents       = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: today)
+    let yesterdayComponents   = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: yesterday)
+    let tomorrowComponents    = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: tomorrow)
+    let currentDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+
+    let dateFormatter = NSDateFormatter()
+    
+    if compareDateComponentsWithoutTime(currentDateComponents, todayComponents) ||
+       compareDateComponentsWithoutTime(currentDateComponents, tomorrowComponents) ||
+       compareDateComponentsWithoutTime(currentDateComponents, yesterdayComponents) {
+      // Use standard date formatting for yeasterday, today and tomorrow
+      // in order to obtain "Yeasterday", "Today" and "Tomorrow" localized date strings
+      dateFormatter.dateStyle = .MediumStyle
+      dateFormatter.timeStyle = .NoStyle
+      dateFormatter.doesRelativeDateFormatting = true
+    } else {
+      // Use custom formatting. If year of a current date is year of today, hide them.
+      let template = currentDateComponents.year == todayComponents.year ? "dMMMM" : "dMMMMyyyy"
+      let formatString = NSDateFormatter.dateFormatFromTemplate(template, options: 0, locale: NSLocale.currentLocale())
+      dateFormatter.dateFormat = formatString
+    }
+    return dateFormatter.stringFromDate(date)
+  }
   
   private func adjustCurrentDayButton() {
-    let text = NSDateFormatter.localizedStringFromDate(currentDate, dateStyle: .MediumStyle, timeStyle: .NoStyle)
-    currentDayButton.setTitle(text, forState: .Normal)
+    let formattedDate = formatDate(currentDate)
+    currentDayButton.setTitle(formattedDate, forState: .Normal)
   }
   
   private func revealButtonSetup() {
@@ -198,5 +243,5 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
   private let drinkTypesCount = 9 // number of supported drinks types: water, tea etc.
-  private let secondsPerDay: NSTimeInterval = 60.0 * 60 * 24
+  private let secondsPerDay: NSTimeInterval = 60 * 60 * 24
 }
