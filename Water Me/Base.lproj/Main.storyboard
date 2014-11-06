@@ -30,7 +30,7 @@
         <!--Water Balance-->
         <scene sceneID="30R-jg-ev2">
             <objects>
-                <viewController id="x3I-fN-BQH" customClass="TodayContainerViewController" customModule="Water_Me" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="x3I-fN-BQH" customClass="DayViewController" customModule="Water_Me" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="keI-ET-C2O">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -112,7 +112,7 @@
                     <connections>
                         <outlet property="consumptionLabel" destination="nDO-TA-hsA" id="GVR-mw-sp2"/>
                         <outlet property="consumptionProgressView" destination="Ulp-MK-urk" id="1el-H8-1VO"/>
-                        <outlet property="modeButton" destination="GKO-c9-CDb" id="Rgd-Gd-MXQ"/>
+                        <outlet property="pageButton" destination="GKO-c9-CDb" id="UxO-im-4tz"/>
                         <outlet property="revealButton" destination="clr-IS-YXe" id="aru-fe-QzG"/>
                         <outlet property="summaryNavigationBar" destination="KHN-d8-Fus" id="VXk-fc-ak3"/>
                     </connections>
@@ -131,10 +131,10 @@
             </objects>
             <point key="canvasLocation" x="1517" y="-829"/>
         </scene>
-        <!--Today View Controller-->
+        <!--Select Drink View Controller-->
         <scene sceneID="qUS-2s-sUw">
             <objects>
-                <viewController storyboardIdentifier="TodayViewController" id="CBf-TI-5MP" customClass="TodayViewController" customModule="Water_Me" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectDrinkViewController" id="CBf-TI-5MP" customClass="SelectDrinkViewController" customModule="Water_Me" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zXz-x5-87g">
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -307,10 +307,10 @@
             </objects>
             <point key="canvasLocation" x="1965" y="-829"/>
         </scene>
-        <!--Drink View Controller-->
+        <!--Add Drink View Controller-->
         <scene sceneID="FpT-nl-K1n">
             <objects>
-                <viewController storyboardIdentifier="DrinkViewController" id="JfU-Cw-4n3" customClass="DrinkViewController" customModule="Water_Me" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddDrinkViewController" id="JfU-Cw-4n3" customClass="AddDrinkViewController" customModule="Water_Me" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ghr-HL-bIJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -388,7 +388,7 @@
                     <connections>
                         <outlet property="amountLabel" destination="IVh-g5-6lW" id="Ua6-W1-yLG"/>
                         <outlet property="amountSlider" destination="Ajg-rM-Vkb" id="I7n-YL-Yg5"/>
-                        <outlet property="drinkName" destination="nbP-4Q-26P" id="Ohe-2J-PdE"/>
+                        <outlet property="drinkNameLabel" destination="nbP-4Q-26P" id="TA5-bw-Mm0"/>
                         <outlet property="largeAmountButton" destination="7xm-eq-yWQ" id="RQm-AW-Ubf"/>
                         <outlet property="mediumAmountButton" destination="vXw-gW-sSA" id="Wov-pS-zpI"/>
                         <outlet property="smallAmountButton" destination="hoF-aO-Mum" id="24Z-Dt-iaO"/>
@@ -398,10 +398,10 @@
             </objects>
             <point key="canvasLocation" x="2315" y="-829"/>
         </scene>
-        <!--Consumption View Controller-->
+        <!--Diary View Controller-->
         <scene sceneID="lYd-x6-Lbn">
             <objects>
-                <viewController storyboardIdentifier="ConsumptionViewController" id="E4b-RW-vEp" customClass="ConsumptionViewController" customModule="Water_Me" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DiaryViewController" id="E4b-RW-vEp" customClass="DiaryViewController" customModule="Water_Me" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="owE-iv-zbz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

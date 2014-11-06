@@ -1,5 +1,5 @@
 //
-//  ConsumptionViewController.swift
+//  DiaryViewController.swift
 //  Water Me
 //
 //  Created by Sergey Balyakin on 05.11.14.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ConsumptionViewController: UIViewController, UITableViewDataSource {
+class DiaryViewController: UIViewController, UITableViewDataSource {
 
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 30

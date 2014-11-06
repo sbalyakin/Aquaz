@@ -1,5 +1,5 @@
 //
-//  TodayContainerViewController.swift
+//  DayViewController.swift
 //  Water Me
 //
 //  Created by Sergey Balyakin on 03.10.14.
@@ -24,7 +24,7 @@ private extension Units.Volume {
   }
 }
 
-class TodayContainerViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
   
   var pageViewController: UIPageViewController!
   
@@ -32,34 +32,34 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
   var pageTitles = ["Drinked", "Add"]
   
   @IBOutlet weak var revealButton: UIBarButtonItem!
-  @IBOutlet weak var modeButton: UIBarButtonItem!
+  @IBOutlet weak var pageButton: UIBarButtonItem!
   @IBOutlet weak var summaryNavigationBar: UIView!
   @IBOutlet weak var consumptionProgressView: MultiProgressView!
   @IBOutlet weak var consumptionLabel: UILabel!
   
   var todayOverallConsumption: Double = 0.0 {
     didSet {
-      setTodayOverallConsumption(todayOverallConsumption, maximum: getCurrentDailyWaterIntake())
+      setTodayOverallConsumption(todayOverallConsumption, maximum: getRecommendedWaterIntake())
     }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Add today view controller
-    let todayViewController = storyboard!.instantiateViewControllerWithIdentifier("TodayViewController") as TodayViewController
-    todayViewController.todayContainerViewController = self
-    pages.append(todayViewController)
+    // Add view controller for drink selection
+    let selectDrinkViewController = storyboard!.instantiateViewControllerWithIdentifier("SelectDrinkViewController") as SelectDrinkViewController
+    selectDrinkViewController.dayViewController = self
+    pages.append(selectDrinkViewController)
 
-    // Add consumption view controller
-    let consumptionViewController = storyboard!.instantiateViewControllerWithIdentifier("ConsumptionViewController") as UIViewController
-    pages.append(consumptionViewController)
+    // Add consumptions diary view controller
+    let diaryViewController = storyboard!.instantiateViewControllerWithIdentifier("DiaryViewController") as UIViewController
+    pages.append(diaryViewController)
     
-    // Add page view controller
+    // Add page view controller for a current day
     pageViewController = storyboard!.instantiateViewControllerWithIdentifier("TodayPageViewController") as UIPageViewController
     pageViewController.dataSource = self
     pageViewController.delegate = self
-    pageViewController.setViewControllers([todayViewController], direction: .Forward, animated: false, completion: nil)
+    pageViewController.setViewControllers([selectDrinkViewController], direction: .Forward, animated: false, completion: nil)
     
     let summaryNavigationBarHeight = summaryNavigationBar.bounds.height
     var pageViewControllerRect = view.frame
@@ -78,7 +78,7 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
       let section = consumptionProgressView.addSection(color: drink.color as UIColor)
       multiProgressSections[drink] = section
     }
-    consumptionProgressView.maximum = getCurrentDailyWaterIntake()
+    consumptionProgressView.maximum = getRecommendedWaterIntake()
     
     // Additional setup for revealing
     revealButtonSetup()
@@ -87,7 +87,7 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
     fetchTodayConsumptions()
   }
   
-  func getCurrentDailyWaterIntake() -> Double {
+  func getRecommendedWaterIntake() -> Double {
     return Settings.sharedInstance.userDailyWaterIntake.value
   }
   
@@ -114,9 +114,9 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
   func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
     let currentPage = pageViewController.viewControllers.last as UIViewController
     if currentPage == pages[0] {
-      modeButton.title = pageTitles[0]
+      pageButton.title = pageTitles[0]
     } else if currentPage == pages[1] {
-      modeButton.title = pageTitles[1]
+      pageButton.title = pageTitles[1]
     }
   }
   
@@ -124,10 +124,10 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
     let currentPage = pageViewController.viewControllers.last as UIViewController
     if currentPage == pages[0] {
       pageViewController.setViewControllers([pages[1]], direction: .Forward, animated: true, completion: nil)
-      modeButton.title = pageTitles[1]
+      pageButton.title = pageTitles[1]
     } else if currentPage == pages[1] {
       pageViewController.setViewControllers([pages[0]], direction: .Reverse, animated: true, completion: nil)
-      modeButton.title = pageTitles[0]
+      pageButton.title = pageTitles[0]
     }
   }
   

@@ -1,5 +1,5 @@
 //
-//  DrinkViewController.swift
+//  AddDrinkViewController.swift
 //  Water Me
 //
 //  Created by Sergey Balyakin on 12.10.14.
@@ -31,9 +31,9 @@ private extension Units.Volume {
   }
 }
 
-class DrinkViewController: UIViewController {
+class AddDrinkViewController: UIViewController {
   
-  @IBOutlet weak var drinkName: UILabel!
+  @IBOutlet weak var drinkNameLabel: UILabel!
   @IBOutlet weak var amountSlider: UISlider!
   @IBOutlet weak var amountLabel: UILabel!
   @IBOutlet weak var smallAmountButton: UIButton!
@@ -43,12 +43,12 @@ class DrinkViewController: UIViewController {
   let predefinedAmounts = Settings.sharedInstance.generalVolumeUnits.value.predefinedAmounts
   
   var drink: Drink!
-  var todayContainerViewController: TodayContainerViewController!
+  var dayViewController: DayViewController!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    drinkName.text = drink.name
+    drinkNameLabel.text = drink.name
 
     let recentAmount = Double(drink.recentAmount.amount)
     setAmountLabel(recentAmount)
@@ -93,8 +93,8 @@ class DrinkViewController: UIViewController {
     drink.recentAmount.amount = processedAmount
     Consumption.addEntity(drink: drink, amount: processedAmount, date: NSDate(), managedObjectContext: ModelHelper.sharedInstance.managedObjectContext)
     
-    // Update parent controller
-    todayContainerViewController.addConsumptionForToday(drink, amount: processedAmount)
+    // Update day view controller
+    dayViewController.addConsumptionForToday(drink, amount: processedAmount)
     
     dismissViewControllerAnimated(true, completion: nil)
   }
