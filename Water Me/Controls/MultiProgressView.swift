@@ -10,10 +10,10 @@ import UIKit
 
 @IBDesignable class MultiProgressView: UIView {
   
-  @IBInspectable var maximum: CGFloat = 1.0
+  @IBInspectable var maximum: Double = 1.0
   
   class Section {
-    var factor: CGFloat = 0.0
+    var factor: Double = 0.0
     var color: UIColor
     
     init(color: UIColor) {
@@ -36,8 +36,10 @@ import UIKit
   }
   
   override func drawRect(rect: CGRect) {
-    var left: CGFloat = rect.minX
-    var isLast: Bool = false
+    let rectWidth = Double(rect.width)
+    let rectRight = Double(rect.maxX)
+    var left = Double(rect.minX)
+    var isLast = false
     
     // Draw the background
     if backgroundColor != nil {
@@ -48,14 +50,14 @@ import UIKit
     
     for section in sections {
       // Compute section bounds
-      var width = section.factor / maximum * rect.width
-      if left + width > rect.maxX {
-        width = rect.maxX - left
+      var width = section.factor / maximum * rectWidth
+      if left + width > rectRight {
+        width = rectRight - left
         isLast = true
       }
       
       // Draw section
-      let sectionPath = UIBezierPath(rect: CGRectMake(left, rect.minY, width, rect.maxY))
+      let sectionPath = UIBezierPath(rect: CGRectMake(CGFloat(left), rect.minY, CGFloat(width), rect.maxY))
       section.color.setFill()
       sectionPath.fill()
       

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -53,10 +53,6 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="YX9-QS-RPJ">
-                                        <rect key="frame" x="16" y="40" width="288" height="2"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </progressView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2000 ml" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nDO-TA-hsA">
                                         <rect key="frame" x="107" y="14" width="106" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -90,10 +86,15 @@
                                         <rect key="frame" x="213" y="48" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="&gt;">
+                                        <state key="normal" title=">">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <view contentMode="scaleToFill" id="Ulp-MK-urk" customClass="MultiProgressView" customModule="Water_Me" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="40" width="288" height="10"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.95645805027173914" green="0.95645805027173914" blue="0.95645805027173914" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -110,7 +111,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="consumptionLabel" destination="nDO-TA-hsA" id="GVR-mw-sp2"/>
-                        <outlet property="consumptionProgressView" destination="YX9-QS-RPJ" id="5Om-g5-LCC"/>
+                        <outlet property="consumptionProgressView" destination="Ulp-MK-urk" id="1el-H8-1VO"/>
                         <outlet property="modeButton" destination="GKO-c9-CDb" id="Rgd-Gd-MXQ"/>
                         <outlet property="revealButton" destination="clr-IS-YXe" id="aru-fe-QzG"/>
                         <outlet property="summaryNavigationBar" destination="KHN-d8-Fus" id="VXk-fc-ak3"/>

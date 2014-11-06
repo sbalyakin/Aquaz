@@ -34,12 +34,12 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
   @IBOutlet weak var revealButton: UIBarButtonItem!
   @IBOutlet weak var modeButton: UIBarButtonItem!
   @IBOutlet weak var summaryNavigationBar: UIView!
-  @IBOutlet weak var consumptionProgressView: UIProgressView!
+  @IBOutlet weak var consumptionProgressView: MultiProgressView!
   @IBOutlet weak var consumptionLabel: UILabel!
   
-  var todayConsumption: Double = 0.0 {
+  var todayOverallConsumption: Double = 0.0 {
     didSet {
-      setTodayConsumption(todayConsumption, maximum: Double(Settings.sharedInstance.userDailyWaterIntake.value))
+      setTodayOverallConsumption(todayOverallConsumption, maximum: getCurrentDailyWaterIntake())
     }
   }
   
@@ -72,11 +72,23 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
     
     pageViewController.didMoveToParentViewController(self)
     
+    // Setup multi progress control
+    for i in 0..<drinkTypesCount {
+      let drink = Drink.getDrinkByIndex(i)!
+      let section = consumptionProgressView.addSection(color: drink.color as UIColor)
+      multiProgressSections[drink] = section
+    }
+    consumptionProgressView.maximum = getCurrentDailyWaterIntake()
+    
     // Additional setup for revealing
     revealButtonSetup()
     
-    // Specify existing consumptions
-    todayConsumption = getTodayConsumption()
+    // Fetch existing consumptions for current day
+    fetchTodayConsumptions()
+  }
+  
+  func getCurrentDailyWaterIntake() -> Double {
+    return Settings.sharedInstance.userDailyWaterIntake.value
   }
   
   func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
@@ -99,6 +111,15 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
     return nil
   }
   
+  func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
+    let currentPage = pageViewController.viewControllers.last as UIViewController
+    if currentPage == pages[0] {
+      modeButton.title = pageTitles[0]
+    } else if currentPage == pages[1] {
+      modeButton.title = pageTitles[1]
+    }
+  }
+  
   @IBAction func toggleCurrentPage(sender: AnyObject) {
     let currentPage = pageViewController.viewControllers.last as UIViewController
     if currentPage == pages[0] {
@@ -110,17 +131,32 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
     }
   }
   
-  func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
-    let currentPage = pageViewController.viewControllers.last as UIViewController
-    if currentPage == pages[0] {
-      modeButton.title = pageTitles[0]
-    } else if currentPage == pages[1] {
-      modeButton.title = pageTitles[1]
+  func addConsumptionForToday(drink: Drink, amount: Double) {
+    if let section = multiProgressSections[drink] {
+      section.factor += amount
     }
+    consumptionProgressView.setNeedsDisplay()
+    todayOverallConsumption += amount
   }
   
-  func addConsumptionForToday(drink: Drink, amount: Double) {
-    todayConsumption += amount
+  private func setTodayOverallConsumption(amount: Double, maximum: Double) {
+    assert(maximum > 0, "Maximum of recommended consumption is specified to 0")
+    let consumptionText = Units.sharedInstance.formatAmountToText(amount: amount, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals)
+    consumptionLabel.text = consumptionText
+  }
+  
+  private func fetchTodayConsumptions() {
+    var overallAmount = 0.0
+    if let consumptions = ModelHelper.sharedInstance.computeDrinkAmountsForDay(NSDate()) {
+      for (drink, amount) in consumptions {
+        overallAmount += amount
+        if let section = multiProgressSections[drink] {
+          section.factor = amount
+        }
+      }
+    }
+    consumptionProgressView.setNeedsDisplay()
+    todayOverallConsumption = overallAmount
   }
   
   private func revealButtonSetup() {
@@ -132,28 +168,9 @@ class TodayContainerViewController: UIViewController, UIPageViewControllerDataSo
     }
   }
   
-  private func setTodayConsumption(amount: Double, maximum: Double) {
-    assert(maximum > 0, "Maximum of recommended consumption is specified to 0")
-    let progress = amount / maximum
-    consumptionProgressView.progress = Float(progress)
-    
-    let consumptionText = Units.sharedInstance.formatAmountToText(amount: amount, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals)
-    consumptionLabel.text = consumptionText
-  }
-  
-  private func getTodayConsumption() -> Double {
-    if let consumptions = ModelHelper.sharedInstance.computeDrinkAmountsForDay(NSDate()) {
-      var overallAmount = 0.0
-      for (drink, amount) in consumptions {
-        overallAmount += amount
-      }
-      return overallAmount
-    } else {
-      return 0.0
-    }
-  }
-  
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
+  private let drinkTypesCount = 9 // number of supported drinks types: water, tea etc.
+  private var multiProgressSections: [Drink: MultiProgressView.Section] = [:]
 
 }
