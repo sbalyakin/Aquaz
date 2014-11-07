@@ -34,11 +34,12 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   @IBOutlet weak var previousDayButton: UIButton!
   @IBOutlet weak var nextDayButton: UIButton!
   @IBOutlet weak var currentDayButton: UIButton!
+  var currentDayLabelInNavigationBar: UILabel! // programmatically created in viewDidLoad()
   
   /// Current date for managing water intake
   var currentDate: NSDate = NSDate() {
     didSet {
-      adjustCurrentDayButton()
+      applyDateSwitching()
       fetchConsumptions()
     }
   }
@@ -91,6 +92,28 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     
     // Fetch existing consumptions for current day
     fetchConsumptions()
+
+    // Customize navigation bar
+    let navigationBarRect = navigationController!.navigationBar.frame
+    let navigationBarTitleLabel = UILabel(frame: navigationBarRect)
+    navigationBarTitleLabel.autoresizingMask = .FlexibleWidth
+    navigationBarTitleLabel.backgroundColor = UIColor.clearColor()
+    navigationBarTitleLabel.text = navigationItem.title
+    navigationBarTitleLabel.font = UIFont.boldSystemFontOfSize(16)
+    navigationBarTitleLabel.textAlignment = .Center
+    navigationItem.titleView = navigationBarTitleLabel
+
+    currentDayLabelInNavigationBar = UILabel(frame: navigationBarRect)
+    currentDayLabelInNavigationBar.autoresizingMask = .FlexibleWidth
+    currentDayLabelInNavigationBar.backgroundColor = UIColor.clearColor()
+    currentDayLabelInNavigationBar.font = UIFont.systemFontOfSize(12)
+    currentDayLabelInNavigationBar.textAlignment = .Center
+    navigationItem.titleView!.addSubview(currentDayLabelInNavigationBar)
+    
+    navigationController!.navigationBar.setTitleVerticalPositionAdjustment(-10.0, forBarMetrics: UIBarMetrics.Default)
+
+    // Apply current date to all related labels
+    applyDateSwitching()
   }
   
   @IBAction func switchToPreviousDay(sender: AnyObject) {
@@ -163,6 +186,12 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   }
   
   private func fetchConsumptions() {
+    // Clear all drink sections
+    for (_, section) in multiProgressSections {
+      section.factor = 0.0
+    }
+    
+    // Fill sections with fetched amounts and compute overall consumption
     var overallAmount = 0.0
     if let consumptions = ModelHelper.sharedInstance.computeDrinkAmountsForDay(currentDate) {
       for (drink, amount) in consumptions {
@@ -172,13 +201,41 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
         }
       }
     }
+    
     consumptionProgressView.setNeedsDisplay()
     overallConsumption = overallAmount
   }
+
+  private func formatDate(date: NSDate) -> String {
+    let today = NSDate()
+    let daysToToday = DateHelper.computeUnitsFrom(today, toDate: date, unit: .CalendarUnitDay)
+    let dateFormatter = NSDateFormatter()
+    
+    if abs(daysToToday) <= 1 {
+      // Use standard date formatting for yesterday, today and tomorrow
+      // in order to obtain "Yesterday", "Today" and "Tomorrow" localized date strings
+      dateFormatter.dateStyle = .MediumStyle
+      dateFormatter.timeStyle = .NoStyle
+      dateFormatter.doesRelativeDateFormatting = true
+    } else {
+      // Use custom formatting. If year of a current date is year of today, hide them.
+      let yearsToToday = DateHelper.computeUnitsFrom(today, toDate: date, unit: .CalendarUnitYear)
+      let template = yearsToToday == 0 ? "dMMMM" : "dMMMMyyyy"
+      let formatString = NSDateFormatter.dateFormatFromTemplate(template, options: 0, locale: NSLocale.currentLocale())
+      dateFormatter.dateFormat = formatString
+    }
+    return dateFormatter.stringFromDate(date)
+  }
   
-  private func adjustCurrentDayButton() {
-    let text = NSDateFormatter.localizedStringFromDate(currentDate, dateStyle: .MediumStyle, timeStyle: .NoStyle)
-    currentDayButton.setTitle(text, forState: .Normal)
+  private func applyDateSwitching() {
+    // Update all related date labels
+    let formattedDate = formatDate(currentDate)
+    currentDayButton.setTitle(formattedDate, forState: .Normal)
+    currentDayLabelInNavigationBar.text = formattedDate
+    
+    // Disable switching to the next day if a current day is today
+    let daysToToday = DateHelper.computeUnitsFrom(currentDate, toDate: NSDate(), unit: .CalendarUnitDay)
+    nextDayButton.enabled = daysToToday > 0
   }
   
   private func revealButtonSetup() {
@@ -198,5 +255,5 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
   private let drinkTypesCount = 9 // number of supported drinks types: water, tea etc.
-  private let secondsPerDay: NSTimeInterval = 60.0 * 60 * 24
+  private let secondsPerDay: NSTimeInterval = 60 * 60 * 24
 }

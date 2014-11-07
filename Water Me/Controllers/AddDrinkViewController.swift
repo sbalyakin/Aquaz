@@ -88,10 +88,13 @@ class AddDrinkViewController: UIViewController {
     // Prepare amount for storing
     let precision = Settings.sharedInstance.generalVolumeUnits.value.precision
     let processedAmount = Units.sharedInstance.prepareAmountForStoring(amount: amount, unitType: .Volume, precision: precision)
-      
+    
+    // Get current date from day view controller and replace time with the current
+    let date = DateHelper.dateByJoiningDateTime(datePart: dayViewController.currentDate, timePart: NSDate())
+    
     // Store the consumption into Core Data
     drink.recentAmount.amount = processedAmount
-    Consumption.addEntity(drink: drink, amount: processedAmount, date: NSDate(), managedObjectContext: ModelHelper.sharedInstance.managedObjectContext)
+    Consumption.addEntity(drink: drink, amount: processedAmount, date: date, managedObjectContext: ModelHelper.sharedInstance.managedObjectContext)
     
     // Update day view controller
     dayViewController.addConsumption(drink, amount: processedAmount)

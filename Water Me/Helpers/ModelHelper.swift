@@ -53,9 +53,9 @@ class ModelHelper {
   // computeDrinkAmountsForInterval
   
   /// Computes amount of all drinked beverages grouped by drinks from start to end dates inclusive
-  func computeDrinkAmountsForDateInterval(#startDate: NSDate, endDate: NSDate) -> [Drink: Double]? {
+  func computeDrinkAmountsForDateInterval(#minDate: NSDate, maxDate: NSDate) -> [Drink: Double]? {
     // Fetch all consumptions for the specified date interval
-    let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", argumentArray: [startDate, endDate])
+    let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", argumentArray: [minDate, maxDate])
     let rawConsumptions: [Consumption]? = fetchManagedObjects(predicate: predicate)
 
     if rawConsumptions == nil {
@@ -79,20 +79,11 @@ class ModelHelper {
   /// Computes amount of all drinked beverages grouped by drinks for whole day of the specified date
   func computeDrinkAmountsForDay(date: NSDate) -> [Drink: Double]? {
     // Determine start and end of specified day
-    let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
-    NSCalendarUnit.DayCalendarUnit
-    var dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
-    dateComponents.hour = 0
-    dateComponents.minute = 0
-    dateComponents.second = 0
-    let startDate = calendar.dateFromComponents(dateComponents)!
-    dateComponents.hour = 23
-    dateComponents.minute = 59
-    dateComponents.second = 59
-    let endDate = calendar.dateFromComponents(dateComponents)!
+    let minDate = DateHelper.dateBySettingHour(0, minute: 0, second: 0, ofDate: date)
+    let maxDate = DateHelper.dateBySettingHour(23, minute: 59, second: 59, ofDate: date)
     
     // Fetch all consumptions for the day
-    return computeDrinkAmountsForDateInterval(startDate: startDate, endDate: endDate)
+    return computeDrinkAmountsForDateInterval(minDate: minDate, maxDate: maxDate)
   }
   
   let managedObjectContext: NSManagedObjectContext!
