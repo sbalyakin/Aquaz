@@ -90,13 +90,7 @@ class AddDrinkViewController: UIViewController {
     let processedAmount = Units.sharedInstance.prepareAmountForStoring(amount: amount, unitType: .Volume, precision: precision)
     
     // Get current date from day view controller and replace time with the current
-    let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
-    var currentDayComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: dayViewController.currentDate)
-    var nowComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: NSDate())
-    currentDayComponents.hour   = nowComponents.hour
-    currentDayComponents.minute = nowComponents.minute
-    currentDayComponents.second = nowComponents.second
-    let date = calendar.dateFromComponents(currentDayComponents)!
+    let date = DateHelper.dateByJoiningDateTime(datePart: dayViewController.currentDate, timePart: NSDate())
     
     // Store the consumption into Core Data
     drink.recentAmount.amount = processedAmount

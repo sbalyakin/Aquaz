@@ -206,36 +206,21 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     overallConsumption = overallAmount
   }
 
-  private func compareDateComponentsWithoutTime(component1: NSDateComponents, _ component2: NSDateComponents) -> Bool {
-    return component1.day == component2.day &&
-           component1.month == component2.month &&
-           component1.year == component2.year
-  }
-  
   private func formatDate(date: NSDate) -> String {
     let today = NSDate()
-    let yesterday = NSDate(timeInterval: -secondsPerDay, sinceDate: today)
-    let tomorrow = NSDate(timeInterval: secondsPerDay, sinceDate: today)
-
-    let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
-    let todayComponents       = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: today)
-    let yesterdayComponents   = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: yesterday)
-    let tomorrowComponents    = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: tomorrow)
-    let currentDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
-
+    let daysToToday = DateHelper.computeUnitsFrom(today, toDate: date, unit: .CalendarUnitDay)
     let dateFormatter = NSDateFormatter()
     
-    if compareDateComponentsWithoutTime(currentDateComponents, todayComponents) ||
-       compareDateComponentsWithoutTime(currentDateComponents, tomorrowComponents) ||
-       compareDateComponentsWithoutTime(currentDateComponents, yesterdayComponents) {
-      // Use standard date formatting for yeasterday, today and tomorrow
-      // in order to obtain "Yeasterday", "Today" and "Tomorrow" localized date strings
+    if abs(daysToToday) <= 1 {
+      // Use standard date formatting for yesterday, today and tomorrow
+      // in order to obtain "Yesterday", "Today" and "Tomorrow" localized date strings
       dateFormatter.dateStyle = .MediumStyle
       dateFormatter.timeStyle = .NoStyle
       dateFormatter.doesRelativeDateFormatting = true
     } else {
       // Use custom formatting. If year of a current date is year of today, hide them.
-      let template = currentDateComponents.year == todayComponents.year ? "dMMMM" : "dMMMMyyyy"
+      let yearsToToday = DateHelper.computeUnitsFrom(today, toDate: date, unit: .CalendarUnitYear)
+      let template = yearsToToday == 0 ? "dMMMM" : "dMMMMyyyy"
       let formatString = NSDateFormatter.dateFormatFromTemplate(template, options: 0, locale: NSLocale.currentLocale())
       dateFormatter.dateFormat = formatString
     }
@@ -249,13 +234,8 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     currentDayLabelInNavigationBar.text = formattedDate
     
     // Disable switching to the next day if a current day is today
-    let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
-    NSCalendarUnit.DayCalendarUnit
-    
-    let today = NSDate()
-    let todayComponents      = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: today)
-    let currentDayComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: currentDate)
-    nextDayButton.enabled = !compareDateComponentsWithoutTime(todayComponents, currentDayComponents)
+    let daysToToday = DateHelper.computeUnitsFrom(currentDate, toDate: NSDate(), unit: .CalendarUnitDay)
+    nextDayButton.enabled = daysToToday > 0
   }
   
   private func revealButtonSetup() {
