@@ -80,7 +80,6 @@ class ModelHelper {
   func computeDrinkAmountsForDay(date: NSDate) -> [Drink: Double]? {
     // Determine start and end of specified day
     let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
-    NSCalendarUnit.DayCalendarUnit
     var dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
     dateComponents.hour = 0
     dateComponents.minute = 0
