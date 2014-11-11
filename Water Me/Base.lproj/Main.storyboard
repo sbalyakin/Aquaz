@@ -82,6 +82,9 @@
                                         <state key="normal" title="S">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="toggleHotDayMode:" destination="x3I-fN-BQH" eventType="touchUpInside" id="zh4-ul-GSE"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ubg-ey-enw">
                                         <rect key="frame" x="8" y="10" width="30" height="30"/>
@@ -111,6 +114,9 @@
                                         <state key="normal" title="A">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="toggleHighActivityMode:" destination="x3I-fN-BQH" eventType="touchUpInside" id="vRf-Ex-FBV"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -131,6 +137,8 @@
                         <outlet property="consumptionProgressView" destination="Ulp-MK-urk" id="1el-H8-1VO"/>
                         <outlet property="currentDayButton" destination="byd-yV-Sp4" id="WQn-rJ-p5C"/>
                         <outlet property="daySelectionBar" destination="I2p-iQ-qGP" id="3nx-qK-6yX"/>
+                        <outlet property="highActivityButton" destination="Sw2-pb-ue3" id="QmV-6d-RdV"/>
+                        <outlet property="hotDayButton" destination="Teo-xX-LXi" id="07o-8B-MXF"/>
                         <outlet property="nextDayButton" destination="8dM-xv-rh9" id="IRn-l4-S59"/>
                         <outlet property="pageButton" destination="GKO-c9-CDb" id="UxO-im-4tz"/>
                         <outlet property="previousDayButton" destination="ruO-Mw-fgx" id="klE-Fy-Vuq"/>

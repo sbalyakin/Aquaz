@@ -35,6 +35,8 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   @IBOutlet weak var nextDayButton: UIButton!
   @IBOutlet weak var currentDayButton: UIButton!
   @IBOutlet weak var daySelectionBar: UIView!
+  @IBOutlet weak var highActivityButton: UIButton!
+  @IBOutlet weak var hotDayButton: UIButton!
   
   var currentDayLabelInNavigationTitle: UILabel! // is programmatically created in viewDidLoad()
   
@@ -42,18 +44,40 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   var currentDate: NSDate = NSDate() {
     didSet {
       applyDateSwitching()
-      fetchConsumptions()
     }
   }
   
   var overallConsumption: Double = 0.0 {
     didSet {
-      setOverallConsumption(overallConsumption, maximum: getRecommendedWaterIntake())
+      setOverallConsumption(overallConsumption, maximum: consumptionBaseRate)
     }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    // Customize navigation bar
+    let navigationTitleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
+    let navigationTitleView = UIView(frame: navigationTitleViewRect)
+    
+    let navigationTitleLabel = UILabel(frame: navigationTitleView.bounds)
+    navigationTitleLabel.autoresizingMask = .FlexibleWidth
+    navigationTitleLabel.backgroundColor = UIColor.clearColor()
+    navigationTitleLabel.text = navigationItem.title
+    navigationTitleLabel.font = UIFont.boldSystemFontOfSize(16)
+    navigationTitleLabel.textAlignment = .Center
+    navigationTitleView.addSubview(navigationTitleLabel)
+    
+    let currentDayLabelRect = navigationTitleView.bounds.rectByOffsetting(dx: 0, dy: 16)
+    currentDayLabelInNavigationTitle = UILabel(frame: currentDayLabelRect)
+    currentDayLabelInNavigationTitle.autoresizingMask = navigationTitleLabel.autoresizingMask
+    currentDayLabelInNavigationTitle.backgroundColor = UIColor.clearColor()
+    currentDayLabelInNavigationTitle.font = UIFont.systemFontOfSize(12)
+    currentDayLabelInNavigationTitle.textAlignment = .Center
+    navigationTitleView.addSubview(currentDayLabelInNavigationTitle)
+    
+    navigationItem.titleView = navigationTitleView
+    navigationController!.navigationBar.setTitleVerticalPositionAdjustment(-8.0, forBarMetrics: .Default)
     
     // Add view controller for drink selection
     let selectDrinkViewController = storyboard!.instantiateViewControllerWithIdentifier("SelectDrinkViewController") as SelectDrinkViewController
@@ -90,36 +114,9 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
       let section = consumptionProgressView.addSection(color: drink.color as UIColor)
       multiProgressSections[drink] = section
     }
-    consumptionProgressView.maximum = getRecommendedWaterIntake()
     
     // Additional setup for revealing
     revealButtonSetup()
-    
-    // Fetch existing consumptions for current day
-    fetchConsumptions()
-
-    // Customize navigation bar
-    let navigationTitleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
-    let navigationTitleView = UIView(frame: navigationTitleViewRect)
-
-    let navigationTitleLabel = UILabel(frame: navigationTitleView.bounds)
-    navigationTitleLabel.autoresizingMask = .FlexibleWidth
-    navigationTitleLabel.backgroundColor = UIColor.clearColor()
-    navigationTitleLabel.text = navigationItem.title
-    navigationTitleLabel.font = UIFont.boldSystemFontOfSize(16)
-    navigationTitleLabel.textAlignment = .Center
-    navigationTitleView.addSubview(navigationTitleLabel)
-
-    let currentDayLabelRect = navigationTitleView.bounds.rectByOffsetting(dx: 0, dy: 16)
-    currentDayLabelInNavigationTitle = UILabel(frame: currentDayLabelRect)
-    currentDayLabelInNavigationTitle.autoresizingMask = navigationTitleLabel.autoresizingMask
-    currentDayLabelInNavigationTitle.backgroundColor = UIColor.clearColor()
-    currentDayLabelInNavigationTitle.font = UIFont.systemFontOfSize(12)
-    currentDayLabelInNavigationTitle.textAlignment = .Center
-    navigationTitleView.addSubview(currentDayLabelInNavigationTitle)
-    
-    navigationItem.titleView = navigationTitleView
-    navigationController!.navigationBar.setTitleVerticalPositionAdjustment(-8.0, forBarMetrics: .Default)
 
     // Apply current date to all related labels
     applyDateSwitching()
@@ -148,16 +145,28 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     }
   }
   
+  @IBAction func toggleHighActivityMode(sender: AnyObject) {
+    if consumptionHighActivity > 0 {
+      consumptionHighActivity = 0
+    } else {
+      consumptionHighActivity = Settings.sharedInstance.generalExtraConsumptionHighActivity.value
+    }
+  }
+  
+  @IBAction func toggleHotDayMode(sender: AnyObject) {
+    if consumptionHotDay > 0 {
+      consumptionHotDay = 0
+    } else {
+      consumptionHotDay = Settings.sharedInstance.generalExtraConsumptionHot.value
+    }
+  }
+  
   @IBAction func switchToPreviousDay(sender: AnyObject) {
     currentDate = DateHelper.addToDate(currentDate, years: 0, months: 0, days: -1)
   }
 
   @IBAction func switchToNextDay(sender: AnyObject) {
     currentDate = DateHelper.addToDate(currentDate, years: 0, months: 0, days: 1)
-  }
-  
-  func getRecommendedWaterIntake() -> Double {
-    return Settings.sharedInstance.userDailyWaterIntake.value
   }
   
   func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
@@ -224,27 +233,6 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     consumptionLabel.text = "\(consumptionText) of \(maximumText)"
   }
   
-  private func fetchConsumptions() {
-    // Clear all drink sections
-    for (_, section) in multiProgressSections {
-      section.factor = 0.0
-    }
-    
-    // Fill sections with fetched amounts and compute overall consumption
-    var overallAmount = 0.0
-    if let consumptions = ModelHelper.sharedInstance.computeDrinkAmountsForDay(currentDate) {
-      for (drink, amount) in consumptions {
-        overallAmount += amount
-        if let section = multiProgressSections[drink] {
-          section.factor = amount
-        }
-      }
-    }
-    
-    consumptionProgressView.setNeedsDisplay()
-    overallConsumption = overallAmount
-  }
-
   private func formatDate(date: NSDate) -> String {
     let today = NSDate()
     let daysToToday = DateHelper.computeUnitsFrom(today, toDate: date, unit: .CalendarUnitDay)
@@ -267,6 +255,15 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   }
   
   private func applyDateSwitching() {
+    // Fetch consumption rate for current day
+    fetchConsumptionRate()
+    
+    // Fetch existing consumptions for current day
+    fetchConsumptions()
+
+    // Update maximum for multi progress control
+    consumptionProgressView.maximum = consumptionBaseRate
+    
     // Update all related date labels
     let formattedDate = formatDate(currentDate)
     currentDayButton.setTitle(formattedDate, forState: .Normal)
@@ -275,6 +272,40 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     // Disable switching to the next day if a current day is today
     let daysToToday = DateHelper.computeUnitsFrom(currentDate, toDate: NSDate(), unit: .CalendarUnitDay)
     nextDayButton.enabled = daysToToday > 0
+  }
+  
+  private func fetchConsumptionRate() {
+    let currentDateAdjusted = DateHelper.dateByClearingTime(ofDate: currentDate)
+    consumptionRate = ConsumptionRate.fetchConsumptionRateForDate(currentDateAdjusted)
+  }
+
+  private func fetchConsumptions() {
+    // Clear all drink sections
+    for (_, section) in multiProgressSections {
+      section.factor = 0.0
+    }
+    
+    // Fill sections with fetched amounts and compute overall consumption
+    var overallAmount = 0.0
+    if let consumptions = ModelHelper.sharedInstance.computeDrinkAmountsForDay(currentDate) {
+      for (drink, amount) in consumptions {
+        overallAmount += amount
+        if let section = multiProgressSections[drink] {
+          section.factor = amount
+        }
+      }
+    }
+    
+    consumptionProgressView.setNeedsDisplay()
+    overallConsumption = overallAmount
+  }
+  
+  private func isConsumptionRateForCurrentDay() -> Bool {
+    if let rate = consumptionRate {
+      return DateHelper.areDatesEqualByDays(date1: rate.date, date2: currentDate)
+    } else {
+      return false
+    }
   }
   
   private func revealButtonSetup() {
@@ -286,10 +317,68 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     }
   }
 
+  private var consumptionRate: ConsumptionRate?
+
+  private var consumptionBaseRate: Double {
+    if let rate = consumptionRate {
+      let baseRate = rate.baseRateAmount.doubleValue
+      return baseRate * (1 + consumptionHotDay + consumptionHighActivity)
+    }
+    return Settings.sharedInstance.userDailyWaterIntake.value
+  }
+  
+  private var consumptionHotDay: Double {
+    get {
+      if let rate = consumptionRate {
+        return rate.hotDayFraction.doubleValue
+      }
+      return 0
+    }
+    set(newConsumptionHotDay) {
+      if !isConsumptionRateForCurrentDay() {
+        consumptionRate = ConsumptionRate.addEntity(
+          date: currentDate,
+          baseRateAmount: consumptionBaseRate,
+          hotDateFraction: newConsumptionHotDay,
+          highActivityFraction: 0)
+      } else if let rate = consumptionRate {
+        rate.hotDayFraction = newConsumptionHotDay
+      }
+
+      // TODO: Should be re-written for image
+      let hotDayColor = newConsumptionHotDay > 0 ? UIColor.greenColor() : UIColor.blueColor()
+      hotDayButton.setTitleColor(hotDayColor, forState: .Normal)
+    }
+  }
+  
+  private var consumptionHighActivity: Double {
+    get {
+      if let rate = consumptionRate {
+        return rate.highActivityFraction.doubleValue
+      }
+      return 0
+    }
+    set(newConsumptionHighActivity) {
+      if !isConsumptionRateForCurrentDay() {
+        consumptionRate = ConsumptionRate.addEntity(
+          date: currentDate,
+          baseRateAmount: consumptionBaseRate,
+          hotDateFraction: 0,
+          highActivityFraction: newConsumptionHighActivity)
+      } else if let rate = consumptionRate {
+        rate.highActivityFraction = newConsumptionHighActivity
+      }
+      
+      // TODO: Should be re-written for image
+      let highActivityColor = newConsumptionHighActivity > 0 ? UIColor.greenColor() : UIColor.blueColor()
+      highActivityButton.setTitleColor(highActivityColor, forState: .Normal)
+    }
+  }
+  
   private var pageViewController: UIPageViewController!
   private var pages: [UIViewController] = []
   private var multiProgressSections: [Drink: MultiProgressView.Section] = [:]
-
+  
   private let pageTitles = ["Drinked", "Add"]
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals

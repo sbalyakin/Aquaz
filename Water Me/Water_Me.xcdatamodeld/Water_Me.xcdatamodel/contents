@@ -5,6 +5,12 @@
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="drink" maxCount="1" deletionRule="Deny" destinationEntity="Drink" inverseName="consumptions" inverseEntity="Drink" syncable="YES"/>
     </entity>
+    <entity name="ConsumptionRate" representedClassName="Water_Me.ConsumptionRate" syncable="YES">
+        <attribute name="baseRateAmount" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="highActivityFraction" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="hotDayFraction" attributeType="Double" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="Drink" representedClassName="Water_Me.Drink" syncable="YES">
         <attribute name="color" attributeType="Transformable" syncable="YES"/>
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -12,11 +18,6 @@
         <attribute name="waterPercent" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="consumptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Consumption" inverseName="drink" inverseEntity="Consumption" syncable="YES"/>
         <relationship name="recentAmount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecentAmount" inverseName="drink" inverseEntity="RecentAmount" syncable="YES"/>
-    </entity>
-    <entity name="ExtraConsumption" representedClassName="Water_Me.ExtraConsumption" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="highActivity" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="hot" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
     <entity name="RecentAmount" representedClassName="Water_Me.RecentAmount" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -26,7 +27,7 @@
     <elements>
         <element name="Consumption" positionX="-36" positionY="27" width="128" height="90"/>
         <element name="Drink" positionX="-63" positionY="-18" width="128" height="135"/>
-        <element name="ExtraConsumption" positionX="-18" positionY="45" width="128" height="90"/>
+        <element name="ConsumptionRate" positionX="-18" positionY="45" width="128" height="103"/>
         <element name="RecentAmount" positionX="-54" positionY="18" width="128" height="75"/>
     </elements>
 </model>

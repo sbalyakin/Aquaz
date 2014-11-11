@@ -47,4 +47,24 @@ class Drink: NSManagedObject, NamedEntity {
     
     return drink
   }
+  
+  class func addEntity(#index: Int, name: String, waterPercent: NSNumber, color: UIColor, recentAmount amount: NSNumber, managedObjectContext: NSManagedObjectContext) -> Drink {
+    let drink = NSEntityDescription.insertNewObjectForEntityForName("Drink", inManagedObjectContext: managedObjectContext) as Drink
+    drink.index = index
+    drink.name = name
+    drink.waterPercent = waterPercent
+    drink.color = color
+    
+    let recentAmount = NSEntityDescription.insertNewObjectForEntityForName("RecentAmount", inManagedObjectContext: managedObjectContext) as RecentAmount
+    recentAmount.drink = drink
+    recentAmount.amount = amount
+    
+    var error: NSError? = nil
+    if !managedObjectContext.save(&error) {
+      assert(false, "Failed to save new drink named \"\(name)\"")
+    }
+    
+    return drink
+  }
+
 }

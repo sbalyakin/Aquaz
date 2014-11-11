@@ -50,8 +50,6 @@ class ModelHelper {
     return nil
   }
   
-  // computeDrinkAmountsForInterval
-  
   /// Computes amount of all drinked beverages grouped by drinks from start to end dates inclusive
   func computeDrinkAmountsForDateInterval(#minDate: NSDate, maxDate: NSDate) -> [Drink: Double]? {
     // Fetch all consumptions for the specified date interval
