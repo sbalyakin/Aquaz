@@ -143,38 +143,41 @@ class Settings {
   }
   
   lazy var generalWeightUnits: SettingsEnumItem<Units.Weight> = SettingsEnumItem(
-    key: "General weight units",initialValue: .Kilograms, userDefaults: self.standardUserDefaults)
+    key: "General - Weight units",initialValue: .Kilograms, userDefaults: self.standardUserDefaults)
   
   lazy var generalHeightUnits: SettingsEnumItem<Units.Length> = SettingsEnumItem(
-    key: "General height units", initialValue: .Centimeters, userDefaults: self.standardUserDefaults)
+    key: "General - Height units", initialValue: .Centimeters, userDefaults: self.standardUserDefaults)
   
   lazy var generalVolumeUnits: SettingsEnumItem<Units.Volume> = SettingsEnumItem(
-    key: "General volume units", initialValue: .Millilitres, userDefaults: self.standardUserDefaults)
+    key: "General - Volume units", initialValue: .Millilitres, userDefaults: self.standardUserDefaults)
   
   lazy var generalExtraConsumptionHot: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
-    key: "General extra consumption hot", initialValue: 0.5, userDefaults: self.standardUserDefaults)
+    key: "General - Extra consumption hot", initialValue: 0.5, userDefaults: self.standardUserDefaults)
   
   lazy var generalExtraConsumptionHighActivity: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
-    key: "General extra consumption high activity", initialValue: 0.5, userDefaults: self.standardUserDefaults)
+    key: "General - Extra consumption high activity", initialValue: 0.5, userDefaults: self.standardUserDefaults)
   
   lazy var userHeight: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
-    key: "User height", initialValue: 170, userDefaults: self.standardUserDefaults)
+    key: "User - Height", initialValue: 170, userDefaults: self.standardUserDefaults)
   
   lazy var userWeight: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
-    key: "User weight", initialValue: 70, userDefaults: self.standardUserDefaults)
+    key: "User - Weight", initialValue: 70, userDefaults: self.standardUserDefaults)
   
   lazy var userActivityLevel: SettingsEnumItem<ActivityLevel> = SettingsEnumItem(
-    key: "User activity level", initialValue: .Medium, userDefaults: self.standardUserDefaults)
+    key: "User - Activity level", initialValue: .Medium, userDefaults: self.standardUserDefaults)
   
   lazy var userIsMale: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "User is male", initialValue: true, userDefaults: self.standardUserDefaults)
+    key: "User - Is male", initialValue: true, userDefaults: self.standardUserDefaults)
   
   lazy var userAge: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
-    key: "User age", initialValue: 30, userDefaults: self.standardUserDefaults)
+    key: "User - Age", initialValue: 30, userDefaults: self.standardUserDefaults)
   
   lazy var userDailyWaterIntake: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
-    key: "User daily water intake", initialValue: 2000.0, userDefaults: self.standardUserDefaults)
+    key: "User - Daily water intake", initialValue: 2000.0, userDefaults: self.standardUserDefaults)
 
+  lazy var uiDisplayDaySelection: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
+    key: "UI - Display Day Selection", initialValue: false, userDefaults: self.standardUserDefaults)
+  
   private let standardUserDefaults = NSUserDefaults.standardUserDefaults()
 
   private init() { }

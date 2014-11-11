@@ -73,11 +73,11 @@ class Units {
   /// Returns specified amount as formatted string taking into account current units settings.
   /// Amount should be specified in metric units.
   // It's possible to specify final precision and numbers of decimals of formatted text.
-  func formatAmountToText(#amount: Double, unitType: UnitType, precision: Double = 1, decimals: Int = 0) -> String {
+  func formatAmountToText(#amount: Double, unitType: UnitType, precision: Double = 1, decimals: Int = 0, displayUnits: Bool = true) -> String {
     let units = self.units[unitType.rawValue]
     var quantity = Quantity(ownUnit: units.settingsUnit, fromUnit: units.internalUnit, fromAmount: amount)
     quantity.amount = round(quantity.amount / precision) * precision
-    return quantity.getDescription(decimals)
+    return quantity.getDescription(decimals, displayUnits: displayUnits)
   }
   
   private var units: [(internalUnit: Unit, settingsUnit: Unit)] = []
@@ -145,7 +145,7 @@ class Quantity {
     return getDescription(0)
   }
 
-  func getDescription(decimals: Int) -> String {
+  func getDescription(decimals: Int, displayUnits: Bool = true) -> String {
     struct Static {
       static let numberFormatter = NSNumberFormatter()
     }
@@ -155,7 +155,12 @@ class Quantity {
     Static.numberFormatter.minimumIntegerDigits = 1
     Static.numberFormatter.numberStyle = .DecimalStyle
 
-    return "\(Static.numberFormatter.stringFromNumber(amount)!) \(unit.contraction)"
+    var description = "\(Static.numberFormatter.stringFromNumber(amount)!)"
+    if displayUnits {
+      description += " \(unit.contraction)"
+    }
+    
+    return description
   }
   
   func convertFrom(#amount:Double, unit: Unit) {

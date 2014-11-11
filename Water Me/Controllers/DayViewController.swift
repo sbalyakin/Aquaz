@@ -28,13 +28,15 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   
   @IBOutlet weak var revealButton: UIBarButtonItem!
   @IBOutlet weak var pageButton: UIBarButtonItem!
-  @IBOutlet weak var summaryNavigationBar: UIView!
+  @IBOutlet weak var summaryBar: UIView!
   @IBOutlet weak var consumptionProgressView: MultiProgressView!
   @IBOutlet weak var consumptionLabel: UILabel!
   @IBOutlet weak var previousDayButton: UIButton!
   @IBOutlet weak var nextDayButton: UIButton!
   @IBOutlet weak var currentDayButton: UIButton!
-  var currentDayLabelInNavigationTitle: UILabel! // programmatically created in viewDidLoad()
+  @IBOutlet weak var daySelectionBar: UIView!
+  
+  var currentDayLabelInNavigationTitle: UILabel! // is programmatically created in viewDidLoad()
   
   /// Current date for managing water intake
   var currentDate: NSDate = NSDate() {
@@ -68,16 +70,19 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     pageViewController.delegate = self
     pageViewController.setViewControllers([selectDrinkViewController], direction: .Forward, animated: false, completion: nil)
     
-    let summaryNavigationBarHeight = summaryNavigationBar.bounds.height
+    // Setup summary bar
+    let summaryBarHeight = summaryBar.bounds.height
     var pageViewControllerRect = view.frame
-    pageViewControllerRect.size.height -= summaryNavigationBarHeight
-    pageViewControllerRect.offset(dx: 0.0, dy: summaryNavigationBarHeight)
+    pageViewControllerRect.size.height -= summaryBarHeight
+    pageViewControllerRect.offset(dx: 0.0, dy: summaryBarHeight)
     pageViewController.view.frame = pageViewControllerRect
     
     addChildViewController(pageViewController)
     view.addSubview(pageViewController.view)
     
     pageViewController.didMoveToParentViewController(self)
+    
+    setDaySelectionBarVisible(Settings.sharedInstance.uiDisplayDaySelection.value)
     
     // Setup multi progress control
     for i in 0..<drinkTypesCount {
@@ -120,8 +125,27 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     applyDateSwitching()
   }
   
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
+  @IBAction func toggleDaySelectionBar(sender: AnyObject) {
+    setDaySelectionBarVisible(daySelectionBar.hidden)
+  }
+  
+  private func setDaySelectionBarVisible(visible: Bool) {
+    if daySelectionBar.hidden == !visible {
+      return
+    }
+    
+    Settings.sharedInstance.uiDisplayDaySelection.value = visible
+
+    daySelectionBar.hidden = !visible
+    if daySelectionBar.hidden {
+      summaryBar.frame.size.height -= daySelectionBar.frame.height
+      pageViewController.view.frame.size.height += daySelectionBar.frame.height
+      pageViewController.view.frame.offset(dx: 0, dy: -daySelectionBar.frame.height)
+    } else {
+      summaryBar.frame.size.height += daySelectionBar.frame.height
+      pageViewController.view.frame.size.height -= daySelectionBar.frame.height
+      pageViewController.view.frame.offset(dx: 0, dy: daySelectionBar.frame.height)
+    }
   }
   
   @IBAction func switchToPreviousDay(sender: AnyObject) {
@@ -195,8 +219,9 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   
   private func setOverallConsumption(amount: Double, maximum: Double) {
     assert(maximum > 0, "Maximum of recommended consumption is specified to 0")
-    let consumptionText = Units.sharedInstance.formatAmountToText(amount: amount, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals)
-    consumptionLabel.text = consumptionText
+    let maximumText = Units.sharedInstance.formatAmountToText(amount: maximum, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals)
+    let consumptionText = Units.sharedInstance.formatAmountToText(amount: amount, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals, displayUnits: false)
+    consumptionLabel.text = "\(consumptionText) of \(maximumText)"
   }
   
   private func fetchConsumptions() {

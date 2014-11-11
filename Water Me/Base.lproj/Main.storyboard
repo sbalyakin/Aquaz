@@ -35,49 +35,62 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="KHN-d8-Fus">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
+                            <view contentMode="scaleToFill" id="KHN-d8-Fus" userLabel="Summary Bar">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" id="I2p-iQ-qGP" userLabel="Day Selection Bar">
+                                        <rect key="frame" x="0.0" y="52" width="320" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ruO-Mw-fgx">
+                                                <rect key="frame" x="8" y="0.0" width="30" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="&lt;"/>
+                                                <connections>
+                                                    <action selector="switchToPreviousDay:" destination="x3I-fN-BQH" eventType="touchUpInside" id="vlm-n8-oOu"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8dM-xv-rh9">
+                                                <rect key="frame" x="282" y="0.0" width="30" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="&gt;">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="switchToNextDay:" destination="x3I-fN-BQH" eventType="touchUpInside" id="dpq-AB-j9a"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="byd-yV-Sp4">
+                                                <rect key="frame" x="54" y="2" width="212" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Today">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="nY1-e6-BNo" kind="push" identifier="ShowCalendar" id="hRB-TF-4Qv"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Teo-xX-LXi">
-                                        <rect key="frame" x="274" y="8" width="30" height="30"/>
+                                        <rect key="frame" x="282" y="8" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="S">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Sw2-pb-ue3">
-                                        <rect key="frame" x="246" y="8" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="A">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ubg-ey-enw">
-                                        <rect key="frame" x="16" y="10" width="30" height="30"/>
+                                        <rect key="frame" x="8" y="10" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="C">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ruO-Mw-fgx">
-                                        <rect key="frame" x="16" y="48" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="&lt;"/>
                                         <connections>
-                                            <action selector="switchToPreviousDay:" destination="x3I-fN-BQH" eventType="touchUpInside" id="vlm-n8-oOu"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8dM-xv-rh9">
-                                        <rect key="frame" x="274" y="48" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="&gt;">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="switchToNextDay:" destination="x3I-fN-BQH" eventType="touchUpInside" id="dpq-AB-j9a"/>
+                                            <action selector="toggleDaySelectionBar:" destination="x3I-fN-BQH" eventType="touchUpInside" id="ZsR-07-wqK"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="Ulp-MK-urk" customClass="MultiProgressView" customModule="Water_Me" customModuleProvider="target">
@@ -85,25 +98,22 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.95645805027173914" green="0.95645805027173914" blue="0.95645805027173914" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="byd-yV-Sp4">
-                                        <rect key="frame" x="54" y="50" width="212" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Today">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="nY1-e6-BNo" kind="push" identifier="ShowCalendar" id="hRB-TF-4Qv"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2000 ml" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nDO-TA-hsA">
-                                        <rect key="frame" x="107" y="14" width="106" height="21"/>
+                                        <rect key="frame" x="76" y="14" width="168" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Sw2-pb-ue3">
+                                        <rect key="frame" x="252" y="8" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="A">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -120,11 +130,12 @@
                         <outlet property="consumptionLabel" destination="nDO-TA-hsA" id="GVR-mw-sp2"/>
                         <outlet property="consumptionProgressView" destination="Ulp-MK-urk" id="1el-H8-1VO"/>
                         <outlet property="currentDayButton" destination="byd-yV-Sp4" id="WQn-rJ-p5C"/>
+                        <outlet property="daySelectionBar" destination="I2p-iQ-qGP" id="3nx-qK-6yX"/>
                         <outlet property="nextDayButton" destination="8dM-xv-rh9" id="IRn-l4-S59"/>
                         <outlet property="pageButton" destination="GKO-c9-CDb" id="UxO-im-4tz"/>
                         <outlet property="previousDayButton" destination="ruO-Mw-fgx" id="klE-Fy-Vuq"/>
                         <outlet property="revealButton" destination="clr-IS-YXe" id="aru-fe-QzG"/>
-                        <outlet property="summaryNavigationBar" destination="KHN-d8-Fus" id="VXk-fc-ak3"/>
+                        <outlet property="summaryBar" destination="KHN-d8-Fus" id="D4h-wB-uQF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ion-bs-e5i" userLabel="First Responder" sceneMemberID="firstResponder"/>
