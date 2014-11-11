@@ -34,7 +34,7 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   @IBOutlet weak var previousDayButton: UIButton!
   @IBOutlet weak var nextDayButton: UIButton!
   @IBOutlet weak var currentDayButton: UIButton!
-  var currentDayLabelInNavigationBar: UILabel! // programmatically created in viewDidLoad()
+  var currentDayLabelInNavigationTitle: UILabel! // programmatically created in viewDidLoad()
   
   /// Current date for managing water intake
   var currentDate: NSDate = NSDate() {
@@ -94,37 +94,42 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     fetchConsumptions()
 
     // Customize navigation bar
-    let navigationBarRect = navigationController!.navigationBar.frame
-    let navigationBarTitleLabel = UILabel(frame: navigationBarRect)
-    navigationBarTitleLabel.autoresizingMask = .FlexibleWidth
-    navigationBarTitleLabel.backgroundColor = UIColor.clearColor()
-    navigationBarTitleLabel.text = navigationItem.title
-    navigationBarTitleLabel.font = UIFont.boldSystemFontOfSize(16)
-    navigationBarTitleLabel.textAlignment = .Center
-    navigationItem.titleView = navigationBarTitleLabel
+    let navigationTitleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
+    let navigationTitleView = UIView(frame: navigationTitleViewRect)
 
-    currentDayLabelInNavigationBar = UILabel(frame: navigationBarRect)
-    currentDayLabelInNavigationBar.autoresizingMask = .FlexibleWidth
-    currentDayLabelInNavigationBar.backgroundColor = UIColor.clearColor()
-    currentDayLabelInNavigationBar.font = UIFont.systemFontOfSize(12)
-    currentDayLabelInNavigationBar.textAlignment = .Center
-    navigationItem.titleView!.addSubview(currentDayLabelInNavigationBar)
+    let navigationTitleLabel = UILabel(frame: navigationTitleView.bounds)
+    navigationTitleLabel.autoresizingMask = .FlexibleWidth
+    navigationTitleLabel.backgroundColor = UIColor.clearColor()
+    navigationTitleLabel.text = navigationItem.title
+    navigationTitleLabel.font = UIFont.boldSystemFontOfSize(16)
+    navigationTitleLabel.textAlignment = .Center
+    navigationTitleView.addSubview(navigationTitleLabel)
+
+    let currentDayLabelRect = navigationTitleView.bounds.rectByOffsetting(dx: 0, dy: 16)
+    currentDayLabelInNavigationTitle = UILabel(frame: currentDayLabelRect)
+    currentDayLabelInNavigationTitle.autoresizingMask = navigationTitleLabel.autoresizingMask
+    currentDayLabelInNavigationTitle.backgroundColor = UIColor.clearColor()
+    currentDayLabelInNavigationTitle.font = UIFont.systemFontOfSize(12)
+    currentDayLabelInNavigationTitle.textAlignment = .Center
+    navigationTitleView.addSubview(currentDayLabelInNavigationTitle)
     
-    navigationController!.navigationBar.setTitleVerticalPositionAdjustment(-10.0, forBarMetrics: UIBarMetrics.Default)
+    navigationItem.titleView = navigationTitleView
+    navigationController!.navigationBar.setTitleVerticalPositionAdjustment(-8.0, forBarMetrics: .Default)
 
     // Apply current date to all related labels
     applyDateSwitching()
   }
   
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+  }
+  
   @IBAction func switchToPreviousDay(sender: AnyObject) {
-    currentDate = NSDate(timeInterval: -secondsPerDay, sinceDate: currentDate)
+    currentDate = DateHelper.addToDate(currentDate, years: 0, months: 0, days: -1)
   }
 
   @IBAction func switchToNextDay(sender: AnyObject) {
-    currentDate = NSDate(timeInterval: secondsPerDay, sinceDate: currentDate)
-  }
-  
-  @IBAction func showCalendar(sender: AnyObject) {
+    currentDate = DateHelper.addToDate(currentDate, years: 0, months: 0, days: 1)
   }
   
   func getRecommendedWaterIntake() -> Double {
@@ -168,6 +173,15 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     } else if currentPage == pages[1] {
       pageViewController.setViewControllers([pages[0]], direction: .Reverse, animated: true, completion: nil)
       pageButton.title = pageTitles[0]
+    }
+  }
+
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "ShowCalendar" {
+      if let calendarViewController = segue.destinationViewController as? CalendarViewController {
+        calendarViewController.date = currentDate
+        calendarViewController.dayViewController = self
+      }
     }
   }
   
@@ -231,7 +245,7 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     // Update all related date labels
     let formattedDate = formatDate(currentDate)
     currentDayButton.setTitle(formattedDate, forState: .Normal)
-    currentDayLabelInNavigationBar.text = formattedDate
+    currentDayLabelInNavigationTitle.text = formattedDate
     
     // Disable switching to the next day if a current day is today
     let daysToToday = DateHelper.computeUnitsFrom(currentDate, toDate: NSDate(), unit: .CalendarUnitDay)
@@ -255,5 +269,4 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
   private let drinkTypesCount = 9 // number of supported drinks types: water, tea etc.
-  private let secondsPerDay: NSTimeInterval = 60 * 60 * 24
 }

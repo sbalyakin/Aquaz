@@ -53,13 +53,6 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2000 ml" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nDO-TA-hsA">
-                                        <rect key="frame" x="107" y="14" width="106" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ubg-ey-enw">
                                         <rect key="frame" x="16" y="10" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -71,9 +64,7 @@
                                         <rect key="frame" x="16" y="48" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="&lt;">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <state key="normal" title="&lt;"/>
                                         <connections>
                                             <action selector="switchToPreviousDay:" destination="x3I-fN-BQH" eventType="touchUpInside" id="vlm-n8-oOu"/>
                                         </connections>
@@ -101,9 +92,16 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="showCalendar:" destination="x3I-fN-BQH" eventType="touchUpInside" id="agd-6n-Pia"/>
+                                            <segue destination="nY1-e6-BNo" kind="push" identifier="ShowCalendar" id="hRB-TF-4Qv"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2000 ml" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nDO-TA-hsA">
+                                        <rect key="frame" x="107" y="14" width="106" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -131,7 +129,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ion-bs-e5i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1006" y="-829"/>
+            <point key="canvasLocation" x="1006" y="-1488"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="S4K-DL-5yS">
@@ -141,7 +139,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OQf-Wh-57M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1517" y="-829"/>
+            <point key="canvasLocation" x="1517" y="-1488"/>
         </scene>
         <!--Select Drink View Controller-->
         <scene sceneID="qUS-2s-sUw">
@@ -317,7 +315,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yQQ-3b-G4J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1965" y="-829"/>
+            <point key="canvasLocation" x="1965" y="-1488"/>
         </scene>
         <!--Add Drink View Controller-->
         <scene sceneID="FpT-nl-K1n">
@@ -408,7 +406,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huJ-Ju-VE1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2315" y="-829"/>
+            <point key="canvasLocation" x="2315" y="-1488"/>
         </scene>
         <!--Diary View Controller-->
         <scene sceneID="lYd-x6-Lbn">
@@ -448,7 +446,73 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z0N-YC-Zdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2751" y="-829"/>
+            <point key="canvasLocation" x="1965" y="-856"/>
+        </scene>
+        <!--Choose day-->
+        <scene sceneID="RHc-kA-ARu">
+            <objects>
+                <viewController id="nY1-e6-BNo" customClass="CalendarViewController" customModule="Water_Me" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bR3-kD-GGC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ORs-BH-u1n">
+                                <rect key="frame" x="70" y="6" width="180" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6io-9A-Yq4">
+                                <rect key="frame" x="16" y="0.0" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="&lt;">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="switchToPreviousMonth:" destination="nY1-e6-BNo" eventType="touchUpInside" id="1dt-YW-E0Y"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8PO-QY-6SQ">
+                                <rect key="frame" x="258" y="0.0" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="&gt;">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="switchToNextMonth:" destination="nY1-e6-BNo" eventType="touchUpInside" id="sJR-yG-M3X"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" id="3Qj-Pw-bGE" customClass="CalendarView" customModule="Water_Me" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="38" width="320" height="370"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="dayDidSelected:" destination="nY1-e6-BNo" eventType="valueChanged" id="F2X-jY-IxO"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Choose day" id="4v4-BL-wZE">
+                        <barButtonItem key="rightBarButtonItem" title="Today" id="nSq-92-OEq">
+                            <connections>
+                                <action selector="todayDidSelected:" destination="nY1-e6-BNo" id="zLc-b3-XGn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="calendarView" destination="3Qj-Pw-bGE" id="frP-yD-Uvr"/>
+                        <outlet property="currentMonthLabel" destination="ORs-BH-u1n" id="UKk-D3-k3M"/>
+                        <outlet property="nextMonthButton" destination="8PO-QY-6SQ" id="4m2-dA-62K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7E7-hd-LKb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1006" y="-848"/>
         </scene>
         <!--Statistics-->
         <scene sceneID="mzk-hW-1gf">
@@ -967,7 +1031,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BO6-P6-OAZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="560" y="-829"/>
+            <point key="canvasLocation" x="560" y="-1488"/>
         </scene>
         <!--Statistics Navigation Controller-->
         <scene sceneID="prQ-iP-Pcm">

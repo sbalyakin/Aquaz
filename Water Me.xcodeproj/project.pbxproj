@@ -28,6 +28,10 @@
 		8468D6421A0D1C240008D027 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468D6411A0D1C240008D027 /* DateHelper.swift */; };
 		8478253719EAC8C200588FE3 /* AddDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478253619EAC8C200588FE3 /* AddDrinkViewController.swift */; };
 		84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */; };
+		A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F801A1212930088AF47 /* CalendarDayButton.swift */; };
+		A5275F841A1212930088AF47 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F811A1212930088AF47 /* CalendarTableViewCell.swift */; };
+		A5275F851A1212930088AF47 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F821A1212930088AF47 /* CalendarView.swift */; };
+		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
 		A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1319E5686C00D0477B /* ModelHelper.swift */; };
 		A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1519E57D3500D0477B /* NamedEntity.swift */; };
 		A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
@@ -71,6 +75,10 @@
 		8468D6411A0D1C240008D027 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		8478253619EAC8C200588FE3 /* AddDrinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddDrinkViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPrePopulation.swift; sourceTree = "<group>"; };
+		A5275F801A1212930088AF47 /* CalendarDayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarDayButton.swift; path = Controls/CalendarDayButton.swift; sourceTree = "<group>"; };
+		A5275F811A1212930088AF47 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarTableViewCell.swift; path = Controls/CalendarTableViewCell.swift; sourceTree = "<group>"; };
+		A5275F821A1212930088AF47 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarView.swift; path = Controls/CalendarView.swift; sourceTree = "<group>"; };
+		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A5B75A1319E5686C00D0477B /* ModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelHelper.swift; sourceTree = "<group>"; };
 		A5B75A1519E57D3500D0477B /* NamedEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedEntity.swift; sourceTree = "<group>"; };
 		A5E70A6F19E30BEE006E5FC0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Settings.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -97,6 +105,9 @@
 		8424AA041A0B57F9009C5C47 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				A5275F801A1212930088AF47 /* CalendarDayButton.swift */,
+				A5275F811A1212930088AF47 /* CalendarTableViewCell.swift */,
+				A5275F821A1212930088AF47 /* CalendarView.swift */,
 				8424AA051A0B5813009C5C47 /* MultiProgressView.swift */,
 			);
 			name = Controls;
@@ -119,6 +130,7 @@
 				843B055819E2D7800097A833 /* SelectDrinkViewController.swift */,
 				8478253619EAC8C200588FE3 /* AddDrinkViewController.swift */,
 				8424AA001A0A7009009C5C47 /* DiaryViewController.swift */,
+				A5275F861A1216090088AF47 /* CalendarViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -318,8 +330,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */,
 				843B056319E2D7800097A833 /* SWRevealViewController.m in Sources */,
 				8424AA061A0B5813009C5C47 /* MultiProgressView.swift in Sources */,
+				A5275F851A1212930088AF47 /* CalendarView.swift in Sources */,
 				843B055E19E2D7800097A833 /* AppDelegate.swift in Sources */,
 				84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */,
 				A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */,
@@ -333,9 +347,11 @@
 				8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */,
 				84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */,
 				84380C2819E4195A0026398E /* Consumption.swift in Sources */,
+				A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */,
 				8478253719EAC8C200588FE3 /* AddDrinkViewController.swift in Sources */,
 				A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */,
 				843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */,
+				A5275F841A1212930088AF47 /* CalendarTableViewCell.swift in Sources */,
 				84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */,
 				843B056019E2D7800097A833 /* StatisticsViewController.swift in Sources */,
 			);
