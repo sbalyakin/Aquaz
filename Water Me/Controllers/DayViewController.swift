@@ -26,6 +26,8 @@ private extension Units.Volume {
 
 class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
   
+  // MARK: UI elements -
+  
   @IBOutlet weak var revealButton: UIBarButtonItem!
   @IBOutlet weak var pageButton: UIBarButtonItem!
   @IBOutlet weak var summaryBar: UIView!
@@ -35,23 +37,28 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   @IBOutlet weak var nextDayButton: UIButton!
   @IBOutlet weak var currentDayButton: UIButton!
   @IBOutlet weak var daySelectionBar: UIView!
+  @IBOutlet weak var showDaySelectionButton: UIButton!
   @IBOutlet weak var highActivityButton: UIButton!
   @IBOutlet weak var hotDayButton: UIButton!
   
   var currentDayLabelInNavigationTitle: UILabel! // is programmatically created in viewDidLoad()
+
+  // MARK: Public properties -
   
   /// Current date for managing water intake
   var currentDate: NSDate = NSDate() {
     didSet {
-      applyDateSwitching()
+      currentDateWasChanged()
     }
   }
   
   var overallConsumption: Double = 0.0 {
     didSet {
-      setOverallConsumption(overallConsumption, maximum: consumptionBaseRate)
+      updateConsumptionLabel()
     }
   }
+  
+  // MARK: Page setup -
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -119,8 +126,19 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     revealButtonSetup()
 
     // Apply current date to all related labels
-    applyDateSwitching()
+    currentDateWasChanged()
   }
+  
+  private func revealButtonSetup() {
+    if let revealViewController = self.revealViewController() {
+      revealButton.target = revealViewController
+      revealButton.action = "revealToggle:"
+      navigationController!.navigationBar.addGestureRecognizer(revealViewController.panGestureRecognizer())
+      view.addGestureRecognizer(revealViewController.panGestureRecognizer())
+    }
+  }
+  
+  // MARK: Summary bar actions -
   
   @IBAction func toggleDaySelectionBar(sender: AnyObject) {
     setDaySelectionBarVisible(daySelectionBar.hidden)
@@ -143,21 +161,25 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
       pageViewController.view.frame.size.height -= daySelectionBar.frame.height
       pageViewController.view.frame.offset(dx: 0, dy: daySelectionBar.frame.height)
     }
+    
+    // TODO: Should be re-written for image
+    let color: UIColor? = visible ? UIColor.greenColor() : nil
+    showDaySelectionButton.setTitleColor(color, forState: .Normal)
   }
   
   @IBAction func toggleHighActivityMode(sender: AnyObject) {
-    if consumptionHighActivity > 0 {
-      consumptionHighActivity = 0
+    if consumptionHighActivityFraction > 0 {
+      consumptionHighActivityFraction = 0
     } else {
-      consumptionHighActivity = Settings.sharedInstance.generalExtraConsumptionHighActivity.value
+      consumptionHighActivityFraction = Settings.sharedInstance.generalExtraConsumptionHighActivity.value
     }
   }
   
   @IBAction func toggleHotDayMode(sender: AnyObject) {
-    if consumptionHotDay > 0 {
-      consumptionHotDay = 0
+    if consumptionHotDayFraction > 0 {
+      consumptionHotDayFraction = 0
     } else {
-      consumptionHotDay = Settings.sharedInstance.generalExtraConsumptionHot.value
+      consumptionHotDayFraction = Settings.sharedInstance.generalExtraConsumptionHot.value
     }
   }
   
@@ -168,6 +190,8 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   @IBAction func switchToNextDay(sender: AnyObject) {
     currentDate = DateHelper.addToDate(currentDate, years: 0, months: 0, days: 1)
   }
+  
+  // MARK: Change current screen -
   
   func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
     if let index = find(pages, viewController) {
@@ -218,6 +242,8 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     }
   }
   
+  // MARK: Consumptions management -
+  
   func addConsumption(drink: Drink, amount: Double) {
     if let section = multiProgressSections[drink] {
       section.factor += amount
@@ -226,57 +252,16 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     overallConsumption += amount
   }
   
-  private func setOverallConsumption(amount: Double, maximum: Double) {
-    assert(maximum > 0, "Maximum of recommended consumption is specified to 0")
-    let maximumText = Units.sharedInstance.formatAmountToText(amount: maximum, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals)
-    let consumptionText = Units.sharedInstance.formatAmountToText(amount: amount, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals, displayUnits: false)
-    consumptionLabel.text = "\(consumptionText) of \(maximumText)"
-  }
-  
-  private func formatDate(date: NSDate) -> String {
-    let today = NSDate()
-    let daysToToday = DateHelper.computeUnitsFrom(today, toDate: date, unit: .CalendarUnitDay)
-    let dateFormatter = NSDateFormatter()
-    
-    if abs(daysToToday) <= 1 {
-      // Use standard date formatting for yesterday, today and tomorrow
-      // in order to obtain "Yesterday", "Today" and "Tomorrow" localized date strings
-      dateFormatter.dateStyle = .MediumStyle
-      dateFormatter.timeStyle = .NoStyle
-      dateFormatter.doesRelativeDateFormatting = true
-    } else {
-      // Use custom formatting. If year of a current date is year of today, hide them.
-      let yearsToToday = DateHelper.computeUnitsFrom(today, toDate: date, unit: .CalendarUnitYear)
-      let template = yearsToToday == 0 ? "dMMMM" : "dMMMMyyyy"
-      let formatString = NSDateFormatter.dateFormatFromTemplate(template, options: 0, locale: NSLocale.currentLocale())
-      dateFormatter.dateFormat = formatString
-    }
-    return dateFormatter.stringFromDate(date)
-  }
-  
-  private func applyDateSwitching() {
-    // Fetch consumption rate for current day
-    fetchConsumptionRate()
-    
-    // Fetch existing consumptions for current day
-    fetchConsumptions()
-
-    // Update maximum for multi progress control
-    consumptionProgressView.maximum = consumptionBaseRate
-    
-    // Update all related date labels
-    let formattedDate = formatDate(currentDate)
-    currentDayButton.setTitle(formattedDate, forState: .Normal)
-    currentDayLabelInNavigationTitle.text = formattedDate
-    
-    // Disable switching to the next day if a current day is today
-    let daysToToday = DateHelper.computeUnitsFrom(currentDate, toDate: NSDate(), unit: .CalendarUnitDay)
-    nextDayButton.enabled = daysToToday > 0
-  }
-  
   private func fetchConsumptionRate() {
-    let currentDateAdjusted = DateHelper.dateByClearingTime(ofDate: currentDate)
-    consumptionRate = ConsumptionRate.fetchConsumptionRateForDate(currentDateAdjusted)
+    consumptionRate = ConsumptionRate.fetchConsumptionRateForDate(currentDate)
+    
+    if let rate = consumptionRate {
+      isConsumptionRateForCurrentDay = DateHelper.areDatesEqualByDays(date1: rate.date, date2: currentDate)
+    } else {
+      isConsumptionRateForCurrentDay = false
+    }
+    
+    consumptionRateWasChanged()
   }
 
   private func fetchConsumptions() {
@@ -300,78 +285,137 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     overallConsumption = overallAmount
   }
   
-  private func isConsumptionRateForCurrentDay() -> Bool {
-    if let rate = consumptionRate {
-      return DateHelper.areDatesEqualByDays(date1: rate.date, date2: currentDate)
-    } else {
-      return false
-    }
+  private func updateConsumptionLabel() {
+    let consumptionText = Units.sharedInstance.formatAmountToText(amount: overallConsumption, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals, displayUnits: false)
+    let consumptionRateText = Units.sharedInstance.formatAmountToText(amount: consumptionRateAmount, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals)
+    consumptionLabel.text = "\(consumptionText) of \(consumptionRateText)"
   }
   
-  private func revealButtonSetup() {
-    if let revealViewController = self.revealViewController() {
-      revealButton.target = revealViewController
-      revealButton.action = "revealToggle:"
-      navigationController!.navigationBar.addGestureRecognizer(revealViewController.panGestureRecognizer())
-      view.addGestureRecognizer(revealViewController.panGestureRecognizer())
-    }
+  private func consumptionRateWasChanged() {
+    updateConsumptionLabel()
+
+    // Update maximum for multi progress control
+    consumptionProgressView.maximum = consumptionRateAmount
+
+    // TODO: Should be re-written for image
+    let highActivityColor: UIColor? = consumptionHighActivityFraction > 0 ? UIColor.greenColor() : nil
+    highActivityButton.setTitleColor(highActivityColor, forState: .Normal)
+
+    // TODO: Should be re-written for image
+    let hotDayColor: UIColor? = consumptionHotDayFraction > 0 ? UIColor.greenColor() : nil
+    hotDayButton.setTitleColor(hotDayColor, forState: .Normal)
   }
-
+  
+  private func saveConsumptionRateForCurrentDate(#baseRateAmount: Double, hotDayFraction: Double, highActivityFraction: Double) {
+    consumptionRate = ConsumptionRate.addEntity(
+      date: currentDate,
+      baseRateAmount: baseRateAmount,
+      hotDateFraction: hotDayFraction,
+      highActivityFraction: highActivityFraction)
+    isConsumptionRateForCurrentDay = true
+  }
+  
+  // MARK: Date management -
+  
+  private func currentDateWasChanged() {
+    // Update all related date labels
+    let formattedDate = formatDate(currentDate)
+    currentDayButton.setTitle(formattedDate, forState: .Normal)
+    currentDayLabelInNavigationTitle.text = formattedDate
+    
+    // Disable switching to the next day if a current day is today
+    let daysToToday = DateHelper.computeUnitsFrom(currentDate, toDate: NSDate(), unit: .CalendarUnitDay)
+    nextDayButton.enabled = daysToToday > 0
+    
+    // Fetch consumption rate for current day
+    fetchConsumptionRate()
+    
+    // Fetch existing consumptions for current day
+    fetchConsumptions()
+  }
+  
+  private func formatDate(date: NSDate) -> String {
+    let today = NSDate()
+    let daysToToday = DateHelper.computeUnitsFrom(today, toDate: date, unit: .CalendarUnitDay)
+    let dateFormatter = NSDateFormatter()
+    
+    if abs(daysToToday) <= 1 {
+      // Use standard date formatting for yesterday, today and tomorrow
+      // in order to obtain "Yesterday", "Today" and "Tomorrow" localized date strings
+      dateFormatter.dateStyle = .MediumStyle
+      dateFormatter.timeStyle = .NoStyle
+      dateFormatter.doesRelativeDateFormatting = true
+    } else {
+      // Use custom formatting. If year of a current date is year of today, hide them.
+      let yearsToToday = DateHelper.computeUnitsFrom(today, toDate: date, unit: .CalendarUnitYear)
+      let template = yearsToToday == 0 ? "dMMMM" : "dMMMMyyyy"
+      let formatString = NSDateFormatter.dateFormatFromTemplate(template, options: 0, locale: NSLocale.currentLocale())
+      dateFormatter.dateFormat = formatString
+    }
+    return dateFormatter.stringFromDate(date)
+  }
+  
+  // MARK: Private properties -
+  
   private var consumptionRate: ConsumptionRate?
+  private var isConsumptionRateForCurrentDay: Bool = false
 
-  private var consumptionBaseRate: Double {
+  private var consumptionBaseRateAmount: Double {
     if let rate = consumptionRate {
-      let baseRate = rate.baseRateAmount.doubleValue
-      return baseRate * (1 + consumptionHotDay + consumptionHighActivity)
+      return rate.baseRateAmount.doubleValue
     }
     return Settings.sharedInstance.userDailyWaterIntake.value
   }
   
-  private var consumptionHotDay: Double {
+  private var consumptionRateAmount: Double {
+    return consumptionBaseRateAmount * (1 + consumptionHotDayFraction + consumptionHighActivityFraction)
+  }
+  
+  private var consumptionHotDayFraction: Double {
     get {
+      if !isConsumptionRateForCurrentDay {
+        return 0
+      }
+      
       if let rate = consumptionRate {
         return rate.hotDayFraction.doubleValue
       }
+
       return 0
     }
-    set(newConsumptionHotDay) {
-      if !isConsumptionRateForCurrentDay() {
-        consumptionRate = ConsumptionRate.addEntity(
-          date: currentDate,
-          baseRateAmount: consumptionBaseRate,
-          hotDateFraction: newConsumptionHotDay,
-          highActivityFraction: 0)
+    set(newHotDayFraction) {
+      if !isConsumptionRateForCurrentDay {
+        saveConsumptionRateForCurrentDate(baseRateAmount: consumptionBaseRateAmount, hotDayFraction: newHotDayFraction, highActivityFraction: 0)
       } else if let rate = consumptionRate {
-        rate.hotDayFraction = newConsumptionHotDay
+        rate.hotDayFraction = newHotDayFraction
+        ModelHelper.sharedInstance.save()
       }
 
-      // TODO: Should be re-written for image
-      let hotDayColor = newConsumptionHotDay > 0 ? UIColor.greenColor() : UIColor.blueColor()
-      hotDayButton.setTitleColor(hotDayColor, forState: .Normal)
+      consumptionRateWasChanged()
     }
   }
   
-  private var consumptionHighActivity: Double {
+  private var consumptionHighActivityFraction: Double {
     get {
+      if !isConsumptionRateForCurrentDay {
+        return 0
+      }
+
       if let rate = consumptionRate {
         return rate.highActivityFraction.doubleValue
       }
+
       return 0
     }
-    set(newConsumptionHighActivity) {
-      if !isConsumptionRateForCurrentDay() {
-        consumptionRate = ConsumptionRate.addEntity(
-          date: currentDate,
-          baseRateAmount: consumptionBaseRate,
-          hotDateFraction: 0,
-          highActivityFraction: newConsumptionHighActivity)
+    set(newHighActivityFraction) {
+      if !isConsumptionRateForCurrentDay {
+        saveConsumptionRateForCurrentDate(baseRateAmount: consumptionBaseRateAmount, hotDayFraction: 0, highActivityFraction: newHighActivityFraction)
       } else if let rate = consumptionRate {
-        rate.highActivityFraction = newConsumptionHighActivity
+        rate.highActivityFraction = newHighActivityFraction
+        ModelHelper.sharedInstance.save()
       }
-      
-      // TODO: Should be re-written for image
-      let highActivityColor = newConsumptionHighActivity > 0 ? UIColor.greenColor() : UIColor.blueColor()
-      highActivityButton.setTitleColor(highActivityColor, forState: .Normal)
+
+      consumptionRateWasChanged()
     }
   }
   

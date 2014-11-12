@@ -10,7 +10,11 @@ import UIKit
 
 @IBDesignable class MultiProgressView: UIView {
   
-  @IBInspectable var maximum: Double = 1.0
+  @IBInspectable var maximum: Double = 1.0 {
+    didSet {
+      setNeedsDisplay()
+    }
+  }
   
   class Section {
     var factor: Double = 0.0

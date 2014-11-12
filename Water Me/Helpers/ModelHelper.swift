@@ -84,6 +84,13 @@ class ModelHelper {
     return computeDrinkAmountsForDateInterval(minDate: minDate, maxDate: maxDate)
   }
   
+  func save() {
+    var error: NSError? = nil
+    if !managedObjectContext.save(&error) {
+      assert(false, "Failed to save managed object context. Error: \(error!.localizedDescription)")
+    }
+  }
+  
   let managedObjectContext: NSManagedObjectContext!
 
   // Hide initializer, clients should use sharedInstance property to get instance of ModelHelper

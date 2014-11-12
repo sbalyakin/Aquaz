@@ -61,7 +61,7 @@ class Drink: NSManagedObject, NamedEntity {
     
     var error: NSError? = nil
     if !managedObjectContext.save(&error) {
-      assert(false, "Failed to save new drink named \"\(name)\"")
+      assert(false, "Failed to save new drink named \"\(name)\". Error: \(error!.localizedDescription)")
     }
     
     return drink

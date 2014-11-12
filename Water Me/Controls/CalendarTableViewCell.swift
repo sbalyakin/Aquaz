@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DaySelectionDelegate {
-  func dayDidSelected(date: NSDate)
+  func currentDayWasChanged(date: NSDate)
 }
 
 class CalendarTableViewCell: UITableViewCell {
@@ -40,7 +40,7 @@ class CalendarTableViewCell: UITableViewCell {
     if let delegate = daySelectionDelegate {
       if let dayButton = button as? CalendarDayButton {
         if let dayInfo = dayButton.dayInfo {
-          delegate.dayDidSelected(dayInfo.date)
+          delegate.currentDayWasChanged(dayInfo.date)
         } else {
           assert(false, "dayInfo for CalendarDayButton is not specified")
         }

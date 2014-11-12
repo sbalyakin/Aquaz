@@ -108,7 +108,7 @@ import UIKit
     initControls()
   }
   
-  func dayDidSelected(date: NSDate) {
+  func currentDayWasChanged(date: NSDate) {
     currentDate = date
     sendActionsForControlEvents(UIControlEvents.ValueChanged)
   }

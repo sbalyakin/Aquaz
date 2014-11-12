@@ -28,8 +28,10 @@ class ConsumptionRate: NSManagedObject, NamedEntity {
   }
   
   class func fetchConsumptionRateForDate(date: NSDate) -> ConsumptionRate? {
+    let adjustedDate = DateHelper.dateByClearingTime(ofDate: date)
+    
     // Fetch consumption rate entity for the specified date
-    let strictDatePredicate = NSPredicate(format: "date = %@", argumentArray: [date])
+    let strictDatePredicate = NSPredicate(format: "date = %@", argumentArray: [adjustedDate])
     let consumptionRateForStrictDate: ConsumptionRate? = ModelHelper.sharedInstance.fetchManagedObject(predicate: strictDatePredicate)
     
     if let consumptionRate = consumptionRateForStrictDate {
@@ -37,7 +39,7 @@ class ConsumptionRate: NSManagedObject, NamedEntity {
     }
     
     // If there is no consumption rate entity exist for the specified date, search for consumption rate entity for the nearest sooner date
-    let soonerDatePredicate = NSPredicate(format: "date < %@", argumentArray: [date])
+    let soonerDatePredicate = NSPredicate(format: "date < %@", argumentArray: [adjustedDate])
     let soonerSortDescriptor = NSSortDescriptor(key: "date", ascending: false)
     let consumptionRateForSoonerDate: ConsumptionRate? = ModelHelper.sharedInstance.fetchManagedObject(predicate: soonerDatePredicate, sortDescriptors: [soonerSortDescriptor])
     
@@ -46,11 +48,11 @@ class ConsumptionRate: NSManagedObject, NamedEntity {
     }
     
     // If there is no consumption rate entity exist for the sooner date, search for consumption rate entity for the nearest later date
-    let laterDatePredicate = NSPredicate(format: "date > %@", argumentArray: [date])
+    let laterDatePredicate = NSPredicate(format: "date > %@", argumentArray: [adjustedDate])
     let laterSortDescriptor = NSSortDescriptor(key: "date", ascending: true)
     let consumptionRateForLaterDate: ConsumptionRate? = ModelHelper.sharedInstance.fetchManagedObject(predicate: laterDatePredicate, sortDescriptors: [laterSortDescriptor])
     
-    if let consumptionRate = consumptionRateForSoonerDate {
+    if let consumptionRate = consumptionRateForLaterDate {
       return consumptionRate
     }
     
@@ -65,7 +67,8 @@ class ConsumptionRate: NSManagedObject, NamedEntity {
                        managedObjectContext: NSManagedObjectContext = ModelHelper.sharedInstance.managedObjectContext,
                        saveImmediately: Bool = true) -> ConsumptionRate {
     let consumptionRate = NSEntityDescription.insertNewObjectForEntityForName(getEntityName(), inManagedObjectContext: managedObjectContext) as ConsumptionRate
-    consumptionRate.date = date
+    let adjustedDate = DateHelper.dateByClearingTime(ofDate: date)
+    consumptionRate.date = adjustedDate
     consumptionRate.baseRateAmount = baseRateAmount
     consumptionRate.hotDayFraction = hotDateFraction
     consumptionRate.highActivityFraction = highActivityFraction
@@ -73,7 +76,7 @@ class ConsumptionRate: NSManagedObject, NamedEntity {
     if saveImmediately {
       var error: NSError? = nil
       if !managedObjectContext.save(&error) {
-        NSLog("Failed to save new consumption rate for date \"\(date)\". Error: \(error!.localizedDescription)")
+        NSLog("Failed to save new consumption rate for date \"\(adjustedDate)\". Error: \(error!.localizedDescription)")
       }
     }
     
