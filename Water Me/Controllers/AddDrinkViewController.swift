@@ -94,10 +94,10 @@ class AddDrinkViewController: UIViewController {
     
     // Store the consumption into Core Data
     drink.recentAmount.amount = processedAmount
-    Consumption.addEntity(drink: drink, amount: processedAmount, date: date, managedObjectContext: ModelHelper.sharedInstance.managedObjectContext)
+    let consumption = Consumption.addEntity(drink: drink, amount: processedAmount, date: date, managedObjectContext: ModelHelper.sharedInstance.managedObjectContext)
     
     // Update day view controller
-    dayViewController.addConsumption(drink, amount: processedAmount)
+    dayViewController.addConsumption(consumption)
     
     dismissViewControllerAnimated(true, completion: nil)
   }

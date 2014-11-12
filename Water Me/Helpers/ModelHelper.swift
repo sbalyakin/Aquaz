@@ -50,40 +50,6 @@ class ModelHelper {
     return nil
   }
   
-  /// Computes amount of all drinked beverages grouped by drinks from start to end dates inclusive
-  func computeDrinkAmountsForDateInterval(#minDate: NSDate, maxDate: NSDate) -> [Drink: Double]? {
-    // Fetch all consumptions for the specified date interval
-    let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", argumentArray: [minDate, maxDate])
-    let rawConsumptions: [Consumption]? = fetchManagedObjects(predicate: predicate)
-
-    if rawConsumptions == nil {
-      return nil
-    }
-
-    // Group consumptions by drinks
-    var consumptionsMap: [Drink: Double] = [:]
-    
-    for consumption in rawConsumptions! {
-      if let amount = consumptionsMap[consumption.drink] {
-        consumptionsMap[consumption.drink] = amount + Double(consumption.amount)
-      } else {
-        consumptionsMap[consumption.drink] = Double(consumption.amount)
-      }
-    }
-    
-    return consumptionsMap
-  }
-
-  /// Computes amount of all drinked beverages grouped by drinks for whole day of the specified date
-  func computeDrinkAmountsForDay(date: NSDate) -> [Drink: Double]? {
-    // Determine start and end of specified day
-    let minDate = DateHelper.dateBySettingHour(0, minute: 0, second: 0, ofDate: date)
-    let maxDate = DateHelper.dateBySettingHour(23, minute: 59, second: 59, ofDate: date)
-    
-    // Fetch all consumptions for the day
-    return computeDrinkAmountsForDateInterval(minDate: minDate, maxDate: maxDate)
-  }
-  
   func save() {
     var error: NSError? = nil
     if !managedObjectContext.save(&error) {

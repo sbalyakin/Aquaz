@@ -87,12 +87,12 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     navigationController!.navigationBar.setTitleVerticalPositionAdjustment(-8.0, forBarMetrics: .Default)
     
     // Add view controller for drink selection
-    let selectDrinkViewController = storyboard!.instantiateViewControllerWithIdentifier("SelectDrinkViewController") as SelectDrinkViewController
+    selectDrinkViewController = storyboard!.instantiateViewControllerWithIdentifier("SelectDrinkViewController") as SelectDrinkViewController
     selectDrinkViewController.dayViewController = self
     pages.append(selectDrinkViewController)
 
     // Add consumptions diary view controller
-    let diaryViewController = storyboard!.instantiateViewControllerWithIdentifier("DiaryViewController") as UIViewController
+    diaryViewController = storyboard!.instantiateViewControllerWithIdentifier("DiaryViewController") as DiaryViewController
     pages.append(diaryViewController)
     
     // Add page view controller for a current day
@@ -100,7 +100,8 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     pageViewController.dataSource = self
     pageViewController.delegate = self
     pageViewController.setViewControllers([selectDrinkViewController], direction: .Forward, animated: false, completion: nil)
-    
+    pageButton.title = pageTitles[0]
+
     // Setup summary bar
     let summaryBarHeight = summaryBar.bounds.height
     var pageViewControllerRect = view.frame
@@ -244,12 +245,16 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   
   // MARK: Consumptions management -
   
-  func addConsumption(drink: Drink, amount: Double) {
-    if let section = multiProgressSections[drink] {
-      section.factor += amount
+  func addConsumption(consumption: Consumption) {
+    consumptions.append(consumption)
+    
+    if let section = multiProgressSections[consumption.drink] {
+      section.factor += consumption.amount.doubleValue
     }
     consumptionProgressView.setNeedsDisplay()
-    overallConsumption += amount
+    overallConsumption += consumption.amount.doubleValue
+    
+    diaryViewController.updateTable(consumptions)
   }
   
   private func fetchConsumptionRate() {
@@ -265,6 +270,22 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   }
 
   private func fetchConsumptions() {
+    consumptions = Consumption.fetchConsumptionsForDay(currentDate)
+    
+    // Group consumptions by drinks
+    var consumptionsMap: [Drink: Double] = [:]
+    
+    for consumption in consumptions {
+      if let amount = consumptionsMap[consumption.drink] {
+        consumptionsMap[consumption.drink] = amount + Double(consumption.amount)
+      } else {
+        consumptionsMap[consumption.drink] = Double(consumption.amount)
+      }
+    }
+
+    // Update diary page
+    diaryViewController.updateTable(consumptions)
+    
     // Clear all drink sections
     for (_, section) in multiProgressSections {
       section.factor = 0.0
@@ -272,12 +293,10 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     
     // Fill sections with fetched amounts and compute overall consumption
     var overallAmount = 0.0
-    if let consumptions = ModelHelper.sharedInstance.computeDrinkAmountsForDay(currentDate) {
-      for (drink, amount) in consumptions {
-        overallAmount += amount
-        if let section = multiProgressSections[drink] {
-          section.factor = amount
-        }
+    for (drink, amount) in consumptionsMap {
+      overallAmount += amount
+      if let section = multiProgressSections[drink] {
+        section.factor = amount
       }
     }
     
@@ -419,11 +438,15 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     }
   }
   
-  private var pageViewController: UIPageViewController!
-  private var pages: [UIViewController] = []
+  private var consumptions: [Consumption] = []
   private var multiProgressSections: [Drink: MultiProgressView.Section] = [:]
   
-  private let pageTitles = ["Drinked", "Add"]
+  private var pageViewController: UIPageViewController!
+  private var pages: [UIViewController] = []
+  private var selectDrinkViewController: SelectDrinkViewController!
+  private var diaryViewController: DiaryViewController!
+  private let pageTitles = ["Diary", "Drinks"]
+
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
   private let drinkTypesCount = 9 // number of supported drinks types: water, tea etc.
