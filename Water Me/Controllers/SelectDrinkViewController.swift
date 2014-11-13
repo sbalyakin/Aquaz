@@ -17,11 +17,13 @@ class SelectDrinkViewController: UIViewController {
   }
   
   @IBAction func drinkTapped(sender: AnyObject) {
-    let addDrinkViewController = storyboard!.instantiateViewControllerWithIdentifier("AddDrinkViewController") as AddDrinkViewController
+    let consumptionViewController = storyboard!.instantiateViewControllerWithIdentifier("ConsumptionViewController") as ConsumptionViewController
     let drink = Drink.getDrinkByIndex(sender.tag)
-    addDrinkViewController.drink = drink
-    addDrinkViewController.dayViewController = dayViewController
-    presentViewController(addDrinkViewController, animated: true, completion: nil)
+    consumptionViewController.drink = drink
+    consumptionViewController.currentDate = dayViewController.currentDate
+    consumptionViewController.dayViewController = dayViewController
+    navigationController!.pushViewController(consumptionViewController, animated: true)
+//    presentViewController(consumptionViewController, animated: true, completion: nil)
   }
   
 }

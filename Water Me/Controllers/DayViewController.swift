@@ -41,7 +41,8 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   @IBOutlet weak var highActivityButton: UIButton!
   @IBOutlet weak var hotDayButton: UIButton!
   
-  var currentDayLabelInNavigationTitle: UILabel! // is programmatically created in viewDidLoad()
+  var navigationTitleLabel: UILabel! // is programmatically created in viewDidLoad()
+  var navigationCurrentDayLabel: UILabel! // is programmatically created in viewDidLoad()
 
   // MARK: Public properties -
   
@@ -64,27 +65,7 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     super.viewDidLoad()
     
     // Customize navigation bar
-    let navigationTitleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
-    let navigationTitleView = UIView(frame: navigationTitleViewRect)
-    
-    let navigationTitleLabel = UILabel(frame: navigationTitleView.bounds)
-    navigationTitleLabel.autoresizingMask = .FlexibleWidth
-    navigationTitleLabel.backgroundColor = UIColor.clearColor()
-    navigationTitleLabel.text = navigationItem.title
-    navigationTitleLabel.font = UIFont.boldSystemFontOfSize(16)
-    navigationTitleLabel.textAlignment = .Center
-    navigationTitleView.addSubview(navigationTitleLabel)
-    
-    let currentDayLabelRect = navigationTitleView.bounds.rectByOffsetting(dx: 0, dy: 16)
-    currentDayLabelInNavigationTitle = UILabel(frame: currentDayLabelRect)
-    currentDayLabelInNavigationTitle.autoresizingMask = navigationTitleLabel.autoresizingMask
-    currentDayLabelInNavigationTitle.backgroundColor = UIColor.clearColor()
-    currentDayLabelInNavigationTitle.font = UIFont.systemFontOfSize(12)
-    currentDayLabelInNavigationTitle.textAlignment = .Center
-    navigationTitleView.addSubview(currentDayLabelInNavigationTitle)
-    
-    navigationItem.titleView = navigationTitleView
-    navigationController!.navigationBar.setTitleVerticalPositionAdjustment(-8.0, forBarMetrics: .Default)
+    createNavigationTitle()
     
     // Add view controller for drink selection
     selectDrinkViewController = storyboard!.instantiateViewControllerWithIdentifier("SelectDrinkViewController") as SelectDrinkViewController
@@ -93,6 +74,7 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
 
     // Add consumptions diary view controller
     diaryViewController = storyboard!.instantiateViewControllerWithIdentifier("DiaryViewController") as DiaryViewController
+    diaryViewController.dayViewController = self
     pages.append(diaryViewController)
     
     // Add page view controller for a current day
@@ -128,6 +110,30 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
 
     // Apply current date to all related labels
     currentDateWasChanged()
+  }
+  
+  private func createNavigationTitle() {
+    let navigationTitleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
+    let navigationTitleView = UIView(frame: navigationTitleViewRect)
+    
+    navigationTitleLabel = UILabel(frame: navigationTitleView.bounds)
+    navigationTitleLabel.autoresizingMask = .FlexibleWidth
+    navigationTitleLabel.backgroundColor = UIColor.clearColor()
+    navigationTitleLabel.text = navigationItem.title
+    navigationTitleLabel.font = UIFont.boldSystemFontOfSize(16)
+    navigationTitleLabel.textAlignment = .Center
+    navigationTitleView.addSubview(navigationTitleLabel)
+    
+    let currentDayLabelRect = navigationTitleView.bounds.rectByOffsetting(dx: 0, dy: 16)
+    navigationCurrentDayLabel = UILabel(frame: currentDayLabelRect)
+    navigationCurrentDayLabel.autoresizingMask = navigationTitleLabel.autoresizingMask
+    navigationCurrentDayLabel.backgroundColor = UIColor.clearColor()
+    navigationCurrentDayLabel.font = UIFont.systemFontOfSize(12)
+    navigationCurrentDayLabel.textAlignment = .Center
+    navigationTitleView.addSubview(navigationCurrentDayLabel)
+    
+    navigationItem.titleView = navigationTitleView
+    navigationController!.navigationBar.setTitleVerticalPositionAdjustment(-8.0, forBarMetrics: .Default)
   }
   
   private func revealButtonSetup() {
@@ -245,18 +251,6 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   
   // MARK: Consumptions management -
   
-  func addConsumption(consumption: Consumption) {
-    consumptions.append(consumption)
-    
-    if let section = multiProgressSections[consumption.drink] {
-      section.factor += consumption.amount.doubleValue
-    }
-    consumptionProgressView.setNeedsDisplay()
-    overallConsumption += consumption.amount.doubleValue
-    
-    diaryViewController.updateTable(consumptions)
-  }
-  
   private func fetchConsumptionRate() {
     consumptionRate = ConsumptionRate.fetchConsumptionRateForDate(currentDate)
     
@@ -271,7 +265,41 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
 
   private func fetchConsumptions() {
     consumptions = Consumption.fetchConsumptionsForDay(currentDate)
+
+    updateConsumptions()
+  }
+  
+  func addConsumption(consumption: Consumption) {
+    consumptions.append(consumption)
     
+    if let section = multiProgressSections[consumption.drink] {
+      section.factor += consumption.amount.doubleValue
+    }
+    consumptionProgressView.setNeedsDisplay()
+    overallConsumption += consumption.amount.doubleValue
+    
+    diaryViewController.updateTable(consumptions)
+  }
+  
+  func removeConsumption(consumption: Consumption) {
+    let index = find(consumptions, consumption)
+    if index == nil {
+      assert(false, "Removed consumption is not found")
+      return
+    }
+    
+    consumptions.removeAtIndex(index!)
+    
+    if let section = multiProgressSections[consumption.drink] {
+      section.factor -= consumption.amount.doubleValue
+    }
+    consumptionProgressView.setNeedsDisplay()
+    overallConsumption += consumption.amount.doubleValue
+    
+    diaryViewController.updateTable(consumptions)
+  }
+  
+  func updateConsumptions() {
     // Group consumptions by drinks
     var consumptionsMap: [Drink: Double] = [:]
     
@@ -282,7 +310,7 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
         consumptionsMap[consumption.drink] = Double(consumption.amount)
       }
     }
-
+    
     // Update diary page
     diaryViewController.updateTable(consumptions)
     
@@ -338,40 +366,19 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   
   private func currentDateWasChanged() {
     // Update all related date labels
-    let formattedDate = formatDate(currentDate)
+    let formattedDate = DateHelper.stringFromDate(currentDate)
     currentDayButton.setTitle(formattedDate, forState: .Normal)
-    currentDayLabelInNavigationTitle.text = formattedDate
+    navigationCurrentDayLabel.text = formattedDate
     
     // Disable switching to the next day if a current day is today
-    let daysToToday = DateHelper.computeUnitsFrom(currentDate, toDate: NSDate(), unit: .CalendarUnitDay)
-    nextDayButton.enabled = daysToToday > 0
+    let daysTillToday = DateHelper.computeUnitsFrom(currentDate, toDate: NSDate(), unit: .CalendarUnitDay)
+    nextDayButton.enabled = daysTillToday > 0
     
     // Fetch consumption rate for current day
     fetchConsumptionRate()
     
     // Fetch existing consumptions for current day
     fetchConsumptions()
-  }
-  
-  private func formatDate(date: NSDate) -> String {
-    let today = NSDate()
-    let daysToToday = DateHelper.computeUnitsFrom(today, toDate: date, unit: .CalendarUnitDay)
-    let dateFormatter = NSDateFormatter()
-    
-    if abs(daysToToday) <= 1 {
-      // Use standard date formatting for yesterday, today and tomorrow
-      // in order to obtain "Yesterday", "Today" and "Tomorrow" localized date strings
-      dateFormatter.dateStyle = .MediumStyle
-      dateFormatter.timeStyle = .NoStyle
-      dateFormatter.doesRelativeDateFormatting = true
-    } else {
-      // Use custom formatting. If year of a current date is year of today, hide them.
-      let yearsToToday = DateHelper.computeUnitsFrom(today, toDate: date, unit: .CalendarUnitYear)
-      let template = yearsToToday == 0 ? "dMMMM" : "dMMMMyyyy"
-      let formatString = NSDateFormatter.dateFormatFromTemplate(template, options: 0, locale: NSLocale.currentLocale())
-      dateFormatter.dateFormat = formatString
-    }
-    return dateFormatter.stringFromDate(date)
   }
   
   // MARK: Private properties -
@@ -450,4 +457,5 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
   private let drinkTypesCount = 9 // number of supported drinks types: water, tea etc.
+  
 }

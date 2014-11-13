@@ -64,4 +64,39 @@ class DateHelper {
       components1.month == components2.month
   }
   
+  /// Generates string for the specified date. If year of a current date is year of today, the function hides it.
+  class func stringFromDate(date: NSDate) -> String {
+    let today = NSDate()
+    let daysTillToday = computeUnitsFrom(today, toDate: date, unit: .CalendarUnitDay)
+    let dateFormatter = NSDateFormatter()
+    
+    if abs(daysTillToday) <= 1 {
+      // Use standard date formatting for yesterday, today and tomorrow
+      // in order to obtain "Yesterday", "Today" and "Tomorrow" localized date strings
+      dateFormatter.dateStyle = .MediumStyle
+      dateFormatter.timeStyle = .NoStyle
+      dateFormatter.doesRelativeDateFormatting = true
+    } else {
+      // Use custom formatting. If year of a current date is year of today, hide it.
+      let yearsTillToday = computeUnitsFrom(today, toDate: date, unit: .CalendarUnitYear)
+      let template = yearsTillToday == 0 ? "dMMMM" : "dMMMMyyyy"
+      let formatString = NSDateFormatter.dateFormatFromTemplate(template, options: 0, locale: NSLocale.currentLocale())
+      dateFormatter.dateFormat = formatString
+    }
+    return dateFormatter.stringFromDate(date)
+  }
+  
+  class func stringFromTime(time: NSDate) -> String {
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateStyle = .NoStyle
+    dateFormatter.timeStyle = .ShortStyle
+    return dateFormatter.stringFromDate(time)
+  }
+  
+  class func stringFromDateTime(dateTime: NSDate) -> String {
+    let datePart = stringFromDate(dateTime)
+    let timePart = stringFromTime(dateTime)
+    return "\(datePart), \(timePart)"
+  }
+
 }

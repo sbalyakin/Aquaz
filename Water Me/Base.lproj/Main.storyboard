@@ -337,88 +337,73 @@
             </objects>
             <point key="canvasLocation" x="1965" y="-1488"/>
         </scene>
-        <!--Add Drink View Controller-->
+        <!--Consumption View Controller-->
         <scene sceneID="FpT-nl-K1n">
             <objects>
-                <viewController storyboardIdentifier="AddDrinkViewController" id="JfU-Cw-4n3" customClass="AddDrinkViewController" customModule="Water_Me" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConsumptionViewController" id="JfU-Cw-4n3" customClass="ConsumptionViewController" customModule="Water_Me" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ghr-HL-bIJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drink" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nbP-4Q-26P">
-                                <rect key="frame" x="69" y="75" width="182" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7VO-sX-5IV">
-                                <rect key="frame" x="16" y="20" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="Qsd-oU-Uii"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="A5t-FE-O50">
-                                <rect key="frame" x="16" y="508" width="280" height="40"/>
+                                <rect key="frame" x="20" y="444" width="280" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.74848152807555379" green="0.90442710277719374" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
-                                    <action selector="addCustomConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="84q-sr-Cba"/>
+                                    <action selector="applyCustomConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="kw9-f2-CwV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hoF-aO-Mum">
-                                <rect key="frame" x="32" y="315" width="64" height="40"/>
+                                <rect key="frame" x="37" y="255" width="64" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.74848152810000002" green="0.90442710280000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="100 ml"/>
                                 <connections>
-                                    <action selector="addSmallConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="gik-vR-NB1"/>
+                                    <action selector="applySmallConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="ebN-Sa-j0P"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vXw-gW-sSA">
-                                <rect key="frame" x="124" y="315" width="64" height="40"/>
+                                <rect key="frame" x="129" y="255" width="64" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.74848152810000002" green="0.90442710280000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="200 ml"/>
                                 <connections>
-                                    <action selector="addMediumConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="ETd-UG-trC"/>
+                                    <action selector="applyMediumConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="E76-LZ-JlQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volume" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IVh-g5-6lW">
-                                <rect key="frame" x="65" y="399" width="182" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="275" minValue="50" maxValue="500" id="Ajg-rM-Vkb">
-                                <rect key="frame" x="14" y="438" width="284" height="31"/>
+                                <rect key="frame" x="18" y="378" width="284" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="amountSliderValueChanged:" destination="JfU-Cw-4n3" eventType="valueChanged" id="skc-CB-qEK"/>
                                 </connections>
                             </slider>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7xm-eq-yWQ">
-                                <rect key="frame" x="215" y="315" width="64" height="40"/>
+                                <rect key="frame" x="220" y="255" width="64" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.74848152810000002" green="0.90442710280000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="500 ml"/>
                                 <connections>
-                                    <action selector="addLargeConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="tVC-Z2-Ic1"/>
+                                    <action selector="applyLargeConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="pJv-e2-GoY"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volume" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IVh-g5-6lW">
+                                <rect key="frame" x="70" y="339" width="182" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="5Tu-jl-z35"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="amountLabel" destination="IVh-g5-6lW" id="Ua6-W1-yLG"/>
                         <outlet property="amountSlider" destination="Ajg-rM-Vkb" id="I7n-YL-Yg5"/>
-                        <outlet property="drinkNameLabel" destination="nbP-4Q-26P" id="TA5-bw-Mm0"/>
+                        <outlet property="applyButton" destination="A5t-FE-O50" id="yOs-s5-Ecp"/>
                         <outlet property="largeAmountButton" destination="7xm-eq-yWQ" id="RQm-AW-Ubf"/>
                         <outlet property="mediumAmountButton" destination="vXw-gW-sSA" id="Wov-pS-zpI"/>
                         <outlet property="smallAmountButton" destination="hoF-aO-Mum" id="24Z-Dt-iaO"/>
@@ -426,7 +411,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huJ-Ju-VE1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2315" y="-1488"/>
+            <point key="canvasLocation" x="2400" y="-1488"/>
         </scene>
         <!--Diary View Controller-->
         <scene sceneID="lYd-x6-Lbn">
@@ -448,11 +433,14 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="sQ8-42-gLb">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Consumption Cell" id="sQ8-42-gLb">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sQ8-42-gLb" id="64s-ux-zdt">
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="JfU-Cw-4n3" kind="push" identifier="Edit Consumption" id="oKA-al-Xsp"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
