@@ -40,8 +40,9 @@ class ConsumptionViewController: UIViewController {
   @IBOutlet weak var mediumAmountButton: UIButton!
   @IBOutlet weak var largeAmountButton: UIButton!
   
+  var navigationTitleView: UIView! // is programmatically created in viewDidLoad()
   var navigationTitleLabel: UILabel! // is programmatically created in viewDidLoad()
-  var navigationCurrentDayLabel: UILabel! // is programmatically created in viewDidLoad()
+  var navigationCurrentDayLabel: UILabel? // is programmatically created in viewDidLoad()
 
   var dayViewController: DayViewController!
   var currentDate: NSDate!
@@ -54,6 +55,13 @@ class ConsumptionViewController: UIViewController {
         drink = existingConsumption.drink
         currentDate = existingConsumption.date
       }
+    }
+  }
+  
+  func changeTime(time: NSDate) {
+    currentDate = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: time)
+    if let dayLabel = navigationCurrentDayLabel {
+      dayLabel.text = DateHelper.stringFromDateTime(currentDate)
     }
   }
   
@@ -86,6 +94,14 @@ class ConsumptionViewController: UIViewController {
     
     createNavigationTitle(title: drink.name, date: date)
   }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    if navigationTitleView != nil {
+      navigationItem.titleView = navigationTitleView
+    }
+  }
   
   override func viewDidDisappear(animated: Bool) {
     super.viewDidDisappear(animated)
@@ -96,7 +112,7 @@ class ConsumptionViewController: UIViewController {
     let verticalAdjustment: CGFloat = 8
     
     let navigationTitleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
-    let navigationTitleView = UIView(frame: navigationTitleViewRect)
+    navigationTitleView = UIView(frame: navigationTitleViewRect)
     
     var titleLabelRect = navigationTitleView.bounds
     if date.isEmpty {
@@ -115,12 +131,12 @@ class ConsumptionViewController: UIViewController {
     if !date.isEmpty {
       let currentDayLabelRect = navigationTitleView.bounds.rectByOffsetting(dx: 0, dy: 16)
       navigationCurrentDayLabel = UILabel(frame: currentDayLabelRect)
-      navigationCurrentDayLabel.autoresizingMask = navigationTitleLabel.autoresizingMask
-      navigationCurrentDayLabel.backgroundColor = UIColor.clearColor()
-      navigationCurrentDayLabel.font = UIFont.systemFontOfSize(12)
-      navigationCurrentDayLabel.textAlignment = .Center
-      navigationCurrentDayLabel.text = date
-      navigationTitleView.addSubview(navigationCurrentDayLabel)
+      navigationCurrentDayLabel!.autoresizingMask = navigationTitleLabel.autoresizingMask
+      navigationCurrentDayLabel!.backgroundColor = UIColor.clearColor()
+      navigationCurrentDayLabel!.font = UIFont.systemFontOfSize(12)
+      navigationCurrentDayLabel!.textAlignment = .Center
+      navigationCurrentDayLabel!.text = date
+      navigationTitleView.addSubview(navigationCurrentDayLabel!)
     }
     
     previousNavigationTitleView = navigationItem.titleView
@@ -148,6 +164,15 @@ class ConsumptionViewController: UIViewController {
     applyConsumption(predefinedAmounts.large)
   }
   
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "PickTime" {
+      if let pickTimeViewController = segue.destinationViewController as? PickTimeViewController {
+        pickTimeViewController.consumptionViewController = self
+        pickTimeViewController.time = currentDate
+      }
+    }
+  }
+  
   private func applyConsumption(amount: Double) {
     // Prepare amount for storing
     let precision = Settings.sharedInstance.generalVolumeUnits.value.precision
@@ -156,14 +181,13 @@ class ConsumptionViewController: UIViewController {
     if let consumption = self.consumption {
       // Edit mode
       consumption.amount = processedAmount
+      consumption.date = currentDate
       ModelHelper.sharedInstance.save()
       
       dayViewController.updateConsumptions()
     } else {
       // Add mode
-
-      // Get current date from day view controller and replace time with the current
-      let date = DateHelper.dateByJoiningDateTime(datePart: dayViewController.currentDate, timePart: NSDate())
+      let date = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: NSDate())
       
       // Store the consumption into Core Data
       drink.recentAmount.amount = processedAmount
@@ -198,6 +222,7 @@ class ConsumptionViewController: UIViewController {
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
 
+  // TODO: Remove it. Previous navigation item should be managed by previous view on viewWillAppear
   private var previousNavigationTitleView: UIView!
 
 }

@@ -27,8 +27,12 @@ class CalendarViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
-    previoustitleView = navigationItem.titleView
-    
+    setupNavigationBar()
+  }
+  
+  func setupNavigationBar() {
+    previousTitleView = navigationItem.titleView
+
     // Customize navigation bar
     let titleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
     let titleView = UIView(frame: titleViewRect)
@@ -48,7 +52,7 @@ class CalendarViewController: UIViewController {
   
   override func viewDidDisappear(animated: Bool) {
     super.viewDidDisappear(animated)
-    navigationItem.titleView = previoustitleView
+    navigationItem.titleView = previousTitleView
   }
   
   private func switchToDate(date: NSDate) {
@@ -84,5 +88,5 @@ class CalendarViewController: UIViewController {
     navigationController!.popViewControllerAnimated(true)
   }
   
-  private var previoustitleView: UIView!
+  private var previousTitleView: UIView!
 }
