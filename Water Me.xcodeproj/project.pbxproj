@@ -126,11 +126,11 @@
 		843B055419E2D7800097A833 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				843B055719E2D7800097A833 /* DayViewController.swift */,
+				843B055819E2D7800097A833 /* SelectDrinkViewController.swift */,
+				8424AA001A0A7009009C5C47 /* DiaryViewController.swift */,
 				8478253619EAC8C200588FE3 /* ConsumptionViewController.swift */,
 				A5275F861A1216090088AF47 /* CalendarViewController.swift */,
-				843B055719E2D7800097A833 /* DayViewController.swift */,
-				8424AA001A0A7009009C5C47 /* DiaryViewController.swift */,
-				843B055819E2D7800097A833 /* SelectDrinkViewController.swift */,
 				843B055519E2D7800097A833 /* SettingsTableViewController.swift */,
 				843B055619E2D7800097A833 /* StatisticsViewController.swift */,
 				84F9DD971A16574E003D6444 /* PickTimeViewController.swift */,

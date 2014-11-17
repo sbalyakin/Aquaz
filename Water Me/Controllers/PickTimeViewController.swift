@@ -17,16 +17,22 @@ class PickTimeViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    // Do any additional setup after loading the view.
-    timePicker.setDate(time, animated: false)
-    
-    setupNavigationBar()
+
+    setupTimePicker()
+    createCustomNavigationTitle()
   }
   
-  func setupNavigationBar() {
-    // Customize navigation bar
+  func setupTimePicker() {
+    timePicker.setDate(time, animated: false)
+  }
+  
+  func createCustomNavigationTitle() {
+    // TODO: Remove magical 100 value and find another way to calculate proper rectangle for the title view
     let titleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
+
+    // Container view is used for adjusting inner label by offsetting inside it
+    // without changing global titleVerticalPositionAdjustmentForBarMetrics,
+    // because if change it on view appearing/disappearing there will be noticable title item jumping.
     let titleView = UIView(frame: titleViewRect)
     
     let verticalAdjustment = navigationController!.navigationBar.titleVerticalPositionAdjustmentForBarMetrics(.Default)
@@ -42,14 +48,9 @@ class PickTimeViewController: UIViewController {
     navigationItem.titleView = titleView
   }
 
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-  
   @IBAction func chooseButtonWasTapped(sender: AnyObject) {
     time = timePicker.date
-    consumptionViewController.changeTime(time)
+    consumptionViewController.changeTimeForCurrentDate(time)
     navigationController!.popViewControllerAnimated(true)
   }
   

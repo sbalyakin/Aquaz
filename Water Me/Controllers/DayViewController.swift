@@ -41,15 +41,16 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   @IBOutlet weak var highActivityButton: UIButton!
   @IBOutlet weak var hotDayButton: UIButton!
   
-  var navigationTitleLabel: UILabel! // is programmatically created in viewDidLoad()
-  var navigationCurrentDayLabel: UILabel! // is programmatically created in viewDidLoad()
+  var navigationTitleView: UIView!
+  var navigationTitleLabel: UILabel!
+  var navigationCurrentDayLabel: UILabel!
 
   // MARK: Public properties -
   
   /// Current date for managing water intake
   var currentDate: NSDate = NSDate() {
     didSet {
-      currentDateWasChanged()
+      updateCurrentDateRelatedControls()
     }
   }
   
@@ -64,57 +65,35 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Customize navigation bar
-    createNavigationTitle()
+    createCustomNavigationTitle()
+  
+    setupSummaryBar()
     
-    // Add view controller for drink selection
-    selectDrinkViewController = storyboard!.instantiateViewControllerWithIdentifier("SelectDrinkViewController") as SelectDrinkViewController
-    selectDrinkViewController.dayViewController = self
-    pages.append(selectDrinkViewController)
-
-    // Add consumptions diary view controller
-    diaryViewController = storyboard!.instantiateViewControllerWithIdentifier("DiaryViewController") as DiaryViewController
-    diaryViewController.dayViewController = self
-    pages.append(diaryViewController)
+    createPageViewController()
     
-    // Add page view controller for a current day
-    pageViewController = storyboard!.instantiateViewControllerWithIdentifier("DayPageViewController") as UIPageViewController
-    pageViewController.dataSource = self
-    pageViewController.delegate = self
-    pageViewController.setViewControllers([selectDrinkViewController], direction: .Forward, animated: false, completion: nil)
-    pageButton.title = pageTitles[0]
-
-    // Setup summary bar
-    let summaryBarHeight = summaryBar.bounds.height
-    var pageViewControllerRect = view.frame
-    pageViewControllerRect.size.height -= summaryBarHeight
-    pageViewControllerRect.offset(dx: 0.0, dy: summaryBarHeight)
-    pageViewController.view.frame = pageViewControllerRect
-    
-    addChildViewController(pageViewController)
-    view.addSubview(pageViewController.view)
-    
-    pageViewController.didMoveToParentViewController(self)
-    
-    setDaySelectionBarVisible(Settings.sharedInstance.uiDisplayDaySelection.value)
-    
-    // Setup multi progress control
-    for i in 0..<drinkTypesCount {
-      let drink = Drink.getDrinkByIndex(i)!
-      let section = consumptionProgressView.addSection(color: drink.color as UIColor)
-      multiProgressSections[drink] = section
-    }
-    
-    // Additional setup for revealing
     revealButtonSetup()
 
-    // Apply current date to all related labels
-    currentDateWasChanged()
+    updateCurrentDateRelatedControls()
   }
   
-  private func createNavigationTitle() {
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    if navigationTitleView != nil {
+      navigationItem.titleView = navigationTitleView
+    }
+  }
+  
+  private func createCustomNavigationTitle() {
+    // Move the title view up in order to display second line of the title (date) properly.
+    // It seems that there is no any other way to do that.
+    // Unfortunately this setting has an influence on any view controllers pushed to navigation controller,
+    // so it's necessary to take this setting into account in all of them.
+    let verticalAdjustment: CGFloat = -8
+    navigationController!.navigationBar.setTitleVerticalPositionAdjustment(verticalAdjustment, forBarMetrics: .Default)
+
     let navigationTitleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
-    let navigationTitleView = UIView(frame: navigationTitleViewRect)
+    navigationTitleView = UIView(frame: navigationTitleViewRect)
     
     navigationTitleLabel = UILabel(frame: navigationTitleView.bounds)
     navigationTitleLabel.autoresizingMask = .FlexibleWidth
@@ -133,7 +112,55 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     navigationTitleView.addSubview(navigationCurrentDayLabel)
     
     navigationItem.titleView = navigationTitleView
-    navigationController!.navigationBar.setTitleVerticalPositionAdjustment(-8.0, forBarMetrics: .Default)
+  }
+  
+  private func setupSummaryBar() {
+    setDaySelectionBarVisible(Settings.sharedInstance.uiDisplayDaySelection.value)
+    setupMultiprogressControl()
+  }
+  
+  private func setupMultiprogressControl() {
+    for i in 0..<drinkTypesCount {
+      let drink = Drink.getDrinkByIndex(i)!
+      let section = consumptionProgressView.addSection(color: drink.color as UIColor)
+      multiProgressSections[drink] = section
+    }
+  }
+  
+  private func createPageViewController() {
+    let summaryBarHeight = summaryBar.bounds.height
+    var rect = view.frame
+    rect.size.height -= summaryBarHeight
+    rect.offset(dx: 0.0, dy: summaryBarHeight)
+    
+    createPageViewControllerWithRect(rect)
+  }
+  
+  private func createPageViewControllerWithRect(rect: CGRect) {
+    pages = []
+    
+    // Add view controller for drink selection
+    selectDrinkViewController = storyboard!.instantiateViewControllerWithIdentifier("SelectDrinkViewController") as SelectDrinkViewController
+    selectDrinkViewController.dayViewController = self
+    pages.append(selectDrinkViewController)
+    
+    // Add consumptions diary view controller
+    diaryViewController = storyboard!.instantiateViewControllerWithIdentifier("DiaryViewController") as DiaryViewController
+    diaryViewController.dayViewController = self
+    pages.append(diaryViewController)
+    
+    // Create, setup and add a page view controller
+    pageViewController = storyboard!.instantiateViewControllerWithIdentifier("DayPageViewController") as UIPageViewController
+    pageViewController.dataSource = self
+    pageViewController.delegate = self
+    pageViewController.setViewControllers([selectDrinkViewController], direction: .Forward, animated: false, completion: nil)
+    pageButton.title = pageTitles[0]
+    pageViewController.view.frame = rect
+    
+    addChildViewController(pageViewController)
+    view.addSubview(pageViewController.view)
+    
+    pageViewController.didMoveToParentViewController(self)
   }
   
   private func revealButtonSetup() {
@@ -364,20 +391,16 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   
   // MARK: Date management -
   
-  private func currentDateWasChanged() {
-    // Update all related date labels
+  private func updateCurrentDateRelatedControls() {
     let formattedDate = DateHelper.stringFromDate(currentDate)
     currentDayButton.setTitle(formattedDate, forState: .Normal)
     navigationCurrentDayLabel.text = formattedDate
     
-    // Disable switching to the next day if a current day is today
     let daysTillToday = DateHelper.computeUnitsFrom(currentDate, toDate: NSDate(), unit: .CalendarUnitDay)
     nextDayButton.enabled = daysTillToday > 0
     
-    // Fetch consumption rate for current day
     fetchConsumptionRate()
     
-    // Fetch existing consumptions for current day
     fetchConsumptions()
   }
   

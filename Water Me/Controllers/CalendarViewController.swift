@@ -20,6 +20,7 @@ class CalendarViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     calendarView.currentDate = date
     switchToDate(date)
   }
@@ -27,14 +28,16 @@ class CalendarViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
-    setupNavigationBar()
+    createCustomNavigationTitle()
   }
   
-  func setupNavigationBar() {
-    previousTitleView = navigationItem.titleView
-
-    // Customize navigation bar
+  func createCustomNavigationTitle() {
+    // TODO: Remove magical 100 value and find another way to calculate proper rectangle for the title view
     let titleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
+    
+    // Container view is used for adjusting inner label by offsetting inside it
+    // without changing global titleVerticalPositionAdjustmentForBarMetrics,
+    // because if change it on view appearing/disappearing there will be noticable title item jumping.
     let titleView = UIView(frame: titleViewRect)
     
     let verticalAdjustment = navigationController!.navigationBar.titleVerticalPositionAdjustmentForBarMetrics(.Default)
@@ -48,11 +51,6 @@ class CalendarViewController: UIViewController {
     titleView.addSubview(titleLabel)
     
     navigationItem.titleView = titleView
-  }
-  
-  override func viewDidDisappear(animated: Bool) {
-    super.viewDidDisappear(animated)
-    navigationItem.titleView = previousTitleView
   }
   
   private func switchToDate(date: NSDate) {
@@ -87,6 +85,5 @@ class CalendarViewController: UIViewController {
     dayViewController.currentDate = adjustedDate
     navigationController!.popViewControllerAnimated(true)
   }
-  
-  private var previousTitleView: UIView!
+
 }

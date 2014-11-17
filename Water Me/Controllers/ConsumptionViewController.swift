@@ -40,11 +40,12 @@ class ConsumptionViewController: UIViewController {
   @IBOutlet weak var mediumAmountButton: UIButton!
   @IBOutlet weak var largeAmountButton: UIButton!
   
-  var navigationTitleView: UIView! // is programmatically created in viewDidLoad()
-  var navigationTitleLabel: UILabel! // is programmatically created in viewDidLoad()
-  var navigationCurrentDayLabel: UILabel? // is programmatically created in viewDidLoad()
+  var navigationTitleView: UIView!
+  var navigationTitleLabel: UILabel!
+  var navigationCurrentDayLabel: UILabel?
 
   var dayViewController: DayViewController!
+  
   var currentDate: NSDate!
   var drink: Drink!
   
@@ -58,7 +59,7 @@ class ConsumptionViewController: UIViewController {
     }
   }
   
-  func changeTime(time: NSDate) {
+  func changeTimeForCurrentDate(time: NSDate) {
     currentDate = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: time)
     if let dayLabel = navigationCurrentDayLabel {
       dayLabel.text = DateHelper.stringFromDateTime(currentDate)
@@ -68,31 +69,10 @@ class ConsumptionViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Predefined amount is always non-fractional values, so we will format amount skipping fraction part
-    smallAmountButton.setTitle(formatAmount(predefinedAmounts.small, precision: 1.0, decimals: 0), forState: .Normal)
-    mediumAmountButton.setTitle(formatAmount(predefinedAmounts.medium, precision: 1.0, decimals: 0), forState: .Normal)
-    largeAmountButton.setTitle(formatAmount(predefinedAmounts.large, precision: 1.0, decimals: 0), forState: .Normal)
-
-    // Setup drink amount
-    var amount = 0.0
-    if let consumption = self.consumption {
-      // Edit mode
-      applyButton.setTitle("Apply", forState: .Normal)
-      amount = consumption.amount.doubleValue
-    } else {
-      // Add mode
-      applyButton.setTitle("Add", forState: .Normal)
-      amount = Double(drink.recentAmount.amount)
-    }
-
-    setAmountLabel(amount)
-    amountSlider.value = Float(amount)
-
-    // Setup navigation title
-    let isToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
-    var date = (isToday && mode == .Add) ? "" : DateHelper.stringFromDateTime(currentDate)
-    
-    createNavigationTitle(title: drink.name, date: date)
+    setupPredefinedAmountLabels()
+    setupAmountRelatedControlsWithInitialAmount()
+    setupApplyButton()
+    createCustomNavigationTitle()
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -103,26 +83,56 @@ class ConsumptionViewController: UIViewController {
     }
   }
   
-  override func viewDidDisappear(animated: Bool) {
-    super.viewDidDisappear(animated)
-    navigationItem.titleView = previousNavigationTitleView
+  private func setupPredefinedAmountLabels() {
+    // Predefined amount is always non-fractional values, so we will format amount skipping fraction part
+    smallAmountButton.setTitle(formatAmount(predefinedAmounts.small, precision: 1.0, decimals: 0), forState: .Normal)
+    mediumAmountButton.setTitle(formatAmount(predefinedAmounts.medium, precision: 1.0, decimals: 0), forState: .Normal)
+    largeAmountButton.setTitle(formatAmount(predefinedAmounts.large, precision: 1.0, decimals: 0), forState: .Normal)
   }
-
-  private func createNavigationTitle(#title: String, date: String) {
-    let verticalAdjustment: CGFloat = 8
+  
+  private func setupAmountRelatedControlsWithInitialAmount() {
+    let amount = getInitialAmount()
+    setAmountLabel(amount)
+    amountSlider.value = Float(amount)
+  }
+  
+  private func getInitialAmount() -> Double {
+    var amount = 0.0
+    if let consumption = self.consumption {
+      amount = consumption.amount.doubleValue
+    } else {
+      amount = Double(drink.recentAmount.amount)
+    }
     
+    return amount
+  }
+  
+  private func setupApplyButton() {
+    let title = (mode == .Add) ? "Add" : "Apply"
+    applyButton.setTitle(title, forState: .Normal)
+  }
+  
+  private func createCustomNavigationTitle() {
+    let isToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
+    let date = (isToday && mode == .Add) ? "" : DateHelper.stringFromDateTime(currentDate)
+
+    // TODO: Remove magical 100 value and find another way to calculate proper rectangle for the title view
     let navigationTitleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
     navigationTitleView = UIView(frame: navigationTitleViewRect)
     
     var titleLabelRect = navigationTitleView.bounds
     if date.isEmpty {
-      titleLabelRect.offset(dx: 0, dy: verticalAdjustment)
+      // Adjust inner label by offsetting inside its parent
+      // without changing global titleVerticalPositionAdjustmentForBarMetrics,
+      // because if change it on view appearing/disappearing there will be noticable title item jumping.
+      let verticalAdjustment = navigationController!.navigationBar.titleVerticalPositionAdjustmentForBarMetrics(.Default)
+      titleLabelRect.offset(dx: 0, dy: -verticalAdjustment)
     }
     
     navigationTitleLabel = UILabel(frame: titleLabelRect)
     navigationTitleLabel.autoresizingMask = .FlexibleWidth
     navigationTitleLabel.backgroundColor = UIColor.clearColor()
-    navigationTitleLabel.text = title
+    navigationTitleLabel.text = drink.name
     let fontSize: CGFloat = date.isEmpty ? 18 : 16
     navigationTitleLabel.font = UIFont.boldSystemFontOfSize(fontSize)
     navigationTitleLabel.textAlignment = .Center
@@ -139,9 +149,7 @@ class ConsumptionViewController: UIViewController {
       navigationTitleView.addSubview(navigationCurrentDayLabel!)
     }
     
-    previousNavigationTitleView = navigationItem.titleView
     navigationItem.titleView = navigationTitleView
-    navigationController!.navigationBar.setTitleVerticalPositionAdjustment(-verticalAdjustment, forBarMetrics: .Default)
   }
   
   @IBAction func amountSliderValueChanged(sender: AnyObject) {
@@ -221,8 +229,5 @@ class ConsumptionViewController: UIViewController {
   private let predefinedAmounts = Settings.sharedInstance.generalVolumeUnits.value.predefinedAmounts
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
-
-  // TODO: Remove it. Previous navigation item should be managed by previous view on viewWillAppear
-  private var previousNavigationTitleView: UIView!
 
 }
