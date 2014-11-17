@@ -24,6 +24,12 @@ class PickTimeViewController: UIViewController {
   
   func setupTimePicker() {
     timePicker.setDate(time, animated: false)
+
+    let today = NSDate()
+    let isTodayTime = DateHelper.areDatesEqualByDays(date1: today, date2: time)
+    if isTodayTime {
+      timePicker.maximumDate = today
+    }
   }
   
   func createCustomNavigationTitle() {

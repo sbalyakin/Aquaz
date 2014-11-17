@@ -20,7 +20,7 @@ class Consumption: NSManagedObject, NamedEntity {
   }
   
   /// Adds a new consumption entity into Core Data
-  class func addEntity(#drink: Drink, amount: NSNumber, date: NSDate, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Consumption {
+  class func addEntity(#drink: Drink, amount: NSNumber, date: NSDate, managedObjectContext: NSManagedObjectContext = ModelHelper.sharedInstance.managedObjectContext, saveImmediately: Bool = true) -> Consumption {
     let consumption = NSEntityDescription.insertNewObjectForEntityForName(getEntityName(), inManagedObjectContext: managedObjectContext) as Consumption
     consumption.amount = amount
     consumption.drink = drink

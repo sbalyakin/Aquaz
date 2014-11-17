@@ -345,15 +345,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="A5t-FE-O50">
-                                <rect key="frame" x="20" y="444" width="280" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.74848152807555379" green="0.90442710277719374" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Add"/>
-                                <connections>
-                                    <action selector="applyCustomConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="kw9-f2-CwV"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hoF-aO-Mum">
                                 <rect key="frame" x="37" y="255" width="64" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -395,6 +386,15 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="A5t-FE-O50">
+                                <rect key="frame" x="20" y="444" width="280" height="40"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.75294125080108643" green="0.90588241815567017" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="applyCustomConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="kw9-f2-CwV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -412,6 +412,7 @@
                         <outlet property="applyButton" destination="A5t-FE-O50" id="yOs-s5-Ecp"/>
                         <outlet property="largeAmountButton" destination="7xm-eq-yWQ" id="RQm-AW-Ubf"/>
                         <outlet property="mediumAmountButton" destination="vXw-gW-sSA" id="Wov-pS-zpI"/>
+                        <outlet property="pickTimeButton" destination="3j1-xd-PoU" id="7re-fd-JHZ"/>
                         <outlet property="smallAmountButton" destination="hoF-aO-Mum" id="24Z-Dt-iaO"/>
                     </connections>
                 </viewController>
@@ -424,12 +425,23 @@
             <objects>
                 <viewController storyboardIdentifier="PickTimeViewController" id="EVr-Rr-PxB" customClass="PickTimeViewController" customModule="Water_Me" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="68Y-Ux-au6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" id="irN-Ta-cev">
-                                <rect key="frame" x="0.0" y="86" width="320" height="202"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wsf-j2-xNS">
+                                <rect key="frame" x="20" y="444" width="280" height="40"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.75294125079999996" green="0.90588241820000004" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="Choose">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseButtonWasTapped:" destination="EVr-Rr-PxB" eventType="touchUpInside" id="DIl-St-iaw"/>
+                                </connections>
+                            </button>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" datePickerMode="time" minuteInterval="1" id="irN-Ta-cev">
+                                <rect key="frame" x="0.0" y="118" width="320" height="202"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="437671574.79575503">
                                     <!--2014-11-14 15:26:14 +0000-->
                                 </date>
@@ -438,18 +450,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Choose time" id="1ri-5R-qlM">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="MgC-Iv-IfB">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="MgC-Iv-IfB">
                             <connections>
                                 <action selector="cancelButtonWasTapped:" destination="EVr-Rr-PxB" id="nXQ-1y-u2d"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Choose" id="jtU-nU-ghB">
-                            <connections>
-                                <action selector="chooseButtonWasTapped:" destination="EVr-Rr-PxB" id="dcL-EK-nsp"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="timePicker" destination="irN-Ta-cev" id="eCf-MA-HBn"/>
                     </connections>

@@ -39,6 +39,7 @@ class ConsumptionViewController: UIViewController {
   @IBOutlet weak var smallAmountButton: UIButton!
   @IBOutlet weak var mediumAmountButton: UIButton!
   @IBOutlet weak var largeAmountButton: UIButton!
+  @IBOutlet weak var pickTimeButton: UIBarButtonItem!
   
   var navigationTitleView: UIView!
   var navigationTitleLabel: UILabel!
@@ -46,7 +47,12 @@ class ConsumptionViewController: UIViewController {
 
   var dayViewController: DayViewController!
   
-  var currentDate: NSDate!
+  var currentDate: NSDate! {
+    didSet {
+      isCurrentDayToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
+    }
+  }
+  
   var drink: Drink!
   
   // Should be nil for add consumption mode, and not nil for edit consumption mode
@@ -59,10 +65,14 @@ class ConsumptionViewController: UIViewController {
     }
   }
   
+  var isCurrentDayShouldBeShown: Bool {
+    return !isCurrentDayToday || viewMode == .Edit
+  }
+
   func changeTimeForCurrentDate(time: NSDate) {
     currentDate = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: time)
     if let dayLabel = navigationCurrentDayLabel {
-      dayLabel.text = DateHelper.stringFromDateTime(currentDate)
+      dayLabel.text = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
     }
   }
   
@@ -73,6 +83,7 @@ class ConsumptionViewController: UIViewController {
     setupAmountRelatedControlsWithInitialAmount()
     setupApplyButton()
     createCustomNavigationTitle()
+    setupPickTimeButton()
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -108,20 +119,17 @@ class ConsumptionViewController: UIViewController {
   }
   
   private func setupApplyButton() {
-    let title = (mode == .Add) ? "Add" : "Apply"
+    let title = (viewMode == .Add) ? "Add" : "Apply"
     applyButton.setTitle(title, forState: .Normal)
   }
   
   private func createCustomNavigationTitle() {
-    let isToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
-    let date = (isToday && mode == .Add) ? "" : DateHelper.stringFromDateTime(currentDate)
-
     // TODO: Remove magical 100 value and find another way to calculate proper rectangle for the title view
     let navigationTitleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
     navigationTitleView = UIView(frame: navigationTitleViewRect)
     
     var titleLabelRect = navigationTitleView.bounds
-    if date.isEmpty {
+    if !isCurrentDayShouldBeShown {
       // Adjust inner label by offsetting inside its parent
       // without changing global titleVerticalPositionAdjustmentForBarMetrics,
       // because if change it on view appearing/disappearing there will be noticable title item jumping.
@@ -133,23 +141,30 @@ class ConsumptionViewController: UIViewController {
     navigationTitleLabel.autoresizingMask = .FlexibleWidth
     navigationTitleLabel.backgroundColor = UIColor.clearColor()
     navigationTitleLabel.text = drink.name
-    let fontSize: CGFloat = date.isEmpty ? 18 : 16
+    let fontSize: CGFloat = isCurrentDayShouldBeShown ? 16 : 18
     navigationTitleLabel.font = UIFont.boldSystemFontOfSize(fontSize)
     navigationTitleLabel.textAlignment = .Center
     navigationTitleView.addSubview(navigationTitleLabel)
     
-    if !date.isEmpty {
+    if isCurrentDayShouldBeShown {
       let currentDayLabelRect = navigationTitleView.bounds.rectByOffsetting(dx: 0, dy: 16)
       navigationCurrentDayLabel = UILabel(frame: currentDayLabelRect)
       navigationCurrentDayLabel!.autoresizingMask = navigationTitleLabel.autoresizingMask
       navigationCurrentDayLabel!.backgroundColor = UIColor.clearColor()
       navigationCurrentDayLabel!.font = UIFont.systemFontOfSize(12)
       navigationCurrentDayLabel!.textAlignment = .Center
+      let date = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
       navigationCurrentDayLabel!.text = date
       navigationTitleView.addSubview(navigationCurrentDayLabel!)
     }
     
     navigationItem.titleView = navigationTitleView
+  }
+  
+  private func setupPickTimeButton() {
+    if !isCurrentDayShouldBeShown {
+      pickTimeButton.title = nil
+    }
   }
   
   @IBAction func amountSliderValueChanged(sender: AnyObject) {
@@ -182,30 +197,43 @@ class ConsumptionViewController: UIViewController {
   }
   
   private func applyConsumption(amount: Double) {
-    // Prepare amount for storing
-    let precision = Settings.sharedInstance.generalVolumeUnits.value.precision
-    let processedAmount = Units.sharedInstance.prepareAmountForStoring(amount: amount, unitType: .Volume, precision: precision)
+    let adjustedAmount = prepareAmountForStoring(amount)
     
+    switch viewMode {
+    case .Add: addConsumption(amount: adjustedAmount)
+    case .Edit: updateConsumption(amount: adjustedAmount)
+    }
+    
+    navigationController!.popViewControllerAnimated(true)
+  }
+  
+  private func prepareAmountForStoring(amount: Double) -> Double {
+    let precision = Settings.sharedInstance.generalVolumeUnits.value.precision
+    return Units.sharedInstance.prepareAmountForStoring(amount: amount, unitType: .Volume, precision: precision)
+  }
+  
+  private func addConsumption(#amount: Double) {
+    var date: NSDate
+    if isCurrentDayShouldBeShown {
+      date = currentDate
+    } else {
+      date = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: NSDate())
+    }
+    
+    drink.recentAmount.amount = amount
+    let consumption = Consumption.addEntity(drink: drink, amount: amount, date: date)
+    
+    dayViewController.addConsumption(consumption)
+  }
+  
+  private func updateConsumption(#amount: Double) {
     if let consumption = self.consumption {
-      // Edit mode
-      consumption.amount = processedAmount
+      consumption.amount = amount
       consumption.date = currentDate
       ModelHelper.sharedInstance.save()
       
       dayViewController.updateConsumptions()
-    } else {
-      // Add mode
-      let date = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: NSDate())
-      
-      // Store the consumption into Core Data
-      drink.recentAmount.amount = processedAmount
-      let consumption = Consumption.addEntity(drink: drink, amount: processedAmount, date: date, managedObjectContext: ModelHelper.sharedInstance.managedObjectContext)
-      
-      // Update day view controller
-      dayViewController.addConsumption(consumption)
     }
-
-    navigationController!.popViewControllerAnimated(true)
   }
 
   private func formatAmount(amount: Double, precision: Double? = nil, decimals: Int? = nil) -> String {
@@ -222,12 +250,14 @@ class ConsumptionViewController: UIViewController {
     case Add, Edit
   }
   
-  private var mode: Mode {
+  private var viewMode: Mode {
     return consumption == nil ? .Add : .Edit
   }
   
   private let predefinedAmounts = Settings.sharedInstance.generalVolumeUnits.value.predefinedAmounts
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
+  
+  private var isCurrentDayToday: Bool = false
 
 }
