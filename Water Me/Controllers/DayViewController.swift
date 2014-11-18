@@ -67,9 +67,9 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     
     createCustomNavigationTitle()
   
-    setupSummaryBar()
-    
     createPageViewController()
+
+    setupSummaryBar()
     
     revealButtonSetup()
 

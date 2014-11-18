@@ -35,6 +35,7 @@
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
 		A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1319E5686C00D0477B /* ModelHelper.swift */; };
 		A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1519E57D3500D0477B /* NamedEntity.swift */; };
+		A5DBC7471A1BBA7A001B5875 /* WeekStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DBC7461A1BBA7A001B5875 /* WeekStatisticsView.swift */; };
 		A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A5B75A1319E5686C00D0477B /* ModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelHelper.swift; sourceTree = "<group>"; };
 		A5B75A1519E57D3500D0477B /* NamedEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedEntity.swift; sourceTree = "<group>"; };
+		A5DBC7461A1BBA7A001B5875 /* WeekStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekStatisticsView.swift; sourceTree = "<group>"; };
 		A5E70A6F19E30BEE006E5FC0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Settings.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 		8424AA041A0B57F9009C5C47 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				A5DBC7461A1BBA7A001B5875 /* WeekStatisticsView.swift */,
 				A5275F801A1212930088AF47 /* CalendarDayButton.swift */,
 				A5275F811A1212930088AF47 /* CalendarTableViewCell.swift */,
 				A5275F821A1212930088AF47 /* CalendarView.swift */,
@@ -354,6 +357,7 @@
 				A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */,
 				8478253719EAC8C200588FE3 /* ConsumptionViewController.swift in Sources */,
 				A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */,
+				A5DBC7471A1BBA7A001B5875 /* WeekStatisticsView.swift in Sources */,
 				843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */,
 				A5275F841A1212930088AF47 /* CalendarTableViewCell.swift in Sources */,
 				84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */,
