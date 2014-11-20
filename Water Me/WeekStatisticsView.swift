@@ -106,14 +106,14 @@ import UIKit
     let horizontalRectangles = innerRect.rectsByDividing(labelSize.width + gapFromScaleToBars, fromEdge: .MinXEdge)
     let rightRectangle = horizontalRectangles.remainder
     let leftRectangle = horizontalRectangles.slice
-    let barWidth = trunc(rightRectangle.width / CGFloat(daysPerWeek))
+    let barWidth = rightRectangle.width / CGFloat(daysPerWeek)
     let rightVerticalRectangles = rightRectangle.rectsByDividing(barWidth, fromEdge: .MaxYEdge)
     let leftVerticalRectangles = leftRectangle.rectsByDividing(barWidth, fromEdge: .MaxYEdge)
     
     var result: (scale: CGRect, bars: CGRect, days: CGRect)
-    result.scale = leftVerticalRectangles.remainder
-    result.bars = rightVerticalRectangles.remainder
-    result.days = rightVerticalRectangles.slice
+    result.scale = leftVerticalRectangles.remainder.integerRect
+    result.bars = rightVerticalRectangles.remainder.integerRect
+    result.days = rightVerticalRectangles.slice.integerRect
     return result
   }
   
@@ -158,8 +158,8 @@ import UIKit
     let maximum = CGFloat(computeMaximumValue())
     
     for i in 0...scaleLabelsCount {
-      let minY = round(innerRect.maxY - CGFloat(i) * segmentHeight - textHeight / 2)
-      let labelRect = CGRectMake(innerRect.minX, minY, innerRect.width - gapFromScaleToBars, textHeight)
+      let minY = innerRect.maxY - CGFloat(i) * segmentHeight - textHeight / 2
+      let labelRect = CGRectMake(innerRect.minX, minY, innerRect.width - gapFromScaleToBars, textHeight).integerRect
       
       let scaleValue = Int(maximum / CGFloat(scaleLabelsCount) * CGFloat(i))
       "\(scaleValue)".drawInRect(labelRect, withAttributes: fontAttributes)
@@ -195,15 +195,16 @@ import UIKit
     let maximumValue = CGFloat(computeMaximumValue())
     let valuesCount = items.count
     let fullBarWidth = rect.width / CGFloat(valuesCount)
-    let barWidthInset = round((fullBarWidth * (1 - barWidthFraction)) / 2)
+    let barWidthInset = (fullBarWidth * (1 - barWidthFraction)) / 2
     var x = rect.minX
     
     for (index, item) in enumerate(items) {
-      let barHeight = maximumValue > 0 ? round(CGFloat(item.value) / maximumValue * rect.height) : 0
-      
-      var rect = CGRectMake(trunc(x), rect.maxY - barHeight, ceil(fullBarWidth), barHeight)
+      let barHeight = maximumValue > 0 ? (CGFloat(item.value) / maximumValue * rect.height) : 0
+      let x = rect.minX + CGFloat(index) * fullBarWidth
+
+      var rect = CGRectMake(x, rect.maxY - barHeight, fullBarWidth, barHeight)
       rect.inset(dx: barWidthInset, dy: 0)
-      x += fullBarWidth
+      rect.integerize()
       
       drawBar(rect: rect)
     }
