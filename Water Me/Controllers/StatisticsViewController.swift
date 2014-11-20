@@ -13,47 +13,60 @@ class StatisticsViewController: UIViewController {
   @IBOutlet weak var segmentedControl: UISegmentedControl!
   @IBOutlet weak var revealButton: UIBarButtonItem!
   
-  var viewControllers: [UIViewController] = []
+  var viewControllers: [UIViewController!] = [nil, nil, nil]
+  var currentViewController: UIViewController!
+  
+  enum ViewControllerType: Int {
+    case Week = 0, Month, Year
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    // Do any additional setup after loading the view.
-    let todayStatisticsViewController = storyboard!.instantiateViewControllerWithIdentifier("Today Statistics View Controller") as UIViewController
-    let monthStatisticsViewController = storyboard!.instantiateViewControllerWithIdentifier("Month Statistics View Controller") as UIViewController
-    let yearStatisticsViewController = storyboard!.instantiateViewControllerWithIdentifier("Year Statistics View Controller") as UIViewController
-    
-    viewControllers.append(todayStatisticsViewController)
-    viewControllers.append(monthStatisticsViewController)
-    viewControllers.append(yearStatisticsViewController)
-    
-    // TODO: Controller index for activation should be taken from saved settings
-    activateViewController(0)
-    
-    // Additional setup for revealing
     revealButtonSetup()
+    
+    let viewControllerTypeToActivate = Settings.sharedInstance.uiSelectedStatisticsPage.value
+    segmentedControl.selectedSegmentIndex = viewControllerTypeToActivate.rawValue
+    activateViewControllerWithType(viewControllerTypeToActivate)
   }
-  
-  func activateViewController(index: Int) {
+
+  private func activateViewControllerWithType(type: ViewControllerType) {
     for viewController in viewControllers {
-      viewController.view.removeFromSuperview()
+      if let controller = viewController {
+        controller.view.removeFromSuperview()
+      }
     }
-    
-    assert(index >= 0 && index < viewControllers.count, "View controller for activation is invalid")
-    if (index < 0 || index >= viewControllers.count) {
-      return
-    }
-    
-    let viewController = viewControllers[index]
-    let currentView = viewController.view
-    currentView.frame = view.frame
-    currentView.frame.origin.y = segmentedControl.frame.origin.y + segmentedControl.frame.size.height + 20
-    
+
+    let rects = view.bounds.rectsByDividing(segmentedControl.frame.maxY, fromEdge: .MinYEdge)
+    let viewController = getViewControllerWithType(type)
+    viewController.view.frame = rects.remainder
     view.addSubview(viewController.view)
+    
+    Settings.sharedInstance.uiSelectedStatisticsPage.value = type
+  }
+
+  private func getViewControllerWithType(type: ViewControllerType) -> UIViewController {
+    if let controller = viewControllers[type.rawValue] {
+      return controller
+    }
+    
+    var controller: UIViewController!
+    
+    switch type {
+    case .Week:  controller = storyboard!.instantiateViewControllerWithIdentifier("Week Statistics View Controller") as UIViewController
+    case .Month: controller = storyboard!.instantiateViewControllerWithIdentifier("Month Statistics View Controller") as UIViewController
+    case .Year:  controller = storyboard!.instantiateViewControllerWithIdentifier("Year Statistics View Controller") as UIViewController
+    }
+    
+    viewControllers[type.rawValue] = controller
+    return controller
   }
   
   @IBAction func segmentChanged(sender: UISegmentedControl) {
-    activateViewController(sender.selectedSegmentIndex)
+    let type = ViewControllerType(rawValue: sender.selectedSegmentIndex)
+    assert(type != nil, "Segment for unknown view controller is activated")
+    if let type = type {
+      activateViewControllerWithType(type)
+    }
   }
   
   private func revealButtonSetup() {

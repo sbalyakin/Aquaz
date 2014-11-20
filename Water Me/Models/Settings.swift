@@ -177,7 +177,10 @@ class Settings {
 
   lazy var uiDisplayDaySelection: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "UI - Display Day Selection", initialValue: false, userDefaults: self.standardUserDefaults)
-  
+
+  lazy var uiSelectedStatisticsPage: SettingsEnumItem<StatisticsViewController.ViewControllerType> = SettingsEnumItem(
+    key: "UI - Selected Statistics Page", initialValue: .Week, userDefaults: self.standardUserDefaults)
+
   private let standardUserDefaults = NSUserDefaults.standardUserDefaults()
 
   private init() { }

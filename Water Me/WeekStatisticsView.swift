@@ -196,6 +196,7 @@ import UIKit
     let valuesCount = items.count
     let fullBarWidth = rect.width / CGFloat(valuesCount)
     let barWidthInset = (fullBarWidth * (1 - barWidthFraction)) / 2
+    let visibleBarWidth = round(fullBarWidth * barWidthFraction)
     var x = rect.minX
     
     for (index, item) in enumerate(items) {
@@ -205,6 +206,7 @@ import UIKit
       var rect = CGRectMake(x, rect.maxY - barHeight, fullBarWidth, barHeight)
       rect.inset(dx: barWidthInset, dy: 0)
       rect.integerize()
+      rect.size.width = visibleBarWidth // to ensure for same width for all bars
       
       drawBar(rect: rect)
     }
