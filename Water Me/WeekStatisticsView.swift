@@ -24,6 +24,7 @@ import UIKit
   @IBInspectable var titleFont: UIFont = UIFont.systemFontOfSize(12)
   
   var items: [ItemType] = []
+  private var dayButtons: [UIButton] = []
 
   let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.WeekdayCalendarUnit).length
   let gapFromScaleToBars: CGFloat = 5
@@ -50,11 +51,39 @@ import UIKit
   }
 
   override func prepareForInterfaceBuilder() {
+    // Initialize values with some predefined values in order to show in Interface Builder
     for i in 0..<daysPerWeek {
       let item: ItemType = (value: Double(200 + i * 300), goal: 1800)
       items.append(item)
     }
     createControls(rect: bounds)
+  }
+
+  override func layoutSubviews() {
+    let rects = computeRectanglesFromRect(bounds)
+    
+    for i in 0..<daysPerWeek {
+      let dayButton = dayButtons[i]
+      let dayButtonRect = calcFrameRectangleForDayButtonWithIndex(i, containerRect: rects.days)
+      dayButton.frame = dayButtonRect
+      dayButton.layer.cornerRadius = round(dayButtonRect.width / 2)
+    }
+  }
+
+  private func calcFrameRectangleForDayButtonWithIndex(index: Int, containerRect: CGRect) -> CGRect {
+    assert(index >= 0 && index < daysPerWeek, "Day index is out of bounds")
+    let buttonWidth = containerRect.width / CGFloat(daysPerWeek)
+    let buttonHeight = containerRect.height
+    let x = containerRect.minX + CGFloat(index) * buttonWidth
+    let y = containerRect.minY
+    
+    var buttonRect = CGRectMake(x, y, buttonWidth, buttonHeight)
+    let minSize = min(buttonWidth, buttonHeight)
+    let buttonsGap: CGFloat = 4
+    let dx = (buttonWidth - minSize) / 2 + buttonsGap
+    let dy = (buttonHeight - minSize) / 2 + buttonsGap
+    buttonRect.inset(dx: dx, dy: dy)
+    return buttonRect.integerRect
   }
   
   private func createControls(#rect: CGRect) {
@@ -89,31 +118,23 @@ import UIKit
   }
   
   private func createDayButtons(#rect: CGRect) {
-    let buttonWidth = rect.width / CGFloat(daysPerWeek)
-    var x = rect.minX
     let calendar = NSCalendar.currentCalendar()
     
     for i in 0..<daysPerWeek {
-      var buttonRect = CGRectMake(trunc(x), rect.minY, ceil(buttonWidth), rect.height)
-      let minSize = min(buttonRect.width, buttonRect.height)
-      let dx = (buttonRect.width - minSize) / 2
-      let dy = (buttonRect.height - minSize) / 2
-      
-      buttonRect.inset(dx: dx + 4, dy: dy + 4)
-      x += buttonWidth
-      
-      let dayButton = UIButton(frame: buttonRect)
       let title = calendar.veryShortWeekdaySymbols[i] as String
+
+      let dayButtonRect = calcFrameRectangleForDayButtonWithIndex(i, containerRect: rect)
+      let dayButton = UIButton(frame: dayButtonRect)
       dayButton.tag = i
       dayButton.setTitle(title, forState: .Normal)
       dayButton.setTitleColor(daysColor, forState: .Normal)
       dayButton.titleLabel?.font = titleFont
       dayButton.backgroundColor = daysBackground
-      dayButton.layer.cornerRadius = buttonRect.width / 2
+      dayButton.layer.cornerRadius = round(dayButtonRect.width / 2)
       dayButton.addTarget(self, action: "dayButtonTapped:", forControlEvents: .TouchUpInside)
       addSubview(dayButton)
+      dayButtons.append(dayButton)
     }
-
   }
   
   override func drawRect(rect: CGRect) {
