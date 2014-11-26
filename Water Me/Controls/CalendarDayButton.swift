@@ -17,17 +17,8 @@ class CalendarDayButton: UIButton {
         setTitle(info.title, forState: .Normal)
         setTitleColor(colors.text, forState: .Normal)
         backgroundColor = colors.background
-
-        if backgroundColor == UIColor.clearColor() {
-          layer.cornerRadius = 0.0
-        } else {
-          let minSide = min(frame.width, frame.height)
-          layer.cornerRadius = minSide / 2
-        }
-        
         if info.isFuture {
           enabled = false
-          
         }
       } else {
         setTitle("", forState: .Normal)
@@ -36,6 +27,21 @@ class CalendarDayButton: UIButton {
         layer.cornerRadius = 0.0
         enabled = false
       }
+      adjustLayerCornerRadius()
+    }
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    adjustLayerCornerRadius()
+  }
+  
+  private func adjustLayerCornerRadius() {
+    if backgroundColor == UIColor.clearColor() {
+      layer.cornerRadius = 0.0
+    } else {
+      let minSide = min(bounds.width, bounds.height)
+      layer.cornerRadius = minSide / 2
     }
   }
   

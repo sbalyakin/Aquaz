@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CalendarViewController: UIViewController {
+class CalendarViewController: UIViewController, CalendarViewDelegate {
 
   var date: NSDate!
   
@@ -22,6 +22,8 @@ class CalendarViewController: UIViewController {
     super.viewDidLoad()
     
     calendarView.currentDate = date
+    calendarView.delegate = self
+
     switchToDate(date)
   }
   
@@ -75,8 +77,8 @@ class CalendarViewController: UIViewController {
     switchToDate(date)
   }
   
-  @IBAction func dayDidSelected(sender: CalendarView) {
-    dayViewController.currentDate = sender.currentDate
+  func calendarCurrentDayChanged(date: NSDate) {
+    dayViewController.currentDate = date
     navigationController!.popViewControllerAnimated(true)
   }
   

@@ -8,7 +8,11 @@
 
 import UIKit
 
-@IBDesignable class CalendarView: UIControl, UITableViewDataSource, UITableViewDelegate, DaySelectionDelegate {
+protocol CalendarViewDelegate {
+  func calendarCurrentDayChanged(date: NSDate)
+}
+
+@IBDesignable class CalendarView: UIView, UITableViewDataSource, UITableViewDelegate, DaySelectionDelegate {
 
   @IBInspectable var headerTextColor: UIColor = UIColor.blackColor()
   @IBInspectable var workDayTextColor: UIColor = UIColor.blackColor()
@@ -35,6 +39,8 @@ import UIKit
     }
   }
   
+  var delegate: CalendarViewDelegate? = nil
+  
   /// Current selected date of the calendar
   var currentDate: NSDate = NSDate()
   
@@ -54,65 +60,32 @@ import UIKit
     initControls()
   }
   
-  func updateCalendar() {
-    computeDays(displayedMonthDate)
-    tableView.reloadData()
-  }
-  
-  private func initControls() {
-    let rects = bounds.rectsByDividing(40.0, fromEdge: .MinYEdge)
-    
-    // Create table view
-    let tableViewRect = rects.remainder
-    tableView = UITableView(frame: tableViewRect, style: .Grouped)
-    tableView.registerClass(CalendarTableViewCell.self, forCellReuseIdentifier: tableCellIdentifier)
-    tableView.dataSource = self
-    tableView.delegate = self
-    tableView.alwaysBounceVertical = false
-    tableView.backgroundColor = backgroundColor
-    
-    // Remove separators gaps
-    if self.tableView.respondsToSelector("setSeparatorInset:") {
-      self.tableView.separatorInset = UIEdgeInsetsZero
-    }
-    if self.tableView.respondsToSelector("setLayoutMargins:") {
-      self.tableView.layoutMargins = UIEdgeInsetsZero
-    }
-    
-    self.tableView.layoutIfNeeded()
-    
-    addSubview(tableView)
-    updateCalendar()
-    
-    // Create weekdays titles
-    let titlesRect = rects.slice
-    let weekdaySymbols = calendar.veryShortWeekdaySymbols
-    let labelWidth = titlesRect.width / CGFloat(weekdaySymbols.count)
-    var x = titlesRect.minX
-
-    for title in weekdaySymbols {
-      var labelRect = CGRectMake(trunc(x), titlesRect.minY, ceil(labelWidth), titlesRect.height)
-      x += labelWidth
-      
-      let weekendLabel = UILabel(frame: labelRect)
-      weekendLabel.textColor = headerTextColor
-      weekendLabel.backgroundColor = tableView.backgroundColor
-      weekendLabel.textAlignment = .Center
-      weekendLabel.text = title as? String
-      
-      addSubview(weekendLabel)
-    }
-  }
-  
   override func prepareForInterfaceBuilder() {
     initControls()
   }
-  
+
   func currentDayWasChanged(date: NSDate) {
     currentDate = date
-    sendActionsForControlEvents(UIControlEvents.ValueChanged)
+    if let delegate = delegate {
+      delegate.calendarCurrentDayChanged(date)
+    }
   }
   
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    let areas = computeUIAreas()
+    
+    tableView.frame = areas.table
+    
+    let weekDayRects = computeWeekDayRects(containerRect: areas.weekdays)
+    assert(weekDayRects.count == weekDayLabels.count)
+    for (index, label) in enumerate(weekDayLabels) {
+      let rect = weekDayRects[index]
+      label.frame = rect
+    }
+  }
+
   func switchToNextMonth() {
     displayedMonthDate = DateHelper.addToDate(displayedMonthDate, years:0, months: 1, days: 0)
   }
@@ -212,6 +185,68 @@ import UIKit
     }
   }
 
+  private func initControls() {
+    let areas = computeUIAreas()
+    
+    // Create table view
+    tableView = UITableView(frame: areas.table, style: .Grouped)
+    tableView.registerClass(CalendarTableViewCell.self, forCellReuseIdentifier: tableCellIdentifier)
+    tableView.dataSource = self
+    tableView.delegate = self
+    tableView.alwaysBounceVertical = false
+    tableView.backgroundColor = backgroundColor
+    
+    // Remove separators gaps
+    if self.tableView.respondsToSelector("setSeparatorInset:") {
+      self.tableView.separatorInset = UIEdgeInsetsZero
+    }
+    if self.tableView.respondsToSelector("setLayoutMargins:") {
+      self.tableView.layoutMargins = UIEdgeInsetsZero
+    }
+    
+    self.tableView.layoutIfNeeded()
+    
+    addSubview(tableView)
+    updateCalendar()
+    
+    // Create weekdays titles
+    let weekDaySymbols = calendar.veryShortWeekdaySymbols
+    
+    for title in weekDaySymbols {
+      let weekDayLabel = UILabel()
+      weekDayLabel.textColor = headerTextColor
+      weekDayLabel.backgroundColor = tableView.backgroundColor
+      weekDayLabel.textAlignment = .Center
+      weekDayLabel.text = title as? String
+      
+      addSubview(weekDayLabel)
+      weekDayLabels.append(weekDayLabel)
+    }
+  }
+  
+  private func computeUIAreas() -> (weekdays: CGRect, table: CGRect) {
+    let rects = bounds.rectsByDividing(40, fromEdge: .MinYEdge)
+    return (weekdays: rects.slice, table: rects.remainder)
+  }
+  
+  private func computeWeekDayRects(#containerRect: CGRect) -> [CGRect] {
+    var rects: [CGRect] = []
+    let labelWidth = containerRect.width / CGFloat(daysPerWeek)
+    
+    for i in 0..<daysPerWeek {
+      let x = containerRect.minX + CGFloat(i) * labelWidth
+      var rect = CGRectMake(trunc(x), containerRect.minY, ceil(labelWidth), containerRect.height)
+      rects.append(rect)
+    }
+    
+    return rects
+  }
+  
+  private func updateCalendar() {
+    computeDays(displayedMonthDate)
+    tableView.reloadData()
+  }
+  
   class DayInfo {
     let calendarView: CalendarView
     let date: NSDate
@@ -292,11 +327,12 @@ import UIKit
     }
   }
   
-  typealias MonthDays = [DayInfo]
+  private typealias MonthDays = [DayInfo]
   
   private var months: [MonthDays] = []
   private var days: [DayInfo] = []
   private var tableView: UITableView!
+  private var weekDayLabels: [UILabel] = []
 
   private let calendar = NSCalendar.currentCalendar()
   let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.WeekdayCalendarUnit).length

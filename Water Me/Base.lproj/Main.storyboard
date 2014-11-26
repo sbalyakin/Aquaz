@@ -561,9 +561,6 @@
                                 <rect key="frame" x="0.0" y="38" width="320" height="370"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="dayDidSelected:" destination="nY1-e6-BNo" eventType="valueChanged" id="F2X-jY-IxO"/>
-                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

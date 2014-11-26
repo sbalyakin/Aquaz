@@ -50,7 +50,28 @@ class CalendarTableViewCell: UITableViewCell {
     }
   }
   
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    let dayButtonRects = computeRectsForDayButtons()
+    assert(dayButtonRects.count == dayButtons.count)
+
+    for (index, rect) in enumerate(dayButtonRects) {
+      let dayButton = dayButtons[index]
+      dayButton.frame = rect
+    }
+  }
+  
   private func initButtons() {
+    for i in 0..<daysPerWeek {
+      let dayButton = CalendarDayButton()
+      dayButton.addTarget(self, action: "dayButtonTapped:", forControlEvents: .TouchUpInside)
+      contentView.addSubview(dayButton)
+      dayButtons.append(dayButton)
+    }
+  }
+  
+  private func initButtonsOld() {
     let width = frame.width / CGFloat(daysPerWeek)
     var x = frame.minX
     
@@ -69,6 +90,24 @@ class CalendarTableViewCell: UITableViewCell {
       contentView.addSubview(dayButton)
       dayButtons.append(dayButton)
     }
+  }
+  
+  private func computeRectsForDayButtons() -> [CGRect] {
+    let width = bounds.width / CGFloat(daysPerWeek)
+    var rects: [CGRect] = []
+    
+    for i in 0..<daysPerWeek {
+      let x = bounds.minX + CGFloat(i) * width
+      var rect = CGRectMake(trunc(x), bounds.minY, ceil(width), bounds.height)
+      let minSize = min(rect.width, rect.height)
+      let dx = (rect.width - minSize) / 2
+      let dy = (rect.height - minSize) / 2
+      
+      rect.inset(dx: dx + 4, dy: dy + 4)
+      rects.append(rect.integerRect)
+    }
+    
+    return rects
   }
   
   var dayButtons: [CalendarDayButton] = []
