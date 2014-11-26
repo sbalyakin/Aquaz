@@ -21,7 +21,7 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    calendarView.currentDate = date
+    calendarView.selectedDate = date
     calendarView.delegate = self
 
     switchToDate(date)

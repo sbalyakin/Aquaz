@@ -12,7 +12,7 @@ protocol CalendarViewDelegate {
   func calendarCurrentDayChanged(date: NSDate)
 }
 
-@IBDesignable class CalendarView: UIView, UITableViewDataSource, UITableViewDelegate, DaySelectionDelegate {
+@IBDesignable class CalendarView: UIView, UITableViewDataSource, UITableViewDelegate, CalendarTableViewCellDelegate {
 
   @IBInspectable var headerTextColor: UIColor = UIColor.blackColor()
   @IBInspectable var workDayTextColor: UIColor = UIColor.blackColor()
@@ -41,8 +41,7 @@ protocol CalendarViewDelegate {
   
   var delegate: CalendarViewDelegate? = nil
   
-  /// Current selected date of the calendar
-  var currentDate: NSDate = NSDate()
+  var selectedDate: NSDate = NSDate()
   
   override init() {
     super.init()
@@ -64,8 +63,24 @@ protocol CalendarViewDelegate {
     initControls()
   }
 
-  func currentDayWasChanged(date: NSDate) {
-    currentDate = date
+  func dayButtonTapped(dayButton: CalendarDayButton) {
+    assert(dayButton.dayInfo != nil)
+    
+    let date = dayButton.dayInfo!.date
+    
+    if !DateHelper.areDatesEqualByDays(date1: selectedDate, date2: date) {
+      if let selectedDayButton = selectedDayButton {
+        selectedDayButton.dayInfo!.isSelected = false
+        selectedDayButton.dayInfoChanged()
+      }
+      
+      dayButton.dayInfo!.isSelected = true
+      dayButton.dayInfoChanged()
+      selectedDayButton = dayButton
+    }
+    
+    selectedDate = date
+    
     if let delegate = delegate {
       delegate.calendarCurrentDayChanged(date)
     }
@@ -102,7 +117,7 @@ protocol CalendarViewDelegate {
     let cell = tableView.dequeueReusableCellWithIdentifier(tableCellIdentifier, forIndexPath: indexPath) as CalendarTableViewCell
     cell.backgroundColor = UIColor.clearColor()
     cell.selectionStyle = .None
-    cell.daySelectionDelegate = self
+    cell.delegate = self
     
     // Remove separators gaps
     if cell.respondsToSelector("setSeparatorInset:") {
@@ -117,6 +132,9 @@ protocol CalendarViewDelegate {
       let dayInfo = days[dayIndex]
       let dayButton = cell.dayButtons[i]
       dayButton.dayInfo = dayInfo
+      if dayInfo.isSelected {
+        selectedDayButton = dayButton
+      }
     }
     
     return cell
@@ -146,7 +164,7 @@ protocol CalendarViewDelegate {
     let today = DateHelper.dateByClearingTime(ofDate: NSDate())
     let weekdayRange = calendar.maximumRangeOfUnit(.WeekdayCalendarUnit)
     var weekdayOfDate = 0
-    let checkForInitial = DateHelper.areDatesEqualByMonths(date1: date, date2: currentDate)
+    let checkForInitial = DateHelper.areDatesEqualByMonths(date1: date, date2: selectedDate)
     let checkForToday = DateHelper.areDatesEqualByMonths(date1: date, date2: today)
     let from = 2 - weekdayOfFirstMonthDay
     let to = daysInMonth.length + daysPerWeek - weekdayOfLastMonthDay
@@ -166,7 +184,7 @@ protocol CalendarViewDelegate {
       let isWeekend = (weekdayOfDate == weekdayRange.location) || (weekdayOfDate == weekdayRange.length)
       weekdayOfDate++
       
-      let isInitial = checkForInitial ? DateHelper.areDatesEqualByDays(date1: date, date2: currentDate) : false
+      let isInitial = checkForInitial ? DateHelper.areDatesEqualByDays(date1: date, date2: selectedDate) : false
       let isToday = checkForToday ? DateHelper.areDatesEqualByDays(date1: date, date2: today) : false
       let isCurrentMonth = i >= daysInMonth.location && i <= daysInMonth.length
       let dayOrdinalNumber = isCurrentMonth ? i : calendar.ordinalityOfUnit(.CalendarUnitDay, inUnit: .CalendarUnitMonth, forDate: date)
@@ -177,7 +195,7 @@ protocol CalendarViewDelegate {
                             date: date,
                             title: title,
                             isWeekend: isWeekend,
-                            isInitial: isInitial,
+                            isSelected: isInitial,
                             isToday: isToday,
                             isCurrentMonth: isCurrentMonth,
                             isFuture: isFuture)
@@ -244,6 +262,7 @@ protocol CalendarViewDelegate {
   
   private func updateCalendar() {
     computeDays(displayedMonthDate)
+    selectedDayButton = nil
     tableView.reloadData()
   }
   
@@ -252,17 +271,18 @@ protocol CalendarViewDelegate {
     let date: NSDate
     let title: String
     let isWeekend: Bool
-    let isInitial: Bool
     let isToday: Bool
     let isCurrentMonth: Bool
     let isFuture: Bool
-    
-    init(calendarView: CalendarView, date: NSDate, title: String, isWeekend: Bool, isInitial: Bool, isToday: Bool, isCurrentMonth: Bool, isFuture: Bool) {
+
+    var isSelected: Bool
+
+    init(calendarView: CalendarView, date: NSDate, title: String, isWeekend: Bool, isSelected: Bool, isToday: Bool, isCurrentMonth: Bool, isFuture: Bool) {
       self.calendarView = calendarView
       self.date = date
       self.title = title
       self.isWeekend = isWeekend
-      self.isInitial = isInitial
+      self.isSelected = isSelected
       self.isToday = isToday
       self.isCurrentMonth = isCurrentMonth
       self.isFuture = isFuture
@@ -276,7 +296,7 @@ protocol CalendarViewDelegate {
         result.background = calendarView.todayBackgroundColor
       }
       
-      if isInitial {
+      if isSelected {
         if result.text == UIColor.clearColor() {
           result.text = calendarView.initialDayTextColor
         }
@@ -333,6 +353,7 @@ protocol CalendarViewDelegate {
   private var days: [DayInfo] = []
   private var tableView: UITableView!
   private var weekDayLabels: [UILabel] = []
+  private var selectedDayButton: CalendarDayButton?
 
   private let calendar = NSCalendar.currentCalendar()
   let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.WeekdayCalendarUnit).length

@@ -10,25 +10,29 @@ import UIKit
 
 class CalendarDayButton: UIButton {
   
-  var dayInfo: CalendarView.DayInfo? = nil {
+  var dayInfo: CalendarView.DayInfo? {
     didSet {
-      if let info = dayInfo {
-        let colors = info.computeColors()
-        setTitle(info.title, forState: .Normal)
-        setTitleColor(colors.text, forState: .Normal)
-        backgroundColor = colors.background
-        if info.isFuture {
-          enabled = false
-        }
-      } else {
-        setTitle("", forState: .Normal)
-        setTitleColor(UIColor.blackColor(), forState: .Normal)
-        backgroundColor = UIColor.clearColor()
-        layer.cornerRadius = 0.0
+      dayInfoChanged()
+    }
+  }
+  
+  func dayInfoChanged() {
+    if let info = dayInfo {
+      let colors = info.computeColors()
+      setTitle(info.title, forState: .Normal)
+      setTitleColor(colors.text, forState: .Normal)
+      backgroundColor = colors.background
+      if info.isFuture {
         enabled = false
       }
-      adjustLayerCornerRadius()
+    } else {
+      setTitle("", forState: .Normal)
+      setTitleColor(UIColor.blackColor(), forState: .Normal)
+      backgroundColor = UIColor.clearColor()
+      layer.cornerRadius = 0.0
+      enabled = false
     }
+    adjustLayerCornerRadius()
   }
   
   override func layoutSubviews() {

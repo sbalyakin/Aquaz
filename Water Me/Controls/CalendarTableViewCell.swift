@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol DaySelectionDelegate {
-  func currentDayWasChanged(date: NSDate)
+protocol CalendarTableViewCellDelegate {
+  func dayButtonTapped(dayButton: CalendarDayButton)
 }
 
 class CalendarTableViewCell: UITableViewCell {
   
-  var daySelectionDelegate: DaySelectionDelegate? = nil
+  var delegate: CalendarTableViewCellDelegate? = nil
   
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,13 +37,9 @@ class CalendarTableViewCell: UITableViewCell {
   }
 
   func dayButtonTapped(button: UIButton!) {
-    if let delegate = daySelectionDelegate {
+    if let delegate = delegate {
       if let dayButton = button as? CalendarDayButton {
-        if let dayInfo = dayButton.dayInfo {
-          delegate.currentDayWasChanged(dayInfo.date)
-        } else {
-          assert(false, "dayInfo for CalendarDayButton is not specified")
-        }
+        delegate.dayButtonTapped(dayButton)
       } else {
         assert(false, "Calendar button class is not CalendarDayButton")
       }
