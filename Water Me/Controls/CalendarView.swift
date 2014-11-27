@@ -347,9 +347,6 @@ protocol CalendarViewDelegate {
     }
   }
   
-  private typealias MonthDays = [DayInfo]
-  
-  private var months: [MonthDays] = []
   private var days: [DayInfo] = []
   private var tableView: UITableView!
   private var weekDayLabels: [UILabel] = []
