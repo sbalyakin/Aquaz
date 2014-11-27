@@ -1,31 +1,38 @@
 //
-//  CalendarView.swift
+//  MonthStatisticsView.swift
 //  Water Me
 //
-//  Created by Sergey Balyakin on 10.11.14.
+//  Created by Sergey Balyakin on 26.11.14.
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.
 //
 
 import UIKit
 
-protocol CalendarViewDelegate {
-  func calendarCurrentDayChanged(date: NSDate)
+protocol MonthStatisticsViewDelegate {
+  func monthStatisticsDaySelected(date: NSDate)
 }
 
-@IBDesignable class CalendarView: UIView, UITableViewDataSource, UITableViewDelegate, CalendarTableViewCellDelegate {
+protocol MonthStatisticsViewDataSource {
+  func monthStatisticsGetConsumptionFractionForDate(date: NSDate) -> Double
+}
 
-  @IBInspectable var headerTextColor: UIColor = UIColor.blackColor()
+@IBDesignable class MonthStatisticsView: UIView, UITableViewDataSource, UITableViewDelegate, MonthStatisticsTableViewCellDelegate {
+  
+  @IBInspectable var weekDaysTextColor: UIColor = UIColor.blackColor()
   @IBInspectable var workDayTextColor: UIColor = UIColor.blackColor()
   @IBInspectable var workDayBackgroundColor: UIColor = UIColor.clearColor()
   @IBInspectable var weekendTextColor: UIColor = UIColor.redColor()
   @IBInspectable var weekendBackgroundColor: UIColor = UIColor.clearColor()
   @IBInspectable var todayTextColor: UIColor = UIColor.whiteColor()
   @IBInspectable var todayBackgroundColor: UIColor = UIColor.redColor()
-  @IBInspectable var initialDayTextColor: UIColor = UIColor.blueColor()
-  @IBInspectable var initialDayBackgroundColor: UIColor = UIColor.clearColor()
+  @IBInspectable var selectedDayTextColor: UIColor = UIColor.blueColor()
+  @IBInspectable var selectedDayBackgroundColor: UIColor = UIColor.clearColor()
+  @IBInspectable var dayConsumptionColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
+  @IBInspectable var dayConsumptionBackgroundColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 0.1)
+  @IBInspectable var dayConsumptionLineWidth: CGFloat = 4
   @IBInspectable var anotherMonthTransparency: CGFloat = 0.4
-  @IBInspectable var futureTransparency: CGFloat = 0.1
-  @IBInspectable var disableFutureDays: Bool = true
+  @IBInspectable var futureDaysTransparency: CGFloat = 0.1
+  @IBInspectable var futureDaysEnabled: Bool = false
   
   /// Date of month displayed in the calendar
   var displayedMonthDate: NSDate = NSDate() {
@@ -36,12 +43,14 @@ protocol CalendarViewDelegate {
       displayedMonthDate = calendar.dateFromComponents(components)!
       
       updateCalendar()
+      tableView.reloadData()
     }
   }
   
-  var delegate: CalendarViewDelegate? = nil
-  
   var selectedDate: NSDate = NSDate()
+  
+  var delegate: MonthStatisticsViewDelegate?
+  var dataSource: MonthStatisticsViewDataSource?
   
   override init() {
     super.init()
@@ -54,16 +63,12 @@ protocol CalendarViewDelegate {
   override init(frame: CGRect) {
     super.init(frame: frame)
   }
- 
-  override func awakeFromNib() {
-    initControls()
-  }
   
   override func prepareForInterfaceBuilder() {
     initControls()
   }
-
-  func dayButtonTapped(dayButton: CalendarDayButton) {
+  
+  func dayButtonTapped(dayButton: MonthStatisticsDayButton) {
     assert(dayButton.dayInfo != nil)
     
     let date = dayButton.dayInfo!.date
@@ -71,24 +76,30 @@ protocol CalendarViewDelegate {
     if !DateHelper.areDatesEqualByDays(date1: selectedDate, date2: date) {
       if let selectedDayButton = selectedDayButton {
         selectedDayButton.dayInfo!.isSelected = false
-        selectedDayButton.dayInfoChanged()
       }
-      
+
       dayButton.dayInfo!.isSelected = true
-      dayButton.dayInfoChanged()
       selectedDayButton = dayButton
     }
     
     selectedDate = date
     
     if let delegate = delegate {
-      delegate.calendarCurrentDayChanged(date)
+      delegate.monthStatisticsDaySelected(date)
     }
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
     
+    if tableView == nil {
+      initControls()
+    } else {
+      layoutControls()
+    }
+  }
+  
+  private func layoutControls() {
     let areas = computeUIAreas()
     
     tableView.frame = areas.table
@@ -100,7 +111,7 @@ protocol CalendarViewDelegate {
       label.frame = rect
     }
   }
-
+  
   func switchToNextMonth() {
     displayedMonthDate = DateHelper.addToDate(displayedMonthDate, years:0, months: 1, days: 0)
   }
@@ -108,13 +119,13 @@ protocol CalendarViewDelegate {
   func switchToPreviousMonth() {
     displayedMonthDate = DateHelper.addToDate(displayedMonthDate, years:0, months: -1, days: 0)
   }
-
+  
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return days.count / daysPerWeek
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(tableCellIdentifier, forIndexPath: indexPath) as CalendarTableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier(tableCellIdentifier, forIndexPath: indexPath) as MonthStatisticsTableViewCell
     cell.backgroundColor = UIColor.clearColor()
     cell.selectionStyle = .None
     cell.delegate = self
@@ -189,26 +200,30 @@ protocol CalendarViewDelegate {
       let isCurrentMonth = i >= daysInMonth.location && i <= daysInMonth.length
       let dayOrdinalNumber = isCurrentMonth ? i : calendar.ordinalityOfUnit(.CalendarUnitDay, inUnit: .CalendarUnitMonth, forDate: date)
       let title = "\(dayOrdinalNumber)"
-      let isFuture = disableFutureDays ? date.compare(today) == .OrderedDescending : false
+      let isFuture = futureDaysEnabled ? false : date.compare(today) == .OrderedDescending
+      let consumptionFraction = requestForConsumptionFractionForDate(date)
       
-      let dayInfo = DayInfo(calendarView: self,
-                            date: date,
-                            title: title,
-                            isWeekend: isWeekend,
-                            isSelected: isInitial,
-                            isToday: isToday,
-                            isCurrentMonth: isCurrentMonth,
-                            isFuture: isFuture)
+      let dayInfo = DayInfo(
+        monthStatisticsView: self,
+        date: date,
+        title: title,
+        consumptionFraction: consumptionFraction,
+        isWeekend: isWeekend,
+        isInitial: isInitial,
+        isToday: isToday,
+        isCurrentMonth: isCurrentMonth,
+        isFuture: isFuture)
+      
       days.append(dayInfo)
     }
   }
-
+  
   private func initControls() {
     let areas = computeUIAreas()
     
     // Create table view
     tableView = UITableView(frame: areas.table, style: .Grouped)
-    tableView.registerClass(CalendarTableViewCell.self, forCellReuseIdentifier: tableCellIdentifier)
+    tableView.registerClass(MonthStatisticsTableViewCell.self, forCellReuseIdentifier: tableCellIdentifier)
     tableView.dataSource = self
     tableView.delegate = self
     tableView.alwaysBounceVertical = false
@@ -222,17 +237,20 @@ protocol CalendarViewDelegate {
       self.tableView.layoutMargins = UIEdgeInsetsZero
     }
     
-    self.tableView.layoutIfNeeded()
+    //self.tableView.layoutIfNeeded()
     
     addSubview(tableView)
     updateCalendar()
     
     // Create weekdays titles
     let weekDaySymbols = calendar.veryShortWeekdaySymbols
+    let weekDayRects = computeWeekDayRects(containerRect: areas.weekdays)
+    assert(weekDaySymbols.count == weekDayRects.count)
     
-    for title in weekDaySymbols {
-      let weekDayLabel = UILabel()
-      weekDayLabel.textColor = headerTextColor
+    for (index, title) in enumerate(weekDaySymbols) {
+      let rect = weekDayRects[index]
+      let weekDayLabel = UILabel(frame: rect)
+      weekDayLabel.textColor = weekDaysTextColor
       weekDayLabel.backgroundColor = UIColor.clearColor()
       weekDayLabel.textAlignment = .Center
       weekDayLabel.text = title as? String
@@ -263,26 +281,47 @@ protocol CalendarViewDelegate {
   private func updateCalendar() {
     computeDays(displayedMonthDate)
     selectedDayButton = nil
-    tableView.reloadData()
+  }
+  
+  private func requestForConsumptionFractionForDate(date: NSDate) -> Double {
+    #if TARGET_INTERFACE_BUILDER
+      return 0.5
+    #else
+      if let dataSource = dataSource {
+        return dataSource.monthStatisticsGetConsumptionFractionForDate(date)
+      }
+      return 0
+    #endif
   }
   
   class DayInfo {
-    let calendarView: CalendarView
+    let monthStatisticsView: MonthStatisticsView
     let date: NSDate
     let title: String
+    let consumptionFraction: Double
     let isWeekend: Bool
     let isToday: Bool
     let isCurrentMonth: Bool
     let isFuture: Bool
 
-    var isSelected: Bool
+    var isSelected: Bool {
+      didSet {
+        if let changeHandler = changeHandler {
+          changeHandler()
+        }
+      }
+    }
 
-    init(calendarView: CalendarView, date: NSDate, title: String, isWeekend: Bool, isSelected: Bool, isToday: Bool, isCurrentMonth: Bool, isFuture: Bool) {
-      self.calendarView = calendarView
+    typealias ChangeHandler = () -> Void
+    var changeHandler: ChangeHandler?
+    
+    init(monthStatisticsView: MonthStatisticsView, date: NSDate, title: String, consumptionFraction: Double, isWeekend: Bool, isInitial: Bool, isToday: Bool, isCurrentMonth: Bool, isFuture: Bool) {
+      self.monthStatisticsView = monthStatisticsView
       self.date = date
       self.title = title
+      self.consumptionFraction = consumptionFraction
       self.isWeekend = isWeekend
-      self.isSelected = isSelected
+      self.isSelected = isInitial
       self.isToday = isToday
       self.isCurrentMonth = isCurrentMonth
       self.isFuture = isFuture
@@ -292,54 +331,54 @@ protocol CalendarViewDelegate {
       var result = (text: UIColor.clearColor(), background: UIColor.clearColor())
       
       if isToday {
-        result.text = calendarView.todayTextColor
-        result.background = calendarView.todayBackgroundColor
+        result.text = monthStatisticsView.todayTextColor
+        result.background = monthStatisticsView.todayBackgroundColor
       }
       
       if isSelected {
         if result.text == UIColor.clearColor() {
-          result.text = calendarView.initialDayTextColor
+          result.text = monthStatisticsView.selectedDayTextColor
         }
         
         if result.background == UIColor.clearColor() {
-          result.background = calendarView.initialDayBackgroundColor
+          result.background = monthStatisticsView.selectedDayBackgroundColor
         }
       }
       
       if isWeekend {
         if result.text == UIColor.clearColor() {
-          result.text = calendarView.weekendTextColor
+          result.text = monthStatisticsView.weekendTextColor
         }
         
         if result.background == UIColor.clearColor() {
-          result.background = calendarView.weekendBackgroundColor
+          result.background = monthStatisticsView.weekendBackgroundColor
         }
       }
       
       if result.text == UIColor.clearColor() {
-        result.text = calendarView.workDayTextColor
+        result.text = monthStatisticsView.workDayTextColor
       }
       
       if result.background == UIColor.clearColor() {
-        result.background = calendarView.workDayBackgroundColor
+        result.background = monthStatisticsView.workDayBackgroundColor
       }
-
+      
       // Make colors more translutent for future days and for days of past month
       if isFuture {
         if result.text != UIColor.clearColor() {
-          result.text = result.text.colorWithAlphaComponent(calendarView.futureTransparency)
+          result.text = result.text.colorWithAlphaComponent(monthStatisticsView.futureDaysTransparency)
         }
         
         if result.background != UIColor.clearColor() {
-          result.background = result.background.colorWithAlphaComponent(calendarView.futureTransparency)
+          result.background = result.background.colorWithAlphaComponent(monthStatisticsView.futureDaysTransparency)
         }
       } else if !isCurrentMonth {
         if result.text != UIColor.clearColor() {
-          result.text = result.text.colorWithAlphaComponent(calendarView.anotherMonthTransparency)
+          result.text = result.text.colorWithAlphaComponent(monthStatisticsView.anotherMonthTransparency)
         }
         
         if result.background != UIColor.clearColor() {
-          result.background = result.background.colorWithAlphaComponent(calendarView.anotherMonthTransparency)
+          result.background = result.background.colorWithAlphaComponent(monthStatisticsView.anotherMonthTransparency)
         }
       }
       
@@ -350,10 +389,10 @@ protocol CalendarViewDelegate {
   private var days: [DayInfo] = []
   private var tableView: UITableView!
   private var weekDayLabels: [UILabel] = []
-  private var selectedDayButton: CalendarDayButton?
-
+  private var selectedDayButton: MonthStatisticsDayButton?
+  
   private let calendar = NSCalendar.currentCalendar()
   let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.WeekdayCalendarUnit).length
-  private let tableCellIdentifier = "CalendarDayCell"
-
+  private let tableCellIdentifier = "MonthStatisticsTableViewCell"
+  
 }

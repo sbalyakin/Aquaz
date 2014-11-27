@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8406D78119FE9875001C54BF /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406D78019FE9875001C54BF /* Units.swift */; };
+		84126A851A278F4A00A66347 /* MonthStatisticsDayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84126A821A278F4A00A66347 /* MonthStatisticsDayButton.swift */; };
+		84126A861A278F4A00A66347 /* MonthStatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84126A831A278F4A00A66347 /* MonthStatisticsTableViewCell.swift */; };
+		84126A871A278F4A00A66347 /* MonthStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84126A841A278F4A00A66347 /* MonthStatisticsView.swift */; };
 		8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA001A0A7009009C5C47 /* DiaryViewController.swift */; };
 		8424AA061A0B5813009C5C47 /* MultiProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA051A0B5813009C5C47 /* MultiProgressView.swift */; };
 		84380C2819E4195A0026398E /* Consumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2719E4195A0026398E /* Consumption.swift */; };
@@ -52,6 +55,9 @@
 
 /* Begin PBXFileReference section */
 		8406D78019FE9875001C54BF /* Units.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Units.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		84126A821A278F4A00A66347 /* MonthStatisticsDayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthStatisticsDayButton.swift; path = Controls/MonthStatisticsDayButton.swift; sourceTree = "<group>"; };
+		84126A831A278F4A00A66347 /* MonthStatisticsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthStatisticsTableViewCell.swift; path = Controls/MonthStatisticsTableViewCell.swift; sourceTree = "<group>"; };
+		84126A841A278F4A00A66347 /* MonthStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthStatisticsView.swift; path = Controls/MonthStatisticsView.swift; sourceTree = "<group>"; };
 		8424AA001A0A7009009C5C47 /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		8424AA051A0B5813009C5C47 /* MultiProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiProgressView.swift; path = Controls/MultiProgressView.swift; sourceTree = "<group>"; };
 		84380C2719E4195A0026398E /* Consumption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consumption.swift; sourceTree = "<group>"; };
@@ -111,6 +117,9 @@
 		8424AA041A0B57F9009C5C47 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				84126A821A278F4A00A66347 /* MonthStatisticsDayButton.swift */,
+				84126A831A278F4A00A66347 /* MonthStatisticsTableViewCell.swift */,
+				84126A841A278F4A00A66347 /* MonthStatisticsView.swift */,
 				84B639811A25D9EF00889438 /* WeekStatisticsView.swift */,
 				84B639821A25D9EF00889438 /* YearStatisticsView.swift */,
 				A5275F801A1212930088AF47 /* CalendarDayButton.swift */,
@@ -341,12 +350,14 @@
 			files = (
 				A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */,
 				843B056319E2D7800097A833 /* SWRevealViewController.m in Sources */,
+				84126A871A278F4A00A66347 /* MonthStatisticsView.swift in Sources */,
 				8424AA061A0B5813009C5C47 /* MultiProgressView.swift in Sources */,
 				A5275F851A1212930088AF47 /* CalendarView.swift in Sources */,
 				843B055E19E2D7800097A833 /* AppDelegate.swift in Sources */,
 				84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */,
 				A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */,
 				8468D6421A0D1C240008D027 /* DateHelper.swift in Sources */,
+				84126A861A278F4A00A66347 /* MonthStatisticsTableViewCell.swift in Sources */,
 				8406D78119FE9875001C54BF /* Units.swift in Sources */,
 				843B056119E2D7800097A833 /* DayViewController.swift in Sources */,
 				843B056919E2D80E0097A833 /* ConsumptionRate.swift in Sources */,
@@ -359,6 +370,7 @@
 				84380C2819E4195A0026398E /* Consumption.swift in Sources */,
 				A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */,
 				8478253719EAC8C200588FE3 /* ConsumptionViewController.swift in Sources */,
+				84126A851A278F4A00A66347 /* MonthStatisticsDayButton.swift in Sources */,
 				A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */,
 				84B639831A25D9EF00889438 /* WeekStatisticsView.swift in Sources */,
 				843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */,
