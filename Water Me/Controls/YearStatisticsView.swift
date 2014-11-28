@@ -134,12 +134,11 @@ import UIKit
   }
 
   private func computeVerticalMaximum() {
+    _verticalMaximum = 0
+
     if items.isEmpty {
-      _verticalMaximum = 0
       return
     }
-    
-    _verticalMaximum = 0
     
     for item in items {
       let itemMax = max(item.value, item.goal)
@@ -162,6 +161,10 @@ import UIKit
   }
   
   private func fillVerticalTitles() {
+    if verticalGridStep <= 1 {
+      return
+    }
+    
     let verticalGap = verticalMaximum / CGFloat(verticalGridStep - 1)
     _verticalTitles = []
     for i in 0..<verticalGridStep {
@@ -177,6 +180,10 @@ import UIKit
   }
   
   private func fillHorizontalTitles() {
+    if horizontalGridStep <= 1 || items.isEmpty {
+      return
+    }
+    
     let horizontalGap = (CGFloat(items.count) - 1) / CGFloat(horizontalGridStep - 1)
     _horizontalTitles = []
     for i in 0..<horizontalGridStep {
@@ -200,6 +207,10 @@ import UIKit
     _horizontalTitlesMaxHeight = 0
     _horizontalTitlesSizes = []
     
+    if horizontalTitles.isEmpty {
+      return
+    }
+    
     for title in horizontalTitles {
       let size = computeSizeForText(title, font: scaleTitleFont)
       _horizontalTitlesSizes.append(size)
@@ -212,6 +223,10 @@ import UIKit
   private func computeVerticalTitlesSizes() {
     _verticalTitlesMaxWidth = 0
     _verticalTitlesSizes = []
+    
+    if verticalTitles.isEmpty {
+      return
+    }
     
     for title in verticalTitles {
       let size = computeSizeForText(title, font: scaleTitleFont)
@@ -476,6 +491,7 @@ import UIKit
   private var valuesStrokeShapeLayer: CAShapeLayer {
     if _valuesStrokeShapeLayer == nil {
       createValuesStrokeShapeLayer()
+      assert(_valuesStrokeShapeLayer != nil)
     }
     return _valuesStrokeShapeLayer
   }
@@ -484,6 +500,7 @@ import UIKit
   private var valuesFillShapeLayer: CAShapeLayer {
     if _valuesFillShapeLayer == nil {
       createValuesFillShapeLayer()
+      assert(_valuesFillShapeLayer != nil)
     }
     return _valuesFillShapeLayer
   }
@@ -492,6 +509,7 @@ import UIKit
   private var goalsShapeLayer: CAShapeLayer {
     if _goalsShapeLayer == nil {
       createGoalsShapeLayer()
+      assert(_goalsShapeLayer != nil)
     }
     return _goalsShapeLayer
   }
@@ -500,6 +518,7 @@ import UIKit
   private var pinsLayer: CALayer {
     if _pinsLayer == nil {
       createPinsLayer()
+      assert(_pinsLayer != nil)
     }
     return _pinsLayer
   }
@@ -510,6 +529,9 @@ import UIKit
   private var verticalMaximum: CGFloat {
     if _verticalMaximum == nil {
       computeVerticalMaximum()
+      if _verticalMaximum == nil {
+        return _verticalMaximum
+      }
     }
     return _verticalMaximum
   }
@@ -518,6 +540,9 @@ import UIKit
   private var horizontalTitles: [String] {
     if _horizontalTitles == nil {
       fillHorizontalTitles()
+      if _horizontalTitles == nil {
+        return []
+      }
     }
     return _horizontalTitles
   }
@@ -526,6 +551,9 @@ import UIKit
   private var verticalTitles: [String] {
     if _verticalTitles == nil {
       fillVerticalTitles()
+      if _verticalTitles == nil {
+        return []
+      }
     }
     return _verticalTitles
   }
@@ -534,6 +562,9 @@ import UIKit
   private var horizontalTitlesSizes: [CGSize] {
     if _horizontalTitlesSizes == nil {
       computeTitlesSizes()
+      if _horizontalTitlesSizes == nil {
+        return []
+      }
     }
     return _horizontalTitlesSizes
   }
@@ -542,6 +573,9 @@ import UIKit
   private var verticalTitlesSizes: [CGSize] {
     if _verticalTitlesSizes == nil {
       computeTitlesSizes()
+      if _verticalTitlesSizes == nil {
+        return []
+      }
     }
     return _verticalTitlesSizes
   }
@@ -550,6 +584,9 @@ import UIKit
   private var horizontalTitlesMaxHeight: CGFloat {
     if _horizontalTitlesMaxHeight == nil {
       computeTitlesSizes()
+      if _horizontalTitlesMaxHeight == nil {
+        return 0
+      }
     }
     return _horizontalTitlesMaxHeight
   }
@@ -558,6 +595,9 @@ import UIKit
   private var verticalTitlesMaxWidth: CGFloat {
     if _verticalTitlesMaxWidth == nil {
       computeTitlesSizes()
+      if _verticalTitlesMaxWidth == nil {
+        return 0
+      }
     }
     return _verticalTitlesMaxWidth
   }
