@@ -8,29 +8,10 @@
 
 import UIKit
 
-class MonthStatisticsDayButton: UIButton {
-  
-  var dayInfo: MonthStatisticsView.DayInfo! {
-    didSet {
-      assert(dayInfo != nil)
-      dayInfo.changeHandler = dayInfoChanged
-      dayInfoChanged()
-    }
-  }
-  
-  private var backgroundCircleColor: UIColor = UIColor.clearColor()
-  
-  private var consumptionColor: UIColor {
-    return dayInfo.monthStatisticsView.dayConsumptionColor
-  }
-  
-  private var consumptionBackgroundColor: UIColor {
-    return dayInfo.monthStatisticsView.dayConsumptionBackgroundColor
-  }
-  
-  private var consumptionLineWidth: CGFloat {
-    return dayInfo.monthStatisticsView.dayConsumptionLineWidth
-  }
+class MonthStatisticsDayButton: CalendarDayButton {
+
+  var consumptionFraction: Double = 0
+  var monthStatisticsView: MonthStatisticsView!
   
   override init() {
     super.init()
@@ -45,43 +26,49 @@ class MonthStatisticsDayButton: UIButton {
   }
 
   override func drawRect(rect: CGRect) {
-    drawBackground(rect: rect)
+    super.drawRect(rect)
     
     if dayInfo.isCurrentMonth && !dayInfo.isFuture {
-      drawArc(rect: rect)
+      drawConsumption(rect: rect)
     }
   }
   
-  private func drawBackground(#rect: CGRect) {
-    if backgroundCircleColor == UIColor.clearColor() {
-      return
-    }
-
-    backgroundCircleColor.setFill()
-    // It seems that circles are drawn visually slightly larger than arcs with the same radius, so reduce circle size a little.
+  override func drawBackground(#rect: CGRect) {
+    // Slightly reduce abckground circle size in order to prevent noticeable hard edges,
+    // produced by multiplying semi-translucent edges of background circle and consumption arcs.
     let adjustedRect = rect.rectByInsetting(dx: 0.2, dy: 0.2)
-    let circlePath = UIBezierPath(ovalInRect: adjustedRect)
-    circlePath.fill()
+    super.drawBackground(rect: adjustedRect)
   }
   
-  private func drawArc(#rect: CGRect) {
-    let lineWidth: CGFloat = consumptionLineWidth
-    
-    let centerPoint = CGPointMake(rect.midX, rect.midY)
-    let startAngle = CGFloat(-M_PI_2)
-    let endAngle = CGFloat(-M_PI_2 + M_PI * 2 * dayInfo!.consumptionFraction)
-    let radius = rect.width / 2 - lineWidth / 2
-    
+  private func drawConsumption(#rect: CGRect) {
+    if consumptionFraction < 1 {
+      drawCircleInRect(rect, strokeColor: monthStatisticsView.dayConsumptionBackgroundColor)
+      drawArcInRect(rect)
+    } else {
+      drawCircleInRect(rect, strokeColor: monthStatisticsView.dayConsumptionFullColor)
+    }
+  }
+  
+  private func drawCircleInRect(rect: CGRect, strokeColor: UIColor) {
+    let lineWidth = monthStatisticsView.dayConsumptionLineWidth
     let circlePath = UIBezierPath(ovalInRect: rect.rectByInsetting(dx: lineWidth / 2, dy: lineWidth / 2))
     circlePath.lineWidth = lineWidth
     circlePath.lineCapStyle = kCGLineCapRound
-    consumptionBackgroundColor.setStroke()
+    strokeColor.setStroke()
     circlePath.stroke()
+  }
+  
+  private func drawArcInRect(rect: CGRect) {
+    let lineWidth: CGFloat = monthStatisticsView.dayConsumptionLineWidth
+    let centerPoint = CGPointMake(rect.midX, rect.midY)
+    let startAngle = CGFloat(-M_PI_2)
+    let endAngle = CGFloat(-M_PI_2 + M_PI * 2 * consumptionFraction)
+    let radius = rect.width / 2 - lineWidth / 2
     
     let arcPath = UIBezierPath(arcCenter: centerPoint, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
     arcPath.lineWidth = lineWidth
     arcPath.lineCapStyle = kCGLineCapRound
-    consumptionColor.setStroke()
+    monthStatisticsView.dayConsumptionColor.setStroke()
     arcPath.stroke()
   }
   

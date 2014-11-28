@@ -77,7 +77,7 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
     switchToDate(date)
   }
   
-  func calendarCurrentDayChanged(date: NSDate) {
+  func calendarViewDaySelected(date: NSDate) {
     dayViewController.currentDate = date
     navigationController!.popViewControllerAnimated(true)
   }

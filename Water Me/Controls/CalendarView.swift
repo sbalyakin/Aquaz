@@ -2,30 +2,32 @@
 //  CalendarView.swift
 //  Water Me
 //
-//  Created by Sergey Balyakin on 10.11.14.
+//  Created by Sergey Balyakin on 26.11.14.
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.
 //
 
 import UIKit
 
 protocol CalendarViewDelegate {
-  func calendarCurrentDayChanged(date: NSDate)
+  func calendarViewDaySelected(date: NSDate)
 }
 
-@IBDesignable class CalendarView: UIView, UITableViewDataSource, UITableViewDelegate, CalendarTableViewCellDelegate {
-
-  @IBInspectable var headerTextColor: UIColor = UIColor.blackColor()
+@IBDesignable class CalendarView: UIView {
+  @IBInspectable var weekDaysTextColor: UIColor = UIColor.blackColor()
   @IBInspectable var workDayTextColor: UIColor = UIColor.blackColor()
   @IBInspectable var workDayBackgroundColor: UIColor = UIColor.clearColor()
   @IBInspectable var weekendTextColor: UIColor = UIColor.redColor()
   @IBInspectable var weekendBackgroundColor: UIColor = UIColor.clearColor()
   @IBInspectable var todayTextColor: UIColor = UIColor.whiteColor()
   @IBInspectable var todayBackgroundColor: UIColor = UIColor.redColor()
-  @IBInspectable var initialDayTextColor: UIColor = UIColor.blueColor()
-  @IBInspectable var initialDayBackgroundColor: UIColor = UIColor.clearColor()
+  @IBInspectable var selectedDayTextColor: UIColor = UIColor.blueColor()
+  @IBInspectable var selectedDayBackgroundColor: UIColor = UIColor.clearColor()
   @IBInspectable var anotherMonthTransparency: CGFloat = 0.4
-  @IBInspectable var futureTransparency: CGFloat = 0.1
-  @IBInspectable var disableFutureDays: Bool = true
+  @IBInspectable var futureDaysTransparency: CGFloat = 0.1
+  @IBInspectable var futureDaysEnabled: Bool = false
+  @IBInspectable var dayRowHeightScale: CGFloat = 1.5
+  @IBInspectable var linesEnabled: Bool = true
+  @IBInspectable var linesColor: UIColor = UIColor(white: 0.8, alpha: 1)
   
   /// Date of month displayed in the calendar
   var displayedMonthDate: NSDate = NSDate() {
@@ -39,9 +41,11 @@ protocol CalendarViewDelegate {
     }
   }
   
-  var delegate: CalendarViewDelegate? = nil
-  
+  let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.WeekdayCalendarUnit).length
+
   var selectedDate: NSDate = NSDate()
+  
+  var delegate: CalendarViewDelegate?
   
   override init() {
     super.init()
@@ -54,53 +58,12 @@ protocol CalendarViewDelegate {
   override init(frame: CGRect) {
     super.init(frame: frame)
   }
- 
-  override func awakeFromNib() {
-    initControls()
-  }
   
   override func prepareForInterfaceBuilder() {
-    initControls()
-  }
-
-  func dayButtonTapped(dayButton: CalendarDayButton) {
-    assert(dayButton.dayInfo != nil)
-    
-    let date = dayButton.dayInfo!.date
-    
-    if !DateHelper.areDatesEqualByDays(date1: selectedDate, date2: date) {
-      if let selectedDayButton = selectedDayButton {
-        selectedDayButton.dayInfo!.isSelected = false
-        selectedDayButton.dayInfoChanged()
-      }
-      
-      dayButton.dayInfo!.isSelected = true
-      dayButton.dayInfoChanged()
-      selectedDayButton = dayButton
-    }
-    
-    selectedDate = date
-    
-    if let delegate = delegate {
-      delegate.calendarCurrentDayChanged(date)
-    }
+    createDaysInfo()
+    createControls()
   }
   
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    
-    let areas = computeUIAreas()
-    
-    tableView.frame = areas.table
-    
-    let weekDayRects = computeWeekDayRects(containerRect: areas.weekdays)
-    assert(weekDayRects.count == weekDayLabels.count)
-    for (index, label) in enumerate(weekDayLabels) {
-      let rect = weekDayRects[index]
-      label.frame = rect
-    }
-  }
-
   func switchToNextMonth() {
     displayedMonthDate = DateHelper.addToDate(displayedMonthDate, years:0, months: 1, days: 0)
   }
@@ -108,43 +71,27 @@ protocol CalendarViewDelegate {
   func switchToPreviousMonth() {
     displayedMonthDate = DateHelper.addToDate(displayedMonthDate, years:0, months: -1, days: 0)
   }
-
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return days.count / daysPerWeek
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    if dayButtons.isEmpty {
+      createDaysInfo()
+      createControls()
+    } else {
+      layoutControls()
+    }
   }
   
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(tableCellIdentifier, forIndexPath: indexPath) as CalendarTableViewCell
-    cell.backgroundColor = UIColor.clearColor()
-    cell.selectionStyle = .None
-    cell.delegate = self
-    
-    // Remove separators gaps
-    if cell.respondsToSelector("setSeparatorInset:") {
-      cell.separatorInset = UIEdgeInsetsZero
-    }
-    if cell.respondsToSelector("setLayoutMargins:") {
-      cell.layoutMargins = UIEdgeInsetsZero
-    }
-    
-    for i in 0..<daysPerWeek {
-      let dayIndex = indexPath.row * daysPerWeek + i
-      let dayInfo = days[dayIndex]
-      let dayButton = cell.dayButtons[i]
-      dayButton.dayInfo = dayInfo
-      if dayInfo.isSelected {
-        selectedDayButton = dayButton
-      }
-    }
-    
-    return cell
+  private func createControls() {
+    let areas = computeUIAreas()
+    createDayButtonsInRect(areas.table)
+    createWeekDaysTitlesInRect(areas.weekdays)
   }
   
-  func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 0.01
-  }
-  
-  private func computeDays(date: NSDate) {
+  private func createDaysInfo() {
+    let date = displayedMonthDate
+    
     // Separate the date to components
     let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitTimeZone | .CalendarUnitCalendar, fromDate: date)
     
@@ -160,7 +107,7 @@ protocol CalendarViewDelegate {
     let weekdayOfLastMonthDay = calendar.ordinalityOfUnit(.CalendarUnitWeekday, inUnit: .WeekCalendarUnit, forDate: lastMonthDay)
     
     // Fill days and days titles
-    days = []
+    daysInfo = []
     let today = DateHelper.dateByClearingTime(ofDate: NSDate())
     let weekdayRange = calendar.maximumRangeOfUnit(.WeekdayCalendarUnit)
     var weekdayOfDate = 0
@@ -189,50 +136,81 @@ protocol CalendarViewDelegate {
       let isCurrentMonth = i >= daysInMonth.location && i <= daysInMonth.length
       let dayOrdinalNumber = isCurrentMonth ? i : calendar.ordinalityOfUnit(.CalendarUnitDay, inUnit: .CalendarUnitMonth, forDate: date)
       let title = "\(dayOrdinalNumber)"
-      let isFuture = disableFutureDays ? date.compare(today) == .OrderedDescending : false
+      let isFuture = futureDaysEnabled ? false : date.compare(today) == .OrderedDescending
       
-      let dayInfo = DayInfo(calendarView: self,
-                            date: date,
-                            title: title,
-                            isWeekend: isWeekend,
-                            isSelected: isInitial,
-                            isToday: isToday,
-                            isCurrentMonth: isCurrentMonth,
-                            isFuture: isFuture)
-      days.append(dayInfo)
+      let dayInfo = CalendarViewDayInfo(
+        calendarView: self,
+        date: date,
+        title: title,
+        isWeekend: isWeekend,
+        isInitial: isInitial,
+        isToday: isToday,
+        isCurrentMonth: isCurrentMonth,
+        isFuture: isFuture)
+      
+      daysInfo.append(dayInfo)
     }
   }
-
-  private func initControls() {
-    let areas = computeUIAreas()
+  
+  private func computeUIAreas() -> (weekdays: CGRect, table: CGRect) {
+    let rects = bounds.rectsByDividing(40, fromEdge: .MinYEdge)
+    return (weekdays: rects.slice, table: rects.remainder)
+  }
+  
+  private func createDayButtonsInRect(rect: CGRect) {
+    let dayButtonRects = computeDayButtonsRects(containerRect: rect)
+    assert(dayButtonRects.count == daysInfo.count)
     
-    // Create table view
-    tableView = UITableView(frame: areas.table, style: .Grouped)
-    tableView.registerClass(CalendarTableViewCell.self, forCellReuseIdentifier: tableCellIdentifier)
-    tableView.dataSource = self
-    tableView.delegate = self
-    tableView.alwaysBounceVertical = false
-    tableView.backgroundColor = UIColor.clearColor()
-    
-    // Remove separators gaps
-    if self.tableView.respondsToSelector("setSeparatorInset:") {
-      self.tableView.separatorInset = UIEdgeInsetsZero
+    for (index, dayInfo) in enumerate(daysInfo) {
+      let dayButtonRect = dayButtonRects[index]
+      addDayButton(frame: dayButtonRect, dayInfo: dayInfo)
     }
-    if self.tableView.respondsToSelector("setLayoutMargins:") {
-      self.tableView.layoutMargins = UIEdgeInsetsZero
+  }
+  
+  private func computeDayButtonsRects(#containerRect: CGRect) -> [CGRect] {
+    let sizes = computeDayButtonsSizes(rect: containerRect)
+    var buttonRects: [CGRect] = []
+    
+    for rowIndex in 0..<sizes.rowsCount {
+      let minY = round(containerRect.origin.y + CGFloat(rowIndex) * sizes.cellSize.height + sizes.padding.dy)
+      
+      for columnIndex in 0..<sizes.columnsCount {
+        let minX = round(containerRect.origin.x + CGFloat(columnIndex) * sizes.cellSize.width + sizes.padding.dx)
+        let buttonRect = CGRectMake(minX, minY, sizes.buttonSize.width, sizes.buttonSize.height)
+        buttonRects.append(buttonRect)
+      }
     }
     
-    self.tableView.layoutIfNeeded()
+    return buttonRects
+  }
+  
+  private func addDayButton(#frame: CGRect, dayInfo: CalendarViewDayInfo) {
+    let button = createDayButton(frame: frame, dayInfo: dayInfo)
+    button.addTarget(self, action: "dayButtonTapped:", forControlEvents: .TouchUpInside)
+    addSubview(button)
+    dayButtons.append(button)
     
-    addSubview(tableView)
-    updateCalendar()
-    
-    // Create weekdays titles
+    if dayInfo.isSelected {
+      selectedDayButton = button
+    }
+  }
+  
+  func createDayButton(#frame: CGRect, dayInfo: CalendarViewDayInfo) -> CalendarDayButton {
+    let button = CalendarDayButton(frame: frame)
+    button.dayInfo = dayInfo
+    return button
+  }
+  
+  private func createWeekDaysTitlesInRect(rect: CGRect) {
     let weekDaySymbols = calendar.veryShortWeekdaySymbols
+    let weekDayRects = computeWeekDayRects(containerRect: rect)
+    assert(weekDaySymbols.count == weekDayRects.count)
+    weekDayLabels = []
     
-    for title in weekDaySymbols {
-      let weekDayLabel = UILabel()
-      weekDayLabel.textColor = headerTextColor
+    for (index, title) in enumerate(weekDaySymbols) {
+      let rect = weekDayRects[index]
+      let weekDayLabel = UILabel(frame: rect)
+      weekDayLabel.textColor = weekDaysTextColor
       weekDayLabel.backgroundColor = UIColor.clearColor()
       weekDayLabel.textAlignment = .Center
       weekDayLabel.text = title as? String
@@ -242,118 +220,221 @@ protocol CalendarViewDelegate {
     }
   }
   
-  private func computeUIAreas() -> (weekdays: CGRect, table: CGRect) {
-    let rects = bounds.rectsByDividing(40, fromEdge: .MinYEdge)
-    return (weekdays: rects.slice, table: rects.remainder)
-  }
-  
   private func computeWeekDayRects(#containerRect: CGRect) -> [CGRect] {
     var rects: [CGRect] = []
     let labelWidth = containerRect.width / CGFloat(daysPerWeek)
     
     for i in 0..<daysPerWeek {
       let x = containerRect.minX + CGFloat(i) * labelWidth
-      var rect = CGRectMake(trunc(x), containerRect.minY, ceil(labelWidth), containerRect.height)
+      var rect = CGRectMake(round(x), containerRect.minY, ceil(labelWidth), containerRect.height)
       rects.append(rect)
     }
     
     return rects
   }
   
-  private func updateCalendar() {
-    computeDays(displayedMonthDate)
-    selectedDayButton = nil
-    tableView.reloadData()
+  private func layoutControls() {
+    let areas = computeUIAreas()
+    layoutWeekDayLabels(rect: areas.weekdays)
+    layoutDayButtons(rect: areas.table)
   }
   
-  class DayInfo {
-    let calendarView: CalendarView
-    let date: NSDate
-    let title: String
-    let isWeekend: Bool
-    let isToday: Bool
-    let isCurrentMonth: Bool
-    let isFuture: Bool
-
-    var isSelected: Bool
-
-    init(calendarView: CalendarView, date: NSDate, title: String, isWeekend: Bool, isSelected: Bool, isToday: Bool, isCurrentMonth: Bool, isFuture: Bool) {
-      self.calendarView = calendarView
-      self.date = date
-      self.title = title
-      self.isWeekend = isWeekend
-      self.isSelected = isSelected
-      self.isToday = isToday
-      self.isCurrentMonth = isCurrentMonth
-      self.isFuture = isFuture
+  private func layoutWeekDayLabels(#rect: CGRect) {
+    let weekDayRects = computeWeekDayRects(containerRect: rect)
+    assert(weekDayRects.count == weekDayLabels.count)
+    
+    for (index, label) in enumerate(weekDayLabels) {
+      let rect = weekDayRects[index]
+      label.frame = rect
+    }
+  }
+  
+  private func layoutDayButtons(#rect: CGRect) {
+    let dayButtonRects = computeDayButtonsRects(containerRect: rect)
+    assert(dayButtonRects.count == dayButtons.count)
+    
+    for (index, dayButton) in enumerate(dayButtons) {
+      let dayButtonRect = dayButtonRects[index]
+      dayButton.frame = dayButtonRect
+    }
+  }
+  
+  override func drawRect(rect: CGRect) {
+    if linesEnabled {
+      let areas = computeUIAreas()
+      drawLines(rect: areas.table)
+    }
+  }
+  
+  private func computeDayButtonsSizes(#rect: CGRect) -> (columnsCount: Int, rowsCount: Int, cellSize: CGSize, buttonSize: CGSize, padding: CGVector) {
+    let columnsCount = daysPerWeek
+    let rowsCount = daysInfo.count / columnsCount
+    
+    let columnWidth = rect.width / CGFloat(columnsCount)
+    let rowHeight = columnWidth * dayRowHeightScale
+    let dy = (rowHeight - columnWidth) / 2 + 4
+    let dx = CGFloat(4)
+    let buttonWidth = round(columnWidth - dx * 2)
+    let buttonHeight = buttonWidth // make strong circle buttons
+    
+    let cell = CGSizeMake(columnWidth, rowHeight)
+    let button = CGSizeMake(buttonWidth, buttonHeight)
+    let padding = CGVectorMake(dx, dy)
+    
+    return (columnsCount: columnsCount, rowsCount: rowsCount, cellSize: cell, buttonSize: button, padding: padding)
+  }
+  
+  private func drawLines(#rect: CGRect) {
+    let sizes = computeDayButtonsSizes(rect: rect)
+    let linePath = UIBezierPath()
+    // Take into account scale factor of retina display
+    let scaleOffset = (contentScaleFactor > 1) ? 1 / (2 * contentScaleFactor) : 0
+    
+    for rowIndex in 1..<sizes.rowsCount {
+      let y = round(rect.origin.y + CGFloat(rowIndex) * sizes.cellSize.height) + scaleOffset
+      let startPoint = CGPointMake(rect.origin.x, y)
+      let endPoint = CGPointMake(rect.maxY, y)
+      
+      linePath.moveToPoint(startPoint)
+      linePath.addLineToPoint(endPoint)
     }
     
-    func computeColors() -> (text: UIColor, background: UIColor) {
-      var result = (text: UIColor.clearColor(), background: UIColor.clearColor())
-      
-      if isToday {
-        result.text = calendarView.todayTextColor
-        result.background = calendarView.todayBackgroundColor
+    linePath.lineWidth = 1 / contentScaleFactor
+    linesColor.setStroke()
+    linePath.stroke()
+  }
+  
+  func dayButtonTapped(dayButton: CalendarDayButton) {
+    assert(dayButton.dayInfo != nil)
+    
+    let date = dayButton.dayInfo!.date
+    
+    if !DateHelper.areDatesEqualByDays(date1: selectedDate, date2: date) {
+      if let selectedDayButton = selectedDayButton {
+        selectedDayButton.dayInfo!.isSelected = false
       }
       
-      if isSelected {
-        if result.text == UIColor.clearColor() {
-          result.text = calendarView.initialDayTextColor
-        }
-        
-        if result.background == UIColor.clearColor() {
-          result.background = calendarView.initialDayBackgroundColor
-        }
+      dayButton.dayInfo!.isSelected = true
+      selectedDayButton = dayButton
+    }
+    
+    selectedDate = date
+    
+    if let delegate = delegate {
+      delegate.calendarViewDaySelected(date)
+    }
+  }
+  
+  private func updateCalendar() {
+    // Remove existing controls
+    weekDayLabels = []
+    dayButtons = []
+    selectedDayButton = nil
+
+    for subview in subviews {
+      subview.removeFromSuperview()
+    }
+
+    // Create new ones
+    createDaysInfo()
+    createControls()
+  }
+  
+  private var daysInfo: [CalendarViewDayInfo] = []
+  private var weekDayLabels: [UILabel] = []
+  private var dayButtons: [CalendarDayButton] = []
+  private var selectedDayButton: CalendarDayButton?
+  private let calendar = NSCalendar.currentCalendar()
+
+}
+
+class CalendarViewDayInfo {
+  let calendarView: CalendarView
+  let date: NSDate
+  let title: String
+  let isWeekend: Bool
+  let isToday: Bool
+  let isCurrentMonth: Bool
+  let isFuture: Bool
+  
+  var isSelected: Bool {
+    didSet {
+      if let changeHandler = changeHandler {
+        changeHandler()
       }
-      
-      if isWeekend {
-        if result.text == UIColor.clearColor() {
-          result.text = calendarView.weekendTextColor
-        }
-        
-        if result.background == UIColor.clearColor() {
-          result.background = calendarView.weekendBackgroundColor
-        }
-      }
-      
+    }
+  }
+  
+  typealias ChangeHandler = () -> Void
+  var changeHandler: ChangeHandler?
+  
+  init(calendarView: CalendarView, date: NSDate, title: String, isWeekend: Bool, isInitial: Bool, isToday: Bool, isCurrentMonth: Bool, isFuture: Bool) {
+    self.calendarView = calendarView
+    self.date = date
+    self.title = title
+    self.isWeekend = isWeekend
+    self.isSelected = isInitial
+    self.isToday = isToday
+    self.isCurrentMonth = isCurrentMonth
+    self.isFuture = isFuture
+  }
+  
+  func computeColors() -> (text: UIColor, background: UIColor) {
+    var result = (text: UIColor.clearColor(), background: UIColor.clearColor())
+    
+    if isToday {
+      result.text = calendarView.todayTextColor
+      result.background = calendarView.todayBackgroundColor
+    }
+    
+    if isSelected {
       if result.text == UIColor.clearColor() {
-        result.text = calendarView.workDayTextColor
+        result.text = calendarView.selectedDayTextColor
       }
       
       if result.background == UIColor.clearColor() {
-        result.background = calendarView.workDayBackgroundColor
+        result.background = calendarView.selectedDayBackgroundColor
       }
-
-      // Make colors more translutent for future days and for days of past month
-      if isFuture {
-        if result.text != UIColor.clearColor() {
-          result.text = result.text.colorWithAlphaComponent(calendarView.futureTransparency)
-        }
-        
-        if result.background != UIColor.clearColor() {
-          result.background = result.background.colorWithAlphaComponent(calendarView.futureTransparency)
-        }
-      } else if !isCurrentMonth {
-        if result.text != UIColor.clearColor() {
-          result.text = result.text.colorWithAlphaComponent(calendarView.anotherMonthTransparency)
-        }
-        
-        if result.background != UIColor.clearColor() {
-          result.background = result.background.colorWithAlphaComponent(calendarView.anotherMonthTransparency)
-        }
+    }
+    
+    if isWeekend {
+      if result.text == UIColor.clearColor() {
+        result.text = calendarView.weekendTextColor
       }
       
-      return result
+      if result.background == UIColor.clearColor() {
+        result.background = calendarView.weekendBackgroundColor
+      }
     }
+    
+    if result.text == UIColor.clearColor() {
+      result.text = calendarView.workDayTextColor
+    }
+    
+    if result.background == UIColor.clearColor() {
+      result.background = calendarView.workDayBackgroundColor
+    }
+    
+    // Make colors more translutent for future days and for days of past month
+    if isFuture {
+      if result.text != UIColor.clearColor() {
+        result.text = result.text.colorWithAlphaComponent(calendarView.futureDaysTransparency)
+      }
+      
+      if result.background != UIColor.clearColor() {
+        result.background = result.background.colorWithAlphaComponent(calendarView.futureDaysTransparency)
+      }
+    } else if !isCurrentMonth {
+      if result.text != UIColor.clearColor() {
+        result.text = result.text.colorWithAlphaComponent(calendarView.anotherMonthTransparency)
+      }
+      
+      if result.background != UIColor.clearColor() {
+        result.background = result.background.colorWithAlphaComponent(calendarView.anotherMonthTransparency)
+      }
+    }
+    
+    return result
   }
-  
-  private var days: [DayInfo] = []
-  private var tableView: UITableView!
-  private var weekDayLabels: [UILabel] = []
-  private var selectedDayButton: CalendarDayButton?
-
-  private let calendar = NSCalendar.currentCalendar()
-  let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.WeekdayCalendarUnit).length
-  private let tableCellIdentifier = "CalendarDayCell"
-
 }
+

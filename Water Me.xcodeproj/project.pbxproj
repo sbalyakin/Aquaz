@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8406D78119FE9875001C54BF /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406D78019FE9875001C54BF /* Units.swift */; };
 		84126A851A278F4A00A66347 /* MonthStatisticsDayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84126A821A278F4A00A66347 /* MonthStatisticsDayButton.swift */; };
-		84126A861A278F4A00A66347 /* MonthStatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84126A831A278F4A00A66347 /* MonthStatisticsTableViewCell.swift */; };
 		84126A871A278F4A00A66347 /* MonthStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84126A841A278F4A00A66347 /* MonthStatisticsView.swift */; };
 		8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA001A0A7009009C5C47 /* DiaryViewController.swift */; };
 		8424AA061A0B5813009C5C47 /* MultiProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA051A0B5813009C5C47 /* MultiProgressView.swift */; };
@@ -35,7 +34,6 @@
 		84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B639821A25D9EF00889438 /* YearStatisticsView.swift */; };
 		84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9DD971A16574E003D6444 /* PickTimeViewController.swift */; };
 		A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F801A1212930088AF47 /* CalendarDayButton.swift */; };
-		A5275F841A1212930088AF47 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F811A1212930088AF47 /* CalendarTableViewCell.swift */; };
 		A5275F851A1212930088AF47 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F821A1212930088AF47 /* CalendarView.swift */; };
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
 		A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1319E5686C00D0477B /* ModelHelper.swift */; };
@@ -56,7 +54,6 @@
 /* Begin PBXFileReference section */
 		8406D78019FE9875001C54BF /* Units.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Units.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84126A821A278F4A00A66347 /* MonthStatisticsDayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthStatisticsDayButton.swift; path = Controls/MonthStatisticsDayButton.swift; sourceTree = "<group>"; };
-		84126A831A278F4A00A66347 /* MonthStatisticsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthStatisticsTableViewCell.swift; path = Controls/MonthStatisticsTableViewCell.swift; sourceTree = "<group>"; };
 		84126A841A278F4A00A66347 /* MonthStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthStatisticsView.swift; path = Controls/MonthStatisticsView.swift; sourceTree = "<group>"; };
 		8424AA001A0A7009009C5C47 /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		8424AA051A0B5813009C5C47 /* MultiProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiProgressView.swift; path = Controls/MultiProgressView.swift; sourceTree = "<group>"; };
@@ -88,7 +85,6 @@
 		84B639821A25D9EF00889438 /* YearStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YearStatisticsView.swift; path = Controls/YearStatisticsView.swift; sourceTree = "<group>"; };
 		84F9DD971A16574E003D6444 /* PickTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTimeViewController.swift; sourceTree = "<group>"; };
 		A5275F801A1212930088AF47 /* CalendarDayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarDayButton.swift; path = Controls/CalendarDayButton.swift; sourceTree = "<group>"; };
-		A5275F811A1212930088AF47 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarTableViewCell.swift; path = Controls/CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		A5275F821A1212930088AF47 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarView.swift; path = Controls/CalendarView.swift; sourceTree = "<group>"; };
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A5B75A1319E5686C00D0477B /* ModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelHelper.swift; sourceTree = "<group>"; };
@@ -118,12 +114,10 @@
 			isa = PBXGroup;
 			children = (
 				84126A821A278F4A00A66347 /* MonthStatisticsDayButton.swift */,
-				84126A831A278F4A00A66347 /* MonthStatisticsTableViewCell.swift */,
 				84126A841A278F4A00A66347 /* MonthStatisticsView.swift */,
 				84B639811A25D9EF00889438 /* WeekStatisticsView.swift */,
 				84B639821A25D9EF00889438 /* YearStatisticsView.swift */,
 				A5275F801A1212930088AF47 /* CalendarDayButton.swift */,
-				A5275F811A1212930088AF47 /* CalendarTableViewCell.swift */,
 				A5275F821A1212930088AF47 /* CalendarView.swift */,
 				8424AA051A0B5813009C5C47 /* MultiProgressView.swift */,
 			);
@@ -357,7 +351,6 @@
 				84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */,
 				A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */,
 				8468D6421A0D1C240008D027 /* DateHelper.swift in Sources */,
-				84126A861A278F4A00A66347 /* MonthStatisticsTableViewCell.swift in Sources */,
 				8406D78119FE9875001C54BF /* Units.swift in Sources */,
 				843B056119E2D7800097A833 /* DayViewController.swift in Sources */,
 				843B056919E2D80E0097A833 /* ConsumptionRate.swift in Sources */,
@@ -375,7 +368,6 @@
 				84B639831A25D9EF00889438 /* WeekStatisticsView.swift in Sources */,
 				843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */,
 				84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */,
-				A5275F841A1212930088AF47 /* CalendarTableViewCell.swift in Sources */,
 				84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */,
 				843B056019E2D7800097A833 /* StatisticsViewController.swift in Sources */,
 			);

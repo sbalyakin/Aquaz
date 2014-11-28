@@ -2,7 +2,7 @@
 //  CalendarDayButton.swift
 //  Water Me
 //
-//  Created by Sergey Balyakin on 07.11.14.
+//  Created by Sergey Balyakin on 26.11.14.
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.
 //
 
@@ -10,44 +10,15 @@ import UIKit
 
 class CalendarDayButton: UIButton {
   
-  var dayInfo: CalendarView.DayInfo? {
+  var dayInfo: CalendarViewDayInfo! {
     didSet {
+      assert(dayInfo != nil)
+      dayInfo.changeHandler = dayInfoChanged
       dayInfoChanged()
     }
   }
   
-  func dayInfoChanged() {
-    if let info = dayInfo {
-      let colors = info.computeColors()
-      setTitle(info.title, forState: .Normal)
-      setTitleColor(colors.text, forState: .Normal)
-      backgroundColor = colors.background
-      if info.isFuture {
-        enabled = false
-      }
-    } else {
-      setTitle("", forState: .Normal)
-      setTitleColor(UIColor.blackColor(), forState: .Normal)
-      backgroundColor = UIColor.clearColor()
-      layer.cornerRadius = 0.0
-      enabled = false
-    }
-    adjustLayerCornerRadius()
-  }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    adjustLayerCornerRadius()
-  }
-  
-  private func adjustLayerCornerRadius() {
-    if backgroundColor == UIColor.clearColor() {
-      layer.cornerRadius = 0.0
-    } else {
-      let minSide = min(bounds.width, bounds.height)
-      layer.cornerRadius = minSide / 2
-    }
-  }
+  var backgroundCircleColor: UIColor = UIColor.clearColor()
   
   override init() {
     super.init()
@@ -59,6 +30,30 @@ class CalendarDayButton: UIButton {
   
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
+  }
+  
+  override func drawRect(rect: CGRect) {
+    drawBackground(rect: rect)
+  }
+  
+  func drawBackground(#rect: CGRect) {
+    if backgroundCircleColor == UIColor.clearColor() {
+      return
+    }
+    
+    backgroundCircleColor.setFill()
+    let circlePath = UIBezierPath(ovalInRect: rect)
+    circlePath.fill()
+  }
+  
+  private func dayInfoChanged() {
+    let colors = dayInfo.computeColors()
+    setTitle(dayInfo.title, forState: .Normal)
+    setTitleColor(colors.text, forState: .Normal)
+    backgroundCircleColor = colors.background
+    if dayInfo.isFuture {
+      enabled = false
+    }
   }
   
 }

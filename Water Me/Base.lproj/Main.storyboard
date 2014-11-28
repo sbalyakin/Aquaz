@@ -558,9 +558,14 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" id="3Qj-Pw-bGE" customClass="CalendarView" customModule="Water_Me" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="38" width="320" height="370"/>
+                                <rect key="frame" x="16" y="38" width="288" height="370"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="dayRowHeightScale">
+                                        <real key="value" value="1.1000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -679,6 +684,10 @@
                             <view contentMode="scaleToFill" id="HC1-Ha-eED" customClass="MonthStatisticsView" customModule="Water_Me" customModuleProvider="target">
                                 <rect key="frame" x="16" y="0.0" width="288" height="548"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="linesEnabled" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.95645805029999997" green="0.95645805029999997" blue="0.95645805029999997" alpha="1" colorSpace="calibratedRGB"/>
