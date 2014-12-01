@@ -21,7 +21,7 @@ import UIKit
   @IBInspectable var daysBackground: UIColor = UIColor.whiteColor()
   @IBInspectable var barCornerRadius: CGFloat = 2
   @IBInspectable var barWidthFraction: CGFloat = 0.4
-  @IBInspectable var scaleLabelsCount: Int = 10
+  @IBInspectable var scaleLabelsCount: Int = 5
   @IBInspectable var scaleRightMargin: CGFloat = 6
   @IBInspectable var dayButtonsTopMargin: CGFloat = 6
   
@@ -179,7 +179,7 @@ import UIKit
       let minY = rect.maxY - CGFloat(i) * segmentHeight - textHeight / 2
       let labelRect = CGRectMake(rect.minX, minY, rect.width - scaleRightMargin, textHeight).integerRect
       
-      let scaleValue = Int(maximumValue / CGFloat(scaleLabelsCount) * CGFloat(i))
+      let scaleValue = Int(maximumValue / CGFloat(scaleLabelsCount - 1) * CGFloat(i))
       "\(scaleValue)".drawInRect(labelRect, withAttributes: fontAttributes)
     }
   }

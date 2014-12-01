@@ -291,7 +291,8 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   }
 
   private func fetchConsumptions() {
-    consumptions = Consumption.fetchConsumptionsForDay(currentDate)
+    // TODO: Take day offset in hours from settings
+    consumptions = Consumption.fetchConsumptionsForDay(currentDate, dayOffsetInHours: 0)
 
     updateConsumptions()
   }
@@ -332,9 +333,9 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     
     for consumption in consumptions {
       if let amount = consumptionsMap[consumption.drink] {
-        consumptionsMap[consumption.drink] = amount + Double(consumption.amount)
+        consumptionsMap[consumption.drink] = amount + Double(consumption.waterIntake)
       } else {
-        consumptionsMap[consumption.drink] = Double(consumption.amount)
+        consumptionsMap[consumption.drink] = Double(consumption.waterIntake)
       }
     }
     

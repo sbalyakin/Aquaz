@@ -36,6 +36,7 @@
 		A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F801A1212930088AF47 /* CalendarDayButton.swift */; };
 		A5275F851A1212930088AF47 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F821A1212930088AF47 /* CalendarView.swift */; };
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
+		A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */; };
 		A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1319E5686C00D0477B /* ModelHelper.swift */; };
 		A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1519E57D3500D0477B /* NamedEntity.swift */; };
 		A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
@@ -87,6 +88,7 @@
 		A5275F801A1212930088AF47 /* CalendarDayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarDayButton.swift; path = Controls/CalendarDayButton.swift; sourceTree = "<group>"; };
 		A5275F821A1212930088AF47 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarView.swift; path = Controls/CalendarView.swift; sourceTree = "<group>"; };
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekStatisticsViewController.swift; sourceTree = "<group>"; };
 		A5B75A1319E5686C00D0477B /* ModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelHelper.swift; sourceTree = "<group>"; };
 		A5B75A1519E57D3500D0477B /* NamedEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedEntity.swift; sourceTree = "<group>"; };
 		A5E70A6F19E30BEE006E5FC0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Settings.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -143,6 +145,7 @@
 				843B055519E2D7800097A833 /* SettingsTableViewController.swift */,
 				843B055619E2D7800097A833 /* StatisticsViewController.swift */,
 				84F9DD971A16574E003D6444 /* PickTimeViewController.swift */,
+				A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				84126A851A278F4A00A66347 /* MonthStatisticsDayButton.swift in Sources */,
 				A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */,
 				84B639831A25D9EF00889438 /* WeekStatisticsView.swift in Sources */,
+				A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */,
 				843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */,
 				84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */,
 				84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */,
