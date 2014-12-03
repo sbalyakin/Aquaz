@@ -44,13 +44,7 @@ class Consumption: NSManagedObject, NamedEntity {
   class func fetchConsumptions(#beginDate: NSDate, endDate: NSDate) -> [Consumption] {
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
     let descriptor = NSSortDescriptor(key: "date", ascending: true)
-    let rawConsumptions: [Consumption]? = ModelHelper.sharedInstance.fetchManagedObjects(predicate: predicate, sortDescriptors: [descriptor])
-    
-    if let consumptions = rawConsumptions {
-      return consumptions
-    }
-    
-    return []
+    return ModelHelper.sharedInstance.fetchManagedObjects(predicate: predicate, sortDescriptors: [descriptor])
   }
 
   /// Fetches all consumptions for a day taken from the specified date.

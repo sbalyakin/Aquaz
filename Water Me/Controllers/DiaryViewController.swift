@@ -46,7 +46,7 @@ class DiaryViewController: UIViewController, UITableViewDataSource {
     formatter.timeStyle = .ShortStyle
     let date = formatter.stringFromDate(consumption.date)
     
-    cell.textLabel.text = "\(date): \(drink) - \(amount)"
+    cell.textLabel!.text = "\(date): \(drink) - \(amount)"
     return cell
   }
   

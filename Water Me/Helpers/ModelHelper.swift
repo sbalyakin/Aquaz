@@ -20,7 +20,7 @@ class ModelHelper {
 
   /// Fetches managed objects from Core Data taking into account specified predicate and sort descriptors
   func fetchManagedObjects<EntityType: NSManagedObject where EntityType: NamedEntity>
-    (predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil, limit: Int? = nil) -> [EntityType]? {
+    (predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil, limit: Int? = nil) -> [EntityType] {
     let entityDescription = NSEntityDescription.entityForName(EntityType.getEntityName(), inManagedObjectContext: managedObjectContext)
     let fetchRequest = NSFetchRequest()
     fetchRequest.entity = entityDescription
@@ -34,20 +34,18 @@ class ModelHelper {
     let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as [EntityType]?
     
     if fetchResults == nil {
-      NSLog("executeFetchRequest failed for entity \"\(EntityType.getEntityName())\" with error: \(error!.localizedDescription)")
+      NSLog("fetchManagedObjects failed for entity \"\(EntityType.getEntityName())\" with error: \(error!.localizedDescription)")
+      return []
     }
     
-    return fetchResults
+    return fetchResults!
   }
   
   /// Fetches a managed object from Core Data taking into account specified predicate and sort descriptors
   func fetchManagedObject<EntityType: NSManagedObject where EntityType: NamedEntity>
     (predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> EntityType? {
-    let entities: [EntityType]? = fetchManagedObjects(predicate: predicate, sortDescriptors: sortDescriptors, limit: 1)
-    if let fetchedEntities = entities {
-      return fetchedEntities.first
-    }
-    return nil
+    let entities: [EntityType] = fetchManagedObjects(predicate: predicate, sortDescriptors: sortDescriptors, limit: 1)
+    return entities.first
   }
   
   func save() {

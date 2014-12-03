@@ -17,6 +17,10 @@ private extension NSDate {
   func isEarlierThan(date: NSDate) -> Bool {
     return date.compare(self) == .OrderedDescending
   }
+  
+  func getNextDay() -> NSDate {
+    return DateHelper.addToDate(self, years: 0, months: 0, days: 1)
+  }
 }
 
 class ConsumptionRate: NSManagedObject, NamedEntity {
@@ -48,7 +52,7 @@ class ConsumptionRate: NSManagedObject, NamedEntity {
       return consumptionRate
     }
     
-    if let consumptionRate = fetchNearestConsumptionRateForDateSoonerThanDate(adjustedDate) {
+    if let consumptionRate = fetchNearestConsumptionRateForDateEarlierThanDate(adjustedDate) {
       return consumptionRate
     }
     
@@ -65,140 +69,44 @@ class ConsumptionRate: NSManagedObject, NamedEntity {
     let endDate = DateHelper.dateByClearingTime(ofDate: endDateRaw)
 
     let consumptionRates = fetchConsumptionRatesForDateInterval(beginDate: beginDate, endDate: endDate)
-    let consumptionRateForSoonerDate = fetchNearestConsumptionRateForDateSoonerThanDate(beginDate)
-    let consumptionRateForLaterDate = fetchNearestConsumptionRateForDateLaterThanDate(endDate)
+    var consumptionRateForEarlierDate = fetchNearestConsumptionRateForDateEarlierThanDate(beginDate)
+    var consumptionRateForLaterDate = fetchNearestConsumptionRateForDateLaterThanDate(endDate)
     
     var consumptionRateAmounts: [Double] = []
     var index = 0
-    var previousConsumptionRateAmount: Double!
     
-    let getNextDayFrom = { (date: NSDate) -> NSDate in
-      return DateHelper.addToDate(date, years: 0, months: 0, days: 1)
-    }
-    
-    for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = getNextDayFrom(currentDay) {
+    for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = currentDay.getNextDay() {
       var consumptionRateAmount: Double!
 
       // Looking for a consumption rate for the current day in fetched rates
-      if let consumptionRates = consumptionRates {
-        if index < consumptionRates.count {
-          let consumptionRate = consumptionRates[index]
+      if index < consumptionRates.count {
+        let consumptionRate = consumptionRates[index]
+        
+        switch currentDay.compare(consumptionRate.date) {
+        case .OrderedSame:
+          // Use computed amount (taking into account high activity etc.)
+          // only for a consumption rate entity strictly related to the current day
+          consumptionRateAmount = consumptionRate.amount
+          consumptionRateForEarlierDate = consumptionRate
+          index++
           
-          switch currentDay.compare(consumptionRate.date) {
-          case .OrderedSame:
-            // Use computed amount (taking into account high activity etc.)
-            // only for a consumption rate entity strictly related to the current day
-            consumptionRateAmount = consumptionRate.amount
-            previousConsumptionRateAmount = consumptionRate.baseRateAmount.doubleValue
-            index++
-            
-          case .OrderedAscending:
-            if previousConsumptionRateAmount == nil {
-              if let soonerConsumptionRate = consumptionRateForSoonerDate {
-                // Use sooner consumption rate for current day
-                consumptionRateAmount = soonerConsumptionRate.baseRateAmount.doubleValue
-                previousConsumptionRateAmount = soonerConsumptionRate.baseRateAmount.doubleValue
-              } else {
-                // Use current (later) consumption rate for current day
-                consumptionRateAmount = consumptionRate.baseRateAmount.doubleValue
-                previousConsumptionRateAmount = consumptionRate.baseRateAmount.doubleValue
-              }
-            }
-            
-          case .OrderedDescending:
-            assert(false, "It's a logical error")
-          }
+        case .OrderedAscending: // current consumption rate is later than current day
+          consumptionRateForLaterDate = consumptionRate
+          
+        case .OrderedDescending: // unreal case
+          assert(false, "It's a logical error")
+          consumptionRateForEarlierDate = consumptionRate
         }
       }
       
       if consumptionRateAmount == nil {
-        if previousConsumptionRateAmount != nil {
-          consumptionRateAmount = previousConsumptionRateAmount
-        } else {
-          if let soonerConsumptionRate = consumptionRateForSoonerDate {
-            consumptionRateAmount = soonerConsumptionRate.baseRateAmount.doubleValue
-          } else if let laterConsumptionRate = consumptionRateForLaterDate {
-            consumptionRateAmount = laterConsumptionRate.baseRateAmount.doubleValue
-          } else {
-            assert(false, "It's a logical error")
-            consumptionRateAmount = Settings.sharedInstance.userDailyWaterIntake.value
-          }
-          
-          previousConsumptionRateAmount = consumptionRateAmount
-        }
-      }
-      
-      consumptionRateAmounts.append(consumptionRateAmount)
-    }
-    
-    return consumptionRateAmounts
-  }
-  
-  class func fetchConsumptionRateAmountsForDateIntervalOld(beginDate beginDateRaw: NSDate, endDate endDateRaw: NSDate) -> [Double] {
-    let beginDate = DateHelper.dateByClearingTime(ofDate: beginDateRaw)
-    let endDate = DateHelper.dateByClearingTime(ofDate: endDateRaw)
-    
-    let consumptionRates = fetchConsumptionRatesForDateInterval(beginDate: beginDate, endDate: endDate)
-    let consumptionRateForSoonerDate = fetchNearestConsumptionRateForDateSoonerThanDate(beginDate)
-    let consumptionRateForLaterDate = fetchNearestConsumptionRateForDateLaterThanDate(endDate)
-    
-    var consumptionRateAmounts: [Double] = []
-    var index = 0
-    var previousConsumptionRateAmount: Double!
-    
-    let getNextDayFrom = { (date: NSDate) -> NSDate in
-      return DateHelper.addToDate(date, years: 0, months: 0, days: 1)
-    }
-    
-    for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = getNextDayFrom(currentDay) {
-      var consumptionRateAmount: Double!
-      
-      // Looking for a consumption rate for the current day in fetched rates
-      if let consumptionRates = consumptionRates {
-        if index < consumptionRates.count {
-          let consumptionRate = consumptionRates[index]
-          
-          switch currentDay.compare(consumptionRate.date) {
-          case .OrderedSame:
-            // Use computed amount (taking into account high activity etc.)
-            // only for a consumption rate entity strictly related to the current day
-            consumptionRateAmount = consumptionRate.amount
-            previousConsumptionRateAmount = consumptionRate.baseRateAmount.doubleValue
-            index++
-            
-          case .OrderedAscending:
-            if previousConsumptionRateAmount == nil {
-              if let soonerConsumptionRate = consumptionRateForSoonerDate {
-                // Use sooner consumption rate for current day
-                consumptionRateAmount = soonerConsumptionRate.baseRateAmount.doubleValue
-                previousConsumptionRateAmount = soonerConsumptionRate.baseRateAmount.doubleValue
-              } else {
-                // Use current (later) consumption rate for current day
-                consumptionRateAmount = consumptionRate.baseRateAmount.doubleValue
-                previousConsumptionRateAmount = consumptionRate.baseRateAmount.doubleValue
-              }
-            }
-            
-          case .OrderedDescending:
-            assert(false, "It's a logical error")
-          }
-        }
-      }
-      
-      if consumptionRateAmount == nil {
-        if previousConsumptionRateAmount != nil {
-          consumptionRateAmount = previousConsumptionRateAmount
-        } else {
-          if let soonerConsumptionRate = consumptionRateForSoonerDate {
-            consumptionRateAmount = soonerConsumptionRate.baseRateAmount.doubleValue
-          } else if let laterConsumptionRate = consumptionRateForLaterDate {
-            consumptionRateAmount = laterConsumptionRate.baseRateAmount.doubleValue
-          } else {
-            assert(false, "It's a logical error")
-            consumptionRateAmount = Settings.sharedInstance.userDailyWaterIntake.value
-          }
-          
-          previousConsumptionRateAmount = consumptionRateAmount
+        if let earlierConsumptionRate = consumptionRateForEarlierDate {
+          consumptionRateAmount = earlierConsumptionRate.baseRateAmount.doubleValue
+        } else if let laterConsumptionRate = consumptionRateForLaterDate {
+          consumptionRateAmount = laterConsumptionRate.baseRateAmount.doubleValue
+        } else { // unreal case
+          assert(false, "It's a logical error")
+          consumptionRateAmount = Settings.sharedInstance.userDailyWaterIntake.value
         }
       }
       
@@ -209,26 +117,26 @@ class ConsumptionRate: NSManagedObject, NamedEntity {
   }
   
   class func fetchConsumptionRateStrictlyForDate(date: NSDate) -> ConsumptionRate? {
-    let strictDatePredicate = NSPredicate(format: "date = %@", argumentArray: [date])
-    return ModelHelper.sharedInstance.fetchManagedObject(predicate: strictDatePredicate)
+    let predicate = NSPredicate(format: "date = %@", argumentArray: [date])
+    return ModelHelper.sharedInstance.fetchManagedObject(predicate: predicate)
   }
   
-  class func fetchNearestConsumptionRateForDateSoonerThanDate(date: NSDate) -> ConsumptionRate? {
-    let soonerDatePredicate = NSPredicate(format: "date < %@", argumentArray: [date])
-    let soonerSortDescriptor = NSSortDescriptor(key: "date", ascending: false)
-    return ModelHelper.sharedInstance.fetchManagedObject(predicate: soonerDatePredicate, sortDescriptors: [soonerSortDescriptor])
+  class func fetchNearestConsumptionRateForDateEarlierThanDate(date: NSDate) -> ConsumptionRate? {
+    let predicate = NSPredicate(format: "date < %@", argumentArray: [date])
+    let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+    return ModelHelper.sharedInstance.fetchManagedObject(predicate: predicate, sortDescriptors: [sortDescriptor])
   }
   
   class func fetchNearestConsumptionRateForDateLaterThanDate(date: NSDate) -> ConsumptionRate? {
-    let laterDatePredicate = NSPredicate(format: "date >= %@", argumentArray: [date])
-    let laterSortDescriptor = NSSortDescriptor(key: "date", ascending: true)
-    return ModelHelper.sharedInstance.fetchManagedObject(predicate: laterDatePredicate, sortDescriptors: [laterSortDescriptor])
+    let predicate = NSPredicate(format: "date >= %@", argumentArray: [date])
+    let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+    return ModelHelper.sharedInstance.fetchManagedObject(predicate: predicate, sortDescriptors: [sortDescriptor])
   }
   
-  class func fetchConsumptionRatesForDateInterval(#beginDate: NSDate, endDate: NSDate) -> [ConsumptionRate]? {
-    let dateIntervalPredicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
+  class func fetchConsumptionRatesForDateInterval(#beginDate: NSDate, endDate: NSDate) -> [ConsumptionRate] {
+    let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
     let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
-    return ModelHelper.sharedInstance.fetchManagedObjects(predicate: dateIntervalPredicate, sortDescriptors: [sortDescriptor])
+    return ModelHelper.sharedInstance.fetchManagedObjects(predicate: predicate, sortDescriptors: [sortDescriptor])
   }
   
   /// Adds a new consumption entity into Core Data
