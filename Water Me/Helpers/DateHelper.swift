@@ -101,3 +101,18 @@ class DateHelper {
   }
 
 }
+
+extension NSDate {
+  func isLaterThan(date: NSDate) -> Bool {
+    return date.compare(self) == .OrderedAscending
+  }
+  
+  func isEarlierThan(date: NSDate) -> Bool {
+    return date.compare(self) == .OrderedDescending
+  }
+  
+  func getNextDay() -> NSDate {
+    return DateHelper.addToDate(self, years: 0, months: 0, days: 1)
+  }
+}
+

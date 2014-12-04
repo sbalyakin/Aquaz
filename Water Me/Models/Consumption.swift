@@ -58,10 +58,18 @@ class Consumption: NSManagedObject, NamedEntity {
 
   enum GroupingCalendarUnit {
     case Day, Month, Year
+    
+    func getCalendarUnit() -> NSCalendarUnit {
+      switch self {
+      case .Day  : return .CalendarUnitDay
+      case .Month: return .CalendarUnitMonth
+      case .Year : return .CalendarUnitYear
+      }
+    }
   }
   
   /// Fetches water intake for specified time period grouping results by specified calendar unit
-  class func fetchGroupedWaterIntake(beginDate beginDateRaw: NSDate, endDate endDateRaw: NSDate, dayOffsetInHours: Int, groupingUnit: GroupingCalendarUnit) -> [Double] {
+  class func fetchGroupedWaterIntake(beginDate beginDateRaw: NSDate, endDate endDateRaw: NSDate, dayOffsetInHours: Int, groupingUnit: GroupingCalendarUnit, var computeAverageAmounts: Bool) -> [Double] {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: beginDateRaw)
     let endDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: endDateRaw)
     
@@ -70,20 +78,35 @@ class Consumption: NSManagedObject, NamedEntity {
     }
     
     let consumptions = fetchConsumptions(beginDate: beginDate, endDate: endDate)
+
+    // Skip useless grouping for days
+    if groupingUnit == .Day {
+      computeAverageAmounts = false
+    }
     
     let deltaYears  = groupingUnit == .Year  ? 1 : 0
     let deltaMonths = groupingUnit == .Month ? 1 : 0
     let deltaDays   = groupingUnit == .Day   ? 1 : 0
     
+    let calendarUnit = groupingUnit.getCalendarUnit()
+    let calendar = NSCalendar.currentCalendar()
+    
     var groupedWaterIntakes: [Double] = []
-    var startOfNextDay: NSDate!
+    var nextDate: NSDate!
     var consumptionIndex = 0
     var lastWaterIntake: Double = 0
+    var daysInCalendarUnit = 0
     
     while true {
-      startOfNextDay = DateHelper.addToDate(startOfNextDay == nil ? beginDate : startOfNextDay, years: deltaYears, months: deltaMonths, days: deltaDays)
+      let currentDate = (nextDate == nil) ? beginDate : nextDate
       
-      if endDate.compare(startOfNextDay) == .OrderedAscending {
+      if computeAverageAmounts {
+        daysInCalendarUnit = calendar.rangeOfUnit(.CalendarUnitDay, inUnit: calendarUnit, forDate: currentDate).length
+      }
+
+      nextDate = DateHelper.addToDate(currentDate, years: deltaYears, months: deltaMonths, days: deltaDays)
+      
+      if nextDate.isLaterThan(endDate) {
         break
       }
 
@@ -94,7 +117,7 @@ class Consumption: NSManagedObject, NamedEntity {
         let consumption = consumptions[consumptionIndex]
         let waterIntake = consumption.amount.doubleValue * consumption.drink.waterPercent.doubleValue
         
-        if startOfNextDay.compare(consumption.date) == .OrderedDescending {
+        if consumption.date.isEarlierThan(nextDate) {
           waterIntakeForUnit += waterIntake
         } else {
           consumptionIndex++
@@ -102,6 +125,10 @@ class Consumption: NSManagedObject, NamedEntity {
           lastWaterIntake = waterIntake
           break
         }
+      }
+      
+      if computeAverageAmounts {
+        waterIntakeForUnit /= Double(daysInCalendarUnit)
       }
       
       groupedWaterIntakes.append(waterIntakeForUnit)

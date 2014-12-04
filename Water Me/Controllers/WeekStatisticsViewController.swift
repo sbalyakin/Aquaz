@@ -50,10 +50,10 @@ class WeekStatisticsViewController: UIViewController {
   }
 
   private func initWeekStatisticsView() {
-    let waterIntakes = Consumption.fetchGroupedWaterIntake(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Day)
+    let waterIntakes = Consumption.fetchGroupedWaterIntake(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Day, computeAverageAmounts: true)
     assert(waterIntakes.count == 7)
     
-    let goals = ConsumptionRate.fetchConsumptionRateAmountsForDateInterval(beginDate: statisticsBeginDate, endDate: statisticsEndDate)
+    let goals = ConsumptionRate.fetchConsumptionRateAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate)
     assert(waterIntakes.count == 7)
     
     var statisticsItems: [WeekStatisticsView.ItemType] = []
