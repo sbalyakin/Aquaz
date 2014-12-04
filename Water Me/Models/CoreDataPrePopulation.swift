@@ -42,7 +42,72 @@ class CoreDataPrePopulation {
           hotDateFraction: 0,
           highActivityFraction: 0,
           managedObjectContext: managedObjectContext)
+        
+        // TODO: Only for development
+        generateConsumptions()
+        generateConsumptionRates()
       }
     }
+  }
+  
+  private class func generateConsumptions() {
+    let secondsPerDay = 60 * 60 * 24
+    let endDate = DateHelper.dateBySettingHour(0, minute: 0, second: 0, ofDate: NSDate())
+    let beginDate = DateHelper.addToDate(endDate, years: -1, months: 0, days: 0)
+    let minAmount = 50
+    let maxAmount = 300
+    let maxConsumptionsPerDay = 10
+    
+    let managedObjectContext = ModelHelper.sharedInstance.managedObjectContext
+    
+    for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = currentDay.getNextDay() {
+      let consumptionsCount = random() % maxConsumptionsPerDay
+      for i in 0..<consumptionsCount {
+        let drinkIndex = random() % 9
+        let drink = Drink.getDrinkByIndex(drinkIndex)!
+        let amount = minAmount + random() % (maxAmount - minAmount)
+        let timeInterval = NSTimeInterval(random() % secondsPerDay)
+        let consumptionDate = NSDate(timeInterval: timeInterval, sinceDate: currentDay)
+        Consumption.addEntity(drink: drink, amount: amount, date: consumptionDate, managedObjectContext: managedObjectContext, saveImmediately: false)
+      }
+    }
+    
+    ModelHelper.sharedInstance.save()
+  }
+  
+  private class func generateConsumptionRates() {
+    let endDate = DateHelper.dateBySettingHour(0, minute: 0, second: 0, ofDate: NSDate())
+    let beginDate = DateHelper.addToDate(endDate, years: -1, months: 0, days: 0)
+    let minConsumptionRate = 1500
+    let maxConsumptionRate = 2500
+    let computeConsumptionRateChanceInPercents = 5
+    let highActivityChanceInPercents = 10
+    let hotDayChanceInPercents = 20
+    
+    let managedObjectContext = ModelHelper.sharedInstance.managedObjectContext
+    
+    var currentConsumptionRate = 0
+
+    for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = currentDay.getNextDay() {
+      let needToComputeConsumptionRate = (random() % 100) < computeConsumptionRateChanceInPercents
+      let enableHighActivity = (random() % 100) < highActivityChanceInPercents
+      let enableHotDay = (random() % 100) < hotDayChanceInPercents
+      
+      if needToComputeConsumptionRate || enableHighActivity || enableHotDay {
+        
+        if needToComputeConsumptionRate {
+          currentConsumptionRate = minConsumptionRate + random() % (maxConsumptionRate - minConsumptionRate)
+        }
+        
+        ConsumptionRate.addEntity(
+          date: currentDay,
+          baseRateAmount: currentConsumptionRate,
+          hotDateFraction: enableHotDay ? 1 : 0,
+          highActivityFraction: enableHighActivity ? 1 : 0,
+          managedObjectContext: managedObjectContext)
+      }
+    }
+    
+    ModelHelper.sharedInstance.save()
   }
 }

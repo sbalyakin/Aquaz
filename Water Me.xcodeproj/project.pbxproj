@@ -201,11 +201,11 @@
 				8424AA041A0B57F9009C5C47 /* Controls */,
 				843B055919E2D7800097A833 /* External */,
 				A5B75A1219E55CBB00D0477B /* Helpers */,
-				84669A7A19DAD78D003C2263 /* LaunchScreen.xib */,
-				84669A7519DAD78D003C2263 /* Main.storyboard */,
 				843B055D19E2D7800097A833 /* Models */,
 				84669A6C19DAD78D003C2263 /* Supporting Files */,
 				84669A7019DAD78D003C2263 /* Water_Me.xcdatamodeld */,
+				84669A7A19DAD78D003C2263 /* LaunchScreen.xib */,
+				84669A7519DAD78D003C2263 /* Main.storyboard */,
 			);
 			path = "Water Me";
 			sourceTree = "<group>";
