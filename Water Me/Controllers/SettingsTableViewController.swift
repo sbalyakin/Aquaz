@@ -8,9 +8,7 @@
 
 import UIKit
 
-class SettingsTableViewController: UITableViewController {
-  
-  @IBOutlet weak var revealButton: UIBarButtonItem!
+class SettingsTableViewController: RevealedTableViewController {
   
   @IBOutlet weak var volume: UISegmentedControl!
   @IBOutlet weak var weight: UISegmentedControl!
@@ -23,18 +21,6 @@ class SettingsTableViewController: UITableViewController {
     volume.selectedSegmentIndex = Settings.sharedInstance.generalVolumeUnits.value.rawValue
     weight.selectedSegmentIndex = Settings.sharedInstance.generalWeightUnits.value.rawValue
     height.selectedSegmentIndex = Settings.sharedInstance.generalHeightUnits.value.rawValue
-    
-    // Additional setup for revealing
-    revealButtonSetup()
-  }
-  
-  func revealButtonSetup() {
-    if let revealViewController = self.revealViewController() {
-      revealButton.target = revealViewController
-      revealButton.action = "revealToggle:"
-      navigationController!.navigationBar.addGestureRecognizer(revealViewController.panGestureRecognizer())
-      view.addGestureRecognizer(revealViewController.panGestureRecognizer())
-    }
   }
   
   @IBAction func volumeSettingChanged(sender: UISegmentedControl) {

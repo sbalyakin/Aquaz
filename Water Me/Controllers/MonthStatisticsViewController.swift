@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MonthStatisticsViewController: UIViewController, MonthStatisticsViewDataSource {
+class MonthStatisticsViewController: UIViewController, MonthStatisticsViewDataSource, CalendarViewDelegate {
 
   @IBOutlet weak var monthStatisticsView: MonthStatisticsView!
   @IBOutlet weak var monthLabel: UILabel!
@@ -31,6 +31,8 @@ class MonthStatisticsViewController: UIViewController, MonthStatisticsViewDataSo
     super.viewDidLoad()
 
     monthStatisticsView.dataSource = self
+    monthStatisticsView.delegate = self
+    
     // TODO: Specify from the settings
     date = NSDate()
   }
@@ -76,13 +78,21 @@ class MonthStatisticsViewController: UIViewController, MonthStatisticsViewDataSo
   }
   
   func monthStatisticsGetConsumptionFractionForDate(date: NSDate, dayOfCurrentMonth: Int) -> Double {
-    if dayOfCurrentMonth < 0 || dayOfCurrentMonth >= consumptionFractions.count {
+    if dayOfCurrentMonth < 1 || dayOfCurrentMonth > consumptionFractions.count {
       return 0
     }
     
-    return consumptionFractions[dayOfCurrentMonth]
+    return consumptionFractions[dayOfCurrentMonth - 1]
   }
 
+  func calendarViewDaySelected(date: NSDate) {
+    let dayViewController = storyboard!.instantiateViewControllerWithIdentifier("DayViewController") as DayViewController
+    dayViewController.setCurrentDate(date, updateControl: false)
+    dayViewController.initializesRevealControls = false
+    
+    navigationController!.pushViewController(dayViewController, animated: true)
+  }
+  
   private func computeStatisticsDateRange() {
     let calendar = NSCalendar.currentCalendar()
     let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitTimeZone | .CalendarUnitCalendar, fromDate: date)

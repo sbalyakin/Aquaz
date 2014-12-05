@@ -37,7 +37,7 @@ class CalendarDayButton: UIButton {
   }
   
   func drawBackground(#rect: CGRect) {
-    if backgroundCircleColor == UIColor.clearColor() {
+    if backgroundCircleColor.isClearColor() {
       return
     }
     

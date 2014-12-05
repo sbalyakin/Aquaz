@@ -27,34 +27,6 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
     switchToDate(date)
   }
   
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-    
-    createCustomNavigationTitle()
-  }
-  
-  func createCustomNavigationTitle() {
-    // TODO: Remove magical 100 value and find another way to calculate proper rectangle for the title view
-    let titleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
-    
-    // Container view is used for adjusting inner label by offsetting inside it
-    // without changing global titleVerticalPositionAdjustmentForBarMetrics,
-    // because if change it on view appearing/disappearing there will be noticable title item jumping.
-    let titleView = UIView(frame: titleViewRect)
-    
-    let verticalAdjustment = navigationController!.navigationBar.titleVerticalPositionAdjustmentForBarMetrics(.Default)
-    let titleLabelRect = titleView.bounds.rectByOffsetting(dx: 0, dy: -verticalAdjustment)
-    let titleLabel = UILabel(frame: titleLabelRect)
-    titleLabel.autoresizingMask = .FlexibleWidth
-    titleLabel.backgroundColor = UIColor.clearColor()
-    titleLabel.text = navigationItem.title
-    titleLabel.font = UIFont.boldSystemFontOfSize(18)
-    titleLabel.textAlignment = .Center
-    titleView.addSubview(titleLabel)
-    
-    navigationItem.titleView = titleView
-  }
-  
   private func switchToDate(date: NSDate) {
     calendarView.switchToMonth(date)
     
@@ -78,14 +50,14 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
   }
   
   func calendarViewDaySelected(date: NSDate) {
-    dayViewController.currentDate = date
+    dayViewController.setCurrentDate(date, updateControl: true)
     navigationController!.popViewControllerAnimated(true)
   }
   
   @IBAction func todayDidSelected(sender: AnyObject) {
-    let adjustedDate = DateHelper.dateByJoiningDateTime(datePart: NSDate(), timePart: dayViewController.currentDate)
-    dayViewController.currentDate = adjustedDate
+    let adjustedDate = DateHelper.dateByJoiningDateTime(datePart: NSDate(), timePart: dayViewController.getCurrentDate())
+    dayViewController.setCurrentDate(adjustedDate, updateControl: true)
     navigationController!.popViewControllerAnimated(true)
   }
-
+  
 }

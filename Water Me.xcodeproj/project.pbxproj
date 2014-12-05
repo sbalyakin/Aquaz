@@ -10,6 +10,8 @@
 		8406D78119FE9875001C54BF /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406D78019FE9875001C54BF /* Units.swift */; };
 		84126A851A278F4A00A66347 /* MonthStatisticsDayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84126A821A278F4A00A66347 /* MonthStatisticsDayButton.swift */; };
 		84126A871A278F4A00A66347 /* MonthStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84126A841A278F4A00A66347 /* MonthStatisticsView.swift */; };
+		841B13BC1A31D55500249426 /* RevealedViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B13BB1A31D55500249426 /* RevealedViewControllers.swift */; };
+		841B13BE1A31FE4F00249426 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B13BD1A31FE4F00249426 /* UIHelper.swift */; };
 		8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA001A0A7009009C5C47 /* DiaryViewController.swift */; };
 		8424AA061A0B5813009C5C47 /* MultiProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA051A0B5813009C5C47 /* MultiProgressView.swift */; };
 		84380C2819E4195A0026398E /* Consumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2719E4195A0026398E /* Consumption.swift */; };
@@ -58,6 +60,8 @@
 		8406D78019FE9875001C54BF /* Units.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Units.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84126A821A278F4A00A66347 /* MonthStatisticsDayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthStatisticsDayButton.swift; path = Controls/MonthStatisticsDayButton.swift; sourceTree = "<group>"; };
 		84126A841A278F4A00A66347 /* MonthStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthStatisticsView.swift; path = Controls/MonthStatisticsView.swift; sourceTree = "<group>"; };
+		841B13BB1A31D55500249426 /* RevealedViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealedViewControllers.swift; sourceTree = "<group>"; };
+		841B13BD1A31FE4F00249426 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		8424AA001A0A7009009C5C47 /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		8424AA051A0B5813009C5C47 /* MultiProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiProgressView.swift; path = Controls/MultiProgressView.swift; sourceTree = "<group>"; };
 		84380C2719E4195A0026398E /* Consumption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consumption.swift; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 				A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */,
 				84C610B91A319DBC00433EF1 /* MonthStatisticsViewController.swift */,
 				84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */,
+				841B13BB1A31D55500249426 /* RevealedViewControllers.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -247,6 +252,7 @@
 				8468D6411A0D1C240008D027 /* DateHelper.swift */,
 				A5B75A1319E5686C00D0477B /* ModelHelper.swift */,
 				8406D78019FE9875001C54BF /* Units.swift */,
+				841B13BD1A31FE4F00249426 /* UIHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -365,6 +371,7 @@
 				843B056919E2D80E0097A833 /* ConsumptionRate.swift in Sources */,
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
 				843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */,
+				841B13BE1A31FE4F00249426 /* UIHelper.swift in Sources */,
 				84380C2C19E4195A0026398E /* Drink.swift in Sources */,
 				84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */,
 				8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */,
@@ -381,6 +388,7 @@
 				843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */,
 				84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */,
 				84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */,
+				841B13BC1A31D55500249426 /* RevealedViewControllers.swift in Sources */,
 				843B056019E2D7800097A833 /* StatisticsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

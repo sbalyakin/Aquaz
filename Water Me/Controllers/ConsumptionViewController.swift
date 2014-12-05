@@ -122,43 +122,20 @@ class ConsumptionViewController: UIViewController {
     let title = (viewMode == .Add) ? "Add" : "Apply"
     applyButton.setTitle(title, forState: .Normal)
   }
-  
+
   private func createCustomNavigationTitle() {
-    // TODO: Remove magical 100 value and find another way to calculate proper rectangle for the title view
-    let navigationTitleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
-    navigationTitleView = UIView(frame: navigationTitleViewRect)
-    
-    var titleLabelRect = navigationTitleView.bounds
-    if !isCurrentDayShouldBeShown {
-      // Adjust inner label by offsetting inside its parent
-      // without changing global titleVerticalPositionAdjustmentForBarMetrics,
-      // because if change it on view appearing/disappearing there will be noticable title item jumping.
-      let verticalAdjustment = navigationController!.navigationBar.titleVerticalPositionAdjustmentForBarMetrics(.Default)
-      titleLabelRect.offset(dx: 0, dy: -verticalAdjustment)
-    }
-    
-    navigationTitleLabel = UILabel(frame: titleLabelRect)
-    navigationTitleLabel.autoresizingMask = .FlexibleWidth
-    navigationTitleLabel.backgroundColor = UIColor.clearColor()
-    navigationTitleLabel.text = drink.name
-    let fontSize: CGFloat = isCurrentDayShouldBeShown ? 16 : 18
-    navigationTitleLabel.font = UIFont.boldSystemFontOfSize(fontSize)
-    navigationTitleLabel.textAlignment = .Center
-    navigationTitleView.addSubview(navigationTitleLabel)
-    
     if isCurrentDayShouldBeShown {
-      let currentDayLabelRect = navigationTitleView.bounds.rectByOffsetting(dx: 0, dy: 16)
-      navigationCurrentDayLabel = UILabel(frame: currentDayLabelRect)
-      navigationCurrentDayLabel!.autoresizingMask = navigationTitleLabel.autoresizingMask
-      navigationCurrentDayLabel!.backgroundColor = UIColor.clearColor()
-      navigationCurrentDayLabel!.font = UIFont.systemFontOfSize(12)
-      navigationCurrentDayLabel!.textAlignment = .Center
-      let date = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
-      navigationCurrentDayLabel!.text = date
-      navigationTitleView.addSubview(navigationCurrentDayLabel!)
+      let dateText = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
+
+      let titleParts = UIHelper.createNavigationTitleViewWithSubTitle(navigationController: navigationController!, titleText: drink.name, subtitleText: dateText)
+      
+      navigationTitleView = titleParts.containerView
+      navigationTitleLabel = titleParts.titleLabel
+      navigationCurrentDayLabel = titleParts.subtitleLabel
+      navigationItem.titleView = navigationTitleView
+    } else {
+      navigationItem.title = drink.name
     }
-    
-    navigationItem.titleView = navigationTitleView
   }
   
   private func setupPickTimeButton() {

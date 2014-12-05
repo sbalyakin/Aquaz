@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol WeekStatisticsViewDelegate {
+  func weekStatisticsViewDaySelected(dayIndex: Int)
+}
+
 @IBDesignable class WeekStatisticsView: UIView {
   
   typealias ItemType = (value: CGFloat, goal: CGFloat)
@@ -33,6 +37,8 @@ import UIKit
   let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.WeekdayCalendarUnit).length
   
   var animationDuration = 0.4
+  
+  var delegate: WeekStatisticsViewDelegate?
   
   enum VerticalAlign {
     case Top, Center, Bottom
@@ -87,7 +93,9 @@ import UIKit
   }
   
   func dayButtonTapped(sender: UIButton) {
-    
+    if let delegate = delegate {
+      delegate.weekStatisticsViewDaySelected(sender.tag)
+    }
   }
   
   private func createControls(#rect: CGRect) {

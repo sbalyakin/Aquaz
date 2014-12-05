@@ -24,11 +24,10 @@ private extension Units.Volume {
   }
 }
 
-class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class DayViewController: RevealedViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
   
   // MARK: UI elements -
   
-  @IBOutlet weak var revealButton: UIBarButtonItem!
   @IBOutlet weak var pageButton: UIBarButtonItem!
   @IBOutlet weak var summaryBar: UIView!
   @IBOutlet weak var consumptionProgressView: MultiProgressView!
@@ -48,13 +47,9 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   // MARK: Public properties -
   
   /// Current date for managing water intake
-  var currentDate: NSDate = NSDate() {
-    didSet {
-      updateCurrentDateRelatedControls()
-    }
-  }
+  private var currentDate: NSDate = NSDate()
   
-  var overallConsumption: Double = 0.0 {
+  private var overallConsumption: Double = 0.0 {
     didSet {
       updateConsumptionLabel()
     }
@@ -66,13 +61,8 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     super.viewDidLoad()
     
     createCustomNavigationTitle()
-  
     createPageViewController()
-
     setupSummaryBar()
-    
-    revealButtonSetup()
-
     updateCurrentDateRelatedControls()
   }
   
@@ -84,36 +74,28 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     }
   }
   
+  func setCurrentDate(date: NSDate, updateControl: Bool) {
+    currentDate = date
+    
+    if updateControl {
+      updateCurrentDateRelatedControls()
+    }
+  }
+  
+  func getCurrentDate() -> NSDate {
+    return currentDate
+  }
+  
   private func createCustomNavigationTitle() {
-    // Move the title view up in order to display second line of the title (date) properly.
-    // It seems that there is no any other way to do that.
-    // Unfortunately this setting has an influence on any view controllers pushed to navigation controller,
-    // so it's necessary to take this setting into account in all of them.
-    let verticalAdjustment: CGFloat = -8
-    navigationController!.navigationBar.setTitleVerticalPositionAdjustment(verticalAdjustment, forBarMetrics: .Default)
-
-    let navigationTitleViewRect = navigationController!.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
-    navigationTitleView = UIView(frame: navigationTitleViewRect)
+    let titleParts = UIHelper.createNavigationTitleViewWithSubTitle(navigationController: navigationController!, titleText: navigationItem.title)
     
-    navigationTitleLabel = UILabel(frame: navigationTitleView.bounds)
-    navigationTitleLabel.autoresizingMask = .FlexibleWidth
-    navigationTitleLabel.backgroundColor = UIColor.clearColor()
-    navigationTitleLabel.text = navigationItem.title
-    navigationTitleLabel.font = UIFont.boldSystemFontOfSize(16)
-    navigationTitleLabel.textAlignment = .Center
-    navigationTitleView.addSubview(navigationTitleLabel)
-    
-    let currentDayLabelRect = navigationTitleView.bounds.rectByOffsetting(dx: 0, dy: 16)
-    navigationCurrentDayLabel = UILabel(frame: currentDayLabelRect)
-    navigationCurrentDayLabel.autoresizingMask = navigationTitleLabel.autoresizingMask
-    navigationCurrentDayLabel.backgroundColor = UIColor.clearColor()
-    navigationCurrentDayLabel.font = UIFont.systemFontOfSize(12)
-    navigationCurrentDayLabel.textAlignment = .Center
-    navigationTitleView.addSubview(navigationCurrentDayLabel)
+    navigationTitleView = titleParts.containerView
+    navigationTitleLabel = titleParts.titleLabel
+    navigationCurrentDayLabel = titleParts.subtitleLabel
     
     navigationItem.titleView = navigationTitleView
   }
-  
+
   private func setupSummaryBar() {
     setDaySelectionBarVisible(Settings.sharedInstance.uiDisplayDaySelection.value)
     setupMultiprogressControl()
@@ -163,15 +145,6 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
     pageViewController.didMoveToParentViewController(self)
   }
   
-  private func revealButtonSetup() {
-    if let revealViewController = self.revealViewController() {
-      revealButton.target = revealViewController
-      revealButton.action = "revealToggle:"
-      navigationController!.navigationBar.addGestureRecognizer(revealViewController.panGestureRecognizer())
-      view.addGestureRecognizer(revealViewController.panGestureRecognizer())
-    }
-  }
-  
   // MARK: Summary bar actions -
   
   @IBAction func toggleDaySelectionBar(sender: AnyObject) {
@@ -219,10 +192,12 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   
   @IBAction func switchToPreviousDay(sender: AnyObject) {
     currentDate = DateHelper.addToDate(currentDate, years: 0, months: 0, days: -1)
+    updateCurrentDateRelatedControls()
   }
 
   @IBAction func switchToNextDay(sender: AnyObject) {
     currentDate = DateHelper.addToDate(currentDate, years: 0, months: 0, days: 1)
+    updateCurrentDateRelatedControls()
   }
   
   // MARK: Change current screen -
@@ -481,5 +456,5 @@ class DayViewController: UIViewController, UIPageViewControllerDataSource, UIPag
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
   private let drinkTypesCount = 9 // number of supported drinks types: water, tea etc.
-  
+
 }

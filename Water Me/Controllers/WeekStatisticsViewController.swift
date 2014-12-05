@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WeekStatisticsViewController: UIViewController {
+class WeekStatisticsViewController: UIViewController, WeekStatisticsViewDelegate {
   
   @IBOutlet weak var weekStatisticsView: WeekStatisticsView!
   @IBOutlet weak var datePeriodLabel: UILabel!
@@ -28,10 +28,25 @@ class WeekStatisticsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    weekStatisticsView.delegate = self
     // TODO: Specify from the settings
     date = NSDate()
   }
   
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+  }
+  
+  func weekStatisticsViewDaySelected(dayIndex: Int) {
+    let selectedDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
+    
+    let dayViewController = storyboard!.instantiateViewControllerWithIdentifier("DayViewController") as DayViewController
+    dayViewController.setCurrentDate(selectedDate, updateControl: false)
+    dayViewController.initializesRevealControls = false
+    
+    navigationController!.pushViewController(dayViewController, animated: true)
+  }
+
   @IBAction func switchToPreviousWeek(sender: AnyObject) {
     date = DateHelper.addToDate(date, years: 0, months: 0, days: -7)
   }

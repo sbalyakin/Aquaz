@@ -13,7 +13,7 @@ protocol CalendarViewDelegate {
 }
 
 @IBDesignable class CalendarView: UIView {
-  @IBInspectable var weekDaysTextColor: UIColor = UIColor.blackColor()
+  @IBInspectable var weekDayTitleTextColor: UIColor = UIColor.blackColor()
   @IBInspectable var workDayTextColor: UIColor = UIColor.blackColor()
   @IBInspectable var workDayBackgroundColor: UIColor = UIColor.clearColor()
   @IBInspectable var weekendTextColor: UIColor = UIColor.redColor()
@@ -215,7 +215,7 @@ protocol CalendarViewDelegate {
     for (index, title) in enumerate(weekDaySymbols) {
       let rect = weekDayRects[index]
       let weekDayLabel = UILabel(frame: rect)
-      weekDayLabel.textColor = weekDaysTextColor
+      weekDayLabel.textColor = weekDayTitleTextColor
       weekDayLabel.backgroundColor = UIColor.clearColor()
       weekDayLabel.textAlignment = .Center
       weekDayLabel.text = title as? String
@@ -353,6 +353,16 @@ protocol CalendarViewDelegate {
 
 }
 
+private extension UIColor {
+  func realColorFromColor(color: UIColor) -> UIColor {
+    if isClearColor() && !color.isClearColor() {
+      return color
+    }
+    
+    return self
+  }
+}
+
 class CalendarViewDayInfo {
   let calendarView: CalendarView
   let date: NSDate
@@ -395,48 +405,38 @@ class CalendarViewDayInfo {
     }
     
     if isSelected {
-      if result.text == UIColor.clearColor() {
-        result.text = calendarView.selectedDayTextColor
-      }
-      
-      if result.background == UIColor.clearColor() {
-        result.background = calendarView.selectedDayBackgroundColor
-      }
+      result.text = result.text.realColorFromColor(calendarView.selectedDayTextColor)
+      result.background = result.background.realColorFromColor(calendarView.selectedDayBackgroundColor)
     }
     
     if isWeekend {
-      if result.text == UIColor.clearColor() {
-        result.text = calendarView.weekendTextColor
-      }
-      
-      if result.background == UIColor.clearColor() {
-        result.background = calendarView.weekendBackgroundColor
-      }
+      result.text = result.text.realColorFromColor(calendarView.weekendTextColor)
+      result.background = result.background.realColorFromColor(calendarView.weekendBackgroundColor)
     }
     
-    if result.text == UIColor.clearColor() {
+    if result.text.isClearColor() {
       result.text = calendarView.workDayTextColor
     }
     
-    if result.background == UIColor.clearColor() {
+    if result.background.isClearColor() {
       result.background = calendarView.workDayBackgroundColor
     }
     
     // Make colors more translutent for future days and for days of past month
     if isFuture {
-      if result.text != UIColor.clearColor() {
+      if !result.text.isClearColor() {
         result.text = result.text.colorWithAlphaComponent(calendarView.futureDaysTransparency)
       }
       
-      if result.background != UIColor.clearColor() {
+      if !result.background.isClearColor() {
         result.background = result.background.colorWithAlphaComponent(calendarView.futureDaysTransparency)
       }
     } else if !isCurrentMonth {
-      if result.text != UIColor.clearColor() {
+      if !result.text.isClearColor() {
         result.text = result.text.colorWithAlphaComponent(calendarView.anotherMonthTransparency)
       }
       
-      if result.background != UIColor.clearColor() {
+      if !result.background.isClearColor() {
         result.background = result.background.colorWithAlphaComponent(calendarView.anotherMonthTransparency)
       }
     }

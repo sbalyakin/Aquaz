@@ -8,10 +8,9 @@
 
 import UIKit
 
-class StatisticsViewController: UIViewController {
+class StatisticsViewController: RevealedViewController {
   
   @IBOutlet weak var segmentedControl: UISegmentedControl!
-  @IBOutlet weak var revealButton: UIBarButtonItem!
   
   var viewControllers: [UIViewController!] = [nil, nil, nil]
   var currentViewController: UIViewController!
@@ -22,7 +21,6 @@ class StatisticsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    revealButtonSetup()
     
     let viewControllerTypeToActivate = Settings.sharedInstance.uiSelectedStatisticsPage.value
     segmentedControl.selectedSegmentIndex = viewControllerTypeToActivate.rawValue
@@ -39,6 +37,12 @@ class StatisticsViewController: UIViewController {
     let rects = view.bounds.rectsByDividing(segmentedControl.frame.maxY, fromEdge: .MinYEdge)
     let viewController = getViewControllerWithType(type)
     viewController.view.frame = rects.remainder
+    
+    for controller in childViewControllers {
+      controller.removeFromParentViewController()
+    }
+    
+    addChildViewController(viewController)
     view.addSubview(viewController.view)
     
     Settings.sharedInstance.uiSelectedStatisticsPage.value = type
@@ -56,7 +60,6 @@ class StatisticsViewController: UIViewController {
     case .Month: controller = storyboard!.instantiateViewControllerWithIdentifier("Month Statistics View Controller") as UIViewController
     case .Year:  controller = storyboard!.instantiateViewControllerWithIdentifier("Year Statistics View Controller") as UIViewController
     }
-    
     viewControllers[type.rawValue] = controller
     return controller
   }
@@ -68,14 +71,4 @@ class StatisticsViewController: UIViewController {
       activateViewControllerWithType(type)
     }
   }
-  
-  private func revealButtonSetup() {
-    if let revealViewController = self.revealViewController() {
-      revealButton.target = revealViewController
-      revealButton.action = "revealToggle:"
-      navigationController!.navigationBar.addGestureRecognizer(revealViewController.panGestureRecognizer())
-      view.addGestureRecognizer(revealViewController.panGestureRecognizer())
-    }
-  }
-
 }

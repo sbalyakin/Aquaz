@@ -28,6 +28,9 @@ class YearStatisticsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    yearStatisticsView.titleForHorizontalStep = getMonthTitleFromIndex
+    
     // TODO: Specify from the settings
     date = NSDate()
   }
@@ -62,6 +65,18 @@ class YearStatisticsViewController: UIViewController {
     }
     
     yearStatisticsView.setItems(statisticsItems)
+  }
+  
+  private func getMonthTitleFromIndex(monthIndex: CGFloat) -> String {
+    let index = Int(monthIndex)
+    let calendar = NSCalendar.currentCalendar()
+    
+    if index < 0 || index >= calendar.shortMonthSymbols.count {
+      assert(false)
+      return ""
+    }
+    
+    return calendar.shortMonthSymbols[index] as String
   }
   
   private func computeStatisticsDateRange() {

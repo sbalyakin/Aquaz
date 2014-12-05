@@ -20,10 +20,9 @@ class SelectDrinkViewController: UIViewController {
     let consumptionViewController = storyboard!.instantiateViewControllerWithIdentifier("ConsumptionViewController") as ConsumptionViewController
     let drink = Drink.getDrinkByIndex(sender.tag)
     consumptionViewController.drink = drink
-    consumptionViewController.currentDate = dayViewController.currentDate
+    consumptionViewController.currentDate = dayViewController.getCurrentDate()
     consumptionViewController.dayViewController = dayViewController
     navigationController!.pushViewController(consumptionViewController, animated: true)
-//    presentViewController(consumptionViewController, animated: true, completion: nil)
   }
   
 }
