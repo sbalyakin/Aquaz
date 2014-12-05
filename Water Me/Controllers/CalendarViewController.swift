@@ -56,7 +56,7 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
   }
   
   private func switchToDate(date: NSDate) {
-    calendarView.displayedMonthDate = date
+    calendarView.switchToMonth(date)
     
     let formatter = NSDateFormatter()
     let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMYYYY", options: 0, locale: NSLocale.currentLocale())

@@ -30,7 +30,7 @@ protocol CalendarViewDelegate {
   @IBInspectable var linesColor: UIColor = UIColor(white: 0.8, alpha: 1)
   
   /// Date of month displayed in the calendar
-  var displayedMonthDate: NSDate = NSDate() {
+  private var displayedMonthDate: NSDate = NSDate() {
     didSet {
       // Clean specified date and adjust it to the first day
       let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: displayedMonthDate)
@@ -62,6 +62,10 @@ protocol CalendarViewDelegate {
   override func prepareForInterfaceBuilder() {
     createDaysInfo()
     createControls()
+  }
+  
+  func switchToMonth(date: NSDate) {
+    displayedMonthDate = date
   }
   
   func switchToNextMonth() {
@@ -141,6 +145,7 @@ protocol CalendarViewDelegate {
       let dayInfo = CalendarViewDayInfo(
         calendarView: self,
         date: date,
+        dayOfCurrentMonth: i,
         title: title,
         isWeekend: isWeekend,
         isInitial: isInitial,
@@ -351,6 +356,7 @@ protocol CalendarViewDelegate {
 class CalendarViewDayInfo {
   let calendarView: CalendarView
   let date: NSDate
+  let dayOfCurrentMonth: Int
   let title: String
   let isWeekend: Bool
   let isToday: Bool
@@ -368,9 +374,10 @@ class CalendarViewDayInfo {
   typealias ChangeHandler = () -> Void
   var changeHandler: ChangeHandler?
   
-  init(calendarView: CalendarView, date: NSDate, title: String, isWeekend: Bool, isInitial: Bool, isToday: Bool, isCurrentMonth: Bool, isFuture: Bool) {
+  init(calendarView: CalendarView, date: NSDate, dayOfCurrentMonth: Int, title: String, isWeekend: Bool, isInitial: Bool, isToday: Bool, isCurrentMonth: Bool, isFuture: Bool) {
     self.calendarView = calendarView
     self.date = date
+    self.dayOfCurrentMonth = dayOfCurrentMonth
     self.title = title
     self.isWeekend = isWeekend
     self.isSelected = isInitial

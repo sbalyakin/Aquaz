@@ -53,9 +53,9 @@ class CoreDataPrePopulation {
   private class func generateConsumptions() {
     let secondsPerDay = 60 * 60 * 24
     let endDate = DateHelper.dateBySettingHour(0, minute: 0, second: 0, ofDate: NSDate())
-    let beginDate = DateHelper.addToDate(endDate, years: -1, months: 0, days: 0)
+    let beginDate = DateHelper.addToDate(endDate, years: -2, months: 0, days: 0)
     let minAmount = 50
-    let maxAmount = 300
+    let maxAmount = 500
     let maxConsumptionsPerDay = 10
     
     let managedObjectContext = ModelHelper.sharedInstance.managedObjectContext
@@ -77,7 +77,7 @@ class CoreDataPrePopulation {
   
   private class func generateConsumptionRates() {
     let endDate = DateHelper.dateBySettingHour(0, minute: 0, second: 0, ofDate: NSDate())
-    let beginDate = DateHelper.addToDate(endDate, years: -1, months: 0, days: 0)
+    let beginDate = DateHelper.addToDate(endDate, years: -2, months: 0, days: 0)
     let minConsumptionRate = 1500
     let maxConsumptionRate = 2500
     let computeConsumptionRateChanceInPercents = 5
@@ -86,7 +86,7 @@ class CoreDataPrePopulation {
     
     let managedObjectContext = ModelHelper.sharedInstance.managedObjectContext
     
-    var currentConsumptionRate = 0
+    var currentConsumptionRate = minConsumptionRate + random() % (maxConsumptionRate - minConsumptionRate)
 
     for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = currentDay.getNextDay() {
       let needToComputeConsumptionRate = (random() % 100) < computeConsumptionRateChanceInPercents

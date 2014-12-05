@@ -34,7 +34,7 @@ class MonthStatisticsDayButton: CalendarDayButton {
   }
   
   override func drawBackground(#rect: CGRect) {
-    // Slightly reduce abckground circle size in order to prevent noticeable hard edges,
+    // Slightly reduce background circle size in order to prevent noticeable hard edges,
     // produced by multiplying semi-translucent edges of background circle and consumption arcs.
     let adjustedRect = rect.rectByInsetting(dx: 0.2, dy: 0.2)
     super.drawBackground(rect: adjustedRect)

@@ -110,21 +110,17 @@ class Consumption: NSManagedObject, NamedEntity {
         break
       }
 
-      var waterIntakeForUnit: Double = lastWaterIntake
-      lastWaterIntake = 0
+      var waterIntakeForUnit: Double = 0
 
       for ; consumptionIndex < consumptions.count; consumptionIndex++ {
         let consumption = consumptions[consumptionIndex]
         let waterIntake = consumption.amount.doubleValue * consumption.drink.waterPercent.doubleValue
         
-        if consumption.date.isEarlierThan(nextDate) {
-          waterIntakeForUnit += waterIntake
-        } else {
-          consumptionIndex++
-          // Remember current water intake in order to take it into account on the next day iteration
-          lastWaterIntake = waterIntake
+        if !consumption.date.isEarlierThan(nextDate) {
           break
         }
+        
+        waterIntakeForUnit += waterIntake
       }
       
       if computeAverageAmounts {

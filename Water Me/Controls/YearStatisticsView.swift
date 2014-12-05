@@ -332,7 +332,7 @@ import UIKit
 
     for (index, item) in enumerate(items) {
       let x = rect.minX + CGFloat(index) / maxIndex * rect.width
-      let y = rect.maxY - item.goal / verticalMaximum * rect.height
+      let y = verticalMaximum > 0 ? rect.maxY - item.goal / verticalMaximum * rect.height : 0
       let point = CGPointMake(round(x), round(y))
 
       if index == 0 {
@@ -354,7 +354,7 @@ import UIKit
     
     for (index, item) in enumerate(items) {
       let x = rect.minX + CGFloat(index) / maxIndex * rect.width
-      let y = rect.maxY - item.value / verticalMaximum * rect.height
+      let y = verticalMaximum > 0 ? rect.maxY - item.value / verticalMaximum * rect.height : 0
       let point = CGPointMake(round(x), round(y))
       valuesPoints.append(point)
       if index == 0 {

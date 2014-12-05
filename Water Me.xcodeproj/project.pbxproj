@@ -32,6 +32,8 @@
 		84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */; };
 		84B639831A25D9EF00889438 /* WeekStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B639811A25D9EF00889438 /* WeekStatisticsView.swift */; };
 		84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B639821A25D9EF00889438 /* YearStatisticsView.swift */; };
+		84C610BA1A319DBC00433EF1 /* MonthStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C610B91A319DBC00433EF1 /* MonthStatisticsViewController.swift */; };
+		84C610BC1A31A98900433EF1 /* YearStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */; };
 		84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9DD971A16574E003D6444 /* PickTimeViewController.swift */; };
 		A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F801A1212930088AF47 /* CalendarDayButton.swift */; };
 		A5275F851A1212930088AF47 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F821A1212930088AF47 /* CalendarView.swift */; };
@@ -84,6 +86,8 @@
 		84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPrePopulation.swift; sourceTree = "<group>"; };
 		84B639811A25D9EF00889438 /* WeekStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeekStatisticsView.swift; path = Controls/WeekStatisticsView.swift; sourceTree = "<group>"; };
 		84B639821A25D9EF00889438 /* YearStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YearStatisticsView.swift; path = Controls/YearStatisticsView.swift; sourceTree = "<group>"; };
+		84C610B91A319DBC00433EF1 /* MonthStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthStatisticsViewController.swift; sourceTree = "<group>"; };
+		84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YearStatisticsViewController.swift; sourceTree = "<group>"; };
 		84F9DD971A16574E003D6444 /* PickTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTimeViewController.swift; sourceTree = "<group>"; };
 		A5275F801A1212930088AF47 /* CalendarDayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarDayButton.swift; path = Controls/CalendarDayButton.swift; sourceTree = "<group>"; };
 		A5275F821A1212930088AF47 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarView.swift; path = Controls/CalendarView.swift; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 				843B055619E2D7800097A833 /* StatisticsViewController.swift */,
 				84F9DD971A16574E003D6444 /* PickTimeViewController.swift */,
 				A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */,
+				84C610B91A319DBC00433EF1 /* MonthStatisticsViewController.swift */,
+				84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -363,7 +369,9 @@
 				84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */,
 				8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */,
 				84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */,
+				84C610BA1A319DBC00433EF1 /* MonthStatisticsViewController.swift in Sources */,
 				84380C2819E4195A0026398E /* Consumption.swift in Sources */,
+				84C610BC1A31A98900433EF1 /* YearStatisticsViewController.swift in Sources */,
 				A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */,
 				8478253719EAC8C200588FE3 /* ConsumptionViewController.swift in Sources */,
 				84126A851A278F4A00A66347 /* MonthStatisticsDayButton.swift in Sources */,

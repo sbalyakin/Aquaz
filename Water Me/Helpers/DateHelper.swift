@@ -64,6 +64,14 @@ class DateHelper {
       components1.month == components2.month
   }
   
+  class func areDatesEqualByYears(#date1: NSDate, date2: NSDate) -> Bool {
+    let calendar = NSCalendar.currentCalendar()
+    let components1 = calendar.components(.CalendarUnitYear, fromDate: date1)
+    let components2 = calendar.components(.CalendarUnitYear, fromDate: date2)
+    
+    return components1.year == components2.year
+  }
+  
   /// Generates string for the specified date. If year of a current date is year of today, the function hides it.
   class func stringFromDate(date: NSDate, shortDateStyle: Bool = false) -> String {
     let today = NSDate()

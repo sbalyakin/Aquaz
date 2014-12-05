@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MonthStatisticsViewDataSource {
-  func monthStatisticsGetConsumptionFractionForDate(date: NSDate) -> Double
+  func monthStatisticsGetConsumptionFractionForDate(date: NSDate, dayOfCurrentMonth: Int) -> Double
 }
 
 @IBDesignable class MonthStatisticsView: CalendarView {
@@ -37,16 +37,16 @@ protocol MonthStatisticsViewDataSource {
     let button = MonthStatisticsDayButton(frame: frame)
     button.dayInfo = dayInfo
     button.monthStatisticsView = self
-    button.consumptionFraction = requestConsumptionFractionForDate(dayInfo.date)
+    button.consumptionFraction = requestConsumptionFractionForDate(dayInfo)
     return button
   }
   
-  private func requestConsumptionFractionForDate(date: NSDate) -> Double {
+  private func requestConsumptionFractionForDate(dayInfo: CalendarViewDayInfo) -> Double {
     #if TARGET_INTERFACE_BUILDER
       return 0.5
     #else
       if let dataSource = dataSource {
-        return dataSource.monthStatisticsGetConsumptionFractionForDate(date)
+        return dataSource.monthStatisticsGetConsumptionFractionForDate(dayInfo.date, dayOfCurrentMonth: dayInfo.dayOfCurrentMonth)
       }
     
       return 0

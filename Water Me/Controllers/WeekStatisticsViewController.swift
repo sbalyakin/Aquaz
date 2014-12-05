@@ -12,12 +12,14 @@ class WeekStatisticsViewController: UIViewController {
   
   @IBOutlet weak var weekStatisticsView: WeekStatisticsView!
   @IBOutlet weak var datePeriodLabel: UILabel!
+  @IBOutlet weak var nextWeekButton: UIButton!
   
   var date: NSDate = NSDate() {
     didSet {
       computeStatisticsDateRange()
       initDatePeriodLabel()
       initWeekStatisticsView()
+      updateSwitchButtons()
     }
   }
   
@@ -67,6 +69,11 @@ class WeekStatisticsViewController: UIViewController {
     weekStatisticsView.setItems(statisticsItems)
   }
 
+  private func updateSwitchButtons() {
+    let isCurrentWeek = statisticsEndDate.isLaterThan(NSDate())
+    nextWeekButton.enabled = !isCurrentWeek
+  }
+  
   private func computeStatisticsDateRange() {
     let calendar = NSCalendar.currentCalendar()
     let weekdayOfDate = calendar.ordinalityOfUnit(.CalendarUnitWeekday, inUnit: .WeekCalendarUnit, forDate: date)
