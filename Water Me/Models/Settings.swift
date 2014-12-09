@@ -135,6 +135,11 @@ class Settings {
     }
     return Instance.instance
   }
+  
+  enum Gender: Int {
+    case Male = 0
+    case Female
+  }
 
   enum ActivityLevel: Int {
     case Low = 0
@@ -166,8 +171,8 @@ class Settings {
   lazy var userActivityLevel: SettingsEnumItem<ActivityLevel> = SettingsEnumItem(
     key: "User - Activity level", initialValue: .Medium, userDefaults: self.standardUserDefaults)
   
-  lazy var userIsMale: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "User - Is male", initialValue: true, userDefaults: self.standardUserDefaults)
+  lazy var userGender: SettingsEnumItem<Gender> = SettingsEnumItem(
+    key: "User - Gender", initialValue: .Male, userDefaults: self.standardUserDefaults)
   
   lazy var userAge: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
     key: "User - Age", initialValue: 30, userDefaults: self.standardUserDefaults)
