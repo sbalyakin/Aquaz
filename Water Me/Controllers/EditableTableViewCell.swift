@@ -35,9 +35,5 @@ class EditableTableViewCell: UITableViewCell {
     let indexPath = tableView.indexPathForCell(self)
     tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
   }
-
-  @IBAction func valueEditingDidEnd(sender: AnyObject) {
-//    selected = false
-  }
   
 }

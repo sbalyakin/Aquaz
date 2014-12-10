@@ -26,6 +26,23 @@ class ConsumptionRateViewController: RevealedViewController, UITableViewDataSour
     tableView.addGestureRecognizer(tap)
   }
   
+  @IBAction func cancelButtonWasTapped(sender: AnyObject) {
+    navigationController!.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  @IBAction func doneButtonWasTapped(sender: AnyObject) {
+    saveToSettings()
+    navigationController!.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  private func saveToSettings() {
+    for section in cellsInfo {
+      for cellInfo in section {
+        cellInfo.saveToSettings()
+      }
+    }
+  }
+  
   // MARK: - Table view data source
   
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -159,6 +176,99 @@ class ConsumptionRateViewController: RevealedViewController, UITableViewDataSour
   private var originalTableViewContentInset: UIEdgeInsets = UIEdgeInsetsZero
 }
 
+private class CellInfo2<T> {
+  let cellIdentifier: String
+  let title: String
+  var value: T
+  
+  init(cellIdentifier: String, title: String, setting: SettingsItemBase<T>) {
+    self.cellIdentifier = cellIdentifier
+    self.title = title
+    self.setting = setting
+    self.value = setting.value
+  }
+
+  func initCell(cell: UITableViewCell, tableView: UITableView) {
+    // Initialize passed cell if it's necessary
+  }
+  
+  func getStringValue() -> String {
+    return "\(value)"
+  }
+  
+  func saveToSettings() {
+    setting.value = value
+  }
+
+  private let setting: SettingsItemBase<T>
+}
+
+private class PickerViewCellInfo<T>: CellInfo2<T> {
+  init(title: String, setting: SettingsItemBase<T>, valuesGenerator: CellInfoValuesGenerator<T>) {
+    self.valuesGenerator = valuesGenerator
+    super.init(cellIdentifier: cellIdentifierRightDetailWithInfo, title: title, setting: setting)
+  }
+  
+  override func initCell(cell: UITableViewCell, tableView: UITableView) {
+    cell.textLabel?.text = title
+    cell.detailTextLabel?.text = getStringValue()
+  }
+  
+  func getAvailableValuesCount() -> Int {
+    return 0
+  }
+  
+  func getAvailableValueByIndex(index: Int) -> String {
+    return ""
+  }
+  
+  func setValueFromAvailableValueByIndex(index: Int) {
+    
+  }
+  
+  let valuesGenerator: CellInfoValuesGenerator<T>
+}
+
+private class CellInfoValuesGenerator<T> {
+  func getAvailableValuesCount() -> Int {
+    return 0
+  }
+  
+  func getAvailableValueByIndex(index: Int) -> String {
+    return ""
+  }
+  
+  func getValueFromAvailableValueByIndex(index: Int) -> T? {
+    return nil
+  }
+}
+
+private class CellInfoOrdinalValuesGenerator<T: IntegerLiteralConvertible>: CellInfoValuesGenerator<T> {
+  init(minimumValue: Int, maximumValue: Int) {
+    self.minimumValue = minimumValue
+    self.maximumValue = maximumValue
+  }
+  
+  override func getAvailableValuesCount() -> Int {
+    return maximumValue - minimumValue + 1
+  }
+  
+  override func getAvailableValueByIndex(index: Int) -> String {
+    return "\(minimumValue + index)"
+  }
+  
+  override func getValueFromAvailableValueByIndex(index: Int) -> T? {
+    let value = minimumValue + index
+    // TODO: Error here
+    return T(integerLiteral: value as T.IntegerLiteralType)
+  }
+  
+  private let minimumValue: Int
+  private let maximumValue: Int
+}
+
+private var a: CellInfoOrdinalValuesGenerator<Float> = CellInfoOrdinalValuesGenerator(minimumValue: 30, maximumValue: 40)
+
 private let cellIdentifierRightDetail = "RightDetail"
 private let cellIdentifierRightDetailWithInfo = "RightDetailWithInfo"
 private let cellIdentifierEditable = "EditableCell"
@@ -171,6 +281,7 @@ private protocol CellInfo {
   func getTitlesForAvailableValues() -> [String]
   func setValueByAvailableValueIndex(index: Int)
   func getValueIndexInAvailableValues() -> Int
+  func saveToSettings()
 }
 
 private class GenderCellInfo : CellInfo {
@@ -201,11 +312,14 @@ private class GenderCellInfo : CellInfo {
   func setValueByAvailableValueIndex(index: Int) {
     assert(index >= availableValues.startIndex && index <= availableValues.endIndex)
     value = availableValues[index]
-    Settings.sharedInstance.userGender.value = value
   }
 
   func getValueIndexInAvailableValues() -> Int {
     return value.rawValue
+  }
+
+  func saveToSettings() {
+    Settings.sharedInstance.userGender.value = value
   }
 
   private var value = Settings.sharedInstance.userGender.value
@@ -238,7 +352,6 @@ private class HeightCellInfo : CellInfo {
   func setValueByAvailableValueIndex(index: Int) {
     assert(index >= availableValues.startIndex && index <= availableValues.endIndex)
     value = availableValues[index]
-    Settings.sharedInstance.userHeight.value = value
   }
   
   func getValueIndexInAvailableValues() -> Int {
@@ -249,6 +362,10 @@ private class HeightCellInfo : CellInfo {
     }
     
     return 0
+  }
+
+  func saveToSettings() {
+    Settings.sharedInstance.userHeight.value = value
   }
 
   init() {
@@ -288,7 +405,6 @@ private class WeightCellInfo : CellInfo {
   func setValueByAvailableValueIndex(index: Int) {
     assert(index >= availableValues.startIndex && index <= availableValues.endIndex)
     value = availableValues[index]
-    Settings.sharedInstance.userWeight.value = value
   }
   
   func getValueIndexInAvailableValues() -> Int {
@@ -308,6 +424,10 @@ private class WeightCellInfo : CellInfo {
     }
   }
   
+  func saveToSettings() {
+    Settings.sharedInstance.userWeight.value = value
+  }
+
   private var value = Settings.sharedInstance.userWeight.value
   private var availableValues: [Double] = []
   private var availableValuesTitles: [String] = []
@@ -338,7 +458,6 @@ private class AgeCellInfo : CellInfo {
   func setValueByAvailableValueIndex(index: Int) {
     assert(index >= availableValues.startIndex && index <= availableValues.endIndex)
     value = availableValues[index]
-    Settings.sharedInstance.userAge.value = value
   }
   
   func getValueIndexInAvailableValues() -> Int {
@@ -358,6 +477,10 @@ private class AgeCellInfo : CellInfo {
     }
   }
   
+  func saveToSettings() {
+    Settings.sharedInstance.userAge.value = value
+  }
+
   private var value = Settings.sharedInstance.userAge.value
   private var availableValues: [Int] = []
   private var availableValuesTitles: [String] = []
@@ -392,13 +515,16 @@ private class ActivityCellInfo : CellInfo {
   func setValueByAvailableValueIndex(index: Int) {
     assert(index >= availableValues.startIndex && index <= availableValues.endIndex)
     value = availableValues[index]
-    Settings.sharedInstance.userActivityLevel.value = value
   }
 
   func getValueIndexInAvailableValues() -> Int {
     return value.rawValue
   }
   
+  func saveToSettings() {
+    Settings.sharedInstance.userActivityLevel.value = value
+  }
+
   private var value = Settings.sharedInstance.userActivityLevel.value
   private var availableValues: [Settings.ActivityLevel] = [.Low, .Medium, .High]
   private var availableValuesTitles = ["Low", "Medium", "High"]
@@ -436,6 +562,9 @@ private class WaterIntakeCellInfo : CellInfo {
     return 0
   }
   
+  func saveToSettings() {
+    Settings.sharedInstance.userDailyWaterIntake.value = value
+  }
 
   private var value = Settings.sharedInstance.userDailyWaterIntake.value
 }
