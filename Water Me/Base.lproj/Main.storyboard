@@ -985,13 +985,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ilq-xH-QYn" id="2fG-2H-PiC">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QjD-aH-nVL">
-                                                    <rect key="frame" x="15" y="12" width="192" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" id="ei9-hf-y9m">
                                                     <rect key="frame" x="215" y="7" width="97" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
@@ -999,9 +992,16 @@
                                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                     <connections>
                                                         <action selector="valueEditingDidBegin:" destination="Ilq-xH-QYn" eventType="editingDidBegin" id="rKD-IK-RXE"/>
-                                                        <action selector="valueEditingDidEnd:" destination="Ilq-xH-QYn" eventType="editingDidEnd" id="KTQ-3b-EWZ"/>
+                                                        <action selector="valueEditingDidEnd:" destination="Ilq-xH-QYn" eventType="editingDidEnd" id="RxR-KI-dCq"/>
                                                     </connections>
                                                 </textField>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QjD-aH-nVL">
+                                                    <rect key="frame" x="15" y="12" width="192" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1042,7 +1042,7 @@
         <scene sceneID="jHK-zD-pWf">
             <objects>
                 <tableViewController id="wjj-WP-iN6" customClass="SettingsTableViewController" customModule="Water_Me" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="S4b-ZQ-4jv">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="S4b-ZQ-4jv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -1151,7 +1151,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="5uR-gT-4hl" kind="push" id="EXS-9d-t1q"/>
+                                            <segue destination="5uR-gT-4hl" kind="push" id="YNn-pc-mta"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>

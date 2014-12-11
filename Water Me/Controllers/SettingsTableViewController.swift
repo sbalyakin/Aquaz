@@ -34,4 +34,5 @@ class SettingsTableViewController: RevealedTableViewController {
   @IBAction func heightSettingChanged(sender: UISegmentedControl) {
     Settings.sharedInstance.generalHeightUnits.value = Units.Length(rawValue: sender.selectedSegmentIndex)!
   }
+  
 }
