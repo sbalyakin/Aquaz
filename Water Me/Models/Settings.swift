@@ -137,14 +137,17 @@ class Settings {
   }
   
   enum Gender: Int {
-    case Male = 0
-    case Female
+    case Man = 0
+    case Woman
+    case PregnantFemale
+    case BreastfeedingFemale
   }
 
-  enum ActivityLevel: Int {
-    case Low = 0
-    case Medium
-    case High
+  enum PhysicalActivity: Int {
+    case Rare = 0
+    case Occasional
+    case Weekly
+    case Daily
   }
   
   lazy var generalWeightUnits: SettingsEnumItem<Units.Weight> = SettingsEnumItem(
@@ -168,11 +171,11 @@ class Settings {
   lazy var userWeight: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
     key: "User - Weight", initialValue: 70, userDefaults: self.standardUserDefaults)
   
-  lazy var userActivityLevel: SettingsEnumItem<ActivityLevel> = SettingsEnumItem(
-    key: "User - Activity level", initialValue: .Medium, userDefaults: self.standardUserDefaults)
+  lazy var userPhysicalActivity: SettingsEnumItem<PhysicalActivity> = SettingsEnumItem(
+    key: "User - Physical activity", initialValue: .Occasional, userDefaults: self.standardUserDefaults)
   
   lazy var userGender: SettingsEnumItem<Gender> = SettingsEnumItem(
-    key: "User - Gender", initialValue: .Male, userDefaults: self.standardUserDefaults)
+    key: "User - Gender", initialValue: .Man, userDefaults: self.standardUserDefaults)
   
   lazy var userAge: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
     key: "User - Age", initialValue: 30, userDefaults: self.standardUserDefaults)

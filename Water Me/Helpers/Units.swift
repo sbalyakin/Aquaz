@@ -74,6 +74,11 @@ class Units {
   /// Amount should be specified in metric units.
   // It's possible to specify final precision and numbers of decimals of formatted text.
   func formatAmountToText(#amount: Double, unitType: UnitType, precision: Double = 1, decimals: Int = 0, displayUnits: Bool = true) -> String {
+    if precision == 0 {
+      assert(false)
+      return ""
+    }
+    
     let units = self.units[unitType.rawValue]
     var quantity = Quantity(ownUnit: units.settingsUnit, fromUnit: units.internalUnit, fromAmount: amount)
     quantity.amount = round(quantity.amount / precision) * precision
@@ -192,39 +197,39 @@ func -=(inout left: Quantity, right: Quantity) {
 }
 
 class MilliliterUnit: Unit {
-  var type: UnitType = .Volume
-  var factor: Double = 0.001
-  var contraction: String = "ml"
+  let type: UnitType = .Volume
+  let factor: Double = 0.001
+  let contraction: String = "ml"
 }
 
 class FluidOunceUnit: Unit {
-  var type: UnitType = .Volume
-  var factor: Double = 0.0295735295625
-  var contraction: String = "fl oz"
+  let type: UnitType = .Volume
+  let factor: Double = 0.0295735295625
+  let contraction: String = "fl oz"
 }
 
 class KilogramUnit: Unit {
-  var type: UnitType = .Weight
-  var factor: Double = 1
-  var contraction: String = "kg"
+  let type: UnitType = .Weight
+  let factor: Double = 1
+  let contraction: String = "kg"
 }
 
 class PoundUnit: Unit {
-  var type: UnitType = .Weight
-  var factor: Double = 0.45359237
-  var contraction: String = "lb"
+  let type: UnitType = .Weight
+  let factor: Double = 0.45359237
+  let contraction: String = "lbs"
 }
 
 class CentimeterUnit: Unit {
-  var type: UnitType = .Length
-  var factor: Double = 0.01
-  var contraction: String = "cm"
+  let type: UnitType = .Length
+  let factor: Double = 0.01
+  let contraction: String = "cm"
 }
 
 class FootUnit: Unit {
-  var type: UnitType = .Length
-  var factor: Double = 0.3048
-  var contraction: String = "ft"
+  let type: UnitType = .Length
+  let factor: Double = 0.3048
+  let contraction: String = "ft"
 }
 
 

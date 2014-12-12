@@ -8,6 +8,80 @@
 
 import UIKit
 
+private extension Units.Weight {
+  var minimumValue: Double {
+    switch self {
+    case Kilograms: return 1
+    case Pounds:    return 1
+    }
+  }
+  
+  var maximumValue: Double {
+    switch self {
+    case Kilograms: return 300
+    case Pounds:    return 660
+    }
+  }
+  
+  var step: Double {
+    switch self {
+    case Kilograms: return 1
+    case Pounds:    return 1
+    }
+  }
+  
+  var precision: Double {
+    switch self {
+    case Kilograms: return 1
+    case Pounds:    return 1
+    }
+  }
+  
+  var decimals: Int {
+    switch self {
+    case Kilograms: return 0
+    case Pounds:    return 0
+    }
+  }
+}
+
+private extension Units.Length {
+  var minimumValue: Double {
+    switch self {
+    case Centimeters: return 30
+    case Feet:        return 30.48 // 1 foot
+    }
+  }
+
+  var maximumValue: Double {
+    switch self {
+    case Centimeters: return 300
+    case Feet:        return 304.8 // 10 feet
+    }
+  }
+
+  var step: Double {
+    switch self {
+    case Centimeters: return 1
+    case Feet:        return 3.048 // 0.1 feet
+    }
+  }
+  
+  var precision: Double {
+    switch self {
+    case Centimeters: return 1
+    case Feet:        return 0.1
+    }
+  }
+  
+  var decimals: Int {
+    switch self {
+    case Centimeters: return 0
+    case Feet:        return 1
+    }
+  }
+}
+
 class ConsumptionRateViewController: RevealedViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
   
   @IBOutlet weak var tableView: UITableView!
@@ -18,48 +92,56 @@ class ConsumptionRateViewController: RevealedViewController, UITableViewDataSour
     gender = SelectableEnumCellInfo<Settings.Gender>(
       viewController: self,
       title: "Gender",
-      setting: Settings.sharedInstance.userGender)
+      setting: Settings.sharedInstance.userGender,
+      titleFunction: getTitleForGender)
     
     height = SelectableCellInfo<Double>(
       viewController: self,
       title: "Height",
       setting: Settings.sharedInstance.userHeight,
-      minimumValue: 30,
-      maximumValue: 300)
+      minimumValue: Settings.sharedInstance.generalHeightUnits.value.minimumValue,
+      maximumValue: Settings.sharedInstance.generalHeightUnits.value.maximumValue,
+      step: Settings.sharedInstance.generalHeightUnits.value.step,
+      titleFunction: getTitleForHeight)
     
     weight = SelectableCellInfo<Double>(
       viewController: self,
       title: "Weight",
       setting: Settings.sharedInstance.userWeight,
-      minimumValue: 30,
-      maximumValue: 300)
+      minimumValue: Settings.sharedInstance.generalWeightUnits.value.minimumValue,
+      maximumValue: Settings.sharedInstance.generalWeightUnits.value.maximumValue,
+      step: Settings.sharedInstance.generalWeightUnits.value.step,
+      titleFunction: getTitleForWeight)
     
     age = SelectableCellInfo<Int>(
       viewController: self,
       title: "Age",
       setting: Settings.sharedInstance.userAge,
-      minimumValue: 1,
-      maximumValue: 100)
+      minimumValue: minimumAge,
+      maximumValue: maximumAge,
+      step: 1,
+      titleFunction: getTitleForAge)
     
-    activity = SelectableEnumCellInfo<Settings.ActivityLevel>(
+    physicalActivity = SelectableEnumCellInfo<Settings.PhysicalActivity>(
       viewController: self,
-      title: "Activity Level",
-      setting: Settings.sharedInstance.userActivityLevel)
+      title: "Physical Activity",
+      setting: Settings.sharedInstance.userPhysicalActivity,
+      titleFunction: getTitleForPhysicalActivity)
     
     waterIntake = EditableCellInfo<Double>(
       title: "Water Intake",
       setting: Settings.sharedInstance.userDailyWaterIntake,
       stringToValueFunction: stringToDouble)
     
-    gender.valueChangedFunction = cellValueWasChanged
-    height.valueChangedFunction = cellValueWasChanged
-    weight.valueChangedFunction = cellValueWasChanged
-    age.valueChangedFunction = cellValueWasChanged
-    activity.valueChangedFunction = cellValueWasChanged
-    waterIntake.valueChangedFunction = cellValueWasChanged
+    gender.valueChangedFunction = updateSourceCellInTable
+    height.valueChangedFunction = updateSourceCellInTable
+    weight.valueChangedFunction = updateSourceCellInTable
+    age.valueChangedFunction = updateSourceCellInTable
+    physicalActivity.valueChangedFunction = updateSourceCellInTable
+    waterIntake.valueChangedFunction = updateCellInTable
     
     cellsInfo = [
-      [gender, height, weight, age, activity], // section 1
+      [gender, height, weight, age, physicalActivity], // section 1
       [waterIntake]                            // section 2
     ]
     
@@ -67,6 +149,38 @@ class ConsumptionRateViewController: RevealedViewController, UITableViewDataSour
     
     let tap = UITapGestureRecognizer(target: self, action: "didTapOnTableView:")
     tableView.addGestureRecognizer(tap)
+  }
+  
+  private func getTitleForHeight(value: Double) -> String {
+    let unit = Settings.sharedInstance.generalHeightUnits.value
+    return Units.sharedInstance.formatAmountToText(amount: value, unitType: unit.unit.type, precision: unit.precision, decimals: unit.decimals, displayUnits: true)
+  }
+  
+  private func getTitleForWeight(value: Double) -> String {
+    let unit = Settings.sharedInstance.generalWeightUnits.value
+    return Units.sharedInstance.formatAmountToText(amount: value, unitType: unit.unit.type, precision: unit.precision, decimals: unit.decimals, displayUnits: true)
+  }
+  
+  private func getTitleForAge(value: Int) -> String {
+    return "\(value) yr"
+  }
+  
+  private func getTitleForGender(gender: Settings.Gender) -> String {
+    switch gender {
+    case .Man:                 return "Man"
+    case .Woman:               return "Woman"
+    case .PregnantFemale:      return "Pregnant female"
+    case .BreastfeedingFemale: return "Breastfeeding female"
+    }
+  }
+  
+  private func getTitleForPhysicalActivity(physicalActivity: Settings.PhysicalActivity) -> String {
+    switch physicalActivity {
+    case .Rare:       return "Rare"
+    case .Occasional: return "Occasional"
+    case .Weekly:     return "Weekly"
+    case .Daily:      return "Daily"
+    }
   }
   
   @IBAction func cancelButtonWasTapped(sender: AnyObject) {
@@ -91,7 +205,14 @@ class ConsumptionRateViewController: RevealedViewController, UITableViewDataSour
     }
   }
   
-  private func cellValueWasChanged(cellInfo: CellInfoBase) {
+  private func updateSourceCellInTable(cellInfo: CellInfoBase) {
+    updateCellInTable(cellInfo)
+    
+    let waterIntakeAmount = calcDailyWaterIntake()
+    waterIntake.value = waterIntakeAmount
+  }
+
+  private func updateCellInTable(cellInfo: CellInfoBase) {
     let selectedInfoPath = tableView.indexPathForSelectedRow()
     
     tableView.reloadRowsAtIndexPaths([cellInfo.indexPath], withRowAnimation: .None)
@@ -214,13 +335,124 @@ class ConsumptionRateViewController: RevealedViewController, UITableViewDataSour
   private var height: CellInfo<Double>!
   private var weight: CellInfo<Double>!
   private var age: CellInfo<Int>!
-  private var activity: CellInfo<Settings.ActivityLevel>!
+  private var physicalActivity: CellInfo<Settings.PhysicalActivity>!
   private var waterIntake: CellInfo<Double>!
   
   private var cellsInfo: [[CellInfoBase]]!
   private var selectedCellInfo: CellInfoBase?
   
+  private let minimumAge = 1
+  private let maximumAge = 100
+  
   private var originalTableViewContentInset: UIEdgeInsets = UIEdgeInsetsZero
+}
+
+// Water intake calculations
+private extension ConsumptionRateViewController {
+  private func calcLostWater(#pregnancyAndLactation: Bool) -> Double {
+    let netWaterLosses = calcNetWaterLosses(pregnancyAndLactation: pregnancyAndLactation, waterInFood: true)
+    return round(netWaterLosses)
+  }
+  
+  private func calcSupplyWater() -> Double {
+    let waterLossesWithNoFood = calcNetWaterLosses(pregnancyAndLactation: false, waterInFood: false)
+    let waterLossesWithFood = calcNetWaterLosses(pregnancyAndLactation: false, waterInFood: true)
+    return round(waterLossesWithNoFood - waterLossesWithFood)
+  }
+  
+  private func calcDailyWaterIntake() -> Double {
+    let lostWater = calcLostWater(pregnancyAndLactation: true)
+    let supplyWater = calcSupplyWater()
+    return lostWater - supplyWater
+  }
+  
+  private func calcNetWaterLosses(#pregnancyAndLactation: Bool, waterInFood useWater: Bool) -> Double {
+    let bodySurface = calcBodySurface()
+    let caloryExpediture = calcCaloryExpendidure(physicalActivity: physicalActivity.value)
+    let caloryExpeditureRare = calcCaloryExpendidure(physicalActivity: .Rare)
+    let lossesSkin = calcLossesSkin(bodySurface: bodySurface)
+    let lossesRespiratory = calcLossesRespiratory(caloryExpediture: caloryExpediture)
+    let sweatAmount = calcSweatAmount(caloryExpediture: caloryExpediture, caloryExpeditureRare: caloryExpeditureRare)
+    let metabolicWater = calcGainMetabolicWater(caloryExpediture: caloryExpediture)
+    let lossesUrine = 1500.0
+    let lossesFaeces = 200.0
+    
+    var waterIntake = lossesUrine + lossesFaeces + lossesSkin + lossesRespiratory + sweatAmount - metabolicWater
+    
+    if pregnancyAndLactation {
+      switch gender.value {
+      case .PregnantFemale     : waterIntake += 300
+      case .BreastfeedingFemale: waterIntake += 700
+      default: break
+      }
+    }
+    
+    if useWater {
+      waterIntake -= calcWaterFromFood()
+    }
+    
+    return waterIntake
+  }
+  
+  private func calcBodySurface() -> Double {
+    return 0.007184 * pow(height.value, 0.725) * pow(weight.value, 0.425)
+  }
+  
+  private func calcCaloryExpendidure(#physicalActivity: Settings.PhysicalActivity) -> Double {
+    var activityFactor: Double
+    
+    switch physicalActivity {
+    case .Rare:       activityFactor = 1.4
+    case .Occasional: activityFactor = 1.53
+    case .Weekly:     activityFactor = 1.76
+    case .Daily:      activityFactor = 2.25
+    }
+    
+    let factors = (gender.value == .Man)
+      ? [(15.057, 692.2), (11.472, 873.1), (11.711, 587.7)] // Man
+      : [(14.818, 486.6), (8.126,  845.6), (9.082,  658.5)] // Woman
+    
+    var caloryExpendidure: Double = 0
+    
+    switch age.value {
+    case minimumAge..<30: caloryExpendidure = activityFactor * (factors[0].0 * weight.value + factors[0].1)
+    case 30..<60        : caloryExpendidure = activityFactor * (factors[1].0 * weight.value + factors[1].1)
+    case 60...maximumAge: caloryExpendidure = activityFactor * (factors[2].0 * weight.value + factors[2].1)
+    default: assert(false)
+    }
+
+    return caloryExpendidure
+  }
+  
+  private func calcLossesSkin(#bodySurface: Double) -> Double {
+    return bodySurface * 7 * 24
+  }
+  
+  private func calcLossesRespiratory(#caloryExpediture: Double) -> Double {
+    return 0.107 * caloryExpediture + 92.2
+  }
+  
+  private func calcSweatAmount(#caloryExpediture: Double, caloryExpeditureRare: Double) -> Double {
+    var sweatAmount: Double = 0
+    
+    switch physicalActivity.value {
+    case .Rare:
+      sweatAmount = 500
+      
+    case .Occasional, .Weekly, .Daily:
+      sweatAmount = 500 + (caloryExpediture - caloryExpeditureRare) * 0.75 / 0.58
+    }
+    
+    return sweatAmount
+  }
+  
+  private func calcGainMetabolicWater(#caloryExpediture: Double) -> Double {
+    return 0.119 * caloryExpediture - 2.25
+  }
+  
+  private func calcWaterFromFood() -> Double {
+    return 711
+  }
 }
 
 class EditableTableViewCell: UITableViewCell {
@@ -318,13 +550,18 @@ private class CellInfo<T>: CellInfoBase {
     }
   }
 
-  init(cellIdentifier: String, title: String, setting: SettingsItemBase<T>) {
+  init(cellIdentifier: String, title: String, setting: SettingsItemBase<T>, titleFunction: TitleFunction? = nil) {
     self.setting = setting
     self.value = setting.value
+    self.titleFunction = titleFunction
     super.init(cellIdentifier: cellIdentifier, title: title)
   }
 
   override func getStringValue() -> String {
+    if let titleFunction = self.titleFunction {
+      return titleFunction(value)
+    }
+    
     return "\(value)"
   }
   
@@ -332,15 +569,19 @@ private class CellInfo<T>: CellInfoBase {
     setting.value = value
   }
 
+  private typealias TitleFunction = (T) -> String
+
   private let setting: SettingsItemBase<T>
+  private var titleFunction: TitleFunction?
 }
 
 private class SelectableCellInfo<T>: CellInfo<T> {
-  init(viewController: ConsumptionRateViewController, title: String, setting: SettingsItemBase<T>, minimumValue: Int, maximumValue: Int) {
+  init(viewController: ConsumptionRateViewController, title: String, setting: SettingsItemBase<T>, minimumValue: NSNumber, maximumValue: NSNumber, step: NSNumber, titleFunction: TitleFunction? = nil) {
     self.viewController = viewController
     self.minimumValue = minimumValue
     self.maximumValue = maximumValue
-    super.init(cellIdentifier: cellIdentifierRightDetailWithInfo, title: title, setting: setting)
+    self.step = step
+    super.init(cellIdentifier: cellIdentifierRightDetailWithInfo, title: title, setting: setting, titleFunction: titleFunction)
   }
   
   override func initCell(cell: UITableViewCell, tableView: UITableView, indexPath: NSIndexPath) {
@@ -369,21 +610,44 @@ private class SelectableCellInfo<T>: CellInfo<T> {
   }
 
   override func getAvailableValuesCount() -> Int {
-    return maximumValue - minimumValue + 1
+    if step == 0 {
+      assert(false)
+      return 0
+    }
+    let count = (maximumValue.doubleValue - minimumValue.doubleValue) / step.doubleValue + 1
+    return Int(count)
+  }
+  
+  private func getValueByIndex(index: Int) -> T {
+    let value = minimumValue.doubleValue + Double(index) * step.doubleValue
+    let numberValue = value as NSNumber
+    return numberValue as T
   }
   
   override func getValueTitleByIndex(index: Int) -> String {
-    return "\(minimumValue + index)"
+    let value = getValueByIndex(index)
+    
+    if let titleFunction = self.titleFunction {
+      return titleFunction(value)
+    }
+    
+    return "\(value)"
   }
   
   override func setValueFromAvailableValueByIndex(index: Int) {
-    let number = (minimumValue + index) as NSNumber
+    let number = (getValueByIndex(index)) as NSNumber
     value = number as T
   }
   
   func getValueIndexInAvailableValues() -> Int {
-    let number = value as NSNumber
-    return number as Int - minimumValue
+    if step == 0 {
+      assert(false)
+      return 0
+    }
+    
+    let valueNumber = value as NSNumber
+    let index = (valueNumber.doubleValue - minimumValue.doubleValue) / step.doubleValue
+    return Int(trunc(index))
   }
   
   private func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -391,16 +655,17 @@ private class SelectableCellInfo<T>: CellInfo<T> {
   }
   
   private let viewController: ConsumptionRateViewController
-  private let minimumValue: Int
-  private let maximumValue: Int
+  private let minimumValue: NSNumber
+  private let maximumValue: NSNumber
+  private var step: NSNumber
   private var pickerView: UIPickerView?
 }
 
-private class SelectableEnumCellInfo<T: TitledEnum where T: RawRepresentable, T.RawValue == Int>: SelectableCellInfo<T> {
+private class SelectableEnumCellInfo<T: RawRepresentable where T.RawValue == Int>: SelectableCellInfo<T> {
   
-  init(viewController: ConsumptionRateViewController, title: String, setting: SettingsItemBase<T>) {
+  init(viewController: ConsumptionRateViewController, title: String, setting: SettingsItemBase<T>, titleFunction: TitleFunction? = nil) {
     let range = SelectableEnumCellInfo.calculateRange()
-    super.init(viewController: viewController, title: title, setting: setting, minimumValue: range.minimumValue, maximumValue: range.maximumValue)
+    super.init(viewController: viewController, title: title, setting: setting, minimumValue: range.minimumValue, maximumValue: range.maximumValue, step: 1, titleFunction: titleFunction)
   }
 
   private class func calculateRange() -> (minimumValue: Int, maximumValue: Int) {
@@ -411,29 +676,24 @@ private class SelectableEnumCellInfo<T: TitledEnum where T: RawRepresentable, T.
     return (minimumValue: 0, maximumValue: index - 1)
   }
   
-  override func getStringValue() -> String {
-    return value.getTitle()
-  }
-
   override func setValueFromAvailableValueByIndex(index: Int) {
     if let value = T(rawValue: index) {
       self.value = value
     }
   }
   
+  override func getValueByIndex(index: Int) -> T {
+    let value = minimumValue.doubleValue + Double(index) * step.doubleValue
+    let numberValue = value as NSNumber
+    return T(rawValue: numberValue.integerValue)!
+  }
+  
   override func getValueIndexInAvailableValues() -> Int {
     return value.rawValue
   }
-
-  override func getValueTitleByIndex(index: Int) -> String {
-    if let value = T(rawValue: index) {
-      return value.getTitle()
-    }
-    return super.getValueTitleByIndex(index)
-  }
 }
 
-@objc private class EditableCellInfo<T> : CellInfo<T> {
+private class EditableCellInfo<T> : CellInfo<T> {
   init(title: String, setting: SettingsItemBase<T>, stringToValueFunction: StringToValueFunction) {
     self.stringToValueFunction = stringToValueFunction
     super.init(cellIdentifier: cellIdentifierEditable, title: title, setting: setting)
@@ -469,29 +729,6 @@ private class SelectableEnumCellInfo<T: TitledEnum where T: RawRepresentable, T.
   typealias StringToValueFunction = (String) -> T?
   private let stringToValueFunction: StringToValueFunction
   private var editableCell: EditableTableViewCell?
-}
-
-private protocol TitledEnum {
-  func getTitle() -> String
-}
-
-extension Settings.Gender : TitledEnum {
-  private func getTitle() -> String {
-    switch self {
-    case .Male:   return "Male"
-    case .Female: return "Female"
-    }
-  }
-}
-
-extension Settings.ActivityLevel : TitledEnum {
-  private func getTitle() -> String {
-    switch self {
-    case .Low:    return "Low"
-    case .Medium: return "Medium"
-    case .High:   return "High"
-    }
-  }
 }
 
 private func stringToDouble(value: String) -> Double? {
