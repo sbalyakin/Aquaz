@@ -82,7 +82,23 @@ private extension Units.Length {
   }
 }
 
-class ConsumptionRateViewController: RevealedViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+private extension Units.Volume {
+  var precision: Double {
+    switch self {
+    case Millilitres: return 1
+    case FluidOunces: return 0.1
+    }
+  }
+
+  var decimals: Int {
+    switch self {
+    case Millilitres: return 0
+    case FluidOunces: return 1
+    }
+  }
+}
+
+class ConsumptionRateViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
   
   @IBOutlet weak var tableView: UITableView!
   
@@ -128,10 +144,13 @@ class ConsumptionRateViewController: RevealedViewController, UITableViewDataSour
       setting: Settings.sharedInstance.userPhysicalActivity,
       titleFunction: getTitleForPhysicalActivity)
     
+    let volumeUnit = Settings.sharedInstance.generalVolumeUnits.value.unit
+    
     waterIntake = EditableCellInfo<Double>(
-      title: "Water Intake",
+      title: "Water Intake (\(volumeUnit.contraction))",
       setting: Settings.sharedInstance.userDailyWaterIntake,
-      stringToValueFunction: stringToDouble)
+      stringToValueFunction: stringToWaterIntakeInMetricUnit,
+      titleFunction: getTitleForWaterIntake)
     
     gender.valueChangedFunction = updateSourceCellInTable
     height.valueChangedFunction = updateSourceCellInTable
@@ -142,7 +161,7 @@ class ConsumptionRateViewController: RevealedViewController, UITableViewDataSour
     
     cellsInfo = [
       [gender, height, weight, age, physicalActivity], // section 1
-      [waterIntake]                            // section 2
+      [waterIntake]                                    // section 2
     ]
     
     registerForKeyboardNotifications()
@@ -153,16 +172,16 @@ class ConsumptionRateViewController: RevealedViewController, UITableViewDataSour
   
   private func getTitleForHeight(value: Double) -> String {
     let unit = Settings.sharedInstance.generalHeightUnits.value
-    return Units.sharedInstance.formatAmountToText(amount: value, unitType: unit.unit.type, precision: unit.precision, decimals: unit.decimals, displayUnits: true)
+    return Units.sharedInstance.formatMetricAmountToText(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision, decimals: unit.decimals, displayUnits: true)
   }
   
   private func getTitleForWeight(value: Double) -> String {
     let unit = Settings.sharedInstance.generalWeightUnits.value
-    return Units.sharedInstance.formatAmountToText(amount: value, unitType: unit.unit.type, precision: unit.precision, decimals: unit.decimals, displayUnits: true)
+    return Units.sharedInstance.formatMetricAmountToText(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision, decimals: unit.decimals, displayUnits: true)
   }
   
   private func getTitleForAge(value: Int) -> String {
-    return "\(value) yr"
+    return "\(value)"
   }
   
   private func getTitleForGender(gender: Settings.Gender) -> String {
@@ -181,6 +200,21 @@ class ConsumptionRateViewController: RevealedViewController, UITableViewDataSour
     case .Weekly:     return "Weekly"
     case .Daily:      return "Daily"
     }
+  }
+  
+  private func getTitleForWaterIntake(value: Double) -> String {
+    let unit = Settings.sharedInstance.generalVolumeUnits.value
+    let title = Units.sharedInstance.formatMetricAmountToText(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision, decimals: unit.decimals, displayUnits: false)
+    return title
+  }
+  
+  private func stringToWaterIntakeInMetricUnit(value: String) -> Double? {
+    let displayedValue = (value as NSString).doubleValue
+    let displayedUnit = Settings.sharedInstance.generalVolumeUnits.value
+    let quantity = Quantity(ownUnit: Units.Volume.metric.unit, fromUnit: displayedUnit.unit, fromAmount: displayedValue)
+    let metricValue = quantity.amount
+    let adjustedMetricValue = Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: metricValue, unitType: .Volume, precision: displayedUnit.precision)
+    return adjustedMetricValue
   }
   
   @IBAction func cancelButtonWasTapped(sender: AnyObject) {
@@ -411,15 +445,18 @@ private extension ConsumptionRateViewController {
     let factors = (gender.value == .Man)
       ? [(15.057, 692.2), (11.472, 873.1), (11.711, 587.7)] // Man
       : [(14.818, 486.6), (8.126,  845.6), (9.082,  658.5)] // Woman
-    
-    var caloryExpendidure: Double = 0
+
+    var factorIndex = 0
     
     switch age.value {
-    case minimumAge..<30: caloryExpendidure = activityFactor * (factors[0].0 * weight.value + factors[0].1)
-    case 30..<60        : caloryExpendidure = activityFactor * (factors[1].0 * weight.value + factors[1].1)
-    case 60...maximumAge: caloryExpendidure = activityFactor * (factors[2].0 * weight.value + factors[2].1)
+    case minimumAge..<30: factorIndex = 0
+    case 30..<60        : factorIndex = 1
+    case 60...maximumAge: factorIndex = 2
     default: assert(false)
     }
+
+    let factor = factors[factorIndex]
+    let caloryExpendidure = activityFactor * (factor.0 * weight.value + factor.1)
 
     return caloryExpendidure
   }
@@ -538,7 +575,6 @@ private class CellInfoBase {
   func setValueFromAvailableValueByIndex(index: Int) {
     assert(false)
   }
-
 }
 
 private class CellInfo<T>: CellInfoBase {
@@ -694,9 +730,9 @@ private class SelectableEnumCellInfo<T: RawRepresentable where T.RawValue == Int
 }
 
 private class EditableCellInfo<T> : CellInfo<T> {
-  init(title: String, setting: SettingsItemBase<T>, stringToValueFunction: StringToValueFunction) {
+  init(title: String, setting: SettingsItemBase<T>, stringToValueFunction: StringToValueFunction, titleFunction: TitleFunction? = nil) {
     self.stringToValueFunction = stringToValueFunction
-    super.init(cellIdentifier: cellIdentifierEditable, title: title, setting: setting)
+    super.init(cellIdentifier: cellIdentifierEditable, title: title, setting: setting, titleFunction: titleFunction)
   }
   
   override func initCell(cell: UITableViewCell, tableView: UITableView, indexPath: NSIndexPath) {
@@ -729,10 +765,6 @@ private class EditableCellInfo<T> : CellInfo<T> {
   typealias StringToValueFunction = (String) -> T?
   private let stringToValueFunction: StringToValueFunction
   private var editableCell: EditableTableViewCell?
-}
-
-private func stringToDouble(value: String) -> Double? {
-  return (value as NSString).doubleValue
 }
 
 private let cellIdentifierRightDetail = "RightDetail"

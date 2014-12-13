@@ -62,57 +62,74 @@ class Units {
   /// Prepares specified amount for storing into Core Data. It converts metric units of amount to current units from settings.
   /// Then it rounds converted amount and makes reverse conversion to metric units.
   /// This methods allows getting amount equals to formatted amount (formatAmountToText) but represented in metric units.
-  func prepareAmountForStoring(#amount: Double, unitType: UnitType, precision: Double = 1) -> Double {
+  func adjustMetricAmountForStoring(#metricAmount: Double, unitType: UnitType, precision: Double = 1) -> Double {
+    if precision == 0 {
+      assert(false)
+      return 0
+    }
+
     let units = self.units[unitType.rawValue]
-    let currentQuantity = Quantity(ownUnit: units.settingsUnit, fromUnit: units.internalUnit, fromAmount: amount)
-    let currentAmount = round(currentQuantity.amount / precision) * precision
-    let metricQuantity = Quantity(ownUnit: units.internalUnit, fromUnit: units.settingsUnit, fromAmount: currentAmount)
+    let displayedQuantity = Quantity(ownUnit: units.displayedUnit, fromUnit: units.metricUnit, fromAmount: metricAmount)
+    let displayedAmount = round(displayedQuantity.amount / precision) * precision
+    let metricQuantity = Quantity(ownUnit: units.metricUnit, fromUnit: units.displayedUnit, fromAmount: displayedAmount)
     return metricQuantity.amount
+  }
+  
+  func convertMetricAmountToDisplayed(#metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1) -> Double {
+    if roundPrecision == 0 {
+      assert(false)
+      return 0
+    }
+    
+    let units = self.units[unitType.rawValue]
+    var quantity = Quantity(ownUnit: units.displayedUnit, fromUnit: units.metricUnit, fromAmount: metricAmount)
+    let displayedAmount = round(quantity.amount / roundPrecision) * roundPrecision
+    return displayedAmount
   }
   
   /// Returns specified amount as formatted string taking into account current units settings.
   /// Amount should be specified in metric units.
-  // It's possible to specify final precision and numbers of decimals of formatted text.
-  func formatAmountToText(#amount: Double, unitType: UnitType, precision: Double = 1, decimals: Int = 0, displayUnits: Bool = true) -> String {
-    if precision == 0 {
+  /// It's possible to specify final precision and numbers of decimals of formatted text.
+  func formatMetricAmountToText(#metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1, decimals: Int = 0, displayUnits: Bool = true) -> String {
+    if roundPrecision == 0 {
       assert(false)
       return ""
     }
     
+    let displayedAmount = convertMetricAmountToDisplayed(metricAmount: metricAmount, unitType: unitType, roundPrecision: roundPrecision)
     let units = self.units[unitType.rawValue]
-    var quantity = Quantity(ownUnit: units.settingsUnit, fromUnit: units.internalUnit, fromAmount: amount)
-    quantity.amount = round(quantity.amount / precision) * precision
+    let quantity = Quantity(unit: units.displayedUnit, amount: displayedAmount)
     return quantity.getDescription(decimals, displayUnits: displayUnits)
   }
   
-  private var units: [(internalUnit: Unit, settingsUnit: Unit)] = []
+  private var units: [(metricUnit: Unit, displayedUnit: Unit)] = []
 
   private func onUpdateVolumeUnitsSettings(value: Units.Volume) {
-    units[UnitType.Volume.rawValue] = (internalUnit: Volume.metric.unit, settingsUnit: value.unit)
+    units[UnitType.Volume.rawValue] = (metricUnit: Volume.metric.unit, displayedUnit: value.unit)
   }
   
   private func onUpdateWeightUnitsSettings(value: Units.Weight) {
-    units[UnitType.Weight.rawValue] = (internalUnit: Weight.metric.unit, settingsUnit: value.unit)
+    units[UnitType.Weight.rawValue] = (metricUnit: Weight.metric.unit, displayedUnit: value.unit)
   }
   
   private func onUpdateHeightUnitsSettings(value: Units.Length) {
-    units[UnitType.Length.rawValue] = (internalUnit: Length.metric.unit, settingsUnit: value.unit)
+    units[UnitType.Length.rawValue] = (metricUnit: Length.metric.unit, displayedUnit: value.unit)
   }
   
   private init() {
-    let settingsVolumeUnits = Settings.sharedInstance.generalVolumeUnits
-    let settingsWeightUnits = Settings.sharedInstance.generalWeightUnits
-    let settingsHeightUnits = Settings.sharedInstance.generalHeightUnits
+    let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits
+    let displayedWeightUnits = Settings.sharedInstance.generalWeightUnits
+    let displayedHeightUnits = Settings.sharedInstance.generalHeightUnits
     
     // Subscribe for changes of the settings
-    settingsVolumeUnits.addObserver(onUpdateVolumeUnitsSettings)
-    settingsWeightUnits.addObserver(onUpdateWeightUnitsSettings)
-    settingsHeightUnits.addObserver(onUpdateHeightUnitsSettings)
+    displayedVolumeUnits.addObserver(onUpdateVolumeUnitsSettings)
+    displayedWeightUnits.addObserver(onUpdateWeightUnitsSettings)
+    displayedHeightUnits.addObserver(onUpdateHeightUnitsSettings)
     
     // Items order should correspond to UnitType elements order
-    units = [(internalUnit: Volume.metric.unit, settingsUnit: settingsVolumeUnits.value.unit), // volume
-             (internalUnit: Weight.metric.unit, settingsUnit: settingsWeightUnits.value.unit), // weight
-             (internalUnit: Length.metric.unit, settingsUnit: settingsHeightUnits.value.unit)] // height
+    units = [(metricUnit: Volume.metric.unit, displayedUnit: displayedVolumeUnits.value.unit), // volume
+             (metricUnit: Weight.metric.unit, displayedUnit: displayedWeightUnits.value.unit), // weight
+             (metricUnit: Length.metric.unit, displayedUnit: displayedHeightUnits.value.unit)] // height
   }
 }
 

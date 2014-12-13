@@ -186,7 +186,7 @@ class ConsumptionViewController: UIViewController {
   
   private func prepareAmountForStoring(amount: Double) -> Double {
     let precision = Settings.sharedInstance.generalVolumeUnits.value.precision
-    return Units.sharedInstance.prepareAmountForStoring(amount: amount, unitType: .Volume, precision: precision)
+    return Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: amount, unitType: .Volume, precision: precision)
   }
   
   private func addConsumption(#amount: Double) {
@@ -216,7 +216,7 @@ class ConsumptionViewController: UIViewController {
   private func formatAmount(amount: Double, precision: Double? = nil, decimals: Int? = nil) -> String {
     let finalPrecision = precision != nil ? precision! : amountPrecision
     let finalDecimals = decimals != nil ? decimals! : amountDecimals
-    return Units.sharedInstance.formatAmountToText(amount: amount, unitType: .Volume, precision: finalPrecision, decimals: finalDecimals)
+    return Units.sharedInstance.formatMetricAmountToText(metricAmount: amount, unitType: .Volume, roundPrecision: finalPrecision, decimals: finalDecimals)
   }
   
   private func setAmountLabel(amount: Double) {

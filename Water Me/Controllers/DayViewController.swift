@@ -336,8 +336,19 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
   
   private func updateConsumptionLabel() {
-    let consumptionText = Units.sharedInstance.formatAmountToText(amount: overallConsumption, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals, displayUnits: false)
-    let consumptionRateText = Units.sharedInstance.formatAmountToText(amount: consumptionRateAmount, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals)
+    let consumptionText = Units.sharedInstance.formatMetricAmountToText(
+      metricAmount: overallConsumption,
+      unitType: .Volume,
+      roundPrecision: amountPrecision,
+      decimals: amountDecimals,
+      displayUnits: false)
+    
+    let consumptionRateText = Units.sharedInstance.formatMetricAmountToText(
+      metricAmount: consumptionRateAmount,
+      unitType: .Volume,
+      roundPrecision: amountPrecision,
+      decimals: amountDecimals)
+    
     consumptionLabel.text = "\(consumptionText) of \(consumptionRateText)"
   }
   

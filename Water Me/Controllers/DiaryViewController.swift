@@ -39,7 +39,7 @@ class DiaryViewController: UIViewController, UITableViewDataSource {
     
     let consumption = consumptions[indexPath.row]
     let drink = consumption.drink.name
-    let amount = Units.sharedInstance.formatAmountToText(amount: consumption.amount.doubleValue, unitType: .Volume, precision: amountPrecision, decimals: amountDecimals, displayUnits: true)
+    let amount = Units.sharedInstance.formatMetricAmountToText(metricAmount: consumption.amount.doubleValue, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: true)
 
     let formatter = NSDateFormatter()
     formatter.dateStyle = .NoStyle
