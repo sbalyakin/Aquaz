@@ -30,6 +30,7 @@ class YearStatisticsViewController: UIViewController {
     super.viewDidLoad()
     
     yearStatisticsView.titleForHorizontalStep = getMonthTitleFromIndex
+    yearStatisticsView.titleForVerticalStep = getTitleForAmount
     
     // TODO: Specify from the settings
     date = NSDate()
@@ -55,12 +56,18 @@ class YearStatisticsViewController: UIViewController {
     
     let goals = ConsumptionRate.fetchConsumptionRateAmountsGroupedByMonths(beginDate: statisticsBeginDate, endDate: statisticsEndDate)
     assert(waterIntakes.count == goals.count)
-    
+
+    let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
+
     var statisticsItems: [YearStatisticsView.ItemType] = []
     
-    for (index, waterIntake) in enumerate(waterIntakes) {
-      let goal = goals[index]
-      let item: YearStatisticsView.ItemType = (value: CGFloat(waterIntake), goal: CGFloat(goal))
+    for (index, metricWaterIntake) in enumerate(waterIntakes) {
+      let metricGoal = goals[index]
+      
+      let displayedWaterIntake = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: metricWaterIntake, unitType: .Volume)
+      let displayedGoal = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: metricGoal, unitType: .Volume)
+
+      let item: YearStatisticsView.ItemType = (value: CGFloat(displayedWaterIntake), goal: CGFloat(displayedGoal))
       statisticsItems.append(item)
     }
     
@@ -77,6 +84,12 @@ class YearStatisticsViewController: UIViewController {
     }
     
     return calendar.shortMonthSymbols[index] as String
+  }
+  
+  private func getTitleForAmount(amount: CGFloat) -> String {
+    let quantity = Quantity(unit: Settings.sharedInstance.generalVolumeUnits.value.unit, amount: Double(amount))
+    let title = quantity.getDescription(0, displayUnits: true)
+    return title
   }
   
   private func computeStatisticsDateRange() {

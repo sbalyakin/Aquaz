@@ -25,7 +25,7 @@ protocol WeekStatisticsViewDelegate {
   @IBInspectable var daysBackground: UIColor = UIColor.whiteColor()
   @IBInspectable var barCornerRadius: CGFloat = 2
   @IBInspectable var barWidthFraction: CGFloat = 0.4
-  @IBInspectable var scaleLabelsCount: Int = 5
+  @IBInspectable var scaleLabelsCount: Int = 2
   @IBInspectable var scaleRightMargin: CGFloat = 6
   @IBInspectable var dayButtonsTopMargin: CGFloat = 6
   
@@ -39,6 +39,7 @@ protocol WeekStatisticsViewDelegate {
   var animationDuration = 0.4
   
   var delegate: WeekStatisticsViewDelegate?
+  var titleForScaleFunction: TitleForStepFunction?
   
   enum VerticalAlign {
     case Top, Center, Bottom
@@ -111,7 +112,7 @@ protocol WeekStatisticsViewDelegate {
   }
   
   private func computeUIAreasFromRect(rect: CGRect) {
-    let maximumValueTitle = "\(Int(maximumValue))"
+    let maximumValueTitle = getTitleForScaleValue(maximumValue)
     let labelSize = computeSizeForText(maximumValueTitle, font: titleFont)
     let maximumValueTitleHalfHeight = ceil(computeSizeForText(maximumValueTitle, font: titleFont).height / 2)
     
@@ -173,23 +174,27 @@ protocol WeekStatisticsViewDelegate {
   
   private func drawScale() {
     let rect = uiAreas.scale
-    
-    let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
-    textStyle.alignment = NSTextAlignment.Right
-    
-    let fontAttributes = [NSFontAttributeName: titleFont, NSForegroundColorAttributeName: scaleColor, NSParagraphStyleAttributeName: textStyle]
-    
-    let textHeight: CGFloat = computeSizeForText("0123456789", font: titleFont).height
-    
+    let fontAttributes = [NSFontAttributeName: titleFont, NSForegroundColorAttributeName: scaleColor]
     let segmentHeight = rect.height / CGFloat(scaleLabelsCount - 1)
     
     for i in 0..<scaleLabelsCount {
-      let minY = rect.maxY - CGFloat(i) * segmentHeight - textHeight / 2
-      let labelRect = CGRectMake(rect.minX, minY, rect.width - scaleRightMargin, textHeight).integerRect
-      
-      let scaleValue = Int(maximumValue / CGFloat(scaleLabelsCount - 1) * CGFloat(i))
-      "\(scaleValue)".drawInRect(labelRect, withAttributes: fontAttributes)
+      let scaleValue = maximumValue / CGFloat(scaleLabelsCount - 1) * CGFloat(i)
+      let title = getTitleForScaleValue(scaleValue)
+
+      let size = computeSizeForText(title, font: titleFont)
+      let minY = rect.maxY - CGFloat(i) * segmentHeight - size.height / 2
+      let minX = rect.maxX - size.width - scaleRightMargin
+      let point = CGPointMake(minX, minY)
+      title.drawAtPoint(point, withAttributes: fontAttributes)
     }
+  }
+  
+  private func getTitleForScaleValue(value: CGFloat) -> String {
+    if let titleFunction = titleForScaleFunction {
+      return titleFunction(value)
+    }
+    
+    return "\(Int(value))"
   }
   
   private func computeSizeForText(text: String, font: UIFont) -> CGSize {

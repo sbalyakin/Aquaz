@@ -28,7 +28,9 @@ class WeekStatisticsViewController: UIViewController, WeekStatisticsViewDelegate
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     weekStatisticsView.delegate = self
+    weekStatisticsView.titleForScaleFunction = getTitleForAmount
     // TODO: Specify from the settings
     date = NSDate()
   }
@@ -45,6 +47,12 @@ class WeekStatisticsViewController: UIViewController, WeekStatisticsViewDelegate
     dayViewController.initializesRevealControls = false
     
     navigationController!.pushViewController(dayViewController, animated: true)
+  }
+  
+  private func getTitleForAmount(amount: CGFloat) -> String {
+    let quantity = Quantity(unit: Settings.sharedInstance.generalVolumeUnits.value.unit, amount: Double(amount))
+    let title = quantity.getDescription(0, displayUnits: true)
+    return title
   }
 
   @IBAction func switchToPreviousWeek(sender: AnyObject) {
@@ -73,11 +81,17 @@ class WeekStatisticsViewController: UIViewController, WeekStatisticsViewDelegate
     let goals = ConsumptionRate.fetchConsumptionRateAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate)
     assert(waterIntakes.count == 7)
     
+    let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
+    
     var statisticsItems: [WeekStatisticsView.ItemType] = []
     
-    for (index, waterIntake) in enumerate(waterIntakes) {
-      let goal = goals[index]
-      let item: WeekStatisticsView.ItemType = (value: CGFloat(waterIntake), goal: CGFloat(goal))
+    for (index, metricWaterIntake) in enumerate(waterIntakes) {
+      let metricGoal = goals[index]
+      
+      let displayedWaterIntake = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: metricWaterIntake, unitType: .Volume)
+      let displayedGoal = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: metricGoal, unitType: .Volume)
+      
+      let item: WeekStatisticsView.ItemType = (value: CGFloat(displayedWaterIntake), goal: CGFloat(displayedGoal))
       statisticsItems.append(item)
     }
     

@@ -169,14 +169,19 @@ import UIKit
     _verticalTitles = []
     for i in 0..<verticalGridStep {
       let value = CGFloat(i) * verticalGap
-      var title: String
-      if let titleFunc = titleForVerticalStep {
-        title = titleFunc(value)
-      } else {
-        title = "\(Int(value))"
-      }
+      let title = getVerticalTitleForValue(value)
       _verticalTitles.append(title)
     }
+  }
+  
+  private func getVerticalTitleForValue(value: CGFloat) -> String {
+    var title: String
+    if let titleFunc = titleForVerticalStep {
+      title = titleFunc(value)
+    } else {
+      title = "\(Int(value))"
+    }
+    return title
   }
   
   private func fillHorizontalTitles() {
@@ -188,16 +193,21 @@ import UIKit
     _horizontalTitles = []
     for i in 0..<horizontalGridStep {
       let value = CGFloat(i) * horizontalGap
-      var title: String
-      if let titleFunc = titleForHorizontalStep {
-        title = titleFunc(value)
-      } else {
-        title = "\(Int(value))"
-      }
+      let title = getHorizontalTitleForValue(value)
       _horizontalTitles.append(title)
     }
   }
 
+  private func getHorizontalTitleForValue(value: CGFloat) -> String {
+    var title: String
+    if let titleFunc = titleForHorizontalStep {
+      title = titleFunc(value)
+    } else {
+      title = "\(Int(value))"
+    }
+    return title
+  }
+  
   private func computeTitlesSizes() {
     computeVerticalTitlesSizes()
     computeHorizontalTitlesSizes()
@@ -255,20 +265,18 @@ import UIKit
       return
     }
     
-    let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
-    textStyle.alignment = NSTextAlignment.Right
-    
-    let fontAttributes = [NSFontAttributeName: scaleTitleFont, NSForegroundColorAttributeName: scaleTitleColor, NSParagraphStyleAttributeName: textStyle]
-    
+    let fontAttributes = [NSFontAttributeName: scaleTitleFont, NSForegroundColorAttributeName: scaleTitleColor,]
     let rect = uiAreas.verticalScale
     let segmentHeight = rect.height / CGFloat(verticalGridStep - 1)
     
     for (index, title) in enumerate(verticalTitles) {
       let textHeight = verticalTitlesSizes[index].height
+      let textWidth = verticalTitlesSizes[index].width
       let midY = rect.maxY - CGFloat(index) * segmentHeight
       let minY = midY - textHeight / 2
-      let labelRect = CGRectMake(rect.minX, minY, rect.width - verticalScaleMargin, textHeight).integerRect
-      title.drawInRect(labelRect, withAttributes: fontAttributes)
+      let minX = rect.maxX - verticalScaleMargin - textWidth
+      let point = CGPointMake(minX, minY)
+      title.drawAtPoint(point, withAttributes: fontAttributes)
     }
   }
 
