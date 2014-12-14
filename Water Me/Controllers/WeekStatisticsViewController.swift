@@ -14,12 +14,11 @@ class WeekStatisticsViewController: UIViewController, WeekStatisticsViewDelegate
   @IBOutlet weak var datePeriodLabel: UILabel!
   @IBOutlet weak var nextWeekButton: UIButton!
   
-  var date: NSDate = NSDate() {
+
+  var date: NSDate = Settings.sharedInstance.uiWeekStatisticsDate.value {
     didSet {
-      computeStatisticsDateRange()
-      initDatePeriodLabel()
-      initWeekStatisticsView()
-      updateSwitchButtons()
+      dateWasChanged()
+      Settings.sharedInstance.uiWeekStatisticsDate.value = date
     }
   }
   
@@ -31,8 +30,15 @@ class WeekStatisticsViewController: UIViewController, WeekStatisticsViewDelegate
     
     weekStatisticsView.delegate = self
     weekStatisticsView.titleForScaleFunction = getTitleForAmount
-    // TODO: Specify from the settings
-    date = NSDate()
+    
+    dateWasChanged()
+  }
+
+  private func dateWasChanged() {
+    computeStatisticsDateRange()
+    initDatePeriodLabel()
+    initWeekStatisticsView()
+    updateSwitchButtons()
   }
   
   override func viewWillAppear(animated: Bool) {

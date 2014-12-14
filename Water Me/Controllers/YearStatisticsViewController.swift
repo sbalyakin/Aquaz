@@ -14,12 +14,10 @@ class YearStatisticsViewController: UIViewController {
   @IBOutlet weak var yearLabel: UILabel!
   @IBOutlet weak var nextYearButton: UIButton!
   
-  var date: NSDate = NSDate() {
+  var date: NSDate = Settings.sharedInstance.uiYearStatisticsDate.value {
     didSet {
-      computeStatisticsDateRange()
-      initYearLabel()
-      initYearStatisticsView()
-      updateSwitchButtons()
+      dateWasChanged()
+      Settings.sharedInstance.uiYearStatisticsDate.value = date
     }
   }
   
@@ -32,10 +30,16 @@ class YearStatisticsViewController: UIViewController {
     yearStatisticsView.titleForHorizontalStep = getMonthTitleFromIndex
     yearStatisticsView.titleForVerticalStep = getTitleForAmount
     
-    // TODO: Specify from the settings
-    date = NSDate()
+    dateWasChanged()
   }
 
+  private func dateWasChanged() {
+    computeStatisticsDateRange()
+    initYearLabel()
+    initYearStatisticsView()
+    updateSwitchButtons()
+  }
+  
   @IBAction func switchToPreviousYear(sender: AnyObject) {
     date = DateHelper.addToDate(date, years: -1, months: 0, days: 0)
   }

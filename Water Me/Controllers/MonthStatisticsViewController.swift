@@ -15,12 +15,10 @@ class MonthStatisticsViewController: UIViewController, MonthStatisticsViewDataSo
   @IBOutlet weak var nextMonthButton: UIButton!
 
   
-  var date: NSDate = NSDate() {
+  var date: NSDate = Settings.sharedInstance.uiMonthStatisticsDate.value {
     didSet {
-      computeStatisticsDateRange()
-      initMonthLabel()
-      initMonthStatisticsView()
-      updateSwitchButtons()
+      dateWasChanged()
+      Settings.sharedInstance.uiMonthStatisticsDate.value = date
     }
   }
   
@@ -33,8 +31,14 @@ class MonthStatisticsViewController: UIViewController, MonthStatisticsViewDataSo
     monthStatisticsView.dataSource = self
     monthStatisticsView.delegate = self
     
-    // TODO: Specify from the settings
-    date = NSDate()
+    dateWasChanged()
+  }
+  
+  private func dateWasChanged() {
+    computeStatisticsDateRange()
+    initMonthLabel()
+    initMonthStatisticsView()
+    updateSwitchButtons()
   }
   
   @IBAction func switchToPreviousMonth(sender: AnyObject) {

@@ -120,6 +120,8 @@ class SettingsOrdinalItem<T>: SettingsItemBase<T> {
       userDefaults.setBool(value as Bool, forKey: key)
     } else if value is String {
       userDefaults.setValue(value as String, forKey: key)
+    } else if value is NSDate {
+      userDefaults.setObject(value as NSDate, forKey: key)
     } else {
       super.writeValue(value)
     }
@@ -184,11 +186,20 @@ class Settings {
     key: "User - Daily water intake", initialValue: 2000.0, userDefaults: self.standardUserDefaults)
 
   lazy var uiDisplayDaySelection: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "UI - Display Day Selection", initialValue: false, userDefaults: self.standardUserDefaults)
+    key: "UI - Display day selection", initialValue: false, userDefaults: self.standardUserDefaults)
 
   lazy var uiSelectedStatisticsPage: SettingsEnumItem<StatisticsViewController.ViewControllerType> = SettingsEnumItem(
-    key: "UI - Selected Statistics Page", initialValue: .Week, userDefaults: self.standardUserDefaults)
+    key: "UI - Selected statistics page", initialValue: .Week, userDefaults: self.standardUserDefaults)
 
+  lazy var uiWeekStatisticsDate: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
+    key: "UI - Week statistics date", initialValue: NSDate(), userDefaults: self.standardUserDefaults)
+
+  lazy var uiMonthStatisticsDate: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
+    key: "UI - Month statistics date", initialValue: NSDate(), userDefaults: self.standardUserDefaults)
+  
+  lazy var uiYearStatisticsDate: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
+    key: "UI - Year statistics date", initialValue: NSDate(), userDefaults: self.standardUserDefaults)
+  
   private let standardUserDefaults = NSUserDefaults.standardUserDefaults()
 
   private init() { }
