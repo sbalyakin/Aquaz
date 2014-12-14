@@ -237,8 +237,24 @@ class ConsumptionRateViewController: UIViewController, UITableViewDataSource, UI
         cellInfo.saveToSettings()
       }
     }
+    
+    saveWaterIntakeToCoreData()
   }
-  
+
+  private func saveWaterIntakeToCoreData() {
+    let adjustedDate = DateHelper.dateByClearingTime(ofDate: NSDate())
+    if let consumptionRate = ConsumptionRate.fetchConsumptionRateStrictlyForDate(adjustedDate) {
+      consumptionRate.baseRateAmount = waterIntake.value
+      ModelHelper.sharedInstance.save()
+    } else {
+      ConsumptionRate.addEntity(
+        date: adjustedDate,
+        baseRateAmount: waterIntake.value,
+        hotDateFraction: 0,
+        highActivityFraction: 0)
+    }
+  }
+
   private func updateSourceCellInTable(cellInfo: CellInfoBase) {
     updateCellInTable(cellInfo)
     
