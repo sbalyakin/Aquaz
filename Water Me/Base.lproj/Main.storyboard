@@ -656,9 +656,9 @@
                                 </connections>
                             </button>
                             <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ar0-25-CDE" customClass="WeekStatisticsView" customModule="Water_Me" customModuleProvider="target">
-                                <rect key="frame" x="16" y="38" width="288" height="510"/>
+                                <rect key="frame" x="0.0" y="38" width="320" height="510"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.95645805029999997" green="0.95645805029999997" blue="0.95645805029999997" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.95645805029999997" green="0.95645805029999997" blue="0.95645805029999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -788,9 +788,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" id="Wae-DX-wQD" customClass="YearStatisticsView" customModule="Water_Me" customModuleProvider="target">
-                                <rect key="frame" x="16" y="38" width="288" height="510"/>
+                                <rect key="frame" x="0.0" y="38" width="320" height="510"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.95645805029999997" green="0.95645805029999997" blue="0.95645805029999997" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.95645805029999997" green="0.95645805029999997" blue="0.95645805029999997" alpha="1" colorSpace="calibratedRGB"/>

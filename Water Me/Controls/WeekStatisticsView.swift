@@ -16,8 +16,9 @@ protocol WeekStatisticsViewDelegate {
   
   typealias ItemType = (value: CGFloat, goal: CGFloat)
   typealias TitleForStepFunction = (CGFloat) -> String
-  private typealias UIAreas = (scale: CGRect, bars: CGRect, days: CGRect)
+  private typealias UIAreas = (scale: CGRect, bars: CGRect, days: CGRect, background: CGRect)
   
+  @IBInspectable var backgroundDarkColor: UIColor = UIColor(white: 235/255, alpha: 1.0)
   @IBInspectable var barsColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
   @IBInspectable var goalLineColor: UIColor = UIColor(red: 239/255, green: 64/255, blue: 79/255, alpha: 0.5)
   @IBInspectable var scaleColor: UIColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
@@ -26,8 +27,10 @@ protocol WeekStatisticsViewDelegate {
   @IBInspectable var barCornerRadius: CGFloat = 2
   @IBInspectable var barWidthFraction: CGFloat = 0.4
   @IBInspectable var scaleLabelsCount: Int = 2
-  @IBInspectable var scaleRightMargin: CGFloat = 6
-  @IBInspectable var dayButtonsTopMargin: CGFloat = 6
+  @IBInspectable var scaleMargin: CGFloat = 6
+  @IBInspectable var scaleInside: Bool = true
+  @IBInspectable var dayButtonsTopMargin: CGFloat = 10
+  @IBInspectable var horizontalMargin: CGFloat = 10
   
   var titleFont: UIFont = UIFont.systemFontOfSize(12)
   
@@ -112,22 +115,33 @@ protocol WeekStatisticsViewDelegate {
   }
   
   private func computeUIAreasFromRect(rect: CGRect) {
-    let maximumValueTitle = getTitleForScaleValue(maximumValue)
-    let labelSize = computeSizeForText(maximumValueTitle, font: titleFont)
-    let maximumValueTitleHalfHeight = ceil(computeSizeForText(maximumValueTitle, font: titleFont).height / 2)
-    
-    var innerRect = CGRectMake(rect.minX, rect.minY + maximumValueTitleHalfHeight, rect.width, rect.height - maximumValueTitleHalfHeight)
-    innerRect.inset(dx: 1, dy: 1)
-    let horizontalRectangles = innerRect.rectsByDividing(labelSize.width + scaleRightMargin, fromEdge: .MinXEdge)
-    let rightRectangle = horizontalRectangles.remainder
-    let leftRectangle = horizontalRectangles.slice
-    let barWidth = round(rightRectangle.width / CGFloat(daysPerWeek))
-    let rightVerticalRectangles = rightRectangle.rectsByDividing(barWidth, fromEdge: .MaxYEdge)
-    let leftVerticalRectangles = leftRectangle.rectsByDividing(barWidth, fromEdge: .MaxYEdge)
-    
-    uiAreas.scale = leftVerticalRectangles.remainder.integerRect
-    uiAreas.bars = rightVerticalRectangles.remainder.integerRect
-    uiAreas.days = rightVerticalRectangles.slice.integerRect
+    if scaleInside {
+      let barWidth = round(rect.width / CGFloat(daysPerWeek))
+      let verticalRectangles = rect.rectsByDividing(barWidth, fromEdge: .MaxYEdge)
+      let scaleRect = verticalRectangles.remainder.integerRect
+      
+      uiAreas.scale = verticalRectangles.remainder.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
+      uiAreas.bars = verticalRectangles.remainder.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
+      uiAreas.days = verticalRectangles.slice.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
+      uiAreas.background = verticalRectangles.remainder.integerRect
+    } else {
+      let maximumValueTitle = getTitleForScaleValue(maximumValue)
+      let labelSize = computeSizeForText(maximumValueTitle, font: titleFont)
+      let maximumValueTitleHalfHeight = ceil(labelSize.height / 2)
+      
+      var innerRect = CGRectMake(rect.minX, rect.minY + maximumValueTitleHalfHeight, rect.width, rect.height - maximumValueTitleHalfHeight)
+      innerRect.inset(dx: 1, dy: 1)
+      let horizontalRectangles = innerRect.rectsByDividing(labelSize.width + scaleMargin, fromEdge: .MinXEdge)
+      let rightRectangle = horizontalRectangles.remainder
+      let leftRectangle = horizontalRectangles.slice
+      let barWidth = round(rightRectangle.width / CGFloat(daysPerWeek))
+      let rightVerticalRectangles = rightRectangle.rectsByDividing(barWidth, fromEdge: .MaxYEdge)
+      let leftVerticalRectangles = leftRectangle.rectsByDividing(barWidth, fromEdge: .MaxYEdge)
+      
+      uiAreas.scale = leftVerticalRectangles.remainder.integerRect
+      uiAreas.bars = rightVerticalRectangles.remainder.integerRect
+      uiAreas.days = rightVerticalRectangles.slice.integerRect
+    }
   }
   
   private func createDayButtons(#rect: CGRect) {
@@ -167,12 +181,89 @@ protocol WeekStatisticsViewDelegate {
   }
   
   override func drawRect(rect: CGRect) {
-    drawScale()
+    drawBackground()
     drawBars()
     drawGoals()
+    drawScale()
+  }
+  
+  private func drawBackground() {
+    if !scaleInside {
+      return
+    }
+    
+    if let backgroundColor = self.backgroundColor {
+      if backgroundColor.isClearColor() {
+        return
+      }
+    } else {
+      return
+    }
+    
+    if (backgroundDarkColor.isClearColor()) {
+      return
+    }
+    
+    var rect = uiAreas.background
+    rect = rect.rectsByDividing(rect.height / 2, fromEdge: .MinYEdge).slice
+    
+    backgroundLayer.frame = rect
+  }
+  
+  private func drawBars() {
+    if _barsLayer == nil {
+      let zeroRect = CGRectMake(uiAreas.bars.minX, uiAreas.bars.maxY, uiAreas.bars.width, 0)
+      let zeroPaths = computeBarsPathsForRect(zeroRect)
+      drawBarsPaths(zeroPaths, useAnimation: false)
+    }
+    
+    let paths = computeBarsPathsForRect(uiAreas.bars)
+    drawBarsPaths(paths, useAnimation: true)
+  }
+  
+  private func drawBarsPaths(paths: [CGPath], useAnimation: Bool) {
+    for (index, path) in enumerate(paths) {
+      if barsLayer.sublayers == nil || index >= barsLayer.sublayers.count {
+        assert(false, "Cannot find necessary shape sub-layers for bars")
+        break
+      }
+      
+      let barLayer = barsLayer.sublayers[index] as CAShapeLayer
+      transformShape(barLayer, path: path, useAnimation: useAnimation)
+    }
+  }
+  
+  private func drawGoals() {
+    if _goalsShapeLayer == nil {
+      let zeroRect = CGRectMake(uiAreas.bars.minX, uiAreas.bars.maxY, uiAreas.bars.width, 0)
+      let zeroPath = computeGoalsPathForRect(zeroRect)
+      transformShape(goalsShapeLayer, path: zeroPath, useAnimation: false)
+    }
+    
+    let path = computeGoalsPathForRect(uiAreas.bars)
+    transformShape(goalsShapeLayer, path: path, useAnimation: true)
   }
   
   private func drawScale() {
+    if scaleInside {
+      drawScaleInside()
+    } else {
+      drawScaleOutside()
+    }
+  }
+
+  private func drawScaleInside() {
+    let title = getTitleForScaleValue(maximumValue)
+    let size = computeSizeForText(title, font: titleFont)
+    var rect = CGRectMake(0, 0, size.width, size.height)
+    rect.offset(dx: uiAreas.scale.minX, dy: uiAreas.scale.minY + scaleMargin)
+    rect.integerize()
+    
+    scaleLayer.frame = rect
+    scaleLayer.string = title
+  }
+  
+  private func drawScaleOutside() {
     let rect = uiAreas.scale
     let fontAttributes = [NSFontAttributeName: titleFont, NSForegroundColorAttributeName: scaleColor]
     let segmentHeight = rect.height / CGFloat(scaleLabelsCount - 1)
@@ -183,7 +274,7 @@ protocol WeekStatisticsViewDelegate {
 
       let size = computeSizeForText(title, font: titleFont)
       let minY = rect.maxY - CGFloat(i) * segmentHeight - size.height / 2
-      let minX = rect.maxX - size.width - scaleRightMargin
+      let minX = rect.maxX - size.width - scaleMargin
       let point = CGPointMake(minX, minY)
       title.drawAtPoint(point, withAttributes: fontAttributes)
     }
@@ -220,40 +311,6 @@ protocol WeekStatisticsViewDelegate {
     }
     
     return maximum
-  }
-  
-  private func drawBars() {
-    if _barsLayer == nil {
-      let zeroRect = CGRectMake(uiAreas.bars.minX, uiAreas.bars.maxY, uiAreas.bars.width, 0)
-      let zeroPaths = computeBarsPathsForRect(zeroRect)
-      drawBarsPaths(zeroPaths, useAnimation: false)
-    }
-    
-    let paths = computeBarsPathsForRect(uiAreas.bars)
-    drawBarsPaths(paths, useAnimation: true)
-  }
-  
-  private func drawBarsPaths(paths: [CGPath], useAnimation: Bool) {
-    for (index, path) in enumerate(paths) {
-      if barsLayer.sublayers == nil || index >= barsLayer.sublayers.count {
-        assert(false, "Cannot find necessary shape sub-layers for bars")
-        break
-      }
-      
-      let barLayer = barsLayer.sublayers[index] as CAShapeLayer
-      transformShape(barLayer, path: path, useAnimation: useAnimation)
-    }
-  }
-  
-  private func drawGoals() {
-    if _goalsShapeLayer == nil {
-      let zeroRect = CGRectMake(uiAreas.bars.minX, uiAreas.bars.maxY, uiAreas.bars.width, 0)
-      let zeroPath = computeGoalsPathForRect(zeroRect)
-      transformShape(goalsShapeLayer, path: zeroPath, useAnimation: false)
-    }
-    
-    let path = computeGoalsPathForRect(uiAreas.bars)
-    transformShape(goalsShapeLayer, path: path, useAnimation: true)
   }
   
   private func computeGoalsPathForRect(rect: CGRect) -> CGPath {
@@ -358,7 +415,23 @@ protocol WeekStatisticsViewDelegate {
     layer.addSublayer(_goalsShapeLayer)
   }
   
-  private var uiAreas: UIAreas = (scale: CGRectZero, bars: CGRectZero, days: CGRectZero)
+  private func createScaleLayer() {
+    _scaleLayer = CATextLayer(layer: layer)
+    _scaleLayer.font = titleFont
+    _scaleLayer.fontSize = titleFont.pointSize
+    _scaleLayer.foregroundColor = scaleColor.CGColor
+    _scaleLayer.alignmentMode = kCAAlignmentLeft
+    _scaleLayer.contentsScale = UIScreen.mainScreen().scale
+    layer.addSublayer(_scaleLayer)
+  }
+
+  private func createBackgroundLayer() {
+    _backgroundLayer = CAGradientLayer(layer: layer)
+    _backgroundLayer.colors = [backgroundDarkColor.CGColor, backgroundColor!.CGColor]
+    layer.insertSublayer(_backgroundLayer, atIndex: 0)
+  }
+
+  private var uiAreas: UIAreas = (scale: CGRectZero, bars: CGRectZero, days: CGRectZero, background: CGRectZero)
   
   private var _goalsShapeLayer: CAShapeLayer!
   private var goalsShapeLayer: CAShapeLayer {
@@ -374,6 +447,24 @@ protocol WeekStatisticsViewDelegate {
       createValuesLayer()
     }
     return _barsLayer
+  }
+  
+  private var _scaleLayer: CATextLayer!
+  private var scaleLayer: CATextLayer {
+    if _scaleLayer == nil {
+      createScaleLayer()
+      assert(_scaleLayer != nil)
+    }
+    return _scaleLayer
+  }
+  
+  private var _backgroundLayer: CAGradientLayer!
+  private var backgroundLayer: CAGradientLayer {
+    if _backgroundLayer == nil {
+      createBackgroundLayer()
+      assert(_backgroundLayer != nil)
+    }
+    return _backgroundLayer
   }
   
   private var _maximumValue: CGFloat!

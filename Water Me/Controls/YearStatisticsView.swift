@@ -10,6 +10,7 @@ import UIKit
 
 @IBDesignable class YearStatisticsView: UIView {
 
+  @IBInspectable var backgroundDarkColor: UIColor = UIColor(white: 235/255, alpha: 1.0)
   @IBInspectable var valuesChartLineColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
   @IBInspectable var valuesChartFillColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 0.1)
   @IBInspectable var goalsChartColor: UIColor = UIColor(red: 239/255, green: 64/255, blue: 79/255, alpha: 0.5)
@@ -20,7 +21,9 @@ import UIKit
   @IBInspectable var chartFillEnabled: Bool = true
   @IBInspectable var verticalMaximumAdjustingEnabled: Bool = true
   @IBInspectable var horizontalScaleMargin: CGFloat = 4
-  @IBInspectable var verticalScaleMargin: CGFloat = 10
+  @IBInspectable var verticalScaleMargin: CGFloat = 6
+  @IBInspectable var verticalScaleInside: Bool = true
+  @IBInspectable var horizontalMargin: CGFloat = 10
   
   var animationDuration = 0.4
   var scaleTitleFont: UIFont = UIFont.systemFontOfSize(12)
@@ -34,7 +37,7 @@ import UIKit
   
   typealias TitleForStepFunction = (CGFloat) -> String
   typealias ItemType = (value: CGFloat, goal: CGFloat)
-  private typealias UIAreas = (chart: CGRect, verticalScale: CGRect, horizontalScale: CGRect)
+  private typealias UIAreas = (chart: CGRect, verticalScale: CGRect, horizontalScale: CGRect, background: CGRect)
 
   var titleForVerticalStep: TitleForStepFunction?
   var titleForHorizontalStep: TitleForStepFunction?
@@ -93,44 +96,39 @@ import UIKit
   }
   
   private func computeAreasFromRect(rect: CGRect) -> UIAreas {
-    // Year statistics control contains three areas: vertical scale, horizontal scale and chart.
-    // Scheme of their placements:
-    // +---+-------------------+
-    // |   |                   |
-    // | V |                   |
-    // | e |                   |
-    // | r |                   |
-    // | t |                   |
-    // | i |      Chart        |
-    // | c |                   |
-    // | a |                   |
-    // | l |                   |
-    // |   |                   |
-    // +---+-------------------+
-    // |   |    Horizontal     |
-    // +---+-------------------+
-    
-    let leftRectangleWidth = round(verticalTitlesMaxWidth + verticalScaleMargin)
-    let bottomRectangleHeight = horizontalTitlesMaxHeight + horizontalScaleMargin
-    let lastVerticalTitleHeight = verticalTitlesSizes.last != nil ? verticalTitlesSizes.last!.height : 0
-    
-    var innerRect = CGRectMake(rect.minX, rect.minY + ceil(lastVerticalTitleHeight / 2), rect.width, rect.height - ceil(lastVerticalTitleHeight / 2))
-    let dx = max(pinDiameter / 2 + pinShadowBlurRadius + pinShadowOffsetByX, 1)
-    let dy = max(pinDiameter / 2 + pinShadowBlurRadius + pinShadowOffsetByY, 1)
-    innerRect.inset(dx: dx, dy: dy)
-    
-    let horizontalRectangles = innerRect.rectsByDividing(leftRectangleWidth, fromEdge: .MinXEdge)
-    let leftRectangle = horizontalRectangles.slice
-    let rightRectangle = horizontalRectangles.remainder
-    
-    let leftVerticalRectangles = leftRectangle.rectsByDividing(bottomRectangleHeight, fromEdge: .MaxYEdge)
-    let rightVerticalRectangles = rightRectangle.rectsByDividing(bottomRectangleHeight, fromEdge: .MaxYEdge)
-    
-    var result: UIAreas
-    result.chart = rightVerticalRectangles.remainder
-    result.verticalScale = leftVerticalRectangles.remainder
-    result.horizontalScale = rightVerticalRectangles.slice
-    return result
+    if verticalScaleInside {
+      let bottomRectangleHeight = horizontalTitlesMaxHeight + horizontalScaleMargin
+      let verticalRectangles = rect.rectsByDividing(bottomRectangleHeight, fromEdge: .MaxYEdge)
+      var result: UIAreas
+      result.chart = verticalRectangles.remainder.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
+      result.verticalScale = verticalRectangles.remainder.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
+      result.horizontalScale = verticalRectangles.slice.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
+      result.background = verticalRectangles.remainder.integerRect
+      return result
+    } else {
+      let leftRectangleWidth = round(verticalTitlesMaxWidth + verticalScaleMargin)
+      let bottomRectangleHeight = horizontalTitlesMaxHeight + horizontalScaleMargin
+      let lastVerticalTitleHeight = verticalTitlesSizes.last != nil ? verticalTitlesSizes.last!.height : 0
+      
+      var innerRect = CGRectMake(rect.minX, rect.minY + ceil(lastVerticalTitleHeight / 2), rect.width, rect.height - ceil(lastVerticalTitleHeight / 2))
+      let dx = max(pinDiameter / 2 + pinShadowBlurRadius + pinShadowOffsetByX, 1)
+      let dy = max(pinDiameter / 2 + pinShadowBlurRadius + pinShadowOffsetByY, 1)
+      innerRect.inset(dx: dx, dy: dy)
+      
+      let horizontalRectangles = innerRect.rectsByDividing(leftRectangleWidth, fromEdge: .MinXEdge)
+      let leftRectangle = horizontalRectangles.slice
+      let rightRectangle = horizontalRectangles.remainder
+      
+      let leftVerticalRectangles = leftRectangle.rectsByDividing(bottomRectangleHeight, fromEdge: .MaxYEdge)
+      let rightVerticalRectangles = rightRectangle.rectsByDividing(bottomRectangleHeight, fromEdge: .MaxYEdge)
+      
+      var result: UIAreas
+      result.chart = rightVerticalRectangles.remainder
+      result.verticalScale = leftVerticalRectangles.remainder
+      result.horizontalScale = rightVerticalRectangles.slice
+      result.background = CGRectZero
+      return result
+    }
   }
 
   private func computeVerticalMaximum() {
@@ -255,12 +253,54 @@ import UIKit
   }
   
   override func drawRect(rect: CGRect) {
+    drawBackground()
+    drawChart()
     drawVerticalScale()
     drawHorizontalScale()
-    drawChart()
+  }
+
+  private func drawBackground() {
+    if !verticalScaleInside {
+      return
+    }
+    
+    if let backgroundColor = self.backgroundColor {
+      if backgroundColor.isClearColor() {
+        return
+      }
+    } else {
+      return
+    }
+    
+    if (backgroundDarkColor.isClearColor()) {
+      return
+    }
+    
+    var rect = uiAreas.background
+    rect = rect.rectsByDividing(rect.height / 2, fromEdge: .MinYEdge).slice
+    backgroundLayer.frame = rect
+  }
+
+  private func drawVerticalScale() {
+    if verticalScaleInside {
+      drawVerticalScaleInside()
+    } else {
+      drawVerticalScaleOutside()
+    }
   }
   
-  private func drawVerticalScale() {
+  private func drawVerticalScaleInside() {
+    let title = getVerticalTitleForValue(verticalMaximum)
+    let size = computeSizeForText(title, font: scaleTitleFont)
+    var rect = CGRectMake(0, 0, size.width, size.height)
+    rect.offset(dx: uiAreas.verticalScale.minX, dy: uiAreas.verticalScale.minY + verticalScaleMargin)
+    rect.integerize()
+
+    verticalScaleLayer.frame = rect
+    verticalScaleLayer.string = title
+  }
+  
+  private func drawVerticalScaleOutside() {
     if verticalTitles.isEmpty || verticalTitlesSizes.isEmpty || verticalTitles.count != verticalTitlesSizes.count {
       return
     }
@@ -426,17 +466,18 @@ import UIKit
   private func drawGrid() {
     let rect = uiAreas.chart
     let maxIndex = CGFloat(items.count) - 1
-    let bezier = UIBezierPath()
-    gridColor.setStroke()
+    
+    let gridPath = UIBezierPath()
     
     for i in 0..<items.count {
       let x = round(rect.minX + CGFloat(i) / maxIndex * rect.width)
       let pointFrom = CGPointMake(x, rect.minY)
       let pointTo = CGPointMake(x, rect.maxY)
-      bezier.moveToPoint(pointFrom)
-      bezier.addLineToPoint(pointTo)
-      bezier.stroke()
+      gridPath.moveToPoint(pointFrom)
+      gridPath.addLineToPoint(pointTo)
     }
+    
+    gridLayer.path = gridPath.CGPath
   }
 
   private func createValuesStrokeShapeLayer() {
@@ -492,7 +533,33 @@ import UIKit
       _pinsLayer.addSublayer(pinLayer)
     }
   }
+  
+  private func createGridLayer() {
+    _gridLayer = CAShapeLayer(layer: layer)
+    _gridLayer.frame = uiAreas.background
+    _gridLayer.bounds = uiAreas.background
+    _gridLayer.strokeColor = gridColor.CGColor
+    _gridLayer.lineWidth = 1
+    _gridLayer.lineCap = kCALineCapButt
+    layer.addSublayer(_gridLayer)
+  }
+  
+  private func createVerticalScaleLayer() {
+    _verticalScaleLayer = CATextLayer(layer: layer)
+    _verticalScaleLayer.font = scaleTitleFont
+    _verticalScaleLayer.fontSize = scaleTitleFont.pointSize
+    _verticalScaleLayer.foregroundColor = scaleTitleColor.CGColor
+    _verticalScaleLayer.alignmentMode = kCAAlignmentLeft
+    _verticalScaleLayer.contentsScale = UIScreen.mainScreen().scale
+    layer.addSublayer(_verticalScaleLayer)
+  }
 
+  private func createBackgroundLayer() {
+    _backgroundLayer = CAGradientLayer(layer: layer)
+    _backgroundLayer.colors = [backgroundDarkColor.CGColor, backgroundColor!.CGColor]
+    layer.insertSublayer(_backgroundLayer, atIndex: 0)
+  }
+  
   private var items: [ItemType] = []
   
   private var _valuesStrokeShapeLayer: CAShapeLayer!
@@ -531,7 +598,34 @@ import UIKit
     return _pinsLayer
   }
   
-  private var uiAreas: UIAreas = (chart: CGRectZero, verticalScale: CGRectZero, horizontalScale: CGRectZero)
+  private var _gridLayer: CAShapeLayer!
+  private var gridLayer: CAShapeLayer {
+    if _gridLayer == nil {
+      createGridLayer()
+      assert(_gridLayer != nil)
+    }
+    return _gridLayer
+  }
+
+  private var _verticalScaleLayer: CATextLayer!
+  private var verticalScaleLayer: CATextLayer {
+    if _verticalScaleLayer == nil {
+      createVerticalScaleLayer()
+      assert(_verticalScaleLayer != nil)
+    }
+    return _verticalScaleLayer
+  }
+
+  private var _backgroundLayer: CAGradientLayer!
+  private var backgroundLayer: CAGradientLayer {
+    if _backgroundLayer == nil {
+      createBackgroundLayer()
+      assert(_backgroundLayer != nil)
+    }
+    return _backgroundLayer
+  }
+
+  private var uiAreas: UIAreas = (chart: CGRectZero, verticalScale: CGRectZero, horizontalScale: CGRectZero, background: CGRectZero)
   
   private var _verticalMaximum: CGFloat!
   private var verticalMaximum: CGFloat {
