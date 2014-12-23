@@ -107,7 +107,16 @@ class DateHelper {
     let timePart = stringFromTime(dateTime)
     return "\(datePart), \(timePart)"
   }
-
+  
+  class func stringFromTimeInterval(timeInterval: NSTimeInterval) -> String {
+    let overallSeconds = Int(timeInterval)
+    let seconds = overallSeconds % 60
+    let minutes = (overallSeconds / 60) % 60
+    let hours = (overallSeconds / 3600)
+    let result = "\(hours) hr \(minutes) min"
+    return result
+  }
+  
 }
 
 extension NSDate {

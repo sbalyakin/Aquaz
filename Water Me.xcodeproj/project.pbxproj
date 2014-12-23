@@ -43,6 +43,8 @@
 		A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F801A1212930088AF47 /* CalendarDayButton.swift */; };
 		A5275F851A1212930088AF47 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F821A1212930088AF47 /* CalendarView.swift */; };
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
+		A53869731A4989A6000E03DC /* NotificationsTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53869721A4989A6000E03DC /* NotificationsTimePickerViewController.swift */; };
+		A53869751A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53869741A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift */; };
 		A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */; };
 		A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1319E5686C00D0477B /* ModelHelper.swift */; };
 		A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1519E57D3500D0477B /* NamedEntity.swift */; };
@@ -102,6 +104,8 @@
 		A5275F801A1212930088AF47 /* CalendarDayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarDayButton.swift; path = Controls/CalendarDayButton.swift; sourceTree = "<group>"; };
 		A5275F821A1212930088AF47 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarView.swift; path = Controls/CalendarView.swift; sourceTree = "<group>"; };
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		A53869721A4989A6000E03DC /* NotificationsTimePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsTimePickerViewController.swift; sourceTree = "<group>"; };
+		A53869741A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsIntervalPickerViewController.swift; sourceTree = "<group>"; };
 		A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekStatisticsViewController.swift; sourceTree = "<group>"; };
 		A5B75A1319E5686C00D0477B /* ModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelHelper.swift; sourceTree = "<group>"; };
 		A5B75A1519E57D3500D0477B /* NamedEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedEntity.swift; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 				841B13BB1A31D55500249426 /* RevealedViewControllers.swift */,
 				840476561A35FE4A004F0FEF /* ConsumptionRateViewController.swift */,
 				840476581A35FE82004F0FEF /* NotificationsViewController.swift */,
+				A53869721A4989A6000E03DC /* NotificationsTimePickerViewController.swift */,
+				A53869741A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift */,
 				8404765A1A360273004F0FEF /* SupportViewController.swift */,
 			);
 			path = Controllers;
@@ -369,6 +375,7 @@
 				A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */,
 				840476571A35FE4A004F0FEF /* ConsumptionRateViewController.swift in Sources */,
 				843B056319E2D7800097A833 /* SWRevealViewController.m in Sources */,
+				A53869731A4989A6000E03DC /* NotificationsTimePickerViewController.swift in Sources */,
 				84126A871A278F4A00A66347 /* MonthStatisticsView.swift in Sources */,
 				8424AA061A0B5813009C5C47 /* MultiProgressView.swift in Sources */,
 				840476591A35FE82004F0FEF /* NotificationsViewController.swift in Sources */,
@@ -397,6 +404,7 @@
 				A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */,
 				84B639831A25D9EF00889438 /* WeekStatisticsView.swift in Sources */,
 				A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */,
+				A53869751A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift in Sources */,
 				843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */,
 				84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */,
 				84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */,

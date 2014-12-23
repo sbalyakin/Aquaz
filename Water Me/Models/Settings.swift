@@ -199,9 +199,24 @@ class Settings {
   
   lazy var uiYearStatisticsDate: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
     key: "UI - Year statistics date", initialValue: NSDate(), userDefaults: self.standardUserDefaults)
+
+  lazy var notificationsEnabled: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
+    key: "Notifications - Enabled", initialValue: false, userDefaults: self.standardUserDefaults)
+
+  lazy var notificationsFrom: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
+    key: "Notifications - From", initialValue: DateHelper.dateBySettingHour(9, minute: 0, second: 0, ofDate: NSDate()), userDefaults: self.standardUserDefaults)
   
+  lazy var notificationsTo: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
+    key: "Notifications - To", initialValue: DateHelper.dateBySettingHour(21, minute: 0, second: 0, ofDate: NSDate()), userDefaults: self.standardUserDefaults)
+
+  lazy var notificationsInterval: SettingsOrdinalItem<NSTimeInterval> = SettingsOrdinalItem(
+    key: "Notifications - Interval", initialValue: 60 * 60 * 1.5, userDefaults: self.standardUserDefaults)
+
+  lazy var notificationsSmart: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
+    key: "Notifications - Smart", initialValue: true, userDefaults: self.standardUserDefaults)
+
+  lazy var notificationsUseWaterIntake: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
+    key: "Notifications - Use water intake", initialValue: true, userDefaults: self.standardUserDefaults)
+
   private let standardUserDefaults = NSUserDefaults.standardUserDefaults()
-
-  private init() { }
-
 }
