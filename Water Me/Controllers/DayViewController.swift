@@ -282,6 +282,30 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     overallConsumption += consumption.amount.doubleValue
     
     diaryViewController.updateTable(consumptions)
+    
+    updateNotifications(consumptionDate: consumption.date)
+  }
+  
+  private func updateNotifications(#consumptionDate: NSDate) {
+    if !Settings.sharedInstance.notificationsEnabled.value {
+      return
+    }
+    
+    let isToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
+    if !isToday {
+      return
+    }
+    
+    if Settings.sharedInstance.notificationsUseWaterIntake.value && overallConsumption >= consumptionRateAmount {
+      NotificationsHelper.removeAllNotifications()
+      
+      let nextDayDate = DateHelper.addToDate(consumptionDate, years: 0, months: 0, days: 1)
+      NotificationsHelper.addNotificationsFromSettingsForDate(nextDayDate)
+      
+      return
+    }
+    
+    NotificationsHelper.rescheduleNotificationsBecauseOfConsumption(consumptionDate: consumptionDate)
   }
   
   func removeConsumption(consumption: Consumption) {

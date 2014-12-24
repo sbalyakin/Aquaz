@@ -37,7 +37,7 @@ class NotificationsTimePickerViewController: UIViewController {
   @IBAction func saveToSettings(sender: AnyObject) {
     switch mode! {
     case .From: Settings.sharedInstance.notificationsFrom.value = datePicker.date
-    case .To:   Settings.sharedInstance.notificationsFrom.value = datePicker.date
+    case .To:   Settings.sharedInstance.notificationsTo.value = datePicker.date
     }
     
     notificationsViewController.initControlsFromSettings()

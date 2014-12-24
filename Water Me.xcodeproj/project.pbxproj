@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84039F171A4B103100C5391E /* NotificationsHelper.swift */; };
 		840476571A35FE4A004F0FEF /* ConsumptionRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840476561A35FE4A004F0FEF /* ConsumptionRateViewController.swift */; };
 		840476591A35FE82004F0FEF /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840476581A35FE82004F0FEF /* NotificationsViewController.swift */; };
 		8404765B1A360273004F0FEF /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8404765A1A360273004F0FEF /* SupportViewController.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84039F171A4B103100C5391E /* NotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsHelper.swift; sourceTree = "<group>"; };
 		840476561A35FE4A004F0FEF /* ConsumptionRateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionRateViewController.swift; sourceTree = "<group>"; };
 		840476581A35FE82004F0FEF /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		8404765A1A360273004F0FEF /* SupportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				A5B75A1319E5686C00D0477B /* ModelHelper.swift */,
 				8406D78019FE9875001C54BF /* Units.swift */,
 				841B13BD1A31FE4F00249426 /* UIHelper.swift */,
+				84039F171A4B103100C5391E /* NotificationsHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				843B056919E2D80E0097A833 /* ConsumptionRate.swift in Sources */,
 				8404765B1A360273004F0FEF /* SupportViewController.swift in Sources */,
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
+				84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */,
 				843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */,
 				841B13BE1A31FE4F00249426 /* UIHelper.swift in Sources */,
 				84380C2C19E4195A0026398E /* Drink.swift in Sources */,

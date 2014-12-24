@@ -32,39 +32,11 @@ class NotificationsViewController: RevealedTableViewController {
   }
   
   func updateNotificationsFromSettings() {
-    removeAllNotifications()
+    NotificationsHelper.removeAllNotifications()
     
     if Settings.sharedInstance.notificationsEnabled.value {
-      addNotifications()
+      NotificationsHelper.addNotificationsFromSettingsForDate(NSDate())
     }
-  }
-  
-  private func removeAllNotifications() {
-    UIApplication.sharedApplication().cancelAllLocalNotifications()
-  }
-  
-  private func addNotifications() {
-    let fromTime = Settings.sharedInstance.notificationsFrom.value
-    let toTime = Settings.sharedInstance.notificationsTo.value
-    let interval = Settings.sharedInstance.notificationsInterval.value
-    
-    for var time = fromTime; !time.isLaterThan(toTime); time = time.dateByAddingTimeInterval(interval) {
-      addNotificationForTime(time)
-    }
-  }
-  
-  private func addNotificationForTime(time: NSDate) {
-    let fireDate = DateHelper.dateByJoiningDateTime(datePart: NSDate(), timePart: time)
-    
-    let notification = UILocalNotification()
-    notification.fireDate = fireDate
-    notification.repeatInterval = .CalendarUnitDay
-    notification.alertBody = "It's time to drink!" // TODO: Rewrite alert body text
-    notification.hasAction = true
-    notification.alertAction = "Water me"
-    notification.timeZone = NSTimeZone.defaultTimeZone()
-    
-    UIApplication.sharedApplication().scheduleLocalNotification(notification)
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -100,6 +72,10 @@ class NotificationsViewController: RevealedTableViewController {
   }
 
   @IBAction func enableNotificationsSwitchValueChanged(sender: AnyObject) {
+    if enableNotificationsSwitch.on {
+      NotificationsHelper.registerApplicationForLocalNotifications()
+    }
+    
     Settings.sharedInstance.notificationsEnabled.value = enableNotificationsSwitch.on
     updateNotificationsFromSettings()
   }
