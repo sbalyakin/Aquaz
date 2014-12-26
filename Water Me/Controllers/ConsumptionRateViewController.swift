@@ -105,15 +105,22 @@ class ConsumptionRateViewController: UIViewController, UITableViewDataSource, UI
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    let genderTitle = NSLocalizedString("CRVC:Gender", value: "Gender", comment: "ConsumptionRateViewController: Table cell title for [Gender] setting")
+    let heightTitle = NSLocalizedString("CRVC:Height", value: "Height", comment: "ConsumptionRateViewController: Table cell title for [Height] setting")
+    let weightTitle = NSLocalizedString("CRVC:Weight", value: "Weight", comment: "ConsumptionRateViewController: Table cell title for [Weight] setting")
+    let ageTitle = NSLocalizedString("CRVC:Age", value: "Age", comment: "ConsumptionRateViewController: Table cell title for [Age] setting")
+    let physicalActivityTitle = NSLocalizedString("CRVC:Physical Activity", value: "Physical Activity", comment: "ConsumptionRateViewController: Table cell title for [Physical Activity] setting")
+    let waterIntakeTitle = NSLocalizedString("CRVC:Water Intake", value: "Water Intake", comment: "ConsumptionRateViewController: Table cell title for [Water Intake] setting")
+    
     gender = SelectableEnumCellInfo<Settings.Gender>(
       viewController: self,
-      title: "Gender",
+      title: genderTitle,
       setting: Settings.sharedInstance.userGender,
       titleFunction: getTitleForGender)
     
     height = SelectableCellInfo<Double>(
       viewController: self,
-      title: "Height",
+      title: heightTitle,
       setting: Settings.sharedInstance.userHeight,
       minimumValue: Settings.sharedInstance.generalHeightUnits.value.minimumValue,
       maximumValue: Settings.sharedInstance.generalHeightUnits.value.maximumValue,
@@ -122,7 +129,7 @@ class ConsumptionRateViewController: UIViewController, UITableViewDataSource, UI
     
     weight = SelectableCellInfo<Double>(
       viewController: self,
-      title: "Weight",
+      title: weightTitle,
       setting: Settings.sharedInstance.userWeight,
       minimumValue: Settings.sharedInstance.generalWeightUnits.value.minimumValue,
       maximumValue: Settings.sharedInstance.generalWeightUnits.value.maximumValue,
@@ -131,7 +138,7 @@ class ConsumptionRateViewController: UIViewController, UITableViewDataSource, UI
     
     age = SelectableCellInfo<Int>(
       viewController: self,
-      title: "Age",
+      title: ageTitle,
       setting: Settings.sharedInstance.userAge,
       minimumValue: minimumAge,
       maximumValue: maximumAge,
@@ -140,14 +147,14 @@ class ConsumptionRateViewController: UIViewController, UITableViewDataSource, UI
     
     physicalActivity = SelectableEnumCellInfo<Settings.PhysicalActivity>(
       viewController: self,
-      title: "Physical Activity",
+      title: physicalActivityTitle,
       setting: Settings.sharedInstance.userPhysicalActivity,
       titleFunction: getTitleForPhysicalActivity)
     
     let volumeUnit = Settings.sharedInstance.generalVolumeUnits.value.unit
     
     waterIntake = EditableCellInfo<Double>(
-      title: "Water Intake (\(volumeUnit.contraction))",
+      title: waterIntakeTitle +  " (\(volumeUnit.contraction))",
       setting: Settings.sharedInstance.userDailyWaterIntake,
       stringToValueFunction: stringToWaterIntakeInMetricUnit,
       titleFunction: getTitleForWaterIntake)
@@ -186,19 +193,33 @@ class ConsumptionRateViewController: UIViewController, UITableViewDataSource, UI
   
   private func getTitleForGender(gender: Settings.Gender) -> String {
     switch gender {
-    case .Man:                 return "Man"
-    case .Woman:               return "Woman"
-    case .PregnantFemale:      return "Pregnant female"
-    case .BreastfeedingFemale: return "Breastfeeding female"
+    case .Man:
+      return NSLocalizedString("CRVC:Man", value: "Man", comment: "ConsumptionRateViewController: [Man] option for gender")
+      
+    case .Woman:
+      return NSLocalizedString("CRVC:Woman", value: "Woman", comment: "ConsumptionRateViewController: [Woman] option for gender")
+      
+    case .PregnantFemale:
+      return NSLocalizedString("CRVC:Pregnant female", value: "Pregnant female", comment: "ConsumptionRateViewController: [Pregnant female] option for gender")
+      
+    case .BreastfeedingFemale:
+      return NSLocalizedString("CRVC:Breastfeeding female", value: "Breastfeeding female", comment: "ConsumptionRateViewController: [Breastfeeding female] option for gender")
     }
   }
   
   private func getTitleForPhysicalActivity(physicalActivity: Settings.PhysicalActivity) -> String {
     switch physicalActivity {
-    case .Rare:       return "Rare"
-    case .Occasional: return "Occasional"
-    case .Weekly:     return "Weekly"
-    case .Daily:      return "Daily"
+    case .Rare:
+      return NSLocalizedString("CRVC:Rare", value: "Rare", comment: "ConsumptionRateViewController: [Rare] option for physical activity")
+      
+    case .Occasional:
+      return NSLocalizedString("CRVC:Occasional", value: "Occasional", comment: "ConsumptionRateViewController: [Occasional] option for physical activity")
+      
+    case .Weekly:
+      return NSLocalizedString("CRVC:Weekly", value: "Weekly", comment: "ConsumptionRateViewController: [Weekly] option for physical activity")
+      
+    case .Daily:
+      return NSLocalizedString("CRVC:Daily", value: "Daily", comment: "ConsumptionRateViewController: [Daily] option for physical activity")
     }
   }
   

@@ -119,7 +119,10 @@ class ConsumptionViewController: UIViewController {
   }
   
   private func setupApplyButton() {
-    let title = (viewMode == .Add) ? "Add" : "Apply"
+    let title = (viewMode == .Add)
+      ? NSLocalizedString("CVC:Add", value: "Add", comment: "ConsumptionViewController: Title for Add button")
+      : NSLocalizedString("CVC:Apply", value: "Apply", comment: "ConsumptionViewController: Title for Apply button")
+    
     applyButton.setTitle(title, forState: .Normal)
   }
 

@@ -178,8 +178,8 @@ class NotificationsIntervalPickerViewController: UIViewController, UIPickerViewD
   private let hoursComponentWidth: CGFloat = 80
   private let minutesComponentWidth: CGFloat = 80
   
-  private let hoursTitle = "hr"
-  private let minutesTitle = "min"
+  private let hoursTitle = NSLocalizedString("NIPVC:hr", value: "hr", comment: "NotificationsIntervalPickerViewController: Contraction for hours")
+  private let minutesTitle = NSLocalizedString("NIPVC:min", value: "min", comment: "NotificationsIntervalPickerViewController: Contraction for minutes")
 
   private let pickerItemsFont = UIFont.systemFontOfSize(20)
   private let pickerLabelFont = UIFont.systemFontOfSize(18)

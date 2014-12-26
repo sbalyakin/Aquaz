@@ -27,12 +27,12 @@ class NotificationsTimePickerViewController: UIViewController {
     
     switch mode! {
     case .From:
-      navigationItem.title = "From"
+      navigationItem.title = NSLocalizedString("NTPVC:From", value: "From", comment: "NotificationsTimePickerViewController: Navigation item title for choosing [From] time")
       datePicker.datePickerMode = .Time
       datePicker.maximumDate = toDate
       datePicker.setDate(fromDate, animated: false)
     case .To:
-      navigationItem.title = "To"
+      navigationItem.title = NSLocalizedString("NTPVC:To", value: "To", comment: "NotificationsTimePickerViewController: Navigation item title for choosing [To] time")
       datePicker.datePickerMode = .Time
       datePicker.minimumDate = fromDate
       datePicker.setDate(toDate, animated: false)

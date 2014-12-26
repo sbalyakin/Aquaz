@@ -505,6 +505,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   private var pages: [UIViewController] = []
   private var selectDrinkViewController: SelectDrinkViewController!
   private var diaryViewController: DiaryViewController!
+  // TODO: Page titles should be replaced with images
   private let pageTitles = ["Diary", "Drinks"]
 
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
