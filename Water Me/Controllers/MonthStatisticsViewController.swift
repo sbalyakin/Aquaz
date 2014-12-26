@@ -91,7 +91,7 @@ class MonthStatisticsViewController: UIViewController, MonthStatisticsViewDataSo
 
   func calendarViewDaySelected(date: NSDate) {
     let dayViewController = storyboard!.instantiateViewControllerWithIdentifier("DayViewController") as DayViewController
-    dayViewController.setCurrentDate(date, updateControl: false)
+    dayViewController.setCurrentDate(date)
     dayViewController.initializesRevealControls = false
     
     navigationController!.pushViewController(dayViewController, animated: true)

@@ -28,12 +28,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
       NSUserDefaults.standardUserDefaults().synchronize()
     }
+    
+    if let options = launchOptions {
+      if let notification = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
+        showDayViewControllerForToday()
+      }
+    }
 
     return true
   }
   
-  func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
-    // TODO: Show day view controller
+  func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+    if application.applicationState == .Active {
+      return
+    }
+
+    showDayViewControllerForToday()
+  }
+  
+  private func showDayViewControllerForToday() {
+    window?.makeKeyAndVisible()
+    if let rootViewController = window?.rootViewController as? SWRevealViewController {
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      
+      let dayNavigationController = storyboard.instantiateViewControllerWithIdentifier("DayNavigationController") as UINavigationController
+      
+      let dayViewController = dayNavigationController.topViewController as DayViewController
+      dayViewController.setCurrentDate(NSDate())
+      
+      rootViewController.setFrontViewController(dayNavigationController, animated: false)
+    }
   }
   
   func applicationWillResignActive(application: UIApplication) {

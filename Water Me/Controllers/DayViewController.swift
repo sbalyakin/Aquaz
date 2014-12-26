@@ -47,7 +47,18 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   // MARK: Public properties -
   
   /// Current date for managing water intake
-  private var currentDate: NSDate = NSDate()
+  private var currentDate: NSDate = NSDate() {
+    didSet {
+      if mode == .General {
+        if DateHelper.areDatesEqualByDays(date1: currentDate, date2: NSDate()) {
+          Settings.sharedInstance.uiUseDayPageDate.value = false
+        } else {
+          Settings.sharedInstance.uiUseDayPageDate.value = true
+          Settings.sharedInstance.uiDayPageDate.value = currentDate
+        }
+      }
+    }
+  }
   
   private var overallConsumption: Double = 0.0 {
     didSet {
@@ -55,10 +66,20 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
   }
   
+  enum Mode {
+    case General, Statistics
+  }
+  
+  var mode: Mode = .General
+  
   // MARK: Page setup -
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    if mode == .General && Settings.sharedInstance.uiUseDayPageDate.value {
+      currentDate = Settings.sharedInstance.uiDayPageDate.value
+    }
     
     createCustomNavigationTitle()
     createPageViewController()
@@ -74,10 +95,10 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
   }
   
-  func setCurrentDate(date: NSDate, updateControl: Bool) {
+  func setCurrentDate(date: NSDate) {
     currentDate = date
-    
-    if updateControl {
+
+    if isViewLoaded() {
       updateCurrentDateRelatedControls()
     }
   }
@@ -191,13 +212,11 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
   
   @IBAction func switchToPreviousDay(sender: AnyObject) {
-    currentDate = DateHelper.addToDate(currentDate, years: 0, months: 0, days: -1)
-    updateCurrentDateRelatedControls()
+    setCurrentDate(DateHelper.addToDate(currentDate, years: 0, months: 0, days: -1))
   }
 
   @IBAction func switchToNextDay(sender: AnyObject) {
-    currentDate = DateHelper.addToDate(currentDate, years: 0, months: 0, days: 1)
-    updateCurrentDateRelatedControls()
+    setCurrentDate(DateHelper.addToDate(currentDate, years: 0, months: 0, days: 1))
   }
   
   // MARK: Change current screen -

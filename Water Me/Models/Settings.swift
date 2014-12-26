@@ -185,6 +185,12 @@ class Settings {
   lazy var userDailyWaterIntake: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
     key: "User - Daily water intake", initialValue: 2000.0, userDefaults: self.standardUserDefaults)
 
+  lazy var uiUseDayPageDate: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
+    key: "UI - Use day page date", initialValue: false, userDefaults: self.standardUserDefaults)
+  
+  lazy var uiDayPageDate: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
+    key: "UI - Day page date", initialValue: NSDate(), userDefaults: self.standardUserDefaults)
+
   lazy var uiDisplayDaySelection: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "UI - Display day selection", initialValue: false, userDefaults: self.standardUserDefaults)
 

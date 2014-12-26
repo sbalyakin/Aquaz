@@ -22,15 +22,20 @@ class NotificationsTimePickerViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    let fromDate = Settings.sharedInstance.notificationsFrom.value
+    let toDate = Settings.sharedInstance.notificationsTo.value
+    
     switch mode! {
     case .From:
       navigationItem.title = "From"
       datePicker.datePickerMode = .Time
-      datePicker.setDate(Settings.sharedInstance.notificationsFrom.value, animated: false)
+      datePicker.maximumDate = toDate
+      datePicker.setDate(fromDate, animated: false)
     case .To:
       navigationItem.title = "To"
       datePicker.datePickerMode = .Time
-      datePicker.setDate(Settings.sharedInstance.notificationsTo.value, animated: false)
+      datePicker.minimumDate = fromDate
+      datePicker.setDate(toDate, animated: false)
     }
   }
   

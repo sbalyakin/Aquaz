@@ -49,7 +49,8 @@ class WeekStatisticsViewController: UIViewController, WeekStatisticsViewDelegate
     let selectedDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
     
     let dayViewController = storyboard!.instantiateViewControllerWithIdentifier("DayViewController") as DayViewController
-    dayViewController.setCurrentDate(selectedDate, updateControl: false)
+    dayViewController.mode = .Statistics
+    dayViewController.setCurrentDate(selectedDate)
     dayViewController.initializesRevealControls = false
     
     navigationController!.pushViewController(dayViewController, animated: true)
