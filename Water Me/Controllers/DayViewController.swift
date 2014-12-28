@@ -392,7 +392,8 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
       roundPrecision: amountPrecision,
       decimals: amountDecimals)
     
-    consumptionLabel.text = "\(consumptionText) of \(consumptionRateText)"
+    let template = NSLocalizedString("DVC:%1$@ of %2$@", value: "%1$@ of %2$@", comment: "DayViewController: Current consumption of recommended one")
+    consumptionLabel.text = NSString(format: template, consumptionText, consumptionRateText)
   }
   
   private func consumptionRateWasChanged() {

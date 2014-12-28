@@ -1,0 +1,105 @@
+/* ConsumptionRateViewController: Table cell title for [Age] setting */
+"CRVC:Age" = "Возраст";
+
+/* ConsumptionRateViewController: Table cell title for [Gender] setting */
+"CRVC:Gender" = "Пол";
+
+/* ConsumptionRateViewController: Table cell title for [Height] setting */
+"CRVC:Height" = "Рост";
+
+/* ConsumptionRateViewController: [Man] option for gender */
+"CRVC:Man" = "Мужчина";
+
+/* ConsumptionRateViewController: [Occasional] option for physical activity */
+"CRVC:Occasional" = "Иногда";
+
+/* ConsumptionRateViewController: Table cell title for [Physical Activity] setting */
+"CRVC:Physical Activity" = "Физическая активность";
+
+/* ConsumptionRateViewController: [Rare] option for physical activity */
+"CRVC:Rare" = "Редко";
+
+/* ConsumptionRateViewController: [Weekly] option for physical activity */
+"CRVC:Weekly" = "Еженедельно";
+
+/* ConsumptionRateViewController: Table cell title for [Weight] setting */
+"CRVC:Weight" = "Вес";
+
+/* ConsumptionRateViewController: [Woman] option for gender */
+"CRVC:Woman" = "Женщина";
+
+/* ConsumptionViewController: Title for Add button */
+"CVC:Add" = "Добавить";
+
+/* ConsumptionViewController: Title for Apply button */
+"CVC:Apply" = "Применить";
+
+/* Drink: Title for alcohol */
+"D:Alcohol" = "Алкоголь";
+
+/* Drink: Title for coffee */
+"D:Coffee" = "Кофе";
+
+/* Drink: Title for energetic drink */
+"D:Energy" = "Энергетик";
+
+/* Drink: Title for juice */
+"D:Juice" = "Сок";
+
+/* Drink: Title for milk */
+"D:Milk" = "Молоко";
+
+/* Drink: Title for soda */
+"D:Soda" = "Газировка";
+
+/* Drink: Title for sport drink */
+"D:Sport" = "Спорт";
+
+/* Drink: Title for tea */
+"D:Tea" = "Чай";
+
+/* Drink: Title for water */
+"D:Water" = "Вода";
+
+/* DayViewController: Current consumption of recommended one */
+"DVC:%1$@ of %2$@" = "%1$@ из %2$@";
+
+/* NotificationsHelper: Text for alert body of notifications */
+"NH:It's time to drink!" = "Время выпить воды!";
+
+/* NotificationsHelper: Text for alert action of notifications */
+"NH:Water me" = "Выпить воды";
+
+/* NotificationsIntervalPickerViewController: Contraction for hours */
+"NIPVC:hr" = "ч";
+
+/* NotificationsIntervalPickerViewController: Contraction for minutes */
+"NIPVC:min" = "мин";
+
+/* NotificationsTimePickerViewController: Navigation item title for choosing [From] time */
+"NTPVC:From" = "От";
+
+/* NotificationsTimePickerViewController: Navigation item title for choosing [To] time */
+"NTPVC:To" = "До";
+
+/* NotificationsViewController: Template string for time interval */
+"NVC:%u hr %u min" = "%1$u ч %2$u мин";
+
+/* Units: contraction for centimeters */
+"U:cm" = "см";
+
+/* Units: contraction for fluid ounces */
+"U:fl oz" = "унц";
+
+/* Units: contraction for feet */
+"U:ft" = "фт";
+
+/* Units: contraction for kilogrames */
+"U:kg" = "кг";
+
+/* Units: contraction for pounds */
+"U:lbs" = "фнт";
+
+/* Units: contraction for milliliters */
+"U:ml" = "мл";
+

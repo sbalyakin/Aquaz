@@ -1,0 +1,261 @@
+/* Class = "IBUILabel"; text = "Enable notifications"; ObjectID = "0ml-KO-V3X"; */
+"0ml-KO-V3X.text" = "Включить оповещения";
+
+/* Class = "IBUINavigationItem"; title = "Choose time"; ObjectID = "1ri-5R-qlM"; */
+"1ri-5R-qlM.title" = "Выберите время";
+
+/* Class = "IBUIBarButtonItem"; title = "Time"; ObjectID = "3j1-xd-PoU"; */
+"3j1-xd-PoU.title" = "Время";
+
+/* Class = "IBUINavigationItem"; title = "Support"; ObjectID = "4Do-hQ-n3x"; */
+"4Do-hQ-n3x.title" = "Поддержка";
+
+/* Class = "IBUINavigationItem"; title = "Choose day"; ObjectID = "4v4-BL-wZE"; */
+"4v4-BL-wZE.title" = "Выберите день";
+
+/* Class = "IBUIButton"; normalTitle = "<"; ObjectID = "6io-9A-Yq4"; */
+"6io-9A-Yq4.normalTitle" = "<";
+
+/* Class = "IBUIButton"; normalTitle = "500 ml"; ObjectID = "7xm-eq-yWQ"; */
+"7xm-eq-yWQ.normalTitle" = "500 мл";
+
+/* Class = "IBUIButton"; normalTitle = ">"; ObjectID = "8PO-QY-6SQ"; */
+"8PO-QY-6SQ.normalTitle" = ">";
+
+/* Class = "IBUIButton"; normalTitle = ">"; ObjectID = "8dM-xv-rh9"; */
+"8dM-xv-rh9.normalTitle" = ">";
+
+/* Class = "IBUILabel"; text = "Daily Water Intake"; ObjectID = "9kh-sv-3YO"; */
+"9kh-sv-3YO.text" = "Дневное потребление";
+
+/* Class = "IBUIButton"; normalTitle = "Add"; ObjectID = "A5t-FE-O50"; */
+"A5t-FE-O50.normalTitle" = "Добавить";
+
+/* Class = "IBUILabel"; text = "Tea"; ObjectID = "BCk-uW-ydR"; */
+"BCk-uW-ydR.text" = "Чай";
+
+/* Class = "IBUIButton"; normalTitle = "<"; ObjectID = "CLj-7y-RXN"; */
+"CLj-7y-RXN.normalTitle" = "<";
+
+/* Class = "IBUILabel"; text = "Coffee"; ObjectID = "CW4-Q1-kdO"; */
+"CW4-Q1-kdO.text" = "Кофе";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Measurement units"; ObjectID = "FKo-wj-xTy"; */
+"FKo-wj-xTy.headerTitle" = "Единицы измерения";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "FhH-vC-1py"; */
+"FhH-vC-1py.text" = "Загловок";
+
+/* Class = "IBUINavigationItem"; title = "Notifications"; ObjectID = "GHE-Dq-UqX"; */
+"GHE-Dq-UqX.title" = "Оповещения";
+
+/* Class = "IBUIBarButtonItem"; title = "Stat"; ObjectID = "GKO-c9-CDb"; */
+"GKO-c9-CDb.title" = "Stat";
+
+/* Class = "IBUILabel"; text = "Smart notifications"; ObjectID = "GZM-rp-lAW"; */
+"GZM-rp-lAW.text" = "Умные оповещения";
+
+/* Class = "IBUINavigationController"; title = "Notifications Navigation Controller"; ObjectID = "I1B-Ue-Dul"; */
+"I1B-Ue-Dul.title" = "Notifications Navigation Controller";
+
+/* Class = "IBUILabel"; text = "Volume"; ObjectID = "IVh-g5-6lW"; */
+"IVh-g5-6lW.text" = "Объем";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "J3B-s1-RNV"; */
+"J3B-s1-RNV.text" = "Подробнее";
+
+/* Class = "IBUILabel"; text = "Water Balance"; ObjectID = "J8e-d1-E0t"; */
+"J8e-d1-E0t.text" = "Водный баланс";
+
+/* Class = "IBUILabel"; text = "Height"; ObjectID = "JWh-CC-TJx"; */
+"JWh-CC-TJx.text" = "Рост";
+
+/* Class = "IBUIButton"; normalTitle = "<"; ObjectID = "K7Y-wl-o8g"; */
+"K7Y-wl-o8g.normalTitle" = "<";
+
+/* Class = "IBUILabel"; text = "Notifications"; ObjectID = "LGg-8e-eN1"; */
+"LGg-8e-eN1.text" = "Оповещения";
+
+/* Class = "IBUISegmentedControl"; Mbn-bY-c57.segmentTitles[0] = "Week"; ObjectID = "Mbn-bY-c57"; */
+"Mbn-bY-c57.segmentTitles[0]" = "Неделя";
+
+/* Class = "IBUISegmentedControl"; Mbn-bY-c57.segmentTitles[1] = "Month"; ObjectID = "Mbn-bY-c57"; */
+"Mbn-bY-c57.segmentTitles[1]" = "Месяц";
+
+/* Class = "IBUISegmentedControl"; Mbn-bY-c57.segmentTitles[2] = "Year"; ObjectID = "Mbn-bY-c57"; */
+"Mbn-bY-c57.segmentTitles[2]" = "Год";
+
+/* Class = "IBUILabel"; text = "Month"; ObjectID = "ORs-BH-u1n"; */
+"ORs-BH-u1n.text" = "Месяц";
+
+/* Class = "IBUINavigationItem"; title = "Water Balance"; ObjectID = "Oy2-YR-KpK"; */
+"Oy2-YR-KpK.title" = "Водный баланс";
+
+/* Class = "IBUILabel"; text = "Support"; ObjectID = "QQ1-gF-NES"; */
+"QQ1-gF-NES.text" = "Поддержка";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "QjD-aH-nVL"; */
+"QjD-aH-nVL.text" = "Заголовок";
+
+/* Class = "IBUILabel"; text = "2000"; ObjectID = "QwJ-BO-3hz"; */
+"QwJ-BO-3hz.text" = "2000";
+
+/* Class = "IBUILabel"; text = "Volume"; ObjectID = "R9F-DL-1Ap"; */
+"R9F-DL-1Ap.text" = "Объем";
+
+/* Class = "IBUILabel"; text = "Milk"; ObjectID = "SfG-BQ-ZCk"; */
+"SfG-BQ-ZCk.text" = "Молоко";
+
+/* Class = "IBUIButton"; normalTitle = "A"; ObjectID = "Sw2-pb-ue3"; */
+"Sw2-pb-ue3.normalTitle" = "A";
+
+/* Class = "IBUIButton"; normalTitle = "S"; ObjectID = "Teo-xX-LXi"; */
+"Teo-xX-LXi.normalTitle" = "S";
+
+/* Class = "IBUIButton"; normalTitle = "C"; ObjectID = "Ubg-ey-enw"; */
+"Ubg-ey-enw.normalTitle" = "C";
+
+/* Class = "IBUISegmentedControl"; VzI-KD-5U6.segmentTitles[0] = "kg"; ObjectID = "VzI-KD-5U6"; */
+"VzI-KD-5U6.segmentTitles[0]" = "кг";
+
+/* Class = "IBUISegmentedControl"; VzI-KD-5U6.segmentTitles[1] = "lb"; ObjectID = "VzI-KD-5U6"; */
+"VzI-KD-5U6.segmentTitles[1]" = "фт";
+
+/* Class = "IBUILabel"; text = "Sport"; ObjectID = "WC8-ZK-eCh"; */
+"WC8-ZK-eCh.text" = "Спорт";
+
+/* Class = "IBUILabel"; text = "1 hr 30 min"; ObjectID = "WGf-Qd-dil"; */
+"WGf-Qd-dil.text" = "1 ч 30 мин";
+
+/* Class = "IBUILabel"; text = "Alcohol"; ObjectID = "aGX-KF-l8i"; */
+"aGX-KF-l8i.text" = "Алкоголь";
+
+/* Class = "IBUILabel"; text = "From"; ObjectID = "bei-SA-Jz8"; */
+"bei-SA-Jz8.text" = "От";
+
+/* Class = "IBUILabel"; text = "To"; ObjectID = "bow-du-pFq"; */
+"bow-du-pFq.text" = "До";
+
+/* Class = "IBUIButton"; normalTitle = "Today"; ObjectID = "byd-yV-Sp4"; */
+"byd-yV-Sp4.normalTitle" = "Сегодня";
+
+/* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "cET-Jh-237"; */
+"cET-Jh-237.title" = "Настройки";
+
+/* Class = "IBUINavigationController"; title = "Support Navigation Controller"; ObjectID = "cH4-x3-tAR"; */
+"cH4-x3-tAR.title" = "Support Navigation Controller";
+
+/* Class = "IBUILabel"; text = "Use water intake"; ObjectID = "da7-ef-4Ga"; */
+"da7-ef-4Ga.text" = "Учитывать потребление воды";
+
+/* Class = "IBUIButton"; normalTitle = ">"; ObjectID = "glk-nc-3dL"; */
+"glk-nc-3dL.normalTitle" = ">";
+
+/* Class = "IBUINavigationItem"; title = "Statistics"; ObjectID = "gqT-gh-oAs"; */
+"gqT-gh-oAs.title" = "Статистика";
+
+/* Class = "IBUIButton"; normalTitle = "100 ml"; ObjectID = "hoF-aO-Mum"; */
+"hoF-aO-Mum.normalTitle" = "100 мл";
+
+/* Class = "IBUILabel"; text = "Year"; ObjectID = "i3n-ub-LA6"; */
+"i3n-ub-LA6.text" = "Год";
+
+/* Class = "IBUILabel"; text = "9:00"; ObjectID = "iXK-kh-CZ9"; */
+"iXK-kh-CZ9.text" = "9:00";
+
+/* Class = "IBUINavigationController"; title = "Settings Navigation Controller"; ObjectID = "j8p-Wz-faw"; */
+"j8p-Wz-faw.title" = "Settings Navigation Controller";
+
+/* Class = "IBUILabel"; text = "Statistics"; ObjectID = "kCf-3O-cd8"; */
+"kCf-3O-cd8.text" = "Статистика";
+
+/* Class = "IBUILabel"; text = "Soda"; ObjectID = "kwB-uL-shq"; */
+"kwB-uL-shq.text" = "Газировка";
+
+/* Class = "IBUILabel"; text = "Juice"; ObjectID = "l73-g9-J2p"; */
+"l73-g9-J2p.text" = "Сок";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "lVV-IF-raQ"; */
+"lVV-IF-raQ.text" = "Подробнее";
+
+/* Class = "IBUILabel"; text = "Water"; ObjectID = "lfG-f0-8ji"; */
+"lfG-f0-8ji.text" = "Вода";
+
+/* Class = "IBUILabel"; text = "Energy"; ObjectID = "m3p-Bz-2ic"; */
+"m3p-Bz-2ic.text" = "Энергетик";
+
+/* Class = "IBUIButton"; normalTitle = ">"; ObjectID = "mTP-tH-nqy"; */
+"mTP-tH-nqy.normalTitle" = ">";
+
+/* Class = "IBUILabel"; text = "2000 ml"; ObjectID = "nDO-TA-hsA"; */
+"nDO-TA-hsA.text" = "2000 мл";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Recommendations"; ObjectID = "nKa-29-Uma"; */
+"nKa-29-Uma.headerTitle" = "Рекомендации";
+
+/* Class = "IBUIBarButtonItem"; title = "Today"; ObjectID = "nSq-92-OEq"; */
+"nSq-92-OEq.title" = "Сегодня";
+
+/* Class = "IBUIButton"; normalTitle = ">"; ObjectID = "np9-8W-4mb"; */
+"np9-8W-4mb.normalTitle" = ">";
+
+/* Class = "IBUISegmentedControl"; nsz-ys-Fh0.segmentTitles[0] = "ml"; ObjectID = "nsz-ys-Fh0"; */
+"nsz-ys-Fh0.segmentTitles[0]" = "мл";
+
+/* Class = "IBUISegmentedControl"; nsz-ys-Fh0.segmentTitles[1] = "fl oz"; ObjectID = "nsz-ys-Fh0"; */
+"nsz-ys-Fh0.segmentTitles[1]" = "унции";
+
+/* Class = "IBUILabel"; text = "Month"; ObjectID = "oGq-1N-zd1"; */
+"oGq-1N-zd1.text" = "Месяц";
+
+/* Class = "IBUILabel"; text = "Settings"; ObjectID = "prt-hu-2Xc"; */
+"prt-hu-2Xc.text" = "Настройки";
+
+/* Class = "IBUILabel"; text = "21:00"; ObjectID = "qAZ-TU-nJ8"; */
+"qAZ-TU-nJ8.text" = "21:00";
+
+/* Class = "IBUILabel"; text = "Week"; ObjectID = "qpS-Mu-cye"; */
+"qpS-Mu-cye.text" = "Неделя";
+
+/* Class = "IBUILabel"; text = "Interval"; ObjectID = "rRH-VW-DVR"; */
+"rRH-VW-DVR.text" = "Интервал";
+
+/* Class = "IBUIButton"; normalTitle = "<"; ObjectID = "ruO-Mw-fgx"; */
+"ruO-Mw-fgx.normalTitle" = "<";
+
+/* Class = "IBUILabel"; text = "Already drinked:"; ObjectID = "shH-0K-PYt"; */
+"shH-0K-PYt.text" = "Сегодня выпито:";
+
+/* Class = "IBUITableViewSection"; footerTitle = "Turn smart notifications on and notifications will be show not earlier than specified interval after the last consumption."; ObjectID = "t2Q-4u-nEu"; */
+"t2Q-4u-nEu.footerTitle" = "Turn smart notifications on and notifications will be show not earlier than specified interval after the last consumption.";
+
+/* Class = "IBUITableViewSection"; footerTitle = "Do not notify if daily water intake is reached."; ObjectID = "t12-ax-KH8"; */
+"t12-ax-KH8.footerTitle" = "Do not notify if daily water intake is reached.";
+
+/* Class = "IBUINavigationItem"; title = "Daily Water Intake"; ObjectID = "uhw-Y6-KGo"; */
+"uhw-Y6-KGo.title" = "Дневное потребление";
+
+/* Class = "IBUISegmentedControl"; vJl-ea-rcR.segmentTitles[0] = "cm"; ObjectID = "vJl-ea-rcR"; */
+"vJl-ea-rcR.segmentTitles[0]" = "см";
+
+/* Class = "IBUISegmentedControl"; vJl-ea-rcR.segmentTitles[1] = "ft"; ObjectID = "vJl-ea-rcR"; */
+"vJl-ea-rcR.segmentTitles[1]" = "фт";
+
+/* Class = "IBUIButton"; normalTitle = "200 ml"; ObjectID = "vXw-gW-sSA"; */
+"vXw-gW-sSA.normalTitle" = "200 мл";
+
+/* Class = "IBUIButton"; normalTitle = "<"; ObjectID = "wdy-GH-zHD"; */
+"wdy-GH-zHD.normalTitle" = "<";
+
+/* Class = "IBUILabel"; text = "Weight"; ObjectID = "wpz-Nx-HJd"; */
+"wpz-Nx-HJd.text" = "Вес";
+
+/* Class = "IBUIButton"; normalTitle = "Choose"; ObjectID = "wsf-j2-xNS"; */
+"wsf-j2-xNS.normalTitle" = "Выберите";
+
+/* Class = "IBUIButton"; normalTitle = "<"; ObjectID = "xh4-oI-4GI"; */
+"xh4-oI-4GI.normalTitle" = "<";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "yAG-Wb-eth"; */
+"yAG-Wb-eth.text" = "Заголовок";
+
