@@ -123,8 +123,8 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
   
   private func setupMultiprogressControl() {
-    for i in 0..<drinkTypesCount {
-      let drink = Drink.getDrinkByIndex(i)!
+    let drinks = Drink.fetchDrinks()
+    for drink in drinks {
       let section = consumptionProgressView.addSection(color: drink.color as UIColor)
       multiProgressSections[drink] = section
     }
@@ -510,6 +510,5 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
 
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
-  private let drinkTypesCount = 9 // number of supported drinks types: water, tea etc.
 
 }

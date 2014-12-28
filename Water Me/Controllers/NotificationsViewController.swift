@@ -26,11 +26,21 @@ class NotificationsViewController: RevealedTableViewController {
     enableNotificationsSwitch.setOn(Settings.sharedInstance.notificationsEnabled.value, animated: false)
     fromCell.detailTextLabel?.text = DateHelper.stringFromTime(Settings.sharedInstance.notificationsFrom.value)
     toCell.detailTextLabel?.text = DateHelper.stringFromTime(Settings.sharedInstance.notificationsTo.value)
-    intervalCell.detailTextLabel?.text = DateHelper.stringFromTimeInterval(Settings.sharedInstance.notificationsInterval.value)
+    intervalCell.detailTextLabel?.text = stringFromTimeInterval(Settings.sharedInstance.notificationsInterval.value)
     smartNotificationsSwitch.setOn(Settings.sharedInstance.notificationsSmart.value, animated: false)
     useWaterIntakeSwitch.setOn(Settings.sharedInstance.notificationsUseWaterIntake.value, animated: false)
   }
   
+  private func stringFromTimeInterval(timeInterval: NSTimeInterval) -> String {
+    let overallSeconds = Int(timeInterval)
+    let seconds = overallSeconds % 60
+    let minutes = (overallSeconds / 60) % 60
+    let hours = (overallSeconds / 3600)
+    let template = NSLocalizedString("NVC:%u hr %u min", value: "%u hr %u min", comment: "NotificationsViewController: Template string for time interval")
+    let result = NSString(format: template, hours, minutes)
+    return result
+  }
+
   func updateNotificationsFromSettings() {
     NotificationsHelper.removeAllNotifications()
     

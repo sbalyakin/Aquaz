@@ -213,40 +213,47 @@ func -=(inout left: Quantity, right: Quantity) {
   left.amount = amount - left.amount
 }
 
+private let milliliterUnitContraction = NSLocalizedString("U:ml",    value: "ml",    comment: "Units: contraction for milliliters")
+private let fluidOunceUnitContraction = NSLocalizedString("U:fl oz", value: "fl oz", comment: "Units: contraction for fluid ounces")
+private let kilogramUnitContraction   = NSLocalizedString("U:kg",    value: "kg",    comment: "Units: contraction for kilogrames")
+private let poundUnitContraction      = NSLocalizedString("U:lbs",   value: "lbs",   comment: "Units: contraction for pounds")
+private let centimiterUnitContraction = NSLocalizedString("U:cm",    value: "cm",    comment: "Units: contraction for centimeters")
+private let footUnitContraction       = NSLocalizedString("U:ft",    value: "ft",    comment: "Units: contraction for feet")
+
 class MilliliterUnit: Unit {
   let type: UnitType = .Volume
   let factor: Double = 0.001
-  let contraction: String = "ml"
+  let contraction: String = milliliterUnitContraction
 }
 
 class FluidOunceUnit: Unit {
   let type: UnitType = .Volume
   let factor: Double = 0.0295735295625
-  let contraction: String = "fl oz"
+  let contraction: String = fluidOunceUnitContraction
 }
 
 class KilogramUnit: Unit {
   let type: UnitType = .Weight
   let factor: Double = 1
-  let contraction: String = "kg"
+  let contraction: String = kilogramUnitContraction
 }
 
 class PoundUnit: Unit {
   let type: UnitType = .Weight
   let factor: Double = 0.45359237
-  let contraction: String = "lbs"
+  let contraction: String = poundUnitContraction
 }
 
 class CentimeterUnit: Unit {
   let type: UnitType = .Length
   let factor: Double = 0.01
-  let contraction: String = "cm"
+  let contraction: String = centimiterUnitContraction
 }
 
 class FootUnit: Unit {
   let type: UnitType = .Length
   let factor: Double = 0.3048
-  let contraction: String = "ft"
+  let contraction: String = footUnitContraction
 }
 
 

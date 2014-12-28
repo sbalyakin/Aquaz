@@ -38,7 +38,7 @@ class DiaryViewController: UIViewController, UITableViewDataSource {
     let cell = tableView.dequeueReusableCellWithIdentifier("Consumption Cell", forIndexPath: indexPath) as UITableViewCell
     
     let consumption = consumptions[indexPath.row]
-    let drink = consumption.drink.name
+    let drink = consumption.drink.localizedName
     let amount = Units.sharedInstance.formatMetricAmountToText(metricAmount: consumption.amount.doubleValue, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: true)
 
     let formatter = NSDateFormatter()

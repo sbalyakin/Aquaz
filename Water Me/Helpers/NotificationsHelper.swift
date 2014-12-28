@@ -10,6 +10,12 @@ import Foundation
 
 class NotificationsHelper {
   
+  private struct Strings {
+    // TODO: Rewrite texts
+    static let notificationAlertBody = NSLocalizedString("NH:It's time to drink!", value: "It's time to drink!", comment: "NotificationsHelper: Text for alert body of notifications")
+    static let notificationAlertAction = NSLocalizedString("NH:Water me", value: "Water me", comment: "NotificationsHelper: Text for alert action of notifications")
+  }
+  
   class func registerApplicationForLocalNotifications() {
     if UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:"))
     {
@@ -56,9 +62,9 @@ class NotificationsHelper {
   class func addNotification(#fireDate: NSDate, repeatInterval: NSCalendarUnit?) {
     let notification = UILocalNotification()
     notification.fireDate = fireDate
-    notification.alertBody = "It's time to drink!" // TODO: Rewrite alert body text
+    notification.alertBody = Strings.notificationAlertBody
     notification.hasAction = true
-    notification.alertAction = "Water me"
+    notification.alertAction = Strings.notificationAlertAction
     notification.timeZone = NSTimeZone.defaultTimeZone()
 
     if let interval = repeatInterval {

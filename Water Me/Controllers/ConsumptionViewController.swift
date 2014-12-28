@@ -130,14 +130,14 @@ class ConsumptionViewController: UIViewController {
     if isCurrentDayShouldBeShown {
       let dateText = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
 
-      let titleParts = UIHelper.createNavigationTitleViewWithSubTitle(navigationController: navigationController!, titleText: drink.name, subtitleText: dateText)
+      let titleParts = UIHelper.createNavigationTitleViewWithSubTitle(navigationController: navigationController!, titleText: drink.localizedName, subtitleText: dateText)
       
       navigationTitleView = titleParts.containerView
       navigationTitleLabel = titleParts.titleLabel
       navigationCurrentDayLabel = titleParts.subtitleLabel
       navigationItem.titleView = navigationTitleView
     } else {
-      navigationItem.title = drink.name
+      navigationItem.title = drink.localizedName
     }
   }
   

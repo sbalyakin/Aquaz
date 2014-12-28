@@ -17,9 +17,64 @@ class Drink: NSManagedObject, NamedEntity {
   @NSManaged var waterPercent: NSNumber
   @NSManaged var consumptions: NSSet
   @NSManaged var recentAmount: RecentAmount
+
+  private struct Strings {
+    static let waterTitle   = NSLocalizedString("D:Water",   value: "Water",   comment: "Drink: Title for water")
+    static let coffeeTitle  = NSLocalizedString("D:Coffee",  value: "Coffee",  comment: "Drink: Title for coffee")
+    static let teaTitle     = NSLocalizedString("D:Tea",     value: "Tea",     comment: "Drink: Title for tea")
+    static let sodaTitle    = NSLocalizedString("D:Soda",    value: "Soda",    comment: "Drink: Title for soda")
+    static let juiceTitle   = NSLocalizedString("D:Juice",   value: "Juice",   comment: "Drink: Title for juice")
+    static let milkTitle    = NSLocalizedString("D:Milk",    value: "Milk",    comment: "Drink: Title for milk")
+    static let alcoholTitle = NSLocalizedString("D:Alcohol", value: "Alcohol", comment: "Drink: Title for alcohol")
+    static let sportTitle   = NSLocalizedString("D:Sport",   value: "Sport",   comment: "Drink: Title for sport drink")
+    static let energyTitle  = NSLocalizedString("D:Energy",  value: "Energy",  comment: "Drink: Title for energetic drink")
+  }
+  
+  enum DrinkType: Int {
+    case water = 0
+    case coffee
+    case tea
+    case soda
+    case juice
+    case milk
+    case alcohol
+    case sport
+    case energy
+    
+    var localizedName: String {
+      switch self {
+      case water:   return Strings.waterTitle
+      case coffee:  return Strings.coffeeTitle
+      case tea:     return Strings.teaTitle
+      case soda:    return Strings.sodaTitle
+      case juice:   return Strings.juiceTitle
+      case milk:    return Strings.milkTitle
+      case alcohol: return Strings.alcoholTitle
+      case sport:   return Strings.sportTitle
+      case energy:  return Strings.energyTitle
+      }
+    }
+    
+    static var count: Int {
+      return energy.rawValue + 1
+    }
+  }
+  
+  var localizedName: String {
+    if let drinkType = DrinkType(rawValue: index.integerValue) {
+      return drinkType.localizedName
+    } else {
+      assert(false, "Unknown drink index")
+      return name
+    }
+  }
   
   class func getEntityName() -> String {
     return "Drink"
+  }
+  
+  class func getDrinksCount() -> Int {
+    return DrinkType.count
   }
   
   class func getDrinkByIndex(index: Int) -> Drink? {
@@ -65,6 +120,11 @@ class Drink: NSManagedObject, NamedEntity {
     }
     
     return drink
+  }
+  
+  class func fetchDrinks() -> [Drink] {
+    let descriptor = NSSortDescriptor(key: "index", ascending: true)
+    return ModelHelper.sharedInstance.fetchManagedObjects(predicate: nil, sortDescriptors: [descriptor])
   }
 
 }

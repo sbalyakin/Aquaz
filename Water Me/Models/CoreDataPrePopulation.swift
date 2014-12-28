@@ -23,17 +23,17 @@ class CoreDataPrePopulation {
     if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
       if let managedObjectContext = appDelegate.managedObjectContext {
         // Add drinks
-        Drink.addEntity(index: 0, name: "Water",   waterPercent: 1.00, color: UIColor.blueColor(),       recentAmount: 250, managedObjectContext: managedObjectContext)
-        Drink.addEntity(index: 1, name: "Coffee",  waterPercent: 0.98,  color: UIColor.blackColor(),     recentAmount: 250, managedObjectContext: managedObjectContext)
-        Drink.addEntity(index: 2, name: "Tea",     waterPercent: 0.98,  color: UIColor.brownColor(),     recentAmount: 250, managedObjectContext: managedObjectContext)
+        Drink.addEntity(index: Drink.DrinkType.water.rawValue,   name: "Water",   waterPercent: 1.00, color: UIColor.blueColor(),      recentAmount: 250, managedObjectContext: managedObjectContext)
+        Drink.addEntity(index: Drink.DrinkType.coffee.rawValue,  name: "Coffee",  waterPercent: 0.98, color: UIColor.blackColor(),     recentAmount: 250, managedObjectContext: managedObjectContext)
+        Drink.addEntity(index: Drink.DrinkType.tea.rawValue,     name: "Tea",     waterPercent: 0.98, color: UIColor.brownColor(),     recentAmount: 250, managedObjectContext: managedObjectContext)
 
-        Drink.addEntity(index: 3, name: "Soda",    waterPercent: 0.98,  color: UIColor.magentaColor(),   recentAmount: 250, managedObjectContext: managedObjectContext)
-        Drink.addEntity(index: 4, name: "Juice",   waterPercent: 0.85,  color: UIColor.orangeColor(),    recentAmount: 250, managedObjectContext: managedObjectContext)
-        Drink.addEntity(index: 5, name: "Milk",    waterPercent: 0.80,  color: UIColor.lightGrayColor(), recentAmount: 250, managedObjectContext: managedObjectContext)
+        Drink.addEntity(index: Drink.DrinkType.soda.rawValue,    name: "Soda",    waterPercent: 0.98, color: UIColor.magentaColor(),   recentAmount: 250, managedObjectContext: managedObjectContext)
+        Drink.addEntity(index: Drink.DrinkType.juice.rawValue,   name: "Juice",   waterPercent: 0.85, color: UIColor.orangeColor(),    recentAmount: 250, managedObjectContext: managedObjectContext)
+        Drink.addEntity(index: Drink.DrinkType.milk.rawValue,    name: "Milk",    waterPercent: 0.80, color: UIColor.lightGrayColor(), recentAmount: 250, managedObjectContext: managedObjectContext)
 
-        Drink.addEntity(index: 6, name: "Alcohol", waterPercent: 0.30,  color: UIColor.redColor(),       recentAmount: 250, managedObjectContext: managedObjectContext)
-        Drink.addEntity(index: 7, name: "Sport",   waterPercent: 1.10, color: UIColor.cyanColor(),       recentAmount: 250, managedObjectContext: managedObjectContext)
-        Drink.addEntity(index: 8, name: "Energy",  waterPercent: 0.95,  color: UIColor.yellowColor(),    recentAmount: 250, managedObjectContext: managedObjectContext)
+        Drink.addEntity(index: Drink.DrinkType.alcohol.rawValue, name: "Alcohol", waterPercent: 0.30, color: UIColor.redColor(),       recentAmount: 250, managedObjectContext: managedObjectContext)
+        Drink.addEntity(index: Drink.DrinkType.sport.rawValue,   name: "Sport",   waterPercent: 1.10, color: UIColor.cyanColor(),      recentAmount: 250, managedObjectContext: managedObjectContext)
+        Drink.addEntity(index: Drink.DrinkType.energy.rawValue,  name: "Energy",  waterPercent: 0.95, color: UIColor.yellowColor(),    recentAmount: 250, managedObjectContext: managedObjectContext)
         
         // Add preliminary consumption rate for today
         ConsumptionRate.addEntity(
@@ -63,7 +63,7 @@ class CoreDataPrePopulation {
     for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = currentDay.getNextDay() {
       let consumptionsCount = random() % maxConsumptionsPerDay
       for i in 0..<consumptionsCount {
-        let drinkIndex = random() % 9
+        let drinkIndex = random() % Drink.getDrinksCount()
         let drink = Drink.getDrinkByIndex(drinkIndex)!
         let amount = minAmount + random() % (maxAmount - minAmount)
         let timeInterval = NSTimeInterval(random() % secondsPerDay)
