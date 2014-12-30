@@ -10,18 +10,25 @@ import UIKit
 
 class SettingsTableViewController: RevealedTableViewController {
   
-  @IBOutlet weak var volume: UISegmentedControl!
-  @IBOutlet weak var weight: UISegmentedControl!
-  @IBOutlet weak var height: UISegmentedControl!
+  @IBOutlet weak var volumeCell: UITableViewCell!
+  @IBOutlet weak var weightCell: UITableViewCell!
+  @IBOutlet weak var heightCell: UITableViewCell!
   @IBOutlet weak var waterIntakeCell: UITableViewCell!
+  @IBOutlet weak var volumeSegmentedControl: UISegmentedControl!
+  @IBOutlet weak var weightSegmentedControl: UISegmentedControl!
+  @IBOutlet weak var heightSegmentedControl: UISegmentedControl!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    volumeCell.accessoryView = volumeSegmentedControl
+    weightCell.accessoryView = weightSegmentedControl
+    heightCell.accessoryView = heightSegmentedControl
+    
     // Getting actual settings
-    volume.selectedSegmentIndex = Settings.sharedInstance.generalVolumeUnits.value.rawValue
-    weight.selectedSegmentIndex = Settings.sharedInstance.generalWeightUnits.value.rawValue
-    height.selectedSegmentIndex = Settings.sharedInstance.generalHeightUnits.value.rawValue
+    volumeSegmentedControl.selectedSegmentIndex = Settings.sharedInstance.generalVolumeUnits.value.rawValue
+    weightSegmentedControl.selectedSegmentIndex = Settings.sharedInstance.generalWeightUnits.value.rawValue
+    heightSegmentedControl.selectedSegmentIndex = Settings.sharedInstance.generalHeightUnits.value.rawValue
   }
   
   override func viewWillAppear(animated: Bool) {

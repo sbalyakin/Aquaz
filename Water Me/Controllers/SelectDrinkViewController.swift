@@ -60,7 +60,7 @@ class SelectDrinkViewController: UIViewController, UICollectionViewDataSource, U
     
     let consumptionViewController = storyboard!.instantiateViewControllerWithIdentifier("ConsumptionViewController") as ConsumptionViewController
     consumptionViewController.drink = drink
-    consumptionViewController.currentDate = dayViewController.getCurrentDate()
+    consumptionViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
     consumptionViewController.dayViewController = dayViewController
     navigationController!.pushViewController(consumptionViewController, animated: true)
   }

@@ -225,7 +225,13 @@ class ConsumptionRateViewController: UIViewController, UITableViewDataSource, UI
   
   private func getTitleForWaterIntake(value: Double) -> String {
     let unit = Settings.sharedInstance.generalVolumeUnits.value
-    let title = Units.sharedInstance.formatMetricAmountToText(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision, decimals: unit.decimals, displayUnits: false)
+    let displayedAmount = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision)
+    let formatter = NSNumberFormatter()
+    formatter.minimumFractionDigits = unit.decimals
+    formatter.maximumFractionDigits = unit.decimals
+    formatter.minimumIntegerDigits = 1
+    formatter.numberStyle = .NoStyle
+    let title = formatter.stringFromNumber(displayedAmount)!
     return title
   }
   
@@ -531,11 +537,14 @@ private extension ConsumptionRateViewController {
 
 class EditableTableViewCell: UITableViewCell {
   
-  @IBOutlet weak var title: UILabel!
-  @IBOutlet weak var value: UITextField!
+  @IBOutlet weak var valueTextField: UITextField!
   
   var tableView: UITableView!
   private var cellInfo: CellInfoBase!
+  
+  deinit {
+    valueTextField.resignFirstResponder()
+  }
   
   @IBAction func valueEditingDidBegin(sender: AnyObject) {
     if let indexPath = tableView.indexPathForCell(self) {
@@ -551,8 +560,14 @@ class EditableTableViewCell: UITableViewCell {
   }
   
   @IBAction func valueEditingDidEnd(sender: AnyObject) {
-    cellInfo.setValueFromString(value.text)
+    cellInfo.setValueFromString(valueTextField.text)
   }
+
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    self.accessoryView = valueTextField
+  }
+  
 }
 
 private class CellInfoBase {
@@ -775,8 +790,8 @@ private class EditableCellInfo<T> : CellInfo<T> {
   override func initCell(cell: UITableViewCell, tableView: UITableView, indexPath: NSIndexPath) {
     super.initCell(cell, tableView: tableView, indexPath: indexPath)
     if let editableCell = cell as? EditableTableViewCell {
-      editableCell.title.text = title
-      editableCell.value.text = getStringValue()
+      editableCell.textLabel!.text = title
+      editableCell.valueTextField.text = getStringValue()
       editableCell.tableView = tableView
       editableCell.cellInfo = self
       self.editableCell = editableCell
@@ -786,9 +801,9 @@ private class EditableCellInfo<T> : CellInfo<T> {
   private override func setSelected(selected: Bool) {
     if let cell = editableCell {
       if selected {
-        cell.value.becomeFirstResponder()
+        cell.valueTextField.becomeFirstResponder()
       } else {
-        cell.value.resignFirstResponder()
+        cell.valueTextField.resignFirstResponder()
       }
     }
   }

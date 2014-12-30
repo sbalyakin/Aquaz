@@ -10,15 +10,23 @@ import UIKit
 
 class NotificationsViewController: RevealedTableViewController {
   
+  @IBOutlet weak var enableNotificationsCell: UITableViewCell!
   @IBOutlet weak var enableNotificationsSwitch: UISwitch!
   @IBOutlet weak var fromCell: UITableViewCell!
   @IBOutlet weak var toCell: UITableViewCell!
   @IBOutlet weak var intervalCell: UITableViewCell!
-  @IBOutlet weak var smartNotificationsSwitch: UISwitch!
+  @IBOutlet weak var useWaterIntakeCell: UITableViewCell!
   @IBOutlet weak var useWaterIntakeSwitch: UISwitch!
+  @IBOutlet weak var smartNotificationsCell: UITableViewCell!
+  @IBOutlet weak var smartNotificationsSwitch: UISwitch!
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    enableNotificationsCell.accessoryView = enableNotificationsSwitch
+    smartNotificationsCell.accessoryView = smartNotificationsSwitch
+    useWaterIntakeCell.accessoryView = useWaterIntakeSwitch
+    
     initControlsFromSettings()
   }
   

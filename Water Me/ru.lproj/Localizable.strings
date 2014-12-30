@@ -1,6 +1,12 @@
 /* ConsumptionRateViewController: Table cell title for [Age] setting */
 "CRVC:Age" = "Возраст";
 
+/* ConsumptionRateViewController: [Breastfeeding female] option for gender */
+"CRVC:Breastfeeding female" = "Кормящая мать";
+
+/* ConsumptionRateViewController: [Daily] option for physical activity */
+"CRVC:Daily" = "Ежедневно";
+
 /* ConsumptionRateViewController: Table cell title for [Gender] setting */
 "CRVC:Gender" = "Пол";
 
@@ -16,8 +22,14 @@
 /* ConsumptionRateViewController: Table cell title for [Physical Activity] setting */
 "CRVC:Physical Activity" = "Физическая активность";
 
+/* ConsumptionRateViewController: [Pregnant female] option for gender */
+"CRVC:Pregnant female" = "Беременная женщина";
+
 /* ConsumptionRateViewController: [Rare] option for physical activity */
 "CRVC:Rare" = "Редко";
+
+/* ConsumptionRateViewController: Table cell title for [Water Intake] setting */
+"CRVC:Water Intake" = "Потребление воды";
 
 /* ConsumptionRateViewController: [Weekly] option for physical activity */
 "CRVC:Weekly" = "Еженедельно";
@@ -89,7 +101,7 @@
 "U:cm" = "см";
 
 /* Units: contraction for fluid ounces */
-"U:fl oz" = "унц";
+"U:fl oz" = "ун";
 
 /* Units: contraction for feet */
 "U:ft" = "фт";
@@ -98,7 +110,7 @@
 "U:kg" = "кг";
 
 /* Units: contraction for pounds */
-"U:lbs" = "фнт";
+"U:lbs" = "фн";
 
 /* Units: contraction for milliliters */
 "U:ml" = "мл";
