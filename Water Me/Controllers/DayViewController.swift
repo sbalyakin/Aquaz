@@ -295,7 +295,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     consumptions.append(consumption)
     
     if let section = multiProgressSections[consumption.drink] {
-      section.factor += consumption.amount.doubleValue
+      section.factor += CGFloat(consumption.amount.doubleValue)
     }
     consumptionProgressView.setNeedsDisplay()
     overallConsumption += consumption.amount.doubleValue
@@ -337,7 +337,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     consumptions.removeAtIndex(index!)
     
     if let section = multiProgressSections[consumption.drink] {
-      section.factor -= consumption.amount.doubleValue
+      section.factor -= CGFloat(consumption.amount.doubleValue)
     }
     consumptionProgressView.setNeedsDisplay()
     overallConsumption += consumption.amount.doubleValue
@@ -370,7 +370,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     for (drink, amount) in consumptionsMap {
       overallAmount += amount
       if let section = multiProgressSections[drink] {
-        section.factor = amount
+        section.factor = CGFloat(amount)
       }
     }
     
@@ -400,7 +400,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     updateConsumptionLabel()
 
     // Update maximum for multi progress control
-    consumptionProgressView.maximum = consumptionRateAmount
+    consumptionProgressView.maximum = CGFloat(consumptionRateAmount)
 
     // TODO: Should be re-written for image
     let highActivityColor: UIColor? = consumptionHighActivityFraction > 0 ? UIColor.greenColor() : nil
