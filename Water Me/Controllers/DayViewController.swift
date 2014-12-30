@@ -81,6 +81,8 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
       currentDate = Settings.sharedInstance.uiDayPageDate.value
     }
     
+    summaryBarOriginalFrame = summaryBar.frame
+    
     createCustomNavigationTitle()
     createPageViewController()
     setupSummaryBar()
@@ -118,7 +120,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
 
   private func setupSummaryBar() {
-    setDaySelectionBarVisible(Settings.sharedInstance.uiDisplayDaySelection.value)
+    setDaySelectionBarVisible(Settings.sharedInstance.uiDisplayDaySelection.value, animated: false)
     setupMultiprogressControl()
   }
   
@@ -169,28 +171,26 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   // MARK: Summary bar actions -
   
   @IBAction func toggleDaySelectionBar(sender: AnyObject) {
-    setDaySelectionBarVisible(daySelectionBar.hidden)
+    let visible = Settings.sharedInstance.uiDisplayDaySelection.value
+    setDaySelectionBarVisible(!visible, animated: true)
   }
   
-  private func setDaySelectionBarVisible(visible: Bool) {
-    if daySelectionBar.hidden == !visible {
-      return
-    }
+  private func setDaySelectionBarVisible(visible: Bool, animated: Bool) {
+    let newSummaryBarHeight = visible ? summaryBarOriginalFrame.height : daySelectionBar.frame.minY
+    let rects = view.bounds.rectsByDividing(newSummaryBarHeight, fromEdge: .MinYEdge)
     
-    Settings.sharedInstance.uiDisplayDaySelection.value = visible
-
-    daySelectionBar.hidden = !visible
-    if daySelectionBar.hidden {
-      summaryBar.frame.size.height -= daySelectionBar.frame.height
-      pageViewController.view.frame.size.height += daySelectionBar.frame.height
-      pageViewController.view.frame.offset(dx: 0, dy: -daySelectionBar.frame.height)
+    if animated {
+      UIView.animateWithDuration(0.4, animations: {
+        self.summaryBar.frame = rects.slice
+        self.pageViewController.view.frame = rects.remainder
+      })
     } else {
-      summaryBar.frame.size.height += daySelectionBar.frame.height
-      pageViewController.view.frame.size.height -= daySelectionBar.frame.height
-      pageViewController.view.frame.offset(dx: 0, dy: daySelectionBar.frame.height)
+      self.summaryBar.frame = rects.slice
+      self.pageViewController.view.frame = rects.remainder
     }
     
     // TODO: Should be re-written for image
+    Settings.sharedInstance.uiDisplayDaySelection.value = visible
     let color: UIColor? = visible ? UIColor.greenColor() : nil
     showDaySelectionButton.setTitleColor(color, forState: .Normal)
   }
@@ -508,6 +508,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   private var diaryViewController: DiaryViewController!
   // TODO: Page titles should be replaced with images
   private let pageTitles = ["Diary", "Drinks"]
+  private var summaryBarOriginalFrame: CGRect!
 
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
