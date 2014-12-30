@@ -46,7 +46,19 @@ class DiaryViewController: UIViewController, UITableViewDataSource {
     formatter.timeStyle = .ShortStyle
     let date = formatter.stringFromDate(consumption.date)
     
-    cell.textLabel!.text = "\(date): \(drink) - \(amount)"
+    let tab = NSTextTab(textAlignment: NSTextAlignment.Left, location: 50, options: nil)
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.tabStops = [tab]
+    
+    
+    let dateTitle = NSAttributedString(string: "\(date)\t", attributes: [NSForegroundColorAttributeName: UIColor.lightGrayColor(), NSFontAttributeName: UIFont.systemFontOfSize(12), NSParagraphStyleAttributeName: paragraphStyle])
+    let drinkTitle = NSAttributedString(string: "\(drink)", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()])
+    let title = NSMutableAttributedString()
+    title.appendAttributedString(dateTitle)
+    title.appendAttributedString(drinkTitle)
+    
+    cell.textLabel!.attributedText = title
+    cell.detailTextLabel!.text = "\(amount)"
     return cell
   }
   

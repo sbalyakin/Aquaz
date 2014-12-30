@@ -199,8 +199,8 @@
 /* Class = "IBUIButton"; normalTitle = "<"; ObjectID = "ruO-Mw-fgx"; */
 "ruO-Mw-fgx.normalTitle" = "<";
 
-/* Class = "IBUILabel"; text = "Already drinked:"; ObjectID = "shH-0K-PYt"; */
-"shH-0K-PYt.text" = "Сегодня выпито:";
+/* Class = "IBUILabel"; text = "Drinking diary:"; ObjectID = "shH-0K-PYt"; */
+"shH-0K-PYt.text" = "Выпитые напитки:";
 
 /* Class = "IBUITableViewSection"; footerTitle = "Turn smart notifications on and notifications will be show not earlier than specified interval after the last consumption."; ObjectID = "t2Q-4u-nEu"; */
 "t2Q-4u-nEu.footerTitle" = "Включите умные оповещения чтобы они появлялись не ранее указанного интервала после очередного потребления.";
