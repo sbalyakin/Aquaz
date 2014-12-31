@@ -66,6 +66,7 @@ class NotificationsHelper {
     notification.hasAction = true
     notification.alertAction = Strings.notificationAlertAction
     notification.timeZone = NSTimeZone.defaultTimeZone()
+    notification.soundName = Settings.sharedInstance.notificationsSound.value
 
     if let interval = repeatInterval {
       notification.repeatInterval = interval

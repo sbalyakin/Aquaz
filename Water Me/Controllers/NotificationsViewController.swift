@@ -15,6 +15,7 @@ class NotificationsViewController: RevealedTableViewController {
   @IBOutlet weak var fromCell: UITableViewCell!
   @IBOutlet weak var toCell: UITableViewCell!
   @IBOutlet weak var intervalCell: UITableViewCell!
+  @IBOutlet weak var soundCell: UITableViewCell!
   @IBOutlet weak var useWaterIntakeCell: UITableViewCell!
   @IBOutlet weak var useWaterIntakeSwitch: UISwitch!
   @IBOutlet weak var smartNotificationsCell: UITableViewCell!
@@ -37,6 +38,15 @@ class NotificationsViewController: RevealedTableViewController {
     intervalCell.detailTextLabel?.text = stringFromTimeInterval(Settings.sharedInstance.notificationsInterval.value)
     smartNotificationsSwitch.setOn(Settings.sharedInstance.notificationsSmart.value, animated: false)
     useWaterIntakeSwitch.setOn(Settings.sharedInstance.notificationsUseWaterIntake.value, animated: false)
+    
+    let soundFileName = Settings.sharedInstance.notificationsSound.value
+    var soundTitle = ""
+    if soundFileName == UILocalNotificationDefaultSoundName {
+      soundTitle = NSLocalizedString("NVC:Default", value: "Default", comment: "NotificationsViewController: title for default system sound")
+    } else {
+      soundTitle = soundFileName.stringByDeletingPathExtension
+    }
+    soundCell.detailTextLabel?.text = soundTitle
   }
   
   private func stringFromTimeInterval(timeInterval: NSTimeInterval) -> String {
@@ -83,6 +93,13 @@ class NotificationsViewController: RevealedTableViewController {
           assert(false)
         }
 
+      case "Sound":
+        if let controller = segue.destinationViewController as? NotificationsSoundViewController {
+          controller.notificationsViewController = self
+        } else {
+          assert(false)
+        }
+        
       default:
         assert(false)
       }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -47,7 +47,7 @@
                                                 <rect key="frame" x="282" y="0.0" width="30" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <state key="normal" title="&gt;">
+                                                <state key="normal" title=">">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -457,7 +457,7 @@
                                 <rect key="frame" x="274" y="0.0" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="&gt;">
+                                <state key="normal" title=">">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -546,7 +546,7 @@
                                 <rect key="frame" x="274" y="0.0" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="&gt;">
+                                <state key="normal" title=">">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -604,7 +604,7 @@
                                 <rect key="frame" x="274" y="0.0" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="&gt;">
+                                <state key="normal" title=">">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -676,7 +676,7 @@
                                 <rect key="frame" x="274" y="0.0" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="&gt;">
+                                <state key="normal" title=">">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1214,6 +1214,29 @@
                                             <segue destination="NW1-U4-haD" kind="push" identifier="Interval" id="OTb-CT-egW"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="3Gv-jc-jdM" detailTextLabel="tQK-qT-pYI" style="IBUITableViewCellStyleValue1" id="aXj-RS-RPj">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aXj-RS-RPj" id="Cow-Z5-qbG">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Sound" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Gv-jc-jdM">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Glass" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tQK-qT-pYI">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="6oZ-Db-dYh" kind="push" identifier="Sound" id="vJn-Il-1Da"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection footerTitle="Turn smart notifications on and notifications will be show not earlier than specified interval after the last consumption." id="t2Q-4u-nEu">
@@ -1274,6 +1297,7 @@
                         <outlet property="intervalCell" destination="MSJ-jL-fTh" id="2Ij-s9-cjp"/>
                         <outlet property="smartNotificationsCell" destination="Xqy-kf-u67" id="99u-2Y-oGK"/>
                         <outlet property="smartNotificationsSwitch" destination="oaR-Eo-auW" id="cEw-06-7hz"/>
+                        <outlet property="soundCell" destination="aXj-RS-RPj" id="U0k-xI-Tnq"/>
                         <outlet property="toCell" destination="Rj2-0A-L58" id="Kop-k9-ZvS"/>
                         <outlet property="useWaterIntakeCell" destination="eg0-X8-WVe" id="f5P-oi-094"/>
                         <outlet property="useWaterIntakeSwitch" destination="WG6-l7-yaW" id="HMs-2z-pbx"/>
@@ -1359,6 +1383,58 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ub-b0-AYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1862" y="712"/>
+        </scene>
+        <!--Notifications Sound View Controller-->
+        <scene sceneID="1uz-4m-rIl">
+            <objects>
+                <viewController id="6oZ-Db-dYh" customClass="NotificationsSoundViewController" customModule="Water_Me" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bvi-b2-DxK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Jdn-gh-rpz">
+                                <rect key="frame" x="5" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SoundCell" textLabel="9Es-8S-l6b" style="IBUITableViewCellStyleDefault" id="ztf-cq-9s2">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ztf-cq-9s2" id="oxh-vt-MGJ">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Es-8S-l6b">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="6oZ-Db-dYh" id="ggl-Yx-tyC"/>
+                                    <outlet property="delegate" destination="6oZ-Db-dYh" id="7gf-3k-4PH"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ywR-B4-HoE">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="wb3-tx-DEu">
+                            <connections>
+                                <action selector="saveWasTapped:" destination="6oZ-Db-dYh" id="T4F-iC-tza"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="Jdn-gh-rpz" id="N4g-A6-hrv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q4C-yT-Zif" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2286" y="712"/>
         </scene>
         <!--Notifications Navigation Controller-->
         <scene sceneID="1no-3p-9ZW">
