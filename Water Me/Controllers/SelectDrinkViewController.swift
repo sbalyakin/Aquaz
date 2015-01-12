@@ -43,10 +43,15 @@ class SelectDrinkViewController: UIViewController, UICollectionViewDataSource, U
     return cell
   }
   
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    collectionView.collectionViewLayout.invalidateLayout()
+  }
+
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
     let layout = collectionViewLayout as UICollectionViewFlowLayout
-    let contentWidth = collectionView.frame.width - layout.minimumInteritemSpacing * CGFloat(columnsCount - 1)
-    let contentHeight = collectionView.frame.height - layout.minimumLineSpacing * CGFloat(rowsCount - 1)
+    let contentWidth = collectionView.bounds.width - layout.minimumInteritemSpacing * CGFloat(columnsCount - 1)
+    let contentHeight = collectionView.bounds.height - layout.minimumLineSpacing * CGFloat(rowsCount - 1)
     let cellWidth = trunc(contentWidth / CGFloat(columnsCount))
     let cellHeight = trunc(contentHeight / CGFloat(rowsCount))
     let size = CGSizeMake(cellWidth, cellHeight)

@@ -179,14 +179,20 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     let newSummaryBarHeight = visible ? summaryBarOriginalFrame.height : daySelectionBar.frame.minY
     let rects = view.bounds.rectsByDividing(newSummaryBarHeight, fromEdge: .MinYEdge)
     
-    if animated {
-      UIView.animateWithDuration(0.4, animations: {
-        self.summaryBar.frame = rects.slice
-        self.pageViewController.view.frame = rects.remainder
-      })
-    } else {
+    func changeFrame() {
       self.summaryBar.frame = rects.slice
       self.pageViewController.view.frame = rects.remainder
+      for subview in self.pageViewController.view.subviews {
+        if let view = subview as? UIView {
+          view.frame = self.pageViewController.view.bounds
+        }
+      }
+    }
+    
+    if animated {
+      UIView.animateWithDuration(0.4, animations: changeFrame)
+    } else {
+      changeFrame()
     }
     
     // TODO: Should be re-written for image

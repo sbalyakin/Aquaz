@@ -15,7 +15,8 @@ class DrinkCollectionViewCell: UICollectionViewCell {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    let minDimension = min(imageView.bounds.width, imageView.bounds.height)
-    imageView.bounds.size = CGSizeMake(minDimension, minDimension)
+    // TODO: Draft method for square images
+    //let minDimension = min(imageView.bounds.width, imageView.bounds.height)
+    //imageView.bounds.size = CGSizeMake(minDimension, minDimension)
   }
 }
