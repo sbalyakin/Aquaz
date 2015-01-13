@@ -13,7 +13,7 @@ class NotificationsHelper {
   private struct Strings {
     // TODO: Rewrite texts
     static let notificationAlertBody = NSLocalizedString("NH:It's time to drink!", value: "It's time to drink!", comment: "NotificationsHelper: Text for alert body of notifications")
-    static let notificationAlertAction = NSLocalizedString("NH:Water me", value: "Water me", comment: "NotificationsHelper: Text for alert action of notifications")
+    static let notificationAlertAction = NSLocalizedString("NH:Drink", value: "Drink", comment: "NotificationsHelper: Text for alert action of notifications")
   }
   
   class func registerApplicationForLocalNotifications() {

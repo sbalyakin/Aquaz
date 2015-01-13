@@ -55,8 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
       let dayViewController = dayNavigationController.topViewController as DayViewController
       dayViewController.setCurrentDate(NSDate())
-      
       rootViewController.setFrontViewController(dayNavigationController, animated: false)
+      rootViewController.setFrontViewPosition(.Left, animated: false)
     }
   }
   
