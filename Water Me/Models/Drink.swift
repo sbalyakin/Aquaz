@@ -12,13 +12,13 @@ import CoreData
 class Drink: NSManagedObject, NamedEntity {
   
   @NSManaged var index: NSNumber
-  @NSManaged var color: AnyObject
   @NSManaged var name: String
   @NSManaged var waterPercent: NSNumber
   @NSManaged var consumptions: NSSet
   @NSManaged var recentAmount: RecentAmount
+  @NSManaged var localizedName: String
 
-  private struct Strings {
+  private struct Static {
     static let waterTitle   = NSLocalizedString("D:Water",   value: "Water",   comment: "Drink: Title for water")
     static let coffeeTitle  = NSLocalizedString("D:Coffee",  value: "Coffee",  comment: "Drink: Title for coffee")
     static let teaTitle     = NSLocalizedString("D:Tea",     value: "Tea",     comment: "Drink: Title for tea")
@@ -28,47 +28,106 @@ class Drink: NSManagedObject, NamedEntity {
     static let alcoholTitle = NSLocalizedString("D:Alcohol", value: "Alcohol", comment: "Drink: Title for alcohol")
     static let sportTitle   = NSLocalizedString("D:Sport",   value: "Sport",   comment: "Drink: Title for sport drink")
     static let energyTitle  = NSLocalizedString("D:Energy",  value: "Energy",  comment: "Drink: Title for energetic drink")
+    static let lightColorShadowLevel: CGFloat = 0.2
   }
   
   enum DrinkType: Int {
-    case water = 0
-    case coffee
-    case tea
-    case soda
-    case juice
-    case milk
-    case alcohol
-    case sport
-    case energy
-    
-    var localizedName: String {
-      switch self {
-      case water:   return Strings.waterTitle
-      case coffee:  return Strings.coffeeTitle
-      case tea:     return Strings.teaTitle
-      case soda:    return Strings.sodaTitle
-      case juice:   return Strings.juiceTitle
-      case milk:    return Strings.milkTitle
-      case alcohol: return Strings.alcoholTitle
-      case sport:   return Strings.sportTitle
-      case energy:  return Strings.energyTitle
-      }
-    }
-    
+    case Water = 0
+    case Coffee
+    case Tea
+    case Soda
+    case Juice
+    case Milk
+    case Alcohol
+    case Sport
+    case Energy
+
     static var count: Int {
-      return energy.rawValue + 1
+      return Energy.rawValue + 1
+    }
+  }
+
+  var drinkType: DrinkType = .Water
+
+  var mainColor: UIColor = StyleKit.waterColor {
+    didSet {
+      lightColor = Drink.getLightColorFrom(mainColor)
     }
   }
   
-  var localizedName: String {
-    if let drinkType = DrinkType(rawValue: index.integerValue) {
-      return drinkType.localizedName
+  var lightColor: UIColor = Drink.getLightColorFrom(StyleKit.waterColor)
+
+  override func didChangeValueForKey(key: String) {
+    super.didChangeValueForKey(key)
+    if key == "index" {
+      initRelatedProperties()
+    }
+  }
+
+  override func awakeFromFetch() {
+    super.awakeFromFetch()
+    initRelatedProperties()
+  }
+  
+  private func initRelatedProperties() {
+    if let drinkTypeRaw = DrinkType(rawValue: index.integerValue) {
+      drinkType = drinkTypeRaw
     } else {
-      assert(false, "Unknown drink index")
-      return name
+      assert(false)
+    }
+    
+    switch drinkType {
+    case .Water:
+      localizedName = Static.waterTitle
+      drawDrinkFunction = StyleKit.drawWaterDrink
+      mainColor = StyleKit.waterColor
+      
+    case .Coffee:
+      localizedName = Static.coffeeTitle
+      drawDrinkFunction = StyleKit.drawCoffeeDrink
+      mainColor = StyleKit.coffeeColor
+      
+    case .Tea:
+      localizedName = Static.teaTitle
+      drawDrinkFunction = StyleKit.drawTeaDrink
+      mainColor = StyleKit.teaColor
+      
+    case .Soda:
+      localizedName = Static.sodaTitle
+      drawDrinkFunction = StyleKit.drawSodaDrink
+      mainColor = StyleKit.sodaColor
+      
+    case .Juice:
+      localizedName = Static.juiceTitle
+      drawDrinkFunction = StyleKit.drawJuiceDrink
+      mainColor = StyleKit.juiceColor
+      
+    case .Milk:
+      localizedName = Static.milkTitle
+      drawDrinkFunction = StyleKit.drawMilkDrink
+      mainColor = StyleKit.milkColor
+      
+    case .Alcohol:
+      localizedName = Static.alcoholTitle
+      drawDrinkFunction = StyleKit.drawAlcoholDrink
+      mainColor = StyleKit.alcoholColor
+      
+    case .Sport:
+      localizedName = Static.sportTitle
+      drawDrinkFunction = StyleKit.drawSportDrink
+      mainColor = StyleKit.sportColor
+      
+    case .Energy:
+      localizedName = Static.energyTitle
+      drawDrinkFunction = StyleKit.drawEnergyDrink
+      mainColor = StyleKit.energyColor
     }
   }
   
+  func drawDrink(#frame: CGRect) {
+    drawDrinkFunction(frame: frame)
+  }
+
   class func getEntityName() -> String {
     return "Drink"
   }
@@ -103,14 +162,13 @@ class Drink: NSManagedObject, NamedEntity {
     return drink
   }
   
-  class func addEntity(#index: Int, name: String, waterPercent: NSNumber, color: UIColor, recentAmount amount: NSNumber, managedObjectContext: NSManagedObjectContext) -> Drink {
-    let drink = NSEntityDescription.insertNewObjectForEntityForName("Drink", inManagedObjectContext: managedObjectContext) as Drink
+  class func addEntity(#index: Int, name: String, waterPercent: NSNumber, recentAmount amount: NSNumber, managedObjectContext: NSManagedObjectContext) -> Drink {
+    let drink = NSEntityDescription.insertNewObjectForEntityForName(Drink.getEntityName(), inManagedObjectContext: managedObjectContext) as Drink
     drink.index = index
     drink.name = name
     drink.waterPercent = waterPercent
-    drink.color = color
-    
-    let recentAmount = NSEntityDescription.insertNewObjectForEntityForName("RecentAmount", inManagedObjectContext: managedObjectContext) as RecentAmount
+
+    let recentAmount = NSEntityDescription.insertNewObjectForEntityForName(RecentAmount.getEntityName(), inManagedObjectContext: managedObjectContext) as RecentAmount
     recentAmount.drink = drink
     recentAmount.amount = amount
     
@@ -126,5 +184,12 @@ class Drink: NSManagedObject, NamedEntity {
     let descriptor = NSSortDescriptor(key: "index", ascending: true)
     return ModelHelper.sharedInstance.fetchManagedObjects(predicate: nil, sortDescriptors: [descriptor])
   }
+
+  private class func getLightColorFrom(color: UIColor) -> UIColor {
+    return color.colorWithShadow(Static.lightColorShadowLevel)
+  }
+
+  private typealias DrawDrinkFunction = (frame: CGRect) -> Void
+  private var drawDrinkFunction: DrawDrinkFunction = StyleKit.drawWaterDrink
 
 }

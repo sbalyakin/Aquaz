@@ -40,6 +40,7 @@ class ConsumptionViewController: UIViewController {
   @IBOutlet weak var mediumAmountButton: UIButton!
   @IBOutlet weak var largeAmountButton: UIButton!
   @IBOutlet weak var pickTimeButton: UIBarButtonItem!
+  @IBOutlet weak var drinkView: DrinkView!
   
   var navigationTitleView: UIView!
   var navigationTitleLabel: UILabel!
@@ -82,8 +83,10 @@ class ConsumptionViewController: UIViewController {
     setupPredefinedAmountLabels()
     setupAmountRelatedControlsWithInitialAmount()
     setupApplyButton()
+    applyColorScheme()
     createCustomNavigationTitle()
     setupPickTimeButton()
+    setupDrinkView()
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -126,6 +129,14 @@ class ConsumptionViewController: UIViewController {
     applyButton.setTitle(title, forState: .Normal)
   }
 
+  private func applyColorScheme() {
+    applyButton.backgroundColor = drink.lightColor
+    smallAmountButton.backgroundColor = drink.lightColor
+    mediumAmountButton.backgroundColor = drink.lightColor
+    largeAmountButton.backgroundColor = drink.lightColor
+    navigationController!.navigationBar.backgroundColor = drink.lightColor
+  }
+
   private func createCustomNavigationTitle() {
     if isCurrentDayShouldBeShown {
       let dateText = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
@@ -145,6 +156,10 @@ class ConsumptionViewController: UIViewController {
     if !isCurrentDayShouldBeShown {
       pickTimeButton.title = nil
     }
+  }
+  
+  private func setupDrinkView() {
+    drinkView.drink = drink
   }
   
   @IBAction func amountSliderValueChanged(sender: AnyObject) {

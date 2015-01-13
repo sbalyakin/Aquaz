@@ -36,6 +36,7 @@ class SelectDrinkViewController: UIViewController, UICollectionViewDataSource, U
     
     if let drink = Drink.getDrinkByIndex(drinkIndex) {
       cell.titleLabel.text = drink.localizedName
+      cell.drinkView.drink = drink
     } else {
       assert(false)
     }

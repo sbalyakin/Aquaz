@@ -10,13 +10,7 @@ import UIKit
 
 class DrinkCollectionViewCell: UICollectionViewCell {
   
-  @IBOutlet weak var imageView: UIImageView!
+  @IBOutlet weak var drinkView: DrinkView!
   @IBOutlet weak var titleLabel: UILabel!
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    // TODO: Draft method for square images
-    //let minDimension = min(imageView.bounds.width, imageView.bounds.height)
-    //imageView.bounds.size = CGSizeMake(minDimension, minDimension)
-  }
+
 }

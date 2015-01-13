@@ -127,7 +127,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   private func setupMultiprogressControl() {
     let drinks = Drink.fetchDrinks()
     for drink in drinks {
-      let section = consumptionProgressView.addSection(color: drink.color as UIColor)
+      let section = consumptionProgressView.addSection(color: drink.mainColor)
       multiProgressSections[drink] = section
     }
   }

@@ -52,6 +52,8 @@
 		A59113D81A50665C007B4241 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59113DA1A50665C007B4241 /* InfoPlist.strings */; };
 		A59113DD1A50665C007B4241 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59113DF1A50665C007B4241 /* Localizable.strings */; };
 		A59113E21A5069EA007B4241 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59113E41A5069EA007B4241 /* InfoPlist.strings */; };
+		A598D5081A6558C100AA89CB /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5071A6558C100AA89CB /* StyleKit.swift */; };
+		A598D50A1A6559FB00AA89CB /* DrinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5091A6559FB00AA89CB /* DrinkView.swift */; };
 		A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */; };
 		A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1319E5686C00D0477B /* ModelHelper.swift */; };
 		A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1519E57D3500D0477B /* NamedEntity.swift */; };
@@ -122,6 +124,8 @@
 		A59113D91A50665C007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A59113DE1A50665C007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A59113E31A5069EA007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A598D5071A6558C100AA89CB /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
+		A598D5091A6559FB00AA89CB /* DrinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkView.swift; path = Controls/DrinkView.swift; sourceTree = "<group>"; };
 		A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekStatisticsViewController.swift; sourceTree = "<group>"; };
 		A5B75A1319E5686C00D0477B /* ModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelHelper.swift; sourceTree = "<group>"; };
 		A5B75A1519E57D3500D0477B /* NamedEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedEntity.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				A5637BCA1A52AF11009489F6 /* DrinkCollectionViewCell.swift */,
+				A598D5091A6559FB00AA89CB /* DrinkView.swift */,
 				84126A821A278F4A00A66347 /* MonthStatisticsDayButton.swift */,
 				84126A841A278F4A00A66347 /* MonthStatisticsView.swift */,
 				84B639811A25D9EF00889438 /* WeekStatisticsView.swift */,
@@ -294,6 +299,7 @@
 		A5B75A1219E55CBB00D0477B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				A598D5071A6558C100AA89CB /* StyleKit.swift */,
 				8468D6411A0D1C240008D027 /* DateHelper.swift */,
 				A5B75A1319E5686C00D0477B /* ModelHelper.swift */,
 				8406D78019FE9875001C54BF /* Units.swift */,
@@ -407,6 +413,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A598D5081A6558C100AA89CB /* StyleKit.swift in Sources */,
 				A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */,
 				840476571A35FE4A004F0FEF /* ConsumptionRateViewController.swift in Sources */,
 				843B056319E2D7800097A833 /* SWRevealViewController.m in Sources */,
@@ -435,6 +442,7 @@
 				84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */,
 				84C610BA1A319DBC00433EF1 /* MonthStatisticsViewController.swift in Sources */,
 				84380C2819E4195A0026398E /* Consumption.swift in Sources */,
+				A598D50A1A6559FB00AA89CB /* DrinkView.swift in Sources */,
 				84C610BC1A31A98900433EF1 /* YearStatisticsViewController.swift in Sources */,
 				A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */,
 				8478253719EAC8C200588FE3 /* ConsumptionViewController.swift in Sources */,
