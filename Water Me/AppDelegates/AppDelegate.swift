@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       NSUserDefaults.standardUserDefaults().synchronize()
     }
     
+    application.applicationIconBadgeNumber = 0
+    
     if let options = launchOptions {
       if let notification = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
         showDayViewControllerForToday()
@@ -42,6 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if application.applicationState == .Active {
       return
     }
+
+    application.applicationIconBadgeNumber = 0
 
     showDayViewControllerForToday()
   }
@@ -80,6 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // TODO: Just for getting sqlite DB folder
     //let appFolder = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
     //println("App dir: \(appFolder[0])");
+    application.applicationIconBadgeNumber = 0
   }
   
   func applicationWillTerminate(application: UIApplication) {
