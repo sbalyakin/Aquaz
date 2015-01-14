@@ -177,14 +177,15 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   
   private func setDaySelectionBarVisible(visible: Bool, animated: Bool) {
     let newSummaryBarHeight = visible ? summaryBarOriginalFrame.height : daySelectionBar.frame.minY
-    let rects = view.bounds.rectsByDividing(newSummaryBarHeight, fromEdge: .MinYEdge)
+    var rects = view.bounds.rectsByDividing(newSummaryBarHeight, fromEdge: .MinYEdge)
+    rects.remainder.size.height += rects.slice.height - daySelectionBar.frame.minY
     
     func changeFrame() {
-      self.summaryBar.frame = rects.slice
-      self.pageViewController.view.frame = rects.remainder
-      for subview in self.pageViewController.view.subviews {
+      summaryBar.frame = rects.slice
+      pageViewController.view.frame = rects.remainder
+      for subview in pageViewController.view.subviews {
         if let view = subview as? UIView {
-          view.frame = self.pageViewController.view.bounds
+          view.frame = pageViewController.view.bounds
         }
       }
     }
