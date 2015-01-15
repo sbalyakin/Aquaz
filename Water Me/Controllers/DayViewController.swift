@@ -31,7 +31,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   @IBOutlet weak var pageButton: UIBarButtonItem!
   @IBOutlet weak var summaryBar: UIView!
   @IBOutlet weak var consumptionProgressView: MultiProgressView!
-  @IBOutlet weak var consumptionLabel: UILabel!
+  @IBOutlet weak var consumptionButton: UIButton!
   @IBOutlet weak var previousDayButton: UIButton!
   @IBOutlet weak var nextDayButton: UIButton!
   @IBOutlet weak var currentDayButton: UIButton!
@@ -62,7 +62,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   
   private var overallConsumption: Double = 0.0 {
     didSet {
-      updateConsumptionLabel()
+      updateConsumptionButton()
     }
   }
   
@@ -125,10 +125,11 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
   
   private func setupMultiprogressControl() {
-    let drinks = Drink.fetchDrinks()
-    for drink in drinks {
-      let section = consumptionProgressView.addSection(color: drink.mainColor)
-      multiProgressSections[drink] = section
+    for drinkIndex in 0..<Drink.getDrinksCount() {
+      if let drink = Drink.getDrinkByIndex(drinkIndex) {
+        let section = consumptionProgressView.addSection(color: drink.mainColor)
+        multiProgressSections[drink] = section
+      }
     }
   }
   
@@ -385,13 +386,25 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     overallConsumption = overallAmount
   }
   
-  private func updateConsumptionLabel() {
-    let consumptionText = Units.sharedInstance.formatMetricAmountToText(
-      metricAmount: overallConsumption,
-      unitType: .Volume,
-      roundPrecision: amountPrecision,
-      decimals: amountDecimals,
-      displayUnits: false)
+  @IBAction func consumptionButtonWasTapped(sender: AnyObject) {
+    Settings.sharedInstance.uiDisplayDayConsumptionInPercents.value = !Settings.sharedInstance.uiDisplayDayConsumptionInPercents.value
+    updateConsumptionButton()
+  }
+  
+  private func updateConsumptionButton() {
+    var consumptionText: String
+    
+    if Settings.sharedInstance.uiDisplayDayConsumptionInPercents.value {
+      let percents = Int(overallConsumption / consumptionRateAmount * 100)
+      consumptionText = "\(percents)%"
+    } else {
+      consumptionText = Units.sharedInstance.formatMetricAmountToText(
+        metricAmount: overallConsumption,
+        unitType: .Volume,
+        roundPrecision: amountPrecision,
+        decimals: amountDecimals,
+        displayUnits: false)
+    }
     
     let consumptionRateText = Units.sharedInstance.formatMetricAmountToText(
       metricAmount: consumptionRateAmount,
@@ -400,11 +413,12 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
       decimals: amountDecimals)
     
     let template = NSLocalizedString("DVC:%1$@ of %2$@", value: "%1$@ of %2$@", comment: "DayViewController: Current consumption of recommended one")
-    consumptionLabel.text = NSString(format: template, consumptionText, consumptionRateText)
+    let text = NSString(format: template, consumptionText, consumptionRateText)
+    consumptionButton.setTitle(text, forState: .Normal)
   }
   
   private func consumptionRateWasChanged() {
-    updateConsumptionLabel()
+    updateConsumptionButton()
 
     // Update maximum for multi progress control
     consumptionProgressView.maximum = CGFloat(consumptionRateAmount)

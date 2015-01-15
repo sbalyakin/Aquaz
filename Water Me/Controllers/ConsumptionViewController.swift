@@ -136,10 +136,10 @@ class ConsumptionViewController: UIViewController {
   }
 
   private func applyColorScheme() {
-    applyButton.backgroundColor = drink.lightColor
-    smallAmountButton.backgroundColor = drink.lightColor
-    mediumAmountButton.backgroundColor = drink.lightColor
-    largeAmountButton.backgroundColor = drink.lightColor
+    applyButton.backgroundColor = drink.darkColor
+    smallAmountButton.backgroundColor = drink.darkColor
+    mediumAmountButton.backgroundColor = drink.darkColor
+    largeAmountButton.backgroundColor = drink.darkColor
   }
 
   private func createCustomNavigationTitle() {

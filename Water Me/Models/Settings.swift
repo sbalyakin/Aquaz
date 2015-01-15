@@ -191,6 +191,9 @@ class Settings {
   lazy var uiDayPageDate: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
     key: "UI - Day page date", initialValue: NSDate(), userDefaults: self.standardUserDefaults)
 
+  lazy var uiDisplayDayConsumptionInPercents: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
+    key: "UI - Display day consumption in percents", initialValue: false, userDefaults: self.standardUserDefaults)
+
   lazy var uiDisplayDaySelection: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "UI - Display day selection", initialValue: false, userDefaults: self.standardUserDefaults)
 
