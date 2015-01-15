@@ -80,7 +80,7 @@ class ConsumptionViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    setupPredefinedAmountLabels()
+    setupPredefinedAmountButtons()
     setupAmountRelatedControlsWithInitialAmount()
     setupApplyButton()
     applyColorScheme()
@@ -97,11 +97,15 @@ class ConsumptionViewController: UIViewController {
     }
   }
   
-  private func setupPredefinedAmountLabels() {
+  private func setupPredefinedAmountButtons() {
     // Predefined amount is always non-fractional values, so we will format amount skipping fraction part
     smallAmountButton.setTitle(formatAmount(predefinedAmounts.small, precision: 1.0, decimals: 0), forState: .Normal)
     mediumAmountButton.setTitle(formatAmount(predefinedAmounts.medium, precision: 1.0, decimals: 0), forState: .Normal)
     largeAmountButton.setTitle(formatAmount(predefinedAmounts.large, precision: 1.0, decimals: 0), forState: .Normal)
+    
+    smallAmountButton.layer.cornerRadius = smallAmountButton.bounds.height / 2
+    mediumAmountButton.layer.cornerRadius = mediumAmountButton.bounds.height / 2
+    largeAmountButton.layer.cornerRadius = largeAmountButton.bounds.height / 2
   }
   
   private func setupAmountRelatedControlsWithInitialAmount() {
@@ -127,6 +131,8 @@ class ConsumptionViewController: UIViewController {
       : NSLocalizedString("CVC:Apply", value: "Apply", comment: "ConsumptionViewController: Title for Apply button")
     
     applyButton.setTitle(title, forState: .Normal)
+    
+    applyButton.layer.cornerRadius = 5
   }
 
   private func applyColorScheme() {
@@ -134,7 +140,6 @@ class ConsumptionViewController: UIViewController {
     smallAmountButton.backgroundColor = drink.lightColor
     mediumAmountButton.backgroundColor = drink.lightColor
     largeAmountButton.backgroundColor = drink.lightColor
-    navigationController!.navigationBar.backgroundColor = drink.lightColor
   }
 
   private func createCustomNavigationTitle() {
