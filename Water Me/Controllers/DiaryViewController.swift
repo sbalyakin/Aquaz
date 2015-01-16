@@ -38,7 +38,7 @@ class DiaryViewController: UIViewController, UITableViewDataSource {
     let cell = tableView.dequeueReusableCellWithIdentifier("Consumption Cell", forIndexPath: indexPath) as UITableViewCell
     
     let consumption = consumptions[indexPath.row]
-    let drink = consumption.drink.localizedName
+    let drinkName = consumption.drink.localizedName
     let amount = Units.sharedInstance.formatMetricAmountToText(metricAmount: consumption.amount.doubleValue, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: true)
 
     let formatter = NSDateFormatter()
@@ -46,19 +46,28 @@ class DiaryViewController: UIViewController, UITableViewDataSource {
     formatter.timeStyle = .ShortStyle
     let date = formatter.stringFromDate(consumption.date)
     
-    let tab = NSTextTab(textAlignment: NSTextAlignment.Left, location: 50, options: nil)
     let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.tabStops = [tab]
+    paragraphStyle.defaultTabInterval = 60
     
+    let dateTitle = NSAttributedString(string: "\(date)\t", attributes: [
+      NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+      NSFontAttributeName: UIFont.systemFontOfSize(12),
+      NSParagraphStyleAttributeName: paragraphStyle])
     
-    let dateTitle = NSAttributedString(string: "\(date)\t", attributes: [NSForegroundColorAttributeName: UIColor.lightGrayColor(), NSFontAttributeName: UIFont.systemFontOfSize(12), NSParagraphStyleAttributeName: paragraphStyle])
-    let drinkTitle = NSAttributedString(string: "\(drink)", attributes: [NSForegroundColorAttributeName: UIColor.blackColor()])
+    let drinkTitle = NSMutableAttributedString(string: "\(drinkName)\t\t\t\t", attributes: [
+      NSForegroundColorAttributeName: consumption.drink.darkColor,
+      NSFontAttributeName: UIFont.systemFontOfSize(16),
+      NSParagraphStyleAttributeName: paragraphStyle])
+    
+    let amountTitle = NSAttributedString(string: "\(amount)", attributes: [
+      NSFontAttributeName: UIFont.systemFontOfSize(16)])
+    
     let title = NSMutableAttributedString()
     title.appendAttributedString(dateTitle)
     title.appendAttributedString(drinkTitle)
+    title.appendAttributedString(amountTitle)
     
     cell.textLabel!.attributedText = title
-    cell.detailTextLabel!.text = "\(amount)"
     return cell
   }
   
