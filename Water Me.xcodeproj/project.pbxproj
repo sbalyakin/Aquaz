@@ -28,6 +28,8 @@
 		843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055819E2D7800097A833 /* SelectDrinkViewController.swift */; };
 		843B056319E2D7800097A833 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B055B19E2D7800097A833 /* SWRevealViewController.m */; };
 		843B056919E2D80E0097A833 /* ConsumptionRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056819E2D80E0097A833 /* ConsumptionRate.swift */; };
+		8455DACF1A694487004245F9 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455DACE1A694487004245F9 /* RoundedButton.swift */; };
+		8455DAD11A694D8A004245F9 /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455DAD01A694D8A004245F9 /* CompleteViewController.swift */; };
 		84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Water_Me.xcdatamodeld */; };
 		84669A7719DAD78D003C2263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7519DAD78D003C2263 /* Main.storyboard */; };
 		84669A7919DAD78D003C2263 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7819DAD78D003C2263 /* Images.xcassets */; };
@@ -94,6 +96,8 @@
 		843B055B19E2D7800097A833 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SWRevealViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		843B055C19E2D7800097A833 /* Water Me-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Water Me-Bridging-Header.h"; sourceTree = "<group>"; };
 		843B056819E2D80E0097A833 /* ConsumptionRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionRate.swift; sourceTree = "<group>"; };
+		8455DACE1A694487004245F9 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedButton.swift; path = Controls/RoundedButton.swift; sourceTree = "<group>"; };
+		8455DAD01A694D8A004245F9 /* CompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
 		84669A6919DAD78D003C2263 /* Water Me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Water Me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84669A6D19DAD78D003C2263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84669A7119DAD78D003C2263 /* Water_Me.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Water_Me.xcdatamodel; sourceTree = "<group>"; };
@@ -162,6 +166,7 @@
 				A5275F801A1212930088AF47 /* CalendarDayButton.swift */,
 				A5275F821A1212930088AF47 /* CalendarView.swift */,
 				8424AA051A0B5813009C5C47 /* MultiProgressView.swift */,
+				8455DACE1A694487004245F9 /* RoundedButton.swift */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 				A53869741A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift */,
 				8488A18D1A53FE6500258EC8 /* NotificationsSoundViewController.swift */,
 				8404765A1A360273004F0FEF /* SupportViewController.swift */,
+				8455DAD01A694D8A004245F9 /* CompleteViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -436,6 +442,7 @@
 				84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */,
 				843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */,
 				841B13BE1A31FE4F00249426 /* UIHelper.swift in Sources */,
+				8455DAD11A694D8A004245F9 /* CompleteViewController.swift in Sources */,
 				84380C2C19E4195A0026398E /* Drink.swift in Sources */,
 				84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */,
 				8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */,
@@ -452,6 +459,7 @@
 				A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */,
 				A53869751A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift in Sources */,
 				843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */,
+				8455DACF1A694487004245F9 /* RoundedButton.swift in Sources */,
 				84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */,
 				84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */,
 				841B13BC1A31D55500249426 /* RevealedViewControllers.swift in Sources */,

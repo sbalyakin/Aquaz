@@ -25,6 +25,17 @@ class NotificationsHelper {
     }
   }
   
+  class func setApplicationIconBadgeNumber(number: Int) {
+    if UIApplication.instancesRespondToSelector(Selector("currentUserNotificationSettings")) {
+      let notificationPermissions = UIApplication.sharedApplication().currentUserNotificationSettings()
+      if notificationPermissions.types & UIUserNotificationType.Badge == .Badge {
+        UIApplication.sharedApplication().applicationIconBadgeNumber = number
+      }
+    } else {
+      UIApplication.sharedApplication().applicationIconBadgeNumber = number
+    }
+  }
+  
   class func removeAllNotifications() {
     UIApplication.sharedApplication().cancelAllLocalNotifications()
   }

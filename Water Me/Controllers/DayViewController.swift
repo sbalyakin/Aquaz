@@ -303,14 +303,15 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     consumptions.append(consumption)
     
     if let section = multiProgressSections[consumption.drink] {
-      section.factor += CGFloat(consumption.amount.doubleValue)
+      section.factor += CGFloat(consumption.waterIntake)
     }
     consumptionProgressView.setNeedsDisplay()
-    overallConsumption += consumption.amount.doubleValue
+    overallConsumption += consumption.waterIntake
     
     diaryViewController.updateTable(consumptions)
     
     updateNotifications(consumptionDate: consumption.date)
+    checkForWaterIntakeComplete()
   }
   
   private func updateNotifications(#consumptionDate: NSDate) {
@@ -334,7 +335,19 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     
     NotificationsHelper.rescheduleNotificationsBecauseOfConsumption(consumptionDate: consumptionDate)
   }
-  
+
+  private func checkForWaterIntakeComplete() {
+    let isToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
+    if !isToday {
+      return
+    }
+    
+    if overallConsumption >= consumptionRateAmount {
+      let completeViewController = storyboard!.instantiateViewControllerWithIdentifier("CompleteViewController") as CompleteViewController
+      parentViewController?.presentViewController(completeViewController, animated: true, completion: nil)
+    }
+  }
+
   func removeConsumption(consumption: Consumption) {
     let index = find(consumptions, consumption)
     if index == nil {
@@ -345,10 +358,10 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     consumptions.removeAtIndex(index!)
     
     if let section = multiProgressSections[consumption.drink] {
-      section.factor -= CGFloat(consumption.amount.doubleValue)
+      section.factor -= CGFloat(consumption.waterIntake)
     }
     consumptionProgressView.setNeedsDisplay()
-    overallConsumption += consumption.amount.doubleValue
+    overallConsumption -= consumption.waterIntake
     
     diaryViewController.updateTable(consumptions)
   }
