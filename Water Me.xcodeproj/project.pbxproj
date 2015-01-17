@@ -59,6 +59,7 @@
 		A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */; };
 		A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1319E5686C00D0477B /* ModelHelper.swift */; };
 		A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1519E57D3500D0477B /* NamedEntity.swift */; };
+		A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */; };
 		A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
@@ -133,6 +134,7 @@
 		A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekStatisticsViewController.swift; sourceTree = "<group>"; };
 		A5B75A1319E5686C00D0477B /* ModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelHelper.swift; sourceTree = "<group>"; };
 		A5B75A1519E57D3500D0477B /* NamedEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedEntity.swift; sourceTree = "<group>"; };
+		A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryTableViewCell.swift; path = Controls/DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		A5E70A6F19E30BEE006E5FC0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Settings.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
@@ -167,6 +169,7 @@
 				A5275F821A1212930088AF47 /* CalendarView.swift */,
 				8424AA051A0B5813009C5C47 /* MultiProgressView.swift */,
 				8455DACE1A694487004245F9 /* RoundedButton.swift */,
+				A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				8404765B1A360273004F0FEF /* SupportViewController.swift in Sources */,
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
 				84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */,
+				A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */,
 				843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */,
 				841B13BE1A31FE4F00249426 /* UIHelper.swift in Sources */,
 				8455DAD11A694D8A004245F9 /* CompleteViewController.swift in Sources */,
