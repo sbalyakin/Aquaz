@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WeekStatisticsViewController: UIViewController, WeekStatisticsViewDelegate {
+class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDelegate {
   
   @IBOutlet weak var weekStatisticsView: WeekStatisticsView!
   @IBOutlet weak var datePeriodLabel: UILabel!

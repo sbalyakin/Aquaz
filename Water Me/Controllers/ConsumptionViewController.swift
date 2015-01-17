@@ -31,7 +31,7 @@ private extension Units.Volume {
   }
 }
 
-class ConsumptionViewController: UIViewController {
+class ConsumptionViewController: StyledViewController {
   
   @IBOutlet weak var amountSlider: UISlider!
   @IBOutlet weak var amountLabel: UILabel!
@@ -83,7 +83,6 @@ class ConsumptionViewController: UIViewController {
     setupPredefinedAmountButtons()
     setupAmountRelatedControlsWithInitialAmount()
     setupApplyButton()
-    applyColorScheme()
     createCustomNavigationTitle()
     setupPickTimeButton()
     setupDrinkView()
@@ -95,6 +94,8 @@ class ConsumptionViewController: UIViewController {
     if navigationTitleView != nil {
       navigationItem.titleView = navigationTitleView
     }
+    
+    applyColorScheme()
   }
   
   private func setupPredefinedAmountButtons() {
@@ -134,6 +135,7 @@ class ConsumptionViewController: UIViewController {
     smallAmountButton.backgroundColor = drink.darkColor
     mediumAmountButton.backgroundColor = drink.darkColor
     largeAmountButton.backgroundColor = drink.darkColor
+    navigationController!.navigationBar.barTintColor = drink.darkColor
   }
 
   private func createCustomNavigationTitle() {

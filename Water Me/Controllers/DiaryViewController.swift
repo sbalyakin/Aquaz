@@ -8,11 +8,16 @@
 
 import Foundation
 
-class DiaryViewController: UIViewController, UITableViewDataSource {
+class DiaryViewController: StyledViewController, UITableViewDataSource {
 
   @IBOutlet weak var tableView: UITableView!
   
   var dayViewController: DayViewController!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    tableView.backgroundColor = StyleKit.pageBackgroundColor
+  }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return consumptions.count
@@ -26,44 +31,7 @@ class DiaryViewController: UIViewController, UITableViewDataSource {
     
     return cell
   }
-  
-//  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//    let cell = tableView.dequeueReusableCellWithIdentifier("Consumption Cell", forIndexPath: indexPath) as UITableViewCell
-//    
-//    let consumption = consumptions[indexPath.row]
-//    let drinkName = consumption.drink.localizedName
-//    let amount = Units.sharedInstance.formatMetricAmountToText(metricAmount: consumption.amount.doubleValue, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: true)
-//    
-//    let formatter = NSDateFormatter()
-//    formatter.dateStyle = .NoStyle
-//    formatter.timeStyle = .ShortStyle
-//    let date = formatter.stringFromDate(consumption.date)
-//    
-//    let paragraphStyle = NSMutableParagraphStyle()
-//    paragraphStyle.defaultTabInterval = 60
-//    
-//    let dateTitle = NSAttributedString(string: "\(date)\t", attributes: [
-//      NSForegroundColorAttributeName: UIColor.lightGrayColor(),
-//      NSFontAttributeName: UIFont.systemFontOfSize(12),
-//      NSParagraphStyleAttributeName: paragraphStyle])
-//    
-//    let drinkTitle = NSMutableAttributedString(string: "\(drinkName)\t\t\t\t", attributes: [
-//      NSForegroundColorAttributeName: consumption.drink.darkColor,
-//      NSFontAttributeName: UIFont.systemFontOfSize(16),
-//      NSParagraphStyleAttributeName: paragraphStyle])
-//    
-//    let amountTitle = NSAttributedString(string: "\(amount)", attributes: [
-//      NSFontAttributeName: UIFont.systemFontOfSize(16)])
-//    
-//    let title = NSMutableAttributedString()
-//    title.appendAttributedString(dateTitle)
-//    title.appendAttributedString(drinkTitle)
-//    title.appendAttributedString(amountTitle)
-//    
-//    cell.textLabel!.attributedText = title
-//    return cell
-//  }
-//  
+
   func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
     return true
   }

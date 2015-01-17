@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YearStatisticsViewController: UIViewController {
+class YearStatisticsViewController: StyledViewController {
 
   @IBOutlet weak var yearStatisticsView: YearStatisticsView!
   @IBOutlet weak var yearLabel: UILabel!
@@ -29,6 +29,8 @@ class YearStatisticsViewController: UIViewController {
     
     yearStatisticsView.titleForHorizontalStep = getMonthTitleFromIndex
     yearStatisticsView.titleForVerticalStep = getTitleForAmount
+    yearStatisticsView.backgroundColor = StyleKit.pageBackgroundColor
+    yearStatisticsView.backgroundDarkColor = StyleKit.pageBackgroundColor.colorWithShadow(0.03)
     
     dateWasChanged()
   }

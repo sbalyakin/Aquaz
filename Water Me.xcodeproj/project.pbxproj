@@ -50,6 +50,7 @@
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
 		A53869731A4989A6000E03DC /* NotificationsTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53869721A4989A6000E03DC /* NotificationsTimePickerViewController.swift */; };
 		A53869751A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53869741A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift */; };
+		A55337CF1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */; };
 		A5637BCB1A52AF11009489F6 /* DrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5637BCA1A52AF11009489F6 /* DrinkCollectionViewCell.swift */; };
 		A59113D81A50665C007B4241 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59113DA1A50665C007B4241 /* InfoPlist.strings */; };
 		A59113DD1A50665C007B4241 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59113DF1A50665C007B4241 /* Localizable.strings */; };
@@ -60,6 +61,7 @@
 		A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1319E5686C00D0477B /* ModelHelper.swift */; };
 		A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1519E57D3500D0477B /* NamedEntity.swift */; };
 		A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */; };
+		A5E6094E1A6AB2CC00786D15 /* StyledViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094D1A6AB2CC00786D15 /* StyledViewController.swift */; };
 		A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +125,7 @@
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A53869721A4989A6000E03DC /* NotificationsTimePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsTimePickerViewController.swift; sourceTree = "<group>"; };
 		A53869741A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsIntervalPickerViewController.swift; sourceTree = "<group>"; };
+		A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewController.swift; sourceTree = "<group>"; };
 		A5637BCA1A52AF11009489F6 /* DrinkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkCollectionViewCell.swift; path = Controls/DrinkCollectionViewCell.swift; sourceTree = "<group>"; };
 		A59113CF1A5054ED007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A59113D01A5054ED007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
@@ -135,6 +138,7 @@
 		A5B75A1319E5686C00D0477B /* ModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelHelper.swift; sourceTree = "<group>"; };
 		A5B75A1519E57D3500D0477B /* NamedEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedEntity.swift; sourceTree = "<group>"; };
 		A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryTableViewCell.swift; path = Controls/DiaryTableViewCell.swift; sourceTree = "<group>"; };
+		A5E6094D1A6AB2CC00786D15 /* StyledViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledViewController.swift; sourceTree = "<group>"; };
 		A5E70A6F19E30BEE006E5FC0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Settings.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
@@ -185,6 +189,9 @@
 		843B055419E2D7800097A833 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A5E6094D1A6AB2CC00786D15 /* StyledViewController.swift */,
+				841B13BB1A31D55500249426 /* RevealedViewControllers.swift */,
+				A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */,
 				843B055719E2D7800097A833 /* DayViewController.swift */,
 				843B055819E2D7800097A833 /* SelectDrinkViewController.swift */,
 				8424AA001A0A7009009C5C47 /* DiaryViewController.swift */,
@@ -196,7 +203,6 @@
 				A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */,
 				84C610B91A319DBC00433EF1 /* MonthStatisticsViewController.swift */,
 				84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */,
-				841B13BB1A31D55500249426 /* RevealedViewControllers.swift */,
 				840476561A35FE4A004F0FEF /* ConsumptionRateViewController.swift */,
 				840476581A35FE82004F0FEF /* NotificationsViewController.swift */,
 				A53869721A4989A6000E03DC /* NotificationsTimePickerViewController.swift */,
@@ -422,6 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A55337CF1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift in Sources */,
 				A598D5081A6558C100AA89CB /* StyleKit.swift in Sources */,
 				A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */,
 				840476571A35FE4A004F0FEF /* ConsumptionRateViewController.swift in Sources */,
@@ -442,6 +449,7 @@
 				A5637BCB1A52AF11009489F6 /* DrinkCollectionViewCell.swift in Sources */,
 				8404765B1A360273004F0FEF /* SupportViewController.swift in Sources */,
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
+				A5E6094E1A6AB2CC00786D15 /* StyledViewController.swift in Sources */,
 				84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */,
 				A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */,
 				843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */,

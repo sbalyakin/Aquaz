@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CompleteViewController: UIViewController {
+class CompleteViewController: StyledViewController {
   
   @IBAction func closeButtonWasTapped(sender: AnyObject) {
     dismissViewControllerAnimated(true, completion: nil)

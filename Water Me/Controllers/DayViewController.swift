@@ -95,6 +95,8 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     if navigationTitleView != nil {
       navigationItem.titleView = navigationTitleView
     }
+    
+    applyStyle()
   }
   
   func setCurrentDate(date: NSDate) {

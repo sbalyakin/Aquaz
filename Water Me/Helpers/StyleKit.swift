@@ -13,749 +13,757 @@
 import UIKit
 
 public class StyleKit : NSObject {
-
-    //// Cache
-
-    private struct Cache {
-        static var drinksWhiteColor: UIColor = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
-        static var waterColor: UIColor = UIColor(red: 0.000, green: 0.616, blue: 0.788, alpha: 1.000)
-        static var coffeeColor: UIColor = UIColor(red: 0.569, green: 0.298, blue: 0.220, alpha: 1.000)
-        static var teaColor: UIColor = UIColor(red: 0.890, green: 0.545, blue: 0.102, alpha: 1.000)
-        static var juiceColor: UIColor = UIColor(red: 0.949, green: 0.396, blue: 0.133, alpha: 1.000)
-        static var milkColor: UIColor = UIColor(red: 0.306, green: 0.788, blue: 0.961, alpha: 1.000)
-        static var sodaColor: UIColor = UIColor(red: 0.314, green: 0.761, blue: 0.733, alpha: 1.000)
-        static var energyColor: UIColor = UIColor(red: 0.773, green: 0.404, blue: 0.663, alpha: 1.000)
-        static var alcoholColor: UIColor = UIColor(red: 0.937, green: 0.255, blue: 0.224, alpha: 1.000)
-        static var sportColor: UIColor = UIColor(red: 0.427, green: 0.753, blue: 0.404, alpha: 1.000)
-    }
-
-    //// Colors
-
-    public class var drinksWhiteColor: UIColor { return Cache.drinksWhiteColor }
-    public class var waterColor: UIColor { return Cache.waterColor }
-    public class var coffeeColor: UIColor { return Cache.coffeeColor }
-    public class var teaColor: UIColor { return Cache.teaColor }
-    public class var juiceColor: UIColor { return Cache.juiceColor }
-    public class var milkColor: UIColor { return Cache.milkColor }
-    public class var sodaColor: UIColor { return Cache.sodaColor }
-    public class var energyColor: UIColor { return Cache.energyColor }
-    public class var alcoholColor: UIColor { return Cache.alcoholColor }
-    public class var sportColor: UIColor { return Cache.sportColor }
-
-    //// Drawing Methods
-
-    public class func drawWaterDrink(#frame: CGRect) {
-
-
-        //// Subframes
-        let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
-
-
-        //// Group
-        //// Oval 2 Drawing
-        var oval2Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
-        StyleKit.waterColor.setFill()
-        oval2Path.fill()
-
-
-        //// Bezier 2 Drawing
-        var bezier2Path = UIBezierPath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.74606 * group.width, group.minY + 0.24631 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.73281 * group.width, group.minY + 0.24000 * group.height), controlPoint1: CGPointMake(group.minX + 0.74290 * group.width, group.minY + 0.24252 * group.height), controlPoint2: CGPointMake(group.minX + 0.73785 * group.width, group.minY + 0.24000 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.27219 * group.width, group.minY + 0.24000 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25894 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.26715 * group.width, group.minY + 0.24000 * group.height), controlPoint2: CGPointMake(group.minX + 0.26210 * group.width, group.minY + 0.24252 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25516 * group.width, group.minY + 0.26019 * group.height), controlPoint1: CGPointMake(group.minX + 0.25579 * group.width, group.minY + 0.25010 * group.height), controlPoint2: CGPointMake(group.minX + 0.25453 * group.width, group.minY + 0.25514 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.34791 * group.width, group.minY + 0.81549 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.36495 * group.width, group.minY + 0.83000 * group.height), controlPoint1: CGPointMake(group.minX + 0.34917 * group.width, group.minY + 0.82369 * group.height), controlPoint2: CGPointMake(group.minX + 0.35674 * group.width, group.minY + 0.83000 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.64005 * group.width, group.minY + 0.83000 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.65709 * group.width, group.minY + 0.81549 * group.height), controlPoint1: CGPointMake(group.minX + 0.64826 * group.width, group.minY + 0.83000 * group.height), controlPoint2: CGPointMake(group.minX + 0.65583 * group.width, group.minY + 0.82369 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.74984 * group.width, group.minY + 0.26019 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.74606 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.75047 * group.width, group.minY + 0.25514 * group.height), controlPoint2: CGPointMake(group.minX + 0.74921 * group.width, group.minY + 0.25010 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.71261 * group.width, group.minY + 0.27471 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.68927 * group.width, group.minY + 0.41353 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height), controlPoint1: CGPointMake(group.minX + 0.68422 * group.width, group.minY + 0.41668 * group.height), controlPoint2: CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.57317 * group.width, group.minY + 0.44950 * group.height), controlPoint1: CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height), controlPoint2: CGPointMake(group.minX + 0.62680 * group.width, group.minY + 0.45265 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.39460 * group.width, group.minY + 0.40406 * group.height), controlPoint1: CGPointMake(group.minX + 0.52017 * group.width, group.minY + 0.44634 * group.height), controlPoint2: CGPointMake(group.minX + 0.45391 * group.width, group.minY + 0.40911 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.31699 * group.width, group.minY + 0.42047 * group.height), controlPoint1: CGPointMake(group.minX + 0.34539 * group.width, group.minY + 0.39965 * group.height), controlPoint2: CGPointMake(group.minX + 0.32267 * group.width, group.minY + 0.41479 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.29239 * group.width, group.minY + 0.27471 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.71261 * group.width, group.minY + 0.27471 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.miterLimit = 4;
-
-        StyleKit.drinksWhiteColor.setFill()
-        bezier2Path.fill()
-    }
-
-    public class func drawCoffeeDrink(#frame: CGRect) {
-
-
-        //// Subframes
-        let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
-
-
-        //// Group
-        //// Oval 2 Drawing
-        var oval2Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
-        StyleKit.coffeeColor.setFill()
-        oval2Path.fill()
-
-
-        //// Group 2
-        //// Bezier 2 Drawing
-        var bezier2Path = UIBezierPath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.83921 * group.width, group.minY + 0.45709 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.74520 * group.width, group.minY + 0.40246 * group.height), controlPoint1: CGPointMake(group.minX + 0.83163 * group.width, group.minY + 0.41284 * group.height), controlPoint2: CGPointMake(group.minX + 0.78182 * group.width, group.minY + 0.40178 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.74454 * group.width, group.minY + 0.35685 * group.height), controlPoint1: CGPointMake(group.minX + 0.74520 * group.width, group.minY + 0.37965 * group.height), controlPoint2: CGPointMake(group.minX + 0.74454 * group.width, group.minY + 0.36144 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.72756 * group.width, group.minY + 0.34000 * group.height), controlPoint1: CGPointMake(group.minX + 0.74388 * group.width, group.minY + 0.34715 * group.height), controlPoint2: CGPointMake(group.minX + 0.73630 * group.width, group.minY + 0.34000 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.27779 * group.width, group.minY + 0.34000 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.26080 * group.width, group.minY + 0.35685 * group.height), controlPoint1: CGPointMake(group.minX + 0.26839 * group.width, group.minY + 0.34000 * group.height), controlPoint2: CGPointMake(group.minX + 0.26080 * group.width, group.minY + 0.34715 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.27779 * group.width, group.minY + 0.53129 * group.height), controlPoint1: CGPointMake(group.minX + 0.26014 * group.width, group.minY + 0.37046 * group.height), controlPoint2: CGPointMake(group.minX + 0.25569 * group.width, group.minY + 0.49096 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.40776 * group.width, group.minY + 0.67000 * group.height), controlPoint1: CGPointMake(group.minX + 0.29231 * group.width, group.minY + 0.55801 * group.height), controlPoint2: CGPointMake(group.minX + 0.37428 * group.width, group.minY + 0.67000 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.59825 * group.width, group.minY + 0.67000 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.70480 * group.width, group.minY + 0.56652 * group.height), controlPoint1: CGPointMake(group.minX + 0.62283 * group.width, group.minY + 0.67000 * group.height), controlPoint2: CGPointMake(group.minX + 0.67395 * group.width, group.minY + 0.60873 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.70546 * group.width, group.minY + 0.56652 * group.height), controlPoint1: CGPointMake(group.minX + 0.70480 * group.width, group.minY + 0.56652 * group.height), controlPoint2: CGPointMake(group.minX + 0.70480 * group.width, group.minY + 0.56652 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.82091 * group.width, group.minY + 0.51581 * group.height), controlPoint1: CGPointMake(group.minX + 0.75032 * group.width, group.minY + 0.56652 * group.height), controlPoint2: CGPointMake(group.minX + 0.79567 * group.width, group.minY + 0.54695 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.83921 * group.width, group.minY + 0.45709 * group.height), controlPoint1: CGPointMake(group.minX + 0.83608 * group.width, group.minY + 0.49675 * group.height), controlPoint2: CGPointMake(group.minX + 0.84235 * group.width, group.minY + 0.47598 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.29429 * group.width, group.minY + 0.37506 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.71007 * group.width, group.minY + 0.37506 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.71007 * group.width, group.minY + 0.40961 * group.height), controlPoint1: CGPointMake(group.minX + 0.71007 * group.width, group.minY + 0.38612 * group.height), controlPoint2: CGPointMake(group.minX + 0.71007 * group.width, group.minY + 0.39786 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.68484 * group.width, group.minY + 0.42135 * group.height), controlPoint1: CGPointMake(group.minX + 0.70315 * group.width, group.minY + 0.41352 * group.height), controlPoint2: CGPointMake(group.minX + 0.69424 * group.width, group.minY + 0.41744 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.56939 * group.width, group.minY + 0.44416 * group.height), controlPoint1: CGPointMake(group.minX + 0.68484 * group.width, group.minY + 0.42135 * group.height), controlPoint2: CGPointMake(group.minX + 0.62612 * group.width, group.minY + 0.44739 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.38021 * group.width, group.minY + 0.40893 * group.height), controlPoint1: CGPointMake(group.minX + 0.51265 * group.width, group.minY + 0.44092 * group.height), controlPoint2: CGPointMake(group.minX + 0.44322 * group.width, group.minY + 0.41352 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.29445 * group.width, group.minY + 0.41676 * group.height), controlPoint1: CGPointMake(group.minX + 0.33288 * group.width, group.minY + 0.40569 * group.height), controlPoint2: CGPointMake(group.minX + 0.30517 * group.width, group.minY + 0.41284 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.29429 * group.width, group.minY + 0.37506 * group.height), controlPoint1: CGPointMake(group.minX + 0.29429 * group.width, group.minY + 0.40297 * group.height), controlPoint2: CGPointMake(group.minX + 0.29429 * group.width, group.minY + 0.38799 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.79452 * group.width, group.minY + 0.49215 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.72888 * group.width, group.minY + 0.52789 * group.height), controlPoint1: CGPointMake(group.minX + 0.78198 * group.width, group.minY + 0.50713 * group.height), controlPoint2: CGPointMake(group.minX + 0.75790 * group.width, group.minY + 0.52278 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.74405 * group.width, group.minY + 0.43735 * group.height), controlPoint1: CGPointMake(group.minX + 0.73828 * group.width, group.minY + 0.50764 * group.height), controlPoint2: CGPointMake(group.minX + 0.74207 * group.width, group.minY + 0.47190 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.80524 * group.width, group.minY + 0.46203 * group.height), controlPoint1: CGPointMake(group.minX + 0.76302 * group.width, group.minY + 0.43735 * group.height), controlPoint2: CGPointMake(group.minX + 0.80145 * group.width, group.minY + 0.43922 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.79452 * group.width, group.minY + 0.49215 * group.height), controlPoint1: CGPointMake(group.minX + 0.80639 * group.width, group.minY + 0.47207 * group.height), controlPoint2: CGPointMake(group.minX + 0.80260 * group.width, group.minY + 0.48245 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.miterLimit = 4;
-
-        StyleKit.drinksWhiteColor.setFill()
-        bezier2Path.fill()
-
-
-        //// Bezier 4 Drawing
-        var bezier4Path = UIBezierPath()
-        bezier4Path.moveToPoint(CGPointMake(group.minX + 0.75307 * group.width, group.minY + 0.70500 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.24693 * group.width, group.minY + 0.70500 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.23000 * group.width, group.minY + 0.72250 * group.height), controlPoint1: CGPointMake(group.minX + 0.23756 * group.width, group.minY + 0.70500 * group.height), controlPoint2: CGPointMake(group.minX + 0.23000 * group.width, group.minY + 0.71282 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.24693 * group.width, group.minY + 0.74000 * group.height), controlPoint1: CGPointMake(group.minX + 0.23000 * group.width, group.minY + 0.73218 * group.height), controlPoint2: CGPointMake(group.minX + 0.23756 * group.width, group.minY + 0.74000 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.75307 * group.width, group.minY + 0.74000 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.77000 * group.width, group.minY + 0.72250 * group.height), controlPoint1: CGPointMake(group.minX + 0.76244 * group.width, group.minY + 0.74000 * group.height), controlPoint2: CGPointMake(group.minX + 0.77000 * group.width, group.minY + 0.73218 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.75307 * group.width, group.minY + 0.70500 * group.height), controlPoint1: CGPointMake(group.minX + 0.77016 * group.width, group.minY + 0.71282 * group.height), controlPoint2: CGPointMake(group.minX + 0.76260 * group.width, group.minY + 0.70500 * group.height))
-        bezier4Path.closePath()
-        bezier4Path.miterLimit = 4;
-
-        StyleKit.drinksWhiteColor.setFill()
-        bezier4Path.fill()
-
-
-
-
-        //// Group 3
-        //// Bezier 6 Drawing
-        var bezier6Path = UIBezierPath()
-        bezier6Path.moveToPoint(CGPointMake(group.minX + 0.54792 * group.width, group.minY + 0.59580 * group.height))
-        bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.51321 * group.width, group.minY + 0.55068 * group.height), controlPoint1: CGPointMake(group.minX + 0.54347 * group.width, group.minY + 0.57482 * group.height), controlPoint2: CGPointMake(group.minX + 0.52964 * group.width, group.minY + 0.56156 * group.height))
-        bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.49063 * group.width, group.minY + 0.53458 * group.height), controlPoint1: CGPointMake(group.minX + 0.50553 * group.width, group.minY + 0.54547 * group.height), controlPoint2: CGPointMake(group.minX + 0.49785 * group.width, group.minY + 0.54026 * group.height))
-        bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.47497 * group.width, group.minY + 0.48394 * group.height), controlPoint1: CGPointMake(group.minX + 0.47420 * group.width, group.minY + 0.52149 * group.height), controlPoint2: CGPointMake(group.minX + 0.47174 * group.width, group.minY + 0.50350 * group.height))
-        bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.47911 * group.width, group.minY + 0.48062 * group.height), controlPoint1: CGPointMake(group.minX + 0.47543 * group.width, group.minY + 0.48173 * group.height), controlPoint2: CGPointMake(group.minX + 0.47758 * group.width, group.minY + 0.48094 * group.height))
-        bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.51260 * group.width, group.minY + 0.48693 * group.height), controlPoint1: CGPointMake(group.minX + 0.49094 * group.width, group.minY + 0.47873 * group.height), controlPoint2: CGPointMake(group.minX + 0.50200 * group.width, group.minY + 0.48125 * group.height))
-        bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.55637 * group.width, group.minY + 0.57545 * group.height), controlPoint1: CGPointMake(group.minX + 0.54270 * group.width, group.minY + 0.50287 * group.height), controlPoint2: CGPointMake(group.minX + 0.56190 * group.width, group.minY + 0.54137 * group.height))
-        bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.54992 * group.width, group.minY + 0.59596 * group.height), controlPoint1: CGPointMake(group.minX + 0.55529 * group.width, group.minY + 0.58239 * group.height), controlPoint2: CGPointMake(group.minX + 0.55207 * group.width, group.minY + 0.58918 * group.height))
-        bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.54792 * group.width, group.minY + 0.59580 * group.height), controlPoint1: CGPointMake(group.minX + 0.54915 * group.width, group.minY + 0.59738 * group.height), controlPoint2: CGPointMake(group.minX + 0.54807 * group.width, group.minY + 0.59675 * group.height))
-        bezier6Path.closePath()
-        bezier6Path.miterLimit = 4;
-
-        StyleKit.coffeeColor.setFill()
-        bezier6Path.fill()
-
-
-        //// Bezier 8 Drawing
-        var bezier8Path = UIBezierPath()
-        bezier8Path.moveToPoint(CGPointMake(group.minX + 0.45792 * group.width, group.minY + 0.49104 * group.height))
-        bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.45992 * group.width, group.minY + 0.51202 * group.height), controlPoint1: CGPointMake(group.minX + 0.45853 * group.width, group.minY + 0.49845 * group.height), controlPoint2: CGPointMake(group.minX + 0.45869 * group.width, group.minY + 0.50539 * group.height))
-        bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.49109 * group.width, group.minY + 0.55446 * group.height), controlPoint1: CGPointMake(group.minX + 0.46330 * group.width, group.minY + 0.53143 * group.height), controlPoint2: CGPointMake(group.minX + 0.47574 * group.width, group.minY + 0.54405 * group.height))
-        bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.51505 * group.width, group.minY + 0.57135 * group.height), controlPoint1: CGPointMake(group.minX + 0.49923 * group.width, group.minY + 0.55999 * group.height), controlPoint2: CGPointMake(group.minX + 0.50722 * group.width, group.minY + 0.56535 * group.height))
-        bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.53410 * group.width, group.minY + 0.60385 * group.height), controlPoint1: CGPointMake(group.minX + 0.52565 * group.width, group.minY + 0.57939 * group.height), controlPoint2: CGPointMake(group.minX + 0.53179 * group.width, group.minY + 0.59044 * group.height))
-        bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.52918 * group.width, group.minY + 0.61221 * group.height), controlPoint1: CGPointMake(group.minX + 0.53487 * group.width, group.minY + 0.60858 * group.height), controlPoint2: CGPointMake(group.minX + 0.53348 * group.width, group.minY + 0.61079 * group.height))
-        bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.48925 * group.width, group.minY + 0.60874 * group.height), controlPoint1: CGPointMake(group.minX + 0.51536 * group.width, group.minY + 0.61710 * group.height), controlPoint2: CGPointMake(group.minX + 0.50215 * group.width, group.minY + 0.61489 * group.height))
-        bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.44410 * group.width, group.minY + 0.51817 * group.height), controlPoint1: CGPointMake(group.minX + 0.45823 * group.width, group.minY + 0.59359 * group.height), controlPoint2: CGPointMake(group.minX + 0.43795 * group.width, group.minY + 0.55289 * group.height))
-        bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.45792 * group.width, group.minY + 0.49104 * group.height), controlPoint1: CGPointMake(group.minX + 0.44579 * group.width, group.minY + 0.50792 * group.height), controlPoint2: CGPointMake(group.minX + 0.45009 * group.width, group.minY + 0.49861 * group.height))
-        bezier8Path.closePath()
-        bezier8Path.miterLimit = 4;
-
-        StyleKit.coffeeColor.setFill()
-        bezier8Path.fill()
-    }
-
-    public class func drawTeaDrink(#frame: CGRect) {
-
-
-        //// Subframes
-        let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
-
-
-        //// Group
-        //// Oval 2 Drawing
-        var oval2Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
-        StyleKit.teaColor.setFill()
-        oval2Path.fill()
-
-
-        //// Bezier 2 Drawing
-        var bezier2Path = UIBezierPath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.85300 * group.width, group.minY + 0.48420 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.82080 * group.width, group.minY + 0.40470 * group.height), controlPoint1: CGPointMake(group.minX + 0.85300 * group.width, group.minY + 0.45076 * group.height), controlPoint2: CGPointMake(group.minX + 0.84227 * group.width, group.minY + 0.42363 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.73116 * group.width, group.minY + 0.37441 * group.height), controlPoint1: CGPointMake(group.minX + 0.79303 * group.width, group.minY + 0.38009 * group.height), controlPoint2: CGPointMake(group.minX + 0.75515 * group.width, group.minY + 0.37504 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.75010 * group.width, group.minY + 0.26019 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.74631 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.75073 * group.width, group.minY + 0.25514 * group.height), controlPoint2: CGPointMake(group.minX + 0.74947 * group.width, group.minY + 0.25010 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.73305 * group.width, group.minY + 0.24000 * group.height), controlPoint1: CGPointMake(group.minX + 0.74315 * group.width, group.minY + 0.24252 * group.height), controlPoint2: CGPointMake(group.minX + 0.73810 * group.width, group.minY + 0.24000 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.27220 * group.width, group.minY + 0.24000 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25895 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.26715 * group.width, group.minY + 0.24000 * group.height), controlPoint2: CGPointMake(group.minX + 0.26210 * group.width, group.minY + 0.24252 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25516 * group.width, group.minY + 0.26019 * group.height), controlPoint1: CGPointMake(group.minX + 0.25579 * group.width, group.minY + 0.25010 * group.height), controlPoint2: CGPointMake(group.minX + 0.25453 * group.width, group.minY + 0.25514 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.34796 * group.width, group.minY + 0.81549 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.36500 * group.width, group.minY + 0.83000 * group.height), controlPoint1: CGPointMake(group.minX + 0.34922 * group.width, group.minY + 0.82369 * group.height), controlPoint2: CGPointMake(group.minX + 0.35680 * group.width, group.minY + 0.83000 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.64025 * group.width, group.minY + 0.83000 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.65730 * group.width, group.minY + 0.81549 * group.height), controlPoint1: CGPointMake(group.minX + 0.64846 * group.width, group.minY + 0.83000 * group.height), controlPoint2: CGPointMake(group.minX + 0.65603 * group.width, group.minY + 0.82369 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.68949 * group.width, group.minY + 0.62303 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.85300 * group.width, group.minY + 0.48420 * group.height), controlPoint1: CGPointMake(group.minX + 0.72358 * group.width, group.minY + 0.61861 * group.height), controlPoint2: CGPointMake(group.minX + 0.85300 * group.width, group.minY + 0.59148 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.71285 * group.width, group.minY + 0.27471 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.68949 * group.width, group.minY + 0.41353 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.68065 * group.width, group.minY + 0.41984 * group.height), controlPoint1: CGPointMake(group.minX + 0.68444 * group.width, group.minY + 0.41668 * group.height), controlPoint2: CGPointMake(group.minX + 0.68065 * group.width, group.minY + 0.41984 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.57333 * group.width, group.minY + 0.44950 * group.height), controlPoint1: CGPointMake(group.minX + 0.68065 * group.width, group.minY + 0.41984 * group.height), controlPoint2: CGPointMake(group.minX + 0.62699 * group.width, group.minY + 0.45265 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.39468 * group.width, group.minY + 0.40406 * group.height), controlPoint1: CGPointMake(group.minX + 0.52030 * group.width, group.minY + 0.44634 * group.height), controlPoint2: CGPointMake(group.minX + 0.45402 * group.width, group.minY + 0.40911 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.31703 * group.width, group.minY + 0.42047 * group.height), controlPoint1: CGPointMake(group.minX + 0.34543 * group.width, group.minY + 0.39965 * group.height), controlPoint2: CGPointMake(group.minX + 0.32271 * group.width, group.minY + 0.41479 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.29240 * group.width, group.minY + 0.27471 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.71285 * group.width, group.minY + 0.27471 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.69581 * group.width, group.minY + 0.58769 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.72548 * group.width, group.minY + 0.40911 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.79808 * group.width, group.minY + 0.43120 * group.height), controlPoint1: CGPointMake(group.minX + 0.74378 * group.width, group.minY + 0.40911 * group.height), controlPoint2: CGPointMake(group.minX + 0.77661 * group.width, group.minY + 0.41164 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.81891 * group.width, group.minY + 0.48483 * group.height), controlPoint1: CGPointMake(group.minX + 0.81197 * group.width, group.minY + 0.44382 * group.height), controlPoint2: CGPointMake(group.minX + 0.81891 * group.width, group.minY + 0.46149 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.69581 * group.width, group.minY + 0.58769 * group.height), controlPoint1: CGPointMake(group.minX + 0.81891 * group.width, group.minY + 0.55488 * group.height), controlPoint2: CGPointMake(group.minX + 0.73305 * group.width, group.minY + 0.58012 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.miterLimit = 4;
-
-        StyleKit.drinksWhiteColor.setFill()
-        bezier2Path.fill()
-    }
-
-    public class func drawJuiceDrink(#frame: CGRect) {
-
-
-        //// Subframes
-        let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
-
-
-        //// Group
-        //// Oval 2 Drawing
-        var oval2Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
-        StyleKit.juiceColor.setFill()
-        oval2Path.fill()
-
-
-        //// Bezier 2 Drawing
-        var bezier2Path = UIBezierPath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.74606 * group.width, group.minY + 0.24631 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.73281 * group.width, group.minY + 0.24000 * group.height), controlPoint1: CGPointMake(group.minX + 0.74290 * group.width, group.minY + 0.24252 * group.height), controlPoint2: CGPointMake(group.minX + 0.73785 * group.width, group.minY + 0.24000 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.27219 * group.width, group.minY + 0.24000 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25894 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.26715 * group.width, group.minY + 0.24000 * group.height), controlPoint2: CGPointMake(group.minX + 0.26210 * group.width, group.minY + 0.24252 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25516 * group.width, group.minY + 0.26019 * group.height), controlPoint1: CGPointMake(group.minX + 0.25579 * group.width, group.minY + 0.25010 * group.height), controlPoint2: CGPointMake(group.minX + 0.25453 * group.width, group.minY + 0.25514 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.34791 * group.width, group.minY + 0.81549 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.36495 * group.width, group.minY + 0.83000 * group.height), controlPoint1: CGPointMake(group.minX + 0.34917 * group.width, group.minY + 0.82369 * group.height), controlPoint2: CGPointMake(group.minX + 0.35674 * group.width, group.minY + 0.83000 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.64005 * group.width, group.minY + 0.83000 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.65709 * group.width, group.minY + 0.81549 * group.height), controlPoint1: CGPointMake(group.minX + 0.64826 * group.width, group.minY + 0.83000 * group.height), controlPoint2: CGPointMake(group.minX + 0.65583 * group.width, group.minY + 0.82369 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.74984 * group.width, group.minY + 0.26019 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.74606 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.75047 * group.width, group.minY + 0.25514 * group.height), controlPoint2: CGPointMake(group.minX + 0.74921 * group.width, group.minY + 0.25010 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.71261 * group.width, group.minY + 0.27471 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.68927 * group.width, group.minY + 0.41353 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height), controlPoint1: CGPointMake(group.minX + 0.68422 * group.width, group.minY + 0.41668 * group.height), controlPoint2: CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.57317 * group.width, group.minY + 0.44950 * group.height), controlPoint1: CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height), controlPoint2: CGPointMake(group.minX + 0.62680 * group.width, group.minY + 0.45265 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.39460 * group.width, group.minY + 0.40406 * group.height), controlPoint1: CGPointMake(group.minX + 0.52017 * group.width, group.minY + 0.44634 * group.height), controlPoint2: CGPointMake(group.minX + 0.45391 * group.width, group.minY + 0.40911 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.31699 * group.width, group.minY + 0.42047 * group.height), controlPoint1: CGPointMake(group.minX + 0.34539 * group.width, group.minY + 0.39965 * group.height), controlPoint2: CGPointMake(group.minX + 0.32267 * group.width, group.minY + 0.41479 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.29239 * group.width, group.minY + 0.27471 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.71261 * group.width, group.minY + 0.27471 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.miterLimit = 4;
-
-        StyleKit.drinksWhiteColor.setFill()
-        bezier2Path.fill()
-
-
-        //// Bezier 4 Drawing
-        var bezier4Path = UIBezierPath()
-        bezier4Path.moveToPoint(CGPointMake(group.minX + 0.59585 * group.width, group.minY + 0.53538 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.57506 * group.width, group.minY + 0.53538 * group.height), controlPoint1: CGPointMake(group.minX + 0.59018 * group.width, group.minY + 0.52971 * group.height), controlPoint2: CGPointMake(group.minX + 0.58073 * group.width, group.minY + 0.52971 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.39618 * group.width, group.minY + 0.71426 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.39618 * group.width, group.minY + 0.73505 * group.height), controlPoint1: CGPointMake(group.minX + 0.39051 * group.width, group.minY + 0.71993 * group.height), controlPoint2: CGPointMake(group.minX + 0.39051 * group.width, group.minY + 0.72938 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.49633 * group.width, group.minY + 0.77662 * group.height), controlPoint1: CGPointMake(group.minX + 0.42264 * group.width, group.minY + 0.76150 * group.height), controlPoint2: CGPointMake(group.minX + 0.45854 * group.width, group.minY + 0.77662 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.59648 * group.width, group.minY + 0.73505 * group.height), controlPoint1: CGPointMake(group.minX + 0.53412 * group.width, group.minY + 0.77662 * group.height), controlPoint2: CGPointMake(group.minX + 0.56940 * group.width, group.minY + 0.76213 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.63805 * group.width, group.minY + 0.63490 * group.height), controlPoint1: CGPointMake(group.minX + 0.62293 * group.width, group.minY + 0.70859 * group.height), controlPoint2: CGPointMake(group.minX + 0.63805 * group.width, group.minY + 0.67269 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.59585 * group.width, group.minY + 0.53538 * group.height), controlPoint1: CGPointMake(group.minX + 0.63679 * group.width, group.minY + 0.59774 * group.height), controlPoint2: CGPointMake(group.minX + 0.62230 * group.width, group.minY + 0.56247 * group.height))
-        bezier4Path.closePath()
-        bezier4Path.moveToPoint(CGPointMake(group.minX + 0.60719 * group.width, group.minY + 0.64435 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.58640 * group.width, group.minY + 0.70041 * group.height), controlPoint1: CGPointMake(group.minX + 0.60530 * group.width, group.minY + 0.66450 * group.height), controlPoint2: CGPointMake(group.minX + 0.59837 * group.width, group.minY + 0.68403 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.53034 * group.width, group.minY + 0.64435 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.60719 * group.width, group.minY + 0.64435 * group.height))
-        bezier4Path.closePath()
-        bezier4Path.moveToPoint(CGPointMake(group.minX + 0.53727 * group.width, group.minY + 0.61475 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.58451 * group.width, group.minY + 0.56751 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.60530 * group.width, group.minY + 0.61475 * group.height), controlPoint1: CGPointMake(group.minX + 0.59522 * group.width, group.minY + 0.58136 * group.height), controlPoint2: CGPointMake(group.minX + 0.60215 * group.width, group.minY + 0.59774 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.53727 * group.width, group.minY + 0.61475 * group.height))
-        bezier4Path.closePath()
-        bezier4Path.moveToPoint(CGPointMake(group.minX + 0.56625 * group.width, group.minY + 0.72245 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.50956 * group.width, group.minY + 0.74639 * group.height), controlPoint1: CGPointMake(group.minX + 0.54987 * group.width, group.minY + 0.73568 * group.height), controlPoint2: CGPointMake(group.minX + 0.53034 * group.width, group.minY + 0.74387 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.50956 * group.width, group.minY + 0.66513 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.56625 * group.width, group.minY + 0.72245 * group.height))
-        bezier4Path.closePath()
-        bezier4Path.moveToPoint(CGPointMake(group.minX + 0.42768 * group.width, group.minY + 0.72434 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.47995 * group.width, group.minY + 0.67206 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.47995 * group.width, group.minY + 0.74576 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.42768 * group.width, group.minY + 0.72434 * group.height), controlPoint1: CGPointMake(group.minX + 0.46043 * group.width, group.minY + 0.74324 * group.height), controlPoint2: CGPointMake(group.minX + 0.44279 * group.width, group.minY + 0.73631 * group.height))
-        bezier4Path.closePath()
-        bezier4Path.miterLimit = 4;
-
-        StyleKit.juiceColor.setFill()
-        bezier4Path.fill()
-    }
-
-    public class func drawMilkDrink(#frame: CGRect) {
-
-
-        //// Subframes
-        let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
-
-
-        //// Group
-        //// Oval 1 Drawing
-        var oval1Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
-        StyleKit.milkColor.setFill()
-        oval1Path.fill()
-
-
-        //// Bezier 2 Drawing
-        var bezier2Path = UIBezierPath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.39683 * group.width, group.minY + 0.21500 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.60317 * group.width, group.minY + 0.21500 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.62000 * group.width, group.minY + 0.19750 * group.height), controlPoint1: CGPointMake(group.minX + 0.61252 * group.width, group.minY + 0.21500 * group.height), controlPoint2: CGPointMake(group.minX + 0.62000 * group.width, group.minY + 0.20722 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.60317 * group.width, group.minY + 0.18000 * group.height), controlPoint1: CGPointMake(group.minX + 0.62000 * group.width, group.minY + 0.18778 * group.height), controlPoint2: CGPointMake(group.minX + 0.61252 * group.width, group.minY + 0.18000 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.39683 * group.width, group.minY + 0.18000 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.38000 * group.width, group.minY + 0.19750 * group.height), controlPoint1: CGPointMake(group.minX + 0.38748 * group.width, group.minY + 0.18000 * group.height), controlPoint2: CGPointMake(group.minX + 0.38000 * group.width, group.minY + 0.18778 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.39683 * group.width, group.minY + 0.21500 * group.height), controlPoint1: CGPointMake(group.minX + 0.38000 * group.width, group.minY + 0.20722 * group.height), controlPoint2: CGPointMake(group.minX + 0.38748 * group.width, group.minY + 0.21500 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.miterLimit = 4;
-
-        StyleKit.drinksWhiteColor.setFill()
-        bezier2Path.fill()
-
-
-        //// Bezier 1 Drawing
-        var bezier1Path = UIBezierPath()
-        bezier1Path.moveToPoint(CGPointMake(group.minX + 0.65988 * group.width, group.minY + 0.34940 * group.height))
-        bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.61411 * group.width, group.minY + 0.25506 * group.height))
-        bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.59839 * group.width, group.minY + 0.24500 * group.height), controlPoint1: CGPointMake(group.minX + 0.61096 * group.width, group.minY + 0.24940 * group.height), controlPoint2: CGPointMake(group.minX + 0.60530 * group.width, group.minY + 0.24500 * group.height))
-        bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.40287 * group.width, group.minY + 0.24500 * group.height))
-        bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.38715 * group.width, group.minY + 0.25506 * group.height), controlPoint1: CGPointMake(group.minX + 0.39595 * group.width, group.minY + 0.24500 * group.height), controlPoint2: CGPointMake(group.minX + 0.39029 * group.width, group.minY + 0.24877 * group.height))
-        bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.34189 * group.width, group.minY + 0.34942 * group.height))
-        bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.35697 * group.height), controlPoint1: CGPointMake(group.minX + 0.34063 * group.width, group.minY + 0.35194 * group.height), controlPoint2: CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.35445 * group.height))
-        bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.81302 * group.height))
-        bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.35697 * group.width, group.minY + 0.83000 * group.height), controlPoint1: CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.82245 * group.height), controlPoint2: CGPointMake(group.minX + 0.34754 * group.width, group.minY + 0.83000 * group.height))
-        bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.64302 * group.width, group.minY + 0.83000 * group.height))
-        bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.66000 * group.width, group.minY + 0.81302 * group.height), controlPoint1: CGPointMake(group.minX + 0.65246 * group.width, group.minY + 0.83000 * group.height), controlPoint2: CGPointMake(group.minX + 0.66000 * group.width, group.minY + 0.82245 * group.height))
-        bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.66000 * group.width, group.minY + 0.35700 * group.height))
-        bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.65988 * group.width, group.minY + 0.34940 * group.height), controlPoint1: CGPointMake(group.minX + 0.66001 * group.width, group.minY + 0.35448 * group.height), controlPoint2: CGPointMake(group.minX + 0.65988 * group.width, group.minY + 0.34940 * group.height))
-        bezier1Path.closePath()
-        bezier1Path.moveToPoint(CGPointMake(group.minX + 0.41356 * group.width, group.minY + 0.27897 * group.height))
-        bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.58770 * group.width, group.minY + 0.27897 * group.height))
-        bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.62668 * group.width, group.minY + 0.36011 * group.height))
-        bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.62668 * group.width, group.minY + 0.40981 * group.height))
-        bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.62479 * group.width, group.minY + 0.41106 * group.height), controlPoint1: CGPointMake(group.minX + 0.62542 * group.width, group.minY + 0.41044 * group.height), controlPoint2: CGPointMake(group.minX + 0.62479 * group.width, group.minY + 0.41106 * group.height))
-        bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.54432 * group.width, group.minY + 0.43371 * group.height), controlPoint1: CGPointMake(group.minX + 0.62479 * group.width, group.minY + 0.41106 * group.height), controlPoint2: CGPointMake(group.minX + 0.58456 * group.width, group.minY + 0.43623 * group.height))
-        bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.41041 * group.width, group.minY + 0.39974 * group.height), controlPoint1: CGPointMake(group.minX + 0.50409 * group.width, group.minY + 0.43119 * group.height), controlPoint2: CGPointMake(group.minX + 0.45505 * group.width, group.minY + 0.40352 * group.height))
-        bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.37521 * group.width, group.minY + 0.40163 * group.height), controlPoint1: CGPointMake(group.minX + 0.39532 * group.width, group.minY + 0.39848 * group.height), controlPoint2: CGPointMake(group.minX + 0.38401 * group.width, group.minY + 0.39974 * group.height))
-        bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.37521 * group.width, group.minY + 0.36074 * group.height))
-        bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.41356 * group.width, group.minY + 0.27897 * group.height))
-        bezier1Path.closePath()
-        bezier1Path.miterLimit = 4;
-
-        StyleKit.drinksWhiteColor.setFill()
-        bezier1Path.fill()
-    }
-
-    public class func drawSodaDrink(#frame: CGRect) {
-
-
-        //// Subframes
-        let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
-
-
-        //// Group
-        //// Oval 2 Drawing
-        var oval2Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
-        StyleKit.sodaColor.setFill()
-        oval2Path.fill()
-
-
-        //// Bezier 2 Drawing
-        var bezier2Path = UIBezierPath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.74606 * group.width, group.minY + 0.24631 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.73281 * group.width, group.minY + 0.24000 * group.height), controlPoint1: CGPointMake(group.minX + 0.74290 * group.width, group.minY + 0.24252 * group.height), controlPoint2: CGPointMake(group.minX + 0.73785 * group.width, group.minY + 0.24000 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.27219 * group.width, group.minY + 0.24000 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25894 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.26715 * group.width, group.minY + 0.24000 * group.height), controlPoint2: CGPointMake(group.minX + 0.26210 * group.width, group.minY + 0.24252 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25516 * group.width, group.minY + 0.26019 * group.height), controlPoint1: CGPointMake(group.minX + 0.25579 * group.width, group.minY + 0.25010 * group.height), controlPoint2: CGPointMake(group.minX + 0.25453 * group.width, group.minY + 0.25514 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.34791 * group.width, group.minY + 0.81549 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.36495 * group.width, group.minY + 0.83000 * group.height), controlPoint1: CGPointMake(group.minX + 0.34917 * group.width, group.minY + 0.82369 * group.height), controlPoint2: CGPointMake(group.minX + 0.35674 * group.width, group.minY + 0.83000 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.64005 * group.width, group.minY + 0.83000 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.65709 * group.width, group.minY + 0.81549 * group.height), controlPoint1: CGPointMake(group.minX + 0.64826 * group.width, group.minY + 0.83000 * group.height), controlPoint2: CGPointMake(group.minX + 0.65583 * group.width, group.minY + 0.82369 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.74984 * group.width, group.minY + 0.26019 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.74606 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.75047 * group.width, group.minY + 0.25514 * group.height), controlPoint2: CGPointMake(group.minX + 0.74921 * group.width, group.minY + 0.25010 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.71261 * group.width, group.minY + 0.27471 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.68927 * group.width, group.minY + 0.41353 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height), controlPoint1: CGPointMake(group.minX + 0.68422 * group.width, group.minY + 0.41668 * group.height), controlPoint2: CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.57317 * group.width, group.minY + 0.44950 * group.height), controlPoint1: CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height), controlPoint2: CGPointMake(group.minX + 0.62680 * group.width, group.minY + 0.45265 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.39460 * group.width, group.minY + 0.40406 * group.height), controlPoint1: CGPointMake(group.minX + 0.52017 * group.width, group.minY + 0.44634 * group.height), controlPoint2: CGPointMake(group.minX + 0.45391 * group.width, group.minY + 0.40911 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.31699 * group.width, group.minY + 0.42047 * group.height), controlPoint1: CGPointMake(group.minX + 0.34539 * group.width, group.minY + 0.39965 * group.height), controlPoint2: CGPointMake(group.minX + 0.32267 * group.width, group.minY + 0.41479 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.29239 * group.width, group.minY + 0.27471 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.71261 * group.width, group.minY + 0.27471 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.miterLimit = 4;
-
-        StyleKit.drinksWhiteColor.setFill()
-        bezier2Path.fill()
-
-
-        //// Oval 4 Drawing
-        var oval4Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.48300 + 0.2) + 0.3, group.minY + (group.height * 0.50800 + 0.1) + 0.4, (group.width * 0.52100 + 0.4) - (group.width * 0.48300 + 0.2) - 0.2, (group.height * 0.54600 + 0.3) - (group.height * 0.50800 + 0.1) - 0.2))
-        StyleKit.sodaColor.setFill()
-        oval4Path.fill()
-
-
-        //// Oval 6 Drawing
-        var oval6Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.45700 - 0.2) + 0.7, group.minY + (group.height * 0.48200 + 0.3) + 0.2, (group.width * 0.48300 + 0.2) - (group.width * 0.45700 - 0.2) - 0.4, (group.height * 0.50800 - 0.3) - (group.height * 0.48200 + 0.3) + 0.6))
-        StyleKit.sodaColor.setFill()
-        oval6Path.fill()
-
-
-        //// Oval 8 Drawing
-        var oval8Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.49300 + 0.2) + 0.3, group.minY + (group.height * 0.55400 - 0.3) + 0.8, (group.width * 0.54100 + 0.4) - (group.width * 0.49300 + 0.2) - 0.2, (group.height * 0.60200 - 0.1) - (group.height * 0.55400 - 0.3) - 0.2))
-        StyleKit.sodaColor.setFill()
-        oval8Path.fill()
-
-
-        //// Oval 10 Drawing
-        var oval10Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.53200 + 0.3) + 0.2, group.minY + (group.height * 0.52300 + 0.4) + 0.1, (group.width * 0.56800 - 0.3) - (group.width * 0.53200 + 0.3) + 0.6, (group.height * 0.55900 - 0.2) - (group.height * 0.52300 + 0.4) + 0.6))
-        StyleKit.sodaColor.setFill()
-        oval10Path.fill()
-
-
-        //// Oval 12 Drawing
-        var oval12Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.48200 + 0.3) + 0.2, group.minY + (group.height * 0.61400 + 0.1) + 0.4, (group.width * 0.51400 + 0.1) - (group.width * 0.48200 + 0.3) + 0.2, (group.height * 0.64600 - 0.1) - (group.height * 0.61400 + 0.1) + 0.2))
-        StyleKit.sodaColor.setFill()
-        oval12Path.fill()
-
-
-        //// Oval 14 Drawing
-        var oval14Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.46300 + 0.2) + 0.3, group.minY + (group.height * 0.65000 + 0.3) + 0.2, (group.width * 0.48100 + 0.4) - (group.width * 0.46300 + 0.2) - 0.2, (group.height * 0.66800 + 0.5) - (group.height * 0.65000 + 0.3) - 0.2))
-        StyleKit.sodaColor.setFill()
-        oval14Path.fill()
-
-
-        //// Oval 16 Drawing
-        var oval16Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.51300 + 0.2) + 0.3, group.minY + (group.height * 0.73600 - 0.3) + 0.8, (group.width * 0.54900 - 0.4) - (group.width * 0.51300 + 0.2) + 0.6, (group.height * 0.77200 + 0.1) - (group.height * 0.73600 - 0.3) - 0.4))
-        StyleKit.sodaColor.setFill()
-        oval16Path.fill()
-
-
-        //// Oval 18 Drawing
-        var oval18Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.48000 + 0.5), group.minY + (group.height * 0.70000 - 0.5) + 1, (group.width * 0.52000 + 0.5) - (group.width * 0.48000 + 0.5), (group.height * 0.74000 - 0.5) - (group.height * 0.70000 - 0.5)))
-        StyleKit.sodaColor.setFill()
-        oval18Path.fill()
-
-
-        //// Oval 20 Drawing
-        var oval20Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.52400 + 0.1) + 0.4, group.minY + (group.height * 0.69100 + 0.2) + 0.3, (group.width * 0.55000 + 0.5) - (group.width * 0.52400 + 0.1) - 0.4, (group.height * 0.71700 - 0.4) - (group.height * 0.69100 + 0.2) + 0.6))
-        StyleKit.sodaColor.setFill()
-        oval20Path.fill()
-    }
-
-    public class func drawEnergyDrink(#frame: CGRect) {
-
-
-        //// Subframes
-        let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
-
-
-        //// Group
-        //// Oval 2 Drawing
-        var oval2Path = UIBezierPath()
-        oval2Path.moveToPoint(CGPointMake(group.minX + 1.00000 * group.width, group.minY + 0.50000 * group.height))
-        oval2Path.addCurveToPoint(CGPointMake(group.minX + 0.50000 * group.width, group.minY + 0.00000 * group.height), controlPoint1: CGPointMake(group.minX + 1.00000 * group.width, group.minY + 0.22386 * group.height), controlPoint2: CGPointMake(group.minX + 0.77614 * group.width, group.minY + 0.00000 * group.height))
-        oval2Path.addCurveToPoint(CGPointMake(group.minX + 0.00000 * group.width, group.minY + 0.50000 * group.height), controlPoint1: CGPointMake(group.minX + 0.22386 * group.width, group.minY + -0.00000 * group.height), controlPoint2: CGPointMake(group.minX + 0.00000 * group.width, group.minY + 0.22386 * group.height))
-        oval2Path.addCurveToPoint(CGPointMake(group.minX + 0.50000 * group.width, group.minY + 1.00000 * group.height), controlPoint1: CGPointMake(group.minX + -0.00000 * group.width, group.minY + 0.77614 * group.height), controlPoint2: CGPointMake(group.minX + 0.22386 * group.width, group.minY + 1.00000 * group.height))
-        oval2Path.addCurveToPoint(CGPointMake(group.minX + 1.00000 * group.width, group.minY + 0.50000 * group.height), controlPoint1: CGPointMake(group.minX + 0.77614 * group.width, group.minY + 1.00000 * group.height), controlPoint2: CGPointMake(group.minX + 1.00000 * group.width, group.minY + 0.77614 * group.height))
-        oval2Path.closePath()
-        StyleKit.energyColor.setFill()
-        oval2Path.fill()
-
-
-        //// Bezier 2 Drawing
-        var bezier2Path = UIBezierPath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.39683 * group.width, group.minY + 0.21500 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.60317 * group.width, group.minY + 0.21500 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.62000 * group.width, group.minY + 0.19750 * group.height), controlPoint1: CGPointMake(group.minX + 0.61252 * group.width, group.minY + 0.21500 * group.height), controlPoint2: CGPointMake(group.minX + 0.62000 * group.width, group.minY + 0.20722 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.60317 * group.width, group.minY + 0.18000 * group.height), controlPoint1: CGPointMake(group.minX + 0.62000 * group.width, group.minY + 0.18778 * group.height), controlPoint2: CGPointMake(group.minX + 0.61252 * group.width, group.minY + 0.18000 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.39683 * group.width, group.minY + 0.18000 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.38000 * group.width, group.minY + 0.19750 * group.height), controlPoint1: CGPointMake(group.minX + 0.38748 * group.width, group.minY + 0.18000 * group.height), controlPoint2: CGPointMake(group.minX + 0.38000 * group.width, group.minY + 0.18778 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.39683 * group.width, group.minY + 0.21500 * group.height), controlPoint1: CGPointMake(group.minX + 0.38000 * group.width, group.minY + 0.20722 * group.height), controlPoint2: CGPointMake(group.minX + 0.38748 * group.width, group.minY + 0.21500 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.miterLimit = 4;
-
-        StyleKit.drinksWhiteColor.setFill()
-        bezier2Path.fill()
-
-
-        //// Bezier 4 Drawing
-        var bezier4Path = UIBezierPath()
-        bezier4Path.moveToPoint(CGPointMake(group.minX + 0.65937 * group.width, group.minY + 0.34942 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.61411 * group.width, group.minY + 0.25506 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.59839 * group.width, group.minY + 0.24500 * group.height), controlPoint1: CGPointMake(group.minX + 0.61096 * group.width, group.minY + 0.24940 * group.height), controlPoint2: CGPointMake(group.minX + 0.60530 * group.width, group.minY + 0.24500 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.40287 * group.width, group.minY + 0.24500 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.38715 * group.width, group.minY + 0.25506 * group.height), controlPoint1: CGPointMake(group.minX + 0.39595 * group.width, group.minY + 0.24500 * group.height), controlPoint2: CGPointMake(group.minX + 0.39029 * group.width, group.minY + 0.24877 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.34189 * group.width, group.minY + 0.34942 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.35697 * group.height), controlPoint1: CGPointMake(group.minX + 0.34063 * group.width, group.minY + 0.35194 * group.height), controlPoint2: CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.35445 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.81302 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.35697 * group.width, group.minY + 0.83000 * group.height), controlPoint1: CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.82245 * group.height), controlPoint2: CGPointMake(group.minX + 0.34754 * group.width, group.minY + 0.83000 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.64303 * group.width, group.minY + 0.83000 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.66000 * group.width, group.minY + 0.81302 * group.height), controlPoint1: CGPointMake(group.minX + 0.65246 * group.width, group.minY + 0.83000 * group.height), controlPoint2: CGPointMake(group.minX + 0.66000 * group.width, group.minY + 0.82245 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.66000 * group.width, group.minY + 0.35634 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.65937 * group.width, group.minY + 0.34942 * group.height))
-        bezier4Path.closePath()
-        bezier4Path.moveToPoint(CGPointMake(group.minX + 0.41356 * group.width, group.minY + 0.27897 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.58770 * group.width, group.minY + 0.27897 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.62668 * group.width, group.minY + 0.36011 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.62668 * group.width, group.minY + 0.45000 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.37521 * group.width, group.minY + 0.45000 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.37521 * group.width, group.minY + 0.36074 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.41356 * group.width, group.minY + 0.27897 * group.height))
-        bezier4Path.closePath()
-        bezier4Path.moveToPoint(CGPointMake(group.minX + 0.37521 * group.width, group.minY + 0.79603 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.37521 * group.width, group.minY + 0.69000 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.62668 * group.width, group.minY + 0.69000 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.62668 * group.width, group.minY + 0.79603 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.37521 * group.width, group.minY + 0.79603 * group.height))
-        bezier4Path.closePath()
-        bezier4Path.miterLimit = 4;
-
-        StyleKit.drinksWhiteColor.setFill()
-        bezier4Path.fill()
-
-
-        //// Bezier 6 Drawing
-        var bezier6Path = UIBezierPath()
-        bezier6Path.moveToPoint(CGPointMake(group.minX + 0.51914 * group.width, group.minY + 0.47290 * group.height))
-        bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.44500 * group.width, group.minY + 0.58479 * group.height))
-        bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.50638 * group.width, group.minY + 0.58479 * group.height))
-        bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.47356 * group.width, group.minY + 0.67290 * group.height))
-        bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.55500 * group.width, group.minY + 0.56521 * group.height))
-        bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.49058 * group.width, group.minY + 0.56521 * group.height))
-        bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.51914 * group.width, group.minY + 0.47290 * group.height))
-        bezier6Path.closePath()
-        bezier6Path.miterLimit = 4;
-
-        StyleKit.energyColor.setFill()
-        bezier6Path.fill()
-    }
-
-    public class func drawAlcoholDrink(#frame: CGRect) {
-
-
-        //// Subframes
-        let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
-
-
-        //// Group
-        //// Oval 2 Drawing
-        var oval2Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
-        StyleKit.alcoholColor.setFill()
-        oval2Path.fill()
-
-
-        //// Bezier 2 Drawing
-        var bezier2Path = UIBezierPath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.59006 * group.width, group.minY + 0.81096 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.50601 * group.width, group.minY + 0.81096 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.50601 * group.width, group.minY + 0.65460 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.50601 * group.width, group.minY + 0.65334 * group.height), controlPoint1: CGPointMake(group.minX + 0.50601 * group.width, group.minY + 0.65397 * group.height), controlPoint2: CGPointMake(group.minX + 0.50601 * group.width, group.minY + 0.65397 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.60216 * group.width, group.minY + 0.61110 * group.height), controlPoint1: CGPointMake(group.minX + 0.54713 * group.width, group.minY + 0.65019 * group.height), controlPoint2: CGPointMake(group.minX + 0.57918 * group.width, group.minY + 0.63632 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.63481 * group.width, group.minY + 0.51590 * group.height), controlPoint1: CGPointMake(group.minX + 0.63662 * group.width, group.minY + 0.57264 * group.height), controlPoint2: CGPointMake(group.minX + 0.63541 * group.width, group.minY + 0.52284 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.63481 * group.width, group.minY + 0.21202 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.61848 * group.width, group.minY + 0.19500 * group.height), controlPoint1: CGPointMake(group.minX + 0.63481 * group.width, group.minY + 0.20257 * group.height), controlPoint2: CGPointMake(group.minX + 0.62755 * group.width, group.minY + 0.19500 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.36149 * group.width, group.minY + 0.19500 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.34516 * group.width, group.minY + 0.21202 * group.height), controlPoint1: CGPointMake(group.minX + 0.35242 * group.width, group.minY + 0.19500 * group.height), controlPoint2: CGPointMake(group.minX + 0.34516 * group.width, group.minY + 0.20257 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.34516 * group.width, group.minY + 0.51590 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.37781 * group.width, group.minY + 0.61110 * group.height), controlPoint1: CGPointMake(group.minX + 0.34456 * group.width, group.minY + 0.52284 * group.height), controlPoint2: CGPointMake(group.minX + 0.34395 * group.width, group.minY + 0.57264 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.47396 * group.width, group.minY + 0.65334 * group.height), controlPoint1: CGPointMake(group.minX + 0.40019 * group.width, group.minY + 0.63632 * group.height), controlPoint2: CGPointMake(group.minX + 0.43284 * group.width, group.minY + 0.65019 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.47396 * group.width, group.minY + 0.65460 * group.height), controlPoint1: CGPointMake(group.minX + 0.47396 * group.width, group.minY + 0.65397 * group.height), controlPoint2: CGPointMake(group.minX + 0.47396 * group.width, group.minY + 0.65397 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.47396 * group.width, group.minY + 0.81096 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.38930 * group.width, group.minY + 0.81096 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.37298 * group.width, group.minY + 0.82798 * group.height), controlPoint1: CGPointMake(group.minX + 0.38023 * group.width, group.minY + 0.81096 * group.height), controlPoint2: CGPointMake(group.minX + 0.37298 * group.width, group.minY + 0.81852 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.38930 * group.width, group.minY + 0.84500 * group.height), controlPoint1: CGPointMake(group.minX + 0.37298 * group.width, group.minY + 0.83743 * group.height), controlPoint2: CGPointMake(group.minX + 0.38023 * group.width, group.minY + 0.84500 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.59006 * group.width, group.minY + 0.84500 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.60639 * group.width, group.minY + 0.82798 * group.height), controlPoint1: CGPointMake(group.minX + 0.59913 * group.width, group.minY + 0.84500 * group.height), controlPoint2: CGPointMake(group.minX + 0.60639 * group.width, group.minY + 0.83743 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.59006 * group.width, group.minY + 0.81096 * group.height), controlPoint1: CGPointMake(group.minX + 0.60639 * group.width, group.minY + 0.81852 * group.height), controlPoint2: CGPointMake(group.minX + 0.59913 * group.width, group.minY + 0.81096 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.60155 * group.width, group.minY + 0.22904 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.60155 * group.width, group.minY + 0.31479 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.59611 * group.width, group.minY + 0.31920 * group.height), controlPoint1: CGPointMake(group.minX + 0.59853 * group.width, group.minY + 0.31668 * group.height), controlPoint2: CGPointMake(group.minX + 0.59611 * group.width, group.minY + 0.31920 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.53080 * group.width, group.minY + 0.33811 * group.height), controlPoint1: CGPointMake(group.minX + 0.59611 * group.width, group.minY + 0.31920 * group.height), controlPoint2: CGPointMake(group.minX + 0.56346 * group.width, group.minY + 0.34000 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.42256 * group.width, group.minY + 0.30911 * group.height), controlPoint1: CGPointMake(group.minX + 0.49815 * group.width, group.minY + 0.33622 * group.height), controlPoint2: CGPointMake(group.minX + 0.45824 * group.width, group.minY + 0.31226 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.37781 * group.width, group.minY + 0.31731 * group.height), controlPoint1: CGPointMake(group.minX + 0.39716 * group.width, group.minY + 0.30659 * group.height), controlPoint2: CGPointMake(group.minX + 0.38326 * group.width, group.minY + 0.31353 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.37781 * group.width, group.minY + 0.22904 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.60155 * group.width, group.minY + 0.22904 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.miterLimit = 4;
-
-        StyleKit.drinksWhiteColor.setFill()
-        bezier2Path.fill()
-    }
-
-    public class func drawSportDrink(#frame: CGRect) {
-
-
-        //// Subframes
-        let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
-
-
-        //// Group
-        //// Oval 2 Drawing
-        var oval2Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
-        StyleKit.sportColor.setFill()
-        oval2Path.fill()
-
-
-        //// Bezier 2 Drawing
-        var bezier2Path = UIBezierPath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.73284 * group.width, group.minY + 0.14531 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.51488 * group.width, group.minY + 0.15546 * group.height), controlPoint1: CGPointMake(group.minX + 0.66567 * group.width, group.minY + 0.07040 * group.height), controlPoint2: CGPointMake(group.minX + 0.53959 * group.width, group.minY + 0.14023 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.51488 * group.width, group.minY + 0.13642 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.49777 * group.width, group.minY + 0.11928 * group.height), controlPoint1: CGPointMake(group.minX + 0.51488 * group.width, group.minY + 0.12690 * group.height), controlPoint2: CGPointMake(group.minX + 0.50727 * group.width, group.minY + 0.11928 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.48066 * group.width, group.minY + 0.13642 * group.height), controlPoint1: CGPointMake(group.minX + 0.48826 * group.width, group.minY + 0.11928 * group.height), controlPoint2: CGPointMake(group.minX + 0.48066 * group.width, group.minY + 0.12690 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.48066 * group.width, group.minY + 0.18086 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.39702 * group.width, group.minY + 0.18086 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.37992 * group.width, group.minY + 0.19799 * group.height), controlPoint1: CGPointMake(group.minX + 0.38752 * group.width, group.minY + 0.18086 * group.height), controlPoint2: CGPointMake(group.minX + 0.37992 * group.width, group.minY + 0.18847 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.39702 * group.width, group.minY + 0.21513 * group.height), controlPoint1: CGPointMake(group.minX + 0.37992 * group.width, group.minY + 0.20752 * group.height), controlPoint2: CGPointMake(group.minX + 0.38752 * group.width, group.minY + 0.21513 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.60485 * group.width, group.minY + 0.21513 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.62196 * group.width, group.minY + 0.19799 * group.height), controlPoint1: CGPointMake(group.minX + 0.61435 * group.width, group.minY + 0.21513 * group.height), controlPoint2: CGPointMake(group.minX + 0.62196 * group.width, group.minY + 0.20752 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.60485 * group.width, group.minY + 0.18086 * group.height), controlPoint1: CGPointMake(group.minX + 0.62196 * group.width, group.minY + 0.18847 * group.height), controlPoint2: CGPointMake(group.minX + 0.61435 * group.width, group.minY + 0.18086 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.54022 * group.width, group.minY + 0.18086 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.70749 * group.width, group.minY + 0.16879 * group.height), controlPoint1: CGPointMake(group.minX + 0.57127 * group.width, group.minY + 0.16372 * group.height), controlPoint2: CGPointMake(group.minX + 0.66314 * group.width, group.minY + 0.11865 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.65047 * group.width, group.minY + 0.33193 * group.height), controlPoint1: CGPointMake(group.minX + 0.74868 * group.width, group.minY + 0.21450 * group.height), controlPoint2: CGPointMake(group.minX + 0.68025 * group.width, group.minY + 0.29956 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.61372 * group.width, group.minY + 0.25512 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.59788 * group.width, group.minY + 0.24497 * group.height), controlPoint1: CGPointMake(group.minX + 0.61055 * group.width, group.minY + 0.24941 * group.height), controlPoint2: CGPointMake(group.minX + 0.60485 * group.width, group.minY + 0.24497 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.40273 * group.width, group.minY + 0.24497 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.38689 * group.width, group.minY + 0.25512 * group.height), controlPoint1: CGPointMake(group.minX + 0.39576 * group.width, group.minY + 0.24497 * group.height), controlPoint2: CGPointMake(group.minX + 0.39005 * group.width, group.minY + 0.24878 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.34190 * group.width, group.minY + 0.34971 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.35732 * group.height), controlPoint1: CGPointMake(group.minX + 0.34063 * group.width, group.minY + 0.35225 * group.height), controlPoint2: CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.35479 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.81310 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.35711 * group.width, group.minY + 0.83024 * group.height), controlPoint1: CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.82262 * group.height), controlPoint2: CGPointMake(group.minX + 0.34760 * group.width, group.minY + 0.83024 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.64286 * group.width, group.minY + 0.83024 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.65997 * group.width, group.minY + 0.81310 * group.height), controlPoint1: CGPointMake(group.minX + 0.65237 * group.width, group.minY + 0.83024 * group.height), controlPoint2: CGPointMake(group.minX + 0.65997 * group.width, group.minY + 0.82262 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.65997 * group.width, group.minY + 0.37129 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.66124 * group.width, group.minY + 0.37065 * group.height), controlPoint1: CGPointMake(group.minX + 0.66061 * group.width, group.minY + 0.37129 * group.height), controlPoint2: CGPointMake(group.minX + 0.66061 * group.width, group.minY + 0.37065 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.73284 * group.width, group.minY + 0.14531 * group.height), controlPoint1: CGPointMake(group.minX + 0.66757 * group.width, group.minY + 0.36431 * group.height), controlPoint2: CGPointMake(group.minX + 0.80697 * group.width, group.minY + 0.22846 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.moveToPoint(CGPointMake(group.minX + 0.41350 * group.width, group.minY + 0.27988 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.58711 * group.width, group.minY + 0.27988 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.62576 * group.width, group.minY + 0.36113 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.62576 * group.width, group.minY + 0.41192 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.62132 * group.width, group.minY + 0.41509 * group.height), controlPoint1: CGPointMake(group.minX + 0.62322 * group.width, group.minY + 0.41382 * group.height), controlPoint2: CGPointMake(group.minX + 0.62132 * group.width, group.minY + 0.41509 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.54085 * group.width, group.minY + 0.43731 * group.height), controlPoint1: CGPointMake(group.minX + 0.62132 * group.width, group.minY + 0.41509 * group.height), controlPoint2: CGPointMake(group.minX + 0.58077 * group.width, group.minY + 0.43985 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.40716 * group.width, group.minY + 0.40303 * group.height), controlPoint1: CGPointMake(group.minX + 0.50094 * group.width, group.minY + 0.43477 * group.height), controlPoint2: CGPointMake(group.minX + 0.45151 * group.width, group.minY + 0.40684 * group.height))
-        bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.37485 * group.width, group.minY + 0.40430 * group.height), controlPoint1: CGPointMake(group.minX + 0.39386 * group.width, group.minY + 0.40176 * group.height), controlPoint2: CGPointMake(group.minX + 0.38309 * group.width, group.minY + 0.40239 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.37485 * group.width, group.minY + 0.36113 * group.height))
-        bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.41350 * group.width, group.minY + 0.27988 * group.height))
-        bezier2Path.closePath()
-        bezier2Path.miterLimit = 4;
-
-        StyleKit.drinksWhiteColor.setFill()
-        bezier2Path.fill()
-
-
-        //// Bezier 4 Drawing
-        var bezier4Path = UIBezierPath()
-        bezier4Path.moveToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.53500 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.42279 * group.width, group.minY + 0.53500 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.44000 * group.width, group.minY + 0.51750 * group.height), controlPoint1: CGPointMake(group.minX + 0.43235 * group.width, group.minY + 0.53500 * group.height), controlPoint2: CGPointMake(group.minX + 0.44000 * group.width, group.minY + 0.52722 * group.height))
-        bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.42279 * group.width, group.minY + 0.50000 * group.height), controlPoint1: CGPointMake(group.minX + 0.44000 * group.width, group.minY + 0.50778 * group.height), controlPoint2: CGPointMake(group.minX + 0.43235 * group.width, group.minY + 0.50000 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.50000 * group.height))
-        bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.53500 * group.height))
-        bezier4Path.closePath()
-        bezier4Path.miterLimit = 4;
-
-        StyleKit.sportColor.setFill()
-        bezier4Path.fill()
-
-
-        //// Bezier 6 Drawing
-        var bezier6Path = UIBezierPath()
-        bezier6Path.moveToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.60500 * group.height))
-        bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.46773 * group.width, group.minY + 0.60500 * group.height))
-        bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.48500 * group.width, group.minY + 0.58750 * group.height), controlPoint1: CGPointMake(group.minX + 0.47733 * group.width, group.minY + 0.60500 * group.height), controlPoint2: CGPointMake(group.minX + 0.48500 * group.width, group.minY + 0.59722 * group.height))
-        bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.46773 * group.width, group.minY + 0.57000 * group.height), controlPoint1: CGPointMake(group.minX + 0.48500 * group.width, group.minY + 0.57778 * group.height), controlPoint2: CGPointMake(group.minX + 0.47733 * group.width, group.minY + 0.57000 * group.height))
-        bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.57000 * group.height))
-        bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.60500 * group.height))
-        bezier6Path.closePath()
-        bezier6Path.miterLimit = 4;
-
-        StyleKit.sportColor.setFill()
-        bezier6Path.fill()
-
-
-        //// Bezier 8 Drawing
-        var bezier8Path = UIBezierPath()
-        bezier8Path.moveToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.67500 * group.height))
-        bezier8Path.addLineToPoint(CGPointMake(group.minX + 0.42279 * group.width, group.minY + 0.67500 * group.height))
-        bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.44000 * group.width, group.minY + 0.65750 * group.height), controlPoint1: CGPointMake(group.minX + 0.43235 * group.width, group.minY + 0.67500 * group.height), controlPoint2: CGPointMake(group.minX + 0.44000 * group.width, group.minY + 0.66722 * group.height))
-        bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.42279 * group.width, group.minY + 0.64000 * group.height), controlPoint1: CGPointMake(group.minX + 0.44000 * group.width, group.minY + 0.64778 * group.height), controlPoint2: CGPointMake(group.minX + 0.43235 * group.width, group.minY + 0.64000 * group.height))
-        bezier8Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.64000 * group.height))
-        bezier8Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.67500 * group.height))
-        bezier8Path.closePath()
-        bezier8Path.miterLimit = 4;
-
-        StyleKit.sportColor.setFill()
-        bezier8Path.fill()
-
-
-        //// Bezier 10 Drawing
-        var bezier10Path = UIBezierPath()
-        bezier10Path.moveToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.74500 * group.height))
-        bezier10Path.addLineToPoint(CGPointMake(group.minX + 0.46773 * group.width, group.minY + 0.74500 * group.height))
-        bezier10Path.addCurveToPoint(CGPointMake(group.minX + 0.48500 * group.width, group.minY + 0.72750 * group.height), controlPoint1: CGPointMake(group.minX + 0.47733 * group.width, group.minY + 0.74500 * group.height), controlPoint2: CGPointMake(group.minX + 0.48500 * group.width, group.minY + 0.73722 * group.height))
-        bezier10Path.addCurveToPoint(CGPointMake(group.minX + 0.46773 * group.width, group.minY + 0.71000 * group.height), controlPoint1: CGPointMake(group.minX + 0.48500 * group.width, group.minY + 0.71778 * group.height), controlPoint2: CGPointMake(group.minX + 0.47733 * group.width, group.minY + 0.71000 * group.height))
-        bezier10Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.71000 * group.height))
-        bezier10Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.74500 * group.height))
-        bezier10Path.closePath()
-        bezier10Path.miterLimit = 4;
-
-        StyleKit.sportColor.setFill()
-        bezier10Path.fill()
-    }
-
+  
+  private struct Cache {
+    static var drinksWhiteColor: UIColor = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+    static var waterColor: UIColor = UIColor(red: 0.000, green: 0.616, blue: 0.788, alpha: 1.000)
+    static var coffeeColor: UIColor = UIColor(red: 0.569, green: 0.298, blue: 0.220, alpha: 1.000)
+    static var teaColor: UIColor = UIColor(red: 0.890, green: 0.545, blue: 0.102, alpha: 1.000)
+    static var juiceColor: UIColor = UIColor(red: 0.949, green: 0.396, blue: 0.133, alpha: 1.000)
+    static var milkColor: UIColor = UIColor(red: 0.306, green: 0.788, blue: 0.961, alpha: 1.000)
+    static var sodaColor: UIColor = UIColor(red: 0.314, green: 0.761, blue: 0.733, alpha: 1.000)
+    static var energyColor: UIColor = UIColor(red: 0.773, green: 0.404, blue: 0.663, alpha: 1.000)
+    static var alcoholColor: UIColor = UIColor(red: 0.937, green: 0.255, blue: 0.224, alpha: 1.000)
+    static var sportColor: UIColor = UIColor(red: 0.427, green: 0.753, blue: 0.404, alpha: 1.000)
+    static var pageBackgroundColor: UIColor = UIColor(red: 0.945, green: 0.945, blue: 0.949, alpha: 1.000)
+    static var barBackgroundColor: UIColor = UIColor(red: 0.000, green: 0.612, blue: 0.784, alpha: 1.000)
+    static var barTextColor: UIColor = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+    static var mainMenuBackgroundColor: UIColor = UIColor(red: 0.200, green: 0.231, blue: 0.255, alpha: 1.000)
+    static var mainMenuTextColor: UIColor = UIColor(red: 0.000, green: 0.612, blue: 0.784, alpha: 1.000)
+  }
+  
+  //// Colors
+  
+  public class var drinksWhiteColor: UIColor { return Cache.drinksWhiteColor }
+  public class var waterColor: UIColor { return Cache.waterColor }
+  public class var coffeeColor: UIColor { return Cache.coffeeColor }
+  public class var teaColor: UIColor { return Cache.teaColor }
+  public class var juiceColor: UIColor { return Cache.juiceColor }
+  public class var milkColor: UIColor { return Cache.milkColor }
+  public class var sodaColor: UIColor { return Cache.sodaColor }
+  public class var energyColor: UIColor { return Cache.energyColor }
+  public class var alcoholColor: UIColor { return Cache.alcoholColor }
+  public class var sportColor: UIColor { return Cache.sportColor }
+  public class var pageBackgroundColor: UIColor { return Cache.pageBackgroundColor }
+  public class var barBackgroundColor: UIColor { return Cache.barBackgroundColor }
+  public class var barTextColor: UIColor { return Cache.barTextColor }
+  public class var mainMenuBackgroundColor: UIColor { return Cache.mainMenuBackgroundColor }
+  public class var mainMenuTextColor: UIColor { return Cache.mainMenuTextColor }
+  
+  //// Drawing Methods
+  
+  public class func drawWaterDrink(#frame: CGRect) {
+    
+    
+    //// Subframes
+    let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
+    
+    
+    //// Group
+    //// Oval 2 Drawing
+    var oval2Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
+    StyleKit.waterColor.setFill()
+    oval2Path.fill()
+    
+    
+    //// Bezier 2 Drawing
+    var bezier2Path = UIBezierPath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.74606 * group.width, group.minY + 0.24631 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.73281 * group.width, group.minY + 0.24000 * group.height), controlPoint1: CGPointMake(group.minX + 0.74290 * group.width, group.minY + 0.24252 * group.height), controlPoint2: CGPointMake(group.minX + 0.73785 * group.width, group.minY + 0.24000 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.27219 * group.width, group.minY + 0.24000 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25894 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.26715 * group.width, group.minY + 0.24000 * group.height), controlPoint2: CGPointMake(group.minX + 0.26210 * group.width, group.minY + 0.24252 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25516 * group.width, group.minY + 0.26019 * group.height), controlPoint1: CGPointMake(group.minX + 0.25579 * group.width, group.minY + 0.25010 * group.height), controlPoint2: CGPointMake(group.minX + 0.25453 * group.width, group.minY + 0.25514 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.34791 * group.width, group.minY + 0.81549 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.36495 * group.width, group.minY + 0.83000 * group.height), controlPoint1: CGPointMake(group.minX + 0.34917 * group.width, group.minY + 0.82369 * group.height), controlPoint2: CGPointMake(group.minX + 0.35674 * group.width, group.minY + 0.83000 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.64005 * group.width, group.minY + 0.83000 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.65709 * group.width, group.minY + 0.81549 * group.height), controlPoint1: CGPointMake(group.minX + 0.64826 * group.width, group.minY + 0.83000 * group.height), controlPoint2: CGPointMake(group.minX + 0.65583 * group.width, group.minY + 0.82369 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.74984 * group.width, group.minY + 0.26019 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.74606 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.75047 * group.width, group.minY + 0.25514 * group.height), controlPoint2: CGPointMake(group.minX + 0.74921 * group.width, group.minY + 0.25010 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.71261 * group.width, group.minY + 0.27471 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.68927 * group.width, group.minY + 0.41353 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height), controlPoint1: CGPointMake(group.minX + 0.68422 * group.width, group.minY + 0.41668 * group.height), controlPoint2: CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.57317 * group.width, group.minY + 0.44950 * group.height), controlPoint1: CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height), controlPoint2: CGPointMake(group.minX + 0.62680 * group.width, group.minY + 0.45265 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.39460 * group.width, group.minY + 0.40406 * group.height), controlPoint1: CGPointMake(group.minX + 0.52017 * group.width, group.minY + 0.44634 * group.height), controlPoint2: CGPointMake(group.minX + 0.45391 * group.width, group.minY + 0.40911 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.31699 * group.width, group.minY + 0.42047 * group.height), controlPoint1: CGPointMake(group.minX + 0.34539 * group.width, group.minY + 0.39965 * group.height), controlPoint2: CGPointMake(group.minX + 0.32267 * group.width, group.minY + 0.41479 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.29239 * group.width, group.minY + 0.27471 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.71261 * group.width, group.minY + 0.27471 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.miterLimit = 4;
+    
+    StyleKit.drinksWhiteColor.setFill()
+    bezier2Path.fill()
+  }
+  
+  public class func drawCoffeeDrink(#frame: CGRect) {
+    
+    
+    //// Subframes
+    let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
+    
+    
+    //// Group
+    //// Oval 2 Drawing
+    var oval2Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
+    StyleKit.coffeeColor.setFill()
+    oval2Path.fill()
+    
+    
+    //// Group 2
+    //// Bezier 2 Drawing
+    var bezier2Path = UIBezierPath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.83921 * group.width, group.minY + 0.45709 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.74520 * group.width, group.minY + 0.40246 * group.height), controlPoint1: CGPointMake(group.minX + 0.83163 * group.width, group.minY + 0.41284 * group.height), controlPoint2: CGPointMake(group.minX + 0.78182 * group.width, group.minY + 0.40178 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.74454 * group.width, group.minY + 0.35685 * group.height), controlPoint1: CGPointMake(group.minX + 0.74520 * group.width, group.minY + 0.37965 * group.height), controlPoint2: CGPointMake(group.minX + 0.74454 * group.width, group.minY + 0.36144 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.72756 * group.width, group.minY + 0.34000 * group.height), controlPoint1: CGPointMake(group.minX + 0.74388 * group.width, group.minY + 0.34715 * group.height), controlPoint2: CGPointMake(group.minX + 0.73630 * group.width, group.minY + 0.34000 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.27779 * group.width, group.minY + 0.34000 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.26080 * group.width, group.minY + 0.35685 * group.height), controlPoint1: CGPointMake(group.minX + 0.26839 * group.width, group.minY + 0.34000 * group.height), controlPoint2: CGPointMake(group.minX + 0.26080 * group.width, group.minY + 0.34715 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.27779 * group.width, group.minY + 0.53129 * group.height), controlPoint1: CGPointMake(group.minX + 0.26014 * group.width, group.minY + 0.37046 * group.height), controlPoint2: CGPointMake(group.minX + 0.25569 * group.width, group.minY + 0.49096 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.40776 * group.width, group.minY + 0.67000 * group.height), controlPoint1: CGPointMake(group.minX + 0.29231 * group.width, group.minY + 0.55801 * group.height), controlPoint2: CGPointMake(group.minX + 0.37428 * group.width, group.minY + 0.67000 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.59825 * group.width, group.minY + 0.67000 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.70480 * group.width, group.minY + 0.56652 * group.height), controlPoint1: CGPointMake(group.minX + 0.62283 * group.width, group.minY + 0.67000 * group.height), controlPoint2: CGPointMake(group.minX + 0.67395 * group.width, group.minY + 0.60873 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.70546 * group.width, group.minY + 0.56652 * group.height), controlPoint1: CGPointMake(group.minX + 0.70480 * group.width, group.minY + 0.56652 * group.height), controlPoint2: CGPointMake(group.minX + 0.70480 * group.width, group.minY + 0.56652 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.82091 * group.width, group.minY + 0.51581 * group.height), controlPoint1: CGPointMake(group.minX + 0.75032 * group.width, group.minY + 0.56652 * group.height), controlPoint2: CGPointMake(group.minX + 0.79567 * group.width, group.minY + 0.54695 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.83921 * group.width, group.minY + 0.45709 * group.height), controlPoint1: CGPointMake(group.minX + 0.83608 * group.width, group.minY + 0.49675 * group.height), controlPoint2: CGPointMake(group.minX + 0.84235 * group.width, group.minY + 0.47598 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.29429 * group.width, group.minY + 0.37506 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.71007 * group.width, group.minY + 0.37506 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.71007 * group.width, group.minY + 0.40961 * group.height), controlPoint1: CGPointMake(group.minX + 0.71007 * group.width, group.minY + 0.38612 * group.height), controlPoint2: CGPointMake(group.minX + 0.71007 * group.width, group.minY + 0.39786 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.68484 * group.width, group.minY + 0.42135 * group.height), controlPoint1: CGPointMake(group.minX + 0.70315 * group.width, group.minY + 0.41352 * group.height), controlPoint2: CGPointMake(group.minX + 0.69424 * group.width, group.minY + 0.41744 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.56939 * group.width, group.minY + 0.44416 * group.height), controlPoint1: CGPointMake(group.minX + 0.68484 * group.width, group.minY + 0.42135 * group.height), controlPoint2: CGPointMake(group.minX + 0.62612 * group.width, group.minY + 0.44739 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.38021 * group.width, group.minY + 0.40893 * group.height), controlPoint1: CGPointMake(group.minX + 0.51265 * group.width, group.minY + 0.44092 * group.height), controlPoint2: CGPointMake(group.minX + 0.44322 * group.width, group.minY + 0.41352 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.29445 * group.width, group.minY + 0.41676 * group.height), controlPoint1: CGPointMake(group.minX + 0.33288 * group.width, group.minY + 0.40569 * group.height), controlPoint2: CGPointMake(group.minX + 0.30517 * group.width, group.minY + 0.41284 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.29429 * group.width, group.minY + 0.37506 * group.height), controlPoint1: CGPointMake(group.minX + 0.29429 * group.width, group.minY + 0.40297 * group.height), controlPoint2: CGPointMake(group.minX + 0.29429 * group.width, group.minY + 0.38799 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.79452 * group.width, group.minY + 0.49215 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.72888 * group.width, group.minY + 0.52789 * group.height), controlPoint1: CGPointMake(group.minX + 0.78198 * group.width, group.minY + 0.50713 * group.height), controlPoint2: CGPointMake(group.minX + 0.75790 * group.width, group.minY + 0.52278 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.74405 * group.width, group.minY + 0.43735 * group.height), controlPoint1: CGPointMake(group.minX + 0.73828 * group.width, group.minY + 0.50764 * group.height), controlPoint2: CGPointMake(group.minX + 0.74207 * group.width, group.minY + 0.47190 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.80524 * group.width, group.minY + 0.46203 * group.height), controlPoint1: CGPointMake(group.minX + 0.76302 * group.width, group.minY + 0.43735 * group.height), controlPoint2: CGPointMake(group.minX + 0.80145 * group.width, group.minY + 0.43922 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.79452 * group.width, group.minY + 0.49215 * group.height), controlPoint1: CGPointMake(group.minX + 0.80639 * group.width, group.minY + 0.47207 * group.height), controlPoint2: CGPointMake(group.minX + 0.80260 * group.width, group.minY + 0.48245 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.miterLimit = 4;
+    
+    StyleKit.drinksWhiteColor.setFill()
+    bezier2Path.fill()
+    
+    
+    //// Bezier 4 Drawing
+    var bezier4Path = UIBezierPath()
+    bezier4Path.moveToPoint(CGPointMake(group.minX + 0.75307 * group.width, group.minY + 0.70500 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.24693 * group.width, group.minY + 0.70500 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.23000 * group.width, group.minY + 0.72250 * group.height), controlPoint1: CGPointMake(group.minX + 0.23756 * group.width, group.minY + 0.70500 * group.height), controlPoint2: CGPointMake(group.minX + 0.23000 * group.width, group.minY + 0.71282 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.24693 * group.width, group.minY + 0.74000 * group.height), controlPoint1: CGPointMake(group.minX + 0.23000 * group.width, group.minY + 0.73218 * group.height), controlPoint2: CGPointMake(group.minX + 0.23756 * group.width, group.minY + 0.74000 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.75307 * group.width, group.minY + 0.74000 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.77000 * group.width, group.minY + 0.72250 * group.height), controlPoint1: CGPointMake(group.minX + 0.76244 * group.width, group.minY + 0.74000 * group.height), controlPoint2: CGPointMake(group.minX + 0.77000 * group.width, group.minY + 0.73218 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.75307 * group.width, group.minY + 0.70500 * group.height), controlPoint1: CGPointMake(group.minX + 0.77016 * group.width, group.minY + 0.71282 * group.height), controlPoint2: CGPointMake(group.minX + 0.76260 * group.width, group.minY + 0.70500 * group.height))
+    bezier4Path.closePath()
+    bezier4Path.miterLimit = 4;
+    
+    StyleKit.drinksWhiteColor.setFill()
+    bezier4Path.fill()
+    
+    
+    
+    
+    //// Group 3
+    //// Bezier 6 Drawing
+    var bezier6Path = UIBezierPath()
+    bezier6Path.moveToPoint(CGPointMake(group.minX + 0.54792 * group.width, group.minY + 0.59580 * group.height))
+    bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.51321 * group.width, group.minY + 0.55068 * group.height), controlPoint1: CGPointMake(group.minX + 0.54347 * group.width, group.minY + 0.57482 * group.height), controlPoint2: CGPointMake(group.minX + 0.52964 * group.width, group.minY + 0.56156 * group.height))
+    bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.49063 * group.width, group.minY + 0.53458 * group.height), controlPoint1: CGPointMake(group.minX + 0.50553 * group.width, group.minY + 0.54547 * group.height), controlPoint2: CGPointMake(group.minX + 0.49785 * group.width, group.minY + 0.54026 * group.height))
+    bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.47497 * group.width, group.minY + 0.48394 * group.height), controlPoint1: CGPointMake(group.minX + 0.47420 * group.width, group.minY + 0.52149 * group.height), controlPoint2: CGPointMake(group.minX + 0.47174 * group.width, group.minY + 0.50350 * group.height))
+    bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.47911 * group.width, group.minY + 0.48062 * group.height), controlPoint1: CGPointMake(group.minX + 0.47543 * group.width, group.minY + 0.48173 * group.height), controlPoint2: CGPointMake(group.minX + 0.47758 * group.width, group.minY + 0.48094 * group.height))
+    bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.51260 * group.width, group.minY + 0.48693 * group.height), controlPoint1: CGPointMake(group.minX + 0.49094 * group.width, group.minY + 0.47873 * group.height), controlPoint2: CGPointMake(group.minX + 0.50200 * group.width, group.minY + 0.48125 * group.height))
+    bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.55637 * group.width, group.minY + 0.57545 * group.height), controlPoint1: CGPointMake(group.minX + 0.54270 * group.width, group.minY + 0.50287 * group.height), controlPoint2: CGPointMake(group.minX + 0.56190 * group.width, group.minY + 0.54137 * group.height))
+    bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.54992 * group.width, group.minY + 0.59596 * group.height), controlPoint1: CGPointMake(group.minX + 0.55529 * group.width, group.minY + 0.58239 * group.height), controlPoint2: CGPointMake(group.minX + 0.55207 * group.width, group.minY + 0.58918 * group.height))
+    bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.54792 * group.width, group.minY + 0.59580 * group.height), controlPoint1: CGPointMake(group.minX + 0.54915 * group.width, group.minY + 0.59738 * group.height), controlPoint2: CGPointMake(group.minX + 0.54807 * group.width, group.minY + 0.59675 * group.height))
+    bezier6Path.closePath()
+    bezier6Path.miterLimit = 4;
+    
+    StyleKit.coffeeColor.setFill()
+    bezier6Path.fill()
+    
+    
+    //// Bezier 8 Drawing
+    var bezier8Path = UIBezierPath()
+    bezier8Path.moveToPoint(CGPointMake(group.minX + 0.45792 * group.width, group.minY + 0.49104 * group.height))
+    bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.45992 * group.width, group.minY + 0.51202 * group.height), controlPoint1: CGPointMake(group.minX + 0.45853 * group.width, group.minY + 0.49845 * group.height), controlPoint2: CGPointMake(group.minX + 0.45869 * group.width, group.minY + 0.50539 * group.height))
+    bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.49109 * group.width, group.minY + 0.55446 * group.height), controlPoint1: CGPointMake(group.minX + 0.46330 * group.width, group.minY + 0.53143 * group.height), controlPoint2: CGPointMake(group.minX + 0.47574 * group.width, group.minY + 0.54405 * group.height))
+    bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.51505 * group.width, group.minY + 0.57135 * group.height), controlPoint1: CGPointMake(group.minX + 0.49923 * group.width, group.minY + 0.55999 * group.height), controlPoint2: CGPointMake(group.minX + 0.50722 * group.width, group.minY + 0.56535 * group.height))
+    bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.53410 * group.width, group.minY + 0.60385 * group.height), controlPoint1: CGPointMake(group.minX + 0.52565 * group.width, group.minY + 0.57939 * group.height), controlPoint2: CGPointMake(group.minX + 0.53179 * group.width, group.minY + 0.59044 * group.height))
+    bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.52918 * group.width, group.minY + 0.61221 * group.height), controlPoint1: CGPointMake(group.minX + 0.53487 * group.width, group.minY + 0.60858 * group.height), controlPoint2: CGPointMake(group.minX + 0.53348 * group.width, group.minY + 0.61079 * group.height))
+    bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.48925 * group.width, group.minY + 0.60874 * group.height), controlPoint1: CGPointMake(group.minX + 0.51536 * group.width, group.minY + 0.61710 * group.height), controlPoint2: CGPointMake(group.minX + 0.50215 * group.width, group.minY + 0.61489 * group.height))
+    bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.44410 * group.width, group.minY + 0.51817 * group.height), controlPoint1: CGPointMake(group.minX + 0.45823 * group.width, group.minY + 0.59359 * group.height), controlPoint2: CGPointMake(group.minX + 0.43795 * group.width, group.minY + 0.55289 * group.height))
+    bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.45792 * group.width, group.minY + 0.49104 * group.height), controlPoint1: CGPointMake(group.minX + 0.44579 * group.width, group.minY + 0.50792 * group.height), controlPoint2: CGPointMake(group.minX + 0.45009 * group.width, group.minY + 0.49861 * group.height))
+    bezier8Path.closePath()
+    bezier8Path.miterLimit = 4;
+    
+    StyleKit.coffeeColor.setFill()
+    bezier8Path.fill()
+  }
+  
+  public class func drawTeaDrink(#frame: CGRect) {
+    
+    
+    //// Subframes
+    let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
+    
+    
+    //// Group
+    //// Oval 2 Drawing
+    var oval2Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
+    StyleKit.teaColor.setFill()
+    oval2Path.fill()
+    
+    
+    //// Bezier 2 Drawing
+    var bezier2Path = UIBezierPath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.85300 * group.width, group.minY + 0.48420 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.82080 * group.width, group.minY + 0.40470 * group.height), controlPoint1: CGPointMake(group.minX + 0.85300 * group.width, group.minY + 0.45076 * group.height), controlPoint2: CGPointMake(group.minX + 0.84227 * group.width, group.minY + 0.42363 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.73116 * group.width, group.minY + 0.37441 * group.height), controlPoint1: CGPointMake(group.minX + 0.79303 * group.width, group.minY + 0.38009 * group.height), controlPoint2: CGPointMake(group.minX + 0.75515 * group.width, group.minY + 0.37504 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.75010 * group.width, group.minY + 0.26019 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.74631 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.75073 * group.width, group.minY + 0.25514 * group.height), controlPoint2: CGPointMake(group.minX + 0.74947 * group.width, group.minY + 0.25010 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.73305 * group.width, group.minY + 0.24000 * group.height), controlPoint1: CGPointMake(group.minX + 0.74315 * group.width, group.minY + 0.24252 * group.height), controlPoint2: CGPointMake(group.minX + 0.73810 * group.width, group.minY + 0.24000 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.27220 * group.width, group.minY + 0.24000 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25895 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.26715 * group.width, group.minY + 0.24000 * group.height), controlPoint2: CGPointMake(group.minX + 0.26210 * group.width, group.minY + 0.24252 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25516 * group.width, group.minY + 0.26019 * group.height), controlPoint1: CGPointMake(group.minX + 0.25579 * group.width, group.minY + 0.25010 * group.height), controlPoint2: CGPointMake(group.minX + 0.25453 * group.width, group.minY + 0.25514 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.34796 * group.width, group.minY + 0.81549 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.36500 * group.width, group.minY + 0.83000 * group.height), controlPoint1: CGPointMake(group.minX + 0.34922 * group.width, group.minY + 0.82369 * group.height), controlPoint2: CGPointMake(group.minX + 0.35680 * group.width, group.minY + 0.83000 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.64025 * group.width, group.minY + 0.83000 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.65730 * group.width, group.minY + 0.81549 * group.height), controlPoint1: CGPointMake(group.minX + 0.64846 * group.width, group.minY + 0.83000 * group.height), controlPoint2: CGPointMake(group.minX + 0.65603 * group.width, group.minY + 0.82369 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.68949 * group.width, group.minY + 0.62303 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.85300 * group.width, group.minY + 0.48420 * group.height), controlPoint1: CGPointMake(group.minX + 0.72358 * group.width, group.minY + 0.61861 * group.height), controlPoint2: CGPointMake(group.minX + 0.85300 * group.width, group.minY + 0.59148 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.71285 * group.width, group.minY + 0.27471 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.68949 * group.width, group.minY + 0.41353 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.68065 * group.width, group.minY + 0.41984 * group.height), controlPoint1: CGPointMake(group.minX + 0.68444 * group.width, group.minY + 0.41668 * group.height), controlPoint2: CGPointMake(group.minX + 0.68065 * group.width, group.minY + 0.41984 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.57333 * group.width, group.minY + 0.44950 * group.height), controlPoint1: CGPointMake(group.minX + 0.68065 * group.width, group.minY + 0.41984 * group.height), controlPoint2: CGPointMake(group.minX + 0.62699 * group.width, group.minY + 0.45265 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.39468 * group.width, group.minY + 0.40406 * group.height), controlPoint1: CGPointMake(group.minX + 0.52030 * group.width, group.minY + 0.44634 * group.height), controlPoint2: CGPointMake(group.minX + 0.45402 * group.width, group.minY + 0.40911 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.31703 * group.width, group.minY + 0.42047 * group.height), controlPoint1: CGPointMake(group.minX + 0.34543 * group.width, group.minY + 0.39965 * group.height), controlPoint2: CGPointMake(group.minX + 0.32271 * group.width, group.minY + 0.41479 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.29240 * group.width, group.minY + 0.27471 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.71285 * group.width, group.minY + 0.27471 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.69581 * group.width, group.minY + 0.58769 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.72548 * group.width, group.minY + 0.40911 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.79808 * group.width, group.minY + 0.43120 * group.height), controlPoint1: CGPointMake(group.minX + 0.74378 * group.width, group.minY + 0.40911 * group.height), controlPoint2: CGPointMake(group.minX + 0.77661 * group.width, group.minY + 0.41164 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.81891 * group.width, group.minY + 0.48483 * group.height), controlPoint1: CGPointMake(group.minX + 0.81197 * group.width, group.minY + 0.44382 * group.height), controlPoint2: CGPointMake(group.minX + 0.81891 * group.width, group.minY + 0.46149 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.69581 * group.width, group.minY + 0.58769 * group.height), controlPoint1: CGPointMake(group.minX + 0.81891 * group.width, group.minY + 0.55488 * group.height), controlPoint2: CGPointMake(group.minX + 0.73305 * group.width, group.minY + 0.58012 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.miterLimit = 4;
+    
+    StyleKit.drinksWhiteColor.setFill()
+    bezier2Path.fill()
+  }
+  
+  public class func drawJuiceDrink(#frame: CGRect) {
+    
+    
+    //// Subframes
+    let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
+    
+    
+    //// Group
+    //// Oval 2 Drawing
+    var oval2Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
+    StyleKit.juiceColor.setFill()
+    oval2Path.fill()
+    
+    
+    //// Bezier 2 Drawing
+    var bezier2Path = UIBezierPath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.74606 * group.width, group.minY + 0.24631 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.73281 * group.width, group.minY + 0.24000 * group.height), controlPoint1: CGPointMake(group.minX + 0.74290 * group.width, group.minY + 0.24252 * group.height), controlPoint2: CGPointMake(group.minX + 0.73785 * group.width, group.minY + 0.24000 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.27219 * group.width, group.minY + 0.24000 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25894 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.26715 * group.width, group.minY + 0.24000 * group.height), controlPoint2: CGPointMake(group.minX + 0.26210 * group.width, group.minY + 0.24252 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25516 * group.width, group.minY + 0.26019 * group.height), controlPoint1: CGPointMake(group.minX + 0.25579 * group.width, group.minY + 0.25010 * group.height), controlPoint2: CGPointMake(group.minX + 0.25453 * group.width, group.minY + 0.25514 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.34791 * group.width, group.minY + 0.81549 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.36495 * group.width, group.minY + 0.83000 * group.height), controlPoint1: CGPointMake(group.minX + 0.34917 * group.width, group.minY + 0.82369 * group.height), controlPoint2: CGPointMake(group.minX + 0.35674 * group.width, group.minY + 0.83000 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.64005 * group.width, group.minY + 0.83000 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.65709 * group.width, group.minY + 0.81549 * group.height), controlPoint1: CGPointMake(group.minX + 0.64826 * group.width, group.minY + 0.83000 * group.height), controlPoint2: CGPointMake(group.minX + 0.65583 * group.width, group.minY + 0.82369 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.74984 * group.width, group.minY + 0.26019 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.74606 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.75047 * group.width, group.minY + 0.25514 * group.height), controlPoint2: CGPointMake(group.minX + 0.74921 * group.width, group.minY + 0.25010 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.71261 * group.width, group.minY + 0.27471 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.68927 * group.width, group.minY + 0.41353 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height), controlPoint1: CGPointMake(group.minX + 0.68422 * group.width, group.minY + 0.41668 * group.height), controlPoint2: CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.57317 * group.width, group.minY + 0.44950 * group.height), controlPoint1: CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height), controlPoint2: CGPointMake(group.minX + 0.62680 * group.width, group.minY + 0.45265 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.39460 * group.width, group.minY + 0.40406 * group.height), controlPoint1: CGPointMake(group.minX + 0.52017 * group.width, group.minY + 0.44634 * group.height), controlPoint2: CGPointMake(group.minX + 0.45391 * group.width, group.minY + 0.40911 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.31699 * group.width, group.minY + 0.42047 * group.height), controlPoint1: CGPointMake(group.minX + 0.34539 * group.width, group.minY + 0.39965 * group.height), controlPoint2: CGPointMake(group.minX + 0.32267 * group.width, group.minY + 0.41479 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.29239 * group.width, group.minY + 0.27471 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.71261 * group.width, group.minY + 0.27471 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.miterLimit = 4;
+    
+    StyleKit.drinksWhiteColor.setFill()
+    bezier2Path.fill()
+    
+    
+    //// Bezier 4 Drawing
+    var bezier4Path = UIBezierPath()
+    bezier4Path.moveToPoint(CGPointMake(group.minX + 0.59585 * group.width, group.minY + 0.53538 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.57506 * group.width, group.minY + 0.53538 * group.height), controlPoint1: CGPointMake(group.minX + 0.59018 * group.width, group.minY + 0.52971 * group.height), controlPoint2: CGPointMake(group.minX + 0.58073 * group.width, group.minY + 0.52971 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.39618 * group.width, group.minY + 0.71426 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.39618 * group.width, group.minY + 0.73505 * group.height), controlPoint1: CGPointMake(group.minX + 0.39051 * group.width, group.minY + 0.71993 * group.height), controlPoint2: CGPointMake(group.minX + 0.39051 * group.width, group.minY + 0.72938 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.49633 * group.width, group.minY + 0.77662 * group.height), controlPoint1: CGPointMake(group.minX + 0.42264 * group.width, group.minY + 0.76150 * group.height), controlPoint2: CGPointMake(group.minX + 0.45854 * group.width, group.minY + 0.77662 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.59648 * group.width, group.minY + 0.73505 * group.height), controlPoint1: CGPointMake(group.minX + 0.53412 * group.width, group.minY + 0.77662 * group.height), controlPoint2: CGPointMake(group.minX + 0.56940 * group.width, group.minY + 0.76213 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.63805 * group.width, group.minY + 0.63490 * group.height), controlPoint1: CGPointMake(group.minX + 0.62293 * group.width, group.minY + 0.70859 * group.height), controlPoint2: CGPointMake(group.minX + 0.63805 * group.width, group.minY + 0.67269 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.59585 * group.width, group.minY + 0.53538 * group.height), controlPoint1: CGPointMake(group.minX + 0.63679 * group.width, group.minY + 0.59774 * group.height), controlPoint2: CGPointMake(group.minX + 0.62230 * group.width, group.minY + 0.56247 * group.height))
+    bezier4Path.closePath()
+    bezier4Path.moveToPoint(CGPointMake(group.minX + 0.60719 * group.width, group.minY + 0.64435 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.58640 * group.width, group.minY + 0.70041 * group.height), controlPoint1: CGPointMake(group.minX + 0.60530 * group.width, group.minY + 0.66450 * group.height), controlPoint2: CGPointMake(group.minX + 0.59837 * group.width, group.minY + 0.68403 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.53034 * group.width, group.minY + 0.64435 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.60719 * group.width, group.minY + 0.64435 * group.height))
+    bezier4Path.closePath()
+    bezier4Path.moveToPoint(CGPointMake(group.minX + 0.53727 * group.width, group.minY + 0.61475 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.58451 * group.width, group.minY + 0.56751 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.60530 * group.width, group.minY + 0.61475 * group.height), controlPoint1: CGPointMake(group.minX + 0.59522 * group.width, group.minY + 0.58136 * group.height), controlPoint2: CGPointMake(group.minX + 0.60215 * group.width, group.minY + 0.59774 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.53727 * group.width, group.minY + 0.61475 * group.height))
+    bezier4Path.closePath()
+    bezier4Path.moveToPoint(CGPointMake(group.minX + 0.56625 * group.width, group.minY + 0.72245 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.50956 * group.width, group.minY + 0.74639 * group.height), controlPoint1: CGPointMake(group.minX + 0.54987 * group.width, group.minY + 0.73568 * group.height), controlPoint2: CGPointMake(group.minX + 0.53034 * group.width, group.minY + 0.74387 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.50956 * group.width, group.minY + 0.66513 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.56625 * group.width, group.minY + 0.72245 * group.height))
+    bezier4Path.closePath()
+    bezier4Path.moveToPoint(CGPointMake(group.minX + 0.42768 * group.width, group.minY + 0.72434 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.47995 * group.width, group.minY + 0.67206 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.47995 * group.width, group.minY + 0.74576 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.42768 * group.width, group.minY + 0.72434 * group.height), controlPoint1: CGPointMake(group.minX + 0.46043 * group.width, group.minY + 0.74324 * group.height), controlPoint2: CGPointMake(group.minX + 0.44279 * group.width, group.minY + 0.73631 * group.height))
+    bezier4Path.closePath()
+    bezier4Path.miterLimit = 4;
+    
+    StyleKit.juiceColor.setFill()
+    bezier4Path.fill()
+  }
+  
+  public class func drawMilkDrink(#frame: CGRect) {
+    
+    
+    //// Subframes
+    let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
+    
+    
+    //// Group
+    //// Oval 1 Drawing
+    var oval1Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
+    StyleKit.milkColor.setFill()
+    oval1Path.fill()
+    
+    
+    //// Bezier 2 Drawing
+    var bezier2Path = UIBezierPath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.39683 * group.width, group.minY + 0.21500 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.60317 * group.width, group.minY + 0.21500 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.62000 * group.width, group.minY + 0.19750 * group.height), controlPoint1: CGPointMake(group.minX + 0.61252 * group.width, group.minY + 0.21500 * group.height), controlPoint2: CGPointMake(group.minX + 0.62000 * group.width, group.minY + 0.20722 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.60317 * group.width, group.minY + 0.18000 * group.height), controlPoint1: CGPointMake(group.minX + 0.62000 * group.width, group.minY + 0.18778 * group.height), controlPoint2: CGPointMake(group.minX + 0.61252 * group.width, group.minY + 0.18000 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.39683 * group.width, group.minY + 0.18000 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.38000 * group.width, group.minY + 0.19750 * group.height), controlPoint1: CGPointMake(group.minX + 0.38748 * group.width, group.minY + 0.18000 * group.height), controlPoint2: CGPointMake(group.minX + 0.38000 * group.width, group.minY + 0.18778 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.39683 * group.width, group.minY + 0.21500 * group.height), controlPoint1: CGPointMake(group.minX + 0.38000 * group.width, group.minY + 0.20722 * group.height), controlPoint2: CGPointMake(group.minX + 0.38748 * group.width, group.minY + 0.21500 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.miterLimit = 4;
+    
+    StyleKit.drinksWhiteColor.setFill()
+    bezier2Path.fill()
+    
+    
+    //// Bezier 1 Drawing
+    var bezier1Path = UIBezierPath()
+    bezier1Path.moveToPoint(CGPointMake(group.minX + 0.65988 * group.width, group.minY + 0.34940 * group.height))
+    bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.61411 * group.width, group.minY + 0.25506 * group.height))
+    bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.59839 * group.width, group.minY + 0.24500 * group.height), controlPoint1: CGPointMake(group.minX + 0.61096 * group.width, group.minY + 0.24940 * group.height), controlPoint2: CGPointMake(group.minX + 0.60530 * group.width, group.minY + 0.24500 * group.height))
+    bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.40287 * group.width, group.minY + 0.24500 * group.height))
+    bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.38715 * group.width, group.minY + 0.25506 * group.height), controlPoint1: CGPointMake(group.minX + 0.39595 * group.width, group.minY + 0.24500 * group.height), controlPoint2: CGPointMake(group.minX + 0.39029 * group.width, group.minY + 0.24877 * group.height))
+    bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.34189 * group.width, group.minY + 0.34942 * group.height))
+    bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.35697 * group.height), controlPoint1: CGPointMake(group.minX + 0.34063 * group.width, group.minY + 0.35194 * group.height), controlPoint2: CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.35445 * group.height))
+    bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.81302 * group.height))
+    bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.35697 * group.width, group.minY + 0.83000 * group.height), controlPoint1: CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.82245 * group.height), controlPoint2: CGPointMake(group.minX + 0.34754 * group.width, group.minY + 0.83000 * group.height))
+    bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.64302 * group.width, group.minY + 0.83000 * group.height))
+    bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.66000 * group.width, group.minY + 0.81302 * group.height), controlPoint1: CGPointMake(group.minX + 0.65246 * group.width, group.minY + 0.83000 * group.height), controlPoint2: CGPointMake(group.minX + 0.66000 * group.width, group.minY + 0.82245 * group.height))
+    bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.66000 * group.width, group.minY + 0.35700 * group.height))
+    bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.65988 * group.width, group.minY + 0.34940 * group.height), controlPoint1: CGPointMake(group.minX + 0.66001 * group.width, group.minY + 0.35448 * group.height), controlPoint2: CGPointMake(group.minX + 0.65988 * group.width, group.minY + 0.34940 * group.height))
+    bezier1Path.closePath()
+    bezier1Path.moveToPoint(CGPointMake(group.minX + 0.41356 * group.width, group.minY + 0.27897 * group.height))
+    bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.58770 * group.width, group.minY + 0.27897 * group.height))
+    bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.62668 * group.width, group.minY + 0.36011 * group.height))
+    bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.62668 * group.width, group.minY + 0.40981 * group.height))
+    bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.62479 * group.width, group.minY + 0.41106 * group.height), controlPoint1: CGPointMake(group.minX + 0.62542 * group.width, group.minY + 0.41044 * group.height), controlPoint2: CGPointMake(group.minX + 0.62479 * group.width, group.minY + 0.41106 * group.height))
+    bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.54432 * group.width, group.minY + 0.43371 * group.height), controlPoint1: CGPointMake(group.minX + 0.62479 * group.width, group.minY + 0.41106 * group.height), controlPoint2: CGPointMake(group.minX + 0.58456 * group.width, group.minY + 0.43623 * group.height))
+    bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.41041 * group.width, group.minY + 0.39974 * group.height), controlPoint1: CGPointMake(group.minX + 0.50409 * group.width, group.minY + 0.43119 * group.height), controlPoint2: CGPointMake(group.minX + 0.45505 * group.width, group.minY + 0.40352 * group.height))
+    bezier1Path.addCurveToPoint(CGPointMake(group.minX + 0.37521 * group.width, group.minY + 0.40163 * group.height), controlPoint1: CGPointMake(group.minX + 0.39532 * group.width, group.minY + 0.39848 * group.height), controlPoint2: CGPointMake(group.minX + 0.38401 * group.width, group.minY + 0.39974 * group.height))
+    bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.37521 * group.width, group.minY + 0.36074 * group.height))
+    bezier1Path.addLineToPoint(CGPointMake(group.minX + 0.41356 * group.width, group.minY + 0.27897 * group.height))
+    bezier1Path.closePath()
+    bezier1Path.miterLimit = 4;
+    
+    StyleKit.drinksWhiteColor.setFill()
+    bezier1Path.fill()
+  }
+  
+  public class func drawSodaDrink(#frame: CGRect) {
+    
+    
+    //// Subframes
+    let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
+    
+    
+    //// Group
+    //// Oval 2 Drawing
+    var oval2Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
+    StyleKit.sodaColor.setFill()
+    oval2Path.fill()
+    
+    
+    //// Bezier 2 Drawing
+    var bezier2Path = UIBezierPath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.74606 * group.width, group.minY + 0.24631 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.73281 * group.width, group.minY + 0.24000 * group.height), controlPoint1: CGPointMake(group.minX + 0.74290 * group.width, group.minY + 0.24252 * group.height), controlPoint2: CGPointMake(group.minX + 0.73785 * group.width, group.minY + 0.24000 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.27219 * group.width, group.minY + 0.24000 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25894 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.26715 * group.width, group.minY + 0.24000 * group.height), controlPoint2: CGPointMake(group.minX + 0.26210 * group.width, group.minY + 0.24252 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.25516 * group.width, group.minY + 0.26019 * group.height), controlPoint1: CGPointMake(group.minX + 0.25579 * group.width, group.minY + 0.25010 * group.height), controlPoint2: CGPointMake(group.minX + 0.25453 * group.width, group.minY + 0.25514 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.34791 * group.width, group.minY + 0.81549 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.36495 * group.width, group.minY + 0.83000 * group.height), controlPoint1: CGPointMake(group.minX + 0.34917 * group.width, group.minY + 0.82369 * group.height), controlPoint2: CGPointMake(group.minX + 0.35674 * group.width, group.minY + 0.83000 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.64005 * group.width, group.minY + 0.83000 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.65709 * group.width, group.minY + 0.81549 * group.height), controlPoint1: CGPointMake(group.minX + 0.64826 * group.width, group.minY + 0.83000 * group.height), controlPoint2: CGPointMake(group.minX + 0.65583 * group.width, group.minY + 0.82369 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.74984 * group.width, group.minY + 0.26019 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.74606 * group.width, group.minY + 0.24631 * group.height), controlPoint1: CGPointMake(group.minX + 0.75047 * group.width, group.minY + 0.25514 * group.height), controlPoint2: CGPointMake(group.minX + 0.74921 * group.width, group.minY + 0.25010 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.71261 * group.width, group.minY + 0.27471 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.68927 * group.width, group.minY + 0.41353 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height), controlPoint1: CGPointMake(group.minX + 0.68422 * group.width, group.minY + 0.41668 * group.height), controlPoint2: CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.57317 * group.width, group.minY + 0.44950 * group.height), controlPoint1: CGPointMake(group.minX + 0.68043 * group.width, group.minY + 0.41984 * group.height), controlPoint2: CGPointMake(group.minX + 0.62680 * group.width, group.minY + 0.45265 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.39460 * group.width, group.minY + 0.40406 * group.height), controlPoint1: CGPointMake(group.minX + 0.52017 * group.width, group.minY + 0.44634 * group.height), controlPoint2: CGPointMake(group.minX + 0.45391 * group.width, group.minY + 0.40911 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.31699 * group.width, group.minY + 0.42047 * group.height), controlPoint1: CGPointMake(group.minX + 0.34539 * group.width, group.minY + 0.39965 * group.height), controlPoint2: CGPointMake(group.minX + 0.32267 * group.width, group.minY + 0.41479 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.29239 * group.width, group.minY + 0.27471 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.71261 * group.width, group.minY + 0.27471 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.miterLimit = 4;
+    
+    StyleKit.drinksWhiteColor.setFill()
+    bezier2Path.fill()
+    
+    
+    //// Oval 4 Drawing
+    var oval4Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.48300 + 0.2) + 0.3, group.minY + (group.height * 0.50800 + 0.1) + 0.4, (group.width * 0.52100 + 0.4) - (group.width * 0.48300 + 0.2) - 0.2, (group.height * 0.54600 + 0.3) - (group.height * 0.50800 + 0.1) - 0.2))
+    StyleKit.sodaColor.setFill()
+    oval4Path.fill()
+    
+    
+    //// Oval 6 Drawing
+    var oval6Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.45700 - 0.2) + 0.7, group.minY + (group.height * 0.48200 + 0.3) + 0.2, (group.width * 0.48300 + 0.2) - (group.width * 0.45700 - 0.2) - 0.4, (group.height * 0.50800 - 0.3) - (group.height * 0.48200 + 0.3) + 0.6))
+    StyleKit.sodaColor.setFill()
+    oval6Path.fill()
+    
+    
+    //// Oval 8 Drawing
+    var oval8Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.49300 + 0.2) + 0.3, group.minY + (group.height * 0.55400 - 0.3) + 0.8, (group.width * 0.54100 + 0.4) - (group.width * 0.49300 + 0.2) - 0.2, (group.height * 0.60200 - 0.1) - (group.height * 0.55400 - 0.3) - 0.2))
+    StyleKit.sodaColor.setFill()
+    oval8Path.fill()
+    
+    
+    //// Oval 10 Drawing
+    var oval10Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.53200 + 0.3) + 0.2, group.minY + (group.height * 0.52300 + 0.4) + 0.1, (group.width * 0.56800 - 0.3) - (group.width * 0.53200 + 0.3) + 0.6, (group.height * 0.55900 - 0.2) - (group.height * 0.52300 + 0.4) + 0.6))
+    StyleKit.sodaColor.setFill()
+    oval10Path.fill()
+    
+    
+    //// Oval 12 Drawing
+    var oval12Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.48200 + 0.3) + 0.2, group.minY + (group.height * 0.61400 + 0.1) + 0.4, (group.width * 0.51400 + 0.1) - (group.width * 0.48200 + 0.3) + 0.2, (group.height * 0.64600 - 0.1) - (group.height * 0.61400 + 0.1) + 0.2))
+    StyleKit.sodaColor.setFill()
+    oval12Path.fill()
+    
+    
+    //// Oval 14 Drawing
+    var oval14Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.46300 + 0.2) + 0.3, group.minY + (group.height * 0.65000 + 0.3) + 0.2, (group.width * 0.48100 + 0.4) - (group.width * 0.46300 + 0.2) - 0.2, (group.height * 0.66800 + 0.5) - (group.height * 0.65000 + 0.3) - 0.2))
+    StyleKit.sodaColor.setFill()
+    oval14Path.fill()
+    
+    
+    //// Oval 16 Drawing
+    var oval16Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.51300 + 0.2) + 0.3, group.minY + (group.height * 0.73600 - 0.3) + 0.8, (group.width * 0.54900 - 0.4) - (group.width * 0.51300 + 0.2) + 0.6, (group.height * 0.77200 + 0.1) - (group.height * 0.73600 - 0.3) - 0.4))
+    StyleKit.sodaColor.setFill()
+    oval16Path.fill()
+    
+    
+    //// Oval 18 Drawing
+    var oval18Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.48000 + 0.5), group.minY + (group.height * 0.70000 - 0.5) + 1, (group.width * 0.52000 + 0.5) - (group.width * 0.48000 + 0.5), (group.height * 0.74000 - 0.5) - (group.height * 0.70000 - 0.5)))
+    StyleKit.sodaColor.setFill()
+    oval18Path.fill()
+    
+    
+    //// Oval 20 Drawing
+    var oval20Path = UIBezierPath(ovalInRect: CGRectMake(group.minX + (group.width * 0.52400 + 0.1) + 0.4, group.minY + (group.height * 0.69100 + 0.2) + 0.3, (group.width * 0.55000 + 0.5) - (group.width * 0.52400 + 0.1) - 0.4, (group.height * 0.71700 - 0.4) - (group.height * 0.69100 + 0.2) + 0.6))
+    StyleKit.sodaColor.setFill()
+    oval20Path.fill()
+  }
+  
+  public class func drawEnergyDrink(#frame: CGRect) {
+    
+    
+    //// Subframes
+    let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
+    
+    
+    //// Group
+    //// Oval 2 Drawing
+    var oval2Path = UIBezierPath()
+    oval2Path.moveToPoint(CGPointMake(group.minX + 1.00000 * group.width, group.minY + 0.50000 * group.height))
+    oval2Path.addCurveToPoint(CGPointMake(group.minX + 0.50000 * group.width, group.minY + 0.00000 * group.height), controlPoint1: CGPointMake(group.minX + 1.00000 * group.width, group.minY + 0.22386 * group.height), controlPoint2: CGPointMake(group.minX + 0.77614 * group.width, group.minY + 0.00000 * group.height))
+    oval2Path.addCurveToPoint(CGPointMake(group.minX + 0.00000 * group.width, group.minY + 0.50000 * group.height), controlPoint1: CGPointMake(group.minX + 0.22386 * group.width, group.minY + -0.00000 * group.height), controlPoint2: CGPointMake(group.minX + 0.00000 * group.width, group.minY + 0.22386 * group.height))
+    oval2Path.addCurveToPoint(CGPointMake(group.minX + 0.50000 * group.width, group.minY + 1.00000 * group.height), controlPoint1: CGPointMake(group.minX + -0.00000 * group.width, group.minY + 0.77614 * group.height), controlPoint2: CGPointMake(group.minX + 0.22386 * group.width, group.minY + 1.00000 * group.height))
+    oval2Path.addCurveToPoint(CGPointMake(group.minX + 1.00000 * group.width, group.minY + 0.50000 * group.height), controlPoint1: CGPointMake(group.minX + 0.77614 * group.width, group.minY + 1.00000 * group.height), controlPoint2: CGPointMake(group.minX + 1.00000 * group.width, group.minY + 0.77614 * group.height))
+    oval2Path.closePath()
+    StyleKit.energyColor.setFill()
+    oval2Path.fill()
+    
+    
+    //// Bezier 2 Drawing
+    var bezier2Path = UIBezierPath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.39683 * group.width, group.minY + 0.21500 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.60317 * group.width, group.minY + 0.21500 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.62000 * group.width, group.minY + 0.19750 * group.height), controlPoint1: CGPointMake(group.minX + 0.61252 * group.width, group.minY + 0.21500 * group.height), controlPoint2: CGPointMake(group.minX + 0.62000 * group.width, group.minY + 0.20722 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.60317 * group.width, group.minY + 0.18000 * group.height), controlPoint1: CGPointMake(group.minX + 0.62000 * group.width, group.minY + 0.18778 * group.height), controlPoint2: CGPointMake(group.minX + 0.61252 * group.width, group.minY + 0.18000 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.39683 * group.width, group.minY + 0.18000 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.38000 * group.width, group.minY + 0.19750 * group.height), controlPoint1: CGPointMake(group.minX + 0.38748 * group.width, group.minY + 0.18000 * group.height), controlPoint2: CGPointMake(group.minX + 0.38000 * group.width, group.minY + 0.18778 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.39683 * group.width, group.minY + 0.21500 * group.height), controlPoint1: CGPointMake(group.minX + 0.38000 * group.width, group.minY + 0.20722 * group.height), controlPoint2: CGPointMake(group.minX + 0.38748 * group.width, group.minY + 0.21500 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.miterLimit = 4;
+    
+    StyleKit.drinksWhiteColor.setFill()
+    bezier2Path.fill()
+    
+    
+    //// Bezier 4 Drawing
+    var bezier4Path = UIBezierPath()
+    bezier4Path.moveToPoint(CGPointMake(group.minX + 0.65937 * group.width, group.minY + 0.34942 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.61411 * group.width, group.minY + 0.25506 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.59839 * group.width, group.minY + 0.24500 * group.height), controlPoint1: CGPointMake(group.minX + 0.61096 * group.width, group.minY + 0.24940 * group.height), controlPoint2: CGPointMake(group.minX + 0.60530 * group.width, group.minY + 0.24500 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.40287 * group.width, group.minY + 0.24500 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.38715 * group.width, group.minY + 0.25506 * group.height), controlPoint1: CGPointMake(group.minX + 0.39595 * group.width, group.minY + 0.24500 * group.height), controlPoint2: CGPointMake(group.minX + 0.39029 * group.width, group.minY + 0.24877 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.34189 * group.width, group.minY + 0.34942 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.35697 * group.height), controlPoint1: CGPointMake(group.minX + 0.34063 * group.width, group.minY + 0.35194 * group.height), controlPoint2: CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.35445 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.81302 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.35697 * group.width, group.minY + 0.83000 * group.height), controlPoint1: CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.82245 * group.height), controlPoint2: CGPointMake(group.minX + 0.34754 * group.width, group.minY + 0.83000 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.64303 * group.width, group.minY + 0.83000 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.66000 * group.width, group.minY + 0.81302 * group.height), controlPoint1: CGPointMake(group.minX + 0.65246 * group.width, group.minY + 0.83000 * group.height), controlPoint2: CGPointMake(group.minX + 0.66000 * group.width, group.minY + 0.82245 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.66000 * group.width, group.minY + 0.35634 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.65937 * group.width, group.minY + 0.34942 * group.height))
+    bezier4Path.closePath()
+    bezier4Path.moveToPoint(CGPointMake(group.minX + 0.41356 * group.width, group.minY + 0.27897 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.58770 * group.width, group.minY + 0.27897 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.62668 * group.width, group.minY + 0.36011 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.62668 * group.width, group.minY + 0.45000 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.37521 * group.width, group.minY + 0.45000 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.37521 * group.width, group.minY + 0.36074 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.41356 * group.width, group.minY + 0.27897 * group.height))
+    bezier4Path.closePath()
+    bezier4Path.moveToPoint(CGPointMake(group.minX + 0.37521 * group.width, group.minY + 0.79603 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.37521 * group.width, group.minY + 0.69000 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.62668 * group.width, group.minY + 0.69000 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.62668 * group.width, group.minY + 0.79603 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.37521 * group.width, group.minY + 0.79603 * group.height))
+    bezier4Path.closePath()
+    bezier4Path.miterLimit = 4;
+    
+    StyleKit.drinksWhiteColor.setFill()
+    bezier4Path.fill()
+    
+    
+    //// Bezier 6 Drawing
+    var bezier6Path = UIBezierPath()
+    bezier6Path.moveToPoint(CGPointMake(group.minX + 0.51914 * group.width, group.minY + 0.47290 * group.height))
+    bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.44500 * group.width, group.minY + 0.58479 * group.height))
+    bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.50638 * group.width, group.minY + 0.58479 * group.height))
+    bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.47356 * group.width, group.minY + 0.67290 * group.height))
+    bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.55500 * group.width, group.minY + 0.56521 * group.height))
+    bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.49058 * group.width, group.minY + 0.56521 * group.height))
+    bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.51914 * group.width, group.minY + 0.47290 * group.height))
+    bezier6Path.closePath()
+    bezier6Path.miterLimit = 4;
+    
+    StyleKit.energyColor.setFill()
+    bezier6Path.fill()
+  }
+  
+  public class func drawAlcoholDrink(#frame: CGRect) {
+    
+    
+    //// Subframes
+    let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
+    
+    
+    //// Group
+    //// Oval 2 Drawing
+    var oval2Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
+    StyleKit.alcoholColor.setFill()
+    oval2Path.fill()
+    
+    
+    //// Bezier 2 Drawing
+    var bezier2Path = UIBezierPath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.59006 * group.width, group.minY + 0.81096 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.50601 * group.width, group.minY + 0.81096 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.50601 * group.width, group.minY + 0.65460 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.50601 * group.width, group.minY + 0.65334 * group.height), controlPoint1: CGPointMake(group.minX + 0.50601 * group.width, group.minY + 0.65397 * group.height), controlPoint2: CGPointMake(group.minX + 0.50601 * group.width, group.minY + 0.65397 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.60216 * group.width, group.minY + 0.61110 * group.height), controlPoint1: CGPointMake(group.minX + 0.54713 * group.width, group.minY + 0.65019 * group.height), controlPoint2: CGPointMake(group.minX + 0.57918 * group.width, group.minY + 0.63632 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.63481 * group.width, group.minY + 0.51590 * group.height), controlPoint1: CGPointMake(group.minX + 0.63662 * group.width, group.minY + 0.57264 * group.height), controlPoint2: CGPointMake(group.minX + 0.63541 * group.width, group.minY + 0.52284 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.63481 * group.width, group.minY + 0.21202 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.61848 * group.width, group.minY + 0.19500 * group.height), controlPoint1: CGPointMake(group.minX + 0.63481 * group.width, group.minY + 0.20257 * group.height), controlPoint2: CGPointMake(group.minX + 0.62755 * group.width, group.minY + 0.19500 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.36149 * group.width, group.minY + 0.19500 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.34516 * group.width, group.minY + 0.21202 * group.height), controlPoint1: CGPointMake(group.minX + 0.35242 * group.width, group.minY + 0.19500 * group.height), controlPoint2: CGPointMake(group.minX + 0.34516 * group.width, group.minY + 0.20257 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.34516 * group.width, group.minY + 0.51590 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.37781 * group.width, group.minY + 0.61110 * group.height), controlPoint1: CGPointMake(group.minX + 0.34456 * group.width, group.minY + 0.52284 * group.height), controlPoint2: CGPointMake(group.minX + 0.34395 * group.width, group.minY + 0.57264 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.47396 * group.width, group.minY + 0.65334 * group.height), controlPoint1: CGPointMake(group.minX + 0.40019 * group.width, group.minY + 0.63632 * group.height), controlPoint2: CGPointMake(group.minX + 0.43284 * group.width, group.minY + 0.65019 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.47396 * group.width, group.minY + 0.65460 * group.height), controlPoint1: CGPointMake(group.minX + 0.47396 * group.width, group.minY + 0.65397 * group.height), controlPoint2: CGPointMake(group.minX + 0.47396 * group.width, group.minY + 0.65397 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.47396 * group.width, group.minY + 0.81096 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.38930 * group.width, group.minY + 0.81096 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.37298 * group.width, group.minY + 0.82798 * group.height), controlPoint1: CGPointMake(group.minX + 0.38023 * group.width, group.minY + 0.81096 * group.height), controlPoint2: CGPointMake(group.minX + 0.37298 * group.width, group.minY + 0.81852 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.38930 * group.width, group.minY + 0.84500 * group.height), controlPoint1: CGPointMake(group.minX + 0.37298 * group.width, group.minY + 0.83743 * group.height), controlPoint2: CGPointMake(group.minX + 0.38023 * group.width, group.minY + 0.84500 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.59006 * group.width, group.minY + 0.84500 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.60639 * group.width, group.minY + 0.82798 * group.height), controlPoint1: CGPointMake(group.minX + 0.59913 * group.width, group.minY + 0.84500 * group.height), controlPoint2: CGPointMake(group.minX + 0.60639 * group.width, group.minY + 0.83743 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.59006 * group.width, group.minY + 0.81096 * group.height), controlPoint1: CGPointMake(group.minX + 0.60639 * group.width, group.minY + 0.81852 * group.height), controlPoint2: CGPointMake(group.minX + 0.59913 * group.width, group.minY + 0.81096 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.60155 * group.width, group.minY + 0.22904 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.60155 * group.width, group.minY + 0.31479 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.59611 * group.width, group.minY + 0.31920 * group.height), controlPoint1: CGPointMake(group.minX + 0.59853 * group.width, group.minY + 0.31668 * group.height), controlPoint2: CGPointMake(group.minX + 0.59611 * group.width, group.minY + 0.31920 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.53080 * group.width, group.minY + 0.33811 * group.height), controlPoint1: CGPointMake(group.minX + 0.59611 * group.width, group.minY + 0.31920 * group.height), controlPoint2: CGPointMake(group.minX + 0.56346 * group.width, group.minY + 0.34000 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.42256 * group.width, group.minY + 0.30911 * group.height), controlPoint1: CGPointMake(group.minX + 0.49815 * group.width, group.minY + 0.33622 * group.height), controlPoint2: CGPointMake(group.minX + 0.45824 * group.width, group.minY + 0.31226 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.37781 * group.width, group.minY + 0.31731 * group.height), controlPoint1: CGPointMake(group.minX + 0.39716 * group.width, group.minY + 0.30659 * group.height), controlPoint2: CGPointMake(group.minX + 0.38326 * group.width, group.minY + 0.31353 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.37781 * group.width, group.minY + 0.22904 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.60155 * group.width, group.minY + 0.22904 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.miterLimit = 4;
+    
+    StyleKit.drinksWhiteColor.setFill()
+    bezier2Path.fill()
+  }
+  
+  public class func drawSportDrink(#frame: CGRect) {
+    
+    
+    //// Subframes
+    let group: CGRect = CGRectMake(frame.minX, frame.minY, frame.width, frame.height)
+    
+    
+    //// Group
+    //// Oval 2 Drawing
+    var oval2Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, group.width, group.height))
+    StyleKit.sportColor.setFill()
+    oval2Path.fill()
+    
+    
+    //// Bezier 2 Drawing
+    var bezier2Path = UIBezierPath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.73284 * group.width, group.minY + 0.14531 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.51488 * group.width, group.minY + 0.15546 * group.height), controlPoint1: CGPointMake(group.minX + 0.66567 * group.width, group.minY + 0.07040 * group.height), controlPoint2: CGPointMake(group.minX + 0.53959 * group.width, group.minY + 0.14023 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.51488 * group.width, group.minY + 0.13642 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.49777 * group.width, group.minY + 0.11928 * group.height), controlPoint1: CGPointMake(group.minX + 0.51488 * group.width, group.minY + 0.12690 * group.height), controlPoint2: CGPointMake(group.minX + 0.50727 * group.width, group.minY + 0.11928 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.48066 * group.width, group.minY + 0.13642 * group.height), controlPoint1: CGPointMake(group.minX + 0.48826 * group.width, group.minY + 0.11928 * group.height), controlPoint2: CGPointMake(group.minX + 0.48066 * group.width, group.minY + 0.12690 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.48066 * group.width, group.minY + 0.18086 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.39702 * group.width, group.minY + 0.18086 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.37992 * group.width, group.minY + 0.19799 * group.height), controlPoint1: CGPointMake(group.minX + 0.38752 * group.width, group.minY + 0.18086 * group.height), controlPoint2: CGPointMake(group.minX + 0.37992 * group.width, group.minY + 0.18847 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.39702 * group.width, group.minY + 0.21513 * group.height), controlPoint1: CGPointMake(group.minX + 0.37992 * group.width, group.minY + 0.20752 * group.height), controlPoint2: CGPointMake(group.minX + 0.38752 * group.width, group.minY + 0.21513 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.60485 * group.width, group.minY + 0.21513 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.62196 * group.width, group.minY + 0.19799 * group.height), controlPoint1: CGPointMake(group.minX + 0.61435 * group.width, group.minY + 0.21513 * group.height), controlPoint2: CGPointMake(group.minX + 0.62196 * group.width, group.minY + 0.20752 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.60485 * group.width, group.minY + 0.18086 * group.height), controlPoint1: CGPointMake(group.minX + 0.62196 * group.width, group.minY + 0.18847 * group.height), controlPoint2: CGPointMake(group.minX + 0.61435 * group.width, group.minY + 0.18086 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.54022 * group.width, group.minY + 0.18086 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.70749 * group.width, group.minY + 0.16879 * group.height), controlPoint1: CGPointMake(group.minX + 0.57127 * group.width, group.minY + 0.16372 * group.height), controlPoint2: CGPointMake(group.minX + 0.66314 * group.width, group.minY + 0.11865 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.65047 * group.width, group.minY + 0.33193 * group.height), controlPoint1: CGPointMake(group.minX + 0.74868 * group.width, group.minY + 0.21450 * group.height), controlPoint2: CGPointMake(group.minX + 0.68025 * group.width, group.minY + 0.29956 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.61372 * group.width, group.minY + 0.25512 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.59788 * group.width, group.minY + 0.24497 * group.height), controlPoint1: CGPointMake(group.minX + 0.61055 * group.width, group.minY + 0.24941 * group.height), controlPoint2: CGPointMake(group.minX + 0.60485 * group.width, group.minY + 0.24497 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.40273 * group.width, group.minY + 0.24497 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.38689 * group.width, group.minY + 0.25512 * group.height), controlPoint1: CGPointMake(group.minX + 0.39576 * group.width, group.minY + 0.24497 * group.height), controlPoint2: CGPointMake(group.minX + 0.39005 * group.width, group.minY + 0.24878 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.34190 * group.width, group.minY + 0.34971 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.35732 * group.height), controlPoint1: CGPointMake(group.minX + 0.34063 * group.width, group.minY + 0.35225 * group.height), controlPoint2: CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.35479 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.81310 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.35711 * group.width, group.minY + 0.83024 * group.height), controlPoint1: CGPointMake(group.minX + 0.34000 * group.width, group.minY + 0.82262 * group.height), controlPoint2: CGPointMake(group.minX + 0.34760 * group.width, group.minY + 0.83024 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.64286 * group.width, group.minY + 0.83024 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.65997 * group.width, group.minY + 0.81310 * group.height), controlPoint1: CGPointMake(group.minX + 0.65237 * group.width, group.minY + 0.83024 * group.height), controlPoint2: CGPointMake(group.minX + 0.65997 * group.width, group.minY + 0.82262 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.65997 * group.width, group.minY + 0.37129 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.66124 * group.width, group.minY + 0.37065 * group.height), controlPoint1: CGPointMake(group.minX + 0.66061 * group.width, group.minY + 0.37129 * group.height), controlPoint2: CGPointMake(group.minX + 0.66061 * group.width, group.minY + 0.37065 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.73284 * group.width, group.minY + 0.14531 * group.height), controlPoint1: CGPointMake(group.minX + 0.66757 * group.width, group.minY + 0.36431 * group.height), controlPoint2: CGPointMake(group.minX + 0.80697 * group.width, group.minY + 0.22846 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.moveToPoint(CGPointMake(group.minX + 0.41350 * group.width, group.minY + 0.27988 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.58711 * group.width, group.minY + 0.27988 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.62576 * group.width, group.minY + 0.36113 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.62576 * group.width, group.minY + 0.41192 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.62132 * group.width, group.minY + 0.41509 * group.height), controlPoint1: CGPointMake(group.minX + 0.62322 * group.width, group.minY + 0.41382 * group.height), controlPoint2: CGPointMake(group.minX + 0.62132 * group.width, group.minY + 0.41509 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.54085 * group.width, group.minY + 0.43731 * group.height), controlPoint1: CGPointMake(group.minX + 0.62132 * group.width, group.minY + 0.41509 * group.height), controlPoint2: CGPointMake(group.minX + 0.58077 * group.width, group.minY + 0.43985 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.40716 * group.width, group.minY + 0.40303 * group.height), controlPoint1: CGPointMake(group.minX + 0.50094 * group.width, group.minY + 0.43477 * group.height), controlPoint2: CGPointMake(group.minX + 0.45151 * group.width, group.minY + 0.40684 * group.height))
+    bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.37485 * group.width, group.minY + 0.40430 * group.height), controlPoint1: CGPointMake(group.minX + 0.39386 * group.width, group.minY + 0.40176 * group.height), controlPoint2: CGPointMake(group.minX + 0.38309 * group.width, group.minY + 0.40239 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.37485 * group.width, group.minY + 0.36113 * group.height))
+    bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.41350 * group.width, group.minY + 0.27988 * group.height))
+    bezier2Path.closePath()
+    bezier2Path.miterLimit = 4;
+    
+    StyleKit.drinksWhiteColor.setFill()
+    bezier2Path.fill()
+    
+    
+    //// Bezier 4 Drawing
+    var bezier4Path = UIBezierPath()
+    bezier4Path.moveToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.53500 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.42279 * group.width, group.minY + 0.53500 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.44000 * group.width, group.minY + 0.51750 * group.height), controlPoint1: CGPointMake(group.minX + 0.43235 * group.width, group.minY + 0.53500 * group.height), controlPoint2: CGPointMake(group.minX + 0.44000 * group.width, group.minY + 0.52722 * group.height))
+    bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.42279 * group.width, group.minY + 0.50000 * group.height), controlPoint1: CGPointMake(group.minX + 0.44000 * group.width, group.minY + 0.50778 * group.height), controlPoint2: CGPointMake(group.minX + 0.43235 * group.width, group.minY + 0.50000 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.50000 * group.height))
+    bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.53500 * group.height))
+    bezier4Path.closePath()
+    bezier4Path.miterLimit = 4;
+    
+    StyleKit.sportColor.setFill()
+    bezier4Path.fill()
+    
+    
+    //// Bezier 6 Drawing
+    var bezier6Path = UIBezierPath()
+    bezier6Path.moveToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.60500 * group.height))
+    bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.46773 * group.width, group.minY + 0.60500 * group.height))
+    bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.48500 * group.width, group.minY + 0.58750 * group.height), controlPoint1: CGPointMake(group.minX + 0.47733 * group.width, group.minY + 0.60500 * group.height), controlPoint2: CGPointMake(group.minX + 0.48500 * group.width, group.minY + 0.59722 * group.height))
+    bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.46773 * group.width, group.minY + 0.57000 * group.height), controlPoint1: CGPointMake(group.minX + 0.48500 * group.width, group.minY + 0.57778 * group.height), controlPoint2: CGPointMake(group.minX + 0.47733 * group.width, group.minY + 0.57000 * group.height))
+    bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.57000 * group.height))
+    bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.60500 * group.height))
+    bezier6Path.closePath()
+    bezier6Path.miterLimit = 4;
+    
+    StyleKit.sportColor.setFill()
+    bezier6Path.fill()
+    
+    
+    //// Bezier 8 Drawing
+    var bezier8Path = UIBezierPath()
+    bezier8Path.moveToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.67500 * group.height))
+    bezier8Path.addLineToPoint(CGPointMake(group.minX + 0.42279 * group.width, group.minY + 0.67500 * group.height))
+    bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.44000 * group.width, group.minY + 0.65750 * group.height), controlPoint1: CGPointMake(group.minX + 0.43235 * group.width, group.minY + 0.67500 * group.height), controlPoint2: CGPointMake(group.minX + 0.44000 * group.width, group.minY + 0.66722 * group.height))
+    bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.42279 * group.width, group.minY + 0.64000 * group.height), controlPoint1: CGPointMake(group.minX + 0.44000 * group.width, group.minY + 0.64778 * group.height), controlPoint2: CGPointMake(group.minX + 0.43235 * group.width, group.minY + 0.64000 * group.height))
+    bezier8Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.64000 * group.height))
+    bezier8Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.67500 * group.height))
+    bezier8Path.closePath()
+    bezier8Path.miterLimit = 4;
+    
+    StyleKit.sportColor.setFill()
+    bezier8Path.fill()
+    
+    
+    //// Bezier 10 Drawing
+    var bezier10Path = UIBezierPath()
+    bezier10Path.moveToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.74500 * group.height))
+    bezier10Path.addLineToPoint(CGPointMake(group.minX + 0.46773 * group.width, group.minY + 0.74500 * group.height))
+    bezier10Path.addCurveToPoint(CGPointMake(group.minX + 0.48500 * group.width, group.minY + 0.72750 * group.height), controlPoint1: CGPointMake(group.minX + 0.47733 * group.width, group.minY + 0.74500 * group.height), controlPoint2: CGPointMake(group.minX + 0.48500 * group.width, group.minY + 0.73722 * group.height))
+    bezier10Path.addCurveToPoint(CGPointMake(group.minX + 0.46773 * group.width, group.minY + 0.71000 * group.height), controlPoint1: CGPointMake(group.minX + 0.48500 * group.width, group.minY + 0.71778 * group.height), controlPoint2: CGPointMake(group.minX + 0.47733 * group.width, group.minY + 0.71000 * group.height))
+    bezier10Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.71000 * group.height))
+    bezier10Path.addLineToPoint(CGPointMake(group.minX + 0.37500 * group.width, group.minY + 0.74500 * group.height))
+    bezier10Path.closePath()
+    bezier10Path.miterLimit = 4;
+    
+    StyleKit.sportColor.setFill()
+    bezier10Path.fill()
+  }
+  
 }
 
 @objc protocol StyleKitSettableImage {
-    func setImage(image: UIImage!)
+  func setImage(image: UIImage!)
 }
 
 @objc protocol StyleKitSettableSelectedImage {
-    func setSelectedImage(image: UIImage!)
+  func setSelectedImage(image: UIImage!)
 }

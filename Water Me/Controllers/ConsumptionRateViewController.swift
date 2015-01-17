@@ -98,12 +98,15 @@ private extension Units.Volume {
   }
 }
 
-class ConsumptionRateViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class ConsumptionRateViewController: StyledViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
   
   @IBOutlet weak var tableView: UITableView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    tableView.backgroundView = nil
+    tableView.backgroundColor = StyleKit.pageBackgroundColor
     
     let genderTitle = NSLocalizedString("CRVC:Gender", value: "Gender", comment: "ConsumptionRateViewController: Table cell title for [Gender] setting")
     let heightTitle = NSLocalizedString("CRVC:Height", value: "Height", comment: "ConsumptionRateViewController: Table cell title for [Height] setting")

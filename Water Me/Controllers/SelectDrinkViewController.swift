@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectDrinkViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class SelectDrinkViewController: StyledViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
   
   @IBOutlet weak var collectionView: UICollectionView!
   

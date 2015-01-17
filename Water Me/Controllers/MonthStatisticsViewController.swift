@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MonthStatisticsViewController: UIViewController, MonthStatisticsViewDataSource, CalendarViewDelegate {
+class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDataSource, CalendarViewDelegate {
 
   @IBOutlet weak var monthStatisticsView: MonthStatisticsView!
   @IBOutlet weak var monthLabel: UILabel!

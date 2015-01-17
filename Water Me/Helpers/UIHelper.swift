@@ -23,6 +23,7 @@ class UIHelper {
     let titleRect = container.bounds.rectByOffsetting(dx: 0, dy: round(yOffset))
     let titleLabel = UILabel(frame: titleRect)
     titleLabel.autoresizingMask = .FlexibleWidth
+    titleLabel.textColor = StyleKit.barTextColor
     titleLabel.backgroundColor = UIColor.clearColor()
     titleLabel.text = titleText
     titleLabel.font = titleFont
@@ -32,6 +33,7 @@ class UIHelper {
     let subtitleRect = container.bounds.rectByOffsetting(dx: 0, dy: round(yOffset + titleHeight))
     let subtitleLabel = UILabel(frame: subtitleRect)
     subtitleLabel.autoresizingMask = titleLabel.autoresizingMask
+    subtitleLabel.textColor = StyleKit.barTextColor
     subtitleLabel.backgroundColor = UIColor.clearColor()
     subtitleLabel.text = subtitleText
     subtitleLabel.font = subtitleFont

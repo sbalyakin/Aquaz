@@ -22,7 +22,7 @@ private class RevealInitializer {
   
 }
 
-class RevealedViewController: UIViewController {
+class RevealedViewController: StyledViewController {
   
   var initializesRevealControls = true
   
@@ -35,7 +35,7 @@ class RevealedViewController: UIViewController {
   }
 }
 
-class RevealedTableViewController: UITableViewController {
+class RevealedTableViewController: StyledTableViewController {
   
   var initializesRevealControls = true
   
