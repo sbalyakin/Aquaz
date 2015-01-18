@@ -12,8 +12,8 @@ private class RevealInitializer {
 
   class func revealButtonSetup(viewController: UIViewController) {
     if let revealViewController = viewController.revealViewController() {
-      // TODO: Should be replaced with image button
-      let revealButton = UIBarButtonItem(title: "Menu", style: .Plain, target: revealViewController, action: "revealToggle:")
+      let menuImage = UIImage(named: "iconMenu")
+      let revealButton = UIBarButtonItem(image: menuImage, style: .Plain, target: revealViewController, action: "revealToggle:")
       viewController.navigationItem.setLeftBarButtonItem(revealButton, animated: true)
       viewController.navigationController!.navigationBar.addGestureRecognizer(revealViewController.panGestureRecognizer())
       viewController.view.addGestureRecognizer(revealViewController.panGestureRecognizer())

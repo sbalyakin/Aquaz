@@ -31,6 +31,8 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
     weekStatisticsView.delegate = self
     weekStatisticsView.titleForScaleFunction = getTitleForAmount
     
+    nextWeekButton.setImage(UIImage(named: "iconRight"), forState: .Disabled)
+
     dateWasChanged()
   }
 

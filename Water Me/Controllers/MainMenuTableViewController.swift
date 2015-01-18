@@ -31,5 +31,5 @@ class MainMenuTableViewController: UITableViewController {
     selectionView.backgroundColor = StyleKit.mainMenuBackgroundColor.colorWithHighlight(0.1)
     cell.selectedBackgroundView = selectionView
   }
-  
+
 }

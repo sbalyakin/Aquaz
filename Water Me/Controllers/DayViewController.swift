@@ -122,6 +122,12 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
 
   private func setupSummaryBar() {
+    showDaySelectionButton.setImage(UIImage(named: "iconCalendarActive"), forState: .Selected)
+    highActivityButton.setImage(UIImage(named: "iconHighActivityActive"), forState: .Selected)
+    hotDayButton.setImage(UIImage(named: "iconHotActive"), forState: .Selected)
+    previousDayButton.setImage(UIImage(named: "iconLeft"), forState: .Disabled)
+    nextDayButton.setImage(UIImage(named: "iconRight"), forState: .Disabled)
+
     setDaySelectionBarVisible(Settings.sharedInstance.uiDisplayDaySelection.value, animated: false)
     setupMultiprogressControl()
   }
@@ -162,7 +168,6 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     pageViewController.dataSource = self
     pageViewController.delegate = self
     pageViewController.setViewControllers([selectDrinkViewController], direction: .Forward, animated: false, completion: nil)
-    pageButton.title = pageTitles[0]
     pageViewController.view.frame = rect
     
     addChildViewController(pageViewController)
@@ -199,10 +204,9 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
       changeFrame()
     }
     
-    // TODO: Should be re-written for image
     Settings.sharedInstance.uiDisplayDaySelection.value = visible
-    let color: UIColor? = visible ? UIColor.greenColor() : nil
-    showDaySelectionButton.setTitleColor(color, forState: .Normal)
+    
+    showDaySelectionButton.selected = visible
   }
   
   @IBAction func toggleHighActivityMode(sender: AnyObject) {
@@ -254,9 +258,9 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
     let currentPage = pageViewController.viewControllers.last as UIViewController
     if currentPage == pages[0] {
-      pageButton.title = pageTitles[0]
+      pageButton.image = UIImage(named: "iconDiary")
     } else if currentPage == pages[1] {
-      pageButton.title = pageTitles[1]
+      pageButton.image = UIImage(named: "iconUp")
     }
   }
   
@@ -264,10 +268,10 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     let currentPage = pageViewController.viewControllers.last as UIViewController
     if currentPage == pages[0] {
       pageViewController.setViewControllers([pages[1]], direction: .Forward, animated: true, completion: nil)
-      pageButton.title = pageTitles[1]
+      pageButton.image = UIImage(named: "iconUp")
     } else if currentPage == pages[1] {
       pageViewController.setViewControllers([pages[0]], direction: .Reverse, animated: true, completion: nil)
-      pageButton.title = pageTitles[0]
+      pageButton.image = UIImage(named: "iconDiary")
     }
   }
 
@@ -438,13 +442,8 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     // Update maximum for multi progress control
     consumptionProgressView.maximum = CGFloat(consumptionRateAmount)
 
-    // TODO: Should be re-written for image
-    let highActivityColor: UIColor? = consumptionHighActivityFraction > 0 ? UIColor.greenColor() : nil
-    highActivityButton.setTitleColor(highActivityColor, forState: .Normal)
-
-    // TODO: Should be re-written for image
-    let hotDayColor: UIColor? = consumptionHotDayFraction > 0 ? UIColor.greenColor() : nil
-    hotDayButton.setTitleColor(hotDayColor, forState: .Normal)
+    highActivityButton.selected = consumptionHighActivityFraction > 0
+    hotDayButton.selected = consumptionHotDayFraction > 0
   }
   
   private func saveConsumptionRateForCurrentDate(#baseRateAmount: Double, hotDayFraction: Double, highActivityFraction: Double) {
@@ -542,8 +541,6 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   private var pages: [UIViewController] = []
   private var selectDrinkViewController: SelectDrinkViewController!
   private var diaryViewController: DiaryViewController!
-  // TODO: Page titles should be replaced with images
-  private let pageTitles = ["Diary", "Drinks"]
   private var summaryBarOriginalFrame: CGRect!
 
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision

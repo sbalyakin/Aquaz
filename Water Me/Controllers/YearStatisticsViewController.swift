@@ -30,8 +30,11 @@ class YearStatisticsViewController: StyledViewController {
     yearStatisticsView.titleForHorizontalStep = getMonthTitleFromIndex
     yearStatisticsView.titleForVerticalStep = getTitleForAmount
     yearStatisticsView.backgroundColor = StyleKit.pageBackgroundColor
-    yearStatisticsView.backgroundDarkColor = StyleKit.pageBackgroundColor.colorWithShadow(0.03)
+//    yearStatisticsView.backgroundDarkColor = StyleKit.pageBackgroundColor.colorWithShadow(0.03)
+    yearStatisticsView.backgroundDarkColor = UIColor.clearColor()
     
+    nextYearButton.setImage(UIImage(named: "iconRight"), forState: .Disabled)
+
     dateWasChanged()
   }
 

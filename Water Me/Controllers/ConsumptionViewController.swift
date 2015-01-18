@@ -135,7 +135,7 @@ class ConsumptionViewController: StyledViewController {
     smallAmountButton.backgroundColor = drink.darkColor
     mediumAmountButton.backgroundColor = drink.darkColor
     largeAmountButton.backgroundColor = drink.darkColor
-    navigationController!.navigationBar.barTintColor = drink.darkColor
+    navigationController!.navigationBar.barTintColor = drink.mainColor
   }
 
   private func createCustomNavigationTitle() {
