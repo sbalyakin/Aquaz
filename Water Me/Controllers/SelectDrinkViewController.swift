@@ -72,7 +72,10 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     let drinkIndex = indexPath.row
     assert(drinkIndex < Drink.getDrinksCount())
-    let drink = Drink.getDrinkByIndex(drinkIndex)
+
+    let drinkType = displayedDrinkTypes[drinkIndex]
+    
+    let drink = Drink.getDrinkByType(drinkType)
     
     let consumptionViewController = storyboard!.instantiateViewControllerWithIdentifier("ConsumptionViewController") as ConsumptionViewController
     consumptionViewController.drink = drink
