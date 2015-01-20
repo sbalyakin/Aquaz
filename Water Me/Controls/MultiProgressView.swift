@@ -16,6 +16,11 @@ import UIKit
     }
   }
 
+  @IBInspectable var emptySectionColor: UIColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1)
+  @IBInspectable var borderColor: UIColor = UIColor(red: 167/255, green: 169/255, blue: 171/255, alpha: 0.8)
+  @IBInspectable var borderWidth: CGFloat = 1.0
+  @IBInspectable var sectionsPading: CGFloat = 4.0
+  
   var animationDuration = 0.2
 
   class Section {
@@ -44,6 +49,16 @@ import UIKit
     }
   }
 
+  override func prepareForInterfaceBuilder() {
+    // Initialize values with some predefined values in order to show in Interface Builder
+    let section1 = addSection(color: UIColor.redColor())
+    section1.factor = 0.2
+    let section2 = addSection(color: UIColor.greenColor())
+    section2.factor = 0.3
+    let section3 = addSection(color: UIColor.blueColor())
+    section3.factor = 0.4
+  }
+
   func addSection(#color: UIColor) -> Section {
     let section = Section(color: color, layer: layer)
     sections.append(section)
@@ -59,18 +74,28 @@ import UIKit
   }
   
   override func drawRect(rect: CGRect) {
+    drawBackground(rect)
+
+    let sectionsRect = rect.rectByInsetting(dx: borderWidth + sectionsPading, dy: borderWidth + sectionsPading)
+    drawSections(sectionsRect)
+  }
+  
+  private func drawBackground(rect: CGRect) {
+    // Draw the background
+    let backgroundPath = UIBezierPath(rect: rect)
+    backgroundColor!.setFill()
+    backgroundPath.fill()
+    backgroundPath.lineWidth = borderWidth
+    borderColor.setStroke()
+    backgroundPath.stroke()
+  }
+  
+  private func drawSections(rect: CGRect) {
     let rectWidth = rect.width
     let rectRight = rect.maxX
     var left = rect.minX
     var isLast = false
-    
-    // Draw the background
-    if backgroundColor != nil {
-      let backgroundPath = UIBezierPath(rect: rect)
-      backgroundColor!.setFill()
-      backgroundPath.fill()
-    }
-    
+
     for section in sections {
       // Compute section bounds
       var width = trunc(section.factor / maximum * rectWidth)
@@ -80,7 +105,7 @@ import UIKit
       }
       
       // Draw section
-      let sectionRect = CGRectMake(left, rect.minY, width, rect.maxY)
+      let sectionRect = CGRectMake(left, rect.minY, width, rect.height)
       let sectionPath = UIBezierPath(rect: sectionRect)
       section.shapeLayer.frame = sectionRect
       section.shapeLayer.bounds = sectionRect
@@ -91,6 +116,15 @@ import UIKit
       }
       
       left += width
+    }
+
+    // Draw empty section if it's necessary
+    if left < rectRight {
+      let width = rectRight - left
+      let rect = CGRectMake(left, rect.minY, width, rect.height)
+      let path = UIBezierPath(rect: rect)
+      emptySectionColor.setFill()
+      path.fill()
     }
   }
   
