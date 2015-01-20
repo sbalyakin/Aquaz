@@ -31,8 +31,6 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
     monthStatisticsView.dataSource = self
     monthStatisticsView.delegate = self
     
-    nextMonthButton.setImage(UIImage(named: "iconRight"), forState: .Disabled)
-
     dateWasChanged()
   }
   

@@ -22,7 +22,6 @@ class StatisticsViewController: RevealedViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    segmentedControl.tintColor = StyleKit.barBackgroundColor
     segmentedControl.layer.cornerRadius = 3
     
     let viewControllerTypeToActivate = Settings.sharedInstance.uiSelectedStatisticsPage.value

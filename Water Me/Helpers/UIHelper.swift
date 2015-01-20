@@ -42,7 +42,12 @@ class UIHelper {
 
     return (containerView: container, titleLabel: titleLabel, subtitleLabel: subtitleLabel)
   }
-  
+
+  class func applyStylization() {
+    UISegmentedControl.appearance().tintColor = StyleKit.controlTintColor
+    UIButton.appearance().tintColor = StyleKit.controlTintColor
+    UISwitch.appearance().onTintColor = StyleKit.controlTintColor
+  }
 }
 
 extension UIColor {

@@ -24,8 +24,6 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
     calendarView.selectedDate = date
     calendarView.delegate = self
 
-    nextMonthButton.setImage(UIImage(named: "iconRight"), forState: .Disabled)
-
     switchToDate(date)
   }
   

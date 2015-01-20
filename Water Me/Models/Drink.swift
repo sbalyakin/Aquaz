@@ -18,20 +18,24 @@ class Drink: NSManagedObject, NamedEntity {
   @NSManaged var recentAmount: RecentAmount
 
   private struct Static {
-    static let waterTitle   = NSLocalizedString("D:Water",   value: "Water",   comment: "Drink: Title for water")
-    static let coffeeTitle  = NSLocalizedString("D:Coffee",  value: "Coffee",  comment: "Drink: Title for coffee")
-    static let teaTitle     = NSLocalizedString("D:Tea",     value: "Tea",     comment: "Drink: Title for tea")
-    static let sodaTitle    = NSLocalizedString("D:Soda",    value: "Soda",    comment: "Drink: Title for soda")
-    static let juiceTitle   = NSLocalizedString("D:Juice",   value: "Juice",   comment: "Drink: Title for juice")
-    static let milkTitle    = NSLocalizedString("D:Milk",    value: "Milk",    comment: "Drink: Title for milk")
-    static let alcoholTitle = NSLocalizedString("D:Alcohol", value: "Alcohol", comment: "Drink: Title for alcohol")
-    static let sportTitle   = NSLocalizedString("D:Sport",   value: "Sport",   comment: "Drink: Title for sport drink")
-    static let energyTitle  = NSLocalizedString("D:Energy",  value: "Energy",  comment: "Drink: Title for energetic drink")
+    static let waterTitle        = NSLocalizedString("D:Water",         value: "Water",         comment: "Drink: Title for water")
+    static let coffeeTitle       = NSLocalizedString("D:Coffee",        value: "Coffee",        comment: "Drink: Title for coffee")
+    static let teaTitle          = NSLocalizedString("D:Tea",           value: "Tea",           comment: "Drink: Title for tea")
+    static let sodaTitle         = NSLocalizedString("D:Soda",          value: "Soda",          comment: "Drink: Title for soda")
+    static let juiceTitle        = NSLocalizedString("D:Juice",         value: "Juice",         comment: "Drink: Title for juice")
+    static let milkTitle         = NSLocalizedString("D:Milk",          value: "Milk",          comment: "Drink: Title for milk")
+    static let sportTitle        = NSLocalizedString("D:Sport",         value: "Sport",         comment: "Drink: Title for sport drink")
+    static let energyTitle       = NSLocalizedString("D:Energy",        value: "Energy",        comment: "Drink: Title for energetic drink")
+    static let alcoholTitle      = NSLocalizedString("D:Alcohol",       value: "Alcohol",       comment: "Drink: Title for alcohol")
+    static let beerTitle         = NSLocalizedString("D:Beer",          value: "Beer",          comment: "Drink: Title for beer")
+    static let wineTitle         = NSLocalizedString("D:Wine",          value: "Wine",          comment: "Drink: Title for wine")
+    static let strongLiquorTitle = NSLocalizedString("D:Strong Liquor", value: "Strong Liquor", comment: "Drink: Title for strong liquor")
     static let darkColorShadowLevel: CGFloat = 0.2
     // Use the cache to store previously used drink objects
     static var cachedDrinks: [Int: Drink] = [:]
   }
   
+  // Important! Order of this enum must NOT be changed in further versions. New drinks must be added to the end.
   enum DrinkType: Int {
     case Water = 0
     case Coffee
@@ -39,12 +43,16 @@ class Drink: NSManagedObject, NamedEntity {
     case Soda
     case Juice
     case Milk
-    case Alcohol
     case Sport
     case Energy
+    case Alcohol
+    case Beer
+    case Wine
+    case StrongLiquor
 
+    // Must be updated if new drink is added
     static var count: Int {
-      return Energy.rawValue + 1
+      return StrongLiquor.rawValue + 1
     }
   }
 
@@ -142,11 +150,6 @@ class Drink: NSManagedObject, NamedEntity {
       _drawDrinkFunction = StyleKit.drawMilkDrink
       _mainColor = StyleKit.milkColor
       
-    case .Alcohol:
-      _localizedName = Static.alcoholTitle
-      _drawDrinkFunction = StyleKit.drawAlcoholDrink
-      _mainColor = StyleKit.alcoholColor
-      
     case .Sport:
       _localizedName = Static.sportTitle
       _drawDrinkFunction = StyleKit.drawSportDrink
@@ -156,6 +159,26 @@ class Drink: NSManagedObject, NamedEntity {
       _localizedName = Static.energyTitle
       _drawDrinkFunction = StyleKit.drawEnergyDrink
       _mainColor = StyleKit.energyColor
+
+    case .Alcohol:
+      _localizedName = Static.alcoholTitle
+      _drawDrinkFunction = StyleKit.drawAlcoholDrink
+      _mainColor = StyleKit.alcoholColor
+      
+    case .Beer:
+      _localizedName = Static.beerTitle
+      _drawDrinkFunction = StyleKit.drawAlcoholDrink // TODO: Use particular draw function
+      _mainColor = StyleKit.alcoholColor
+      
+    case .Wine:
+      _localizedName = Static.wineTitle
+      _drawDrinkFunction = StyleKit.drawAlcoholDrink // TODO: Use particular draw function
+      _mainColor = StyleKit.alcoholColor
+      
+    case .StrongLiquor:
+      _localizedName = Static.strongLiquorTitle
+      _drawDrinkFunction = StyleKit.drawAlcoholDrink // TODO: Use particular draw function
+      _mainColor = StyleKit.alcoholColor
     }
     
     _darkColor = _mainColor.colorWithShadow(Static.darkColorShadowLevel)
@@ -171,6 +194,10 @@ class Drink: NSManagedObject, NamedEntity {
   
   class func getDrinksCount() -> Int {
     return DrinkType.count
+  }
+  
+  class func getDrinkByType(drinkType: Drink.DrinkType) -> Drink? {
+    return getDrinkByIndex(drinkType.rawValue)
   }
   
   class func getDrinkByIndex(index: Int) -> Drink? {

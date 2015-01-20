@@ -37,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     }
 
+    UIHelper.applyStylization()
+    
     return true
   }
   

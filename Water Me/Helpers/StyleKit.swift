@@ -20,18 +20,19 @@ public class StyleKit : NSObject {
     static var drinksWhiteColor: UIColor = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
     static var waterColor: UIColor = UIColor(red: 0.000, green: 0.616, blue: 0.788, alpha: 1.000)
     static var coffeeColor: UIColor = UIColor(red: 0.569, green: 0.298, blue: 0.220, alpha: 1.000)
-    static var teaColor: UIColor = UIColor(red: 0.890, green: 0.545, blue: 0.102, alpha: 1.000)
+    static var teaColor: UIColor = UIColor(red: 0.980, green: 0.647, blue: 0.098, alpha: 1.000)
     static var juiceColor: UIColor = UIColor(red: 0.949, green: 0.396, blue: 0.133, alpha: 1.000)
     static var milkColor: UIColor = UIColor(red: 0.306, green: 0.788, blue: 0.961, alpha: 1.000)
     static var sodaColor: UIColor = UIColor(red: 0.314, green: 0.761, blue: 0.733, alpha: 1.000)
     static var energyColor: UIColor = UIColor(red: 0.773, green: 0.404, blue: 0.663, alpha: 1.000)
     static var alcoholColor: UIColor = UIColor(red: 0.937, green: 0.255, blue: 0.224, alpha: 1.000)
     static var sportColor: UIColor = UIColor(red: 0.427, green: 0.753, blue: 0.404, alpha: 1.000)
+    static var controlTintColor: UIColor = StyleKit.waterColor
     static var pageBackgroundColor: UIColor = UIColor(red: 0.945, green: 0.945, blue: 0.949, alpha: 1.000)
-    static var barBackgroundColor: UIColor = UIColor(red: 0.000, green: 0.612, blue: 0.784, alpha: 1.000)
+    static var barBackgroundColor: UIColor = StyleKit.waterColor
     static var barTextColor: UIColor = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
     static var mainMenuBackgroundColor: UIColor = UIColor(red: 0.200, green: 0.231, blue: 0.255, alpha: 1.000)
-    static var mainMenuTextColor: UIColor = UIColor(red: 0.000, green: 0.612, blue: 0.784, alpha: 1.000)
+    static var mainMenuTextColor: UIColor = StyleKit.waterColor
   }
   
   //// Colors
@@ -46,6 +47,7 @@ public class StyleKit : NSObject {
   public class var energyColor: UIColor { return Cache.energyColor }
   public class var alcoholColor: UIColor { return Cache.alcoholColor }
   public class var sportColor: UIColor { return Cache.sportColor }
+  public class var controlTintColor: UIColor { return Cache.controlTintColor }
   public class var pageBackgroundColor: UIColor { return Cache.pageBackgroundColor }
   public class var barBackgroundColor: UIColor { return Cache.barBackgroundColor }
   public class var barTextColor: UIColor { return Cache.barTextColor }

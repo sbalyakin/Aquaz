@@ -14,9 +14,17 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
   
   var dayViewController: DayViewController!
   
+  private let columnsCount = 3
+  private var rowsCount = 0
+
+  private let displayedDrinkTypes: [Drink.DrinkType] = [
+    .Water, .Tea, .Coffee,
+    .Milk, .Juice, .Sport,
+    .Soda, .Energy, .Alcohol]
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    rowsCount = Int(ceil(Float(Drink.getDrinksCount()) / Float(columnsCount)))
+    rowsCount = Int(ceil(Float(displayedDrinkTypes.count) / Float(columnsCount)))
   }
   
   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -24,7 +32,7 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
   }
   
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return Drink.getDrinksCount()
+    return displayedDrinkTypes.count
   }
   
   // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -32,9 +40,11 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DrinkCell", forIndexPath: indexPath) as DrinkCollectionViewCell
     
     let drinkIndex = indexPath.row
-    assert(drinkIndex < Drink.getDrinksCount())
+    assert(drinkIndex < displayedDrinkTypes.count)
     
-    if let drink = Drink.getDrinkByIndex(drinkIndex) {
+    let drinkType = displayedDrinkTypes[drinkIndex]
+    
+    if let drink = Drink.getDrinkByType(drinkType) {
       cell.titleLabel.text = drink.localizedName
       cell.drinkView.drink = drink
     } else {
@@ -70,7 +80,4 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     consumptionViewController.dayViewController = dayViewController
     navigationController!.pushViewController(consumptionViewController, animated: true)
   }
-  
-  let columnsCount = 3
-  var rowsCount = 0
 }

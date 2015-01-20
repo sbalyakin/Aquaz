@@ -122,12 +122,6 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
 
   private func setupSummaryBar() {
-    showDaySelectionButton.setImage(UIImage(named: "iconCalendarActive"), forState: .Selected)
-    highActivityButton.setImage(UIImage(named: "iconHighActivityActive"), forState: .Selected)
-    hotDayButton.setImage(UIImage(named: "iconHotActive"), forState: .Selected)
-    previousDayButton.setImage(UIImage(named: "iconLeft"), forState: .Disabled)
-    nextDayButton.setImage(UIImage(named: "iconRight"), forState: .Disabled)
-
     setDaySelectionBarVisible(Settings.sharedInstance.uiDisplayDaySelection.value, animated: false)
     setupMultiprogressControl()
   }
