@@ -32,7 +32,7 @@ private extension Units.Volume {
 }
 
 class ConsumptionViewController: StyledViewController {
-  
+
   @IBOutlet weak var amountSlider: UISlider!
   @IBOutlet weak var amountLabel: UILabel!
   @IBOutlet weak var applyButton: UIButton!
@@ -136,6 +136,10 @@ class ConsumptionViewController: StyledViewController {
     mediumAmountButton.backgroundColor = drink.darkColor
     largeAmountButton.backgroundColor = drink.darkColor
     navigationController!.navigationBar.barTintColor = drink.mainColor
+  }
+  
+  func cancelConsumption() {
+    navigationController!.popViewControllerAnimated(true)
   }
 
   private func createCustomNavigationTitle() {

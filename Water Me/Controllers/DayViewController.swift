@@ -254,9 +254,9 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
     let currentPage = pageViewController.viewControllers.last as UIViewController
     if currentPage == pages[0] {
-      pageButton.image = UIImage(named: "iconDiary")
+      pageButton.image = UIImage(named: "iconDiary")?.imageWithRenderingMode(.AlwaysOriginal)
     } else if currentPage == pages[1] {
-      pageButton.image = UIImage(named: "iconUp")
+      pageButton.image = UIImage(named: "iconUp")?.imageWithRenderingMode(.AlwaysOriginal)
     }
   }
   
@@ -264,10 +264,10 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     let currentPage = pageViewController.viewControllers.last as UIViewController
     if currentPage == pages[0] {
       pageViewController.setViewControllers([pages[1]], direction: .Forward, animated: true, completion: nil)
-      pageButton.image = UIImage(named: "iconUp")
+      pageButton.image = UIImage(named: "iconUp")?.imageWithRenderingMode(.AlwaysOriginal)
     } else if currentPage == pages[1] {
       pageViewController.setViewControllers([pages[0]], direction: .Reverse, animated: true, completion: nil)
-      pageButton.image = UIImage(named: "iconDiary")
+      pageButton.image = UIImage(named: "iconDiary")?.imageWithRenderingMode(.AlwaysOriginal)
     }
   }
 

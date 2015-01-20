@@ -16,6 +16,14 @@ private class Styler {
       navigationController.navigationBar.barTintColor = StyleKit.barBackgroundColor
       navigationController.navigationBar.barStyle = .Black
       navigationController.navigationBar.tintColor = StyleKit.barTextColor
+      navigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: StyleKit.barTextColor]
+      navigationController.navigationBar.translucent = false
+      navigationController.navigationBar.tintAdjustmentMode = .Normal
+
+      // Replace standard back icon with custom white one. Standard back icon is slightly dimmed and looks gray.
+      let image = UIImage(named: "iconBack")!.imageWithRenderingMode(.AlwaysOriginal)
+      navigationController.navigationBar.backIndicatorImage = image
+      navigationController.navigationBar.backIndicatorTransitionMaskImage = image
     }
   }
   

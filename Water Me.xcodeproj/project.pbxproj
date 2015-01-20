@@ -52,6 +52,7 @@
 		A53869751A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53869741A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift */; };
 		A55337CF1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */; };
 		A5637BCB1A52AF11009489F6 /* DrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5637BCA1A52AF11009489F6 /* DrinkCollectionViewCell.swift */; };
+		A575A5A51A6EBB0300B00E9F /* StyledBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */; };
 		A59113D81A50665C007B4241 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59113DA1A50665C007B4241 /* InfoPlist.strings */; };
 		A59113DD1A50665C007B4241 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59113DF1A50665C007B4241 /* Localizable.strings */; };
 		A59113E21A5069EA007B4241 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59113E41A5069EA007B4241 /* InfoPlist.strings */; };
@@ -128,6 +129,7 @@
 		A53869741A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsIntervalPickerViewController.swift; sourceTree = "<group>"; };
 		A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewController.swift; sourceTree = "<group>"; };
 		A5637BCA1A52AF11009489F6 /* DrinkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkCollectionViewCell.swift; path = Controls/DrinkCollectionViewCell.swift; sourceTree = "<group>"; };
+		A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StyledBarButtonItem.swift; path = Controls/StyledBarButtonItem.swift; sourceTree = "<group>"; };
 		A59113CF1A5054ED007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A59113D01A5054ED007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		A59113D91A50665C007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				8455DACE1A694487004245F9 /* RoundedButton.swift */,
 				A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */,
 				A5A1681C1A6EA1330027711B /* DaySummaryView.swift */,
+				A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -376,9 +379,11 @@
 				TargetAttributes = {
 					84669A6819DAD78D003C2263 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = BEWTR7XXXS;
 					};
 					84669A8019DAD78D003C2263 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = BEWTR7XXXS;
 						TestTargetID = 84669A6819DAD78D003C2263;
 					};
 				};
@@ -454,6 +459,7 @@
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
 				A5E6094E1A6AB2CC00786D15 /* StyledViewController.swift in Sources */,
 				84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */,
+				A575A5A51A6EBB0300B00E9F /* StyledBarButtonItem.swift in Sources */,
 				A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */,
 				843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */,
 				841B13BE1A31FE4F00249426 /* UIHelper.swift in Sources */,
@@ -653,6 +659,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -664,6 +672,7 @@
 				INFOPLIST_FILE = "Water MeTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Water Me.app/Water Me";
 			};
 			name = Debug;
@@ -672,6 +681,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -679,6 +690,7 @@
 				INFOPLIST_FILE = "Water MeTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Water Me.app/Water Me";
 			};
 			name = Release;

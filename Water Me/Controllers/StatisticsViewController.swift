@@ -23,6 +23,9 @@ class StatisticsViewController: RevealedViewController {
     super.viewDidLoad()
     
     segmentedControl.layer.cornerRadius = 3
+    segmentedControl.tintColor = StyleKit.controlTintColor
+    segmentedControl.tintAdjustmentMode = .Normal
+    view.tintAdjustmentMode = .Normal
     
     let viewControllerTypeToActivate = Settings.sharedInstance.uiSelectedStatisticsPage.value
     segmentedControl.selectedSegmentIndex = viewControllerTypeToActivate.rawValue

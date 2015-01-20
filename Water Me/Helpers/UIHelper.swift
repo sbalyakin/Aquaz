@@ -47,6 +47,10 @@ class UIHelper {
     UISegmentedControl.appearance().tintColor = StyleKit.controlTintColor
     UIButton.appearance().tintColor = StyleKit.controlTintColor
     UISwitch.appearance().onTintColor = StyleKit.controlTintColor
+    UIBarButtonItem.appearance().tintColor = StyleKit.barTextColor
+    UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: StyleKit.barTextColor], forState: .Normal)
+    UINavigationBar.appearance().tintColor = StyleKit.barTextColor
+    UINavigationBar.appearance().tintAdjustmentMode = .Normal
   }
 }
 
