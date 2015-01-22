@@ -229,7 +229,7 @@ class ConsumptionViewController: StyledViewController {
       consumption.date = currentDate
       ModelHelper.sharedInstance.save()
       
-      dayViewController.updateConsumptions()
+      dayViewController.consumptionsWereChanged(doSort: true)
     }
   }
 

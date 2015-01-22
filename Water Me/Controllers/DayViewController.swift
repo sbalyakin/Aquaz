@@ -298,11 +298,13 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     // TODO: Take day offset in hours from settings
     consumptions = Consumption.fetchConsumptionsForDay(currentDate, dayOffsetInHours: 0)
 
-    updateConsumptions()
+    consumptionsWereChanged(doSort: false) // Sort is useless, because consumption are fetched already sorted
   }
   
   func addConsumption(consumption: Consumption) {
     consumptions.append(consumption)
+    
+    sortConsumptions()
     
     if let section = multiProgressSections[consumption.drink] {
       section.factor += CGFloat(consumption.waterIntake)
@@ -314,6 +316,10 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     
     updateNotifications(consumptionDate: consumption.date)
     checkForWaterIntakeComplete()
+  }
+  
+  private func sortConsumptions() {
+    consumptions.sort({ $0.date.isEarlierThan($1.date) })
   }
   
   private func updateNotifications(#consumptionDate: NSDate) {
@@ -368,7 +374,11 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     diaryViewController.updateTable(consumptions)
   }
   
-  func updateConsumptions() {
+  func consumptionsWereChanged(#doSort: Bool) {
+    if doSort {
+      sortConsumptions()
+    }
+    
     // Group consumptions by drinks
     var consumptionsMap: [Drink: Double] = [:]
     
