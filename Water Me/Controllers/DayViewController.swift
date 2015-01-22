@@ -47,14 +47,14 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   // MARK: Public properties -
   
   /// Current date for managing water intake
-  private var currentDate: NSDate = NSDate() {
+  private var currentDate: NSDate! {
     didSet {
       if mode == .General {
         if DateHelper.areDatesEqualByDays(date1: currentDate, date2: NSDate()) {
-          Settings.sharedInstance.uiUseDayPageDate.value = false
+          Settings.sharedInstance.uiUseCustomDateForDayView.value = false
         } else {
-          Settings.sharedInstance.uiUseDayPageDate.value = true
-          Settings.sharedInstance.uiDayPageDate.value = currentDate
+          Settings.sharedInstance.uiUseCustomDateForDayView.value = true
+          Settings.sharedInstance.uiCustomDateForDayView.value = currentDate
         }
       }
     }
@@ -77,8 +77,10 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    if mode == .General && Settings.sharedInstance.uiUseDayPageDate.value {
-      currentDate = Settings.sharedInstance.uiDayPageDate.value
+    if mode == .General && Settings.sharedInstance.uiUseCustomDateForDayView.value {
+      currentDate = Settings.sharedInstance.uiCustomDateForDayView.value
+    } else {
+      currentDate = NSDate()
     }
     
     summaryBarOriginalFrame = summaryBar.frame
@@ -97,6 +99,22 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
     
     applyStyle()
+    refreshCurrentDay(showAlert: false)
+  }
+  
+  func refreshCurrentDay(#showAlert: Bool) {
+    let dayIsSwitched = !DateHelper.areDatesEqualByDays(date1: currentDate, date2: NSDate())
+    
+    if mode == .General && isCurrentDayToday && dayIsSwitched {
+      if showAlert {
+        let message = NSLocalizedString("DVC:Welcome to the next day", value: "Welcome to the next day", comment: "DayViewController: Title for alert displayed if tomorrow has come")
+        let cancelButtonTitle = NSLocalizedString("DVC:OK", value: "OK", comment: "DayViewController: Cancel button title for alert displayed if tomorrow has come")
+        let alert = UIAlertView(title: nil, message: message, delegate: nil, cancelButtonTitle: cancelButtonTitle)
+        alert.show()
+      }
+
+      setCurrentDate(NSDate())
+    }
   }
   
   func setCurrentDate(date: NSDate) {
@@ -550,4 +568,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
 
+  private var isCurrentDayToday: Bool {
+    return !Settings.sharedInstance.uiUseCustomDateForDayView.value
+  }
 }

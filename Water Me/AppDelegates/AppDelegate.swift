@@ -98,6 +98,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //let appFolder = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
     //println("App dir: \(appFolder[0])");
     NotificationsHelper.setApplicationIconBadgeNumber(0)
+
+    refreshCurrentDayForDayViewController(showAlert: false)
+  }
+  
+  func applicationSignificantTimeChange(application: UIApplication) {
+    refreshCurrentDayForDayViewController(showAlert: true)
+  }
+  
+  private func refreshCurrentDayForDayViewController(#showAlert: Bool) {
+    if let rootViewController = window?.rootViewController as? SWRevealViewController {
+      if let frontNavigationController = rootViewController.frontViewController as? UINavigationController {
+        if let dayViewController = frontNavigationController.topViewController as? DayViewController {
+          dayViewController.refreshCurrentDay(showAlert: showAlert)
+        }
+      }
+    }
   }
   
   func applicationWillTerminate(application: UIApplication) {

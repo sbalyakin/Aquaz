@@ -210,11 +210,15 @@ class ConsumptionViewController: StyledViewController {
   }
   
   private func addConsumption(#amount: Double) {
-    var date: NSDate
+    var date: NSDate!
     if timeIsChoosen {
       date = currentDate
     } else {
-      date = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: NSDate())
+      if isCurrentDayToday {
+        date = NSDate()
+      } else {
+        date = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: NSDate())
+      }
     }
     
     drink.recentAmount.amount = amount
