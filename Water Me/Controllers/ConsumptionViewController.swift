@@ -62,15 +62,17 @@ class ConsumptionViewController: StyledViewController {
       if let existingConsumption = consumption {
         drink = existingConsumption.drink
         currentDate = existingConsumption.date
+        timeIsChoosen = true
+      } else {
+        timeIsChoosen = false
       }
     }
   }
-  
-  var isCurrentDayShouldBeShown: Bool {
-    return !isCurrentDayToday || viewMode == .Edit
-  }
 
+  private var timeIsChoosen = false
+  
   func changeTimeForCurrentDate(time: NSDate) {
+    timeIsChoosen = true
     currentDate = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: time)
     if let dayLabel = navigationCurrentDayLabel {
       dayLabel.text = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
@@ -84,7 +86,6 @@ class ConsumptionViewController: StyledViewController {
     setupAmountRelatedControlsWithInitialAmount()
     setupApplyButton()
     createCustomNavigationTitle()
-    setupPickTimeButton()
     setupDrinkView()
   }
 
@@ -143,24 +144,20 @@ class ConsumptionViewController: StyledViewController {
   }
 
   private func createCustomNavigationTitle() {
-    if isCurrentDayShouldBeShown {
-      let dateText = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
-
-      let titleParts = UIHelper.createNavigationTitleViewWithSubTitle(navigationController: navigationController!, titleText: drink.localizedName, subtitleText: dateText)
-      
-      navigationTitleView = titleParts.containerView
-      navigationTitleLabel = titleParts.titleLabel
-      navigationCurrentDayLabel = titleParts.subtitleLabel
-      navigationItem.titleView = navigationTitleView
+    var subtitleText: String
+    
+    if timeIsChoosen {
+      subtitleText = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
     } else {
-      navigationItem.title = drink.localizedName
+      subtitleText = NSLocalizedString("CVC:Now", value: "Now", comment: "ConsumptionViewController: Subtitle of view if user adds consumption for today")
     }
-  }
-  
-  private func setupPickTimeButton() {
-    if !isCurrentDayShouldBeShown {
-      pickTimeButton.title = nil
-    }
+
+    let titleParts = UIHelper.createNavigationTitleViewWithSubTitle(navigationController: navigationController!, titleText: drink.localizedName, subtitleText: subtitleText)
+    
+    navigationTitleView = titleParts.containerView
+    navigationTitleLabel = titleParts.titleLabel
+    navigationCurrentDayLabel = titleParts.subtitleLabel
+    navigationItem.titleView = navigationTitleView
   }
   
   private func setupDrinkView() {
@@ -214,7 +211,7 @@ class ConsumptionViewController: StyledViewController {
   
   private func addConsumption(#amount: Double) {
     var date: NSDate
-    if isCurrentDayShouldBeShown {
+    if timeIsChoosen {
       date = currentDate
     } else {
       date = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: NSDate())
