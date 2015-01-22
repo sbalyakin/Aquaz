@@ -16,6 +16,21 @@ class NotificationsHelper {
     static let notificationAlertAction = NSLocalizedString("NH:Drink", value: "Drink", comment: "NotificationsHelper: Text for alert action of notifications")
   }
   
+  class func areLocalNotificationsRegistered() -> Bool {
+    if UIApplication.instancesRespondToSelector(Selector("currentUserNotificationSettings")) {
+      let notificationPermissions = UIApplication.sharedApplication().currentUserNotificationSettings()
+      if notificationPermissions.types & UIUserNotificationType.Sound == .Sound ||
+         notificationPermissions.types & UIUserNotificationType.Alert == .Alert ||
+         notificationPermissions.types & UIUserNotificationType.Badge == .Badge {
+        return true
+      }
+      
+      return false
+    }
+    
+    return true
+  }
+  
   class func registerApplicationForLocalNotifications() {
     if UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:"))
     {
@@ -40,7 +55,7 @@ class NotificationsHelper {
     UIApplication.sharedApplication().cancelAllLocalNotifications()
   }
 
-  class func addNotificationsFromSettingsForDate(date: NSDate) {
+  class func scheduleNotificationsFromSettingsForDate(date: NSDate) {
     let fromTime = Settings.sharedInstance.notificationsFrom.value
     let toTime = Settings.sharedInstance.notificationsTo.value
     let interval = Settings.sharedInstance.notificationsInterval.value
@@ -49,7 +64,7 @@ class NotificationsHelper {
     let toDate = DateHelper.dateByJoiningDateTime(datePart: date, timePart: toTime)
     
     for var fireDate = fromDate; !fireDate.isLaterThan(toDate); fireDate = fireDate.dateByAddingTimeInterval(interval) {
-      addNotification(fireDate: fireDate, repeatInterval: .CalendarUnitDay)
+      scheduleNotification(fireDate: fireDate, repeatInterval: .CalendarUnitDay)
     }
   }
   
@@ -58,7 +73,7 @@ class NotificationsHelper {
     
     // Schedule all notifications from the next day
     let nextDayDate = DateHelper.addToDate(consumptionDate, years: 0, months: 0, days: 1)
-    addNotificationsFromSettingsForDate(nextDayDate)
+    scheduleNotificationsFromSettingsForDate(nextDayDate)
     
     // Schedule one-time notifications from the consumption time
     let toTime = Settings.sharedInstance.notificationsTo.value
@@ -66,11 +81,11 @@ class NotificationsHelper {
     let interval = Settings.sharedInstance.notificationsInterval.value
     
     for var fireDate = consumptionDate; !fireDate.isLaterThan(toDate); fireDate = fireDate.dateByAddingTimeInterval(interval) {
-      addNotification(fireDate: fireDate, repeatInterval: nil)
+      scheduleNotification(fireDate: fireDate, repeatInterval: nil)
     }
   }
 
-  class func addNotification(#fireDate: NSDate, repeatInterval: NSCalendarUnit?) {
+  class func scheduleNotification(#fireDate: NSDate, repeatInterval: NSCalendarUnit?) {
     let notification = UILocalNotification()
     notification.fireDate = fireDate
     notification.alertBody = Strings.notificationAlertBody

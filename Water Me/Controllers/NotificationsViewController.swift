@@ -61,9 +61,13 @@ class NotificationsViewController: RevealedTableViewController {
 
   func updateNotificationsFromSettings() {
     NotificationsHelper.removeAllNotifications()
-    
+
     if Settings.sharedInstance.notificationsEnabled.value {
-      NotificationsHelper.addNotificationsFromSettingsForDate(NSDate())
+      if NotificationsHelper.areLocalNotificationsRegistered() {
+        NotificationsHelper.scheduleNotificationsFromSettingsForDate(NSDate())
+      } else {
+        NotificationsHelper.registerApplicationForLocalNotifications()
+      }
     }
   }
   
@@ -107,10 +111,6 @@ class NotificationsViewController: RevealedTableViewController {
   }
 
   @IBAction func enableNotificationsSwitchValueChanged(sender: AnyObject) {
-    if enableNotificationsSwitch.on {
-      NotificationsHelper.registerApplicationForLocalNotifications()
-    }
-    
     Settings.sharedInstance.notificationsEnabled.value = enableNotificationsSwitch.on
     updateNotificationsFromSettings()
   }

@@ -336,12 +336,10 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
       NotificationsHelper.removeAllNotifications()
       
       let nextDayDate = DateHelper.addToDate(consumptionDate, years: 0, months: 0, days: 1)
-      NotificationsHelper.addNotificationsFromSettingsForDate(nextDayDate)
-      
-      return
+      NotificationsHelper.scheduleNotificationsFromSettingsForDate(nextDayDate)
+    } else {
+      NotificationsHelper.rescheduleNotificationsBecauseOfConsumption(consumptionDate: consumptionDate)
     }
-    
-    NotificationsHelper.rescheduleNotificationsBecauseOfConsumption(consumptionDate: consumptionDate)
   }
 
   private func checkForWaterIntakeComplete() {

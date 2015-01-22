@@ -43,13 +43,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+    NotificationsHelper.setApplicationIconBadgeNumber(0)
+    
     if application.applicationState == .Active {
       return
     }
 
-    NotificationsHelper.setApplicationIconBadgeNumber(0)
-
     showDayViewControllerForToday()
+  }
+  
+  func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+    NotificationsHelper.removeAllNotifications()
+    NotificationsHelper.scheduleNotificationsFromSettingsForDate(NSDate())
   }
   
   private func showDayViewControllerForToday() {
