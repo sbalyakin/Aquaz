@@ -52,6 +52,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     showDayViewControllerForToday()
   }
   
+  func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+    NotificationsHelper.setApplicationIconBadgeNumber(0)
+    showDayViewControllerForToday()
+  }
+  
   func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
     NotificationsHelper.removeAllNotifications()
     NotificationsHelper.scheduleNotificationsFromSettingsForDate(NSDate())
@@ -83,6 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func applicationWillEnterForeground(application: UIApplication) {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    NotificationsHelper.setApplicationIconBadgeNumber(0)
   }
   
   func applicationDidBecomeActive(application: UIApplication) {
