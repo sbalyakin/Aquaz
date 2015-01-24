@@ -80,7 +80,9 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     if mode == .General && Settings.sharedInstance.uiUseCustomDateForDayView.value {
       currentDate = Settings.sharedInstance.uiCustomDateForDayView.value
     } else {
-      currentDate = NSDate()
+      if currentDate == nil {
+        currentDate = NSDate()
+      }
     }
     
     summaryBarOriginalFrame = summaryBar.frame
