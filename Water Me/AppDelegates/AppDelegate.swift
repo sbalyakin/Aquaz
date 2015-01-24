@@ -63,12 +63,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func showDayViewControllerForToday() {
-    window?.makeKeyAndVisible()
     if let rootViewController = window?.rootViewController as? SWRevealViewController {
+      if let frontNavigationController = rootViewController.frontViewController as? UINavigationController {
+        if let dayViewController = frontNavigationController.topViewController as? DayViewController {
+          dayViewController.refreshCurrentDay(showAlert: false)
+          dayViewController.switchToSelectDrinkPage()
+          return
+        }
+      }
+
+      // Recreate day view controller in order to show day view
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      
       let dayNavigationController = storyboard.instantiateViewControllerWithIdentifier("DayNavigationController") as UINavigationController
-      
       let dayViewController = dayNavigationController.topViewController as DayViewController
       dayViewController.setCurrentDate(NSDate())
       rootViewController.setFrontViewController(dayNavigationController, animated: false)

@@ -278,7 +278,11 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
   }
   
-  @IBAction func toggleCurrentPage(sender: AnyObject) {
+  @IBAction func pageButtonWasTapped(sender: AnyObject) {
+    toggleCurrentPage()
+  }
+  
+  private func toggleCurrentPage() {
     let currentPage = pageViewController.viewControllers.last as UIViewController
     if currentPage == pages[0] {
       pageViewController.setViewControllers([pages[1]], direction: .Forward, animated: true, completion: nil)
@@ -286,6 +290,13 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     } else if currentPage == pages[1] {
       pageViewController.setViewControllers([pages[0]], direction: .Reverse, animated: true, completion: nil)
       pageButton.image = UIImage(named: "iconDiary")?.imageWithRenderingMode(.AlwaysOriginal)
+    }
+  }
+  
+  func switchToSelectDrinkPage() {
+    let currentPage = pageViewController.viewControllers.last as UIViewController
+    if currentPage != pages[0] {
+      toggleCurrentPage()
     }
   }
 

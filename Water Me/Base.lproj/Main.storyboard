@@ -140,7 +140,7 @@
                     <navigationItem key="navigationItem" title="Water Balance" id="Oy2-YR-KpK">
                         <barButtonItem key="rightBarButtonItem" image="iconDiary" id="GKO-c9-CDb" customClass="StyledBarButtonItem" customModule="Water_Me" customModuleProvider="target">
                             <connections>
-                                <action selector="toggleCurrentPage:" destination="x3I-fN-BQH" id="u8v-pe-qHG"/>
+                                <action selector="pageButtonWasTapped:" destination="x3I-fN-BQH" id="3Sd-Ly-sog"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
