@@ -30,19 +30,18 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
     
     weekStatisticsView.delegate = self
     weekStatisticsView.titleForScaleFunction = getTitleForAmount
-    
-    dateWasChanged()
   }
 
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    dateWasChanged()
+  }
+  
   private func dateWasChanged() {
     computeStatisticsDateRange()
     initDatePeriodLabel()
     initWeekStatisticsView()
     updateSwitchButtons()
-  }
-  
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
   }
   
   func weekStatisticsViewDaySelected(dayIndex: Int) {

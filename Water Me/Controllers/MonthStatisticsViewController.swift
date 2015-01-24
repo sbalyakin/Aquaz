@@ -30,7 +30,10 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
 
     monthStatisticsView.dataSource = self
     monthStatisticsView.delegate = self
-    
+  }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
     dateWasChanged()
   }
   
