@@ -341,12 +341,18 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
       section.factor += CGFloat(consumption.waterIntake)
     }
     consumptionProgressView.setNeedsDisplay()
+    
+    let needCheckForWaterIntakeCompletion = overallConsumption < consumptionRateAmount
+    
     overallConsumption += consumption.waterIntake
     
     diaryViewController.updateTable(consumptions)
     
     updateNotifications(consumptionDate: consumption.date)
-    checkForWaterIntakeComplete()
+    
+    if needCheckForWaterIntakeCompletion {
+      checkForWaterIntakeCompletion()
+    }
   }
   
   private func sortConsumptions() {
@@ -373,7 +379,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
   }
 
-  private func checkForWaterIntakeComplete() {
+  private func checkForWaterIntakeCompletion() {
     let isToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
     if !isToday {
       return
