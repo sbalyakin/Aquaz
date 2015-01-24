@@ -103,7 +103,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func applicationSignificantTimeChange(application: UIApplication) {
-    refreshCurrentDayForDayViewController(showAlert: true)
+    let showAlert = application.applicationState == .Active
+    refreshCurrentDayForDayViewController(showAlert: showAlert)
   }
   
   private func refreshCurrentDayForDayViewController(#showAlert: Bool) {
