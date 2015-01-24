@@ -222,7 +222,7 @@ class Settings {
     key: "Notifications - Interval", initialValue: 60 * 60 * 1.5, userDefaults: self.standardUserDefaults)
   
   lazy var notificationsSound: SettingsOrdinalItem<String> = SettingsOrdinalItem(
-    key: "Notifications - Sound", initialValue: UILocalNotificationDefaultSoundName, userDefaults: self.standardUserDefaults)
+    key: "Notifications - Sound", initialValue: "default.wav", userDefaults: self.standardUserDefaults)
   
   lazy var notificationsSmart: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "Notifications - Smart", initialValue: true, userDefaults: self.standardUserDefaults)
