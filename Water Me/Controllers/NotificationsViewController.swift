@@ -40,12 +40,7 @@ class NotificationsViewController: RevealedTableViewController {
     useWaterIntakeSwitch.setOn(Settings.sharedInstance.notificationsUseWaterIntake.value, animated: false)
     
     let soundFileName = Settings.sharedInstance.notificationsSound.value
-    var soundTitle = ""
-    if soundFileName == UILocalNotificationDefaultSoundName {
-      soundTitle = NSLocalizedString("NVC:Default", value: "Default", comment: "NotificationsViewController: title for default system sound")
-    } else {
-      soundTitle = soundFileName.stringByDeletingPathExtension
-    }
+    let soundTitle = soundFileName.stringByDeletingPathExtension.capitalizedString
     soundCell.detailTextLabel?.text = soundTitle
   }
   
