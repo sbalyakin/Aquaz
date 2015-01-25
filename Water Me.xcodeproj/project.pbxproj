@@ -50,10 +50,9 @@
 		A53869731A4989A6000E03DC /* NotificationsTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53869721A4989A6000E03DC /* NotificationsTimePickerViewController.swift */; };
 		A53869751A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53869741A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift */; };
 		A55337CF1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */; };
-		A5637BCB1A52AF11009489F6 /* DrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5637BCA1A52AF11009489F6 /* DrinkCollectionViewCell.swift */; };
+		A55F34A61A74D6AC00A529A5 /* DrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */; };
+		A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */; };
 		A575A5A51A6EBB0300B00E9F /* StyledBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */; };
-		A579226B1A73FEFE00364C93 /* NewDrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57922691A73FEFE00364C93 /* NewDrinkCollectionViewCell.swift */; };
-		A579226C1A73FEFE00364C93 /* NewDrinkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A579226A1A73FEFE00364C93 /* NewDrinkCollectionViewCell.xib */; };
 		A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */; };
 		A58A65F11A73D4B90072164E /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8488A1901A540BAC00258EC8 /* default.wav */; };
 		A59113D81A50665C007B4241 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59113DA1A50665C007B4241 /* InfoPlist.strings */; };
@@ -131,10 +130,9 @@
 		A53869721A4989A6000E03DC /* NotificationsTimePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsTimePickerViewController.swift; sourceTree = "<group>"; };
 		A53869741A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsIntervalPickerViewController.swift; sourceTree = "<group>"; };
 		A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewController.swift; sourceTree = "<group>"; };
-		A5637BCA1A52AF11009489F6 /* DrinkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkCollectionViewCell.swift; path = Controls/DrinkCollectionViewCell.swift; sourceTree = "<group>"; };
+		A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkCollectionViewCell.swift; path = Controls/DrinkCollectionViewCell.swift; sourceTree = "<group>"; };
+		A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DrinkCollectionViewCell.xib; path = Controls/DrinkCollectionViewCell.xib; sourceTree = "<group>"; };
 		A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StyledBarButtonItem.swift; path = Controls/StyledBarButtonItem.swift; sourceTree = "<group>"; };
-		A57922691A73FEFE00364C93 /* NewDrinkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewDrinkCollectionViewCell.swift; path = Controls/NewDrinkCollectionViewCell.swift; sourceTree = "<group>"; };
-		A579226A1A73FEFE00364C93 /* NewDrinkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewDrinkCollectionViewCell.xib; path = Controls/NewDrinkCollectionViewCell.xib; sourceTree = "<group>"; };
 		A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A59113CF1A5054ED007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A59113D01A5054ED007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
@@ -174,7 +172,6 @@
 		8424AA041A0B57F9009C5C47 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				A5637BCA1A52AF11009489F6 /* DrinkCollectionViewCell.swift */,
 				A598D5091A6559FB00AA89CB /* DrinkView.swift */,
 				84126A821A278F4A00A66347 /* MonthStatisticsDayButton.swift */,
 				84126A841A278F4A00A66347 /* MonthStatisticsView.swift */,
@@ -187,8 +184,8 @@
 				A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */,
 				A5A1681C1A6EA1330027711B /* DaySummaryView.swift */,
 				A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */,
-				A57922691A73FEFE00364C93 /* NewDrinkCollectionViewCell.swift */,
-				A579226A1A73FEFE00364C93 /* NewDrinkCollectionViewCell.xib */,
+				A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */,
+				A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -425,9 +422,9 @@
 				A58A65F11A73D4B90072164E /* default.wav in Resources */,
 				A59113DD1A50665C007B4241 /* Localizable.strings in Resources */,
 				84669A7719DAD78D003C2263 /* Main.storyboard in Resources */,
+				A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */,
 				84669A7C19DAD78D003C2263 /* LaunchScreen.xib in Resources */,
 				84669A7919DAD78D003C2263 /* Images.xcassets in Resources */,
-				A579226C1A73FEFE00364C93 /* NewDrinkCollectionViewCell.xib in Resources */,
 				A59113E21A5069EA007B4241 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,10 +460,8 @@
 				8468D6421A0D1C240008D027 /* DateHelper.swift in Sources */,
 				8406D78119FE9875001C54BF /* Units.swift in Sources */,
 				843B056119E2D7800097A833 /* DayViewController.swift in Sources */,
-				A579226B1A73FEFE00364C93 /* NewDrinkCollectionViewCell.swift in Sources */,
 				8488A18E1A53FE6500258EC8 /* NotificationsSoundViewController.swift in Sources */,
 				843B056919E2D80E0097A833 /* ConsumptionRate.swift in Sources */,
-				A5637BCB1A52AF11009489F6 /* DrinkCollectionViewCell.swift in Sources */,
 				8404765B1A360273004F0FEF /* SupportViewController.swift in Sources */,
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
 				A5E6094E1A6AB2CC00786D15 /* StyledViewController.swift in Sources */,
@@ -482,6 +477,7 @@
 				84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */,
 				84C610BA1A319DBC00433EF1 /* MonthStatisticsViewController.swift in Sources */,
 				84380C2819E4195A0026398E /* Consumption.swift in Sources */,
+				A55F34A61A74D6AC00A529A5 /* DrinkCollectionViewCell.swift in Sources */,
 				A598D50A1A6559FB00AA89CB /* DrinkView.swift in Sources */,
 				84C610BC1A31A98900433EF1 /* YearStatisticsViewController.swift in Sources */,
 				A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */,

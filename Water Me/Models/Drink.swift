@@ -26,7 +26,6 @@ class Drink: NSManagedObject, NamedEntity {
     static let milkTitle         = NSLocalizedString("D:Milk",          value: "Milk",          comment: "Drink: Title for milk")
     static let sportTitle        = NSLocalizedString("D:Sport",         value: "Sport",         comment: "Drink: Title for sport drink")
     static let energyTitle       = NSLocalizedString("D:Energy",        value: "Energy",        comment: "Drink: Title for energetic drink")
-    static let alcoholTitle      = NSLocalizedString("D:Alcohol",       value: "Alcohol",       comment: "Drink: Title for alcohol")
     static let beerTitle         = NSLocalizedString("D:Beer",          value: "Beer",          comment: "Drink: Title for beer")
     static let wineTitle         = NSLocalizedString("D:Wine",          value: "Wine",          comment: "Drink: Title for wine")
     static let strongLiquorTitle = NSLocalizedString("D:Strong Liquor", value: "Strong Liquor", comment: "Drink: Title for strong liquor")
@@ -45,7 +44,6 @@ class Drink: NSManagedObject, NamedEntity {
     case Milk
     case Sport
     case Energy
-    case Alcohol
     case Beer
     case Wine
     case StrongLiquor
@@ -160,11 +158,6 @@ class Drink: NSManagedObject, NamedEntity {
       _drawDrinkFunction = StyleKit.drawEnergyDrink
       _mainColor = StyleKit.energyColor
 
-    case .Alcohol:
-      _localizedName = Static.alcoholTitle
-      _drawDrinkFunction = StyleKit.drawAlcoholDrink
-      _mainColor = StyleKit.alcoholColor
-      
     case .Beer:
       _localizedName = Static.beerTitle
       _drawDrinkFunction = StyleKit.drawAlcoholDrink // TODO: Use particular draw function

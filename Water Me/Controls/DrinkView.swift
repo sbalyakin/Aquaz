@@ -22,6 +22,12 @@ class DrinkView: UIView {
     }
   }
   
+  var isGroup: Bool = false {
+    didSet {
+      setNeedsDisplay()
+    }
+  }
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
   }
@@ -39,6 +45,26 @@ class DrinkView: UIView {
       let path = UIBezierPath(ovalInRect: drawRect)
       UIColor(white: 0, alpha: 0.2).setFill()
       path.fill()
+    }
+    
+    if isGroup {
+      let dotRadius: CGFloat = 2
+      
+      var markRect = drawRect
+      markRect.size.width /= 5
+      markRect.size.height /= 5
+      markRect.offset(dx: drawRect.width - markRect.width, dy: 0)
+      markRect.inset(dx: dotRadius, dy: dotRadius)
+
+      var dotsCount = 3
+      var dx = markRect.width / CGFloat(dotsCount)
+      for i in 0..<dotsCount {
+        let x = markRect.minX + CGFloat(i) * dx
+        
+        let path = UIBezierPath(ovalInRect: CGRectMake(x - dotRadius, markRect.minY - dotRadius, dotRadius * 2, dotRadius * 2))
+        drink.mainColor.setFill()
+        path.fill()
+      }
     }
   }
 

@@ -209,6 +209,9 @@ class Settings {
   lazy var uiYearStatisticsDate: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
     key: "UI - Year statistics date", initialValue: NSDate(), userDefaults: self.standardUserDefaults)
 
+  lazy var uiSelectedAlcoholicDrink: SettingsEnumItem<Drink.DrinkType> = SettingsEnumItem(
+    key: "UI - Selected alcoholic drink", initialValue: .Beer, userDefaults: self.standardUserDefaults)
+
   lazy var notificationsEnabled: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "Notifications - Enabled", initialValue: false, userDefaults: self.standardUserDefaults)
 

@@ -33,7 +33,6 @@ class CoreDataPrePopulation {
 
         Drink.addEntity(index: Drink.DrinkType.Sport.rawValue,   name: "Sport",   waterPercent: 1.10, recentAmount: 250, managedObjectContext: managedObjectContext)
         Drink.addEntity(index: Drink.DrinkType.Energy.rawValue,  name: "Energy",  waterPercent: 0.90, recentAmount: 250, managedObjectContext: managedObjectContext)
-        Drink.addEntity(index: Drink.DrinkType.Alcohol.rawValue, name: "Alcohol", waterPercent: 0.30, recentAmount: 250, managedObjectContext: managedObjectContext)
 
         Drink.addEntity(index: Drink.DrinkType.Beer.rawValue, name: "Beer", waterPercent: 0.95, recentAmount: 250, managedObjectContext: managedObjectContext)
         Drink.addEntity(index: Drink.DrinkType.Wine.rawValue, name: "Wine", waterPercent: 0.80, recentAmount: 250, managedObjectContext: managedObjectContext)
@@ -68,10 +67,6 @@ class CoreDataPrePopulation {
       let consumptionsCount = random() % maxConsumptionsPerDay
       for i in 0..<consumptionsCount {
         let drinkIndex = random() % Drink.getDrinksCount()
-        // Alcohol drink type is pure virtual
-        if drinkIndex == Drink.DrinkType.Alcohol.rawValue {
-          continue
-        }
         let drink = Drink.getDrinkByIndex(drinkIndex)!
         let amount = minAmount + random() % (maxAmount - minAmount)
         let timeInterval = NSTimeInterval(random() % secondsPerDay)
