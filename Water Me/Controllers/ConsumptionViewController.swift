@@ -33,7 +33,7 @@ private extension Units.Volume {
 
 class ConsumptionViewController: StyledViewController {
 
-  @IBOutlet weak var amountSlider: UISlider!
+  @IBOutlet weak var amountSlider: CustomSlider!
   @IBOutlet weak var amountLabel: UILabel!
   @IBOutlet weak var applyButton: UIButton!
   @IBOutlet weak var smallAmountButton: UIButton!
@@ -87,6 +87,7 @@ class ConsumptionViewController: StyledViewController {
     setupApplyButton()
     createCustomNavigationTitle()
     setupDrinkView()
+    setupSlider()
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -162,6 +163,11 @@ class ConsumptionViewController: StyledViewController {
   
   private func setupDrinkView() {
     drinkView.drink = drink
+  }
+  
+  private func setupSlider() {
+    amountSlider.tintColor = drink.mainColor
+    amountSlider.maximumTrackTintColor = UIColor.lightGrayColor()
   }
   
   @IBAction func amountSliderValueChanged(sender: AnyObject) {

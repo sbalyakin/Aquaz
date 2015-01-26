@@ -53,6 +53,7 @@
 		A55F34A61A74D6AC00A529A5 /* DrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */; };
 		A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */; };
 		A575A5A51A6EBB0300B00E9F /* StyledBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */; };
+		A581FEF01A76D5F60025CDEF /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */; };
 		A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */; };
 		A58A65F11A73D4B90072164E /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8488A1901A540BAC00258EC8 /* default.wav */; };
 		A59113D81A50665C007B4241 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59113DA1A50665C007B4241 /* InfoPlist.strings */; };
@@ -133,6 +134,7 @@
 		A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkCollectionViewCell.swift; path = Controls/DrinkCollectionViewCell.swift; sourceTree = "<group>"; };
 		A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DrinkCollectionViewCell.xib; path = Controls/DrinkCollectionViewCell.xib; sourceTree = "<group>"; };
 		A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StyledBarButtonItem.swift; path = Controls/StyledBarButtonItem.swift; sourceTree = "<group>"; };
+		A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomSlider.swift; path = Controls/CustomSlider.swift; sourceTree = "<group>"; };
 		A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A59113CF1A5054ED007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A59113D01A5054ED007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */,
 				A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */,
 				A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */,
+				A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A55337CF1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift in Sources */,
+				A581FEF01A76D5F60025CDEF /* CustomSlider.swift in Sources */,
 				A598D5081A6558C100AA89CB /* StyleKit.swift in Sources */,
 				A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */,
 				840476571A35FE4A004F0FEF /* ConsumptionRateViewController.swift in Sources */,
