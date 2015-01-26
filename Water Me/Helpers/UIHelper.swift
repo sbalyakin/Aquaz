@@ -44,6 +44,7 @@ class UIHelper {
   }
 
   class func applyStylization() {
+    UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
     UISegmentedControl.appearance().tintColor = StyleKit.controlTintColor
     UIButton.appearance().tintColor = StyleKit.controlTintColor
     UISwitch.appearance().onTintColor = StyleKit.controlTintColor

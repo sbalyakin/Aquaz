@@ -46,7 +46,7 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     collectionView.addGestureRecognizer(tapGestureRecognizer)
   }
   
-  func changeAlcoholicDrinkTo(#drinkType: Drink.DrinkType) {
+  private func changeAlcoholicDrinkTo(#drinkType: Drink.DrinkType) {
     displayedDrinkTypes[displayedDrinkTypes.count - 1] = drinkType
     Settings.sharedInstance.uiSelectedAlcoholicDrink.value = drinkType
     let alcoholIndexPath = NSIndexPath(forRow: displayedDrinkTypes.count - 1, inSection: 0)
@@ -95,15 +95,7 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
       // Adjust to tap position
       rect.origin.y -= rect.maxY - pointInScreen.y + 20
       
-      let popupView = popupViewManager.createPopupView(frame: rect, screenFrame: navigationController!.view.frame)
-      
-      popupView.alpha = 0.0
-      
-      navigationController!.view.addSubview(popupView)
-
-      UIView.animateWithDuration(0.3, animations: {
-        popupView.alpha = 1.0
-      })
+      popupViewManager.showPopupView(frame: rect)
     }
   }
   
@@ -183,9 +175,9 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
   
 }
 
-class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
   
-  var collectionView: UICollectionView!
+  private var window: UIWindow!
   private var popupView: UIView!
   private var popupCollectionView: UICollectionView!
   
@@ -205,15 +197,26 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     super.init()
   }
   
-  func createPopupView(#frame: CGRect, screenFrame: CGRect) -> UIView {
-    removePopupView()
+  func showPopupView(#frame: CGRect) {
+    cleanPopupView()
     
     let backgroundView = UIView(frame: frame)
     backgroundView.backgroundColor = StyleKit.pageBackgroundColor
     backgroundView.layer.cornerRadius = padding * 2
+    backgroundView.layer.masksToBounds = true
     
     let layout = UICollectionViewFlowLayout()
-    popupCollectionView = UICollectionView(frame: backgroundView.bounds.rectByInsetting(dx: padding, dy: padding), collectionViewLayout: layout)
+    layout.minimumLineSpacing = 0
+    layout.minimumInteritemSpacing = 0
+    
+    let collectionViewRect = backgroundView.bounds.rectByInsetting(dx: padding, dy: padding)
+    let contentWidth = collectionViewRect.width - layout.minimumInteritemSpacing * CGFloat(columnsCount - 1)
+    let contentHeight = collectionViewRect.height - layout.minimumLineSpacing * CGFloat(rowsCount - 1)
+    let cellWidth = trunc(contentWidth / CGFloat(columnsCount))
+    let cellHeight = trunc(contentHeight / CGFloat(rowsCount))
+    layout.itemSize = CGSizeMake(cellWidth, cellHeight)
+
+    popupCollectionView = UICollectionView(frame: collectionViewRect, collectionViewLayout: layout)
     popupCollectionView.backgroundColor = UIColor.clearColor()
     popupCollectionView.delegate = self
     popupCollectionView.dataSource = self
@@ -223,23 +226,47 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     
     backgroundView.addSubview(popupCollectionView)
     
-    popupView = UIView(frame: screenFrame)
-    popupView.backgroundColor = UIColor(white: 0.5, alpha: 0.7)
+    popupView = UIView(frame: UIScreen.mainScreen().bounds)
+    popupView.backgroundColor = UIColor(white: 0, alpha: 0.5)
     popupView.addSubview(backgroundView)
+    popupView.alpha = 0
     
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handlePopupViewTap:")
     tapGestureRecognizer.numberOfTapsRequired = 1
     popupView.addGestureRecognizer(tapGestureRecognizer)
     
-    return popupView
+    let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePopupViewPan:")
+    panGestureRecognizer.maximumNumberOfTouches = 1
+    popupView.addGestureRecognizer(panGestureRecognizer)
+    
+    window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    window.windowLevel = UIWindowLevelAlert
+    window.opaque = false
+    window.addSubview(popupView)
+    window.makeKeyAndVisible()
+    
+    UIView.animateWithDuration(0.3, animations: {
+      self.popupView.alpha = 1.0
+    })
   }
   
-  private func removePopupView() {
-    if popupView != nil {
-      popupCollectionView = nil
-      popupView.removeFromSuperview()
-      popupView = nil
+  private func hidePopupView() {
+    if window != nil {
+      UIView.animateWithDuration(0.3,
+        animations: {
+        self.popupView.alpha = 0
+        },
+        completion: {
+          (completed: Bool) in
+          self.cleanPopupView()
+      })
     }
+  }
+  
+  private func cleanPopupView() {
+    self.window = nil
+    self.popupCollectionView = nil
+    self.popupView = nil
   }
   
   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -268,22 +295,12 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     return cell
   }
   
-  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-    let layout = collectionViewLayout as UICollectionViewFlowLayout
-    let contentWidth = collectionView.bounds.width - layout.minimumInteritemSpacing * CGFloat(columnsCount - 1)
-    let contentHeight = collectionView.bounds.height - layout.minimumLineSpacing * CGFloat(rowsCount - 1)
-    let cellWidth = trunc(contentWidth / CGFloat(columnsCount))
-    let cellHeight = trunc(contentHeight / CGFloat(rowsCount))
-    let size = CGSizeMake(cellWidth, cellHeight)
-    return size
-  }
-  
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     popupCellIsSelected(indexPath: indexPath)
   }
   
   private func popupCellIsSelected(#indexPath: NSIndexPath) {
-    removePopupView()
+    hidePopupView()
     
     let drinkIndex = indexPath.row
     assert(drinkIndex < popupDrinkTypes.count)
@@ -292,8 +309,8 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     selectDrinkViewController.changeAlcoholicDrinkTo(drinkType: drinkType)
   }
   
-  func handlePopupViewTap(gestureRecognizer: UITapGestureRecognizer) {
-    if popupView == nil {
+  func handlePopupViewTap(gestureRecognizer: UIGestureRecognizer) {
+    if popupCollectionView == nil {
       return
     }
     
@@ -301,7 +318,19 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     if let indexPath = popupCollectionView.indexPathForItemAtPoint(pointInCollectionView) {
       popupCellIsSelected(indexPath: indexPath)
     } else {
-      removePopupView()
+      hidePopupView()
+    }
+  }
+  
+  func handlePopupViewPan(gestureRecognizer: UIGestureRecognizer) {
+    switch gestureRecognizer.state {
+    case .Changed:
+      handleLongPressChanged(gestureRecognizer)
+      
+    case .Ended:
+      handleLongPressEnded(gestureRecognizer)
+      
+    default: break
     }
   }
   
@@ -309,17 +338,16 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     if popupCollectionView == nil {
       return
     }
-    
+
+    for currentCell in popupCollectionView.visibleCells() {
+      if let visibleCell = currentCell as? UICollectionViewCell {
+        visibleCell.highlighted = false
+        visibleCell.setNeedsDisplay()
+      }
+    }
+
     let pointInCollectionView = gestureRecognizer.locationInView(popupCollectionView)
     if let indexPath = popupCollectionView.indexPathForItemAtPoint(pointInCollectionView) {
-      
-      for currentCell in popupCollectionView.visibleCells() {
-        if let visibleCell = currentCell as? UICollectionViewCell {
-          visibleCell.highlighted = false
-          visibleCell.setNeedsDisplay()
-        }
-      }
-      
       let cell = popupCollectionView.cellForItemAtIndexPath(indexPath)!
       cell.highlighted = true
       cell.setNeedsDisplay()

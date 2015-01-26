@@ -379,14 +379,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drink" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="Vcm-PC-Pd2">
-                                                    <rect key="frame" x="87" y="11" width="2386" height="21"/>
+                                                    <rect key="frame" x="87" y="11" width="2673" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500 / 500 fl oz" textAlignment="right" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="agg-wE-OgY">
-                                                    <rect key="frame" x="2481" y="11" width="94" height="21"/>
+                                                    <rect key="frame" x="2768" y="11" width="94" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
