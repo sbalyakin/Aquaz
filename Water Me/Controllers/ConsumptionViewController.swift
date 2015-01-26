@@ -167,7 +167,7 @@ class ConsumptionViewController: StyledViewController {
   
   private func setupSlider() {
     amountSlider.tintColor = drink.mainColor
-    amountSlider.maximumTrackTintColor = UIColor.lightGrayColor()
+    amountSlider.maximumTrackTintColor = UIColor.blackColor().colorWithAlpha(0.2)
   }
   
   @IBAction func amountSliderValueChanged(sender: AnyObject) {
