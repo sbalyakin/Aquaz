@@ -33,7 +33,6 @@
 		84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Water_Me.xcdatamodeld */; };
 		84669A7719DAD78D003C2263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7519DAD78D003C2263 /* Main.storyboard */; };
 		84669A7919DAD78D003C2263 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7819DAD78D003C2263 /* Images.xcassets */; };
-		84669A7C19DAD78D003C2263 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7A19DAD78D003C2263 /* LaunchScreen.xib */; };
 		84669A8819DAD78D003C2263 /* Water_MeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84669A8719DAD78D003C2263 /* Water_MeTests.swift */; };
 		8468D6421A0D1C240008D027 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468D6411A0D1C240008D027 /* DateHelper.swift */; };
 		8478253719EAC8C200588FE3 /* ConsumptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478253619EAC8C200588FE3 /* ConsumptionViewController.swift */; };
@@ -63,6 +62,7 @@
 		A598D50A1A6559FB00AA89CB /* DrinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5091A6559FB00AA89CB /* DrinkView.swift */; };
 		A5A1681D1A6EA1330027711B /* DaySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A1681C1A6EA1330027711B /* DaySummaryView.swift */; };
 		A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */; };
+		A5AAA1D91A77A9CF008C3C56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */; };
 		A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1319E5686C00D0477B /* ModelHelper.swift */; };
 		A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1519E57D3500D0477B /* NamedEntity.swift */; };
 		A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */; };
@@ -111,7 +111,6 @@
 		84669A7119DAD78D003C2263 /* Water_Me.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Water_Me.xcdatamodel; sourceTree = "<group>"; };
 		84669A7619DAD78D003C2263 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84669A7819DAD78D003C2263 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		84669A7B19DAD78D003C2263 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		84669A8119DAD78D003C2263 /* Water MeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Water MeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84669A8619DAD78D003C2263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84669A8719DAD78D003C2263 /* Water_MeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Water_MeTests.swift; sourceTree = "<group>"; };
@@ -136,7 +135,6 @@
 		A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StyledBarButtonItem.swift; path = Controls/StyledBarButtonItem.swift; sourceTree = "<group>"; };
 		A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomSlider.swift; path = Controls/CustomSlider.swift; sourceTree = "<group>"; };
 		A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		A59113CF1A5054ED007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A59113D01A5054ED007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		A59113D91A50665C007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A59113DE1A50665C007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -145,6 +143,7 @@
 		A598D5091A6559FB00AA89CB /* DrinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkView.swift; path = Controls/DrinkView.swift; sourceTree = "<group>"; };
 		A5A1681C1A6EA1330027711B /* DaySummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DaySummaryView.swift; path = Controls/DaySummaryView.swift; sourceTree = "<group>"; };
 		A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekStatisticsViewController.swift; sourceTree = "<group>"; };
+		A5AAA1D81A77A9CF008C3C56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A5B75A1319E5686C00D0477B /* ModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelHelper.swift; sourceTree = "<group>"; };
 		A5B75A1519E57D3500D0477B /* NamedEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedEntity.swift; sourceTree = "<group>"; };
 		A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryTableViewCell.swift; path = Controls/DiaryTableViewCell.swift; sourceTree = "<group>"; };
@@ -285,8 +284,8 @@
 				843B055D19E2D7800097A833 /* Models */,
 				84669A6C19DAD78D003C2263 /* Supporting Files */,
 				84669A7019DAD78D003C2263 /* Water_Me.xcdatamodeld */,
-				84669A7A19DAD78D003C2263 /* LaunchScreen.xib */,
 				84669A7519DAD78D003C2263 /* Main.storyboard */,
+				A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */,
 			);
 			path = "Water Me";
 			sourceTree = "<group>";
@@ -426,7 +425,7 @@
 				A59113DD1A50665C007B4241 /* Localizable.strings in Resources */,
 				84669A7719DAD78D003C2263 /* Main.storyboard in Resources */,
 				A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */,
-				84669A7C19DAD78D003C2263 /* LaunchScreen.xib in Resources */,
+				A5AAA1D91A77A9CF008C3C56 /* LaunchScreen.xib in Resources */,
 				84669A7919DAD78D003C2263 /* Images.xcassets in Resources */,
 				A59113E21A5069EA007B4241 /* InfoPlist.strings in Resources */,
 			);
@@ -529,15 +528,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		84669A7A19DAD78D003C2263 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				84669A7B19DAD78D003C2263 /* Base */,
-				A59113CF1A5054ED007B4241 /* ru */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
 		A59113DA1A50665C007B4241 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -560,6 +550,14 @@
 				A59113E31A5069EA007B4241 /* ru */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5AAA1D81A77A9CF008C3C56 /* Base */,
+			);
+			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

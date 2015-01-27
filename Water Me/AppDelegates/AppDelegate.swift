@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
+    UIHelper.applyStylization()
 
     if !NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce")
     {
@@ -36,8 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         showDayViewControllerForToday()
       }
     }
-
-    UIHelper.applyStylization()
     
     return true
   }
