@@ -45,11 +45,7 @@ protocol MonthStatisticsViewDataSource {
     #if TARGET_INTERFACE_BUILDER
       return 0.5
     #else
-      if let dataSource = dataSource {
-        return dataSource.monthStatisticsGetConsumptionFractionForDate(dayInfo.date, dayOfCurrentMonth: dayInfo.dayOfCurrentMonth)
-      }
-    
-      return 0
+      return dataSource?.monthStatisticsGetConsumptionFractionForDate(dayInfo.date, dayOfCurrentMonth: dayInfo.dayOfCurrentMonth) ?? 0
     #endif
   }
 

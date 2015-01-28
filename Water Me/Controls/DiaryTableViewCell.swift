@@ -110,14 +110,16 @@ class DiaryTableViewCell: UITableViewCell {
     let separatorTitleAt = NSAttributedString(string: " / ", attributes: [
       NSForegroundColorAttributeName: UIColor.lightGrayColor(),
       NSFontAttributeName: amountLabel.font])
+
+    let waterColor = Drink.getDrinkByIndex(Drink.DrinkType.Water.rawValue)?.darkColor ?? StyleKit.waterColor
     
     let waterTitleAt = NSAttributedString(string: "\(waterTitle) ", attributes: [
-      NSForegroundColorAttributeName: Drink.getDrinkByIndex(Drink.DrinkType.Water.rawValue)!.darkColor,
+      NSForegroundColorAttributeName: waterColor,
       NSFontAttributeName: amountLabel.font])
 
     let unit = Settings.sharedInstance.generalVolumeUnits.value.unit.contraction
     let unitsTitleAt = NSAttributedString(string: unit, attributes: [
-      NSForegroundColorAttributeName: Drink.getDrinkByIndex(Drink.DrinkType.Water.rawValue)!.darkColor,
+      NSForegroundColorAttributeName: waterColor,
       NSFontAttributeName: amountLabel.font])
     
 
@@ -127,9 +129,7 @@ class DiaryTableViewCell: UITableViewCell {
     title.appendAttributedString(waterTitleAt)
     title.appendAttributedString(unitsTitleAt)
 
-//    amountLabel.text = amountTitle
     amountLabel.attributedText = title
-
   }
   
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision

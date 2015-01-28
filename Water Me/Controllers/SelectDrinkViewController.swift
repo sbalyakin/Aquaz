@@ -53,11 +53,14 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     self.collectionView.reloadItemsAtIndexPaths([alcoholIndexPath])
 
     let drink = Drink.getDrinkByType(drinkType)
-    let consumptionViewController = storyboard!.instantiateViewControllerWithIdentifier("ConsumptionViewController") as ConsumptionViewController
-    consumptionViewController.drink = drink
-    consumptionViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
-    consumptionViewController.dayViewController = dayViewController
-    navigationController!.pushViewController(consumptionViewController, animated: true)
+    if let consumptionViewController = storyboard?.instantiateViewControllerWithIdentifier("ConsumptionViewController") as? ConsumptionViewController {
+      consumptionViewController.drink = drink
+      consumptionViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
+      consumptionViewController.dayViewController = dayViewController
+      navigationController?.pushViewController(consumptionViewController, animated: true)
+    } else {
+      assert(false)
+    }
   }
   
   func handleConsumptionCellLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
@@ -85,17 +88,20 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
         return
       }
       
-      let cell = collectionView.cellForItemAtIndexPath(indexPath)!
-      var rect = CGRectMake(cell.frame.minX, 0, cell.frame.width, collectionView.bounds.height)
-      rect.inset(dx: -popupViewManager.padding, dy: -popupViewManager.padding)
-      rect = collectionView.convertRect(rect, toView: navigationController!.view)
-      let dy = rect.height / 3
-      rect.size.height -= dy
-      rect.origin.y += dy - cell.frame.height
-      // Adjust to tap position
-      rect.origin.y -= rect.maxY - pointInScreen.y + 20
-      
-      popupViewManager.showPopupView(frame: rect)
+      if let cell = collectionView.cellForItemAtIndexPath(indexPath) {
+        var rect = CGRect(x: cell.frame.minX, y: 0, width: cell.frame.width, height: collectionView.bounds.height)
+        rect.inset(dx: -popupViewManager.padding, dy: -popupViewManager.padding)
+        rect = collectionView.convertRect(rect, toView: navigationController!.view)
+        let dy = rect.height / 3
+        rect.size.height -= dy
+        rect.origin.y += dy - cell.frame.height
+        // Adjust to tap position
+        rect.origin.y -= rect.maxY - pointInScreen.y + 20
+        
+        popupViewManager.showPopupView(frame: rect)
+      } else {
+        assert(false)
+      }
     }
   }
   
@@ -154,7 +160,7 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     let contentHeight = collectionView.bounds.height - layout.minimumLineSpacing * CGFloat(rowsCount - 1)
     let cellWidth = trunc(contentWidth / CGFloat(columnsCount))
     let cellHeight = trunc(contentHeight / CGFloat(rowsCount))
-    let size = CGSizeMake(cellWidth, cellHeight)
+    let size = CGSize(width: cellWidth, height: cellHeight)
     return size
   }
   
@@ -166,11 +172,14 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     
     let drink = Drink.getDrinkByType(drinkType)
     
-    let consumptionViewController = storyboard!.instantiateViewControllerWithIdentifier("ConsumptionViewController") as ConsumptionViewController
-    consumptionViewController.drink = drink
-    consumptionViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
-    consumptionViewController.dayViewController = dayViewController
-    navigationController!.pushViewController(consumptionViewController, animated: true)
+    if let consumptionViewController = storyboard?.instantiateViewControllerWithIdentifier("ConsumptionViewController") as? ConsumptionViewController {
+      consumptionViewController.drink = drink
+      consumptionViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
+      consumptionViewController.dayViewController = dayViewController
+      navigationController?.pushViewController(consumptionViewController, animated: true)
+    } else {
+      assert(false)
+    }
   }
   
 }
@@ -214,7 +223,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     let contentHeight = collectionViewRect.height - layout.minimumLineSpacing * CGFloat(rowsCount - 1)
     let cellWidth = trunc(contentWidth / CGFloat(columnsCount))
     let cellHeight = trunc(contentHeight / CGFloat(rowsCount))
-    layout.itemSize = CGSizeMake(cellWidth, cellHeight)
+    layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
 
     popupCollectionView = UICollectionView(frame: collectionViewRect, collectionViewLayout: layout)
     popupCollectionView.backgroundColor = UIColor.clearColor()
@@ -348,9 +357,12 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
 
     let pointInCollectionView = gestureRecognizer.locationInView(popupCollectionView)
     if let indexPath = popupCollectionView.indexPathForItemAtPoint(pointInCollectionView) {
-      let cell = popupCollectionView.cellForItemAtIndexPath(indexPath)!
-      cell.highlighted = true
-      cell.setNeedsDisplay()
+      if let cell = popupCollectionView.cellForItemAtIndexPath(indexPath) {
+        cell.highlighted = true
+        cell.setNeedsDisplay()
+      } else {
+        assert(false)
+      }
       
       if gestureRecognizer.state == .Ended {
         popupCellIsSelected(indexPath: indexPath)

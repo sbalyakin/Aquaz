@@ -47,12 +47,12 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
   func weekStatisticsViewDaySelected(dayIndex: Int) {
     let selectedDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
     
-    let dayViewController = storyboard!.instantiateViewControllerWithIdentifier("DayViewController") as DayViewController
-    dayViewController.mode = .Statistics
-    dayViewController.setCurrentDate(selectedDate)
-    dayViewController.initializesRevealControls = false
-    
-    navigationController!.pushViewController(dayViewController, animated: true)
+    if let dayViewController = storyboard?.instantiateViewControllerWithIdentifier("DayViewController") as? DayViewController {
+      dayViewController.mode = .Statistics
+      dayViewController.setCurrentDate(selectedDate)
+      dayViewController.initializesRevealControls = false
+      navigationController?.pushViewController(dayViewController, animated: true)
+    }
   }
   
   private func getTitleForAmount(amount: CGFloat) -> String {

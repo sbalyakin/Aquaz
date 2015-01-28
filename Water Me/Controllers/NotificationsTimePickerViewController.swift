@@ -48,10 +48,10 @@ class NotificationsTimePickerViewController: UIViewController {
     notificationsViewController.initControlsFromSettings()
     notificationsViewController.updateNotificationsFromSettings()
     
-    navigationController!.popViewControllerAnimated(true)
+    navigationController?.popViewControllerAnimated(true)
   }
   
   @IBAction func cancelButtonWasTapped(sender: AnyObject) {
-    navigationController!.popViewControllerAnimated(true)
+    navigationController?.popViewControllerAnimated(true)
   }
 }

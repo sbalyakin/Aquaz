@@ -31,9 +31,9 @@ class Consumption: NSManagedObject, NamedEntity {
     consumption.date = date
 
     if saveImmediately {
-      var error: NSError? = nil
+      var error: NSError?
       if !managedObjectContext.save(&error) {
-        NSLog("Failed to add new consumption for drink \"\(drink.name)\". Error: \(error!.localizedDescription)")
+        NSLog("Failed to add new consumption for drink \"\(drink.name)\". Error: \(error?.localizedDescription ?? String())")
       }
     }
 
@@ -138,9 +138,9 @@ class Consumption: NSManagedObject, NamedEntity {
     managedObjectContext!.deleteObject(self)
     
     if saveImmediately {
-      var error: NSError? = nil
+      var error: NSError?
       if !managedObjectContext!.save(&error) {
-        NSLog("Failed to delete consumption. Error: \(error!.localizedDescription)")
+        NSLog("Failed to delete consumption. Error: \(error?.localizedDescription ?? String())")
       }
     }
   }

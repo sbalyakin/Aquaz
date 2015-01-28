@@ -170,17 +170,23 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     pages = []
     
     // Add view controller for drink selection
-    selectDrinkViewController = storyboard!.instantiateViewControllerWithIdentifier("SelectDrinkViewController") as SelectDrinkViewController
+    selectDrinkViewController = storyboard?.instantiateViewControllerWithIdentifier("SelectDrinkViewController") as? SelectDrinkViewController
+    assert(selectDrinkViewController != nil)
+    
     selectDrinkViewController.dayViewController = self
     pages.append(selectDrinkViewController)
     
     // Add consumptions diary view controller
-    diaryViewController = storyboard!.instantiateViewControllerWithIdentifier("DiaryViewController") as DiaryViewController
+    diaryViewController = storyboard?.instantiateViewControllerWithIdentifier("DiaryViewController") as? DiaryViewController
+    assert(diaryViewController != nil)
+    
     diaryViewController.dayViewController = self
     pages.append(diaryViewController)
     
     // Create, setup and add a page view controller
-    pageViewController = storyboard!.instantiateViewControllerWithIdentifier("DayPageViewController") as UIPageViewController
+    pageViewController = storyboard?.instantiateViewControllerWithIdentifier("DayPageViewController") as? UIPageViewController
+    assert(pageViewController != nil)
+    
     pageViewController.dataSource = self
     pageViewController.delegate = self
     pageViewController.setViewControllers([selectDrinkViewController], direction: .Forward, animated: false, completion: nil)
@@ -316,8 +322,8 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   private func fetchConsumptionRate() {
     consumptionRate = ConsumptionRate.fetchConsumptionRateForDate(currentDate)
     
-    if let rate = consumptionRate {
-      isConsumptionRateForCurrentDay = DateHelper.areDatesEqualByDays(date1: rate.date, date2: currentDate)
+    if let consumptionRate = consumptionRate {
+      isConsumptionRateForCurrentDay = DateHelper.areDatesEqualByDays(date1: consumptionRate.date, date2: currentDate)
     } else {
       isConsumptionRateForCurrentDay = false
     }
@@ -386,8 +392,11 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
     
     if overallConsumption >= consumptionRateAmount {
-      let completeViewController = storyboard!.instantiateViewControllerWithIdentifier("CompleteViewController") as CompleteViewController
-      parentViewController?.presentViewController(completeViewController, animated: true, completion: nil)
+      if let completeViewController = storyboard?.instantiateViewControllerWithIdentifier("CompleteViewController") as? CompleteViewController {
+        parentViewController?.presentViewController(completeViewController, animated: true, completion: nil)
+      } else {
+        assert(false)
+      }
     }
   }
 
@@ -517,10 +526,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   private var isConsumptionRateForCurrentDay: Bool = false
 
   private var consumptionBaseRateAmount: Double {
-    if let rate = consumptionRate {
-      return rate.baseRateAmount.doubleValue
-    }
-    return Settings.sharedInstance.userDailyWaterIntake.value
+    return consumptionRate?.baseRateAmount.doubleValue ?? Settings.sharedInstance.userDailyWaterIntake.value
   }
   
   private var consumptionRateAmount: Double {
@@ -533,17 +539,13 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
         return 0
       }
       
-      if let rate = consumptionRate {
-        return rate.hotDayFraction.doubleValue
-      }
-
-      return 0
+      return consumptionRate?.hotDayFraction.doubleValue ?? 0
     }
     set(newHotDayFraction) {
       if !isConsumptionRateForCurrentDay {
         saveConsumptionRateForCurrentDate(baseRateAmount: consumptionBaseRateAmount, hotDayFraction: newHotDayFraction, highActivityFraction: 0)
-      } else if let rate = consumptionRate {
-        rate.hotDayFraction = newHotDayFraction
+      } else if let consumptionRate = consumptionRate {
+        consumptionRate.hotDayFraction = newHotDayFraction
         ModelHelper.sharedInstance.save()
       }
 
@@ -557,17 +559,13 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
         return 0
       }
 
-      if let rate = consumptionRate {
-        return rate.highActivityFraction.doubleValue
-      }
-
-      return 0
+      return consumptionRate?.highActivityFraction.doubleValue ?? 0
     }
     set(newHighActivityFraction) {
       if !isConsumptionRateForCurrentDay {
         saveConsumptionRateForCurrentDate(baseRateAmount: consumptionBaseRateAmount, hotDayFraction: 0, highActivityFraction: newHighActivityFraction)
-      } else if let rate = consumptionRate {
-        rate.highActivityFraction = newHighActivityFraction
+      } else if let consumptionRate = consumptionRate {
+        consumptionRate.highActivityFraction = newHighActivityFraction
         ModelHelper.sharedInstance.save()
       }
 

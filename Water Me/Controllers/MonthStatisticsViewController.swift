@@ -93,12 +93,14 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
   }
 
   func calendarViewDaySelected(date: NSDate) {
-    let dayViewController = storyboard!.instantiateViewControllerWithIdentifier("DayViewController") as DayViewController
-    dayViewController.mode = .Statistics
-    dayViewController.setCurrentDate(date)
-    dayViewController.initializesRevealControls = false
-    
-    navigationController!.pushViewController(dayViewController, animated: true)
+    if let dayViewController = storyboard?.instantiateViewControllerWithIdentifier("DayViewController") as? DayViewController {
+      dayViewController.mode = .Statistics
+      dayViewController.setCurrentDate(date)
+      dayViewController.initializesRevealControls = false
+      navigationController?.pushViewController(dayViewController, animated: true)
+    } else {
+      assert(false)
+    }
   }
   
   private func computeStatisticsDateRange() {

@@ -59,9 +59,9 @@ class ConsumptionViewController: StyledViewController {
   // Should be nil for add consumption mode, and not nil for edit consumption mode
   var consumption: Consumption? {
     didSet {
-      if let existingConsumption = consumption {
-        drink = existingConsumption.drink
-        currentDate = existingConsumption.date
+      if let consumption = consumption {
+        drink = consumption.drink
+        currentDate = consumption.date
         timeIsChoosen = true
       } else {
         timeIsChoosen = false
@@ -74,9 +74,7 @@ class ConsumptionViewController: StyledViewController {
   func changeTimeForCurrentDate(time: NSDate) {
     timeIsChoosen = true
     currentDate = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: time)
-    if let dayLabel = navigationCurrentDayLabel {
-      dayLabel.text = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
-    }
+    navigationCurrentDayLabel?.text = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
   }
   
   override func viewDidLoad() {
@@ -114,14 +112,7 @@ class ConsumptionViewController: StyledViewController {
   }
   
   private func getInitialAmount() -> Double {
-    var amount = 0.0
-    if let consumption = self.consumption {
-      amount = consumption.amount.doubleValue
-    } else {
-      amount = Double(drink.recentAmount.amount)
-    }
-    
-    return amount
+    return consumption?.amount.doubleValue ?? Double(drink.recentAmount.amount)
   }
   
   private func setupApplyButton() {
@@ -137,11 +128,11 @@ class ConsumptionViewController: StyledViewController {
     smallAmountButton.backgroundColor = drink.darkColor
     mediumAmountButton.backgroundColor = drink.darkColor
     largeAmountButton.backgroundColor = drink.darkColor
-    navigationController!.navigationBar.barTintColor = drink.mainColor
+    navigationController?.navigationBar.barTintColor = drink.mainColor
   }
   
   func cancelConsumption() {
-    navigationController!.popViewControllerAnimated(true)
+    navigationController?.popViewControllerAnimated(true)
   }
 
   private func createCustomNavigationTitle() {
@@ -207,7 +198,7 @@ class ConsumptionViewController: StyledViewController {
     case .Edit: updateConsumption(amount: adjustedAmount)
     }
     
-    navigationController!.popViewControllerAnimated(true)
+    navigationController?.popViewControllerAnimated(true)
   }
   
   private func prepareAmountForStoring(amount: Double) -> Double {
@@ -244,8 +235,8 @@ class ConsumptionViewController: StyledViewController {
   }
 
   private func formatAmount(amount: Double, precision: Double? = nil, decimals: Int? = nil) -> String {
-    let finalPrecision = precision != nil ? precision! : amountPrecision
-    let finalDecimals = decimals != nil ? decimals! : amountDecimals
+    let finalPrecision = precision ?? amountPrecision
+    let finalDecimals = decimals ?? amountDecimals
     return Units.sharedInstance.formatMetricAmountToText(metricAmount: amount, unitType: .Volume, roundPrecision: finalPrecision, decimals: finalDecimals)
   }
   

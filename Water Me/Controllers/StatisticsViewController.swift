@@ -34,9 +34,7 @@ class StatisticsViewController: RevealedViewController {
 
   private func activateViewControllerWithType(type: ViewControllerType) {
     for viewController in viewControllers {
-      if let controller = viewController {
-        controller.view.removeFromSuperview()
-      }
+      viewController?.view.removeFromSuperview()
     }
 
     let rects = view.bounds.rectsByDividing(segmentedControl.frame.maxY, fromEdge: .MinYEdge)
@@ -61,10 +59,13 @@ class StatisticsViewController: RevealedViewController {
     var controller: UIViewController!
     
     switch type {
-    case .Week:  controller = storyboard!.instantiateViewControllerWithIdentifier("Week Statistics View Controller") as UIViewController
-    case .Month: controller = storyboard!.instantiateViewControllerWithIdentifier("Month Statistics View Controller") as UIViewController
-    case .Year:  controller = storyboard!.instantiateViewControllerWithIdentifier("Year Statistics View Controller") as UIViewController
+    case .Week:  controller = storyboard?.instantiateViewControllerWithIdentifier("Week Statistics View Controller") as? UIViewController
+    case .Month: controller = storyboard?.instantiateViewControllerWithIdentifier("Month Statistics View Controller") as? UIViewController
+    case .Year:  controller = storyboard?.instantiateViewControllerWithIdentifier("Year Statistics View Controller") as? UIViewController
     }
+    
+    assert(controller != nil)
+    
     viewControllers[type.rawValue] = controller
     return controller
   }

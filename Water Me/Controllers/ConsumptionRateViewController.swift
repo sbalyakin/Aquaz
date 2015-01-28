@@ -234,7 +234,7 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
     formatter.maximumFractionDigits = unit.decimals
     formatter.minimumIntegerDigits = 1
     formatter.numberStyle = .NoStyle
-    let title = formatter.stringFromNumber(displayedAmount)!
+    let title = formatter.stringFromNumber(displayedAmount) ?? "0"
     return title
   }
   
@@ -249,7 +249,7 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
   
   @IBAction func cancelButtonWasTapped(sender: AnyObject) {
     view.endEditing(true)
-    navigationController!.popViewControllerAnimated(true)
+    navigationController?.popViewControllerAnimated(true)
   }
   
   @IBAction func doneButtonWasTapped(sender: AnyObject) {
@@ -258,7 +258,7 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
     }
     view.endEditing(true)
     saveToSettings()
-    navigationController!.popViewControllerAnimated(true)
+    navigationController?.popViewControllerAnimated(true)
   }
   
   private func saveToSettings() {
@@ -336,12 +336,10 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    if let cellInfo = selectedCellInfo {
-      cellInfo.setSelected(false)
-    }
+    selectedCellInfo?.setSelected(false)
     
     selectedCellInfo = cellsInfo[indexPath.section][indexPath.row]
-    selectedCellInfo!.setSelected(true)
+    selectedCellInfo?.setSelected(true)
   }
 
   private func deselectTableViewCell(indexPath: NSIndexPath) {
@@ -369,26 +367,15 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
   }
   
   func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    if let cellInfo = selectedCellInfo {
-      return cellInfo.getAvailableValuesCount()
-    }
-    assert(false)
-    return 0
+    return selectedCellInfo?.getAvailableValuesCount() ?? 0
   }
   
   func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-    if let cellInfo = selectedCellInfo {
-      return cellInfo.getValueTitleByIndex(row)
-    }
-    assert(false)
-    return ""
+    return selectedCellInfo?.getValueTitleByIndex(row) ?? ""
   }
   
   func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    if let cellInfo = selectedCellInfo {
-      return cellInfo.setValueFromAvailableValueByIndex(row)
-    }
-    assert(false)
+    selectedCellInfo?.setValueFromAvailableValueByIndex(row)
   }
 
   func registerForKeyboardNotifications() {
@@ -397,13 +384,13 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
   }
 
   func keyboardWillBeShown(notification: NSNotification) {
-    let info: NSDictionary = notification.userInfo!
-    let infoRect = info.objectForKey(UIKeyboardFrameBeginUserInfoKey)!.CGRectValue()
-    let size = infoRect.size
-    let contentInsets = UIEdgeInsetsMake(0, 0, size.height, 0)
-    originalTableViewContentInset = tableView.contentInset
-    tableView.contentInset = contentInsets
-    tableView.scrollIndicatorInsets = contentInsets
+    if let infoRect = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue() {
+      let size = infoRect.size
+      let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: size.height, right: 0)
+      originalTableViewContentInset = tableView.contentInset
+      tableView.contentInset = contentInsets
+      tableView.scrollIndicatorInsets = contentInsets
+    }
   }
   
   func keyboardWillBeHidden(notification: NSNotification) {
@@ -555,9 +542,9 @@ class EditableTableViewCell: UITableViewCell {
         return
       }
       
-      if let newIndexPath = tableView.delegate!.tableView!(tableView, willSelectRowAtIndexPath: indexPath) {
+      if let newIndexPath = tableView.delegate?.tableView?(tableView, willSelectRowAtIndexPath: indexPath) {
         tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
-        tableView.delegate!.tableView!(tableView, didSelectRowAtIndexPath: newIndexPath)
+        tableView.delegate?.tableView?(tableView, didSelectRowAtIndexPath: newIndexPath)
       }
     }
   }
@@ -635,9 +622,7 @@ private class CellInfoBase {
 private class CellInfo<T>: CellInfoBase {
   var value: T {
     didSet {
-      if let function = valueChangedFunction {
-        function(self)
-      }
+      valueChangedFunction?(self)
     }
   }
 
@@ -649,11 +634,7 @@ private class CellInfo<T>: CellInfoBase {
   }
 
   override func getStringValue() -> String {
-    if let titleFunction = self.titleFunction {
-      return titleFunction(value)
-    }
-    
-    return "\(value)"
+    return titleFunction?(value) ?? "\(value)"
   }
   
   override func saveToSettings() {
@@ -693,10 +674,8 @@ private class SelectableCellInfo<T>: CellInfo<T> {
       viewController.view.addSubview(pickerView!)
       viewController.view.bringSubviewToFront(pickerView!)
     } else {
-      if let pickerView = self.pickerView {
-        pickerView.removeFromSuperview()
-        self.pickerView = nil
-      }
+      pickerView?.removeFromSuperview()
+      pickerView = nil
     }
   }
 
@@ -717,12 +696,7 @@ private class SelectableCellInfo<T>: CellInfo<T> {
   
   override func getValueTitleByIndex(index: Int) -> String {
     let value = getValueByIndex(index)
-    
-    if let titleFunction = self.titleFunction {
-      return titleFunction(value)
-    }
-    
-    return "\(value)"
+    return titleFunction?(value) ?? "\(value)"
   }
   
   override func setValueFromAvailableValueByIndex(index: Int) {
@@ -793,7 +767,7 @@ private class EditableCellInfo<T> : CellInfo<T> {
   override func initCell(cell: UITableViewCell, tableView: UITableView, indexPath: NSIndexPath) {
     super.initCell(cell, tableView: tableView, indexPath: indexPath)
     if let editableCell = cell as? EditableTableViewCell {
-      editableCell.textLabel!.text = title
+      editableCell.textLabel?.text = title
       editableCell.valueTextField.text = getStringValue()
       editableCell.tableView = tableView
       editableCell.cellInfo = self

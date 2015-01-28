@@ -105,7 +105,7 @@ import UIKit
       }
       
       // Draw section
-      let sectionRect = CGRectMake(left, rect.minY, width, rect.height)
+      let sectionRect = CGRect(x: left, y: rect.minY, width: width, height: rect.height)
       let sectionPath = UIBezierPath(rect: sectionRect)
       section.shapeLayer.frame = sectionRect
       section.shapeLayer.bounds = sectionRect
@@ -121,7 +121,7 @@ import UIKit
     // Draw empty section if it's necessary
     if left < rectRight {
       let width = rectRight - left
-      let rect = CGRectMake(left, rect.minY, width, rect.height)
+      let rect = CGRect(x: left, y: rect.minY, width: width, height: rect.height)
       let path = UIBezierPath(rect: rect)
       emptySectionColor.setFill()
       path.fill()

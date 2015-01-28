@@ -97,9 +97,7 @@ protocol WeekStatisticsViewDelegate {
   }
   
   func dayButtonTapped(sender: UIButton) {
-    if let delegate = delegate {
-      delegate.weekStatisticsViewDaySelected(sender.tag)
-    }
+    delegate?.weekStatisticsViewDaySelected(sender.tag)
   }
   
   private func createControls(#rect: CGRect) {
@@ -129,7 +127,7 @@ protocol WeekStatisticsViewDelegate {
       let labelSize = computeSizeForText(maximumValueTitle, font: titleFont)
       let maximumValueTitleHalfHeight = ceil(labelSize.height / 2)
       
-      var innerRect = CGRectMake(rect.minX, rect.minY + maximumValueTitleHalfHeight, rect.width, rect.height - maximumValueTitleHalfHeight)
+      var innerRect = CGRect(x: rect.minX, y: rect.minY + maximumValueTitleHalfHeight, width: rect.width, height: rect.height - maximumValueTitleHalfHeight)
       innerRect.inset(dx: 1, dy: 1)
       let horizontalRectangles = innerRect.rectsByDividing(labelSize.width + scaleMargin, fromEdge: .MinXEdge)
       let rightRectangle = horizontalRectangles.remainder
@@ -166,18 +164,18 @@ protocol WeekStatisticsViewDelegate {
   private func computeRectangleForDayButtonWithIndex(index: Int, containerRect: CGRect) -> CGRect {
     assert(index >= 0 && index < daysPerWeek, "Day index is out of bounds")
     
-    let rect = CGRectMake(containerRect.minX, containerRect.minY + dayButtonsTopMargin, containerRect.width, containerRect.height - dayButtonsTopMargin)
+    let rect = CGRect(x: containerRect.minX, y: containerRect.minY + dayButtonsTopMargin, width: containerRect.width, height: containerRect.height - dayButtonsTopMargin)
     let buttonWidth = rect.width / CGFloat(daysPerWeek)
     let buttonHeight = rect.height
     let x = rect.minX + CGFloat(index) * buttonWidth
     let y = rect.minY
     
-    var buttonRect = CGRectMake(x, y, buttonWidth, buttonHeight)
+    var buttonRect = CGRect(x: x, y: y, width: buttonWidth, height: buttonHeight)
     let minSize = min(buttonWidth, buttonHeight)
     let dx = (buttonWidth - minSize) / 2
     let dy = (buttonHeight - minSize) / 2
     buttonRect.inset(dx: dx, dy: dy)
-    return CGRectMake(trunc(buttonRect.minX), trunc(buttonRect.minY), ceil(buttonRect.width), trunc(buttonRect.height))
+    return CGRect(x: trunc(buttonRect.minX), y: trunc(buttonRect.minY), width: ceil(buttonRect.width), height: trunc(buttonRect.height))
   }
   
   override func drawRect(rect: CGRect) {
@@ -192,15 +190,11 @@ protocol WeekStatisticsViewDelegate {
       return
     }
     
-    if let backgroundColor = self.backgroundColor {
-      if backgroundColor.isClearColor() {
-        return
-      }
-    } else {
+    if backgroundColor?.isClearColor() ?? true {
       return
     }
     
-    if (backgroundDarkColor.isClearColor()) {
+    if backgroundDarkColor.isClearColor() {
       return
     }
     
@@ -212,7 +206,7 @@ protocol WeekStatisticsViewDelegate {
   
   private func drawBars() {
     if _barsLayer == nil {
-      let zeroRect = CGRectMake(uiAreas.bars.minX, uiAreas.bars.maxY, uiAreas.bars.width, 0)
+      let zeroRect = CGRect(x: uiAreas.bars.minX, y: uiAreas.bars.maxY, width: uiAreas.bars.width, height: 0)
       let zeroPaths = computeBarsPathsForRect(zeroRect)
       drawBarsPaths(zeroPaths, useAnimation: false)
     }
@@ -235,7 +229,7 @@ protocol WeekStatisticsViewDelegate {
   
   private func drawGoals() {
     if _goalsShapeLayer == nil {
-      let zeroRect = CGRectMake(uiAreas.bars.minX, uiAreas.bars.maxY, uiAreas.bars.width, 0)
+      let zeroRect = CGRect(x: uiAreas.bars.minX, y: uiAreas.bars.maxY, width: uiAreas.bars.width, height: 0)
       let zeroPath = computeGoalsPathForRect(zeroRect)
       transformShape(goalsShapeLayer, path: zeroPath, useAnimation: false)
     }
@@ -255,7 +249,7 @@ protocol WeekStatisticsViewDelegate {
   private func drawScaleInside() {
     let title = getTitleForScaleValue(maximumValue)
     let size = computeSizeForText(title, font: titleFont)
-    var rect = CGRectMake(0, 0, size.width, size.height)
+    var rect = CGRect(origin: CGPoint.zeroPoint, size: size)
     rect.offset(dx: uiAreas.scale.minX, dy: uiAreas.scale.minY + scaleMargin)
     rect.integerize()
     
@@ -275,23 +269,21 @@ protocol WeekStatisticsViewDelegate {
       let size = computeSizeForText(title, font: titleFont)
       let minY = rect.maxY - CGFloat(i) * segmentHeight - size.height / 2
       let minX = rect.maxX - size.width - scaleMargin
-      let point = CGPointMake(minX, minY)
+      let point = CGPoint(x: minX, y: minY)
       title.drawAtPoint(point, withAttributes: fontAttributes)
     }
   }
   
   private func getTitleForScaleValue(value: CGFloat) -> String {
-    if let titleFunction = titleForScaleFunction {
-      return titleFunction(value)
-    }
-    
-    return "\(Int(value))"
+    return titleForScaleFunction?(value) ?? "\(Int(value))"
   }
   
   private func computeSizeForText(text: String, font: UIFont) -> CGSize {
     let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
     let fontAttributes = [NSFontAttributeName: font, NSParagraphStyleAttributeName: textStyle]
-    return text.boundingRectWithSize(CGSizeMake(CGFloat.infinity, CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: fontAttributes, context: nil).size
+    let infiniteSize = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
+    let rect = text.boundingRectWithSize(infiniteSize, options: .UsesLineFragmentOrigin, attributes: fontAttributes, context: nil)
+    return rect.size
   }
   
   private func computeMaximumValue() -> CGFloat {
@@ -325,7 +317,7 @@ protocol WeekStatisticsViewDelegate {
       let y = round(rect.maxY - goalHeight)
       let xTo = xFrom + barWidth
       
-      let fromPoint = CGPointMake(round(xFrom), y)
+      let fromPoint = CGPoint(x: round(xFrom), y: y)
       
       if index == 0 {
         path.moveToPoint(fromPoint)
@@ -333,7 +325,7 @@ protocol WeekStatisticsViewDelegate {
         path.addLineToPoint(fromPoint)
       }
       
-      let toPoint = CGPointMake(round(xTo), y)
+      let toPoint = CGPoint(x: round(xTo), y: y)
       path.addLineToPoint(toPoint)
       
       xFrom = xTo
@@ -355,7 +347,7 @@ protocol WeekStatisticsViewDelegate {
       let barHeight = maximumValue > 0 ? (CGFloat(item.value) / maximumValue * rect.height) : 0
       let x = rect.minX + CGFloat(index) * fullBarWidth
       
-      var rect = CGRectMake(x, rect.maxY - barHeight, fullBarWidth, barHeight)
+      var rect = CGRect(x: x, y: rect.maxY - barHeight, width: fullBarWidth, height: barHeight)
       rect.inset(dx: barWidthInset, dy: 0)
       rect.integerize()
       rect.size.width = visibleBarWidth // to ensure for same width for all bars
@@ -365,7 +357,7 @@ protocol WeekStatisticsViewDelegate {
         rect.size.height = barCornerRadius * 2
       }
       
-      let path = UIBezierPath(roundedRect: rect, byRoundingCorners: .TopLeft | .TopRight, cornerRadii: CGSizeMake(barCornerRadius, barCornerRadius))
+      let path = UIBezierPath(roundedRect: rect, byRoundingCorners: .TopLeft | .TopRight, cornerRadii: CGSize(width: barCornerRadius, height: barCornerRadius))
       paths.append(path.CGPath)
     }
     
@@ -427,6 +419,7 @@ protocol WeekStatisticsViewDelegate {
 
   private func createBackgroundLayer() {
     _backgroundLayer = CAGradientLayer(layer: layer)
+    assert(backgroundColor != nil)
     _backgroundLayer.colors = [backgroundDarkColor.CGColor, backgroundColor!.CGColor]
     layer.insertSublayer(_backgroundLayer, atIndex: 0)
   }

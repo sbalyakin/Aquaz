@@ -30,11 +30,11 @@ class ModelHelper {
       fetchRequest.fetchLimit = fetchLimit
     }
     
-    var error: NSError? = nil
+    var error: NSError?
     let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as [EntityType]?
     
     if fetchResults == nil {
-      NSLog("fetchManagedObjects failed for entity \"\(EntityType.getEntityName())\" with error: \(error!.localizedDescription)")
+      NSLog("fetchManagedObjects failed for entity \"\(EntityType.getEntityName())\" with error: \(error?.localizedDescription ?? String())")
       return []
     }
     
@@ -49,9 +49,9 @@ class ModelHelper {
   }
   
   func save() {
-    var error: NSError? = nil
+    var error: NSError?
     if !managedObjectContext.save(&error) {
-      assert(false, "Failed to save managed object context. Error: \(error!.localizedDescription)")
+      assert(false, "Failed to save managed object context. Error: \(error?.localizedDescription ?? String())")
     }
   }
   

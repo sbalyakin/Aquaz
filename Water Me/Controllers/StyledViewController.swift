@@ -21,9 +21,12 @@ private class Styler {
       navigationController.navigationBar.tintAdjustmentMode = .Normal
 
       // Replace standard back icon with custom white one. Standard back icon is slightly dimmed and looks gray.
-      let image = UIImage(named: "iconBack")!.imageWithRenderingMode(.AlwaysOriginal)
-      navigationController.navigationBar.backIndicatorImage = image
-      navigationController.navigationBar.backIndicatorTransitionMaskImage = image
+      if let image = UIImage(named: "iconBack")?.imageWithRenderingMode(.AlwaysOriginal) {
+        navigationController.navigationBar.backIndicatorImage = image
+        navigationController.navigationBar.backIndicatorTransitionMaskImage = image
+      } else {
+        assert(false)
+      }
     }
   }
   

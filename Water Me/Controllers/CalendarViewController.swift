@@ -51,13 +51,13 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
   
   func calendarViewDaySelected(date: NSDate) {
     dayViewController.setCurrentDate(date)
-    navigationController!.popViewControllerAnimated(true)
+    navigationController?.popViewControllerAnimated(true)
   }
   
   @IBAction func todayDidSelected(sender: AnyObject) {
     let adjustedDate = DateHelper.dateByJoiningDateTime(datePart: NSDate(), timePart: dayViewController.getCurrentDate())
     dayViewController.setCurrentDate(adjustedDate)
-    navigationController!.popViewControllerAnimated(true)
+    navigationController?.popViewControllerAnimated(true)
   }
   
 }

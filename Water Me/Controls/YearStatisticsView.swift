@@ -108,9 +108,9 @@ import UIKit
     } else {
       let leftRectangleWidth = round(verticalTitlesMaxWidth + verticalScaleMargin)
       let bottomRectangleHeight = horizontalTitlesMaxHeight + horizontalScaleMargin
-      let lastVerticalTitleHeight = verticalTitlesSizes.last != nil ? verticalTitlesSizes.last!.height : 0
+      let lastVerticalTitleHeight = verticalTitlesSizes.last?.height ?? 0
       
-      var innerRect = CGRectMake(rect.minX, rect.minY + ceil(lastVerticalTitleHeight / 2), rect.width, rect.height - ceil(lastVerticalTitleHeight / 2))
+      var innerRect = CGRect(x: rect.minX, y: rect.minY + ceil(lastVerticalTitleHeight / 2), width: rect.width, height: rect.height - ceil(lastVerticalTitleHeight / 2))
       let dx = max(pinDiameter / 2 + pinShadowBlurRadius + pinShadowOffsetByX, 1)
       let dy = max(pinDiameter / 2 + pinShadowBlurRadius + pinShadowOffsetByY, 1)
       innerRect.inset(dx: dx, dy: dy)
@@ -173,13 +173,7 @@ import UIKit
   }
   
   private func getVerticalTitleForValue(value: CGFloat) -> String {
-    var title: String
-    if let titleFunc = titleForVerticalStep {
-      title = titleFunc(value)
-    } else {
-      title = "\(Int(value))"
-    }
-    return title
+    return titleForVerticalStep?(value) ?? "\(Int(value))"
   }
   
   private func fillHorizontalTitles() {
@@ -197,13 +191,7 @@ import UIKit
   }
 
   private func getHorizontalTitleForValue(value: CGFloat) -> String {
-    var title: String
-    if let titleFunc = titleForHorizontalStep {
-      title = titleFunc(value)
-    } else {
-      title = "\(Int(value))"
-    }
-    return title
+    return titleForHorizontalStep?(value) ?? "\(Int(value))"
   }
   
   private func computeTitlesSizes() {
@@ -248,8 +236,9 @@ import UIKit
   private func computeSizeForText(text: String, font: UIFont) -> CGSize {
     let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
     let fontAttributes = [NSFontAttributeName: font, NSParagraphStyleAttributeName: textStyle]
-    let size = text.boundingRectWithSize(CGSizeMake(CGFloat.infinity, CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: fontAttributes, context: nil).size
-    return CGSizeMake(round(size.width), round(size.height))
+    let infiniteSize = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
+    let rect = text.boundingRectWithSize(infiniteSize, options: .UsesLineFragmentOrigin, attributes: fontAttributes, context: nil)
+    return CGSize(width: round(rect.width), height: round(rect.height))
   }
   
   override func drawRect(rect: CGRect) {
@@ -264,15 +253,11 @@ import UIKit
       return
     }
     
-    if let backgroundColor = self.backgroundColor {
-      if backgroundColor.isClearColor() {
-        return
-      }
-    } else {
+    if backgroundColor?.isClearColor() ?? true {
       return
     }
     
-    if (backgroundDarkColor.isClearColor()) {
+    if backgroundDarkColor.isClearColor() {
       return
     }
     
@@ -292,7 +277,7 @@ import UIKit
   private func drawVerticalScaleInside() {
     let title = getVerticalTitleForValue(verticalMaximum)
     let size = computeSizeForText(title, font: scaleTitleFont)
-    var rect = CGRectMake(0, 0, size.width, size.height)
+    var rect = CGRect(origin: CGPoint.zeroPoint, size: size)
     rect.offset(dx: uiAreas.verticalScale.minX, dy: uiAreas.verticalScale.minY + verticalScaleMargin)
     rect.integerize()
 
@@ -315,7 +300,7 @@ import UIKit
       let midY = rect.maxY - CGFloat(index) * segmentHeight
       let minY = midY - textHeight / 2
       let minX = rect.maxX - verticalScaleMargin - textWidth
-      let point = CGPointMake(minX, minY)
+      let point = CGPoint(x: minX, y: minY)
       title.drawAtPoint(point, withAttributes: fontAttributes)
     }
   }
@@ -330,14 +315,20 @@ import UIKit
     let rect = uiAreas.horizontalScale.rectByOffsetting(dx: 0, dy: horizontalScaleMargin)
     
     // First title
-    let firstTitle = horizontalTitles.first!
-    textStyle.alignment = .Left
-    firstTitle.drawInRect(rect, withAttributes: fontAttributes)
+    if let firstTitle = horizontalTitles.first {
+      textStyle.alignment = .Left
+      firstTitle.drawInRect(rect, withAttributes: fontAttributes)
+    } else {
+      assert(false)
+    }
     
     // Last title
-    let lastTitle = horizontalTitles.last!
-    textStyle.alignment = .Right
-    lastTitle.drawInRect(rect, withAttributes: fontAttributes)
+    if let lastTitle = horizontalTitles.last {
+      textStyle.alignment = .Right
+      lastTitle.drawInRect(rect, withAttributes: fontAttributes)
+    } else {
+      assert(false)
+    }
   }
   
   private func drawChart() {
@@ -351,7 +342,7 @@ import UIKit
   
   private func drawItems() {
     if isFirstDraw() {
-      let zeroRect = CGRectMake(uiAreas.chart.minX, uiAreas.chart.maxY, uiAreas.chart.width, 0)
+      let zeroRect = CGRect(x: uiAreas.chart.minX, y: uiAreas.chart.maxY, width: uiAreas.chart.width, height: 0)
       let zeroPaths = computePathsForRect(zeroRect)
       drawValuesLine(zeroPaths.valuesStroke, useAnimation: false)
       drawValuesFill(zeroPaths.valuesFill, useAnimation: false)
@@ -381,15 +372,15 @@ import UIKit
     for (index, item) in enumerate(items) {
       let x = rect.minX + CGFloat(index) / maxIndex * rect.width
       let y = verticalMaximum > 0 ? rect.maxY - item.goal / verticalMaximum * rect.height : 0
-      let point = CGPointMake(round(x), round(y))
+      let point = CGPoint(x: round(x), y: round(y))
 
       if index == 0 {
         goalsPath.moveToPoint(point)
-        goalsPath.addLineToPoint(CGPointMake(point.x + halfSectionWidth, point.y))
+        goalsPath.addLineToPoint(CGPoint(x: point.x + halfSectionWidth, y: point.y))
       } else {
-        goalsPath.addLineToPoint(CGPointMake(previousGoal.x + halfSectionWidth, point.y))
+        goalsPath.addLineToPoint(CGPoint(x: previousGoal.x + halfSectionWidth, y: point.y))
         let nextGoalX = min(point.x + halfSectionWidth, rect.maxX)
-        goalsPath.addLineToPoint(CGPointMake(nextGoalX, point.y))
+        goalsPath.addLineToPoint(CGPoint(x: nextGoalX, y: point.y))
       }
       
       previousGoal = point
@@ -403,7 +394,7 @@ import UIKit
     for (index, item) in enumerate(items) {
       let x = rect.minX + CGFloat(index) / maxIndex * rect.width
       let y = verticalMaximum > 0 ? rect.maxY - item.value / verticalMaximum * rect.height : 0
-      let point = CGPointMake(round(x), round(y))
+      let point = CGPoint(x: round(x), y: round(y))
       valuesPoints.append(point)
       if index == 0 {
         valuesStrokePath.moveToPoint(point)
@@ -415,9 +406,9 @@ import UIKit
     }
 
     // Close fill path
-    valuesFillPath.addLineToPoint(CGPointMake(valuesPoints.last!.x, rect.maxY))
-    valuesFillPath.addLineToPoint(CGPointMake(rect.minX, rect.maxY))
-    valuesFillPath.addLineToPoint(CGPointMake(rect.minX, valuesPoints.first!.y))
+    valuesFillPath.addLineToPoint(CGPoint(x: valuesPoints.last!.x, y: rect.maxY))
+    valuesFillPath.addLineToPoint(CGPoint(x: rect.minX, y: rect.maxY))
+    valuesFillPath.addLineToPoint(CGPoint(x: rect.minX, y: valuesPoints.first!.y))
     
     return (valuesStroke: valuesStrokePath.CGPath, valuesFill: valuesFillPath.CGPath, goals: goalsPath.CGPath, pinsPoints: valuesPoints)
   }
@@ -443,7 +434,7 @@ import UIKit
       }
       
       let pinLayer = pinsLayer.sublayers[index] as CAShapeLayer
-      let rect = CGRectMake(coord.x - pinDiameter / 2, coord.y - pinDiameter / 2, pinDiameter, pinDiameter)
+      let rect = CGRect(x: coord.x - pinDiameter / 2, y: coord.y - pinDiameter / 2, width: pinDiameter, height: pinDiameter)
       var path = UIBezierPath(ovalInRect: rect).CGPath
       transformShape(pinLayer, path: path, useAnimation: useAnimation)
     }
@@ -471,10 +462,8 @@ import UIKit
     
     for i in 0..<items.count {
       let x = round(rect.minX + CGFloat(i) / maxIndex * rect.width)
-      let pointFrom = CGPointMake(x, rect.minY)
-      let pointTo = CGPointMake(x, rect.maxY)
-      gridPath.moveToPoint(pointFrom)
-      gridPath.addLineToPoint(pointTo)
+      gridPath.moveToPoint(CGPoint(x: x, y: rect.minY))
+      gridPath.addLineToPoint(CGPoint(x: x, y: rect.maxY))
     }
     
     gridLayer.path = gridPath.CGPath
@@ -517,7 +506,7 @@ import UIKit
   private func createPinsLayer() {
     // Create main layer with shadow
     _pinsLayer = CALayer(layer: layer)
-    _pinsLayer.shadowOffset = CGSizeMake(pinShadowOffsetByX, pinShadowOffsetByY)
+    _pinsLayer.shadowOffset = CGSize(width: pinShadowOffsetByX, height: pinShadowOffsetByY)
     _pinsLayer.shadowRadius = pinShadowBlurRadius
     _pinsLayer.shadowColor = UIColor.blackColor().CGColor
     _pinsLayer.shadowOpacity = 0.2
@@ -556,6 +545,7 @@ import UIKit
 
   private func createBackgroundLayer() {
     _backgroundLayer = CAGradientLayer(layer: layer)
+    assert(backgroundColor != nil)
     _backgroundLayer.colors = [backgroundDarkColor.CGColor, backgroundColor!.CGColor]
     layer.insertSublayer(_backgroundLayer, atIndex: 0)
   }

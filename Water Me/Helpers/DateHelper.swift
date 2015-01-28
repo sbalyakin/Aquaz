@@ -16,7 +16,12 @@ class DateHelper {
     components.hour = hour
     components.minute = minute
     components.second = second
-    return calendar.dateFromComponents(components)!
+
+    if let date = calendar.dateFromComponents(components) {
+      return date
+    } else {
+      assert(false)
+    }
   }
 
   class func addToDate(date: NSDate, years: Int, months: Int, days: Int) -> NSDate {
@@ -25,7 +30,12 @@ class DateHelper {
     components.year += years
     components.month += months
     components.day += days
-    return calendar.dateFromComponents(components)!
+    
+    if let date = calendar.dateFromComponents(components) {
+      return date
+    } else {
+      assert(false)
+    }
   }
 
   class func dateByClearingTime(#ofDate: NSDate) -> NSDate {

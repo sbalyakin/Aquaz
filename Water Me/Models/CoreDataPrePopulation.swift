@@ -67,11 +67,12 @@ class CoreDataPrePopulation {
       let consumptionsCount = random() % maxConsumptionsPerDay
       for i in 0..<consumptionsCount {
         let drinkIndex = random() % Drink.getDrinksCount()
-        let drink = Drink.getDrinkByIndex(drinkIndex)!
-        let amount = minAmount + random() % (maxAmount - minAmount)
-        let timeInterval = NSTimeInterval(random() % secondsPerDay)
-        let consumptionDate = NSDate(timeInterval: timeInterval, sinceDate: currentDay)
-        Consumption.addEntity(drink: drink, amount: amount, date: consumptionDate, managedObjectContext: managedObjectContext, saveImmediately: false)
+          if let drink = Drink.getDrinkByIndex(drinkIndex) {
+          let amount = minAmount + random() % (maxAmount - minAmount)
+          let timeInterval = NSTimeInterval(random() % secondsPerDay)
+          let consumptionDate = NSDate(timeInterval: timeInterval, sinceDate: currentDay)
+          Consumption.addEntity(drink: drink, amount: amount, date: consumptionDate, managedObjectContext: managedObjectContext, saveImmediately: false)
+        }
       }
     }
     

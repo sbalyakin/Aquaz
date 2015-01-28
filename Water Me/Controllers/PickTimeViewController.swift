@@ -34,11 +34,11 @@ class PickTimeViewController: StyledViewController {
   @IBAction func chooseButtonWasTapped(sender: AnyObject) {
     time = timePicker.date
     consumptionViewController.changeTimeForCurrentDate(time)
-    navigationController!.popViewControllerAnimated(true)
+    navigationController?.popViewControllerAnimated(true)
   }
   
   @IBAction func cancelButtonWasTapped(sender: AnyObject) {
-    navigationController!.popViewControllerAnimated(true)
+    navigationController?.popViewControllerAnimated(true)
   }
 
 }

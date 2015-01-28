@@ -177,7 +177,7 @@ class Quantity {
     Static.numberFormatter.minimumIntegerDigits = 1
     Static.numberFormatter.numberStyle = .DecimalStyle
 
-    var description = "\(Static.numberFormatter.stringFromNumber(amount)!)"
+    var description = Static.numberFormatter.stringFromNumber(amount) ?? "0"
     if displayUnits {
       description += " \(unit.contraction)"
     }

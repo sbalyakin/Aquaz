@@ -48,7 +48,8 @@ import UIKit
   private func initImages() {
     if thumbRadius > 0 {
       let imageSize = calcThumbImageSize()
-      let thumbImage = StyleImages.imageOfThumb(frame: CGRectMake(0, 0, imageSize.width, imageSize.height))
+      let thumbRect = CGRect(origin: CGPoint.zeroPoint, size: imageSize)
+      let thumbImage = StyleImages.imageOfThumb(frame: thumbRect)
       setThumbImage(thumbImage, forState: .Normal)
     }
   }
@@ -61,12 +62,12 @@ import UIKit
     
     let imageWidth = thumbRadius * 2 * frameWidth / originalWidth
     let imageHeight = thumbRadius * 2 * frameHeight / originalHeight
-    return CGSizeMake(imageWidth, imageHeight)
+    return CGSize(width: imageWidth, height: imageHeight)
   }
   
   override func trackRectForBounds(bounds: CGRect) -> CGRect {
     let standardRect = super.trackRectForBounds(bounds)
-    let rect = CGRectMake(standardRect.minX, round(standardRect.midY - trackHeight / 2), standardRect.width, trackHeight)
+    let rect = CGRect(x: standardRect.minX, y: round(standardRect.midY - trackHeight / 2), width: standardRect.width, height: trackHeight)
     return rect
   }
   

@@ -28,7 +28,7 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
     notificationsViewController.initControlsFromSettings()
     notificationsViewController.updateNotificationsFromSettings()
     
-    navigationController!.popViewControllerAnimated(true)
+    navigationController?.popViewControllerAnimated(true)
   }
 
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -76,15 +76,19 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
   }
 
   private func fillSoundsList() {
-    let bundlePath = NSBundle.mainBundle().resourcePath!
-    let fileManager = NSFileManager()
-    let allFiles = fileManager.contentsOfDirectoryAtPath(bundlePath, error: nil)
-    
-    for fileName in allFiles! {
-      let fileNameString = fileName as NSString
-      if fileNameString.pathExtension == "wav" {
-        soundsList.append((title: fileNameString.stringByDeletingPathExtension, fileName: fileNameString))
+    if let bundlePath = NSBundle.mainBundle().resourcePath {
+      if let allFiles = NSFileManager().contentsOfDirectoryAtPath(bundlePath, error: nil) {
+        for fileName in allFiles {
+          if fileName.pathExtension == "wav" {
+            let item: Sound = (title: fileName.stringByDeletingPathExtension, fileName: fileName as NSString)
+            soundsList.append(item)
+          }
+        }
+      } else {
+        assert(false)
       }
+    } else {
+      assert(false)
     }
   }
   

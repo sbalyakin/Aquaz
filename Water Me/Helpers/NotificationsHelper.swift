@@ -95,8 +95,8 @@ class NotificationsHelper {
     notification.soundName = Settings.sharedInstance.notificationsSound.value
     notification.applicationIconBadgeNumber = 1
 
-    if let interval = repeatInterval {
-      notification.repeatInterval = interval
+    if let repeatInterval = repeatInterval {
+      notification.repeatInterval = repeatInterval
     }
     
     UIApplication.sharedApplication().scheduleLocalNotification(notification)

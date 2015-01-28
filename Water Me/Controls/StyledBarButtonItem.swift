@@ -31,7 +31,7 @@ class StyledBarButtonItem: UIBarButtonItem {
   
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    if let image = self.image {
+    if let image = image {
       self.image = image.imageWithRenderingMode(.AlwaysOriginal)
     }
   }

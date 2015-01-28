@@ -181,7 +181,8 @@ protocol CalendarViewDelegate {
       
       for columnIndex in 0..<sizes.columnsCount {
         let minX = round(containerRect.origin.x + CGFloat(columnIndex) * sizes.cellSize.width + sizes.padding.dx)
-        let buttonRect = CGRectMake(minX, minY, sizes.buttonSize.width, sizes.buttonSize.height)
+        let origin = CGPoint(x: minX, y: minY)
+        let buttonRect = CGRect(origin: origin, size: sizes.buttonSize)
         buttonRects.append(buttonRect)
       }
     }
@@ -231,7 +232,7 @@ protocol CalendarViewDelegate {
     
     for i in 0..<daysPerWeek {
       let x = containerRect.minX + CGFloat(i) * labelWidth
-      var rect = CGRectMake(round(x), containerRect.minY, ceil(labelWidth), containerRect.height)
+      var rect = CGRect(x: round(x), y: containerRect.minY, width: ceil(labelWidth), height: containerRect.height)
       rects.append(rect)
     }
     
@@ -282,9 +283,9 @@ protocol CalendarViewDelegate {
     let buttonWidth = round(columnWidth - dx * 2)
     let buttonHeight = buttonWidth // make strong circle buttons
     
-    let cell = CGSizeMake(columnWidth, rowHeight)
-    let button = CGSizeMake(buttonWidth, buttonHeight)
-    let padding = CGVectorMake(dx, dy)
+    let cell = CGSize(width: columnWidth, height: rowHeight)
+    let button = CGSize(width: buttonWidth, height: buttonHeight)
+    let padding = CGVector(dx: dx, dy: dy)
     
     return (columnsCount: columnsCount, rowsCount: rowsCount, cellSize: cell, buttonSize: button, padding: padding)
   }
@@ -297,8 +298,8 @@ protocol CalendarViewDelegate {
     
     for rowIndex in 1..<sizes.rowsCount {
       let y = round(rect.origin.y + CGFloat(rowIndex) * sizes.cellSize.height) + scaleOffset
-      let startPoint = CGPointMake(rect.origin.x, y)
-      let endPoint = CGPointMake(rect.maxY, y)
+      let startPoint = CGPoint(x: rect.minX, y: y)
+      let endPoint = CGPoint(x: rect.maxX, y: y)
       
       linePath.moveToPoint(startPoint)
       linePath.addLineToPoint(endPoint)
@@ -310,23 +311,17 @@ protocol CalendarViewDelegate {
   }
   
   func dayButtonTapped(dayButton: CalendarDayButton) {
-    assert(dayButton.dayInfo != nil)
-    
-    let date = dayButton.dayInfo!.date
-    
-    if !DateHelper.areDatesEqualByDays(date1: selectedDate, date2: date) {
-      if let selectedDayButton = selectedDayButton {
-        selectedDayButton.dayInfo!.isSelected = false
+    if let date = dayButton.dayInfo?.date {
+      if !DateHelper.areDatesEqualByDays(date1: selectedDate, date2: date) {
+        selectedDayButton?.dayInfo?.isSelected = false
+        dayButton.dayInfo?.isSelected = true
+        selectedDayButton = dayButton
       }
       
-      dayButton.dayInfo!.isSelected = true
-      selectedDayButton = dayButton
-    }
-    
-    selectedDate = date
-    
-    if let delegate = delegate {
-      delegate.calendarViewDaySelected(date)
+      selectedDate = date
+      delegate?.calendarViewDaySelected(date)
+    } else {
+      assert(false)
     }
   }
   
@@ -375,9 +370,7 @@ class CalendarViewDayInfo {
   
   var isSelected: Bool {
     didSet {
-      if let changeHandler = changeHandler {
-        changeHandler()
-      }
+      changeHandler?()
     }
   }
   

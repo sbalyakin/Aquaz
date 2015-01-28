@@ -24,14 +24,16 @@ class NotificationsIntervalPickerViewController: UIViewController, UIPickerViewD
     let pickerGap: CGFloat = 2 // Discovered gap for current picker view implementation
 
     let hoursSize = computeSizeForText(hoursTitle, font: pickerLabelFont)
-    let hoursRect = CGRectMake(trunc(pickerView.bounds.midX) - hoursSize.width - pickerGap, trunc(pickerView.bounds.midY - hoursSize.height / 2), hoursSize.width, hoursSize.height)
+    let hoursOrigin = CGPoint(x: trunc(pickerView.bounds.midX) - hoursSize.width - pickerGap, y: trunc(pickerView.bounds.midY - hoursSize.height / 2))
+    let hoursRect = CGRect(origin: hoursOrigin, size: hoursSize)
     let hoursLabel = UILabel(frame: hoursRect)
     hoursLabel.font = pickerLabelFont
     hoursLabel.text = hoursTitle
     hoursLabel.backgroundColor = UIColor.clearColor()
 
     let minutesSize = computeSizeForText(minutesTitle, font: pickerLabelFont)
-    let minutesRect = CGRectMake(trunc(pickerView.bounds.midX) + pickerGap + 1 + minutesComponentWidth - minutesSize.width, trunc(pickerView.bounds.midY - minutesSize.height / 2), minutesSize.width, minutesSize.height)
+    let minutesOrigin = CGPoint(x: trunc(pickerView.bounds.midX) + pickerGap + 1 + minutesComponentWidth - minutesSize.width, y: trunc(pickerView.bounds.midY - minutesSize.height / 2))
+    let minutesRect = CGRect(origin: minutesOrigin, size: minutesSize)
     let minutesLabel = UILabel(frame: minutesRect)
     minutesLabel.font = pickerLabelFont
     minutesLabel.text = minutesTitle
@@ -44,8 +46,9 @@ class NotificationsIntervalPickerViewController: UIViewController, UIPickerViewD
   private func computeSizeForText(text: String, font: UIFont) -> CGSize {
     let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
     let fontAttributes = [NSFontAttributeName: font, NSParagraphStyleAttributeName: textStyle]
-    let size = text.boundingRectWithSize(CGSizeMake(CGFloat.infinity, CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: fontAttributes, context: nil).size
-    return CGSizeMake(ceil(size.width), ceil(size.height))
+    let infiniteSize = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
+    let rect = text.boundingRectWithSize(infiniteSize, options: .UsesLineFragmentOrigin, attributes: fontAttributes, context: nil)
+    return CGSize(width: ceil(rect.width), height: ceil(rect.height))
   }
 
   private func selectTimeInterval(timeInterval: NSTimeInterval) {
@@ -66,7 +69,7 @@ class NotificationsIntervalPickerViewController: UIViewController, UIPickerViewD
   }
   
   @IBAction func cancelWasTapped(sender: AnyObject) {
-    navigationController!.popViewControllerAnimated(true)
+    navigationController?.popViewControllerAnimated(true)
   }
   
   @IBAction func saveWasTapped(sender: AnyObject) {
@@ -75,7 +78,7 @@ class NotificationsIntervalPickerViewController: UIViewController, UIPickerViewD
     notificationsViewController.initControlsFromSettings()
     notificationsViewController.updateNotificationsFromSettings()
 
-    navigationController!.popViewControllerAnimated(true)
+    navigationController?.popViewControllerAnimated(true)
   }
 
   private func getPickedTimeInterval() -> NSTimeInterval {
@@ -131,13 +134,14 @@ class NotificationsIntervalPickerViewController: UIViewController, UIPickerViewD
   }
 
   private func createViewForPickerItem(#title: String, labelWidth: CGFloat, componentWidth: CGFloat) -> UIView {
-    let label = UILabel(frame: CGRectMake(0, 0, labelWidth, 33))
+    // TODO: Magical numbers (33) should be transformed to constants
+    let label = UILabel(frame: CGRect(x: 0, y: 0, width: labelWidth, height: 33))
     label.textAlignment = .Right
     label.backgroundColor = UIColor.clearColor()
     label.text = title
     label.font = UIFont.systemFontOfSize(20)
 
-    let view = UIView(frame: CGRectMake(0, 0, componentWidth, 33))
+    let view = UIView(frame: CGRect(x: 0, y: 0, width: componentWidth, height: 33))
     view.backgroundColor = UIColor.clearColor()
     view.addSubview(label)
     

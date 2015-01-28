@@ -60,7 +60,7 @@ class MonthStatisticsDayButton: CalendarDayButton {
   
   private func drawArcInRect(rect: CGRect) {
     let lineWidth: CGFloat = monthStatisticsView.dayConsumptionLineWidth
-    let centerPoint = CGPointMake(rect.midX, rect.midY)
+    let centerPoint = CGPoint(x: rect.midX, y: rect.midY)
     let startAngle = CGFloat(-M_PI_2)
     let endAngle = CGFloat(-M_PI_2 + M_PI * 2 * consumptionFraction)
     let radius = rect.width / 2 - lineWidth / 2

@@ -204,9 +204,9 @@ class ConsumptionRate: NSManagedObject, NamedEntity {
     consumptionRate.highActivityFraction = highActivityFraction
     
     if saveImmediately {
-      var error: NSError? = nil
+      var error: NSError?
       if !managedObjectContext.save(&error) {
-        NSLog("Failed to save new consumption rate for date \"\(adjustedDate)\". Error: \(error!.localizedDescription)")
+        NSLog("Failed to save new consumption rate for date \"\(adjustedDate)\". Error: \(error?.localizedDescription ?? String())")
       }
     }
     

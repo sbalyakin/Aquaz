@@ -18,8 +18,8 @@ class DaySummaryView: UIView {
 
     let path = UIBezierPath()
     path.lineWidth = 1 / contentScaleFactor
-    path.moveToPoint(CGPointMake(rect.minX, rect.maxY - scaleOffset))
-    path.addLineToPoint(CGPointMake(rect.maxX, rect.maxY - scaleOffset))
+    path.moveToPoint(CGPoint(x: rect.minX, y: rect.maxY - scaleOffset))
+    path.addLineToPoint(CGPoint(x: rect.maxX, y: rect.maxY - scaleOffset))
     path.stroke()
   }
   

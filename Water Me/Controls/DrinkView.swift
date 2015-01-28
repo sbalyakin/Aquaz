@@ -38,7 +38,7 @@ class DrinkView: UIView {
   
   override func drawRect(rect: CGRect) {
     let minDimension = min(rect.width, rect.height)
-    let drawRect = CGRectMake(rect.minX + trunc((rect.width - minDimension) / 2), rect.minY + trunc((rect.height - minDimension) / 2), minDimension, minDimension)
+    let drawRect = CGRect(x: rect.minX + trunc((rect.width - minDimension) / 2), y: rect.minY + trunc((rect.height - minDimension) / 2), width: minDimension, height: minDimension)
     drink.drawDrink(frame: drawRect)
     
     if highlighted {
@@ -61,7 +61,8 @@ class DrinkView: UIView {
       for i in 0..<dotsCount {
         let x = markRect.minX + CGFloat(i) * dx
         
-        let path = UIBezierPath(ovalInRect: CGRectMake(x - dotRadius, markRect.minY - dotRadius, dotRadius * 2, dotRadius * 2))
+        let dotsRect = CGRect(x: x - dotRadius, y: markRect.minY - dotRadius, width: dotRadius * 2, height: dotRadius * 2)
+        let path = UIBezierPath(ovalInRect: dotsRect)
         drink.mainColor.setFill()
         path.fill()
       }
