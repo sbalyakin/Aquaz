@@ -55,24 +55,6 @@ class UIHelper {
     UINavigationBar.appearance().tintAdjustmentMode = .Normal
   }
 
-  class func getImageOfView(view: UIView) -> UIImage {
-    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0)
-    view.drawViewHierarchyInRect(view.bounds, afterScreenUpdates: false)
-    let image = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    return image
-  }
-  
-  class func saveImageOfViewToDisk(#view: UIView, fileName: String) {
-    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-    var filePath = paths[0] as String
-    filePath = filePath.stringByAppendingPathComponent(fileName)
-
-    let image = getImageOfView(view)
-    
-    UIImagePNGRepresentation(image).writeToFile(filePath, atomically: true)
-  }
-
 }
 
 extension UIColor {
