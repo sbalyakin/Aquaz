@@ -1,6 +1,6 @@
 //
-//  Water_MeTests.swift
-//  Water MeTests
+//  AquazTests.swift
+//  AquazTests
 //
 //  Created by Sergey Balyakin on 30.09.14.
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.
@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 
-class Water_MeTests: XCTestCase {
+class AquazTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

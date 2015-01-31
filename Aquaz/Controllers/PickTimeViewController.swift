@@ -1,6 +1,6 @@
 //
 //  PickTimeViewController.swift
-//  Water Me
+//  Aquaz
 //
 //  Created by Sergey Balyakin on 14.11.14.
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.

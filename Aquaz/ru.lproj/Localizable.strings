@@ -79,9 +79,6 @@
 /* NotificationsHelper: Text for alert body of notifications */
 "NH:It's time to drink!" = "Время выпить воды!";
 
-/* NotificationsHelper: Text for alert action of notifications */
-"NH:Water me" = "Выпить воды";
-
 /* NotificationsIntervalPickerViewController: Contraction for hours */
 "NIPVC:hr" = "ч";
 

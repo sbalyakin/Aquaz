@@ -1,6 +1,6 @@
 //
 //  MultiProgressView.swift
-//  Water Me
+//  Aquaz
 //
 //  Created by Sergey Balyakin on 06.11.14.
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.

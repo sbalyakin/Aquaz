@@ -1,6 +1,6 @@
 //
 //  DaySummaryView.swift
-//  Water Me
+//  Aquaz
 //
 //  Created by Sergey Balyakin on 20.01.15.
 //  Copyright (c) 2015 Sergey Balyakin. All rights reserved.

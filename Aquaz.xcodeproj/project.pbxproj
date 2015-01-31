@@ -30,10 +30,10 @@
 		843B056919E2D80E0097A833 /* ConsumptionRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056819E2D80E0097A833 /* ConsumptionRate.swift */; };
 		8455DACF1A694487004245F9 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455DACE1A694487004245F9 /* RoundedButton.swift */; };
 		8455DAD11A694D8A004245F9 /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455DAD01A694D8A004245F9 /* CompleteViewController.swift */; };
-		84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Water_Me.xcdatamodeld */; };
+		84669A7219DAD78D003C2263 /* Aquaz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Aquaz.xcdatamodeld */; };
 		84669A7719DAD78D003C2263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7519DAD78D003C2263 /* Main.storyboard */; };
 		84669A7919DAD78D003C2263 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7819DAD78D003C2263 /* Images.xcassets */; };
-		84669A8819DAD78D003C2263 /* Water_MeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84669A8719DAD78D003C2263 /* Water_MeTests.swift */; };
+		84669A8819DAD78D003C2263 /* AquazTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84669A8719DAD78D003C2263 /* AquazTests.swift */; };
 		8468D6421A0D1C240008D027 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468D6411A0D1C240008D027 /* DateHelper.swift */; };
 		8478253719EAC8C200588FE3 /* ConsumptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478253619EAC8C200588FE3 /* ConsumptionViewController.swift */; };
 		8488A18E1A53FE6500258EC8 /* NotificationsSoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488A18D1A53FE6500258EC8 /* NotificationsSoundViewController.swift */; };
@@ -76,7 +76,7 @@
 			containerPortal = 84669A6119DAD78D003C2263 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 84669A6819DAD78D003C2263;
-			remoteInfo = "Water Me";
+			remoteInfo = "Aquaz";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -102,18 +102,18 @@
 		843B055819E2D7800097A833 /* SelectDrinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SelectDrinkViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		843B055A19E2D7800097A833 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SWRevealViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		843B055B19E2D7800097A833 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SWRevealViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		843B055C19E2D7800097A833 /* Water Me-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Water Me-Bridging-Header.h"; sourceTree = "<group>"; };
+		843B055C19E2D7800097A833 /* Aquaz-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Aquaz-Bridging-Header.h"; sourceTree = "<group>"; };
 		843B056819E2D80E0097A833 /* ConsumptionRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionRate.swift; sourceTree = "<group>"; };
 		8455DACE1A694487004245F9 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedButton.swift; path = Controls/RoundedButton.swift; sourceTree = "<group>"; };
 		8455DAD01A694D8A004245F9 /* CompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
-		84669A6919DAD78D003C2263 /* Water Me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Water Me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84669A6919DAD78D003C2263 /* Aquaz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aquaz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84669A6D19DAD78D003C2263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84669A7119DAD78D003C2263 /* Water_Me.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Water_Me.xcdatamodel; sourceTree = "<group>"; };
+		84669A7119DAD78D003C2263 /* Aquaz.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Aquaz.xcdatamodel; sourceTree = "<group>"; };
 		84669A7619DAD78D003C2263 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84669A7819DAD78D003C2263 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		84669A8119DAD78D003C2263 /* Water MeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Water MeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84669A8119DAD78D003C2263 /* AquazTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AquazTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84669A8619DAD78D003C2263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84669A8719DAD78D003C2263 /* Water_MeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Water_MeTests.swift; sourceTree = "<group>"; };
+		84669A8719DAD78D003C2263 /* AquazTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AquazTests.swift; sourceTree = "<group>"; };
 		8468D6411A0D1C240008D027 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		8478253619EAC8C200588FE3 /* ConsumptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ConsumptionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8488A18D1A53FE6500258EC8 /* NotificationsSoundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsSoundViewController.swift; sourceTree = "<group>"; };
@@ -233,7 +233,7 @@
 			children = (
 				843B055A19E2D7800097A833 /* SWRevealViewController.h */,
 				843B055B19E2D7800097A833 /* SWRevealViewController.m */,
-				843B055C19E2D7800097A833 /* Water Me-Bridging-Header.h */,
+				843B055C19E2D7800097A833 /* Aquaz-Bridging-Header.h */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -256,8 +256,8 @@
 			isa = PBXGroup;
 			children = (
 				A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */,
-				84669A6B19DAD78D003C2263 /* Water Me */,
-				84669A8419DAD78D003C2263 /* Water MeTests */,
+				84669A6B19DAD78D003C2263 /* Aquaz */,
+				84669A8419DAD78D003C2263 /* AquazTests */,
 				84669A6A19DAD78D003C2263 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -265,13 +265,13 @@
 		84669A6A19DAD78D003C2263 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84669A6919DAD78D003C2263 /* Water Me.app */,
-				84669A8119DAD78D003C2263 /* Water MeTests.xctest */,
+				84669A6919DAD78D003C2263 /* Aquaz.app */,
+				84669A8119DAD78D003C2263 /* AquazTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		84669A6B19DAD78D003C2263 /* Water Me */ = {
+		84669A6B19DAD78D003C2263 /* Aquaz */ = {
 			isa = PBXGroup;
 			children = (
 				8488A18F1A540B9300258EC8 /* Sounds */,
@@ -283,11 +283,11 @@
 				A5B75A1219E55CBB00D0477B /* Helpers */,
 				843B055D19E2D7800097A833 /* Models */,
 				84669A6C19DAD78D003C2263 /* Supporting Files */,
-				84669A7019DAD78D003C2263 /* Water_Me.xcdatamodeld */,
+				84669A7019DAD78D003C2263 /* Aquaz.xcdatamodeld */,
 				84669A7519DAD78D003C2263 /* Main.storyboard */,
 				A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */,
 			);
-			path = "Water Me";
+			path = "Aquaz";
 			sourceTree = "<group>";
 		};
 		84669A6C19DAD78D003C2263 /* Supporting Files */ = {
@@ -300,13 +300,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		84669A8419DAD78D003C2263 /* Water MeTests */ = {
+		84669A8419DAD78D003C2263 /* AquazTests */ = {
 			isa = PBXGroup;
 			children = (
-				84669A8719DAD78D003C2263 /* Water_MeTests.swift */,
+				84669A8719DAD78D003C2263 /* AquazTests.swift */,
 				84669A8519DAD78D003C2263 /* Supporting Files */,
 			);
-			path = "Water MeTests";
+			path = "AquazTests";
 			sourceTree = "<group>";
 		};
 		84669A8519DAD78D003C2263 /* Supporting Files */ = {
@@ -342,9 +342,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		84669A6819DAD78D003C2263 /* Water Me */ = {
+		84669A6819DAD78D003C2263 /* Aquaz */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84669A8B19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "Water Me" */;
+			buildConfigurationList = 84669A8B19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "Aquaz" */;
 			buildPhases = (
 				84669A6519DAD78D003C2263 /* Sources */,
 				84669A6619DAD78D003C2263 /* Frameworks */,
@@ -354,14 +354,14 @@
 			);
 			dependencies = (
 			);
-			name = "Water Me";
-			productName = "Water Me";
-			productReference = 84669A6919DAD78D003C2263 /* Water Me.app */;
+			name = "Aquaz";
+			productName = "Aquaz";
+			productReference = 84669A6919DAD78D003C2263 /* Aquaz.app */;
 			productType = "com.apple.product-type.application";
 		};
-		84669A8019DAD78D003C2263 /* Water MeTests */ = {
+		84669A8019DAD78D003C2263 /* AquazTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84669A8E19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "Water MeTests" */;
+			buildConfigurationList = 84669A8E19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "AquazTests" */;
 			buildPhases = (
 				84669A7D19DAD78D003C2263 /* Sources */,
 				84669A7E19DAD78D003C2263 /* Frameworks */,
@@ -372,9 +372,9 @@
 			dependencies = (
 				84669A8319DAD78D003C2263 /* PBXTargetDependency */,
 			);
-			name = "Water MeTests";
-			productName = "Water MeTests";
-			productReference = 84669A8119DAD78D003C2263 /* Water MeTests.xctest */;
+			name = "AquazTests";
+			productName = "AquazTests";
+			productReference = 84669A8119DAD78D003C2263 /* AquazTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -397,7 +397,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 84669A6419DAD78D003C2263 /* Build configuration list for PBXProject "Water Me" */;
+			buildConfigurationList = 84669A6419DAD78D003C2263 /* Build configuration list for PBXProject "Aquaz" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -410,8 +410,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84669A6819DAD78D003C2263 /* Water Me */,
-				84669A8019DAD78D003C2263 /* Water MeTests */,
+				84669A6819DAD78D003C2263 /* Aquaz */,
+				84669A8019DAD78D003C2263 /* AquazTests */,
 			);
 		};
 /* End PBXProject section */
@@ -477,7 +477,7 @@
 				84380C2C19E4195A0026398E /* Drink.swift in Sources */,
 				84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */,
 				8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */,
-				84669A7219DAD78D003C2263 /* Water_Me.xcdatamodeld in Sources */,
+				84669A7219DAD78D003C2263 /* Aquaz.xcdatamodeld in Sources */,
 				84C610BA1A319DBC00433EF1 /* MonthStatisticsViewController.swift in Sources */,
 				84380C2819E4195A0026398E /* Consumption.swift in Sources */,
 				A55F34A61A74D6AC00A529A5 /* DrinkCollectionViewCell.swift in Sources */,
@@ -504,7 +504,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84669A8819DAD78D003C2263 /* Water_MeTests.swift in Sources */,
+				84669A8819DAD78D003C2263 /* AquazTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,7 +513,7 @@
 /* Begin PBXTargetDependency section */
 		84669A8319DAD78D003C2263 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 84669A6819DAD78D003C2263 /* Water Me */;
+			target = 84669A6819DAD78D003C2263 /* Aquaz */;
 			targetProxy = 84669A8219DAD78D003C2263 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -647,11 +647,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "Water Me/Info.plist";
+				INFOPLIST_FILE = "Aquaz/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Water Me/External/Water Me-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Aquaz/External/Aquaz-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -663,11 +663,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "Water Me/Info.plist";
+				INFOPLIST_FILE = "Aquaz/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Water Me/External/Water Me-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Aquaz/External/Aquaz-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -685,11 +685,11 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Water MeTests/Info.plist";
+				INFOPLIST_FILE = "AquazTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Water Me.app/Water Me";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aquaz.app/Aquaz";
 			};
 			name = Debug;
 		};
@@ -703,18 +703,18 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Water MeTests/Info.plist";
+				INFOPLIST_FILE = "AquazTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Water Me.app/Water Me";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aquaz.app/Aquaz";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		84669A6419DAD78D003C2263 /* Build configuration list for PBXProject "Water Me" */ = {
+		84669A6419DAD78D003C2263 /* Build configuration list for PBXProject "Aquaz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84669A8919DAD78D003C2263 /* Debug */,
@@ -723,7 +723,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84669A8B19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "Water Me" */ = {
+		84669A8B19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "Aquaz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84669A8C19DAD78D003C2263 /* Debug */,
@@ -732,7 +732,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84669A8E19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "Water MeTests" */ = {
+		84669A8E19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "AquazTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84669A8F19DAD78D003C2263 /* Debug */,
@@ -744,13 +744,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		84669A7019DAD78D003C2263 /* Water_Me.xcdatamodeld */ = {
+		84669A7019DAD78D003C2263 /* Aquaz.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				84669A7119DAD78D003C2263 /* Water_Me.xcdatamodel */,
+				84669A7119DAD78D003C2263 /* Aquaz.xcdatamodel */,
 			);
-			currentVersion = 84669A7119DAD78D003C2263 /* Water_Me.xcdatamodel */;
-			path = Water_Me.xcdatamodeld;
+			currentVersion = 84669A7119DAD78D003C2263 /* Aquaz.xcdatamodel */;
+			path = Aquaz.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

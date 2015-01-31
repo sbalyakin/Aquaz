@@ -1,6 +1,6 @@
 //
 //  NotificationsSoundViewController.swift
-//  Water Me
+//  Aquaz
 //
 //  Created by Sergey Balyakin on 31.12.14.
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.

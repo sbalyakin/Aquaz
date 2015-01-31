@@ -1,6 +1,6 @@
 //
 //  SettingsTableViewController.swift
-//  Water Me
+//  Aquaz
 //
 //  Created by Sergey Balyakin on 03.10.14.
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.
