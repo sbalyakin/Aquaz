@@ -34,7 +34,14 @@ import UIKit
     }
   }
   
-  @IBInspectable var sectionsPading: CGFloat = 4.0 {
+  @IBInspectable var sectionsPadding: CGFloat = 2.0 {
+    didSet {
+      setNeedsDisplay()
+    }
+  }
+  
+  /// If sections' factor total is more than maximum, auto scale will be used
+  @IBInspectable var autoOverloadScale: Bool = true {
     didSet {
       setNeedsDisplay()
     }
@@ -43,6 +50,7 @@ import UIKit
   // 0.25 seconds is default animation time for iOS transitions
   @IBInspectable var animationDuration: Float = 0.25
 
+  
   class Section {
     var factor: CGFloat = 0.0 {
       didSet {
@@ -142,14 +150,10 @@ import UIKit
   
   private func calcSectionsRect(layer: CALayer) -> CGRect {
     let rect = layer.bounds
-    return rect.rectByInsetting(dx: borderWidth + sectionsPading, dy: borderWidth + sectionsPading)
+    return rect.rectByInsetting(dx: borderWidth + sectionsPadding, dy: borderWidth + sectionsPadding)
   }
   
   private func displaySections(rect: CGRect) {
-    let rectWidth = rect.width
-    let rectRight = rect.maxX
-    var left = rect.minX
-
     CATransaction.begin()
     
     if animationDuration <= 0 {
@@ -158,16 +162,37 @@ import UIKit
       CATransaction.setAnimationDuration(CFTimeInterval(animationDuration))
     }
 
-    for section in sections {
-      var width = trunc(section.factor / maximum * rectWidth)
-      if left + width > rectRight {
-        width = rectRight - left
+    var displayedMaximum = maximum
+    
+    if autoOverloadScale {
+      var factorsTotal: CGFloat = 0
+      for section in sections {
+        factorsTotal += section.factor
       }
       
-      let sectionRect = CGRect(x: left, y: rect.minY, width: width, height: rect.height)
-      section.setFrame(sectionRect)
+      if factorsTotal > displayedMaximum {
+        displayedMaximum = factorsTotal
+      }
+    }
+    
+    var factorsTotal: CGFloat = 0
+    let scaleX = 1 / displayedMaximum * rect.width
+    
+    for (index, section) in enumerate(sections) {
+      var x = rect.minX + trunc(factorsTotal * scaleX)
+      var width = ceil(section.factor * scaleX)
+      factorsTotal += section.factor
 
-      left += width
+      if x > rect.maxX {
+        x = rect.maxX
+      }
+      
+      if x + width > rect.maxX {
+        width = rect.maxX - x
+      }
+      
+      let sectionRect = CGRect(x: x, y: rect.minY, width: width, height: rect.height)
+      section.setFrame(sectionRect)
     }
     
     CATransaction.commit()
