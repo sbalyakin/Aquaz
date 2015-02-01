@@ -16,39 +16,101 @@ import UIKit
     }
   }
 
-  @IBInspectable var emptySectionColor: UIColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1)
-  @IBInspectable var borderColor: UIColor = UIColor(red: 167/255, green: 169/255, blue: 171/255, alpha: 0.8)
-  @IBInspectable var borderWidth: CGFloat = 1.0
-  @IBInspectable var sectionsPading: CGFloat = 4.0
-  
-  var animationDuration = 0.2
-
-  class Section {
-    var factor: CGFloat = 0.0
-    var color: UIColor
-    private var layer: CALayer
-    
-    init(color: UIColor, layer: CALayer) {
-      self.color = color
-      self.layer = layer
-    }
-    
-    private var _shapeLayer: CAShapeLayer!
-    private var shapeLayer: CAShapeLayer {
-      if _shapeLayer == nil {
-        createShapeLayer()
-      }
-      return _shapeLayer
-    }
-
-    private func createShapeLayer() {
-      _shapeLayer = CAShapeLayer(layer: layer)
-      _shapeLayer.fillColor = color.CGColor
-      _shapeLayer.lineWidth = 0
-      layer.addSublayer(_shapeLayer)
+  @IBInspectable var emptySectionColor: UIColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1) {
+    didSet {
+      setNeedsDisplay()
     }
   }
+  
+  @IBInspectable var borderColor: UIColor = UIColor(red: 167/255, green: 169/255, blue: 171/255, alpha: 0.8) {
+    didSet {
+      setNeedsDisplay()
+    }
+  }
+  
+  @IBInspectable var borderWidth: CGFloat = 1.0 {
+    didSet {
+      setNeedsDisplay()
+    }
+  }
+  
+  @IBInspectable var sectionsPading: CGFloat = 4.0 {
+    didSet {
+      setNeedsDisplay()
+    }
+  }
+  
+  // 0.25 seconds is default animation time for iOS transitions
+  @IBInspectable var animationDuration: Float = 0.25
 
+  class Section {
+    var factor: CGFloat = 0.0 {
+      didSet {
+        superLayer.setNeedsDisplay()
+      }
+    }
+    
+    var color: UIColor {
+      didSet {
+        layer.backgroundColor = color.CGColor
+      }
+    }
+    
+    
+    init(color: UIColor, superLayer: CALayer) {
+      self.color = color
+      self.superLayer = superLayer
+
+      layer = CALayer(layer: superLayer)
+      layer.backgroundColor = color.CGColor
+      superLayer.addSublayer(layer)
+    }
+    
+    deinit {
+      layer.removeFromSuperlayer()
+    }
+    
+    func setFrame(rect: CGRect) {
+      layer.frame = rect
+    }
+
+    private var superLayer: CALayer
+    private var layer: CALayer
+  }
+
+  override init() {
+    super.init()
+    initSubLayers()
+  }
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    initSubLayers()
+  }
+  
+  required init(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    initSubLayers()
+  }
+
+  private func initSubLayers() {
+    layer.borderColor = borderColor.CGColor
+    layer.borderWidth = borderWidth
+    
+    let sectionsRect = calcSectionsRect(layer)
+    emptySectionLayer = CAShapeLayer(layer: layer)
+    emptySectionLayer.backgroundColor = emptySectionColor.CGColor
+    emptySectionLayer.frame = sectionsRect
+    emptySectionLayer.bounds = sectionsRect
+    layer.addSublayer(emptySectionLayer)
+  }
+  
+  override func layoutSublayersOfLayer(layer: CALayer!) {
+    let sectionsRect = calcSectionsRect(layer)
+    emptySectionLayer.frame = sectionsRect
+    emptySectionLayer.bounds = sectionsRect
+  }
+  
   override func prepareForInterfaceBuilder() {
     // Initialize values with some predefined values in order to show in Interface Builder
     let section1 = addSection(color: UIColor.redColor())
@@ -60,7 +122,7 @@ import UIKit
   }
 
   func addSection(#color: UIColor) -> Section {
-    let section = Section(color: color, layer: layer)
+    let section = Section(color: color, superLayer: layer)
     sections.append(section)
     return section
   }
@@ -73,75 +135,44 @@ import UIKit
     return sections[index]
   }
   
-  override func drawRect(rect: CGRect) {
-    drawBackground(rect)
-
-    let sectionsRect = rect.rectByInsetting(dx: borderWidth + sectionsPading, dy: borderWidth + sectionsPading)
-    drawSections(sectionsRect)
+  override func displayLayer(layer: CALayer!) {
+    let sectionsRect = calcSectionsRect(layer)
+    displaySections(sectionsRect)
   }
   
-  private func drawBackground(rect: CGRect) {
-    // Draw the background
-    let backgroundPath = UIBezierPath(rect: rect)
-    backgroundColor!.setFill()
-    backgroundPath.fill()
-    backgroundPath.lineWidth = borderWidth
-    borderColor.setStroke()
-    backgroundPath.stroke()
+  private func calcSectionsRect(layer: CALayer) -> CGRect {
+    let rect = layer.bounds
+    return rect.rectByInsetting(dx: borderWidth + sectionsPading, dy: borderWidth + sectionsPading)
   }
   
-  private func drawSections(rect: CGRect) {
+  private func displaySections(rect: CGRect) {
     let rectWidth = rect.width
     let rectRight = rect.maxX
     var left = rect.minX
-    var isLast = false
+
+    CATransaction.begin()
+    
+    if animationDuration <= 0 {
+      CATransaction.setDisableActions(true)
+    } else {
+      CATransaction.setAnimationDuration(CFTimeInterval(animationDuration))
+    }
 
     for section in sections {
-      // Compute section bounds
       var width = trunc(section.factor / maximum * rectWidth)
       if left + width > rectRight {
         width = rectRight - left
-        isLast = true
       }
       
-      // Draw section
       let sectionRect = CGRect(x: left, y: rect.minY, width: width, height: rect.height)
-      let sectionPath = UIBezierPath(rect: sectionRect)
-      section.shapeLayer.frame = sectionRect
-      section.shapeLayer.bounds = sectionRect
-      transformShape(section.shapeLayer, path: sectionPath.CGPath, useAnimation: true)
-      
-      if isLast {
-        break
-      }
-      
+      section.setFrame(sectionRect)
+
       left += width
     }
-
-    // Draw empty section if it's necessary
-    if left < rectRight {
-      let width = rectRight - left
-      let rect = CGRect(x: left, y: rect.minY, width: width, height: rect.height)
-      let path = UIBezierPath(rect: rect)
-      emptySectionColor.setFill()
-      path.fill()
-    }
-  }
-  
-  private func transformShape(shape: CAShapeLayer, path: CGPath, useAnimation: Bool) {
-    if useAnimation {
-      let animation = CABasicAnimation(keyPath: "path")
-      animation.duration = animationDuration
-      animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-      animation.fromValue = shape.path
-      shape.path = path
-      animation.toValue = shape.path
-      shape.addAnimation(animation, forKey: nil)
-    } else {
-      shape.path = path
-    }
+    
+    CATransaction.commit()
   }
 
   private var sections: [Section] = []
-  
+  private var emptySectionLayer: CAShapeLayer!
 }

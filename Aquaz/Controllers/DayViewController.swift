@@ -147,8 +147,6 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
   
   private func setupMultiprogressControl() {
-    //consumptionProgressView.borderWidth = 1 / consumptionProgressView.contentScaleFactor
-
     for drinkIndex in 0..<Drink.getDrinksCount() {
       if let drink = Drink.getDrinkByIndex(drinkIndex) {
         let section = consumptionProgressView.addSection(color: drink.mainColor)
@@ -346,8 +344,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     if let section = multiProgressSections[consumption.drink] {
       section.factor += CGFloat(consumption.waterIntake)
     }
-    consumptionProgressView.setNeedsDisplay()
-    
+
     let needCheckForWaterIntakeCompletion = overallConsumption < consumptionRateAmount
     
     overallConsumption += consumption.waterIntake
@@ -412,7 +409,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     if let section = multiProgressSections[consumption.drink] {
       section.factor -= CGFloat(consumption.waterIntake)
     }
-    consumptionProgressView.setNeedsDisplay()
+
     overallConsumption -= consumption.waterIntake
     
     diaryViewController.updateTable(consumptions)
@@ -451,7 +448,6 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
       }
     }
     
-    consumptionProgressView.setNeedsDisplay()
     overallConsumption = overallAmount
   }
   
