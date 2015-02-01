@@ -42,6 +42,7 @@ class SettingsItemBase<ValueType>: Observable<ValueType> {
     didSet {
       writeValue(value)
       notify(value)
+      userDefaults.synchronize()
     }
   }
   
@@ -152,6 +153,9 @@ class Settings {
     case Daily
   }
   
+  lazy var generalHasLaunchedOnce: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
+    key: "General - Has Launched Once", initialValue: false, userDefaults: self.standardUserDefaults)
+
   lazy var generalWeightUnits: SettingsEnumItem<Units.Weight> = SettingsEnumItem(
     key: "General - Weight units",initialValue: .Kilograms, userDefaults: self.standardUserDefaults)
   

@@ -17,19 +17,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
-    UIHelper.applyStylization()
 
-    if !NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce")
-    {
+    if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
       // Pre populate core data if the application is running for the first time
-      for versionIdentifier in managedObjectModel.versionIdentifiers {
-        CoreDataPrePopulation.prePopulateCoreData(versionIdentifier as String)
+      if let versionIdentifier = managedObjectModel.versionIdentifiers.anyObject() as? String {
+        CoreDataPrePopulation.prePopulateCoreData(versionIdentifier)
+      } else {
+        assert(false)
       }
       
-      NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
-      NSUserDefaults.standardUserDefaults().synchronize()
+      if !Settings.sharedInstance.notificationsEnabled.value {
+        NotificationsHelper.removeAllNotifications()
+      }
+      
+      Settings.sharedInstance.generalHasLaunchedOnce.value = true
     }
     
+    UIHelper.applyStylization()
     NotificationsHelper.setApplicationIconBadgeNumber(0)
     
     if let options = launchOptions {
