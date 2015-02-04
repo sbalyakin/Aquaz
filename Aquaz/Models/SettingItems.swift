@@ -12,13 +12,6 @@ import Foundation
 class Observable<ValueType> {
   typealias ObserverFunction = (ValueType) -> Void
   
-  init() {
-  }
-  
-  init(key: String) {
-    
-  }
-  
   /// Adds an observer and returns it unique identifier (in a scope of class instance)
   func addObserver(observerFunction: ObserverFunction) -> Int {
     observerFunctions[observerIdentitfer] = observerFunction
@@ -46,6 +39,7 @@ class SettingsItemBase<ValueType>: Observable<ValueType> {
   
   let key: String
   let userDefaults: NSUserDefaults
+  let initialValue: ValueType
   
   var value: ValueType {
     didSet {
@@ -62,6 +56,7 @@ class SettingsItemBase<ValueType>: Observable<ValueType> {
   init(key: String, initialValue: ValueType, userDefaults: NSUserDefaults) {
     self.value = initialValue
     self.key = key
+    self.initialValue = initialValue
     self.userDefaults = userDefaults
     
     super.init()
@@ -77,6 +72,12 @@ class SettingsItemBase<ValueType>: Observable<ValueType> {
   /// Write the value to user defaults
   func writeToUserDefaults() {
     writeValue(value)
+  }
+  
+  /// Removes the value from user defaults
+  func removeFromUserDefaults() {
+    userDefaults.removeObjectForKey(key)
+    value = initialValue
   }
   
   private func readValue(inout outValue: ValueType) {

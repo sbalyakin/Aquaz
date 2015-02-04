@@ -21,29 +21,69 @@ class SettingsTests: XCTestCase {
     super.tearDown()
   }
   
-  func testFloatSettingItem() {
-    NSUserDefaults.resetStandardUserDefaults()
-    let initialValue: Float = 99.99
-    let settingItem = SettingsOrdinalItem<Float>(key: "Float", initialValue: initialValue)
-    XCTAssert(settingItem.value == initialValue, "Float setting item is unproperly initialized with value \(initialValue)")
-    
-    let testValue: Float = -99.99
-    settingItem.value = testValue
-    XCTAssert(settingItem.value == testValue, "Float setting item has an error with reading/writing a value (\(testValue))")
+  func testOrdinalItem<T: Equatable>(#key: String, initialValue: T, testValue: T) {
+    if let userDefaults = NSUserDefaults(suiteName: "SettingsTests") {
+      let settingItem = SettingsOrdinalItem<T>(key: key, initialValue: initialValue, userDefaults: userDefaults)
+      settingItem.removeFromUserDefaults()
+      XCTAssert(settingItem.value == initialValue, "\(key) setting item is unproperly initialized with value \(initialValue)")
+      
+      settingItem.value = testValue
+      XCTAssert(settingItem.value == testValue, "\(key) setting item has an error with setting a value (\(testValue))")
+      
+      let settingItemCopy = SettingsOrdinalItem<T>(key: key, initialValue: initialValue, userDefaults: userDefaults)
+      XCTAssert(settingItemCopy.value == testValue, "\(key) setting item has an error with writing a value (\(testValue))")
+    } else {
+      XCTFail("Unable to create user defaults with name SettingsTests")
+    }
   }
   
-  func testDoubleSettingItem() {
-    NSUserDefaults.resetStandardUserDefaults()
-    let initialValue: Double = 99.99
-    let settingItem = SettingsOrdinalItem<Double>(key: "Double", initialValue: initialValue)
-    XCTAssert(settingItem.value == initialValue, "Double setting item is unproperly initialized with value \(initialValue)")
-    
-    let testValue: Double = -99.99
-    settingItem.value = testValue
-    XCTAssert(settingItem.value == testValue, "Double setting item has an error with reading/writing a value (\(testValue))")
+  func testFloat() {
+    testOrdinalItem(key: "Float", initialValue: Float(99.99), testValue: -99.99)
+  }
+  
+  func testDouble() {
+    testOrdinalItem(key: "Double", initialValue: Double(99.99), testValue: -99.99)
+  }
+  
+  func testInt() {
+    testOrdinalItem(key: "Int", initialValue: Int(99), testValue: -99)
+  }
+  
+  func testBool() {
+    testOrdinalItem(key: "Bool", initialValue: true, testValue: false)
+  }
+  
+  func testString() {
+    testOrdinalItem(key: "String", initialValue: "initial", testValue: "test")
+  }
+  
+  func testNSDate() {
+    testOrdinalItem(key: "NSDate", initialValue: NSDate(), testValue: NSDate(timeIntervalSinceNow: 60 * 60 * 24))
   }
   
   func testEnumSettings() {
+    enum TestEnum: Int {
+      case One = 0
+      case Two
+      case Three
+    }
+    
+    if let userDefaults = NSUserDefaults(suiteName: "SettingsTests") {
+      let key = "TestEnum"
+      let initialValue: TestEnum = .Two
+      let settingItem = SettingsEnumItem<TestEnum>(key: key, initialValue: initialValue, userDefaults: userDefaults)
+      settingItem.removeFromUserDefaults()
+      XCTAssert(settingItem.value == initialValue, "\(key) setting item is unproperly initialized with value \(initialValue)")
+      
+      let testValue: TestEnum = .Three
+      settingItem.value = testValue
+      XCTAssert(settingItem.value == testValue, "\(key) setting item has an error with setting a value (\(testValue))")
+      
+      let settingItemCopy = SettingsEnumItem<TestEnum>(key: key, initialValue: initialValue, userDefaults: userDefaults)
+      XCTAssert(settingItemCopy.value == testValue, "\(key) setting item has an error with writing a value (\(testValue))")
+    } else {
+      XCTFail("Unable to create user defaults with name SettingsTests")
+    }
   }
   
 }
