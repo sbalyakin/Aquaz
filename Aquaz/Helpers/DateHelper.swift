@@ -21,6 +21,7 @@ class DateHelper {
       return date
     } else {
       assert(false)
+      return ofDate
     }
   }
 
@@ -35,6 +36,7 @@ class DateHelper {
       return date
     } else {
       assert(false)
+      return date
     }
   }
 
