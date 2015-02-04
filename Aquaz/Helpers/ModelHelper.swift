@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.
 //
 
+import Foundation
 import CoreData
 
 class ModelHelper {
