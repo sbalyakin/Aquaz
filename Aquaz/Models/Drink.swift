@@ -160,18 +160,18 @@ class Drink: NSManagedObject, NamedEntity {
 
     case .Beer:
       _localizedName = Static.beerTitle
-      _drawDrinkFunction = StyleKit.drawAlcoholDrink // TODO: Use particular draw function
-      _mainColor = StyleKit.alcoholColor
+      _drawDrinkFunction = StyleKit.drawBeerDrink
+      _mainColor = StyleKit.beerColor
       
     case .Wine:
       _localizedName = Static.wineTitle
-      _drawDrinkFunction = StyleKit.drawAlcoholDrink // TODO: Use particular draw function
-      _mainColor = StyleKit.alcoholColor
+      _drawDrinkFunction = StyleKit.drawWineDrink
+      _mainColor = StyleKit.wineColor
       
     case .StrongLiquor:
       _localizedName = Static.strongLiquorTitle
-      _drawDrinkFunction = StyleKit.drawAlcoholDrink // TODO: Use particular draw function
-      _mainColor = StyleKit.alcoholColor
+      _drawDrinkFunction = StyleKit.drawStrongLiquorDrink
+      _mainColor = StyleKit.strongLiquorColor
     }
     
     _darkColor = _mainColor.colorWithShadow(Static.darkColorShadowLevel)
