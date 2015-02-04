@@ -46,7 +46,7 @@ class SettingsItemBase<ValueType>: Observable<ValueType> {
     }
   }
   
-  init(key: String, initialValue: ValueType, userDefaults: NSUserDefaults) {
+  init(key: String, initialValue: ValueType, userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) {
     self.value = initialValue
     self.key = key
     self.userDefaults = userDefaults
@@ -79,7 +79,7 @@ class SettingsItemBase<ValueType>: Observable<ValueType> {
 /// Settings item class for enumerations
 class SettingsEnumItem<T: RawRepresentable where T.RawValue == Int>: SettingsItemBase<T> {
   
-  override init(key: String, initialValue: T, userDefaults: NSUserDefaults) {
+  override init(key: String, initialValue: T, userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) {
     super.init(key: key, initialValue: initialValue, userDefaults: userDefaults)
   }
 
@@ -100,7 +100,7 @@ class SettingsEnumItem<T: RawRepresentable where T.RawValue == Int>: SettingsIte
 /// Settings item class for ordinal types (Int, Bool etc.)
 class SettingsOrdinalItem<T>: SettingsItemBase<T> {
 
-  override init(key: String, initialValue: T, userDefaults: NSUserDefaults) {
+  override init(key: String, initialValue: T, userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) {
     super.init(key: key, initialValue: initialValue, userDefaults: userDefaults)
   }
 
@@ -153,89 +153,87 @@ class Settings {
     case Daily
   }
   
-  lazy var generalHasLaunchedOnce: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "General - Has Launched Once", initialValue: false, userDefaults: self.standardUserDefaults)
+  lazy var generalHasLaunchedOnce = SettingsOrdinalItem(
+    key: "General - Has Launched Once", initialValue: false)
 
-  lazy var generalWeightUnits: SettingsEnumItem<Units.Weight> = SettingsEnumItem(
-    key: "General - Weight units",initialValue: .Kilograms, userDefaults: self.standardUserDefaults)
+  lazy var generalWeightUnits = SettingsEnumItem(
+    key: "General - Weight units",initialValue: Units.Weight.Kilograms)
   
-  lazy var generalHeightUnits: SettingsEnumItem<Units.Length> = SettingsEnumItem(
-    key: "General - Height units", initialValue: .Centimeters, userDefaults: self.standardUserDefaults)
+  lazy var generalHeightUnits = SettingsEnumItem(
+    key: "General - Height units", initialValue: Units.Length.Centimeters)
   
-  lazy var generalVolumeUnits: SettingsEnumItem<Units.Volume> = SettingsEnumItem(
-    key: "General - Volume units", initialValue: .Millilitres, userDefaults: self.standardUserDefaults)
+  lazy var generalVolumeUnits = SettingsEnumItem(
+    key: "General - Volume units", initialValue: Units.Volume.Millilitres)
   
-  lazy var generalExtraConsumptionHot: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
-    key: "General - Extra consumption hot", initialValue: 0.5, userDefaults: self.standardUserDefaults)
+  lazy var generalExtraConsumptionHot = SettingsOrdinalItem<Double>(
+    key: "General - Extra consumption hot", initialValue: 0.5)
   
-  lazy var generalExtraConsumptionHighActivity: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
-    key: "General - Extra consumption high activity", initialValue: 0.5, userDefaults: self.standardUserDefaults)
+  lazy var generalExtraConsumptionHighActivity = SettingsOrdinalItem<Double>(
+    key: "General - Extra consumption high activity", initialValue: 0.5)
   
-  lazy var userHeight: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
-    key: "User - Height", initialValue: 170, userDefaults: self.standardUserDefaults)
+  lazy var userHeight = SettingsOrdinalItem<Double>(
+    key: "User - Height", initialValue: 170)
   
-  lazy var userWeight: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
-    key: "User - Weight", initialValue: 70, userDefaults: self.standardUserDefaults)
+  lazy var userWeight = SettingsOrdinalItem<Double>(
+    key: "User - Weight", initialValue: 70)
   
-  lazy var userPhysicalActivity: SettingsEnumItem<PhysicalActivity> = SettingsEnumItem(
-    key: "User - Physical activity", initialValue: .Occasional, userDefaults: self.standardUserDefaults)
+  lazy var userPhysicalActivity = SettingsEnumItem(
+    key: "User - Physical activity", initialValue: PhysicalActivity.Occasional)
   
-  lazy var userGender: SettingsEnumItem<Gender> = SettingsEnumItem(
-    key: "User - Gender", initialValue: .Man, userDefaults: self.standardUserDefaults)
+  lazy var userGender = SettingsEnumItem(
+    key: "User - Gender", initialValue: Gender.Man)
   
-  lazy var userAge: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
-    key: "User - Age", initialValue: 30, userDefaults: self.standardUserDefaults)
+  lazy var userAge = SettingsOrdinalItem<Int>(
+    key: "User - Age", initialValue: 30)
   
-  lazy var userDailyWaterIntake: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
-    key: "User - Daily water intake", initialValue: 2000.0, userDefaults: self.standardUserDefaults)
+  lazy var userDailyWaterIntake = SettingsOrdinalItem<Double>(
+    key: "User - Daily water intake", initialValue: 2000)
 
-  lazy var uiUseCustomDateForDayView: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "UI - Use custom day page date", initialValue: false, userDefaults: self.standardUserDefaults)
+  lazy var uiUseCustomDateForDayView = SettingsOrdinalItem(
+    key: "UI - Use custom day page date", initialValue: false)
   
-  lazy var uiCustomDateForDayView: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
-    key: "UI - Day page date", initialValue: NSDate(), userDefaults: self.standardUserDefaults)
+  lazy var uiCustomDateForDayView = SettingsOrdinalItem(
+    key: "UI - Day page date", initialValue: NSDate())
 
-  lazy var uiDisplayDayConsumptionInPercents: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "UI - Display day consumption in percents", initialValue: false, userDefaults: self.standardUserDefaults)
+  lazy var uiDisplayDayConsumptionInPercents = SettingsOrdinalItem(
+    key: "UI - Display day consumption in percents", initialValue: false)
 
-  lazy var uiDisplayDaySelection: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "UI - Display day selection", initialValue: false, userDefaults: self.standardUserDefaults)
+  lazy var uiDisplayDaySelection = SettingsOrdinalItem(
+    key: "UI - Display day selection", initialValue: false)
 
-  lazy var uiSelectedStatisticsPage: SettingsEnumItem<StatisticsViewController.ViewControllerType> = SettingsEnumItem(
-    key: "UI - Selected statistics page", initialValue: .Week, userDefaults: self.standardUserDefaults)
+  lazy var uiSelectedStatisticsPage = SettingsEnumItem(
+    key: "UI - Selected statistics page", initialValue: StatisticsViewController.ViewControllerType.Week)
 
-  lazy var uiWeekStatisticsDate: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
-    key: "UI - Week statistics date", initialValue: NSDate(), userDefaults: self.standardUserDefaults)
+  lazy var uiWeekStatisticsDate = SettingsOrdinalItem(
+    key: "UI - Week statistics date", initialValue: NSDate())
 
-  lazy var uiMonthStatisticsDate: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
-    key: "UI - Month statistics date", initialValue: NSDate(), userDefaults: self.standardUserDefaults)
+  lazy var uiMonthStatisticsDate = SettingsOrdinalItem(
+    key: "UI - Month statistics date", initialValue: NSDate())
   
-  lazy var uiYearStatisticsDate: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
-    key: "UI - Year statistics date", initialValue: NSDate(), userDefaults: self.standardUserDefaults)
+  lazy var uiYearStatisticsDate = SettingsOrdinalItem(
+    key: "UI - Year statistics date", initialValue: NSDate())
 
-  lazy var uiSelectedAlcoholicDrink: SettingsEnumItem<Drink.DrinkType> = SettingsEnumItem(
-    key: "UI - Selected alcoholic drink", initialValue: .Beer, userDefaults: self.standardUserDefaults)
+  lazy var uiSelectedAlcoholicDrink = SettingsEnumItem(
+    key: "UI - Selected alcoholic drink", initialValue: Drink.DrinkType.Beer)
 
-  lazy var notificationsEnabled: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "Notifications - Enabled", initialValue: false, userDefaults: self.standardUserDefaults)
+  lazy var notificationsEnabled = SettingsOrdinalItem(
+    key: "Notifications - Enabled", initialValue: false)
 
-  lazy var notificationsFrom: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
-    key: "Notifications - From", initialValue: DateHelper.dateBySettingHour(9, minute: 0, second: 0, ofDate: NSDate()), userDefaults: self.standardUserDefaults)
+  lazy var notificationsFrom = SettingsOrdinalItem(
+    key: "Notifications - From", initialValue: DateHelper.dateBySettingHour(9, minute: 0, second: 0, ofDate: NSDate()))
   
-  lazy var notificationsTo: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
-    key: "Notifications - To", initialValue: DateHelper.dateBySettingHour(21, minute: 0, second: 0, ofDate: NSDate()), userDefaults: self.standardUserDefaults)
+  lazy var notificationsTo = SettingsOrdinalItem(
+    key: "Notifications - To", initialValue: DateHelper.dateBySettingHour(21, minute: 0, second: 0, ofDate: NSDate()))
 
-  lazy var notificationsInterval: SettingsOrdinalItem<NSTimeInterval> = SettingsOrdinalItem(
-    key: "Notifications - Interval", initialValue: 60 * 60 * 1.5, userDefaults: self.standardUserDefaults)
+  lazy var notificationsInterval = SettingsOrdinalItem<NSTimeInterval>(
+    key: "Notifications - Interval", initialValue: 60 * 60 * 1.5)
   
-  lazy var notificationsSound: SettingsOrdinalItem<String> = SettingsOrdinalItem(
-    key: "Notifications - Sound", initialValue: "default.wav", userDefaults: self.standardUserDefaults)
+  lazy var notificationsSound = SettingsOrdinalItem(
+    key: "Notifications - Sound", initialValue: "default.wav")
   
-  lazy var notificationsSmart: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "Notifications - Smart", initialValue: true, userDefaults: self.standardUserDefaults)
+  lazy var notificationsSmart = SettingsOrdinalItem(
+    key: "Notifications - Smart", initialValue: true)
 
-  lazy var notificationsUseWaterIntake: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "Notifications - Use water intake", initialValue: true, userDefaults: self.standardUserDefaults)
-
-  private let standardUserDefaults = NSUserDefaults.standardUserDefaults()
+  lazy var notificationsUseWaterIntake = SettingsOrdinalItem(
+    key: "Notifications - Use water intake", initialValue: true)
 }
