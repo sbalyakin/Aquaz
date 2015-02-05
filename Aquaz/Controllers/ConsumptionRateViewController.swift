@@ -239,12 +239,19 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
   }
   
   private func stringToWaterIntakeInMetricUnit(value: String) -> Double? {
-    let displayedValue = (value as NSString).doubleValue
-    let displayedUnit = Settings.sharedInstance.generalVolumeUnits.value
-    let quantity = Quantity(ownUnit: Units.Volume.metric.unit, fromUnit: displayedUnit.unit, fromAmount: displayedValue)
-    let metricValue = quantity.amount
-    let adjustedMetricValue = Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: metricValue, unitType: .Volume, precision: displayedUnit.precision)
-    return adjustedMetricValue
+    if let displayedValue = NSNumberFormatter().numberFromString(value)?.doubleValue {
+      if displayedValue <= 0 {
+        return nil
+      }
+      
+      let displayedUnit = Settings.sharedInstance.generalVolumeUnits.value
+      let quantity = Quantity(ownUnit: Units.Volume.metric.unit, fromUnit: displayedUnit.unit, fromAmount: displayedValue)
+      let metricValue = quantity.amount
+      let adjustedMetricValue = Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: metricValue, unitType: .Volume, precision: displayedUnit.precision)
+      return adjustedMetricValue
+    } else {
+      return nil
+    }
   }
   
   @IBAction func cancelButtonWasTapped(sender: AnyObject) {
@@ -696,6 +703,9 @@ private class EditableCellInfo<T> : CellInfo<T> {
   override func setValueFromString(stringValue: String) {
     if let value = stringToValueFunction(stringValue) {
       self.value = value
+    } else {
+      // Just for restoring previous value
+      valueChangedFunction?(self)
     }
   }
 
