@@ -68,8 +68,7 @@ class Settings {
   lazy var userAge = SettingsOrdinalItem<Int>(
     key: "User - Age", initialValue: 30)
   
-  lazy var userDailyWaterIntake = SettingsOrdinalItem<Double>(
-    key: "User - Daily water intake", initialValue: 2000)
+  lazy var userDailyWaterIntake = Settings.createUserDailyWaterIntakeSetting()
 
   lazy var uiUseCustomDateForDayView = SettingsOrdinalItem(
     key: "UI - Use custom day page date", initialValue: false)
@@ -118,4 +117,16 @@ class Settings {
 
   lazy var notificationsUseWaterIntake = SettingsOrdinalItem(
     key: "Notifications - Use water intake", initialValue: true)
+  
+  private class func createUserDailyWaterIntakeSetting() -> SettingsOrdinalItem<Double> {
+    let settings = sharedInstance
+    
+    let consumptionRateCalculatorData = ConsumptionRateCalculatorData(physicalActivity: settings.userPhysicalActivity.value, gender: settings.userGender.value, age: settings.userAge.value, height: settings.userHeight.value, weight: settings.userWeight.value)
+    
+    let consumptionRateCalculator = ConsumptionRateCalculator()
+    
+    let dailyWaterIntake = consumptionRateCalculator.calcDailyWaterIntake(consumptionRateCalculatorData)
+    
+    return SettingsOrdinalItem<Double>(key: "User - Daily water intake", initialValue: dailyWaterIntake)
+  }
 }
