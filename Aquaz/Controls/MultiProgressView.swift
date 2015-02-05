@@ -10,60 +10,26 @@ import UIKit
 
 @IBDesignable class MultiProgressView: UIView {
   
-  @IBInspectable var maximum: CGFloat = 1.0 {
-    didSet {
-      setNeedsDisplay()
-    }
-  }
+  @IBInspectable var maximum: CGFloat = 1.0 { didSet { setNeedsDisplay() } }
 
-  @IBInspectable var emptySectionColor: UIColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1) {
-    didSet {
-      setNeedsDisplay()
-    }
-  }
+  @IBInspectable var emptySectionColor: UIColor = UIColor.lightGrayColor() { didSet { emptySectionLayer.backgroundColor = emptySectionColor.CGColor } }
   
-  @IBInspectable var borderColor: UIColor = UIColor(red: 167/255, green: 169/255, blue: 171/255, alpha: 0.8) {
-    didSet {
-      setNeedsDisplay()
-    }
-  }
+  @IBInspectable var borderColor: UIColor = UIColor.lightGrayColor() { didSet { layer.borderColor = borderColor.CGColor } }
   
-  @IBInspectable var borderWidth: CGFloat = 1.0 {
-    didSet {
-      setNeedsDisplay()
-    }
-  }
+  @IBInspectable var borderWidth: CGFloat = 0.5 { didSet { layer.borderWidth = borderWidth } }
   
-  @IBInspectable var sectionsPadding: CGFloat = 2.0 {
-    didSet {
-      setNeedsDisplay()
-    }
-  }
+  @IBInspectable var sectionsPadding: CGFloat = 2.0 { didSet { setNeedsDisplay() } }
   
   /// If sections' factor total is more than maximum, auto scale will be used
-  @IBInspectable var autoOverloadScale: Bool = true {
-    didSet {
-      setNeedsDisplay()
-    }
-  }
+  @IBInspectable var autoOverloadScale: Bool = true { didSet { setNeedsDisplay() } }
   
   // 0.25 seconds is default animation time for iOS transitions
   @IBInspectable var animationDuration: Float = 0.25
 
   
   class Section {
-    var factor: CGFloat = 0.0 {
-      didSet {
-        superLayer.setNeedsDisplay()
-      }
-    }
-    
-    var color: UIColor {
-      didSet {
-        layer.backgroundColor = color.CGColor
-      }
-    }
-    
+    var factor: CGFloat = 0.0 { didSet { superLayer.setNeedsDisplay() } }
+    var color: UIColor { didSet { layer.backgroundColor = color.CGColor } }
     
     init(color: UIColor, superLayer: CALayer) {
       self.color = color

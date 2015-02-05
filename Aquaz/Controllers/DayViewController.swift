@@ -147,6 +147,9 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
   
   private func setupMultiprogressControl() {
+    consumptionProgressView.borderColor = UIColor(red: 167/255, green: 169/255, blue: 171/255, alpha: 0.8)
+    consumptionProgressView.emptySectionColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1)
+    
     for drinkIndex in 0..<Drink.getDrinksCount() {
       if let drink = Drink.getDrinkByIndex(drinkIndex) {
         let section = consumptionProgressView.addSection(color: drink.mainColor)
