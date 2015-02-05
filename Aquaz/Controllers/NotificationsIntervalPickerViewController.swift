@@ -21,26 +21,41 @@ class NotificationsIntervalPickerViewController: UIViewController, UIPickerViewD
   }
   
   private func setupPickerView() {
-    let pickerGap: CGFloat = 2 // Discovered gap for current picker view implementation
-
-    let hoursSize = computeSizeForText(hoursTitle, font: pickerLabelFont)
-    let hoursOrigin = CGPoint(x: trunc(pickerView.bounds.midX) - hoursSize.width - pickerGap, y: trunc(pickerView.bounds.midY - hoursSize.height / 2))
-    let hoursRect = CGRect(origin: hoursOrigin, size: hoursSize)
-    let hoursLabel = UILabel(frame: hoursRect)
+    hoursLabel = UILabel()
     hoursLabel.font = pickerLabelFont
     hoursLabel.text = hoursTitle
+    hoursLabel.textColor = UIColor.blackColor()
     hoursLabel.backgroundColor = UIColor.clearColor()
-
-    let minutesSize = computeSizeForText(minutesTitle, font: pickerLabelFont)
-    let minutesOrigin = CGPoint(x: trunc(pickerView.bounds.midX) + pickerGap + 1 + minutesComponentWidth - minutesSize.width, y: trunc(pickerView.bounds.midY - minutesSize.height / 2))
-    let minutesRect = CGRect(origin: minutesOrigin, size: minutesSize)
-    let minutesLabel = UILabel(frame: minutesRect)
+    hoursLabel.sizeToFit()
+    pickerView.addSubview(hoursLabel)
+    
+    minutesLabel = UILabel()
     minutesLabel.font = pickerLabelFont
     minutesLabel.text = minutesTitle
+    minutesLabel.textColor = UIColor.blackColor()
     minutesLabel.backgroundColor = UIColor.clearColor()
-
-    pickerView.addSubview(hoursLabel)
+    minutesLabel.sizeToFit()
     pickerView.addSubview(minutesLabel)
+  }
+
+  override func viewDidLayoutSubviews() {
+    layoutPickerView()
+  }
+  
+  private func layoutPickerView() {
+    let pickerMarginBetweenSections: CGFloat = 5 // standard margin between section for a picker view
+    let midX = (pickerView.bounds.width - hoursComponentWidth - minutesComponentWidth) / 2 + minutesComponentWidth
+    let center = CGPoint(x: midX, y: pickerView.bounds.midY)
+    
+    let hoursX = center.x - hoursLabel.frame.width - pickerMarginBetweenSections / 2
+    let hoursY = center.y - hoursLabel.frame.height / 2
+    let hoursLabelOrigin = CGPoint(x: ceil(hoursX), y: ceil(hoursY))
+    hoursLabel.frame.origin = hoursLabelOrigin
+    
+    let minutesX = center.x + pickerMarginBetweenSections / 2 + hoursComponentWidth - minutesLabel.frame.width
+    let minutesY = center.y - minutesLabel.frame.height / 2
+    let minutesLabelOrigin = CGPoint(x: ceil(minutesX), y: ceil(minutesY))
+    minutesLabel.frame.origin = minutesLabelOrigin
   }
   
   private func computeSizeForText(text: String, font: UIFont) -> CGSize {
@@ -101,71 +116,6 @@ class NotificationsIntervalPickerViewController: UIViewController, UIPickerViewD
     return minimumMinutes + row * minutesStep
   }
 
-  func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-    return 2
-  }
-  
-  func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    switch component {
-    case Component.Hours.rawValue:   return Int((maximumHours - minimumHours) / hoursStep + 1)
-    case Component.Minutes.rawValue: return Int((maximumMinutes - minimumMinutes) / minutesStep + 1)
-    default:
-      assert(false)
-      return 0
-    }
-  }
-
-  func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
-    if component == Component.Hours.rawValue {
-      let hours = getHoursForRow(row)
-      let title = getTitleForHours(hours)
-      let hoursLabelSize = computeSizeForText(hoursTitle, font: pickerLabelFont)
-      let labelWidth = hoursComponentWidth - hoursLabelSize.width - pickerTitleGap
-      let view = createViewForPickerItem(title: title, labelWidth: labelWidth, componentWidth: hoursComponentWidth)
-      return view
-    } else {
-      let minutes = getMinutesForRow(row)
-      let title = getTitleForMinutes(minutes)
-      let minutesLabelSize = computeSizeForText(minutesTitle, font: pickerLabelFont)
-      let labelWidth = minutesComponentWidth - minutesLabelSize.width - pickerTitleGap
-      let view = createViewForPickerItem(title: title, labelWidth: labelWidth, componentWidth: minutesComponentWidth)
-      return view
-    }
-  }
-
-  private func createViewForPickerItem(#title: String, labelWidth: CGFloat, componentWidth: CGFloat) -> UIView {
-    // TODO: Magical numbers (33) should be transformed to constants
-    let label = UILabel(frame: CGRect(x: 0, y: 0, width: labelWidth, height: 33))
-    label.textAlignment = .Right
-    label.backgroundColor = UIColor.clearColor()
-    label.text = title
-    label.font = UIFont.systemFontOfSize(20)
-
-    let view = UIView(frame: CGRect(x: 0, y: 0, width: componentWidth, height: 33))
-    view.backgroundColor = UIColor.clearColor()
-    view.addSubview(label)
-    
-    return view
-  }
-  
-  private func getTitleForHours(hours: Int) -> String {
-    return "\(hours)"
-  }
-
-  private func getTitleForMinutes(minutes: Int) -> String {
-    return "\(minutes)"
-  }
-  
-  func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-    switch component {
-    case Component.Hours.rawValue:   return hoursComponentWidth
-    case Component.Minutes.rawValue: return minutesComponentWidth
-    default:
-      assert(false)
-      return 0
-    }
-  }
-
   private enum Component: Int {
     case Hours = 0
     case Minutes
@@ -179,15 +129,73 @@ class NotificationsIntervalPickerViewController: UIViewController, UIPickerViewD
   private let maximumMinutes = 59
   private let minutesStep = 5
   
-  private let hoursComponentWidth: CGFloat = 80
-  private let minutesComponentWidth: CGFloat = 80
+  private let hoursComponentWidth: CGFloat = 100
+  private let minutesComponentWidth: CGFloat = 100
   
-  private let hoursTitle = NSLocalizedString("NIPVC:hr", value: "hr", comment: "NotificationsIntervalPickerViewController: Contraction for hours")
-  private let minutesTitle = NSLocalizedString("NIPVC:min", value: "min", comment: "NotificationsIntervalPickerViewController: Contraction for minutes")
+  private let hoursTitle = " " + NSLocalizedString("NIPVC:hr", value: "hr", comment: "NotificationsIntervalPickerViewController: Contraction for hours")
+  private let minutesTitle = " " + NSLocalizedString("NIPVC:min", value: "min", comment: "NotificationsIntervalPickerViewController: Contraction for minutes")
 
-  private let pickerItemsFont = UIFont.systemFontOfSize(20)
-  private let pickerLabelFont = UIFont.systemFontOfSize(18)
+  private var hoursLabel: UILabel!
+  private var minutesLabel: UILabel!
+
+  private let pickerLabelFont = UIFont.systemFontOfSize(21)
+
+}
+
+// MARK: Data source and delegate for UIPickerView -
+extension NotificationsIntervalPickerViewController {
   
-  private let pickerTitleGap: CGFloat = 5
-
+  func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    return 2
+  }
+  
+  func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    switch component {
+    case Component.Hours.rawValue:   return Int((maximumHours - minimumHours) / hoursStep + 1)
+    case Component.Minutes.rawValue: return Int((maximumMinutes - minimumMinutes) / minutesStep + 1)
+    default:
+      assert(false)
+      return 0
+    }
+  }
+  
+  func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+    var title = ""
+    var postfix = ""
+    
+    switch component {
+    case Component.Hours.rawValue:
+      let hours = getHoursForRow(row)
+      title = "\(hours)"
+      postfix = hoursTitle
+      
+    case Component.Minutes.rawValue:
+      let minutes = getMinutesForRow(row)
+      title = "\(minutes)"
+      postfix = minutesTitle
+      
+    default:
+      assert(false)
+      return nil
+    }
+    
+    let postfixSize = UIHelper.calcTextSize(postfix, font: pickerLabelFont)
+    
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.alignment = .Right
+    paragraphStyle.tailIndent = -postfixSize.width
+    
+    return NSMutableAttributedString(string: title, attributes: [NSParagraphStyleAttributeName: paragraphStyle])
+  }
+  
+  func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+    switch component {
+    case Component.Hours.rawValue:   return hoursComponentWidth
+    case Component.Minutes.rawValue: return minutesComponentWidth
+    default:
+      assert(false)
+      return 0
+    }
+  }
+  
 }

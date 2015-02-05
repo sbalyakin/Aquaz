@@ -54,7 +54,23 @@ class UIHelper {
     UINavigationBar.appearance().tintColor = StyleKit.barTextColor
     UINavigationBar.appearance().tintAdjustmentMode = .Normal
   }
+  
+  class func calcFontHeight(font: UIFont) -> CGFloat {
+    return adjustValueForScaleFactor(font.lineHeight)
+  }
+  
+  class func calcTextSize(text: String, font: UIFont) -> CGSize {
+    var size = text.sizeWithAttributes([NSFontAttributeName: font])
+    size.width = adjustValueForScaleFactor(size.width)
+    size.height = adjustValueForScaleFactor(size.height)
+    return size
+  }
 
+  class func adjustValueForScaleFactor(value: CGFloat) -> CGFloat {
+    let scaleFactor = UIScreen.mainScreen().scale
+    return ceil(value * scaleFactor) / scaleFactor
+  }
+  
 }
 
 extension UIColor {
