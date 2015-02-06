@@ -24,36 +24,42 @@ class Consumption: NSManagedObject, NamedEntity {
   }
   
   /// Adds a new consumption entity into Core Data
-  class func addEntity(#drink: Drink, amount: NSNumber, date: NSDate, managedObjectContext: NSManagedObjectContext = ModelHelper.sharedInstance.managedObjectContext, saveImmediately: Bool = true) -> Consumption {
-    let consumption = NSEntityDescription.insertNewObjectForEntityForName(getEntityName(), inManagedObjectContext: managedObjectContext) as Consumption
-    consumption.amount = amount
-    consumption.drink = drink
-    consumption.date = date
+  class func addEntity(#drink: Drink, amount: NSNumber, date: NSDate, managedObjectContext: NSManagedObjectContext?, saveImmediately: Bool = true) -> Consumption? {
+    if let managedObjectContext = managedObjectContext {
+      let consumption = NSEntityDescription.insertNewObjectForEntityForName(getEntityName(), inManagedObjectContext: managedObjectContext) as Consumption
+      consumption.amount = amount
+      consumption.drink = drink
+      consumption.date = date
 
-    if saveImmediately {
-      var error: NSError?
-      if !managedObjectContext.save(&error) {
-        NSLog("Failed to add new consumption for drink \"\(drink.name)\". Error: \(error?.localizedDescription ?? String())")
+      if saveImmediately {
+        var error: NSError?
+        if !managedObjectContext.save(&error) {
+          NSLog("Failed to add new consumption for drink \"\(drink.name)\". Error: \(error?.localizedDescription ?? String())")
+          return nil
+        }
       }
-    }
 
-    return consumption
+      return consumption
+    } else {
+      assert(false)
+      return nil
+    }
   }
 
   /// Fetches all consumptions for the specified date interval [date, toDate)
-  class func fetchConsumptions(#beginDate: NSDate, endDate: NSDate) -> [Consumption] {
+  class func fetchConsumptions(#beginDate: NSDate, endDate: NSDate, managedObjectContext: NSManagedObjectContext?) -> [Consumption] {
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
     let descriptor = NSSortDescriptor(key: "date", ascending: true)
-    return ModelHelper.sharedInstance.fetchManagedObjects(predicate: predicate, sortDescriptors: [descriptor])
+    return ModelHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: [descriptor])
   }
 
   /// Fetches all consumptions for a day taken from the specified date.
   /// Start of the day is inclusively started from 0:00 + specified offset in hours.
   /// End of the day is exclusive ended with 0:00 of the next day + specified offset in hours.
-  class func fetchConsumptionsForDay(date: NSDate, dayOffsetInHours: Int) -> [Consumption] {
+  class func fetchConsumptionsForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext?) -> [Consumption] {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
     let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
-    return fetchConsumptions(beginDate: beginDate, endDate: endDate)
+    return fetchConsumptions(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
   }
 
   enum GroupingCalendarUnit {
@@ -69,7 +75,7 @@ class Consumption: NSManagedObject, NamedEntity {
   }
   
   /// Fetches water intake for specified time period grouping results by specified calendar unit
-  class func fetchGroupedWaterIntake(beginDate beginDateRaw: NSDate, endDate endDateRaw: NSDate, dayOffsetInHours: Int, groupingUnit: GroupingCalendarUnit, var computeAverageAmounts: Bool) -> [Double] {
+  class func fetchGroupedWaterIntake(beginDate beginDateRaw: NSDate, endDate endDateRaw: NSDate, dayOffsetInHours: Int, groupingUnit: GroupingCalendarUnit, var computeAverageAmounts: Bool, managedObjectContext: NSManagedObjectContext?) -> [Double] {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: beginDateRaw)
     let endDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: endDateRaw)
     
@@ -77,7 +83,7 @@ class Consumption: NSManagedObject, NamedEntity {
       return []
     }
     
-    let consumptions = fetchConsumptions(beginDate: beginDate, endDate: endDate)
+    let consumptions = fetchConsumptions(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
 
     // Skip useless grouping for days
     if groupingUnit == .Day {
@@ -135,13 +141,17 @@ class Consumption: NSManagedObject, NamedEntity {
   
   /// Deletes the consumption from Core Data
   func deleteEntity(saveImmediately: Bool = true) {
-    managedObjectContext!.deleteObject(self)
-    
-    if saveImmediately {
-      var error: NSError?
-      if !managedObjectContext!.save(&error) {
-        NSLog("Failed to delete consumption. Error: \(error?.localizedDescription ?? String())")
+    if let managedObjectContext = managedObjectContext {
+      managedObjectContext.deleteObject(self)
+      
+      if saveImmediately {
+        var error: NSError?
+        if !managedObjectContext.save(&error) {
+          NSLog("Failed to delete consumption. Error: \(error?.localizedDescription ?? String())")
+        }
       }
+    } else {
+      assert(false)
     }
   }
   

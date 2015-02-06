@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class YearStatisticsViewController: StyledViewController {
 
@@ -58,9 +59,9 @@ class YearStatisticsViewController: StyledViewController {
   }
   
   private func initYearStatisticsView() {
-    let waterIntakes = Consumption.fetchGroupedWaterIntake(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Month, computeAverageAmounts: true)
+    let waterIntakes = Consumption.fetchGroupedWaterIntake(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Month, computeAverageAmounts: true, managedObjectContext: managedObjectContext)
     
-    let goals = ConsumptionRate.fetchConsumptionRateAmountsGroupedByMonths(beginDate: statisticsBeginDate, endDate: statisticsEndDate)
+    let goals = ConsumptionRate.fetchConsumptionRateAmountsGroupedByMonths(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
     assert(waterIntakes.count == goals.count)
 
     let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
@@ -112,5 +113,13 @@ class YearStatisticsViewController: StyledViewController {
     let isCurrentYear = DateHelper.areDatesEqualByYears(date1: date, date2: NSDate())
     nextYearButton.enabled = !isCurrentYear
   }
+
+  private lazy var managedObjectContext: NSManagedObjectContext? = {
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+      return appDelegate.managedObjectContext
+    } else {
+      return nil
+    }
+  }()
 
 }

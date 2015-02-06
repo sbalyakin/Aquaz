@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 private extension Units.Weight {
   var minimumValue: Double {
@@ -280,15 +281,16 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
 
   private func saveWaterIntakeToCoreData() {
     let adjustedDate = DateHelper.dateByClearingTime(ofDate: NSDate())
-    if let consumptionRate = ConsumptionRate.fetchConsumptionRateStrictlyForDate(adjustedDate) {
+    if let consumptionRate = ConsumptionRate.fetchConsumptionRateStrictlyForDate(adjustedDate, managedObjectContext: managedObjectContext) {
       consumptionRate.baseRateAmount = waterIntake.value
-      ModelHelper.sharedInstance.save()
+      ModelHelper.save(managedObjectContext: managedObjectContext)
     } else {
       ConsumptionRate.addEntity(
         date: adjustedDate,
         baseRateAmount: waterIntake.value,
         hotDateFraction: 0,
-        highActivityFraction: 0)
+        highActivityFraction: 0,
+        managedObjectContext: managedObjectContext)
     }
   }
 
@@ -437,6 +439,14 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
   }
   
   private var originalTableViewContentInset: UIEdgeInsets = UIEdgeInsetsZero
+  
+  private lazy var managedObjectContext: NSManagedObjectContext? = {
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+      return appDelegate.managedObjectContext
+    } else {
+      return nil
+    }
+  }()
 }
 
 

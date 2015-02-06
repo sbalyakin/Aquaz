@@ -111,7 +111,7 @@ class DiaryTableViewCell: UITableViewCell {
       NSForegroundColorAttributeName: UIColor.lightGrayColor(),
       NSFontAttributeName: amountLabel.font])
 
-    let waterColor = Drink.getDrinkByIndex(Drink.DrinkType.Water.rawValue)?.darkColor ?? StyleKit.waterColor
+    let waterColor = Drink.getDarkColorFromDrinkColor(StyleKit.waterColor)
     
     let waterTitleAt = NSAttributedString(string: "\(waterTitle) ", attributes: [
       NSForegroundColorAttributeName: waterColor,

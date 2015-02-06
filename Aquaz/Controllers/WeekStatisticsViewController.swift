@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDelegate {
   
@@ -81,10 +82,10 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
   }
 
   private func initWeekStatisticsView() {
-    let waterIntakes = Consumption.fetchGroupedWaterIntake(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Day, computeAverageAmounts: true)
+    let waterIntakes = Consumption.fetchGroupedWaterIntake(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Day, computeAverageAmounts: true, managedObjectContext: managedObjectContext)
     assert(waterIntakes.count == 7)
     
-    let goals = ConsumptionRate.fetchConsumptionRateAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate)
+    let goals = ConsumptionRate.fetchConsumptionRateAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
     assert(waterIntakes.count == 7)
     
     let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
@@ -116,4 +117,13 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
     statisticsBeginDate = DateHelper.addToDate(date, years: 0, months: 0, days: -weekdayOfDate + 1)
     statisticsEndDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: daysPerWeek)
   }
+  
+  private lazy var managedObjectContext: NSManagedObjectContext? = {
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+      return appDelegate.managedObjectContext
+    } else {
+      return nil
+    }
+  }()
+
 }

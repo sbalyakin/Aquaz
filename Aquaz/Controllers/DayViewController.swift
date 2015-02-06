@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 private extension Units.Volume {
   var precision: Double {
@@ -151,7 +152,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     consumptionProgressView.emptySectionColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1)
     
     for drinkIndex in 0..<Drink.getDrinksCount() {
-      if let drink = Drink.getDrinkByIndex(drinkIndex) {
+      if let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: managedObjectContext) {
         let section = consumptionProgressView.addSection(color: drink.mainColor)
         multiProgressSections[drink] = section
       }
@@ -321,7 +322,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   // MARK: Consumptions management -
   
   private func fetchConsumptionRate() {
-    consumptionRate = ConsumptionRate.fetchConsumptionRateForDate(currentDate)
+    consumptionRate = ConsumptionRate.fetchConsumptionRateForDate(currentDate, managedObjectContext: managedObjectContext)
     
     if let consumptionRate = consumptionRate {
       isConsumptionRateForCurrentDay = DateHelper.areDatesEqualByDays(date1: consumptionRate.date, date2: currentDate)
@@ -334,7 +335,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
 
   private func fetchConsumptions() {
     // TODO: Take day offset in hours from settings
-    consumptions = Consumption.fetchConsumptionsForDay(currentDate, dayOffsetInHours: 0)
+    consumptions = Consumption.fetchConsumptionsForDay(currentDate, dayOffsetInHours: 0, managedObjectContext: managedObjectContext)
 
     consumptionsWereChanged(doSort: false) // Sort is useless, because consumption are fetched already sorted
   }
@@ -500,7 +501,8 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
       date: currentDate,
       baseRateAmount: baseRateAmount,
       hotDateFraction: hotDayFraction,
-      highActivityFraction: highActivityFraction)
+      highActivityFraction: highActivityFraction,
+      managedObjectContext: managedObjectContext)
     isConsumptionRateForCurrentDay = true
   }
   
@@ -545,7 +547,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
         saveConsumptionRateForCurrentDate(baseRateAmount: consumptionBaseRateAmount, hotDayFraction: newHotDayFraction, highActivityFraction: 0)
       } else if let consumptionRate = consumptionRate {
         consumptionRate.hotDayFraction = newHotDayFraction
-        ModelHelper.sharedInstance.save()
+        ModelHelper.save(managedObjectContext: managedObjectContext)
       }
 
       consumptionRateWasChanged()
@@ -565,7 +567,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
         saveConsumptionRateForCurrentDate(baseRateAmount: consumptionBaseRateAmount, hotDayFraction: 0, highActivityFraction: newHighActivityFraction)
       } else if let consumptionRate = consumptionRate {
         consumptionRate.highActivityFraction = newHighActivityFraction
-        ModelHelper.sharedInstance.save()
+        ModelHelper.save(managedObjectContext: managedObjectContext)
       }
 
       consumptionRateWasChanged()
@@ -587,4 +589,12 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   private var isCurrentDayToday: Bool {
     return !Settings.sharedInstance.uiUseCustomDateForDayView.value
   }
+  
+  private lazy var managedObjectContext: NSManagedObjectContext? = {
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+      return appDelegate.managedObjectContext
+    } else {
+      return nil
+    }
+  }()
 }

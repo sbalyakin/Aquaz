@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 private extension Units.Volume {
   var precision: Double {
@@ -219,16 +220,18 @@ class ConsumptionViewController: StyledViewController {
     }
     
     drink.recentAmount.amount = amount
-    let consumption = Consumption.addEntity(drink: drink, amount: amount, date: date)
-    
-    dayViewController.addConsumption(consumption)
+    if let consumption = Consumption.addEntity(drink: drink, amount: amount, date: date, managedObjectContext: managedObjectContext) {
+      dayViewController.addConsumption(consumption)
+    } else {
+      assert(false)
+    }
   }
   
   private func updateConsumption(#amount: Double) {
     if let consumption = self.consumption {
       consumption.amount = amount
       consumption.date = currentDate
-      ModelHelper.sharedInstance.save()
+      ModelHelper.save(managedObjectContext: managedObjectContext)
       
       dayViewController.consumptionsWereChanged(doSort: true)
     }
@@ -257,5 +260,13 @@ class ConsumptionViewController: StyledViewController {
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
   
   private var isCurrentDayToday: Bool = false
+
+  private lazy var managedObjectContext: NSManagedObjectContext? = {
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+      return appDelegate.managedObjectContext
+    } else {
+      return nil
+    }
+  }()
 
 }

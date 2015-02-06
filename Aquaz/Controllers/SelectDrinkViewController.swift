@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SelectDrinkViewController: StyledViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
   
@@ -52,14 +53,15 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     let alcoholIndexPath = NSIndexPath(forRow: displayedDrinkTypes.count - 1, inSection: 0)
     self.collectionView.reloadItemsAtIndexPaths([alcoholIndexPath])
 
-    let drink = Drink.getDrinkByType(drinkType)
-    if let consumptionViewController = storyboard?.instantiateViewControllerWithIdentifier("ConsumptionViewController") as? ConsumptionViewController {
-      consumptionViewController.drink = drink
-      consumptionViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
-      consumptionViewController.dayViewController = dayViewController
-      navigationController?.pushViewController(consumptionViewController, animated: true)
-    } else {
-      assert(false)
+    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
+      if let consumptionViewController = storyboard?.instantiateViewControllerWithIdentifier("ConsumptionViewController") as? ConsumptionViewController {
+        consumptionViewController.drink = drink
+        consumptionViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
+        consumptionViewController.dayViewController = dayViewController
+        navigationController?.pushViewController(consumptionViewController, animated: true)
+      } else {
+        assert(false)
+      }
     }
   }
   
@@ -136,7 +138,7 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     
     let drinkType = displayedDrinkTypes[drinkIndex]
     
-    if let drink = Drink.getDrinkByType(drinkType) {
+    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
       cell.drinkLabel.text = drink.localizedName
       cell.drinkView.drink = drink
       if drinkIndex == displayedDrinkTypes.count - 1 {
@@ -170,18 +172,27 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     
     let drinkType = displayedDrinkTypes[drinkIndex]
     
-    let drink = Drink.getDrinkByType(drinkType)
-    
-    if let consumptionViewController = storyboard?.instantiateViewControllerWithIdentifier("ConsumptionViewController") as? ConsumptionViewController {
-      consumptionViewController.drink = drink
-      consumptionViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
-      consumptionViewController.dayViewController = dayViewController
-      navigationController?.pushViewController(consumptionViewController, animated: true)
+    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
+      if let consumptionViewController = storyboard?.instantiateViewControllerWithIdentifier("ConsumptionViewController") as? ConsumptionViewController {
+        consumptionViewController.drink = drink
+        consumptionViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
+        consumptionViewController.dayViewController = dayViewController
+        navigationController?.pushViewController(consumptionViewController, animated: true)
+      } else {
+        assert(false)
+      }
     } else {
       assert(false)
     }
   }
   
+  private lazy var managedObjectContext: NSManagedObjectContext? = {
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+      return appDelegate.managedObjectContext
+    } else {
+      return nil
+    }
+  }()
 }
 
 class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -294,7 +305,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     
     let drinkType = popupDrinkTypes[drinkIndex]
     
-    if let drink = Drink.getDrinkByType(drinkType) {
+    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
       cell.drinkLabel.text = drink.localizedName
       cell.drinkView.drink = drink
     } else {
@@ -381,6 +392,13 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     }
   }
   
+  private lazy var managedObjectContext: NSManagedObjectContext? = {
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+      return appDelegate.managedObjectContext
+    } else {
+      return nil
+    }
+  }()
 }
 
 private let cellNibName = "DrinkCollectionViewCell"

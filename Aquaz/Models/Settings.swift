@@ -35,6 +35,13 @@ class Settings {
     case Daily
   }
   
+  enum StatisticsViewPage: Int {
+    case Week = 0
+    case Month
+    case Year
+  }
+
+  
   lazy var generalHasLaunchedOnce = SettingsOrdinalItem(
     key: "General - Has Launched Once", initialValue: false)
 
@@ -83,7 +90,7 @@ class Settings {
     key: "UI - Display day selection", initialValue: false)
 
   lazy var uiSelectedStatisticsPage = SettingsEnumItem(
-    key: "UI - Selected statistics page", initialValue: StatisticsViewController.ViewControllerType.Week)
+    key: "UI - Selected statistics page", initialValue: StatisticsViewPage.Week)
 
   lazy var uiWeekStatisticsDate = SettingsOrdinalItem(
     key: "UI - Week statistics date", initialValue: NSDate())

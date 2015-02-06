@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDataSource, CalendarViewDelegate {
 
@@ -63,9 +64,9 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
   }
   
   private func initMonthStatisticsView() {
-    let waterIntakes = Consumption.fetchGroupedWaterIntake(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Day, computeAverageAmounts: true)
+    let waterIntakes = Consumption.fetchGroupedWaterIntake(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Day, computeAverageAmounts: true, managedObjectContext: managedObjectContext)
     
-    let goals = ConsumptionRate.fetchConsumptionRateAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate)
+    let goals = ConsumptionRate.fetchConsumptionRateAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
     assert(waterIntakes.count == goals.count)
     
     consumptionFractions = []
@@ -117,5 +118,13 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
   }
 
   private var consumptionFractions: [Double] = []
+
+  private lazy var managedObjectContext: NSManagedObjectContext? = {
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+      return appDelegate.managedObjectContext
+    } else {
+      return nil
+    }
+  }()
 
 }

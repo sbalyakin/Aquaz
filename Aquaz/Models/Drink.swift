@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class Drink: NSManagedObject, NamedEntity {
   
@@ -174,7 +175,11 @@ class Drink: NSManagedObject, NamedEntity {
       _mainColor = StyleKit.strongLiquorColor
     }
     
-    _darkColor = _mainColor.colorWithShadow(Static.darkColorShadowLevel)
+    _darkColor = Drink.getDarkColorFromDrinkColor(_mainColor)
+  }
+  
+  class func getDarkColorFromDrinkColor(color: UIColor) -> UIColor {
+    return color.colorWithShadow(Static.darkColorShadowLevel)
   }
   
   func drawDrink(#frame: CGRect) {
@@ -189,11 +194,11 @@ class Drink: NSManagedObject, NamedEntity {
     return DrinkType.count
   }
   
-  class func getDrinkByType(drinkType: Drink.DrinkType) -> Drink? {
-    return getDrinkByIndex(drinkType.rawValue)
+  class func getDrinkByType(drinkType: Drink.DrinkType, managedObjectContext: NSManagedObjectContext?) -> Drink? {
+    return getDrinkByIndex(drinkType.rawValue, managedObjectContext: managedObjectContext)
   }
   
-  class func getDrinkByIndex(index: Int) -> Drink? {
+  class func getDrinkByIndex(index: Int, managedObjectContext: NSManagedObjectContext?) -> Drink? {
     // Try to search for the drink in the cache
     if let drink = Static.cachedDrinks[index] {
       return drink
@@ -201,40 +206,49 @@ class Drink: NSManagedObject, NamedEntity {
     
     // Fetch the drink from Core Data
     let predicate = NSPredicate(format: "%K = %@", argumentArray: ["index", index])
-    let drink: Drink? = ModelHelper.sharedInstance.fetchManagedObject(predicate: predicate)
-    
-    assert(drink != nil, "Requested drink with index \(index) is not found")
-    if drink == nil {
-      NSLog("Requested drink with index \(index) is not found")
-    } else {
-      // Put the drink into the cache
+    if let drink: Drink = ModelHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate) {
       Static.cachedDrinks[index] = drink
+      return drink
+    } else {
+      assert(false, "Requested drink with index \(index) is not found")
+      return nil
     }
-    
-    return drink
   }
   
-  class func addEntity(#index: Int, name: String, waterPercent: NSNumber, recentAmount amount: NSNumber, managedObjectContext: NSManagedObjectContext) -> Drink {
-    let drink = NSEntityDescription.insertNewObjectForEntityForName(Drink.getEntityName(), inManagedObjectContext: managedObjectContext) as Drink
-    drink.index = index
-    drink.name = name
-    drink.waterPercent = waterPercent
+  class func addEntity(#index: Int, name: String, waterPercent: NSNumber, recentAmount amount: NSNumber, managedObjectContext: NSManagedObjectContext?) -> Drink? {
+    if let managedObjectContext = managedObjectContext {
+      if let drink = NSEntityDescription.insertNewObjectForEntityForName(Drink.getEntityName(), inManagedObjectContext: managedObjectContext) as? Drink {
+        drink.index = index
+        drink.name = name
+        drink.waterPercent = waterPercent
 
-    let recentAmount = NSEntityDescription.insertNewObjectForEntityForName(RecentAmount.getEntityName(), inManagedObjectContext: managedObjectContext) as RecentAmount
-    recentAmount.drink = drink
-    recentAmount.amount = amount
-    
-    var error: NSError? = nil
-    if !managedObjectContext.save(&error) {
-      assert(false, "Failed to save new drink named \"\(name)\". Error: \(error!.localizedDescription)")
+        if let recentAmount = NSEntityDescription.insertNewObjectForEntityForName(RecentAmount.getEntityName(), inManagedObjectContext: managedObjectContext) as? RecentAmount {
+          recentAmount.drink = drink
+          recentAmount.amount = amount
+        } else {
+          assert(false)
+        }
+        
+        var error: NSError?
+        if !managedObjectContext.save(&error) {
+          assert(false, "Failed to save new drink named \"\(name)\". Error: \(error!.localizedDescription)")
+          return nil
+        }
+        
+        return drink
+      } else {
+        assert(false)
+        return nil
+      }
+    } else {
+      assert(false)
+      return nil
     }
-    
-    return drink
   }
   
-  class func fetchDrinks() -> [Drink] {
+  class func fetchDrinks(managedObjectContext: NSManagedObjectContext?) -> [Drink] {
     let descriptor = NSSortDescriptor(key: "index", ascending: true)
-    return ModelHelper.sharedInstance.fetchManagedObjects(predicate: nil, sortDescriptors: [descriptor])
+    return ModelHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: [descriptor])
   }
 
   private typealias DrawDrinkFunction = (frame: CGRect) -> Void
