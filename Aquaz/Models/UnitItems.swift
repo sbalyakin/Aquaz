@@ -8,10 +8,18 @@
 
 import Foundation
 
-enum UnitType: Int {
+enum UnitType: Int, Printable {
   case Volume = 0
   case Weight
   case Length
+  
+  var description: String {
+    switch self {
+    case Volume: return "Volume"
+    case Weight: return "Weight"
+    case Length: return "Length"
+    }
+  }
 }
 
 protocol Unit {
@@ -38,6 +46,12 @@ class Quantity {
     convertFrom(amount: fromAmount, unit: fromUnit)
   }
   
+  /// Initializes quantity using conversion from another quantity
+  init(ownUnit: Unit, fromQuantity: Quantity) {
+    self.unit = ownUnit
+    convertFrom(quantity: fromQuantity)
+  }
+  
   var description: String {
     return getDescription(0)
   }
@@ -60,7 +74,7 @@ class Quantity {
     return description
   }
   
-  func convertFrom(#amount:Double, unit: Unit) {
+  func convertFrom(#amount: Double, unit: Unit) {
     if unit.type != self.unit.type {
       assert(false, "Incompatible unit is specified")
       return

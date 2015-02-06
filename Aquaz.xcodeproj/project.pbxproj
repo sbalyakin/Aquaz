@@ -46,6 +46,7 @@
 		84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B639821A25D9EF00889438 /* YearStatisticsView.swift */; };
 		84C610BA1A319DBC00433EF1 /* MonthStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C610B91A319DBC00433EF1 /* MonthStatisticsViewController.swift */; };
 		84C610BC1A31A98900433EF1 /* YearStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */; };
+		84ED8A211A84C8660042BAF2 /* UnitsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED8A201A84C8660042BAF2 /* UnitsTests.swift */; };
 		84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9DD971A16574E003D6444 /* PickTimeViewController.swift */; };
 		A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F801A1212930088AF47 /* CalendarDayButton.swift */; };
 		A5275F851A1212930088AF47 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F821A1212930088AF47 /* CalendarView.swift */; };
@@ -130,6 +131,7 @@
 		84B639821A25D9EF00889438 /* YearStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YearStatisticsView.swift; path = Controls/YearStatisticsView.swift; sourceTree = "<group>"; };
 		84C610B91A319DBC00433EF1 /* MonthStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthStatisticsViewController.swift; sourceTree = "<group>"; };
 		84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YearStatisticsViewController.swift; sourceTree = "<group>"; };
+		84ED8A201A84C8660042BAF2 /* UnitsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsTests.swift; sourceTree = "<group>"; };
 		84F9DD971A16574E003D6444 /* PickTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTimeViewController.swift; sourceTree = "<group>"; };
 		A5275F801A1212930088AF47 /* CalendarDayButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarDayButton.swift; path = Controls/CalendarDayButton.swift; sourceTree = "<group>"; };
 		A5275F821A1212930088AF47 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarView.swift; path = Controls/CalendarView.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				847D0E201A823CB300966538 /* SettingsTests.swift */,
+				84ED8A201A84C8660042BAF2 /* UnitsTests.swift */,
 				84669A8519DAD78D003C2263 /* Supporting Files */,
 			);
 			path = AquazTests;
@@ -519,6 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				847D0E261A824CA900966538 /* SettingItems.swift in Sources */,
+				84ED8A211A84C8660042BAF2 /* UnitsTests.swift in Sources */,
 				847D0E211A823CB300966538 /* SettingsTests.swift in Sources */,
 				847D0E291A824D6700966538 /* UnitItems.swift in Sources */,
 			);
