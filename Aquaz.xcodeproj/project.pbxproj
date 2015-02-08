@@ -74,7 +74,6 @@
 		A575A5A51A6EBB0300B00E9F /* StyledBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */; };
 		A581FEF01A76D5F60025CDEF /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */; };
 		A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */; };
-		A58A65F11A73D4B90072164E /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8488A1901A540BAC00258EC8 /* default.wav */; };
 		A59113D81A50665C007B4241 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59113DA1A50665C007B4241 /* InfoPlist.strings */; };
 		A59113DD1A50665C007B4241 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59113DF1A50665C007B4241 /* Localizable.strings */; };
 		A59113E21A5069EA007B4241 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59113E41A5069EA007B4241 /* InfoPlist.strings */; };
@@ -85,6 +84,18 @@
 		A5AAA1D91A77A9CF008C3C56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */; };
 		A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1319E5686C00D0477B /* ModelHelper.swift */; };
 		A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1519E57D3500D0477B /* NamedEntity.swift */; };
+		A5B8F98D1A87DF3D00145705 /* alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9811A87DF3D00145705 /* alarm.caf */; };
+		A5B8F98E1A87DF3D00145705 /* aqua.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9821A87DF3D00145705 /* aqua.caf */; };
+		A5B8F98F1A87DF3D00145705 /* bells.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9831A87DF3D00145705 /* bells.caf */; };
+		A5B8F9901A87DF3D00145705 /* bubbles.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9841A87DF3D00145705 /* bubbles.caf */; };
+		A5B8F9911A87DF3D00145705 /* chime.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9851A87DF3D00145705 /* chime.caf */; };
+		A5B8F9921A87DF3D00145705 /* chirp.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9861A87DF3D00145705 /* chirp.caf */; };
+		A5B8F9931A87DF3D00145705 /* chord.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9871A87DF3D00145705 /* chord.caf */; };
+		A5B8F9941A87DF3D00145705 /* glass.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9881A87DF3D00145705 /* glass.caf */; };
+		A5B8F9951A87DF3D00145705 /* hand-bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9891A87DF3D00145705 /* hand-bell.caf */; };
+		A5B8F9961A87DF3D00145705 /* magic.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98A1A87DF3D00145705 /* magic.caf */; };
+		A5B8F9971A87DF3D00145705 /* tiny-bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */; };
+		A5B8F9981A87DF3D00145705 /* whistle.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98C1A87DF3D00145705 /* whistle.caf */; };
 		A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */; };
 		A5E6094E1A6AB2CC00786D15 /* StyledViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094D1A6AB2CC00786D15 /* StyledViewController.swift */; };
 		A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
@@ -140,7 +151,6 @@
 		847D0E241A824CA900966538 /* SettingItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingItems.swift; sourceTree = "<group>"; };
 		847D0E271A824D6700966538 /* UnitItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitItems.swift; sourceTree = "<group>"; };
 		8488A18D1A53FE6500258EC8 /* NotificationsSoundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsSoundViewController.swift; sourceTree = "<group>"; };
-		8488A1901A540BAC00258EC8 /* default.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = default.wav; path = Sounds/default.wav; sourceTree = "<group>"; };
 		84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPrePopulation.swift; sourceTree = "<group>"; };
 		84B639811A25D9EF00889438 /* WeekStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeekStatisticsView.swift; path = Controls/WeekStatisticsView.swift; sourceTree = "<group>"; };
 		84B639821A25D9EF00889438 /* YearStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YearStatisticsView.swift; path = Controls/YearStatisticsView.swift; sourceTree = "<group>"; };
@@ -171,6 +181,18 @@
 		A5AAA1D81A77A9CF008C3C56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A5B75A1319E5686C00D0477B /* ModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelHelper.swift; sourceTree = "<group>"; };
 		A5B75A1519E57D3500D0477B /* NamedEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedEntity.swift; sourceTree = "<group>"; };
+		A5B8F9811A87DF3D00145705 /* alarm.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm.caf; sourceTree = "<group>"; };
+		A5B8F9821A87DF3D00145705 /* aqua.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = aqua.caf; sourceTree = "<group>"; };
+		A5B8F9831A87DF3D00145705 /* bells.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bells.caf; sourceTree = "<group>"; };
+		A5B8F9841A87DF3D00145705 /* bubbles.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bubbles.caf; sourceTree = "<group>"; };
+		A5B8F9851A87DF3D00145705 /* chime.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chime.caf; sourceTree = "<group>"; };
+		A5B8F9861A87DF3D00145705 /* chirp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chirp.caf; sourceTree = "<group>"; };
+		A5B8F9871A87DF3D00145705 /* chord.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chord.caf; sourceTree = "<group>"; };
+		A5B8F9881A87DF3D00145705 /* glass.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = glass.caf; sourceTree = "<group>"; };
+		A5B8F9891A87DF3D00145705 /* hand-bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "hand-bell.caf"; sourceTree = "<group>"; };
+		A5B8F98A1A87DF3D00145705 /* magic.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = magic.caf; sourceTree = "<group>"; };
+		A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiny-bell.caf"; sourceTree = "<group>"; };
+		A5B8F98C1A87DF3D00145705 /* whistle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whistle.caf; sourceTree = "<group>"; };
 		A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryTableViewCell.swift; path = Controls/DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		A5E6094D1A6AB2CC00786D15 /* StyledViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledViewController.swift; sourceTree = "<group>"; };
 		A5E70A6F19E30BEE006E5FC0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Settings.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -353,7 +375,18 @@
 		8488A18F1A540B9300258EC8 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				8488A1901A540BAC00258EC8 /* default.wav */,
+				A5B8F9811A87DF3D00145705 /* alarm.caf */,
+				A5B8F9821A87DF3D00145705 /* aqua.caf */,
+				A5B8F9831A87DF3D00145705 /* bells.caf */,
+				A5B8F9841A87DF3D00145705 /* bubbles.caf */,
+				A5B8F9851A87DF3D00145705 /* chime.caf */,
+				A5B8F9861A87DF3D00145705 /* chirp.caf */,
+				A5B8F9871A87DF3D00145705 /* chord.caf */,
+				A5B8F9881A87DF3D00145705 /* glass.caf */,
+				A5B8F9891A87DF3D00145705 /* hand-bell.caf */,
+				A5B8F98A1A87DF3D00145705 /* magic.caf */,
+				A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */,
+				A5B8F98C1A87DF3D00145705 /* whistle.caf */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
@@ -452,13 +485,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A58A65F11A73D4B90072164E /* default.wav in Resources */,
+				A5B8F9941A87DF3D00145705 /* glass.caf in Resources */,
+				A5B8F9971A87DF3D00145705 /* tiny-bell.caf in Resources */,
+				A5B8F98E1A87DF3D00145705 /* aqua.caf in Resources */,
 				A59113DD1A50665C007B4241 /* Localizable.strings in Resources */,
+				A5B8F9911A87DF3D00145705 /* chime.caf in Resources */,
 				84669A7719DAD78D003C2263 /* Main.storyboard in Resources */,
 				A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */,
+				A5B8F9921A87DF3D00145705 /* chirp.caf in Resources */,
+				A5B8F9981A87DF3D00145705 /* whistle.caf in Resources */,
+				A5B8F9961A87DF3D00145705 /* magic.caf in Resources */,
 				A5AAA1D91A77A9CF008C3C56 /* LaunchScreen.xib in Resources */,
 				84669A7919DAD78D003C2263 /* Images.xcassets in Resources */,
+				A5B8F98F1A87DF3D00145705 /* bells.caf in Resources */,
+				A5B8F98D1A87DF3D00145705 /* alarm.caf in Resources */,
+				A5B8F9951A87DF3D00145705 /* hand-bell.caf in Resources */,
+				A5B8F9901A87DF3D00145705 /* bubbles.caf in Resources */,
 				A59113E21A5069EA007B4241 /* InfoPlist.strings in Resources */,
+				A5B8F9931A87DF3D00145705 /* chord.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

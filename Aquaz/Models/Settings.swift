@@ -117,7 +117,7 @@ class Settings {
     key: "Notifications - Interval", initialValue: 60 * 60 * 1.5)
   
   lazy var notificationsSound = SettingsOrdinalItem(
-    key: "Notifications - Sound", initialValue: "default.wav")
+    key: "Notifications - Sound", initialValue: "aqua.caf")
   
   lazy var notificationsSmart = SettingsOrdinalItem(
     key: "Notifications - Smart", initialValue: true)
