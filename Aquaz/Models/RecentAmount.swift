@@ -9,12 +9,12 @@
 import Foundation
 import CoreData
 
-class RecentAmount: NSManagedObject, NamedEntity {
+public class RecentAmount: NSManagedObject, NamedEntity {
   
-  @NSManaged var amount: NSNumber
-  @NSManaged var drink: Drink
+  @NSManaged public var amount: NSNumber
+  @NSManaged public var drink: Drink
   
-  class func getEntityName() -> String {
+  public class func getEntityName() -> String {
     return "RecentAmount"
   }
 }

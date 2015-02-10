@@ -37,9 +37,7 @@
 		8478253719EAC8C200588FE3 /* ConsumptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478253619EAC8C200588FE3 /* ConsumptionViewController.swift */; };
 		847D0E211A823CB300966538 /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E201A823CB300966538 /* SettingsTests.swift */; };
 		847D0E251A824CA900966538 /* SettingItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E241A824CA900966538 /* SettingItems.swift */; };
-		847D0E261A824CA900966538 /* SettingItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E241A824CA900966538 /* SettingItems.swift */; };
 		847D0E281A824D6700966538 /* UnitItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E271A824D6700966538 /* UnitItems.swift */; };
-		847D0E291A824D6700966538 /* UnitItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E271A824D6700966538 /* UnitItems.swift */; };
 		8488A18E1A53FE6500258EC8 /* NotificationsSoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488A18D1A53FE6500258EC8 /* NotificationsSoundViewController.swift */; };
 		84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */; };
 		84B639831A25D9EF00889438 /* WeekStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B639811A25D9EF00889438 /* WeekStatisticsView.swift */; };
@@ -48,20 +46,6 @@
 		84C610BC1A31A98900433EF1 /* YearStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */; };
 		84ED8A211A84C8660042BAF2 /* UnitsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED8A201A84C8660042BAF2 /* UnitsTests.swift */; };
 		84ED8A231A84ED9E0042BAF2 /* DrinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */; };
-		84ED8A241A84EDBC0042BAF2 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2B19E4195A0026398E /* Drink.swift */; };
-		84ED8A251A84EE590042BAF2 /* NamedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1519E57D3500D0477B /* NamedEntity.swift */; };
-		84ED8A261A84EE6D0042BAF2 /* RecentAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2919E4195A0026398E /* RecentAmount.swift */; };
-		84ED8A271A84EE700042BAF2 /* Consumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2719E4195A0026398E /* Consumption.swift */; };
-		84ED8A281A84EE730042BAF2 /* ConsumptionRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056819E2D80E0097A833 /* ConsumptionRate.swift */; };
-		84ED8A291A84EE980042BAF2 /* ModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1319E5686C00D0477B /* ModelHelper.swift */; };
-		84ED8A2A1A84EE9A0042BAF2 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468D6411A0D1C240008D027 /* DateHelper.swift */; };
-		84ED8A2B1A84EE9C0042BAF2 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B13BD1A31FE4F00249426 /* UIHelper.swift */; };
-		84ED8A2C1A84EEA40042BAF2 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5071A6558C100AA89CB /* StyleKit.swift */; };
-		84ED8A2D1A84EEE10042BAF2 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
-		84ED8A2E1A84EEEE0042BAF2 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406D78019FE9875001C54BF /* Units.swift */; };
-		84ED8A2F1A84F0980042BAF2 /* ConsumptionRateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF375C1A81618F00854A8D /* ConsumptionRateCalculator.swift */; };
-		84ED8A311A84F1180042BAF2 /* CoreDataPrePopulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */; };
-		84ED8A321A84F1430042BAF2 /* NotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84039F171A4B103100C5391E /* NotificationsHelper.swift */; };
 		84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9DD971A16574E003D6444 /* PickTimeViewController.swift */; };
 		A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F801A1212930088AF47 /* CalendarDayButton.swift */; };
 		A5275F851A1212930088AF47 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F821A1212930088AF47 /* CalendarView.swift */; };
@@ -582,25 +566,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84ED8A2C1A84EEA40042BAF2 /* StyleKit.swift in Sources */,
-				84ED8A2B1A84EE9C0042BAF2 /* UIHelper.swift in Sources */,
-				847D0E261A824CA900966538 /* SettingItems.swift in Sources */,
-				84ED8A271A84EE700042BAF2 /* Consumption.swift in Sources */,
 				84ED8A231A84ED9E0042BAF2 /* DrinkTests.swift in Sources */,
-				84ED8A261A84EE6D0042BAF2 /* RecentAmount.swift in Sources */,
-				84ED8A321A84F1430042BAF2 /* NotificationsHelper.swift in Sources */,
 				84ED8A211A84C8660042BAF2 /* UnitsTests.swift in Sources */,
 				847D0E211A823CB300966538 /* SettingsTests.swift in Sources */,
-				84ED8A241A84EDBC0042BAF2 /* Drink.swift in Sources */,
-				84ED8A2F1A84F0980042BAF2 /* ConsumptionRateCalculator.swift in Sources */,
-				84ED8A2E1A84EEEE0042BAF2 /* Units.swift in Sources */,
-				84ED8A2D1A84EEE10042BAF2 /* Settings.swift in Sources */,
-				84ED8A311A84F1180042BAF2 /* CoreDataPrePopulation.swift in Sources */,
-				84ED8A281A84EE730042BAF2 /* ConsumptionRate.swift in Sources */,
-				84ED8A291A84EE980042BAF2 /* ModelHelper.swift in Sources */,
-				84ED8A2A1A84EE9A0042BAF2 /* DateHelper.swift in Sources */,
-				84ED8A251A84EE590042BAF2 /* NamedEntity.swift in Sources */,
-				847D0E291A824D6700966538 /* UnitItems.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

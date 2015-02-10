@@ -9,25 +9,25 @@
 import Foundation
 import CoreData
 
-class ConsumptionRate: NSManagedObject, NamedEntity {
+public class ConsumptionRate: NSManagedObject, NamedEntity {
   
   /// Date of consumption rate entity
-  @NSManaged var date: NSDate
+  @NSManaged public var date: NSDate
   
   /// Base consumption rate in volume units (millilitres)
-  @NSManaged var baseRateAmount: NSNumber
+  @NSManaged public var baseRateAmount: NSNumber
   
   /// Additional consumption rate for hot day in fraction of base consumption rate
-  @NSManaged var hotDayFraction: NSNumber
+  @NSManaged public var hotDayFraction: NSNumber
 
   /// Additional consumption rate for high user activity in fraction of base consumption rate
-  @NSManaged var highActivityFraction: NSNumber
+  @NSManaged public var highActivityFraction: NSNumber
   
-  var amount: Double {
+  public var amount: Double {
     return baseRateAmount.doubleValue * (1 + hotDayFraction.doubleValue + highActivityFraction.doubleValue)
   }
   
-  class func getEntityName() -> String {
+  public class func getEntityName() -> String {
     return "ConsumptionRate"
   }
   

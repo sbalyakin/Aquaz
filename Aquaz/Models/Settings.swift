@@ -8,9 +8,9 @@
 
 import Foundation
 
-class Settings {
+public class Settings {
 
-  class var sharedInstance: Settings {
+  public class var sharedInstance: Settings {
     struct Instance {
       static let instance = Settings()
     }
@@ -21,21 +21,21 @@ class Settings {
     // Hide initizalizer, sharedInstance should be used instead.
   }
   
-  enum Gender: Int {
+  public enum Gender: Int {
     case Man = 0
     case Woman
     case PregnantFemale
     case BreastfeedingFemale
   }
 
-  enum PhysicalActivity: Int {
+  public enum PhysicalActivity: Int {
     case Rare = 0
     case Occasional
     case Weekly
     case Daily
   }
   
-  enum StatisticsViewPage: Int {
+  public enum StatisticsViewPage: Int {
     case Week = 0
     case Month
     case Year

@@ -10,13 +10,13 @@ import Foundation
 import CoreData
 import UIKit
 
-class Drink: NSManagedObject, NamedEntity {
+public class Drink: NSManagedObject, NamedEntity {
   
-  @NSManaged var index: NSNumber
-  @NSManaged var name: String
-  @NSManaged var waterPercent: NSNumber
-  @NSManaged var consumptions: NSSet
-  @NSManaged var recentAmount: RecentAmount
+  @NSManaged public var index: NSNumber
+  @NSManaged public var name: String
+  @NSManaged public var waterPercent: NSNumber
+  @NSManaged public var consumptions: NSSet
+  @NSManaged public var recentAmount: RecentAmount
 
   private struct Static {
     static let waterTitle        = NSLocalizedString("D:Water",         value: "Water",         comment: "Drink: Title for water")
@@ -36,7 +36,7 @@ class Drink: NSManagedObject, NamedEntity {
   }
   
   // Important! Order of this enum must NOT be changed in further versions. New drinks must be added to the end.
-  enum DrinkType: Int {
+  public enum DrinkType: Int {
     case Water = 0
     case Coffee
     case Tea
@@ -55,7 +55,7 @@ class Drink: NSManagedObject, NamedEntity {
     }
   }
 
-  var drinkType: DrinkType {
+  public var drinkType: DrinkType {
     if _drinkType == nil {
       initIndexRelatedProperties()
       assert(_drinkType != nil)
@@ -63,7 +63,7 @@ class Drink: NSManagedObject, NamedEntity {
     return _drinkType
   }
 
-  var localizedName: String {
+  public var localizedName: String {
     if _localizedName == nil {
       initIndexRelatedProperties()
       assert(_localizedName != nil)
@@ -71,7 +71,7 @@ class Drink: NSManagedObject, NamedEntity {
     return _localizedName
   }
   
-  var mainColor: UIColor {
+  public var mainColor: UIColor {
     if _mainColor == nil {
       initIndexRelatedProperties()
       assert(_mainColor != nil)
@@ -79,7 +79,7 @@ class Drink: NSManagedObject, NamedEntity {
     return _mainColor
   }
 
-  var darkColor: UIColor {
+  public var darkColor: UIColor {
     if _darkColor == nil {
       initIndexRelatedProperties()
       assert(_darkColor != nil)
@@ -96,7 +96,7 @@ class Drink: NSManagedObject, NamedEntity {
   }
   
 
-  override func didChangeValueForKey(key: String) {
+  override public func didChangeValueForKey(key: String) {
     super.didChangeValueForKey(key)
     if key == "index" {
       clearCachedProperties()
@@ -182,26 +182,28 @@ class Drink: NSManagedObject, NamedEntity {
     return color.colorWithShadow(Static.darkColorShadowLevel)
   }
   
-  func drawDrink(#frame: CGRect) {
+  public func drawDrink(#frame: CGRect) {
     drawDrinkFunction(frame: frame)
   }
 
-  class func getEntityName() -> String {
+  public class func getEntityName() -> String {
     return "Drink"
   }
   
-  class func getDrinksCount() -> Int {
+  public class func getDrinksCount() -> Int {
     return DrinkType.count
   }
   
-  class func getDrinkByType(drinkType: Drink.DrinkType, managedObjectContext: NSManagedObjectContext?) -> Drink? {
+  public class func getDrinkByType(drinkType: Drink.DrinkType, managedObjectContext: NSManagedObjectContext?) -> Drink? {
     return getDrinkByIndex(drinkType.rawValue, managedObjectContext: managedObjectContext)
   }
   
-  class func getDrinkByIndex(index: Int, managedObjectContext: NSManagedObjectContext?) -> Drink? {
+  public class func getDrinkByIndex(index: Int, managedObjectContext: NSManagedObjectContext?) -> Drink? {
     // Try to search for the drink in the cache
     if let drink = Static.cachedDrinks[index] {
-      return drink
+      if drink.managedObjectContext === managedObjectContext {
+        return drink
+      }
     }
     
     // Fetch the drink from Core Data

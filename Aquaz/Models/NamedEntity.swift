@@ -6,6 +6,6 @@
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.
 //
 
-protocol NamedEntity {
+public protocol NamedEntity {
   static func getEntityName() -> String
 }

@@ -10,9 +10,9 @@ import Foundation
 import CoreData
 import UIKit
 
-class CoreDataPrePopulation {
+public class CoreDataPrePopulation {
   
-  class func prePopulateCoreData(#model: String, managedObjectContext: NSManagedObjectContext) {
+  public class func prePopulateCoreData(#model: String, managedObjectContext: NSManagedObjectContext) {
     switch model {
     case "Version 1.0":
       prePopulateCoreDataVersion1_0(managedObjectContext: managedObjectContext)

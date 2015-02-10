@@ -8,6 +8,7 @@
 
 import UIKit
 import XCTest
+import Aquaz
 
 class UnitsTests: XCTestCase {
   
