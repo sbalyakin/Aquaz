@@ -51,7 +51,7 @@ class NotificationsViewController: RevealedTableViewController {
     let hours = (overallSeconds / 3600)
     let template = NSLocalizedString("NVC:%u hr %u min", value: "%u hr %u min", comment: "NotificationsViewController: Template string for time interval")
     let result = NSString(format: template, hours, minutes)
-    return result
+    return result as! String
   }
 
   func updateNotificationsFromSettings() {

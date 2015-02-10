@@ -24,7 +24,7 @@ class DiaryViewController: StyledViewController, UITableViewDataSource {
   }
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("DiaryTableViewCell", forIndexPath: indexPath) as DiaryTableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("DiaryTableViewCell", forIndexPath: indexPath) as! DiaryTableViewCell
     
     let consumption = consumptions[indexPath.row]
     cell.consumption = consumption

@@ -234,7 +234,7 @@ import UIKit
   }
   
   private func computeSizeForText(text: String, font: UIFont) -> CGSize {
-    let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
+    let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
     let fontAttributes = [NSFontAttributeName: font, NSParagraphStyleAttributeName: textStyle]
     let infiniteSize = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
     let rect = text.boundingRectWithSize(infiniteSize, options: .UsesLineFragmentOrigin, attributes: fontAttributes, context: nil)
@@ -310,7 +310,7 @@ import UIKit
       return
     }
     
-    let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
+    let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
     let fontAttributes = [NSFontAttributeName: scaleTitleFont, NSForegroundColorAttributeName: scaleTitleColor, NSParagraphStyleAttributeName: textStyle]
     let rect = uiAreas.horizontalScale.rectByOffsetting(dx: 0, dy: horizontalScaleMargin)
     
@@ -433,7 +433,7 @@ import UIKit
         break
       }
       
-      let pinLayer = pinsLayer.sublayers[index] as CAShapeLayer
+      let pinLayer = pinsLayer.sublayers[index] as! CAShapeLayer
       let rect = CGRect(x: coord.x - pinDiameter / 2, y: coord.y - pinDiameter / 2, width: pinDiameter, height: pinDiameter)
       var path = UIBezierPath(ovalInRect: rect).CGPath
       transformShape(pinLayer, path: path, useAnimation: useAnimation)

@@ -146,7 +146,7 @@ protocol WeekStatisticsViewDelegate {
     let calendar = NSCalendar.currentCalendar()
     
     for i in 0..<daysPerWeek {
-      let title = calendar.veryShortWeekdaySymbols[i] as String
+      let title = calendar.veryShortWeekdaySymbols[i] as! String
       let dayButtonRect = computeRectangleForDayButtonWithIndex(i, containerRect: rect)
       let dayButton = UIButton(frame: dayButtonRect)
       dayButton.tag = i
@@ -222,7 +222,7 @@ protocol WeekStatisticsViewDelegate {
         break
       }
       
-      let barLayer = barsLayer.sublayers[index] as CAShapeLayer
+      let barLayer = barsLayer.sublayers[index] as! CAShapeLayer
       transformShape(barLayer, path: path, useAnimation: useAnimation)
     }
   }
@@ -279,7 +279,7 @@ protocol WeekStatisticsViewDelegate {
   }
   
   private func computeSizeForText(text: String, font: UIFont) -> CGSize {
-    let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
+    let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
     let fontAttributes = [NSFontAttributeName: font, NSParagraphStyleAttributeName: textStyle]
     let infiniteSize = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
     let rect = text.boundingRectWithSize(infiniteSize, options: .UsesLineFragmentOrigin, attributes: fontAttributes, context: nil)

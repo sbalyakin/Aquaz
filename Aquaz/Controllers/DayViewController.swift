@@ -280,7 +280,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
   
   func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
-    let currentPage = pageViewController.viewControllers.last as UIViewController
+    let currentPage = pageViewController.viewControllers.last as! UIViewController
     if currentPage == pages[0] {
       pageButton.image = UIImage(named: "iconDiary")?.imageWithRenderingMode(.AlwaysOriginal)
     } else if currentPage == pages[1] {
@@ -293,7 +293,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
   
   private func toggleCurrentPage() {
-    let currentPage = pageViewController.viewControllers.last as UIViewController
+    let currentPage = pageViewController.viewControllers.last as! UIViewController
     if currentPage == pages[0] {
       pageViewController.setViewControllers([pages[1]], direction: .Forward, animated: true, completion: nil)
       pageButton.image = UIImage(named: "iconUp")?.imageWithRenderingMode(.AlwaysOriginal)
@@ -304,7 +304,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
   
   func switchToSelectDrinkPage() {
-    let currentPage = pageViewController.viewControllers.last as UIViewController
+    let currentPage = pageViewController.viewControllers.last as! UIViewController
     if currentPage != pages[0] {
       toggleCurrentPage()
     }
@@ -483,7 +483,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     
     let template = NSLocalizedString("DVC:%1$@ of %2$@", value: "%1$@ of %2$@", comment: "DayViewController: Current consumption of recommended one")
     let text = NSString(format: template, consumptionText, consumptionRateText)
-    consumptionButton.setTitle(text, forState: .Normal)
+    consumptionButton.setTitle(text as String, forState: .Normal)
   }
   
   private func consumptionRateWasChanged() {

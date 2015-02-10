@@ -59,7 +59,7 @@ class NotificationsIntervalPickerViewController: UIViewController, UIPickerViewD
   }
   
   private func computeSizeForText(text: String, font: UIFont) -> CGSize {
-    let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
+    let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
     let fontAttributes = [NSFontAttributeName: font, NSParagraphStyleAttributeName: textStyle]
     let infiniteSize = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
     let rect = text.boundingRectWithSize(infiniteSize, options: .UsesLineFragmentOrigin, attributes: fontAttributes, context: nil)

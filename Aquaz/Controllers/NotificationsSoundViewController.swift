@@ -113,7 +113,7 @@ extension NotificationsSoundViewController {
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("SoundCell") as UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("SoundCell") as! UITableViewCell
     
     let index = indexPath.row
     let sound = soundList[index]

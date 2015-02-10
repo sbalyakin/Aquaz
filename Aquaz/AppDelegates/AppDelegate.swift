@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
       // Pre populate core data if the application is running for the first time
-      if let versionIdentifier = managedObjectModel.versionIdentifiers.anyObject() as? String {
+      if let versionIdentifier = managedObjectModel.versionIdentifiers.first as? String {
         if let managedObjectContext = managedObjectContext {
           CoreDataPrePopulation.prePopulateCoreData(model: versionIdentifier, managedObjectContext: managedObjectContext)
         } else {
@@ -81,8 +81,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
       // Recreate day view controller in order to show day view
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      let dayNavigationController = storyboard.instantiateViewControllerWithIdentifier("DayNavigationController") as UINavigationController
-      let dayViewController = dayNavigationController.topViewController as DayViewController
+      let dayNavigationController = storyboard.instantiateViewControllerWithIdentifier("DayNavigationController") as! UINavigationController
+      let dayViewController = dayNavigationController.topViewController as! DayViewController
       dayViewController.setCurrentDate(NSDate())
       rootViewController.setFrontViewController(dayNavigationController, animated: false)
       rootViewController.setFrontViewPosition(.Left, animated: false)
@@ -141,7 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   lazy var applicationDocumentsDirectory: NSURL = {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "com.devmanifest.Aquaz" in the application's documents Application Support directory.
     let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-    return urls[urls.count-1] as NSURL
+    return urls[urls.count-1] as! NSURL
     }()
   
   lazy var managedObjectModel: NSManagedObjectModel = {
@@ -155,12 +155,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Create the coordinator and store
     var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
     let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("Aquaz.sqlite")
-    var error: NSError? = nil
-    var failureReason = "There was an error creating or loading the application's saved data."
+    var error: NSError?
+    let failureReason = "There was an error creating or loading the application's saved data."
     if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
       coordinator = nil
       // Report any error we got.
-      let dict = NSMutableDictionary()
+      var dict: [NSObject: AnyObject] = [:]
       dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
       dict[NSLocalizedFailureReasonErrorKey] = failureReason
       dict[NSUnderlyingErrorKey] = error

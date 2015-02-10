@@ -335,7 +335,7 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cellInfo = cellsInfo[indexPath.section][indexPath.row]
     let cellIdentifier = cellInfo.getCellIdentifier()
-    let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UITableViewCell
     cellInfo.initCell(cell, tableView: tableView, indexPath: indexPath)
     return cell
   }
@@ -616,7 +616,7 @@ private class SelectableCellInfo<T>: CellInfo<T> {
   private func getValueByIndex(index: Int) -> T {
     let value = minimumValue.doubleValue + Double(index) * step.doubleValue
     let numberValue = value as NSNumber
-    return numberValue as T
+    return numberValue as! T
   }
   
   override func getValueTitleByIndex(index: Int) -> String {
@@ -625,8 +625,8 @@ private class SelectableCellInfo<T>: CellInfo<T> {
   }
   
   override func setValueFromAvailableValueByIndex(index: Int) {
-    let number = (getValueByIndex(index)) as NSNumber
-    value = number as T
+    let number = (getValueByIndex(index)) as! NSNumber
+    value = number as! T
   }
   
   func getValueIndexInAvailableValues() -> Int {
@@ -635,7 +635,7 @@ private class SelectableCellInfo<T>: CellInfo<T> {
       return 0
     }
     
-    let valueNumber = value as NSNumber
+    let valueNumber = value as! NSNumber
     let index = (valueNumber.doubleValue - minimumValue.doubleValue) / step.doubleValue
     return Int(trunc(index))
   }

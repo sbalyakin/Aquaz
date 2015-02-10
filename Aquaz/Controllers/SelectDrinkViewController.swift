@@ -131,7 +131,7 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
   }
   
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as DrinkCollectionViewCell
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! DrinkCollectionViewCell
     
     let drinkIndex = indexPath.row
     assert(drinkIndex < displayedDrinkTypes.count)
@@ -157,7 +157,7 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
   }
 
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-    let layout = collectionViewLayout as UICollectionViewFlowLayout
+    let layout = collectionViewLayout as! UICollectionViewFlowLayout
     let contentWidth = collectionView.bounds.width - layout.minimumInteritemSpacing * CGFloat(columnsCount - 1)
     let contentHeight = collectionView.bounds.height - layout.minimumLineSpacing * CGFloat(rowsCount - 1)
     let cellWidth = trunc(contentWidth / CGFloat(columnsCount))
@@ -298,7 +298,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
   }
   
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as DrinkCollectionViewCell
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! DrinkCollectionViewCell
     
     let drinkIndex = indexPath.row
     assert(drinkIndex < popupDrinkTypes.count)

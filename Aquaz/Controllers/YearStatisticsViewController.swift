@@ -90,7 +90,7 @@ class YearStatisticsViewController: StyledViewController {
       return ""
     }
     
-    return calendar.shortMonthSymbols[index] as String
+    return calendar.shortMonthSymbols[index] as! String
   }
   
   private func getTitleForAmount(amount: CGFloat) -> String {
