@@ -11,10 +11,9 @@ import CoreData
 
 public class RecentAmount: NSManagedObject, NamedEntity {
   
+  public static var entityName = "RecentAmount"
+  
   @NSManaged public var amount: NSNumber
   @NSManaged public var drink: Drink
   
-  public class func getEntityName() -> String {
-    return "RecentAmount"
-  }
 }

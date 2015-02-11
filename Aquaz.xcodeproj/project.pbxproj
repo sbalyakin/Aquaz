@@ -273,17 +273,17 @@
 		843B055D19E2D7800097A833 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A5B75A1519E57D3500D0477B /* NamedEntity.swift */,
+				84380C2B19E4195A0026398E /* Drink.swift */,
+				84380C2719E4195A0026398E /* Consumption.swift */,
+				843B056819E2D80E0097A833 /* ConsumptionRate.swift */,
+				84380C2919E4195A0026398E /* RecentAmount.swift */,
 				8406D78019FE9875001C54BF /* Units.swift */,
 				847D0E271A824D6700966538 /* UnitItems.swift */,
 				A5E70A6F19E30BEE006E5FC0 /* Settings.swift */,
 				847D0E241A824CA900966538 /* SettingItems.swift */,
-				84380C2719E4195A0026398E /* Consumption.swift */,
-				843B056819E2D80E0097A833 /* ConsumptionRate.swift */,
 				A5EF375C1A81618F00854A8D /* ConsumptionRateCalculator.swift */,
 				84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */,
-				84380C2B19E4195A0026398E /* Drink.swift */,
-				A5B75A1519E57D3500D0477B /* NamedEntity.swift */,
-				84380C2919E4195A0026398E /* RecentAmount.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

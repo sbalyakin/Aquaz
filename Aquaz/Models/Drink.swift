@@ -11,7 +11,9 @@ import CoreData
 import UIKit
 
 public class Drink: NSManagedObject, NamedEntity {
-  
+
+  public static var entityName = "Drink"
+
   @NSManaged public var index: NSNumber
   @NSManaged public var name: String
   @NSManaged public var waterPercent: NSNumber
@@ -185,10 +187,6 @@ public class Drink: NSManagedObject, NamedEntity {
     drawDrinkFunction(frame: frame)
   }
 
-  public class func getEntityName() -> String {
-    return "Drink"
-  }
-  
   public class func getDrinksCount() -> Int {
     return DrinkType.count
   }
@@ -218,12 +216,12 @@ public class Drink: NSManagedObject, NamedEntity {
   
   class func addEntity(#index: Int, name: String, waterPercent: NSNumber, recentAmount amount: NSNumber, managedObjectContext: NSManagedObjectContext?) -> Drink? {
     if let managedObjectContext = managedObjectContext {
-      if let drink = NSEntityDescription.insertNewObjectForEntityForName(Drink.getEntityName(), inManagedObjectContext: managedObjectContext) as? Drink {
+      if let drink = NSEntityDescription.insertNewObjectForEntityForName(Drink.entityName, inManagedObjectContext: managedObjectContext) as? Drink {
         drink.index = index
         drink.name = name
         drink.waterPercent = waterPercent
 
-        if let recentAmount = NSEntityDescription.insertNewObjectForEntityForName(RecentAmount.getEntityName(), inManagedObjectContext: managedObjectContext) as? RecentAmount {
+        if let recentAmount = NSEntityDescription.insertNewObjectForEntityForName(RecentAmount.entityName, inManagedObjectContext: managedObjectContext) as? RecentAmount {
           recentAmount.drink = drink
           recentAmount.amount = amount
         } else {

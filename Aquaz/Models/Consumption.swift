@@ -11,6 +11,8 @@ import CoreData
 
 public class Consumption: NSManagedObject, NamedEntity {
   
+  public static var entityName = "Consumption"
+
   @NSManaged public var amount: NSNumber
   @NSManaged public var date: NSDate
   @NSManaged public var drink: Drink
@@ -19,14 +21,10 @@ public class Consumption: NSManagedObject, NamedEntity {
     return amount.doubleValue * drink.waterPercent.doubleValue
   }
   
-  public class func getEntityName() -> String {
-    return "Consumption"
-  }
-  
   /// Adds a new consumption entity into Core Data
   public class func addEntity(#drink: Drink, amount: NSNumber, date: NSDate, managedObjectContext: NSManagedObjectContext?, saveImmediately: Bool = true) -> Consumption? {
     if let managedObjectContext = managedObjectContext {
-      let consumption = NSEntityDescription.insertNewObjectForEntityForName(getEntityName(), inManagedObjectContext: managedObjectContext) as! Consumption
+      let consumption = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext) as! Consumption
       consumption.amount = amount
       consumption.drink = drink
       consumption.date = date

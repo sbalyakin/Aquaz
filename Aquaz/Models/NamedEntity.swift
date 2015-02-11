@@ -7,5 +7,7 @@
 //
 
 public protocol NamedEntity {
-  static func getEntityName() -> String
+  
+  static var entityName: String { get }
+  
 }

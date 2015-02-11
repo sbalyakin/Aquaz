@@ -11,6 +11,8 @@ import CoreData
 
 public class ConsumptionRate: NSManagedObject, NamedEntity {
   
+  public static var entityName = "ConsumptionRate"
+
   /// Date of consumption rate entity
   @NSManaged public var date: NSDate
   
@@ -25,10 +27,6 @@ public class ConsumptionRate: NSManagedObject, NamedEntity {
   
   public var amount: Double {
     return baseRateAmount.doubleValue * (1 + hotDayFraction.doubleValue + highActivityFraction.doubleValue)
-  }
-  
-  public class func getEntityName() -> String {
-    return "ConsumptionRate"
   }
   
   class func fetchConsumptionRateForDate(date: NSDate, managedObjectContext: NSManagedObjectContext?) -> ConsumptionRate? {
@@ -199,7 +197,7 @@ public class ConsumptionRate: NSManagedObject, NamedEntity {
                        managedObjectContext: NSManagedObjectContext?,
                        saveImmediately: Bool = true) -> ConsumptionRate? {
     if let managedObjectContext = managedObjectContext {
-      if let consumptionRate = NSEntityDescription.insertNewObjectForEntityForName(getEntityName(), inManagedObjectContext: managedObjectContext) as? ConsumptionRate {
+      if let consumptionRate = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext) as? ConsumptionRate {
         let adjustedDate = DateHelper.dateByClearingTime(ofDate: date)
         consumptionRate.date = adjustedDate
         consumptionRate.baseRateAmount = baseRateAmount
