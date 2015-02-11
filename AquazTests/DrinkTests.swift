@@ -19,11 +19,27 @@ class DrinkTests: XCTestCase {
     prePopulateCoreData2()
   }
   
-  func testGetDrink() {
+  func testGetDrinkByIndex() {
     for drinkIndex in 0..<Drink.getDrinksCount() {
-      let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: DrinkTests.managedObjectContext)
-      XCTAssert(drink != nil, "Failed to get drink by index \(drinkIndex)")
-      XCTAssert(drink?.index == drinkIndex, "Wrong drink is get for index \(drinkIndex)")
+      if let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: DrinkTests.managedObjectContext) {
+        XCTAssert(drink.index == drinkIndex, "Wrong drink is get for index \(drinkIndex)")
+      } else {
+        XCTFail("Failed to get drink by index \(drinkIndex)")
+      }
+    }
+  }
+  
+  func testGetDrinkByType() {
+    for drinkIndex in 0..<Drink.getDrinksCount() {
+      if let drinkType = Drink.DrinkType(rawValue: drinkIndex) {
+        if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: DrinkTests.managedObjectContext) {
+          XCTAssert(drink.drinkType == drinkType, "Wrong drink is get for type with index \(drinkType.rawValue)")
+        } else {
+          XCTFail("Failed to get drink by type with index \(drinkType.rawValue)")
+        }
+      } else {
+        XCTFail("Failed to get drink type from index \(drinkIndex)")
+      }
     }
   }
   

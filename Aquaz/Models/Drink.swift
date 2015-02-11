@@ -94,7 +94,6 @@ public class Drink: NSManagedObject, NamedEntity {
     }
     return _drawDrinkFunction
   }
-  
 
   override public func didChangeValueForKey(key: String) {
     super.didChangeValueForKey(key)
@@ -248,11 +247,6 @@ public class Drink: NSManagedObject, NamedEntity {
     }
   }
   
-  class func fetchDrinks(managedObjectContext: NSManagedObjectContext?) -> [Drink] {
-    let descriptor = NSSortDescriptor(key: "index", ascending: true)
-    return ModelHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: [descriptor])
-  }
-
   private typealias DrawDrinkFunction = (frame: CGRect) -> Void
   
   private var _drinkType: DrinkType!
