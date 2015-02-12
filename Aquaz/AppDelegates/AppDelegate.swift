@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // Pre populate core data if the application is running for the first time
       if let versionIdentifier = managedObjectModel.versionIdentifiers.first as? String {
         if let managedObjectContext = managedObjectContext {
-          CoreDataPrePopulation.prePopulateCoreData(model: versionIdentifier, managedObjectContext: managedObjectContext)
+          CoreDataPrePopulation.prePopulateCoreData(modelVersion: .Version1_0, managedObjectContext: managedObjectContext)
         } else {
           assert(false)
         }

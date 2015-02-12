@@ -13,10 +13,16 @@ public class Consumption: NSManagedObject, NamedEntity {
   
   public static var entityName = "Consumption"
 
+  /// Amount of consumption in millilitres
   @NSManaged public var amount: NSNumber
+  
+  /// The date when consumption was done
   @NSManaged public var date: NSDate
+  
+  /// What drink was consumed
   @NSManaged public var drink: Drink
   
+  /// Water intake of consumption taking into account water percentage of the drink
   public var waterIntake: Double {
     return amount.doubleValue * drink.waterPercent.doubleValue
   }
@@ -45,7 +51,7 @@ public class Consumption: NSManagedObject, NamedEntity {
   }
 
   /// Fetches all consumptions for the specified date interval [date, toDate)
-  class func fetchConsumptions(#beginDate: NSDate, endDate: NSDate, managedObjectContext: NSManagedObjectContext?) -> [Consumption] {
+  public class func fetchConsumptions(#beginDate: NSDate, endDate: NSDate, managedObjectContext: NSManagedObjectContext?) -> [Consumption] {
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
     let descriptor = NSSortDescriptor(key: "date", ascending: true)
     return ModelHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: [descriptor])
@@ -54,14 +60,16 @@ public class Consumption: NSManagedObject, NamedEntity {
   /// Fetches all consumptions for a day taken from the specified date.
   /// Start of the day is inclusively started from 0:00 + specified offset in hours.
   /// End of the day is exclusive ended with 0:00 of the next day + specified offset in hours.
-  class func fetchConsumptionsForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext?) -> [Consumption] {
+  public class func fetchConsumptionsForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext?) -> [Consumption] {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
     let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
     return fetchConsumptions(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
   }
 
-  enum GroupingCalendarUnit {
-    case Day, Month, Year
+  public enum GroupingCalendarUnit {
+    case Day
+    case Month
+    case Year
     
     func getCalendarUnit() -> NSCalendarUnit {
       switch self {
@@ -72,21 +80,24 @@ public class Consumption: NSManagedObject, NamedEntity {
     }
   }
   
+  public enum AggregateFunction {
+    case Average
+    case Summary
+  }
+  
   /// Fetches water intake for specified time period grouping results by specified calendar unit
-  class func fetchGroupedWaterIntake(beginDate beginDateRaw: NSDate, endDate endDateRaw: NSDate, dayOffsetInHours: Int, groupingUnit: GroupingCalendarUnit, var computeAverageAmounts: Bool, managedObjectContext: NSManagedObjectContext?) -> [Double] {
+  public class func fetchGroupedWaterIntake(beginDate beginDateRaw: NSDate, endDate endDateRaw: NSDate, dayOffsetInHours: Int, groupingUnit: GroupingCalendarUnit, aggregateFunction aggregateFunctionRaw: AggregateFunction, managedObjectContext: NSManagedObjectContext?) -> [Double] {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: beginDateRaw)
     let endDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: endDateRaw)
     
-    if endDate.compare(beginDate) == .OrderedAscending {
+    if endDate.isEarlierThan(beginDate) {
       return []
     }
     
     let consumptions = fetchConsumptions(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
 
-    // Skip useless grouping for days
-    if groupingUnit == .Day {
-      computeAverageAmounts = false
-    }
+    // It's just an optimization. Algorithm below already groups consumptions by days, so calculating the average is useless
+    let aggregateFunction: AggregateFunction = (groupingUnit == .Day) ? .Summary : aggregateFunctionRaw
     
     let deltaYears  = groupingUnit == .Year  ? 1 : 0
     let deltaMonths = groupingUnit == .Month ? 1 : 0
@@ -102,9 +113,9 @@ public class Consumption: NSManagedObject, NamedEntity {
     var daysInCalendarUnit = 0
     
     while true {
-      let currentDate = (nextDate == nil) ? beginDate : nextDate
+      let currentDate = nextDate ?? beginDate
       
-      if computeAverageAmounts {
+      if aggregateFunction == .Average {
         daysInCalendarUnit = calendar.rangeOfUnit(.CalendarUnitDay, inUnit: calendarUnit, forDate: currentDate).length
       }
 
@@ -118,16 +129,15 @@ public class Consumption: NSManagedObject, NamedEntity {
 
       for ; consumptionIndex < consumptions.count; consumptionIndex++ {
         let consumption = consumptions[consumptionIndex]
-        let waterIntake = consumption.amount.doubleValue * consumption.drink.waterPercent.doubleValue
         
         if !consumption.date.isEarlierThan(nextDate) {
           break
         }
         
-        waterIntakeForUnit += waterIntake
+        waterIntakeForUnit += consumption.waterIntake
       }
       
-      if computeAverageAmounts {
+      if aggregateFunction == .Average {
         waterIntakeForUnit /= Double(daysInCalendarUnit)
       }
       
@@ -138,7 +148,7 @@ public class Consumption: NSManagedObject, NamedEntity {
   }
   
   /// Deletes the consumption from Core Data
-  func deleteEntity(saveImmediately: Bool = true) {
+  public func deleteEntity(saveImmediately: Bool = true) {
     if let managedObjectContext = managedObjectContext {
       managedObjectContext.deleteObject(self)
       

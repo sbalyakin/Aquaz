@@ -12,16 +12,17 @@ import UIKit
 
 public class CoreDataPrePopulation {
   
-  public class func prePopulateCoreData(#model: String, managedObjectContext: NSManagedObjectContext) {
-    switch model {
-    case "Version 1.0":
-      prePopulateCoreDataVersion1_0(managedObjectContext: managedObjectContext)
-    default:
-      assert(false, "Unsupported Core Data Model version (\(model))")
+  public enum ModelVersion: String {
+     case Version1_0 = "Version 1.0"
+  }
+  
+  public class func prePopulateCoreData(#modelVersion: ModelVersion, managedObjectContext: NSManagedObjectContext, generateConsumptionsForTests: Bool = false, generateConsumptionRatesForTests: Bool = false) {
+    switch modelVersion {
+    case .Version1_0: prePopulateCoreDataVersion1_0(managedObjectContext: managedObjectContext)
     }
   }
   
-  private class func prePopulateCoreDataVersion1_0(#managedObjectContext: NSManagedObjectContext) {
+  private class func prePopulateCoreDataVersion1_0(#managedObjectContext: NSManagedObjectContext, generateConsumptionsForTests: Bool = false, generateConsumptionRatesForTests: Bool = false) {
     // Add drinks
     Drink.addEntity(index: Drink.DrinkType.Water.rawValue,   name: "Water",   waterPercent: 1.00, recentAmount: 250, managedObjectContext: managedObjectContext)
     Drink.addEntity(index: Drink.DrinkType.Coffee.rawValue,  name: "Coffee",  waterPercent: 0.98, recentAmount: 250, managedObjectContext: managedObjectContext)
@@ -38,7 +39,6 @@ public class CoreDataPrePopulation {
     Drink.addEntity(index: Drink.DrinkType.Wine.rawValue, name: "Wine", waterPercent: 0.80, recentAmount: 250, managedObjectContext: managedObjectContext)
     Drink.addEntity(index: Drink.DrinkType.StrongLiquor.rawValue, name: "StrongLiquor", waterPercent: 0.60, recentAmount: 250, managedObjectContext: managedObjectContext)
 
-    // Add preliminary consumption rate for today
     ConsumptionRate.addEntity(
       date: DateHelper.dateByClearingTime(ofDate: NSDate()),
       baseRateAmount: Settings.sharedInstance.userDailyWaterIntake.value,
@@ -46,9 +46,13 @@ public class CoreDataPrePopulation {
       highActivityFraction: 0,
       managedObjectContext: managedObjectContext)
     
-    // TODO: Only for development
-    generateConsumptions(managedObjectContext: managedObjectContext)
-    generateConsumptionRates(managedObjectContext: managedObjectContext)
+    if generateConsumptionsForTests {
+      generateConsumptions(managedObjectContext: managedObjectContext)
+    }
+    
+    if generateConsumptionRatesForTests {
+      generateConsumptionRates(managedObjectContext: managedObjectContext)
+    }
   }
   
   private class func generateConsumptions(#managedObjectContext: NSManagedObjectContext) {

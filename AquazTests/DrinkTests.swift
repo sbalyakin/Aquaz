@@ -13,15 +13,9 @@ import Aquaz
 
 class DrinkTests: XCTestCase {
 
-  override class func setUp() {
-    super.setUp()
-    setupManagedContext()
-    prePopulateCoreData2()
-  }
-  
   func testGetDrinkByIndex() {
     for drinkIndex in 0..<Drink.getDrinksCount() {
-      if let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: DrinkTests.managedObjectContext) {
+      if let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: managedObjectContext) {
         XCTAssert(drink.index == drinkIndex, "Wrong drink is get for index \(drinkIndex)")
       } else {
         XCTFail("Failed to get drink by index \(drinkIndex)")
@@ -32,7 +26,7 @@ class DrinkTests: XCTestCase {
   func testGetDrinkByType() {
     for drinkIndex in 0..<Drink.getDrinksCount() {
       if let drinkType = Drink.DrinkType(rawValue: drinkIndex) {
-        if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: DrinkTests.managedObjectContext) {
+        if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
           XCTAssert(drink.drinkType == drinkType, "Wrong drink is get for type with index \(drinkType.rawValue)")
         } else {
           XCTFail("Failed to get drink by type with index \(drinkType.rawValue)")
@@ -47,7 +41,7 @@ class DrinkTests: XCTestCase {
     measureBlock() {
       for i in 0..<10000 {
         let drinkIndex = i % Drink.getDrinksCount()
-        let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: DrinkTests.managedObjectContext)
+        let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: managedObjectContext)
         XCTAssert(drink != nil, "Failed to get drink by index \(drinkIndex)")
       }
     }
@@ -62,7 +56,7 @@ class DrinkTests: XCTestCase {
       for dimension in 1...100 {
         let frame = CGRect(x: 0, y: 0, width: dimension, height: dimension)
         for drinkIndex in 0..<Drink.getDrinksCount() {
-          if let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: DrinkTests.managedObjectContext) {
+          if let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: self.managedObjectContext) {
             drink.drawDrink(frame: frame)
           }
         }
@@ -73,26 +67,10 @@ class DrinkTests: XCTestCase {
   }
   
   private func drawDrinkWithType(drinkType: Drink.DrinkType, frame: CGRect) {
-    let drink = Drink.getDrinkByType(drinkType, managedObjectContext: DrinkTests.managedObjectContext)
+    let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext)
     drink?.drawDrink(frame: frame)
   }
 
-  private static var managedObjectContext: NSManagedObjectContext!
-  
-  private class func setupManagedContext() {
-    let model = NSManagedObjectModel.mergedModelFromBundles(nil)
-    XCTAssert(model != nil, "Failed to create managed object model")
-    
-    let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model!)
-    let store = coordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil, error: nil)
-    XCTAssert(store != nil, "Failed to create persistent store")
-    
-    managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-    managedObjectContext.persistentStoreCoordinator = coordinator
-  }
-  
-  private class func prePopulateCoreData2() {
-    CoreDataPrePopulation.prePopulateCoreData(model: "Version 1.0", managedObjectContext: DrinkTests.managedObjectContext)
-  }
+  private var managedObjectContext = CoreDataHelper.sharedInstance.managedObjectContext
 
 }

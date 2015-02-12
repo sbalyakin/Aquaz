@@ -18,6 +18,8 @@
 		841B13BE1A31FE4F00249426 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B13BD1A31FE4F00249426 /* UIHelper.swift */; };
 		8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA001A0A7009009C5C47 /* DiaryViewController.swift */; };
 		8424AA061A0B5813009C5C47 /* MultiProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA051A0B5813009C5C47 /* MultiProgressView.swift */; };
+		842C0EE91A8CCD7300F8264D /* ConsumptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C0EE81A8CCD7300F8264D /* ConsumptionTests.swift */; };
+		842C0EEB1A8CCDA700F8264D /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C0EEA1A8CCDA700F8264D /* CoreDataHelper.swift */; };
 		84380C2819E4195A0026398E /* Consumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2719E4195A0026398E /* Consumption.swift */; };
 		84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2919E4195A0026398E /* RecentAmount.swift */; };
 		84380C2C19E4195A0026398E /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2B19E4195A0026398E /* Drink.swift */; };
@@ -108,6 +110,8 @@
 		841B13BD1A31FE4F00249426 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		8424AA001A0A7009009C5C47 /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		8424AA051A0B5813009C5C47 /* MultiProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiProgressView.swift; path = Controls/MultiProgressView.swift; sourceTree = "<group>"; };
+		842C0EE81A8CCD7300F8264D /* ConsumptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConsumptionTests.swift; path = AquazTests/ConsumptionTests.swift; sourceTree = SOURCE_ROOT; };
+		842C0EEA1A8CCDA700F8264D /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		84380C2719E4195A0026398E /* Consumption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consumption.swift; sourceTree = "<group>"; };
 		84380C2919E4195A0026398E /* RecentAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentAmount.swift; sourceTree = "<group>"; };
 		84380C2B19E4195A0026398E /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
@@ -339,9 +343,11 @@
 		84669A8419DAD78D003C2263 /* AquazTests */ = {
 			isa = PBXGroup;
 			children = (
+				84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */,
+				842C0EE81A8CCD7300F8264D /* ConsumptionTests.swift */,
 				847D0E201A823CB300966538 /* SettingsTests.swift */,
 				84ED8A201A84C8660042BAF2 /* UnitsTests.swift */,
-				84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */,
+				842C0EEA1A8CCDA700F8264D /* CoreDataHelper.swift */,
 				84669A8519DAD78D003C2263 /* Supporting Files */,
 			);
 			path = AquazTests;
@@ -566,9 +572,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				842C0EEB1A8CCDA700F8264D /* CoreDataHelper.swift in Sources */,
 				84ED8A231A84ED9E0042BAF2 /* DrinkTests.swift in Sources */,
 				84ED8A211A84C8660042BAF2 /* UnitsTests.swift in Sources */,
 				847D0E211A823CB300966538 /* SettingsTests.swift in Sources */,
+				842C0EE91A8CCD7300F8264D /* ConsumptionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

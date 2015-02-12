@@ -8,12 +8,11 @@
 
 import Foundation
 import CoreData
-import UIKit
 
-class ModelHelper {
+public class ModelHelper {
 
   /// Fetches managed objects from Core Data taking into account specified predicate and sort descriptors
-  class func fetchManagedObjects<EntityType: NSManagedObject where EntityType: NamedEntity>(#managedObjectContext: NSManagedObjectContext?, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil, limit: Int? = nil) -> [EntityType] {
+  public class func fetchManagedObjects<EntityType: NSManagedObject where EntityType: NamedEntity>(#managedObjectContext: NSManagedObjectContext?, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil, limit: Int? = nil) -> [EntityType] {
     if let managedObjectContext = managedObjectContext {
       if let entityDescription = NSEntityDescription.entityForName(EntityType.entityName, inManagedObjectContext: managedObjectContext) {
         let fetchRequest = NSFetchRequest()
@@ -42,13 +41,13 @@ class ModelHelper {
   }
   
   /// Fetches a managed object from Core Data taking into account specified predicate and sort descriptors
-  class func fetchManagedObject<EntityType: NSManagedObject where EntityType: NamedEntity>
+  public class func fetchManagedObject<EntityType: NSManagedObject where EntityType: NamedEntity>
     (#managedObjectContext: NSManagedObjectContext?, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> EntityType? {
     let entities: [EntityType] = fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: sortDescriptors, limit: 1)
     return entities.first
   }
   
-  class func save(#managedObjectContext: NSManagedObjectContext?) {
+  public class func save(#managedObjectContext: NSManagedObjectContext?) {
     var error: NSError?
     if let managedObjectContext = managedObjectContext {
       if !managedObjectContext.save(&error) {
@@ -59,7 +58,7 @@ class ModelHelper {
     }
   }
   
-  // Hide initializer, clients should use sharedInstance property to get instance of ModelHelper
+  // Hide initializer, clients should use only class function of the class
   private init() {
   }
   
