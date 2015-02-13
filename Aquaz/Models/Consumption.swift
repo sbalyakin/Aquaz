@@ -50,7 +50,23 @@ public class Consumption: NSManagedObject, NamedEntity {
     }
   }
 
-  /// Fetches all consumptions for the specified date interval [date, toDate)
+  /// Deletes the consumption from Core Data
+  public func deleteEntity(saveImmediately: Bool = true) {
+    if let managedObjectContext = managedObjectContext {
+      managedObjectContext.deleteObject(self)
+      
+      if saveImmediately {
+        var error: NSError?
+        if !managedObjectContext.save(&error) {
+          NSLog("Failed to delete consumption. Error: \(error?.localizedDescription ?? String())")
+        }
+      }
+    } else {
+      assert(false)
+    }
+  }
+  
+  /// Fetches all consumptions for the specified date interval (beginDate..<endDate)
   public class func fetchConsumptions(#beginDate: NSDate, endDate: NSDate, managedObjectContext: NSManagedObjectContext?) -> [Consumption] {
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
     let descriptor = NSSortDescriptor(key: "date", ascending: true)
@@ -83,8 +99,17 @@ public class Consumption: NSManagedObject, NamedEntity {
     case Summary
   }
   
-  /// Fetches water intake for specified time period grouping results by specified calendar unit
-  public class func fetchGroupedWaterIntake(beginDate beginDateRaw: NSDate, endDate endDateRaw: NSDate, dayOffsetInHours: Int, groupingUnit: GroupingCalendarUnit, aggregateFunction aggregateFunctionRaw: AggregateFunction, managedObjectContext: NSManagedObjectContext?) -> [Double] {
+  /// Fetches water intakes (taking water percent of drinks into account)
+  /// for specified time period (beginDate..<endDate) grouping results by specified calendar unit.
+  /// It's also possible to specify aggregate function for grouping.
+  /// Note: Average function calculates an average value taking into account ALL days in a specified calendar unit,
+  /// not only days with consumptions.
+  public class func fetchGroupedWaterIntake(beginDate beginDateRaw: NSDate,
+                                            endDate endDateRaw: NSDate,
+                                            dayOffsetInHours: Int,
+                                            groupingUnit: GroupingCalendarUnit,
+                                            aggregateFunction aggregateFunctionRaw: AggregateFunction,
+                                            managedObjectContext: NSManagedObjectContext?) -> [Double] {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: beginDateRaw)
     let endDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: endDateRaw)
     
@@ -94,7 +119,7 @@ public class Consumption: NSManagedObject, NamedEntity {
     
     let consumptions = fetchConsumptions(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
 
-    // It's just an optimization. Algorithm below already groups consumptions by days, so calculating the average is useless
+    // It's just an optimization. An algorithm below already groups consumptions by days, so calculating the average is useless
     let aggregateFunction: AggregateFunction = (groupingUnit == .Day) ? .Summary : aggregateFunctionRaw
     
     let deltaMonths = groupingUnit == .Month ? 1 : 0
@@ -142,22 +167,6 @@ public class Consumption: NSManagedObject, NamedEntity {
     }
     
     return groupedWaterIntakes
-  }
-  
-  /// Deletes the consumption from Core Data
-  public func deleteEntity(saveImmediately: Bool = true) {
-    if let managedObjectContext = managedObjectContext {
-      managedObjectContext.deleteObject(self)
-      
-      if saveImmediately {
-        var error: NSError?
-        if !managedObjectContext.save(&error) {
-          NSLog("Failed to delete consumption. Error: \(error?.localizedDescription ?? String())")
-        }
-      }
-    } else {
-      assert(false)
-    }
   }
   
 }
