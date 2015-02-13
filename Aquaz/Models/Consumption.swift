@@ -69,13 +69,11 @@ public class Consumption: NSManagedObject, NamedEntity {
   public enum GroupingCalendarUnit {
     case Day
     case Month
-    case Year
     
     func getCalendarUnit() -> NSCalendarUnit {
       switch self {
       case .Day  : return .CalendarUnitDay
       case .Month: return .CalendarUnitMonth
-      case .Year : return .CalendarUnitYear
       }
     }
   }
@@ -99,7 +97,6 @@ public class Consumption: NSManagedObject, NamedEntity {
     // It's just an optimization. Algorithm below already groups consumptions by days, so calculating the average is useless
     let aggregateFunction: AggregateFunction = (groupingUnit == .Day) ? .Summary : aggregateFunctionRaw
     
-    let deltaYears  = groupingUnit == .Year  ? 1 : 0
     let deltaMonths = groupingUnit == .Month ? 1 : 0
     let deltaDays   = groupingUnit == .Day   ? 1 : 0
     
@@ -119,7 +116,7 @@ public class Consumption: NSManagedObject, NamedEntity {
         daysInCalendarUnit = calendar.rangeOfUnit(.CalendarUnitDay, inUnit: calendarUnit, forDate: currentDate).length
       }
 
-      nextDate = DateHelper.addToDate(currentDate, years: deltaYears, months: deltaMonths, days: deltaDays)
+      nextDate = DateHelper.addToDate(currentDate, years: 0, months: deltaMonths, days: deltaDays)
       
       if nextDate.isLaterThan(endDate) {
         break
@@ -133,7 +130,7 @@ public class Consumption: NSManagedObject, NamedEntity {
         if !consumption.date.isEarlierThan(nextDate) {
           break
         }
-        
+
         waterIntakeForUnit += consumption.waterIntake
       }
       
