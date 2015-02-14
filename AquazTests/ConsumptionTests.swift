@@ -72,7 +72,7 @@ class ConsumptionTests: XCTestCase {
     XCTAssert(areEqual, "Fetched consumptions are not equal to generated consumption")
   }
   
-  func testFetchWaterIntakeGroupedByDays() {
+  func testFetchWaterIntakeGroupedByDaysRandom() {
     deleteAllConsumptions()
     
     let startDate = DateHelper.dateByClearingTime(ofDate: NSDate())
@@ -112,65 +112,130 @@ class ConsumptionTests: XCTestCase {
     XCTAssert(areArraysOfDoublesAreEqual(waterIntakes, fetchedWaterIntakes), "Wrong water intakes grouped by days are fetched")
   }
 
+  func testFetchWaterIntakeGroupedByDays() {
+    deleteAllConsumptions()
+    
+    // Add consumptions
+    var waterIntakes: [Double] = []
+    var waterIntake: Double
+    
+    typealias ConsumptionInfo = (textDate: String, drinkType: Drink.DrinkType, amount: Double)
+    
+    func addGroupedConsumptions(consumptions: [ConsumptionInfo]) {
+      var waterIntake: Double = 0
+      for consumption in consumptions {
+        addConsumption(consumption.textDate, consumption.drinkType, consumption.amount, &waterIntake)
+      }
+      waterIntakes.append(waterIntake)
+    }
+    
+    // Out of check
+    addConsumption("01.01.2014 10:00:00", .Water, 1000)
+    addConsumption("01.01.2015 20:59:59", .Juice, 2000)
+    addConsumption("01.01.2015 23:59:59", .Coffee, 500)
+    
+    // 2 January
+    addGroupedConsumptions([
+      ("02.01.2015 00:00:00", .Beer, 1000),
+      ("02.01.2015 16:59:59", .Milk, 1000),
+      ("02.01.2015 23:59:59", .Tea,  200)])
+
+
+    // 3 January - no consumptions
+    addGroupedConsumptions([])
+    
+    // 4 January
+    addGroupedConsumptions([
+      ("04.01.2015 00:00:00", .Soda,  1000),
+      ("04.01.2015 12:00:00", .Water, 1000),
+      ("04.01.2015 23:59:58", .Milk,  200)])
+    
+    // 5 January
+    addGroupedConsumptions([
+      ("05.01.2015 01:00:01", .Beer,         1000),
+      ("05.01.2015 15:15:14", .Wine,         1000),
+      ("05.01.2015 20:00:10", .StrongLiquor, 2000)])
+    
+    // Out of check
+    addConsumption("06.01.2015 00:00:00", .Water, 1000)
+    addConsumption("05.01.2016 00:00:00", .Juice, 2000)
+    
+    
+    // Fetch grouped consumptions and check
+    let beginDate = dateFromString("02.01.2015")
+    let endDate = dateFromString("06.01.2015")
+    let fetchedWaterIntakes = Consumption.fetchGroupedWaterIntake(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Summary, managedObjectContext: managedObjectContext)
+    
+    // It's wrong to compare arrays of doubles in a standard way because doubles values
+    // calculated as a result of the same arithmetical operation
+    // can have slightly different values (observed in unsignificant last decimals)
+    // depending on order of these operations in a particular case.
+    // Taking this into account, arrays of doubles are compared using a special function.
+    XCTAssert(areArraysOfDoublesAreEqual(waterIntakes, fetchedWaterIntakes), "Fetching for water intakes grouped by days works unproperly")
+  }
+
   func testFetchWaterIntakeGroupedByMonts() {
     deleteAllConsumptions()
 
     // Add consumptions
-    
-    // Out of check
-    addConsumption(textDate: "01.01.2015", drinkType: .Water, amount: 1000)
-    addConsumption(textDate: "03.01.2015", drinkType: .Juice, amount: 2000)
-    addConsumption(textDate: "05.01.2015", drinkType: .Coffee, amount: 500)
-    
-    // For check
     var waterIntakes: [Double] = []
     var waterIntakesAverage: [Double] = []
+    var waterIntake: Double
+    
+    typealias ConsumptionInfo = (textDate: String, drinkType: Drink.DrinkType, amount: Double)
+    
+    func addGroupedConsumptions(daysInMonth: Int, consumptions: [ConsumptionInfo]) {
+      var waterIntake: Double = 0
+      for consumption in consumptions {
+        addConsumption(consumption.textDate, consumption.drinkType, consumption.amount, &waterIntake)
+      }
+      waterIntakes.append(waterIntake)
+      waterIntakesAverage.append(waterIntake / Double(daysInMonth))
+    }
+    
+    // Out of check
+    addConsumption("01.01.2015", .Water, 1000)
+    addConsumption("03.01.2015", .Juice, 2000)
+    addConsumption("05.01.2015", .Coffee, 500)
     
     // February
-    waterIntakes.append(0)
-    addConsumption(textDate: "01.02.2015", drinkType: .Water,  amount: 1000, waterIntake: &waterIntakes[waterIntakes.count - 1])
-    addConsumption(textDate: "01.02.2015", drinkType: .Water,  amount: 1000, waterIntake: &waterIntakes[waterIntakes.count - 1])
-    addConsumption(textDate: "03.02.2015", drinkType: .Juice,  amount: 2000, waterIntake: &waterIntakes[waterIntakes.count - 1])
-    addConsumption(textDate: "05.02.2015", drinkType: .Coffee, amount: 500,  waterIntake: &waterIntakes[waterIntakes.count - 1])
-    addConsumption(textDate: "28.02.2015", drinkType: .Tea,    amount: 200,  waterIntake: &waterIntakes[waterIntakes.count - 1])
-    let daysInFebruary2015: Double = 28
-    waterIntakesAverage.append(waterIntakes.last! / daysInFebruary2015)
+    addGroupedConsumptions(28, [
+      ("01.02.2015", .Water,  1000),
+      ("01.02.2015", .Water,  1000),
+      ("03.02.2015", .Juice,  2000),
+      ("05.02.2015", .Coffee, 500),
+      ("28.02.2015", .Tea,    200)])
 
     // March - no consumptions
-    waterIntakes.append(0)
-    waterIntakesAverage.append(0)
+    addGroupedConsumptions(31, [])
    
     // April
-    waterIntakes.append(0)
-    addConsumption(textDate: "01.04.2015", drinkType: .Water, amount: 1000, waterIntake: &waterIntakes[waterIntakes.count - 1])
-    addConsumption(textDate: "01.04.2015", drinkType: .Water, amount: 1000, waterIntake: &waterIntakes[waterIntakes.count - 1])
-    addConsumption(textDate: "03.04.2015", drinkType: .Juice, amount: 2000, waterIntake: &waterIntakes[waterIntakes.count - 1])
-    addConsumption(textDate: "15.04.2015", drinkType: .Sport, amount: 500,  waterIntake: &waterIntakes[waterIntakes.count - 1])
-    addConsumption(textDate: "30.04.2015", drinkType: .Milk,  amount: 200,  waterIntake: &waterIntakes[waterIntakes.count - 1])
-    let daysInApril: Double = 30
-    waterIntakesAverage.append(waterIntakes.last! / daysInApril)
+    addGroupedConsumptions(30, [
+      ("01.04.2015", .Water, 1000),
+      ("01.04.2015", .Water, 1000),
+      ("03.04.2015", .Juice, 2000),
+      ("15.04.2015", .Sport, 500),
+      ("30.04.2015", .Milk,  200)])
 
     // May
-    waterIntakes.append(0)
-    addConsumption(textDate: "10.05.2015", drinkType: .Beer,         amount: 1000, waterIntake: &waterIntakes[waterIntakes.count - 1])
-    addConsumption(textDate: "01.05.2015", drinkType: .Wine,         amount: 1000, waterIntake: &waterIntakes[waterIntakes.count - 1])
-    addConsumption(textDate: "03.05.2015", drinkType: .StrongLiquor, amount: 2000, waterIntake: &waterIntakes[waterIntakes.count - 1])
-    addConsumption(textDate: "15.05.2015", drinkType: .Energy,       amount: 500,  waterIntake: &waterIntakes[waterIntakes.count - 1])
-    addConsumption(textDate: "30.05.2015", drinkType: .Soda,         amount: 200,  waterIntake: &waterIntakes[waterIntakes.count - 1])
-    let daysInMay: Double = 31
-    waterIntakesAverage.append(waterIntakes.last! / daysInMay)
+    addGroupedConsumptions(31, [
+      ("10.05.2015", .Beer,         1000),
+      ("01.05.2015", .Wine,         1000),
+      ("03.05.2015", .StrongLiquor, 2000),
+      ("15.05.2015", .Energy,       500),
+      ("30.05.2015", .Soda,         200)])
 
     // Out of check
-    addConsumption(textDate: "01.06.2015", drinkType: .Water, amount: 1000)
-    addConsumption(textDate: "03.07.2015", drinkType: .Juice, amount: 2000)
-    addConsumption(textDate: "05.08.2015", drinkType: .Coffee, amount: 500)
-    addConsumption(textDate: "01.09.2015", drinkType: .Water, amount: 1000)
-    addConsumption(textDate: "03.10.2015", drinkType: .Juice, amount: 2000)
-    addConsumption(textDate: "05.11.2015", drinkType: .Coffee, amount: 500)
-    addConsumption(textDate: "01.12.2015", drinkType: .Water, amount: 1000)
+    addConsumption("01.06.2015", .Water, 1000)
+    addConsumption("03.07.2015", .Juice, 2000)
+    addConsumption("05.08.2015", .Coffee, 500)
+    addConsumption("01.09.2015", .Water, 1000)
+    addConsumption("03.10.2015", .Juice, 2000)
+    addConsumption("05.11.2015", .Coffee, 500)
+    addConsumption("01.12.2015", .Water, 1000)
     
-    addConsumption(textDate: "03.07.2016", drinkType: .Juice, amount: 2000)
-    addConsumption(textDate: "05.08.2013", drinkType: .Coffee, amount: 500)
+    addConsumption("03.07.2016", .Juice, 2000)
+    addConsumption("05.08.2013", .Coffee, 500)
     
     
     // Fetch grouped consumptions and check
@@ -188,12 +253,12 @@ class ConsumptionTests: XCTestCase {
     XCTAssert(areArraysOfDoublesAreEqual(waterIntakesAverage, fetchedWaterIntakesAverage), "Fetching for average water intakes grouped by days works unproperly")
   }
 
-  private func addConsumption(#textDate: String, drinkType: Drink.DrinkType, amount: Double) -> Consumption {
+  private func addConsumption(textDate: String, _ drinkType: Drink.DrinkType, _ amount: Double) -> Consumption {
     var waterIntake: Double = 0
-    return addConsumption(textDate: textDate, drinkType: drinkType, amount: amount, waterIntake: &waterIntake)
+    return addConsumption(textDate, drinkType, amount, &waterIntake)
   }
 
-  private func addConsumption(#textDate: String, drinkType: Drink.DrinkType, amount: Double, inout waterIntake: Double) -> Consumption {
+  private func addConsumption(textDate: String, _ drinkType: Drink.DrinkType, _ amount: Double, inout _ waterIntake: Double) -> Consumption {
     let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext)!
     let date = dateFromString(textDate)
     let consumption = Consumption.addEntity(drink: drink, amount: amount, date: date, managedObjectContext: managedObjectContext, saveImmediately: true)!
@@ -205,7 +270,8 @@ class ConsumptionTests: XCTestCase {
   
   private func dateFromString(textDate: String) -> NSDate {
     let dateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = "dd.MM.yyyy"
+    let range = textDate.rangeOfString(":", options: .CaseInsensitiveSearch, range: nil, locale: nil)
+    dateFormatter.dateFormat = range == nil ? "dd.MM.yyyy" : "dd.MM.yyyy HH:mm:ss"
     let date = dateFormatter.dateFromString(textDate)!
     return date
   }
