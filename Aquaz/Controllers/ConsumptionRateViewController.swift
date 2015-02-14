@@ -280,13 +280,13 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
   }
 
   private func saveWaterIntakeToCoreData() {
-    let adjustedDate = DateHelper.dateByClearingTime(ofDate: NSDate())
-    if let consumptionRate = ConsumptionRate.fetchConsumptionRateStrictlyForDate(adjustedDate, managedObjectContext: managedObjectContext) {
+    let date = NSDate()
+    if let consumptionRate = ConsumptionRate.fetchConsumptionRateStrictlyForDate(date, managedObjectContext: managedObjectContext) {
       consumptionRate.baseRateAmount = waterIntake.value
       ModelHelper.save(managedObjectContext: managedObjectContext)
     } else {
       ConsumptionRate.addEntity(
-        date: adjustedDate,
+        date: date,
         baseRateAmount: waterIntake.value,
         hotDateFraction: 0,
         highActivityFraction: 0,
