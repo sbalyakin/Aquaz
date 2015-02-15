@@ -66,6 +66,7 @@
 		A598D5081A6558C100AA89CB /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5071A6558C100AA89CB /* StyleKit.swift */; };
 		A598D50A1A6559FB00AA89CB /* DrinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5091A6559FB00AA89CB /* DrinkView.swift */; };
 		A59CE8F41A8FC3CA00FDD2B2 /* ConsumptionRateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CE8F31A8FC3CA00FDD2B2 /* ConsumptionRateTests.swift */; };
+		A59CE8F61A9119A300FDD2B2 /* ConsumptionRateCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CE8F51A9119A300FDD2B2 /* ConsumptionRateCalculatorTests.swift */; };
 		A5A1681D1A6EA1330027711B /* DaySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A1681C1A6EA1330027711B /* DaySummaryView.swift */; };
 		A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */; };
 		A5AAA1D91A77A9CF008C3C56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */; };
@@ -166,6 +167,7 @@
 		A598D5071A6558C100AA89CB /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		A598D5091A6559FB00AA89CB /* DrinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkView.swift; path = Controls/DrinkView.swift; sourceTree = "<group>"; };
 		A59CE8F31A8FC3CA00FDD2B2 /* ConsumptionRateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionRateTests.swift; sourceTree = "<group>"; };
+		A59CE8F51A9119A300FDD2B2 /* ConsumptionRateCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionRateCalculatorTests.swift; sourceTree = "<group>"; };
 		A5A1681C1A6EA1330027711B /* DaySummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DaySummaryView.swift; path = Controls/DaySummaryView.swift; sourceTree = "<group>"; };
 		A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekStatisticsViewController.swift; sourceTree = "<group>"; };
 		A5AAA1D81A77A9CF008C3C56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */,
 				842C0EE81A8CCD7300F8264D /* ConsumptionTests.swift */,
 				A59CE8F31A8FC3CA00FDD2B2 /* ConsumptionRateTests.swift */,
+				A59CE8F51A9119A300FDD2B2 /* ConsumptionRateCalculatorTests.swift */,
 				847D0E201A823CB300966538 /* SettingsTests.swift */,
 				84ED8A201A84C8660042BAF2 /* UnitsTests.swift */,
 				842C0EEA1A8CCDA700F8264D /* CoreDataHelper.swift */,
@@ -581,6 +584,7 @@
 				847D0E211A823CB300966538 /* SettingsTests.swift in Sources */,
 				842C0EE91A8CCD7300F8264D /* ConsumptionTests.swift in Sources */,
 				A59CE8F41A8FC3CA00FDD2B2 /* ConsumptionRateTests.swift in Sources */,
+				A59CE8F61A9119A300FDD2B2 /* ConsumptionRateCalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

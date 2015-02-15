@@ -297,7 +297,7 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
   private func updateSourceCellInTable(cellInfo: CellInfoBase) {
     updateCellInTable(cellInfo)
     
-    let data = ConsumptionRateCalculatorData(physicalActivity: physicalActivity.value, gender: gender.value, age: age.value, height: height.value, weight: weight.value)
+    let data = ConsumptionRateCalculator.Data(physicalActivity: physicalActivity.value, gender: gender.value, age: age.value, height: height.value, weight: weight.value, country: .Average)
     
     let waterIntakeAmount = ConsumptionRateCalculator.calcDailyWaterIntake(data: data)
 

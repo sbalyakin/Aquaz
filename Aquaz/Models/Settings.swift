@@ -21,18 +21,36 @@ public class Settings {
     // Hide initizalizer, sharedInstance should be used instead.
   }
   
-  public enum Gender: Int {
+  public enum Gender: Int, Printable {
     case Man = 0
     case Woman
     case PregnantFemale
     case BreastfeedingFemale
+    
+    public var description: String {
+      switch self {
+      case .Man: return "Man"
+      case .Woman: return "Woman"
+      case .PregnantFemale: return "Pregnant Female"
+      case .BreastfeedingFemale: return "Breastfeeding Female"
+      }
+    }
   }
 
-  public enum PhysicalActivity: Int {
+  public enum PhysicalActivity: Int, Printable {
     case Rare = 0
     case Occasional
     case Weekly
     case Daily
+    
+    public var description: String {
+      switch self {
+      case .Rare: return "Rare"
+      case .Occasional: return "Occasional"
+      case .Weekly: return "Weekly"
+      case .Daily: return "Daily"
+      }
+    }
   }
   
   public enum StatisticsViewPage: Int {
@@ -128,9 +146,9 @@ public class Settings {
   private class func createUserDailyWaterIntakeSetting() -> SettingsOrdinalItem<Double> {
     let settings = sharedInstance
     
-    let consumptionRateCalculatorData = ConsumptionRateCalculatorData(physicalActivity: settings.userPhysicalActivity.value, gender: settings.userGender.value, age: settings.userAge.value, height: settings.userHeight.value, weight: settings.userWeight.value)
+    let data = ConsumptionRateCalculator.Data(physicalActivity: settings.userPhysicalActivity.value, gender: settings.userGender.value, age: settings.userAge.value, height: settings.userHeight.value, weight: settings.userWeight.value, country: .Average)
     
-    let dailyWaterIntake = ConsumptionRateCalculator.calcDailyWaterIntake(data: consumptionRateCalculatorData)
+    let dailyWaterIntake = ConsumptionRateCalculator.calcDailyWaterIntake(data: data)
     
     return SettingsOrdinalItem<Double>(key: "User - Daily water intake", initialValue: dailyWaterIntake)
   }

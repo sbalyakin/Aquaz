@@ -8,30 +8,91 @@
 
 import Foundation
 
-public struct ConsumptionRateCalculatorData {
-  let physicalActivity: Settings.PhysicalActivity
-  let gender: Settings.Gender
-  let age: Int
-  let height: Double
-  let weight: Double
-}
-
 // Based on calculator from http://www.h4hinitiative.com/
 
 public class ConsumptionRateCalculator {
+
+  public struct Data: Printable {
+    public let physicalActivity: Settings.PhysicalActivity
+    public let gender: Settings.Gender
+    public let age: Int
+    public let height: Double
+    public let weight: Double
+    public let country: Country
+    
+    // Unfortunately Swift 1.2 create only internal synthesised initializers, so it's necessary to create own public one
+    public init(physicalActivity: Settings.PhysicalActivity, gender: Settings.Gender, age: Int, height: Double, weight: Double, country: Country) {
+      self.physicalActivity = physicalActivity
+      self.gender = gender
+      self.age = age
+      self.height = height
+      self.weight = weight
+      self.country = country
+    }
+    
+    public var description: String {
+      return "Physical activity: \(physicalActivity), Gender: \(gender), Age: \(age), Height: \(height), Weight: \(weight), Country: \(country)"
+    }
+  }
   
-  public class func calcDailyWaterIntake(#data: ConsumptionRateCalculatorData) -> Double {
+  public enum Country: String, Printable {
+    case Argentina     = "argentina"
+    case Mexico        = "mexico"
+    case Brazil        = "brazil"
+    case Uruguay       = "uruguay"
+    case China         = "china"
+    case Indonesia     = "indonesia"
+    case Singapore     = "singapore"
+    case Dubai         = "dubai"
+    case Russia        = "russia"
+    case France        = "france"
+    case UnitedKingdom = "united kingdom"
+    case Spain         = "spain"
+    case Japan         = "japan"
+    case Germany       = "germany"
+    case Poland        = "poland"
+    case Turkey        = "turkey"
+    case Average       = "average"
+    
+    var waterFromFood: Double {
+      switch self {
+      case .Argentina:     return 623
+      case .Mexico:        return 557
+      case .Brazil:        return 470
+      case .Uruguay:       return 550
+      case .China:         return 1000
+      case .Indonesia:     return 468
+      case .Singapore:     return 533
+      case .Dubai:         return 711
+      case .Russia:        return 926
+      case .France:        return 840
+      case .UnitedKingdom: return 683
+      case .Spain:         return 794
+      case .Japan:         return 855
+      case .Germany:       return 780
+      case .Poland:        return 780
+      case .Turkey:        return 830
+      case .Average:       return 711
+      }
+    }
+    
+    public var description: String {
+      return self.rawValue
+    }
+  }
+
+  public class func calcDailyWaterIntake(#data: Data) -> Double {
     let lostWater = calcLostWater(data: data)
     let supplyWater = calcSupplyWater(data: data)
     return roundAmount(lostWater - supplyWater)
   }
   
-  public class func calcLostWater(#data: ConsumptionRateCalculatorData) -> Double {
+  public class func calcLostWater(#data: Data) -> Double {
     let netWaterLosses = calcNetWaterLosses(data: data, pregnancyAndLactation: true, waterInFood: false)
     return roundAmount(netWaterLosses)
   }
   
-  public class func calcSupplyWater(#data: ConsumptionRateCalculatorData) -> Double {
+  public class func calcSupplyWater(#data: Data) -> Double {
     let waterLossesWithNoFood = calcNetWaterLosses(data: data, pregnancyAndLactation: false, waterInFood: false)
     let waterLossesWithFood = calcNetWaterLosses(data: data, pregnancyAndLactation: false, waterInFood: true)
     return roundAmount(waterLossesWithNoFood - waterLossesWithFood)
@@ -41,7 +102,7 @@ public class ConsumptionRateCalculator {
     return round(amount / 100) * 100
   }
   
-  private class func calcNetWaterLosses(#data: ConsumptionRateCalculatorData, pregnancyAndLactation: Bool, waterInFood useWater: Bool) -> Double {
+  private class func calcNetWaterLosses(#data: Data, pregnancyAndLactation: Bool, waterInFood useWater: Bool) -> Double {
     let bodySurface = calcBodySurface(weight: data.weight, height: data.height)
     let caloryExpediture = calcCaloryExpendidure(physicalActivity: data.physicalActivity, weight: data.weight, gender: data.gender, age: data.age)
     let caloryExpeditureRare = calcCaloryExpendidure(physicalActivity: .Rare, weight: data.weight, gender: data.gender, age: data.age)
@@ -63,7 +124,7 @@ public class ConsumptionRateCalculator {
     }
     
     if useWater {
-      waterIntake -= calcWaterFromFood()
+      waterIntake -= data.country.waterFromFood
     }
     
     return waterIntake
@@ -127,10 +188,6 @@ public class ConsumptionRateCalculator {
   
   private class func calcGainMetabolicWater(#caloryExpediture: Double) -> Double {
     return 0.119 * caloryExpediture - 2.25
-  }
-  
-  private class func calcWaterFromFood() -> Double {
-    return 711
   }
   
 }
