@@ -297,21 +297,13 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
   private func updateSourceCellInTable(cellInfo: CellInfoBase) {
     updateCellInTable(cellInfo)
     
-    let data = gatherConsumptionRateCalculatorData()
-    let waterIntakeAmount = consumptionRateCalculator.calcDailyWaterIntake(data)
+    let data = ConsumptionRateCalculatorData(physicalActivity: physicalActivity.value, gender: gender.value, age: age.value, height: height.value, weight: weight.value)
+    
+    let waterIntakeAmount = ConsumptionRateCalculator.calcDailyWaterIntake(data: data)
 
     waterIntake.value = waterIntakeAmount
   }
   
-  private func gatherConsumptionRateCalculatorData() -> ConsumptionRateCalculatorData {
-    return ConsumptionRateCalculatorData(
-      physicalActivity: physicalActivity.value,
-      gender: gender.value,
-      age: age.value,
-      height: height.value,
-      weight: weight.value)
-  }
-
   private func updateCellInTable(cellInfo: CellInfoBase) {
     let selectedInfoPath = tableView.indexPathForSelectedRow()
     
@@ -428,15 +420,8 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
   private var cellsInfo: [[CellInfoBase]]!
   private var selectedCellInfo: CellInfoBase?
   
-  private let consumptionRateCalculator = ConsumptionRateCalculator()
-  
-  private var minimumAge: Int {
-    return consumptionRateCalculator.minimumAge
-  }
-  
-  private var maximumAge: Int {
-    return consumptionRateCalculator.maximumAge
-  }
+  private let minimumAge = 10
+  private let maximumAge = 100
   
   private var originalTableViewContentInset: UIEdgeInsets = UIEdgeInsetsZero
   

@@ -130,9 +130,7 @@ public class Settings {
     
     let consumptionRateCalculatorData = ConsumptionRateCalculatorData(physicalActivity: settings.userPhysicalActivity.value, gender: settings.userGender.value, age: settings.userAge.value, height: settings.userHeight.value, weight: settings.userWeight.value)
     
-    let consumptionRateCalculator = ConsumptionRateCalculator()
-    
-    let dailyWaterIntake = consumptionRateCalculator.calcDailyWaterIntake(consumptionRateCalculatorData)
+    let dailyWaterIntake = ConsumptionRateCalculator.calcDailyWaterIntake(data: consumptionRateCalculatorData)
     
     return SettingsOrdinalItem<Double>(key: "User - Daily water intake", initialValue: dailyWaterIntake)
   }
