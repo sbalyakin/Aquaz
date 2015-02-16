@@ -192,7 +192,11 @@ class WaterGoalViewController: StyledViewController, UITableViewDataSource, UITa
   }
   
   private func getTitleForAge(value: Int) -> String {
-    return "\(value)"
+    let formatter = NSNumberFormatter()
+    formatter.numberStyle = .DecimalStyle
+    formatter.maximumFractionDigits = 0
+    let title = formatter.stringFromNumber(value)!
+    return title
   }
   
   private func getTitleForGender(gender: Settings.Gender) -> String {

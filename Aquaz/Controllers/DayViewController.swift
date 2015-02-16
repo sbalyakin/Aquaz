@@ -464,8 +464,12 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     let intakeText: String
     
     if Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value {
-      let percents = Int(dailyWaterIntake / waterGoalAmount * 100)
-      intakeText = "\(percents)%"
+      let formatter = NSNumberFormatter()
+      formatter.numberStyle = .PercentStyle
+      formatter.maximumFractionDigits = 0
+      formatter.multiplier = 100
+      let drinkedPart = dailyWaterIntake / waterGoalAmount
+      intakeText = formatter.stringFromNumber(drinkedPart)!
     } else {
       intakeText = Units.sharedInstance.formatMetricAmountToText(
         metricAmount: dailyWaterIntake,
