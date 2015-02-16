@@ -19,6 +19,14 @@ class DiaryViewController: StyledViewController, UITableViewDataSource {
     tableView.backgroundColor = StyleKit.pageBackgroundColor
   }
   
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    if let selectedIndexPath = tableView.indexPathForSelectedRow() {
+      tableView.deselectRowAtIndexPath(selectedIndexPath, animated: false)
+    }
+  }
+  
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return intakes.count
   }

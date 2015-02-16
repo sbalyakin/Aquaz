@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7515.2" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7515.2" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7512"/>
     </dependencies>
@@ -140,12 +140,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="intakeButton" destination="9h2-YY-Qq4" id="rPX-6l-EDa"/>
-                        <outlet property="intakesMultiProgressView" destination="Ulp-MK-urk" id="1el-H8-1VO"/>
                         <outlet property="currentDayButton" destination="byd-yV-Sp4" id="WQn-rJ-p5C"/>
                         <outlet property="daySelectionBar" destination="I2p-iQ-qGP" id="3nx-qK-6yX"/>
                         <outlet property="highActivityButton" destination="Sw2-pb-ue3" id="QmV-6d-RdV"/>
                         <outlet property="hotDayButton" destination="Teo-xX-LXi" id="07o-8B-MXF"/>
+                        <outlet property="intakeButton" destination="9h2-YY-Qq4" id="rPX-6l-EDa"/>
+                        <outlet property="intakesMultiProgressView" destination="Ulp-MK-urk" id="1el-H8-1VO"/>
                         <outlet property="nextDayButton" destination="8dM-xv-rh9" id="IRn-l4-S59"/>
                         <outlet property="pageButton" destination="GKO-c9-CDb" id="UxO-im-4tz"/>
                         <outlet property="previousDayButton" destination="ruO-Mw-fgx" id="klE-Fy-Vuq"/>
@@ -1202,7 +1202,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Support Cell" id="Gpq-Yu-Hbh">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gpq-Yu-Hbh" id="PXk-hy-hk4">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
