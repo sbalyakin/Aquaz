@@ -17,7 +17,7 @@ public class Drink: NSManagedObject, NamedEntity {
   @NSManaged public var index: NSNumber
   @NSManaged public var name: String
   @NSManaged public var waterPercent: NSNumber
-  @NSManaged public var consumptions: NSSet
+  @NSManaged public var intakes: NSSet
   @NSManaged public var recentAmount: RecentAmount
 
   private struct Static {

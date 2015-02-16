@@ -10,7 +10,7 @@ import UIKit
 
 class MonthStatisticsDayButton: CalendarDayButton {
 
-  var consumptionFraction: Double = 0
+  var value: Double = 0
   var monthStatisticsView: MonthStatisticsView!
   
   override init() {
@@ -29,28 +29,28 @@ class MonthStatisticsDayButton: CalendarDayButton {
     super.drawRect(rect)
     
     if dayInfo.isCurrentMonth && !dayInfo.isFuture {
-      drawConsumption(rect: rect)
+      drawIntake(rect: rect)
     }
   }
   
   override func drawBackground(#rect: CGRect) {
     // Slightly reduce background circle size in order to prevent noticeable hard edges,
-    // produced by multiplying semi-translucent edges of background circle and consumption arcs.
+    // produced by multiplying semi-translucent edges of background circle and intake arcs.
     let adjustedRect = rect.rectByInsetting(dx: 0.2, dy: 0.2)
     super.drawBackground(rect: adjustedRect)
   }
   
-  private func drawConsumption(#rect: CGRect) {
-    if consumptionFraction < 1 {
-      drawCircleInRect(rect, strokeColor: monthStatisticsView.dayConsumptionBackgroundColor)
+  private func drawIntake(#rect: CGRect) {
+    if value < 1 {
+      drawCircleInRect(rect, strokeColor: monthStatisticsView.dayIntakeBackgroundColor)
       drawArcInRect(rect)
     } else {
-      drawCircleInRect(rect, strokeColor: monthStatisticsView.dayConsumptionFullColor)
+      drawCircleInRect(rect, strokeColor: monthStatisticsView.dayIntakeFullColor)
     }
   }
   
   private func drawCircleInRect(rect: CGRect, strokeColor: UIColor) {
-    let lineWidth = monthStatisticsView.dayConsumptionLineWidth
+    let lineWidth = monthStatisticsView.dayIntakeLineWidth
     let circlePath = UIBezierPath(ovalInRect: rect.rectByInsetting(dx: lineWidth / 2, dy: lineWidth / 2))
     circlePath.lineWidth = lineWidth
     circlePath.lineCapStyle = kCGLineCapRound
@@ -59,16 +59,16 @@ class MonthStatisticsDayButton: CalendarDayButton {
   }
   
   private func drawArcInRect(rect: CGRect) {
-    let lineWidth: CGFloat = monthStatisticsView.dayConsumptionLineWidth
+    let lineWidth: CGFloat = monthStatisticsView.dayIntakeLineWidth
     let centerPoint = CGPoint(x: rect.midX, y: rect.midY)
     let startAngle = CGFloat(-M_PI_2)
-    let endAngle = CGFloat(-M_PI_2 + M_PI * 2 * consumptionFraction)
+    let endAngle = CGFloat(-M_PI_2 + M_PI * 2 * value)
     let radius = rect.width / 2 - lineWidth / 2
     
     let arcPath = UIBezierPath(arcCenter: centerPoint, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
     arcPath.lineWidth = lineWidth
     arcPath.lineCapStyle = kCGLineCapRound
-    monthStatisticsView.dayConsumptionColor.setStroke()
+    monthStatisticsView.dayIntakeColor.setStroke()
     arcPath.stroke()
   }
   

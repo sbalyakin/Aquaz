@@ -1,50 +1,50 @@
-/* ConsumptionRateViewController: Table cell title for [Age] setting */
-"CRVC:Age" = "Возраст";
+/* WaterGoalViewController: Table cell title for [Age] setting */
+"WGVC:Age" = "Возраст";
 
-/* ConsumptionRateViewController: [Breastfeeding female] option for gender */
-"CRVC:Breastfeeding female" = "Кормящая мать";
+/* WaterGoalViewController: [Breastfeeding female] option for gender */
+"WGVC:Breastfeeding female" = "Кормящая мать";
 
-/* ConsumptionRateViewController: [Daily] option for physical activity */
-"CRVC:Daily" = "Ежедневно";
+/* WaterGoalViewController: [Daily] option for physical activity */
+"WGVC:Daily" = "Ежедневно";
 
-/* ConsumptionRateViewController: Table cell title for [Gender] setting */
-"CRVC:Gender" = "Пол";
+/* WaterGoalViewController: Table cell title for [Gender] setting */
+"WGVC:Gender" = "Пол";
 
-/* ConsumptionRateViewController: Table cell title for [Height] setting */
-"CRVC:Height" = "Рост";
+/* WaterGoalViewController: Table cell title for [Height] setting */
+"WGVC:Height" = "Рост";
 
-/* ConsumptionRateViewController: [Man] option for gender */
-"CRVC:Man" = "Мужчина";
+/* WaterGoalViewController: [Man] option for gender */
+"WGVC:Man" = "Мужчина";
 
-/* ConsumptionRateViewController: [Occasional] option for physical activity */
-"CRVC:Occasional" = "Иногда";
+/* WaterGoalViewController: [Occasional] option for physical activity */
+"WGVC:Occasional" = "Иногда";
 
-/* ConsumptionRateViewController: Table cell title for [Physical Activity] setting */
-"CRVC:Physical Activity" = "Физическая активность";
+/* WaterGoalViewController: Table cell title for [Physical Activity] setting */
+"WGVC:Physical Activity" = "Физическая активность";
 
-/* ConsumptionRateViewController: [Pregnant female] option for gender */
-"CRVC:Pregnant female" = "Беременная женщина";
+/* WaterGoalViewController: [Pregnant female] option for gender */
+"WGVC:Pregnant female" = "Беременная женщина";
 
-/* ConsumptionRateViewController: [Rare] option for physical activity */
-"CRVC:Rare" = "Редко";
+/* WaterGoalViewController: [Rare] option for physical activity */
+"WGVC:Rare" = "Редко";
 
-/* ConsumptionRateViewController: Table cell title for [Water Intake] setting */
-"CRVC:Water Intake" = "Потребление воды";
+/* WaterGoalViewController: Table cell title for [Water Intake] setting */
+"WGVC:Water Intake" = "Потребление воды";
 
-/* ConsumptionRateViewController: [Weekly] option for physical activity */
-"CRVC:Weekly" = "Еженедельно";
+/* WaterGoalViewController: [Weekly] option for physical activity */
+"WGVC:Weekly" = "Еженедельно";
 
-/* ConsumptionRateViewController: Table cell title for [Weight] setting */
-"CRVC:Weight" = "Вес";
+/* WaterGoalViewController: Table cell title for [Weight] setting */
+"WGVC:Weight" = "Вес";
 
-/* ConsumptionRateViewController: [Woman] option for gender */
-"CRVC:Woman" = "Женщина";
+/* WaterGoalViewController: [Woman] option for gender */
+"WGVC:Woman" = "Женщина";
 
-/* ConsumptionViewController: Title for Add button */
-"CVC:Add" = "Добавить";
+/* IntakeViewController: Title for Add button */
+"IVC:Add" = "Добавить";
 
-/* ConsumptionViewController: Title for Apply button */
-"CVC:Apply" = "Применить";
+/* IntakeViewController: Title for Apply button */
+"IVC:Apply" = "Применить";
 
 /* Drink: Title for alcohol */
 "D:Alcohol" = "Алкоголь";
@@ -73,7 +73,7 @@
 /* Drink: Title for water */
 "D:Water" = "Вода";
 
-/* DayViewController: Current consumption of recommended one */
+/* DayViewController: Current daily water intake of water intake goal */
 "DVC:%1$@ of %2$@" = "%1$@ из %2$@";
 
 /* NotificationsHelper: Text for alert body of notifications */

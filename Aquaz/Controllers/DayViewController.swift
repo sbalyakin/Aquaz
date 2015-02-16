@@ -31,8 +31,8 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   
   @IBOutlet weak var pageButton: UIBarButtonItem!
   @IBOutlet weak var summaryBar: UIView!
-  @IBOutlet weak var consumptionProgressView: MultiProgressView!
-  @IBOutlet weak var consumptionButton: UIButton!
+  @IBOutlet weak var intakesMultiProgressView: MultiProgressView!
+  @IBOutlet weak var intakeButton: UIButton!
   @IBOutlet weak var previousDayButton: UIButton!
   @IBOutlet weak var nextDayButton: UIButton!
   @IBOutlet weak var currentDayButton: UIButton!
@@ -61,9 +61,9 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
   }
   
-  private var overallConsumption: Double = 0.0 {
+  private var dailyWaterIntake: Double = 0.0 {
     didSet {
-      updateConsumptionButton()
+      updateIntakeButton()
     }
   }
   
@@ -148,12 +148,12 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
   
   private func setupMultiprogressControl() {
-    consumptionProgressView.borderColor = UIColor(red: 167/255, green: 169/255, blue: 171/255, alpha: 0.8)
-    consumptionProgressView.emptySectionColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1)
+    intakesMultiProgressView.borderColor = UIColor(red: 167/255, green: 169/255, blue: 171/255, alpha: 0.8)
+    intakesMultiProgressView.emptySectionColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1)
     
     for drinkIndex in 0..<Drink.getDrinksCount() {
       if let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: managedObjectContext) {
-        let section = consumptionProgressView.addSection(color: drink.mainColor)
+        let section = intakesMultiProgressView.addSection(color: drink.mainColor)
         multiProgressSections[drink] = section
       }
     }
@@ -178,7 +178,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     selectDrinkViewController.dayViewController = self
     pages.append(selectDrinkViewController)
     
-    // Add consumptions diary view controller
+    // Add intakes diary view controller
     diaryViewController = storyboard?.instantiateViewControllerWithIdentifier("DiaryViewController") as? DiaryViewController
     assert(diaryViewController != nil)
     
@@ -234,18 +234,18 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
   
   @IBAction func toggleHighActivityMode(sender: AnyObject) {
-    if consumptionHighActivityFraction > 0 {
-      consumptionHighActivityFraction = 0
+    if highActivityExtraFactor > 0 {
+      highActivityExtraFactor = 0
     } else {
-      consumptionHighActivityFraction = Settings.sharedInstance.generalExtraConsumptionHighActivity.value
+      highActivityExtraFactor = Settings.sharedInstance.generalHighActivityExtraFactor.value
     }
   }
   
   @IBAction func toggleHotDayMode(sender: AnyObject) {
-    if consumptionHotDayFraction > 0 {
-      consumptionHotDayFraction = 0
+    if hotDayExtraFactor > 0 {
+      hotDayExtraFactor = 0
     } else {
-      consumptionHotDayFraction = Settings.sharedInstance.generalExtraConsumptionHot.value
+      hotDayExtraFactor = Settings.sharedInstance.generalHotDayExtraFactor.value
     }
   }
   
@@ -319,54 +319,56 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
   }
   
-  // MARK: Consumptions management -
+  // MARK: Intakes management -
   
-  private func fetchConsumptionRate() {
-    consumptionRate = ConsumptionRate.fetchConsumptionRateForDate(currentDate, managedObjectContext: managedObjectContext)
+  private func fetchWaterGoal() {
+    waterGoal = WaterGoal.fetchWaterGoalForDate(currentDate, managedObjectContext: managedObjectContext)
     
-    if let consumptionRate = consumptionRate {
-      isConsumptionRateForCurrentDay = DateHelper.areDatesEqualByDays(date1: consumptionRate.date, date2: currentDate)
+    if let waterGoal = waterGoal {
+      isWaterGoalForCurrentDay = DateHelper.areDatesEqualByDays(date1: waterGoal.date, date2: currentDate)
     } else {
-      isConsumptionRateForCurrentDay = false
+      isWaterGoalForCurrentDay = false
     }
     
-    consumptionRateWasChanged()
+    waterGoalWasChanged()
   }
 
-  private func fetchConsumptions() {
+  private func fetchIntakes() {
     // TODO: Take day offset in hours from settings
-    consumptions = Consumption.fetchConsumptionsForDay(currentDate, dayOffsetInHours: 0, managedObjectContext: managedObjectContext)
+    intakes = Intake.fetchIntakesForDay(currentDate, dayOffsetInHours: 0, managedObjectContext: managedObjectContext)
 
-    consumptionsWereChanged(doSort: false) // Sort is useless, because consumption are fetched already sorted
+    intakesWereChanged(doSort: false) // Sort is useless, because fetched intakes are already sorted
   }
   
-  func addConsumption(consumption: Consumption) {
-    consumptions.append(consumption)
+  func addIntake(intake: Intake) {
+    intakes.append(intake)
     
-    sortConsumptions()
+    sortIntakes()
     
-    if let section = multiProgressSections[consumption.drink] {
-      section.factor += CGFloat(consumption.waterIntake)
+    if let section = multiProgressSections[intake.drink] {
+      section.factor += CGFloat(intake.waterAmount)
     }
 
-    let needCheckForWaterIntakeCompletion = overallConsumption < consumptionRateAmount
+    let needCheckForWaterIntakeCompletion = dailyWaterIntake < waterGoalAmount
     
-    overallConsumption += consumption.waterIntake
+    dailyWaterIntake += intake.waterAmount
     
-    diaryViewController.updateTable(consumptions)
+    diaryViewController.updateTable(intakes)
     
-    updateNotifications(consumptionDate: consumption.date)
+    updateNotifications(intakeDate: intake.date)
     
     if needCheckForWaterIntakeCompletion {
       checkForWaterIntakeCompletion()
     }
   }
   
-  private func sortConsumptions() {
-    consumptions.sort({ $0.date.isEarlierThan($1.date) })
+  private func sortIntakes() {
+    intakes.sort() {
+      $0.date.isEarlierThan($1.date)
+    }
   }
   
-  private func updateNotifications(#consumptionDate: NSDate) {
+  private func updateNotifications(#intakeDate: NSDate) {
     if !Settings.sharedInstance.notificationsEnabled.value {
       return
     }
@@ -376,13 +378,13 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
       return
     }
     
-    if Settings.sharedInstance.notificationsUseWaterIntake.value && overallConsumption >= consumptionRateAmount {
+    if Settings.sharedInstance.notificationsUseWaterIntake.value && dailyWaterIntake >= waterGoalAmount {
       NotificationsHelper.removeAllNotifications()
       
-      let nextDayDate = DateHelper.addToDate(consumptionDate, years: 0, months: 0, days: 1)
+      let nextDayDate = DateHelper.addToDate(intakeDate, years: 0, months: 0, days: 1)
       NotificationsHelper.scheduleNotificationsFromSettingsForDate(nextDayDate)
     } else {
-      NotificationsHelper.rescheduleNotificationsBecauseOfConsumption(consumptionDate: consumptionDate)
+      NotificationsHelper.rescheduleNotificationsBecauseOfIntake(intakeDate: intakeDate)
     }
   }
 
@@ -392,7 +394,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
       return
     }
     
-    if overallConsumption >= consumptionRateAmount {
+    if dailyWaterIntake >= waterGoalAmount {
       if let completeViewController = storyboard?.instantiateViewControllerWithIdentifier("CompleteViewController") as? CompleteViewController {
         parentViewController?.presentViewController(completeViewController, animated: true, completion: nil)
       } else {
@@ -401,109 +403,107 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
   }
 
-  func removeConsumption(consumption: Consumption) {
-    let index = find(consumptions, consumption)
+  func removeIntake(intake: Intake) {
+    let index = find(intakes, intake)
     if index == nil {
-      assert(false, "Removed consumption is not found")
+      assert(false, "Removed intake is not found")
       return
     }
     
-    consumptions.removeAtIndex(index!)
+    intakes.removeAtIndex(index!)
     
-    if let section = multiProgressSections[consumption.drink] {
-      section.factor -= CGFloat(consumption.waterIntake)
+    if let section = multiProgressSections[intake.drink] {
+      section.factor -= CGFloat(intake.waterAmount)
     }
 
-    overallConsumption -= consumption.waterIntake
+    dailyWaterIntake -= intake.waterAmount
     
-    diaryViewController.updateTable(consumptions)
+    diaryViewController.updateTable(intakes)
   }
   
-  func consumptionsWereChanged(#doSort: Bool) {
+  func intakesWereChanged(#doSort: Bool) {
     if doSort {
-      sortConsumptions()
+      sortIntakes()
     }
     
-    // Group consumptions by drinks
-    var consumptionsMap: [Drink: Double] = [:]
+    // Group intakes by drinks
+    var intakesMap: [Drink: Double] = [:]
     
-    for consumption in consumptions {
-      if let amount = consumptionsMap[consumption.drink] {
-        consumptionsMap[consumption.drink] = amount + Double(consumption.waterIntake)
+    for intake in intakes {
+      if let amount = intakesMap[intake.drink] {
+        intakesMap[intake.drink] = amount + Double(intake.waterAmount)
       } else {
-        consumptionsMap[consumption.drink] = Double(consumption.waterIntake)
+        intakesMap[intake.drink] = Double(intake.waterAmount)
       }
     }
     
     // Update diary page
-    diaryViewController.updateTable(consumptions)
+    diaryViewController.updateTable(intakes)
     
     // Clear all drink sections
     for (_, section) in multiProgressSections {
       section.factor = 0.0
     }
     
-    // Fill sections with fetched amounts and compute overall consumption
-    var overallAmount = 0.0
-    for (drink, amount) in consumptionsMap {
-      overallAmount += amount
+    // Fill sections with fetched intakes and compute daily water intake
+    dailyWaterIntake = 0.0
+    for (drink, amount) in intakesMap {
+      dailyWaterIntake += amount
       if let section = multiProgressSections[drink] {
         section.factor = CGFloat(amount)
       }
     }
-    
-    overallConsumption = overallAmount
   }
   
-  @IBAction func consumptionButtonWasTapped(sender: AnyObject) {
-    Settings.sharedInstance.uiDisplayDayConsumptionInPercents.value = !Settings.sharedInstance.uiDisplayDayConsumptionInPercents.value
-    updateConsumptionButton()
+  @IBAction func intakeButtonWasTapped(sender: AnyObject) {
+    Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value = !Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value
+    updateIntakeButton()
   }
   
-  private func updateConsumptionButton() {
-    var consumptionText: String
+  private func updateIntakeButton() {
+    let intakeText: String
     
-    if Settings.sharedInstance.uiDisplayDayConsumptionInPercents.value {
-      let percents = Int(overallConsumption / consumptionRateAmount * 100)
-      consumptionText = "\(percents)%"
+    if Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value {
+      let percents = Int(dailyWaterIntake / waterGoalAmount * 100)
+      intakeText = "\(percents)%"
     } else {
-      consumptionText = Units.sharedInstance.formatMetricAmountToText(
-        metricAmount: overallConsumption,
+      intakeText = Units.sharedInstance.formatMetricAmountToText(
+        metricAmount: dailyWaterIntake,
         unitType: .Volume,
         roundPrecision: amountPrecision,
         decimals: amountDecimals,
         displayUnits: false)
     }
     
-    let consumptionRateText = Units.sharedInstance.formatMetricAmountToText(
-      metricAmount: consumptionRateAmount,
+    let waterGoalText = Units.sharedInstance.formatMetricAmountToText(
+      metricAmount: waterGoalAmount,
       unitType: .Volume,
       roundPrecision: amountPrecision,
       decimals: amountDecimals)
     
-    let template = NSLocalizedString("DVC:%1$@ of %2$@", value: "%1$@ of %2$@", comment: "DayViewController: Current consumption of recommended one")
-    let text = NSString(format: template, consumptionText, consumptionRateText)
-    consumptionButton.setTitle(text as String, forState: .Normal)
+    let template = NSLocalizedString("DVC:%1$@ of %2$@", value: "%1$@ of %2$@", comment: "DayViewController: Current daily water intake of water intake goal")
+    let text = NSString(format: template, intakeText, waterGoalText)
+    intakeButton.setTitle(text as String, forState: .Normal)
   }
   
-  private func consumptionRateWasChanged() {
-    updateConsumptionButton()
+  private func waterGoalWasChanged() {
+    updateIntakeButton()
 
     // Update maximum for multi progress control
-    consumptionProgressView.maximum = CGFloat(consumptionRateAmount)
+    intakesMultiProgressView.maximum = CGFloat(waterGoalAmount)
 
-    highActivityButton.selected = consumptionHighActivityFraction > 0
-    hotDayButton.selected = consumptionHotDayFraction > 0
+    highActivityButton.selected = highActivityExtraFactor > 0
+    hotDayButton.selected = hotDayExtraFactor > 0
   }
   
-  private func saveConsumptionRateForCurrentDate(#baseRateAmount: Double, hotDayFraction: Double, highActivityFraction: Double) {
-    consumptionRate = ConsumptionRate.addEntity(
+  private func saveWaterGoalForCurrentDate(#baseAmount: Double, hotDayFactor: Double, highActivityFactor: Double) {
+    waterGoal = WaterGoal.addEntity(
       date: currentDate,
-      baseRateAmount: baseRateAmount,
-      hotDateFraction: hotDayFraction,
-      highActivityFraction: highActivityFraction,
+      baseAmount: baseAmount,
+      hotDayFactor: hotDayFactor,
+      highActivityFactor: highActivityFactor,
       managedObjectContext: managedObjectContext)
-    isConsumptionRateForCurrentDay = true
+    isWaterGoalForCurrentDay = true
   }
   
   // MARK: Date management -
@@ -516,65 +516,65 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     let daysTillToday = DateHelper.computeUnitsFrom(currentDate, toDate: NSDate(), unit: .CalendarUnitDay)
     nextDayButton.enabled = daysTillToday > 0
     
-    fetchConsumptionRate()
+    fetchWaterGoal()
     
-    fetchConsumptions()
+    fetchIntakes()
   }
   
   // MARK: Private properties -
   
-  private var consumptionRate: ConsumptionRate?
-  private var isConsumptionRateForCurrentDay: Bool = false
+  private var waterGoal: WaterGoal?
+  private var isWaterGoalForCurrentDay: Bool = false
 
-  private var consumptionBaseRateAmount: Double {
-    return consumptionRate?.baseRateAmount.doubleValue ?? Settings.sharedInstance.userDailyWaterIntake.value
+  private var waterGoalBaseAmount: Double {
+    return waterGoal?.baseAmount.doubleValue ?? Settings.sharedInstance.userWaterGoal.value
   }
   
-  private var consumptionRateAmount: Double {
-    return consumptionBaseRateAmount * (1 + consumptionHotDayFraction + consumptionHighActivityFraction)
+  private var waterGoalAmount: Double {
+    return waterGoalBaseAmount * (1 + hotDayExtraFactor + highActivityExtraFactor)
   }
   
-  private var consumptionHotDayFraction: Double {
+  private var hotDayExtraFactor: Double {
     get {
-      if !isConsumptionRateForCurrentDay {
+      if !isWaterGoalForCurrentDay {
         return 0
       }
       
-      return consumptionRate?.hotDayFraction.doubleValue ?? 0
+      return waterGoal?.hotDayFactor.doubleValue ?? 0
     }
-    set(newHotDayFraction) {
-      if !isConsumptionRateForCurrentDay {
-        saveConsumptionRateForCurrentDate(baseRateAmount: consumptionBaseRateAmount, hotDayFraction: newHotDayFraction, highActivityFraction: 0)
-      } else if let consumptionRate = consumptionRate {
-        consumptionRate.hotDayFraction = newHotDayFraction
+    set(newHotDayFactor) {
+      if !isWaterGoalForCurrentDay {
+        saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, hotDayFactor: newHotDayFactor, highActivityFactor: 0)
+      } else if let waterGoal = waterGoal {
+        waterGoal.hotDayFactor = newHotDayFactor
         ModelHelper.save(managedObjectContext: managedObjectContext)
       }
 
-      consumptionRateWasChanged()
+      waterGoalWasChanged()
     }
   }
   
-  private var consumptionHighActivityFraction: Double {
+  private var highActivityExtraFactor: Double {
     get {
-      if !isConsumptionRateForCurrentDay {
+      if !isWaterGoalForCurrentDay {
         return 0
       }
 
-      return consumptionRate?.highActivityFraction.doubleValue ?? 0
+      return waterGoal?.highActivityFactor.doubleValue ?? 0
     }
-    set(newHighActivityFraction) {
-      if !isConsumptionRateForCurrentDay {
-        saveConsumptionRateForCurrentDate(baseRateAmount: consumptionBaseRateAmount, hotDayFraction: 0, highActivityFraction: newHighActivityFraction)
-      } else if let consumptionRate = consumptionRate {
-        consumptionRate.highActivityFraction = newHighActivityFraction
+    set(newHighActivityFactor) {
+      if !isWaterGoalForCurrentDay {
+        saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, hotDayFactor: 0, highActivityFactor: newHighActivityFactor)
+      } else if let waterGoal = waterGoal {
+        waterGoal.highActivityFactor = newHighActivityFactor
         ModelHelper.save(managedObjectContext: managedObjectContext)
       }
 
-      consumptionRateWasChanged()
+      waterGoalWasChanged()
     }
   }
   
-  private var consumptions: [Consumption] = []
+  private var intakes: [Intake] = []
   private var multiProgressSections: [Drink: MultiProgressView.Section] = [:]
   
   private var pageViewController: UIPageViewController!

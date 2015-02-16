@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="Version 1.0" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7517.1" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Consumption" representedClassName="Aquaz.Consumption" syncable="YES">
-        <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="drink" maxCount="1" deletionRule="Nullify" destinationEntity="Drink" inverseName="consumptions" inverseEntity="Drink" syncable="YES"/>
-    </entity>
-    <entity name="ConsumptionRate" representedClassName="Aquaz.ConsumptionRate" syncable="YES">
-        <attribute name="baseRateAmount" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="highActivityFraction" attributeType="Double" defaultValueString="0" syncable="YES"/>
-        <attribute name="hotDayFraction" attributeType="Double" defaultValueString="0" syncable="YES"/>
-    </entity>
+<model userDefinedModelVersionIdentifier="Version 1.0" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7517.1" systemVersion="14A389" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Drink" representedClassName="Aquaz.Drink" syncable="YES">
         <attribute name="index" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="waterPercent" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="consumptions" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Consumption" inverseName="drink" inverseEntity="Consumption" syncable="YES"/>
+        <relationship name="intakes" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Intake" inverseName="drink" inverseEntity="Intake" syncable="YES"/>
         <relationship name="recentAmount" optional="YES" maxCount="1" deletionRule="Deny" destinationEntity="RecentAmount" inverseName="drink" inverseEntity="RecentAmount" syncable="YES"/>
+    </entity>
+    <entity name="Intake" representedClassName="Aquaz.Intake" syncable="YES">
+        <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="drink" maxCount="1" deletionRule="Nullify" destinationEntity="Drink" inverseName="intakes" inverseEntity="Drink" syncable="YES"/>
     </entity>
     <entity name="RecentAmount" representedClassName="Aquaz.RecentAmount" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="drink" maxCount="1" deletionRule="Nullify" destinationEntity="Drink" inverseName="recentAmount" inverseEntity="Drink" syncable="YES"/>
     </entity>
+    <entity name="WaterGoal" representedClassName="Aquaz.WaterGoal" syncable="YES">
+        <attribute name="baseAmount" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="highActivityFactor" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="hotDayFactor" attributeType="Double" defaultValueString="0" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Consumption" positionX="-36" positionY="27" width="128" height="90"/>
-        <element name="ConsumptionRate" positionX="-18" positionY="45" width="128" height="105"/>
+        <element name="Intake" positionX="-36" positionY="27" width="128" height="90"/>
+        <element name="WaterGoal" positionX="-18" positionY="45" width="128" height="105"/>
         <element name="Drink" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="RecentAmount" positionX="-54" positionY="18" width="128" height="75"/>
     </elements>

@@ -69,19 +69,19 @@ class NotificationsHelper {
     }
   }
   
-  class func rescheduleNotificationsBecauseOfConsumption(#consumptionDate: NSDate) {
+  class func rescheduleNotificationsBecauseOfIntake(#intakeDate: NSDate) {
     removeAllNotifications()
     
     // Schedule all notifications from the next day
-    let nextDayDate = DateHelper.addToDate(consumptionDate, years: 0, months: 0, days: 1)
+    let nextDayDate = DateHelper.addToDate(intakeDate, years: 0, months: 0, days: 1)
     scheduleNotificationsFromSettingsForDate(nextDayDate)
     
-    // Schedule one-time notifications from the consumption time
+    // Schedule one-time notifications from time of the intake
     let toTime = Settings.sharedInstance.notificationsTo.value
-    let toDate = DateHelper.dateByJoiningDateTime(datePart: consumptionDate, timePart: toTime)
+    let toDate = DateHelper.dateByJoiningDateTime(datePart: intakeDate, timePart: toTime)
     let interval = Settings.sharedInstance.notificationsInterval.value
     
-    for var fireDate = consumptionDate; !fireDate.isLaterThan(toDate); fireDate = fireDate.dateByAddingTimeInterval(interval) {
+    for var fireDate = intakeDate; !fireDate.isLaterThan(toDate); fireDate = fireDate.dateByAddingTimeInterval(interval) {
       scheduleNotification(fireDate: fireDate, repeatInterval: nil)
     }
   }

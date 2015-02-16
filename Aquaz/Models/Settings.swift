@@ -72,11 +72,11 @@ public class Settings {
   lazy var generalVolumeUnits = SettingsEnumItem(
     key: "General - Volume units", initialValue: Units.Volume.Millilitres)
   
-  lazy var generalExtraConsumptionHot = SettingsOrdinalItem<Double>(
-    key: "General - Extra consumption hot", initialValue: 0.5)
+  lazy var generalHotDayExtraFactor = SettingsOrdinalItem<Double>(
+    key: "General - Hot day extra factor", initialValue: 0.5)
   
-  lazy var generalExtraConsumptionHighActivity = SettingsOrdinalItem<Double>(
-    key: "General - Extra consumption high activity", initialValue: 0.5)
+  lazy var generalHighActivityExtraFactor = SettingsOrdinalItem<Double>(
+    key: "General - High activity extra factor", initialValue: 0.5)
   
   lazy var userHeight = SettingsOrdinalItem<Double>(
     key: "User - Height", initialValue: 170)
@@ -93,7 +93,7 @@ public class Settings {
   lazy var userAge = SettingsOrdinalItem<Int>(
     key: "User - Age", initialValue: 30)
   
-  lazy var userDailyWaterIntake = Settings.createUserDailyWaterIntakeSetting()
+  lazy var userWaterGoal = Settings.createUserDailyWaterIntakeSetting()
 
   lazy var uiUseCustomDateForDayView = SettingsOrdinalItem(
     key: "UI - Use custom day page date", initialValue: false)
@@ -101,8 +101,8 @@ public class Settings {
   lazy var uiCustomDateForDayView = SettingsOrdinalItem(
     key: "UI - Day page date", initialValue: NSDate())
 
-  lazy var uiDisplayDayConsumptionInPercents = SettingsOrdinalItem(
-    key: "UI - Display day consumption in percents", initialValue: false)
+  lazy var uiDisplayDailyWaterIntakeInPercents = SettingsOrdinalItem(
+    key: "UI - Display daily water intake in percents", initialValue: false)
 
   lazy var uiDisplayDaySelection = SettingsOrdinalItem(
     key: "UI - Display day selection", initialValue: false)
@@ -146,9 +146,9 @@ public class Settings {
   private class func createUserDailyWaterIntakeSetting() -> SettingsOrdinalItem<Double> {
     let settings = sharedInstance
     
-    let data = ConsumptionRateCalculator.Data(physicalActivity: settings.userPhysicalActivity.value, gender: settings.userGender.value, age: settings.userAge.value, height: settings.userHeight.value, weight: settings.userWeight.value, country: .Average)
+    let data = WaterGoalCalculator.Data(physicalActivity: settings.userPhysicalActivity.value, gender: settings.userGender.value, age: settings.userAge.value, height: settings.userHeight.value, weight: settings.userWeight.value, country: .Average)
     
-    let dailyWaterIntake = ConsumptionRateCalculator.calcDailyWaterIntake(data: data)
+    let dailyWaterIntake = WaterGoalCalculator.calcDailyWaterIntake(data: data)
     
     return SettingsOrdinalItem<Double>(key: "User - Daily water intake", initialValue: dailyWaterIntake)
   }

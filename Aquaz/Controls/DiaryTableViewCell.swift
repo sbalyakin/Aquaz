@@ -31,9 +31,9 @@ class DiaryTableViewCell: UITableViewCell {
   @IBOutlet weak var drinkLabel: UILabel!
   @IBOutlet weak var amountLabel: UILabel!
   
-  var consumption: Consumption! {
+  var intake: Intake! {
     didSet {
-      applyConsumption()
+      applyIntake()
     }
   }
   
@@ -89,19 +89,19 @@ class DiaryTableViewCell: UITableViewCell {
     return height
   }
   
-  private func applyConsumption() {
-    let drinkTitle = consumption.drink.localizedName
-    let amountTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: consumption.amount.doubleValue, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: false)
-    let waterTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: consumption.waterIntake, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: false)
+  private func applyIntake() {
+    let drinkTitle = intake.drink.localizedName
+    let amountTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intake.amount.doubleValue, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: false)
+    let waterTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intake.waterAmount, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: false)
     
     let formatter = NSDateFormatter()
     formatter.dateStyle = .NoStyle
     formatter.timeStyle = .ShortStyle
-    let timeTitle = formatter.stringFromDate(consumption.date)
+    let timeTitle = formatter.stringFromDate(intake.date)
 
     timeLabel.text = timeTitle
     drinkLabel.text = drinkTitle
-    drinkLabel.textColor = consumption.drink.darkColor
+    drinkLabel.textColor = intake.drink.darkColor
     
     let amountTitleAt = NSAttributedString(string: amountTitle, attributes: [
       NSForegroundColorAttributeName: amountLabel.textColor,

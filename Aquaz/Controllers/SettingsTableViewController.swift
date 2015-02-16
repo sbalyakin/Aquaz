@@ -50,7 +50,7 @@ class SettingsTableViewController: RevealedTableViewController {
   }
   
   private func updateWaterIntakeCell() {
-    let waterIntake = Settings.sharedInstance.userDailyWaterIntake.value
+    let waterIntake = Settings.sharedInstance.userWaterGoal.value
     let volumeUnit = Settings.sharedInstance.generalVolumeUnits.value
     let title = Units.sharedInstance.formatMetricAmountToText(metricAmount: waterIntake, unitType: .Volume, roundPrecision: volumeUnit.precision, decimals: volumeUnit.decimals, displayUnits: true)
     

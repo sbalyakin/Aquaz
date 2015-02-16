@@ -37,12 +37,12 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
   }
   
   private func setupGestureRecognizers() {
-    let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "handleConsumptionCellLongPress:")
+    let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "handleDrinkCellLongPress:")
     longPressGestureRecognizer.minimumPressDuration = 0.5
     longPressGestureRecognizer.cancelsTouchesInView = false
     collectionView.addGestureRecognizer(longPressGestureRecognizer)
     
-    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleConsumptionCellTap:")
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleDrinkCellTap:")
     tapGestureRecognizer.numberOfTapsRequired = 1
     collectionView.addGestureRecognizer(tapGestureRecognizer)
   }
@@ -54,18 +54,18 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     self.collectionView.reloadItemsAtIndexPaths([alcoholIndexPath])
 
     if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
-      if let consumptionViewController = storyboard?.instantiateViewControllerWithIdentifier("ConsumptionViewController") as? ConsumptionViewController {
-        consumptionViewController.drink = drink
-        consumptionViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
-        consumptionViewController.dayViewController = dayViewController
-        navigationController?.pushViewController(consumptionViewController, animated: true)
+      if let intakeViewController = storyboard?.instantiateViewControllerWithIdentifier("IntakeViewController") as? IntakeViewController {
+        intakeViewController.drink = drink
+        intakeViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
+        intakeViewController.dayViewController = dayViewController
+        navigationController?.pushViewController(intakeViewController, animated: true)
       } else {
         assert(false)
       }
     }
   }
   
-  func handleConsumptionCellLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
+  func handleDrinkCellLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
     switch gestureRecognizer.state {
     case .Began:
       handleLongPressBegin(gestureRecognizer)
@@ -107,7 +107,7 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     }
   }
   
-  func handleConsumptionCellTap(gestureRecognizer: UIGestureRecognizer) {
+  func handleDrinkCellTap(gestureRecognizer: UIGestureRecognizer) {
     if popupViewManager.popupIsShown {
       return
     }
@@ -173,11 +173,11 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     let drinkType = displayedDrinkTypes[drinkIndex]
     
     if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
-      if let consumptionViewController = storyboard?.instantiateViewControllerWithIdentifier("ConsumptionViewController") as? ConsumptionViewController {
-        consumptionViewController.drink = drink
-        consumptionViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
-        consumptionViewController.dayViewController = dayViewController
-        navigationController?.pushViewController(consumptionViewController, animated: true)
+      if let intakeViewController = storyboard?.instantiateViewControllerWithIdentifier("IntakeViewController") as? IntakeViewController {
+        intakeViewController.drink = drink
+        intakeViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
+        intakeViewController.dayViewController = dayViewController
+        navigationController?.pushViewController(intakeViewController, animated: true)
       } else {
         assert(false)
       }

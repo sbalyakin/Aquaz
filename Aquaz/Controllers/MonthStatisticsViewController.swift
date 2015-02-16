@@ -64,33 +64,33 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
   }
   
   private func initMonthStatisticsView() {
-    let waterIntakes = Consumption.fetchGroupedWaterIntake(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
+    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
     
-    let goals = ConsumptionRate.fetchConsumptionRateAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
+    let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
     assert(waterIntakes.count == goals.count)
     
-    consumptionFractions = []
+    intakeFractions = []
     
     for (index, waterIntake) in enumerate(waterIntakes) {
       let goal = goals[index]
-      var consumptionFraction: Double = 0
+      var intakeFraction: Double = 0
       if goal > 0 {
-        consumptionFraction = waterIntake / goal
+        intakeFraction = waterIntake / goal
       } else {
         assert(false)
       }
-      consumptionFractions.append(consumptionFraction)
+      intakeFractions.append(intakeFraction)
     }
     
     monthStatisticsView.switchToMonth(date)
   }
   
-  func monthStatisticsGetConsumptionFractionForDate(date: NSDate, dayOfCurrentMonth: Int) -> Double {
-    if dayOfCurrentMonth < 1 || dayOfCurrentMonth > consumptionFractions.count {
+  func monthStatisticsGetValueForDate(date: NSDate, dayOfCurrentMonth: Int) -> Double {
+    if dayOfCurrentMonth < 1 || dayOfCurrentMonth > intakeFractions.count {
       return 0
     }
     
-    return consumptionFractions[dayOfCurrentMonth - 1]
+    return intakeFractions[dayOfCurrentMonth - 1]
   }
 
   func calendarViewDaySelected(date: NSDate) {
@@ -117,7 +117,7 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
     nextMonthButton.enabled = !isCurrentMonth
   }
 
-  private var consumptionFractions: [Double] = []
+  private var intakeFractions: [Double] = []
 
   private lazy var managedObjectContext: NSManagedObjectContext? = {
     if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {

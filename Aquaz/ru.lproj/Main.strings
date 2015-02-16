@@ -202,7 +202,7 @@
 /* Class = "IBUILabel"; text = "Drinking diary:"; ObjectID = "shH-0K-PYt"; */
 "shH-0K-PYt.text" = "Выпитые напитки:";
 
-/* Class = "IBUITableViewSection"; footerTitle = "Turn smart notifications on and notifications will be show not earlier than specified interval after the last consumption."; ObjectID = "t2Q-4u-nEu"; */
+/* Class = "IBUITableViewSection"; footerTitle = "Turn smart notifications on and notifications will be show not earlier than specified interval after the last intake."; ObjectID = "t2Q-4u-nEu"; */
 "t2Q-4u-nEu.footerTitle" = "Включите умные оповещения чтобы они появлялись не ранее указанного интервала после очередного потребления.";
 
 /* Class = "IBUITableViewSection"; footerTitle = "Do not notify if daily water intake is reached."; ObjectID = "t12-ax-KH8"; */

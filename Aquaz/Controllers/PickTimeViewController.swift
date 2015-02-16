@@ -13,7 +13,7 @@ class PickTimeViewController: StyledViewController {
   @IBOutlet weak var timePicker: UIDatePicker!
   
   var time: NSDate!
-  var consumptionViewController: ConsumptionViewController!
+  var intakeViewController: IntakeViewController!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -33,7 +33,7 @@ class PickTimeViewController: StyledViewController {
   
   @IBAction func chooseButtonWasTapped(sender: AnyObject) {
     time = timePicker.date
-    consumptionViewController.changeTimeForCurrentDate(time)
+    intakeViewController.changeTimeForCurrentDate(time)
     navigationController?.popViewControllerAnimated(true)
   }
   

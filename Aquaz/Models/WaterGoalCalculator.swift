@@ -1,5 +1,5 @@
 //
-//  ConsumptionRateCalculator.swift
+//  WaterGoalCalculator.swift
 //  Aquaz
 //
 //  Created by Sergey Balyakin on 03.02.15.
@@ -10,7 +10,7 @@ import Foundation
 
 // Based on calculator from http://www.h4hinitiative.com/
 
-public class ConsumptionRateCalculator {
+public class WaterGoalCalculator {
 
   public struct Data: Printable {
     public let physicalActivity: Settings.PhysicalActivity

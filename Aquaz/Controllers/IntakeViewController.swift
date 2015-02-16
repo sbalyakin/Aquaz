@@ -1,5 +1,5 @@
 //
-//  ConsumptionViewController.swift
+//  IntakeViewController.swift
 //  Aquaz
 //
 //  Created by Sergey Balyakin on 12.10.14.
@@ -32,7 +32,7 @@ private extension Units.Volume {
   }
 }
 
-class ConsumptionViewController: StyledViewController {
+class IntakeViewController: StyledViewController {
 
   @IBOutlet weak var amountSlider: CustomSlider!
   @IBOutlet weak var amountLabel: UILabel!
@@ -57,12 +57,12 @@ class ConsumptionViewController: StyledViewController {
   
   var drink: Drink!
   
-  // Should be nil for add consumption mode, and not nil for edit consumption mode
-  var consumption: Consumption? {
+  // Should be nil for add intake mode, and not nil for edit intake mode
+  var intake: Intake? {
     didSet {
-      if let consumption = consumption {
-        drink = consumption.drink
-        currentDate = consumption.date
+      if let intake = intake {
+        drink = intake.drink
+        currentDate = intake.date
         timeIsChoosen = true
       } else {
         timeIsChoosen = false
@@ -113,13 +113,13 @@ class ConsumptionViewController: StyledViewController {
   }
   
   private func getInitialAmount() -> Double {
-    return consumption?.amount.doubleValue ?? Double(drink.recentAmount.amount)
+    return intake?.amount.doubleValue ?? Double(drink.recentAmount.amount)
   }
   
   private func setupApplyButton() {
     let title = (viewMode == .Add)
-      ? NSLocalizedString("CVC:Add", value: "Add", comment: "ConsumptionViewController: Title for Add button")
-      : NSLocalizedString("CVC:Apply", value: "Apply", comment: "ConsumptionViewController: Title for Apply button")
+      ? NSLocalizedString("IVC:Add", value: "Add", comment: "IntakeViewController: Title for Add button")
+      : NSLocalizedString("IVC:Apply", value: "Apply", comment: "IntakeViewController: Title for Apply button")
     
     applyButton.setTitle(title, forState: .Normal)
   }
@@ -132,7 +132,7 @@ class ConsumptionViewController: StyledViewController {
     navigationController?.navigationBar.barTintColor = drink.mainColor
   }
   
-  func cancelConsumption() {
+  func cancelIntake() {
     navigationController?.popViewControllerAnimated(true)
   }
 
@@ -142,7 +142,7 @@ class ConsumptionViewController: StyledViewController {
     if timeIsChoosen {
       subtitleText = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
     } else {
-      subtitleText = NSLocalizedString("CVC:Now", value: "Now", comment: "ConsumptionViewController: Subtitle of view if user adds consumption for today")
+      subtitleText = NSLocalizedString("IVC:Now", value: "Now", comment: "IntakeViewController: Subtitle of view if user adds intake for today")
     }
 
     let titleParts = UIHelper.createNavigationTitleViewWithSubTitle(navigationController: navigationController!, titleText: drink.localizedName, subtitleText: subtitleText)
@@ -166,37 +166,37 @@ class ConsumptionViewController: StyledViewController {
     setAmountLabel(Double(amountSlider.value))
   }
   
-  @IBAction func applyCustomConsumption(sender: AnyObject) {
-    applyConsumption(Double(amountSlider.value))
+  @IBAction func applyCustomIntake(sender: AnyObject) {
+    applyIntake(Double(amountSlider.value))
   }
   
-  @IBAction func applySmallConsumption(sender: AnyObject) {
-    applyConsumption(predefinedAmounts.small)
+  @IBAction func applySmallIntake(sender: AnyObject) {
+    applyIntake(predefinedAmounts.small)
   }
   
-  @IBAction func applyMediumConsumption(sender: AnyObject) {
-    applyConsumption(predefinedAmounts.medium)
+  @IBAction func applyMediumIntake(sender: AnyObject) {
+    applyIntake(predefinedAmounts.medium)
   }
   
-  @IBAction func applyLargeConsumption(sender: AnyObject) {
-    applyConsumption(predefinedAmounts.large)
+  @IBAction func applyLargeIntake(sender: AnyObject) {
+    applyIntake(predefinedAmounts.large)
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "PickTime" {
       if let pickTimeViewController = segue.destinationViewController as? PickTimeViewController {
-        pickTimeViewController.consumptionViewController = self
+        pickTimeViewController.intakeViewController = self
         pickTimeViewController.time = currentDate
       }
     }
   }
   
-  private func applyConsumption(amount: Double) {
+  private func applyIntake(amount: Double) {
     let adjustedAmount = prepareAmountForStoring(amount)
     
     switch viewMode {
-    case .Add: addConsumption(amount: adjustedAmount)
-    case .Edit: updateConsumption(amount: adjustedAmount)
+    case .Add: addIntake(amount: adjustedAmount)
+    case .Edit: updateIntake(amount: adjustedAmount)
     }
     
     navigationController?.popViewControllerAnimated(true)
@@ -207,7 +207,7 @@ class ConsumptionViewController: StyledViewController {
     return Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: amount, unitType: .Volume, precision: precision)
   }
   
-  private func addConsumption(#amount: Double) {
+  private func addIntake(#amount: Double) {
     var date: NSDate!
     if timeIsChoosen {
       date = currentDate
@@ -220,20 +220,20 @@ class ConsumptionViewController: StyledViewController {
     }
     
     drink.recentAmount.amount = amount
-    if let consumption = Consumption.addEntity(drink: drink, amount: amount, date: date, managedObjectContext: managedObjectContext) {
-      dayViewController.addConsumption(consumption)
+    if let intake = Intake.addEntity(drink: drink, amount: amount, date: date, managedObjectContext: managedObjectContext) {
+      dayViewController.addIntake(intake)
     } else {
       assert(false)
     }
   }
   
-  private func updateConsumption(#amount: Double) {
-    if let consumption = self.consumption {
-      consumption.amount = amount
-      consumption.date = currentDate
+  private func updateIntake(#amount: Double) {
+    if let intake = intake {
+      intake.amount = amount
+      intake.date = currentDate
       ModelHelper.save(managedObjectContext: managedObjectContext)
       
-      dayViewController.consumptionsWereChanged(doSort: true)
+      dayViewController.intakesWereChanged(doSort: true)
     }
   }
 
@@ -252,7 +252,7 @@ class ConsumptionViewController: StyledViewController {
   }
   
   private var viewMode: Mode {
-    return consumption == nil ? .Add : .Edit
+    return intake == nil ? .Add : .Edit
   }
   
   private let predefinedAmounts = Settings.sharedInstance.generalVolumeUnits.value.predefinedAmounts

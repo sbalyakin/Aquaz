@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7515.2" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7515.2" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7512"/>
     </dependencies>
@@ -85,7 +85,7 @@
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="consumptionButtonWasTapped:" destination="x3I-fN-BQH" eventType="touchUpInside" id="koI-6p-I6v"/>
+                                            <action selector="intakeButtonWasTapped:" destination="x3I-fN-BQH" eventType="touchUpInside" id="koI-6p-I6v"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="I2p-iQ-qGP" userLabel="Day Selection Bar">
@@ -140,8 +140,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="consumptionButton" destination="9h2-YY-Qq4" id="rPX-6l-EDa"/>
-                        <outlet property="consumptionProgressView" destination="Ulp-MK-urk" id="1el-H8-1VO"/>
+                        <outlet property="intakeButton" destination="9h2-YY-Qq4" id="rPX-6l-EDa"/>
+                        <outlet property="intakesMultiProgressView" destination="Ulp-MK-urk" id="1el-H8-1VO"/>
                         <outlet property="currentDayButton" destination="byd-yV-Sp4" id="WQn-rJ-p5C"/>
                         <outlet property="daySelectionBar" destination="I2p-iQ-qGP" id="3nx-qK-6yX"/>
                         <outlet property="highActivityButton" destination="Sw2-pb-ue3" id="QmV-6d-RdV"/>
@@ -167,10 +167,10 @@
             </objects>
             <point key="canvasLocation" x="1517" y="-1488"/>
         </scene>
-        <!--Consumption View Controller-->
+        <!--Intake View Controller-->
         <scene sceneID="FpT-nl-K1n">
             <objects>
-                <viewController storyboardIdentifier="ConsumptionViewController" id="JfU-Cw-4n3" customClass="ConsumptionViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IntakeViewController" id="JfU-Cw-4n3" customClass="IntakeViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ghr-HL-bIJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -206,7 +206,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="applyCustomConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="kw9-f2-CwV"/>
+                                    <action selector="applyCustomIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="kw9-f2-CwV"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" id="vml-tJ-hK9" customClass="DrinkView" customModule="Aquaz" customModuleProvider="target">
@@ -227,7 +227,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="applySmallConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="ebN-Sa-j0P"/>
+                                    <action selector="applySmallIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="ebN-Sa-j0P"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vXw-gW-sSA" customClass="RoundedButton" customModule="Aquaz" customModuleProvider="target">
@@ -243,7 +243,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="applyMediumConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="E76-LZ-JlQ"/>
+                                    <action selector="applyMediumIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="E76-LZ-JlQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7xm-eq-yWQ" customClass="RoundedButton" customModule="Aquaz" customModuleProvider="target">
@@ -259,7 +259,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="applyLargeConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="pJv-e2-GoY"/>
+                                    <action selector="applyLargeIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="pJv-e2-GoY"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -397,7 +397,7 @@
                                             <outlet property="amountLabel" destination="agg-wE-OgY" id="hXR-ve-DPy"/>
                                             <outlet property="drinkLabel" destination="Vcm-PC-Pd2" id="8PE-wf-bY3"/>
                                             <outlet property="timeLabel" destination="oVd-k1-C1k" id="Ld3-dz-CHr"/>
-                                            <segue destination="JfU-Cw-4n3" kind="push" identifier="Edit Consumption" id="Y3z-7d-zGG"/>
+                                            <segue destination="JfU-Cw-4n3" kind="push" identifier="Edit Intake" id="Y3z-7d-zGG"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -450,7 +450,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="applyCustomConsumption:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="UZ2-qV-9e6"/>
+                                    <action selector="applyCustomIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="UZ2-qV-9e6"/>
                                     <action selector="closeButtonWasTapped:" destination="lbQ-YN-p2O" eventType="touchUpInside" id="2M9-Wc-n0S"/>
                                 </connections>
                             </button>
@@ -934,7 +934,7 @@
         <!--Daily Water Intake-->
         <scene sceneID="dke-W0-eam">
             <objects>
-                <viewController id="5uR-gT-4hl" customClass="ConsumptionRateViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5uR-gT-4hl" customClass="WaterGoalViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zry-Rz-h0Q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1249,7 +1249,7 @@
                             <tableViewSection id="MNe-7m-zWf">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Enable Notifications" textLabel="MhE-Rw-0bH" style="IBUITableViewCellStyleDefault" id="y9D-kQ-WUP">
-                                        <rect key="frame" x="0.0" y="35" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="99" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y9D-kQ-WUP" id="it6-N8-7if">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1272,7 +1272,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="From" textLabel="bei-SA-Jz8" detailTextLabel="iXK-kh-CZ9" style="IBUITableViewCellStyleValue1" id="lHf-Pf-hNq">
-                                        <rect key="frame" x="0.0" y="79" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="143" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lHf-Pf-hNq" id="ACp-hq-gqG">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1297,7 +1297,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="To" textLabel="bow-du-pFq" detailTextLabel="qAZ-TU-nJ8" style="IBUITableViewCellStyleValue1" id="Rj2-0A-L58">
-                                        <rect key="frame" x="0.0" y="123" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="187" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rj2-0A-L58" id="hoI-C5-yLN">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1322,7 +1322,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Interval" textLabel="rRH-VW-DVR" detailTextLabel="WGf-Qd-dil" style="IBUITableViewCellStyleValue1" id="MSJ-jL-fTh">
-                                        <rect key="frame" x="0.0" y="167" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="231" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MSJ-jL-fTh" id="rlP-CZ-XCQ">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1347,7 +1347,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Sound" textLabel="3Gv-jc-jdM" detailTextLabel="tQK-qT-pYI" style="IBUITableViewCellStyleValue1" id="aXj-RS-RPj">
-                                        <rect key="frame" x="0.0" y="211" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="275" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aXj-RS-RPj" id="Cow-Z5-qbG">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1373,10 +1373,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection footerTitle="Turn smart notifications on and notifications will be show not earlier than specified interval after the last consumption." id="t2Q-4u-nEu">
+                            <tableViewSection footerTitle="Turn smart notifications on and notifications will be show not earlier than specified interval after the last intake." id="t2Q-4u-nEu">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Smart Notifications" textLabel="E1P-5f-ZQ4" style="IBUITableViewCellStyleDefault" id="Xqy-kf-u67">
-                                        <rect key="frame" x="0.0" y="275" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="339" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xqy-kf-u67" id="wUL-wj-try">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1403,7 +1403,7 @@
                             <tableViewSection footerTitle="Do not notify if daily water intake is reached." id="t12-ax-KH8">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Use Water Intake" textLabel="FOe-oJ-LVS" style="IBUITableViewCellStyleDefault" id="eg0-X8-WVe">
-                                        <rect key="frame" x="0.0" y="383" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="447" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eg0-X8-WVe" id="lJv-zN-pfT">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>

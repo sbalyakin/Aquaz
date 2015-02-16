@@ -20,14 +20,14 @@ class DiaryViewController: StyledViewController, UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return consumptions.count
+    return intakes.count
   }
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("DiaryTableViewCell", forIndexPath: indexPath) as! DiaryTableViewCell
     
-    let consumption = consumptions[indexPath.row]
-    cell.consumption = consumption
+    let intake = intakes[indexPath.row]
+    cell.intake = intake
     
     return cell
   }
@@ -38,14 +38,14 @@ class DiaryViewController: StyledViewController, UITableViewDataSource {
   
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if editingStyle == .Delete {
-      let consumption = consumptions[indexPath.row]
-      dayViewController.removeConsumption(consumption)
-      consumption.deleteEntity()
+      let intake = intakes[indexPath.row]
+      dayViewController.removeIntake(intake)
+      intake.deleteEntity()
     }
   }
   
-  func updateTable(consumptions: [Consumption]) {
-    self.consumptions = consumptions
+  func updateTable(intakes: [Intake]) {
+    self.intakes = intakes
 
     if tableView != nil {
       tableView.reloadData()
@@ -53,17 +53,17 @@ class DiaryViewController: StyledViewController, UITableViewDataSource {
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "Edit Consumption" {
-      if let consumptionViewController = segue.destinationViewController as? ConsumptionViewController {
+    if segue.identifier == "Edit Intake" {
+      if let intakeViewController = segue.destinationViewController as? IntakeViewController {
         if let indexPath = tableView.indexPathForSelectedRow() {
-          let consumption = consumptions[indexPath.row]
-          consumptionViewController.consumption = consumption
-          consumptionViewController.dayViewController = dayViewController
+          let intake = intakes[indexPath.row]
+          intakeViewController.intake = intake
+          intakeViewController.dayViewController = dayViewController
         }
       }
     }
   }
   
-  private var consumptions: [Consumption] = []
+  private var intakes: [Intake] = []
 
 }

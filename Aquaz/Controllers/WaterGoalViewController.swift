@@ -1,5 +1,5 @@
 //
-//  ConsumptionRateViewController.swift
+//  WaterGoalViewController.swift
 //  Aquaz
 //
 //  Created by Sergey Balyakin on 08.12.14.
@@ -99,7 +99,7 @@ private extension Units.Volume {
   }
 }
 
-class ConsumptionRateViewController: StyledViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class WaterGoalViewController: StyledViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
   
   @IBOutlet weak var tableView: UITableView!
   
@@ -109,20 +109,20 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
     tableView.backgroundView = nil
     tableView.backgroundColor = StyleKit.pageBackgroundColor
     
-    let genderTitle = NSLocalizedString("CRVC:Gender", value: "Gender", comment: "ConsumptionRateViewController: Table cell title for [Gender] setting")
-    let heightTitle = NSLocalizedString("CRVC:Height", value: "Height", comment: "ConsumptionRateViewController: Table cell title for [Height] setting")
-    let weightTitle = NSLocalizedString("CRVC:Weight", value: "Weight", comment: "ConsumptionRateViewController: Table cell title for [Weight] setting")
-    let ageTitle = NSLocalizedString("CRVC:Age", value: "Age", comment: "ConsumptionRateViewController: Table cell title for [Age] setting")
-    let physicalActivityTitle = NSLocalizedString("CRVC:Physical Activity", value: "Physical Activity", comment: "ConsumptionRateViewController: Table cell title for [Physical Activity] setting")
-    let waterIntakeTitle = NSLocalizedString("CRVC:Water Intake", value: "Water Intake", comment: "ConsumptionRateViewController: Table cell title for [Water Intake] setting")
+    let genderTitle = NSLocalizedString("WGVC:Gender", value: "Gender", comment: "WaterGoalViewController: Table cell title for [Gender] setting")
+    let heightTitle = NSLocalizedString("WGVC:Height", value: "Height", comment: "WaterGoalViewController: Table cell title for [Height] setting")
+    let weightTitle = NSLocalizedString("WGVC:Weight", value: "Weight", comment: "WaterGoalViewController: Table cell title for [Weight] setting")
+    let ageTitle = NSLocalizedString("WGVC:Age", value: "Age", comment: "WaterGoalViewController: Table cell title for [Age] setting")
+    let physicalActivityTitle = NSLocalizedString("WGVC:Physical Activity", value: "Physical Activity", comment: "WaterGoalViewController: Table cell title for [Physical Activity] setting")
+    let waterGoalTitle = NSLocalizedString("WGVC:Water Intake", value: "Water Intake", comment: "WaterGoalViewController: Table cell title for [Water Intake] setting")
     
-    gender = SelectableEnumCellInfo<Settings.Gender>(
+    genderCell = SelectableEnumCellInfo<Settings.Gender>(
       viewController: self,
       title: genderTitle,
       setting: Settings.sharedInstance.userGender,
       titleFunction: getTitleForGender)
     
-    height = SelectableCellInfo<Double>(
+    heightCell = SelectableCellInfo<Double>(
       viewController: self,
       title: heightTitle,
       setting: Settings.sharedInstance.userHeight,
@@ -131,7 +131,7 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
       step: Settings.sharedInstance.generalHeightUnits.value.step,
       titleFunction: getTitleForHeight)
     
-    weight = SelectableCellInfo<Double>(
+    weightCell = SelectableCellInfo<Double>(
       viewController: self,
       title: weightTitle,
       setting: Settings.sharedInstance.userWeight,
@@ -140,7 +140,7 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
       step: Settings.sharedInstance.generalWeightUnits.value.step,
       titleFunction: getTitleForWeight)
     
-    age = SelectableCellInfo<Int>(
+    ageCell = SelectableCellInfo<Int>(
       viewController: self,
       title: ageTitle,
       setting: Settings.sharedInstance.userAge,
@@ -149,7 +149,7 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
       step: 1,
       titleFunction: getTitleForAge)
     
-    physicalActivity = SelectableEnumCellInfo<Settings.PhysicalActivity>(
+    physicalActivityCell = SelectableEnumCellInfo<Settings.PhysicalActivity>(
       viewController: self,
       title: physicalActivityTitle,
       setting: Settings.sharedInstance.userPhysicalActivity,
@@ -157,22 +157,22 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
     
     let volumeUnit = Settings.sharedInstance.generalVolumeUnits.value.unit
     
-    waterIntake = EditableCellInfo<Double>(
-      title: waterIntakeTitle +  " (\(volumeUnit.contraction))",
-      setting: Settings.sharedInstance.userDailyWaterIntake,
-      stringToValueFunction: stringToWaterIntakeInMetricUnit,
-      titleFunction: getTitleForWaterIntake)
+    waterGoalCell = EditableCellInfo<Double>(
+      title: waterGoalTitle +  " (\(volumeUnit.contraction))",
+      setting: Settings.sharedInstance.userWaterGoal,
+      stringToValueFunction: stringToWaterGoalInMetricUnit,
+      titleFunction: getTitleForWaterGoal)
     
-    gender.valueChangedFunction = updateSourceCellInTable
-    height.valueChangedFunction = updateSourceCellInTable
-    weight.valueChangedFunction = updateSourceCellInTable
-    age.valueChangedFunction = updateSourceCellInTable
-    physicalActivity.valueChangedFunction = updateSourceCellInTable
-    waterIntake.valueChangedFunction = updateCellInTable
+    genderCell.valueChangedFunction = updateSourceCellInTable
+    heightCell.valueChangedFunction = updateSourceCellInTable
+    weightCell.valueChangedFunction = updateSourceCellInTable
+    ageCell.valueChangedFunction = updateSourceCellInTable
+    physicalActivityCell.valueChangedFunction = updateSourceCellInTable
+    waterGoalCell.valueChangedFunction = updateCellInTable
     
     cellsInfo = [
-      [gender, height, weight, age, physicalActivity], // section 1
-      [waterIntake]                                    // section 2
+      [genderCell, heightCell, weightCell, ageCell, physicalActivityCell], // section 1
+      [waterGoalCell]                                    // section 2
     ]
     
     registerForKeyboardNotifications()
@@ -198,36 +198,36 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
   private func getTitleForGender(gender: Settings.Gender) -> String {
     switch gender {
     case .Man:
-      return NSLocalizedString("CRVC:Man", value: "Man", comment: "ConsumptionRateViewController: [Man] option for gender")
+      return NSLocalizedString("WGVC:Man", value: "Man", comment: "WaterGoalViewController: [Man] option for gender")
       
     case .Woman:
-      return NSLocalizedString("CRVC:Woman", value: "Woman", comment: "ConsumptionRateViewController: [Woman] option for gender")
+      return NSLocalizedString("WGVC:Woman", value: "Woman", comment: "WaterGoalViewController: [Woman] option for gender")
       
     case .PregnantFemale:
-      return NSLocalizedString("CRVC:Pregnant female", value: "Pregnant female", comment: "ConsumptionRateViewController: [Pregnant female] option for gender")
+      return NSLocalizedString("WGVC:Pregnant female", value: "Pregnant female", comment: "WaterGoalViewController: [Pregnant female] option for gender")
       
     case .BreastfeedingFemale:
-      return NSLocalizedString("CRVC:Breastfeeding female", value: "Breastfeeding female", comment: "ConsumptionRateViewController: [Breastfeeding female] option for gender")
+      return NSLocalizedString("WGVC:Breastfeeding female", value: "Breastfeeding female", comment: "WaterGoalViewController: [Breastfeeding female] option for gender")
     }
   }
   
   private func getTitleForPhysicalActivity(physicalActivity: Settings.PhysicalActivity) -> String {
     switch physicalActivity {
     case .Rare:
-      return NSLocalizedString("CRVC:Rare", value: "Rare", comment: "ConsumptionRateViewController: [Rare] option for physical activity")
+      return NSLocalizedString("WGVC:Rare", value: "Rare", comment: "WaterGoalViewController: [Rare] option for physical activity")
       
     case .Occasional:
-      return NSLocalizedString("CRVC:Occasional", value: "Occasional", comment: "ConsumptionRateViewController: [Occasional] option for physical activity")
+      return NSLocalizedString("WGVC:Occasional", value: "Occasional", comment: "WaterGoalViewController: [Occasional] option for physical activity")
       
     case .Weekly:
-      return NSLocalizedString("CRVC:Weekly", value: "Weekly", comment: "ConsumptionRateViewController: [Weekly] option for physical activity")
+      return NSLocalizedString("WGVC:Weekly", value: "Weekly", comment: "WaterGoalViewController: [Weekly] option for physical activity")
       
     case .Daily:
-      return NSLocalizedString("CRVC:Daily", value: "Daily", comment: "ConsumptionRateViewController: [Daily] option for physical activity")
+      return NSLocalizedString("WGVC:Daily", value: "Daily", comment: "WaterGoalViewController: [Daily] option for physical activity")
     }
   }
   
-  private func getTitleForWaterIntake(value: Double) -> String {
+  private func getTitleForWaterGoal(value: Double) -> String {
     let unit = Settings.sharedInstance.generalVolumeUnits.value
     let displayedAmount = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision)
     let formatter = NSNumberFormatter()
@@ -239,7 +239,7 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
     return title
   }
   
-  private func stringToWaterIntakeInMetricUnit(value: String) -> Double? {
+  private func stringToWaterGoalInMetricUnit(value: String) -> Double? {
     if let displayedValue = NSNumberFormatter().numberFromString(value)?.doubleValue {
       if displayedValue <= 0 {
         return nil
@@ -276,20 +276,20 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
       }
     }
     
-    saveWaterIntakeToCoreData()
+    saveWaterGoalToCoreData()
   }
 
-  private func saveWaterIntakeToCoreData() {
+  private func saveWaterGoalToCoreData() {
     let date = NSDate()
-    if let consumptionRate = ConsumptionRate.fetchConsumptionRateStrictlyForDate(date, managedObjectContext: managedObjectContext) {
-      consumptionRate.baseRateAmount = waterIntake.value
+    if let waterGoal = WaterGoal.fetchWaterGoalStrictlyForDate(date, managedObjectContext: managedObjectContext) {
+      waterGoal.baseAmount = waterGoalCell.value
       ModelHelper.save(managedObjectContext: managedObjectContext)
     } else {
-      ConsumptionRate.addEntity(
+      WaterGoal.addEntity(
         date: date,
-        baseRateAmount: waterIntake.value,
-        hotDateFraction: 0,
-        highActivityFraction: 0,
+        baseAmount: waterGoalCell.value,
+        hotDayFactor: 0,
+        highActivityFactor: 0,
         managedObjectContext: managedObjectContext)
     }
   }
@@ -297,11 +297,11 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
   private func updateSourceCellInTable(cellInfo: CellInfoBase) {
     updateCellInTable(cellInfo)
     
-    let data = ConsumptionRateCalculator.Data(physicalActivity: physicalActivity.value, gender: gender.value, age: age.value, height: height.value, weight: weight.value, country: .Average)
+    let data = WaterGoalCalculator.Data(physicalActivity: physicalActivityCell.value, gender: genderCell.value, age: ageCell.value, height: heightCell.value, weight: weightCell.value, country: .Average)
     
-    let waterIntakeAmount = ConsumptionRateCalculator.calcDailyWaterIntake(data: data)
+    let waterGoalAmount = WaterGoalCalculator.calcDailyWaterIntake(data: data)
 
-    waterIntake.value = waterIntakeAmount
+    waterGoalCell.value = waterGoalAmount
   }
   
   private func updateCellInTable(cellInfo: CellInfoBase) {
@@ -410,12 +410,12 @@ class ConsumptionRateViewController: StyledViewController, UITableViewDataSource
     tableView.scrollIndicatorInsets = originalTableViewContentInset
   }
   
-  private var gender: CellInfo<Settings.Gender>!
-  private var height: CellInfo<Double>!
-  private var weight: CellInfo<Double>!
-  private var age: CellInfo<Int>!
-  private var physicalActivity: CellInfo<Settings.PhysicalActivity>!
-  private var waterIntake: CellInfo<Double>!
+  private var genderCell: CellInfo<Settings.Gender>!
+  private var heightCell: CellInfo<Double>!
+  private var weightCell: CellInfo<Double>!
+  private var ageCell: CellInfo<Int>!
+  private var physicalActivityCell: CellInfo<Settings.PhysicalActivity>!
+  private var waterGoalCell: CellInfo<Double>!
   
   private var cellsInfo: [[CellInfoBase]]!
   private var selectedCellInfo: CellInfoBase?
@@ -558,7 +558,7 @@ private class CellInfo<T>: CellInfoBase {
 }
 
 private class SelectableCellInfo<T>: CellInfo<T> {
-  init(viewController: ConsumptionRateViewController, title: String, setting: SettingsItemBase<T>, minimumValue: NSNumber, maximumValue: NSNumber, step: NSNumber, titleFunction: TitleFunction? = nil) {
+  init(viewController: WaterGoalViewController, title: String, setting: SettingsItemBase<T>, minimumValue: NSNumber, maximumValue: NSNumber, step: NSNumber, titleFunction: TitleFunction? = nil) {
     self.viewController = viewController
     self.minimumValue = minimumValue
     self.maximumValue = maximumValue
@@ -629,7 +629,7 @@ private class SelectableCellInfo<T>: CellInfo<T> {
     return 1
   }
   
-  private let viewController: ConsumptionRateViewController
+  private let viewController: WaterGoalViewController
   private let minimumValue: NSNumber
   private let maximumValue: NSNumber
   private var step: NSNumber
@@ -638,7 +638,7 @@ private class SelectableCellInfo<T>: CellInfo<T> {
 
 private class SelectableEnumCellInfo<T: RawRepresentable where T.RawValue == Int>: SelectableCellInfo<T> {
   
-  init(viewController: ConsumptionRateViewController, title: String, setting: SettingsItemBase<T>, titleFunction: TitleFunction? = nil) {
+  init(viewController: WaterGoalViewController, title: String, setting: SettingsItemBase<T>, titleFunction: TitleFunction? = nil) {
     let range = SelectableEnumCellInfo.calculateRange()
     super.init(viewController: viewController, title: title, setting: setting, minimumValue: range.minimumValue, maximumValue: range.maximumValue, step: 1, titleFunction: titleFunction)
   }

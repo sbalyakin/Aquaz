@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84039F171A4B103100C5391E /* NotificationsHelper.swift */; };
-		840476571A35FE4A004F0FEF /* ConsumptionRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840476561A35FE4A004F0FEF /* ConsumptionRateViewController.swift */; };
+		840476571A35FE4A004F0FEF /* WaterGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840476561A35FE4A004F0FEF /* WaterGoalViewController.swift */; };
 		840476591A35FE82004F0FEF /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840476581A35FE82004F0FEF /* NotificationsViewController.swift */; };
 		8404765B1A360273004F0FEF /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8404765A1A360273004F0FEF /* SupportViewController.swift */; };
 		8406D78119FE9875001C54BF /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406D78019FE9875001C54BF /* Units.swift */; };
@@ -18,9 +18,9 @@
 		841B13BE1A31FE4F00249426 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B13BD1A31FE4F00249426 /* UIHelper.swift */; };
 		8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA001A0A7009009C5C47 /* DiaryViewController.swift */; };
 		8424AA061A0B5813009C5C47 /* MultiProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA051A0B5813009C5C47 /* MultiProgressView.swift */; };
-		842C0EE91A8CCD7300F8264D /* ConsumptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C0EE81A8CCD7300F8264D /* ConsumptionTests.swift */; };
+		842C0EE91A8CCD7300F8264D /* IntakeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C0EE81A8CCD7300F8264D /* IntakeTests.swift */; };
 		842C0EEB1A8CCDA700F8264D /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C0EEA1A8CCDA700F8264D /* CoreDataHelper.swift */; };
-		84380C2819E4195A0026398E /* Consumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2719E4195A0026398E /* Consumption.swift */; };
+		84380C2819E4195A0026398E /* Intake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2719E4195A0026398E /* Intake.swift */; };
 		84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2919E4195A0026398E /* RecentAmount.swift */; };
 		84380C2C19E4195A0026398E /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2B19E4195A0026398E /* Drink.swift */; };
 		843B055E19E2D7800097A833 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055319E2D7800097A833 /* AppDelegate.swift */; };
@@ -29,14 +29,14 @@
 		843B056119E2D7800097A833 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055719E2D7800097A833 /* DayViewController.swift */; };
 		843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055819E2D7800097A833 /* SelectDrinkViewController.swift */; };
 		843B056319E2D7800097A833 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B055B19E2D7800097A833 /* SWRevealViewController.m */; };
-		843B056919E2D80E0097A833 /* ConsumptionRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056819E2D80E0097A833 /* ConsumptionRate.swift */; };
+		843B056919E2D80E0097A833 /* WaterGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056819E2D80E0097A833 /* WaterGoal.swift */; };
 		8455DACF1A694487004245F9 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455DACE1A694487004245F9 /* RoundedButton.swift */; };
 		8455DAD11A694D8A004245F9 /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455DAD01A694D8A004245F9 /* CompleteViewController.swift */; };
 		84669A7219DAD78D003C2263 /* Aquaz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Aquaz.xcdatamodeld */; };
 		84669A7719DAD78D003C2263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7519DAD78D003C2263 /* Main.storyboard */; };
 		84669A7919DAD78D003C2263 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7819DAD78D003C2263 /* Images.xcassets */; };
 		8468D6421A0D1C240008D027 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468D6411A0D1C240008D027 /* DateHelper.swift */; };
-		8478253719EAC8C200588FE3 /* ConsumptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478253619EAC8C200588FE3 /* ConsumptionViewController.swift */; };
+		8478253719EAC8C200588FE3 /* IntakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478253619EAC8C200588FE3 /* IntakeViewController.swift */; };
 		847D0E211A823CB300966538 /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E201A823CB300966538 /* SettingsTests.swift */; };
 		847D0E251A824CA900966538 /* SettingItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E241A824CA900966538 /* SettingItems.swift */; };
 		847D0E281A824D6700966538 /* UnitItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E271A824D6700966538 /* UnitItems.swift */; };
@@ -65,8 +65,8 @@
 		A59113E21A5069EA007B4241 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59113E41A5069EA007B4241 /* InfoPlist.strings */; };
 		A598D5081A6558C100AA89CB /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5071A6558C100AA89CB /* StyleKit.swift */; };
 		A598D50A1A6559FB00AA89CB /* DrinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5091A6559FB00AA89CB /* DrinkView.swift */; };
-		A59CE8F41A8FC3CA00FDD2B2 /* ConsumptionRateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CE8F31A8FC3CA00FDD2B2 /* ConsumptionRateTests.swift */; };
-		A59CE8F61A9119A300FDD2B2 /* ConsumptionRateCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CE8F51A9119A300FDD2B2 /* ConsumptionRateCalculatorTests.swift */; };
+		A59CE8F41A8FC3CA00FDD2B2 /* WaterGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CE8F31A8FC3CA00FDD2B2 /* WaterGoalTests.swift */; };
+		A59CE8F61A9119A300FDD2B2 /* WaterGoalCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CE8F51A9119A300FDD2B2 /* WaterGoalCalculatorTests.swift */; };
 		A5A1681D1A6EA1330027711B /* DaySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A1681C1A6EA1330027711B /* DaySummaryView.swift */; };
 		A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */; };
 		A5AAA1D91A77A9CF008C3C56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */; };
@@ -87,7 +87,7 @@
 		A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */; };
 		A5E6094E1A6AB2CC00786D15 /* StyledViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094D1A6AB2CC00786D15 /* StyledViewController.swift */; };
 		A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
-		A5EF375D1A81618F00854A8D /* ConsumptionRateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF375C1A81618F00854A8D /* ConsumptionRateCalculator.swift */; };
+		A5EF375D1A81618F00854A8D /* WaterGoalCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF375C1A81618F00854A8D /* WaterGoalCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,7 +102,7 @@
 
 /* Begin PBXFileReference section */
 		84039F171A4B103100C5391E /* NotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsHelper.swift; sourceTree = "<group>"; };
-		840476561A35FE4A004F0FEF /* ConsumptionRateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionRateViewController.swift; sourceTree = "<group>"; };
+		840476561A35FE4A004F0FEF /* WaterGoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoalViewController.swift; sourceTree = "<group>"; };
 		840476581A35FE82004F0FEF /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		8404765A1A360273004F0FEF /* SupportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		8406D78019FE9875001C54BF /* Units.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Units.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -112,9 +112,9 @@
 		841B13BD1A31FE4F00249426 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		8424AA001A0A7009009C5C47 /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		8424AA051A0B5813009C5C47 /* MultiProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiProgressView.swift; path = Controls/MultiProgressView.swift; sourceTree = "<group>"; };
-		842C0EE81A8CCD7300F8264D /* ConsumptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConsumptionTests.swift; path = AquazTests/ConsumptionTests.swift; sourceTree = SOURCE_ROOT; };
+		842C0EE81A8CCD7300F8264D /* IntakeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntakeTests.swift; path = AquazTests/IntakeTests.swift; sourceTree = SOURCE_ROOT; };
 		842C0EEA1A8CCDA700F8264D /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
-		84380C2719E4195A0026398E /* Consumption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consumption.swift; sourceTree = "<group>"; };
+		84380C2719E4195A0026398E /* Intake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Intake.swift; sourceTree = "<group>"; };
 		84380C2919E4195A0026398E /* RecentAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentAmount.swift; sourceTree = "<group>"; };
 		84380C2B19E4195A0026398E /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		843B055319E2D7800097A833 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 		843B055A19E2D7800097A833 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SWRevealViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		843B055B19E2D7800097A833 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SWRevealViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		843B055C19E2D7800097A833 /* Aquaz-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Aquaz-Bridging-Header.h"; sourceTree = "<group>"; };
-		843B056819E2D80E0097A833 /* ConsumptionRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionRate.swift; sourceTree = "<group>"; };
+		843B056819E2D80E0097A833 /* WaterGoal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoal.swift; sourceTree = "<group>"; };
 		8455DACE1A694487004245F9 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedButton.swift; path = Controls/RoundedButton.swift; sourceTree = "<group>"; };
 		8455DAD01A694D8A004245F9 /* CompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
 		84669A6919DAD78D003C2263 /* Aquaz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aquaz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,7 +136,7 @@
 		84669A8119DAD78D003C2263 /* AquazTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AquazTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84669A8619DAD78D003C2263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8468D6411A0D1C240008D027 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
-		8478253619EAC8C200588FE3 /* ConsumptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ConsumptionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		8478253619EAC8C200588FE3 /* IntakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = IntakeViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		847D0E201A823CB300966538 /* SettingsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTests.swift; sourceTree = "<group>"; };
 		847D0E241A824CA900966538 /* SettingItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingItems.swift; sourceTree = "<group>"; };
 		847D0E271A824D6700966538 /* UnitItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitItems.swift; sourceTree = "<group>"; };
@@ -166,8 +166,8 @@
 		A59113E31A5069EA007B4241 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A598D5071A6558C100AA89CB /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		A598D5091A6559FB00AA89CB /* DrinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkView.swift; path = Controls/DrinkView.swift; sourceTree = "<group>"; };
-		A59CE8F31A8FC3CA00FDD2B2 /* ConsumptionRateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionRateTests.swift; sourceTree = "<group>"; };
-		A59CE8F51A9119A300FDD2B2 /* ConsumptionRateCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionRateCalculatorTests.swift; sourceTree = "<group>"; };
+		A59CE8F31A8FC3CA00FDD2B2 /* WaterGoalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoalTests.swift; sourceTree = "<group>"; };
+		A59CE8F51A9119A300FDD2B2 /* WaterGoalCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoalCalculatorTests.swift; sourceTree = "<group>"; };
 		A5A1681C1A6EA1330027711B /* DaySummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DaySummaryView.swift; path = Controls/DaySummaryView.swift; sourceTree = "<group>"; };
 		A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekStatisticsViewController.swift; sourceTree = "<group>"; };
 		A5AAA1D81A77A9CF008C3C56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 		A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryTableViewCell.swift; path = Controls/DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		A5E6094D1A6AB2CC00786D15 /* StyledViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledViewController.swift; sourceTree = "<group>"; };
 		A5E70A6F19E30BEE006E5FC0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Settings.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		A5EF375C1A81618F00854A8D /* ConsumptionRateCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumptionRateCalculator.swift; sourceTree = "<group>"; };
+		A5EF375C1A81618F00854A8D /* WaterGoalCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoalCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,7 +249,7 @@
 				843B055719E2D7800097A833 /* DayViewController.swift */,
 				843B055819E2D7800097A833 /* SelectDrinkViewController.swift */,
 				8424AA001A0A7009009C5C47 /* DiaryViewController.swift */,
-				8478253619EAC8C200588FE3 /* ConsumptionViewController.swift */,
+				8478253619EAC8C200588FE3 /* IntakeViewController.swift */,
 				A5275F861A1216090088AF47 /* CalendarViewController.swift */,
 				843B055519E2D7800097A833 /* SettingsTableViewController.swift */,
 				843B055619E2D7800097A833 /* StatisticsViewController.swift */,
@@ -257,7 +257,7 @@
 				A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */,
 				84C610B91A319DBC00433EF1 /* MonthStatisticsViewController.swift */,
 				84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */,
-				840476561A35FE4A004F0FEF /* ConsumptionRateViewController.swift */,
+				840476561A35FE4A004F0FEF /* WaterGoalViewController.swift */,
 				840476581A35FE82004F0FEF /* NotificationsViewController.swift */,
 				A53869721A4989A6000E03DC /* NotificationsTimePickerViewController.swift */,
 				A53869741A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift */,
@@ -283,14 +283,14 @@
 			children = (
 				A5B75A1519E57D3500D0477B /* NamedEntity.swift */,
 				84380C2B19E4195A0026398E /* Drink.swift */,
-				84380C2719E4195A0026398E /* Consumption.swift */,
-				843B056819E2D80E0097A833 /* ConsumptionRate.swift */,
+				84380C2719E4195A0026398E /* Intake.swift */,
+				843B056819E2D80E0097A833 /* WaterGoal.swift */,
+				A5EF375C1A81618F00854A8D /* WaterGoalCalculator.swift */,
 				84380C2919E4195A0026398E /* RecentAmount.swift */,
 				8406D78019FE9875001C54BF /* Units.swift */,
 				847D0E271A824D6700966538 /* UnitItems.swift */,
 				A5E70A6F19E30BEE006E5FC0 /* Settings.swift */,
 				847D0E241A824CA900966538 /* SettingItems.swift */,
-				A5EF375C1A81618F00854A8D /* ConsumptionRateCalculator.swift */,
 				84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */,
 			);
 			path = Models;
@@ -348,9 +348,9 @@
 			isa = PBXGroup;
 			children = (
 				84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */,
-				842C0EE81A8CCD7300F8264D /* ConsumptionTests.swift */,
-				A59CE8F31A8FC3CA00FDD2B2 /* ConsumptionRateTests.swift */,
-				A59CE8F51A9119A300FDD2B2 /* ConsumptionRateCalculatorTests.swift */,
+				842C0EE81A8CCD7300F8264D /* IntakeTests.swift */,
+				A59CE8F31A8FC3CA00FDD2B2 /* WaterGoalTests.swift */,
+				A59CE8F51A9119A300FDD2B2 /* WaterGoalCalculatorTests.swift */,
 				847D0E201A823CB300966538 /* SettingsTests.swift */,
 				84ED8A201A84C8660042BAF2 /* UnitsTests.swift */,
 				842C0EEA1A8CCDA700F8264D /* CoreDataHelper.swift */,
@@ -521,7 +521,7 @@
 				A581FEF01A76D5F60025CDEF /* CustomSlider.swift in Sources */,
 				A598D5081A6558C100AA89CB /* StyleKit.swift in Sources */,
 				A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */,
-				840476571A35FE4A004F0FEF /* ConsumptionRateViewController.swift in Sources */,
+				840476571A35FE4A004F0FEF /* WaterGoalViewController.swift in Sources */,
 				843B056319E2D7800097A833 /* SWRevealViewController.m in Sources */,
 				A53869731A4989A6000E03DC /* NotificationsTimePickerViewController.swift in Sources */,
 				84126A871A278F4A00A66347 /* MonthStatisticsView.swift in Sources */,
@@ -535,8 +535,8 @@
 				8406D78119FE9875001C54BF /* Units.swift in Sources */,
 				843B056119E2D7800097A833 /* DayViewController.swift in Sources */,
 				8488A18E1A53FE6500258EC8 /* NotificationsSoundViewController.swift in Sources */,
-				843B056919E2D80E0097A833 /* ConsumptionRate.swift in Sources */,
-				A5EF375D1A81618F00854A8D /* ConsumptionRateCalculator.swift in Sources */,
+				843B056919E2D80E0097A833 /* WaterGoal.swift in Sources */,
+				A5EF375D1A81618F00854A8D /* WaterGoalCalculator.swift in Sources */,
 				8404765B1A360273004F0FEF /* SupportViewController.swift in Sources */,
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
 				A5E6094E1A6AB2CC00786D15 /* StyledViewController.swift in Sources */,
@@ -551,13 +551,13 @@
 				8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */,
 				84669A7219DAD78D003C2263 /* Aquaz.xcdatamodeld in Sources */,
 				84C610BA1A319DBC00433EF1 /* MonthStatisticsViewController.swift in Sources */,
-				84380C2819E4195A0026398E /* Consumption.swift in Sources */,
+				84380C2819E4195A0026398E /* Intake.swift in Sources */,
 				A55F34A61A74D6AC00A529A5 /* DrinkCollectionViewCell.swift in Sources */,
 				847D0E251A824CA900966538 /* SettingItems.swift in Sources */,
 				A598D50A1A6559FB00AA89CB /* DrinkView.swift in Sources */,
 				84C610BC1A31A98900433EF1 /* YearStatisticsViewController.swift in Sources */,
 				A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */,
-				8478253719EAC8C200588FE3 /* ConsumptionViewController.swift in Sources */,
+				8478253719EAC8C200588FE3 /* IntakeViewController.swift in Sources */,
 				84126A851A278F4A00A66347 /* MonthStatisticsDayButton.swift in Sources */,
 				A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */,
 				84B639831A25D9EF00889438 /* WeekStatisticsView.swift in Sources */,
@@ -582,9 +582,9 @@
 				84ED8A231A84ED9E0042BAF2 /* DrinkTests.swift in Sources */,
 				84ED8A211A84C8660042BAF2 /* UnitsTests.swift in Sources */,
 				847D0E211A823CB300966538 /* SettingsTests.swift in Sources */,
-				842C0EE91A8CCD7300F8264D /* ConsumptionTests.swift in Sources */,
-				A59CE8F41A8FC3CA00FDD2B2 /* ConsumptionRateTests.swift in Sources */,
-				A59CE8F61A9119A300FDD2B2 /* ConsumptionRateCalculatorTests.swift in Sources */,
+				842C0EE91A8CCD7300F8264D /* IntakeTests.swift in Sources */,
+				A59CE8F41A8FC3CA00FDD2B2 /* WaterGoalTests.swift in Sources */,
+				A59CE8F61A9119A300FDD2B2 /* WaterGoalCalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

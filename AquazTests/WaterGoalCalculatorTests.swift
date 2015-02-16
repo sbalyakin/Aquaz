@@ -1,5 +1,5 @@
 //
-//  ConsumptionRateCalculatorTests.swift
+//  WaterGoalCalculatorTests.swift
 //  Aquaz
 //
 //  Created by Sergey Balyakin on 15.02.15.
@@ -10,7 +10,7 @@ import UIKit
 import XCTest
 import Aquaz
 
-class ConsumptionRateCalculatorTests: XCTestCase {
+class WaterGoalCalculatorTests: XCTestCase {
   
   func testCalcDailyWaterIntake() {
     test(18, .Man, 130, 35, .Rare, dailyWaterIntake: 1800, lostWater: 2500, supplyWater: 700)
@@ -25,15 +25,15 @@ class ConsumptionRateCalculatorTests: XCTestCase {
   }
   
   private func test(age: Int, _ gender: Settings.Gender, _ height: Double, _ weight: Double, _ physicalActivity: Settings.PhysicalActivity, dailyWaterIntake: Double, lostWater: Double, supplyWater: Double) {
-    let data = ConsumptionRateCalculator.Data(physicalActivity: physicalActivity, gender: gender, age: age, height: height, weight: weight, country: .UnitedKingdom)
+    let data = WaterGoalCalculator.Data(physicalActivity: physicalActivity, gender: gender, age: age, height: height, weight: weight, country: .UnitedKingdom)
     
-    let calculatedDailyWaterIntake = ConsumptionRateCalculator.calcDailyWaterIntake(data: data)
+    let calculatedDailyWaterIntake = WaterGoalCalculator.calcDailyWaterIntake(data: data)
     XCTAssertEqual(calculatedDailyWaterIntake, dailyWaterIntake, "Daily water intake is calculated wrong. Data: \(data)")
     
-    let calculatedLostWater = ConsumptionRateCalculator.calcLostWater(data: data)
+    let calculatedLostWater = WaterGoalCalculator.calcLostWater(data: data)
     XCTAssertEqual(calculatedLostWater, lostWater, "Water loss is calculated wrong. Data: \(data)")
     
-    let calculatedSupplyWater = ConsumptionRateCalculator.calcSupplyWater(data: data)
+    let calculatedSupplyWater = WaterGoalCalculator.calcSupplyWater(data: data)
     XCTAssertEqual(calculatedSupplyWater, supplyWater, "Water supply is calculated wrong. Data: \(data)")
   }
   

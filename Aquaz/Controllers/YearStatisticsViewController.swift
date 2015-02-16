@@ -59,9 +59,9 @@ class YearStatisticsViewController: StyledViewController {
   }
   
   private func initYearStatisticsView() {
-    let waterIntakes = Consumption.fetchGroupedWaterIntake(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Month, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
+    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Month, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
     
-    let goals = ConsumptionRate.fetchConsumptionRateAmountsGroupedByMonths(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
+    let goals = WaterGoal.fetchWaterGoalAmountsGroupedByMonths(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
     assert(waterIntakes.count == goals.count)
 
     let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
