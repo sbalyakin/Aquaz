@@ -59,18 +59,17 @@ public class Settings {
     case Year
   }
 
-  
   lazy var generalHasLaunchedOnce = SettingsOrdinalItem(
     key: "General - Has Launched Once", initialValue: false)
 
-  lazy var generalWeightUnits = SettingsEnumItem(
-    key: "General - Weight units",initialValue: Units.Weight.Kilograms)
+  lazy var generalWeightUnits = SettingsEnumItem<Units.Weight>(
+    key: "General - Weight units",initialValue: isMetric ? .Kilograms : .Pounds)
   
-  lazy var generalHeightUnits = SettingsEnumItem(
-    key: "General - Height units", initialValue: Units.Length.Centimeters)
+  lazy var generalHeightUnits = SettingsEnumItem<Units.Length>(
+    key: "General - Height units", initialValue: isMetric ? .Centimeters : .Feet)
   
-  lazy var generalVolumeUnits = SettingsEnumItem(
-    key: "General - Volume units", initialValue: Units.Volume.Millilitres)
+  lazy var generalVolumeUnits = SettingsEnumItem<Units.Volume>(
+    key: "General - Volume units", initialValue: isMetric ? .Millilitres : .FluidOunces)
   
   lazy var generalHotDayExtraFactor = SettingsOrdinalItem<Double>(
     key: "General - Hot day extra factor", initialValue: 0.5)
@@ -143,6 +142,10 @@ public class Settings {
   lazy var notificationsUseWaterIntake = SettingsOrdinalItem(
     key: "Notifications - Use water intake", initialValue: true)
   
+  private class var isMetric: Bool {
+    return NSLocale.currentLocale().objectForKey(NSLocaleUsesMetricSystem)! as! Bool
+  }
+
   private class func createUserDailyWaterIntakeSetting() -> SettingsOrdinalItem<Double> {
     let settings = sharedInstance
     
