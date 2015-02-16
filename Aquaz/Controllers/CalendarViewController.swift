@@ -27,13 +27,17 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
     switchToDate(date)
   }
   
+  private lazy var dateFormatter: NSDateFormatter = {
+    let formatter = NSDateFormatter()
+    let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMyyyy", options: 0, locale: NSLocale.currentLocale())
+    formatter.dateFormat = dateFormat
+    return formatter
+  }()
+  
   private func switchToDate(date: NSDate) {
     calendarView.switchToMonth(date)
     
-    let formatter = NSDateFormatter()
-    let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMYYYY", options: 0, locale: NSLocale.currentLocale())
-    formatter.dateFormat = dateFormat
-    currentMonthLabel.text = formatter.stringFromDate(date)
+    currentMonthLabel.text = dateFormatter.stringFromDate(date)
     
     let isCurrentMonth = DateHelper.areDatesEqualByMonths(date1: date, date2: NSDate())
     nextMonthButton.enabled = !isCurrentMonth

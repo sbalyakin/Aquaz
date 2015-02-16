@@ -53,12 +53,14 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
     date = DateHelper.addToDate(date, years: 0, months: 1, days: 0)
   }
   
-  private func initMonthLabel() {
-    let dateFormatter = NSDateFormatter()
-    
-    let formatString = NSDateFormatter.dateFormatFromTemplate("MMMMYYYY", options: 0, locale: NSLocale.currentLocale())
-    dateFormatter.dateFormat = formatString
+  private lazy var dateFormatter: NSDateFormatter = {
+    let formatter = NSDateFormatter()
+    let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMyyyy", options: 0, locale: NSLocale.currentLocale())
+    formatter.dateFormat = dateFormat
+    return formatter
+    }()
 
+  private func initMonthLabel() {
     let monthTitle = dateFormatter.stringFromDate(statisticsBeginDate)
     monthLabel.text = monthTitle
   }

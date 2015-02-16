@@ -70,10 +70,14 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
     date = DateHelper.addToDate(date, years: 0, months: 0, days: 7)
   }
 
+  private lazy var dateFormatter: NSDateFormatter = {
+    let formatter = NSDateFormatter()
+    let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMyy", options: 0, locale: NSLocale.currentLocale())
+    formatter.dateFormat = dateFormat
+    return formatter
+    }()
+
   private func initDatePeriodLabel() {
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.dateStyle = .MediumStyle
-    dateFormatter.timeStyle = .NoStyle
     let maxDate = DateHelper.addToDate(statisticsEndDate, years: 0, months: 0, days: -1)
     let fromDateTitle = dateFormatter.stringFromDate(statisticsBeginDate)
     let toDateTitle = dateFormatter.stringFromDate(maxDate)

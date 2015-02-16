@@ -51,9 +51,14 @@ class YearStatisticsViewController: StyledViewController {
     date = DateHelper.addToDate(date, years: 1, months: 0, days: 0)
   }
   
+  private lazy var dateFormatter: NSDateFormatter = {
+    let formatter = NSDateFormatter()
+    let dateFormat = NSDateFormatter.dateFormatFromTemplate("yyyy", options: 0, locale: NSLocale.currentLocale())
+    formatter.dateFormat = dateFormat
+    return formatter
+    }()
+
   private func initYearLabel() {
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = "YYYY"
     let yearTitle = dateFormatter.stringFromDate(date)
     yearLabel.text = yearTitle
   }
