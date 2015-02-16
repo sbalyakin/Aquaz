@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MonthStatisticsViewDataSource {
+protocol MonthStatisticsViewDataSource: class {
   func monthStatisticsGetValueForDate(date: NSDate, dayOfCurrentMonth: Int) -> Double
 }
 
@@ -19,7 +19,7 @@ protocol MonthStatisticsViewDataSource {
   @IBInspectable var dayIntakeBackgroundColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 0.1)
   @IBInspectable var dayIntakeLineWidth: CGFloat = 4
   
-  var dataSource: MonthStatisticsViewDataSource?
+  weak var dataSource: MonthStatisticsViewDataSource?
   
   override init() {
     super.init()

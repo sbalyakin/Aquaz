@@ -11,7 +11,7 @@ import UIKit
 class MonthStatisticsDayButton: CalendarDayButton {
 
   var value: Double = 0
-  var monthStatisticsView: MonthStatisticsView!
+  weak var monthStatisticsView: MonthStatisticsView!
   
   override init() {
     super.init()

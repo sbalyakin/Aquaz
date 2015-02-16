@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CalendarViewDelegate {
+protocol CalendarViewDelegate: class {
   func calendarViewDaySelected(date: NSDate)
 }
 
@@ -45,7 +45,7 @@ protocol CalendarViewDelegate {
 
   var selectedDate: NSDate = NSDate()
   
-  var delegate: CalendarViewDelegate?
+  weak var delegate: CalendarViewDelegate?
   
   override init() {
     super.init()

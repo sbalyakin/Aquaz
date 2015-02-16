@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol WeekStatisticsViewDelegate {
+protocol WeekStatisticsViewDelegate: class {
   func weekStatisticsViewDaySelected(dayIndex: Int)
 }
 
@@ -41,7 +41,8 @@ protocol WeekStatisticsViewDelegate {
   
   var animationDuration = 0.4
   
-  var delegate: WeekStatisticsViewDelegate?
+  weak var delegate: WeekStatisticsViewDelegate?
+  
   var titleForScaleFunction: TitleForStepFunction?
   
   enum VerticalAlign {
