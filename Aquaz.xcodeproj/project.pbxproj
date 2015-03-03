@@ -411,7 +411,7 @@
 				A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */,
 				A5B8F98C1A87DF3D00145705 /* whistle.caf */,
 			);
-			name = Sounds;
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		A5B75A1219E55CBB00D0477B /* Helpers */ = {
