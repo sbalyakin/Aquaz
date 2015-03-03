@@ -24,7 +24,7 @@
 		84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2919E4195A0026398E /* RecentAmount.swift */; };
 		84380C2C19E4195A0026398E /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2B19E4195A0026398E /* Drink.swift */; };
 		843B055E19E2D7800097A833 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055319E2D7800097A833 /* AppDelegate.swift */; };
-		843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055519E2D7800097A833 /* SettingsTableViewController.swift */; };
+		843B055F19E2D7800097A833 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055519E2D7800097A833 /* SettingsViewController.swift */; };
 		843B056019E2D7800097A833 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055619E2D7800097A833 /* StatisticsViewController.swift */; };
 		843B056119E2D7800097A833 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055719E2D7800097A833 /* DayViewController.swift */; };
 		843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055819E2D7800097A833 /* SelectDrinkViewController.swift */; };
@@ -84,6 +84,19 @@
 		A5B8F9961A87DF3D00145705 /* magic.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98A1A87DF3D00145705 /* magic.caf */; };
 		A5B8F9971A87DF3D00145705 /* tiny-bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */; };
 		A5B8F9981A87DF3D00145705 /* whistle.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98C1A87DF3D00145705 /* whistle.caf */; };
+		A5D3D4211AA5D29700E3C989 /* OmegaSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4121AA5D29700E3C989 /* OmegaSettingsViewController.swift */; };
+		A5D3D4221AA5D29700E3C989 /* BasicTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4141AA5D29700E3C989 /* BasicTableCell.swift */; };
+		A5D3D4231AA5D29700E3C989 /* PickerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4151AA5D29700E3C989 /* PickerTableCell.swift */; };
+		A5D3D4241AA5D29700E3C989 /* RightDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4161AA5D29700E3C989 /* RightDetailTableCell.swift */; };
+		A5D3D4251AA5D29700E3C989 /* SegmentedTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4171AA5D29700E3C989 /* SegmentedTableCell.swift */; };
+		A5D3D4261AA5D29700E3C989 /* SwitchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4181AA5D29700E3C989 /* SwitchTableCell.swift */; };
+		A5D3D4271AA5D29700E3C989 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4191AA5D29700E3C989 /* TableCell.swift */; };
+		A5D3D4281AA5D29700E3C989 /* TableCellWithValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D41A1AA5D29700E3C989 /* TableCellWithValue.swift */; };
+		A5D3D4291AA5D29700E3C989 /* TextFieldTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D41B1AA5D29700E3C989 /* TextFieldTableCell.swift */; };
+		A5D3D42A1AA5D29700E3C989 /* UIPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D41D1AA5D29700E3C989 /* UIPickerTableViewCell.swift */; };
+		A5D3D42B1AA5D29700E3C989 /* UISegmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D41E1AA5D29700E3C989 /* UISegmentedTableViewCell.swift */; };
+		A5D3D42C1AA5D29700E3C989 /* UISwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D41F1AA5D29700E3C989 /* UISwitchTableViewCell.swift */; };
+		A5D3D42D1AA5D29700E3C989 /* UITextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4201AA5D29700E3C989 /* UITextFieldTableViewCell.swift */; };
 		A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */; };
 		A5E6094E1A6AB2CC00786D15 /* StyledViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094D1A6AB2CC00786D15 /* StyledViewController.swift */; };
 		A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
@@ -118,7 +131,7 @@
 		84380C2919E4195A0026398E /* RecentAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentAmount.swift; sourceTree = "<group>"; };
 		84380C2B19E4195A0026398E /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		843B055319E2D7800097A833 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		843B055519E2D7800097A833 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		843B055519E2D7800097A833 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		843B055619E2D7800097A833 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		843B055719E2D7800097A833 /* DayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
 		843B055819E2D7800097A833 /* SelectDrinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SelectDrinkViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -185,6 +198,19 @@
 		A5B8F98A1A87DF3D00145705 /* magic.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = magic.caf; sourceTree = "<group>"; };
 		A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiny-bell.caf"; sourceTree = "<group>"; };
 		A5B8F98C1A87DF3D00145705 /* whistle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whistle.caf; sourceTree = "<group>"; };
+		A5D3D4121AA5D29700E3C989 /* OmegaSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmegaSettingsViewController.swift; sourceTree = "<group>"; };
+		A5D3D4141AA5D29700E3C989 /* BasicTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTableCell.swift; sourceTree = "<group>"; };
+		A5D3D4151AA5D29700E3C989 /* PickerTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableCell.swift; sourceTree = "<group>"; };
+		A5D3D4161AA5D29700E3C989 /* RightDetailTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightDetailTableCell.swift; sourceTree = "<group>"; };
+		A5D3D4171AA5D29700E3C989 /* SegmentedTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedTableCell.swift; sourceTree = "<group>"; };
+		A5D3D4181AA5D29700E3C989 /* SwitchTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableCell.swift; sourceTree = "<group>"; };
+		A5D3D4191AA5D29700E3C989 /* TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
+		A5D3D41A1AA5D29700E3C989 /* TableCellWithValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellWithValue.swift; sourceTree = "<group>"; };
+		A5D3D41B1AA5D29700E3C989 /* TextFieldTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableCell.swift; sourceTree = "<group>"; };
+		A5D3D41D1AA5D29700E3C989 /* UIPickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPickerTableViewCell.swift; sourceTree = "<group>"; };
+		A5D3D41E1AA5D29700E3C989 /* UISegmentedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISegmentedTableViewCell.swift; sourceTree = "<group>"; };
+		A5D3D41F1AA5D29700E3C989 /* UISwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISwitchTableViewCell.swift; sourceTree = "<group>"; };
+		A5D3D4201AA5D29700E3C989 /* UITextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryTableViewCell.swift; path = Controls/DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		A5E6094D1A6AB2CC00786D15 /* StyledViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledViewController.swift; sourceTree = "<group>"; };
 		A5E70A6F19E30BEE006E5FC0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Settings.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -251,7 +277,7 @@
 				8424AA001A0A7009009C5C47 /* DiaryViewController.swift */,
 				8478253619EAC8C200588FE3 /* IntakeViewController.swift */,
 				A5275F861A1216090088AF47 /* CalendarViewController.swift */,
-				843B055519E2D7800097A833 /* SettingsTableViewController.swift */,
+				843B055519E2D7800097A833 /* SettingsViewController.swift */,
 				843B055619E2D7800097A833 /* StatisticsViewController.swift */,
 				84F9DD971A16574E003D6444 /* PickTimeViewController.swift */,
 				A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */,
@@ -271,6 +297,7 @@
 		843B055919E2D7800097A833 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A5D3D4111AA5D29700E3C989 /* OmegaSettingsViewController */,
 				843B055A19E2D7800097A833 /* SWRevealViewController.h */,
 				843B055B19E2D7800097A833 /* SWRevealViewController.m */,
 				843B055C19E2D7800097A833 /* Aquaz-Bridging-Header.h */,
@@ -399,6 +426,42 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		A5D3D4111AA5D29700E3C989 /* OmegaSettingsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A5D3D4131AA5D29700E3C989 /* TableCells */,
+				A5D3D4121AA5D29700E3C989 /* OmegaSettingsViewController.swift */,
+			);
+			path = OmegaSettingsViewController;
+			sourceTree = "<group>";
+		};
+		A5D3D4131AA5D29700E3C989 /* TableCells */ = {
+			isa = PBXGroup;
+			children = (
+				A5D3D41C1AA5D29700E3C989 /* UICells */,
+				A5D3D4191AA5D29700E3C989 /* TableCell.swift */,
+				A5D3D41A1AA5D29700E3C989 /* TableCellWithValue.swift */,
+				A5D3D4141AA5D29700E3C989 /* BasicTableCell.swift */,
+				A5D3D4161AA5D29700E3C989 /* RightDetailTableCell.swift */,
+				A5D3D4151AA5D29700E3C989 /* PickerTableCell.swift */,
+				A5D3D4171AA5D29700E3C989 /* SegmentedTableCell.swift */,
+				A5D3D4181AA5D29700E3C989 /* SwitchTableCell.swift */,
+				A5D3D41B1AA5D29700E3C989 /* TextFieldTableCell.swift */,
+			);
+			path = TableCells;
+			sourceTree = "<group>";
+		};
+		A5D3D41C1AA5D29700E3C989 /* UICells */ = {
+			isa = PBXGroup;
+			children = (
+				A5D3D41D1AA5D29700E3C989 /* UIPickerTableViewCell.swift */,
+				A5D3D41E1AA5D29700E3C989 /* UISegmentedTableViewCell.swift */,
+				A5D3D41F1AA5D29700E3C989 /* UISwitchTableViewCell.swift */,
+				A5D3D4201AA5D29700E3C989 /* UITextFieldTableViewCell.swift */,
+			);
+			path = UICells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -519,13 +582,16 @@
 			files = (
 				A55337CF1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift in Sources */,
 				A581FEF01A76D5F60025CDEF /* CustomSlider.swift in Sources */,
+				A5D3D4211AA5D29700E3C989 /* OmegaSettingsViewController.swift in Sources */,
 				A598D5081A6558C100AA89CB /* StyleKit.swift in Sources */,
+				A5D3D4241AA5D29700E3C989 /* RightDetailTableCell.swift in Sources */,
 				A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */,
 				840476571A35FE4A004F0FEF /* WaterGoalViewController.swift in Sources */,
 				843B056319E2D7800097A833 /* SWRevealViewController.m in Sources */,
 				A53869731A4989A6000E03DC /* NotificationsTimePickerViewController.swift in Sources */,
 				84126A871A278F4A00A66347 /* MonthStatisticsView.swift in Sources */,
 				8424AA061A0B5813009C5C47 /* MultiProgressView.swift in Sources */,
+				A5D3D42C1AA5D29700E3C989 /* UISwitchTableViewCell.swift in Sources */,
 				840476591A35FE82004F0FEF /* NotificationsViewController.swift in Sources */,
 				A5275F851A1212930088AF47 /* CalendarView.swift in Sources */,
 				843B055E19E2D7800097A833 /* AppDelegate.swift in Sources */,
@@ -533,6 +599,7 @@
 				A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */,
 				8468D6421A0D1C240008D027 /* DateHelper.swift in Sources */,
 				8406D78119FE9875001C54BF /* Units.swift in Sources */,
+				A5D3D4221AA5D29700E3C989 /* BasicTableCell.swift in Sources */,
 				843B056119E2D7800097A833 /* DayViewController.swift in Sources */,
 				8488A18E1A53FE6500258EC8 /* NotificationsSoundViewController.swift in Sources */,
 				843B056919E2D80E0097A833 /* WaterGoal.swift in Sources */,
@@ -544,18 +611,23 @@
 				A575A5A51A6EBB0300B00E9F /* StyledBarButtonItem.swift in Sources */,
 				A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */,
 				843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */,
+				A5D3D4281AA5D29700E3C989 /* TableCellWithValue.swift in Sources */,
 				841B13BE1A31FE4F00249426 /* UIHelper.swift in Sources */,
 				8455DAD11A694D8A004245F9 /* CompleteViewController.swift in Sources */,
 				84380C2C19E4195A0026398E /* Drink.swift in Sources */,
 				84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */,
 				8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */,
 				84669A7219DAD78D003C2263 /* Aquaz.xcdatamodeld in Sources */,
+				A5D3D4291AA5D29700E3C989 /* TextFieldTableCell.swift in Sources */,
 				84C610BA1A319DBC00433EF1 /* MonthStatisticsViewController.swift in Sources */,
+				A5D3D42D1AA5D29700E3C989 /* UITextFieldTableViewCell.swift in Sources */,
 				84380C2819E4195A0026398E /* Intake.swift in Sources */,
 				A55F34A61A74D6AC00A529A5 /* DrinkCollectionViewCell.swift in Sources */,
 				847D0E251A824CA900966538 /* SettingItems.swift in Sources */,
 				A598D50A1A6559FB00AA89CB /* DrinkView.swift in Sources */,
+				A5D3D4251AA5D29700E3C989 /* SegmentedTableCell.swift in Sources */,
 				84C610BC1A31A98900433EF1 /* YearStatisticsViewController.swift in Sources */,
+				A5D3D4231AA5D29700E3C989 /* PickerTableCell.swift in Sources */,
 				A5275F831A1212930088AF47 /* CalendarDayButton.swift in Sources */,
 				8478253719EAC8C200588FE3 /* IntakeViewController.swift in Sources */,
 				84126A851A278F4A00A66347 /* MonthStatisticsDayButton.swift in Sources */,
@@ -563,13 +635,17 @@
 				84B639831A25D9EF00889438 /* WeekStatisticsView.swift in Sources */,
 				A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */,
 				A53869751A49D5FE000E03DC /* NotificationsIntervalPickerViewController.swift in Sources */,
-				843B055F19E2D7800097A833 /* SettingsTableViewController.swift in Sources */,
+				A5D3D42A1AA5D29700E3C989 /* UIPickerTableViewCell.swift in Sources */,
+				843B055F19E2D7800097A833 /* SettingsViewController.swift in Sources */,
 				8455DACF1A694487004245F9 /* RoundedButton.swift in Sources */,
 				847D0E281A824D6700966538 /* UnitItems.swift in Sources */,
 				84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */,
 				84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */,
 				841B13BC1A31D55500249426 /* RevealedViewControllers.swift in Sources */,
+				A5D3D42B1AA5D29700E3C989 /* UISegmentedTableViewCell.swift in Sources */,
 				843B056019E2D7800097A833 /* StatisticsViewController.swift in Sources */,
+				A5D3D4271AA5D29700E3C989 /* TableCell.swift in Sources */,
+				A5D3D4261AA5D29700E3C989 /* SwitchTableCell.swift in Sources */,
 				A5A1681D1A6EA1330027711B /* DaySummaryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,7 +8,7 @@
 
 import UIKit
 
-private class RevealInitializer {
+class RevealInitializer {
 
   class func revealButtonSetup(viewController: UIViewController) {
     if let revealViewController = viewController.revealViewController() {

@@ -123,7 +123,7 @@ class IntakeTests: XCTestCase {
     func addGroupedIntakes(intakes: [IntakeInfo]) {
       var waterAmount: Double = 0
       for intake in intakes {
-        addIntake(intake.textDate, intake.drinkType, intake.amount, &waterAmount)
+        self.addIntake(intake.textDate, intake.drinkType, intake.amount, &waterAmount)
       }
       waterAmounts.append(waterAmount)
     }
@@ -186,7 +186,7 @@ class IntakeTests: XCTestCase {
     func addGroupedIntakes(daysInMonth: Int, intakes: [IntakeInfo]) {
       var waterIntake: Double = 0
       for intake in intakes {
-        addIntake(intake.textDate, intake.drinkType, intake.amount, &waterIntake)
+        self.addIntake(intake.textDate, intake.drinkType, intake.amount, &waterIntake)
       }
       waterIntakes.append(waterIntake)
       waterIntakesAverage.append(waterIntake / Double(daysInMonth))

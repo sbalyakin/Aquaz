@@ -16,12 +16,12 @@ class WaterGoalTests: XCTestCase {
     deleteAllWaterGoals()
     
     func testForExistance(textDate: String, expectedWaterGoal: WaterGoal) {
-      let fcr = fetchWaterGoalForDate(textDate)
+      let fcr = self.fetchWaterGoalForDate(textDate)
 
       XCTAssert(fcr != nil, "Water goal fitting for a date (\(textDate)) should exist")
       
       if let fcr = fcr {
-        XCTAssertEqual(fcr, expectedWaterGoal, "Wrong water goal is fetched for a date (\(textDate)). Expected water goal for a date (\(stringFromDate(expectedWaterGoal.date)))")
+        XCTAssertEqual(fcr, expectedWaterGoal, "Wrong water goal is fetched for a date (\(textDate)). Expected water goal for a date (\(self.stringFromDate(expectedWaterGoal.date)))")
       }
     }
 
@@ -42,17 +42,17 @@ class WaterGoalTests: XCTestCase {
     deleteAllWaterGoals()
     
     func testForExistance(textDate: String, expectedWaterGoal: WaterGoal) {
-      let fcr = fetchWaterGoalStrictlyForDate(textDate)
+      let fcr = self.fetchWaterGoalStrictlyForDate(textDate)
       
       XCTAssert(fcr != nil, "Water goal strictly matching for a date (\(textDate)) should exist")
       
       if let fcr = fcr {
-        XCTAssertEqual(fcr, expectedWaterGoal, "Wrong water goal is fetched strictly for a date (\(textDate)). Expected water goal for a date (\(stringFromDate(expectedWaterGoal.date)))")
+        XCTAssertEqual(fcr, expectedWaterGoal, "Wrong water goal is fetched strictly for a date (\(textDate)). Expected water goal for a date (\(self.stringFromDate(expectedWaterGoal.date)))")
       }
     }
 
     func testForNil(textDate: String) {
-      let fcr = fetchWaterGoalStrictlyForDate(textDate)
+      let fcr = self.fetchWaterGoalStrictlyForDate(textDate)
       XCTAssert(fcr == nil, "Water goal fetched strictly for a date (\(textDate)) should be nil")
     }
 

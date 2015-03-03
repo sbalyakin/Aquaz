@@ -213,11 +213,11 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     rects.remainder.size.height += rects.slice.height - daySelectionBar.frame.minY
     
     func changeFrame() {
-      summaryBar.frame = rects.slice
-      pageViewController.view.frame = rects.remainder
-      for subview in pageViewController.view.subviews {
+      self.summaryBar.frame = rects.slice
+      self.pageViewController.view.frame = rects.remainder
+      for subview in self.pageViewController.view.subviews {
         if let view = subview as? UIView {
-          view.frame = pageViewController.view.bounds
+          self.view.frame = self.pageViewController.view.bounds
         }
       }
     }

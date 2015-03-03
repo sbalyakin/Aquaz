@@ -41,7 +41,7 @@ class DrinkTests: XCTestCase {
     measureBlock() {
       for i in 0..<10000 {
         let drinkIndex = i % Drink.getDrinksCount()
-        let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: managedObjectContext)
+        let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: self.managedObjectContext)
         XCTAssert(drink != nil, "Failed to get drink by index \(drinkIndex)")
       }
     }

@@ -10,7 +10,7 @@ import Foundation
 
 class Units {
   
-  enum Volume: Int {
+  enum Volume: Int, Printable {
     case Millilitres = 0
     case FluidOunces
     
@@ -22,9 +22,13 @@ class Units {
       case FluidOunces: return FluidOunceUnit()
       }
     }
+    
+    var description: String {
+      return unit.contraction
+    }
   }
   
-  enum Weight: Int {
+  enum Weight: Int, Printable {
     case Kilograms = 0
     case Pounds
 
@@ -36,9 +40,13 @@ class Units {
       case Pounds: return PoundUnit()
       }
     }
+    
+    var description: String {
+      return unit.contraction
+    }
   }
   
-  enum Length: Int {
+  enum Length: Int, Printable {
     case Centimeters = 0
     case Feet
     
@@ -49,6 +57,10 @@ class Units {
       case Centimeters: return CentimeterUnit()
       case Feet: return FootUnit()
       }
+    }
+    
+    var description: String {
+      return unit.contraction
     }
   }
   

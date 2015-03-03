@@ -20,7 +20,7 @@ class MainMenuTableViewController: UITableViewController {
   }
   
   override func preferredStatusBarStyle() -> UIStatusBarStyle {
-    return .BlackOpaque
+    return .LightContent
   }
   
   override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {

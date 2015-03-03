@@ -8,7 +8,7 @@
 
 import UIKit
 
-private class Styler {
+class Styler {
   
   class func viewDidLoad(viewController: UIViewController) {
     viewController.view.backgroundColor = StyleKit.pageBackgroundColor
