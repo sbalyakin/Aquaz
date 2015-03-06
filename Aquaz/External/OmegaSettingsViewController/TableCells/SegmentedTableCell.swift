@@ -10,7 +10,6 @@ import UIKit
 
 class SegmentedTableCell<Value: Printable, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>: TableCellWithValue<Value>, UISegmentedTableViewCellDelegate {
   
-  override var value: Value { didSet { updateUICell() } }
   var title: String { didSet { uiCell?.textLabel?.text = title } }
   var collection: Collection
   var uiCell: UISegmentedTableViewCell?
@@ -38,6 +37,11 @@ class SegmentedTableCell<Value: Printable, Collection: CollectionType where Valu
     uiCell!.segmentsWidth = segmentsWidth
     updateUICell()
     return uiCell!
+  }
+  
+  override func valueDidChange() {
+    super.valueDidChange()
+    updateUICell()
   }
   
   private func updateUICell() {

@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol TableCellWithValueDelegate {
-  func valueDidChange()
-}
-
 class ValueExternalStorage<Value> {
   
   var value: Value
@@ -32,10 +28,9 @@ class ValueExternalStorage<Value> {
 
 class TableCellWithValue<Value>: TableCell {
   
-  var value: Value {
+  final var value: Value {
     didSet {
-      valueExternalStorage?.value = value
-      valueChangedFunction?(self)
+      valueDidChange()
     }
   }
   
@@ -57,9 +52,15 @@ class TableCellWithValue<Value>: TableCell {
   typealias StringFromValueFunction = (Value) -> String
   typealias ValueChangedFunction = (TableCell) -> ()
   
+  
   init(value: Value, container: TableCellsContainer){
     self.value = value
     super.init(container: container)
+  }
+  
+  func valueDidChange() {
+    valueExternalStorage?.value = value
+    valueChangedFunction?(self)
   }
   
   override func writeToExternalStorage() {

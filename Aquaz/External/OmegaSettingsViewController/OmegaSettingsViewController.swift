@@ -72,7 +72,14 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createRangedRightDetailTableCell<Value: Printable, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(#title: String, settingsItem: SettingsItemBase<Value>, collection: Collection, pickerTableCellHeight: PickerTableCellHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
+  func createRightDetailTableCell<Value: Printable>(#title: String, value: Value, accessoryType: UITableViewCellAccessoryType = .None, selectionChangedFunction: TableCell.TableCellActivatedFunction? = nil, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
+    let cell = RightDetailTableCell(title: title, value: value, container: self, accessoryType: accessoryType)
+    cell.tableCellActivatedFunction = selectionChangedFunction
+    cell.stringFromValueFunction = stringFromValueFunction
+    return cell
+  }
+  
+  func createRangedRightDetailTableCell<Value: Printable, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(#title: String, settingsItem: SettingsItemBase<Value>, collection: Collection, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
     let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: .None)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     cell.supportingTableCell = PickerTableCell(value: settingsItem.value, collection: collection, container: self, height: pickerTableCellHeight)
@@ -83,7 +90,7 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createRangedRightDetailTableCell<Value: Printable, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(#title: String, value: Value, collection: Collection, pickerTableCellHeight: PickerTableCellHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
+  func createRangedRightDetailTableCell<Value: Printable, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(#title: String, value: Value, collection: Collection, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
     let cell = RightDetailTableCell(title: title, value: value, container: self, accessoryType: .None)
     cell.supportingTableCell = PickerTableCell(value: value, collection: collection, container: self, height: pickerTableCellHeight)
     
@@ -93,22 +100,53 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createEnumRightDetailTableCell<Value: RawRepresentable where Value: Printable, Value: Equatable, Value.RawValue == Int>(#title: String, settingsItem: SettingsItemBase<Value>, pickerTableCellHeight: PickerTableCellHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
+  func createEnumRightDetailTableCell<Value: RawRepresentable where Value: Printable, Value: Equatable, Value.RawValue == Int>(#title: String, settingsItem: SettingsItemBase<Value>, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
     let cell = createRangedRightDetailTableCell(title: title, settingsItem: settingsItem, collection: EnumCollection<Value>(), pickerTableCellHeight: pickerTableCellHeight)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createEnumRightDetailTableCell<Value: RawRepresentable where Value: Printable, Value: Equatable, Value.RawValue == Int>(#title: String, value: Value, pickerTableCellHeight: PickerTableCellHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
+  func createEnumRightDetailTableCell<Value: RawRepresentable where Value: Printable, Value: Equatable, Value.RawValue == Int>(#title: String, value: Value, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
     let cell = createRangedRightDetailTableCell(title: title, value: value, collection: EnumCollection<Value>(), pickerTableCellHeight: pickerTableCellHeight)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createRightDetailTableCell<Value: Printable>(#title: String, value: Value, accessoryType: UITableViewCellAccessoryType = .None, selectionChangedFunction: TableCell.TableCellActivatedFunction? = nil, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
-    let cell = RightDetailTableCell(title: title, value: value, container: self, accessoryType: accessoryType)
-    cell.tableCellActivatedFunction = selectionChangedFunction
+  func createTimeIntervalRightDetailTableCell(#title: String, value: NSTimeInterval, timeComponents: [TimeIntervalPickerTableCellComponent], height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSTimeInterval) -> String)? = nil) -> RightDetailTableCell<NSTimeInterval> {
+    let pickerCell = TimeIntervalPickerTableCell(value: value, timeComponents: timeComponents, container: self, height: height)
+    
+    let cell = RightDetailTableCell(title: title, value: value, container: self)
+    cell.supportingTableCell = pickerCell
     cell.stringFromValueFunction = stringFromValueFunction
+    return cell
+  }
+  
+  func createTimeIntervalRightDetailTableCell(#title: String, settingsItem: SettingsItemBase<NSTimeInterval>, timeComponents: [TimeIntervalPickerTableCellComponent], height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSTimeInterval) -> String)? = nil) -> RightDetailTableCell<NSTimeInterval> {
+    let pickerCell = TimeIntervalPickerTableCell(value: settingsItem.value, timeComponents: timeComponents, container: self, height: height)
+
+    let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self)
+    cell.supportingTableCell = pickerCell
+    cell.stringFromValueFunction = stringFromValueFunction
+    cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
+    return cell
+  }
+  
+  func createDateRightDetailTableCell(#title: String, value: NSDate, datePickerMode: DatePickerTableCellMode, minimumDate: NSDate? = nil, maximumDate: NSDate? = nil, height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSDate) -> String)? = nil) -> RightDetailTableCell<NSDate> {
+    let pickerCell = DatePickerTableCell(value: value, container: self, datePickerMode: datePickerMode, minimumDate: minimumDate, maximumDate: maximumDate, height: height)
+    
+    let cell = RightDetailTableCell(title: title, value: value, container: self)
+    cell.supportingTableCell = pickerCell
+    cell.stringFromValueFunction = stringFromValueFunction
+    return cell
+  }
+  
+  func createDateRightDetailTableCell(#title: String, settingsItem: SettingsItemBase<NSDate>, datePickerMode: DatePickerTableCellMode, minimumDate: NSDate? = nil, maximumDate: NSDate? = nil, height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSDate) -> String)? = nil) -> RightDetailTableCell<NSDate> {
+    let pickerCell = DatePickerTableCell(value: settingsItem.value, container: self, datePickerMode: datePickerMode, minimumDate: minimumDate, maximumDate: maximumDate, height: height)
+    
+    let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self)
+    cell.supportingTableCell = pickerCell
+    cell.stringFromValueFunction = stringFromValueFunction
+    cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     return cell
   }
   

@@ -10,7 +10,6 @@ import UIKit
 
 class SwitchTableCell<Value: BooleanType>: TableCellWithValue<Value>, UISwitchTableViewCellDelegate {
   
-  override var value: Value { didSet { uiCell?.switchControl.setOn(value.boolValue, animated: true) } }
   var title: String { didSet { uiCell?.textLabel?.text = title } }
   var uiCell: UISwitchTableViewCell?
   
@@ -28,6 +27,11 @@ class SwitchTableCell<Value: BooleanType>: TableCellWithValue<Value>, UISwitchTa
     uiCell!.switchControl.setOn(value.boolValue, animated: false)
     uiCell!.delegate = self
     return uiCell!
+  }
+
+  override func valueDidChange() {
+    super.valueDidChange()
+    uiCell?.switchControl.setOn(value.boolValue, animated: true)
   }
   
   func switchControlValueChanged(switchControl: UISwitch, on: Bool) {

@@ -8,13 +8,7 @@
 
 import UIKit
 
-class RightDetailTableCell<Value: Printable>: TableCellWithValue<Value>, TableCellWithValueDelegate {
-  
-  override var value: Value {
-    didSet {
-      uiCell?.detailTextLabel?.text = stringFromValueFunction?(value) ?? value.description
-    }
-  }
+class RightDetailTableCell<Value: Printable>: TableCellWithValue<Value> {
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
   var accessoryType: UITableViewCellAccessoryType? { didSet { uiCell?.accessoryType = accessoryType ?? .None } }
@@ -49,6 +43,11 @@ class RightDetailTableCell<Value: Printable>: TableCellWithValue<Value>, TableCe
     return uiCell!
   }
   
+  override func valueDidChange() {
+    super.valueDidChange()
+    uiCell?.detailTextLabel?.text = stringFromValueFunction?(value) ?? value.description
+  }
+  
   override func setActive(active: Bool) {
     if isSupportingCell {
       return
@@ -70,12 +69,6 @@ class RightDetailTableCell<Value: Printable>: TableCellWithValue<Value>, TableCe
   
   private func setHighlightForValue(enable: Bool) {
     uiCell!.detailTextLabel?.textColor = enable ? UIColor.redColor() : UIColor.blackColor()
-  }
-  
-  func valueDidChange() {
-    if let supportingTableCell = supportingTableCell {
-      value = supportingTableCell.value
-    }
   }
   
 }

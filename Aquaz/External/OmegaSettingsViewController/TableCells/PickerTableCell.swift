@@ -8,19 +8,14 @@
 
 import UIKit
 
-enum PickerTableCellHeight {
-  case Small
-  case Medium
-  case Large
-}
-
 class PickerTableCell<Value: Printable, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>: TableCellWithValue<Value>, UIPickerTableViewCellDataSource, UIPickerTableViewCellDelegate {
   
-  var collection: Collection
+  let collection: Collection
+  let height: UIPickerViewHeight
+
   var uiCell: UIPickerTableViewCell?
-  var height: PickerTableCellHeight
   
-  init(value: Value, collection: Collection, container: TableCellsContainer, height: PickerTableCellHeight = .Medium) {
+  init(value: Value, collection: Collection, container: TableCellsContainer, height: UIPickerViewHeight = .Medium) {
     self.collection = collection
     self.height = height
     super.init(value: value, container: container)
@@ -37,6 +32,11 @@ class PickerTableCell<Value: Printable, Collection: CollectionType where Value: 
     return uiCell!
   }
   
+  override func valueDidChange() {
+    super.valueDidChange()
+    updateUICell()
+  }
+  
   private func updateUICell() {
     if let uiCell = uiCell, let row = find(collection, value) {
       uiCell.pickerView.selectRow(row, inComponent: 0, animated: true)
@@ -44,11 +44,7 @@ class PickerTableCell<Value: Printable, Collection: CollectionType where Value: 
   }
   
   override func getRowHeight() -> CGFloat? {
-    switch height {
-    case .Small:  return 162.5
-    case .Medium: return 180.5
-    case .Large:  return 216.5
-    }
+    return height.rawValue
   }
   
   // MARK: PickerTableViewCellDataSource
@@ -67,10 +63,20 @@ class PickerTableCell<Value: Printable, Collection: CollectionType where Value: 
     return title
   }
   
+  func pickerView(pickerView: UIPickerView, titleForComponent: Int) -> String? {
+    return nil
+  }
+
   // MARK: PickerTableViewCellDelegate
   
   func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    baseTableCell?.value = collection[row]
+    let value = collection[row]
+    self.value = value
+    baseTableCell?.value = value
   }
   
+  func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat? {
+    return nil
+  }
+
 }

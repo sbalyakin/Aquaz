@@ -10,7 +10,6 @@ import UIKit
 
 class TextFieldTableCell<Value: Printable>: TableCellWithValue<Value>, UITextFieldTableViewCellDelegate {
   
-  override var value: Value { didSet { uiCell?.textField.text = value.description } }
   var title: String { didSet { uiCell?.textLabel?.text = title } }
   var uiCell: UITextFieldTableViewCell?
   var textFieldBorderStyle: UITextBorderStyle {
@@ -50,6 +49,11 @@ class TextFieldTableCell<Value: Printable>: TableCellWithValue<Value>, UITextFie
     uiCell!.textField.textAlignment = .Right
     uiCell!.delegate = self
     return uiCell!
+  }
+  
+  override func valueDidChange() {
+    super.valueDidChange()
+    uiCell?.textField.text = value.description
   }
   
   override func setActive(active: Bool) {
