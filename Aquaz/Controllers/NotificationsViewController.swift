@@ -147,8 +147,6 @@ class NotificationsViewController: OmegaSettingsViewController {
   }
 
   func recreateNotifications() {
-    println("recreateNotifications")
-    
     NotificationsHelper.removeAllNotifications()
 
     if Settings.sharedInstance.notificationsEnabled.value {
