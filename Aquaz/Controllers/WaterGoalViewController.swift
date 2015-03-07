@@ -108,11 +108,12 @@ class WaterGoalViewController: OmegaSettingsViewController {
 
     tableView.backgroundView = nil
     tableView.backgroundColor = StyleKit.pageBackgroundColor
-    
-    initTableCells()
   }
   
-  private func initTableCells() {
+  override func createTableCellsSections() -> [TableCellsSection] {
+    // Settings should be saved to user defaults only if user taps Done button
+    saveToSettingsOnValueUpdate = false
+    
     let genderTitle = NSLocalizedString("WGVC:Gender", value: "Gender",
       comment: "WaterGoalViewController: Table cell title for [Gender] setting")
     
@@ -218,7 +219,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
     let section2 = TableCellsSection()
     section2.tableCells = [waterGoalCell]
     
-    tableSections = [section1, section2]
+    return [section1, section2]
   }
   
   private func stringFromHeight(value: Double) -> String {

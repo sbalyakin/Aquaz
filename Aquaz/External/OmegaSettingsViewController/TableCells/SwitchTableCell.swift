@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SwitchTableCell<Value: BooleanType>: TableCellWithValue<Value>, UISwitchTableViewCellDelegate {
+class SwitchTableCell<Value: BooleanType where Value: BooleanLiteralConvertible, Value.BooleanLiteralType == Bool>: TableCellWithValue<Value>, UISwitchTableViewCellDelegate {
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
   var uiCell: UISwitchTableViewCell?
@@ -35,6 +35,8 @@ class SwitchTableCell<Value: BooleanType>: TableCellWithValue<Value>, UISwitchTa
   }
   
   func switchControlValueChanged(switchControl: UISwitch, on: Bool) {
+    value = Value(booleanLiteral: on)
+
     if !active {
       container.activateTableCell(self)
     }

@@ -15,11 +15,14 @@ class SettingsViewController: OmegaSettingsViewController {
     
     RevealInitializer.revealButtonSetup(self)
     Styler.viewDidLoad(self)
-    
-    initTableCells()
   }
-  
-  private func initTableCells() {
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    readTableCellValuesFromExternalStorage()
+  }
+
+  override func createTableCellsSections() -> [TableCellsSection] {
     let volumeTitle = NSLocalizedString("SVC:Volume", value: "Volume",
       comment: "SettingsViewController: Table cell title for [Volume] setting")
 
@@ -53,7 +56,7 @@ class SettingsViewController: OmegaSettingsViewController {
       settingsItem: Settings.sharedInstance.generalHeightUnits,
       segmentsWidth: 70)
     
-    let waterGoalCell = createRightDetailTableCell(title: waterGoalTitle, value: Settings.sharedInstance.userWaterGoal.value, accessoryType: .DisclosureIndicator, selectionChangedFunction: waterGoalCellWasSelected, stringFromValueFunction: stringFromWaterGoal)
+    let waterGoalCell = createRightDetailTableCell(title: waterGoalTitle, value: Settings.sharedInstance.userWaterGoal.value, accessoryType: .DisclosureIndicator, activationChangedFunction: waterGoalCellWasSelected, stringFromValueFunction: stringFromWaterGoal)
     
     let unitsSection = TableCellsSection()
     unitsSection.headerTitle = unitsSectionHeader
@@ -66,12 +69,7 @@ class SettingsViewController: OmegaSettingsViewController {
     recommendationsSection.headerTitle = recommendationsSectionHeader
     recommendationsSection.tableCells = [waterGoalCell]
     
-    tableSections = [unitsSection, recommendationsSection]
-  }
-  
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-    readTableCellValuesFromExternalStorage()
+    return [unitsSection, recommendationsSection]
   }
   
   private func stringFromWaterGoal(waterGoal: Double) -> String {
@@ -80,14 +78,13 @@ class SettingsViewController: OmegaSettingsViewController {
     return text
   }
   
-  private func waterGoalCellWasSelected(tableCell: TableCell, selected: Bool) {
-    if selected {
+  private func waterGoalCellWasSelected(tableCell: TableCell, active: Bool) {
+    if active {
       if let waterGoalViewController = storyboard?.instantiateViewControllerWithIdentifier("WaterGoalViewController") as? WaterGoalViewController {
         navigationController?.pushViewController(waterGoalViewController, animated: true)
       } else {
         assert(false)
       }
-
     }
   }
 }

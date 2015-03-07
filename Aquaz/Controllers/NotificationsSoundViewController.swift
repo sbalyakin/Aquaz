@@ -25,8 +25,7 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
     let soundInfo = soundList[checkedIndex]
     Settings.sharedInstance.notificationsSound.value = soundInfo.fileName
     
-    notificationsViewController.initControlsFromSettings()
-    notificationsViewController.updateNotificationsFromSettings()
+    notificationsViewController.recreateNotifications()
     
     navigationController?.popViewControllerAnimated(true)
   }

@@ -12,7 +12,7 @@ class TableCell {
   
   let container: TableCellsContainer
   var active = false
-  var tableCellActivatedFunction: TableCellActivatedFunction?
+  var tableCellDidActivateFunction: TableCellActivatedFunction?
   var isSupportingCell: Bool { return false }
   var supportsPermanentActivation: Bool { return false }
   
@@ -33,7 +33,7 @@ class TableCell {
   
   func setActive(active: Bool) {
     self.active = active
-    tableCellActivatedFunction?(self, active)
+    tableCellDidActivateFunction?(self, active)
     if !supportsPermanentActivation {
       self.active = false
     }

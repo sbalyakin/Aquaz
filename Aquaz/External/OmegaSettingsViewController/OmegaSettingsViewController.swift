@@ -20,7 +20,9 @@ class OmegaSettingsViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
   
-  var tableSections: [TableCellsSection] = []
+  var tableCellsSections: [TableCellsSection] = []
+  
+  /// If true all settings item will be saved to user defaults automatically on value update
   var saveToSettingsOnValueUpdate = true
   
   private var activeTableCell: TableCell?
@@ -28,11 +30,17 @@ class OmegaSettingsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.keyboardDismissMode = .OnDrag
+    tableCellsSections = createTableCellsSections()
+  }
+  
+  func createTableCellsSections() -> [TableCellsSection] {
+    assert(false, "This method should be overriden by descendants")
+    return []
   }
   
   func createBasicTableCell(#title: String, accessoryType: UITableViewCellAccessoryType? = nil, selectionChangedFunction: TableCell.TableCellActivatedFunction? = nil) -> BasicTableCell {
     let cell = BasicTableCell(title: title, container: self, accessoryType: accessoryType)
-    cell.tableCellActivatedFunction = selectionChangedFunction
+    cell.tableCellDidActivateFunction = selectionChangedFunction
     return cell
   }
   
@@ -72,9 +80,16 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createRightDetailTableCell<Value: Printable>(#title: String, value: Value, accessoryType: UITableViewCellAccessoryType = .None, selectionChangedFunction: TableCell.TableCellActivatedFunction? = nil, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
+  func createRightDetailTableCell<Value: Printable>(#title: String, value: Value, accessoryType: UITableViewCellAccessoryType = .None, activationChangedFunction: TableCell.TableCellActivatedFunction? = nil, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
     let cell = RightDetailTableCell(title: title, value: value, container: self, accessoryType: accessoryType)
-    cell.tableCellActivatedFunction = selectionChangedFunction
+    cell.tableCellDidActivateFunction = activationChangedFunction
+    cell.stringFromValueFunction = stringFromValueFunction
+    return cell
+  }
+  
+  func createRightDetailTableCell<Value: Printable>(#title: String, settingsItem: SettingsItemBase<Value>, accessoryType: UITableViewCellAccessoryType = .None, activationChangedFunction: TableCell.TableCellActivatedFunction? = nil, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
+    let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: accessoryType)
+    cell.tableCellDidActivateFunction = activationChangedFunction
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
@@ -205,7 +220,7 @@ class OmegaSettingsViewController: UIViewController {
   }
   
   func writeTableCellValuesToExternalStorage() {
-    for section in tableSections {
+    for section in tableCellsSections {
       for cell in section.tableCells {
         cell.writeToExternalStorage()
       }
@@ -213,7 +228,7 @@ class OmegaSettingsViewController: UIViewController {
   }
   
   func readTableCellValuesFromExternalStorage() {
-    for section in tableSections {
+    for section in tableCellsSections {
       for cell in section.tableCells {
         cell.readFromExternalStorage()
       }
@@ -227,7 +242,7 @@ extension OmegaSettingsViewController: TableCellsContainer {
   func addSupportingTableCell(#baseTableCell: TableCell, supportingTableCell: TableCell) {
     tableView.beginUpdates()
     
-    section: for (sectionIndex, section) in enumerate(tableSections) {
+    section: for (sectionIndex, section) in enumerate(tableCellsSections) {
       for (cellIndex, tableCell) in enumerate(section.tableCells) {
         if tableCell === baseTableCell {
           let insertIndex = cellIndex + 1
@@ -258,7 +273,7 @@ extension OmegaSettingsViewController: TableCellsContainer {
   func deleteSupportingTableCell() {
     tableView.beginUpdates()
     
-    section: for (sectionIndex, section) in enumerate(tableSections) {
+    section: for (sectionIndex, section) in enumerate(tableCellsSections) {
       var indexesToDelete = [Int]()
       
       for (cellIndex, tableCell) in enumerate(section.tableCells) {
@@ -280,7 +295,7 @@ extension OmegaSettingsViewController: TableCellsContainer {
 extension OmegaSettingsViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return tableSections[section].tableCells.count
+    return tableCellsSections[section].tableCells.count
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -290,11 +305,11 @@ extension OmegaSettingsViewController: UITableViewDataSource, UITableViewDelegat
   }
   
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return tableSections.count
+    return tableCellsSections.count
   }
   
   private func getTableCellForRowAtIndexPath(indexPath: NSIndexPath) -> TableCell {
-    let section = tableSections[indexPath.section]
+    let section = tableCellsSections[indexPath.section]
     let cell = section.tableCells[indexPath.row]
     return cell
   }
@@ -305,12 +320,12 @@ extension OmegaSettingsViewController: UITableViewDataSource, UITableViewDelegat
   }
   
   func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    let section = tableSections[section]
+    let section = tableCellsSections[section]
     return section.headerTitle
   }
   
   func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-    let section = tableSections[section]
+    let section = tableCellsSections[section]
     return section.footerTitle
   }
   
