@@ -72,7 +72,7 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
 
   private lazy var dateFormatter: NSDateFormatter = {
     let formatter = NSDateFormatter()
-    let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMyy", options: 0, locale: NSLocale.currentLocale())
+    let dateFormat = NSDateFormatter.dateFormatFromTemplate("ddMMMyy", options: 0, locale: NSLocale.currentLocale())
     formatter.dateFormat = dateFormat
     return formatter
     }()
