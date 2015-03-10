@@ -357,13 +357,7 @@
 		84669A6019DAD78D003C2263 = {
 			isa = PBXGroup;
 			children = (
-				A5EE36291AADB2890038C844 /* AdSupport.framework */,
-				A5F0A5B01AAC7F04006452C9 /* Fabric.framework */,
-				A5F0A5AF1AAC7F04006452C9 /* Crashlytics.framework */,
-				A5E660A31AACB95800C24627 /* SystemConfiguration.framework */,
-				A5E660A11AACB95200C24627 /* libsqlite3.dylib */,
-				A5E6609F1AACB94B00C24627 /* libz.dylib */,
-				A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */,
+				A5D3D42E1AAF58C000E3C989 /* Frameworks & Libraries */,
 				84669A6B19DAD78D003C2263 /* Aquaz */,
 				84669A8419DAD78D003C2263 /* AquazTests */,
 				84669A6A19DAD78D003C2263 /* Products */,
@@ -382,16 +376,16 @@
 		84669A6B19DAD78D003C2263 /* Aquaz */ = {
 			isa = PBXGroup;
 			children = (
-				A5EE36241AAD9D820038C844 /* Services */,
-				8488A18F1A540B9300258EC8 /* Sounds */,
-				84669A7819DAD78D003C2263 /* Images.xcassets */,
 				843B055219E2D7800097A833 /* AppDelegates */,
 				843B055419E2D7800097A833 /* Controllers */,
 				8424AA041A0B57F9009C5C47 /* Controls */,
-				843B055919E2D7800097A833 /* External */,
-				A5B75A1219E55CBB00D0477B /* Helpers */,
 				843B055D19E2D7800097A833 /* Models */,
+				A5EE36241AAD9D820038C844 /* Services */,
+				A5B75A1219E55CBB00D0477B /* Helpers */,
+				843B055919E2D7800097A833 /* External */,
+				8488A18F1A540B9300258EC8 /* Sounds */,
 				84669A6C19DAD78D003C2263 /* Supporting Files */,
+				84669A7819DAD78D003C2263 /* Images.xcassets */,
 				84669A7019DAD78D003C2263 /* Aquaz.xcdatamodeld */,
 				84669A7519DAD78D003C2263 /* Main.storyboard */,
 				A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */,
@@ -503,6 +497,20 @@
 				84B0C7031AA75E36006889E9 /* UITimeIntervalPickerTableViewCell.swift */,
 			);
 			path = UICells;
+			sourceTree = "<group>";
+		};
+		A5D3D42E1AAF58C000E3C989 /* Frameworks & Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				A5EE36291AADB2890038C844 /* AdSupport.framework */,
+				A5F0A5B01AAC7F04006452C9 /* Fabric.framework */,
+				A5F0A5AF1AAC7F04006452C9 /* Crashlytics.framework */,
+				A5E660A31AACB95800C24627 /* SystemConfiguration.framework */,
+				A5E660A11AACB95200C24627 /* libsqlite3.dylib */,
+				A5E6609F1AACB94B00C24627 /* libz.dylib */,
+				A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */,
+			);
+			name = "Frameworks & Libraries";
 			sourceTree = "<group>";
 		};
 		A5EE36241AAD9D820038C844 /* Services */ = {
