@@ -13,31 +13,26 @@ public class ModelHelper {
 
   /// Fetches managed objects from Core Data taking into account specified predicate and sort descriptors
   public class func fetchManagedObjects<EntityType: NSManagedObject where EntityType: NamedEntity>(#managedObjectContext: NSManagedObjectContext?, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil, limit: Int? = nil) -> [EntityType] {
-    if let managedObjectContext = managedObjectContext {
-      if let entityDescription = NSEntityDescription.entityForName(EntityType.entityName, inManagedObjectContext: managedObjectContext) {
-        let fetchRequest = NSFetchRequest()
-        fetchRequest.entity = entityDescription
-        fetchRequest.sortDescriptors = sortDescriptors
-        fetchRequest.predicate = predicate
-        if let fetchLimit = limit {
-          fetchRequest.fetchLimit = fetchLimit
-        }
-        
-        var error: NSError?
-        if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as? [EntityType] {
-          return fetchResults
-        } else {
-          NSLog("fetchManagedObjects failed for entity \"\(EntityType.entityName)\" with error: \(error?.localizedDescription ?? String())")
-          return []
-        }
+    if let managedObjectContext = managedObjectContext, let entityDescription = LoggedActions.entityDescriptionForEntity(EntityType.self, inManagedObjectContext: managedObjectContext) {
+      let fetchRequest = NSFetchRequest()
+      fetchRequest.entity = entityDescription
+      fetchRequest.sortDescriptors = sortDescriptors
+      fetchRequest.predicate = predicate
+      if let fetchLimit = limit {
+        fetchRequest.fetchLimit = fetchLimit
+      }
+      
+      var error: NSError?
+      if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as? [EntityType] {
+        return fetchResults
       } else {
-        assert(false)
+        Logger.logError(Logger.Messages.failedToExecuteFetchRequest, error: error)
         return []
       }
-    } else {
-      assert(false)
-      return []
     }
+    
+    assert(false)
+    return []
   }
   
   /// Fetches a managed object from Core Data taking into account specified predicate and sort descriptors
@@ -51,7 +46,7 @@ public class ModelHelper {
     var error: NSError?
     if let managedObjectContext = managedObjectContext {
       if !managedObjectContext.save(&error) {
-        assert(false, "Failed to save managed object context. Error: \(error?.localizedDescription ?? String())")
+        Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
       }
     } else {
       assert(false)

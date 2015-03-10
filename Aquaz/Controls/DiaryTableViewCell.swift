@@ -9,6 +9,7 @@
 import UIKit
 
 private extension Units.Volume {
+  
   var precision: Double {
     switch self {
     case Millilitres: return 1.0
@@ -56,15 +57,14 @@ class DiaryTableViewCell: UITableViewCell {
     super.layoutSubviews()
     
     // Adjust amount label
-    var maxX: CGFloat = 0
-    
+    let maxX: CGFloat
+
+    // TODO: Hardcoded magic numbers should be transformed to constants
     if let defaultAccessoryView = findDefaultAccessoryView() {
-      maxX = defaultAccessoryView.frame.minX
+      maxX = defaultAccessoryView.frame.minX - 8
     } else {
-      maxX = bounds.width - 23
+      maxX = bounds.width - 23 - 8
     }
-    
-    maxX -= 8
     
     var frame = amountLabel.frame
     frame.origin.x = maxX - frame.width

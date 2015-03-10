@@ -116,7 +116,7 @@ public class Drink: NSManagedObject, NamedEntity {
     if let drinkTypeRaw = DrinkType(rawValue: index.integerValue) {
       _drinkType = drinkTypeRaw
     } else {
-      assert(false)
+      Logger.logDrinkIsNotFound(drinkIndex: index.integerValue)
     }
     
     switch drinkType {
@@ -209,40 +209,35 @@ public class Drink: NSManagedObject, NamedEntity {
       Static.cachedDrinks[index] = drink
       return drink
     } else {
-      assert(false, "Requested drink with index \(index) is not found")
+      Logger.logDrinkIsNotFound(drinkIndex: index)
       return nil
     }
   }
   
   class func addEntity(#index: Int, name: String, waterPercent: NSNumber, recentAmount amount: NSNumber, managedObjectContext: NSManagedObjectContext?) -> Drink? {
     if let managedObjectContext = managedObjectContext {
-      if let drink = NSEntityDescription.insertNewObjectForEntityForName(Drink.entityName, inManagedObjectContext: managedObjectContext) as? Drink {
+      if let drink = LoggedActions.insertNewObjectForEntity(Drink.self, inManagedObjectContext: managedObjectContext) {
         drink.index = index
         drink.name = name
         drink.waterPercent = waterPercent
 
-        if let recentAmount = NSEntityDescription.insertNewObjectForEntityForName(RecentAmount.entityName, inManagedObjectContext: managedObjectContext) as? RecentAmount {
+        if let recentAmount = LoggedActions.insertNewObjectForEntity(RecentAmount.self, inManagedObjectContext: managedObjectContext) {
           recentAmount.drink = drink
           recentAmount.amount = amount
-        } else {
-          assert(false)
         }
         
         var error: NSError?
         if !managedObjectContext.save(&error) {
-          assert(false, "Failed to save new drink named \"\(name)\". Error: \(error!.localizedDescription)")
+          Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
           return nil
         }
         
         return drink
-      } else {
-        assert(false)
-        return nil
       }
-    } else {
-      assert(false)
-      return nil
     }
+    
+    assert(false)
+    return nil
   }
   
   private typealias DrawDrinkFunction = (frame: CGRect) -> Void

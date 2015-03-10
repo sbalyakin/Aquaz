@@ -87,10 +87,10 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
 
   private func initWeekStatisticsView() {
     let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
-    assert(waterIntakes.count == 7)
+    Logger.logSevere(waterIntakes.count == 7, "Unexpected count of grouped water intakes", logDetails: [Logger.Attributes.count: "\(waterIntakes.count)"])
     
     let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
-    assert(waterIntakes.count == 7)
+    Logger.logSevere(goals.count == 7, "Unexpected count of water goals", logDetails: [Logger.Attributes.count: "\(goals.count)"])
     
     let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
     

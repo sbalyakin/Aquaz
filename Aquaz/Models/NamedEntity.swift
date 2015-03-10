@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.
 //
 
-public protocol NamedEntity {
+public protocol NamedEntity: class {
   
   static var entityName: String { get }
   

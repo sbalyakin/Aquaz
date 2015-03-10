@@ -54,13 +54,11 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     self.collectionView.reloadItemsAtIndexPaths([alcoholIndexPath])
 
     if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
-      if let intakeViewController = storyboard?.instantiateViewControllerWithIdentifier("IntakeViewController") as? IntakeViewController {
+      if let intakeViewController: IntakeViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "IntakeViewController") {
         intakeViewController.drink = drink
         intakeViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
         intakeViewController.dayViewController = dayViewController
         navigationController?.pushViewController(intakeViewController, animated: true)
-      } else {
-        assert(false)
       }
     }
   }
@@ -101,8 +99,6 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
         rect.origin.y -= rect.maxY - pointInScreen.y + 20
         
         popupViewManager.showPopupView(frame: rect)
-      } else {
-        assert(false)
       }
     }
   }
@@ -144,8 +140,6 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
       if drinkIndex == displayedDrinkTypes.count - 1 {
         cell.drinkView.isGroup = true
       }
-    } else {
-      assert(false)
     }
     
     return cell
@@ -173,16 +167,12 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     let drinkType = displayedDrinkTypes[drinkIndex]
     
     if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
-      if let intakeViewController = storyboard?.instantiateViewControllerWithIdentifier("IntakeViewController") as? IntakeViewController {
+      if let intakeViewController: IntakeViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "IntakeViewController") {
         intakeViewController.drink = drink
         intakeViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
         intakeViewController.dayViewController = dayViewController
         navigationController?.pushViewController(intakeViewController, animated: true)
-      } else {
-        assert(false)
       }
-    } else {
-      assert(false)
     }
   }
   
@@ -218,6 +208,8 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
   }
   
   func showPopupView(#frame: CGRect) {
+    let a = popupDrinkTypes[5]
+    
     cleanPopupView()
     
     let backgroundView = UIView(frame: frame)
@@ -308,8 +300,6 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
       cell.drinkLabel.text = drink.localizedName
       cell.drinkView.drink = drink
-    } else {
-      assert(false)
     }
     
     return cell
@@ -371,8 +361,6 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
       if let cell = popupCollectionView.cellForItemAtIndexPath(indexPath) {
         cell.highlighted = true
         cell.setNeedsDisplay()
-      } else {
-        assert(false)
       }
       
       if gestureRecognizer.state == .Ended {

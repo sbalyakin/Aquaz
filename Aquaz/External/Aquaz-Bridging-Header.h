@@ -6,3 +6,4 @@
 //
 
 #import "SWRevealViewController.h"
+#import "Localytics.h"

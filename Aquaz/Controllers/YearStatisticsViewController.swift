@@ -67,7 +67,7 @@ class YearStatisticsViewController: StyledViewController {
     let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Month, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
     
     let goals = WaterGoal.fetchWaterGoalAmountsGroupedByMonths(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
-    assert(waterIntakes.count == goals.count)
+    Logger.logSevere(waterIntakes.count == goals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
 
     let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
 

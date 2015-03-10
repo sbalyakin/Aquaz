@@ -37,10 +37,10 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
       if status == OSStatus(kAudioServicesNoError) {
         AudioServicesPlaySystemSound(mySound)
       } else {
-        assert(false)
+        Logger.logError("Failed to create system sound identifier")
       }
     } else {
-      assert(false)
+      Logger.logError("Failed to build URL for sound file", logDetails: [Logger.Attributes.fileName: fileName])
     }
   }
 
@@ -52,27 +52,29 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
           if contains(allFiles, soundInfo.fileName) {
             checkedSounds.append(soundInfo)
           } else {
-            assert(false)
+            Logger.logError("Sound file is not found", logDetails: [Logger.Attributes.fileName: soundInfo.fileName])
           }
         }
         soundList = checkedSounds
       } else {
-        assert(false)
+        Logger.logError("Failed to get contents of resource directory")
       }
     } else {
-      assert(false)
+      Logger.logError("Failed to get resource path")
     }
   }
   
   private func findCheckedIndex() {
+    let fileName = Settings.sharedInstance.notificationsSound.value
+    
     for (index, sound) in enumerate(soundList) {
-      if sound.fileName == Settings.sharedInstance.notificationsSound.value {
+      if sound.fileName == fileName {
         checkedIndex = index
         return
       }
     }
     
-    assert(false)
+    Logger.logWarning("Sound file stored in settings is not found", logDetails: [Logger.Attributes.fileName: fileName])
     checkedIndex == 0
   }
   

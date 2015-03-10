@@ -301,7 +301,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
       let displayedUnit = Settings.sharedInstance.generalVolumeUnits.value
       let quantity = Quantity(ownUnit: Units.Volume.metric.unit, fromUnit: displayedUnit.unit, fromAmount: displayedValue)
       let metricValue = quantity.amount
-      let adjustedMetricValue = Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: metricValue, unitType: .Volume, precision: displayedUnit.precision)
+      let adjustedMetricValue = Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: metricValue, unitType: .Volume, roundPrecision: displayedUnit.precision)
       return adjustedMetricValue
     } else {
       return nil

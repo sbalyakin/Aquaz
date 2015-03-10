@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,17 +19,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
-
+    Fabric.with([Crashlytics()])
+    
+    Localytics.integrate("5f18fc62efbdeb52bd87247-87c1e42e-c5ae-11e4-ae01-009c5fda0a25")
+    
+    Logger.setup(logLevel: .Warning, assertLevel: .Error, showLogLevel: false, showFileNames: true, showLineNumbers: true)
+    
     if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
       // Pre populate core data if the application is running for the first time
       if let versionIdentifier = managedObjectModel.versionIdentifiers.first as? String {
         if let managedObjectContext = managedObjectContext {
           CoreDataPrePopulation.prePopulateCoreData(modelVersion: .Version1_0, managedObjectContext: managedObjectContext)
         } else {
-          assert(false)
+          Logger.logSevere("Managed object context is not initialized")
         }
       } else {
-        assert(false)
+        Logger.logSevere("Version identifier for managed object model is not specified")
       }
       
       if !Settings.sharedInstance.notificationsEnabled.value {
@@ -92,20 +99,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationWillResignActive(application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    Localytics.closeSession()
+    Localytics.upload()
   }
   
   func applicationDidEnterBackground(application: UIApplication) {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    Localytics.closeSession()
+    Localytics.upload()
   }
   
   func applicationWillEnterForeground(application: UIApplication) {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    Localytics.openSession()
+    Localytics.upload()
+    
     NotificationsHelper.setApplicationIconBadgeNumber(0)
   }
   
   func applicationDidBecomeActive(application: UIApplication) {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    Localytics.openSession()
+    Localytics.upload()
     
     // TODO: Just for getting sqlite DB folder
     //let appFolder = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
@@ -133,6 +150,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationWillTerminate(application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
+    Localytics.closeSession()
+    Localytics.upload()
+    
     self.saveContext()
   }
   

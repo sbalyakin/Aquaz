@@ -155,7 +155,7 @@ public class WaterGoalCalculator {
     case 30..<60     : ageFactor = factors[1]
     case 60...Int.max: ageFactor = factors[2]
     default:
-      assert(false)
+      Logger.logError(Logger.Messages.logicalError)
       ageFactor = factors[0]
     }
     

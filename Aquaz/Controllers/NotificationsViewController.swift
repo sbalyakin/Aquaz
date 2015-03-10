@@ -132,13 +132,13 @@ class NotificationsViewController: OmegaSettingsViewController {
   }
   
   private func soundTableCellDidActivate(tableCell: TableCell, active: Bool) {
-    if active {
-      if let controller = storyboard?.instantiateViewControllerWithIdentifier("NotificationsSoundViewController") as? NotificationsSoundViewController {
-        controller.notificationsViewController = self
-        navigationController?.pushViewController(controller, animated: true)
-      } else {
-        assert(false)
-      }
+    if !active {
+      return
+    }
+    
+    if let controller: NotificationsSoundViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "NotificationsSoundViewController") {
+      controller.notificationsViewController = self
+      navigationController?.pushViewController(controller, animated: true)
     }
   }
 

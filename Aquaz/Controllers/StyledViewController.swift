@@ -25,7 +25,7 @@ class Styler {
         navigationController.navigationBar.backIndicatorImage = image
         navigationController.navigationBar.backIndicatorTransitionMaskImage = image
       } else {
-        assert(false)
+        Logger.logError(Logger.Messages.imageNotFound, logDetails: [Logger.Attributes.name: "iconBack"])
       }
     }
   }

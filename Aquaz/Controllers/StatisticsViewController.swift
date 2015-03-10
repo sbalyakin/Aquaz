@@ -52,15 +52,13 @@ class StatisticsViewController: RevealedViewController {
       return controller
     }
     
-    var controller: UIViewController!
+    let controller: UIViewController!
     
     switch page {
-    case .Week:  controller = storyboard?.instantiateViewControllerWithIdentifier("Week Statistics View Controller") as? UIViewController
-    case .Month: controller = storyboard?.instantiateViewControllerWithIdentifier("Month Statistics View Controller") as? UIViewController
-    case .Year:  controller = storyboard?.instantiateViewControllerWithIdentifier("Year Statistics View Controller") as? UIViewController
+    case .Week:  controller = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Week Statistics View Controller")
+    case .Month: controller = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Month Statistics View Controller")
+    case .Year:  controller = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Year Statistics View Controller")
     }
-    
-    assert(controller != nil)
     
     viewControllers[page.rawValue] = controller
     return controller

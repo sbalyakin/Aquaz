@@ -74,22 +74,22 @@ class Units {
   /// Prepares specified amount for storing into Core Data. It converts metric units of amount to current units from settings.
   /// Then it rounds converted amount and makes reverse conversion to metric units.
   /// This methods allows getting amount equals to formatted amount (formatAmountToText) but represented in metric units.
-  func adjustMetricAmountForStoring(#metricAmount: Double, unitType: UnitType, precision: Double = 1) -> Double {
-    if precision == 0 {
-      assert(false)
+  func adjustMetricAmountForStoring(#metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1) -> Double {
+    if roundPrecision <= 0 {
+      assert(false, "Round precision should be positive number")
       return 0
     }
 
     let units = self.units[unitType.rawValue]
     let displayedQuantity = Quantity(ownUnit: units.displayedUnit, fromUnit: units.metricUnit, fromAmount: metricAmount)
-    let displayedAmount = round(displayedQuantity.amount / precision) * precision
+    let displayedAmount = round(displayedQuantity.amount / roundPrecision) * roundPrecision
     let metricQuantity = Quantity(ownUnit: units.metricUnit, fromUnit: units.displayedUnit, fromAmount: displayedAmount)
     return metricQuantity.amount
   }
   
   func convertMetricAmountToDisplayed(#metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1) -> Double {
-    if roundPrecision == 0 {
-      assert(false)
+    if roundPrecision <= 0 {
+      assert(false, "Round precision should be positive number")
       return 0
     }
     
@@ -103,8 +103,8 @@ class Units {
   /// Amount should be specified in metric units.
   /// It's possible to specify final precision and numbers of decimals of formatted text.
   func formatMetricAmountToText(#metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1, decimals: Int = 0, displayUnits: Bool = true) -> String {
-    if roundPrecision == 0 {
-      assert(false)
+    if roundPrecision <= 0 {
+      assert(false, "Round precision should be positive number")
       return ""
     }
     

@@ -79,12 +79,12 @@ class SettingsViewController: OmegaSettingsViewController {
   }
   
   private func waterGoalCellWasSelected(tableCell: TableCell, active: Bool) {
-    if active {
-      if let waterGoalViewController = storyboard?.instantiateViewControllerWithIdentifier("WaterGoalViewController") as? WaterGoalViewController {
-        navigationController?.pushViewController(waterGoalViewController, animated: true)
-      } else {
-        assert(false)
-      }
+    if !active {
+      return
+    }
+    
+    if let waterGoalViewController: WaterGoalViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "WaterGoalViewController") {
+      navigationController?.pushViewController(waterGoalViewController, animated: true)
     }
   }
 }

@@ -232,7 +232,7 @@ protocol CalendarViewDelegate: class {
     
     for i in 0..<daysPerWeek {
       let x = containerRect.minX + CGFloat(i) * labelWidth
-      var rect = CGRect(x: round(x), y: containerRect.minY, width: ceil(labelWidth), height: containerRect.height)
+      let rect = CGRect(x: round(x), y: containerRect.minY, width: ceil(labelWidth), height: containerRect.height)
       rects.append(rect)
     }
     
@@ -311,18 +311,15 @@ protocol CalendarViewDelegate: class {
   }
   
   func dayButtonTapped(dayButton: CalendarDayButton) {
-    if let date = dayButton.dayInfo?.date {
-      if !DateHelper.areDatesEqualByDays(date1: selectedDate, date2: date) {
-        selectedDayButton?.dayInfo?.isSelected = false
-        dayButton.dayInfo?.isSelected = true
-        selectedDayButton = dayButton
-      }
-      
-      selectedDate = date
-      delegate?.calendarViewDaySelected(date)
-    } else {
-      assert(false)
+    let date = dayButton.dayInfo.date
+    if !DateHelper.areDatesEqualByDays(date1: selectedDate, date2: date) {
+      selectedDayButton?.dayInfo?.isSelected = false
+      dayButton.dayInfo?.isSelected = true
+      selectedDayButton = dayButton
     }
+    
+    selectedDate = date
+    delegate?.calendarViewDaySelected(date)
   }
   
   private func updateCalendar() {

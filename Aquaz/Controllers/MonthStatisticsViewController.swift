@@ -69,17 +69,18 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
     let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
     
     let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
-    assert(waterIntakes.count == goals.count)
+    Logger.logSevere(waterIntakes.count == goals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     
     intakeFractions = []
     
     for (index, waterIntake) in enumerate(waterIntakes) {
       let goal = goals[index]
-      var intakeFraction: Double = 0
+      let intakeFraction: Double
       if goal > 0 {
         intakeFraction = waterIntake / goal
       } else {
-        assert(false)
+        Logger.logError("Wrong water goal", logDetails: ["goal": "\(goal)"])
+        intakeFraction = 0
       }
       intakeFractions.append(intakeFraction)
     }
@@ -96,13 +97,11 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
   }
 
   func calendarViewDaySelected(date: NSDate) {
-    if let dayViewController = storyboard?.instantiateViewControllerWithIdentifier("DayViewController") as? DayViewController {
+    if let dayViewController: DayViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "DayViewController") {
       dayViewController.mode = .Statistics
       dayViewController.setCurrentDate(date)
       dayViewController.initializesRevealControls = false
       navigationController?.pushViewController(dayViewController, animated: true)
-    } else {
-      assert(false)
     }
   }
   

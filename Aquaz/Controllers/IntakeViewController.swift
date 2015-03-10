@@ -204,11 +204,11 @@ class IntakeViewController: StyledViewController {
   
   private func prepareAmountForStoring(amount: Double) -> Double {
     let precision = Settings.sharedInstance.generalVolumeUnits.value.precision
-    return Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: amount, unitType: .Volume, precision: precision)
+    return Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: amount, unitType: .Volume, roundPrecision: precision)
   }
   
   private func addIntake(#amount: Double) {
-    var date: NSDate!
+    let date: NSDate
     if timeIsChoosen {
       date = currentDate
     } else {
@@ -222,8 +222,6 @@ class IntakeViewController: StyledViewController {
     drink.recentAmount.amount = amount
     if let intake = Intake.addEntity(drink: drink, amount: amount, date: date, managedObjectContext: managedObjectContext) {
       dayViewController.addIntake(intake)
-    } else {
-      assert(false)
     }
   }
   

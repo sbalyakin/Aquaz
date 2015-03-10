@@ -78,7 +78,7 @@ public class CoreDataPrePopulation {
     
     var error: NSError?
     if !managedObjectContext.save(&error) {
-      assert(false, "Failed to save managed object context. Error: \(error?.localizedDescription ?? String())")
+      Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
     }
   }
   
@@ -115,7 +115,7 @@ public class CoreDataPrePopulation {
     
     var error: NSError?
     if !managedObjectContext.save(&error) {
-      assert(false, "Failed to save managed object context. Error: \(error?.localizedDescription ?? String())")
+      Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
     }
   }
 }

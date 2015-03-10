@@ -172,22 +172,19 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     pages = []
     
     // Add view controller for drink selection
-    selectDrinkViewController = storyboard?.instantiateViewControllerWithIdentifier("SelectDrinkViewController") as? SelectDrinkViewController
-    assert(selectDrinkViewController != nil)
+    selectDrinkViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "SelectDrinkViewController")
     
     selectDrinkViewController.dayViewController = self
     pages.append(selectDrinkViewController)
     
     // Add intakes diary view controller
-    diaryViewController = storyboard?.instantiateViewControllerWithIdentifier("DiaryViewController") as? DiaryViewController
-    assert(diaryViewController != nil)
+    diaryViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "DiaryViewController")
     
     diaryViewController.dayViewController = self
     pages.append(diaryViewController)
     
     // Create, setup and add a page view controller
-    pageViewController = storyboard?.instantiateViewControllerWithIdentifier("DayPageViewController") as? UIPageViewController
-    assert(pageViewController != nil)
+    pageViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "DayPageViewController")
     
     pageViewController.dataSource = self
     pageViewController.delegate = self
@@ -395,10 +392,8 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
     
     if dailyWaterIntake >= waterGoalAmount {
-      if let completeViewController = storyboard?.instantiateViewControllerWithIdentifier("CompleteViewController") as? CompleteViewController {
+      if let completeViewController: CompleteViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "CompleteViewController") {
         parentViewController?.presentViewController(completeViewController, animated: true, completion: nil)
-      } else {
-        assert(false)
       }
     }
   }
@@ -406,7 +401,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   func removeIntake(intake: Intake) {
     let index = find(intakes, intake)
     if index == nil {
-      assert(false, "Removed intake is not found")
+      Logger.logError("Intake for removing is not found")
       return
     }
     

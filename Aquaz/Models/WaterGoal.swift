@@ -31,31 +31,26 @@ public class WaterGoal: NSManagedObject, NamedEntity {
 
   /// Adds a new water goal entity into Core Data
   public class func addEntity(#date: NSDate, baseAmount: NSNumber, hotDayFactor: NSNumber, highActivityFactor: NSNumber, managedObjectContext: NSManagedObjectContext?, saveImmediately: Bool = true) -> WaterGoal? {
-    if let managedObjectContext = managedObjectContext {
-      if let waterGoal = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext) as? WaterGoal {
-        let pureDate = DateHelper.dateByClearingTime(ofDate: date)
-        waterGoal.date = pureDate
-        waterGoal.baseAmount = baseAmount
-        waterGoal.hotDayFactor = hotDayFactor
-        waterGoal.highActivityFactor = highActivityFactor
-        
-        if saveImmediately {
-          var error: NSError?
-          if !managedObjectContext.save(&error) {
-            NSLog("Failed to save a new water intake goal for date \"\(pureDate)\". Error: \(error?.localizedDescription ?? String())")
-            return nil
-          }
+    if let managedObjectContext = managedObjectContext, waterGoal = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext) {
+      let pureDate = DateHelper.dateByClearingTime(ofDate: date)
+      waterGoal.date = pureDate
+      waterGoal.baseAmount = baseAmount
+      waterGoal.hotDayFactor = hotDayFactor
+      waterGoal.highActivityFactor = highActivityFactor
+      
+      if saveImmediately {
+        var error: NSError?
+        if !managedObjectContext.save(&error) {
+          Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
+          return nil
         }
-        
-        return waterGoal
-      } else {
-        assert(false)
-        return nil
       }
-    } else {
-      assert(false)
-      return nil
+      
+      return waterGoal
     }
+      
+    assert(false)
+    return nil
   }
   
   /// Fetches a water goal that suits for a specified date (time part is skipped).
@@ -63,7 +58,7 @@ public class WaterGoal: NSManagedObject, NamedEntity {
   /// If water goal's entity is found for a certain stage, searching is done.
   /// Stage 1: The function looks for a water goal's entity with a date equals to the specified date.
   /// Stage 2: The function looks for a water goal's entity with a date earlier than the specified date.
-  /// Stage 2: The function looks for a water goal's entity with a date later than the specified date.
+  /// Stage 3: The function looks for a water goal's entity with a date later than the specified date.
   public class func fetchWaterGoalForDate(date: NSDate, managedObjectContext: NSManagedObjectContext?) -> WaterGoal? {
     if let waterGoal = fetchWaterGoalStrictlyForDate(date, managedObjectContext: managedObjectContext) {
       return waterGoal
@@ -77,7 +72,7 @@ public class WaterGoal: NSManagedObject, NamedEntity {
       return waterGoal
     }
     
-    assert(false)
+    Logger.logError("Failed to fetch water goal", logDetails: [Logger.Attributes.date: date.description])
     return nil
   }
   
@@ -197,7 +192,7 @@ public class WaterGoal: NSManagedObject, NamedEntity {
         laterWaterGoal = waterGoal
         
       case .OrderedDescending: // unreal case
-        assert(false, "It's a logical error")
+        Logger.logError(Logger.Messages.logicalError)
         earlierWaterGoal = waterGoal
       }
     }
@@ -208,7 +203,7 @@ public class WaterGoal: NSManagedObject, NamedEntity {
       } else if let laterWaterGoal = laterWaterGoal {
         amount = laterWaterGoal.baseAmount.doubleValue
       } else { // unreal case
-        assert(false, "It's a logical error")
+        Logger.logError(Logger.Messages.logicalError)
         amount = Settings.sharedInstance.userWaterGoal.value
       }
     }

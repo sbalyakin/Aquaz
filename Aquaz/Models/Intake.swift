@@ -29,8 +29,7 @@ public class Intake: NSManagedObject, NamedEntity {
   
   /// Adds a new intake's entity into Core Data
   public class func addEntity(#drink: Drink, amount: NSNumber, date: NSDate, managedObjectContext: NSManagedObjectContext?, saveImmediately: Bool = true) -> Intake? {
-    if let managedObjectContext = managedObjectContext {
-      let intake = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext) as! Intake
+    if let managedObjectContext = managedObjectContext, let intake = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext) {
       intake.amount = amount
       intake.drink = drink
       intake.date = date
@@ -38,16 +37,16 @@ public class Intake: NSManagedObject, NamedEntity {
       if saveImmediately {
         var error: NSError?
         if !managedObjectContext.save(&error) {
-          NSLog("Failed to add a new intake of drink \"\(drink.name)\". Error: \(error?.localizedDescription ?? String())")
+          Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
           return nil
         }
       }
 
       return intake
-    } else {
-      assert(false)
-      return nil
     }
+    
+    assert(false)
+    return nil
   }
 
   /// Deletes the intake from Core Data
@@ -58,7 +57,7 @@ public class Intake: NSManagedObject, NamedEntity {
       if saveImmediately {
         var error: NSError?
         if !managedObjectContext.save(&error) {
-          NSLog("Failed to delete the intake. Error: \(error?.localizedDescription ?? String())")
+          Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
         }
       }
     } else {
