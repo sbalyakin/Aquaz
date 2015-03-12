@@ -49,19 +49,21 @@ protocol WeekStatisticsViewDelegate: class {
     case Top, Center, Bottom
   }
   
-  override init() {
-    super.init()
+//  required init(coder aDecoder: NSCoder) {
+//    super.init(coder: aDecoder)
+//    setTranslatesAutoresizingMaskIntoConstraints(false)
+//  }
+  
+  override func intrinsicContentSize() -> CGSize {
+    return CGSizeMake(300, 300)
   }
   
-  required init(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-  }
+//  override class func requiresConstraintBasedLayout() -> Bool {
+//    return false
+//  }
   
   override func awakeFromNib() {
+    super.awakeFromNib()
     initValues()
     createControls(rect: bounds)
   }
@@ -74,13 +76,14 @@ protocol WeekStatisticsViewDelegate: class {
     }
     createControls(rect: bounds)
   }
-  
+
   override func layoutSubviews() {
+    super.layoutSubviews()
+    
     computeUIAreasFromRect(bounds)
     
-    for i in 0..<daysPerWeek {
-      let dayButton = dayButtons[i]
-      let dayButtonRect = computeRectangleForDayButtonWithIndex(i, containerRect: uiAreas.days)
+    for (index, dayButton) in enumerate(dayButtons) {
+      let dayButtonRect = computeRectangleForDayButtonWithIndex(index, containerRect: uiAreas.days)
       dayButton.frame = dayButtonRect
       dayButton.layer.cornerRadius = round(dayButtonRect.width / 2)
     }

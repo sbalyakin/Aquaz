@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class UIHelper {
@@ -115,5 +116,28 @@ extension UIColor {
     var red: CGFloat = 1.0, green: CGFloat = 1.0, blue: CGFloat = 1.0, alpha: CGFloat = 1.0
     self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
     return UIColor(red: red * (1-shadow), green: green * (1-shadow), blue: blue * (1-shadow), alpha: alpha * (1-shadow) + shadow)
+  }
+}
+
+extension UIView {
+  public func liveDebugLog(message: String) {
+    #if !(TARGET_OS_IPHONE)
+      let logPath = "/tmp/XcodeLiveRendering.log"
+      if !NSFileManager.defaultManager().fileExistsAtPath(logPath) {
+        NSFileManager.defaultManager().createFileAtPath(logPath, contents: NSData(), attributes: nil)
+      }
+      
+      if let fileHandle = NSFileHandle(forWritingAtPath: logPath) {
+        fileHandle.seekToEndOfFile()
+        
+        let date = NSDate()
+        let bundle = NSBundle(forClass: self.dynamicType)
+        if let application: AnyObject = bundle.objectForInfoDictionaryKey("CFBundleName") {
+          if let data = "\(date) \(application) \(message)\n".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true) {
+            fileHandle.writeData(data)
+          }
+        }
+      }
+    #endif
   }
 }

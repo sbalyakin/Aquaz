@@ -12,7 +12,9 @@ import CoreData
 class SelectDrinkViewController: StyledViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
   
   @IBOutlet weak var collectionView: UICollectionView!
-  
+  @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var collectionViewTopVerticalSpaceConstraint: NSLayoutConstraint!
+
   var dayViewController: DayViewController!
   
   private let columnsCount = 3
@@ -34,6 +36,11 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     rowsCount = Int(ceil(Float(displayedDrinkTypes.count) / Float(columnsCount)))
     setupGestureRecognizers()
     popupViewManager = SelectDrinkPopupViewManager(selectDrinkViewController: self)
+  }
+  
+  func adjustPermanentConstraints(height: CGFloat) {
+    let collectionViewHeight = height - 2 * collectionViewTopVerticalSpaceConstraint.constant
+    collectionViewHeightConstraint.constant = collectionViewHeight
   }
   
   private func setupGestureRecognizers() {
@@ -208,8 +215,6 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
   }
   
   func showPopupView(#frame: CGRect) {
-    let a = popupDrinkTypes[5]
-    
     cleanPopupView()
     
     let backgroundView = UIView(frame: frame)

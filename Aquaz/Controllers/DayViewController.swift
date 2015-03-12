@@ -40,6 +40,8 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   @IBOutlet weak var showDaySelectionButton: UIButton!
   @IBOutlet weak var highActivityButton: UIButton!
   @IBOutlet weak var hotDayButton: UIButton!
+  @IBOutlet weak var containerView: UIView!
+  @IBOutlet weak var summaryBarHeightConstraint: NSLayoutConstraint!
   
   var navigationTitleView: UIView!
   var navigationTitleLabel: UILabel!
@@ -86,10 +88,9 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
       }
     }
     
-    summaryBarOriginalFrame = summaryBar.frame
+    summaryBarOriginalHeight = summaryBarHeightConstraint.constant
     
     createCustomNavigationTitle()
-    createPageViewController()
     setupSummaryBar()
     updateCurrentDateRelatedControls()
   }
@@ -159,16 +160,14 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
   }
   
-  private func createPageViewController() {
-    let summaryBarHeight = summaryBar.bounds.height
-    var rect = view.frame
-    rect.size.height -= summaryBarHeight
-    rect.offset(dx: 0.0, dy: summaryBarHeight)
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
     
-    createPageViewControllerWithRect(rect)
+    let neededContainerViewHeight = view.bounds.height - summaryBarOriginalHeight
+    selectDrinkViewController.adjustPermanentConstraints(neededContainerViewHeight)
   }
-  
-  private func createPageViewControllerWithRect(rect: CGRect) {
+
+  private func setupPageViewController(pageViewController: UIPageViewController) {
     pages = []
     
     // Add view controller for drink selection
@@ -183,18 +182,9 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     diaryViewController.dayViewController = self
     pages.append(diaryViewController)
     
-    // Create, setup and add a page view controller
-    pageViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "DayPageViewController")
-    
     pageViewController.dataSource = self
     pageViewController.delegate = self
     pageViewController.setViewControllers([selectDrinkViewController], direction: .Forward, animated: false, completion: nil)
-    pageViewController.view.frame = rect
-    
-    addChildViewController(pageViewController)
-    view.addSubview(pageViewController.view)
-    
-    pageViewController.didMoveToParentViewController(self)
   }
   
   // MARK: Summary bar actions -
@@ -205,24 +195,12 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
   
   private func setDaySelectionBarVisible(visible: Bool, animated: Bool) {
-    let newSummaryBarHeight = visible ? summaryBarOriginalFrame.height : daySelectionBar.frame.minY
-    var rects = view.bounds.rectsByDividing(newSummaryBarHeight, fromEdge: .MinYEdge)
-    rects.remainder.size.height += rects.slice.height - daySelectionBar.frame.minY
-    
-    func changeFrame() {
-      self.summaryBar.frame = rects.slice
-      self.pageViewController.view.frame = rects.remainder
-      for subview in self.pageViewController.view.subviews {
-        if let view = subview as? UIView {
-          self.view.frame = self.pageViewController.view.bounds
-        }
-      }
-    }
+    let newSummaryBarHeight = visible ? summaryBarOriginalHeight : daySelectionBar.frame.minY
+
+    self.summaryBarHeightConstraint.constant = newSummaryBarHeight
     
     if animated {
-      UIView.animateWithDuration(0.4, animations: changeFrame)
-    } else {
-      changeFrame()
+      UIView.animateWithDuration(0.4, animations: view.layoutIfNeeded)
     }
     
     Settings.sharedInstance.uiDisplayDaySelection.value = visible
@@ -308,10 +286,19 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "ShowCalendar" {
-      if let calendarViewController = segue.destinationViewController as? CalendarViewController {
-        calendarViewController.date = currentDate
-        calendarViewController.dayViewController = self
+    if let identifier = segue.identifier {
+      switch identifier {
+      case "ShowCalendar":
+        if let calendarViewController = segue.destinationViewController as? CalendarViewController {
+          calendarViewController.date = currentDate
+          calendarViewController.dayViewController = self
+        }
+      case "PageViewEmbed":
+        if let pageViewController = segue.destinationViewController as? UIPageViewController {
+          self.pageViewController = pageViewController
+          setupPageViewController(pageViewController)
+        }
+      default: break;
       }
     }
   }
@@ -576,11 +563,11 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   private var intakes: [Intake] = []
   private var multiProgressSections: [Drink: MultiProgressView.Section] = [:]
   
-  private var pageViewController: UIPageViewController!
   private var pages: [UIViewController] = []
-  private var selectDrinkViewController: SelectDrinkViewController!
+  private weak var pageViewController: UIPageViewController!
   private var diaryViewController: DiaryViewController!
-  private var summaryBarOriginalFrame: CGRect!
+  private var selectDrinkViewController: SelectDrinkViewController!
+  private var summaryBarOriginalHeight: CGFloat!
 
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals

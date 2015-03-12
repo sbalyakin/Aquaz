@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7519.1" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7513.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,8 +16,11 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7g6-1f-VKo" customClass="DrinkView" customModule="Aquaz" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="7g6-1f-VKo" secondAttribute="height" multiplier="1:1" id="OOi-fO-p5u"/>
+                        </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drink" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUc-80-Uzd" userLabel="Drink Label">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Drink" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUc-80-Uzd" userLabel="Drink Label">
                         <rect key="frame" x="0.0" y="125" width="120" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -26,13 +30,14 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="7g6-1f-VKo" firstAttribute="top" secondItem="PrE-fP-LFx" secondAttribute="top" id="2G3-Tq-dbV"/>
-                <constraint firstItem="7g6-1f-VKo" firstAttribute="leading" secondItem="PrE-fP-LFx" secondAttribute="leading" id="P6F-eX-G0f"/>
-                <constraint firstAttribute="bottom" secondItem="7g6-1f-VKo" secondAttribute="bottom" constant="30" id="c46-82-kny"/>
-                <constraint firstItem="BUc-80-Uzd" firstAttribute="leading" secondItem="PrE-fP-LFx" secondAttribute="leading" id="dX0-d0-hkQ"/>
-                <constraint firstAttribute="trailing" secondItem="BUc-80-Uzd" secondAttribute="trailing" id="epc-nR-Q7w"/>
-                <constraint firstAttribute="bottom" secondItem="BUc-80-Uzd" secondAttribute="top" constant="25" id="q91-hW-90k"/>
-                <constraint firstAttribute="trailing" secondItem="7g6-1f-VKo" secondAttribute="trailing" id="tlD-pe-Hf7"/>
+                <constraint firstAttribute="trailing" secondItem="BUc-80-Uzd" secondAttribute="trailing" id="0Jv-ed-j1f"/>
+                <constraint firstItem="7g6-1f-VKo" firstAttribute="top" secondItem="PrE-fP-LFx" secondAttribute="top" id="1ea-jl-k6c"/>
+                <constraint firstItem="BUc-80-Uzd" firstAttribute="leading" secondItem="PrE-fP-LFx" secondAttribute="leading" id="4Ad-a6-O05"/>
+                <constraint firstAttribute="centerX" secondItem="7g6-1f-VKo" secondAttribute="centerX" id="IqX-VT-DiN"/>
+                <constraint firstAttribute="bottom" secondItem="BUc-80-Uzd" secondAttribute="bottom" constant="8" id="QKP-V5-GsE"/>
+                <constraint firstAttribute="trailing" secondItem="7g6-1f-VKo" secondAttribute="trailing" priority="999" id="TAq-Cl-mvc"/>
+                <constraint firstItem="BUc-80-Uzd" firstAttribute="top" secondItem="7g6-1f-VKo" secondAttribute="bottom" constant="5" id="bNb-Di-6y8"/>
+                <constraint firstItem="7g6-1f-VKo" firstAttribute="leading" secondItem="PrE-fP-LFx" secondAttribute="leading" priority="999" id="rpk-zb-wqE"/>
             </constraints>
             <size key="customSize" width="406" height="371"/>
             <connections>

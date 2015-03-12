@@ -132,10 +132,10 @@ class IntakeViewController: StyledViewController {
     navigationController?.navigationBar.barTintColor = drink.mainColor
   }
   
-  func cancelIntake() {
+  @IBAction func cancelIntake(sender: UIBarButtonItem) {
     navigationController?.popViewControllerAnimated(true)
   }
-
+  
   private func createCustomNavigationTitle() {
     var subtitleText: String
     

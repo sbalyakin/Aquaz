@@ -47,21 +47,23 @@ protocol CalendarViewDelegate: class {
   
   weak var delegate: CalendarViewDelegate?
   
-  override init() {
-    super.init()
-  }
-  
-  required init(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    createDaysInfo()
+    createControls()
   }
   
   override func prepareForInterfaceBuilder() {
     createDaysInfo()
     createControls()
+  }
+  
+  override func intrinsicContentSize() -> CGSize {
+    return CGSizeMake(300, 300)
+  }
+
+  override func layoutSubviews() {
+    layoutControls()
   }
   
   func switchToMonth(date: NSDate) {
@@ -74,17 +76,6 @@ protocol CalendarViewDelegate: class {
   
   func switchToPreviousMonth() {
     displayedMonthDate = DateHelper.addToDate(displayedMonthDate, years:0, months: -1, days: 0)
-  }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    
-    if dayButtons.isEmpty {
-      createDaysInfo()
-      createControls()
-    } else {
-      layoutControls()
-    }
   }
   
   private func createControls() {
@@ -246,6 +237,10 @@ protocol CalendarViewDelegate: class {
   }
   
   private func layoutWeekDayLabels(#rect: CGRect) {
+    if weekDayLabels.isEmpty {
+      return
+    }
+    
     let weekDayRects = computeWeekDayRects(containerRect: rect)
     assert(weekDayRects.count == weekDayLabels.count)
     
@@ -256,6 +251,10 @@ protocol CalendarViewDelegate: class {
   }
   
   private func layoutDayButtons(#rect: CGRect) {
+    if dayButtons.isEmpty {
+      return
+    }
+    
     let dayButtonRects = computeDayButtonsRects(containerRect: rect)
     assert(dayButtonRects.count == dayButtons.count)
     

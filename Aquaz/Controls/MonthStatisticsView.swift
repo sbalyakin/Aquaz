@@ -21,18 +21,6 @@ protocol MonthStatisticsViewDataSource: class {
   
   weak var dataSource: MonthStatisticsViewDataSource?
   
-  override init() {
-    super.init()
-  }
-  
-  required init(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-  }
-  
   override func createDayButton(#frame: CGRect, dayInfo: CalendarViewDayInfo) -> CalendarDayButton {
     let button = MonthStatisticsDayButton(frame: frame)
     button.dayInfo = dayInfo
