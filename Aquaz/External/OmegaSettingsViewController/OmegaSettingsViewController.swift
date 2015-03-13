@@ -89,6 +89,7 @@ class OmegaSettingsViewController: UIViewController {
   
   func createRightDetailTableCell<Value: Printable>(#title: String, settingsItem: SettingsItemBase<Value>, accessoryType: UITableViewCellAccessoryType = .None, activationChangedFunction: TableCell.TableCellActivatedFunction? = nil, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
     let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: accessoryType)
+    cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     cell.tableCellDidActivateFunction = activationChangedFunction
     cell.stringFromValueFunction = stringFromValueFunction
     return cell

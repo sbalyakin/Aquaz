@@ -9,6 +9,8 @@
 import UIKit
 
 class SettingsViewController: OmegaSettingsViewController {
+
+  private var waterGoalCell: TableCell!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,6 +47,8 @@ class SettingsViewController: OmegaSettingsViewController {
       title: volumeTitle,
       settingsItem: Settings.sharedInstance.generalVolumeUnits,
       segmentsWidth: 70)
+    volumeCell.valueChangedFunction = volumeUnitDidChange
+
     
     let weightCell = createEnumSegmentedTableCell(
       title: weightTitle,
@@ -56,7 +60,7 @@ class SettingsViewController: OmegaSettingsViewController {
       settingsItem: Settings.sharedInstance.generalHeightUnits,
       segmentsWidth: 70)
     
-    let waterGoalCell = createRightDetailTableCell(title: waterGoalTitle, value: Settings.sharedInstance.userWaterGoal.value, accessoryType: .DisclosureIndicator, activationChangedFunction: waterGoalCellWasSelected, stringFromValueFunction: stringFromWaterGoal)
+    waterGoalCell = createRightDetailTableCell(title: waterGoalTitle, settingsItem: Settings.sharedInstance.userWaterGoal, accessoryType: .DisclosureIndicator, activationChangedFunction: waterGoalCellWasSelected, stringFromValueFunction: stringFromWaterGoal)
     
     let unitsSection = TableCellsSection()
     unitsSection.headerTitle = unitsSectionHeader
@@ -70,6 +74,10 @@ class SettingsViewController: OmegaSettingsViewController {
     recommendationsSection.tableCells = [waterGoalCell]
     
     return [unitsSection, recommendationsSection]
+  }
+  
+  private func volumeUnitDidChange(tableCell: TableCell) {
+    waterGoalCell?.readFromExternalStorage()
   }
   
   private func stringFromWaterGoal(waterGoal: Double) -> String {
