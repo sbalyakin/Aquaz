@@ -99,7 +99,7 @@ public class Logger {
       return
     }
 
-    if condition() == false {
+    if condition() == true {
       return
     }
 
