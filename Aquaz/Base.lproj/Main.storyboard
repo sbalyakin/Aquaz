@@ -828,8 +828,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="glk-nc-3dL">
-                                <rect key="frame" x="562" y="19" width="22" height="22"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLj-7y-RXN" userLabel="&lt;">
+                                <rect key="frame" x="16" y="20" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="ccy-Zb-NCO"/>
+                                    <constraint firstAttribute="width" constant="22" id="sKI-kV-PXA"/>
+                                </constraints>
+                                <state key="normal" image="iconLeftActive"/>
+                                <state key="disabled" image="iconLeft"/>
+                                <connections>
+                                    <action selector="switchToPreviousDay:" destination="x3I-fN-BQH" eventType="touchUpInside" id="2Ek-5M-QSN"/>
+                                    <action selector="switchToPreviousWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="48x-ud-NiQ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpS-Mu-cye">
+                                <rect key="frame" x="46" y="21" width="508" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ar0-25-CDE" customClass="WeekStatisticsView" customModule="Aquaz" customModuleProvider="target">
+                                <rect key="frame" x="20" y="50" width="560" height="542"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="horizontalMargin">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="glk-nc-3dL" userLabel="&gt;">
+                                <rect key="frame" x="562" y="20" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="LeP-TD-6rE"/>
+                                    <constraint firstAttribute="width" constant="22" id="nY7-3q-DM2"/>
+                                </constraints>
                                 <state key="normal" image="iconRightActive">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -839,56 +871,21 @@
                                     <action selector="switchToNextWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="FWB-hj-tac"/>
                                 </connections>
                             </button>
-                            <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ar0-25-CDE" customClass="WeekStatisticsView" customModule="Aquaz" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49" width="600" height="531"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="horizontalMargin">
-                                        <real key="value" value="16"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpS-Mu-cye">
-                                <rect key="frame" x="46" y="20" width="508" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLj-7y-RXN">
-                                <rect key="frame" x="16" y="19" width="22" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="22" id="gEx-0h-mcU"/>
-                                </constraints>
-                                <state key="normal" image="iconLeftActive"/>
-                                <state key="disabled" image="iconLeft"/>
-                                <connections>
-                                    <action selector="switchToPreviousDay:" destination="x3I-fN-BQH" eventType="touchUpInside" id="2Ek-5M-QSN"/>
-                                    <action selector="switchToPreviousWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="48x-ud-NiQ"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.95645805029999997" green="0.95645805029999997" blue="0.95645805029999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="ar0-25-CDE" firstAttribute="top" secondItem="CLj-7y-RXN" secondAttribute="bottom" constant="8" symbolic="YES" id="1hG-1R-Hnj"/>
-                            <constraint firstItem="ar0-25-CDE" firstAttribute="centerX" secondItem="qpS-Mu-cye" secondAttribute="centerX" id="77Q-xG-5dL"/>
-                            <constraint firstItem="qpS-Mu-cye" firstAttribute="leading" secondItem="CLj-7y-RXN" secondAttribute="trailing" constant="8" symbolic="YES" id="BeZ-B3-vxi"/>
-                            <constraint firstItem="CLj-7y-RXN" firstAttribute="leading" secondItem="m3I-Jj-SIt" secondAttribute="leadingMargin" id="DWI-do-Rhg"/>
-                            <constraint firstItem="qpS-Mu-cye" firstAttribute="top" secondItem="m3I-Jj-SIt" secondAttribute="top" constant="20" symbolic="YES" id="FtM-cm-iwU"/>
-                            <constraint firstItem="ar0-25-CDE" firstAttribute="top" secondItem="qpS-Mu-cye" secondAttribute="bottom" constant="8" symbolic="YES" id="GvY-LQ-fY8"/>
-                            <constraint firstItem="glk-nc-3dL" firstAttribute="leading" secondItem="qpS-Mu-cye" secondAttribute="trailing" constant="8" symbolic="YES" id="MXO-li-H7o"/>
-                            <constraint firstItem="ar0-25-CDE" firstAttribute="bottom" secondItem="Ne1-Nq-iDL" secondAttribute="top" constant="8" symbolic="YES" id="Q1l-yM-UqN"/>
-                            <constraint firstItem="ar0-25-CDE" firstAttribute="top" secondItem="CLj-7y-RXN" secondAttribute="bottom" constant="8" symbolic="YES" id="VmX-SL-K13"/>
-                            <constraint firstItem="ar0-25-CDE" firstAttribute="leading" secondItem="m3I-Jj-SIt" secondAttribute="leading" id="fRf-W4-Jkh"/>
-                            <constraint firstAttribute="bottom" secondItem="ar0-25-CDE" secondAttribute="bottom" constant="20" symbolic="YES" id="fcB-P4-dEi"/>
-                            <constraint firstAttribute="trailing" secondItem="ar0-25-CDE" secondAttribute="trailing" id="kyn-Vn-tj8"/>
-                            <constraint firstItem="CLj-7y-RXN" firstAttribute="top" secondItem="glk-nc-3dL" secondAttribute="top" id="lQT-2T-2Ov"/>
+                            <constraint firstItem="CLj-7y-RXN" firstAttribute="top" secondItem="Wcd-Fu-RrX" secondAttribute="bottom" constant="20" id="8gQ-JM-tn5"/>
+                            <constraint firstItem="qpS-Mu-cye" firstAttribute="leading" secondItem="CLj-7y-RXN" secondAttribute="trailing" constant="8" symbolic="YES" id="AEo-wf-0lr"/>
+                            <constraint firstAttribute="trailing" secondItem="ar0-25-CDE" secondAttribute="trailing" constant="20" symbolic="YES" id="D5n-7X-LMq"/>
+                            <constraint firstItem="CLj-7y-RXN" firstAttribute="centerY" secondItem="qpS-Mu-cye" secondAttribute="centerY" id="EHW-lQ-zpG"/>
+                            <constraint firstItem="CLj-7y-RXN" firstAttribute="leading" secondItem="m3I-Jj-SIt" secondAttribute="leadingMargin" id="L3W-tJ-XMg"/>
+                            <constraint firstItem="Ne1-Nq-iDL" firstAttribute="top" secondItem="ar0-25-CDE" secondAttribute="bottom" constant="8" symbolic="YES" id="Oqm-aS-Akc"/>
+                            <constraint firstItem="CLj-7y-RXN" firstAttribute="centerY" secondItem="glk-nc-3dL" secondAttribute="centerY" id="aGo-jI-zDf"/>
+                            <constraint firstItem="glk-nc-3dL" firstAttribute="leading" secondItem="qpS-Mu-cye" secondAttribute="trailing" constant="8" symbolic="YES" id="l1h-Fc-Vvm"/>
+                            <constraint firstItem="ar0-25-CDE" firstAttribute="leading" secondItem="m3I-Jj-SIt" secondAttribute="leading" constant="20" symbolic="YES" id="o6S-VI-m8D"/>
+                            <constraint firstItem="ar0-25-CDE" firstAttribute="top" secondItem="CLj-7y-RXN" secondAttribute="bottom" constant="8" symbolic="YES" id="tpv-sE-RBc"/>
+                            <constraint firstItem="glk-nc-3dL" firstAttribute="trailing" secondItem="m3I-Jj-SIt" secondAttribute="trailingMargin" id="vYz-gR-WaF"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="1hG-1R-Hnj"/>
-                                <exclude reference="Q1l-yM-UqN"/>
-                            </mask>
-                        </variation>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -914,27 +911,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xh4-oI-4GI">
-                                <rect key="frame" x="16" y="19" width="22" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="22" id="3gW-ZZ-epy"/>
-                                </constraints>
-                                <state key="normal" image="iconLeftActive"/>
-                                <state key="disabled" image="iconLeft"/>
-                                <connections>
-                                    <action selector="switchToPreviousDay:" destination="x3I-fN-BQH" eventType="touchUpInside" id="eea-fU-PZp"/>
-                                    <action selector="switchToPreviousMonth:" destination="7ff-6R-UZu" eventType="touchUpInside" id="lrD-2v-0EP"/>
-                                    <action selector="switchToPreviousWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="DeK-oQ-GCl"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGq-1N-zd1">
-                                <rect key="frame" x="46" y="20" width="508" height="21"/>
+                                <rect key="frame" x="46" y="21" width="508" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="np9-8W-4mb" userLabel="&gt;">
+                                <rect key="frame" x="562" y="20" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="22" id="qXE-qf-3eg"/>
+                                    <constraint firstAttribute="height" constant="22" id="y5b-9Q-pl4"/>
+                                </constraints>
+                                <state key="normal" image="iconRightActive">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled" image="iconRight"/>
+                                <connections>
+                                    <action selector="switchToNextDay:" destination="x3I-fN-BQH" eventType="touchUpInside" id="MeI-k1-isp"/>
+                                    <action selector="switchToNextMonth:" destination="7ff-6R-UZu" eventType="touchUpInside" id="tPt-zZ-Hvm"/>
+                                    <action selector="switchToNextWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="lR3-hG-z7D"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HC1-Ha-eED" customClass="MonthStatisticsView" customModule="Aquaz" customModuleProvider="target">
-                                <rect key="frame" x="16" y="49" width="568" height="531"/>
+                                <rect key="frame" x="16" y="50" width="568" height="542"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="linesEnabled" value="NO"/>
@@ -949,32 +949,34 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="np9-8W-4mb">
-                                <rect key="frame" x="562" y="19" width="22" height="22"/>
-                                <state key="normal" image="iconRightActive">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="disabled" image="iconRight"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xh4-oI-4GI" userLabel="&lt;">
+                                <rect key="frame" x="16" y="20" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="22" id="BFC-0e-fKN"/>
+                                    <constraint firstAttribute="height" constant="22" id="k7u-f6-u4T"/>
+                                </constraints>
+                                <state key="normal" image="iconLeftActive"/>
+                                <state key="disabled" image="iconLeft"/>
                                 <connections>
-                                    <action selector="switchToNextDay:" destination="x3I-fN-BQH" eventType="touchUpInside" id="MeI-k1-isp"/>
-                                    <action selector="switchToNextMonth:" destination="7ff-6R-UZu" eventType="touchUpInside" id="tPt-zZ-Hvm"/>
-                                    <action selector="switchToNextWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="lR3-hG-z7D"/>
+                                    <action selector="switchToPreviousDay:" destination="x3I-fN-BQH" eventType="touchUpInside" id="eea-fU-PZp"/>
+                                    <action selector="switchToPreviousMonth:" destination="7ff-6R-UZu" eventType="touchUpInside" id="lrD-2v-0EP"/>
+                                    <action selector="switchToPreviousWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="DeK-oQ-GCl"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.95645805029999997" green="0.95645805029999997" blue="0.95645805029999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="HC1-Ha-eED" secondAttribute="bottom" constant="20" symbolic="YES" id="4ko-a2-PwJ"/>
-                            <constraint firstItem="HC1-Ha-eED" firstAttribute="leading" secondItem="xh4-oI-4GI" secondAttribute="leading" id="82q-fp-Law"/>
-                            <constraint firstItem="oGq-1N-zd1" firstAttribute="top" secondItem="nZQ-Ie-hZD" secondAttribute="top" constant="20" symbolic="YES" id="EMS-aO-uIt"/>
-                            <constraint firstItem="HC1-Ha-eED" firstAttribute="trailing" secondItem="nZQ-Ie-hZD" secondAttribute="trailingMargin" id="SI7-Ox-bKB"/>
-                            <constraint firstItem="xh4-oI-4GI" firstAttribute="leading" secondItem="nZQ-Ie-hZD" secondAttribute="leadingMargin" id="UXt-jl-n4a"/>
-                            <constraint firstItem="np9-8W-4mb" firstAttribute="leading" secondItem="oGq-1N-zd1" secondAttribute="trailing" constant="8" symbolic="YES" id="XOm-ph-A4J"/>
-                            <constraint firstItem="HC1-Ha-eED" firstAttribute="top" secondItem="xh4-oI-4GI" secondAttribute="bottom" constant="8" symbolic="YES" id="Yc7-q1-lBE"/>
-                            <constraint firstItem="HC1-Ha-eED" firstAttribute="centerX" secondItem="oGq-1N-zd1" secondAttribute="centerX" id="coz-Ev-uZL"/>
-                            <constraint firstItem="xh4-oI-4GI" firstAttribute="bottom" secondItem="oGq-1N-zd1" secondAttribute="bottom" id="hLv-JP-2UE"/>
-                            <constraint firstItem="oGq-1N-zd1" firstAttribute="leading" secondItem="xh4-oI-4GI" secondAttribute="trailing" constant="8" symbolic="YES" id="ph9-rR-Mt6"/>
-                            <constraint firstItem="np9-8W-4mb" firstAttribute="top" secondItem="xh4-oI-4GI" secondAttribute="top" id="thR-TQ-xnB"/>
+                            <constraint firstItem="HC1-Ha-eED" firstAttribute="trailing" secondItem="nZQ-Ie-hZD" secondAttribute="trailingMargin" id="20t-Pj-PGf"/>
+                            <constraint firstItem="xh4-oI-4GI" firstAttribute="leading" secondItem="nZQ-Ie-hZD" secondAttribute="leadingMargin" id="37R-hR-6qY"/>
+                            <constraint firstItem="np9-8W-4mb" firstAttribute="trailing" secondItem="nZQ-Ie-hZD" secondAttribute="trailingMargin" id="Ai4-OD-tZK"/>
+                            <constraint firstItem="oGq-1N-zd1" firstAttribute="centerY" secondItem="xh4-oI-4GI" secondAttribute="centerY" id="B5b-cg-H1n"/>
+                            <constraint firstItem="HC1-Ha-eED" firstAttribute="leading" secondItem="nZQ-Ie-hZD" secondAttribute="leadingMargin" id="DY2-7R-gLj"/>
+                            <constraint firstItem="HC1-Ha-eED" firstAttribute="top" secondItem="xh4-oI-4GI" secondAttribute="bottom" constant="8" symbolic="YES" id="OgL-Sk-ix4"/>
+                            <constraint firstItem="oGq-1N-zd1" firstAttribute="leading" secondItem="xh4-oI-4GI" secondAttribute="trailing" constant="8" symbolic="YES" id="RLt-hp-5JY"/>
+                            <constraint firstItem="np9-8W-4mb" firstAttribute="leading" secondItem="oGq-1N-zd1" secondAttribute="trailing" constant="8" symbolic="YES" id="ZYD-mb-8Jr"/>
+                            <constraint firstItem="xh4-oI-4GI" firstAttribute="top" secondItem="ENN-7O-jIB" secondAttribute="bottom" constant="20" id="c5v-6m-qE1"/>
+                            <constraint firstItem="zjj-BE-xgl" firstAttribute="top" secondItem="HC1-Ha-eED" secondAttribute="bottom" constant="8" symbolic="YES" id="mZt-ac-e0L"/>
+                            <constraint firstItem="np9-8W-4mb" firstAttribute="centerY" secondItem="xh4-oI-4GI" secondAttribute="centerY" id="sIM-hZ-ok3"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -1007,8 +1009,12 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mTP-tH-nqy">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mTP-tH-nqy" userLabel="&gt;">
                                 <rect key="frame" x="562" y="20" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="dWk-R6-vxy"/>
+                                    <constraint firstAttribute="width" constant="22" id="ot1-hn-GUu"/>
+                                </constraints>
                                 <state key="normal" image="iconRightActive">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1021,7 +1027,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wae-DX-wQD" customClass="YearStatisticsView" customModule="Aquaz" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49" width="600" height="531"/>
+                                <rect key="frame" x="0.0" y="50" width="600" height="542"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="horizontalMargin">
@@ -1029,10 +1035,11 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K7Y-wl-o8g">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K7Y-wl-o8g" userLabel="&lt;">
                                 <rect key="frame" x="16" y="20" width="22" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="22" id="JVd-dI-c1l"/>
+                                    <constraint firstAttribute="height" constant="22" id="Kn5-Vv-idj"/>
+                                    <constraint firstAttribute="width" constant="22" id="Lvf-jM-46M"/>
                                 </constraints>
                                 <state key="normal" image="iconLeftActive"/>
                                 <state key="disabled" image="iconLeft"/>
@@ -1046,17 +1053,17 @@
                         </subviews>
                         <color key="backgroundColor" red="0.95645805029999997" green="0.95645805029999997" blue="0.95645805029999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Wae-DX-wQD" secondAttribute="bottom" constant="20" symbolic="YES" id="0Mj-Vs-DMJ"/>
-                            <constraint firstItem="Wae-DX-wQD" firstAttribute="top" secondItem="i3n-ub-LA6" secondAttribute="bottom" constant="8" symbolic="YES" id="2df-oF-fhs"/>
-                            <constraint firstItem="K7Y-wl-o8g" firstAttribute="top" secondItem="KWn-vA-ToF" secondAttribute="top" constant="20" symbolic="YES" id="Ew4-G0-NQS"/>
-                            <constraint firstAttribute="trailing" secondItem="Wae-DX-wQD" secondAttribute="trailing" id="P4I-5S-CE7"/>
-                            <constraint firstItem="i3n-ub-LA6" firstAttribute="leading" secondItem="K7Y-wl-o8g" secondAttribute="trailing" constant="8" symbolic="YES" id="X2S-xe-MXS"/>
-                            <constraint firstItem="mTP-tH-nqy" firstAttribute="leading" secondItem="i3n-ub-LA6" secondAttribute="trailing" constant="8" symbolic="YES" id="k57-p7-52f"/>
-                            <constraint firstItem="Wae-DX-wQD" firstAttribute="centerX" secondItem="i3n-ub-LA6" secondAttribute="centerX" id="k5z-6g-bdr"/>
-                            <constraint firstItem="Wae-DX-wQD" firstAttribute="leading" secondItem="KWn-vA-ToF" secondAttribute="leading" id="oai-mc-kCH"/>
-                            <constraint firstItem="K7Y-wl-o8g" firstAttribute="leading" secondItem="KWn-vA-ToF" secondAttribute="leadingMargin" id="puF-5D-hEC"/>
-                            <constraint firstItem="mTP-tH-nqy" firstAttribute="top" secondItem="i3n-ub-LA6" secondAttribute="top" id="ry2-pl-yFU"/>
-                            <constraint firstItem="i3n-ub-LA6" firstAttribute="top" secondItem="K7Y-wl-o8g" secondAttribute="top" id="vdt-6E-thR"/>
+                            <constraint firstItem="f1w-H7-WfC" firstAttribute="top" secondItem="Wae-DX-wQD" secondAttribute="bottom" constant="8" symbolic="YES" id="CyD-wW-VEh"/>
+                            <constraint firstItem="mTP-tH-nqy" firstAttribute="leading" secondItem="i3n-ub-LA6" secondAttribute="trailing" constant="8" symbolic="YES" id="Das-tc-hbY"/>
+                            <constraint firstItem="i3n-ub-LA6" firstAttribute="leading" secondItem="K7Y-wl-o8g" secondAttribute="trailing" constant="8" symbolic="YES" id="EYk-g5-BhD"/>
+                            <constraint firstItem="K7Y-wl-o8g" firstAttribute="top" secondItem="WD3-N8-n1O" secondAttribute="bottom" constant="20" id="IXx-31-Nwg"/>
+                            <constraint firstItem="Wae-DX-wQD" firstAttribute="leading" secondItem="KWn-vA-ToF" secondAttribute="leading" id="V40-Us-0P0"/>
+                            <constraint firstItem="K7Y-wl-o8g" firstAttribute="leading" secondItem="KWn-vA-ToF" secondAttribute="leadingMargin" id="bFI-Av-tNh"/>
+                            <constraint firstItem="mTP-tH-nqy" firstAttribute="trailing" secondItem="KWn-vA-ToF" secondAttribute="trailingMargin" id="dhe-bh-Nds"/>
+                            <constraint firstItem="Wae-DX-wQD" firstAttribute="top" secondItem="K7Y-wl-o8g" secondAttribute="bottom" constant="8" symbolic="YES" id="h6h-Eo-4Lm"/>
+                            <constraint firstItem="K7Y-wl-o8g" firstAttribute="centerY" secondItem="i3n-ub-LA6" secondAttribute="centerY" id="jYK-K7-beG"/>
+                            <constraint firstItem="mTP-tH-nqy" firstAttribute="centerY" secondItem="K7Y-wl-o8g" secondAttribute="centerY" id="mgh-Bf-1bw"/>
+                            <constraint firstAttribute="trailing" secondItem="Wae-DX-wQD" secondAttribute="trailing" id="niw-aX-6OV"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
