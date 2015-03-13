@@ -63,14 +63,14 @@ class YearStatisticsViewController: StyledViewController {
     yearLabel.text = yearTitle
   }
   
-  private func initYearStatisticsView() {
+  private func fetchStatisticsItems() -> [YearStatisticsView.ItemType] {
     let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Month, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
     
     let goals = WaterGoal.fetchWaterGoalAmountsGroupedByMonths(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
     Logger.logSevere(waterIntakes.count == goals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
-
+    
     let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
-
+    
     var statisticsItems: [YearStatisticsView.ItemType] = []
     
     for (index, metricWaterIntake) in enumerate(waterIntakes) {
@@ -78,12 +78,24 @@ class YearStatisticsViewController: StyledViewController {
       
       let displayedWaterIntake = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: metricWaterIntake, unitType: .Volume)
       let displayedGoal = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: metricGoal, unitType: .Volume)
-
+      
       let item: YearStatisticsView.ItemType = (value: CGFloat(displayedWaterIntake), goal: CGFloat(displayedGoal))
       statisticsItems.append(item)
     }
     
-    yearStatisticsView.setItems(statisticsItems)
+    return statisticsItems
+  }
+  
+  private func initYearStatisticsView() {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+      let date = self.date
+      let statisticsItems = self.fetchStatisticsItems()
+      dispatch_async(dispatch_get_main_queue()) {
+        if self.date === date {
+          self.yearStatisticsView.setItems(statisticsItems)
+        }
+      }
+    }
   }
   
   private func getMonthTitleFromIndex(monthIndex: CGFloat) -> String {

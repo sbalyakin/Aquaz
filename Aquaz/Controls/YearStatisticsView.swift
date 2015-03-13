@@ -59,6 +59,7 @@ import UIKit
   }
   
   override func layoutSubviews() {
+    super.layoutSubviews()
     uiAreas = computeAreasFromRect(bounds)
   }
 
@@ -76,6 +77,8 @@ import UIKit
       _valuesFillShapeLayer = nil
       _goalsShapeLayer = nil
       _pinsLayer = nil
+      _gridLayer = nil
+      _verticalScaleLayer = nil
       layer.sublayers = nil
     }
     

@@ -321,7 +321,7 @@ protocol CalendarViewDelegate: class {
     delegate?.calendarViewDaySelected(date)
   }
   
-  private func updateCalendar() {
+  func updateCalendar() {
     // Remove existing controls
     weekDayLabels = []
     dayButtons = []

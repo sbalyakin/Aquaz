@@ -85,7 +85,7 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
     datePeriodLabel.text = title
   }
 
-  private func initWeekStatisticsView() {
+  private func fetchStatisticsItems() -> [WeekStatisticsView.ItemType] {
     let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
     Logger.logSevere(waterIntakes.count == 7, "Unexpected count of grouped water intakes", logDetails: [Logger.Attributes.count: "\(waterIntakes.count)"])
     
@@ -106,7 +106,19 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
       statisticsItems.append(item)
     }
     
-    weekStatisticsView.setItems(statisticsItems)
+    return statisticsItems
+  }
+  
+  private func initWeekStatisticsView() {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+      let date = self.date
+      let statisticsItems = self.fetchStatisticsItems()
+      dispatch_async(dispatch_get_main_queue()) {
+        if self.date === date {
+          self.weekStatisticsView.setItems(statisticsItems)
+        }
+      }
+    }
   }
 
   private func updateSwitchButtons() {

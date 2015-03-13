@@ -65,13 +65,13 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
     monthLabel.text = monthTitle
   }
   
-  private func initMonthStatisticsView() {
+  private func fetchIntakeFractions() -> [Double] {
     let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
     
     let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
     Logger.logSevere(waterIntakes.count == goals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     
-    intakeFractions = []
+    var intakeFractions = [Double]()
     
     for (index, waterIntake) in enumerate(waterIntakes) {
       let goal = goals[index]
@@ -84,8 +84,24 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
       }
       intakeFractions.append(intakeFraction)
     }
-    
+
+    return intakeFractions
+  }
+  
+  private func initMonthStatisticsView() {
+    intakeFractions = []
     monthStatisticsView.switchToMonth(date)
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+      let date = self.date
+      let intakeFractions = self.fetchIntakeFractions()
+      dispatch_async(dispatch_get_main_queue()) {
+        if self.date === date {
+          self.intakeFractions = intakeFractions
+          self.monthStatisticsView.updateCalendar()
+        }
+      }
+    }
   }
   
   func monthStatisticsGetValueForDate(date: NSDate, dayOfCurrentMonth: Int) -> Double {
