@@ -1,8 +1,176 @@
+/* Drink: Title for beer */
+"D:Beer" = "Пиво";
+
+/* Drink: Title for coffee */
+"D:Coffee" = "Кофе";
+
+/* Drink: Title for energetic drink */
+"D:Energy" = "Энергетик";
+
+/* Drink: Title for juice */
+"D:Juice" = "Сок";
+
+/* Drink: Title for milk */
+"D:Milk" = "Молоко";
+
+/* Drink: Title for soda */
+"D:Soda" = "Газировка";
+
+/* Drink: Title for sport drink */
+"D:Sport" = "Спортивный";
+
+/* Drink: Title for strong liquor */
+"D:Strong Liquor" = "Крепкий алкогол";
+
+/* Drink: Title for tea */
+"D:Tea" = "Чай";
+
+/* Drink: Title for water */
+"D:Water" = "Вода";
+
+/* Drink: Title for wine */
+"D:Wine" = "Вино";
+
+/* DayViewController: Current daily water intake of water intake goal */
+"DVC:%1$@ of %2$@" = "%1$@ из %2$@";
+
+/* DayViewController: Cancel button title for alert displayed if tomorrow has come */
+"DVC:OK" = "ОК";
+
+/* DayViewController: Title for alert displayed if tomorrow has come */
+"DVC:Welcome to the next day" = "Добро пожаловать в следующий день";
+
+/* IntakeViewController: Title for Add button */
+"IVC:Add" = "Добавить";
+
+/* IntakeViewController: Title for Apply button */
+"IVC:Apply" = "Применить";
+
+/* IntakeViewController: Subtitle of view if user adds intake for today */
+"IVC:Now" = "Сейчас";
+
+/* NotificationsHelper: Text for alert action of notifications */
+"NH:Drink" = "Напиток";
+
+/* NotificationsHelper: Text for alert body of notifications */
+"NH:It is time to drink!" = "Время утолить жажду!";
+
+/* NotificationsSoundViewController: alarm sound named [Alarm] */
+"NSVC:Alarm" = "Тревога";
+
+/* NotificationsSoundViewController: alarm sound named [Aqua] */
+"NSVC:Aqua" = "Аква";
+
+/* NotificationsSoundViewController: alarm sound named [Bells] */
+"NSVC:Bells" = "Перезвон";
+
+/* NotificationsSoundViewController: alarm sound named [Bubbles] */
+"NSVC:Bubbles" = "Пызури";
+
+/* NotificationsSoundViewController: alarm sound named [Chime] */
+"NSVC:Chime" = "Звонок";
+
+/* NotificationsSoundViewController: alarm sound named [Chirp] */
+"NSVC:Chirp" = "Щебет";
+
+/* NotificationsSoundViewController: alarm sound named [Chord] */
+"NSVC:Chord" = "Аккорд";
+
+/* NotificationsSoundViewController: alarm sound named [Glass] */
+"NSVC:Glass" = "Стекло";
+
+/* NotificationsSoundViewController: alarm sound named [Hand Bell] */
+"NSVC:Hand Bell" = "Колокольчик";
+
+/* NotificationsSoundViewController: alarm sound named [Magic] */
+"NSVC:Magic" = "Магия";
+
+/* NotificationsSoundViewController: header title for [NSVC:Notification sounds] section */
+"NSVC:Notification sounds" = "Звуки оповещения";
+
+/* NotificationsSoundViewController: alarm sound named [Tiny Bell] */
+"NSVC:Tiny Bell" = "Легкий звонок";
+
+/* NotificationsSoundViewController: alarm sound named [Whistle] */
+"NSVC:Whistle" = "Свист";
+
+/* NotificationsViewController: Template string for time interval */
+"NVC:%u hr %u min" = "%1$u ч %2$u мин";
+
+/* NotificationsViewController: Footer text for [Use water intake] section */
+"NVC:Do not notify if daily water intake is reached" = "Не оповещать если выпита норма";
+
+/* NotificationsViewController: Title for [Enable notification] setting */
+"NVC:Enable notifications" = "Включить оповещения";
+
+/* NotificationsViewController: Title for [From] setting */
+"NVC:From" = "С";
+
+/* NotificationsViewController: Title for [Interval] setting */
+"NVC:Interval" = "Интервал";
+
+/* NotificationsViewController: Title for [Smart notifications] setting */
+"NVC:Smart notifications" = "Умные оповещения";
+
+/* NotificationsViewController: Title for [Sound] setting */
+"NVC:Sound" = "Звук";
+
+/* NotificationsViewController: Title for [To] setting */
+"NVC:To" = "До";
+
+/* NotificationsViewController: Footer text for [Smart notifications] section */
+"NVC:Turn smart notifications on and notifications will be shown not earlier than specified interval after the last intake" = "Включите чтобы оповещать не ранее указанного интервала с последнего употребления напитка";
+
+/* NotificationsViewController: Title for [Use water intake] setting */
+"NVC:Use water intake" = "Учитывать употребление";
+
+/* NotificationsViewController: contraction for hour */
+"NVC:hr" = "ч";
+
+/* NotificationsViewController: contraction for minute */
+"NVC:min" = "мин";
+
+/* SettingsViewController: Table cell title for [Height] setting */
+"SVC:Height" = "Рост";
+
+/* SettingsViewController: Header for settings section [Measurements units] */
+"SVC:Measurements units" = "Единицы измерения";
+
+/* SettingsViewController: Header for settings section [Recommendations] */
+"SVC:Recommendations" = "Рекомендации";
+
+/* SettingsViewController: Table cell title for [Volume] setting */
+"SVC:Volume" = "Объём";
+
+/* SettingsViewController: Table cell title for [Water goal] setting */
+"SVC:Water goal" = "Цель";
+
+/* SettingsViewController: Table cell title for [Weight] setting */
+"SVC:Weight" = "Вес";
+
+/* Units: contraction for centimeters */
+"U:cm" = "см";
+
+/* Units: contraction for fluid ounces */
+"U:fl oz" = "унц";
+
+/* Units: contraction for feet */
+"U:ft" = "фт";
+
+/* Units: contraction for kilogrames */
+"U:kg" = "кг";
+
+/* Units: contraction for pounds */
+"U:lbs" = "фнт";
+
+/* Units: contraction for milliliters */
+"U:ml" = "мл";
+
 /* WaterGoalViewController: Table cell title for [Age] setting */
 "WGVC:Age" = "Возраст";
 
 /* WaterGoalViewController: [Breastfeeding female] option for gender */
-"WGVC:Breastfeeding female" = "Кормящая мать";
+"WGVC:Breastfeeding female" = "Женщина: Кормящая грудью";
 
 /* WaterGoalViewController: [Daily] option for physical activity */
 "WGVC:Daily" = "Ежедневно";
@@ -23,13 +191,13 @@
 "WGVC:Physical Activity" = "Физическая активность";
 
 /* WaterGoalViewController: [Pregnant female] option for gender */
-"WGVC:Pregnant female" = "Беременная женщина";
+"WGVC:Pregnant female" = "Женщина: Беременность";
 
 /* WaterGoalViewController: [Rare] option for physical activity */
 "WGVC:Rare" = "Редко";
 
 /* WaterGoalViewController: Table cell title for [Water Intake] setting */
-"WGVC:Water Intake" = "Потребление воды";
+"WGVC:Water Intake" = "Норма потребления";
 
 /* WaterGoalViewController: [Weekly] option for physical activity */
 "WGVC:Weekly" = "Еженедельно";
@@ -39,76 +207,4 @@
 
 /* WaterGoalViewController: [Woman] option for gender */
 "WGVC:Woman" = "Женщина";
-
-/* IntakeViewController: Title for Add button */
-"IVC:Add" = "Добавить";
-
-/* IntakeViewController: Title for Apply button */
-"IVC:Apply" = "Применить";
-
-/* Drink: Title for alcohol */
-"D:Alcohol" = "Алкоголь";
-
-/* Drink: Title for coffee */
-"D:Coffee" = "Кофе";
-
-/* Drink: Title for energetic drink */
-"D:Energy" = "Энергетик";
-
-/* Drink: Title for juice */
-"D:Juice" = "Сок";
-
-/* Drink: Title for milk */
-"D:Milk" = "Молоко";
-
-/* Drink: Title for soda */
-"D:Soda" = "Газировка";
-
-/* Drink: Title for sport drink */
-"D:Sport" = "Спорт";
-
-/* Drink: Title for tea */
-"D:Tea" = "Чай";
-
-/* Drink: Title for water */
-"D:Water" = "Вода";
-
-/* DayViewController: Current daily water intake of water intake goal */
-"DVC:%1$@ of %2$@" = "%1$@ из %2$@";
-
-/* NotificationsHelper: Text for alert body of notifications */
-"NH:It's time to drink!" = "Время выпить воды!";
-
-/* NotificationsIntervalPickerViewController: Contraction for hours */
-"NIPVC:hr" = "ч";
-
-/* NotificationsIntervalPickerViewController: Contraction for minutes */
-"NIPVC:min" = "мин";
-
-/* NotificationsTimePickerViewController: Navigation item title for choosing [From] time */
-"NTPVC:From" = "От";
-
-/* NotificationsTimePickerViewController: Navigation item title for choosing [To] time */
-"NTPVC:To" = "До";
-
-/* NotificationsViewController: Template string for time interval */
-"NVC:%u hr %u min" = "%1$u ч %2$u мин";
-
-/* Units: contraction for centimeters */
-"U:cm" = "см";
-
-/* Units: contraction for fluid ounces */
-"U:fl oz" = "ун";
-
-/* Units: contraction for feet */
-"U:ft" = "фт";
-
-/* Units: contraction for kilogrames */
-"U:kg" = "кг";
-
-/* Units: contraction for pounds */
-"U:lbs" = "фн";
-
-/* Units: contraction for milliliters */
-"U:ml" = "мл";
 
