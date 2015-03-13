@@ -18,7 +18,7 @@ public class CoreDataPrePopulation {
   
   public class func prePopulateCoreData(#modelVersion: ModelVersion, managedObjectContext: NSManagedObjectContext, generateIntakesForTests: Bool = false, generateWaterGoalsForTests: Bool = false) {
     switch modelVersion {
-    case .Version1_0: prePopulateCoreDataVersion1_0(managedObjectContext: managedObjectContext)
+    case .Version1_0: prePopulateCoreDataVersion1_0(managedObjectContext: managedObjectContext, generateIntakesForTests: generateIntakesForTests, generateWaterGoalsForTests: generateWaterGoalsForTests)
     }
   }
   
