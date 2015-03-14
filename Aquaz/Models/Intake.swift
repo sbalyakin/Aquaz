@@ -140,6 +140,7 @@ public class Intake: NSManagedObject, NamedEntity {
       }
 
       nextDate = DateHelper.addToDate(currentDate, years: 0, months: deltaMonths, days: deltaDays)
+      nextDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: nextDate)
       
       if nextDate.isLaterThan(endDate) {
         break

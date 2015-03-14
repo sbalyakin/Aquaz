@@ -10,7 +10,7 @@ import UIKit
 
 class CalendarDayButton: UIButton {
   
-  var dayInfo: CalendarViewDayInfo! {
+  weak var dayInfo: CalendarViewDayInfo! {
     didSet {
       assert(dayInfo != nil)
       dayInfo.changeHandler = dayInfoChanged

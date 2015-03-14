@@ -163,6 +163,8 @@ protocol CalendarViewDelegate: class {
   }
   
   private func createDayButtonsInRect(rect: CGRect) {
+    removeDayButtons()
+    
     let dayButtonRects = computeDayButtonsRects(containerRect: rect)
     assert(dayButtonRects.count == daysInfo.count)
     
@@ -170,6 +172,14 @@ protocol CalendarViewDelegate: class {
       let dayButtonRect = dayButtonRects[index]
       addDayButton(frame: dayButtonRect, dayInfo: dayInfo)
     }
+  }
+  
+  private func removeDayButtons() {
+    for button in dayButtons {
+      button.removeFromSuperview()
+    }
+    
+    dayButtons = []
   }
   
   private func computeDayButtonsRects(#containerRect: CGRect) -> [CGRect] {
@@ -208,22 +218,31 @@ protocol CalendarViewDelegate: class {
   }
   
   private func createWeekDaysTitlesInRect(rect: CGRect) {
-    let weekDaySymbols = calendar.veryShortWeekdaySymbols
+    //let weekDaySymbols = calendar.veryShortWeekdaySymbols
     let weekDayRects = computeWeekDayRects(containerRect: rect)
-    assert(weekDaySymbols.count == weekDayRects.count)
-    weekDayLabels = []
+    //assert(weekDaySymbols.count == weekDayRects.count)
     
-    for (index, title) in enumerate(weekDaySymbols) {
+    removeWeekDaysTitles()
+    
+    for (index, title) in enumerate(calendar.veryShortWeekdaySymbols as! [String]) {
       let rect = weekDayRects[index]
       let weekDayLabel = UILabel(frame: rect)
       weekDayLabel.textColor = weekDayTitleTextColor
       weekDayLabel.backgroundColor = UIColor.clearColor()
       weekDayLabel.textAlignment = .Center
-      weekDayLabel.text = title as? String
+      weekDayLabel.text = title
       
       addSubview(weekDayLabel)
       weekDayLabels.append(weekDayLabel)
     }
+  }
+
+  private func removeWeekDaysTitles() {
+    for label in weekDayLabels {
+      label.removeFromSuperview()
+    }
+    
+    weekDayLabels = []
   }
   
   private func computeWeekDayRects(#containerRect: CGRect) -> [CGRect] {

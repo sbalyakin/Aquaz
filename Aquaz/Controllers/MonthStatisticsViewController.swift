@@ -65,10 +65,10 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
     monthLabel.text = monthTitle
   }
   
-  private func fetchIntakeFractions() -> [Double] {
-    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
+  private func fetchIntakeFractions(#beginDate: NSDate, endDate: NSDate) -> [Double] {
+    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
     
-    let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
+    let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
     Logger.logSevere(waterIntakes.count == goals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     
     var intakeFractions = [Double]()
@@ -87,23 +87,31 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
 
     return intakeFractions
   }
+
+//  Another version with fetching in another queue. Unfortunately it works with noticeable blink
+//  between month switch and statistics fetching. Because animation is off it looks ugly.
   
+//  private func initMonthStatisticsView() {
+//    intakeFractions = []
+//    monthStatisticsView.switchToMonth(date)
+//
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+//      let fetchedDate = self.date
+//      let intakeFractions = self.fetchIntakeFractions(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
+//      dispatch_async(dispatch_get_main_queue()) {
+//        if self.date === fetchedDate {
+//          self.intakeFractions = intakeFractions
+//          self.monthStatisticsView.updateCalendar()
+//        }
+//      }
+//    }
+//  }
+
   private func initMonthStatisticsView() {
-    intakeFractions = []
+    intakeFractions = fetchIntakeFractions(beginDate: statisticsBeginDate, endDate: statisticsEndDate)
     monthStatisticsView.switchToMonth(date)
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-      let date = self.date
-      let intakeFractions = self.fetchIntakeFractions()
-      dispatch_async(dispatch_get_main_queue()) {
-        if self.date === date {
-          self.intakeFractions = intakeFractions
-          self.monthStatisticsView.updateCalendar()
-        }
-      }
-    }
   }
-  
+
   func monthStatisticsGetValueForDate(date: NSDate, dayOfCurrentMonth: Int) -> Double {
     if dayOfCurrentMonth < 1 || dayOfCurrentMonth > intakeFractions.count {
       return 0

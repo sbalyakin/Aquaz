@@ -85,11 +85,11 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
     datePeriodLabel.text = title
   }
 
-  private func fetchStatisticsItems() -> [WeekStatisticsView.ItemType] {
-    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
+  private func fetchStatisticsItems(#beginDate: NSDate, endDate: NSDate) -> [WeekStatisticsView.ItemType] {
+    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
     Logger.logSevere(waterIntakes.count == 7, "Unexpected count of grouped water intakes", logDetails: [Logger.Attributes.count: "\(waterIntakes.count)"])
     
-    let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
+    let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
     Logger.logSevere(goals.count == 7, "Unexpected count of water goals", logDetails: [Logger.Attributes.count: "\(goals.count)"])
     
     let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
@@ -112,7 +112,7 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
   private func initWeekStatisticsView() {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
       let date = self.date
-      let statisticsItems = self.fetchStatisticsItems()
+      let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
       dispatch_async(dispatch_get_main_queue()) {
         if self.date === date {
           self.weekStatisticsView.setItems(statisticsItems)

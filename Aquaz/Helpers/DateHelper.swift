@@ -27,7 +27,7 @@ public class DateHelper {
 
   public class func addToDate(date: NSDate, years: Int, months: Int, days: Int) -> NSDate {
     let calendar = NSCalendar.currentCalendar()
-    let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond, fromDate: date)
+    let components = calendar.components(.CalendarUnitEra | .CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond | .CalendarUnitCalendar | .CalendarUnitTimeZone, fromDate: date)
     components.year += years
     components.month += months
     components.day += days

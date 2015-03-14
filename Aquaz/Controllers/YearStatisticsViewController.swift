@@ -63,10 +63,10 @@ class YearStatisticsViewController: StyledViewController {
     yearLabel.text = yearTitle
   }
   
-  private func fetchStatisticsItems() -> [YearStatisticsView.ItemType] {
-    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: statisticsBeginDate, endDate: statisticsEndDate, dayOffsetInHours: 0, groupingUnit: .Month, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
+  private func fetchStatisticsItems(#beginDate: NSDate, endDate: NSDate) -> [YearStatisticsView.ItemType] {
+    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Month, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
     
-    let goals = WaterGoal.fetchWaterGoalAmountsGroupedByMonths(beginDate: statisticsBeginDate, endDate: statisticsEndDate, managedObjectContext: managedObjectContext)
+    let goals = WaterGoal.fetchWaterGoalAmountsGroupedByMonths(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
     Logger.logSevere(waterIntakes.count == goals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     
     let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
@@ -89,7 +89,7 @@ class YearStatisticsViewController: StyledViewController {
   private func initYearStatisticsView() {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
       let date = self.date
-      let statisticsItems = self.fetchStatisticsItems()
+      let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
       dispatch_async(dispatch_get_main_queue()) {
         if self.date === date {
           self.yearStatisticsView.setItems(statisticsItems)
