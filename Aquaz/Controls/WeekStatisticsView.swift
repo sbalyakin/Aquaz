@@ -49,23 +49,32 @@ protocol WeekStatisticsViewDelegate: class {
     case Top, Center, Bottom
   }
   
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    baseInit()
+  }
+  
+  required init(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    baseInit()
+  }
+  
+  private func baseInit() {
+    initValues()
+    createControls()
+  }
+  
   override func intrinsicContentSize() -> CGSize {
     return CGSizeMake(300, 300)
   }
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    initValues()
-    createControls(rect: bounds)
-  }
-  
   override func prepareForInterfaceBuilder() {
+    super.prepareForInterfaceBuilder()
+
     // Initialize values with some predefined values in order to show in Interface Builder
-    for i in 0..<daysPerWeek {
-      let item: ItemType = (value: CGFloat(200 + i * 300), goal: 1800)
-      items.append(item)
+    for (index, var item) in enumerate(items) {
+      item = (value: CGFloat(200 + index * 300), goal: 1800)
     }
-    createControls(rect: bounds)
   }
 
   override func layoutSubviews() {
@@ -95,12 +104,13 @@ protocol WeekStatisticsViewDelegate: class {
     delegate?.weekStatisticsViewDaySelected(sender.tag)
   }
   
-  private func createControls(#rect: CGRect) {
-    computeUIAreasFromRect(rect)
+  private func createControls() {
+    computeUIAreasFromRect(bounds)
     createDayButtons(rect: uiAreas.days)
   }
   
   private func initValues() {
+    items = []
     for i in 0..<daysPerWeek {
       let item: ItemType = (value: 0, goal: 0)
       items.append(item)

@@ -18,7 +18,11 @@ class CalendarDayButton: UIButton {
     }
   }
   
-  var backgroundCircleColor: UIColor = UIColor.clearColor()
+  var backgroundCircleColor: UIColor = UIColor.clearColor() {
+    didSet {
+      setNeedsDisplay()
+    }
+  }
   
   override func drawRect(rect: CGRect) {
     drawBackground(rect: rect)

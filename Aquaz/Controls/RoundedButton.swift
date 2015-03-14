@@ -31,6 +31,8 @@ import UIKit
   }
   
   override func prepareForInterfaceBuilder() {
+    super.prepareForInterfaceBuilder()
+
     applyCornerRadius()
   }
 

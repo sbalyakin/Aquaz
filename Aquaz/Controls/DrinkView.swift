@@ -28,14 +28,6 @@ class DrinkView: UIView {
     }
   }
   
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-  }
-
-  required init(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-  
   override func drawRect(rect: CGRect) {
     let minDimension = min(rect.width, rect.height)
     let drawRect = CGRect(x: rect.minX + trunc((rect.width - minDimension) / 2), y: rect.minY + trunc((rect.height - minDimension) / 2), width: minDimension, height: minDimension)

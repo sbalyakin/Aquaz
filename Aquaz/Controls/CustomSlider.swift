@@ -15,7 +15,7 @@ import UIKit
       if thumbRadius < 1 {
         thumbRadius = 1
       }
-      initImages()
+      baseInit()
       setNeedsDisplay()
     }
   }
@@ -31,15 +31,15 @@ import UIKit
   
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    initImages()
+    baseInit()
   }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    initImages()
+    baseInit()
   }
   
-  private func initImages() {
+  private func baseInit() {
     if thumbRadius > 0 {
       let imageSize = calcThumbImageSize()
       let thumbRect = CGRect(origin: CGPoint.zeroPoint, size: imageSize)
@@ -67,6 +67,7 @@ import UIKit
   
   override func prepareForInterfaceBuilder() {
     super.prepareForInterfaceBuilder()
+    
     thumbRadius = 15
     trackHeight = 14
   }

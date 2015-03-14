@@ -54,15 +54,15 @@ import UIKit
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    initSubLayers()
+    baseInit()
   }
   
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    initSubLayers()
+    baseInit()
   }
 
-  private func initSubLayers() {
+  private func baseInit() {
     layer.borderColor = borderColor.CGColor
     layer.borderWidth = borderWidth
     
@@ -81,6 +81,8 @@ import UIKit
   }
   
   override func prepareForInterfaceBuilder() {
+    super.prepareForInterfaceBuilder()
+
     // Initialize values with some predefined values in order to show in Interface Builder
     let section1 = addSection(color: UIColor.redColor())
     section1.factor = 0.2

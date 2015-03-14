@@ -43,7 +43,16 @@ import UIKit
   var titleForHorizontalStep: TitleForStepFunction?
   
   override func prepareForInterfaceBuilder() {
-    initWithFakeValues()
+    super.prepareForInterfaceBuilder()
+
+    var items: [YearStatisticsView.ItemType] = []
+    
+    for i in 0..<12 {
+      let value = 1500 + cos(CGFloat(i + 4) / 2) * 700
+      items.append((value: CGFloat(value), goal: 2000))
+    }
+    
+    setItems(items)
   }
   
   override func layoutSubviews() {
@@ -73,17 +82,6 @@ import UIKit
     self.items = items
     
     setNeedsDisplay()
-  }
-  
-  private func initWithFakeValues() {
-    var items: [YearStatisticsView.ItemType] = []
-    
-    for i in 0..<12 {
-      let value = 1500 + cos(CGFloat(i + 4) / 2) * 700
-      items.append((value: CGFloat(value), goal: 2000))
-    }
-    
-    setItems(items)
   }
   
   private func computeAreasFromRect(rect: CGRect) -> UIAreas {

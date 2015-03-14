@@ -43,17 +43,25 @@ protocol CalendarViewDelegate: class {
   
   let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.CalendarUnitWeekday).length
 
-  var selectedDate: NSDate = NSDate()
+  var selectedDate: NSDate = NSDate() {
+    didSet {
+      setNeedsDisplay()
+    }
+  }
   
   weak var delegate: CalendarViewDelegate?
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    createDaysInfo()
-    createControls()
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    baseInit()
   }
   
-  override func prepareForInterfaceBuilder() {
+  required init(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    baseInit()
+  }
+  
+  private func baseInit() {
     createDaysInfo()
     createControls()
   }
@@ -63,6 +71,7 @@ protocol CalendarViewDelegate: class {
   }
 
   override func layoutSubviews() {
+    super.layoutSubviews()
     layoutControls()
   }
   
