@@ -20,7 +20,7 @@ class SwitchTableCell<Value: BooleanType where Value: BooleanLiteralConvertible,
   
   override func createUICell(#tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
     if uiCell == nil {
-      uiCell = UISwitchTableViewCell(style: .Default, reuseIdentifier: nil)
+      uiCell = UISwitchTableViewCell()
     }
     
     uiCell!.textLabel?.text = title

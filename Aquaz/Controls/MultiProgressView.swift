@@ -52,11 +52,6 @@ import UIKit
     private var layer: CALayer
   }
 
-  override init() {
-    super.init()
-    initSubLayers()
-  }
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
     initSubLayers()

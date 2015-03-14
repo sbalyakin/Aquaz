@@ -29,11 +29,6 @@ import UIKit
     }
   }
   
-  override init() {
-    super.init()
-    initImages()
-  }
-  
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     initImages()
@@ -43,7 +38,6 @@ import UIKit
     super.init(frame: frame)
     initImages()
   }
-  
   
   private func initImages() {
     if thumbRadius > 0 {

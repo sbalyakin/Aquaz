@@ -44,23 +44,13 @@ class UIPickerTableViewCell: UITableViewCell {
     }
   }
   
-  override init() {
-    super.init()
+  init(reuseIdentifier: String? = nil) {
+    super.init(style: .Default, reuseIdentifier: reuseIdentifier)
     baseInit()
   }
   
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    baseInit()
-  }
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    baseInit()
-  }
-  
-  override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
     baseInit()
   }
   

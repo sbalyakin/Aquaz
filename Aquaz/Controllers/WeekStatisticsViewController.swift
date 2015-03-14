@@ -128,8 +128,8 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
   
   private func computeStatisticsDateRange() {
     let calendar = NSCalendar.currentCalendar()
-    let weekdayOfDate = calendar.ordinalityOfUnit(.CalendarUnitWeekday, inUnit: .WeekCalendarUnit, forDate: date)
-    let daysPerWeek = calendar.maximumRangeOfUnit(.WeekdayCalendarUnit).length
+    let weekdayOfDate = calendar.ordinalityOfUnit(.CalendarUnitWeekday, inUnit: .CalendarUnitWeekOfMonth, forDate: date)
+    let daysPerWeek = calendar.maximumRangeOfUnit(.CalendarUnitWeekday).length
     statisticsBeginDate = DateHelper.addToDate(date, years: 0, months: 0, days: -weekdayOfDate + 1)
     statisticsEndDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: daysPerWeek)
   }

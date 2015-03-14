@@ -41,7 +41,7 @@ protocol CalendarViewDelegate: class {
     }
   }
   
-  let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.WeekdayCalendarUnit).length
+  let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.CalendarUnitWeekday).length
 
   var selectedDate: NSDate = NSDate()
   
@@ -95,16 +95,16 @@ protocol CalendarViewDelegate: class {
     
     components.day = daysInMonth.location
     let firstMonthDay = calendar.dateFromComponents(components)!
-    let weekdayOfFirstMonthDay = calendar.ordinalityOfUnit(.CalendarUnitWeekday, inUnit: .WeekCalendarUnit, forDate: firstMonthDay)
+    let weekdayOfFirstMonthDay = calendar.ordinalityOfUnit(.CalendarUnitWeekday, inUnit: .CalendarUnitWeekOfMonth, forDate: firstMonthDay)
     
     components.day = daysInMonth.length
     let lastMonthDay = calendar.dateFromComponents(components)!
-    let weekdayOfLastMonthDay = calendar.ordinalityOfUnit(.CalendarUnitWeekday, inUnit: .WeekCalendarUnit, forDate: lastMonthDay)
+    let weekdayOfLastMonthDay = calendar.ordinalityOfUnit(.CalendarUnitWeekday, inUnit: .CalendarUnitWeekOfMonth, forDate: lastMonthDay)
     
     // Fill days and days titles
     daysInfo = []
     let today = DateHelper.dateByClearingTime(ofDate: NSDate())
-    let weekdayRange = calendar.maximumRangeOfUnit(.WeekdayCalendarUnit)
+    let weekdayRange = calendar.maximumRangeOfUnit(.CalendarUnitWeekday)
     var weekdayOfDate = 0
     let checkForInitial = DateHelper.areDatesEqualByMonths(date1: date, date2: selectedDate)
     let checkForToday = DateHelper.areDatesEqualByMonths(date1: date, date2: today)
@@ -116,7 +116,7 @@ protocol CalendarViewDelegate: class {
       let date = calendar.dateFromComponents(components)!
       
       if i == from {
-        let weekDayComponents = calendar.components(.WeekdayCalendarUnit, fromDate: date)
+        let weekDayComponents = calendar.components(.CalendarUnitWeekday, fromDate: date)
         weekdayOfDate = weekDayComponents.weekday
       } else {
         if weekdayOfDate > daysPerWeek {

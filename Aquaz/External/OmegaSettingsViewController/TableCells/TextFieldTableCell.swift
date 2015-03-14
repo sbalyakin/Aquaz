@@ -39,7 +39,7 @@ class TextFieldTableCell<Value: Printable>: TableCellWithValue<Value>, UITextFie
   
   override func createUICell(#tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
     if uiCell == nil {
-      uiCell = UITextFieldTableViewCell(style: .Default, reuseIdentifier: nil)
+      uiCell = UITextFieldTableViewCell()
     }
     
     uiCell!.textLabel?.text = title

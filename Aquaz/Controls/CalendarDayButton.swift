@@ -20,18 +20,6 @@ class CalendarDayButton: UIButton {
   
   var backgroundCircleColor: UIColor = UIColor.clearColor()
   
-  override init() {
-    super.init()
-  }
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-  }
-  
-  required init(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-  
   override func drawRect(rect: CGRect) {
     drawBackground(rect: rect)
   }

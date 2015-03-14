@@ -37,7 +37,7 @@ protocol WeekStatisticsViewDelegate: class {
   private var items: [ItemType] = []
   private var dayButtons: [UIButton] = []
   
-  let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.WeekdayCalendarUnit).length
+  let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.CalendarUnitWeekday).length
   
   var animationDuration = 0.4
   
@@ -49,18 +49,9 @@ protocol WeekStatisticsViewDelegate: class {
     case Top, Center, Bottom
   }
   
-//  required init(coder aDecoder: NSCoder) {
-//    super.init(coder: aDecoder)
-//    setTranslatesAutoresizingMaskIntoConstraints(false)
-//  }
-  
   override func intrinsicContentSize() -> CGSize {
     return CGSizeMake(300, 300)
   }
-  
-//  override class func requiresConstraintBasedLayout() -> Bool {
-//    return false
-//  }
   
   override func awakeFromNib() {
     super.awakeFromNib()
