@@ -64,4 +64,7 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
     navigationController?.popViewControllerAnimated(true)
   }
   
+  @IBAction func cancelWasTapped(sender: UIBarButtonItem) {
+    navigationController?.popViewControllerAnimated(true)
+  }
 }

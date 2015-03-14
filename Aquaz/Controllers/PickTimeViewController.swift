@@ -11,14 +11,19 @@ import UIKit
 class PickTimeViewController: StyledViewController {
   
   @IBOutlet weak var timePicker: UIDatePicker!
+  @IBOutlet weak var chooseButton: RoundedButton!
   
   var time: NSDate!
   var intakeViewController: IntakeViewController!
+  var drink: Drink! {
+    return intakeViewController?.drink
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
 
     setupTimePicker()
+    applyColorScheme()
   }
   
   func setupTimePicker() {
@@ -31,6 +36,11 @@ class PickTimeViewController: StyledViewController {
     }
   }
   
+  private func applyColorScheme() {
+    chooseButton.backgroundColor = drink?.darkColor
+    navigationController?.navigationBar.barTintColor = drink?.mainColor
+  }
+
   @IBAction func chooseButtonWasTapped(sender: AnyObject) {
     time = timePicker.date
     intakeViewController.changeTimeForCurrentDate(time)
