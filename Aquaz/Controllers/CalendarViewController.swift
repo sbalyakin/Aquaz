@@ -45,16 +45,16 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
   
   @IBAction func switchToNextMonth(sender: AnyObject) {
     date = DateHelper.addToDate(date, years: 0, months: 1, days: 0)
-    switchToDate(date)
+    calendarView.switchToNextMonth()
   }
   
   @IBAction func switchToPreviousMonth(sender: AnyObject) {
     date = DateHelper.addToDate(date, years: 0, months: -1, days: 0)
-    switchToDate(date)
+    calendarView.switchToPreviousMonth()
   }
   
-  func calendarViewDaySelected(date: NSDate) {
-    dayViewController.setCurrentDate(date)
+  func calendarViewDaySelected(dayInfo: CalendarViewDayInfo) {
+    dayViewController.setCurrentDate(dayInfo.date)
     navigationController?.popViewControllerAnimated(true)
   }
   

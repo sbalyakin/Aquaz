@@ -2,14 +2,14 @@
 //  MonthStatisticsView.swift
 //  Aquaz
 //
-//  Created by Sergey Balyakin on 26.11.14.
-//  Copyright (c) 2014 Sergey Balyakin. All rights reserved.
+//  Created by Sergey Balyakin on 17.03.15.
+//  Copyright (c) 2015 Sergey Balyakin. All rights reserved.
 //
 
 import UIKit
 
 protocol MonthStatisticsViewDataSource: class {
-  func monthStatisticsGetValueForDate(date: NSDate, dayOfCurrentMonth: Int) -> Double
+  func monthStatisticsGetValuesForDateInterval(#beginDate: NSDate, endDate: NSDate) -> [Double]
 }
 
 @IBDesignable class MonthStatisticsView: CalendarView {
@@ -21,20 +21,45 @@ protocol MonthStatisticsViewDataSource: class {
   
   weak var dataSource: MonthStatisticsViewDataSource?
   
-  override func createDayButton(#frame: CGRect, dayInfo: CalendarViewDayInfo) -> CalendarDayButton {
-    let button = MonthStatisticsDayButton(frame: frame)
-    button.dayInfo = dayInfo
-    button.monthStatisticsView = self
-    button.value = requestValueForDate(dayInfo)
-    return button
+  override func createCalendarViewContent() -> CalendarContentView {
+    let contentView = MonthStatisticsContentView(frame: bounds)
+    
+    contentView.dayIntakeColor = dayIntakeColor
+    contentView.dayIntakeFullColor = dayIntakeFullColor
+    contentView.dayIntakeBackgroundColor = dayIntakeBackgroundColor
+    contentView.dayIntakeLineWidth = dayIntakeLineWidth
+    
+    return contentView
   }
   
-  private func requestValueForDate(dayInfo: CalendarViewDayInfo) -> Double {
+  override func createCalendarViewDaysInfoForMonth(monthDate: NSDate) -> [CalendarViewDayInfo] {
+    let daysInfo = CalendarViewDataSource.createCalendarViewDaysInfoForMonth(monthDate)
+    
     #if TARGET_INTERFACE_BUILDER
-      return 0.5
+      for dayInfo in daysInfo {
+        if dayInfo.isCurrentMonth {
+          dayInfo.userData = CGFloat(sin(Double(dayInfo.dayOfCurrentMonth % 20) / 20 * M_PI))
+        }
+      }
     #else
-      return dataSource?.monthStatisticsGetValueForDate(dayInfo.date, dayOfCurrentMonth: dayInfo.dayOfCurrentMonth) ?? 0
+      let startOfMonth = DateHelper.startDateFromDate(monthDate, calendarUnit: .CalendarUnitMonth)
+      let startOfNextMonth = DateHelper.addToDate(startOfMonth, years: 0, months: 1, days: 0)
+      
+      if let values = dataSource?.monthStatisticsGetValuesForDateInterval(beginDate: startOfMonth, endDate: startOfNextMonth) {
+        for dayInfo in daysInfo {
+          if dayInfo.isCurrentMonth {
+            let dayIndex = dayInfo.dayOfCurrentMonth - 1
+            if dayIndex < values.count {
+              dayInfo.userData = values[dayIndex]
+            } else {
+              assert(false)
+            }
+          }
+        }
+      }
     #endif
+    
+    return daysInfo
   }
 
 }

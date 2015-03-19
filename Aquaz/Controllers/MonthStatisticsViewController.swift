@@ -13,44 +13,52 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
 
   @IBOutlet weak var monthStatisticsView: MonthStatisticsView!
   @IBOutlet weak var monthLabel: UILabel!
-  @IBOutlet weak var nextMonthButton: UIButton!
-
   
-  var date: NSDate = Settings.sharedInstance.uiMonthStatisticsDate.value {
+  private var date: NSDate = DateHelper.startDateFromDate(Settings.sharedInstance.uiMonthStatisticsDate.value, calendarUnit: .CalendarUnitMonth) {
     didSet {
-      dateWasChanged()
       Settings.sharedInstance.uiMonthStatisticsDate.value = date
     }
   }
   
-  private var statisticsBeginDate: NSDate!
-  private var statisticsEndDate: NSDate!
+  var monthDate: NSDate {
+    return monthStatisticsView.displayedMonthDate
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    initMonthStatisticsView()
+    initMonthLabel()
+  }
+
+  private func initMonthStatisticsView() {
+    monthStatisticsView.resetToDisplayMonthDate(date)
     monthStatisticsView.dataSource = self
     monthStatisticsView.delegate = self
+  }
+  
+  private func initMonthLabel() {
+    monthLabel.text = dateFormatter.stringFromDate(monthDate)
   }
 
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-    dateWasChanged()
+    
+    monthStatisticsView.refresh()
   }
   
-  private func dateWasChanged() {
-    computeStatisticsDateRange()
-    initMonthLabel()
-    initMonthStatisticsView()
-    updateSwitchButtons()
+  func monthStatisticsGetValuesForDateInterval(#beginDate: NSDate, endDate: NSDate) -> [Double] {
+    return fetchIntakeFractions(beginDate: beginDate, endDate: endDate)
   }
-  
+
   @IBAction func switchToPreviousMonth(sender: AnyObject) {
-    date = DateHelper.addToDate(date, years: 0, months: -1, days: 0)
+    monthStatisticsView.switchToPreviousMonth()
+    date = monthStatisticsView.displayedMonthDate
   }
   
   @IBAction func switchToNextMonth(sender: AnyObject) {
-    date = DateHelper.addToDate(date, years: 0, months: 1, days: 0)
+    monthStatisticsView.switchToNextMonth()
+    date = monthStatisticsView.displayedMonthDate
   }
   
   private lazy var dateFormatter: NSDateFormatter = {
@@ -60,11 +68,6 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
     return formatter
     }()
 
-  private func initMonthLabel() {
-    let monthTitle = dateFormatter.stringFromDate(statisticsBeginDate)
-    monthLabel.text = monthTitle
-  }
-  
   private func fetchIntakeFractions(#beginDate: NSDate, endDate: NSDate) -> [Double] {
     let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
     
@@ -107,43 +110,19 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
 //    }
 //  }
 
-  private func initMonthStatisticsView() {
-    intakeFractions = fetchIntakeFractions(beginDate: statisticsBeginDate, endDate: statisticsEndDate)
-    monthStatisticsView.switchToMonth(date)
-  }
-
-  func monthStatisticsGetValueForDate(date: NSDate, dayOfCurrentMonth: Int) -> Double {
-    if dayOfCurrentMonth < 1 || dayOfCurrentMonth > intakeFractions.count {
-      return 0
+  func calendarViewDaySelected(dayInfo: CalendarViewDayInfo) {
+    if !dayInfo.isCurrentMonth {
+      return
     }
     
-    return intakeFractions[dayOfCurrentMonth - 1]
-  }
-
-  func calendarViewDaySelected(date: NSDate) {
     if let dayViewController: DayViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "DayViewController") {
       dayViewController.mode = .Statistics
-      dayViewController.setCurrentDate(date)
+      dayViewController.setCurrentDate(dayInfo.date)
       dayViewController.initializesRevealControls = false
       navigationController?.pushViewController(dayViewController, animated: true)
     }
   }
   
-  private func computeStatisticsDateRange() {
-    let calendar = NSCalendar.currentCalendar()
-    let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitTimeZone | .CalendarUnitCalendar, fromDate: date)
-    dateComponents.day = 1
-    statisticsBeginDate = calendar.dateFromComponents(dateComponents)
-    statisticsEndDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 1, days: 0)
-  }
-
-  private func updateSwitchButtons() {
-    let isCurrentMonth = DateHelper.areDatesEqualByMonths(date1: date, date2: NSDate())
-    nextMonthButton.enabled = !isCurrentMonth
-  }
-
-  private var intakeFractions: [Double] = []
-
   private lazy var managedObjectContext: NSManagedObjectContext? = {
     if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
       return appDelegate.managedObjectContext
