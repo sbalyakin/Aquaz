@@ -131,7 +131,7 @@ extension CalendarContentView: UICollectionViewDelegateFlowLayout {
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
     let layout = collectionViewLayout as! UICollectionViewFlowLayout
     let contentWidth = collectionView.bounds.width - layout.minimumInteritemSpacing * CGFloat(daysPerWeek - 1)
-    let cellWidth = contentWidth / CGFloat(daysPerWeek)
+    let cellWidth = trunc(contentWidth / CGFloat(daysPerWeek))
     let cellHeight = cellWidth * (indexPath.section == 0 ? weekDayTitlesHeightScale : dayRowHeightScale)
     let size = CGSize(width: cellWidth, height: cellHeight)
     return size
