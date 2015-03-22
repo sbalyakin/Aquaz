@@ -125,10 +125,7 @@ class InfiniteScrollView: UIView {
     
     layoutPages()
     
-    // Setting contentOffset affects calling scrollViewDidScroll, so reset scroll view's delegate temporarily to avoid that
-    scrollView.delegate = nil
-    scrollView.contentOffset = calcContentOffsetByIndex(currentIndex)
-    scrollView.delegate = self
+    adjustContentOffsetToCurrentIndex()
   }
   
   private func layoutPages() {
@@ -151,7 +148,10 @@ class InfiniteScrollView: UIView {
   }
   
   private func adjustContentOffsetToCurrentIndex() {
+    // Setting contentOffset affects calling scrollViewDidScroll, so reset scroll view's delegate temporarily to avoid that
+    scrollView.delegate = nil
     scrollView.contentOffset = CGPoint(x: scrollView.frame.width * CGFloat(sidePagesCount), y: 0)
+    scrollView.delegate = self
   }
   
   private func obtainPageByIndex(index: Int) -> UIView? {
@@ -218,6 +218,7 @@ extension InfiniteScrollView: UIScrollViewDelegate {
     let deltaIndex = Int(scrollView.contentOffset.x / scrollView.frame.width) - sidePagesCount
     
     if deltaIndex == 0 {
+      adjustContentOffsetToCurrentIndex()
       return
     }
     
@@ -231,6 +232,7 @@ extension InfiniteScrollView: UIScrollViewDelegate {
     let deltaIndex = Int(scrollView.contentOffset.x / scrollView.frame.width) - sidePagesCount
     
     if deltaIndex == 0 {
+      adjustContentOffsetToCurrentIndex()
       return
     }
     

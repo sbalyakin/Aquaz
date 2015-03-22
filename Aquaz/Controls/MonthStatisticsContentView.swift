@@ -41,4 +41,19 @@ class MonthStatisticsContentView: CalendarContentView {
     
     return cell
   }
+  
+  func updateValues(values: [Double]) {
+    for dayInfo in daysInfo {
+      if dayInfo.isCurrentMonth {
+        let dayIndex = dayInfo.dayOfCurrentMonth - 1
+        if dayIndex < values.count {
+          dayInfo.userData = values[dayIndex]
+        } else {
+          assert(false)
+        }
+      }
+    }
+    
+    collectionView.reloadData()
+  }
 }

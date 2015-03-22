@@ -18,27 +18,33 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
 
   var date: NSDate = Settings.sharedInstance.uiWeekStatisticsDate.value {
     didSet {
-      dateWasChanged()
+      updateUI()
       Settings.sharedInstance.uiWeekStatisticsDate.value = date
     }
   }
   
   private var statisticsBeginDate: NSDate!
   private var statisticsEndDate: NSDate!
+  private var isShowingDay = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     weekStatisticsView.delegate = self
     weekStatisticsView.titleForScaleFunction = getTitleForAmount
+    updateUI()
   }
 
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-    dateWasChanged()
+    
+    if isShowingDay {
+      updateUI()
+      isShowingDay = false
+    }
   }
   
-  private func dateWasChanged() {
+  private func updateUI() {
     computeStatisticsDateRange()
     initDatePeriodLabel()
     initWeekStatisticsView()
@@ -52,6 +58,7 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
       dayViewController.mode = .Statistics
       dayViewController.setCurrentDate(selectedDate)
       dayViewController.initializesRevealControls = false
+      isShowingDay = true
       navigationController?.pushViewController(dayViewController, animated: true)
     }
   }

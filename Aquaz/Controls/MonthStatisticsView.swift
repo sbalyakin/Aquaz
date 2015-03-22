@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MonthStatisticsViewDataSource: class {
-  func monthStatisticsGetValuesForDateInterval(#beginDate: NSDate, endDate: NSDate) -> [Double]
+  func monthStatisticsGetValuesForDateInterval(#beginDate: NSDate, endDate: NSDate, calendarContentView: CalendarContentView) -> [Double]
 }
 
 @IBDesignable class MonthStatisticsView: CalendarView {
@@ -32,7 +32,7 @@ protocol MonthStatisticsViewDataSource: class {
     return contentView
   }
   
-  override func createCalendarViewDaysInfoForMonth(monthDate: NSDate) -> [CalendarViewDayInfo] {
+  override func createCalendarViewDaysInfoForMonth(#calendarContentView: CalendarContentView, monthDate: NSDate) -> [CalendarViewDayInfo] {
     let daysInfo = CalendarViewDataSource.createCalendarViewDaysInfoForMonth(monthDate)
     
     #if TARGET_INTERFACE_BUILDER
@@ -45,7 +45,7 @@ protocol MonthStatisticsViewDataSource: class {
       let startOfMonth = DateHelper.startDateFromDate(monthDate, calendarUnit: .CalendarUnitMonth)
       let startOfNextMonth = DateHelper.addToDate(startOfMonth, years: 0, months: 1, days: 0)
       
-      if let values = dataSource?.monthStatisticsGetValuesForDateInterval(beginDate: startOfMonth, endDate: startOfNextMonth) {
+      if let values = dataSource?.monthStatisticsGetValuesForDateInterval(beginDate: startOfMonth, endDate: startOfNextMonth, calendarContentView: calendarContentView) where !values.isEmpty {
         for dayInfo in daysInfo {
           if dayInfo.isCurrentMonth {
             let dayIndex = dayInfo.dayOfCurrentMonth - 1

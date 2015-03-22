@@ -27,26 +27,42 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
       arcLayer?.removeFromSuperlayer()
       arcLayer = nil
       
-      if let value = value {
+      if getDayInfo().isCurrentMonth {
         circleLayer = CAShapeLayer()
         circleLayer.lineWidth = monthStatisticsContentView.dayIntakeLineWidth
         circleLayer.lineCap = kCALineCapRound
         circleLayer.fillColor = nil
-        circleLayer.strokeColor = value < 1 ? monthStatisticsContentView.dayIntakeBackgroundColor.CGColor : monthStatisticsContentView.dayIntakeFullColor.CGColor
+        circleLayer.strokeColor = monthStatisticsContentView.dayIntakeBackgroundColor.CGColor
         contentView.layer.addSublayer(circleLayer)
-        
-        if value < 1 {
+
+        if let value = value {
           arcLayer = CAShapeLayer()
           arcLayer.lineWidth = monthStatisticsContentView.dayIntakeLineWidth
           arcLayer.lineCap = kCALineCapRound
           arcLayer.fillColor = nil
-          arcLayer.strokeColor = monthStatisticsContentView.dayIntakeColor.CGColor
+          arcLayer.strokeStart = 0
+          arcLayer.strokeEnd = 0
+          if value < 1 {
+            arcLayer.strokeColor = monthStatisticsContentView.dayIntakeColor.CGColor
+          } else {
+            arcLayer.strokeColor = monthStatisticsContentView.dayIntakeFullColor.CGColor
+          }
+
           contentView.layer.addSublayer(arcLayer)
+          
+          let animation = CABasicAnimation(keyPath: "strokeEnd")
+          animation.duration = 0.4
+          animation.fromValue = 0
+          animation.toValue = 1
+          animation.fillMode = kCAFillModeForwards
+          animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+          animation.removedOnCompletion = false
+          arcLayer.strokeEnd = 1
+          arcLayer.addAnimation(animation, forKey: "animateStrokeEnd")
         }
         
         setNeedsLayout()
       }
-
     } else {
       assert(false)
     }

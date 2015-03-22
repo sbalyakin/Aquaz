@@ -32,6 +32,7 @@ protocol CalendarViewDelegate: class {
   @IBInspectable var futureDaysEnabled: Bool = false
   @IBInspectable var dayRowHeightScale: CGFloat = 1
   @IBInspectable var weekDayTitlesHeightScale: CGFloat = 1
+  @IBInspectable var markSelectedDay: Bool = true
   
   private var displayedMonthDate: NSDate
   
@@ -145,6 +146,7 @@ extension CalendarView: InfiniteScrollViewDataSource {
     viewContent.futureDaysEnabled = futureDaysEnabled
     viewContent.dayRowHeightScale = dayRowHeightScale
     viewContent.weekDayTitlesHeightScale = weekDayTitlesHeightScale
+    viewContent.markSelectedDay = markSelectedDay
 
     return viewContent
   }
@@ -173,7 +175,7 @@ extension CalendarView: InfiniteScrollViewDelegate {
 
 extension CalendarView: CalendarViewContentDataSource {
   
-  func createCalendarViewDaysInfoForMonth(monthDate: NSDate) -> [CalendarViewDayInfo] {
+  func createCalendarViewDaysInfoForMonth(#calendarContentView: CalendarContentView, monthDate: NSDate) -> [CalendarViewDayInfo] {
     return CalendarViewDataSource.createCalendarViewDaysInfoForMonth(monthDate)
   }
   

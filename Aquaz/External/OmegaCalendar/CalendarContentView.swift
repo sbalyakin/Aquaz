@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol CalendarViewContentDataSource: class {
-  func createCalendarViewDaysInfoForMonth(monthDate: NSDate) -> [CalendarViewDayInfo]
+  func createCalendarViewDaysInfoForMonth(#calendarContentView: CalendarContentView, monthDate: NSDate) -> [CalendarViewDayInfo]
 }
 
 class CalendarContentView: UIView {
@@ -30,12 +30,13 @@ class CalendarContentView: UIView {
   var futureDaysEnabled: Bool = false
   var dayRowHeightScale: CGFloat = 1
   var weekDayTitlesHeightScale: CGFloat = 1
+  var markSelectedDay: Bool = true
 
   var selectedDate: NSDate? { didSet { collectionView?.reloadData() } }
   
   var date: NSDate = NSDate() {
     didSet {
-      daysInfo = dataSource?.createCalendarViewDaysInfoForMonth(date) ?? []
+      daysInfo = dataSource?.createCalendarViewDaysInfoForMonth(calendarContentView: self, monthDate: date) ?? []
       collectionView?.reloadData()
     }
   }
@@ -149,10 +150,15 @@ extension CalendarContentView: UICollectionViewDelegate {
       return
     }
     
-    selectedDate = dayInfo.date
+    if markSelectedDay {
+      selectedDate = dayInfo.date
+    }
+    
     delegate?.calendarViewDaySelected(dayInfo)
     
-    collectionView.reloadData()
+    if markSelectedDay {
+      collectionView.reloadData()
+    }
   }
 
 }

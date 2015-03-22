@@ -14,6 +14,8 @@ class MonthStatisticsViewController: StyledViewController {
   @IBOutlet weak var monthStatisticsView: MonthStatisticsView!
   @IBOutlet weak var monthLabel: UILabel!
   
+  private var isShowingDay = false
+  
   private var date: NSDate = DateHelper.startDateFromDate(Settings.sharedInstance.uiMonthStatisticsDate.value, calendarUnit: .CalendarUnitMonth) {
     didSet {
       Settings.sharedInstance.uiMonthStatisticsDate.value = date
@@ -40,7 +42,10 @@ class MonthStatisticsViewController: StyledViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
-    monthStatisticsView.refresh()
+    if isShowingDay {
+      monthStatisticsView.refresh()
+      isShowingDay = false
+    }
   }
   
   @IBAction func switchToPreviousMonth(sender: AnyObject) {
@@ -81,6 +86,7 @@ extension MonthStatisticsViewController: CalendarViewDelegate {
       dayViewController.mode = .Statistics
       dayViewController.setCurrentDate(dayInfo.date)
       dayViewController.initializesRevealControls = false
+      isShowingDay = true
       navigationController?.pushViewController(dayViewController, animated: true)
     }
   }
@@ -94,8 +100,20 @@ extension MonthStatisticsViewController: CalendarViewDelegate {
 
 extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
   
-  func monthStatisticsGetValuesForDateInterval(#beginDate: NSDate, endDate: NSDate) -> [Double] {
-    return fetchIntakeFractions(beginDate: beginDate, endDate: endDate)
+  func monthStatisticsGetValuesForDateInterval(#beginDate: NSDate, endDate: NSDate, calendarContentView: CalendarContentView) -> [Double] {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+      weak var requestingMonthStatisticsContentView = (calendarContentView as! MonthStatisticsContentView)
+      let intakeFractions = self.fetchIntakeFractions(beginDate: beginDate, endDate: endDate)
+      dispatch_async(dispatch_get_main_queue()) {
+        if requestingMonthStatisticsContentView != nil {
+          requestingMonthStatisticsContentView?.updateValues(intakeFractions)
+        } else {
+          println("Calendar content view is null now")
+        }
+      }
+    }
+
+    return []
   }
   
   private func fetchIntakeFractions(#beginDate: NSDate, endDate: NSDate) -> [Double] {
