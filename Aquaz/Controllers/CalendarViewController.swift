@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CalendarViewController: UIViewController, CalendarViewDelegate {
+class CalendarViewController: UIViewController {
 
   var date: NSDate!
   
@@ -16,7 +16,6 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
   
   @IBOutlet weak var calendarView: CalendarView!
   @IBOutlet weak var currentMonthLabel: UILabel!
-  @IBOutlet weak var nextMonthButton: UIButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -36,11 +35,11 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
   
   private func switchToDate(date: NSDate) {
     calendarView.switchToMonth(date)
-    
+    updateUI()
+  }
+  
+  private func updateUI() {
     currentMonthLabel.text = dateFormatter.stringFromDate(date)
-    
-    let isCurrentMonth = DateHelper.areDatesEqualByMonths(date1: date, date2: NSDate())
-    nextMonthButton.enabled = !isCurrentMonth
   }
   
   @IBAction func switchToNextMonth(sender: AnyObject) {
@@ -53,11 +52,6 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
     calendarView.switchToPreviousMonth()
   }
   
-  func calendarViewDaySelected(dayInfo: CalendarViewDayInfo) {
-    dayViewController.setCurrentDate(dayInfo.date)
-    navigationController?.popViewControllerAnimated(true)
-  }
-  
   @IBAction func todayDidSelected(sender: AnyObject) {
     let date = DateHelper.dateByJoiningDateTime(datePart: NSDate(), timePart: dayViewController.getCurrentDate())
     dayViewController.setCurrentDate(date)
@@ -67,4 +61,18 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
   @IBAction func cancelWasTapped(sender: UIBarButtonItem) {
     navigationController?.popViewControllerAnimated(true)
   }
+}
+
+extension CalendarViewController: CalendarViewDelegate {
+
+  func calendarViewDaySelected(dayInfo: CalendarViewDayInfo) {
+    dayViewController.setCurrentDate(dayInfo.date)
+    navigationController?.popViewControllerAnimated(true)
+  }
+
+  func calendarViewDayWasSwitched(date: NSDate) {
+    self.date = date
+    updateUI()
+  }
+
 }

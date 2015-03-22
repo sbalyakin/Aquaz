@@ -11,11 +11,17 @@ import UIKit
 
 
 protocol InfiniteScrollViewDataSource {
+  
   func infiniteScrollViewNeedsPage(#index: Int) -> UIView
+  
 }
 
 protocol InfiniteScrollViewDelegate {
+  
   func infiniteScrollViewPageCanBeRemoved(#index: Int, view: UIView?)
+  
+  func infinteScrollViewPageWasSwitched(#pageIndex: Int)
+  
 }
 
 class InfiniteScrollView: UIView {
@@ -51,7 +57,11 @@ class InfiniteScrollView: UIView {
 
   private var scrollView: UIScrollView!
   private var pages = [Int: UIView]()
-  private var currentIndex: Int = 0
+  private var currentIndex: Int = 0 {
+    didSet {
+      delegate?.infinteScrollViewPageWasSwitched(pageIndex: currentIndex)
+    }
+  }
   
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)

@@ -9,7 +9,11 @@
 import UIKit
 
 protocol CalendarViewDelegate: class {
+  
   func calendarViewDaySelected(dayInfo: CalendarViewDayInfo)
+  
+  func calendarViewDayWasSwitched(date: NSDate)
+  
 }
 
 @IBDesignable class CalendarView: UIView {
@@ -29,13 +33,7 @@ protocol CalendarViewDelegate: class {
   @IBInspectable var dayRowHeightScale: CGFloat = 1
   @IBInspectable var weekDayTitlesHeightScale: CGFloat = 1
   
-  /// Date of month displayed in the calendar
-  var displayedMonthDate: NSDate {
-    didSet {
-      let monthIndex = calcDeltaMonthsBetweenDates(fromDate: initialDisplayedMonthDate, toDate: displayedMonthDate)
-      scrollView.switchToIndex(monthIndex, animated: true)
-    }
-  }
+  private var displayedMonthDate: NSDate
   
   var selectedDate: NSDate?
   
@@ -64,6 +62,16 @@ protocol CalendarViewDelegate: class {
     baseInit()
   }
   
+  func setDisplayedMonthDate(date: NSDate) {
+    displayedMonthDate = date
+    let monthIndex = calcDeltaMonthsBetweenDates(fromDate: initialDisplayedMonthDate, toDate: displayedMonthDate)
+    scrollView.switchToIndex(monthIndex, animated: true)
+  }
+  
+  func getDisplayedMonthDate() -> NSDate {
+    return displayedMonthDate
+  }
+  
   func resetToDisplayMonthDate(date: NSDate) {
     let startOfMonth = DateHelper.startDateFromDate(date, calendarUnit: .CalendarUnitMonth)
     initialDisplayedMonthDate = startOfMonth
@@ -73,6 +81,7 @@ protocol CalendarViewDelegate: class {
   
   private func baseInit() {
     scrollView = InfiniteScrollView(frame: bounds)
+    scrollView.delegate = self
     addSubview(scrollView)
   }
   
@@ -95,15 +104,15 @@ protocol CalendarViewDelegate: class {
   }
   
   func switchToMonth(date: NSDate) {
-    displayedMonthDate = DateHelper.startDateFromDate(date, calendarUnit: .CalendarUnitMonth)
+    setDisplayedMonthDate(DateHelper.startDateFromDate(date, calendarUnit: .CalendarUnitMonth))
   }
   
   func switchToNextMonth() {
-    displayedMonthDate = DateHelper.addToDate(displayedMonthDate, years:0, months: 1, days: 0)
+    setDisplayedMonthDate(DateHelper.addToDate(displayedMonthDate, years:0, months: 1, days: 0))
   }
   
   func switchToPreviousMonth() {
-    displayedMonthDate = DateHelper.addToDate(displayedMonthDate, years:0, months: -1, days: 0)
+    setDisplayedMonthDate(DateHelper.addToDate(displayedMonthDate, years:0, months: -1, days: 0))
   }
   
   func calcDeltaMonthsBetweenDates(#fromDate: NSDate, toDate: NSDate) -> Int {
@@ -144,6 +153,22 @@ extension CalendarView: InfiniteScrollViewDataSource {
     return CalendarContentView(frame: bounds)
   }
 
+}
+
+extension CalendarView: InfiniteScrollViewDelegate {
+
+  func infiniteScrollViewPageCanBeRemoved(#index: Int, view: UIView?) {
+    // Do nothing, because a calendar view does not manage its content views
+  }
+  
+  func infinteScrollViewPageWasSwitched(#pageIndex: Int) {
+    displayedMonthDate = DateHelper.addToDate(initialDisplayedMonthDate, years: 0, months: pageIndex, days: 0)
+
+    if let delegate = delegate {
+      delegate.calendarViewDayWasSwitched(displayedMonthDate)
+    }
+  }
+  
 }
 
 extension CalendarView: CalendarViewContentDataSource {

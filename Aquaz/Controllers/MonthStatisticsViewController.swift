@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDataSource, CalendarViewDelegate {
+class MonthStatisticsViewController: StyledViewController {
 
   @IBOutlet weak var monthStatisticsView: MonthStatisticsView!
   @IBOutlet weak var monthLabel: UILabel!
@@ -20,15 +20,11 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
     }
   }
   
-  var monthDate: NSDate {
-    return monthStatisticsView.displayedMonthDate
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
 
     initMonthStatisticsView()
-    initMonthLabel()
+    updateUI()
   }
 
   private func initMonthStatisticsView() {
@@ -37,8 +33,8 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
     monthStatisticsView.delegate = self
   }
   
-  private func initMonthLabel() {
-    monthLabel.text = dateFormatter.stringFromDate(monthDate)
+  private func updateUI() {
+    monthLabel.text = dateFormatter.stringFromDate(date)
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -47,18 +43,14 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
     monthStatisticsView.refresh()
   }
   
-  func monthStatisticsGetValuesForDateInterval(#beginDate: NSDate, endDate: NSDate) -> [Double] {
-    return fetchIntakeFractions(beginDate: beginDate, endDate: endDate)
-  }
-
   @IBAction func switchToPreviousMonth(sender: AnyObject) {
     monthStatisticsView.switchToPreviousMonth()
-    date = monthStatisticsView.displayedMonthDate
+    date = monthStatisticsView.getDisplayedMonthDate()
   }
   
   @IBAction func switchToNextMonth(sender: AnyObject) {
     monthStatisticsView.switchToNextMonth()
-    date = monthStatisticsView.displayedMonthDate
+    date = monthStatisticsView.getDisplayedMonthDate()
   }
   
   private lazy var dateFormatter: NSDateFormatter = {
@@ -68,6 +60,44 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
     return formatter
     }()
 
+  private lazy var managedObjectContext: NSManagedObjectContext? = {
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+      return appDelegate.managedObjectContext
+    } else {
+      return nil
+    }
+  }()
+
+}
+
+extension MonthStatisticsViewController: CalendarViewDelegate {
+
+  func calendarViewDaySelected(dayInfo: CalendarViewDayInfo) {
+    if !dayInfo.isCurrentMonth {
+      return
+    }
+    
+    if let dayViewController: DayViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "DayViewController") {
+      dayViewController.mode = .Statistics
+      dayViewController.setCurrentDate(dayInfo.date)
+      dayViewController.initializesRevealControls = false
+      navigationController?.pushViewController(dayViewController, animated: true)
+    }
+  }
+
+  func calendarViewDayWasSwitched(date: NSDate) {
+    self.date = date
+    updateUI()
+  }
+
+}
+
+extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
+  
+  func monthStatisticsGetValuesForDateInterval(#beginDate: NSDate, endDate: NSDate) -> [Double] {
+    return fetchIntakeFractions(beginDate: beginDate, endDate: endDate)
+  }
+  
   private func fetchIntakeFractions(#beginDate: NSDate, endDate: NSDate) -> [Double] {
     let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
     
@@ -87,48 +117,8 @@ class MonthStatisticsViewController: StyledViewController, MonthStatisticsViewDa
       }
       intakeFractions.append(intakeFraction)
     }
-
+    
     return intakeFractions
   }
-
-//  Another version with fetching in another queue. Unfortunately it works with noticeable blink
-//  between month switch and statistics fetching. Because animation is off it looks ugly.
-  
-//  private func initMonthStatisticsView() {
-//    intakeFractions = []
-//    monthStatisticsView.switchToMonth(date)
-//
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-//      let fetchedDate = self.date
-//      let intakeFractions = self.fetchIntakeFractions(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
-//      dispatch_async(dispatch_get_main_queue()) {
-//        if self.date === fetchedDate {
-//          self.intakeFractions = intakeFractions
-//          self.monthStatisticsView.updateCalendar()
-//        }
-//      }
-//    }
-//  }
-
-  func calendarViewDaySelected(dayInfo: CalendarViewDayInfo) {
-    if !dayInfo.isCurrentMonth {
-      return
-    }
-    
-    if let dayViewController: DayViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "DayViewController") {
-      dayViewController.mode = .Statistics
-      dayViewController.setCurrentDate(dayInfo.date)
-      dayViewController.initializesRevealControls = false
-      navigationController?.pushViewController(dayViewController, animated: true)
-    }
-  }
-  
-  private lazy var managedObjectContext: NSManagedObjectContext? = {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-      return appDelegate.managedObjectContext
-    } else {
-      return nil
-    }
-  }()
 
 }
