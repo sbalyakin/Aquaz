@@ -53,7 +53,7 @@ class TextFieldTableCell<Value: Printable>: TableCellWithValue<Value>, UITextFie
   
   override func valueDidChange() {
     super.valueDidChange()
-    uiCell?.textField.text = value.description
+    uiCell?.textField.text = stringFromValueFunction?(value) ?? value.description
   }
   
   override func setActive(active: Bool) {
