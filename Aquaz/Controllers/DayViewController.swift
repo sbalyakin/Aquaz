@@ -9,39 +9,16 @@
 import UIKit
 import CoreData
 
-private extension Units.Volume {
-  var precision: Double {
-    switch self {
-    case Millilitres: return 1.0
-    case FluidOunces: return 0.1
-    }
-  }
-  
-  var decimals: Int {
-    switch self {
-    case Millilitres: return 0
-    case FluidOunces: return 1
-    }
-  }
-}
-
-class DayViewController: RevealedViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class DayViewController: RevealedViewController {
   
   // MARK: UI elements -
   
-  @IBOutlet weak var pageButton: UIBarButtonItem!
   @IBOutlet weak var summaryBar: UIView!
   @IBOutlet weak var intakesMultiProgressView: MultiProgressView!
   @IBOutlet weak var intakeButton: UIButton!
-  @IBOutlet weak var previousDayButton: UIButton!
-  @IBOutlet weak var nextDayButton: UIButton!
-  @IBOutlet weak var currentDayButton: UIButton!
-  @IBOutlet weak var daySelectionBar: UIView!
-  @IBOutlet weak var showDaySelectionButton: UIButton!
   @IBOutlet weak var highActivityButton: UIButton!
   @IBOutlet weak var hotDayButton: UIButton!
   @IBOutlet weak var containerView: UIView!
-  @IBOutlet weak var summaryBarHeightConstraint: NSLayoutConstraint!
   
   var navigationTitleView: UIView!
   var navigationTitleLabel: UILabel!
@@ -75,6 +52,13 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
   
   var mode: Mode = .General
   
+  private struct Constants {
+    static let selectDrinkViewControllerStoryboardID = "SelectDrinkViewController"
+    static let diaryViewControllerStoryboardID = "DiaryViewController"
+    static let showCalendarSegue = "ShowCalendar"
+    static let pageViewEmbedSegue = "PageViewEmbed"
+  }
+  
   // MARK: Page setup -
   
   override func viewDidLoad() {
@@ -88,10 +72,9 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
       }
     }
     
-    summaryBarOriginalHeight = summaryBarHeightConstraint.constant
-    
+    setupGestureRecognizers()
     createCustomNavigationTitle()
-    setupSummaryBar()
+    setupMultiprogressControl()
     updateCurrentDateRelatedControls()
   }
   
@@ -103,6 +86,7 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
     
     applyStyle()
+    
     refreshCurrentDay(showAlert: false)
   }
   
@@ -133,6 +117,19 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     return currentDate
   }
   
+  private func setupGestureRecognizers() {
+    if let navigationBar = navigationController?.navigationBar {
+      let leftSwipe = UISwipeGestureRecognizer(target: self, action: "leftSwipeGestureIsRecognized:")
+      leftSwipe.direction = .Left
+      self.navigationItem
+      navigationBar.addGestureRecognizer(leftSwipe)
+      
+      let rightSwipe = UISwipeGestureRecognizer(target: self, action: "rightSwipeGestureIsRecognized:")
+      rightSwipe.direction = .Right
+      navigationBar.addGestureRecognizer(rightSwipe)
+    }
+  }
+  
   private func createCustomNavigationTitle() {
     let titleParts = UIHelper.createNavigationTitleViewWithSubTitle(navigationController: navigationController!, titleText: navigationItem.title)
     
@@ -143,11 +140,6 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     navigationItem.titleView = navigationTitleView
   }
 
-  private func setupSummaryBar() {
-    setDaySelectionBarVisible(Settings.sharedInstance.uiDisplayDaySelection.value, animated: false)
-    setupMultiprogressControl()
-  }
-  
   private func setupMultiprogressControl() {
     intakesMultiProgressView.borderColor = UIColor(red: 167/255, green: 169/255, blue: 171/255, alpha: 0.8)
     intakesMultiProgressView.emptySectionColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1)
@@ -160,24 +152,17 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
   }
   
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    
-    let neededContainerViewHeight = view.bounds.height - summaryBarOriginalHeight
-    selectDrinkViewController.adjustPermanentConstraints(neededContainerViewHeight)
-  }
-
   private func setupPageViewController(pageViewController: UIPageViewController) {
     pages = []
     
     // Add view controller for drink selection
-    selectDrinkViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "SelectDrinkViewController")
+    selectDrinkViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.selectDrinkViewControllerStoryboardID)
     
     selectDrinkViewController.dayViewController = self
     pages.append(selectDrinkViewController)
     
     // Add intakes diary view controller
-    diaryViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "DiaryViewController")
+    diaryViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.diaryViewControllerStoryboardID)
     
     diaryViewController.dayViewController = self
     pages.append(diaryViewController)
@@ -185,28 +170,54 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     pageViewController.dataSource = self
     pageViewController.delegate = self
     pageViewController.setViewControllers([selectDrinkViewController], direction: .Forward, animated: false, completion: nil)
+    
+    updateUIAccordingToCurrentPage(selectDrinkViewController)
+  }
+  
+  // MARK: Day selection -
+  
+  func leftSwipeGestureIsRecognized(gestureRecognizer: UISwipeGestureRecognizer) {
+    if gestureRecognizer.state == .Ended {
+      let daysTillToday = DateHelper.computeUnitsFrom(currentDate, toDate: NSDate(), unit: .CalendarUnitDay)
+      if daysTillToday > 0 {
+        switchToNextDay()
+      }
+    }
+  }
+  
+  func rightSwipeGestureIsRecognized(gestureRecognizer: UISwipeGestureRecognizer) {
+    if gestureRecognizer.state == .Ended {
+      switchToPreviousDay()
+    }
+  }
+  
+  private func switchToNextDay() {
+    setCurrentDate(DateHelper.addToDate(currentDate, years: 0, months: 0, days: 1))
+  }
+
+  private func switchToPreviousDay() {
+    setCurrentDate(DateHelper.addToDate(currentDate, years: 0, months: 0, days: -1))
+  }
+
+  private func updateCurrentDateRelatedControls() {
+    let formattedDate = DateHelper.stringFromDate(currentDate)
+    setTextToLabelWithAnimation(label: navigationCurrentDayLabel, text: formattedDate)
+
+    fetchWaterGoal()
+    fetchIntakes()
+  }
+  
+  private func setTextToLabelWithAnimation(#label: UILabel, text: String) {
+    if label.text == text {
+      return
+    }
+    
+    UIView.transitionWithView(label, duration: 0.4, options: .TransitionCrossDissolve, animations: {
+      label.text = text
+      }, completion: nil)
   }
   
   // MARK: Summary bar actions -
-  
-  @IBAction func toggleDaySelectionBar(sender: AnyObject) {
-    let visible = Settings.sharedInstance.uiDisplayDaySelection.value
-    setDaySelectionBarVisible(!visible, animated: true)
-  }
-  
-  private func setDaySelectionBarVisible(visible: Bool, animated: Bool) {
-    let newSummaryBarHeight = visible ? summaryBarOriginalHeight : daySelectionBar.frame.minY
-
-    self.summaryBarHeightConstraint.constant = newSummaryBarHeight
-    
-    if animated {
-      UIView.animateWithDuration(0.4, animations: view.layoutIfNeeded)
-    }
-    
-    Settings.sharedInstance.uiDisplayDaySelection.value = visible
-    
-    showDaySelectionButton.selected = visible
-  }
   
   @IBAction func toggleHighActivityMode(sender: AnyObject) {
     if highActivityExtraFactor > 0 {
@@ -224,57 +235,15 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
   }
   
-  @IBAction func switchToPreviousDay(sender: AnyObject) {
-    setCurrentDate(DateHelper.addToDate(currentDate, years: 0, months: 0, days: -1))
-  }
-
-  @IBAction func switchToNextDay(sender: AnyObject) {
-    setCurrentDate(DateHelper.addToDate(currentDate, years: 0, months: 0, days: 1))
-  }
-  
   // MARK: Change current screen -
-  
-  func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-    if let index = find(pages, viewController) {
-      if index > 0 {
-        return pages[index - 1]
-      }
-    }
-    
-    return nil
-  }
-  
-  func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-    if let index = find(pages, viewController) {
-      if index < pages.count - 1 {
-        return pages[index + 1]
-      }
-    }
-    
-    return nil
-  }
-  
-  func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
-    let currentPage = pageViewController.viewControllers.last as! UIViewController
-    if currentPage == pages[0] {
-      pageButton.image = UIImage(named: "iconDiary")?.imageWithRenderingMode(.AlwaysOriginal)
-    } else if currentPage == pages[1] {
-      pageButton.image = UIImage(named: "iconUp")?.imageWithRenderingMode(.AlwaysOriginal)
-    }
-  }
-  
-  @IBAction func pageButtonWasTapped(sender: AnyObject) {
-    toggleCurrentPage()
-  }
   
   private func toggleCurrentPage() {
     let currentPage = pageViewController.viewControllers.last as! UIViewController
+    updateUIAccordingToCurrentPage(currentPage)
     if currentPage == pages[0] {
       pageViewController.setViewControllers([pages[1]], direction: .Forward, animated: true, completion: nil)
-      pageButton.image = UIImage(named: "iconUp")?.imageWithRenderingMode(.AlwaysOriginal)
     } else if currentPage == pages[1] {
       pageViewController.setViewControllers([pages[0]], direction: .Reverse, animated: true, completion: nil)
-      pageButton.image = UIImage(named: "iconDiary")?.imageWithRenderingMode(.AlwaysOriginal)
     }
   }
   
@@ -285,15 +254,30 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     }
   }
 
+  private func updateUIAccordingToCurrentPage(page: UIViewController) {
+    if navigationTitleLabel == nil {
+      return
+    }
+    
+    let title: String
+    if page == selectDrinkViewController {
+      title = NSLocalizedString("DVC:Water Intake", value: "Water Intake", comment: "DayViewController: Top bar title for water intake page")
+    } else {
+      title = NSLocalizedString("DVC:Diary", value: "Diary", comment: "DayViewController: Top bar title for water intakes diary")
+    }
+    
+    setTextToLabelWithAnimation(label: navigationTitleLabel, text: title)
+  }
+  
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if let identifier = segue.identifier {
       switch identifier {
-      case "ShowCalendar":
+      case Constants.showCalendarSegue:
         if let calendarViewController = segue.destinationViewController as? CalendarViewController {
           calendarViewController.date = currentDate
           calendarViewController.dayViewController = self
         }
-      case "PageViewEmbed":
+      case Constants.pageViewEmbedSegue:
         if let pageViewController = segue.destinationViewController as? UIPageViewController {
           self.pageViewController = pageViewController
           setupPageViewController(pageViewController)
@@ -492,21 +476,6 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
     isWaterGoalForCurrentDay = true
   }
   
-  // MARK: Date management -
-  
-  private func updateCurrentDateRelatedControls() {
-    let formattedDate = DateHelper.stringFromDate(currentDate)
-    currentDayButton.setTitle(formattedDate, forState: .Normal)
-    navigationCurrentDayLabel.text = formattedDate
-    
-    let daysTillToday = DateHelper.computeUnitsFrom(currentDate, toDate: NSDate(), unit: .CalendarUnitDay)
-    nextDayButton.enabled = daysTillToday > 0
-    
-    fetchWaterGoal()
-    
-    fetchIntakes()
-  }
-  
   // MARK: Private properties -
   
   private var waterGoal: WaterGoal?
@@ -583,4 +552,57 @@ class DayViewController: RevealedViewController, UIPageViewControllerDataSource,
       return nil
     }
   }()
+}
+
+// MARK: UIPageViewControllerDataSource -
+
+extension DayViewController: UIPageViewControllerDataSource {
+  
+  func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    if let index = find(pages, viewController) {
+      if index > 0 {
+        return pages[index - 1]
+      }
+    }
+    
+    return nil
+  }
+  
+  func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    if let index = find(pages, viewController) {
+      if index < pages.count - 1 {
+        return pages[index + 1]
+      }
+    }
+    
+    return nil
+  }
+  
+}
+
+// MARK: UIPageViewControllerDelegate -
+
+extension DayViewController: UIPageViewControllerDelegate {
+
+  func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
+    let currentPage = pageViewController.viewControllers.last as! UIViewController
+    updateUIAccordingToCurrentPage(currentPage)
+  }
+  
+}
+
+private extension Units.Volume {
+  var precision: Double {
+    switch self {
+    case Millilitres: return 1.0
+    case FluidOunces: return 0.1
+    }
+  }
+  
+  var decimals: Int {
+    switch self {
+    case Millilitres: return 0
+    case FluidOunces: return 1
+    }
+  }
 }

@@ -103,9 +103,6 @@ public class Settings {
   lazy var uiDisplayDailyWaterIntakeInPercents = SettingsOrdinalItem(
     key: "UI - Display daily water intake in percents", initialValue: false)
 
-  lazy var uiDisplayDaySelection = SettingsOrdinalItem(
-    key: "UI - Display day selection", initialValue: false)
-
   lazy var uiSelectedStatisticsPage = SettingsEnumItem(
     key: "UI - Selected statistics page", initialValue: StatisticsViewPage.Week)
 

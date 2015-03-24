@@ -38,11 +38,6 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     popupViewManager = SelectDrinkPopupViewManager(selectDrinkViewController: self)
   }
   
-  func adjustPermanentConstraints(height: CGFloat) {
-    let collectionViewHeight = height - 2 * collectionViewTopVerticalSpaceConstraint.constant
-    collectionViewHeightConstraint.constant = collectionViewHeight
-  }
-  
   private func setupGestureRecognizers() {
     let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "handleDrinkCellLongPress:")
     longPressGestureRecognizer.minimumPressDuration = 0.5

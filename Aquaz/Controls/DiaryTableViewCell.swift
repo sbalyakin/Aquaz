@@ -8,24 +8,6 @@
 
 import UIKit
 
-private extension Units.Volume {
-  
-  var precision: Double {
-    switch self {
-    case Millilitres: return 1.0
-    case FluidOunces: return 0.1
-    }
-  }
-  
-  var decimals: Int {
-    switch self {
-    case Millilitres: return 0
-    case FluidOunces: return 1
-    }
-  }
-}
-
-
 class DiaryTableViewCell: UITableViewCell {
   
   @IBOutlet weak var timeLabel: UILabel!
@@ -36,57 +18,6 @@ class DiaryTableViewCell: UITableViewCell {
     didSet {
       applyIntake()
     }
-  }
-  
-  private func findDefaultAccessoryView() -> UIView? {
-    for subview in subviews {
-      if let subview = subview as? UIButton {
-        if subview != backgroundView &&
-           subview != contentView &&
-           subview != selectedBackgroundView &&
-           subview != multipleSelectionBackgroundView {
-          return subview
-        }
-      }
-    }
-
-    return nil
-  }
-
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    
-    // Adjust amount label
-    let maxX: CGFloat
-
-    // TODO: Hardcoded magic numbers should be transformed to constants
-    if let defaultAccessoryView = findDefaultAccessoryView() {
-      maxX = defaultAccessoryView.frame.minX - 8
-    } else {
-      maxX = bounds.width - 23 - 8
-    }
-    
-    var frame = amountLabel.frame
-    frame.origin.x = maxX - frame.width
-    amountLabel.frame = frame
-    
-    // Adjust drink label
-    drinkLabel.frame.size.width = amountLabel.frame.minX - 8 - drinkLabel.frame.minX
-    
-    // Adjust time label
-    let drinkFontHeight = calcTextHeight(font: drinkLabel.font)
-    let timeFontHeight = calcTextHeight(font: timeLabel.font)
-
-    let drinkLabelBaseline = drinkLabel.frame.height + drinkLabel.font.descender - (drinkLabel.frame.height - drinkFontHeight) / 2
-    let timeLabelBaseline = timeLabel.frame.height + timeLabel.font.descender - (timeLabel.frame.height - timeFontHeight) / 2
-    timeLabel.frame.origin.y = drinkLabel.frame.minY + drinkLabelBaseline - timeLabelBaseline
-  }
-  
-  private func calcTextHeight(#font: UIFont) -> CGFloat {
-    let scale = UIScreen.mainScreen().scale
-    let rawHeight = "0".sizeWithAttributes([NSFontAttributeName: font]).height
-    let height = ceil(rawHeight * scale) / scale
-    return height
   }
   
   private func applyIntake() {
@@ -135,4 +66,21 @@ class DiaryTableViewCell: UITableViewCell {
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
 
+}
+
+private extension Units.Volume {
+  
+  var precision: Double {
+    switch self {
+    case Millilitres: return 1.0
+    case FluidOunces: return 0.1
+    }
+  }
+  
+  var decimals: Int {
+    switch self {
+    case Millilitres: return 0
+    case FluidOunces: return 1
+    }
+  }
 }
