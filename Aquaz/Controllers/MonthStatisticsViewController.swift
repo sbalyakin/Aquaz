@@ -36,7 +36,7 @@ class MonthStatisticsViewController: StyledViewController {
   }
   
   private func updateUI() {
-    monthLabel.text = dateFormatter.stringFromDate(date)
+    monthLabel.setTextWithAnimation(dateFormatter.stringFromDate(date))
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -51,11 +51,13 @@ class MonthStatisticsViewController: StyledViewController {
   @IBAction func switchToPreviousMonth(sender: AnyObject) {
     monthStatisticsView.switchToPreviousMonth()
     date = monthStatisticsView.getDisplayedMonthDate()
+    updateUI() // Updating month label before scroll view animation is finished
   }
   
   @IBAction func switchToNextMonth(sender: AnyObject) {
     monthStatisticsView.switchToNextMonth()
     date = monthStatisticsView.getDisplayedMonthDate()
+    updateUI() // Updating month label before scroll view animation is finished
   }
   
   private lazy var dateFormatter: NSDateFormatter = {

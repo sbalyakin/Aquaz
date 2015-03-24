@@ -39,17 +39,19 @@ class CalendarViewController: UIViewController {
   }
   
   private func updateUI() {
-    currentMonthLabel.text = dateFormatter.stringFromDate(date)
+    currentMonthLabel.setTextWithAnimation(dateFormatter.stringFromDate(date))
   }
   
   @IBAction func switchToNextMonth(sender: AnyObject) {
     date = DateHelper.addToDate(date, years: 0, months: 1, days: 0)
     calendarView.switchToNextMonth()
+    updateUI() // Updating month label before scroll view animation is finished
   }
   
   @IBAction func switchToPreviousMonth(sender: AnyObject) {
     date = DateHelper.addToDate(date, years: 0, months: -1, days: 0)
     calendarView.switchToPreviousMonth()
+    updateUI() // Updating month label before scroll view animation is finished
   }
   
   @IBAction func todayDidSelected(sender: AnyObject) {

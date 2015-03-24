@@ -680,10 +680,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6io-9A-Yq4" userLabel="&lt;">
-                                <rect key="frame" x="16" y="20" width="22" height="22"/>
+                                <rect key="frame" x="16" y="8" width="32" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="UZ6-fr-E0p"/>
-                                    <constraint firstAttribute="width" constant="22" id="rHb-QX-S9C"/>
+                                    <constraint firstAttribute="height" constant="32" id="UZ6-fr-E0p"/>
+                                    <constraint firstAttribute="width" constant="32" id="rHb-QX-S9C"/>
                                 </constraints>
                                 <state key="normal" image="iconLeftActive">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -694,16 +694,16 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORs-BH-u1n">
-                                <rect key="frame" x="46" y="20" width="508" height="21"/>
+                                <rect key="frame" x="56" y="13" width="488" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8PO-QY-6SQ" userLabel="&gt;">
-                                <rect key="frame" x="562" y="20" width="22" height="22"/>
+                                <rect key="frame" x="552" y="8" width="32" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="0uC-ib-lKZ"/>
-                                    <constraint firstAttribute="width" constant="22" id="icy-nY-Csx"/>
+                                    <constraint firstAttribute="height" constant="32" id="0uC-ib-lKZ"/>
+                                    <constraint firstAttribute="width" constant="32" id="icy-nY-Csx"/>
                                 </constraints>
                                 <state key="normal" image="iconRightActive">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -714,7 +714,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qj-Pw-bGE" customClass="CalendarView" customModule="Aquaz" customModuleProvider="target">
-                                <rect key="frame" x="16" y="49" width="568" height="479"/>
+                                <rect key="frame" x="16" y="40" width="568" height="488"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="dayRowHeightScale">
@@ -730,10 +730,10 @@
                             <constraint firstItem="ORs-BH-u1n" firstAttribute="top" secondItem="CWY-nB-5a7" secondAttribute="bottom" constant="8" symbolic="YES" id="CNT-D8-dgy"/>
                             <constraint firstItem="l3J-14-sGV" firstAttribute="top" secondItem="3Qj-Pw-bGE" secondAttribute="bottom" constant="8" symbolic="YES" id="ED0-lm-Sh6"/>
                             <constraint firstItem="ORs-BH-u1n" firstAttribute="centerY" secondItem="6io-9A-Yq4" secondAttribute="centerY" id="JVj-G5-VnX"/>
-                            <constraint firstItem="6io-9A-Yq4" firstAttribute="top" secondItem="CWY-nB-5a7" secondAttribute="bottom" constant="20" id="LCs-bp-J7d"/>
+                            <constraint firstItem="6io-9A-Yq4" firstAttribute="top" secondItem="CWY-nB-5a7" secondAttribute="bottom" constant="8" symbolic="YES" id="LCs-bp-J7d"/>
                             <constraint firstItem="ORs-BH-u1n" firstAttribute="leading" secondItem="6io-9A-Yq4" secondAttribute="trailing" constant="8" symbolic="YES" id="Tm4-mY-C3l"/>
                             <constraint firstItem="8PO-QY-6SQ" firstAttribute="leading" secondItem="ORs-BH-u1n" secondAttribute="trailing" constant="8" symbolic="YES" id="Y9j-cd-nlH"/>
-                            <constraint firstItem="3Qj-Pw-bGE" firstAttribute="top" secondItem="6io-9A-Yq4" secondAttribute="bottom" constant="7" id="dtD-cp-IkD"/>
+                            <constraint firstItem="3Qj-Pw-bGE" firstAttribute="top" secondItem="6io-9A-Yq4" secondAttribute="bottom" id="dtD-cp-IkD"/>
                             <constraint firstItem="6io-9A-Yq4" firstAttribute="leading" secondItem="bR3-kD-GGC" secondAttribute="leadingMargin" id="fOz-LH-1IR"/>
                             <constraint firstItem="3Qj-Pw-bGE" firstAttribute="leading" secondItem="bR3-kD-GGC" secondAttribute="leadingMargin" id="odm-uu-Bt6"/>
                             <constraint firstItem="6io-9A-Yq4" firstAttribute="centerY" secondItem="8PO-QY-6SQ" secondAttribute="centerY" id="rfi-ak-iru"/>
@@ -819,10 +819,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLj-7y-RXN" userLabel="&lt;">
-                                <rect key="frame" x="16" y="20" width="22" height="22"/>
+                                <rect key="frame" x="16" y="8" width="32" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="ccy-Zb-NCO"/>
-                                    <constraint firstAttribute="width" constant="22" id="sKI-kV-PXA"/>
+                                    <constraint firstAttribute="height" constant="32" id="ccy-Zb-NCO"/>
+                                    <constraint firstAttribute="width" constant="32" id="sKI-kV-PXA"/>
                                 </constraints>
                                 <state key="normal" image="iconLeftActive"/>
                                 <state key="disabled" image="iconLeft"/>
@@ -831,13 +831,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpS-Mu-cye">
-                                <rect key="frame" x="46" y="21" width="508" height="21"/>
+                                <rect key="frame" x="56" y="14" width="488" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ar0-25-CDE" customClass="WeekStatisticsView" customModule="Aquaz" customModuleProvider="target">
-                                <rect key="frame" x="20" y="50" width="560" height="542"/>
+                                <rect key="frame" x="20" y="48" width="560" height="544"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="horizontalMargin">
@@ -846,10 +846,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="glk-nc-3dL" userLabel="&gt;">
-                                <rect key="frame" x="562" y="20" width="22" height="22"/>
+                                <rect key="frame" x="552" y="8" width="32" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="LeP-TD-6rE"/>
-                                    <constraint firstAttribute="width" constant="22" id="nY7-3q-DM2"/>
+                                    <constraint firstAttribute="height" constant="32" id="LeP-TD-6rE"/>
+                                    <constraint firstAttribute="width" constant="32" id="nY7-3q-DM2"/>
                                 </constraints>
                                 <state key="normal" image="iconRightActive">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -862,7 +862,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.95645805029999997" green="0.95645805029999997" blue="0.95645805029999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="CLj-7y-RXN" firstAttribute="top" secondItem="Wcd-Fu-RrX" secondAttribute="bottom" constant="20" id="8gQ-JM-tn5"/>
+                            <constraint firstItem="CLj-7y-RXN" firstAttribute="top" secondItem="Wcd-Fu-RrX" secondAttribute="bottom" constant="8" symbolic="YES" id="8gQ-JM-tn5"/>
                             <constraint firstItem="qpS-Mu-cye" firstAttribute="leading" secondItem="CLj-7y-RXN" secondAttribute="trailing" constant="8" symbolic="YES" id="AEo-wf-0lr"/>
                             <constraint firstAttribute="trailing" secondItem="ar0-25-CDE" secondAttribute="trailing" constant="20" symbolic="YES" id="D5n-7X-LMq"/>
                             <constraint firstItem="CLj-7y-RXN" firstAttribute="centerY" secondItem="qpS-Mu-cye" secondAttribute="centerY" id="EHW-lQ-zpG"/>
@@ -879,7 +879,6 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="datePeriodLabel" destination="qpS-Mu-cye" id="Geq-hC-xHB"/>
-                        <outlet property="nextWeekButton" destination="glk-nc-3dL" id="ZaS-kn-204"/>
                         <outlet property="weekStatisticsView" destination="ar0-25-CDE" id="OhM-Em-x4Q"/>
                     </connections>
                 </viewController>
@@ -900,16 +899,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGq-1N-zd1">
-                                <rect key="frame" x="46" y="21" width="508" height="21"/>
+                                <rect key="frame" x="56" y="14" width="488" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="np9-8W-4mb" userLabel="&gt;">
-                                <rect key="frame" x="562" y="20" width="22" height="22"/>
+                                <rect key="frame" x="552" y="8" width="32" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="22" id="qXE-qf-3eg"/>
-                                    <constraint firstAttribute="height" constant="22" id="y5b-9Q-pl4"/>
+                                    <constraint firstAttribute="width" constant="32" id="qXE-qf-3eg"/>
+                                    <constraint firstAttribute="height" constant="32" id="y5b-9Q-pl4"/>
                                 </constraints>
                                 <state key="normal" image="iconRightActive">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -921,7 +920,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HC1-Ha-eED" customClass="MonthStatisticsView" customModule="Aquaz" customModuleProvider="target">
-                                <rect key="frame" x="16" y="50" width="568" height="542"/>
+                                <rect key="frame" x="16" y="40" width="568" height="552"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="dayRowHeightScale">
@@ -937,10 +936,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xh4-oI-4GI" userLabel="&lt;">
-                                <rect key="frame" x="16" y="20" width="22" height="22"/>
+                                <rect key="frame" x="16" y="8" width="32" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="22" id="BFC-0e-fKN"/>
-                                    <constraint firstAttribute="height" constant="22" id="k7u-f6-u4T"/>
+                                    <constraint firstAttribute="width" constant="32" id="BFC-0e-fKN"/>
+                                    <constraint firstAttribute="height" constant="32" id="k7u-f6-u4T"/>
                                 </constraints>
                                 <state key="normal" image="iconLeftActive"/>
                                 <state key="disabled" image="iconLeft"/>
@@ -957,10 +956,10 @@
                             <constraint firstItem="np9-8W-4mb" firstAttribute="trailing" secondItem="nZQ-Ie-hZD" secondAttribute="trailingMargin" id="Ai4-OD-tZK"/>
                             <constraint firstItem="oGq-1N-zd1" firstAttribute="centerY" secondItem="xh4-oI-4GI" secondAttribute="centerY" id="B5b-cg-H1n"/>
                             <constraint firstItem="HC1-Ha-eED" firstAttribute="leading" secondItem="nZQ-Ie-hZD" secondAttribute="leadingMargin" id="DY2-7R-gLj"/>
-                            <constraint firstItem="HC1-Ha-eED" firstAttribute="top" secondItem="xh4-oI-4GI" secondAttribute="bottom" constant="8" symbolic="YES" id="OgL-Sk-ix4"/>
+                            <constraint firstItem="HC1-Ha-eED" firstAttribute="top" secondItem="xh4-oI-4GI" secondAttribute="bottom" id="OgL-Sk-ix4"/>
                             <constraint firstItem="oGq-1N-zd1" firstAttribute="leading" secondItem="xh4-oI-4GI" secondAttribute="trailing" constant="8" symbolic="YES" id="RLt-hp-5JY"/>
                             <constraint firstItem="np9-8W-4mb" firstAttribute="leading" secondItem="oGq-1N-zd1" secondAttribute="trailing" constant="8" symbolic="YES" id="ZYD-mb-8Jr"/>
-                            <constraint firstItem="xh4-oI-4GI" firstAttribute="top" secondItem="ENN-7O-jIB" secondAttribute="bottom" constant="20" id="c5v-6m-qE1"/>
+                            <constraint firstItem="xh4-oI-4GI" firstAttribute="top" secondItem="ENN-7O-jIB" secondAttribute="bottom" constant="8" symbolic="YES" id="c5v-6m-qE1"/>
                             <constraint firstItem="zjj-BE-xgl" firstAttribute="top" secondItem="HC1-Ha-eED" secondAttribute="bottom" constant="8" symbolic="YES" id="mZt-ac-e0L"/>
                             <constraint firstItem="np9-8W-4mb" firstAttribute="centerY" secondItem="xh4-oI-4GI" secondAttribute="centerY" id="sIM-hZ-ok3"/>
                         </constraints>
@@ -989,16 +988,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3n-ub-LA6">
-                                <rect key="frame" x="46" y="20" width="508" height="21"/>
+                                <rect key="frame" x="56" y="13" width="488" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mTP-tH-nqy" userLabel="&gt;">
-                                <rect key="frame" x="562" y="20" width="22" height="22"/>
+                                <rect key="frame" x="552" y="8" width="32" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="dWk-R6-vxy"/>
-                                    <constraint firstAttribute="width" constant="22" id="ot1-hn-GUu"/>
+                                    <constraint firstAttribute="height" constant="32" id="dWk-R6-vxy"/>
+                                    <constraint firstAttribute="width" constant="32" id="ot1-hn-GUu"/>
                                 </constraints>
                                 <state key="normal" image="iconRightActive">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1011,7 +1010,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wae-DX-wQD" customClass="YearStatisticsView" customModule="Aquaz" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="600" height="542"/>
+                                <rect key="frame" x="0.0" y="48" width="600" height="544"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="horizontalMargin">
@@ -1020,10 +1019,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K7Y-wl-o8g" userLabel="&lt;">
-                                <rect key="frame" x="16" y="20" width="22" height="22"/>
+                                <rect key="frame" x="16" y="8" width="32" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="Kn5-Vv-idj"/>
-                                    <constraint firstAttribute="width" constant="22" id="Lvf-jM-46M"/>
+                                    <constraint firstAttribute="height" constant="32" id="Kn5-Vv-idj"/>
+                                    <constraint firstAttribute="width" constant="32" id="Lvf-jM-46M"/>
                                 </constraints>
                                 <state key="normal" image="iconLeftActive"/>
                                 <state key="disabled" image="iconLeft"/>
@@ -1039,7 +1038,7 @@
                             <constraint firstItem="f1w-H7-WfC" firstAttribute="top" secondItem="Wae-DX-wQD" secondAttribute="bottom" constant="8" symbolic="YES" id="CyD-wW-VEh"/>
                             <constraint firstItem="mTP-tH-nqy" firstAttribute="leading" secondItem="i3n-ub-LA6" secondAttribute="trailing" constant="8" symbolic="YES" id="Das-tc-hbY"/>
                             <constraint firstItem="i3n-ub-LA6" firstAttribute="leading" secondItem="K7Y-wl-o8g" secondAttribute="trailing" constant="8" symbolic="YES" id="EYk-g5-BhD"/>
-                            <constraint firstItem="K7Y-wl-o8g" firstAttribute="top" secondItem="WD3-N8-n1O" secondAttribute="bottom" constant="20" id="IXx-31-Nwg"/>
+                            <constraint firstItem="K7Y-wl-o8g" firstAttribute="top" secondItem="WD3-N8-n1O" secondAttribute="bottom" constant="8" symbolic="YES" id="IXx-31-Nwg"/>
                             <constraint firstItem="Wae-DX-wQD" firstAttribute="leading" secondItem="KWn-vA-ToF" secondAttribute="leading" id="V40-Us-0P0"/>
                             <constraint firstItem="K7Y-wl-o8g" firstAttribute="leading" secondItem="KWn-vA-ToF" secondAttribute="leadingMargin" id="bFI-Av-tNh"/>
                             <constraint firstItem="mTP-tH-nqy" firstAttribute="trailing" secondItem="KWn-vA-ToF" secondAttribute="trailingMargin" id="dhe-bh-Nds"/>
@@ -1052,7 +1051,6 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="nextYearButton" destination="mTP-tH-nqy" id="5K9-6R-xfE"/>
                         <outlet property="yearLabel" destination="i3n-ub-LA6" id="c03-0U-aE1"/>
                         <outlet property="yearStatisticsView" destination="Wae-DX-wQD" id="NqA-5Y-q0r"/>
                     </connections>

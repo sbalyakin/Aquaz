@@ -141,3 +141,17 @@ extension UIView {
     #endif
   }
 }
+
+extension UILabel {
+  
+  func setTextWithAnimation(text: String, duration: CGFloat = 0.4) {
+    if self.text == text {
+      return
+    }
+    
+    UIView.transitionWithView(self, duration: 0.4, options: .TransitionCrossDissolve, animations: {
+      self.text = text
+      }, completion: nil)
+  }
+
+}

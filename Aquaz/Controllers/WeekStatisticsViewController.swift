@@ -13,7 +13,6 @@ class WeekStatisticsViewController: StyledViewController {
   
   @IBOutlet weak var weekStatisticsView: WeekStatisticsView!
   @IBOutlet weak var datePeriodLabel: UILabel!
-  @IBOutlet weak var nextWeekButton: UIButton!
 
   var date: NSDate = Settings.sharedInstance.uiWeekStatisticsDate.value {
     didSet {
@@ -31,6 +30,7 @@ class WeekStatisticsViewController: StyledViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    weekStatisticsView.dataSource = self
     weekStatisticsView.delegate = self
     weekStatisticsView.titleForScaleFunction = getTitleForAmount
     
@@ -67,9 +67,8 @@ class WeekStatisticsViewController: StyledViewController {
 
   private func updateUI() {
     computeStatisticsDateRange()
-    initDatePeriodLabel()
-    initWeekStatisticsView()
-    updateSwitchButtons()
+    updateDatePeriodLabel()
+    updateWeekStatisticsView()
   }
   
   private func getTitleForAmount(amount: CGFloat) -> String {
@@ -113,12 +112,12 @@ class WeekStatisticsViewController: StyledViewController {
     return formatter
     }()
 
-  private func initDatePeriodLabel() {
+  private func updateDatePeriodLabel() {
     let maxDate = DateHelper.addToDate(statisticsEndDate, years: 0, months: 0, days: -1)
     let fromDateTitle = dateFormatter.stringFromDate(statisticsBeginDate)
     let toDateTitle = dateFormatter.stringFromDate(maxDate)
     let title = "\(fromDateTitle) - \(toDateTitle)"
-    datePeriodLabel.text = title
+    datePeriodLabel.setTextWithAnimation(title)
   }
 
   private func fetchStatisticsItems(#beginDate: NSDate, endDate: NSDate) -> [WeekStatisticsView.ItemType] {
@@ -145,7 +144,7 @@ class WeekStatisticsViewController: StyledViewController {
     return statisticsItems
   }
   
-  private func initWeekStatisticsView() {
+  private func updateWeekStatisticsView() {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
       let date = self.date
       let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
@@ -157,11 +156,6 @@ class WeekStatisticsViewController: StyledViewController {
     }
   }
 
-  private func updateSwitchButtons() {
-    let isCurrentWeek = statisticsEndDate.isLaterThan(NSDate())
-    nextWeekButton.enabled = !isCurrentWeek
-  }
-  
   private func computeStatisticsDateRange() {
     let calendar = NSCalendar.currentCalendar()
     let weekdayOfDate = calendar.ordinalityOfUnit(.CalendarUnitWeekday, inUnit: .CalendarUnitWeekOfMonth, forDate: date)
@@ -180,10 +174,25 @@ class WeekStatisticsViewController: StyledViewController {
 
 }
 
+extension WeekStatisticsViewController: WeekStatisticsViewDataSource {
+  
+  func weekStatisticsViewIsFutureDay(dayIndex: Int) -> Bool {
+    let date = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
+    let daysBetween = DateHelper.calcDistanceBetweenDates(fromDate: NSDate(), toDate: date, calendarUnit: .CalendarUnitDay)
+    return daysBetween > 0
+  }
+  
+}
+
+
 extension WeekStatisticsViewController: WeekStatisticsViewDelegate {
   
   func weekStatisticsViewDaySelected(dayIndex: Int) {
     let selectedDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
+    let daysBetween = DateHelper.calcDistanceBetweenDates(fromDate: NSDate(), toDate: selectedDate, calendarUnit: .CalendarUnitDay)
+    if daysBetween > 0 {
+      return
+    }
     
     if let dayViewController = storyboard?.instantiateViewControllerWithIdentifier("DayViewController") as? DayViewController {
       dayViewController.mode = .Statistics

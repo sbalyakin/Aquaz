@@ -201,20 +201,10 @@ class DayViewController: RevealedViewController {
 
   private func updateCurrentDateRelatedControls() {
     let formattedDate = DateHelper.stringFromDate(currentDate)
-    setTextToLabelWithAnimation(label: navigationCurrentDayLabel, text: formattedDate)
+    navigationCurrentDayLabel.setTextWithAnimation(formattedDate)
 
     fetchWaterGoal()
     fetchIntakes()
-  }
-  
-  private func setTextToLabelWithAnimation(#label: UILabel, text: String) {
-    if label.text == text {
-      return
-    }
-    
-    UIView.transitionWithView(label, duration: 0.4, options: .TransitionCrossDissolve, animations: {
-      label.text = text
-      }, completion: nil)
   }
   
   // MARK: Summary bar actions -
@@ -266,7 +256,7 @@ class DayViewController: RevealedViewController {
       title = NSLocalizedString("DVC:Diary", value: "Diary", comment: "DayViewController: Top bar title for water intakes diary")
     }
     
-    setTextToLabelWithAnimation(label: navigationTitleLabel, text: title)
+    navigationTitleLabel.setTextWithAnimation(title)
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

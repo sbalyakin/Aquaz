@@ -8,8 +8,16 @@
 
 import UIKit
 
+protocol WeekStatisticsViewDataSource: class {
+  
+  func weekStatisticsViewIsFutureDay(dayIndex: Int) -> Bool
+  
+}
+
 protocol WeekStatisticsViewDelegate: class {
+  
   func weekStatisticsViewDaySelected(dayIndex: Int)
+  
 }
 
 @IBDesignable class WeekStatisticsView: UIView {
@@ -20,6 +28,8 @@ protocol WeekStatisticsViewDelegate: class {
   @IBInspectable var scaleColor: UIColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
   @IBInspectable var daysColor: UIColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
   @IBInspectable var daysBackground: UIColor = UIColor.whiteColor()
+  @IBInspectable var futureDaysColor: UIColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 0.7)
+  @IBInspectable var futureDaysBackground: UIColor = UIColor.clearColor()
   @IBInspectable var barCornerRadius: CGFloat = 2
   @IBInspectable var barWidthFraction: CGFloat = 0.4
   @IBInspectable var scaleLabelsCount: Int = 2
@@ -27,11 +37,13 @@ protocol WeekStatisticsViewDelegate: class {
   @IBInspectable var dayButtonsTopMargin: CGFloat = 10
   @IBInspectable var horizontalMargin: CGFloat = 10
   @IBInspectable var titleFont: UIFont = UIFont.systemFontOfSize(12)
+  @IBInspectable var disableFutureDayButtons: Bool = true
   
   var animationDuration = 0.4
   let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.CalendarUnitWeekday).length
   
   weak var delegate: WeekStatisticsViewDelegate?
+  weak var dataSource: WeekStatisticsViewDataSource?
 
   typealias ItemType = (value: CGFloat, goal: CGFloat)
   typealias TitleForStepFunction = (CGFloat) -> String
@@ -79,9 +91,12 @@ protocol WeekStatisticsViewDelegate: class {
     super.prepareForInterfaceBuilder()
     
     // Initialize values with some predefined values in order to show in Interface Builder
-    for (index, var item) in enumerate(items) {
-      item = (value: CGFloat(200 + index * 300), goal: 1800)
+    var items = [ItemType]()
+    for index in 0..<daysPerWeek {
+      let item: ItemType = (value: CGFloat(200 + index * 300), goal: 1800)
+      items.append(item)
     }
+    setItems(items)
   }
 
   // MARK: Creation -
@@ -106,25 +121,40 @@ protocol WeekStatisticsViewDelegate: class {
   private func createButtons() {
     let calendar = NSCalendar.currentCalendar()
     
-    for i in 0..<daysPerWeek {
-      let title = calendar.veryShortWeekdaySymbols[i] as! String
+    for dayIndex in 0..<daysPerWeek {
+      let title = calendar.veryShortWeekdaySymbols[dayIndex] as! String
+
       let dayButton = UIButton()
-      dayButton.tag = i
-      dayButton.setTitle(title, forState: .Normal)
-      dayButton.setTitleColor(daysColor, forState: .Normal)
+      dayButton.tag = dayIndex
       dayButton.titleLabel?.font = titleFont
-      dayButton.backgroundColor = daysBackground
+      dayButton.setTitle(title, forState: .Normal)
       dayButton.addTarget(self, action: "dayButtonTapped:", forControlEvents: .TouchUpInside)
       addSubview(dayButton)
       dayButtons.append(dayButton)
+    }
+    
+    updateButtons()
+  }
+
+  private func updateButtons() {
+    for dayButton in dayButtons {
+      let isFutureDay = dataSource?.weekStatisticsViewIsFutureDay(dayButton.tag) ?? false
+      let titleColor = isFutureDay ? futureDaysColor : daysColor
+      let backgroundColor = isFutureDay ? UIColor.clearColor() : daysBackground
+      
+      UIView.animateWithDuration(0.4) {
+        dayButton.setTitleColor(titleColor, forState: .Normal)
+        dayButton.backgroundColor = backgroundColor
+      }
+      dayButton.userInteractionEnabled = !isFutureDay
     }
   }
   
   private func createLayers() {
     createBackgroundLayer()
-    createScaleLayer()
     createBarsLayer()
     createGoalsLayer()
+    createScaleLayer()
   }
   
   private func createBackgroundLayer() {
@@ -380,6 +410,7 @@ protocol WeekStatisticsViewDelegate: class {
 
     self.items = items
     maximumValue = calcMaximumValue()
+    updateButtons()
     setNeedsLayout()
   }
   

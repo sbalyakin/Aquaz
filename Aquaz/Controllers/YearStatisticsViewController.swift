@@ -13,7 +13,6 @@ class YearStatisticsViewController: StyledViewController {
 
   @IBOutlet weak var yearStatisticsView: YearStatisticsView!
   @IBOutlet weak var yearLabel: UILabel!
-  @IBOutlet weak var nextYearButton: UIButton!
   
   var date: NSDate = Settings.sharedInstance.uiYearStatisticsDate.value {
     didSet {
@@ -30,14 +29,6 @@ class YearStatisticsViewController: StyledViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "leftSwipeGestureIsRecognized:")
-    leftSwipeGestureRecognizer.direction = .Left
-    yearStatisticsView.addGestureRecognizer(leftSwipeGestureRecognizer)
-    
-    rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "rightSwipeGestureIsRecognized:")
-    rightSwipeGestureRecognizer.direction = .Right
-    yearStatisticsView.addGestureRecognizer(rightSwipeGestureRecognizer)
-
     yearStatisticsView.titleForHorizontalStep = getMonthTitleFromIndex
     yearStatisticsView.titleForVerticalStep = getTitleForAmount
     yearStatisticsView.backgroundColor = StyleKit.pageBackgroundColor
@@ -48,6 +39,14 @@ class YearStatisticsViewController: StyledViewController {
 
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
+    
+    leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "leftSwipeGestureIsRecognized:")
+    leftSwipeGestureRecognizer.direction = .Left
+    yearStatisticsView.addGestureRecognizer(leftSwipeGestureRecognizer)
+    
+    rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "rightSwipeGestureIsRecognized:")
+    rightSwipeGestureRecognizer.direction = .Right
+    yearStatisticsView.addGestureRecognizer(rightSwipeGestureRecognizer)
     
     revealViewController()?.panGestureRecognizer()?.requireGestureRecognizerToFail(rightSwipeGestureRecognizer)
   }
@@ -63,9 +62,8 @@ class YearStatisticsViewController: StyledViewController {
 
   private func dateWasChanged() {
     computeStatisticsDateRange()
-    initYearLabel()
-    initYearStatisticsView()
-    updateSwitchButtons()
+    updateYearLabel()
+    updateYearStatisticsView()
   }
   
   @IBAction func switchToPreviousYear(sender: AnyObject) {
@@ -103,9 +101,8 @@ class YearStatisticsViewController: StyledViewController {
     return formatter
     }()
 
-  private func initYearLabel() {
-    let yearTitle = dateFormatter.stringFromDate(date)
-    yearLabel.text = yearTitle
+  private func updateYearLabel() {
+    yearLabel.setTextWithAnimation(dateFormatter.stringFromDate(date))
   }
   
   private func fetchStatisticsItems(#beginDate: NSDate, endDate: NSDate) -> [YearStatisticsView.ItemType] {
@@ -131,7 +128,7 @@ class YearStatisticsViewController: StyledViewController {
     return statisticsItems
   }
   
-  private func initYearStatisticsView() {
+  private func updateYearStatisticsView() {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
       let date = self.date
       let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
@@ -169,11 +166,6 @@ class YearStatisticsViewController: StyledViewController {
     dateComponents.month = 1
     statisticsBeginDate = calendar.dateFromComponents(dateComponents)
     statisticsEndDate = DateHelper.addToDate(statisticsBeginDate, years: 1, months: 0, days: 0)
-  }
-
-  private func updateSwitchButtons() {
-    let isCurrentYear = DateHelper.areDatesEqualByYears(date1: date, date2: NSDate())
-    nextYearButton.enabled = !isCurrentYear
   }
 
   private lazy var managedObjectContext: NSManagedObjectContext? = {
