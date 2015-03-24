@@ -16,7 +16,7 @@ class WeekStatisticsViewController: StyledViewController {
 
   var date: NSDate = Settings.sharedInstance.uiWeekStatisticsDate.value {
     didSet {
-      updateUI()
+      updateUI(initial: false)
       Settings.sharedInstance.uiWeekStatisticsDate.value = date
     }
   }
@@ -34,7 +34,7 @@ class WeekStatisticsViewController: StyledViewController {
     weekStatisticsView.delegate = self
     weekStatisticsView.titleForScaleFunction = getTitleForAmount
     
-    updateUI()
+    updateUI(initial: true)
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -51,7 +51,7 @@ class WeekStatisticsViewController: StyledViewController {
     revealViewController()?.panGestureRecognizer()?.requireGestureRecognizerToFail(rightSwipeGestureRecognizer)
 
     if isShowingDay {
-      updateUI()
+      updateUI(initial: true)
       isShowingDay = false
     }
   }
@@ -65,9 +65,9 @@ class WeekStatisticsViewController: StyledViewController {
     rightSwipeGestureRecognizer = nil
   }
 
-  private func updateUI() {
+  private func updateUI(#initial: Bool) {
     computeStatisticsDateRange()
-    updateDatePeriodLabel()
+    updateDatePeriodLabel(animated: !initial)
     updateWeekStatisticsView()
   }
   
@@ -112,12 +112,16 @@ class WeekStatisticsViewController: StyledViewController {
     return formatter
     }()
 
-  private func updateDatePeriodLabel() {
+  private func updateDatePeriodLabel(#animated: Bool) {
     let maxDate = DateHelper.addToDate(statisticsEndDate, years: 0, months: 0, days: -1)
     let fromDateTitle = dateFormatter.stringFromDate(statisticsBeginDate)
     let toDateTitle = dateFormatter.stringFromDate(maxDate)
     let title = "\(fromDateTitle) - \(toDateTitle)"
-    datePeriodLabel.setTextWithAnimation(title)
+    if animated {
+      datePeriodLabel.setTextWithAnimation(title)
+    } else {
+      datePeriodLabel.text = title
+    }
   }
 
   private func fetchStatisticsItems(#beginDate: NSDate, endDate: NSDate) -> [WeekStatisticsView.ItemType] {

@@ -144,14 +144,19 @@ extension UIView {
 
 extension UILabel {
   
-  func setTextWithAnimation(text: String, duration: CGFloat = 0.4) {
+  func setTextWithAnimation(text: String, duration: NSTimeInterval = 0.3) {
     if self.text == text {
       return
     }
     
-    UIView.transitionWithView(self, duration: 0.4, options: .TransitionCrossDissolve, animations: {
+    UIView.animateWithDuration(duration / 2, delay: 0, options: .CurveEaseInOut, animations: { self.alpha = 0 } ) {
+      (completed) -> Void in
       self.text = text
+      
+      UIView.animateWithDuration(duration / 2, delay: 0, options: .CurveEaseInOut, animations: {
+        self.alpha = 1
       }, completion: nil)
+    }
   }
 
 }

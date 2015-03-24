@@ -22,8 +22,8 @@ class CalendarViewController: UIViewController {
     
     calendarView.selectedDate = date
     calendarView.delegate = self
-
-    switchToDate(date)
+    calendarView.switchToMonth(date)
+    updateUI(initial: true)
   }
   
   private lazy var dateFormatter: NSDateFormatter = {
@@ -33,25 +33,26 @@ class CalendarViewController: UIViewController {
     return formatter
   }()
   
-  private func switchToDate(date: NSDate) {
-    calendarView.switchToMonth(date)
-    updateUI()
-  }
-  
-  private func updateUI() {
-    currentMonthLabel.setTextWithAnimation(dateFormatter.stringFromDate(date))
+  private func updateUI(#initial: Bool) {
+    let title = dateFormatter.stringFromDate(date)
+    
+    if initial {
+      currentMonthLabel.text = title
+    } else {
+      currentMonthLabel.setTextWithAnimation(title)
+    }
   }
   
   @IBAction func switchToNextMonth(sender: AnyObject) {
     date = DateHelper.addToDate(date, years: 0, months: 1, days: 0)
     calendarView.switchToNextMonth()
-    updateUI() // Updating month label before scroll view animation is finished
+    updateUI(initial: false) // Updating month label before scroll view animation is finished
   }
   
   @IBAction func switchToPreviousMonth(sender: AnyObject) {
     date = DateHelper.addToDate(date, years: 0, months: -1, days: 0)
     calendarView.switchToPreviousMonth()
-    updateUI() // Updating month label before scroll view animation is finished
+    updateUI(initial: false) // Updating month label before scroll view animation is finished
   }
   
   @IBAction func todayDidSelected(sender: AnyObject) {
@@ -74,7 +75,7 @@ extension CalendarViewController: CalendarViewDelegate {
 
   func calendarViewDayWasSwitched(date: NSDate) {
     self.date = date
-    updateUI()
+    updateUI(initial: false)
   }
 
 }

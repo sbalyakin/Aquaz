@@ -16,7 +16,7 @@ class YearStatisticsViewController: StyledViewController {
   
   var date: NSDate = Settings.sharedInstance.uiYearStatisticsDate.value {
     didSet {
-      dateWasChanged()
+      updateUI(initial: false)
       Settings.sharedInstance.uiYearStatisticsDate.value = date
     }
   }
@@ -34,7 +34,7 @@ class YearStatisticsViewController: StyledViewController {
     yearStatisticsView.backgroundColor = StyleKit.pageBackgroundColor
     yearStatisticsView.backgroundDarkColor = UIColor.clearColor()
     
-    dateWasChanged()
+    updateUI(initial: true)
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -60,9 +60,9 @@ class YearStatisticsViewController: StyledViewController {
     rightSwipeGestureRecognizer = nil
   }
 
-  private func dateWasChanged() {
+  private func updateUI(#initial: Bool) {
     computeStatisticsDateRange()
-    updateYearLabel()
+    updateYearLabel(animated: !initial)
     updateYearStatisticsView()
   }
   
@@ -101,8 +101,14 @@ class YearStatisticsViewController: StyledViewController {
     return formatter
     }()
 
-  private func updateYearLabel() {
-    yearLabel.setTextWithAnimation(dateFormatter.stringFromDate(date))
+  private func updateYearLabel(#animated: Bool) {
+    let title = dateFormatter.stringFromDate(date)
+    
+    if animated {
+      yearLabel.setTextWithAnimation(title)
+    } else {
+      yearLabel.text = title
+    }
   }
   
   private func fetchStatisticsItems(#beginDate: NSDate, endDate: NSDate) -> [YearStatisticsView.ItemType] {
