@@ -24,16 +24,41 @@ class YearStatisticsViewController: StyledViewController {
   
   private var statisticsBeginDate: NSDate!
   private var statisticsEndDate: NSDate!
+  private var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
+  private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "leftSwipeGestureIsRecognized:")
+    leftSwipeGestureRecognizer.direction = .Left
+    yearStatisticsView.addGestureRecognizer(leftSwipeGestureRecognizer)
     
+    rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "rightSwipeGestureIsRecognized:")
+    rightSwipeGestureRecognizer.direction = .Right
+    yearStatisticsView.addGestureRecognizer(rightSwipeGestureRecognizer)
+
     yearStatisticsView.titleForHorizontalStep = getMonthTitleFromIndex
     yearStatisticsView.titleForVerticalStep = getTitleForAmount
     yearStatisticsView.backgroundColor = StyleKit.pageBackgroundColor
     yearStatisticsView.backgroundDarkColor = UIColor.clearColor()
     
     dateWasChanged()
+  }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    revealViewController()?.panGestureRecognizer()?.requireGestureRecognizerToFail(rightSwipeGestureRecognizer)
+  }
+  
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    
+    yearStatisticsView.removeGestureRecognizer(leftSwipeGestureRecognizer)
+    yearStatisticsView.removeGestureRecognizer(rightSwipeGestureRecognizer)
+    leftSwipeGestureRecognizer = nil
+    rightSwipeGestureRecognizer = nil
   }
 
   private func dateWasChanged() {
@@ -44,13 +69,33 @@ class YearStatisticsViewController: StyledViewController {
   }
   
   @IBAction func switchToPreviousYear(sender: AnyObject) {
-    date = DateHelper.addToDate(date, years: -1, months: 0, days: 0)
+    switchToPreviousYear()
   }
   
   @IBAction func switchToNextYear(sender: AnyObject) {
-    date = DateHelper.addToDate(date, years: 1, months: 0, days: 0)
+    switchToNextYear()
+  }
+
+  func leftSwipeGestureIsRecognized(gestureRecognizer: UISwipeGestureRecognizer) {
+    if gestureRecognizer.state == .Ended {
+      switchToNextYear()
+    }
   }
   
+  func rightSwipeGestureIsRecognized(gestureRecognizer: UISwipeGestureRecognizer) {
+    if gestureRecognizer.state == .Ended {
+      switchToPreviousYear()
+    }
+  }
+  
+  private func switchToPreviousYear() {
+    date = DateHelper.addToDate(date, years: -1, months: 0, days: 0)
+  }
+  
+  private func switchToNextYear() {
+    date = DateHelper.addToDate(date, years: 1, months: 0, days: 0)
+  }
+
   private lazy var dateFormatter: NSDateFormatter = {
     let formatter = NSDateFormatter()
     let dateFormat = NSDateFormatter.dateFormatFromTemplate("yyyy", options: 0, locale: NSLocale.currentLocale())

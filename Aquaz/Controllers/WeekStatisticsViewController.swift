@@ -9,12 +9,11 @@
 import Foundation
 import CoreData
 
-class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDelegate {
+class WeekStatisticsViewController: StyledViewController {
   
   @IBOutlet weak var weekStatisticsView: WeekStatisticsView!
   @IBOutlet weak var datePeriodLabel: UILabel!
   @IBOutlet weak var nextWeekButton: UIButton!
-  
 
   var date: NSDate = Settings.sharedInstance.uiWeekStatisticsDate.value {
     didSet {
@@ -26,41 +25,51 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
   private var statisticsBeginDate: NSDate!
   private var statisticsEndDate: NSDate!
   private var isShowingDay = false
+  private var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
+  private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     weekStatisticsView.delegate = self
     weekStatisticsView.titleForScaleFunction = getTitleForAmount
+    
     updateUI()
   }
 
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
+    leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "leftSwipeGestureIsRecognized:")
+    leftSwipeGestureRecognizer.direction = .Left
+    weekStatisticsView.addGestureRecognizer(leftSwipeGestureRecognizer)
+    
+    rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "rightSwipeGestureIsRecognized:")
+    rightSwipeGestureRecognizer.direction = .Right
+    weekStatisticsView.addGestureRecognizer(rightSwipeGestureRecognizer)
+    
+    revealViewController()?.panGestureRecognizer()?.requireGestureRecognizerToFail(rightSwipeGestureRecognizer)
+
     if isShowingDay {
       updateUI()
       isShowingDay = false
     }
   }
   
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    
+    weekStatisticsView.removeGestureRecognizer(leftSwipeGestureRecognizer)
+    weekStatisticsView.removeGestureRecognizer(rightSwipeGestureRecognizer)
+    leftSwipeGestureRecognizer = nil
+    rightSwipeGestureRecognizer = nil
+  }
+
   private func updateUI() {
     computeStatisticsDateRange()
     initDatePeriodLabel()
     initWeekStatisticsView()
     updateSwitchButtons()
-  }
-  
-  func weekStatisticsViewDaySelected(dayIndex: Int) {
-    let selectedDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
-    
-    if let dayViewController = storyboard?.instantiateViewControllerWithIdentifier("DayViewController") as? DayViewController {
-      dayViewController.mode = .Statistics
-      dayViewController.setCurrentDate(selectedDate)
-      dayViewController.initializesRevealControls = false
-      isShowingDay = true
-      navigationController?.pushViewController(dayViewController, animated: true)
-    }
   }
   
   private func getTitleForAmount(amount: CGFloat) -> String {
@@ -70,13 +79,33 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
   }
 
   @IBAction func switchToPreviousWeek(sender: AnyObject) {
-    date = DateHelper.addToDate(date, years: 0, months: 0, days: -7)
+    switchToPreviousWeek()
   }
   
   @IBAction func switchToNextWeek(sender: AnyObject) {
+    switchToNextWeek()
+  }
+  
+  func leftSwipeGestureIsRecognized(gestureRecognizer: UISwipeGestureRecognizer) {
+    if gestureRecognizer.state == .Ended {
+      switchToNextWeek()
+    }
+  }
+  
+  func rightSwipeGestureIsRecognized(gestureRecognizer: UISwipeGestureRecognizer) {
+    if gestureRecognizer.state == .Ended {
+      switchToPreviousWeek()
+    }
+  }
+  
+  private func switchToPreviousWeek() {
+    date = DateHelper.addToDate(date, years: 0, months: 0, days: -7)
+  }
+  
+  private func switchToNextWeek() {
     date = DateHelper.addToDate(date, years: 0, months: 0, days: 7)
   }
-
+  
   private lazy var dateFormatter: NSDateFormatter = {
     let formatter = NSDateFormatter()
     let dateFormat = NSDateFormatter.dateFormatFromTemplate("ddMMMyy", options: 0, locale: NSLocale.currentLocale())
@@ -149,4 +178,20 @@ class WeekStatisticsViewController: StyledViewController, WeekStatisticsViewDele
     }
   }()
 
+}
+
+extension WeekStatisticsViewController: WeekStatisticsViewDelegate {
+  
+  func weekStatisticsViewDaySelected(dayIndex: Int) {
+    let selectedDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
+    
+    if let dayViewController = storyboard?.instantiateViewControllerWithIdentifier("DayViewController") as? DayViewController {
+      dayViewController.mode = .Statistics
+      dayViewController.setCurrentDate(selectedDate)
+      dayViewController.initializesRevealControls = false
+      isShowingDay = true
+      navigationController?.pushViewController(dayViewController, animated: true)
+    }
+  }
+  
 }
