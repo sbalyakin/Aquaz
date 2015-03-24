@@ -459,7 +459,7 @@ import UIKit
   }
 
   private func createValuesStrokeShapeLayer() {
-    _valuesStrokeShapeLayer = CAShapeLayer(layer: layer)
+    _valuesStrokeShapeLayer = CAShapeLayer()
     _valuesStrokeShapeLayer.frame = uiAreas.chart
     _valuesStrokeShapeLayer.bounds = uiAreas.chart
     _valuesStrokeShapeLayer.strokeColor = valuesChartLineColor.CGColor
@@ -470,7 +470,7 @@ import UIKit
   }
   
   private func createValuesFillShapeLayer() {
-    _valuesFillShapeLayer = CAShapeLayer(layer: layer)
+    _valuesFillShapeLayer = CAShapeLayer()
     _valuesFillShapeLayer.frame = uiAreas.chart
     _valuesFillShapeLayer.bounds = uiAreas.chart
     _valuesFillShapeLayer.strokeColor = nil
@@ -481,7 +481,7 @@ import UIKit
   }
   
   private func createGoalsShapeLayer() {
-    _goalsShapeLayer = CAShapeLayer(layer: layer)
+    _goalsShapeLayer = CAShapeLayer()
     _goalsShapeLayer.frame = uiAreas.chart
     _goalsShapeLayer.bounds = uiAreas.chart
     _goalsShapeLayer.strokeColor = goalsChartColor.CGColor
@@ -494,7 +494,7 @@ import UIKit
   
   private func createPinsLayer() {
     // Create main layer with shadow
-    _pinsLayer = CALayer(layer: layer)
+    _pinsLayer = CALayer()
     _pinsLayer.shadowOffset = CGSize(width: pinShadowOffsetByX, height: pinShadowOffsetByY)
     _pinsLayer.shadowRadius = pinShadowBlurRadius
     _pinsLayer.shadowColor = UIColor.blackColor().CGColor
@@ -505,7 +505,7 @@ import UIKit
     
     // Create shape layer for each pin
     for i in 0..<items.count {
-      let pinLayer = CAShapeLayer(layer: _pinsLayer)
+      let pinLayer = CAShapeLayer()
       pinLayer.strokeColor = nil
       pinLayer.fillColor = UIColor.whiteColor().CGColor
       _pinsLayer.addSublayer(pinLayer)
@@ -513,7 +513,7 @@ import UIKit
   }
   
   private func createGridLayer() {
-    _gridLayer = CAShapeLayer(layer: layer)
+    _gridLayer = CAShapeLayer()
     _gridLayer.frame = uiAreas.background
     _gridLayer.bounds = uiAreas.background
     _gridLayer.strokeColor = gridColor.CGColor
@@ -523,7 +523,7 @@ import UIKit
   }
   
   private func createVerticalScaleLayer() {
-    _verticalScaleLayer = CATextLayer(layer: layer)
+    _verticalScaleLayer = CATextLayer()
     _verticalScaleLayer.font = scaleTitleFont
     _verticalScaleLayer.fontSize = scaleTitleFont.pointSize
     _verticalScaleLayer.foregroundColor = scaleTitleColor.CGColor
@@ -533,7 +533,7 @@ import UIKit
   }
 
   private func createBackgroundLayer() {
-    _backgroundLayer = CAGradientLayer(layer: layer)
+    _backgroundLayer = CAGradientLayer()
     assert(backgroundColor != nil)
     _backgroundLayer.colors = [backgroundDarkColor.CGColor, backgroundColor!.CGColor]
     layer.insertSublayer(_backgroundLayer, atIndex: 0)

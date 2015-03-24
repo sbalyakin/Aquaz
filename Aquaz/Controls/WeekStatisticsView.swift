@@ -14,10 +14,6 @@ protocol WeekStatisticsViewDelegate: class {
 
 @IBDesignable class WeekStatisticsView: UIView {
   
-  typealias ItemType = (value: CGFloat, goal: CGFloat)
-  typealias TitleForStepFunction = (CGFloat) -> String
-  private typealias UIAreas = (scale: CGRect, bars: CGRect, days: CGRect, background: CGRect)
-  
   @IBInspectable var backgroundDarkColor: UIColor = UIColor(white: 235/255, alpha: 1.0)
   @IBInspectable var barsColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
   @IBInspectable var goalLineColor: UIColor = UIColor(red: 239/255, green: 64/255, blue: 79/255, alpha: 0.5)
@@ -28,22 +24,38 @@ protocol WeekStatisticsViewDelegate: class {
   @IBInspectable var barWidthFraction: CGFloat = 0.4
   @IBInspectable var scaleLabelsCount: Int = 2
   @IBInspectable var scaleMargin: CGFloat = 6
-  @IBInspectable var scaleInside: Bool = true
   @IBInspectable var dayButtonsTopMargin: CGFloat = 10
   @IBInspectable var horizontalMargin: CGFloat = 10
-  
-  var titleFont: UIFont = UIFont.systemFontOfSize(12)
-  
-  private var items: [ItemType] = []
-  private var dayButtons: [UIButton] = []
-  
-  let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.CalendarUnitWeekday).length
+  @IBInspectable var titleFont: UIFont = UIFont.systemFontOfSize(12)
   
   var animationDuration = 0.4
+  let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.CalendarUnitWeekday).length
   
   weak var delegate: WeekStatisticsViewDelegate?
-  
+
+  typealias ItemType = (value: CGFloat, goal: CGFloat)
+  typealias TitleForStepFunction = (CGFloat) -> String
+  private typealias UIAreas = (scale: CGRect, bars: CGRect, days: CGRect, background: CGRect)
+
   var titleForScaleFunction: TitleForStepFunction?
+
+  private var items: [ItemType] = []
+  private var dayButtons: [UIButton] = []
+
+  private var uiAreas: UIAreas = (scale: CGRectZero, bars: CGRectZero, days: CGRectZero, background: CGRectZero)
+  
+  private var goalsLayer: CAShapeLayer!
+  private var barsLayer: CALayer!
+  private var scaleLayer: CATextLayer!
+  private var backgroundLayer: CAGradientLayer!
+  
+  private var maximumValue: CGFloat = 0 {
+    didSet {
+      scaleLayer.string = getTitleForScaleValue(maximumValue)
+    }
+  }
+  
+  private var itemsInitializing = false
   
   enum VerticalAlign {
     case Top, Center, Bottom
@@ -58,143 +70,64 @@ protocol WeekStatisticsViewDelegate: class {
     super.init(coder: aDecoder)
     baseInit()
   }
-  
-  private func baseInit() {
-    initValues()
-    createControls()
-  }
-  
+
   override func intrinsicContentSize() -> CGSize {
     return CGSizeMake(300, 300)
   }
   
   override func prepareForInterfaceBuilder() {
     super.prepareForInterfaceBuilder()
-
+    
     // Initialize values with some predefined values in order to show in Interface Builder
     for (index, var item) in enumerate(items) {
       item = (value: CGFloat(200 + index * 300), goal: 1800)
     }
   }
 
-  override func layoutSubviews() {
-    super.layoutSubviews()
+  // MARK: Creation -
+
+  private func baseInit() {
+    createButtons()
+    createLayers()
+    initItems()
+  }
+
+  private func initItems() {
+    itemsInitializing = true
     
-    computeUIAreasFromRect(bounds)
-    
-    for (index, dayButton) in enumerate(dayButtons) {
-      let dayButtonRect = computeRectangleForDayButtonWithIndex(index, containerRect: uiAreas.days)
-      dayButton.frame = dayButtonRect
-      dayButton.layer.cornerRadius = round(dayButtonRect.width / 2)
-    }
-  }
-  
-  func setItems(items: [ItemType]) {
-    if items.count != daysPerWeek {
-      assert(false, "Count of specified items should equal to days per week")
-      return
-    }
-    
-    _maximumValue = nil
-    self.items = items
-    setNeedsDisplay()
-  }
-  
-  func dayButtonTapped(sender: UIButton) {
-    delegate?.weekStatisticsViewDaySelected(sender.tag)
-  }
-  
-  private func createControls() {
-    computeUIAreasFromRect(bounds)
-    createDayButtons(rect: uiAreas.days)
-  }
-  
-  private func initValues() {
-    items = []
+    var items = [ItemType]()
     for i in 0..<daysPerWeek {
       let item: ItemType = (value: 0, goal: 0)
       items.append(item)
     }
+    setItems(items)
   }
   
-  private func computeUIAreasFromRect(rect: CGRect) {
-    if scaleInside {
-      let barWidth = round(rect.width / CGFloat(daysPerWeek))
-      let verticalRectangles = rect.rectsByDividing(barWidth, fromEdge: .MaxYEdge)
-      let scaleRect = verticalRectangles.remainder.integerRect
-      
-      uiAreas.scale = verticalRectangles.remainder.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
-      uiAreas.bars = verticalRectangles.remainder.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
-      uiAreas.days = verticalRectangles.slice.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
-      uiAreas.background = verticalRectangles.remainder.integerRect
-    } else {
-      let maximumValueTitle = getTitleForScaleValue(maximumValue)
-      let labelSize = computeSizeForText(maximumValueTitle, font: titleFont)
-      let maximumValueTitleHalfHeight = ceil(labelSize.height / 2)
-      
-      var innerRect = CGRect(x: rect.minX, y: rect.minY + maximumValueTitleHalfHeight, width: rect.width, height: rect.height - maximumValueTitleHalfHeight)
-      innerRect.inset(dx: 1, dy: 1)
-      let horizontalRectangles = innerRect.rectsByDividing(labelSize.width + scaleMargin, fromEdge: .MinXEdge)
-      let rightRectangle = horizontalRectangles.remainder
-      let leftRectangle = horizontalRectangles.slice
-      let barWidth = round(rightRectangle.width / CGFloat(daysPerWeek))
-      let rightVerticalRectangles = rightRectangle.rectsByDividing(barWidth, fromEdge: .MaxYEdge)
-      let leftVerticalRectangles = leftRectangle.rectsByDividing(barWidth, fromEdge: .MaxYEdge)
-      
-      uiAreas.scale = leftVerticalRectangles.remainder.integerRect
-      uiAreas.bars = rightVerticalRectangles.remainder.integerRect
-      uiAreas.days = rightVerticalRectangles.slice.integerRect
-    }
-  }
-  
-  private func createDayButtons(#rect: CGRect) {
+  private func createButtons() {
     let calendar = NSCalendar.currentCalendar()
     
     for i in 0..<daysPerWeek {
       let title = calendar.veryShortWeekdaySymbols[i] as! String
-      let dayButtonRect = computeRectangleForDayButtonWithIndex(i, containerRect: rect)
-      let dayButton = UIButton(frame: dayButtonRect)
+      let dayButton = UIButton()
       dayButton.tag = i
       dayButton.setTitle(title, forState: .Normal)
       dayButton.setTitleColor(daysColor, forState: .Normal)
       dayButton.titleLabel?.font = titleFont
       dayButton.backgroundColor = daysBackground
-      dayButton.layer.cornerRadius = round(dayButtonRect.width / 2)
       dayButton.addTarget(self, action: "dayButtonTapped:", forControlEvents: .TouchUpInside)
       addSubview(dayButton)
       dayButtons.append(dayButton)
     }
   }
   
-  private func computeRectangleForDayButtonWithIndex(index: Int, containerRect: CGRect) -> CGRect {
-    assert(index >= 0 && index < daysPerWeek, "Day index is out of bounds")
-    
-    let rect = CGRect(x: containerRect.minX, y: containerRect.minY + dayButtonsTopMargin, width: containerRect.width, height: containerRect.height - dayButtonsTopMargin)
-    let buttonWidth = rect.width / CGFloat(daysPerWeek)
-    let buttonHeight = rect.height
-    let x = rect.minX + CGFloat(index) * buttonWidth
-    let y = rect.minY
-    
-    var buttonRect = CGRect(x: x, y: y, width: buttonWidth, height: buttonHeight)
-    let minSize = min(buttonWidth, buttonHeight)
-    let dx = (buttonWidth - minSize) / 2
-    let dy = (buttonHeight - minSize) / 2
-    buttonRect.inset(dx: dx, dy: dy)
-    return CGRect(x: trunc(buttonRect.minX), y: trunc(buttonRect.minY), width: ceil(buttonRect.width), height: trunc(buttonRect.height))
+  private func createLayers() {
+    createBackgroundLayer()
+    createScaleLayer()
+    createBarsLayer()
+    createGoalsLayer()
   }
   
-  override func drawRect(rect: CGRect) {
-    drawBackground()
-    drawBars()
-    drawGoals()
-    drawScale()
-  }
-  
-  private func drawBackground() {
-    if !scaleInside {
-      return
-    }
-    
+  private func createBackgroundLayer() {
     if backgroundColor?.isClearColor() ?? true {
       return
     }
@@ -203,24 +136,110 @@ protocol WeekStatisticsViewDelegate: class {
       return
     }
     
-    var rect = uiAreas.background
-    rect = rect.rectsByDividing(rect.height / 2, fromEdge: .MinYEdge).slice
-    
-    backgroundLayer.frame = rect
+    backgroundLayer = CAGradientLayer()
+    backgroundLayer.colors = [backgroundDarkColor.CGColor, backgroundColor!.CGColor]
+    layer.insertSublayer(backgroundLayer, atIndex: 0)
+  }
+
+  private func createScaleLayer() {
+    scaleLayer = CATextLayer()
+    scaleLayer.font = titleFont
+    scaleLayer.fontSize = titleFont.pointSize
+    scaleLayer.foregroundColor = scaleColor.CGColor
+    scaleLayer.alignmentMode = kCAAlignmentLeft
+    scaleLayer.contentsScale = UIScreen.mainScreen().scale
+    layer.addSublayer(scaleLayer)
   }
   
-  private func drawBars() {
-    if _barsLayer == nil {
+  private func createBarsLayer() {
+    // Create layer containing bar shape sub-layers
+    barsLayer = CALayer()
+    barsLayer.frame = uiAreas.bars
+    barsLayer.bounds = uiAreas.bars
+    barsLayer.masksToBounds = true
+    layer.addSublayer(barsLayer)
+    
+    // Create shape layer for each bar
+    for i in 0..<daysPerWeek {
+      let barLayer = CAShapeLayer()
+      barLayer.strokeColor = nil
+      barLayer.fillColor = barsColor.CGColor
+      barsLayer.addSublayer(barLayer)
+    }
+  }
+  
+  private func createGoalsLayer() {
+    goalsLayer = CAShapeLayer()
+    goalsLayer.frame = uiAreas.bars
+    goalsLayer.bounds = uiAreas.bars
+    goalsLayer.strokeColor = goalLineColor.CGColor
+    goalsLayer.fillColor = nil
+    goalsLayer.lineWidth = 1
+    goalsLayer.lineJoin = kCALineJoinRound
+    goalsLayer.lineDashPattern = [3, 3]
+    layer.addSublayer(goalsLayer)
+  }
+
+  // MARK: Layout -
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    calcUIAreasFromRect(bounds)
+    
+    layoutBackground()
+    layoutScale()
+    layoutBars()
+    layoutGoals()
+
+    layoutButtons()
+    
+    itemsInitializing = false
+  }
+
+  private func calcUIAreasFromRect(rect: CGRect) {
+    let barWidth = round(rect.width / CGFloat(daysPerWeek))
+    let verticalRectangles = rect.rectsByDividing(barWidth, fromEdge: .MaxYEdge)
+    let scaleRect = verticalRectangles.remainder.integerRect
+    
+    uiAreas.scale = verticalRectangles.remainder.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
+    uiAreas.bars = verticalRectangles.remainder.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
+    uiAreas.days = verticalRectangles.slice.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
+    uiAreas.background = verticalRectangles.remainder.integerRect
+  }
+
+  private func layoutBackground() {
+    if backgroundLayer != nil {
+      var rect = uiAreas.background
+      rect = rect.rectsByDividing(rect.height / 2, fromEdge: .MinYEdge).slice
+      backgroundLayer.frame = rect
+    }
+  }
+  
+  private func layoutScale() {
+    let title = scaleLayer.string as! String
+    let size = calcSizeForText(title, font: titleFont)
+    var rect = CGRect(origin: CGPoint.zeroPoint, size: size)
+    rect.offset(dx: uiAreas.scale.minX, dy: uiAreas.scale.minY + scaleMargin)
+    rect.integerize()
+    
+    scaleLayer.frame = rect
+  }
+  
+  private func layoutBars() {
+    barsLayer.frame = uiAreas.bars
+    
+    if itemsInitializing {
       let zeroRect = CGRect(x: uiAreas.bars.minX, y: uiAreas.bars.maxY, width: uiAreas.bars.width, height: 0)
-      let zeroPaths = computeBarsPathsForRect(zeroRect)
-      drawBarsPaths(zeroPaths, useAnimation: false)
+      let zeroPaths = calcBarsPathsForRect(zeroRect)
+      layoutBarsPaths(zeroPaths, useAnimation: false)
     }
     
-    let paths = computeBarsPathsForRect(uiAreas.bars)
-    drawBarsPaths(paths, useAnimation: true)
+    let paths = calcBarsPathsForRect(uiAreas.bars)
+    layoutBarsPaths(paths, useAnimation: true)
   }
   
-  private func drawBarsPaths(paths: [CGPath], useAnimation: Bool) {
+  private func layoutBarsPaths(paths: [CGPath], useAnimation: Bool) {
     for (index, path) in enumerate(paths) {
       if barsLayer.sublayers == nil || index >= barsLayer.sublayers.count {
         assert(false, "Cannot find necessary shape sub-layers for bars")
@@ -232,58 +251,28 @@ protocol WeekStatisticsViewDelegate: class {
     }
   }
   
-  private func drawGoals() {
-    if _goalsShapeLayer == nil {
+  private func layoutGoals() {
+    goalsLayer.frame = uiAreas.bars
+    
+    if itemsInitializing {
       let zeroRect = CGRect(x: uiAreas.bars.minX, y: uiAreas.bars.maxY, width: uiAreas.bars.width, height: 0)
-      let zeroPath = computeGoalsPathForRect(zeroRect)
-      transformShape(goalsShapeLayer, path: zeroPath, useAnimation: false)
+      let zeroPath = calcGoalsPathForRect(zeroRect)
+      transformShape(goalsLayer, path: zeroPath, useAnimation: false)
     }
     
-    let path = computeGoalsPathForRect(uiAreas.bars)
-    transformShape(goalsShapeLayer, path: path, useAnimation: true)
-  }
-  
-  private func drawScale() {
-    if scaleInside {
-      drawScaleInside()
-    } else {
-      drawScaleOutside()
-    }
+    let path = calcGoalsPathForRect(uiAreas.bars)
+    transformShape(goalsLayer, path: path, useAnimation: true)
   }
 
-  private func drawScaleInside() {
-    let title = getTitleForScaleValue(maximumValue)
-    let size = computeSizeForText(title, font: titleFont)
-    var rect = CGRect(origin: CGPoint.zeroPoint, size: size)
-    rect.offset(dx: uiAreas.scale.minX, dy: uiAreas.scale.minY + scaleMargin)
-    rect.integerize()
-    
-    scaleLayer.frame = rect
-    scaleLayer.string = title
-  }
-  
-  private func drawScaleOutside() {
-    let rect = uiAreas.scale
-    let fontAttributes = [NSFontAttributeName: titleFont, NSForegroundColorAttributeName: scaleColor]
-    let segmentHeight = rect.height / CGFloat(scaleLabelsCount - 1)
-    
-    for i in 0..<scaleLabelsCount {
-      let scaleValue = maximumValue / CGFloat(scaleLabelsCount - 1) * CGFloat(i)
-      let title = getTitleForScaleValue(scaleValue)
-
-      let size = computeSizeForText(title, font: titleFont)
-      let minY = rect.maxY - CGFloat(i) * segmentHeight - size.height / 2
-      let minX = rect.maxX - size.width - scaleMargin
-      let point = CGPoint(x: minX, y: minY)
-      title.drawAtPoint(point, withAttributes: fontAttributes)
+  private func layoutButtons() {
+    for (index, dayButton) in enumerate(dayButtons) {
+      let dayButtonRect = calcRectangleForDayButtonWithIndex(index, containerRect: uiAreas.days)
+      dayButton.frame = dayButtonRect
+      dayButton.layer.cornerRadius = round(dayButtonRect.width / 2)
     }
   }
   
-  private func getTitleForScaleValue(value: CGFloat) -> String {
-    return titleForScaleFunction?(value) ?? "\(Int(value))"
-  }
-  
-  private func computeSizeForText(text: String, font: UIFont) -> CGSize {
+  private func calcSizeForText(text: String, font: UIFont) -> CGSize {
     let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
     let fontAttributes = [NSFontAttributeName: font, NSParagraphStyleAttributeName: textStyle]
     let infiniteSize = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
@@ -291,26 +280,7 @@ protocol WeekStatisticsViewDelegate: class {
     return rect.size
   }
   
-  private func computeMaximumValue() -> CGFloat {
-    var maximum: CGFloat = 0
-    
-    for (value, goal) in items {
-      let itemMaximum = max(value, goal)
-      if itemMaximum > maximum {
-        maximum = itemMaximum
-      }
-    }
-    
-    if maximum > 1000 {
-      maximum = ceil(maximum / 100) * 100
-    } else if maximum > 100 {
-      maximum = ceil(maximum / 10) * 10
-    }
-    
-    return maximum
-  }
-  
-  private func computeGoalsPathForRect(rect: CGRect) -> CGPath {
+  private func calcGoalsPathForRect(rect: CGRect) -> CGPath {
     let goalsCount = items.count
     let barWidth = rect.width / CGFloat(goalsCount)
     var xFrom = rect.minX
@@ -339,7 +309,7 @@ protocol WeekStatisticsViewDelegate: class {
     return path.CGPath
   }
   
-  private func computeBarsPathsForRect(rect: CGRect) -> [CGPath] {
+  private func calcBarsPathsForRect(rect: CGRect) -> [CGPath] {
     let valuesCount = items.count
     let fullBarWidth = rect.width / CGFloat(valuesCount)
     let barWidthInset = (fullBarWidth * (1 - barWidthFraction)) / 2
@@ -383,94 +353,61 @@ protocol WeekStatisticsViewDelegate: class {
     }
   }
   
-  private func createValuesLayer() {
-    // Create layer containing bar shape sub-layers
-    _barsLayer = CALayer(layer: layer)
-    _barsLayer.frame = uiAreas.bars
-    _barsLayer.bounds = uiAreas.bars
-    _barsLayer.masksToBounds = true
-    layer.addSublayer(_barsLayer)
+  private func calcRectangleForDayButtonWithIndex(index: Int, containerRect: CGRect) -> CGRect {
+    assert(index >= 0 && index < daysPerWeek, "Day index is out of bounds")
     
-    // Create shape layer for each bar
-    for i in 0..<items.count {
-      let barLayer = CAShapeLayer(layer: _barsLayer)
-      barLayer.strokeColor = nil
-      barLayer.fillColor = barsColor.CGColor
-      _barsLayer.addSublayer(barLayer)
-    }
-  }
-  
-  private func createGoalsShapeLayer() {
-    _goalsShapeLayer = CAShapeLayer(layer: layer)
-    _goalsShapeLayer.frame = uiAreas.bars
-    _goalsShapeLayer.bounds = uiAreas.bars
-    _goalsShapeLayer.strokeColor = goalLineColor.CGColor
-    _goalsShapeLayer.fillColor = nil
-    _goalsShapeLayer.lineWidth = 1
-    _goalsShapeLayer.lineJoin = kCALineJoinRound
-    _goalsShapeLayer.lineDashPattern = [3, 3]
-    layer.addSublayer(_goalsShapeLayer)
-  }
-  
-  private func createScaleLayer() {
-    _scaleLayer = CATextLayer(layer: layer)
-    _scaleLayer.font = titleFont
-    _scaleLayer.fontSize = titleFont.pointSize
-    _scaleLayer.foregroundColor = scaleColor.CGColor
-    _scaleLayer.alignmentMode = kCAAlignmentLeft
-    _scaleLayer.contentsScale = UIScreen.mainScreen().scale
-    layer.addSublayer(_scaleLayer)
+    let rect = CGRect(x: containerRect.minX, y: containerRect.minY + dayButtonsTopMargin, width: containerRect.width, height: containerRect.height - dayButtonsTopMargin)
+    let buttonWidth = rect.width / CGFloat(daysPerWeek)
+    let buttonHeight = rect.height
+    let x = rect.minX + CGFloat(index) * buttonWidth
+    let y = rect.minY
+    
+    var buttonRect = CGRect(x: x, y: y, width: buttonWidth, height: buttonHeight)
+    let minSize = min(buttonWidth, buttonHeight)
+    let dx = (buttonWidth - minSize) / 2
+    let dy = (buttonHeight - minSize) / 2
+    buttonRect.inset(dx: dx, dy: dy)
+    return CGRect(x: trunc(buttonRect.minX), y: trunc(buttonRect.minY), width: ceil(buttonRect.width), height: trunc(buttonRect.height))
   }
 
-  private func createBackgroundLayer() {
-    _backgroundLayer = CAGradientLayer(layer: layer)
-    assert(backgroundColor != nil)
-    _backgroundLayer.colors = [backgroundDarkColor.CGColor, backgroundColor!.CGColor]
-    layer.insertSublayer(_backgroundLayer, atIndex: 0)
+  // MARK: Other -
+  
+  func setItems(items: [ItemType]) {
+    if items.count != daysPerWeek {
+      assert(false, "Count of specified items should equal to days per week")
+      return
+    }
+
+    self.items = items
+    maximumValue = calcMaximumValue()
+    setNeedsLayout()
+  }
+  
+  func dayButtonTapped(sender: UIButton) {
+    delegate?.weekStatisticsViewDaySelected(sender.tag)
   }
 
-  private var uiAreas: UIAreas = (scale: CGRectZero, bars: CGRectZero, days: CGRectZero, background: CGRectZero)
-  
-  private var _goalsShapeLayer: CAShapeLayer!
-  private var goalsShapeLayer: CAShapeLayer {
-    if _goalsShapeLayer == nil {
-      createGoalsShapeLayer()
-    }
-    return _goalsShapeLayer
+  private func getTitleForScaleValue(value: CGFloat) -> String {
+    return titleForScaleFunction?(value) ?? "\(Int(value))"
   }
   
-  private var _barsLayer: CALayer!
-  private var barsLayer: CALayer {
-    if _barsLayer == nil {
-      createValuesLayer()
+  private func calcMaximumValue() -> CGFloat {
+    var maximum: CGFloat = 0
+    
+    for (value, goal) in items {
+      let itemMaximum = max(value, goal)
+      if itemMaximum > maximum {
+        maximum = itemMaximum
+      }
     }
-    return _barsLayer
-  }
-  
-  private var _scaleLayer: CATextLayer!
-  private var scaleLayer: CATextLayer {
-    if _scaleLayer == nil {
-      createScaleLayer()
-      assert(_scaleLayer != nil)
+    
+    if maximum > 1000 {
+      maximum = ceil(maximum / 100) * 100
+    } else if maximum > 100 {
+      maximum = ceil(maximum / 10) * 10
     }
-    return _scaleLayer
-  }
-  
-  private var _backgroundLayer: CAGradientLayer!
-  private var backgroundLayer: CAGradientLayer {
-    if _backgroundLayer == nil {
-      createBackgroundLayer()
-      assert(_backgroundLayer != nil)
-    }
-    return _backgroundLayer
-  }
-  
-  private var _maximumValue: CGFloat!
-  private var maximumValue: CGFloat {
-    if _maximumValue == nil {
-      _maximumValue = computeMaximumValue()
-    }
-    return _maximumValue
+    
+    return maximum
   }
   
 }

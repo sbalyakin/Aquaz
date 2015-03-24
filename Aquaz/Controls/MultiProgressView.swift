@@ -35,7 +35,7 @@ import UIKit
       self.color = color
       self.superLayer = superLayer
 
-      layer = CALayer(layer: superLayer)
+      layer = CALayer()
       layer.backgroundColor = color.CGColor
       superLayer.addSublayer(layer)
     }
@@ -67,7 +67,7 @@ import UIKit
     layer.borderWidth = borderWidth
     
     let sectionsRect = calcSectionsRect(layer)
-    emptySectionLayer = CAShapeLayer(layer: layer)
+    emptySectionLayer = CAShapeLayer()
     emptySectionLayer.backgroundColor = emptySectionColor.CGColor
     emptySectionLayer.frame = sectionsRect
     emptySectionLayer.bounds = sectionsRect
