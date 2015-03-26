@@ -17,12 +17,16 @@ extension String: Printable {
 class NotificationsViewController: OmegaSettingsViewController {
   
   private var soundCell: TableCell!
+
+  private struct Constants {
+    static let chooseSoundSegue = "Choose Sound"
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     RevealInitializer.revealButtonSetup(self)
-    Styler.viewDidLoad(self)
+    UIHelper.applyStyle(self)
   }
   
   override func createTableCellsSections() -> [TableCellsSection] {
@@ -132,16 +136,19 @@ class NotificationsViewController: OmegaSettingsViewController {
   }
   
   private func soundTableCellDidActivate(tableCell: TableCell, active: Bool) {
-    if !active {
-      return
-    }
-    
-    if let controller: NotificationsSoundViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "NotificationsSoundViewController") {
-      controller.notificationsViewController = self
-      navigationController?.pushViewController(controller, animated: true)
+    if active {
+      performSegueWithIdentifier(Constants.chooseSoundSegue, sender: tableCell)
     }
   }
 
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == Constants.chooseSoundSegue {
+      if let viewController = segue.destinationViewController.contentViewController as? NotificationsSoundViewController {
+        viewController.notificationsViewController = self
+      }
+    }
+  }
+  
   private func tableCellValueAffectNotificationsDidChange(tableCell: TableCell) {
     recreateNotifications()
   }

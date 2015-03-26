@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class YearStatisticsViewController: StyledViewController {
+class YearStatisticsViewController: UIViewController {
 
   @IBOutlet weak var yearStatisticsView: YearStatisticsView!
   @IBOutlet weak var yearLabel: UILabel!

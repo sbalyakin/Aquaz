@@ -17,17 +17,20 @@ class StatisticsViewController: RevealedViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    segmentedControl.layer.cornerRadius = 3
-    segmentedControl.tintColor = StyleKit.controlTintColor
-    segmentedControl.tintAdjustmentMode = .Normal
-    view.tintAdjustmentMode = .Normal
+
+    applyStyle()
     
     let lastStatisticsPage = Settings.sharedInstance.uiSelectedStatisticsPage.value
     segmentedControl.selectedSegmentIndex = lastStatisticsPage.rawValue
     activateStatisticsPage(lastStatisticsPage)
   }
 
+  private func applyStyle() {
+    UIHelper.applyStyle(self)
+    segmentedControl.layer.cornerRadius = 3
+    segmentedControl.layer.masksToBounds = true
+  }
+  
   private func activateStatisticsPage(page: Settings.StatisticsViewPage) {
     for viewController in viewControllers {
       viewController?.view.removeFromSuperview()

@@ -19,10 +19,8 @@ class DayViewController: RevealedViewController {
   @IBOutlet weak var highActivityButton: UIButton!
   @IBOutlet weak var hotDayButton: UIButton!
   @IBOutlet weak var containerView: UIView!
-  
-  var navigationTitleView: UIView!
-  var navigationTitleLabel: UILabel!
-  var navigationCurrentDayLabel: UILabel!
+  @IBOutlet weak var navigationTitleLabel: UILabel!
+  @IBOutlet weak var navigationDateLabel: UILabel!
 
   // MARK: Public properties -
   
@@ -57,6 +55,7 @@ class DayViewController: RevealedViewController {
     static let diaryViewControllerStoryboardID = "DiaryViewController"
     static let showCalendarSegue = "ShowCalendar"
     static let pageViewEmbedSegue = "PageViewEmbed"
+    static let showCompleteSegue = "ShowComplete"
   }
   
   // MARK: Page setup -
@@ -73,21 +72,21 @@ class DayViewController: RevealedViewController {
     }
     
     setupGestureRecognizers()
-    createCustomNavigationTitle()
     setupMultiprogressControl()
     updateCurrentDateRelatedControls()
+    applyStyle()
   }
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
-    if navigationTitleView != nil {
-      navigationItem.titleView = navigationTitleView
-    }
-    
-    applyStyle()
-    
     refreshCurrentDay(showAlert: false)
+  }
+  
+  func applyStyle() {
+    UIHelper.applyStyle(self)
+    navigationTitleLabel.textColor = StyleKit.barTextColor
+    navigationDateLabel.textColor = StyleKit.barTextColor
   }
   
   func refreshCurrentDay(#showAlert: Bool) {
@@ -130,16 +129,6 @@ class DayViewController: RevealedViewController {
     }
   }
   
-  private func createCustomNavigationTitle() {
-    let titleParts = UIHelper.createNavigationTitleViewWithSubTitle(navigationController: navigationController!, titleText: navigationItem.title)
-    
-    navigationTitleView = titleParts.containerView
-    navigationTitleLabel = titleParts.titleLabel
-    navigationCurrentDayLabel = titleParts.subtitleLabel
-    
-    navigationItem.titleView = navigationTitleView
-  }
-
   private func setupMultiprogressControl() {
     intakesMultiProgressView.borderColor = UIColor(red: 167/255, green: 169/255, blue: 171/255, alpha: 0.8)
     intakesMultiProgressView.emptySectionColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1)
@@ -201,7 +190,7 @@ class DayViewController: RevealedViewController {
 
   private func updateCurrentDateRelatedControls() {
     let formattedDate = DateHelper.stringFromDate(currentDate)
-    navigationCurrentDayLabel.setTextWithAnimation(formattedDate)
+    navigationDateLabel.setTextWithAnimation(formattedDate)
 
     fetchWaterGoal()
     fetchIntakes()
@@ -263,7 +252,7 @@ class DayViewController: RevealedViewController {
     if let identifier = segue.identifier {
       switch identifier {
       case Constants.showCalendarSegue:
-        if let calendarViewController = segue.destinationViewController as? CalendarViewController {
+        if let calendarViewController = segue.destinationViewController.contentViewController as? CalendarViewController {
           calendarViewController.date = currentDate
           calendarViewController.dayViewController = self
         }
@@ -353,9 +342,7 @@ class DayViewController: RevealedViewController {
     }
     
     if dailyWaterIntake >= waterGoalAmount {
-      if let completeViewController: CompleteViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "CompleteViewController") {
-        parentViewController?.presentViewController(completeViewController, animated: true, completion: nil)
-      }
+      performSegueWithIdentifier(Constants.showCompleteSegue, sender: self)
     }
   }
 

@@ -9,30 +9,7 @@
 import UIKit
 import CoreData
 
-private extension Units.Volume {
-  var precision: Double {
-    switch self {
-    case Millilitres: return 10.0
-    case FluidOunces: return 0.5
-    }
-  }
-  
-  var decimals: Int {
-    switch self {
-    case Millilitres: return 0
-    case FluidOunces: return 1
-    }
-  }
-  
-  var predefinedAmounts: (small: Double, medium: Double, large: Double) {
-    switch self {
-    case Millilitres: return (small: 100.0, medium: 200.0, large: 500.0)
-    case FluidOunces: return (small: 118.29411825, medium: 236.5882365 , large: 502.7500025625) // 4, 8 and 17 fl oz
-    }
-  }
-}
-
-class IntakeViewController: StyledViewController {
+class IntakeViewController: UIViewController {
 
   @IBOutlet weak var amountSlider: CustomSlider!
   @IBOutlet weak var amountLabel: UILabel!
@@ -42,12 +19,10 @@ class IntakeViewController: StyledViewController {
   @IBOutlet weak var largeAmountButton: UIButton!
   @IBOutlet weak var pickTimeButton: UIBarButtonItem!
   @IBOutlet weak var drinkView: DrinkView!
+  @IBOutlet weak var navigationTitleLabel: UILabel!
+  @IBOutlet weak var navigationDateLabel: UILabel!
   
-  var navigationTitleView: UIView!
-  var navigationTitleLabel: UILabel!
-  var navigationCurrentDayLabel: UILabel?
-
-  var dayViewController: DayViewController!
+  weak var dayViewController: DayViewController!
   
   var currentDate: NSDate! {
     didSet {
@@ -75,7 +50,7 @@ class IntakeViewController: StyledViewController {
   func changeTimeForCurrentDate(time: NSDate) {
     timeIsChoosen = true
     currentDate = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: time)
-    navigationCurrentDayLabel?.text = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
+    navigationDateLabel?.text = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
   }
   
   override func viewDidLoad() {
@@ -87,18 +62,11 @@ class IntakeViewController: StyledViewController {
     createCustomNavigationTitle()
     setupDrinkView()
     setupSlider()
-  }
-
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
     
-    if navigationTitleView != nil {
-      navigationItem.titleView = navigationTitleView
-    }
-    
+    UIHelper.applyStyle(self)
     applyColorScheme()
   }
-  
+
   private func setupPredefinedAmountButtons() {
     // Predefined amount is always non-fractional values, so we will format amount skipping fraction part
     smallAmountButton.setTitle(formatAmount(predefinedAmounts.small, precision: 1.0, decimals: 0), forState: .Normal)
@@ -130,27 +98,25 @@ class IntakeViewController: StyledViewController {
     mediumAmountButton.backgroundColor = drink.darkColor
     largeAmountButton.backgroundColor = drink.darkColor
     navigationController?.navigationBar.barTintColor = drink.mainColor
+    navigationTitleLabel.textColor = StyleKit.barTextColor
+    navigationDateLabel.textColor = StyleKit.barTextColor
   }
   
   @IBAction func cancelIntake(sender: UIBarButtonItem) {
-    navigationController?.popViewControllerAnimated(true)
+    navigationController?.dismissViewControllerAnimated(true, completion: nil)
   }
   
   private func createCustomNavigationTitle() {
-    var subtitleText: String
+    let dateText: String
     
     if timeIsChoosen {
-      subtitleText = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
+      dateText = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
     } else {
-      subtitleText = NSLocalizedString("IVC:Now", value: "Now", comment: "IntakeViewController: Subtitle of view if user adds intake for today")
+      dateText = NSLocalizedString("IVC:Now", value: "Now", comment: "IntakeViewController: Subtitle of view if user adds intake for today")
     }
 
-    let titleParts = UIHelper.createNavigationTitleViewWithSubTitle(navigationController: navigationController!, titleText: drink.localizedName, subtitleText: subtitleText)
-    
-    navigationTitleView = titleParts.containerView
-    navigationTitleLabel = titleParts.titleLabel
-    navigationCurrentDayLabel = titleParts.subtitleLabel
-    navigationItem.titleView = navigationTitleView
+    navigationTitleLabel.text = drink.localizedName
+    navigationDateLabel.text = dateText
   }
   
   private func setupDrinkView() {
@@ -184,7 +150,7 @@ class IntakeViewController: StyledViewController {
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "PickTime" {
-      if let pickTimeViewController = segue.destinationViewController as? PickTimeViewController {
+      if let pickTimeViewController = segue.destinationViewController.contentViewController as? PickTimeViewController {
         pickTimeViewController.intakeViewController = self
         pickTimeViewController.time = currentDate
       }
@@ -199,7 +165,7 @@ class IntakeViewController: StyledViewController {
     case .Edit: updateIntake(amount: adjustedAmount)
     }
     
-    navigationController?.popViewControllerAnimated(true)
+    navigationController?.dismissViewControllerAnimated(true, completion: nil)
   }
   
   private func prepareAmountForStoring(amount: Double) -> Double {
@@ -267,4 +233,27 @@ class IntakeViewController: StyledViewController {
     }
   }()
 
+}
+
+private extension Units.Volume {
+  var precision: Double {
+    switch self {
+    case Millilitres: return 10.0
+    case FluidOunces: return 0.5
+    }
+  }
+  
+  var decimals: Int {
+    switch self {
+    case Millilitres: return 0
+    case FluidOunces: return 1
+    }
+  }
+  
+  var predefinedAmounts: (small: Double, medium: Double, large: Double) {
+    switch self {
+    case Millilitres: return (small: 100.0, medium: 200.0, large: 500.0)
+    case FluidOunces: return (small: 118.29411825, medium: 236.5882365 , large: 502.7500025625) // 4, 8 and 17 fl oz
+    }
+  }
 }

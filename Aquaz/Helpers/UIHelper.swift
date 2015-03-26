@@ -11,51 +11,45 @@ import UIKit
 
 class UIHelper {
   
-  class func createNavigationTitleViewWithSubTitle(#navigationController: UINavigationController, titleText: String? = nil, subtitleText: String? = nil) -> (containerView: UIView, titleLabel: UILabel, subtitleLabel: UILabel) {
-    let titleFont = UIFont.boldSystemFontOfSize(16)
-    let subtitleFont = UIFont.systemFontOfSize(12)
-    let titleHeight = titleFont.lineHeight
-    let subtitleHeight = subtitleFont.lineHeight
-    let yOffset = -subtitleHeight / 2
-    
-    let containerRect = navigationController.navigationBar.frame.rectByInsetting(dx: 100, dy: 0)
-    let container = UIView(frame: containerRect)
-    container.autoresizesSubviews = false
-    
-    let titleRect = container.bounds.rectByOffsetting(dx: 0, dy: round(yOffset))
-    let titleLabel = UILabel(frame: titleRect)
-    titleLabel.autoresizingMask = .FlexibleWidth
-    titleLabel.textColor = StyleKit.barTextColor
-    titleLabel.backgroundColor = UIColor.clearColor()
-    titleLabel.text = titleText
-    titleLabel.font = titleFont
-    titleLabel.textAlignment = .Center
-    container.addSubview(titleLabel)
-    
-    let subtitleRect = container.bounds.rectByOffsetting(dx: 0, dy: round(yOffset + titleHeight))
-    let subtitleLabel = UILabel(frame: subtitleRect)
-    subtitleLabel.autoresizingMask = titleLabel.autoresizingMask
-    subtitleLabel.textColor = StyleKit.barTextColor
-    subtitleLabel.backgroundColor = UIColor.clearColor()
-    subtitleLabel.text = subtitleText
-    subtitleLabel.font = subtitleFont
-    subtitleLabel.textAlignment = .Center
-    container.addSubview(subtitleLabel)
-
-    return (containerView: container, titleLabel: titleLabel, subtitleLabel: subtitleLabel)
-  }
-
   class func applyStylization() {
     UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
+    
     UISegmentedControl.appearance().tintColor = StyleKit.controlTintColor
+    
     UIButton.appearance().tintColor = StyleKit.controlTintColor
+    
     UISwitch.appearance().onTintColor = StyleKit.controlTintColor
+    
     UIBarButtonItem.appearance().tintColor = StyleKit.barTextColor
     UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: StyleKit.barTextColor], forState: .Normal)
+    
+    UINavigationBar.appearance().barTintColor = StyleKit.barBackgroundColor
+    UINavigationBar.appearance().barStyle = .Black
     UINavigationBar.appearance().tintColor = StyleKit.barTextColor
+    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: StyleKit.barTextColor]
+    UINavigationBar.appearance().translucent = false
     UINavigationBar.appearance().tintAdjustmentMode = .Normal
   }
   
+  class func applyStyle(viewController: UIViewController) {
+    viewController.view.backgroundColor = StyleKit.pageBackgroundColor
+    
+//    if let navigationController = viewController.navigationController {
+//      // Replace standard back icon with custom white one. Standard back icon is slightly dimmed and looks gray.
+//      if let image = UIImage(named: "iconBack")?.imageWithRenderingMode(.AlwaysOriginal) {
+//        navigationController.navigationBar.backIndicatorImage = image
+//        navigationController.navigationBar.backIndicatorTransitionMaskImage = image
+//      } else {
+//        Logger.logError(Logger.Messages.imageNotFound, logDetails: [Logger.Attributes.name: "iconBack"])
+//      }
+//    }
+    
+    if let tableViewController = viewController as? UITableViewController {
+      tableViewController.tableView.backgroundView = nil
+      tableViewController.tableView.backgroundColor = StyleKit.pageBackgroundColor
+    }
+  }
+
   class func calcFontHeight(font: UIFont) -> CGFloat {
     return adjustValueForScaleFactor(font.lineHeight)
   }
@@ -159,4 +153,16 @@ extension UILabel {
     }
   }
 
+}
+
+extension UIViewController {
+  
+  func contentViewController() -> UIViewController {
+    if let navigationController = self as? UINavigationController {
+      return navigationController.visibleViewController
+    } else {
+      return self
+    }
+  }
+  
 }

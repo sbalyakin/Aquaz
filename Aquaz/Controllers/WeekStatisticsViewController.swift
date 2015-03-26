@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class WeekStatisticsViewController: StyledViewController {
+class WeekStatisticsViewController: UIViewController {
   
   @IBOutlet weak var weekStatisticsView: WeekStatisticsView!
   @IBOutlet weak var datePeriodLabel: UILabel!

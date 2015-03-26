@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MonthStatisticsViewController: StyledViewController {
+class MonthStatisticsViewController: UIViewController {
 
   @IBOutlet weak var monthStatisticsView: MonthStatisticsView!
   @IBOutlet weak var monthLabel: UILabel!

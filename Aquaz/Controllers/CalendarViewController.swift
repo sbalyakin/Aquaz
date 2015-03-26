@@ -58,11 +58,11 @@ class CalendarViewController: UIViewController {
   @IBAction func todayDidSelected(sender: AnyObject) {
     let date = DateHelper.dateByJoiningDateTime(datePart: NSDate(), timePart: dayViewController.getCurrentDate())
     dayViewController.setCurrentDate(date)
-    navigationController?.popViewControllerAnimated(true)
+    navigationController?.dismissViewControllerAnimated(true, completion: nil)
   }
   
   @IBAction func cancelWasTapped(sender: UIBarButtonItem) {
-    navigationController?.popViewControllerAnimated(true)
+    navigationController?.dismissViewControllerAnimated(true, completion: nil)
   }
 }
 
@@ -70,7 +70,7 @@ extension CalendarViewController: CalendarViewDelegate {
 
   func calendarViewDaySelected(dayInfo: CalendarViewDayInfo) {
     dayViewController.setCurrentDate(dayInfo.date)
-    navigationController?.popViewControllerAnimated(true)
+    navigationController?.dismissViewControllerAnimated(true, completion: nil)
   }
 
   func calendarViewDayWasSwitched(date: NSDate) {

@@ -8,14 +8,15 @@
 
 import Foundation
 
-class DiaryViewController: StyledViewController, UITableViewDataSource {
+class DiaryViewController: UIViewController, UITableViewDataSource {
 
   @IBOutlet weak var tableView: UITableView!
   
-  var dayViewController: DayViewController!
+  weak var dayViewController: DayViewController!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    UIHelper.applyStyle(self)
     tableView.backgroundColor = StyleKit.pageBackgroundColor
   }
   
@@ -62,7 +63,7 @@ class DiaryViewController: StyledViewController, UITableViewDataSource {
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "Edit Intake" {
-      if let intakeViewController = segue.destinationViewController as? IntakeViewController {
+      if let intakeViewController = segue.destinationViewController.contentViewController as? IntakeViewController {
         if let indexPath = tableView.indexPathForSelectedRow() {
           let intake = intakes[indexPath.row]
           intakeViewController.intake = intake

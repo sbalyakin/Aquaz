@@ -104,10 +104,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    Styler.viewDidLoad(self)
-
-    tableView.backgroundView = nil
-    tableView.backgroundColor = StyleKit.pageBackgroundColor
+    UIHelper.applyStyle(self)
   }
   
   override func createTableCellsSections() -> [TableCellsSection] {

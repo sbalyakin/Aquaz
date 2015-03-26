@@ -12,11 +12,15 @@ class SettingsViewController: OmegaSettingsViewController {
 
   private var waterGoalCell: TableCell!
   
+  private struct Constants {
+    static let calculateWaterIntakeSegue = "Calculate Water Intake"
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     RevealInitializer.revealButtonSetup(self)
-    Styler.viewDidLoad(self)
+    UIHelper.applyStyle(self)
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -87,12 +91,8 @@ class SettingsViewController: OmegaSettingsViewController {
   }
   
   private func waterGoalCellWasSelected(tableCell: TableCell, active: Bool) {
-    if !active {
-      return
-    }
-    
-    if let waterGoalViewController: WaterGoalViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "WaterGoalViewController") {
-      navigationController?.pushViewController(waterGoalViewController, animated: true)
+    if active {
+      performSegueWithIdentifier(Constants.calculateWaterIntakeSegue, sender: tableCell)
     }
   }
 }

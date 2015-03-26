@@ -106,7 +106,6 @@
 		A5D3D42C1AA5D29700E3C989 /* UISwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D41F1AA5D29700E3C989 /* UISwitchTableViewCell.swift */; };
 		A5D3D42D1AA5D29700E3C989 /* UITextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4201AA5D29700E3C989 /* UITextFieldTableViewCell.swift */; };
 		A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */; };
-		A5E6094E1A6AB2CC00786D15 /* StyledViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094D1A6AB2CC00786D15 /* StyledViewController.swift */; };
 		A5E660A01AACB94B00C24627 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E6609F1AACB94B00C24627 /* libz.dylib */; };
 		A5E660A21AACB95200C24627 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E660A11AACB95200C24627 /* libsqlite3.dylib */; };
 		A5E660A41AACB95800C24627 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E660A31AACB95800C24627 /* SystemConfiguration.framework */; };
@@ -242,7 +241,6 @@
 		A5D3D41F1AA5D29700E3C989 /* UISwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISwitchTableViewCell.swift; sourceTree = "<group>"; };
 		A5D3D4201AA5D29700E3C989 /* UITextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryTableViewCell.swift; path = Controls/DiaryTableViewCell.swift; sourceTree = "<group>"; };
-		A5E6094D1A6AB2CC00786D15 /* StyledViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledViewController.swift; sourceTree = "<group>"; };
 		A5E6609F1AACB94B00C24627 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A5E660A11AACB95200C24627 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		A5E660A31AACB95800C24627 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -315,7 +313,6 @@
 		843B055419E2D7800097A833 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A5E6094D1A6AB2CC00786D15 /* StyledViewController.swift */,
 				841B13BB1A31D55500249426 /* RevealedViewControllers.swift */,
 				A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */,
 				843B055719E2D7800097A833 /* DayViewController.swift */,
@@ -725,7 +722,6 @@
 				843A8C9E1AA89D5800ED9507 /* MultiPickerTableCell.swift in Sources */,
 				8404765B1A360273004F0FEF /* SupportViewController.swift in Sources */,
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
-				A5E6094E1A6AB2CC00786D15 /* StyledViewController.swift in Sources */,
 				84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */,
 				A575A5A51A6EBB0300B00E9F /* StyledBarButtonItem.swift in Sources */,
 				A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */,

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class SelectDrinkViewController: StyledViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
+class SelectDrinkViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
   
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
@@ -27,9 +27,15 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     .Milk,  .Juice,  .Sport,
     .Soda,  .Energy, Settings.sharedInstance.uiSelectedAlcoholicDrink.value]
   
+  private struct Constants {
+    static let addIntakeSegue = "Add Intake"
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    UIHelper.applyStyle(self)
+
     let nib = UINib(nibName: cellNibName, bundle: nil)
     collectionView.registerNib(nib, forCellWithReuseIdentifier: cellReuseIdentifier)
 
@@ -124,6 +130,18 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     return 1
   }
   
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == Constants.addIntakeSegue {
+      if let
+        intakeViewController = segue.destinationViewController.contentViewController as? IntakeViewController,
+        drink = sender as? Drink {
+          intakeViewController.drink = drink
+          intakeViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
+          intakeViewController.dayViewController = dayViewController
+      }
+    }
+  }
+  
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return displayedDrinkTypes.count
   }
@@ -169,12 +187,7 @@ class SelectDrinkViewController: StyledViewController, UICollectionViewDataSourc
     let drinkType = displayedDrinkTypes[drinkIndex]
     
     if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
-      if let intakeViewController: IntakeViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "IntakeViewController") {
-        intakeViewController.drink = drink
-        intakeViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
-        intakeViewController.dayViewController = dayViewController
-        navigationController?.pushViewController(intakeViewController, animated: true)
-      }
+      performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
     }
   }
   
