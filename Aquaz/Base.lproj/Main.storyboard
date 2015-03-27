@@ -32,18 +32,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-460" y="-75"/>
+            <point key="canvasLocation" x="-328" y="-1572"/>
         </scene>
         <!--Day View Controller-->
         <scene sceneID="30R-jg-ev2">
             <objects>
-                <viewController storyboardIdentifier="DayViewController" id="x3I-fN-BQH" customClass="DayViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="x3I-fN-BQH" customClass="DayViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zfu-Wj-NHo"/>
                         <viewControllerLayoutGuide type="bottom" id="Z5E-Gz-oNX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="keI-ET-C2O">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KHN-d8-Fus" userLabel="Summary Bar" customClass="DaySummaryView" customModule="Aquaz" customModuleProvider="target">
@@ -111,7 +111,7 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qSt-Nh-d9B">
-                                <rect key="frame" x="0.0" y="75" width="600" height="461"/>
+                                <rect key="frame" x="0.0" y="75" width="600" height="481"/>
                                 <connections>
                                     <segue destination="bT2-56-xxf" kind="embed" identifier="PageViewEmbed" id="GFT-cZ-45e"/>
                                 </connections>
@@ -188,7 +188,7 @@
         <!--Intake View Controller-->
         <scene sceneID="FpT-nl-K1n">
             <objects>
-                <viewController storyboardIdentifier="IntakeViewController" id="JfU-Cw-4n3" customClass="IntakeViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JfU-Cw-4n3" customClass="IntakeViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Sjb-I3-Ntn"/>
                         <viewControllerLayoutGuide type="bottom" id="Rvc-MZ-Z2x"/>
@@ -434,7 +434,7 @@
         <!--Choose time-->
         <scene sceneID="gmZ-vb-qAs">
             <objects>
-                <viewController storyboardIdentifier="PickTimeViewController" id="EVr-Rr-PxB" customClass="PickTimeViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="EVr-Rr-PxB" customClass="PickTimeViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3Vz-s7-jhV"/>
                         <viewControllerLayoutGuide type="bottom" id="4yL-q2-ZQA"/>
@@ -608,7 +608,7 @@
         <!--Complete View Controller-->
         <scene sceneID="8jX-oD-7dv">
             <objects>
-                <viewController storyboardIdentifier="CompleteViewController" id="lbQ-YN-p2O" customClass="CompleteViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lbQ-YN-p2O" customClass="CompleteViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CjG-7t-tcS"/>
                         <viewControllerLayoutGuide type="bottom" id="1Pr-4Z-YuX"/>
@@ -664,7 +664,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o6b-mH-PF7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1886" y="-840"/>
+            <point key="canvasLocation" x="2694" y="-840"/>
         </scene>
         <!--Select Drink View Controller-->
         <scene sceneID="sXd-xw-tDr">
@@ -822,7 +822,7 @@
         <!--Statistics-->
         <scene sceneID="mzk-hW-1gf">
             <objects>
-                <viewController storyboardIdentifier="StatisticsViewController" id="pyt-St-yCN" customClass="StatisticsViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pyt-St-yCN" customClass="StatisticsViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zau-tw-3eK"/>
                         <viewControllerLayoutGuide type="bottom" id="yh4-R1-AEG"/>
@@ -868,7 +868,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dDT-3f-c7p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1886" y="-75"/>
+            <point key="canvasLocation" x="1886" y="752"/>
         </scene>
         <!--Statistics Page View Controller-->
         <scene sceneID="I4V-QK-vLg">
@@ -876,7 +876,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Xrf-rG-4US" customClass="StatisticsPageViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w48-9N-gbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2694" y="-15"/>
+            <point key="canvasLocation" x="2694" y="812"/>
         </scene>
         <!--Week Statistics View Controller-->
         <scene sceneID="a7k-9S-ZFN">
@@ -952,11 +952,12 @@
                     <connections>
                         <outlet property="datePeriodLabel" destination="qpS-Mu-cye" id="Geq-hC-xHB"/>
                         <outlet property="weekStatisticsView" destination="ar0-25-CDE" id="OhM-Em-x4Q"/>
+                        <segue destination="DbZ-Sj-oMQ" kind="show" identifier="Show Day" id="CSP-Z5-lGS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W4p-cu-hbh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1878" y="752"/>
+            <point key="canvasLocation" x="1050" y="-28"/>
         </scene>
         <!--Month Statistics View Controller-->
         <scene sceneID="HKC-Gc-hIw">
@@ -1041,11 +1042,12 @@
                     <connections>
                         <outlet property="monthLabel" destination="oGq-1N-zd1" id="PIt-ro-EmV"/>
                         <outlet property="monthStatisticsView" destination="HC1-Ha-eED" id="efy-tL-T4p"/>
+                        <segue destination="DbZ-Sj-oMQ" kind="show" identifier="Show Day" id="hsH-bF-ptx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Z2-hQ-bE2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2694" y="752"/>
+            <point key="canvasLocation" x="1866" y="-28"/>
         </scene>
         <!--Year Statistics View Controller-->
         <scene sceneID="5dw-fe-BzQ">
@@ -1129,7 +1131,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bbB-7P-98e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3510" y="752"/>
+            <point key="canvasLocation" x="2682" y="-28"/>
         </scene>
         <!--Main Menu View Controller-->
         <scene sceneID="gkJ-MH-GaY">
@@ -1264,7 +1266,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zod-SU-IKg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-468" y="752"/>
+            <point key="canvasLocation" x="-336" y="-745"/>
         </scene>
         <!--Support-->
         <scene sceneID="RQV-9c-NoK">
@@ -1298,7 +1300,7 @@
         <!--Support Navigation Controller-->
         <scene sceneID="08F-9i-TbB">
             <objects>
-                <navigationController title="Support Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="cH4-x3-tAR" userLabel="Support Navigation Controller" sceneMemberID="viewController">
+                <navigationController title="Support Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="cH4-x3-tAR" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cmh-Hn-32X">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1540,7 +1542,7 @@
         <!--Day Navigation Controller-->
         <scene sceneID="FtE-Ot-0fq">
             <objects>
-                <navigationController storyboardIdentifier="DayNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="DbZ-Sj-oMQ" userLabel="Day Navigation Controller" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DbZ-Sj-oMQ" userLabel="Day Navigation Controller" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Tc7-ZS-J00">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1571,7 +1573,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jeJ-s9-KpU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1050" y="-75"/>
+            <point key="canvasLocation" x="1050" y="752"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jg4-Uv-qi9">
@@ -1646,7 +1648,7 @@
         <image name="menuIconWaterBalance" width="29" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EIN-hd-VAD"/>
-        <segue reference="sL9-fM-OF1"/>
+        <segue reference="Y3z-7d-zGG"/>
+        <segue reference="CSP-Z5-lGS"/>
     </inferredMetricsTieBreakers>
 </document>

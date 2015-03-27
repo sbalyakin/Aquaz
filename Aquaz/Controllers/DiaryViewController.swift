@@ -14,6 +14,11 @@ class DiaryViewController: UIViewController, UITableViewDataSource {
   
   weak var dayViewController: DayViewController!
   
+  private struct Constants {
+    static let diaryCellIdentifier = "DiaryTableViewCell"
+    static let editIntakeSegue = "Edit Intake"
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     UIHelper.applyStyle(self)
@@ -33,7 +38,7 @@ class DiaryViewController: UIViewController, UITableViewDataSource {
   }
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("DiaryTableViewCell", forIndexPath: indexPath) as! DiaryTableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier, forIndexPath: indexPath) as! DiaryTableViewCell
     
     let intake = intakes[indexPath.row]
     cell.intake = intake
@@ -62,7 +67,7 @@ class DiaryViewController: UIViewController, UITableViewDataSource {
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "Edit Intake" {
+    if segue.identifier == Constants.editIntakeSegue {
       if let intakeViewController = segue.destinationViewController.contentViewController as? IntakeViewController {
         if let indexPath = tableView.indexPathForSelectedRow() {
           let intake = intakes[indexPath.row]

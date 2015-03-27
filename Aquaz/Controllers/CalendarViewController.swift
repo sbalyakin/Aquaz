@@ -12,7 +12,7 @@ class CalendarViewController: UIViewController {
 
   var date: NSDate!
   
-  var dayViewController: DayViewController!
+  weak var dayViewController: DayViewController!
   
   @IBOutlet weak var calendarView: CalendarView!
   @IBOutlet weak var currentMonthLabel: UILabel!

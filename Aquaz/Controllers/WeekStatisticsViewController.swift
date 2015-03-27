@@ -27,6 +27,10 @@ class WeekStatisticsViewController: UIViewController {
   private var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
   
+  private struct Constants {
+    static let showDaySegue = "Show Day"
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -168,6 +172,21 @@ class WeekStatisticsViewController: UIViewController {
     statisticsEndDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: daysPerWeek)
   }
   
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == Constants.showDaySegue {
+      if let viewController = segue.destinationViewController.contentViewController as? DayViewController, date = sender as? NSDate {
+        viewController.mode = .Statistics
+        viewController.setCurrentDate(date)
+      }
+    }
+  }
+
+  private func isFutureDate(dayIndex: Int) -> Bool {
+    let date = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
+    let daysBetween = DateHelper.calcDistanceBetweenDates(fromDate: NSDate(), toDate: date, calendarUnit: .CalendarUnitDay)
+    return daysBetween > 0
+  }
+  
   private lazy var managedObjectContext: NSManagedObjectContext? = {
     if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
       return appDelegate.managedObjectContext
@@ -181,9 +200,7 @@ class WeekStatisticsViewController: UIViewController {
 extension WeekStatisticsViewController: WeekStatisticsViewDataSource {
   
   func weekStatisticsViewIsFutureDay(dayIndex: Int) -> Bool {
-    let date = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
-    let daysBetween = DateHelper.calcDistanceBetweenDates(fromDate: NSDate(), toDate: date, calendarUnit: .CalendarUnitDay)
-    return daysBetween > 0
+    return isFutureDate(dayIndex)
   }
   
 }
@@ -192,18 +209,10 @@ extension WeekStatisticsViewController: WeekStatisticsViewDataSource {
 extension WeekStatisticsViewController: WeekStatisticsViewDelegate {
   
   func weekStatisticsViewDaySelected(dayIndex: Int) {
-    let selectedDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
-    let daysBetween = DateHelper.calcDistanceBetweenDates(fromDate: NSDate(), toDate: selectedDate, calendarUnit: .CalendarUnitDay)
-    if daysBetween > 0 {
-      return
-    }
-    
-    if let dayViewController = storyboard?.instantiateViewControllerWithIdentifier("DayViewController") as? DayViewController {
-      dayViewController.mode = .Statistics
-      dayViewController.setCurrentDate(selectedDate)
-      dayViewController.initializesRevealControls = false
+    if !isFutureDate(dayIndex) {
+      let selectedDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
+      performSegueWithIdentifier(Constants.showDaySegue, sender: selectedDate)
       isShowingDay = true
-      navigationController?.pushViewController(dayViewController, animated: true)
     }
   }
   

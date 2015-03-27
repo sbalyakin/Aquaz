@@ -28,7 +28,7 @@ class PickTimeViewController: UIViewController {
     applyStyle()
   }
   
-  func setupTimePicker() {
+  private func setupTimePicker() {
     timePicker.setDate(time, animated: false)
 
     let today = NSDate()

@@ -78,21 +78,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   private func showDayViewControllerForToday() {
     if let rootViewController = window?.rootViewController as? SWRevealViewController {
-      if let frontNavigationController = rootViewController.frontViewController as? UINavigationController {
-        if let dayViewController = frontNavigationController.topViewController as? DayViewController {
-          dayViewController.refreshCurrentDay(showAlert: false)
-          dayViewController.switchToSelectDrinkPage()
-          return
-        }
+      if let dayViewController = rootViewController.frontViewController.contentViewController() as? DayViewController {
+        dayViewController.refreshCurrentDay(showAlert: false)
+        dayViewController.switchToSelectDrinkPage()
+      } else {
+        rootViewController.performSegueWithIdentifier(SWSegueFrontIdentifier, sender: rootViewController)
       }
-
-      // Recreate day view controller in order to show day view
-      let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      let dayNavigationController = storyboard.instantiateViewControllerWithIdentifier("DayNavigationController") as! UINavigationController
-      let dayViewController = dayNavigationController.topViewController as! DayViewController
-      dayViewController.setCurrentDate(NSDate())
-      rootViewController.setFrontViewController(dayNavigationController, animated: false)
-      rootViewController.setFrontViewPosition(.Left, animated: false)
     }
   }
   

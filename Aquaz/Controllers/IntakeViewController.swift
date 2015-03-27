@@ -47,6 +47,10 @@ class IntakeViewController: UIViewController {
 
   private var timeIsChoosen = false
   
+  private struct Constants {
+    static let pickTimeSegue = "PickTime"
+  }
+  
   func changeTimeForCurrentDate(time: NSDate) {
     timeIsChoosen = true
     currentDate = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: time)
@@ -149,7 +153,7 @@ class IntakeViewController: UIViewController {
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "PickTime" {
+    if segue.identifier == Constants.pickTimeSegue {
       if let pickTimeViewController = segue.destinationViewController.contentViewController as? PickTimeViewController {
         pickTimeViewController.intakeViewController = self
         pickTimeViewController.time = currentDate

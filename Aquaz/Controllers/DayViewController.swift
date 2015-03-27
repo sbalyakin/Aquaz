@@ -44,8 +44,6 @@ class DayViewController: UIViewController {
     }
   }
   
-  var initializesRevealControls = true
-  
   enum Mode {
     case General, Statistics
   }
@@ -70,7 +68,7 @@ class DayViewController: UIViewController {
     setupMultiprogressControl()
     updateCurrentDateRelatedControls()
     applyStyle()
-    if initializesRevealControls {
+    if mode == .General {
       UIHelper.setupReveal(self)
     }
   }

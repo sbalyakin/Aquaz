@@ -22,6 +22,10 @@ class MonthStatisticsViewController: UIViewController {
     }
   }
   
+  private struct Constants {
+    static let showDaySegue = "Show Day"
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -66,6 +70,15 @@ class MonthStatisticsViewController: UIViewController {
     updateUI(initial: false) // Updating month label before scroll view animation is finished
   }
   
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == Constants.showDaySegue {
+      if let viewController = segue.destinationViewController.contentViewController as? DayViewController, date = sender as? NSDate {
+        viewController.mode = .Statistics
+        viewController.setCurrentDate(date)
+      }
+    }
+  }
+  
   private lazy var dateFormatter: NSDateFormatter = {
     let formatter = NSDateFormatter()
     let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMyyyy", options: 0, locale: NSLocale.currentLocale())
@@ -86,16 +99,9 @@ class MonthStatisticsViewController: UIViewController {
 extension MonthStatisticsViewController: CalendarViewDelegate {
 
   func calendarViewDaySelected(dayInfo: CalendarViewDayInfo) {
-    if !dayInfo.isCurrentMonth {
-      return
-    }
-    
-    if let dayViewController: DayViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "DayViewController") {
-      dayViewController.mode = .Statistics
-      dayViewController.setCurrentDate(dayInfo.date)
-      dayViewController.initializesRevealControls = false
+    if dayInfo.isCurrentMonth {
+      performSegueWithIdentifier(Constants.showDaySegue, sender: dayInfo.date)
       isShowingDay = true
-      navigationController?.pushViewController(dayViewController, animated: true)
     }
   }
 

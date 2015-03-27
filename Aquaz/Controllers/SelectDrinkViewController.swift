@@ -9,13 +9,13 @@
 import UIKit
 import CoreData
 
-class SelectDrinkViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
+class SelectDrinkViewController: UIViewController {
   
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var collectionViewTopVerticalSpaceConstraint: NSLayoutConstraint!
 
-  var dayViewController: DayViewController!
+  weak var dayViewController: DayViewController!
   
   private let columnsCount = 3
   private var rowsCount = 0
@@ -36,8 +36,8 @@ class SelectDrinkViewController: UIViewController, UICollectionViewDataSource, U
     
     UIHelper.applyStyle(self)
 
-    let nib = UINib(nibName: cellNibName, bundle: nil)
-    collectionView.registerNib(nib, forCellWithReuseIdentifier: cellReuseIdentifier)
+    let nib = UINib(nibName: drinkCellNibName, bundle: nil)
+    collectionView.registerNib(nib, forCellWithReuseIdentifier: drinkCellReuseIdentifier)
 
     rowsCount = Int(ceil(Float(displayedDrinkTypes.count) / Float(columnsCount)))
     setupGestureRecognizers()
@@ -62,12 +62,7 @@ class SelectDrinkViewController: UIViewController, UICollectionViewDataSource, U
     self.collectionView.reloadItemsAtIndexPaths([alcoholIndexPath])
 
     if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
-      if let intakeViewController: IntakeViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "IntakeViewController") {
-        intakeViewController.drink = drink
-        intakeViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
-        intakeViewController.dayViewController = dayViewController
-        navigationController?.pushViewController(intakeViewController, animated: true)
-      }
+      performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
     }
   }
   
@@ -126,10 +121,17 @@ class SelectDrinkViewController: UIViewController, UICollectionViewDataSource, U
     }
   }
 
-  func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-    return 1
+  private func collectionViewCellIsSelected(#indexPath: NSIndexPath) {
+    let drinkIndex = indexPath.row
+    assert(drinkIndex < displayedDrinkTypes.count)
+    
+    let drinkType = displayedDrinkTypes[drinkIndex]
+    
+    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
+      performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
+    }
   }
-  
+
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == Constants.addIntakeSegue {
       if let
@@ -142,12 +144,32 @@ class SelectDrinkViewController: UIViewController, UICollectionViewDataSource, U
     }
   }
   
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    collectionView.collectionViewLayout.invalidateLayout()
+  }
+
+  private lazy var managedObjectContext: NSManagedObjectContext? = {
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+      return appDelegate.managedObjectContext
+    } else {
+      return nil
+    }
+  }()
+}
+
+extension SelectDrinkViewController: UICollectionViewDataSource {
+  
+  func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    return 1
+  }
+  
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return displayedDrinkTypes.count
   }
   
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! DrinkCollectionViewCell
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(drinkCellReuseIdentifier, forIndexPath: indexPath) as! DrinkCollectionViewCell
     
     let drinkIndex = indexPath.row
     assert(drinkIndex < displayedDrinkTypes.count)
@@ -165,11 +187,10 @@ class SelectDrinkViewController: UIViewController, UICollectionViewDataSource, U
     return cell
   }
   
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    collectionView.collectionViewLayout.invalidateLayout()
-  }
+}
 
+extension SelectDrinkViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+  
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
     let layout = collectionViewLayout as! UICollectionViewFlowLayout
     let contentWidth = collectionView.bounds.width - layout.minimumInteritemSpacing * CGFloat(columnsCount - 1)
@@ -180,24 +201,6 @@ class SelectDrinkViewController: UIViewController, UICollectionViewDataSource, U
     return size
   }
   
-  private func collectionViewCellIsSelected(#indexPath: NSIndexPath) {
-    let drinkIndex = indexPath.row
-    assert(drinkIndex < displayedDrinkTypes.count)
-    
-    let drinkType = displayedDrinkTypes[drinkIndex]
-    
-    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
-      performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
-    }
-  }
-  
-  private lazy var managedObjectContext: NSManagedObjectContext? = {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-      return appDelegate.managedObjectContext
-    } else {
-      return nil
-    }
-  }()
 }
 
 class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -246,8 +249,8 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     popupCollectionView.delegate = self
     popupCollectionView.dataSource = self
     
-    let nib = UINib(nibName: cellNibName, bundle: nil)
-    popupCollectionView.registerNib(nib, forCellWithReuseIdentifier: cellReuseIdentifier)
+    let nib = UINib(nibName: drinkCellNibName, bundle: nil)
+    popupCollectionView.registerNib(nib, forCellWithReuseIdentifier: drinkCellReuseIdentifier)
     
     backgroundView.addSubview(popupCollectionView)
     
@@ -303,7 +306,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
   }
   
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! DrinkCollectionViewCell
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(drinkCellReuseIdentifier, forIndexPath: indexPath) as! DrinkCollectionViewCell
     
     let drinkIndex = indexPath.row
     assert(drinkIndex < popupDrinkTypes.count)
@@ -402,5 +405,5 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
   }()
 }
 
-private let cellNibName = "DrinkCollectionViewCell"
-private let cellReuseIdentifier = "DrinkCell"
+private let drinkCellNibName = "DrinkCollectionViewCell"
+private let drinkCellReuseIdentifier = "DrinkCell"
