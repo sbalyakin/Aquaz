@@ -50,6 +50,16 @@ class UIHelper {
     }
   }
 
+  class func setupReveal(viewController: UIViewController) {
+    if let revealViewController = viewController.revealViewController() {
+      let menuImage = UIImage(named: "iconMenu")
+      let revealButton = StyledBarButtonItem(image: menuImage, style: .Plain, target: revealViewController, action: "revealToggle:")
+      viewController.navigationItem.setLeftBarButtonItem(revealButton, animated: true)
+      viewController.navigationController?.navigationBar.addGestureRecognizer(revealViewController.panGestureRecognizer())
+      viewController.view.addGestureRecognizer(revealViewController.panGestureRecognizer())
+    }
+  }
+
   class func calcFontHeight(font: UIFont) -> CGFloat {
     return adjustValueForScaleFactor(font.lineHeight)
   }

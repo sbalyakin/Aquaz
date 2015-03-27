@@ -8,12 +8,13 @@
 
 import UIKit
 
-class SupportViewController: RevealedTableViewController {
+class SupportViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     UIHelper.applyStyle(self)
+    UIHelper.setupReveal(self)
   }
   
 }

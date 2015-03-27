@@ -19,7 +19,7 @@ class SettingsViewController: OmegaSettingsViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    RevealInitializer.revealButtonSetup(self)
+    UIHelper.setupReveal(self)
     UIHelper.applyStyle(self)
   }
 

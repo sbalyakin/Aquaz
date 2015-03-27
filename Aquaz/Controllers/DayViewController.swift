@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DayViewController: RevealedViewController {
+class DayViewController: UIViewController {
   
   // MARK: UI elements -
   
@@ -44,6 +44,8 @@ class DayViewController: RevealedViewController {
     }
   }
   
+  var initializesRevealControls = true
+  
   enum Mode {
     case General, Statistics
   }
@@ -63,18 +65,14 @@ class DayViewController: RevealedViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    if mode == .General && Settings.sharedInstance.uiUseCustomDateForDayView.value {
-      currentDate = Settings.sharedInstance.uiCustomDateForDayView.value
-    } else {
-      if currentDate == nil {
-        currentDate = NSDate()
-      }
-    }
-    
+    initCurrentDay()
     setupGestureRecognizers()
     setupMultiprogressControl()
     updateCurrentDateRelatedControls()
     applyStyle()
+    if initializesRevealControls {
+      UIHelper.setupReveal(self)
+    }
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -83,7 +81,17 @@ class DayViewController: RevealedViewController {
     refreshCurrentDay(showAlert: false)
   }
   
-  func applyStyle() {
+  private func initCurrentDay() {
+    if mode == .General && Settings.sharedInstance.uiUseCustomDateForDayView.value {
+      currentDate = Settings.sharedInstance.uiCustomDateForDayView.value
+    } else {
+      if currentDate == nil {
+        currentDate = NSDate()
+      }
+    }
+  }
+  
+  private func applyStyle() {
     UIHelper.applyStyle(self)
     navigationTitleLabel.textColor = StyleKit.barTextColor
     navigationDateLabel.textColor = StyleKit.barTextColor
