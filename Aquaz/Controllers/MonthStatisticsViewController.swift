@@ -16,11 +16,7 @@ class MonthStatisticsViewController: UIViewController {
   
   private var isShowingDay = false
   
-  private var date: NSDate = DateHelper.startDateFromDate(Settings.sharedInstance.uiMonthStatisticsDate.value, calendarUnit: .CalendarUnitMonth) {
-    didSet {
-      Settings.sharedInstance.uiMonthStatisticsDate.value = date
-    }
-  }
+  private var date: NSDate = DateHelper.startDateFromDate(NSDate(), calendarUnit: .CalendarUnitMonth)
   
   private struct Constants {
     static let showDaySegue = "Show Day"

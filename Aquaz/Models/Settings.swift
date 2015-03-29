@@ -106,15 +106,6 @@ public class Settings {
   lazy var uiSelectedStatisticsPage = SettingsEnumItem(
     key: "UI - Selected statistics page", initialValue: StatisticsViewPage.Week)
 
-  lazy var uiWeekStatisticsDate = SettingsOrdinalItem(
-    key: "UI - Week statistics date", initialValue: NSDate())
-
-  lazy var uiMonthStatisticsDate = SettingsOrdinalItem(
-    key: "UI - Month statistics date", initialValue: NSDate())
-  
-  lazy var uiYearStatisticsDate = SettingsOrdinalItem(
-    key: "UI - Year statistics date", initialValue: NSDate())
-
   lazy var uiSelectedAlcoholicDrink = SettingsEnumItem(
     key: "UI - Selected alcoholic drink", initialValue: Drink.DrinkType.Beer)
 

@@ -14,10 +14,9 @@ class YearStatisticsViewController: UIViewController {
   @IBOutlet weak var yearStatisticsView: YearStatisticsView!
   @IBOutlet weak var yearLabel: UILabel!
   
-  var date: NSDate = Settings.sharedInstance.uiYearStatisticsDate.value {
+  var date: NSDate = NSDate() {
     didSet {
       updateUI(initial: false)
-      Settings.sharedInstance.uiYearStatisticsDate.value = date
     }
   }
   

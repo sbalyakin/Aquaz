@@ -14,10 +14,9 @@ class WeekStatisticsViewController: UIViewController {
   @IBOutlet weak var weekStatisticsView: WeekStatisticsView!
   @IBOutlet weak var datePeriodLabel: UILabel!
 
-  var date: NSDate = Settings.sharedInstance.uiWeekStatisticsDate.value {
+  var date: NSDate = NSDate() {
     didSet {
       updateUI(initial: false)
-      Settings.sharedInstance.uiWeekStatisticsDate.value = date
     }
   }
   
