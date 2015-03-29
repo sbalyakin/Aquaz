@@ -51,6 +51,7 @@ class StatisticsViewController: UIViewController {
   
   private func activateStatisticsPage(page: Settings.StatisticsViewPage) {
     pageViewController.currentPage = page
+    Settings.sharedInstance.uiSelectedStatisticsPage.value = page
   }
 
   @IBAction func segmentChanged(sender: UISegmentedControl) {
