@@ -41,19 +41,14 @@ class DrinkView: UIView {
     
     if isGroup {
       let dotRadius: CGFloat = 2
+      let dotsCount = 3
+      let dx = dotRadius * 3
+      let y = drawRect.minY + dotRadius
       
-      var markRect = drawRect
-      markRect.size.width /= 5
-      markRect.size.height /= 5
-      markRect.offset(dx: drawRect.width - markRect.width, dy: 0)
-      markRect.inset(dx: dotRadius, dy: dotRadius)
-
-      var dotsCount = 3
-      var dx = markRect.width / CGFloat(dotsCount)
       for i in 0..<dotsCount {
-        let x = markRect.minX + CGFloat(i) * dx
+        let x = drawRect.maxX - CGFloat(i) * dx - dotRadius * 2
         
-        let dotsRect = CGRect(x: x - dotRadius, y: markRect.minY - dotRadius, width: dotRadius * 2, height: dotRadius * 2)
+        let dotsRect = CGRect(x: x, y: y, width: dotRadius * 2, height: dotRadius * 2)
         let path = UIBezierPath(ovalInRect: dotsRect)
         drink.mainColor.setFill()
         path.fill()

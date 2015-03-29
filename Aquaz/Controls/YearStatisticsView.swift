@@ -13,11 +13,12 @@ import UIKit
   @IBInspectable var backgroundDarkColor: UIColor = UIColor(white: 235/255, alpha: 1.0)
   @IBInspectable var valuesChartLineColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
   @IBInspectable var valuesChartFillColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 0.1)
+  @IBInspectable var valuesChartLineWidth: CGFloat = 3
   @IBInspectable var goalsChartColor: UIColor = UIColor(red: 239/255, green: 64/255, blue: 79/255, alpha: 0.5)
   @IBInspectable var scaleTitleColor: UIColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
   @IBInspectable var gridColor: UIColor = UIColor(red: 230/255, green: 231/255, blue: 232/255, alpha: 1.0)
   @IBInspectable var pinsColor: UIColor = UIColor.whiteColor()
-  @IBInspectable var pinDiameter: CGFloat = 6
+  @IBInspectable var pinDiameter: CGFloat = 9
   @IBInspectable var chartFillEnabled: Bool = true
   @IBInspectable var verticalMaximumAdjustingEnabled: Bool = true
   @IBInspectable var horizontalScaleMargin: CGFloat = 4
@@ -464,7 +465,7 @@ import UIKit
     _valuesStrokeShapeLayer.bounds = uiAreas.chart
     _valuesStrokeShapeLayer.strokeColor = valuesChartLineColor.CGColor
     _valuesStrokeShapeLayer.fillColor = nil
-    _valuesStrokeShapeLayer.lineWidth = 2
+    _valuesStrokeShapeLayer.lineWidth = valuesChartLineWidth
     _valuesStrokeShapeLayer.lineJoin = kCALineJoinRound
     layer.addSublayer(_valuesStrokeShapeLayer)
   }

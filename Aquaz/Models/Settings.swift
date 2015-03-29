@@ -107,7 +107,7 @@ public class Settings {
     key: "UI - Selected statistics page", initialValue: StatisticsViewPage.Week)
 
   lazy var uiSelectedAlcoholicDrink = SettingsEnumItem(
-    key: "UI - Selected alcoholic drink", initialValue: Drink.DrinkType.Beer)
+    key: "UI - Selected alcoholic drink", initialValue: Drink.DrinkType.Wine)
 
   lazy var notificationsEnabled = SettingsOrdinalItem(
     key: "Notifications - Enabled", initialValue: false)

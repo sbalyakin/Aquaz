@@ -35,7 +35,7 @@ protocol WeekStatisticsViewDelegate: class {
   @IBInspectable var scaleLabelsCount: Int = 2
   @IBInspectable var scaleMargin: CGFloat = 6
   @IBInspectable var dayButtonsTopMargin: CGFloat = 10
-  @IBInspectable var horizontalMargin: CGFloat = 10
+  @IBInspectable var horizontalMargin: CGFloat = 0
   @IBInspectable var titleFont: UIFont = UIFont.systemFontOfSize(12)
   @IBInspectable var disableFutureDayButtons: Bool = true
   
@@ -233,7 +233,7 @@ protocol WeekStatisticsViewDelegate: class {
     let scaleRect = verticalRectangles.remainder.integerRect
     
     uiAreas.scale = verticalRectangles.remainder.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
-    uiAreas.bars = verticalRectangles.remainder.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
+    uiAreas.bars = uiAreas.scale
     uiAreas.days = verticalRectangles.slice.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
     uiAreas.background = verticalRectangles.remainder.integerRect
   }
@@ -260,12 +260,12 @@ protocol WeekStatisticsViewDelegate: class {
     barsLayer.frame = uiAreas.bars
     
     if itemsInitializing {
-      let zeroRect = CGRect(x: uiAreas.bars.minX, y: uiAreas.bars.maxY, width: uiAreas.bars.width, height: 0)
+      let zeroRect = CGRect(x: barsLayer.bounds.minX, y: barsLayer.bounds.maxY, width: barsLayer.bounds.width, height: 0)
       let zeroPaths = calcBarsPathsForRect(zeroRect)
       layoutBarsPaths(zeroPaths, useAnimation: false)
     }
     
-    let paths = calcBarsPathsForRect(uiAreas.bars)
+    let paths = calcBarsPathsForRect(barsLayer.bounds)
     layoutBarsPaths(paths, useAnimation: true)
   }
   
@@ -285,12 +285,12 @@ protocol WeekStatisticsViewDelegate: class {
     goalsLayer.frame = uiAreas.bars
     
     if itemsInitializing {
-      let zeroRect = CGRect(x: uiAreas.bars.minX, y: uiAreas.bars.maxY, width: uiAreas.bars.width, height: 0)
+      let zeroRect = CGRect(x: goalsLayer.bounds.minX, y: goalsLayer.bounds.maxY, width: goalsLayer.bounds.width, height: 0)
       let zeroPath = calcGoalsPathForRect(zeroRect)
       transformShape(goalsLayer, path: zeroPath, useAnimation: false)
     }
     
-    let path = calcGoalsPathForRect(uiAreas.bars)
+    let path = calcGoalsPathForRect(goalsLayer.bounds)
     transformShape(goalsLayer, path: path, useAnimation: true)
   }
 

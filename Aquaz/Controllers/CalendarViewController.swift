@@ -16,6 +16,13 @@ class CalendarViewController: UIViewController {
   
   @IBOutlet weak var calendarView: CalendarView!
   @IBOutlet weak var currentMonthLabel: UILabel!
+
+  private lazy var dateFormatter: NSDateFormatter = {
+    let formatter = NSDateFormatter()
+    let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMyyyy", options: 0, locale: NSLocale.currentLocale())
+    formatter.dateFormat = dateFormat
+    return formatter
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -24,14 +31,8 @@ class CalendarViewController: UIViewController {
     calendarView.delegate = self
     calendarView.switchToMonth(date)
     updateUI(initial: true)
+    applyStyle()
   }
-  
-  private lazy var dateFormatter: NSDateFormatter = {
-    let formatter = NSDateFormatter()
-    let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMyyyy", options: 0, locale: NSLocale.currentLocale())
-    formatter.dateFormat = dateFormat
-    return formatter
-  }()
   
   private func updateUI(#initial: Bool) {
     let title = dateFormatter.stringFromDate(date)
@@ -41,6 +42,16 @@ class CalendarViewController: UIViewController {
     } else {
       currentMonthLabel.setTextWithAnimation(title)
     }
+  }
+
+  private func applyStyle() {
+    calendarView.weekendBackgroundColor = StyleKit.calendarWeekendBackgroundColor
+    calendarView.weekendTextColor = StyleKit.calendarWeekendTextColor
+    calendarView.weekDayTitleTextColor = StyleKit.calendarWeekDayTitleTextColor
+    calendarView.selectedDayTextColor = StyleKit.calendarSelectedDayTextColor
+    calendarView.selectedDayBackgroundColor = StyleKit.calendarSelectedDayBackgroundColor
+    calendarView.todayBackgroundColor = StyleKit.calendarTodayBackgroundColor
+    calendarView.todayTextColor = StyleKit.calendarTodayTextColor
   }
   
   @IBAction func switchToNextMonth(sender: AnyObject) {

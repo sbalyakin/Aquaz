@@ -20,7 +20,7 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
   
   override func setDayInfo(dayInfo: CalendarViewDayInfo, calendarContentView: CalendarContentView) {
     super.setDayInfo(dayInfo, calendarContentView: calendarContentView)
-    
+
     if let monthStatisticsContentView = calendarContentView as? MonthStatisticsContentView {
       circleLayer?.removeFromSuperlayer()
       circleLayer = nil
@@ -53,11 +53,11 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
           let animation = CABasicAnimation(keyPath: "strokeEnd")
           animation.duration = 0.4
           animation.fromValue = 0
-          animation.toValue = 1
+          animation.toValue = value
           animation.fillMode = kCAFillModeForwards
           animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
           animation.removedOnCompletion = false
-          arcLayer.strokeEnd = 1
+          arcLayer.strokeEnd = value
           arcLayer.addAnimation(animation, forKey: "animateStrokeEnd")
         }
         
@@ -92,7 +92,7 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
     if let arcLayer = arcLayer {
       let centerPoint = CGPoint(x: rect.midX, y: rect.midY)
       let startAngle = CGFloat(-M_PI_2)
-      let endAngle = CGFloat(-M_PI_2 + M_PI * 2 * Double(value ?? 0))
+      let endAngle = CGFloat(M_PI * 2 - M_PI_2)
       let radius = rect.width / 2 - arcLayer.lineWidth / 2
       
       let arcPath = UIBezierPath(arcCenter: centerPoint, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)

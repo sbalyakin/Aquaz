@@ -20,7 +20,7 @@ public class StyleKit : NSObject {
     static var drinksWhiteColor: UIColor = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
     static var waterColor: UIColor = UIColor(red: 0.000, green: 0.580, blue: 0.722, alpha: 1.000)
     static var coffeeColor: UIColor = UIColor(red: 0.624, green: 0.388, blue: 0.322, alpha: 1.000)
-    static var teaColor: UIColor = UIColor(red: 0.824, green: 0.620, blue: 0.243, alpha: 1.000)
+    static var teaColor: UIColor = UIColor(red: 234/255, green: 160/255, blue: 34/255, alpha: 1.000)
     static var juiceColor: UIColor = UIColor(red: 0.878, green: 0.478, blue: 0.122, alpha: 1.000)
     static var milkColor: UIColor = UIColor(red: 0.388, green: 0.722, blue: 0.800, alpha: 1.000)
     static var sodaColor: UIColor = UIColor(red: 0.325, green: 0.729, blue: 0.678, alpha: 1.000)
@@ -28,13 +28,22 @@ public class StyleKit : NSObject {
     static var sportColor: UIColor = UIColor(red: 0.396, green: 0.694, blue: 0.424, alpha: 1.000)
     static var wineColor: UIColor = UIColor(red: 0.839, green: 0.259, blue: 0.357, alpha: 1.000)
     static var controlTintColor: UIColor = StyleKit.waterColor
-    static var beerColor: UIColor = UIColor(red: 0.922, green: 0.627, blue: 0.271, alpha: 1.000)
+    static var beerColor: UIColor = UIColor(red: 237/255, green: 177/255, blue: 77/255, alpha: 1.000)
     static var strongLiquorColor: UIColor = UIColor(red: 0.651, green: 0.290, blue: 0.125, alpha: 1.000)
     static var pageBackgroundColor: UIColor = UIColor(red: 0.945, green: 0.945, blue: 0.949, alpha: 1.000)
     static var barBackgroundColor: UIColor = StyleKit.waterColor
     static var barTextColor: UIColor = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
     static var mainMenuBackgroundColor: UIColor = UIColor(red: 0.200, green: 0.231, blue: 0.255, alpha: 1.000)
     static var mainMenuTextColor: UIColor = StyleKit.waterColor
+    static var calendarWeekendBackgroundColor = UIColor.clearColor()
+    static var calendarWeekendTextColor = UIColor(red: 220/255, green: 62/255, blue: 75/255, alpha: 1)
+    static var calendarWeekDayTitleTextColor = UIColor(white: 0.5, alpha: 1)
+    static var calendarSelectedDayTextColor = UIColor.whiteColor()
+    static var calendarSelectedDayBackgroundColor = StyleKit.waterColor
+    static var calendarTodayBackgroundColor = UIColor.clearColor()
+    static var calendarTodayTextColor = StyleKit.waterColor
+    static var monthStatisticsDayIntakeColor = StyleKit.waterColor
+    static var monthStatisticsDayIntakeFullColor = StyleKit.waterColor
   }
   
   //// Colors
@@ -57,7 +66,16 @@ public class StyleKit : NSObject {
   public class var barTextColor: UIColor { return Cache.barTextColor }
   public class var mainMenuBackgroundColor: UIColor { return Cache.mainMenuBackgroundColor }
   public class var mainMenuTextColor: UIColor { return Cache.mainMenuTextColor }
-  
+  public class var calendarWeekendBackgroundColor: UIColor { return Cache.calendarWeekendBackgroundColor }
+  public class var calendarWeekendTextColor: UIColor { return Cache.calendarWeekendTextColor }
+  public class var calendarWeekDayTitleTextColor: UIColor { return Cache.calendarWeekDayTitleTextColor }
+  public class var calendarSelectedDayTextColor: UIColor { return Cache.calendarSelectedDayTextColor }
+  public class var calendarSelectedDayBackgroundColor: UIColor { return Cache.calendarSelectedDayBackgroundColor }
+  public class var calendarTodayBackgroundColor: UIColor { return Cache.calendarTodayBackgroundColor }
+  public class var calendarTodayTextColor: UIColor { return Cache.calendarTodayTextColor }
+  public class var monthStatisticsDayIntakeColor: UIColor { return Cache.monthStatisticsDayIntakeColor }
+  public class var monthStatisticsDayIntakeFullColor: UIColor { return Cache.monthStatisticsDayIntakeFullColor }
+
   //// Drawing Methods
   
   public class func drawWaterDrink(#frame: CGRect) {

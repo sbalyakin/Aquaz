@@ -34,7 +34,13 @@ class CalendarContentViewCell: UICollectionViewCell {
     label.text = dayInfo.title
     label.textColor = colors.text
     label.textAlignment = .Center
-    label.font = calendarContentView.font
+    if dayInfo.isToday {
+      let fontDescriptor = calendarContentView.font.fontDescriptor().fontDescriptorWithSymbolicTraits(.TraitBold)!
+      let boldFont = UIFont(descriptor: fontDescriptor, size: calendarContentView.font.pointSize)
+      label.font = boldFont
+    } else {
+      label.font = calendarContentView.font
+    }
     label.userInteractionEnabled = false
     
     contentView.addSubview(label)
@@ -60,30 +66,19 @@ class CalendarContentViewCell: UICollectionViewCell {
   }
 
   private func computeColors(calendarContentView: CalendarContentView) -> (text: UIColor, background: UIColor) {
-    var result = (text: UIColor.clearColor(), background: UIColor.clearColor())
+    var result = (text: UIColor.blackColor(), background: UIColor.clearColor())
     
-    if dayInfo.isToday {
+    if let selectedDate = calendarContentView.selectedDate where DateHelper.areDatesEqualByDays(date1: selectedDate, date2: dayInfo.date) {
+      result.text = calendarContentView.selectedDayTextColor
+      result.background = calendarContentView.selectedDayBackgroundColor
+    } else if dayInfo.isToday {
       result.text = calendarContentView.todayTextColor
       result.background = calendarContentView.todayBackgroundColor
-    }
-    
-    if let selectedDate = calendarContentView.selectedDate {
-      if DateHelper.areDatesEqualByDays(date1: selectedDate, date2: dayInfo.date) {
-        result.text = result.text.realColorFromColor(calendarContentView.selectedDayTextColor)
-        result.background = result.background.realColorFromColor(calendarContentView.selectedDayBackgroundColor)
-      }
-    }
-    
-    if dayInfo.isWeekend {
-      result.text = result.text.realColorFromColor(calendarContentView.weekendTextColor)
-      result.background = result.background.realColorFromColor(calendarContentView.weekendBackgroundColor)
-    }
-    
-    if result.text.isClearColor() {
+    } else if dayInfo.isWeekend {
+      result.text = calendarContentView.weekendTextColor
+      result.background = calendarContentView.weekendBackgroundColor
+    } else {
       result.text = calendarContentView.workDayTextColor
-    }
-    
-    if result.background.isClearColor() {
       result.background = calendarContentView.workDayBackgroundColor
     }
     
@@ -110,14 +105,3 @@ class CalendarContentViewCell: UICollectionViewCell {
   }
 
 }
-
-private extension UIColor {
-  func realColorFromColor(color: UIColor) -> UIColor {
-    if isClearColor() && !color.isClearColor() {
-      return color
-    }
-    
-    return self
-  }
-}
-

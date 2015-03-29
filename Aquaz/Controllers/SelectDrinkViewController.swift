@@ -255,7 +255,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     backgroundView.addSubview(popupCollectionView)
     
     popupView = UIView(frame: UIScreen.mainScreen().bounds)
-    popupView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+    popupView.backgroundColor = UIColor(white: 0, alpha: 0.3)
     popupView.addSubview(backgroundView)
     popupView.alpha = 0
     

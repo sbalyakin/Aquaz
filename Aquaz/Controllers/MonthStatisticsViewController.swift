@@ -27,6 +27,7 @@ class MonthStatisticsViewController: UIViewController {
 
     initMonthStatisticsView()
     updateUI(initial: true)
+    applyStyle()
   }
 
   private func initMonthStatisticsView() {
@@ -43,6 +44,18 @@ class MonthStatisticsViewController: UIViewController {
     } else {
       monthLabel.setTextWithAnimation(title)
     }
+  }
+
+  private func applyStyle() {
+    monthStatisticsView.weekendBackgroundColor = StyleKit.calendarWeekendBackgroundColor
+    monthStatisticsView.weekendTextColor = StyleKit.calendarWeekendTextColor
+    monthStatisticsView.weekDayTitleTextColor = StyleKit.calendarWeekDayTitleTextColor
+    monthStatisticsView.selectedDayTextColor = StyleKit.calendarSelectedDayTextColor
+    monthStatisticsView.selectedDayBackgroundColor = StyleKit.calendarSelectedDayBackgroundColor
+    monthStatisticsView.todayBackgroundColor = StyleKit.calendarTodayBackgroundColor
+    monthStatisticsView.todayTextColor = StyleKit.calendarTodayTextColor
+    monthStatisticsView.dayIntakeFullColor = StyleKit.monthStatisticsDayIntakeFullColor
+    monthStatisticsView.dayIntakeColor = StyleKit.monthStatisticsDayIntakeColor
   }
 
   override func viewWillAppear(animated: Bool) {

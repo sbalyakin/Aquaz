@@ -15,13 +15,6 @@ class DrinkCollectionViewCell: UICollectionViewCell {
   
   override func drawRect(rect: CGRect) {
     drinkView.highlighted = highlighted
-    
-    if highlighted {
-      drinkLabel.textColor = UIColor.blackColor()
-    } else {
-      drinkLabel.textColor = UIColor.lightGrayColor()
-    }
-    
     super.drawRect(rect)
   }
   
