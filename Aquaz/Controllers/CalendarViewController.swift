@@ -27,9 +27,9 @@ class CalendarViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    calendarView.resetToDisplayMonthDate(date)
     calendarView.selectedDate = date
     calendarView.delegate = self
-    calendarView.switchToMonth(date)
     updateUI(initial: true)
     applyStyle()
   }
