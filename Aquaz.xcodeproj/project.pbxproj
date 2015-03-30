@@ -69,6 +69,7 @@
 		A55F34A61A74D6AC00A529A5 /* DrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */; };
 		A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */; };
 		A575A5A51A6EBB0300B00E9F /* StyledBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */; };
+		A57F5E6B1AC968A6005C4F46 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */; };
 		A581FEF01A76D5F60025CDEF /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */; };
 		A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */; };
 		A598D5081A6558C100AA89CB /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5071A6558C100AA89CB /* StyleKit.swift */; };
@@ -204,6 +205,7 @@
 		A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkCollectionViewCell.swift; path = Controls/DrinkCollectionViewCell.swift; sourceTree = "<group>"; };
 		A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DrinkCollectionViewCell.xib; path = Controls/DrinkCollectionViewCell.xib; sourceTree = "<group>"; };
 		A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StyledBarButtonItem.swift; path = Controls/StyledBarButtonItem.swift; sourceTree = "<group>"; };
+		A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomSlider.swift; path = Controls/CustomSlider.swift; sourceTree = "<group>"; };
 		A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A598D5071A6558C100AA89CB /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				A5E70A6F19E30BEE006E5FC0 /* Settings.swift */,
 				847D0E241A824CA900966538 /* SettingItems.swift */,
 				84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */,
+				A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -761,6 +764,7 @@
 				8455DACF1A694487004245F9 /* RoundedButton.swift in Sources */,
 				847D0E281A824D6700966538 /* UnitItems.swift in Sources */,
 				84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */,
+				A57F5E6B1AC968A6005C4F46 /* GlobalConstants.swift in Sources */,
 				84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */,
 				A5D3D42B1AA5D29700E3C989 /* UISegmentedTableViewCell.swift in Sources */,
 				843B056019E2D7800097A833 /* StatisticsViewController.swift in Sources */,
@@ -872,7 +876,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
@@ -910,7 +914,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				SDKROOT = iphoneos;

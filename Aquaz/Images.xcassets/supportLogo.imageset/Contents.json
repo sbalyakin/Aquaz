@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "iconCalendarActive.png"
+      "filename" : "supportLogo.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "iconCalendarActive@2x.png"
+      "filename" : "supportLogo@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "iconCalendarActive@3x.png"
+      "filename" : "supportLogo@3x.png"
     }
   ],
   "info" : {

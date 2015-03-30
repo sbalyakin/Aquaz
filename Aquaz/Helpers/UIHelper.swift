@@ -31,6 +31,15 @@ class UIHelper {
     UINavigationBar.appearance().tintAdjustmentMode = .Normal
   }
   
+  class func applyStyleToNavigationBar(navigationBar: UINavigationBar) {
+    navigationBar.barTintColor = StyleKit.barBackgroundColor
+    navigationBar.barStyle = .Black
+    navigationBar.tintColor = StyleKit.barTextColor
+    navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: StyleKit.barTextColor]
+    navigationBar.translucent = false
+    navigationBar.tintAdjustmentMode = .Normal
+  }
+  
   class func applyStyle(viewController: UIViewController) {
     viewController.view.backgroundColor = StyleKit.pageBackgroundColor
     

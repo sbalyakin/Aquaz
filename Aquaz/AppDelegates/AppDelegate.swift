@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     Fabric.with([Crashlytics()])
     
-    Localytics.integrate("5f18fc62efbdeb52bd87247-87c1e42e-c5ae-11e4-ae01-009c5fda0a25")
+    Localytics.integrate(GlobalConstants.localyticsApplicationKey)
     
     Logger.setup(logLevel: .Warning, assertLevel: .Error, showLogLevel: false, showFileNames: true, showLineNumbers: true)
     
