@@ -66,7 +66,7 @@ class DayViewController: UIViewController {
     initCurrentDay()
     setupGestureRecognizers()
     setupMultiprogressControl()
-    updateCurrentDateRelatedControls()
+    updateCurrentDateRelatedControls(initial: true)
     applyStyle()
     if mode == .General {
       UIHelper.setupReveal(self)
@@ -114,7 +114,7 @@ class DayViewController: UIViewController {
     currentDate = date
 
     if isViewLoaded() {
-      updateCurrentDateRelatedControls()
+      updateCurrentDateRelatedControls(initial: false)
     }
   }
   
@@ -166,7 +166,7 @@ class DayViewController: UIViewController {
     pageViewController.delegate = self
     pageViewController.setViewControllers([selectDrinkViewController], direction: .Forward, animated: false, completion: nil)
     
-    updateUIAccordingToCurrentPage(selectDrinkViewController)
+    updateUIAccordingToCurrentPage(selectDrinkViewController, initial: true)
   }
   
   // MARK: Day selection -
@@ -194,9 +194,14 @@ class DayViewController: UIViewController {
     setCurrentDate(DateHelper.addToDate(currentDate, years: 0, months: 0, days: -1))
   }
 
-  private func updateCurrentDateRelatedControls() {
+  private func updateCurrentDateRelatedControls(#initial: Bool) {
     let formattedDate = DateHelper.stringFromDate(currentDate)
-    navigationDateLabel.setTextWithAnimation(formattedDate)
+    
+    if initial {
+      navigationDateLabel.text = formattedDate
+    } else {
+      navigationDateLabel.setTextWithAnimation(formattedDate)
+    }
 
     fetchWaterGoal()
     fetchIntakes()
@@ -224,7 +229,7 @@ class DayViewController: UIViewController {
   
   private func toggleCurrentPage() {
     let currentPage = pageViewController.viewControllers.last as! UIViewController
-    updateUIAccordingToCurrentPage(currentPage)
+    updateUIAccordingToCurrentPage(currentPage, initial: false)
     if currentPage == pages[0] {
       pageViewController.setViewControllers([pages[1]], direction: .Forward, animated: true, completion: nil)
     } else if currentPage == pages[1] {
@@ -239,19 +244,23 @@ class DayViewController: UIViewController {
     }
   }
 
-  private func updateUIAccordingToCurrentPage(page: UIViewController) {
+  private func updateUIAccordingToCurrentPage(page: UIViewController, initial: Bool) {
     if navigationTitleLabel == nil {
       return
     }
     
     let title: String
     if page == selectDrinkViewController {
-      title = NSLocalizedString("DVC:Water Intake", value: "Water Intake", comment: "DayViewController: Top bar title for water intake page")
+      title = NSLocalizedString("DVC:Water Balance", value: "Water Balance", comment: "DayViewController: Top bar title for water balance page")
     } else {
       title = NSLocalizedString("DVC:Diary", value: "Diary", comment: "DayViewController: Top bar title for water intakes diary")
     }
     
-    navigationTitleLabel.setTextWithAnimation(title)
+    if initial {
+      navigationTitleLabel.text = title
+    } else {
+      navigationTitleLabel.setTextWithAnimation(title)
+    }
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -569,7 +578,7 @@ extension DayViewController: UIPageViewControllerDelegate {
 
   func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
     let currentPage = pageViewController.viewControllers.last as! UIViewController
-    updateUIAccordingToCurrentPage(currentPage)
+    updateUIAccordingToCurrentPage(currentPage, initial: false)
   }
   
 }
