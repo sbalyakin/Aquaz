@@ -13,6 +13,8 @@ import Social
 class SupportViewController: UIViewController {
   
   @IBOutlet weak var applicationTitle: UILabel!
+  @IBOutlet weak var tellToFriendTextView: UITextView!
+  @IBOutlet weak var reviewTextView: UITextView!
   
   private struct Strings {
     lazy var applicationTitleTemplate: String = NSLocalizedString(
@@ -81,8 +83,17 @@ class SupportViewController: UIViewController {
     UIHelper.applyStyle(self)
     UIHelper.setupReveal(self)
     setupApplicationTitle()
+    
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
   }
-  
+
+  func preferredContentSizeChanged() {
+    applicationTitle.font = UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
+    tellToFriendTextView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    reviewTextView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    view.invalidateIntrinsicContentSize()
+  }
+
   private func setupApplicationTitle() {
     applicationTitle.text = NSString(format: strings.applicationTitleTemplate, applicationVersion) as String
   }

@@ -27,11 +27,23 @@ class CalendarViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    calendarView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    calendarView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     calendarView.resetToDisplayMonthDate(date)
     calendarView.selectedDate = date
     calendarView.delegate = self
     updateUI(initial: true)
     applyStyle()
+
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+  }
+  
+  func preferredContentSizeChanged() {
+    currentMonthLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    calendarView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    calendarView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    calendarView.refresh()
+    view.invalidateIntrinsicContentSize()
   }
   
   private func updateUI(#initial: Bool) {

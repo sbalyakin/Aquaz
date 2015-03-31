@@ -17,6 +17,8 @@ class CalendarContentView: UIView {
   
   var font: UIFont = UIFont.systemFontOfSize(16)
   var weekDayTitleTextColor: UIColor = UIColor.blackColor()
+  var weekDayTitlesHeightScale: CGFloat = 1
+  var weekDayFont: UIFont = UIFont.systemFontOfSize(14)
   var workDayTextColor: UIColor = UIColor.blackColor()
   var workDayBackgroundColor: UIColor = UIColor.clearColor()
   var weekendTextColor: UIColor = UIColor.redColor()
@@ -29,7 +31,6 @@ class CalendarContentView: UIView {
   var futureDaysTransparency: CGFloat = 0.1
   var futureDaysEnabled: Bool = false
   var dayRowHeightScale: CGFloat = 1
-  var weekDayTitlesHeightScale: CGFloat = 1
   var markSelectedDay: Bool = true
 
   var selectedDate: NSDate? { didSet { collectionView?.reloadData() } }

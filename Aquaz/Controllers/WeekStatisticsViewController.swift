@@ -33,11 +33,22 @@ class WeekStatisticsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    weekStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    weekStatisticsView.daysFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     weekStatisticsView.dataSource = self
     weekStatisticsView.delegate = self
     weekStatisticsView.titleForScaleFunction = getTitleForAmount
     
     updateUI(initial: true)
+
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+  }
+  
+  func preferredContentSizeChanged() {
+    datePeriodLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    weekStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    weekStatisticsView.daysFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    view.invalidateIntrinsicContentSize()
   }
 
   override func viewWillAppear(animated: Bool) {

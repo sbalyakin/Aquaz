@@ -12,8 +12,6 @@ import CoreData
 class SelectDrinkViewController: UIViewController {
   
   @IBOutlet weak var collectionView: UICollectionView!
-  @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
-  @IBOutlet weak var collectionViewTopVerticalSpaceConstraint: NSLayoutConstraint!
 
   weak var dayViewController: DayViewController!
   
@@ -42,8 +40,17 @@ class SelectDrinkViewController: UIViewController {
     rowsCount = Int(ceil(Float(displayedDrinkTypes.count) / Float(columnsCount)))
     setupGestureRecognizers()
     popupViewManager = SelectDrinkPopupViewManager(selectDrinkViewController: self)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "preferredContentSizeChanged",
+      name: UIContentSizeCategoryDidChangeNotification,
+      object: nil)
   }
   
+  func preferredContentSizeChanged() {
+    collectionView.reloadData()
+  }
+
   private func setupGestureRecognizers() {
     let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "handleDrinkCellLongPress:")
     longPressGestureRecognizer.minimumPressDuration = 0.5
@@ -178,10 +185,10 @@ extension SelectDrinkViewController: UICollectionViewDataSource {
     
     if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
       cell.drinkLabel.text = drink.localizedName
+      cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
       cell.drinkView.drink = drink
-      if drinkIndex == displayedDrinkTypes.count - 1 {
-        cell.drinkView.isGroup = true
-      }
+      cell.drinkView.isGroup = drinkIndex == displayedDrinkTypes.count - 1
+      cell.invalidateIntrinsicContentSize()
     }
     
     return cell
@@ -226,6 +233,11 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
   }
   
   func showPopupView(#frame: CGRect) {
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "preferredContentSizeChanged",
+      name: UIContentSizeCategoryDidChangeNotification,
+      object: nil)
+
     cleanPopupView()
     
     let backgroundView = UIView(frame: frame)
@@ -279,6 +291,8 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
   }
   
   private func hidePopupView() {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+
     if window != nil {
       UIView.animateWithDuration(0.3,
         animations: {
@@ -292,11 +306,15 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
   }
   
   private func cleanPopupView() {
-    self.window = nil
-    self.popupCollectionView = nil
-    self.popupView = nil
+    window = nil
+    popupCollectionView = nil
+    popupView = nil
   }
   
+  func preferredContentSizeChanged() {
+    popupCollectionView.reloadData()
+  }
+
   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
     return 1
   }
@@ -315,7 +333,10 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     
     if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
       cell.drinkLabel.text = drink.localizedName
+      cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
       cell.drinkView.drink = drink
+      cell.drinkView.isGroup = false
+      cell.invalidateIntrinsicContentSize()
     }
     
     return cell

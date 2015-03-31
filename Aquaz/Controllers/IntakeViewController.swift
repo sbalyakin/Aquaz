@@ -69,6 +69,16 @@ class IntakeViewController: UIViewController {
     
     UIHelper.applyStyle(self)
     applyColorScheme()
+
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "preferredContentSizeChanged",
+      name: UIContentSizeCategoryDidChangeNotification,
+      object: nil)
+  }
+  
+  func preferredContentSizeChanged() {
+    amountLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    view.invalidateIntrinsicContentSize()
   }
 
   private func setupPredefinedAmountButtons() {

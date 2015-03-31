@@ -28,9 +28,21 @@ class MonthStatisticsViewController: UIViewController {
     initMonthStatisticsView()
     updateUI(initial: true)
     applyStyle()
+    
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+  }
+  
+  func preferredContentSizeChanged() {
+    monthLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    monthStatisticsView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    monthStatisticsView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    monthStatisticsView.refresh()
+    view.invalidateIntrinsicContentSize()
   }
 
   private func initMonthStatisticsView() {
+    monthStatisticsView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    monthStatisticsView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     monthStatisticsView.resetToDisplayMonthDate(date)
     monthStatisticsView.dataSource = self
     monthStatisticsView.delegate = self

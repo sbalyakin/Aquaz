@@ -18,7 +18,10 @@ protocol CalendarViewDelegate: class {
 
 @IBDesignable class CalendarView: UIView {
   
+  @IBInspectable var font: UIFont = UIFont.systemFontOfSize(16)
   @IBInspectable var weekDayTitleTextColor: UIColor = UIColor.blackColor()
+  @IBInspectable var weekDayTitlesHeightScale: CGFloat = 1
+  @IBInspectable var weekDayFont: UIFont = UIFont.systemFontOfSize(14)
   @IBInspectable var workDayTextColor: UIColor = UIColor.blackColor()
   @IBInspectable var workDayBackgroundColor: UIColor = UIColor.clearColor()
   @IBInspectable var weekendTextColor: UIColor = UIColor.redColor()
@@ -31,7 +34,6 @@ protocol CalendarViewDelegate: class {
   @IBInspectable var futureDaysTransparency: CGFloat = 0.1
   @IBInspectable var futureDaysEnabled: Bool = false
   @IBInspectable var dayRowHeightScale: CGFloat = 1
-  @IBInspectable var weekDayTitlesHeightScale: CGFloat = 1
   @IBInspectable var markSelectedDay: Bool = true
   
   private var displayedMonthDate: NSDate
@@ -147,6 +149,8 @@ extension CalendarView: InfiniteScrollViewDataSource {
     viewContent.dayRowHeightScale = dayRowHeightScale
     viewContent.weekDayTitlesHeightScale = weekDayTitlesHeightScale
     viewContent.markSelectedDay = markSelectedDay
+    viewContent.font = font
+    viewContent.weekDayFont = weekDayFont
 
     return viewContent
   }

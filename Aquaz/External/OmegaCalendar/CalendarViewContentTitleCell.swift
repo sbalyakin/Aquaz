@@ -18,7 +18,7 @@ class CalendarContentViewTitleCell: UICollectionViewCell {
       label = UILabel(frame: contentView.bounds)
       label.backgroundColor = UIColor.clearColor()
       label.userInteractionEnabled = false
-      label.font = calendarContentView.font
+      label.font = calendarContentView.weekDayFont
       label.textAlignment = .Center
       label.textColor = calendarContentView.weekDayTitleTextColor
       contentView.addSubview(label)

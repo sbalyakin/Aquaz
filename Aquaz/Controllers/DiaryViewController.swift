@@ -8,12 +8,16 @@
 
 import Foundation
 
-class DiaryViewController: UIViewController, UITableViewDataSource {
+class DiaryViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
   
   weak var dayViewController: DayViewController!
+
+  private var intakes: [Intake] = []
   
+  private var sizingCell: DiaryTableViewCell!
+
   private struct Constants {
     static let diaryCellIdentifier = "DiaryTableViewCell"
     static let editIntakeSegue = "Edit Intake"
@@ -22,6 +26,7 @@ class DiaryViewController: UIViewController, UITableViewDataSource {
   override func viewDidLoad() {
     super.viewDidLoad()
     UIHelper.applyStyle(self)
+    tableView.backgroundView = nil
     tableView.backgroundColor = StyleKit.pageBackgroundColor
   }
   
@@ -33,37 +38,9 @@ class DiaryViewController: UIViewController, UITableViewDataSource {
     }
   }
   
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return intakes.count
-  }
-
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier, forIndexPath: indexPath) as! DiaryTableViewCell
-    
-    let intake = intakes[indexPath.row]
-    cell.intake = intake
-    
-    return cell
-  }
-
-  func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    return true
-  }
-  
-  func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle == .Delete {
-      let intake = intakes[indexPath.row]
-      dayViewController.removeIntake(intake)
-      intake.deleteEntity()
-    }
-  }
-  
   func updateTable(intakes: [Intake]) {
     self.intakes = intakes
-
-    if tableView != nil {
-      tableView.reloadData()
-    }
+    tableView?.reloadData()
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -78,6 +55,52 @@ class DiaryViewController: UIViewController, UITableViewDataSource {
     }
   }
   
-  private var intakes: [Intake] = []
+}
 
+// MARK: UITableViewDataSource
+extension DiaryViewController: UITableViewDataSource {
+  
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return intakes.count
+  }
+  
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier, forIndexPath: indexPath) as! DiaryTableViewCell
+    
+    let intake = intakes[indexPath.row]
+    cell.intake = intake
+    
+    return cell
+  }
+  
+  func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    return true
+  }
+  
+  func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    if editingStyle == .Delete {
+      let intake = intakes[indexPath.row]
+      dayViewController.removeIntake(intake)
+      intake.deleteEntity()
+    }
+  }
+  
+}
+
+// MARK: UITableViewDelegate
+extension DiaryViewController: UITableViewDelegate {
+
+  func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    if sizingCell == nil {
+      sizingCell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier) as! DiaryTableViewCell
+    }
+
+    let intake = intakes[indexPath.row]
+    sizingCell.intake = intake
+    sizingCell.setNeedsLayout()
+    sizingCell.layoutIfNeeded()
+    let size = sizingCell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+    return size.height
+  }
+  
 }

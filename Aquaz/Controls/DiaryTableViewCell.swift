@@ -61,6 +61,15 @@ class DiaryTableViewCell: UITableViewCell {
     title.appendAttributedString(unitsTitleAt)
 
     amountLabel.attributedText = title
+    
+    updateFonts()
+  }
+  
+  private func updateFonts() {
+    drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    timeLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
+    amountLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    invalidateIntrinsicContentSize()
   }
   
   private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision

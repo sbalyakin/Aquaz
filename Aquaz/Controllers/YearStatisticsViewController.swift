@@ -28,11 +28,20 @@ class YearStatisticsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    yearStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     yearStatisticsView.titleForHorizontalStep = getMonthTitleFromIndex
     yearStatisticsView.titleForVerticalStep = getTitleForAmount
     
     updateUI(initial: true)
     applyStyle()
+
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+  }
+  
+  func preferredContentSizeChanged() {
+    yearStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    yearLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    view.invalidateIntrinsicContentSize()
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -70,7 +79,7 @@ class YearStatisticsViewController: UIViewController {
     yearStatisticsView.valuesChartLineColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
     yearStatisticsView.valuesChartFillColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 0.1)
     yearStatisticsView.goalsChartColor = UIColor(red: 239/255, green: 64/255, blue: 79/255, alpha: 0.5)
-    yearStatisticsView.scaleTitleColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
+    yearStatisticsView.scaleTextColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
     yearStatisticsView.gridColor = UIColor(red: 230/255, green: 231/255, blue: 232/255, alpha: 1.0)
     yearStatisticsView.pinsColor = UIColor.whiteColor()
   }

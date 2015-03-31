@@ -28,6 +28,12 @@ protocol WeekStatisticsViewDelegate: class {
   @IBInspectable var scaleColor: UIColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
   @IBInspectable var daysColor: UIColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
   @IBInspectable var daysBackground: UIColor = UIColor.whiteColor()
+  @IBInspectable var daysFont: UIFont = UIFont.systemFontOfSize(12) {
+    didSet {
+      createButtons()
+      setNeedsLayout()
+    }
+  }
   @IBInspectable var futureDaysColor: UIColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 0.7)
   @IBInspectable var futureDaysBackground: UIColor = UIColor.clearColor()
   @IBInspectable var barCornerRadius: CGFloat = 2
@@ -36,7 +42,13 @@ protocol WeekStatisticsViewDelegate: class {
   @IBInspectable var scaleMargin: CGFloat = 6
   @IBInspectable var dayButtonsTopMargin: CGFloat = 10
   @IBInspectable var horizontalMargin: CGFloat = 0
-  @IBInspectable var titleFont: UIFont = UIFont.systemFontOfSize(12)
+  @IBInspectable var titleFont: UIFont = UIFont.systemFontOfSize(12) {
+    didSet {
+      scaleLayer?.font = titleFont
+      scaleLayer?.fontSize = titleFont.pointSize
+      setNeedsLayout()
+    }
+  }
   @IBInspectable var disableFutureDayButtons: Bool = true
   
   var animationDuration = 0.4
@@ -68,10 +80,6 @@ protocol WeekStatisticsViewDelegate: class {
   }
   
   private var itemsInitializing = false
-  
-  enum VerticalAlign {
-    case Top, Center, Bottom
-  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -119,6 +127,8 @@ protocol WeekStatisticsViewDelegate: class {
   }
   
   private func createButtons() {
+    deleteButtons()
+    
     let calendar = NSCalendar.currentCalendar()
     
     for dayIndex in 0..<daysPerWeek {
@@ -126,7 +136,7 @@ protocol WeekStatisticsViewDelegate: class {
 
       let dayButton = UIButton()
       dayButton.tag = dayIndex
-      dayButton.titleLabel?.font = titleFont
+      dayButton.titleLabel?.font = daysFont
       dayButton.setTitle(title, forState: .Normal)
       dayButton.addTarget(self, action: "dayButtonTapped:", forControlEvents: .TouchUpInside)
       addSubview(dayButton)
@@ -134,6 +144,13 @@ protocol WeekStatisticsViewDelegate: class {
     }
     
     updateButtons()
+  }
+  
+  private func deleteButtons() {
+    for dayButton in dayButtons {
+      dayButton.removeFromSuperview()
+    }
+    dayButtons.removeAll(keepCapacity: true)
   }
 
   private func updateButtons() {

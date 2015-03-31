@@ -21,7 +21,7 @@
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCalendar" translatesAutoresizingMaskIntoConstraints="NO" id="f6c-FB-q9c">
-                            <rect key="frame" x="562" y="31" width="22" height="20"/>
+                            <rect key="frame" x="562" y="30" width="22" height="22"/>
                         </imageView>
                         <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Water Balance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ll5-gl-rLc">
                             <rect key="frame" x="46" y="24" width="508" height="22"/>
@@ -32,7 +32,7 @@
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.58039215686274503" blue="0.72156862745098038" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="f6c-FB-q9c" firstAttribute="top" secondItem="8Zn-ne-DBC" secondAttribute="top" constant="1" id="51e-5h-naX"/>
+                        <constraint firstItem="f6c-FB-q9c" firstAttribute="top" secondItem="8Zn-ne-DBC" secondAttribute="top" id="51e-5h-naX"/>
                         <constraint firstItem="Ll5-gl-rLc" firstAttribute="top" secondItem="Cwc-Qu-e7T" secondAttribute="top" constant="24" id="7Bo-w5-anw"/>
                         <constraint firstAttribute="bottom" secondItem="Ll5-gl-rLc" secondAttribute="bottom" constant="18" id="L0T-Wc-n08"/>
                         <constraint firstItem="Ll5-gl-rLc" firstAttribute="leading" secondItem="8Zn-ne-DBC" secondAttribute="trailing" constant="8" symbolic="YES" id="UGe-Zf-0aw"/>
@@ -56,7 +56,7 @@
         </view>
     </objects>
     <resources>
-        <image name="iconCalendar" width="22" height="20"/>
+        <image name="iconCalendar" width="22" height="22"/>
         <image name="iconMenu" width="22" height="22"/>
     </resources>
 </document>
