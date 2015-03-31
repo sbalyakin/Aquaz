@@ -13,7 +13,7 @@ public class RecentAmount: NSManagedObject, NamedEntity {
   
   public static var entityName = "RecentAmount"
   
-  @NSManaged public var amount: NSNumber
+  @NSManaged public var amount: Double
   @NSManaged public var drink: Drink
   
 }

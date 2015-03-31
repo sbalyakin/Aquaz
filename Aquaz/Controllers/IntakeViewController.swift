@@ -85,7 +85,7 @@ class IntakeViewController: UIViewController {
   }
   
   private func getInitialAmount() -> Double {
-    return intake?.amount.doubleValue ?? Double(drink.recentAmount.amount)
+    return intake?.amount ?? drink.recentAmount.amount
   }
   
   private func setupApplyButton() {

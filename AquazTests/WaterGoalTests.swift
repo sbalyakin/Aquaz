@@ -75,25 +75,25 @@ class WaterGoalTests: XCTestCase {
   func testFetchWaterGoalAmounts() {
     deleteAllWaterGoals()
     
-    let cr02 = addWaterGoal("02.01.2015", 1000, 0, 0)
-    let cr04 = addWaterGoal("04.01.2015", 2000, 0, 0)
-    let cr06 = addWaterGoal("06.01.2015", 3000, 0.3, 0)
-    let cr08 = addWaterGoal("08.01.2015", 4000, 0, 0.2)
-    let cr10 = addWaterGoal("10.01.2015", 5000, 0.3, 0.2)
+    let cr02 = addWaterGoal("02.01.2015", 1000, false, false)
+    let cr04 = addWaterGoal("04.01.2015", 2000, false, false)
+    let cr06 = addWaterGoal("06.01.2015", 3000, true, false)
+    let cr08 = addWaterGoal("08.01.2015", 4000, false, true)
+    let cr10 = addWaterGoal("10.01.2015", 5000, true, true)
 
     // Expected water goals from 01.01.2015 to 11.01.2015
     let expectedAmounts = [
-      cr02.baseAmount.doubleValue, // 01.01
-      cr02.amount,                 // 02.01
-      cr02.baseAmount.doubleValue, // 03.01
-      cr04.amount,                 // 04.01
-      cr04.baseAmount.doubleValue, // 05.01
-      cr06.amount,                 // 06.01
-      cr06.baseAmount.doubleValue, // 07.01
-      cr08.amount,                 // 08.01
-      cr08.baseAmount.doubleValue, // 09.01
-      cr10.amount,                 // 10.01
-      cr10.baseAmount.doubleValue] // 11.01
+      cr02.baseAmount, // 01.01
+      cr02.amount,     // 02.01
+      cr02.baseAmount, // 03.01
+      cr04.amount,     // 04.01
+      cr04.baseAmount, // 05.01
+      cr06.amount,     // 06.01
+      cr06.baseAmount, // 07.01
+      cr08.amount,     // 08.01
+      cr08.baseAmount, // 09.01
+      cr10.amount,     // 10.01
+      cr10.baseAmount] // 11.01
     
     let beginDate = dateFromString("01.01.2015")
     let endDate   = dateFromString("12.01.2015")
@@ -105,22 +105,22 @@ class WaterGoalTests: XCTestCase {
   func testFetchWaterGoalAmountsGroupedByMonths() {
     deleteAllWaterGoals()
     
-    let cr10_01 = addWaterGoal("10.01.2015", 1000, 0.3, 0.2)
-    let cr15_01 = addWaterGoal("15.01.2015", 2000, 0,   0.2)
-    let cr01_03 = addWaterGoal("01.03.2015", 3000, 0.3, 0)
+    let cr10_01 = addWaterGoal("10.01.2015", 1000, true, true)
+    let cr15_01 = addWaterGoal("15.01.2015", 2000, false, true)
+    let cr01_03 = addWaterGoal("01.03.2015", 3000, true, false)
 
     let summary01 =
-      cr10_01.baseAmount.doubleValue * 9 +
+      cr10_01.baseAmount * 9 +
       cr10_01.amount +
-      cr10_01.baseAmount.doubleValue * 4 +
+      cr10_01.baseAmount * 4 +
       cr15_01.amount +
-      cr15_01.baseAmount.doubleValue * 16
+      cr15_01.baseAmount * 16
     let average01 = summary01 / 31
     
-    let summary02 = cr15_01.baseAmount.doubleValue * 28
+    let summary02 = cr15_01.baseAmount * 28
     let average02 = summary02 / 28
     
-    let summary03 = cr01_03.amount + cr01_03.baseAmount.doubleValue * 30
+    let summary03 = cr01_03.amount + cr01_03.baseAmount * 30
     let average03 = summary03 / 31
     
     let expectedAmounts = [average01, average02, average03]
@@ -142,9 +142,9 @@ class WaterGoalTests: XCTestCase {
     return WaterGoal.fetchWaterGoalStrictlyForDate(date, managedObjectContext: managedObjectContext)
   }
   
-  private func addWaterGoal(textDate: String, _ baseAmount: Double, _ hotDayFactor: Double = 0, _ highActivityFactor: Double = 0) -> WaterGoal {
+  private func addWaterGoal(textDate: String, _ baseAmount: Double, _ isHotDay: Bool = false, _ isHighActivity: Bool = false) -> WaterGoal {
     let date = dateFromString(textDate)
-    let waterGoal = WaterGoal.addEntity(date: date, baseAmount: baseAmount, hotDayFactor: hotDayFactor, highActivityFactor: highActivityFactor, managedObjectContext: managedObjectContext, saveImmediately: true)
+    let waterGoal = WaterGoal.addEntity(date: date, baseAmount: baseAmount, isHotDay: isHotDay, isHighActivity: isHighActivity, managedObjectContext: managedObjectContext, saveImmediately: true)
     return waterGoal!
   }
 

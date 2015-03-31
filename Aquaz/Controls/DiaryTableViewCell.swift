@@ -22,7 +22,7 @@ class DiaryTableViewCell: UITableViewCell {
   
   private func applyIntake() {
     let drinkTitle = intake.drink.localizedName
-    let amountTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intake.amount.doubleValue, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: false)
+    let amountTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intake.amount, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: false)
     let waterTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intake.waterAmount, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: false)
     
     let formatter = NSDateFormatter()

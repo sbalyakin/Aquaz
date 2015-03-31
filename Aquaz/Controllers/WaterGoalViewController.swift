@@ -105,6 +105,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
     super.viewDidLoad()
 
     UIHelper.applyStyle(self)
+    rightDetailSelectedValueColor = StyleKit.waterColor
   }
   
   override func createTableCellsSections() -> [TableCellsSection] {
@@ -330,8 +331,8 @@ class WaterGoalViewController: OmegaSettingsViewController {
       WaterGoal.addEntity(
         date: date,
         baseAmount: waterGoalCell.value,
-        hotDayFactor: 0,
-        highActivityFactor: 0,
+        isHotDay: false,
+        isHighActivity: false,
         managedObjectContext: managedObjectContext)
     }
   }

@@ -11,6 +11,7 @@ import UIKit
 class SegmentedTableCell<Value: Printable, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>: TableCellWithValue<Value>, UISegmentedTableViewCellDelegate {
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
+  var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
   var collection: Collection
   var uiCell: UISegmentedTableViewCell?
   var segmentsWidth: CGFloat {
@@ -33,6 +34,7 @@ class SegmentedTableCell<Value: Printable, Collection: CollectionType where Valu
     }
     
     uiCell!.textLabel?.text = title
+    uiCell!.imageView?.image = image
     uiCell!.delegate = self
     uiCell!.segmentsWidth = segmentsWidth
     updateUICell()

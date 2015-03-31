@@ -27,11 +27,12 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     UIHelper.setupReveal(self)
     UIHelper.applyStyle(self)
+    rightDetailSelectedValueColor = StyleKit.waterColor
   }
   
   override func createTableCellsSections() -> [TableCellsSection] {
-    let enableNotificationsTitle = NSLocalizedString("NVC:Enable notifications", value: "Enable notifications",
-      comment: "NotificationsViewController: Title for [Enable notification] setting")
+    let enableNotificationsTitle = NSLocalizedString("NVC:Enable Notifications", value: "Enable Notifications",
+      comment: "NotificationsViewController: Title for [Enable Notification] setting")
 
     let fromTitle = NSLocalizedString("NVC:From", value: "From",
       comment: "NotificationsViewController: Title for [From] setting")
@@ -51,11 +52,11 @@ class NotificationsViewController: OmegaSettingsViewController {
     let soundTitle = NSLocalizedString("NVC:Sound", value: "Sound",
       comment: "NotificationsViewController: Title for [Sound] setting")
     
-    let smartNotificationsTitle = NSLocalizedString("NVC:Smart notifications", value: "Smart notifications",
-      comment: "NotificationsViewController: Title for [Smart notifications] setting")
+    let smartNotificationsTitle = NSLocalizedString("NVC:Smart Notifications", value: "Smart Notifications",
+      comment: "NotificationsViewController: Title for [Smart Notifications] setting")
     
-    let useWaterIntakeTitle = NSLocalizedString("NVC:Use water intake", value: "Use water intake",
-      comment: "NotificationsViewController: Title for [Use water intake] setting")
+    let useWaterIntakeTitle = NSLocalizedString("NVC:Use Water Intake", value: "Use Water Intake",
+      comment: "NotificationsViewController: Title for [Use Water Intake] setting")
     
     let smartNotificationsSectionFooter = NSLocalizedString(
       "NVC:Turn smart notifications on and notifications will be shown not earlier than specified interval after the last intake",

@@ -17,26 +17,34 @@ public class WaterGoal: NSManagedObject, NamedEntity {
   @NSManaged public var date: NSDate
   
   /// Base water goal measured in millilitres
-  @NSManaged public var baseAmount: NSNumber
+  @NSManaged public var baseAmount: Double
   
-  /// Extra water goal factor because of hot day. Should be specified as a fraction of base water goal
-  @NSManaged public var hotDayFactor: NSNumber
+  /// Is current date hot day? If so water goal will be increased according to corresponding setting.
+  @NSManaged public var isHotDay: Bool
 
-  /// Extra water goal factor because of high user activity. Should be specified as a fraction of base water goal
-  @NSManaged public var highActivityFactor: NSNumber
+  /// Is there high activity for current day? If so water goal will be increased according to corresponding setting.
+  @NSManaged public var isHighActivity: Bool
   
   public var amount: Double {
-    return baseAmount.doubleValue * (1 + hotDayFactor.doubleValue + highActivityFactor.doubleValue)
+    return baseAmount * (1 + hotDayFactor + highActivityFactor)
+  }
+  
+  public var hotDayFactor: Double {
+    return isHotDay ? Settings.sharedInstance.generalHotDayExtraFactor.value : 0
+  }
+  
+  public var highActivityFactor: Double {
+    return isHighActivity ? Settings.sharedInstance.generalHighActivityExtraFactor.value : 0
   }
 
   /// Adds a new water goal entity into Core Data
-  public class func addEntity(#date: NSDate, baseAmount: NSNumber, hotDayFactor: NSNumber, highActivityFactor: NSNumber, managedObjectContext: NSManagedObjectContext?, saveImmediately: Bool = true) -> WaterGoal? {
+  public class func addEntity(#date: NSDate, baseAmount: Double, isHotDay: Bool, isHighActivity: Bool, managedObjectContext: NSManagedObjectContext?, saveImmediately: Bool = true) -> WaterGoal? {
     if let managedObjectContext = managedObjectContext, waterGoal = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext) {
       let pureDate = DateHelper.dateByClearingTime(ofDate: date)
       waterGoal.date = pureDate
       waterGoal.baseAmount = baseAmount
-      waterGoal.hotDayFactor = hotDayFactor
-      waterGoal.highActivityFactor = highActivityFactor
+      waterGoal.isHotDay = isHotDay
+      waterGoal.isHighActivity = isHighActivity
       
       if saveImmediately {
         var error: NSError?
@@ -199,9 +207,9 @@ public class WaterGoal: NSManagedObject, NamedEntity {
     
     if amount == nil {
       if let earlierWaterGoal = earlierWaterGoal {
-        amount = earlierWaterGoal.baseAmount.doubleValue
+        amount = earlierWaterGoal.baseAmount
       } else if let laterWaterGoal = laterWaterGoal {
-        amount = laterWaterGoal.baseAmount.doubleValue
+        amount = laterWaterGoal.baseAmount
       } else { // unreal case
         Logger.logError(Logger.Messages.logicalError)
         amount = Settings.sharedInstance.userWaterGoal.value

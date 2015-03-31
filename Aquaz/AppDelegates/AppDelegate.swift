@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
   
-  
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
     Fabric.with([Crashlytics()])
@@ -29,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // Pre populate core data if the application is running for the first time
       if let versionIdentifier = managedObjectModel.versionIdentifiers.first as? String {
         if let managedObjectContext = managedObjectContext {
-          CoreDataPrePopulation.prePopulateCoreData(modelVersion: .Version1_0, managedObjectContext: managedObjectContext, generateIntakesForTests: true, generateWaterGoalsForTests: true)
+          CoreDataPrePopulation.prePopulateCoreData(modelVersion: .Version1_0, managedObjectContext: managedObjectContext)
         } else {
           Logger.logSevere("Managed object context is not initialized")
         }

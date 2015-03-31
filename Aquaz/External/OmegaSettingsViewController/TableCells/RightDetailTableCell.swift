@@ -11,6 +11,7 @@ import UIKit
 class RightDetailTableCell<Value: Printable>: TableCellWithValue<Value> {
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
+  var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
   var accessoryType: UITableViewCellAccessoryType? { didSet { uiCell?.accessoryType = accessoryType ?? .None } }
   var uiCell: UITableViewCell?
   
@@ -36,7 +37,9 @@ class RightDetailTableCell<Value: Printable>: TableCellWithValue<Value> {
     }
     
     uiCell!.textLabel?.text = title
+    uiCell!.imageView?.image = image
     uiCell!.detailTextLabel?.text = stringFromValueFunction?(value) ?? value.description
+    uiCell!.detailTextLabel?.textColor = container.rightDetailValueColor
     if let accessoryType = accessoryType {
       uiCell!.accessoryType = accessoryType
     }
@@ -68,7 +71,7 @@ class RightDetailTableCell<Value: Printable>: TableCellWithValue<Value> {
   }
   
   private func setHighlightForValue(enable: Bool) {
-    uiCell!.detailTextLabel?.textColor = enable ? UIColor.redColor() : UIColor.blackColor()
+    uiCell!.detailTextLabel?.textColor = enable ? container.rightDetailSelectedValueColor : container.rightDetailValueColor
   }
   
 }

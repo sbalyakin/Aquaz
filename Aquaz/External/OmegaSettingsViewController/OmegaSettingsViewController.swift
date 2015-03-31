@@ -13,6 +13,9 @@ protocol TableCellsContainer: class {
   func addSupportingTableCell(#baseTableCell: TableCell, supportingTableCell: TableCell)
   func deleteSupportingTableCell()
   func activateTableCell(tableCell: TableCell?)
+  
+  var rightDetailValueColor: UIColor { get }
+  var rightDetailSelectedValueColor: UIColor { get }
 }
 
 // MARK: OmegaSettingsViewController -
@@ -21,6 +24,9 @@ class OmegaSettingsViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   
   var tableCellsSections: [TableCellsSection] = []
+
+  var rightDetailValueColor = UIColor.darkTextColor()
+  var rightDetailSelectedValueColor = UIColor.redColor()
   
   /// If true all settings item will be saved to user defaults automatically on value update
   var saveToSettingsOnValueUpdate = true

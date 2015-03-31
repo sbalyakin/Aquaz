@@ -210,19 +210,11 @@ class DayViewController: UIViewController {
   // MARK: Summary bar actions -
   
   @IBAction func toggleHighActivityMode(sender: AnyObject) {
-    if highActivityExtraFactor > 0 {
-      highActivityExtraFactor = 0
-    } else {
-      highActivityExtraFactor = Settings.sharedInstance.generalHighActivityExtraFactor.value
-    }
+    isHighActivity = !isHighActivity
   }
   
   @IBAction func toggleHotDayMode(sender: AnyObject) {
-    if hotDayExtraFactor > 0 {
-      hotDayExtraFactor = 0
-    } else {
-      hotDayExtraFactor = Settings.sharedInstance.generalHotDayExtraFactor.value
-    }
+    isHotDay = !isHotDay
   }
   
   // MARK: Change current screen -
@@ -285,13 +277,6 @@ class DayViewController: UIViewController {
   
   private func fetchWaterGoal() {
     waterGoal = WaterGoal.fetchWaterGoalForDate(currentDate, managedObjectContext: managedObjectContext)
-    
-    if let waterGoal = waterGoal {
-      isWaterGoalForCurrentDay = DateHelper.areDatesEqualByDays(date1: waterGoal.date, date2: currentDate)
-    } else {
-      isWaterGoalForCurrentDay = false
-    }
-    
     waterGoalWasChanged()
   }
 
@@ -454,27 +439,73 @@ class DayViewController: UIViewController {
     // Update maximum for multi progress control
     intakesMultiProgressView.maximum = CGFloat(waterGoalAmount)
 
-    highActivityButton.selected = highActivityExtraFactor > 0
-    hotDayButton.selected = hotDayExtraFactor > 0
+    highActivityButton.selected = isHighActivity
+    hotDayButton.selected = isHotDay
   }
   
-  private func saveWaterGoalForCurrentDate(#baseAmount: Double, hotDayFactor: Double, highActivityFactor: Double) {
+  private func saveWaterGoalForCurrentDate(#baseAmount: Double, isHotDay: Bool, isHighActivity: Bool) {
     waterGoal = WaterGoal.addEntity(
       date: currentDate,
       baseAmount: baseAmount,
-      hotDayFactor: hotDayFactor,
-      highActivityFactor: highActivityFactor,
+      isHotDay: isHotDay,
+      isHighActivity: isHighActivity,
       managedObjectContext: managedObjectContext)
-    isWaterGoalForCurrentDay = true
   }
   
   // MARK: Private properties -
   
   private var waterGoal: WaterGoal?
-  private var isWaterGoalForCurrentDay: Bool = false
+  
+  private var isWaterGoalForCurrentDay: Bool {
+    if let waterGoal = waterGoal {
+      return DateHelper.areDatesEqualByDays(date1: waterGoal.date, date2: currentDate)
+    } else {
+      return false
+    }
+  }
+  
+  private var isHotDay: Bool {
+    get {
+      if isWaterGoalForCurrentDay {
+        return waterGoal?.isHotDay ?? false
+      } else {
+        return false
+      }
+    }
+    set {
+      if !isWaterGoalForCurrentDay {
+        saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: newValue, isHighActivity: false)
+      } else {
+        waterGoal?.isHotDay = newValue
+        ModelHelper.save(managedObjectContext: managedObjectContext)
+      }
+      
+      waterGoalWasChanged()
+    }
+  }
 
+  private var isHighActivity: Bool {
+    get {
+      if isWaterGoalForCurrentDay {
+        return waterGoal?.isHighActivity ?? false
+      } else {
+        return false
+      }
+    }
+    set {
+      if !isWaterGoalForCurrentDay {
+        saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: false, isHighActivity: newValue)
+      } else {
+        waterGoal?.isHighActivity = newValue
+        ModelHelper.save(managedObjectContext: managedObjectContext)
+      }
+      
+      waterGoalWasChanged()
+    }
+  }
+  
   private var waterGoalBaseAmount: Double {
-    return waterGoal?.baseAmount.doubleValue ?? Settings.sharedInstance.userWaterGoal.value
+    return waterGoal?.baseAmount ?? Settings.sharedInstance.userWaterGoal.value
   }
   
   private var waterGoalAmount: Double {
@@ -482,42 +513,18 @@ class DayViewController: UIViewController {
   }
   
   private var hotDayExtraFactor: Double {
-    get {
-      if !isWaterGoalForCurrentDay {
-        return 0
-      }
-      
-      return waterGoal?.hotDayFactor.doubleValue ?? 0
-    }
-    set(newHotDayFactor) {
-      if !isWaterGoalForCurrentDay {
-        saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, hotDayFactor: newHotDayFactor, highActivityFactor: 0)
-      } else if let waterGoal = waterGoal {
-        waterGoal.hotDayFactor = newHotDayFactor
-        ModelHelper.save(managedObjectContext: managedObjectContext)
-      }
-
-      waterGoalWasChanged()
+    if isWaterGoalForCurrentDay {
+      return waterGoal?.hotDayFactor ?? 0
+    } else {
+      return 0
     }
   }
-  
+
   private var highActivityExtraFactor: Double {
-    get {
-      if !isWaterGoalForCurrentDay {
-        return 0
-      }
-
-      return waterGoal?.highActivityFactor.doubleValue ?? 0
-    }
-    set(newHighActivityFactor) {
-      if !isWaterGoalForCurrentDay {
-        saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, hotDayFactor: 0, highActivityFactor: newHighActivityFactor)
-      } else if let waterGoal = waterGoal {
-        waterGoal.highActivityFactor = newHighActivityFactor
-        ModelHelper.save(managedObjectContext: managedObjectContext)
-      }
-
-      waterGoalWasChanged()
+    if isWaterGoalForCurrentDay {
+      return waterGoal?.highActivityFactor ?? 0
+    } else {
+      return 0
     }
   }
   

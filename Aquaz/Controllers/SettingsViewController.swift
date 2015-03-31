@@ -11,6 +11,7 @@ import UIKit
 class SettingsViewController: OmegaSettingsViewController {
 
   private var waterGoalCell: TableCell!
+  private let numberFormatter = NSNumberFormatter()
   
   private struct Constants {
     static let calculateWaterIntakeSegue = "Calculate Water Intake"
@@ -21,6 +22,11 @@ class SettingsViewController: OmegaSettingsViewController {
     
     UIHelper.setupReveal(self)
     UIHelper.applyStyle(self)
+    rightDetailSelectedValueColor = StyleKit.waterColor
+    
+    numberFormatter.numberStyle = .PercentStyle
+    numberFormatter.maximumFractionDigits = 0
+    numberFormatter.multiplier = 100
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -38,8 +44,8 @@ class SettingsViewController: OmegaSettingsViewController {
     let heightTitle = NSLocalizedString("SVC:Height", value: "Height",
       comment: "SettingsViewController: Table cell title for [Height] setting")
     
-    let waterGoalTitle = NSLocalizedString("SVC:Water goal", value: "Water goal",
-      comment: "SettingsViewController: Table cell title for [Water goal] setting")
+    let waterGoalTitle = NSLocalizedString("SVC:Water Goal", value: "Water Goal",
+      comment: "SettingsViewController: Table cell title for [Water Goal] setting")
 
     let unitsSectionHeader = NSLocalizedString("SVC:Measurements units", value: "Measurements units",
       comment: "SettingsViewController: Header for settings section [Measurements units]")
@@ -47,12 +53,27 @@ class SettingsViewController: OmegaSettingsViewController {
     let recommendationsSectionHeader = NSLocalizedString("SVC:Recommendations", value: "Recommendations",
       comment: "SettingsViewController: Header for settings section [Recommendations]")
 
+    let extraFactorsSectionHeader = NSLocalizedString("SVC:Extra factors", value: "Extra factors",
+      comment: "SettingsViewController: Header for settings section [Extra factors]")
+
+    let highActivitySectionFooter = NSLocalizedString("SVC:Additional water goal related to high activity", value: "Additional water goal related to high activity",
+      comment: "SettingsViewController: Footer for high activity section")
+
+    let highActivityTitle = NSLocalizedString("SVC:High Activity", value: "High Activity",
+      comment: "SettingsViewController: Table cell title for [High Activity] setting")
+
+    let hotDaySectionFooter = NSLocalizedString("SVC:Additional water goal related to high day temperature", value: "Additional water goal related to high day temperature",
+      comment: "SettingsViewController: Footer for hot day section")
+
+    let hotDayTitle = NSLocalizedString("SVC:Hot Day", value: "Hot Day",
+      comment: "SettingsViewController: Table cell title for [Hot Day] setting")
+
+    // Measurements section
     let volumeCell = createEnumSegmentedTableCell(
       title: volumeTitle,
       settingsItem: Settings.sharedInstance.generalVolumeUnits,
       segmentsWidth: 70)
     volumeCell.valueChangedFunction = volumeUnitDidChange
-
     
     let weightCell = createEnumSegmentedTableCell(
       title: weightTitle,
@@ -63,21 +84,61 @@ class SettingsViewController: OmegaSettingsViewController {
       title: heightTitle,
       settingsItem: Settings.sharedInstance.generalHeightUnits,
       segmentsWidth: 70)
-    
-    waterGoalCell = createRightDetailTableCell(title: waterGoalTitle, settingsItem: Settings.sharedInstance.userWaterGoal, accessoryType: .DisclosureIndicator, activationChangedFunction: waterGoalCellWasSelected, stringFromValueFunction: stringFromWaterGoal)
-    
+
     let unitsSection = TableCellsSection()
     unitsSection.headerTitle = unitsSectionHeader
     unitsSection.tableCells = [
       volumeCell,
       weightCell,
       heightCell]
-
+    
+    // Water goal section
+    let waterGoalCell = createRightDetailTableCell(title: waterGoalTitle, settingsItem: Settings.sharedInstance.userWaterGoal, accessoryType: .DisclosureIndicator, activationChangedFunction: waterGoalCellWasSelected, stringFromValueFunction: stringFromWaterGoal)
+    waterGoalCell.image = UIImage(named: "iconWaterDrop")
+    self.waterGoalCell = waterGoalCell
+    
     let recommendationsSection = TableCellsSection()
     recommendationsSection.headerTitle = recommendationsSectionHeader
     recommendationsSection.tableCells = [waterGoalCell]
     
-    return [unitsSection, recommendationsSection]
+    // High activity section
+    let factorsCollection = DoubleCollection(
+      minimumValue: 0.1,
+      maximumValue: 1.0,
+      step: 0.1)
+    
+    let highActivityCell = createRangedRightDetailTableCell(
+      title: highActivityTitle,
+      settingsItem: Settings.sharedInstance.generalHighActivityExtraFactor,
+      collection: factorsCollection,
+      pickerTableCellHeight: .Large,
+      stringFromValueFunction: stringFromFactor)
+    highActivityCell.image = UIImage(named: "iconHighActivityActive")
+    
+    let highActivitySection = TableCellsSection()
+    highActivitySection.headerTitle = extraFactorsSectionHeader
+    highActivitySection.footerTitle = highActivitySectionFooter
+    highActivitySection.tableCells = [highActivityCell]
+    
+    // Hot day section
+    let hotDayCell = createRangedRightDetailTableCell(
+      title: hotDayTitle,
+      settingsItem: Settings.sharedInstance.generalHotDayExtraFactor,
+      collection: factorsCollection,
+      pickerTableCellHeight: .Large,
+      stringFromValueFunction: stringFromFactor)
+    hotDayCell.image = UIImage(named: "iconHotActive")
+    
+    let hotDaySection = TableCellsSection()
+    hotDaySection.footerTitle = hotDaySectionFooter
+    hotDaySection.tableCells = [hotDayCell]
+    
+    // Adding section
+    return [unitsSection, recommendationsSection, highActivitySection, hotDaySection]
+  }
+  
+  private func stringFromFactor(value: Double) -> String {
+    return numberFormatter.stringFromNumber(value)!
   }
   
   private func volumeUnitDidChange(tableCell: TableCell) {

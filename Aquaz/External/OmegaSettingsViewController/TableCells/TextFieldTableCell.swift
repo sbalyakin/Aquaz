@@ -11,6 +11,7 @@ import UIKit
 class TextFieldTableCell<Value: Printable>: TableCellWithValue<Value>, UITextFieldTableViewCellDelegate {
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
+  var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
   var uiCell: UITextFieldTableViewCell?
   var textFieldBorderStyle: UITextBorderStyle {
     didSet {
@@ -43,6 +44,7 @@ class TextFieldTableCell<Value: Printable>: TableCellWithValue<Value>, UITextFie
     }
     
     uiCell!.textLabel?.text = title
+    uiCell!.imageView?.image = image
     uiCell!.textField.text = stringFromValueFunction?(value) ?? value.description
     uiCell!.textField.keyboardType = keyboardType
     uiCell!.textField.borderStyle = textFieldBorderStyle

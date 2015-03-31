@@ -11,6 +11,7 @@ import UIKit
 class BasicTableCell: TableCell {
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
+  var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
   var accessoryType: UITableViewCellAccessoryType? { didSet { uiCell?.accessoryType = accessoryType ?? .None } }
   var uiCell: UITableViewCell?
   
@@ -26,6 +27,7 @@ class BasicTableCell: TableCell {
     }
     
     uiCell!.textLabel?.text = title
+    uiCell!.imageView?.image = image
     if let accessoryType = accessoryType {
       uiCell!.accessoryType = accessoryType
     }

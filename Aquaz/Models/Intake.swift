@@ -14,7 +14,7 @@ public class Intake: NSManagedObject, NamedEntity {
   public static var entityName = "Intake"
 
   /// Amount of intake in millilitres
-  @NSManaged public var amount: NSNumber
+  @NSManaged public var amount: Double
   
   /// Date of intake
   @NSManaged public var date: NSDate
@@ -24,11 +24,11 @@ public class Intake: NSManagedObject, NamedEntity {
   
   /// Amount of pure water of the intake taking into account water percentage of the drink
   public var waterAmount: Double {
-    return amount.doubleValue * drink.waterPercent.doubleValue
+    return amount * drink.waterPercent
   }
   
   /// Adds a new intake's entity into Core Data
-  public class func addEntity(#drink: Drink, amount: NSNumber, date: NSDate, managedObjectContext: NSManagedObjectContext?, saveImmediately: Bool = true) -> Intake? {
+  public class func addEntity(#drink: Drink, amount: Double, date: NSDate, managedObjectContext: NSManagedObjectContext?, saveImmediately: Bool = true) -> Intake? {
     if let managedObjectContext = managedObjectContext, let intake = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext) {
       intake.amount = amount
       intake.drink = drink

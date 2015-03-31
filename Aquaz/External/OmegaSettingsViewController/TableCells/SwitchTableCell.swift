@@ -11,6 +11,7 @@ import UIKit
 class SwitchTableCell<Value: BooleanType where Value: BooleanLiteralConvertible, Value.BooleanLiteralType == Bool>: TableCellWithValue<Value>, UISwitchTableViewCellDelegate {
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
+  var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
   var uiCell: UISwitchTableViewCell?
   
   init(title: String, value: Value, container: TableCellsContainer) {
@@ -24,6 +25,7 @@ class SwitchTableCell<Value: BooleanType where Value: BooleanLiteralConvertible,
     }
     
     uiCell!.textLabel?.text = title
+    uiCell!.imageView?.image = image
     uiCell!.switchControl.setOn(value.boolValue, animated: false)
     uiCell!.delegate = self
     return uiCell!
