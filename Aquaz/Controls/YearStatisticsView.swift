@@ -64,8 +64,8 @@ import UIKit
   }
   
   private func baseInit() {
-    createLabels()
     createLayers()
+    createLabels()
   }
   
   private func createLabels() {
