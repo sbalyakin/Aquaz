@@ -46,6 +46,8 @@ class TextFieldTableCell<Value: Printable>: TableCellWithValue<Value>, UITextFie
     uiCell!.textLabel?.text = title
     uiCell!.imageView?.image = image
     uiCell!.textField.text = stringFromValueFunction?(value) ?? value.description
+    uiCell!.textField.textColor = container.rightDetailValueColor
+    uiCell!.textField.font = uiCell!.textLabel!.font
     uiCell!.textField.keyboardType = keyboardType
     uiCell!.textField.borderStyle = textFieldBorderStyle
     uiCell!.textField.textAlignment = .Right
@@ -77,12 +79,14 @@ class TextFieldTableCell<Value: Printable>: TableCellWithValue<Value>, UITextFie
   
   func textFieldDidBeginEditing(textField: UITextField) {
     container.activateTableCell(self)
+    uiCell?.textField?.textColor = container.rightDetailSelectedValueColor
   }
   
   func textFieldDidEndEditing(textField: UITextField) {
     if let value = valueFromStringFunction(textField.text) {
       self.value = value
     }
+    uiCell?.textField?.textColor = container.rightDetailValueColor
   }
   
 }

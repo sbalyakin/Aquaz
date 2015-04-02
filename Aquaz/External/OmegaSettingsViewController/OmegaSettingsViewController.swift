@@ -25,7 +25,7 @@ class OmegaSettingsViewController: UIViewController {
   
   var tableCellsSections: [TableCellsSection] = []
 
-  var rightDetailValueColor = UIColor.darkTextColor()
+  var rightDetailValueColor = UIColor.darkGrayColor()
   var rightDetailSelectedValueColor = UIColor.redColor()
   
   /// If true all settings item will be saved to user defaults automatically on value update

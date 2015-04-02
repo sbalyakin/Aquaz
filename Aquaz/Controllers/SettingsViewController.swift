@@ -22,7 +22,8 @@ class SettingsViewController: OmegaSettingsViewController {
     
     UIHelper.setupReveal(self)
     UIHelper.applyStyle(self)
-    rightDetailSelectedValueColor = StyleKit.waterColor
+    rightDetailValueColor = StyleKit.settingsTablesValueColor
+    rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
     
     numberFormatter.numberStyle = .PercentStyle
     numberFormatter.maximumFractionDigits = 0

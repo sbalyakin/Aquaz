@@ -105,7 +105,8 @@ class WaterGoalViewController: OmegaSettingsViewController {
     super.viewDidLoad()
 
     UIHelper.applyStyle(self)
-    rightDetailSelectedValueColor = StyleKit.waterColor
+    rightDetailValueColor = StyleKit.settingsTablesValueColor
+    rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
   }
   
   override func createTableCellsSections() -> [TableCellsSection] {

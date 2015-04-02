@@ -44,6 +44,8 @@ public class StyleKit : NSObject {
     static var calendarTodayTextColor = StyleKit.waterColor
     static var monthStatisticsDayIntakeColor = StyleKit.waterColor
     static var monthStatisticsDayIntakeFullColor = StyleKit.waterColor
+    static var settingsTablesValueColor = UIColor.darkGrayColor()
+    static var settingsTablesSelectedValueColor = StyleKit.waterColor
   }
   
   //// Colors
@@ -75,6 +77,8 @@ public class StyleKit : NSObject {
   public class var calendarTodayTextColor: UIColor { return Cache.calendarTodayTextColor }
   public class var monthStatisticsDayIntakeColor: UIColor { return Cache.monthStatisticsDayIntakeColor }
   public class var monthStatisticsDayIntakeFullColor: UIColor { return Cache.monthStatisticsDayIntakeFullColor }
+  public class var settingsTablesValueColor: UIColor { return Cache.settingsTablesValueColor }
+  public class var settingsTablesSelectedValueColor: UIColor { return Cache.settingsTablesSelectedValueColor }
 
   //// Drawing Methods
   
