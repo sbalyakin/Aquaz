@@ -34,10 +34,14 @@ class TableCellWithValue<Value>: TableCell {
     }
   }
   
+  private var isInternalValueUpdate = false
+  
   var valueExternalStorage: ValueExternalStorage<Value>? {
     didSet {
       if let valueExternalStorage = valueExternalStorage {
+        isInternalValueUpdate = true
         value = valueExternalStorage.value
+        isInternalValueUpdate = false
       }
     }
   }
@@ -59,7 +63,9 @@ class TableCellWithValue<Value>: TableCell {
   }
   
   func valueDidChange() {
-    valueExternalStorage?.value = value
+    if !isInternalValueUpdate {
+      valueExternalStorage?.value = value
+    }
     valueChangedFunction?(self)
   }
   
@@ -69,8 +75,10 @@ class TableCellWithValue<Value>: TableCell {
   
   override func readFromExternalStorage() {
     if let valueExternalStorage = valueExternalStorage {
+      isInternalValueUpdate = true
       valueExternalStorage.readValueFromExternalStorage()
       value = valueExternalStorage.value
+      isInternalValueUpdate = false
     }
   }
   

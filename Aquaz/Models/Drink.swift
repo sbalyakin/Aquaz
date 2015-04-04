@@ -14,7 +14,7 @@ public class Drink: NSManagedObject, NamedEntity {
 
   public static var entityName = "Drink"
 
-  @NSManaged public var index: Int
+  @NSManaged public var index: NSNumber
   @NSManaged public var name: String
   @NSManaged public var waterPercent: Double
   @NSManaged public var intakes: NSSet
@@ -113,10 +113,10 @@ public class Drink: NSManagedObject, NamedEntity {
   }
   
   private func initIndexRelatedProperties() {
-    if let drinkTypeRaw = DrinkType(rawValue: index) {
+    if let drinkTypeRaw = DrinkType(rawValue: index.integerValue) {
       _drinkType = drinkTypeRaw
     } else {
-      Logger.logDrinkIsNotFound(drinkIndex: index)
+      Logger.logDrinkIsNotFound(drinkIndex: index.integerValue)
     }
     
     switch drinkType {

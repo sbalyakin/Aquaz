@@ -1,28 +1,75 @@
 //
-//  WaterGoalViewController.swift
+//  WelcomeWizardMetricsViewController.swift
 //  Aquaz
 //
-//  Created by Sergey Balyakin on 08.12.14.
-//  Copyright (c) 2014 Sergey Balyakin. All rights reserved.
+//  Created by Sergey Balyakin on 04.04.15.
+//  Copyright (c) 2015 Sergey Balyakin. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class WaterGoalViewController: OmegaSettingsViewController {
+class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
+
+  @IBOutlet weak var descriptionLabel: UILabel!
+  
+  private var isOutdated = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     UIHelper.applyStyle(self)
     rightDetailValueColor = StyleKit.settingsTablesValueColor
     rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
   }
+
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    
+    if let headerView = tableView.tableHeaderView {
+      headerView.setNeedsLayout()
+      headerView.layoutIfNeeded()
+      
+      // It's ugly way to update header, but unfortunately I've not found any better way.
+      let originalHeight = descriptionLabel.frame.height
+      let newHeight = descriptionLabel.sizeThatFits(CGSize(width: descriptionLabel.frame.width, height: CGFloat.max)).height
+      descriptionLabel.frame.size.height = newHeight
+      
+      let deltaHeight = newHeight - originalHeight
+      if deltaHeight != 0 {
+        headerView.frame.size.height += deltaHeight
+        tableView.tableHeaderView = headerView
+      }
+    }
+    
+  }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    if isOutdated {
+      tableCellsSections = createTableCellsSections()
+      tableView.reloadData()
+      isOutdated = true
+    }
+  }
+  
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    saveWaterGoalToCoreData()
+    isOutdated = true
+  }
+
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+
+    if tableView.contentSize.height > tableView.frame.size.height {
+      let offset = CGPoint(x: 0, y: tableView.contentSize.height - tableView.frame.size.height)
+      tableView.setContentOffset(offset, animated: true)
+    }
+  }
   
   override func createTableCellsSections() -> [TableCellsSection] {
-    // Settings should be saved to user defaults only if user taps Done button
-    saveToSettingsOnValueUpdate = false
-    
     let genderTitle = NSLocalizedString("WGVC:Gender", value: "Gender",
       comment: "WaterGoalViewController: Table cell title for [Gender] setting")
     
@@ -217,22 +264,6 @@ class WaterGoalViewController: OmegaSettingsViewController {
     }
   }
   
-  @IBAction func cancelButtonWasTapped(sender: AnyObject) {
-    activateTableCell(nil)
-    navigationController?.popViewControllerAnimated(true)
-  }
-  
-  @IBAction func doneButtonWasTapped(sender: AnyObject) {
-    activateTableCell(nil)
-    saveToSettings()
-    navigationController?.popViewControllerAnimated(true)
-  }
-  
-  private func saveToSettings() {
-    writeTableCellValuesToExternalStorage()
-    saveWaterGoalToCoreData()
-  }
-
   private func saveWaterGoalToCoreData() {
     let date = NSDate()
     if let waterGoal = WaterGoal.fetchWaterGoalStrictlyForDate(date, managedObjectContext: managedObjectContext) {
@@ -247,12 +278,12 @@ class WaterGoalViewController: OmegaSettingsViewController {
         managedObjectContext: managedObjectContext)
     }
   }
-
+  
   private func sourceCellValueChanged(tableCell: TableCell) {
     let data = WaterGoalCalculator.Data(physicalActivity: physicalActivityCell.value, gender: genderCell.value, age: ageCell.value, height: heightCell.value, weight: weightCell.value, country: .Average)
     
     let waterGoalAmount = WaterGoalCalculator.calcDailyWaterIntake(data: data)
-
+    
     waterGoalCell.value = waterGoalAmount
   }
   
@@ -367,4 +398,3 @@ private extension Units.Volume {
     }
   }
 }
-

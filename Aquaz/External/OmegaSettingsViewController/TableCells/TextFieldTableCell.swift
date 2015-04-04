@@ -87,6 +87,10 @@ class TextFieldTableCell<Value: Printable>: TableCellWithValue<Value>, UITextFie
       self.value = value
     }
     uiCell?.textField?.textColor = container.rightDetailValueColor
+    if active {
+      container.activateTableCell(nil)
+    }
+
   }
   
 }

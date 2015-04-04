@@ -42,20 +42,13 @@ class UIHelper {
   
   class func applyStyle(viewController: UIViewController) {
     viewController.view.backgroundColor = StyleKit.pageBackgroundColor
-    
-//    if let navigationController = viewController.navigationController {
-//      // Replace standard back icon with custom white one. Standard back icon is slightly dimmed and looks gray.
-//      if let image = UIImage(named: "iconBack")?.imageWithRenderingMode(.AlwaysOriginal) {
-//        navigationController.navigationBar.backIndicatorImage = image
-//        navigationController.navigationBar.backIndicatorTransitionMaskImage = image
-//      } else {
-//        Logger.logError(Logger.Messages.imageNotFound, logDetails: [Logger.Attributes.name: "iconBack"])
-//      }
-//    }
-    
+
     if let tableViewController = viewController as? UITableViewController {
       tableViewController.tableView.backgroundView = nil
-      tableViewController.tableView.backgroundColor = StyleKit.pageBackgroundColor
+      tableViewController.tableView.backgroundColor = UIColor.clearColor()
+    } else if let settingsViewController = viewController as? OmegaSettingsViewController {
+      settingsViewController.tableView.backgroundView = nil
+      settingsViewController.tableView.backgroundColor = UIColor.clearColor()
     }
   }
 

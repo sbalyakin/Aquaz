@@ -19,6 +19,7 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
     
     checkSoundsList()
     findCheckedIndex()
+    UIHelper.applyStyle(self)
   }
 
   @IBAction func saveWasTapped(sender: AnyObject) {

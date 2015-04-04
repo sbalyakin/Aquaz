@@ -38,9 +38,32 @@ class PickerTableCell<Value: Printable, Collection: CollectionType where Value: 
   }
   
   private func updateUICell() {
-    if let uiCell = uiCell, let row = find(collection, value) {
-      uiCell.pickerView.selectRow(row, inComponent: 0, animated: true)
+    if let uiCell = uiCell {
+      var row: Int?
+      if let numberValue = value as? NSNumber {
+        row = findRowWithNearestValue(numberValue)
+      } else {
+        row = find(collection, value)
+      }
+      
+      if let row = row {
+        uiCell.pickerView.selectRow(row, inComponent: 0, animated: true)
+      }
     }
+  }
+  
+  private func findRowWithNearestValue(value: NSNumber) -> Int? {
+    var minimumDelta: Double!
+    var row: Int?
+    for (index, item) in enumerate(collection) {
+      let numberItem = item as! NSNumber
+      let delta = abs(value.doubleValue - numberItem.doubleValue)
+      if minimumDelta == nil || delta < minimumDelta {
+        minimumDelta = delta
+        row = index
+      }
+    }
+    return row
   }
   
   override func getRowHeight() -> CGFloat? {

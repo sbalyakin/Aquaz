@@ -16,6 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
   
+  private struct Constants {
+    static let mainStoryboard = "Main"
+    static let welcomeStoryboard = "Welcome"
+    static let defaultRootViewController = "Root View Controller"
+    static let welcomeViewController = "Welcome Wizard"
+  }
+  
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
     Fabric.with([Crashlytics()])
@@ -24,35 +31,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     Logger.setup(logLevel: .Warning, assertLevel: .Error, showLogLevel: false, showFileNames: true, showLineNumbers: true)
     
-    if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
-      // Pre populate core data if the application is running for the first time
-      if let versionIdentifier = managedObjectModel.versionIdentifiers.first as? String {
-        if let managedObjectContext = managedObjectContext {
-          CoreDataPrePopulation.prePopulateCoreData(modelVersion: .Version1_0, managedObjectContext: managedObjectContext)
-        } else {
-          Logger.logSevere("Managed object context is not initialized")
-        }
-      } else {
-        Logger.logSevere("Version identifier for managed object model is not specified")
-      }
-      
-      if !Settings.sharedInstance.notificationsEnabled.value {
-        NotificationsHelper.removeAllNotifications()
-      }
-      
-      Settings.sharedInstance.generalHasLaunchedOnce.value = true
-    }
-    
     UIHelper.applyStylization()
     NotificationsHelper.setApplicationIconBadgeNumber(0)
     
-    if let options = launchOptions {
-      if let notification = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
-        showDayViewControllerForToday()
+    if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
+      prePopulateCoreData()
+      adjustNotifications()
+      showWelcomeWizard()
+      Settings.sharedInstance.generalHasLaunchedOnce.value = true
+    } else {
+      if let options = launchOptions {
+        if let notification = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
+          showDayViewControllerForToday()
+        }
       }
     }
     
     return true
+  }
+  
+  func showDefaultRootViewControllerWithAnimation() {
+    let storyboard = UIStoryboard(name: Constants.mainStoryboard, bundle: nil)
+    let rootViewController: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.defaultRootViewController)!
+
+    let snapShot = window!.snapshotViewAfterScreenUpdates(true)
+    
+    rootViewController.view.addSubview(snapShot)
+    
+    window!.rootViewController = rootViewController;
+    
+    UIView.animateWithDuration(0.65, animations: {
+      snapShot.layer.opacity = 0;
+      snapShot.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
+      }, completion: { (finished) -> Void in
+        snapShot.removeFromSuperview()
+    })
+
+  }
+  
+  private func showWelcomeWizard() {
+    let storyboard = UIStoryboard(name: Constants.welcomeStoryboard, bundle: nil)
+    if let welcomeWizard: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.welcomeViewController) {
+      window?.rootViewController = welcomeWizard
+    }
+  }
+  
+  private func prePopulateCoreData() {
+    // Pre populate core data if the application is running for the first time
+    if let versionIdentifier = managedObjectModel.versionIdentifiers.first as? String {
+      if let managedObjectContext = managedObjectContext {
+        CoreDataPrePopulation.prePopulateCoreData(modelVersion: .Version1_0, managedObjectContext: managedObjectContext)
+      } else {
+        Logger.logSevere("Managed object context is not initialized")
+      }
+    } else {
+      Logger.logSevere("Version identifier for managed object model is not specified")
+    }
+  }
+  
+  private func adjustNotifications() {
+    if !Settings.sharedInstance.notificationsEnabled.value {
+      NotificationsHelper.removeAllNotifications()
+    }
   }
   
   func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {

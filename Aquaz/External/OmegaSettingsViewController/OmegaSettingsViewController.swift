@@ -195,7 +195,9 @@ class OmegaSettingsViewController: UIViewController {
   
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
-    
+
+    activateTableCell(nil)
+
     let notificationCenter = NSNotificationCenter.defaultCenter()
     notificationCenter.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
     notificationCenter.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
@@ -247,13 +249,14 @@ class OmegaSettingsViewController: UIViewController {
 // MARK: TableCellsContainer
 extension OmegaSettingsViewController: TableCellsContainer {
   func addSupportingTableCell(#baseTableCell: TableCell, supportingTableCell: TableCell) {
+    var insertedIndexPath: NSIndexPath!
     tableView.beginUpdates()
     
     section: for (sectionIndex, section) in enumerate(tableCellsSections) {
       for (cellIndex, tableCell) in enumerate(section.tableCells) {
         if tableCell === baseTableCell {
           let insertIndex = cellIndex + 1
-          let insertedIndexPath = NSIndexPath(forRow: insertIndex, inSection: sectionIndex)
+          insertedIndexPath = NSIndexPath(forRow: insertIndex, inSection: sectionIndex)
           tableView.insertRowsAtIndexPaths([insertedIndexPath], withRowAnimation: .Fade)
           section.tableCells.insert(supportingTableCell, atIndex: insertIndex)
           break section
@@ -262,6 +265,10 @@ extension OmegaSettingsViewController: TableCellsContainer {
     }
     
     tableView.endUpdates()
+    
+    if insertedIndexPath != nil {
+      tableView.scrollToRowAtIndexPath(insertedIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+    }
   }
   
   func activateTableCell(tableCell: TableCell?) {
@@ -271,7 +278,7 @@ extension OmegaSettingsViewController: TableCellsContainer {
     } else {
       activeTableCell?.setActive(false)
       tableCell?.setActive(true)
-      if tableCell?.supportsPermanentActivation ?? false {
+      if tableCell?.supportsPermanentActivation ?? true {
         activeTableCell = tableCell
       }
     }
@@ -410,7 +417,13 @@ class IntCollection: CollectionType {
   func generate() -> GeneratorOf<Int> {
     var index = startIndex
     return GeneratorOf<Int> {
-      return index <= self.endIndex ? (self.minimumValue + index * self.step) : nil
+      if index <= self.endIndex {
+        let value = self.minimumValue + index * self.step
+        index++
+        return value
+      } else {
+        return nil
+      }
     }
   }
   
@@ -441,7 +454,13 @@ class DoubleCollection: CollectionType {
   func generate() -> GeneratorOf<Double> {
     var index = startIndex
     return GeneratorOf<Double> {
-      return index <= self.endIndex ? (self.minimumValue + Double(index) * self.step) : nil
+      if index <= self.endIndex {
+        let value = self.minimumValue + Double(index) * self.step
+        index++
+        return value
+      } else {
+        return nil
+      }
     }
   }
   
@@ -456,7 +475,7 @@ class SettingsItemConnector<Value>: ValueExternalStorage<Value> {
   
   override var value: Value {
     didSet {
-      if saveToSettingsOnValueUpdate {
+      if saveToSettingsOnValueUpdate && !isInternalValueUpdate {
         writeValueToExternalStorage()
       }
     }
@@ -464,6 +483,7 @@ class SettingsItemConnector<Value>: ValueExternalStorage<Value> {
   
   let settingsItem: SettingsItemBase<Value>
   var saveToSettingsOnValueUpdate: Bool
+  private var isInternalValueUpdate = false
   
   init(settingsItem: SettingsItemBase<Value>, saveToSettingsOnValueUpdate: Bool) {
     self.settingsItem = settingsItem
@@ -476,7 +496,9 @@ class SettingsItemConnector<Value>: ValueExternalStorage<Value> {
   }
   
   override func readValueFromExternalStorage() {
+    isInternalValueUpdate = true
     value = settingsItem.value
+    isInternalValueUpdate = false
   }
   
 }

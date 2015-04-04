@@ -93,7 +93,7 @@ class IntakeTests: XCTestCase {
         let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: managedObjectContext)!
         let intakeDate = DateHelper.dateBySettingHour(0, minute: 0, second: i, ofDate: date)
         
-        let intake = Intake.addEntity(drink: drink, amount: amount, date: intakeDate, managedObjectContext: managedObjectContext, saveImmediately: true)!
+        let intake = Intake.addEntity(drink: drink, amount: Double(amount), date: intakeDate, managedObjectContext: managedObjectContext, saveImmediately: true)!
         
         waterAmount += intake.waterAmount
       }
@@ -301,7 +301,7 @@ class IntakeTests: XCTestCase {
       let timeIntervalDelta = endTimeInterval / NSTimeInterval(intakeCount)
       for i in 0..<intakeCount {
         let timeInterval = NSTimeInterval(i) * timeIntervalDelta
-        if let intake = Intake.addEntity(drink: drink, amount: random() % 2000, date: NSDate(timeInterval: timeInterval, sinceDate: startDate), managedObjectContext: managedObjectContext, saveImmediately: true) {
+        if let intake = Intake.addEntity(drink: drink, amount: Double(random() % 2000), date: NSDate(timeInterval: timeInterval, sinceDate: startDate), managedObjectContext: managedObjectContext, saveImmediately: true) {
           generatedIntakes.append(intake)
         } else {
           XCTFail("Failed to add an intake")
