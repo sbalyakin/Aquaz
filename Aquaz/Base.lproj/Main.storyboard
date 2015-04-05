@@ -34,6 +34,54 @@
             </objects>
             <point key="canvasLocation" x="-328" y="-1572"/>
         </scene>
+        <!--Day Guide1 View Controller-->
+        <scene sceneID="fJd-UE-YYj">
+            <objects>
+                <viewController storyboardIdentifier="DayGuide1ViewController" id="bZ6-q7-i2q" customClass="DayGuide1ViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uOs-ny-NV1"/>
+                        <viewControllerLayoutGuide type="bottom" id="CPv-Ae-EDS"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" id="77c-LO-PHY">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hki-Kx-mus">
+                                <rect key="frame" x="273" y="289" width="54" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="hki-Kx-mus" firstAttribute="top" secondItem="uOs-ny-NV1" secondAttribute="bottom" constant="289" id="Tt3-RZ-uMf"/>
+                            <constraint firstItem="hki-Kx-mus" firstAttribute="centerX" secondItem="77c-LO-PHY" secondAttribute="centerX" id="ai5-qC-ezg"/>
+                            <constraint firstAttribute="centerY" secondItem="hki-Kx-mus" secondAttribute="centerY" id="lbo-ys-zwe"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Tt3-RZ-uMf"/>
+                            </mask>
+                        </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="ziu-xd-pSv" appends="YES" id="y5x-dr-XJS"/>
+                        </connections>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ga3-gh-XPY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ziu-xd-pSv">
+                    <connections>
+                        <action selector="viewWasTapped:" destination="bZ6-q7-i2q" id="kUG-CK-eje"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1866" y="-3190"/>
+        </scene>
         <!--Day View Controller-->
         <scene sceneID="30R-jg-ev2">
             <objects>
@@ -721,7 +769,7 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6io-9A-Yq4" userLabel="&lt;">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6io-9A-Yq4" userLabel="&lt;">
                                 <rect key="frame" x="16" y="52" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="UZ6-fr-E0p"/>
@@ -735,13 +783,13 @@
                                     <action selector="switchToPreviousMonth:" destination="nY1-e6-BNo" eventType="touchUpInside" id="1dt-YW-E0Y"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORs-BH-u1n">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORs-BH-u1n">
                                 <rect key="frame" x="56" y="58" width="488" height="20"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8PO-QY-6SQ" userLabel="&gt;">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8PO-QY-6SQ" userLabel="&gt;">
                                 <rect key="frame" x="552" y="52" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="0uC-ib-lKZ"/>
@@ -755,7 +803,7 @@
                                     <action selector="switchToNextMonth:" destination="nY1-e6-BNo" eventType="touchUpInside" id="sJR-yG-M3X"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qj-Pw-bGE" customClass="CalendarView" customModule="Aquaz" customModuleProvider="target">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Qj-Pw-bGE" customClass="CalendarView" customModule="Aquaz" customModuleProvider="target">
                                 <rect key="frame" x="16" y="84" width="568" height="508"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
@@ -1136,7 +1184,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Water Balance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vg1-CA-c5f">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="menuIconWaterBalance" id="Iu5-gv-5ET">
@@ -1718,6 +1766,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EOJ-5a-dZX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4326" y="-1196"/>
+        </scene>
+        <!--Day Guide2 View Controller-->
+        <scene sceneID="01X-XL-wqO">
+            <objects>
+                <viewController storyboardIdentifier="DayGuide2ViewController" id="YDG-kn-ERU" customClass="DayGuide2ViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4nx-mJ-5Y9"/>
+                        <viewControllerLayoutGuide type="bottom" id="h14-pN-i91"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" id="ZId-xG-Xbd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4H-QE-ddu">
+                                <rect key="frame" x="273" y="289" width="54" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="v4H-QE-ddu" firstAttribute="centerX" secondItem="ZId-xG-Xbd" secondAttribute="centerX" id="cLN-N4-Mx3"/>
+                            <constraint firstAttribute="centerY" secondItem="v4H-QE-ddu" secondAttribute="centerY" id="hx7-Nt-VCb"/>
+                            <constraint firstItem="v4H-QE-ddu" firstAttribute="top" secondItem="4nx-mJ-5Y9" secondAttribute="bottom" constant="289" id="nYc-cb-Ii1"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="nYc-cb-Ii1"/>
+                            </mask>
+                        </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Sxv-Bb-5HC" appends="YES" id="MlD-GA-DL4"/>
+                        </connections>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RlV-O3-2AE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Sxv-Bb-5HC">
+                    <connections>
+                        <action selector="viewWasTapped:" destination="YDG-kn-ERU" id="FKw-ej-fMV"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="2694" y="-3190"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PN8-lM-Ngp">

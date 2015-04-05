@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window!.rootViewController = rootViewController;
     
     UIView.animateWithDuration(0.65, animations: {
-      snapShot.layer.opacity = 0;
+      snapShot.layer.opacity = 0
       snapShot.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
       }, completion: { (finished) -> Void in
         snapShot.removeFromSuperview()

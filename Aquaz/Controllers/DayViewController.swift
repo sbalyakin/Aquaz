@@ -56,7 +56,18 @@ class DayViewController: UIViewController {
     static let showCalendarSegue = "ShowCalendar"
     static let pageViewEmbedSegue = "PageViewEmbed"
     static let showCompleteSegue = "ShowComplete"
+    static let dayGuide1ViewControllerStoryboardID = "DayGuide1ViewController"
+    static let dayGuide2ViewControllerStoryboardID = "DayGuide2ViewController"
   }
+  
+  private enum GuideState {
+    case None, Page1, Page2
+  }
+  
+  private var guideState: GuideState = .None
+  private var dayGuide1ViewController: DayGuide1ViewController!
+  private var dayGuide2ViewController: DayGuide2ViewController!
+  
   
   // MARK: Page setup -
   
@@ -75,8 +86,78 @@ class DayViewController: UIViewController {
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-    
+
     refreshCurrentDay(showAlert: false)
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+
+    if !Settings.uiDayPageHasDisplayedOnce.value {
+      continueGuide()
+    }
+  }
+  
+  func continueGuide() {
+    switch guideState {
+    case .None: showGuidePage1()
+    case .Page1: showGuidePage2()
+    case .Page2: finishGuide()//Settings.uiDayPageHasDisplayedOnce.value = true
+    }
+  }
+  
+  private func showGuidePage1() {
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let window = appDelegate.window!
+
+    dayGuide1ViewController = storyboard!.instantiateViewControllerWithIdentifier(Constants.dayGuide1ViewControllerStoryboardID) as! DayGuide1ViewController
+    dayGuide1ViewController.view.layer.opacity = 0
+    dayGuide1ViewController.view.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
+    dayGuide1ViewController.view.frame = window.frame
+    dayGuide1ViewController.view.backgroundColor = UIColor(white: 0, alpha: 0.7)
+    dayGuide1ViewController.dayViewController = self
+
+    window.addSubview(dayGuide1ViewController.view)
+    
+    UIView.animateWithDuration(0.65, delay: 0, options: .CurveEaseInOut, animations: {
+      self.dayGuide1ViewController.view.layer.opacity = 1
+      self.dayGuide1ViewController.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
+    }, completion: nil)
+
+    guideState = .Page1
+  }
+
+  private func showGuidePage2() {
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let window = appDelegate.window!
+    
+    dayGuide2ViewController = storyboard!.instantiateViewControllerWithIdentifier(Constants.dayGuide2ViewControllerStoryboardID) as! DayGuide2ViewController
+    dayGuide2ViewController.view.layer.opacity = 0
+    dayGuide2ViewController.view.frame = window.frame
+    dayGuide2ViewController.view.backgroundColor = UIColor(white: 0, alpha: 0.7)
+    dayGuide2ViewController.dayViewController = self
+    
+    window.addSubview(dayGuide2ViewController.view)
+
+    UIView.animateWithDuration(0.65, delay: 0, options: .CurveEaseInOut, animations: {
+      self.dayGuide1ViewController.view.layer.opacity = 0
+      self.dayGuide2ViewController.view.layer.opacity = 1
+    }, completion: { (finished) -> Void in
+      self.dayGuide1ViewController.view.removeFromSuperview()
+      self.dayGuide1ViewController = nil
+    })
+
+    guideState = .Page2
+  }
+
+  private func finishGuide() {
+    UIView.animateWithDuration(0.65, delay: 0, options: .CurveEaseInOut, animations: {
+      self.dayGuide2ViewController.view.layer.opacity = 0
+      self.dayGuide2ViewController.view.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
+    }, completion: { (finished) -> Void in
+      self.dayGuide2ViewController.view.removeFromSuperview()
+      self.dayGuide2ViewController = nil
+    })
   }
   
   private func initCurrentDay() {

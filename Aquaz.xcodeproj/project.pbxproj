@@ -68,6 +68,8 @@
 		A55337CF1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */; };
 		A55F34A61A74D6AC00A529A5 /* DrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */; };
 		A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */; };
+		A55F83981AD1213E00D30BAF /* DayGuide1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55F83971AD1213E00D30BAF /* DayGuide1ViewController.swift */; };
+		A55F839A1AD1231500D30BAF /* DayGuide2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55F83991AD1231500D30BAF /* DayGuide2ViewController.swift */; };
 		A575A5A51A6EBB0300B00E9F /* StyledBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */; };
 		A57D2BEB1ACFDE0D00619D62 /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57D2BE91ACFDE0D00619D62 /* Welcome.storyboard */; };
 		A57D2BEE1ACFEA0A00619D62 /* WelcomeWizardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D2BED1ACFEA0A00619D62 /* WelcomeWizardViewController.swift */; };
@@ -210,6 +212,8 @@
 		A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewController.swift; sourceTree = "<group>"; };
 		A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkCollectionViewCell.swift; path = Controls/DrinkCollectionViewCell.swift; sourceTree = "<group>"; };
 		A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DrinkCollectionViewCell.xib; path = Controls/DrinkCollectionViewCell.xib; sourceTree = "<group>"; };
+		A55F83971AD1213E00D30BAF /* DayGuide1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayGuide1ViewController.swift; sourceTree = "<group>"; };
+		A55F83991AD1231500D30BAF /* DayGuide2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayGuide2ViewController.swift; sourceTree = "<group>"; };
 		A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StyledBarButtonItem.swift; path = Controls/StyledBarButtonItem.swift; sourceTree = "<group>"; };
 		A57D2BEA1ACFDE0D00619D62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Welcome.storyboard; sourceTree = "<group>"; };
 		A57D2BED1ACFEA0A00619D62 /* WelcomeWizardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWizardViewController.swift; sourceTree = "<group>"; };
@@ -330,6 +334,8 @@
 				A57D2BEC1ACFE9C600619D62 /* Welcome Wizard */,
 				A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */,
 				843B055719E2D7800097A833 /* DayViewController.swift */,
+				A55F83971AD1213E00D30BAF /* DayGuide1ViewController.swift */,
+				A55F83991AD1231500D30BAF /* DayGuide2ViewController.swift */,
 				843B055819E2D7800097A833 /* SelectDrinkViewController.swift */,
 				8424AA001A0A7009009C5C47 /* DiaryViewController.swift */,
 				8478253619EAC8C200588FE3 /* IntakeViewController.swift */,
@@ -743,6 +749,7 @@
 				A5B75A1419E5686C00D0477B /* ModelHelper.swift in Sources */,
 				A57D2BF61AD02C5C00619D62 /* WelcomeWizardProVersionViewController.swift in Sources */,
 				8468D6421A0D1C240008D027 /* DateHelper.swift in Sources */,
+				A55F83981AD1213E00D30BAF /* DayGuide1ViewController.swift in Sources */,
 				8406D78119FE9875001C54BF /* Units.swift in Sources */,
 				A5D3D4221AA5D29700E3C989 /* BasicTableCell.swift in Sources */,
 				84CD97571ABB2B960011623B /* CalendarViewDataSource.swift in Sources */,
@@ -755,6 +762,7 @@
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
 				84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */,
 				A575A5A51A6EBB0300B00E9F /* StyledBarButtonItem.swift in Sources */,
+				A55F839A1AD1231500D30BAF /* DayGuide2ViewController.swift in Sources */,
 				A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */,
 				843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */,
 				A5D3D4281AA5D29700E3C989 /* TableCellWithValue.swift in Sources */,

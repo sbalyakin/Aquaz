@@ -103,6 +103,9 @@ public class Settings {
   static let uiSelectedAlcoholicDrink = SettingsEnumItem(
     key: "UI - Selected alcoholic drink", initialValue: Drink.DrinkType.Wine)
 
+  static let uiDayPageHasDisplayedOnce = SettingsOrdinalItem(
+    key: "UI - Day page has displayed one", initialValue: false)
+
   static let notificationsEnabled = SettingsOrdinalItem(
     key: "Notifications - Enabled", initialValue: false)
 
