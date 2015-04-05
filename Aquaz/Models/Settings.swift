@@ -85,7 +85,8 @@ public class Settings {
   static let userAge = SettingsOrdinalItem<Int>(
     key: "User - Age", initialValue: 30)
   
-  static let userWaterGoal = Settings.createUserDailyWaterIntakeSetting()
+  static let userWaterGoal = SettingsOrdinalItem(
+    key: "User - Daily water intake", initialValue: Settings.calcUserDailyWaterIntakeSetting())
 
   static let uiUseCustomDateForDayView = SettingsOrdinalItem(
     key: "UI - Use custom day page date", initialValue: false)
@@ -127,11 +128,9 @@ public class Settings {
     return NSLocale.currentLocale().objectForKey(NSLocaleUsesMetricSystem)! as! Bool
   }
 
-  private class func createUserDailyWaterIntakeSetting() -> SettingsOrdinalItem<Double> {
+  private class func calcUserDailyWaterIntakeSetting() -> Double {
     let data = WaterGoalCalculator.Data(physicalActivity: Settings.userPhysicalActivity.value, gender: Settings.userGender.value, age: Settings.userAge.value, height: Settings.userHeight.value, weight: Settings.userWeight.value, country: .Average)
     
-    let dailyWaterIntake = WaterGoalCalculator.calcDailyWaterIntake(data: data)
-    
-    return SettingsOrdinalItem<Double>(key: "User - Daily water intake", initialValue: dailyWaterIntake)
+    return WaterGoalCalculator.calcDailyWaterIntake(data: data)
   }
 }
