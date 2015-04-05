@@ -183,7 +183,7 @@ class IntakeViewController: UIViewController {
   }
   
   private func prepareAmountForStoring(amount: Double) -> Double {
-    let precision = Settings.sharedInstance.generalVolumeUnits.value.precision
+    let precision = Settings.generalVolumeUnits.value.precision
     return Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: amount, unitType: .Volume, roundPrecision: precision)
   }
   
@@ -233,9 +233,9 @@ class IntakeViewController: UIViewController {
     return intake == nil ? .Add : .Edit
   }
   
-  private let predefinedAmounts = Settings.sharedInstance.generalVolumeUnits.value.predefinedAmounts
-  private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
-  private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
+  private let predefinedAmounts = Settings.generalVolumeUnits.value.predefinedAmounts
+  private let amountPrecision = Settings.generalVolumeUnits.value.precision
+  private let amountDecimals = Settings.generalVolumeUnits.value.decimals
   
   private var isCurrentDayToday: Bool = false
 

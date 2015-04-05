@@ -48,7 +48,7 @@ class DiaryTableViewCell: UITableViewCell {
       NSForegroundColorAttributeName: waterColor,
       NSFontAttributeName: amountLabel.font])
 
-    let unit = Settings.sharedInstance.generalVolumeUnits.value.unit.contraction
+    let unit = Settings.generalVolumeUnits.value.unit.contraction
     let unitsTitleAt = NSAttributedString(string: unit, attributes: [
       NSForegroundColorAttributeName: waterColor,
       NSFontAttributeName: amountLabel.font])
@@ -72,8 +72,8 @@ class DiaryTableViewCell: UITableViewCell {
     invalidateIntrinsicContentSize()
   }
   
-  private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
-  private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
+  private let amountPrecision = Settings.generalVolumeUnits.value.precision
+  private let amountDecimals = Settings.generalVolumeUnits.value.decimals
 
 }
 

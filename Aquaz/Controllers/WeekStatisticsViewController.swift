@@ -86,7 +86,7 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   private func getTitleForAmount(amount: CGFloat) -> String {
-    let quantity = Quantity(unit: Settings.sharedInstance.generalVolumeUnits.value.unit, amount: Double(amount))
+    let quantity = Quantity(unit: Settings.generalVolumeUnits.value.unit, amount: Double(amount))
     let title = quantity.getDescription(0, displayUnits: true)
     return title
   }
@@ -145,7 +145,7 @@ class WeekStatisticsViewController: UIViewController {
     let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
     Logger.logSevere(goals.count == 7, "Unexpected count of water goals", logDetails: [Logger.Attributes.count: "\(goals.count)"])
     
-    let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
+    let displayedVolumeUnits = Settings.generalVolumeUnits.value
     
     var statisticsItems: [WeekStatisticsView.ItemType] = []
     

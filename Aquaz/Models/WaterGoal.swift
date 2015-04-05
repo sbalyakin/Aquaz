@@ -30,11 +30,11 @@ public class WaterGoal: NSManagedObject, NamedEntity {
   }
   
   public var hotDayFactor: Double {
-    return isHotDay ? Settings.sharedInstance.generalHotDayExtraFactor.value : 0
+    return isHotDay ? Settings.generalHotDayExtraFactor.value : 0
   }
   
   public var highActivityFactor: Double {
-    return isHighActivity ? Settings.sharedInstance.generalHighActivityExtraFactor.value : 0
+    return isHighActivity ? Settings.generalHighActivityExtraFactor.value : 0
   }
 
   /// Adds a new water goal entity into Core Data
@@ -212,7 +212,7 @@ public class WaterGoal: NSManagedObject, NamedEntity {
         amount = laterWaterGoal.baseAmount
       } else { // unreal case
         Logger.logError(Logger.Messages.logicalError)
-        amount = Settings.sharedInstance.userWaterGoal.value
+        amount = Settings.userWaterGoal.value
       }
     }
 

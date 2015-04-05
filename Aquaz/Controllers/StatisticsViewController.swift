@@ -44,14 +44,14 @@ class StatisticsViewController: UIViewController {
   }
   
   private func initStatisticsPage() {
-    let lastStatisticsPage = Settings.sharedInstance.uiSelectedStatisticsPage.value
+    let lastStatisticsPage = Settings.uiSelectedStatisticsPage.value
     segmentedControl.selectedSegmentIndex = lastStatisticsPage.rawValue
     activateStatisticsPage(lastStatisticsPage)
   }
   
   private func activateStatisticsPage(page: Settings.StatisticsViewPage) {
     pageViewController.currentPage = page
-    Settings.sharedInstance.uiSelectedStatisticsPage.value = page
+    Settings.uiSelectedStatisticsPage.value = page
   }
 
   @IBAction func segmentChanged(sender: UISegmentedControl) {

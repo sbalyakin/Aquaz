@@ -56,17 +56,17 @@ class WelcomeWizardUnitsViewController: OmegaSettingsViewController {
     // Measurements section
     let volumeCell = createEnumSegmentedTableCell(
       title: volumeTitle,
-      settingsItem: Settings.sharedInstance.generalVolumeUnits,
+      settingsItem: Settings.generalVolumeUnits,
       segmentsWidth: 70)
     
     let weightCell = createEnumSegmentedTableCell(
       title: weightTitle,
-      settingsItem: Settings.sharedInstance.generalWeightUnits,
+      settingsItem: Settings.generalWeightUnits,
       segmentsWidth: 70)
     
     let heightCell = createEnumSegmentedTableCell(
       title: heightTitle,
-      settingsItem: Settings.sharedInstance.generalHeightUnits,
+      settingsItem: Settings.generalHeightUnits,
       segmentsWidth: 70)
     
     let unitsSection = TableCellsSection()

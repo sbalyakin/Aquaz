@@ -72,18 +72,18 @@ class SettingsViewController: OmegaSettingsViewController {
     // Measurements section
     let volumeCell = createEnumSegmentedTableCell(
       title: volumeTitle,
-      settingsItem: Settings.sharedInstance.generalVolumeUnits,
+      settingsItem: Settings.generalVolumeUnits,
       segmentsWidth: 70)
     volumeCell.valueChangedFunction = volumeUnitDidChange
     
     let weightCell = createEnumSegmentedTableCell(
       title: weightTitle,
-      settingsItem: Settings.sharedInstance.generalWeightUnits,
+      settingsItem: Settings.generalWeightUnits,
       segmentsWidth: 70)
     
     let heightCell = createEnumSegmentedTableCell(
       title: heightTitle,
-      settingsItem: Settings.sharedInstance.generalHeightUnits,
+      settingsItem: Settings.generalHeightUnits,
       segmentsWidth: 70)
 
     let unitsSection = TableCellsSection()
@@ -94,7 +94,7 @@ class SettingsViewController: OmegaSettingsViewController {
       heightCell]
     
     // Water goal section
-    let waterGoalCell = createRightDetailTableCell(title: waterGoalTitle, settingsItem: Settings.sharedInstance.userWaterGoal, accessoryType: .DisclosureIndicator, activationChangedFunction: waterGoalCellWasSelected, stringFromValueFunction: stringFromWaterGoal)
+    let waterGoalCell = createRightDetailTableCell(title: waterGoalTitle, settingsItem: Settings.userWaterGoal, accessoryType: .DisclosureIndicator, activationChangedFunction: waterGoalCellWasSelected, stringFromValueFunction: stringFromWaterGoal)
     waterGoalCell.image = UIImage(named: "iconWaterDrop")
     self.waterGoalCell = waterGoalCell
     
@@ -110,7 +110,7 @@ class SettingsViewController: OmegaSettingsViewController {
     
     let highActivityCell = createRangedRightDetailTableCell(
       title: highActivityTitle,
-      settingsItem: Settings.sharedInstance.generalHighActivityExtraFactor,
+      settingsItem: Settings.generalHighActivityExtraFactor,
       collection: factorsCollection,
       pickerTableCellHeight: .Large,
       stringFromValueFunction: stringFromFactor)
@@ -124,7 +124,7 @@ class SettingsViewController: OmegaSettingsViewController {
     // Hot day section
     let hotDayCell = createRangedRightDetailTableCell(
       title: hotDayTitle,
-      settingsItem: Settings.sharedInstance.generalHotDayExtraFactor,
+      settingsItem: Settings.generalHotDayExtraFactor,
       collection: factorsCollection,
       pickerTableCellHeight: .Large,
       stringFromValueFunction: stringFromFactor)
@@ -147,7 +147,7 @@ class SettingsViewController: OmegaSettingsViewController {
   }
   
   private func stringFromWaterGoal(waterGoal: Double) -> String {
-    let volumeUnit = Settings.sharedInstance.generalVolumeUnits.value
+    let volumeUnit = Settings.generalVolumeUnits.value
     let text = Units.sharedInstance.formatMetricAmountToText(metricAmount: waterGoal, unitType: .Volume, roundPrecision: volumeUnit.precision, decimals: volumeUnit.decimals, displayUnits: true)
     return text
   }

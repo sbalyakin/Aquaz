@@ -24,7 +24,7 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
 
   @IBAction func saveWasTapped(sender: AnyObject) {
     let soundInfo = soundList[checkedIndex]
-    Settings.sharedInstance.notificationsSound.value = soundInfo.fileName
+    Settings.notificationsSound.value = soundInfo.fileName
     
     notificationsViewController.recreateNotifications()
     
@@ -66,7 +66,7 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
   }
   
   private func findCheckedIndex() {
-    let fileName = Settings.sharedInstance.notificationsSound.value
+    let fileName = Settings.notificationsSound.value
     
     for (index, sound) in enumerate(soundList) {
       if sound.fileName == fileName {

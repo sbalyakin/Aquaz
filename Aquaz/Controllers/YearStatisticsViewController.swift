@@ -135,7 +135,7 @@ class YearStatisticsViewController: UIViewController {
     let goals = WaterGoal.fetchWaterGoalAmountsGroupedByMonths(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
     Logger.logSevere(waterIntakes.count == goals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     
-    let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
+    let displayedVolumeUnits = Settings.generalVolumeUnits.value
     
     var statisticsItems: [YearStatisticsView.ItemType] = []
     
@@ -177,7 +177,7 @@ class YearStatisticsViewController: UIViewController {
   }
   
   private func getTitleForAmount(amount: CGFloat) -> String {
-    let quantity = Quantity(unit: Settings.sharedInstance.generalVolumeUnits.value.unit, amount: Double(amount))
+    let quantity = Quantity(unit: Settings.generalVolumeUnits.value.unit, amount: Double(amount))
     let title = quantity.getDescription(0, displayUnits: true)
     return title
   }

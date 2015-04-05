@@ -23,7 +23,7 @@ class SelectDrinkViewController: UIViewController {
   private var displayedDrinkTypes: [Drink.DrinkType] = [
     .Water, .Tea,    .Coffee,
     .Milk,  .Juice,  .Sport,
-    .Soda,  .Energy, Settings.sharedInstance.uiSelectedAlcoholicDrink.value]
+    .Soda,  .Energy, Settings.uiSelectedAlcoholicDrink.value]
   
   private struct Constants {
     static let addIntakeSegue = "Add Intake"
@@ -64,7 +64,7 @@ class SelectDrinkViewController: UIViewController {
   
   private func changeAlcoholicDrinkTo(#drinkType: Drink.DrinkType) {
     displayedDrinkTypes[displayedDrinkTypes.count - 1] = drinkType
-    Settings.sharedInstance.uiSelectedAlcoholicDrink.value = drinkType
+    Settings.uiSelectedAlcoholicDrink.value = drinkType
     let alcoholIndexPath = NSIndexPath(forRow: displayedDrinkTypes.count - 1, inSection: 0)
     self.collectionView.reloadItemsAtIndexPaths([alcoholIndexPath])
 

@@ -34,11 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UIHelper.applyStylization()
     NotificationsHelper.setApplicationIconBadgeNumber(0)
     
-    if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
+    if Settings.generalHasLaunchedOnce.value == false {
       prePopulateCoreData()
       adjustNotifications()
       showWelcomeWizard()
-      Settings.sharedInstance.generalHasLaunchedOnce.value = true
+      Settings.generalHasLaunchedOnce.value = true
     } else {
       if let options = launchOptions {
         if let notification = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
@@ -90,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func adjustNotifications() {
-    if !Settings.sharedInstance.notificationsEnabled.value {
+    if !Settings.notificationsEnabled.value {
       NotificationsHelper.removeAllNotifications()
     }
   }

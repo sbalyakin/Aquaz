@@ -41,7 +41,7 @@ public class CoreDataPrePopulation {
 
     WaterGoal.addEntity(
       date: DateHelper.dateByClearingTime(ofDate: NSDate()),
-      baseAmount: Settings.sharedInstance.userWaterGoal.value,
+      baseAmount: Settings.userWaterGoal.value,
       isHotDay: false,
       isHighActivity: false,
       managedObjectContext: managedObjectContext)

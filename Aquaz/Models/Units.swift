@@ -129,9 +129,9 @@ class Units {
   }
   
   private init() {
-    let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits
-    let displayedWeightUnits = Settings.sharedInstance.generalWeightUnits
-    let displayedHeightUnits = Settings.sharedInstance.generalHeightUnits
+    let displayedVolumeUnits = Settings.generalVolumeUnits
+    let displayedWeightUnits = Settings.generalWeightUnits
+    let displayedHeightUnits = Settings.generalHeightUnits
     
     // Subscribe for changes of the settings
     displayedVolumeUnits.addObserver(onUpdateVolumeUnitsSettings)

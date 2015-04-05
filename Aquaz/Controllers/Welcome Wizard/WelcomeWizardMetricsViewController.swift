@@ -91,14 +91,14 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     // Gender cell
     genderCell = createEnumRightDetailTableCell(
       title: genderTitle,
-      settingsItem: Settings.sharedInstance.userGender,
+      settingsItem: Settings.userGender,
       pickerTableCellHeight: .Small,
       stringFromValueFunction: stringFromGender)
     
     genderCell.valueChangedFunction = sourceCellValueChanged
     
     // Height cell
-    let heightUnit = Settings.sharedInstance.generalHeightUnits.value
+    let heightUnit = Settings.generalHeightUnits.value
     let heightCollection = DoubleCollection(
       minimumValue: heightUnit.minimumValue,
       maximumValue: heightUnit.maximumValue,
@@ -106,7 +106,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     
     heightCell = createRangedRightDetailTableCell(
       title: heightTitle,
-      settingsItem: Settings.sharedInstance.userHeight,
+      settingsItem: Settings.userHeight,
       collection: heightCollection,
       pickerTableCellHeight: .Large,
       stringFromValueFunction: stringFromHeight)
@@ -114,7 +114,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     heightCell.valueChangedFunction = sourceCellValueChanged
     
     // Weight cell
-    let weightUnit = Settings.sharedInstance.generalWeightUnits.value
+    let weightUnit = Settings.generalWeightUnits.value
     let weightCollection = DoubleCollection(
       minimumValue: weightUnit.minimumValue,
       maximumValue: weightUnit.maximumValue,
@@ -122,7 +122,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     
     weightCell = createRangedRightDetailTableCell(
       title: weightTitle,
-      settingsItem: Settings.sharedInstance.userWeight,
+      settingsItem: Settings.userWeight,
       collection: weightCollection,
       pickerTableCellHeight: .Large,
       stringFromValueFunction: stringFromWeight)
@@ -137,7 +137,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     
     ageCell = createRangedRightDetailTableCell(
       title: ageTitle,
-      settingsItem: Settings.sharedInstance.userAge,
+      settingsItem: Settings.userAge,
       collection: ageCollection,
       pickerTableCellHeight: .Large,
       stringFromValueFunction: stringFromAge)
@@ -147,18 +147,18 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     // Physical activity cell
     physicalActivityCell = createEnumRightDetailTableCell(
       title: physicalActivityTitle,
-      settingsItem: Settings.sharedInstance.userPhysicalActivity,
+      settingsItem: Settings.userPhysicalActivity,
       pickerTableCellHeight: .Small,
       stringFromValueFunction: stringFromPhysicalActivity)
     
     physicalActivityCell.valueChangedFunction = sourceCellValueChanged
     
-    let volumeUnit = Settings.sharedInstance.generalVolumeUnits.value.unit
+    let volumeUnit = Settings.generalVolumeUnits.value.unit
     let waterGoalTitleFinal = waterGoalTitle +  " (\(volumeUnit.contraction))"
     
     waterGoalCell = createTextFieldTableCell(
       title: waterGoalTitleFinal, settingsItem:
-      Settings.sharedInstance.userWaterGoal,
+      Settings.userWaterGoal,
       valueFromStringFunction: metricWaterGoalFromString,
       stringFromValueFunction: stringFromWaterGoal,
       keyboardType: .DecimalPad)
@@ -179,12 +179,12 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
   }
   
   private func stringFromHeight(value: Double) -> String {
-    let unit = Settings.sharedInstance.generalHeightUnits.value
+    let unit = Settings.generalHeightUnits.value
     return Units.sharedInstance.formatMetricAmountToText(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision, decimals: unit.decimals, displayUnits: true)
   }
   
   private func stringFromWeight(value: Double) -> String {
-    let unit = Settings.sharedInstance.generalWeightUnits.value
+    let unit = Settings.generalWeightUnits.value
     return Units.sharedInstance.formatMetricAmountToText(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision, decimals: unit.decimals, displayUnits: true)
   }
   
@@ -237,7 +237,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
   }
   
   private func stringFromWaterGoal(value: Double) -> String {
-    let unit = Settings.sharedInstance.generalVolumeUnits.value
+    let unit = Settings.generalVolumeUnits.value
     let displayedAmount = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision)
     let formatter = NSNumberFormatter()
     formatter.minimumFractionDigits = unit.decimals
@@ -254,7 +254,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
         return nil
       }
       
-      let displayedUnit = Settings.sharedInstance.generalVolumeUnits.value
+      let displayedUnit = Settings.generalVolumeUnits.value
       let quantity = Quantity(ownUnit: Units.Volume.metric.unit, fromUnit: displayedUnit.unit, fromAmount: displayedValue)
       let metricValue = quantity.amount
       let adjustedMetricValue = Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: metricValue, unitType: .Volume, roundPrecision: displayedUnit.precision)

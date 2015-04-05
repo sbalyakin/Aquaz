@@ -29,10 +29,10 @@ class DayViewController: UIViewController {
     didSet {
       if mode == .General {
         if DateHelper.areDatesEqualByDays(date1: currentDate, date2: NSDate()) {
-          Settings.sharedInstance.uiUseCustomDateForDayView.value = false
+          Settings.uiUseCustomDateForDayView.value = false
         } else {
-          Settings.sharedInstance.uiUseCustomDateForDayView.value = true
-          Settings.sharedInstance.uiCustomDateForDayView.value = currentDate
+          Settings.uiUseCustomDateForDayView.value = true
+          Settings.uiCustomDateForDayView.value = currentDate
         }
       }
     }
@@ -80,8 +80,8 @@ class DayViewController: UIViewController {
   }
   
   private func initCurrentDay() {
-    if mode == .General && Settings.sharedInstance.uiUseCustomDateForDayView.value {
-      currentDate = Settings.sharedInstance.uiCustomDateForDayView.value
+    if mode == .General && Settings.uiUseCustomDateForDayView.value {
+      currentDate = Settings.uiCustomDateForDayView.value
     } else {
       if currentDate == nil {
         currentDate = NSDate()
@@ -316,7 +316,7 @@ class DayViewController: UIViewController {
   }
   
   private func updateNotifications(#intakeDate: NSDate) {
-    if !Settings.sharedInstance.notificationsEnabled.value {
+    if !Settings.notificationsEnabled.value {
       return
     }
     
@@ -325,7 +325,7 @@ class DayViewController: UIViewController {
       return
     }
     
-    if Settings.sharedInstance.notificationsUseWaterIntake.value && dailyWaterIntake >= waterGoalAmount {
+    if Settings.notificationsUseWaterIntake.value && dailyWaterIntake >= waterGoalAmount {
       NotificationsHelper.removeAllNotifications()
       
       let nextDayDate = DateHelper.addToDate(intakeDate, years: 0, months: 0, days: 1)
@@ -399,14 +399,14 @@ class DayViewController: UIViewController {
   }
   
   @IBAction func intakeButtonWasTapped(sender: AnyObject) {
-    Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value = !Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value
+    Settings.uiDisplayDailyWaterIntakeInPercents.value = !Settings.uiDisplayDailyWaterIntakeInPercents.value
     updateIntakeButton()
   }
   
   private func updateIntakeButton() {
     let intakeText: String
     
-    if Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value {
+    if Settings.uiDisplayDailyWaterIntakeInPercents.value {
       let formatter = NSNumberFormatter()
       formatter.numberStyle = .PercentStyle
       formatter.maximumFractionDigits = 0
@@ -505,7 +505,7 @@ class DayViewController: UIViewController {
   }
   
   private var waterGoalBaseAmount: Double {
-    return waterGoal?.baseAmount ?? Settings.sharedInstance.userWaterGoal.value
+    return waterGoal?.baseAmount ?? Settings.userWaterGoal.value
   }
   
   private var waterGoalAmount: Double {
@@ -537,11 +537,11 @@ class DayViewController: UIViewController {
   private var selectDrinkViewController: SelectDrinkViewController!
   private var summaryBarOriginalHeight: CGFloat!
 
-  private let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
-  private let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
+  private let amountPrecision = Settings.generalVolumeUnits.value.precision
+  private let amountDecimals = Settings.generalVolumeUnits.value.decimals
 
   private var isCurrentDayToday: Bool {
-    return !Settings.sharedInstance.uiUseCustomDateForDayView.value
+    return !Settings.uiUseCustomDateForDayView.value
   }
   
   private lazy var managedObjectContext: NSManagedObjectContext? = {

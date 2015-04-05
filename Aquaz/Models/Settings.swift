@@ -10,13 +10,6 @@ import Foundation
 
 public class Settings {
 
-  public class var sharedInstance: Settings {
-    struct Instance {
-      static let instance = Settings()
-    }
-    return Instance.instance
-  }
-  
   private init() {
     // Hide initizalizer, sharedInstance should be used instead.
   }
@@ -59,75 +52,75 @@ public class Settings {
     case Year
   }
 
-  lazy var generalHasLaunchedOnce = SettingsOrdinalItem(
+  static let generalHasLaunchedOnce = SettingsOrdinalItem(
     key: "General - Has Launched Once", initialValue: false)
 
-  lazy var generalWeightUnits = SettingsEnumItem<Units.Weight>(
+  static let generalWeightUnits = SettingsEnumItem<Units.Weight>(
     key: "General - Weight units",initialValue: isMetric ? .Kilograms : .Pounds)
   
-  lazy var generalHeightUnits = SettingsEnumItem<Units.Length>(
+  static let generalHeightUnits = SettingsEnumItem<Units.Length>(
     key: "General - Height units", initialValue: isMetric ? .Centimeters : .Feet)
   
-  lazy var generalVolumeUnits = SettingsEnumItem<Units.Volume>(
+  static let generalVolumeUnits = SettingsEnumItem<Units.Volume>(
     key: "General - Volume units", initialValue: isMetric ? .Millilitres : .FluidOunces)
   
-  lazy var generalHotDayExtraFactor = SettingsOrdinalItem<Double>(
+  static let generalHotDayExtraFactor = SettingsOrdinalItem<Double>(
     key: "General - Hot day extra factor", initialValue: 0.5)
   
-  lazy var generalHighActivityExtraFactor = SettingsOrdinalItem<Double>(
+  static let generalHighActivityExtraFactor = SettingsOrdinalItem<Double>(
     key: "General - High activity extra factor", initialValue: 0.5)
   
-  lazy var userHeight = SettingsOrdinalItem<Double>(
+  static let userHeight = SettingsOrdinalItem<Double>(
     key: "User - Height", initialValue: 170)
   
-  lazy var userWeight = SettingsOrdinalItem<Double>(
+  static let userWeight = SettingsOrdinalItem<Double>(
     key: "User - Weight", initialValue: 70)
   
-  lazy var userPhysicalActivity = SettingsEnumItem(
+  static let userPhysicalActivity = SettingsEnumItem(
     key: "User - Physical activity", initialValue: PhysicalActivity.Occasional)
   
-  lazy var userGender = SettingsEnumItem(
+  static let userGender = SettingsEnumItem(
     key: "User - Gender", initialValue: Gender.Man)
   
-  lazy var userAge = SettingsOrdinalItem<Int>(
+  static let userAge = SettingsOrdinalItem<Int>(
     key: "User - Age", initialValue: 30)
   
-  lazy var userWaterGoal = Settings.createUserDailyWaterIntakeSetting()
+  static let userWaterGoal = Settings.createUserDailyWaterIntakeSetting()
 
-  lazy var uiUseCustomDateForDayView = SettingsOrdinalItem(
+  static let uiUseCustomDateForDayView = SettingsOrdinalItem(
     key: "UI - Use custom day page date", initialValue: false)
   
-  lazy var uiCustomDateForDayView = SettingsOrdinalItem(
+  static let uiCustomDateForDayView = SettingsOrdinalItem(
     key: "UI - Day page date", initialValue: NSDate())
 
-  lazy var uiDisplayDailyWaterIntakeInPercents = SettingsOrdinalItem(
+  static let uiDisplayDailyWaterIntakeInPercents = SettingsOrdinalItem(
     key: "UI - Display daily water intake in percents", initialValue: false)
 
-  lazy var uiSelectedStatisticsPage = SettingsEnumItem(
+  static let uiSelectedStatisticsPage = SettingsEnumItem(
     key: "UI - Selected statistics page", initialValue: StatisticsViewPage.Week)
 
-  lazy var uiSelectedAlcoholicDrink = SettingsEnumItem(
+  static let uiSelectedAlcoholicDrink = SettingsEnumItem(
     key: "UI - Selected alcoholic drink", initialValue: Drink.DrinkType.Wine)
 
-  lazy var notificationsEnabled = SettingsOrdinalItem(
+  static let notificationsEnabled = SettingsOrdinalItem(
     key: "Notifications - Enabled", initialValue: false)
 
-  lazy var notificationsFrom = SettingsOrdinalItem(
+  static let notificationsFrom = SettingsOrdinalItem(
     key: "Notifications - From", initialValue: DateHelper.dateBySettingHour(9, minute: 0, second: 0, ofDate: NSDate()))
   
-  lazy var notificationsTo = SettingsOrdinalItem(
+  static let notificationsTo = SettingsOrdinalItem(
     key: "Notifications - To", initialValue: DateHelper.dateBySettingHour(21, minute: 0, second: 0, ofDate: NSDate()))
 
-  lazy var notificationsInterval = SettingsOrdinalItem<NSTimeInterval>(
+  static let notificationsInterval = SettingsOrdinalItem<NSTimeInterval>(
     key: "Notifications - Interval", initialValue: 60 * 60 * 1.5)
   
-  lazy var notificationsSound = SettingsOrdinalItem(
+  static let notificationsSound = SettingsOrdinalItem(
     key: "Notifications - Sound", initialValue: "aqua.caf")
   
-  lazy var notificationsSmart = SettingsOrdinalItem(
+  static let notificationsSmart = SettingsOrdinalItem(
     key: "Notifications - Smart", initialValue: true)
 
-  lazy var notificationsUseWaterIntake = SettingsOrdinalItem(
+  static let notificationsUseWaterIntake = SettingsOrdinalItem(
     key: "Notifications - Use water intake", initialValue: true)
   
   private class var isMetric: Bool {
@@ -135,9 +128,7 @@ public class Settings {
   }
 
   private class func createUserDailyWaterIntakeSetting() -> SettingsOrdinalItem<Double> {
-    let settings = sharedInstance
-    
-    let data = WaterGoalCalculator.Data(physicalActivity: settings.userPhysicalActivity.value, gender: settings.userGender.value, age: settings.userAge.value, height: settings.userHeight.value, weight: settings.userWeight.value, country: .Average)
+    let data = WaterGoalCalculator.Data(physicalActivity: Settings.userPhysicalActivity.value, gender: Settings.userGender.value, age: Settings.userAge.value, height: Settings.userHeight.value, weight: Settings.userWeight.value, country: .Average)
     
     let dailyWaterIntake = WaterGoalCalculator.calcDailyWaterIntake(data: data)
     

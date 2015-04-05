@@ -70,23 +70,23 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     // Main section
     
-    let enableNotificationsCell = createSwitchTableCell(title: enableNotificationsTitle, settingsItem: Settings.sharedInstance.notificationsEnabled)
+    let enableNotificationsCell = createSwitchTableCell(title: enableNotificationsTitle, settingsItem: Settings.notificationsEnabled)
     enableNotificationsCell.valueChangedFunction = tableCellValueAffectNotificationsDidChange
     
-    let fromCell = createDateRightDetailTableCell(title: fromTitle, settingsItem: Settings.sharedInstance.notificationsFrom, datePickerMode: .Time, minimumDate: nil, maximumDate: nil, height: .Large, stringFromValueFunction: timeStringFromDate)
+    let fromCell = createDateRightDetailTableCell(title: fromTitle, settingsItem: Settings.notificationsFrom, datePickerMode: .Time, minimumDate: nil, maximumDate: nil, height: .Large, stringFromValueFunction: timeStringFromDate)
     fromCell.valueChangedFunction = tableCellValueAffectNotificationsDidChange
 
-    let toCell = createDateRightDetailTableCell(title: toTitle, settingsItem: Settings.sharedInstance.notificationsTo, datePickerMode: .Time, minimumDate: nil, maximumDate: nil, height: .Large, stringFromValueFunction: timeStringFromDate)
+    let toCell = createDateRightDetailTableCell(title: toTitle, settingsItem: Settings.notificationsTo, datePickerMode: .Time, minimumDate: nil, maximumDate: nil, height: .Large, stringFromValueFunction: timeStringFromDate)
     toCell.valueChangedFunction = tableCellValueAffectNotificationsDidChange
     
     let timeComponents = [
       TimeIntervalPickerTableCellComponent(calendarUnit: NSCalendarUnit.CalendarUnitHour, minValue: 1, maxValue: 6, step: 1, title: intervalHourTitle, width: nil),
       TimeIntervalPickerTableCellComponent(calendarUnit: NSCalendarUnit.CalendarUnitMinute, minValue: 0, maxValue: 59, step: 5, title: intervalMinuteTitle, width: nil)]
     
-    let intervalCell = createTimeIntervalRightDetailTableCell(title: intervalTitle, settingsItem: Settings.sharedInstance.notificationsInterval, timeComponents: timeComponents, height: .Large, stringFromValueFunction: stringFromTimeInterval)
+    let intervalCell = createTimeIntervalRightDetailTableCell(title: intervalTitle, settingsItem: Settings.notificationsInterval, timeComponents: timeComponents, height: .Large, stringFromValueFunction: stringFromTimeInterval)
     intervalCell.valueChangedFunction = tableCellValueAffectNotificationsDidChange
   
-    let soundCell = createRightDetailTableCell(title: soundTitle, settingsItem: Settings.sharedInstance.notificationsSound, accessoryType: UITableViewCellAccessoryType.DisclosureIndicator, activationChangedFunction: soundTableCellDidActivate, stringFromValueFunction: stringFromSoundFileName)
+    let soundCell = createRightDetailTableCell(title: soundTitle, settingsItem: Settings.notificationsSound, accessoryType: UITableViewCellAccessoryType.DisclosureIndicator, activationChangedFunction: soundTableCellDidActivate, stringFromValueFunction: stringFromSoundFileName)
     fromCell.valueChangedFunction = tableCellValueAffectNotificationsDidChange
     self.soundCell = soundCell
     
@@ -100,7 +100,7 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     // Smart notifications section
     
-    let smartNotificationsCell = createSwitchTableCell(title: smartNotificationsTitle, settingsItem: Settings.sharedInstance.notificationsSmart)
+    let smartNotificationsCell = createSwitchTableCell(title: smartNotificationsTitle, settingsItem: Settings.notificationsSmart)
     
     let smartNotificationsSection = TableCellsSection()
     smartNotificationsSection.footerTitle = smartNotificationsSectionFooter
@@ -108,7 +108,7 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     // Use water intake section
     
-    let useWaterIntakeCell = createSwitchTableCell(title: useWaterIntakeTitle, settingsItem: Settings.sharedInstance.notificationsUseWaterIntake)
+    let useWaterIntakeCell = createSwitchTableCell(title: useWaterIntakeTitle, settingsItem: Settings.notificationsUseWaterIntake)
     
     let useWaterIntakeSection = TableCellsSection()
     useWaterIntakeSection.footerTitle = useWaterIntakeSectionFooter
@@ -158,7 +158,7 @@ class NotificationsViewController: OmegaSettingsViewController {
   func recreateNotifications() {
     NotificationsHelper.removeAllNotifications()
 
-    if Settings.sharedInstance.notificationsEnabled.value {
+    if Settings.notificationsEnabled.value {
       if NotificationsHelper.areLocalNotificationsRegistered() {
         NotificationsHelper.scheduleNotificationsFromSettingsForDate(NSDate())
       } else {
