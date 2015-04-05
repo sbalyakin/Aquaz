@@ -129,7 +129,13 @@ public class Settings {
   }
 
   private class func calcUserDailyWaterIntakeSetting() -> Double {
-    let data = WaterGoalCalculator.Data(physicalActivity: Settings.userPhysicalActivity.value, gender: Settings.userGender.value, age: Settings.userAge.value, height: Settings.userHeight.value, weight: Settings.userWeight.value, country: .Average)
+    let data = WaterGoalCalculator.Data(
+      physicalActivity: Settings.userPhysicalActivity.value,
+      gender: Settings.userGender.value,
+      age: Settings.userAge.value,
+      height: Settings.userHeight.value,
+      weight: Settings.userWeight.value,
+      country: .Average)
     
     return WaterGoalCalculator.calcDailyWaterIntake(data: data)
   }
