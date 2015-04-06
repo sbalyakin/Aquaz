@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+@objc(Intake)
 public class Intake: NSManagedObject, NamedEntity {
   
   public static var entityName = "Intake"

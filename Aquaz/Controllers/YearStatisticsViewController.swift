@@ -130,9 +130,9 @@ class YearStatisticsViewController: UIViewController {
   }
   
   private func fetchStatisticsItems(#beginDate: NSDate, endDate: NSDate) -> [YearStatisticsView.ItemType] {
-    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Month, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
+    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Month, aggregateFunction: .Average, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
     
-    let goals = WaterGoal.fetchWaterGoalAmountsGroupedByMonths(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
+    let goals = WaterGoal.fetchWaterGoalAmountsGroupedByMonths(beginDate: beginDate, endDate: endDate, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
     Logger.logSevere(waterIntakes.count == goals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     
     let displayedVolumeUnits = Settings.generalVolumeUnits.value
@@ -191,13 +191,5 @@ class YearStatisticsViewController: UIViewController {
     statisticsBeginDate = calendar.dateFromComponents(dateComponents)
     statisticsEndDate = DateHelper.addToDate(statisticsBeginDate, years: 1, months: 0, days: 0)
   }
-
-  private lazy var managedObjectContext: NSManagedObjectContext? = {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-      return appDelegate.managedObjectContext
-    } else {
-      return nil
-    }
-  }()
 
 }

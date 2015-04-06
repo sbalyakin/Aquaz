@@ -42,17 +42,6 @@ public class ModelHelper {
     return entities.first
   }
   
-  public class func save(#managedObjectContext: NSManagedObjectContext?) {
-    var error: NSError?
-    if let managedObjectContext = managedObjectContext {
-      if !managedObjectContext.save(&error) {
-        Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
-      }
-    } else {
-      assert(false)
-    }
-  }
-  
   // Hide initializer, clients should use only class function of the class
   private init() {
   }

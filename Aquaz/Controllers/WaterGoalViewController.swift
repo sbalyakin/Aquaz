@@ -235,16 +235,16 @@ class WaterGoalViewController: OmegaSettingsViewController {
 
   private func saveWaterGoalToCoreData() {
     let date = NSDate()
-    if let waterGoal = WaterGoal.fetchWaterGoalStrictlyForDate(date, managedObjectContext: managedObjectContext) {
+    if let waterGoal = WaterGoal.fetchWaterGoalStrictlyForDate(date, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
       waterGoal.baseAmount = waterGoalCell.value
-      ModelHelper.save(managedObjectContext: managedObjectContext)
+      CoreDataProvider.sharedInstance.saveContext()
     } else {
       WaterGoal.addEntity(
         date: date,
         baseAmount: waterGoalCell.value,
         isHotDay: false,
         isHighActivity: false,
-        managedObjectContext: managedObjectContext)
+        managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
     }
   }
 
@@ -267,14 +267,6 @@ class WaterGoalViewController: OmegaSettingsViewController {
   private let maximumAge = 100
   
   private var originalTableViewContentInset: UIEdgeInsets = UIEdgeInsetsZero
-  
-  private lazy var managedObjectContext: NSManagedObjectContext? = {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-      return appDelegate.managedObjectContext
-    } else {
-      return nil
-    }
-  }()
   
 }
 

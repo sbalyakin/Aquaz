@@ -12,5 +12,6 @@ class GlobalConstants {
   static let applicationIdentifier = "963482552"
   static let appStoreLink = "http://itunes.apple.com/app/id\(GlobalConstants.applicationIdentifier)"
   static let developerMail = "devmanifest@gmail.com"
+  static let appGroupName = "group.com.devmanifest.Aquaz"
   
 }

@@ -8,6 +8,8 @@
 
 import UIKit
 
+@IBDesignable
+@objc(DrinkView)
 class DrinkView: UIView {
 
   var drink: Drink! {
@@ -29,9 +31,19 @@ class DrinkView: UIView {
   }
   
   override func drawRect(rect: CGRect) {
+    #if TARGET_INTERFACE_BUILDER
+      drawDrink(rect, drawFunction: StyleKit.drawWaterDrink, drinkColor: UIColor.grayColor())
+    #else
+      if drink != nil {
+        drawDrink(rect, drawFunction: drink.drawDrinkFunction, drinkColor: drink.mainColor)
+      }
+    #endif
+  }
+
+  private func drawDrink(rect: CGRect, drawFunction: Drink.DrawDrinkFunction, drinkColor: UIColor) {
     let minDimension = min(rect.width, rect.height)
     let drawRect = CGRect(x: rect.minX + trunc((rect.width - minDimension) / 2), y: rect.minY + trunc((rect.height - minDimension) / 2), width: minDimension, height: minDimension)
-    drink.drawDrink(frame: drawRect)
+    drawFunction(frame: drawRect)
     
     if highlighted {
       let path = UIBezierPath(ovalInRect: drawRect)
@@ -50,7 +62,7 @@ class DrinkView: UIView {
         
         let dotsRect = CGRect(x: x, y: y, width: dotRadius * 2, height: dotRadius * 2)
         let path = UIBezierPath(ovalInRect: dotsRect)
-        drink.mainColor.setFill()
+        drinkColor.setFill()
         path.fill()
       }
     }

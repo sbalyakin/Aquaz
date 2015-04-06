@@ -95,7 +95,7 @@ class SupportViewController: UIViewController {
   }
 
   private func setupApplicationTitle() {
-    applicationTitle.text = NSString(format: strings.applicationTitleTemplate, applicationVersion) as String
+    applicationTitle.text = String.localizedStringWithFormat(strings.applicationTitleTemplate, applicationVersion)
   }
   
   @IBAction func tellToFriendsByMail() {

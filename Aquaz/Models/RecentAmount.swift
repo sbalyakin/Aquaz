@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+@objc(RecentAmount)
 public class RecentAmount: NSManagedObject, NamedEntity {
   
   public static var entityName = "RecentAmount"

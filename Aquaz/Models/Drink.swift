@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 import UIKit
 
+@objc(Drink)
 public class Drink: NSManagedObject, NamedEntity {
 
   public static var entityName = "Drink"
@@ -89,7 +90,7 @@ public class Drink: NSManagedObject, NamedEntity {
     return _darkColor
   }
   
-  private var drawDrinkFunction: DrawDrinkFunction {
+  public var drawDrinkFunction: DrawDrinkFunction {
     if _drawDrinkFunction == nil {
       initIndexRelatedProperties()
       assert(_drawDrinkFunction != nil)
@@ -180,9 +181,15 @@ public class Drink: NSManagedObject, NamedEntity {
   }
   
   class func getDarkColorFromDrinkColor(color: UIColor) -> UIColor {
-    return color.colorWithShadow(Static.darkColorShadowLevel)
+    return Drink.colorWithShadow(color, shadow: Static.darkColorShadowLevel)
   }
   
+  private class func colorWithShadow(color: UIColor, shadow: CGFloat) -> UIColor {
+    var red: CGFloat = 1.0, green: CGFloat = 1.0, blue: CGFloat = 1.0, alpha: CGFloat = 1.0
+    color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+    return UIColor(red: red * (1-shadow), green: green * (1-shadow), blue: blue * (1-shadow), alpha: alpha * (1-shadow) + shadow)
+  }
+
   public func drawDrink(#frame: CGRect) {
     drawDrinkFunction(frame: frame)
   }
@@ -240,7 +247,7 @@ public class Drink: NSManagedObject, NamedEntity {
     return nil
   }
   
-  private typealias DrawDrinkFunction = (frame: CGRect) -> Void
+  public typealias DrawDrinkFunction = (frame: CGRect) -> Void
   
   private var _drinkType: DrinkType!
   private var _drawDrinkFunction: DrawDrinkFunction!

@@ -68,7 +68,7 @@ class SelectDrinkViewController: UIViewController {
     let alcoholIndexPath = NSIndexPath(forRow: displayedDrinkTypes.count - 1, inSection: 0)
     self.collectionView.reloadItemsAtIndexPaths([alcoholIndexPath])
 
-    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
+    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
       performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
     }
   }
@@ -134,7 +134,7 @@ class SelectDrinkViewController: UIViewController {
     
     let drinkType = displayedDrinkTypes[drinkIndex]
     
-    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
+    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
       performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
     }
   }
@@ -156,13 +156,6 @@ class SelectDrinkViewController: UIViewController {
     collectionView.collectionViewLayout.invalidateLayout()
   }
 
-  private lazy var managedObjectContext: NSManagedObjectContext? = {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-      return appDelegate.managedObjectContext
-    } else {
-      return nil
-    }
-  }()
 }
 
 extension SelectDrinkViewController: UICollectionViewDataSource {
@@ -183,7 +176,7 @@ extension SelectDrinkViewController: UICollectionViewDataSource {
     
     let drinkType = displayedDrinkTypes[drinkIndex]
     
-    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
+    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
       cell.drinkLabel.text = drink.localizedName
       cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
       cell.drinkView.drink = drink
@@ -331,7 +324,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     
     let drinkType = popupDrinkTypes[drinkIndex]
     
-    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
+    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
       cell.drinkLabel.text = drink.localizedName
       cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
       cell.drinkView.drink = drink
@@ -417,13 +410,6 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     }
   }
   
-  private lazy var managedObjectContext: NSManagedObjectContext? = {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-      return appDelegate.managedObjectContext
-    } else {
-      return nil
-    }
-  }()
 }
 
 private let drinkCellNibName = "DrinkCollectionViewCell"

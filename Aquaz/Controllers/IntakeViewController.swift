@@ -200,7 +200,7 @@ class IntakeViewController: UIViewController {
     }
     
     drink.recentAmount.amount = amount
-    if let intake = Intake.addEntity(drink: drink, amount: amount, date: date, managedObjectContext: managedObjectContext) {
+    if let intake = Intake.addEntity(drink: drink, amount: amount, date: date, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
       dayViewController.addIntake(intake)
     }
   }
@@ -209,7 +209,7 @@ class IntakeViewController: UIViewController {
     if let intake = intake {
       intake.amount = amount
       intake.date = currentDate
-      ModelHelper.save(managedObjectContext: managedObjectContext)
+      CoreDataProvider.sharedInstance.saveContext()
       
       dayViewController.intakesWereChanged(doSort: true)
     }
@@ -238,14 +238,6 @@ class IntakeViewController: UIViewController {
   private let amountDecimals = Settings.generalVolumeUnits.value.decimals
   
   private var isCurrentDayToday: Bool = false
-
-  private lazy var managedObjectContext: NSManagedObjectContext? = {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-      return appDelegate.managedObjectContext
-    } else {
-      return nil
-    }
-  }()
 
 }
 

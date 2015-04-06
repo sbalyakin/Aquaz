@@ -95,6 +95,7 @@ public class Logger {
       assert(condition(), logMessage)
     }
     
+    #if AQUAZ
     if !isEnabledForLogLevel(logLevel) {
       return
     }
@@ -122,6 +123,7 @@ public class Logger {
     }
     
     Localytics.tagEvent(logLevel.description, attributes: attributes)
+    #endif
   }
 
   public func logMessage(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", logLevel: LogLevel, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__, forceAssert: Bool = false) {

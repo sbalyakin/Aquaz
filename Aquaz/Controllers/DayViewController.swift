@@ -61,7 +61,7 @@ class DayViewController: UIViewController {
   }
   
   private enum GuideState {
-    case None, Page1, Page2
+    case None, Page1, Page2, Finished
   }
   
   private var guideState: GuideState = .None
@@ -103,6 +103,7 @@ class DayViewController: UIViewController {
     case .None: showGuidePage1()
     case .Page1: showGuidePage2()
     case .Page2: finishGuide()//Settings.uiDayPageHasDisplayedOnce.value = true
+    case .Finished: break
     }
   }
   
@@ -158,6 +159,8 @@ class DayViewController: UIViewController {
       self.dayGuide2ViewController.view.removeFromSuperview()
       self.dayGuide2ViewController = nil
     })
+    
+    guideState = .Finished
   }
   
   private func initCurrentDay() {
@@ -221,7 +224,7 @@ class DayViewController: UIViewController {
     intakesMultiProgressView.emptySectionColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1)
     
     for drinkIndex in 0..<Drink.getDrinksCount() {
-      if let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: managedObjectContext) {
+      if let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
         let section = intakesMultiProgressView.addSection(color: drink.mainColor)
         multiProgressSections[drink] = section
       }
@@ -357,13 +360,13 @@ class DayViewController: UIViewController {
   // MARK: Intakes management -
   
   private func fetchWaterGoal() {
-    waterGoal = WaterGoal.fetchWaterGoalForDate(currentDate, managedObjectContext: managedObjectContext)
+    waterGoal = WaterGoal.fetchWaterGoalForDate(currentDate, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
     waterGoalWasChanged()
   }
 
   private func fetchIntakes() {
     // TODO: Take day offset in hours from settings
-    intakes = Intake.fetchIntakesForDay(currentDate, dayOffsetInHours: 0, managedObjectContext: managedObjectContext)
+    intakes = Intake.fetchIntakesForDay(currentDate, dayOffsetInHours: 0, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
 
     intakesWereChanged(doSort: false) // Sort is useless, because fetched intakes are already sorted
   }
@@ -530,7 +533,7 @@ class DayViewController: UIViewController {
       baseAmount: baseAmount,
       isHotDay: isHotDay,
       isHighActivity: isHighActivity,
-      managedObjectContext: managedObjectContext)
+      managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
   }
   
   // MARK: Private properties -
@@ -558,7 +561,7 @@ class DayViewController: UIViewController {
         saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: newValue, isHighActivity: false)
       } else {
         waterGoal?.isHotDay = newValue
-        ModelHelper.save(managedObjectContext: managedObjectContext)
+        CoreDataProvider.sharedInstance.saveContext()
       }
       
       waterGoalWasChanged()
@@ -578,7 +581,7 @@ class DayViewController: UIViewController {
         saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: false, isHighActivity: newValue)
       } else {
         waterGoal?.isHighActivity = newValue
-        ModelHelper.save(managedObjectContext: managedObjectContext)
+        CoreDataProvider.sharedInstance.saveContext()
       }
       
       waterGoalWasChanged()
@@ -625,13 +628,6 @@ class DayViewController: UIViewController {
     return !Settings.uiUseCustomDateForDayView.value
   }
   
-  private lazy var managedObjectContext: NSManagedObjectContext? = {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-      return appDelegate.managedObjectContext
-    } else {
-      return nil
-    }
-  }()
 }
 
 // MARK: UIPageViewControllerDataSource -

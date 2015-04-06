@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+@objc(WaterGoal)
 public class WaterGoal: NSManagedObject, NamedEntity {
   
   public static var entityName = "WaterGoal"
