@@ -181,15 +181,9 @@ public class Drink: NSManagedObject, NamedEntity {
   }
   
   class func getDarkColorFromDrinkColor(color: UIColor) -> UIColor {
-    return Drink.colorWithShadow(color, shadow: Static.darkColorShadowLevel)
+    return color.colorWithShadow(Static.darkColorShadowLevel)
   }
   
-  private class func colorWithShadow(color: UIColor, shadow: CGFloat) -> UIColor {
-    var red: CGFloat = 1.0, green: CGFloat = 1.0, blue: CGFloat = 1.0, alpha: CGFloat = 1.0
-    color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-    return UIColor(red: red * (1-shadow), green: green * (1-shadow), blue: blue * (1-shadow), alpha: alpha * (1-shadow) + shadow)
-  }
-
   public func drawDrink(#frame: CGRect) {
     drawDrinkFunction(frame: frame)
   }

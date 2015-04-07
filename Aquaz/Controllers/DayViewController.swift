@@ -94,7 +94,7 @@ class DayViewController: UIViewController {
     super.viewDidAppear(animated)
 
     if !Settings.uiDayPageHasDisplayedOnce.value {
-      continueGuide()
+//      continueGuide()
     }
   }
   
@@ -287,8 +287,10 @@ class DayViewController: UIViewController {
       navigationDateLabel.setTextWithAnimation(formattedDate)
     }
 
-    fetchWaterGoal()
-    fetchIntakes()
+    intakesMultiProgressView.updateWithAnimation {
+      self.fetchWaterGoal()
+      self.fetchIntakes()
+    }
   }
   
   // MARK: Summary bar actions -
@@ -376,8 +378,10 @@ class DayViewController: UIViewController {
     
     sortIntakes()
     
-    if let section = multiProgressSections[intake.drink] {
-      section.factor += CGFloat(intake.waterAmount)
+    intakesMultiProgressView.updateWithAnimation {
+      if let section = self.multiProgressSections[intake.drink] {
+        section.factor += CGFloat(intake.waterAmount)
+      }
     }
 
     let needCheckForWaterIntakeCompletion = dailyWaterIntake < waterGoalAmount
@@ -521,7 +525,9 @@ class DayViewController: UIViewController {
     updateIntakeButton()
 
     // Update maximum for multi progress control
-    intakesMultiProgressView.maximum = CGFloat(waterGoalAmount)
+    intakesMultiProgressView.updateWithAnimation {
+      self.intakesMultiProgressView.maximum = CGFloat(self.waterGoalAmount)
+    }
 
     highActivityButton.selected = isHighActivity
     hotDayButton.selected = isHotDay

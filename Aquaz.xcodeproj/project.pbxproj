@@ -91,11 +91,14 @@
 		84ED8A231A84ED9E0042BAF2 /* DrinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */; };
 		84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9DD971A16574E003D6444 /* PickTimeViewController.swift */; };
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
+		A54ED2591AD447A600FD37DD /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54ED2581AD447A600FD37DD /* UIExtensions.swift */; };
+		A54ED25A1AD447C000FD37DD /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54ED2581AD447A600FD37DD /* UIExtensions.swift */; };
 		A55337CF1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */; };
 		A55F34A61A74D6AC00A529A5 /* DrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */; };
 		A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */; };
 		A55F83981AD1213E00D30BAF /* DayGuide1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55F83971AD1213E00D30BAF /* DayGuide1ViewController.swift */; };
 		A55F839A1AD1231500D30BAF /* DayGuide2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55F83991AD1231500D30BAF /* DayGuide2ViewController.swift */; };
+		A55F839B1AD3DE4B00D30BAF /* MultiProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA051A0B5813009C5C47 /* MultiProgressView.swift */; };
 		A575A5A51A6EBB0300B00E9F /* StyledBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */; };
 		A57D2BEB1ACFDE0D00619D62 /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57D2BE91ACFDE0D00619D62 /* Welcome.storyboard */; };
 		A57D2BEE1ACFEA0A00619D62 /* WelcomeWizardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D2BED1ACFEA0A00619D62 /* WelcomeWizardViewController.swift */; };
@@ -265,6 +268,7 @@
 		84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkTests.swift; sourceTree = "<group>"; };
 		84F9DD971A16574E003D6444 /* PickTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTimeViewController.swift; sourceTree = "<group>"; };
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		A54ED2581AD447A600FD37DD /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewController.swift; sourceTree = "<group>"; };
 		A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkCollectionViewCell.swift; path = Controls/DrinkCollectionViewCell.swift; sourceTree = "<group>"; };
 		A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DrinkCollectionViewCell.xib; path = Controls/DrinkCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -614,6 +618,7 @@
 				8468D6411A0D1C240008D027 /* DateHelper.swift */,
 				A5B75A1319E5686C00D0477B /* ModelHelper.swift */,
 				841B13BD1A31FE4F00249426 /* UIHelper.swift */,
+				A54ED2581AD447A600FD37DD /* UIExtensions.swift */,
 				84039F171A4B103100C5391E /* NotificationsHelper.swift */,
 			);
 			path = Helpers;
@@ -885,6 +890,7 @@
 				A5D3D4221AA5D29700E3C989 /* BasicTableCell.swift in Sources */,
 				84CD97571ABB2B960011623B /* CalendarViewDataSource.swift in Sources */,
 				843B056119E2D7800097A833 /* DayViewController.swift in Sources */,
+				A54ED2591AD447A600FD37DD /* UIExtensions.swift in Sources */,
 				8488A18E1A53FE6500258EC8 /* NotificationsSoundViewController.swift in Sources */,
 				843B056919E2D80E0097A833 /* WaterGoal.swift in Sources */,
 				A5EF375D1A81618F00854A8D /* WaterGoalCalculator.swift in Sources */,
@@ -986,7 +992,9 @@
 				84D251B61AD26852001E6644 /* Intake.swift in Sources */,
 				84D251BD1AD268AE001E6644 /* DateHelper.swift in Sources */,
 				84D251BA1AD2688B001E6644 /* Units.swift in Sources */,
+				A54ED25A1AD447C000FD37DD /* UIExtensions.swift in Sources */,
 				84D251B91AD26871001E6644 /* SettingItems.swift in Sources */,
+				A55F839B1AD3DE4B00D30BAF /* MultiProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

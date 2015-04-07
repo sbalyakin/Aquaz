@@ -32,7 +32,7 @@ class DrinkView: UIView {
   
   override func drawRect(rect: CGRect) {
     #if TARGET_INTERFACE_BUILDER
-      drawDrink(rect, drawFunction: StyleKit.drawWaterDrink, drinkColor: UIColor.grayColor())
+      drawDrink(rect, drawFunction: StyleKit.drawWaterDrink, drinkColor: StyleKit.waterColor)
     #else
       if drink != nil {
         drawDrink(rect, drawFunction: drink.drawDrinkFunction, drinkColor: drink.mainColor)
@@ -41,8 +41,9 @@ class DrinkView: UIView {
   }
 
   private func drawDrink(rect: CGRect, drawFunction: Drink.DrawDrinkFunction, drinkColor: UIColor) {
-    let minDimension = min(rect.width, rect.height)
-    let drawRect = CGRect(x: rect.minX + trunc((rect.width - minDimension) / 2), y: rect.minY + trunc((rect.height - minDimension) / 2), width: minDimension, height: minDimension)
+    let minDimension = trunc(min(rect.width, rect.height))
+    let drawRect = CGRect(x: trunc(rect.minX + (rect.width - minDimension) / 2), y: trunc(rect.minY + (rect.height - minDimension) / 2), width: minDimension, height: minDimension)
+    
     drawFunction(frame: drawRect)
     
     if highlighted {
