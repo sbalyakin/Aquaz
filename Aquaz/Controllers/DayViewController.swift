@@ -44,6 +44,8 @@ class DayViewController: UIViewController {
     }
   }
   
+  private var wormhole: MMWormhole!
+  
   enum Mode {
     case General, Statistics
   }
@@ -74,6 +76,7 @@ class DayViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setupCoreDataSynchronization()
     initCurrentDay()
     setupGestureRecognizers()
     setupMultiprogressControl()
@@ -161,6 +164,16 @@ class DayViewController: UIViewController {
     })
     
     guideState = .Finished
+  }
+  
+  private func setupCoreDataSynchronization() {
+    wormhole = WormholeHelper.createWormhole()
+
+    WormholeHelper.ManageObjectContextDidSaveMessage.listen(wormhole) { context in
+      if context != .Aquaz { // Skip our own messages
+        self.fetchIntakes()
+      }
+    }
   }
   
   private func initCurrentDay() {

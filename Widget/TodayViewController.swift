@@ -50,13 +50,35 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   private var progressViewSection: MultiProgressView.Section!
+  private var wormhole: MMWormhole!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setupCoreDataSynchronization()
     setupProgressView()
     updateWaterIntakeForDate(NSDate())
     updateDrinks()
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "contextDidSave:", name: NSManagedObjectContextDidSaveNotification, object: nil)
+  }
+  
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+
+  func contextDidSave(notification: NSNotification) {
+    WormholeHelper.ManageObjectContextDidSaveMessage.pass(wormhole, context: .Widget)
+  }
+
+  private func setupCoreDataSynchronization() {
+    wormhole = WormholeHelper.createWormhole()
+    
+    WormholeHelper.ManageObjectContextDidSaveMessage.listen(wormhole) { context in
+      if context != .Widget { // Skip our own messages
+        self.updateWaterIntakeForDate(NSDate())
+        self.updateDrinks()
+      }
+    }
   }
 
   private func updateDrinks() -> Bool {
@@ -220,7 +242,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   @IBAction func openApplicationWasTapped() {
-    let url = NSURL(string: "aquaz://")
+    let url = NSURL(string: GlobalConstants.applicationSchemeURL)
     extensionContext?.openURL(url!, completionHandler: nil)
   }
 }

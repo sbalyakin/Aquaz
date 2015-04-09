@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
   
+  private var wormhole: MMWormhole!
+  
   private struct Constants {
     static let mainStoryboard = "Main"
     static let welcomeStoryboard = "Welcome"
@@ -30,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Localytics.integrate(GlobalConstants.localyticsApplicationKey)
     
     Logger.setup(logLevel: .Warning, assertLevel: .Error, showLogLevel: false, showFileNames: true, showLineNumbers: true)
+    
+    setupCoreDataSynchronization()
     
     UIHelper.applyStylization()
     NotificationsHelper.setApplicationIconBadgeNumber(0)
@@ -50,6 +54,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
   
+  private func setupCoreDataSynchronization() {
+    wormhole = WormholeHelper.createWormhole()
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "managedObjectContextDidSave:", name: NSManagedObjectContextDidSaveNotification, object: nil)
+  }
+  
+  func managedObjectContextDidSave(notification: NSNotification) {
+    WormholeHelper.ManageObjectContextDidSaveMessage.pass(wormhole, context: .Aquaz)
+  }
+
   func showDefaultRootViewControllerWithAnimation() {
     let storyboard = UIStoryboard(name: Constants.mainStoryboard, bundle: nil)
     let rootViewController: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.defaultRootViewController)!
