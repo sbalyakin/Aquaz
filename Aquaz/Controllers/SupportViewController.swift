@@ -87,6 +87,10 @@ class SupportViewController: UIViewController {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
   }
 
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+  
   func preferredContentSizeChanged() {
     applicationTitle.font = UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
     tellToFriendTextView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)

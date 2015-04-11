@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 @objc(RecentAmount)
-public class RecentAmount: NSManagedObject, NamedEntity {
+public class RecentAmount: CodingManagedObject, NamedEntity {
   
   public static var entityName = "RecentAmount"
   

@@ -46,9 +46,9 @@ class WaterGoalViewController: OmegaSettingsViewController {
       title: genderTitle,
       settingsItem: Settings.userGender,
       pickerTableCellHeight: .Small,
-      stringFromValueFunction: stringFromGender)
+      stringFromValueFunction: WaterGoalViewController.stringFromGender)
     
-    genderCell.valueChangedFunction = sourceCellValueChanged
+    genderCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
     
     // Height cell
     let heightUnit = Settings.generalHeightUnits.value
@@ -62,9 +62,9 @@ class WaterGoalViewController: OmegaSettingsViewController {
       settingsItem: Settings.userHeight,
       collection: heightCollection,
       pickerTableCellHeight: .Large,
-      stringFromValueFunction: stringFromHeight)
+      stringFromValueFunction: WaterGoalViewController.stringFromHeight)
     
-    heightCell.valueChangedFunction = sourceCellValueChanged
+    heightCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
     
     // Weight cell
     let weightUnit = Settings.generalWeightUnits.value
@@ -78,9 +78,9 @@ class WaterGoalViewController: OmegaSettingsViewController {
       settingsItem: Settings.userWeight,
       collection: weightCollection,
       pickerTableCellHeight: .Large,
-      stringFromValueFunction: stringFromWeight)
+      stringFromValueFunction: WaterGoalViewController.stringFromWeight)
     
-    weightCell.valueChangedFunction = sourceCellValueChanged
+    weightCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
     
     // Age cell
     let ageCollection = IntCollection(
@@ -93,18 +93,18 @@ class WaterGoalViewController: OmegaSettingsViewController {
       settingsItem: Settings.userAge,
       collection: ageCollection,
       pickerTableCellHeight: .Large,
-      stringFromValueFunction: stringFromAge)
+      stringFromValueFunction: WaterGoalViewController.stringFromAge)
     
-    ageCell.valueChangedFunction = sourceCellValueChanged
+    ageCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
     
     // Physical activity cell
     physicalActivityCell = createEnumRightDetailTableCell(
       title: physicalActivityTitle,
       settingsItem: Settings.userPhysicalActivity,
       pickerTableCellHeight: .Small,
-      stringFromValueFunction: stringFromPhysicalActivity)
+      stringFromValueFunction: WaterGoalViewController.stringFromPhysicalActivity)
     
-    physicalActivityCell.valueChangedFunction = sourceCellValueChanged
+    physicalActivityCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
     
     let volumeUnit = Settings.generalVolumeUnits.value.unit
     let waterGoalTitleFinal = waterGoalTitle +  " (\(volumeUnit.contraction))"
@@ -112,8 +112,8 @@ class WaterGoalViewController: OmegaSettingsViewController {
     waterGoalCell = createTextFieldTableCell(
       title: waterGoalTitleFinal, settingsItem:
       Settings.userWaterGoal,
-      valueFromStringFunction: metricWaterGoalFromString,
-      stringFromValueFunction: stringFromWaterGoal,
+      valueFromStringFunction: WaterGoalViewController.metricWaterGoalFromString,
+      stringFromValueFunction: WaterGoalViewController.stringFromWaterGoal,
       keyboardType: .DecimalPad)
     
     // Table sections
@@ -131,17 +131,17 @@ class WaterGoalViewController: OmegaSettingsViewController {
     return [section1, section2]
   }
   
-  private func stringFromHeight(value: Double) -> String {
+  private class func stringFromHeight(value: Double) -> String {
     let unit = Settings.generalHeightUnits.value
     return Units.sharedInstance.formatMetricAmountToText(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision, decimals: unit.decimals, displayUnits: true)
   }
   
-  private func stringFromWeight(value: Double) -> String {
+  private class func stringFromWeight(value: Double) -> String {
     let unit = Settings.generalWeightUnits.value
     return Units.sharedInstance.formatMetricAmountToText(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision, decimals: unit.decimals, displayUnits: true)
   }
   
-  private func stringFromAge(value: Int) -> String {
+  private class func stringFromAge(value: Int) -> String {
     let formatter = NSNumberFormatter()
     formatter.numberStyle = .DecimalStyle
     formatter.maximumFractionDigits = 0
@@ -149,7 +149,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
     return title
   }
   
-  private func stringFromGender(gender: Settings.Gender) -> String {
+  private class func stringFromGender(gender: Settings.Gender) -> String {
     switch gender {
     case .Man:
       return NSLocalizedString("WGVC:Man", value: "Man",
@@ -169,7 +169,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
     }
   }
   
-  private func stringFromPhysicalActivity(physicalActivity: Settings.PhysicalActivity) -> String {
+  private class func stringFromPhysicalActivity(physicalActivity: Settings.PhysicalActivity) -> String {
     switch physicalActivity {
     case .Rare:
       return NSLocalizedString("WGVC:Rare", value: "Rare",
@@ -189,7 +189,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
     }
   }
   
-  private func stringFromWaterGoal(value: Double) -> String {
+  private class func stringFromWaterGoal(value: Double) -> String {
     let unit = Settings.generalVolumeUnits.value
     let displayedAmount = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision)
     let formatter = NSNumberFormatter()
@@ -201,7 +201,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
     return title
   }
   
-  private func metricWaterGoalFromString(value: String) -> Double? {
+  private class func metricWaterGoalFromString(value: String) -> Double? {
     if let displayedValue = NSNumberFormatter().numberFromString(value)?.doubleValue {
       if displayedValue <= 0 {
         return nil

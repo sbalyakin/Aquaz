@@ -18,4 +18,10 @@ class GlobalConstants {
   
   static let developerMail = "devmanifest@gmail.com"
   
+  static let wormholeOptionalDirectory = "wormhole"
+  static let wormholeMessageFromAquaz = "From Aquaz"
+  static let wormholeMessageFromWidget = "From Widget"
+  
+  static let notificationManagedObjectContextWasMerged = "AquazManagedObjectContextWasMerged"
+  
 }

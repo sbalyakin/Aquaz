@@ -44,8 +44,6 @@ class DayViewController: UIViewController {
     }
   }
   
-  private var wormhole: MMWormhole!
-  
   enum Mode {
     case General, Statistics
   }
@@ -75,18 +73,34 @@ class DayViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    setupCoreDataSynchronization()
-    initCurrentDay()
-    setupGestureRecognizers()
-    setupMultiprogressControl()
-    updateCurrentDateRelatedControls(initial: true)
+
     applyStyle()
     if mode == .General {
       UIHelper.setupReveal(self)
     }
+
+    setupNotificationsObservation()
+    setupGestureRecognizers()
+    setupMultiprogressControl()
+    obtainCurrentDate()
+    updateUIRelatedToCurrentDate(animate: false)
   }
   
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+
+  private func setupNotificationsObservation() {
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "managedObjectContextDidChange:",
+      name: GlobalConstants.notificationManagedObjectContextWasMerged,
+      object: nil)
+  }
+  
+  func managedObjectContextDidChange(notification: NSNotification) {
+    self.fetchIntakes()
+  }
+
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
@@ -166,17 +180,7 @@ class DayViewController: UIViewController {
     guideState = .Finished
   }
   
-  private func setupCoreDataSynchronization() {
-    wormhole = WormholeHelper.createWormhole()
-
-    WormholeHelper.ManageObjectContextDidSaveMessage.listen(wormhole) { context in
-      if context != .Aquaz { // Skip our own messages
-        self.fetchIntakes()
-      }
-    }
-  }
-  
-  private func initCurrentDay() {
+  private func obtainCurrentDate() {
     if mode == .General && Settings.uiUseCustomDateForDayView.value {
       currentDate = Settings.uiCustomDateForDayView.value
     } else {
@@ -211,7 +215,7 @@ class DayViewController: UIViewController {
     currentDate = date
 
     if isViewLoaded() {
-      updateCurrentDateRelatedControls(initial: false)
+      updateUIRelatedToCurrentDate(animate: true)
     }
   }
   
@@ -223,7 +227,6 @@ class DayViewController: UIViewController {
     if let navigationBar = navigationController?.navigationBar {
       let leftSwipe = UISwipeGestureRecognizer(target: self, action: "leftSwipeGestureIsRecognized:")
       leftSwipe.direction = .Left
-      self.navigationItem
       navigationBar.addGestureRecognizer(leftSwipe)
       
       let rightSwipe = UISwipeGestureRecognizer(target: self, action: "rightSwipeGestureIsRecognized:")
@@ -291,18 +294,21 @@ class DayViewController: UIViewController {
     setCurrentDate(DateHelper.addToDate(currentDate, years: 0, months: 0, days: -1))
   }
 
-  private func updateCurrentDateRelatedControls(#initial: Bool) {
+  private func updateUIRelatedToCurrentDate(#animate: Bool) {
     let formattedDate = DateHelper.stringFromDate(currentDate)
     
-    if initial {
-      navigationDateLabel.text = formattedDate
-    } else {
+    if animate {
       navigationDateLabel.setTextWithAnimation(formattedDate)
-    }
-
-    intakesMultiProgressView.updateWithAnimation {
-      self.fetchWaterGoal()
-      self.fetchIntakes()
+      intakesMultiProgressView.updateWithAnimation { [unowned self] in
+        self.fetchWaterGoal()
+        self.fetchIntakes()
+      }
+    } else {
+      navigationDateLabel.text = formattedDate
+      intakesMultiProgressView.update { [unowned self] in
+        self.fetchWaterGoal()
+        self.fetchIntakes()
+      }
     }
   }
   
@@ -391,7 +397,7 @@ class DayViewController: UIViewController {
     
     sortIntakes()
     
-    intakesMultiProgressView.updateWithAnimation {
+    intakesMultiProgressView.updateWithAnimation { [unowned self] in
       if let section = self.multiProgressSections[intake.drink] {
         section.factor += CGFloat(intake.waterAmount)
       }
@@ -475,9 +481,9 @@ class DayViewController: UIViewController {
     
     for intake in intakes {
       if let amount = intakesMap[intake.drink] {
-        intakesMap[intake.drink] = amount + Double(intake.waterAmount)
+        intakesMap[intake.drink] = amount + intake.waterAmount
       } else {
-        intakesMap[intake.drink] = Double(intake.waterAmount)
+        intakesMap[intake.drink] = intake.waterAmount
       }
     }
     
@@ -538,7 +544,7 @@ class DayViewController: UIViewController {
     updateIntakeButton()
 
     // Update maximum for multi progress control
-    intakesMultiProgressView.updateWithAnimation {
+    intakesMultiProgressView.updateWithAnimation { [unowned self] in
       self.intakesMultiProgressView.maximum = CGFloat(self.waterGoalAmount)
     }
 

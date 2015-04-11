@@ -50,17 +50,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
       }
     }
+
+    // TODO: remove
+    showWelcomeWizard()
     
     return true
   }
   
   private func setupCoreDataSynchronization() {
-    wormhole = WormholeHelper.createWormhole()
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "managedObjectContextDidSave:", name: NSManagedObjectContextDidSaveNotification, object: nil)
+    wormhole = MMWormhole(applicationGroupIdentifier: GlobalConstants.appGroupName, optionalDirectory: GlobalConstants.wormholeOptionalDirectory)
+    
+    wormhole.listenForMessageWithIdentifier(GlobalConstants.wormholeMessageFromWidget) { [unowned self] (messageObject) -> Void in
+      if let notification = messageObject as? NSNotification {
+        println("AppDelegate: listenForMessageWithIdentifier")
+        CoreDataProvider.sharedInstance.managedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationManagedObjectContextWasMerged, object: nil)
+        
+        self.wormhole.clearMessageContentsForIdentifier(GlobalConstants.wormholeMessageFromWidget)
+      }
+    }
+
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "managedObjectContextDidSave:",
+      name: NSManagedObjectContextDidSaveNotification,
+      object: CoreDataProvider.sharedInstance.managedObjectContext)
   }
   
   func managedObjectContextDidSave(notification: NSNotification) {
-    WormholeHelper.ManageObjectContextDidSaveMessage.pass(wormhole, context: .Aquaz)
+    wormhole?.passMessageObject(notification, identifier: GlobalConstants.wormholeMessageFromAquaz)
   }
 
   func showDefaultRootViewControllerWithAnimation() {
@@ -197,6 +215,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Localytics.upload()
     
     CoreDataProvider.sharedInstance.saveContext()
+    
+    NSNotificationCenter.defaultCenter().removeObserver(self)
   }
   
 }

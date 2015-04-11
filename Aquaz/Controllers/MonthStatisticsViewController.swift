@@ -14,10 +14,8 @@ class MonthStatisticsViewController: UIViewController {
   @IBOutlet weak var monthStatisticsView: MonthStatisticsView!
   @IBOutlet weak var monthLabel: UILabel!
   
-  private var isShowingDay = false
-  
   private var date: NSDate = DateHelper.startDateFromDate(NSDate(), calendarUnit: .CalendarUnitMonth)
-  
+
   private struct Constants {
     static let showDaySegue = "Show Day"
   }
@@ -25,11 +23,51 @@ class MonthStatisticsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    initMonthStatisticsView()
-    updateUI(initial: true)
-    applyStyle()
-    
+    setupUI()
+    setupNotificationsObservation()
+  }
+  
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+
+  private func setupUI() {
+    monthStatisticsView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    monthStatisticsView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    monthStatisticsView.weekendBackgroundColor = StyleKit.calendarWeekendBackgroundColor
+    monthStatisticsView.weekendTextColor = StyleKit.calendarWeekendTextColor
+    monthStatisticsView.weekDayTitleTextColor = StyleKit.calendarWeekDayTitleTextColor
+    monthStatisticsView.selectedDayTextColor = StyleKit.calendarSelectedDayTextColor
+    monthStatisticsView.selectedDayBackgroundColor = StyleKit.calendarSelectedDayBackgroundColor
+    monthStatisticsView.todayBackgroundColor = StyleKit.calendarTodayBackgroundColor
+    monthStatisticsView.todayTextColor = StyleKit.calendarTodayTextColor
+    monthStatisticsView.dayIntakeFullColor = StyleKit.monthStatisticsDayIntakeFullColor
+    monthStatisticsView.dayIntakeColor = StyleKit.monthStatisticsDayIntakeColor
+
+    monthStatisticsView.resetToDisplayMonthDate(date)
+    monthStatisticsView.dataSource = self
+    monthStatisticsView.delegate = self
+
+    updateUI(animated: false)
+  }
+  
+  private func setupNotificationsObservation() {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "managedObjectContextDidChange:",
+      name: NSManagedObjectContextDidSaveNotification,
+      object: CoreDataProvider.sharedInstance.managedObjectContext)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "managedObjectContextDidChange:",
+      name: GlobalConstants.notificationManagedObjectContextWasMerged,
+      object: nil)
+  }
+
+  func managedObjectContextDidChange(notification: NSNotification) {
+    println("MonthStatistics: updateUI()")
+    monthStatisticsView.refresh()
   }
   
   func preferredContentSizeChanged() {
@@ -40,55 +78,26 @@ class MonthStatisticsViewController: UIViewController {
     view.invalidateIntrinsicContentSize()
   }
 
-  private func initMonthStatisticsView() {
-    monthStatisticsView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-    monthStatisticsView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    monthStatisticsView.resetToDisplayMonthDate(date)
-    monthStatisticsView.dataSource = self
-    monthStatisticsView.delegate = self
-  }
-  
-  private func updateUI(#initial: Bool) {
+  private func updateUI(#animated: Bool) {
     let title = dateFormatter.stringFromDate(date)
     
-    if initial {
-      monthLabel.text = title
-    } else {
+    if animated {
       monthLabel.setTextWithAnimation(title)
+    } else {
+      monthLabel.text = title
     }
   }
 
-  private func applyStyle() {
-    monthStatisticsView.weekendBackgroundColor = StyleKit.calendarWeekendBackgroundColor
-    monthStatisticsView.weekendTextColor = StyleKit.calendarWeekendTextColor
-    monthStatisticsView.weekDayTitleTextColor = StyleKit.calendarWeekDayTitleTextColor
-    monthStatisticsView.selectedDayTextColor = StyleKit.calendarSelectedDayTextColor
-    monthStatisticsView.selectedDayBackgroundColor = StyleKit.calendarSelectedDayBackgroundColor
-    monthStatisticsView.todayBackgroundColor = StyleKit.calendarTodayBackgroundColor
-    monthStatisticsView.todayTextColor = StyleKit.calendarTodayTextColor
-    monthStatisticsView.dayIntakeFullColor = StyleKit.monthStatisticsDayIntakeFullColor
-    monthStatisticsView.dayIntakeColor = StyleKit.monthStatisticsDayIntakeColor
-  }
-
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-    
-    if isShowingDay {
-      monthStatisticsView.refresh()
-      isShowingDay = false
-    }
-  }
-  
   @IBAction func switchToPreviousMonth(sender: AnyObject) {
     monthStatisticsView.switchToPreviousMonth()
     date = monthStatisticsView.getDisplayedMonthDate()
-    updateUI(initial: false) // Updating month label before scroll view animation is finished
+    updateUI(animated: true) // Updating month label before scroll view animation is finished
   }
   
   @IBAction func switchToNextMonth(sender: AnyObject) {
     monthStatisticsView.switchToNextMonth()
     date = monthStatisticsView.getDisplayedMonthDate()
-    updateUI(initial: false) // Updating month label before scroll view animation is finished
+    updateUI(animated: true) // Updating month label before scroll view animation is finished
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -114,13 +123,12 @@ extension MonthStatisticsViewController: CalendarViewDelegate {
   func calendarViewDaySelected(dayInfo: CalendarViewDayInfo) {
     if dayInfo.isCurrentMonth {
       performSegueWithIdentifier(Constants.showDaySegue, sender: dayInfo.date)
-      isShowingDay = true
     }
   }
 
   func calendarViewDayWasSwitched(date: NSDate) {
     self.date = date
-    updateUI(initial: false)
+    updateUI(animated: true)
   }
 
 }

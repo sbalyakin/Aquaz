@@ -13,10 +13,10 @@ class YearStatisticsViewController: UIViewController {
 
   @IBOutlet weak var yearStatisticsView: YearStatisticsView!
   @IBOutlet weak var yearLabel: UILabel!
-  
+
   var date: NSDate = NSDate() {
     didSet {
-      updateUI(initial: false)
+      updateUI(animated: true)
     }
   }
   
@@ -28,20 +28,46 @@ class YearStatisticsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    yearStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    yearStatisticsView.titleForHorizontalStep = getMonthTitleFromIndex
-    yearStatisticsView.titleForVerticalStep = getTitleForAmount
-    
-    updateUI(initial: true)
-    applyStyle()
+    setupUI()
+    setupNotificationsObservation()
+  }
 
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+
+  private func setupUI() {
+    yearStatisticsView.backgroundColor = UIColor.clearColor()
+    yearStatisticsView.backgroundDarkColor = UIColor.clearColor()
+    yearStatisticsView.valuesChartLineColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
+    yearStatisticsView.valuesChartFillColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 0.1)
+    yearStatisticsView.goalsChartColor = UIColor(red: 239/255, green: 64/255, blue: 79/255, alpha: 0.5)
+    yearStatisticsView.scaleTextColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
+    yearStatisticsView.gridColor = UIColor(red: 230/255, green: 231/255, blue: 232/255, alpha: 1.0)
+    yearStatisticsView.pinsColor = UIColor.whiteColor()
+    yearStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    yearStatisticsView.dataSource = self
+    
+    updateUI(animated: false)
   }
   
-  func preferredContentSizeChanged() {
-    yearStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    yearLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-    view.invalidateIntrinsicContentSize()
+  private func setupNotificationsObservation() {
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "managedObjectContextDidChange:",
+      name: NSManagedObjectContextDidSaveNotification,
+      object: CoreDataProvider.sharedInstance.managedObjectContext)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "managedObjectContextDidChange:",
+      name: GlobalConstants.notificationManagedObjectContextWasMerged,
+      object: nil)
+  }
+  
+  func managedObjectContextDidChange(notification: NSNotification) {
+    println("YearStatistics: updateUI()")
+    updateYearStatisticsView()
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -67,21 +93,16 @@ class YearStatisticsViewController: UIViewController {
     rightSwipeGestureRecognizer = nil
   }
 
-  private func updateUI(#initial: Bool) {
-    computeStatisticsDateRange()
-    updateYearLabel(animated: !initial)
-    updateYearStatisticsView()
+  func preferredContentSizeChanged() {
+    yearStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    yearLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    view.invalidateIntrinsicContentSize()
   }
   
-  private func applyStyle() {
-    yearStatisticsView.backgroundColor = UIColor.clearColor()
-    yearStatisticsView.backgroundDarkColor = UIColor.clearColor()
-    yearStatisticsView.valuesChartLineColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
-    yearStatisticsView.valuesChartFillColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 0.1)
-    yearStatisticsView.goalsChartColor = UIColor(red: 239/255, green: 64/255, blue: 79/255, alpha: 0.5)
-    yearStatisticsView.scaleTextColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
-    yearStatisticsView.gridColor = UIColor(red: 230/255, green: 231/255, blue: 232/255, alpha: 1.0)
-    yearStatisticsView.pinsColor = UIColor.whiteColor()
+  private func updateUI(#animated: Bool) {
+    computeStatisticsDateRange()
+    updateYearLabel(animated: animated)
+    updateYearStatisticsView()
   }
   
   @IBAction func switchToPreviousYear(sender: AnyObject) {
@@ -164,8 +185,22 @@ class YearStatisticsViewController: UIViewController {
     }
   }
   
-  private func getMonthTitleFromIndex(monthIndex: CGFloat) -> String {
-    let index = Int(monthIndex)
+  private func computeStatisticsDateRange() {
+    let calendar = NSCalendar.currentCalendar()
+    let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitTimeZone | .CalendarUnitCalendar, fromDate: date)
+    
+    dateComponents.day = 1
+    dateComponents.month = 1
+    statisticsBeginDate = calendar.dateFromComponents(dateComponents)
+    statisticsEndDate = DateHelper.addToDate(statisticsBeginDate, years: 1, months: 0, days: 0)
+  }
+
+}
+
+extension YearStatisticsViewController: YearStatisticsViewDataSource {
+  
+  func yearStatisticsViewGetTitleForHorizontalValue(value: CGFloat) -> String {
+    let index = Int(value)
     let calendar = NSCalendar.currentCalendar()
     
     if index < 0 || index >= calendar.shortMonthSymbols.count {
@@ -176,20 +211,11 @@ class YearStatisticsViewController: UIViewController {
     return calendar.shortMonthSymbols[index] as! String
   }
   
-  private func getTitleForAmount(amount: CGFloat) -> String {
-    let quantity = Quantity(unit: Settings.generalVolumeUnits.value.unit, amount: Double(amount))
+  func yearStatisticsViewGetTitleForVerticalValue(value: CGFloat) -> String {
+    let quantity = Quantity(unit: Settings.generalVolumeUnits.value.unit, amount: Double(value))
     let title = quantity.getDescription(0, displayUnits: true)
     return title
   }
   
-  private func computeStatisticsDateRange() {
-    let calendar = NSCalendar.currentCalendar()
-    let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitTimeZone | .CalendarUnitCalendar, fromDate: date)
-    
-    dateComponents.day = 1
-    dateComponents.month = 1
-    statisticsBeginDate = calendar.dateFromComponents(dateComponents)
-    statisticsEndDate = DateHelper.addToDate(statisticsBeginDate, years: 1, months: 0, days: 0)
-  }
 
 }

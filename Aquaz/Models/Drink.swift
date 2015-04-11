@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 @objc(Drink)
-public class Drink: NSManagedObject, NamedEntity {
+public class Drink: CodingManagedObject, NamedEntity {
 
   public static var entityName = "Drink"
 

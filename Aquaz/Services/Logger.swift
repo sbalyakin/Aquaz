@@ -89,10 +89,8 @@ public class Logger {
   
   // MARK: logMessage
   public func logMessage(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], logLevel: LogLevel, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__, forceAssert: Bool = false) {
-    if forceAssert {
-      assert(condition(), logMessage)
-    } else if isAssertsEnabledForLogLevel(logLevel) {
-      assert(condition(), logMessage)
+    if forceAssert || isAssertsEnabledForLogLevel(logLevel) {
+      assert(condition(), logMessage + "\r\n" + logDetails.description)
     }
     
     #if AQUAZ

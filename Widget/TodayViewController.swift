@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import NotificationCenter
-import Aquaz
 
 class TodayViewController: UIViewController, NCWidgetProviding {
         
@@ -59,22 +58,27 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     setupProgressView()
     updateWaterIntakeForDate(NSDate())
     updateDrinks()
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "contextDidSave:", name: NSManagedObjectContextDidSaveNotification, object: nil)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "managedObjectContextDidSave:",
+      name: NSManagedObjectContextDidSaveNotification,
+      object: CoreDataProvider.sharedInstance.managedObjectContext)
   }
   
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }
 
-  func contextDidSave(notification: NSNotification) {
-    WormholeHelper.ManageObjectContextDidSaveMessage.pass(wormhole, context: .Widget)
+  func managedObjectContextDidSave(notification: NSNotification) {
+    wormhole?.passMessageObject(notification, identifier: GlobalConstants.wormholeMessageFromWidget)
   }
 
   private func setupCoreDataSynchronization() {
-    wormhole = WormholeHelper.createWormhole()
-    
-    WormholeHelper.ManageObjectContextDidSaveMessage.listen(wormhole) { context in
-      if context != .Widget { // Skip our own messages
+    wormhole = MMWormhole(applicationGroupIdentifier: GlobalConstants.appGroupName, optionalDirectory: GlobalConstants.wormholeOptionalDirectory)
+
+    wormhole.listenForMessageWithIdentifier(GlobalConstants.wormholeMessageFromAquaz) { [unowned self] (messageObject) -> Void in
+      if let notification = messageObject as? NSNotification {
+        CoreDataProvider.sharedInstance.managedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
         self.updateWaterIntakeForDate(NSDate())
         self.updateDrinks()
       }
@@ -93,14 +97,22 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       if let intake1: Intake = ModelHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor]) {
         let drinkIndex1 = intake1.drink.index.integerValue
         drinkIndexesToDisplay += [drinkIndex1]
-        drinkIndexes.removeAtIndex(drinkIndex1)
+        if let index = find(drinkIndexes, drinkIndex1) {
+          drinkIndexes.removeAtIndex(index)
+        } else {
+          assert(false)
+        }
         
         let predicate2 = NSPredicate(format: "%K != %d", "drink.index", drinkIndex1)
         
         if let intake2: Intake = ModelHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate2, sortDescriptors: [sortDescriptor]) {
           let drinkIndex2 = intake2.drink.index.integerValue
           drinkIndexesToDisplay += [drinkIndex2]
-          drinkIndexes.removeAtIndex(drinkIndex2)
+          if let index = find(drinkIndexes, drinkIndex2) {
+            drinkIndexes.removeAtIndex(index)
+          } else {
+            assert(false)
+          }
           
           let predicate3 = NSPredicate(format: "%K != %d AND %K != %d", "drink.index", drinkIndex1, "drink.index", drinkIndex2)
           
@@ -208,18 +220,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
-    let intakeDidChange = updateWaterIntakeForDate(NSDate())
-    let drinksDidChange = updateDrinks()
-    
-    if intakeDidChange || drinksDidChange {
-      completionHandler(.NewData)
-    } else {
-      completionHandler(.NoData)
-    }
+    completionHandler(.NewData)
   }
   
   func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
-    return UIEdgeInsetsMake(0, 16, 0, 16)
+    return UIEdgeInsetsZero
   }
 
   @IBAction func drink1WasTapped(sender: UITapGestureRecognizer) {
@@ -237,6 +242,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   private func addIntakeForDrink(drink: Drink!) {
     if drink != nil {
       let intake = Intake.addEntity(drink: drink, amount: drink.recentAmount.amount, date: NSDate(), managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext, saveImmediately: true)
+
       updateWaterIntakeForDate(NSDate())
     }
   }

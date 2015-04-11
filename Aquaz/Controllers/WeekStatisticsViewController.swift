@@ -16,7 +16,7 @@ class WeekStatisticsViewController: UIViewController {
 
   var date: NSDate = NSDate() {
     didSet {
-      updateUI(initial: false)
+      updateUI(animated: true)
     }
   }
   
@@ -33,22 +33,12 @@ class WeekStatisticsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    weekStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    weekStatisticsView.daysFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    weekStatisticsView.dataSource = self
-    weekStatisticsView.delegate = self
-    weekStatisticsView.titleForScaleFunction = getTitleForAmount
-    
-    updateUI(initial: true)
-
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+    setupUI()
+    setupNotificationsObservation()
   }
-  
-  func preferredContentSizeChanged() {
-    datePeriodLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-    weekStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    weekStatisticsView.daysFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    view.invalidateIntrinsicContentSize()
+
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -63,11 +53,6 @@ class WeekStatisticsViewController: UIViewController {
     weekStatisticsView.addGestureRecognizer(rightSwipeGestureRecognizer)
     
     revealViewController()?.panGestureRecognizer()?.requireGestureRecognizerToFail(rightSwipeGestureRecognizer)
-
-    if isShowingDay {
-      updateUI(initial: true)
-      isShowingDay = false
-    }
   }
   
   override func viewWillDisappear(animated: Bool) {
@@ -78,17 +63,46 @@ class WeekStatisticsViewController: UIViewController {
     leftSwipeGestureRecognizer = nil
     rightSwipeGestureRecognizer = nil
   }
-
-  private func updateUI(#initial: Bool) {
-    computeStatisticsDateRange()
-    updateDatePeriodLabel(animated: !initial)
-    updateWeekStatisticsView()
+  
+  private func setupUI() {
+    weekStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    weekStatisticsView.daysFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    weekStatisticsView.dataSource = self
+    weekStatisticsView.delegate = self
+    
+    updateUI(animated: false)
   }
   
-  private func getTitleForAmount(amount: CGFloat) -> String {
-    let quantity = Quantity(unit: Settings.generalVolumeUnits.value.unit, amount: Double(amount))
-    let title = quantity.getDescription(0, displayUnits: true)
-    return title
+  private func setupNotificationsObservation() {
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "managedObjectContextDidChange:",
+      name: NSManagedObjectContextDidSaveNotification,
+      object: CoreDataProvider.sharedInstance.managedObjectContext)
+
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "managedObjectContextDidChange:",
+      name: GlobalConstants.notificationManagedObjectContextWasMerged,
+      object: nil)
+  }
+  
+  func managedObjectContextDidChange(notification: NSNotification) {
+    println("WeekStatistics: updateUI()")
+    updateWeekStatisticsView()
+  }
+
+  func preferredContentSizeChanged() {
+    datePeriodLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    weekStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    weekStatisticsView.daysFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    view.invalidateIntrinsicContentSize()
+  }
+
+  private func updateUI(#animated: Bool) {
+    computeStatisticsDateRange()
+    updateDatePeriodLabel(animated: animated)
+    updateWeekStatisticsView()
   }
 
   @IBAction func switchToPreviousWeek(sender: AnyObject) {
@@ -163,7 +177,7 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   private func updateWeekStatisticsView() {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { 
       let date = self.date
       let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
       dispatch_async(dispatch_get_main_queue()) {
@@ -203,6 +217,12 @@ extension WeekStatisticsViewController: WeekStatisticsViewDataSource {
   
   func weekStatisticsViewIsFutureDay(dayIndex: Int) -> Bool {
     return isFutureDate(dayIndex)
+  }
+  
+  func weekStatisticsViewGetTitleForValue(value: CGFloat) -> String {
+    let quantity = Quantity(unit: Settings.generalVolumeUnits.value.unit, amount: Double(value))
+    let title = quantity.getDescription(0, displayUnits: true)
+    return title
   }
   
 }

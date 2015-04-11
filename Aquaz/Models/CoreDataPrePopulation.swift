@@ -40,7 +40,7 @@ public class CoreDataPrePopulation {
     Drink.addEntity(index: Drink.DrinkType.StrongLiquor.rawValue, name: "StrongLiquor", waterPercent: 0.60, recentAmount: 250, managedObjectContext: managedObjectContext)
 
     WaterGoal.addEntity(
-      date: DateHelper.dateByClearingTime(ofDate: NSDate()),
+      date: NSDate(),
       baseAmount: Settings.userWaterGoal.value,
       isHotDay: false,
       isHighActivity: false,

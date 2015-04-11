@@ -12,7 +12,7 @@ import AudioToolbox
 class NotificationsSoundViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
   @IBOutlet weak var tableView: UITableView!
-  var notificationsViewController: NotificationsViewController!
+  weak var notificationsViewController: NotificationsViewController!
 
   override func viewDidLoad() {
     super.viewDidLoad()

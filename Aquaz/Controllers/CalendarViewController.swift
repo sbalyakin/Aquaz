@@ -38,6 +38,10 @@ class CalendarViewController: UIViewController {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
   }
   
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+  
   func preferredContentSizeChanged() {
     currentMonthLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     calendarView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)

@@ -18,7 +18,7 @@ class SelectDrinkViewController: UIViewController {
   private let columnsCount = 3
   private var rowsCount = 0
   
-  private var popupViewManager: SelectDrinkPopupViewManager!
+  private lazy var popupViewManager: SelectDrinkPopupViewManager = SelectDrinkPopupViewManager(selectDrinkViewController: self)
 
   private var displayedDrinkTypes: [Drink.DrinkType] = [
     .Water, .Tea,    .Coffee,
@@ -39,12 +39,15 @@ class SelectDrinkViewController: UIViewController {
 
     rowsCount = Int(ceil(Float(displayedDrinkTypes.count) / Float(columnsCount)))
     setupGestureRecognizers()
-    popupViewManager = SelectDrinkPopupViewManager(selectDrinkViewController: self)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "preferredContentSizeChanged",
       name: UIContentSizeCategoryDidChangeNotification,
       object: nil)
+  }
+  
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
   }
   
   func preferredContentSizeChanged() {
@@ -205,12 +208,16 @@ extension SelectDrinkViewController: UICollectionViewDelegate, UICollectionViewD
 
 class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
   
+  deinit {
+    println("deinit SelectDrinkPopupViewManager")
+  }
+  
   private var window: UIWindow!
   private var popupView: UIView!
   private var popupCollectionView: UICollectionView!
   
   private let popupDrinkTypes: [Drink.DrinkType] = [ .Beer, .Wine, .StrongLiquor ]
-  private var selectDrinkViewController: SelectDrinkViewController!
+  private weak var selectDrinkViewController: SelectDrinkViewController!
   
   private let columnsCount = 1
   private var rowsCount = 3

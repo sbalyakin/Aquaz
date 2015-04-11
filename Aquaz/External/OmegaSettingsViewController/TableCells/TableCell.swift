@@ -10,7 +10,7 @@ import UIKit
 
 class TableCell {
   
-  let container: TableCellsContainer
+  weak var container: TableCellsContainer!
   var active = false
   var tableCellDidActivateFunction: TableCellActivatedFunction?
   var isSupportingCell: Bool { return false }

@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 @objc(WaterGoal)
-public class WaterGoal: NSManagedObject, NamedEntity {
+public class WaterGoal: CodingManagedObject, NamedEntity {
   
   public static var entityName = "WaterGoal"
 
@@ -38,8 +38,29 @@ public class WaterGoal: NSManagedObject, NamedEntity {
     return isHighActivity ? Settings.generalHighActivityExtraFactor.value : 0
   }
 
-  /// Adds a new water goal entity into Core Data
+  /// Adds a new water goal entity into Core Data. If a water goal with passed date is already exist, it will be returned as a result.
   public class func addEntity(#date: NSDate, baseAmount: Double, isHotDay: Bool, isHighActivity: Bool, managedObjectContext: NSManagedObjectContext?, saveImmediately: Bool = true) -> WaterGoal? {
+    if let waterGoal = self.fetchWaterGoalStrictlyForDate(date, managedObjectContext: managedObjectContext) {
+      waterGoal.baseAmount = baseAmount
+      waterGoal.isHotDay = isHotDay
+      waterGoal.isHighActivity = isHighActivity
+      if saveImmediately {
+        CoreDataProvider.sharedInstance.saveContext(managedObjectContext: managedObjectContext)
+      }
+      return waterGoal
+    } else {
+      return WaterGoal.rawAddEntity(
+        date: date,
+        baseAmount: baseAmount,
+        isHotDay: isHotDay,
+        isHighActivity: isHighActivity,
+        managedObjectContext: managedObjectContext,
+        saveImmediately: saveImmediately)
+    }
+  }
+
+  /// Adds a new water goal entity into Core Data without any checks for water goal existance for passed date
+  private class func rawAddEntity(#date: NSDate, baseAmount: Double, isHotDay: Bool, isHighActivity: Bool, managedObjectContext: NSManagedObjectContext?, saveImmediately: Bool = true) -> WaterGoal? {
     if let managedObjectContext = managedObjectContext, waterGoal = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext) {
       let pureDate = DateHelper.dateByClearingTime(ofDate: date)
       waterGoal.date = pureDate
@@ -48,16 +69,12 @@ public class WaterGoal: NSManagedObject, NamedEntity {
       waterGoal.isHighActivity = isHighActivity
       
       if saveImmediately {
-        var error: NSError?
-        if !managedObjectContext.save(&error) {
-          Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
-          return nil
-        }
+        CoreDataProvider.sharedInstance.saveContext(managedObjectContext: managedObjectContext)
       }
       
       return waterGoal
     }
-      
+    
     assert(false)
     return nil
   }

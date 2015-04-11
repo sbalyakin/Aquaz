@@ -16,8 +16,8 @@ extension String: Printable {
 
 class NotificationsViewController: OmegaSettingsViewController {
   
-  private var soundCell: TableCell!
-
+  private var soundObserverIdentifier: Int?
+  
   private struct Constants {
     static let chooseSoundSegue = "Choose Sound"
   }
@@ -31,6 +31,12 @@ class NotificationsViewController: OmegaSettingsViewController {
     rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
   }
   
+  deinit {
+    if let soundObserverIdentifier = soundObserverIdentifier {
+      Settings.notificationsSound.removeObserver(soundObserverIdentifier)
+    }
+  }
+
   override func createTableCellsSections() -> [TableCellsSection] {
     let enableNotificationsTitle = NSLocalizedString("NVC:Enable Notifications", value: "Enable Notifications",
       comment: "NotificationsViewController: Title for [Enable Notification] setting")
@@ -70,25 +76,59 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     // Main section
     
-    let enableNotificationsCell = createSwitchTableCell(title: enableNotificationsTitle, settingsItem: Settings.notificationsEnabled)
-    enableNotificationsCell.valueChangedFunction = tableCellValueAffectNotificationsDidChange
+    let enableNotificationsCell = createSwitchTableCell(
+      title: enableNotificationsTitle,
+      settingsItem: Settings.notificationsEnabled)
     
-    let fromCell = createDateRightDetailTableCell(title: fromTitle, settingsItem: Settings.notificationsFrom, datePickerMode: .Time, minimumDate: nil, maximumDate: nil, height: .Large, stringFromValueFunction: timeStringFromDate)
-    fromCell.valueChangedFunction = tableCellValueAffectNotificationsDidChange
+    enableNotificationsCell.valueChangedFunction = { [unowned self] in self.tableCellValueAffectNotificationsDidChange($0) }
+    
+    let fromCell = createDateRightDetailTableCell(
+      title: fromTitle,
+      settingsItem: Settings.notificationsFrom,
+      datePickerMode: .Time,
+      minimumDate: nil,
+      maximumDate: nil,
+      height: .Large,
+      stringFromValueFunction: NotificationsViewController.timeStringFromDate)
+    
+    fromCell.valueChangedFunction = { [unowned self] in self.tableCellValueAffectNotificationsDidChange($0) }
 
-    let toCell = createDateRightDetailTableCell(title: toTitle, settingsItem: Settings.notificationsTo, datePickerMode: .Time, minimumDate: nil, maximumDate: nil, height: .Large, stringFromValueFunction: timeStringFromDate)
-    toCell.valueChangedFunction = tableCellValueAffectNotificationsDidChange
+    let toCell = createDateRightDetailTableCell(
+      title: toTitle,
+      settingsItem: Settings.notificationsTo,
+      datePickerMode: .Time,
+      minimumDate: nil,
+      maximumDate: nil,
+      height: .Large,
+      stringFromValueFunction: NotificationsViewController.timeStringFromDate)
+    
+    toCell.valueChangedFunction = { [unowned self] in self.tableCellValueAffectNotificationsDidChange($0) }
     
     let timeComponents = [
       TimeIntervalPickerTableCellComponent(calendarUnit: NSCalendarUnit.CalendarUnitHour, minValue: 1, maxValue: 6, step: 1, title: intervalHourTitle, width: nil),
       TimeIntervalPickerTableCellComponent(calendarUnit: NSCalendarUnit.CalendarUnitMinute, minValue: 0, maxValue: 59, step: 5, title: intervalMinuteTitle, width: nil)]
     
-    let intervalCell = createTimeIntervalRightDetailTableCell(title: intervalTitle, settingsItem: Settings.notificationsInterval, timeComponents: timeComponents, height: .Large, stringFromValueFunction: stringFromTimeInterval)
-    intervalCell.valueChangedFunction = tableCellValueAffectNotificationsDidChange
+    let intervalCell = createTimeIntervalRightDetailTableCell(
+      title: intervalTitle,
+      settingsItem: Settings.notificationsInterval,
+      timeComponents: timeComponents,
+      height: .Large,
+      stringFromValueFunction: NotificationsViewController.stringFromTimeInterval)
+    
+    intervalCell.valueChangedFunction = { [unowned self] in self.tableCellValueAffectNotificationsDidChange($0) }
   
-    let soundCell = createRightDetailTableCell(title: soundTitle, settingsItem: Settings.notificationsSound, accessoryType: UITableViewCellAccessoryType.DisclosureIndicator, activationChangedFunction: soundTableCellDidActivate, stringFromValueFunction: stringFromSoundFileName)
-    fromCell.valueChangedFunction = tableCellValueAffectNotificationsDidChange
-    self.soundCell = soundCell
+    let soundCell = createRightDetailTableCell(
+      title: soundTitle,
+      settingsItem: Settings.notificationsSound,
+      accessoryType: UITableViewCellAccessoryType.DisclosureIndicator,
+      activationChangedFunction: { [unowned self] in self.soundTableCellDidActivate($0, active: $1) },
+      stringFromValueFunction: NotificationsViewController.stringFromSoundFileName)
+    
+    fromCell.valueChangedFunction = { [unowned self] in self.tableCellValueAffectNotificationsDidChange($0) }
+    
+    soundObserverIdentifier = Settings.notificationsSound.addObserver { value in
+      soundCell.readFromExternalStorage()
+    }
     
     let mainSection = TableCellsSection()
     mainSection.tableCells = [
@@ -100,7 +140,9 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     // Smart notifications section
     
-    let smartNotificationsCell = createSwitchTableCell(title: smartNotificationsTitle, settingsItem: Settings.notificationsSmart)
+    let smartNotificationsCell = createSwitchTableCell(
+      title: smartNotificationsTitle,
+      settingsItem: Settings.notificationsSmart)
     
     let smartNotificationsSection = TableCellsSection()
     smartNotificationsSection.footerTitle = smartNotificationsSectionFooter
@@ -108,32 +150,33 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     // Use water intake section
     
-    let useWaterIntakeCell = createSwitchTableCell(title: useWaterIntakeTitle, settingsItem: Settings.notificationsUseWaterIntake)
+    let useWaterIntakeCell = createSwitchTableCell(
+      title: useWaterIntakeTitle,
+      settingsItem: Settings.notificationsUseWaterIntake)
     
     let useWaterIntakeSection = TableCellsSection()
     useWaterIntakeSection.footerTitle = useWaterIntakeSectionFooter
     useWaterIntakeSection.tableCells = [useWaterIntakeCell]
-    
+
     return [mainSection, smartNotificationsSection, useWaterIntakeSection]
   }
   
-  private func stringFromTimeInterval(timeInterval: NSTimeInterval) -> String {
+  private class func stringFromTimeInterval(timeInterval: NSTimeInterval) -> String {
     let overallSeconds = Int(timeInterval)
     let minutes = (overallSeconds / 60) % 60
     let hours = (overallSeconds / 3600)
     let template = NSLocalizedString("NVC:%u hr %u min", value: "%u hr %u min", comment: "NotificationsViewController: Template string for time interval")
-    let result = NSString(format: template, hours, minutes)
-    return result as! String
+    return String.localizedStringWithFormat(template, hours, minutes)
   }
   
-  private func timeStringFromDate(date: NSDate) -> String {
+  private class func timeStringFromDate(date: NSDate) -> String {
     let dateFormatter = NSDateFormatter()
     dateFormatter.timeStyle = .ShortStyle
     dateFormatter.dateStyle = .NoStyle
     return dateFormatter.stringFromDate(date)
   }
   
-  private func stringFromSoundFileName(filename: String) -> String {
+  private class func stringFromSoundFileName(filename: String) -> String {
     return filename.stringByDeletingPathExtension.capitalizedString
   }
   

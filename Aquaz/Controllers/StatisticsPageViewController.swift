@@ -19,7 +19,7 @@ class StatisticsPageViewController: UIPageViewController {
   
   private var ownViewControllers: [UIViewController!] = [nil, nil, nil]
 
-  private func getViewControllerByStatisticsPage(page: Settings.StatisticsViewPage) -> UIViewController {
+  private func getViewControllerByStatisticsPage(page: Settings.StatisticsViewPage) -> UIViewController! {
     if let controller = ownViewControllers[page.rawValue] {
       return controller
     }

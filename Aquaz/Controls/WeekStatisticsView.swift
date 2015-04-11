@@ -11,6 +11,7 @@ import UIKit
 protocol WeekStatisticsViewDataSource: class {
   
   func weekStatisticsViewIsFutureDay(dayIndex: Int) -> Bool
+  func weekStatisticsViewGetTitleForValue(value: CGFloat) -> String
   
 }
 
@@ -60,8 +61,6 @@ protocol WeekStatisticsViewDelegate: class {
   typealias ItemType = (value: CGFloat, goal: CGFloat)
   typealias TitleForStepFunction = (CGFloat) -> String
   private typealias UIAreas = (scale: CGRect, bars: CGRect, days: CGRect, background: CGRect)
-
-  var titleForScaleFunction: TitleForStepFunction?
 
   private var items: [ItemType] = []
   private var dayButtons: [UIButton] = []
@@ -436,7 +435,7 @@ protocol WeekStatisticsViewDelegate: class {
   }
 
   private func getTitleForScaleValue(value: CGFloat) -> String {
-    return titleForScaleFunction?(value) ?? "\(Int(value))"
+    return dataSource?.weekStatisticsViewGetTitleForValue(value) ?? "\(Int(value))"
   }
   
   private func calcMaximumValue() -> CGFloat {

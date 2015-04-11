@@ -8,6 +8,13 @@
 
 import UIKit
 
+protocol YearStatisticsViewDataSource: class {
+  
+  func yearStatisticsViewGetTitleForHorizontalValue(value: CGFloat) -> String
+  func yearStatisticsViewGetTitleForVerticalValue(value: CGFloat) -> String
+
+}
+
 @IBDesignable class YearStatisticsView: UIView {
 
   @IBInspectable var backgroundDarkColor: UIColor = UIColor(white: 235/255, alpha: 1.0)
@@ -44,12 +51,10 @@ import UIKit
   let horizontalGridStep = 2
   var verticalGridStep = 2
   
-  typealias TitleForStepFunction = (CGFloat) -> String
   typealias ItemType = (value: CGFloat, goal: CGFloat)
   private typealias UIAreas = (chart: CGRect, verticalScale: CGRect, horizontalScale: CGRect, background: CGRect)
 
-  var titleForVerticalStep: TitleForStepFunction?
-  var titleForHorizontalStep: TitleForStepFunction?
+  weak var dataSource: YearStatisticsViewDataSource?
   
   private var isFirstSettingItems = true
 
@@ -256,12 +261,12 @@ import UIKit
     }
   }
   
-  private func getVerticalTitleForValue(value: CGFloat) -> String {
-    return titleForVerticalStep?(value) ?? "\(Int(value))"
+  private func getHorizontalTitleForValue(value: CGFloat) -> String {
+    return dataSource?.yearStatisticsViewGetTitleForHorizontalValue(value) ?? "\(Int(value))"
   }
   
-  private func getHorizontalTitleForValue(value: CGFloat) -> String {
-    return titleForHorizontalStep?(value) ?? "\(Int(value))"
+  private func getVerticalTitleForValue(value: CGFloat) -> String {
+    return dataSource?.yearStatisticsViewGetTitleForVerticalValue(value) ?? "\(Int(value))"
   }
   
   override func layoutSubviews() {

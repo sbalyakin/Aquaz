@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 @objc(Intake)
-public class Intake: NSManagedObject, NamedEntity {
+public class Intake: CodingManagedObject, NamedEntity {
   
   public static var entityName = "Intake"
 

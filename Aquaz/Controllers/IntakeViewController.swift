@@ -76,6 +76,10 @@ class IntakeViewController: UIViewController {
       object: nil)
   }
   
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+
   func preferredContentSizeChanged() {
     amountLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     view.invalidateIntrinsicContentSize()

@@ -64,12 +64,13 @@ class CoreDataProvider {
     }
     var managedObjectContext = NSManagedObjectContext()
     managedObjectContext.persistentStoreCoordinator = coordinator
+//    managedObjectContext.mergePolicy = NSMergePolicy(mergeType: NSMergePolicyType.MergeByPropertyObjectTrumpMergePolicyType)
     return managedObjectContext
   }()
   
   // MARK: - Core Data Saving support
   
-  func saveContext () {
+  func saveContext(managedObjectContext: NSManagedObjectContext? = CoreDataProvider.sharedInstance.managedObjectContext) {
     var error: NSError?
     if let moc = managedObjectContext {
       if moc.hasChanges && !moc.save(&error) {

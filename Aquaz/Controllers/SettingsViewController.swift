@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsViewController: OmegaSettingsViewController {
 
-  private var waterGoalCell: TableCell!
+  private var volumeObserverIdentifier: Int?
   private let numberFormatter = NSNumberFormatter()
   
   private struct Constants {
@@ -30,9 +30,10 @@ class SettingsViewController: OmegaSettingsViewController {
     numberFormatter.multiplier = 100
   }
 
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-    readTableCellValuesFromExternalStorage()
+  deinit {
+    if let volumeObserverIdentifier = volumeObserverIdentifier {
+      Settings.notificationsSound.removeObserver(volumeObserverIdentifier)
+    }
   }
 
   override func createTableCellsSections() -> [TableCellsSection] {
@@ -74,7 +75,6 @@ class SettingsViewController: OmegaSettingsViewController {
       title: volumeTitle,
       settingsItem: Settings.generalVolumeUnits,
       segmentsWidth: 70)
-    volumeCell.valueChangedFunction = volumeUnitDidChange
     
     let weightCell = createEnumSegmentedTableCell(
       title: weightTitle,
@@ -94,10 +94,19 @@ class SettingsViewController: OmegaSettingsViewController {
       heightCell]
     
     // Water goal section
-    let waterGoalCell = createRightDetailTableCell(title: waterGoalTitle, settingsItem: Settings.userWaterGoal, accessoryType: .DisclosureIndicator, activationChangedFunction: waterGoalCellWasSelected, stringFromValueFunction: stringFromWaterGoal)
-    waterGoalCell.image = UIImage(named: "iconWaterDrop")
-    self.waterGoalCell = waterGoalCell
+    let waterGoalCell = createRightDetailTableCell(
+      title: waterGoalTitle,
+      settingsItem: Settings.userWaterGoal,
+      accessoryType: .DisclosureIndicator,
+      activationChangedFunction: { [unowned self] in self.waterGoalCellWasSelected($0, active: $1) },
+      stringFromValueFunction: { [unowned self] in self.stringFromWaterGoal($0) })
     
+    waterGoalCell.image = UIImage(named: "iconWaterDrop")
+    
+    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { value in
+      waterGoalCell.readFromExternalStorage()
+    }
+
     let recommendationsSection = TableCellsSection()
     recommendationsSection.headerTitle = recommendationsSectionHeader
     recommendationsSection.tableCells = [waterGoalCell]
@@ -113,7 +122,8 @@ class SettingsViewController: OmegaSettingsViewController {
       settingsItem: Settings.generalHighActivityExtraFactor,
       collection: factorsCollection,
       pickerTableCellHeight: .Large,
-      stringFromValueFunction: stringFromFactor)
+      stringFromValueFunction: { [unowned self] in self.stringFromFactor($0) })
+    
     highActivityCell.image = UIImage(named: "iconHighActivityActive")
     
     let highActivitySection = TableCellsSection()
@@ -127,7 +137,8 @@ class SettingsViewController: OmegaSettingsViewController {
       settingsItem: Settings.generalHotDayExtraFactor,
       collection: factorsCollection,
       pickerTableCellHeight: .Large,
-      stringFromValueFunction: stringFromFactor)
+      stringFromValueFunction: { [unowned self] in self.stringFromFactor($0) })
+    
     hotDayCell.image = UIImage(named: "iconHotActive")
     
     let hotDaySection = TableCellsSection()
@@ -140,10 +151,6 @@ class SettingsViewController: OmegaSettingsViewController {
   
   private func stringFromFactor(value: Double) -> String {
     return numberFormatter.stringFromNumber(value)!
-  }
-  
-  private func volumeUnitDidChange(tableCell: TableCell) {
-    waterGoalCell?.readFromExternalStorage()
   }
   
   private func stringFromWaterGoal(waterGoal: Double) -> String {
