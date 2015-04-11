@@ -59,7 +59,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     wormhole.listenForMessageWithIdentifier(GlobalConstants.wormholeMessageFromWidget) { [unowned self] (messageObject) -> Void in
       if let notification = messageObject as? NSNotification {
-        println("AppDelegate: listenForMessageWithIdentifier")
         CoreDataProvider.sharedInstance.managedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
         
         NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationManagedObjectContextWasMerged, object: nil)

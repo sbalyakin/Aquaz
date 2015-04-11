@@ -88,7 +88,6 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
-    println("WeekStatistics: updateUI()")
     updateWeekStatisticsView()
   }
 

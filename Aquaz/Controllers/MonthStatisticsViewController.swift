@@ -66,7 +66,6 @@ class MonthStatisticsViewController: UIViewController {
   }
 
   func managedObjectContextDidChange(notification: NSNotification) {
-    println("MonthStatistics: updateUI()")
     monthStatisticsView.refresh()
   }
   
@@ -143,7 +142,7 @@ extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
         if requestingMonthStatisticsContentView != nil {
           requestingMonthStatisticsContentView?.updateValues(intakeFractions)
         } else {
-          println("Calendar content view is null now")
+          assert(false, "Calendar content view is null now")
         }
       }
     }

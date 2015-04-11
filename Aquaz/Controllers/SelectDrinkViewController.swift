@@ -208,10 +208,6 @@ extension SelectDrinkViewController: UICollectionViewDelegate, UICollectionViewD
 
 class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
   
-  deinit {
-    println("deinit SelectDrinkPopupViewManager")
-  }
-  
   private var window: UIWindow!
   private var popupView: UIView!
   private var popupCollectionView: UICollectionView!

@@ -66,7 +66,6 @@ class YearStatisticsViewController: UIViewController {
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
-    println("YearStatistics: updateUI()")
     updateYearStatisticsView()
   }
 
