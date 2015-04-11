@@ -56,7 +56,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     setupCoreDataSynchronization()
     setupProgressView()
-    updateWaterIntakeForDate(NSDate())
+    updateWaterIntakeForDate(NSDate(), animate: false)
     updateDrinks()
     
     NSNotificationCenter.defaultCenter().addObserver(self,
@@ -79,7 +79,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     wormhole.listenForMessageWithIdentifier(GlobalConstants.wormholeMessageFromAquaz) { [unowned self] (messageObject) -> Void in
       if let notification = messageObject as? NSNotification {
         CoreDataProvider.sharedInstance.managedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
-        self.updateWaterIntakeForDate(NSDate())
+        self.updateWaterIntakeForDate(NSDate(), animate: true)
         self.updateDrinks()
       }
     }
@@ -165,7 +165,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     progressViewSection = progressView.addSection(color: StyleKit.waterColor)
   }
   
-  private func updateWaterIntakeForDate(date: NSDate) -> Bool {
+  private func updateWaterIntakeForDate(date: NSDate, animate: Bool) -> Bool {
     if let
       waterGoal = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)?.amount,
       waterIntake = Intake.fetchGroupedWaterAmounts(
@@ -178,8 +178,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     {
       let newFactor = CGFloat(waterIntake / waterGoal)
       if progressViewSection.factor != newFactor {
-        progressViewSection.setFactorWithAnimation(newFactor)
-        updateProgressLabel(waterGoal: waterGoal, waterIntake: waterIntake)
+        if animate {
+          progressViewSection.setFactorWithAnimation(newFactor)
+        } else {
+          progressViewSection.factor = newFactor
+        }
+        updateProgressLabel(waterGoal: waterGoal, waterIntake: waterIntake, animate: animate)
         return true
       } else {
         return false
@@ -189,7 +193,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
   }
   
-  private func updateProgressLabel(#waterGoal: Double, waterIntake: Double) {
+  private func updateProgressLabel(#waterGoal: Double, waterIntake: Double, animate: Bool) {
     let intakeText: String
     
     if Settings.uiDisplayDailyWaterIntakeInPercents.value {
@@ -208,7 +212,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     let template = NSLocalizedString("TodayExtension:%1$@ of %2$@", value: "%1$@ of %2$@",
       comment: "TodayExtension: Current daily water intake of water intake goal")
     let text = String.localizedStringWithFormat(template, intakeText, waterGoalText)
-    progressLabel.setTextWithAnimation(text)
+    
+    if animate {
+      progressLabel.setTextWithAnimation(text)
+    } else {
+      progressLabel.text = text
+    }
   }
   
   private func formatWaterVolume(value: Double, displayUnits: Bool = true) -> String {
@@ -243,7 +252,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     if drink != nil {
       let intake = Intake.addEntity(drink: drink, amount: drink.recentAmount.amount, date: NSDate(), managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext, saveImmediately: true)
 
-      updateWaterIntakeForDate(NSDate())
+      updateWaterIntakeForDate(NSDate(), animate: true)
     }
   }
   
