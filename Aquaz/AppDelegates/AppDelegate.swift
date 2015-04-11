@@ -51,9 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     }
 
-    // TODO: remove
-    showWelcomeWizard()
-    
     return true
   }
   
