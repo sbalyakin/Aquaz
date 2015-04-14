@@ -18,9 +18,6 @@ class CoreDataProvider {
     return Static.instance
   }
   
-  private init() {
-  }
-  
   lazy var containerURL: NSURL = {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "com.devmanifest.Aquaz" in the application's documents Application Support directory.
     return NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(GlobalConstants.appGroupName)!

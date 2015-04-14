@@ -50,7 +50,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   
   private var progressViewSection: MultiProgressView.Section!
   private var wormhole: MMWormhole!
-  
+
+  // It's better to create CoreDataProvider in the today extension and do not use sharedInstance of it
+  private var coreDataProvider = CoreDataProvider()
+  private var managedObjectContext: NSManagedObjectContext! {
+    return coreDataProvider.managedObjectContext!
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -62,63 +68,52 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidSave:",
       name: NSManagedObjectContextDidSaveNotification,
-      object: CoreDataProvider.sharedInstance.managedObjectContext)
+      object: coreDataProvider.managedObjectContext)
   }
   
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
+    // It's necessary to reset the managed object context in order to finalize background tasks correctly.
+    managedObjectContext.reset()
   }
 
   func managedObjectContextDidSave(notification: NSNotification) {
-    wormhole?.passMessageObject(notification, identifier: GlobalConstants.wormholeMessageFromWidget)
+    wormhole.passMessageObject(notification, identifier: GlobalConstants.wormholeMessageFromWidget)
   }
 
   private func setupCoreDataSynchronization() {
     wormhole = MMWormhole(applicationGroupIdentifier: GlobalConstants.appGroupName, optionalDirectory: GlobalConstants.wormholeOptionalDirectory)
-
-    wormhole.listenForMessageWithIdentifier(GlobalConstants.wormholeMessageFromAquaz) { [unowned self] (messageObject) -> Void in
-      if let notification = messageObject as? NSNotification {
-        CoreDataProvider.sharedInstance.managedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
-        self.updateWaterIntakeForDate(NSDate(), animate: true)
-        self.updateDrinks()
-      }
-    }
   }
 
-  private func updateDrinks() -> Bool {
+  private func updateDrinks() {
     var drinkIndexesToDisplay = [Int]()
     var drinkIndexes = Array(0..<Drink.getDrinksCount())
 
-    if let
-      managedObjectContext = CoreDataProvider.sharedInstance.managedObjectContext,
-      entityDescription = LoggedActions.entityDescriptionForEntity(Intake.self, inManagedObjectContext: managedObjectContext)
-    {
-      let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
-      if let intake1: Intake = ModelHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor]) {
-        let drinkIndex1 = intake1.drink.index.integerValue
-        drinkIndexesToDisplay += [drinkIndex1]
-        if let index = find(drinkIndexes, drinkIndex1) {
+    let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+    if let intake1: Intake = ModelHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor]) {
+      let drinkIndex1 = intake1.drink.index.integerValue
+      drinkIndexesToDisplay += [drinkIndex1]
+      if let index = find(drinkIndexes, drinkIndex1) {
+        drinkIndexes.removeAtIndex(index)
+      } else {
+        assert(false)
+      }
+      
+      let predicate2 = NSPredicate(format: "%K != %d", "drink.index", drinkIndex1)
+      
+      if let intake2: Intake = ModelHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate2, sortDescriptors: [sortDescriptor]) {
+        let drinkIndex2 = intake2.drink.index.integerValue
+        drinkIndexesToDisplay += [drinkIndex2]
+        if let index = find(drinkIndexes, drinkIndex2) {
           drinkIndexes.removeAtIndex(index)
         } else {
           assert(false)
         }
         
-        let predicate2 = NSPredicate(format: "%K != %d", "drink.index", drinkIndex1)
+        let predicate3 = NSPredicate(format: "%K != %d AND %K != %d", "drink.index", drinkIndex1, "drink.index", drinkIndex2)
         
-        if let intake2: Intake = ModelHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate2, sortDescriptors: [sortDescriptor]) {
-          let drinkIndex2 = intake2.drink.index.integerValue
-          drinkIndexesToDisplay += [drinkIndex2]
-          if let index = find(drinkIndexes, drinkIndex2) {
-            drinkIndexes.removeAtIndex(index)
-          } else {
-            assert(false)
-          }
-          
-          let predicate3 = NSPredicate(format: "%K != %d AND %K != %d", "drink.index", drinkIndex1, "drink.index", drinkIndex2)
-          
-          if let intake3: Intake = ModelHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate3, sortDescriptors: [sortDescriptor]) {
-            drinkIndexesToDisplay += [intake3.drink.index.integerValue]
-          }
+        if let intake3: Intake = ModelHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate3, sortDescriptors: [sortDescriptor]) {
+          drinkIndexesToDisplay += [intake3.drink.index.integerValue]
         }
       }
     }
@@ -137,45 +132,26 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     drinkIndexesToDisplay.sort(<)
     
-    let newDrink1 = Drink.getDrinkByIndex(drinkIndexesToDisplay[0], managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)!
-    let newDrink2 = Drink.getDrinkByIndex(drinkIndexesToDisplay[1], managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)!
-    let newDrink3 = Drink.getDrinkByIndex(drinkIndexesToDisplay[2], managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)!
-    
-    let noChanges = drinksAreEqual(drink1, newDrink1) && drinksAreEqual(drink2, newDrink2) && drinksAreEqual(drink3, newDrink3)
-    
-    if noChanges {
-      return false
-    }
-    
-    drink1 = newDrink1
-    drink2 = newDrink2
-    drink3 = newDrink3
-    return true
-  }
-  
-  private func drinksAreEqual(drink1: Drink!, _ drink2: Drink!) -> Bool {
-    if drink1 == nil || drink2 == nil {
-      return false
-    }
-    
-    return drink1.index == drink2.index && drink1.recentAmount.amount == drink2.recentAmount.amount
+    drink1 = Drink.getDrinkByIndex(drinkIndexesToDisplay[0], managedObjectContext: managedObjectContext)!
+    drink2 = Drink.getDrinkByIndex(drinkIndexesToDisplay[1], managedObjectContext: managedObjectContext)!
+    drink3 = Drink.getDrinkByIndex(drinkIndexesToDisplay[2], managedObjectContext: managedObjectContext)!
   }
   
   private func setupProgressView() {
     progressViewSection = progressView.addSection(color: StyleKit.waterColor)
   }
   
-  private func updateWaterIntakeForDate(date: NSDate, animate: Bool) -> Bool {
-    if let
-      waterGoal = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)?.amount,
-      waterIntake = Intake.fetchGroupedWaterAmounts(
+  private func updateWaterIntakeForDate(date: NSDate, animate: Bool) {
+    if let waterGoal = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: managedObjectContext)?.amount
+    {
+      let waterIntake = Intake.fetchGroupedWaterAmounts(
         beginDate: date,
         endDate: DateHelper.addToDate(date, years: 0, months: 0, days: 1),
         dayOffsetInHours: 0,
         groupingUnit: .Day,
         aggregateFunction: .Summary,
-        managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext).first
-    {
+        managedObjectContext: managedObjectContext).first ?? 0
+
       let newFactor = CGFloat(waterIntake / waterGoal)
       if progressViewSection.factor != newFactor {
         if animate {
@@ -183,13 +159,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         } else {
           progressViewSection.factor = newFactor
         }
-        updateProgressLabel(waterGoal: waterGoal, waterIntake: waterIntake, animate: animate)
-        return true
-      } else {
-        return false
       }
-    } else {
-      return false
+      updateProgressLabel(waterGoal: waterGoal, waterIntake: waterIntake, animate: animate)
     }
   }
   
@@ -250,7 +221,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   
   private func addIntakeForDrink(drink: Drink!) {
     if drink != nil {
-      let intake = Intake.addEntity(drink: drink, amount: drink.recentAmount.amount, date: NSDate(), managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext, saveImmediately: true)
+      let intake = Intake.addEntity(drink: drink, amount: drink.recentAmount.amount, date: NSDate(), managedObjectContext: managedObjectContext, saveImmediately: true)
 
       updateWaterIntakeForDate(NSDate(), animate: true)
     }
