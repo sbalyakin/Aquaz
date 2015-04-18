@@ -81,7 +81,6 @@ class SupportViewController: UIViewController {
     super.viewDidLoad()
     
     UIHelper.applyStyle(self)
-    UIHelper.setupReveal(self)
     setupApplicationTitle()
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)

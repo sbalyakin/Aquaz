@@ -13,7 +13,6 @@ class DayViewController: UIViewController {
   
   // MARK: UI elements -
   
-  @IBOutlet weak var summaryBar: UIView!
   @IBOutlet weak var intakesMultiProgressView: MultiProgressView!
   @IBOutlet weak var intakeButton: UIButton!
   @IBOutlet weak var highActivityButton: UIButton!
@@ -75,10 +74,6 @@ class DayViewController: UIViewController {
     super.viewDidLoad()
 
     applyStyle()
-    if mode == .General {
-      UIHelper.setupReveal(self)
-    }
-
     setupNotificationsObservation()
     setupGestureRecognizers()
     setupMultiprogressControl()
@@ -89,7 +84,12 @@ class DayViewController: UIViewController {
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }
-
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    UIHelper.adjustNavigationTitleViewSize(navigationItem)
+  }
+  
   private func setupNotificationsObservation() {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
@@ -298,13 +298,18 @@ class DayViewController: UIViewController {
     let formattedDate = DateHelper.stringFromDate(currentDate)
     
     if animate {
-      navigationDateLabel.setTextWithAnimation(formattedDate)
+      navigationDateLabel.setTextWithAnimation(formattedDate) {
+        UIHelper.adjustNavigationTitleViewSize(self.navigationItem)
+      }
+      
       intakesMultiProgressView.updateWithAnimation { [unowned self] in
         self.fetchWaterGoal()
         self.fetchIntakes()
       }
     } else {
       navigationDateLabel.text = formattedDate
+      UIHelper.adjustNavigationTitleViewSize(navigationItem)
+      
       intakesMultiProgressView.update { [unowned self] in
         self.fetchWaterGoal()
         self.fetchIntakes()
@@ -355,8 +360,11 @@ class DayViewController: UIViewController {
     
     if initial {
       navigationTitleLabel.text = title
+      UIHelper.adjustNavigationTitleViewSize(navigationItem)
     } else {
-      navigationTitleLabel.setTextWithAnimation(title)
+      navigationTitleLabel.setTextWithAnimation(title) {
+        UIHelper.adjustNavigationTitleViewSize(self.navigationItem)
+      }
     }
   }
   
@@ -644,7 +652,6 @@ class DayViewController: UIViewController {
   private weak var pageViewController: UIPageViewController!
   private var diaryViewController: DiaryViewController!
   private var selectDrinkViewController: SelectDrinkViewController!
-  private var summaryBarOriginalHeight: CGFloat!
 
   private let amountPrecision = Settings.generalVolumeUnits.value.precision
   private let amountDecimals = Settings.generalVolumeUnits.value.decimals

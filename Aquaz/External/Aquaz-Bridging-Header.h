@@ -5,6 +5,5 @@
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.
 //
 
-#import "SWRevealViewController.h"
 #import "Localytics.h"
 #import "MMWormhole.h"

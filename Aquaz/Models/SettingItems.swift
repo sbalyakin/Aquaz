@@ -10,19 +10,19 @@ import Foundation
 
 /// Generic class allows its clients to add/remove observers and notify them
 class Observable<ValueType> {
-  typealias ObserverFunction = (ValueType) -> Void
+  typealias ObserverFunction = (ValueType) -> ()
   
   /// Adds an observer and returns it unique identifier (in a scope of class instance)
   func addObserver(observerFunction: ObserverFunction) -> Int {
-    observerFunctions[observerIdentitfer] = observerFunction
-    return observerIdentitfer++
+    observerFunctions[observerIdentifier] = observerFunction
+    return observerIdentifier++
   }
   
   /// Removes an observer using its identifier
   func removeObserver(observerIdentifier: Int) {
-    observerFunctions[observerIdentifier] = nil
+    observerFunctions.removeValueForKey(observerIdentifier)
   }
-  
+
   /// Notifies all observers
   private func notify(value: ValueType) {
     for (_, observerFunction) in observerFunctions {
@@ -30,7 +30,7 @@ class Observable<ValueType> {
     }
   }
   
-  private var observerIdentitfer = 0
+  private var observerIdentifier = 0
   private var observerFunctions: [Int: ObserverFunction] = [:]
 }
 

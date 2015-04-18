@@ -29,6 +29,8 @@ class UIHelper {
     UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: StyleKit.barTextColor]
     UINavigationBar.appearance().translucent = false
     UINavigationBar.appearance().tintAdjustmentMode = .Normal
+    
+    UITabBar.appearance().tintColor = StyleKit.controlTintColor
   }
   
   class func applyStyleToNavigationBar(navigationBar: UINavigationBar) {
@@ -52,13 +54,11 @@ class UIHelper {
     }
   }
 
-  class func setupReveal(viewController: UIViewController) {
-    if let revealViewController = viewController.revealViewController() {
-      let menuImage = UIImage(named: "iconMenu")
-      let revealButton = StyledBarButtonItem(image: menuImage, style: .Plain, target: revealViewController, action: "revealToggle:")
-      viewController.navigationItem.setLeftBarButtonItem(revealButton, animated: true)
-      viewController.navigationController?.navigationBar.addGestureRecognizer(revealViewController.panGestureRecognizer())
-      viewController.view.addGestureRecognizer(revealViewController.panGestureRecognizer())
+  class func adjustNavigationTitleViewSize(navigationItem: UINavigationItem) {
+    if let titleView = navigationItem.titleView {
+      navigationItem.titleView = nil
+      titleView.frame.size = titleView.systemLayoutSizeFittingSize(CGSizeZero)
+      navigationItem.titleView = titleView
     }
   }
   

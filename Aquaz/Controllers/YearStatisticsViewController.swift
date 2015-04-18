@@ -79,8 +79,6 @@ class YearStatisticsViewController: UIViewController {
     rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "rightSwipeGestureIsRecognized:")
     rightSwipeGestureRecognizer.direction = .Right
     yearStatisticsView.addGestureRecognizer(rightSwipeGestureRecognizer)
-    
-    revealViewController()?.panGestureRecognizer()?.requireGestureRecognizerToFail(rightSwipeGestureRecognizer)
   }
   
   override func viewWillDisappear(animated: Bool) {

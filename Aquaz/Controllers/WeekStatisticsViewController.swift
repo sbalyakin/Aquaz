@@ -51,8 +51,6 @@ class WeekStatisticsViewController: UIViewController {
     rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "rightSwipeGestureIsRecognized:")
     rightSwipeGestureRecognizer.direction = .Right
     weekStatisticsView.addGestureRecognizer(rightSwipeGestureRecognizer)
-    
-    revealViewController()?.panGestureRecognizer()?.requireGestureRecognizerToFail(rightSwipeGestureRecognizer)
   }
   
   override func viewWillDisappear(animated: Bool) {

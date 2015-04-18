@@ -25,7 +25,6 @@ class NotificationsViewController: OmegaSettingsViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    UIHelper.setupReveal(self)
     UIHelper.applyStyle(self)
     rightDetailValueColor = StyleKit.settingsTablesValueColor
     rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
@@ -80,7 +79,7 @@ class NotificationsViewController: OmegaSettingsViewController {
       title: enableNotificationsTitle,
       settingsItem: Settings.notificationsEnabled)
     
-    enableNotificationsCell.valueChangedFunction = { [unowned self] in self.tableCellValueAffectNotificationsDidChange($0) }
+    enableNotificationsCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
     
     let fromCell = createDateRightDetailTableCell(
       title: fromTitle,
@@ -91,7 +90,7 @@ class NotificationsViewController: OmegaSettingsViewController {
       height: .Large,
       stringFromValueFunction: NotificationsViewController.timeStringFromDate)
     
-    fromCell.valueChangedFunction = { [unowned self] in self.tableCellValueAffectNotificationsDidChange($0) }
+    fromCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
 
     let toCell = createDateRightDetailTableCell(
       title: toTitle,
@@ -102,7 +101,7 @@ class NotificationsViewController: OmegaSettingsViewController {
       height: .Large,
       stringFromValueFunction: NotificationsViewController.timeStringFromDate)
     
-    toCell.valueChangedFunction = { [unowned self] in self.tableCellValueAffectNotificationsDidChange($0) }
+    toCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
     
     let timeComponents = [
       TimeIntervalPickerTableCellComponent(calendarUnit: NSCalendarUnit.CalendarUnitHour, minValue: 1, maxValue: 6, step: 1, title: intervalHourTitle, width: nil),
@@ -115,7 +114,7 @@ class NotificationsViewController: OmegaSettingsViewController {
       height: .Large,
       stringFromValueFunction: NotificationsViewController.stringFromTimeInterval)
     
-    intervalCell.valueChangedFunction = { [unowned self] in self.tableCellValueAffectNotificationsDidChange($0) }
+    intervalCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
   
     let soundCell = createRightDetailTableCell(
       title: soundTitle,
@@ -124,7 +123,7 @@ class NotificationsViewController: OmegaSettingsViewController {
       activationChangedFunction: { [unowned self] in self.soundTableCellDidActivate($0, active: $1) },
       stringFromValueFunction: NotificationsViewController.stringFromSoundFileName)
     
-    fromCell.valueChangedFunction = { [unowned self] in self.tableCellValueAffectNotificationsDidChange($0) }
+    soundCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
     
     soundObserverIdentifier = Settings.notificationsSound.addObserver { value in
       soundCell.readFromExternalStorage()
@@ -186,19 +185,11 @@ class NotificationsViewController: OmegaSettingsViewController {
     }
   }
 
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == Constants.chooseSoundSegue {
-      if let viewController = segue.destinationViewController.contentViewController as? NotificationsSoundViewController {
-        viewController.notificationsViewController = self
-      }
-    }
-  }
-  
-  private func tableCellValueAffectNotificationsDidChange(tableCell: TableCell) {
+  private class func tableCellValueAffectNotificationsDidChange(tableCell: TableCell) {
     recreateNotifications()
   }
 
-  func recreateNotifications() {
+  class func recreateNotifications() {
     NotificationsHelper.removeAllNotifications()
 
     if Settings.notificationsEnabled.value {

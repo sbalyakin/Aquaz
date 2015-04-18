@@ -21,8 +21,10 @@ class StatisticsViewController: UIViewController {
     super.viewDidLoad()
 
     applyStyle()
+    segmentedControl.tintColor = UIColor.whiteColor()
+    segmentedControl.backgroundColor = StyleKit.controlTintColor
+    
     initStatisticsPage()
-    UIHelper.setupReveal(self)
   }
 
   private func applyStyle() {

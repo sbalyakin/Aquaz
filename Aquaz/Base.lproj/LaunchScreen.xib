@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7528.3" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7518.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,17 +14,15 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cwc-Qu-e7T">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconMenu" translatesAutoresizingMaskIntoConstraints="NO" id="8Zn-ne-DBC">
-                            <rect key="frame" x="16" y="30" width="22" height="22"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCalendar" translatesAutoresizingMaskIntoConstraints="NO" id="f6c-FB-q9c">
+                            <rect key="frame" x="562" y="32" width="22" height="18"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="22" id="EOg-h4-MuJ"/>
+                                <constraint firstAttribute="height" constant="18" id="nXj-EM-oTM"/>
+                                <constraint firstAttribute="width" constant="22" id="zDW-RH-nC2"/>
                             </constraints>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCalendar" translatesAutoresizingMaskIntoConstraints="NO" id="f6c-FB-q9c">
-                            <rect key="frame" x="562" y="30" width="22" height="22"/>
-                        </imageView>
                         <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Water Balance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ll5-gl-rLc">
-                            <rect key="frame" x="46" y="24" width="508" height="22"/>
+                            <rect key="frame" x="246" y="26" width="109" height="20"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -32,16 +30,22 @@
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.58039215686274503" blue="0.72156862745098038" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="f6c-FB-q9c" firstAttribute="top" secondItem="8Zn-ne-DBC" secondAttribute="top" id="51e-5h-naX"/>
-                        <constraint firstItem="Ll5-gl-rLc" firstAttribute="top" secondItem="Cwc-Qu-e7T" secondAttribute="top" constant="24" id="7Bo-w5-anw"/>
+                        <constraint firstItem="Ll5-gl-rLc" firstAttribute="top" secondItem="Cwc-Qu-e7T" secondAttribute="top" constant="26" id="7Bo-w5-anw"/>
                         <constraint firstAttribute="bottom" secondItem="Ll5-gl-rLc" secondAttribute="bottom" constant="18" id="L0T-Wc-n08"/>
-                        <constraint firstItem="Ll5-gl-rLc" firstAttribute="leading" secondItem="8Zn-ne-DBC" secondAttribute="trailing" constant="8" symbolic="YES" id="UGe-Zf-0aw"/>
-                        <constraint firstAttribute="bottom" secondItem="8Zn-ne-DBC" secondAttribute="bottom" constant="12" id="XT1-F3-cK3"/>
                         <constraint firstItem="f6c-FB-q9c" firstAttribute="leading" secondItem="Ll5-gl-rLc" secondAttribute="trailing" constant="8" symbolic="YES" id="bwK-9i-chg"/>
-                        <constraint firstItem="8Zn-ne-DBC" firstAttribute="leading" secondItem="Cwc-Qu-e7T" secondAttribute="leading" constant="16" id="sOV-Sf-Kin"/>
-                        <constraint firstItem="8Zn-ne-DBC" firstAttribute="top" secondItem="Cwc-Qu-e7T" secondAttribute="top" constant="30" id="vMf-B8-lgF"/>
+                        <constraint firstAttribute="height" constant="64" id="cLz-OZ-9F3"/>
+                        <constraint firstAttribute="centerX" secondItem="Ll5-gl-rLc" secondAttribute="centerX" id="gJU-47-tya"/>
+                        <constraint firstAttribute="trailing" secondItem="f6c-FB-q9c" secondAttribute="trailing" constant="16" id="lSL-ik-kPx"/>
+                        <constraint firstItem="f6c-FB-q9c" firstAttribute="top" secondItem="Cwc-Qu-e7T" secondAttribute="top" constant="32" id="wO1-A2-4Nx"/>
                         <constraint firstItem="Ll5-gl-rLc" firstAttribute="centerX" secondItem="Cwc-Qu-e7T" secondAttribute="centerX" id="y0c-X9-jVS"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="L0T-Wc-n08"/>
+                            <exclude reference="y0c-X9-jVS"/>
+                            <exclude reference="bwK-9i-chg"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.94499999999999995" green="0.94499999999999995" blue="0.94899999999999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -56,7 +60,6 @@
         </view>
     </objects>
     <resources>
-        <image name="iconCalendar" width="22" height="22"/>
-        <image name="iconMenu" width="22" height="22"/>
+        <image name="iconCalendar" width="22" height="18"/>
     </resources>
 </document>

@@ -78,14 +78,17 @@ extension UIView {
 
 extension UILabel {
   
-  func setTextWithAnimation(text: String, duration: NSTimeInterval = 0.3) {
+  func setTextWithAnimation(text: String, callback: (() -> ())? = nil) {
     if self.text == text {
       return
     }
     
+    let duration: NSTimeInterval = 0.3
+    
     UIView.animateWithDuration(duration / 2, delay: 0, options: .CurveEaseInOut, animations: { self.alpha = 0 } ) {
       (completed) -> Void in
       self.text = text
+      callback?()
       
       UIView.animateWithDuration(duration / 2, delay: 0, options: .CurveEaseInOut, animations: {
         self.alpha = 1

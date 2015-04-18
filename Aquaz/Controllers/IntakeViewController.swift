@@ -55,6 +55,7 @@ class IntakeViewController: UIViewController {
     timeIsChoosen = true
     currentDate = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: time)
     navigationDateLabel?.text = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
+    UIHelper.adjustNavigationTitleViewSize(navigationItem)
   }
   
   override func viewDidLoad() {
@@ -63,7 +64,7 @@ class IntakeViewController: UIViewController {
     setupPredefinedAmountButtons()
     setupAmountRelatedControlsWithInitialAmount()
     setupApplyButton()
-    createCustomNavigationTitle()
+    setupNavigationTitle()
     setupDrinkView()
     setupSlider()
     
@@ -78,6 +79,11 @@ class IntakeViewController: UIViewController {
   
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    UIHelper.adjustNavigationTitleViewSize(navigationItem)
   }
 
   func preferredContentSizeChanged() {
@@ -124,7 +130,7 @@ class IntakeViewController: UIViewController {
     navigationController?.dismissViewControllerAnimated(true, completion: nil)
   }
   
-  private func createCustomNavigationTitle() {
+  private func setupNavigationTitle() {
     let dateText: String
     
     if timeIsChoosen {
@@ -262,8 +268,8 @@ private extension Units.Volume {
   
   var predefinedAmounts: (small: Double, medium: Double, large: Double) {
     switch self {
-    case Millilitres: return (small: 100.0, medium: 200.0, large: 500.0)
-    case FluidOunces: return (small: 118.29411825, medium: 236.5882365 , large: 502.7500025625) // 4, 8 and 17 fl oz
+    case Millilitres: return (small: 200.0, medium: 330.0, large: 500.0)
+    case FluidOunces: return (small: 236.5882365, medium: 354.8821875 , large: 502.7500025625) // 8, 12 and 17 fl oz
     }
   }
 }

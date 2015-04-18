@@ -143,12 +143,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func showDayViewControllerForToday() {
-    if let rootViewController = window?.rootViewController as? SWRevealViewController {
-      if let dayViewController = rootViewController.frontViewController.contentViewController() as? DayViewController {
-        dayViewController.refreshCurrentDay(showAlert: false)
-        dayViewController.switchToSelectDrinkPage()
-      } else {
-        rootViewController.performSegueWithIdentifier(SWSegueFrontIdentifier, sender: rootViewController)
+    if let
+      tabBarController = window?.rootViewController as? UITabBarController,
+      viewControllers = tabBarController.viewControllers as? [UIViewController]
+    {
+      for (index, viewController) in enumerate(viewControllers) {
+        if let dayViewController = viewController.contentViewController() as? DayViewController {
+          dayViewController.refreshCurrentDay(showAlert: false)
+          dayViewController.switchToSelectDrinkPage()
+          tabBarController.selectedIndex = index
+        }
       }
     }
   }
@@ -195,9 +199,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func refreshCurrentDayForDayViewController(#showAlert: Bool) {
-    if let rootViewController = window?.rootViewController as? SWRevealViewController {
-      if let frontNavigationController = rootViewController.frontViewController as? UINavigationController {
-        if let dayViewController = frontNavigationController.topViewController as? DayViewController {
+    if let
+      tabBarController = window?.rootViewController as? UITabBarController,
+      viewControllers = tabBarController.viewControllers as? [UIViewController]
+    {
+      for viewController in viewControllers {
+        if let dayViewController = viewController.contentViewController() as? DayViewController {
           dayViewController.refreshCurrentDay(showAlert: showAlert)
         }
       }

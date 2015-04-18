@@ -12,7 +12,6 @@ import AudioToolbox
 class NotificationsSoundViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
   @IBOutlet weak var tableView: UITableView!
-  weak var notificationsViewController: NotificationsViewController!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,8 +24,6 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
   @IBAction func saveWasTapped(sender: AnyObject) {
     let soundInfo = soundList[checkedIndex]
     Settings.notificationsSound.value = soundInfo.fileName
-    
-    notificationsViewController.recreateNotifications()
     
     navigationController?.popViewControllerAnimated(true)
   }

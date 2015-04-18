@@ -27,19 +27,32 @@ class CalendarViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    calendarView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-    calendarView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    calendarView.resetToDisplayMonthDate(date)
-    calendarView.selectedDate = date
-    calendarView.delegate = self
-    updateUI(initial: true)
-    applyStyle()
-
+    setupUI()
+    
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
   }
   
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+
+  private func setupUI() {
+    UIHelper.applyStyle(self)
+
+    calendarView.weekendBackgroundColor = StyleKit.calendarWeekendBackgroundColor
+    calendarView.weekendTextColor = StyleKit.calendarWeekendTextColor
+    calendarView.weekDayTitleTextColor = StyleKit.calendarWeekDayTitleTextColor
+    calendarView.selectedDayTextColor = StyleKit.calendarSelectedDayTextColor
+    calendarView.selectedDayBackgroundColor = StyleKit.calendarSelectedDayBackgroundColor
+    calendarView.todayBackgroundColor = StyleKit.calendarTodayBackgroundColor
+    calendarView.todayTextColor = StyleKit.calendarTodayTextColor
+    calendarView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    calendarView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    calendarView.resetToDisplayMonthDate(date)
+    calendarView.selectedDate = date
+    calendarView.delegate = self
+    
+    updateUI(initial: true)
   }
   
   func preferredContentSizeChanged() {
@@ -60,16 +73,6 @@ class CalendarViewController: UIViewController {
     }
   }
 
-  private func applyStyle() {
-    calendarView.weekendBackgroundColor = StyleKit.calendarWeekendBackgroundColor
-    calendarView.weekendTextColor = StyleKit.calendarWeekendTextColor
-    calendarView.weekDayTitleTextColor = StyleKit.calendarWeekDayTitleTextColor
-    calendarView.selectedDayTextColor = StyleKit.calendarSelectedDayTextColor
-    calendarView.selectedDayBackgroundColor = StyleKit.calendarSelectedDayBackgroundColor
-    calendarView.todayBackgroundColor = StyleKit.calendarTodayBackgroundColor
-    calendarView.todayTextColor = StyleKit.calendarTodayTextColor
-  }
-  
   @IBAction func switchToNextMonth(sender: AnyObject) {
     date = DateHelper.addToDate(date, years: 0, months: 1, days: 0)
     calendarView.switchToNextMonth()
