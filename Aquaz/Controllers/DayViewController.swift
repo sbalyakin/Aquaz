@@ -89,12 +89,17 @@ class DayViewController: UIViewController {
     super.viewWillLayoutSubviews()
     UIHelper.adjustNavigationTitleViewSize(navigationItem)
   }
-  
+    
   private func setupNotificationsObservation() {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
       name: GlobalConstants.notificationManagedObjectContextWasMerged,
       object: nil)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "managedObjectContextDidChange:",
+      name: NSManagedObjectContextDidSaveNotification,
+      object: CoreDataProvider.sharedInstance.managedObjectContext)
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
@@ -259,7 +264,6 @@ class DayViewController: UIViewController {
     // Add intakes diary view controller
     diaryViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.diaryViewControllerStoryboardID)
     
-    diaryViewController.dayViewController = self
     pages.append(diaryViewController)
     
     pageViewController.dataSource = self
@@ -353,7 +357,7 @@ class DayViewController: UIViewController {
     
     let title: String
     if page == selectDrinkViewController {
-      title = NSLocalizedString("DVC:Water Balance", value: "Water Balance", comment: "DayViewController: Top bar title for water balance page")
+      title = NSLocalizedString("DVC:Drinks", value: "Drinks", comment: "DayViewController: Top bar title for page with drinks selection")
     } else {
       title = NSLocalizedString("DVC:Diary", value: "Diary", comment: "DayViewController: Top bar title for water intakes diary")
     }
@@ -397,93 +401,10 @@ class DayViewController: UIViewController {
     // TODO: Take day offset in hours from settings
     intakes = Intake.fetchIntakesForDay(currentDate, dayOffsetInHours: 0, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
 
-    intakesWereChanged(doSort: false) // Sort is useless, because fetched intakes are already sorted
-  }
-  
-  func addIntake(intake: Intake) {
-    intakes.append(intake)
-    
-    sortIntakes()
-    
-    intakesMultiProgressView.updateWithAnimation { [unowned self] in
-      if let section = self.multiProgressSections[intake.drink] {
-        section.factor += CGFloat(intake.waterAmount)
-      }
-    }
-
-    let needCheckForWaterIntakeCompletion = dailyWaterIntake < waterGoalAmount
-    
-    dailyWaterIntake += intake.waterAmount
-    
-    diaryViewController.updateTable(intakes)
-    
-    updateNotifications(intakeDate: intake.date)
-    
-    if needCheckForWaterIntakeCompletion {
-      checkForWaterIntakeCompletion()
-    }
-  }
-  
-  private func sortIntakes() {
-    intakes.sort() {
-      $0.date.isEarlierThan($1.date)
-    }
-  }
-  
-  private func updateNotifications(#intakeDate: NSDate) {
-    if !Settings.notificationsEnabled.value {
-      return
-    }
-    
-    let isToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
-    if !isToday {
-      return
-    }
-    
-    if Settings.notificationsUseWaterIntake.value && dailyWaterIntake >= waterGoalAmount {
-      NotificationsHelper.removeAllNotifications()
-      
-      let nextDayDate = DateHelper.addToDate(intakeDate, years: 0, months: 0, days: 1)
-      NotificationsHelper.scheduleNotificationsFromSettingsForDate(nextDayDate)
-    } else {
-      NotificationsHelper.rescheduleNotificationsBecauseOfIntake(intakeDate: intakeDate)
-    }
+    intakesWereChanged()
   }
 
-  private func checkForWaterIntakeCompletion() {
-    let isToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
-    if !isToday {
-      return
-    }
-    
-    if dailyWaterIntake >= waterGoalAmount {
-      performSegueWithIdentifier(Constants.showCompleteSegue, sender: self)
-    }
-  }
-
-  func removeIntake(intake: Intake) {
-    let index = find(intakes, intake)
-    if index == nil {
-      Logger.logError("Intake for removing is not found")
-      return
-    }
-    
-    intakes.removeAtIndex(index!)
-    
-    if let section = multiProgressSections[intake.drink] {
-      section.factor -= CGFloat(intake.waterAmount)
-    }
-
-    dailyWaterIntake -= intake.waterAmount
-    
-    diaryViewController.updateTable(intakes)
-  }
-  
-  func intakesWereChanged(#doSort: Bool) {
-    if doSort {
-      sortIntakes()
-    }
-    
+  private func intakesWereChanged() {
     // Group intakes by drinks
     var intakesMap: [Drink: Double] = [:]
     
@@ -511,8 +432,52 @@ class DayViewController: UIViewController {
         section.factor = CGFloat(amount)
       }
     }
+    
+    showCongratulationsAboutWaterGoalReaching()
+    
+    updateNotifications()
   }
   
+  private func updateNotifications() {
+    if !Settings.notificationsEnabled.value {
+      return
+    }
+    
+    let isToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
+    if !isToday {
+      return
+    }
+    
+    if let lastIntake = intakes.last {
+      if Settings.notificationsCheckWaterGoalReaching.value && dailyWaterIntake >= waterGoalAmount {
+        NotificationsHelper.removeAllNotifications()
+        
+        let nextDayDate = DateHelper.addToDate(lastIntake.date, years: 0, months: 0, days: 1)
+        NotificationsHelper.scheduleNotificationsFromSettingsForDate(nextDayDate)
+      } else {
+        NotificationsHelper.rescheduleNotificationsBecauseOfIntake(intakeDate: lastIntake.date)
+      }
+    }
+  }
+
+  private func showCongratulationsAboutWaterGoalReaching() {
+//    performSegueWithIdentifier(Constants.showCompleteSegue, sender: self)
+    let isToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
+    if !isToday {
+      return
+    }
+    
+    let waterGoalReachingIsShownForToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: Settings.uiWaterGoalReachingIsShownForDate.value)
+    if waterGoalReachingIsShownForToday {
+      return
+    }
+    
+    if dailyWaterIntake >= waterGoalAmount {
+      Settings.uiWaterGoalReachingIsShownForDate.value = NSDate()
+      performSegueWithIdentifier(Constants.showCompleteSegue, sender: self)
+    }
+  }
+
   @IBAction func intakeButtonWasTapped(sender: AnyObject) {
     Settings.uiDisplayDailyWaterIntakeInPercents.value = !Settings.uiDisplayDailyWaterIntakeInPercents.value
     updateIntakeButton()

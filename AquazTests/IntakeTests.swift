@@ -153,7 +153,7 @@ class IntakeTests: XCTestCase {
     addGroupedIntakes([
       ("05.01.2015 01:00:01", .Beer,         1000),
       ("05.01.2015 15:15:14", .Wine,         1000),
-      ("05.01.2015 20:00:10", .StrongLiquor, 2000)])
+      ("05.01.2015 20:00:10", .HardLiquor, 2000)])
     
     // Out of check
     addIntake("06.01.2015 00:00:00", .Water, 1000)
@@ -220,7 +220,7 @@ class IntakeTests: XCTestCase {
     addGroupedIntakes(31, [
       ("10.05.2015", .Beer,         1000),
       ("01.05.2015", .Wine,         1000),
-      ("03.05.2015", .StrongLiquor, 2000),
+      ("03.05.2015", .HardLiquor, 2000),
       ("15.05.2015", .Energy,       500),
       ("30.05.2015", .Soda,         200)])
 

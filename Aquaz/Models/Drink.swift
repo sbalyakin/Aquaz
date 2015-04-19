@@ -32,7 +32,7 @@ public class Drink: CodingManagedObject, NamedEntity {
     static let energyTitle       = NSLocalizedString("D:Energy",        value: "Energy",        comment: "Drink: Title for energetic drink")
     static let beerTitle         = NSLocalizedString("D:Beer",          value: "Beer",          comment: "Drink: Title for beer")
     static let wineTitle         = NSLocalizedString("D:Wine",          value: "Wine",          comment: "Drink: Title for wine")
-    static let strongLiquorTitle = NSLocalizedString("D:Strong Liquor", value: "Strong Liquor", comment: "Drink: Title for strong liquor")
+    static let hardLiquorTitle   = NSLocalizedString("D:Hard Liquor",   value: "Hard Liquor",   comment: "Drink: Title for hard liquor")
     static let darkColorShadowLevel: CGFloat = 0.2
     // Use the cache to store previously used drink objects
     static var cachedDrinks: [Int: Drink] = [:]
@@ -50,11 +50,11 @@ public class Drink: CodingManagedObject, NamedEntity {
     case Energy
     case Beer
     case Wine
-    case StrongLiquor
+    case HardLiquor
 
     // Must be updated if new drink is added
     static var count: Int {
-      return StrongLiquor.rawValue + 1
+      return HardLiquor.rawValue + 1
     }
   }
 
@@ -171,10 +171,10 @@ public class Drink: CodingManagedObject, NamedEntity {
       _drawDrinkFunction = StyleKit.drawWineDrink
       _mainColor = StyleKit.wineColor
       
-    case .StrongLiquor:
-      _localizedName = Static.strongLiquorTitle
-      _drawDrinkFunction = StyleKit.drawStrongLiquorDrink
-      _mainColor = StyleKit.strongLiquorColor
+    case .HardLiquor:
+      _localizedName = Static.hardLiquorTitle
+      _drawDrinkFunction = StyleKit.drawHardLiquorDrink
+      _mainColor = StyleKit.hardLiquorColor
     }
     
     _darkColor = Drink.getDarkColorFromDrinkColor(_mainColor)

@@ -1,11 +1,11 @@
-/* Class = "UINavigationItem"; title = "Choose time"; ObjectID = "1ri-5R-qlM"; */
-"1ri-5R-qlM.title" = "Выберите время";
+/* Class = "UINavigationItem"; title = "Time Selection"; ObjectID = "1ri-5R-qlM"; */
+"1ri-5R-qlM.title" = "Выбор Времени";
 
 /* Class = "UINavigationItem"; title = "Support"; ObjectID = "4Do-hQ-n3x"; */
 "4Do-hQ-n3x.title" = "Поддержка";
 
-/* Class = "UINavigationItem"; title = "Choose day"; ObjectID = "4v4-BL-wZE"; */
-"4v4-BL-wZE.title" = "Выберите день";
+/* Class = "UINavigationItem"; title = "Day Selection"; ObjectID = "4v4-BL-wZE"; */
+"4v4-BL-wZE.title" = "Выбор Дня";
 
 /* Class = "UILabel"; text = "Support"; ObjectID = "5ut-mi-WHN"; */
 "5ut-mi-WHN.text" = "Поддержка";

@@ -22,8 +22,6 @@ class IntakeViewController: UIViewController {
   @IBOutlet weak var navigationTitleLabel: UILabel!
   @IBOutlet weak var navigationDateLabel: UILabel!
   
-  weak var dayViewController: DayViewController!
-  
   var currentDate: NSDate! {
     didSet {
       isCurrentDayToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
@@ -182,14 +180,14 @@ class IntakeViewController: UIViewController {
   }
   
   private func applyIntake(amount: Double) {
-    let adjustedAmount = prepareAmountForStoring(amount)
-    
-    switch viewMode {
-    case .Add: addIntake(amount: adjustedAmount)
-    case .Edit: updateIntake(amount: adjustedAmount)
+    navigationController?.dismissViewControllerAnimated(true) {
+      let adjustedAmount = self.prepareAmountForStoring(amount)
+      
+      switch self.viewMode {
+      case .Add: self.addIntake(amount: adjustedAmount)
+      case .Edit: self.updateIntake(amount: adjustedAmount)
+      }
     }
-    
-    navigationController?.dismissViewControllerAnimated(true, completion: nil)
   }
   
   private func prepareAmountForStoring(amount: Double) -> Double {
@@ -202,17 +200,15 @@ class IntakeViewController: UIViewController {
     if timeIsChoosen {
       date = currentDate
     } else {
-      if isCurrentDayToday {
-        date = NSDate()
-      } else {
-        date = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: NSDate())
-      }
+      date = isCurrentDayToday ? NSDate() : DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: NSDate())
     }
     
     drink.recentAmount.amount = amount
-    if let intake = Intake.addEntity(drink: drink, amount: amount, date: date, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
-      dayViewController.addIntake(intake)
-    }
+    Intake.addEntity(
+      drink: drink,
+      amount: amount,
+      date: date,
+      managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
   }
   
   private func updateIntake(#amount: Double) {
@@ -220,8 +216,6 @@ class IntakeViewController: UIViewController {
       intake.amount = amount
       intake.date = currentDate
       CoreDataProvider.sharedInstance.saveContext()
-      
-      dayViewController.intakesWereChanged(doSort: true)
     }
   }
 

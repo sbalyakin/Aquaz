@@ -29,7 +29,7 @@ public class StyleKit : NSObject {
     static var wineColor: UIColor = UIColor(red: 0.839, green: 0.259, blue: 0.357, alpha: 1.000)
     static var controlTintColor: UIColor = StyleKit.waterColor
     static var beerColor: UIColor = UIColor(red: 237/255, green: 177/255, blue: 77/255, alpha: 1.000)
-    static var strongLiquorColor: UIColor = UIColor(red: 0.651, green: 0.290, blue: 0.125, alpha: 1.000)
+    static var hardLiquorColor: UIColor = UIColor(red: 0.651, green: 0.290, blue: 0.125, alpha: 1.000)
     static var pageBackgroundColor: UIColor = UIColor(red: 0.945, green: 0.945, blue: 0.949, alpha: 1.000)
     static var barBackgroundColor: UIColor = StyleKit.waterColor
     static var barTextColor: UIColor = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
@@ -62,7 +62,7 @@ public class StyleKit : NSObject {
   public class var wineColor: UIColor { return Cache.wineColor }
   public class var controlTintColor: UIColor { return Cache.controlTintColor }
   public class var beerColor: UIColor { return Cache.beerColor }
-  public class var strongLiquorColor: UIColor { return Cache.strongLiquorColor }
+  public class var hardLiquorColor: UIColor { return Cache.hardLiquorColor }
   public class var pageBackgroundColor: UIColor { return Cache.pageBackgroundColor }
   public class var barBackgroundColor: UIColor { return Cache.barBackgroundColor }
   public class var barTextColor: UIColor { return Cache.barTextColor }
@@ -630,9 +630,9 @@ public class StyleKit : NSObject {
     bezier4Path.fill()
   }
   
-  public class func drawStrongLiquorDrink(#frame: CGRect) {
+  public class func drawHardLiquorDrink(#frame: CGRect) {
     //// Color Declarations
-    let strongLiquorColor = UIColor(red: 0.651, green: 0.290, blue: 0.125, alpha: 1.000)
+    let hardLiquorColor = UIColor(red: 0.651, green: 0.290, blue: 0.125, alpha: 1.000)
     
     
     //// Subframes
@@ -650,7 +650,7 @@ public class StyleKit : NSObject {
     oval1Path.closePath()
     oval1Path.miterLimit = 4;
     
-    strongLiquorColor.setFill()
+    hardLiquorColor.setFill()
     oval1Path.fill()
     
     

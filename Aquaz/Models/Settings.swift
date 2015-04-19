@@ -124,6 +124,11 @@ public class Settings {
     key: "UI - Day page has displayed one", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
+  static let uiWaterGoalReachingIsShownForDate = SettingsOrdinalItem(
+    key: "UI - Water goal reaching is shown for date",
+    initialValue: DateHelper.addToDate(NSDate(), years: -1, months: 0, days: 0), // It should be any not today date
+    userDefaults: UserDefaultsProvider.sharedUserDefaults)
+
   static let notificationsEnabled = SettingsOrdinalItem(
     key: "Notifications - Enabled", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
@@ -148,8 +153,8 @@ public class Settings {
     key: "Notifications - Smart", initialValue: true,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  static let notificationsUseWaterIntake = SettingsOrdinalItem(
-    key: "Notifications - Use water intake", initialValue: true,
+  static let notificationsCheckWaterGoalReaching = SettingsOrdinalItem(
+    key: "Notifications - Check water goal reaching", initialValue: true,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
   private class var isMetric: Bool {

@@ -12,8 +12,6 @@ class DiaryViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
   
-  weak var dayViewController: DayViewController!
-
   private var intakes: [Intake] = []
   
   private var sizingCell: DiaryTableViewCell!
@@ -44,14 +42,12 @@ class DiaryViewController: UIViewController {
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == Constants.editIntakeSegue {
-      if let intakeViewController = segue.destinationViewController.contentViewController as? IntakeViewController {
-        if let indexPath = tableView.indexPathForSelectedRow() {
-          let intake = intakes[indexPath.row]
-          intakeViewController.intake = intake
-          intakeViewController.dayViewController = dayViewController
-        }
-      }
+    if segue.identifier == Constants.editIntakeSegue,
+      let intakeViewController = segue.destinationViewController.contentViewController as? IntakeViewController,
+      indexPath = tableView.indexPathForSelectedRow()
+    {
+      let intake = intakes[indexPath.row]
+      intakeViewController.intake = intake
     }
   }
   
@@ -80,7 +76,6 @@ extension DiaryViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if editingStyle == .Delete {
       let intake = intakes[indexPath.row]
-      dayViewController.removeIntake(intake)
       intake.deleteEntity()
     }
   }

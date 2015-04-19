@@ -25,22 +25,25 @@ class ExtraFactorsViewController: OmegaSettingsViewController {
   }
   
   override func createTableCellsSections() -> [TableCellsSection] {
-    let extraFactorsSectionHeader = NSLocalizedString("EFVC:Extra factors", value: "Extra factors",
-      comment: "ExtraFactorsViewController: Header for settings section [Extra factors]")
+    let highActivitySectionFooter = NSLocalizedString(
+      "EFVC:Specify daily water intake increasing when High Physical Activity mode is turned on.",
+      value: "Specify daily water intake increasing when High Physical Activity mode is turned on.",
+      comment: "ExtraFactorsViewController: Footer for high physical activity section")
     
-    let highActivitySectionFooter = NSLocalizedString("EFVC:Additional water goal related to high activity", value: "Additional water goal related to high activity",
-      comment: "ExtraFactorsViewController: Footer for high activity section")
+    // TODO: move to a localization file
+    //let a = "Укажите повышение суточной нормы при включении режима Высокая Физическая Активность"
+    let highActivityTitle = NSLocalizedString("EFVC:High Physical Activity", value: "High Physical Activity",
+      comment: "ExtraFactorsViewController: Table cell title for [High Physical Activity] setting")
     
-    let highActivityTitle = NSLocalizedString("EFVC:High Activity", value: "High Activity",
-      comment: "ExtraFactorsViewController: Table cell title for [High Activity] setting")
+    let hotWeatherSectionFooter = NSLocalizedString(
+      "EFVC:Specify daily water intake increasing when Hot Weather mode is turned on.",
+      value: "Specify daily water intake increasing when Hot Weather mode is turned on.",
+      comment: "ExtraFactorsViewController: Footer for hot weather section")
     
-    let hotDaySectionFooter = NSLocalizedString("EFVC:Additional water goal related to high day temperature", value: "Additional water goal related to high day temperature",
-      comment: "ExtraFactorsViewController: Footer for hot day section")
+    let hotWeatherTitle = NSLocalizedString("EFVC:Hot Weather", value: "Hot Weather",
+      comment: "ExtraFactorsViewController: Table cell title for [Hot Weather] setting")
     
-    let hotDayTitle = NSLocalizedString("EFVC:Hot Day", value: "Hot Day",
-      comment: "ExtraFactorsViewController: Table cell title for [Hot Day] setting")
-    
-    // High activity section
+    // High Physical Activity section
     let factorsCollection = DoubleCollection(
       minimumValue: 0.1,
       maximumValue: 1.0,
@@ -56,26 +59,25 @@ class ExtraFactorsViewController: OmegaSettingsViewController {
     highActivityCell.image = UIImage(named: "iconHighActivityActive")
     
     let highActivitySection = TableCellsSection()
-    highActivitySection.headerTitle = extraFactorsSectionHeader
     highActivitySection.footerTitle = highActivitySectionFooter
     highActivitySection.tableCells = [highActivityCell]
     
-    // Hot day section
-    let hotDayCell = createRangedRightDetailTableCell(
-      title: hotDayTitle,
+    // Hot Weather section
+    let hotWeatherCell = createRangedRightDetailTableCell(
+      title: hotWeatherTitle,
       settingsItem: Settings.generalHotDayExtraFactor,
       collection: factorsCollection,
       pickerTableCellHeight: .Large,
       stringFromValueFunction: { [unowned self] in self.stringFromFactor($0) })
     
-    hotDayCell.image = UIImage(named: "iconHotActive")
+    hotWeatherCell.image = UIImage(named: "iconHotActive")
     
-    let hotDaySection = TableCellsSection()
-    hotDaySection.footerTitle = hotDaySectionFooter
-    hotDaySection.tableCells = [hotDayCell]
+    let hotWeatherSection = TableCellsSection()
+    hotWeatherSection.footerTitle = hotWeatherSectionFooter
+    hotWeatherSection.tableCells = [hotWeatherCell]
     
     // Adding sections
-    return [highActivitySection, hotDaySection]
+    return [highActivitySection, hotWeatherSection]
   }
 
   private func stringFromFactor(value: Double) -> String {

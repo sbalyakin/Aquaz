@@ -28,10 +28,6 @@ class UnitsViewController: OmegaSettingsViewController {
     let heightTitle = NSLocalizedString("UVC:Height", value: "Height",
       comment: "UnitsViewController: Table cell title for [Height] setting")
     
-    let unitsSectionHeader = NSLocalizedString("UVC:Measurements units", value: "Measurements units",
-      comment: "UnitsViewController: Header for settings section [Measurements units]")
-    
-    // Measurements section
     let volumeCell = createEnumSegmentedTableCell(
       title: volumeTitle,
       settingsItem: Settings.generalVolumeUnits,
@@ -48,7 +44,6 @@ class UnitsViewController: OmegaSettingsViewController {
       segmentsWidth: 70)
     
     let unitsSection = TableCellsSection()
-    unitsSection.headerTitle = unitsSectionHeader
     unitsSection.tableCells = [
       volumeCell,
       weightCell,

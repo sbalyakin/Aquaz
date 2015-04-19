@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -17,7 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="DbZ-Sj-oMQ" kind="relationship" relationship="viewControllers" id="ynN-69-b5u"/>
@@ -86,7 +86,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Z5E-Gz-oNX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="keI-ET-C2O">
-                        <rect key="frame" x="0.0" y="44" width="600" height="487"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KHN-d8-Fus" userLabel="Summary Bar" customClass="DaySummaryView" customModule="Aquaz" customModuleProvider="target">
@@ -163,7 +163,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="qSt-Nh-d9B" firstAttribute="leading" secondItem="keI-ET-C2O" secondAttribute="leading" id="280-7G-JnL"/>
-                            <constraint firstItem="Z5E-Gz-oNX" firstAttribute="top" secondItem="qSt-Nh-d9B" secondAttribute="bottom" id="5lu-UO-v6S"/>
+                            <constraint firstItem="qSt-Nh-d9B" firstAttribute="bottom" secondItem="Z5E-Gz-oNX" secondAttribute="bottom" id="5lu-UO-v6S"/>
                             <constraint firstItem="KHN-d8-Fus" firstAttribute="leading" secondItem="keI-ET-C2O" secondAttribute="leading" id="LfA-QQ-U0L"/>
                             <constraint firstItem="qSt-Nh-d9B" firstAttribute="top" secondItem="KHN-d8-Fus" secondAttribute="bottom" id="Nnl-ws-HbX"/>
                             <constraint firstAttribute="trailing" secondItem="qSt-Nh-d9B" secondAttribute="trailing" id="Uh4-PX-urZ"/>
@@ -177,8 +177,8 @@
                             <rect key="frame" x="180" y="6" width="240" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Water Balance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z84-wB-oAh">
-                                    <rect key="frame" x="66" y="0.0" width="109" height="20"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drinks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z84-wB-oAh">
+                                    <rect key="frame" x="96" y="0.0" width="48" height="20"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -483,7 +483,7 @@
             </objects>
             <point key="canvasLocation" x="5100" y="-1196"/>
         </scene>
-        <!--Choose time-->
+        <!--Time Selection-->
         <scene sceneID="gmZ-vb-qAs">
             <objects>
                 <viewController id="EVr-Rr-PxB" customClass="PickTimeViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
@@ -543,7 +543,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Choose time" id="1ri-5R-qlM">
+                    <navigationItem key="navigationItem" title="Time Selection" id="1ri-5R-qlM">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="MgC-Iv-IfB">
                             <connections>
                                 <action selector="cancelButtonWasTapped:" destination="EVr-Rr-PxB" id="nXQ-1y-u2d"/>
@@ -683,25 +683,51 @@
                                     <action selector="closeButtonWasTapped:" destination="lbQ-YN-p2O" eventType="touchUpInside" id="2M9-Wc-n0S"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations! You are reached your water intake for today!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LdP-9M-cRB">
-                                <rect key="frame" x="16" y="268" width="568" height="63"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reward" translatesAutoresizingMaskIntoConstraints="NO" id="34H-4N-gVl">
+                                <rect key="frame" x="250" y="200" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="IdJ-13-DH8"/>
+                                    <constraint firstAttribute="height" constant="100" id="roj-Nh-nRb"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations! You are drink your water goal for today!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="LdP-9M-cRB">
+                                <rect key="frame" x="16" y="308" width="568" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="OoF-BQ-TCb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="OoF-BQ-TCb"/>
+                                    </mask>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="LdP-9M-cRB" firstAttribute="top" secondItem="34H-4N-gVl" secondAttribute="bottom" constant="8" symbolic="YES" id="9jt-tA-PIg"/>
                             <constraint firstItem="tul-MI-hEV" firstAttribute="leading" secondItem="XEc-tF-5yF" secondAttribute="leadingMargin" id="9ny-I2-zOW"/>
+                            <constraint firstItem="LdP-9M-cRB" firstAttribute="top" secondItem="34H-4N-gVl" secondAttribute="bottom" constant="8" symbolic="YES" id="SVM-Ta-gKN"/>
+                            <constraint firstAttribute="centerX" secondItem="34H-4N-gVl" secondAttribute="centerX" id="UfW-Xa-rRA"/>
+                            <constraint firstItem="34H-4N-gVl" firstAttribute="top" secondItem="CjG-7t-tcS" secondAttribute="bottom" constant="140" id="VzA-3Z-zom"/>
                             <constraint firstItem="LdP-9M-cRB" firstAttribute="leading" secondItem="XEc-tF-5yF" secondAttribute="leadingMargin" id="ZEU-MV-2Wi"/>
+                            <constraint firstItem="34H-4N-gVl" firstAttribute="centerX" secondItem="LdP-9M-cRB" secondAttribute="centerX" id="ZGz-vV-fZb"/>
                             <constraint firstItem="tul-MI-hEV" firstAttribute="trailing" secondItem="XEc-tF-5yF" secondAttribute="trailingMargin" id="eSi-FJ-eBW"/>
                             <constraint firstItem="1Pr-4Z-YuX" firstAttribute="top" secondItem="tul-MI-hEV" secondAttribute="bottom" constant="20" id="gW5-3i-eSh"/>
+                            <constraint firstAttribute="centerY" secondItem="34H-4N-gVl" secondAttribute="bottom" id="qTP-Bs-ywf"/>
                             <constraint firstItem="LdP-9M-cRB" firstAttribute="trailing" secondItem="XEc-tF-5yF" secondAttribute="trailingMargin" id="tUh-Sq-dhF"/>
                             <constraint firstAttribute="centerY" secondItem="LdP-9M-cRB" secondAttribute="centerY" constant="0.5" id="zi4-wJ-Pqj"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="SVM-Ta-gKN"/>
+                                <exclude reference="zi4-wJ-Pqj"/>
+                                <exclude reference="VzA-3Z-zom"/>
+                                <exclude reference="ZGz-vV-fZb"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o6b-mH-PF7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -838,7 +864,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Choose day" id="4v4-BL-wZE">
+                    <navigationItem key="navigationItem" title="Day Selection" id="4v4-BL-wZE">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="7Ui-aT-8A0">
                             <connections>
                                 <action selector="cancelWasTapped:" destination="nY1-e6-BNo" id="L3g-tP-4xg"/>
@@ -987,7 +1013,7 @@
                     <connections>
                         <outlet property="datePeriodLabel" destination="qpS-Mu-cye" id="Geq-hC-xHB"/>
                         <outlet property="weekStatisticsView" destination="ar0-25-CDE" id="OhM-Em-x4Q"/>
-                        <segue destination="DbZ-Sj-oMQ" kind="show" identifier="Show Day" id="CSP-Z5-lGS"/>
+                        <segue destination="x3I-fN-BQH" kind="show" identifier="Show Day" id="a5J-vo-YYv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W4p-cu-hbh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1077,7 +1103,7 @@
                     <connections>
                         <outlet property="monthLabel" destination="oGq-1N-zd1" id="PIt-ro-EmV"/>
                         <outlet property="monthStatisticsView" destination="HC1-Ha-eED" id="efy-tL-T4p"/>
-                        <segue destination="DbZ-Sj-oMQ" kind="show" identifier="Show Day" id="hsH-bF-ptx"/>
+                        <segue destination="x3I-fN-BQH" kind="show" identifier="Show Day" id="cJJ-Wb-0ke"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Z2-hQ-bE2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1168,7 +1194,7 @@
             </objects>
             <point key="canvasLocation" x="2682" y="-28"/>
         </scene>
-        <!--Notifications Sound View Controller-->
+        <!--Notification Sound-->
         <scene sceneID="1uz-4m-rIl">
             <objects>
                 <viewController id="6oZ-Db-dYh" customClass="NotificationsSoundViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
@@ -1215,7 +1241,7 @@
                             <constraint firstItem="Jdn-gh-rpz" firstAttribute="top" secondItem="co4-9M-YyE" secondAttribute="bottom" id="n6a-9R-0BF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ywR-B4-HoE">
+                    <navigationItem key="navigationItem" title="Notification Sound" id="ywR-B4-HoE">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="wb3-tx-DEu">
                             <connections>
                                 <action selector="saveWasTapped:" destination="6oZ-Db-dYh" id="T4F-iC-tza"/>
@@ -1387,7 +1413,7 @@
             </objects>
             <point key="canvasLocation" x="2694" y="1644"/>
         </scene>
-        <!--Extra Factors-->
+        <!--Special Modes-->
         <scene sceneID="ky2-ab-OOE">
             <objects>
                 <viewController id="3WE-Cl-pAb" customClass="ExtraFactorsViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
@@ -1416,7 +1442,7 @@
                             <constraint firstItem="72t-LM-6sV" firstAttribute="top" secondItem="niu-4L-x9S" secondAttribute="top" id="TLS-k1-7a0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Extra Factors" id="LeW-y3-3hQ"/>
+                    <navigationItem key="navigationItem" title="Special Modes" id="LeW-y3-3hQ"/>
                     <connections>
                         <outlet property="tableView" destination="72t-LM-6sV" id="56R-tV-uLv"/>
                     </connections>
@@ -1425,7 +1451,7 @@
             </objects>
             <point key="canvasLocation" x="2694" y="3115"/>
         </scene>
-        <!--Units-->
+        <!--Measurement Units-->
         <scene sceneID="Ky5-sM-c1O">
             <objects>
                 <viewController id="RqO-tR-Iry" customClass="UnitsViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
@@ -1454,7 +1480,7 @@
                             <constraint firstItem="ZnI-fz-l72" firstAttribute="leading" secondItem="UJI-ky-yqS" secondAttribute="leading" id="tKS-Rs-gcq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Units" id="gpX-c9-GbZ"/>
+                    <navigationItem key="navigationItem" title="Measurement Units" id="gpX-c9-GbZ"/>
                     <connections>
                         <outlet property="tableView" destination="ZnI-fz-l72" id="EoC-IU-ncR"/>
                     </connections>
@@ -1642,7 +1668,7 @@
         <scene sceneID="FtE-Ot-0fq">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DbZ-Sj-oMQ" userLabel="Day Navigation Controller" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Drink" image="tabbarWaterInactive" id="ZJP-Cb-pl3">
+                    <tabBarItem key="tabBarItem" title="Drinks" image="tabbarWaterInactive" id="ZJP-Cb-pl3">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="tabbarWaterActive"/>
                         </userDefinedRuntimeAttributes>
@@ -1653,7 +1679,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="JYG-TM-AjL">
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="JYG-TM-AjL">
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -1801,6 +1827,7 @@
         <image name="iconRight" width="22" height="22"/>
         <image name="iconRightActive" width="22" height="22"/>
         <image name="iconTime" width="22" height="22"/>
+        <image name="reward" width="100" height="100"/>
         <image name="supportFacebook" width="60" height="60"/>
         <image name="supportLogo" width="60" height="60"/>
         <image name="supportMail" width="60" height="60"/>
@@ -1814,6 +1841,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="sL9-fM-OF1"/>
-        <segue reference="ynN-69-b5u"/>
+        <segue reference="kff-4M-IxV"/>
     </inferredMetricsTieBreakers>
 </document>

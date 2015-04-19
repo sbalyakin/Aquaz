@@ -55,25 +55,28 @@ class NotificationsViewController: OmegaSettingsViewController {
     let intervalMinuteTitle = NSLocalizedString("NVC:min", value: "min",
       comment: "NotificationsViewController: contraction for minute")
 
-    let soundTitle = NSLocalizedString("NVC:Sound", value: "Sound",
-      comment: "NotificationsViewController: Title for [Sound] setting")
+    let soundTitle = NSLocalizedString("NVC:Notification Sound", value: "Notification Sound",
+      comment: "NotificationsViewController: Title for [Notification Sound] setting")
     
     let smartNotificationsTitle = NSLocalizedString("NVC:Smart Notifications", value: "Smart Notifications",
       comment: "NotificationsViewController: Title for [Smart Notifications] setting")
     
-    let useWaterIntakeTitle = NSLocalizedString("NVC:Use Water Intake", value: "Use Water Intake",
-      comment: "NotificationsViewController: Title for [Use Water Intake] setting")
+    let limitNotificationsTitle = NSLocalizedString("NVC:Limit Notifications", value: "Limit Notifications",
+      comment: "NotificationsViewController: Title for [Limit Notifications] setting")
+    
+    // TODO: move to a localization file
+    // "Включите режим Умные Оповещения чтобы откладывать оповещения, учитывая время употребления напитков."
     
     let smartNotificationsSectionFooter = NSLocalizedString(
-      "NVC:Turn smart notifications on and notifications will be shown not earlier than specified interval after the last intake",
-      value: "Turn smart notifications on and notifications will be shown not earlier than specified interval after the last intake",
-      comment: "NotificationsViewController: Footer text for [Smart notifications] section")
+      "NVC:Enable to snooze notifications taking into account time of drink intakes.",
+      value: "Enable to snooze notifications taking into account time of drink intakes.",
+      comment: "NotificationsViewController: Footer text for [Smart Notifications] section")
     
-    let useWaterIntakeSectionFooter = NSLocalizedString("NVC:Do not notify if daily water intake is reached",
-      value: "Do not notify if daily water intake is reached",
-      comment: "NotificationsViewController: Footer text for [Use water intake] section")
+    let limitNotificationsSectionFooter = NSLocalizedString("NVC:When enabled, notifications will not be shown if you already drink your daily water intake.",
+      value: "When enabled, notifications will not be shown if you already drink your daily water intake.",
+      comment: "NotificationsViewController: Footer text for [Limit Notifications] section")
     
-    // Main section
+    // General section
     
     let enableNotificationsCell = createSwitchTableCell(
       title: enableNotificationsTitle,
@@ -137,7 +140,7 @@ class NotificationsViewController: OmegaSettingsViewController {
       intervalCell,
       soundCell]
     
-    // Smart notifications section
+    // Smart Notifications section
     
     let smartNotificationsCell = createSwitchTableCell(
       title: smartNotificationsTitle,
@@ -147,17 +150,17 @@ class NotificationsViewController: OmegaSettingsViewController {
     smartNotificationsSection.footerTitle = smartNotificationsSectionFooter
     smartNotificationsSection.tableCells = [smartNotificationsCell]
     
-    // Use water intake section
+    // Limit Notifications section
     
-    let useWaterIntakeCell = createSwitchTableCell(
-      title: useWaterIntakeTitle,
-      settingsItem: Settings.notificationsUseWaterIntake)
+    let limitNotificationsCell = createSwitchTableCell(
+      title: limitNotificationsTitle,
+      settingsItem: Settings.notificationsCheckWaterGoalReaching)
     
-    let useWaterIntakeSection = TableCellsSection()
-    useWaterIntakeSection.footerTitle = useWaterIntakeSectionFooter
-    useWaterIntakeSection.tableCells = [useWaterIntakeCell]
+    let limitNotificationsSection = TableCellsSection()
+    limitNotificationsSection.footerTitle = limitNotificationsSectionFooter
+    limitNotificationsSection.tableCells = [limitNotificationsCell]
 
-    return [mainSection, smartNotificationsSection, useWaterIntakeSection]
+    return [mainSection, smartNotificationsSection, limitNotificationsSection]
   }
   
   private class func stringFromTimeInterval(timeInterval: NSTimeInterval) -> String {

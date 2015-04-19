@@ -84,8 +84,14 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     let physicalActivityTitle = NSLocalizedString("WGVC:Physical Activity", value: "Physical Activity",
       comment: "WaterGoalViewController: Table cell title for [Physical Activity] setting")
     
-    let waterGoalTitle = NSLocalizedString("WGVC:Water Intake", value: "Water Intake",
-      comment: "WaterGoalViewController: Table cell title for [Water Intake] setting")
+    let dailyWaterIntakeTitle = NSLocalizedString("WGVC:Daily Water Intake", value: "Daily Water Intake",
+      comment: "WaterGoalViewController: Table cell title for [Daily Water Intake] setting")
+    
+    let dailyWaterIntakeSectionFooter = NSLocalizedString("Calculated daily water intake is only an estimate. Always take into account needs of your body. Please consult your health care provider for advice about a specific medical condition.",
+      value: "Calculated daily water intake is only an estimate. Always take into account needs of your body. Please consult your health care provider for advice about a specific medical condition.",
+      comment: "Footer for section with calculated daily water intake")
+
+    // Information section
     
     // Gender cell
     genderCell = createEnumRightDetailTableCell(
@@ -153,28 +159,30 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     physicalActivityCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
     
     let volumeUnit = Settings.generalVolumeUnits.value.unit
-    let waterGoalTitleFinal = waterGoalTitle +  " (\(volumeUnit.contraction))"
-    
-    waterGoalCell = createTextFieldTableCell(
-      title: waterGoalTitleFinal, settingsItem:
-      Settings.userWaterGoal,
-      valueFromStringFunction: WelcomeWizardMetricsViewController.metricWaterGoalFromString,
-      stringFromValueFunction: WelcomeWizardMetricsViewController.stringFromWaterGoal,
-      keyboardType: .DecimalPad)
-    
-    // Table sections
-    let section1 = TableCellsSection()
-    section1.tableCells = [
+    let dailyWaterIntakeTitleFinal = dailyWaterIntakeTitle +  " (\(volumeUnit.contraction))"
+
+    let informationSection = TableCellsSection()
+    informationSection.tableCells = [
       genderCell,
       heightCell,
       weightCell,
       ageCell,
       physicalActivityCell]
+
+    // Daily Water Intke section
     
-    let section2 = TableCellsSection()
-    section2.tableCells = [waterGoalCell]
+    dailyWaterIntakeCell = createTextFieldTableCell(
+      title: dailyWaterIntakeTitleFinal, settingsItem:
+      Settings.userWaterGoal,
+      valueFromStringFunction: WelcomeWizardMetricsViewController.metricWaterGoalFromString,
+      stringFromValueFunction: WelcomeWizardMetricsViewController.stringFromWaterGoal,
+      keyboardType: .DecimalPad)
     
-    return [section1, section2]
+    let dailyWaterIntakeSection = TableCellsSection()
+    dailyWaterIntakeSection.footerTitle = dailyWaterIntakeSectionFooter
+    dailyWaterIntakeSection.tableCells = [dailyWaterIntakeCell]
+    
+    return [informationSection, dailyWaterIntakeSection]
   }
   
   private class func stringFromHeight(value: Double) -> String {
@@ -266,12 +274,12 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
   private func saveWaterGoalToCoreData() {
     let date = NSDate()
     if let waterGoal = WaterGoal.fetchWaterGoalStrictlyForDate(date, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
-      waterGoal.baseAmount = waterGoalCell.value
+      waterGoal.baseAmount = dailyWaterIntakeCell.value
       CoreDataProvider.sharedInstance.saveContext()
     } else {
       WaterGoal.addEntity(
         date: date,
-        baseAmount: waterGoalCell.value,
+        baseAmount: dailyWaterIntakeCell.value,
         isHotDay: false,
         isHighActivity: false,
         managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
@@ -283,7 +291,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     
     let waterGoalAmount = WaterGoalCalculator.calcDailyWaterIntake(data: data)
     
-    waterGoalCell.value = waterGoalAmount
+    dailyWaterIntakeCell.value = waterGoalAmount
   }
   
   private var genderCell: TableCellWithValue<Settings.Gender>!
@@ -291,7 +299,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
   private var weightCell: TableCellWithValue<Double>!
   private var ageCell: TableCellWithValue<Int>!
   private var physicalActivityCell: TableCellWithValue<Settings.PhysicalActivity>!
-  private var waterGoalCell: TableCellWithValue<Double>!
+  private var dailyWaterIntakeCell: TableCellWithValue<Double>!
   
   private let minimumAge = 10
   private let maximumAge = 100

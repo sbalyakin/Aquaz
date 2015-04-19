@@ -51,6 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     }
 
+    showWelcomeWizard()
+
     return true
   }
   

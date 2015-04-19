@@ -37,7 +37,7 @@ public class CoreDataPrePopulation {
 
     Drink.addEntity(index: Drink.DrinkType.Beer.rawValue, name: "Beer", waterPercent: 0.95, recentAmount: 250, managedObjectContext: managedObjectContext)
     Drink.addEntity(index: Drink.DrinkType.Wine.rawValue, name: "Wine", waterPercent: 0.80, recentAmount: 250, managedObjectContext: managedObjectContext)
-    Drink.addEntity(index: Drink.DrinkType.StrongLiquor.rawValue, name: "StrongLiquor", waterPercent: 0.60, recentAmount: 250, managedObjectContext: managedObjectContext)
+    Drink.addEntity(index: Drink.DrinkType.HardLiquor.rawValue, name: "HardLiquor", waterPercent: 0.60, recentAmount: 250, managedObjectContext: managedObjectContext)
 
     WaterGoal.addEntity(
       date: NSDate(),

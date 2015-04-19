@@ -35,39 +35,36 @@ class SettingsViewController: OmegaSettingsViewController {
   }
 
   override func createTableCellsSections() -> [TableCellsSection] {
-    let waterGoalTitle = NSLocalizedString("SVC:Water Goal", value: "Water Goal",
-      comment: "SettingsViewController: Table cell title for [Water Goal] setting")
+    let dailyWaterIntakeTitle = NSLocalizedString("SVC:Daily Water Intake", value: "Daily Water Intake",
+      comment: "SettingsViewController: Table cell title for [Daily Water Intake] settings blok")
 
-    let recommendationsSectionHeader = NSLocalizedString("SVC:Recommendations", value: "Recommendations",
-      comment: "SettingsViewController: Header for settings section [Recommendations]")
+    let specialModesTitle = NSLocalizedString("SVC:Special Modes", value: "Special Modes",
+      comment: "SettingsViewController: Table cell title for [Special Modes] settings block")
 
-    let extraFactorsTitle = NSLocalizedString("SVC:Extra Factors", value: "Extra Factors",
-      comment: "SettingsViewController: Table cell title for [Extra Factors] setting")
-
-    let unitsTitle = NSLocalizedString("SVC:Units", value: "Units",
-      comment: "SettingsViewController: Table cell title for [Units] setting")
+    let unitsTitle = NSLocalizedString("SVC:Measurement Units", value: "Measurement Units",
+      comment: "SettingsViewController: Table cell title for [Meathurement Units] settings block")
 
     let notificationsTitle = NSLocalizedString("SVC:Notifications", value: "Notifications",
-      comment: "SettingsViewController: Table cell title for [Notifications] setting")
+      comment: "SettingsViewController: Table cell title for [Notifications] settings block")
 
     let supportTitle = NSLocalizedString("SVC:Support", value: "Support",
-      comment: "SettingsViewController: Table cell title for [Support] setting")
+      comment: "SettingsViewController: Table cell title for [Support] settings block")
 
     // Water goal section
-    let waterGoalCell = createRightDetailTableCell(
-      title: waterGoalTitle,
+    let dailyWaterIntakeCell = createRightDetailTableCell(
+      title: dailyWaterIntakeTitle,
       settingsItem: Settings.userWaterGoal,
       accessoryType: .DisclosureIndicator,
       activationChangedFunction: { [unowned self] in self.waterGoalCellWasSelected($0, active: $1) },
       stringFromValueFunction: { [unowned self] in self.stringFromWaterGoal($0) })
     
-    waterGoalCell.image = UIImage(named: "settingsWater")
+    dailyWaterIntakeCell.image = UIImage(named: "settingsWater")
     
     volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { value in
-      waterGoalCell.readFromExternalStorage()
+      dailyWaterIntakeCell.readFromExternalStorage()
     }
 
-    let extraFactorsCell = createBasicTableCell(title: extraFactorsTitle, accessoryType: .DisclosureIndicator) { [unowned self]
+    let extraFactorsCell = createBasicTableCell(title: specialModesTitle, accessoryType: .DisclosureIndicator) { [unowned self]
       (tableCell, active) -> () in
       if active {
         self.performSegueWithIdentifier(Constants.showExtraFactorsSegue, sender: tableCell)
@@ -77,8 +74,7 @@ class SettingsViewController: OmegaSettingsViewController {
     extraFactorsCell.image = UIImage(named: "settingsExtraFactors")
 
     let recommendationsSection = TableCellsSection()
-    recommendationsSection.headerTitle = recommendationsSectionHeader
-    recommendationsSection.tableCells = [waterGoalCell, extraFactorsCell]
+    recommendationsSection.tableCells = [dailyWaterIntakeCell, extraFactorsCell]
     
     // Units section
     let unitsCell = createBasicTableCell(title: unitsTitle, accessoryType: .DisclosureIndicator) { [unowned self]

@@ -22,6 +22,9 @@ class WaterGoalViewController: OmegaSettingsViewController {
   override func createTableCellsSections() -> [TableCellsSection] {
     // Settings should be saved to user defaults only if user taps Done button
     saveToSettingsOnValueUpdate = false
+
+    let informationSectionHeader = NSLocalizedString("WGVC:Information About You", value: "Information About You",
+      comment: "WaterGoalViewController: Header for section with personal information about user")
     
     let genderTitle = NSLocalizedString("WGVC:Gender", value: "Gender",
       comment: "WaterGoalViewController: Table cell title for [Gender] setting")
@@ -38,9 +41,21 @@ class WaterGoalViewController: OmegaSettingsViewController {
     let physicalActivityTitle = NSLocalizedString("WGVC:Physical Activity", value: "Physical Activity",
       comment: "WaterGoalViewController: Table cell title for [Physical Activity] setting")
     
-    let waterGoalTitle = NSLocalizedString("WGVC:Water Intake", value: "Water Intake",
-      comment: "WaterGoalViewController: Table cell title for [Water Intake] setting")
-    
+    let dailyWaterIntakeTitle = NSLocalizedString("WGVC:Daily Water Intake", value: "Daily Water Intake",
+      comment: "WaterGoalViewController: Table cell title for [Daily Water Intake] setting")
+
+    // TODO: move to a localization file
+    let a = "Рассчитанная суточная норма потребления воды носит общий характер. Всегда руководствуйтесь потребностями своего организма. Пожалуйста, проконсультируйтесь со специалистом для получения информации о возможных противопоказаниях."
+
+    let dailyWaterIntakeSectionHeader = NSLocalizedString("WGVC:Recommendations", value: "Recommendations",
+      comment: "WaterGoalViewController: Header for section with daily water intake")
+
+    let dailyWaterIntakeSectionFooter = NSLocalizedString("Calculated daily water intake is only an estimate. Always take into account needs of your body. Please consult your health care provider for advice about a specific medical condition.",
+      value: "Calculated daily water intake is only an estimate. Always take into account needs of your body. Please consult your health care provider for advice about a specific medical condition.",
+      comment: "Footer for section with calculated daily water intake")
+
+    // Information section
+
     // Gender cell
     genderCell = createEnumRightDetailTableCell(
       title: genderTitle,
@@ -106,29 +121,34 @@ class WaterGoalViewController: OmegaSettingsViewController {
     
     physicalActivityCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
     
-    let volumeUnit = Settings.generalVolumeUnits.value.unit
-    let waterGoalTitleFinal = waterGoalTitle +  " (\(volumeUnit.contraction))"
-    
-    waterGoalCell = createTextFieldTableCell(
-      title: waterGoalTitleFinal, settingsItem:
-      Settings.userWaterGoal,
-      valueFromStringFunction: WaterGoalViewController.metricWaterGoalFromString,
-      stringFromValueFunction: WaterGoalViewController.stringFromWaterGoal,
-      keyboardType: .DecimalPad)
-    
-    // Table sections
-    let section1 = TableCellsSection()
-    section1.tableCells = [
+    let informationSection = TableCellsSection()
+    informationSection.headerTitle = informationSectionHeader
+    informationSection.tableCells = [
       genderCell,
       heightCell,
       weightCell,
       ageCell,
       physicalActivityCell]
+
     
-    let section2 = TableCellsSection()
-    section2.tableCells = [waterGoalCell]
+    // Daily water intake section
     
-    return [section1, section2]
+    let volumeUnit = Settings.generalVolumeUnits.value.unit
+    let dailyWaterIntakeTitleFinal = dailyWaterIntakeTitle +  " (\(volumeUnit.contraction))"
+    
+    dailyWaterIntakeCell = createTextFieldTableCell(
+      title: dailyWaterIntakeTitleFinal, settingsItem:
+      Settings.userWaterGoal,
+      valueFromStringFunction: WaterGoalViewController.metricWaterGoalFromString,
+      stringFromValueFunction: WaterGoalViewController.stringFromWaterGoal,
+      keyboardType: .DecimalPad)
+    
+    let dailyWaterIntakeSection = TableCellsSection()
+    dailyWaterIntakeSection.headerTitle = dailyWaterIntakeSectionHeader
+    dailyWaterIntakeSection.footerTitle = dailyWaterIntakeSectionFooter
+    dailyWaterIntakeSection.tableCells = [dailyWaterIntakeCell]
+    
+    return [informationSection, dailyWaterIntakeSection]
   }
   
   private class func stringFromHeight(value: Double) -> String {
@@ -236,12 +256,12 @@ class WaterGoalViewController: OmegaSettingsViewController {
   private func saveWaterGoalToCoreData() {
     let date = NSDate()
     if let waterGoal = WaterGoal.fetchWaterGoalStrictlyForDate(date, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
-      waterGoal.baseAmount = waterGoalCell.value
+      waterGoal.baseAmount = dailyWaterIntakeCell.value
       CoreDataProvider.sharedInstance.saveContext()
     } else {
       WaterGoal.addEntity(
         date: date,
-        baseAmount: waterGoalCell.value,
+        baseAmount: dailyWaterIntakeCell.value,
         isHotDay: false,
         isHighActivity: false,
         managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
@@ -253,7 +273,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
     
     let waterGoalAmount = WaterGoalCalculator.calcDailyWaterIntake(data: data)
 
-    waterGoalCell.value = waterGoalAmount
+    dailyWaterIntakeCell.value = waterGoalAmount
   }
   
   private var genderCell: TableCellWithValue<Settings.Gender>!
@@ -261,7 +281,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
   private var weightCell: TableCellWithValue<Double>!
   private var ageCell: TableCellWithValue<Int>!
   private var physicalActivityCell: TableCellWithValue<Settings.PhysicalActivity>!
-  private var waterGoalCell: TableCellWithValue<Double>!
+  private var dailyWaterIntakeCell: TableCellWithValue<Double>!
   
   private let minimumAge = 10
   private let maximumAge = 100

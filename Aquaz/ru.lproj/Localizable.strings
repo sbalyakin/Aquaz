@@ -14,13 +14,13 @@
 "D:Milk" = "Молоко";
 
 /* Drink: Title for soda */
-"D:Soda" = "Газировка";
+"D:Soda" = "Газированная вода";
 
 /* Drink: Title for sport drink */
-"D:Sport" = "Спортивный";
+"D:Sport" = "Спортивный напиток";
 
-/* Drink: Title for strong liquor */
-"D:Strong Liquor" = "Крепкий алкогол";
+/* Drink: Title for hard liquor */
+"D:Hard Liquor" = "Крепкий алкоголь";
 
 /* Drink: Title for tea */
 "D:Tea" = "Чай";

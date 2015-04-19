@@ -94,7 +94,6 @@
 		A54ED25A1AD447C000FD37DD /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54ED2581AD447A600FD37DD /* UIExtensions.swift */; };
 		A54ED25E1AD5A67900FD37DD /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = A54ED25D1AD5A67900FD37DD /* MMWormhole.m */; };
 		A54ED25F1AD5A67900FD37DD /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = A54ED25D1AD5A67900FD37DD /* MMWormhole.m */; };
-		A55337CF1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */; };
 		A55F34A61A74D6AC00A529A5 /* DrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */; };
 		A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */; };
 		A55F83981AD1213E00D30BAF /* DayGuide1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55F83971AD1213E00D30BAF /* DayGuide1ViewController.swift */; };
@@ -275,7 +274,6 @@
 		A54ED25C1AD5A67900FD37DD /* MMWormhole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMWormhole.h; sourceTree = "<group>"; };
 		A54ED25D1AD5A67900FD37DD /* MMWormhole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWormhole.m; sourceTree = "<group>"; };
 		A54ED2601AD5AB6200FD37DD /* Widget-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Widget-Bridging-Header.h"; sourceTree = "<group>"; };
-		A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewController.swift; sourceTree = "<group>"; };
 		A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkCollectionViewCell.swift; path = Controls/DrinkCollectionViewCell.swift; sourceTree = "<group>"; };
 		A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DrinkCollectionViewCell.xib; path = Controls/DrinkCollectionViewCell.xib; sourceTree = "<group>"; };
 		A55F83971AD1213E00D30BAF /* DayGuide1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayGuide1ViewController.swift; sourceTree = "<group>"; };
@@ -409,7 +407,6 @@
 			isa = PBXGroup;
 			children = (
 				A57D2BEC1ACFE9C600619D62 /* Welcome Wizard */,
-				A55337CE1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift */,
 				843B055719E2D7800097A833 /* DayViewController.swift */,
 				A55F83971AD1213E00D30BAF /* DayGuide1ViewController.swift */,
 				A55F83991AD1231500D30BAF /* DayGuide2ViewController.swift */,
@@ -418,6 +415,7 @@
 				8478253619EAC8C200588FE3 /* IntakeViewController.swift */,
 				A5275F861A1216090088AF47 /* CalendarViewController.swift */,
 				843B055519E2D7800097A833 /* SettingsViewController.swift */,
+				840476561A35FE4A004F0FEF /* WaterGoalViewController.swift */,
 				A5B013E21AE27C4900C372F8 /* ExtraFactorsViewController.swift */,
 				A5B013E41AE27C7D00C372F8 /* UnitsViewController.swift */,
 				840476581A35FE82004F0FEF /* NotificationsViewController.swift */,
@@ -429,7 +427,6 @@
 				A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */,
 				84C610B91A319DBC00433EF1 /* MonthStatisticsViewController.swift */,
 				84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */,
-				840476561A35FE4A004F0FEF /* WaterGoalViewController.swift */,
 				8455DAD01A694D8A004245F9 /* CompleteViewController.swift */,
 			);
 			path = Controllers;
@@ -884,7 +881,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A55337CF1A6ABEDF00FCD5BA /* MainMenuTableViewController.swift in Sources */,
 				84CD97591ABB2B960011623B /* InfiniteScrollView.swift in Sources */,
 				84CD97631ABB2C3A0011623B /* MonthStatisticsContentView.swift in Sources */,
 				A581FEF01A76D5F60025CDEF /* CustomSlider.swift in Sources */,
