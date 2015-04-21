@@ -11,6 +11,7 @@ import UIKit
 protocol WeekStatisticsViewDataSource: class {
   
   func weekStatisticsViewIsFutureDay(dayIndex: Int) -> Bool
+  func weekStatisticsViewIsToday(dayIndex: Int) -> Bool
   func weekStatisticsViewGetTitleForValue(value: CGFloat) -> String
   
 }
@@ -27,7 +28,7 @@ protocol WeekStatisticsViewDelegate: class {
   @IBInspectable var barsColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
   @IBInspectable var goalLineColor: UIColor = UIColor(red: 239/255, green: 64/255, blue: 79/255, alpha: 0.5)
   @IBInspectable var scaleColor: UIColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
-  @IBInspectable var daysColor: UIColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
+  @IBInspectable var daysColor: UIColor = UIColor.darkGrayColor()
   @IBInspectable var daysBackground: UIColor = UIColor.whiteColor()
   @IBInspectable var daysFont: UIFont = UIFont.systemFontOfSize(12) {
     didSet {
@@ -35,7 +36,9 @@ protocol WeekStatisticsViewDelegate: class {
       setNeedsLayout()
     }
   }
-  @IBInspectable var futureDaysColor: UIColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 0.7)
+  @IBInspectable var todayColor: UIColor = UIColor.darkGrayColor()
+  @IBInspectable var todayBackground: UIColor = UIColor.whiteColor()
+  @IBInspectable var futureDaysColor: UIColor = UIColor.darkGrayColor().colorWithAlphaComponent(0.7)
   @IBInspectable var futureDaysBackground: UIColor = UIColor.clearColor()
   @IBInspectable var barCornerRadius: CGFloat = 2
   @IBInspectable var barWidthFraction: CGFloat = 0.4
@@ -45,13 +48,20 @@ protocol WeekStatisticsViewDelegate: class {
   @IBInspectable var horizontalMargin: CGFloat = 0
   @IBInspectable var titleFont: UIFont = UIFont.systemFontOfSize(12) {
     didSet {
-      scaleLayer?.font = titleFont
-      scaleLayer?.fontSize = titleFont.pointSize
+      titleLabel?.font = titleFont
       setNeedsLayout()
     }
   }
   @IBInspectable var disableFutureDayButtons: Bool = true
   
+  override var backgroundColor: UIColor? {
+    didSet {
+      if let backgroundColor = backgroundColor where !backgroundColor.isClearColor() {
+        titleLabel.backgroundColor = backgroundColor.colorWithAlphaComponent(0.7)
+      }
+    }
+  }
+
   var animationDuration = 0.4
   let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.CalendarUnitWeekday).length
   
@@ -69,14 +79,10 @@ protocol WeekStatisticsViewDelegate: class {
   
   private var goalsLayer: CAShapeLayer!
   private var barsLayer: CALayer!
-  private var scaleLayer: CATextLayer!
   private var backgroundLayer: CAGradientLayer!
+  private var titleLabel: UILabel!
   
-  private var maximumValue: CGFloat = 0 {
-    didSet {
-      scaleLayer.string = getTitleForScaleValue(maximumValue)
-    }
-  }
+  private var maximumValue: CGFloat = 0
   
   private var itemsInitializing = false
   
@@ -103,7 +109,7 @@ protocol WeekStatisticsViewDelegate: class {
       let item: ItemType = (value: CGFloat(200 + index * 300), goal: 1800)
       items.append(item)
     }
-    setItems(items)
+    setItems(items, animate: false)
   }
 
   // MARK: Creation -
@@ -111,6 +117,7 @@ protocol WeekStatisticsViewDelegate: class {
   private func baseInit() {
     createButtons()
     createLayers()
+    createTitleLabel()
     initItems()
   }
 
@@ -122,7 +129,7 @@ protocol WeekStatisticsViewDelegate: class {
       let item: ItemType = (value: 0, goal: 0)
       items.append(item)
     }
-    setItems(items)
+    setItems(items, animate: false)
   }
   
   private func createButtons() {
@@ -154,13 +161,26 @@ protocol WeekStatisticsViewDelegate: class {
 
   private func updateButtons() {
     for dayButton in dayButtons {
+      let titleColor: UIColor
+      let backgroundColor: UIColor
+      let font: UIFont
       let isFutureDay = dataSource?.weekStatisticsViewIsFutureDay(dayButton.tag) ?? false
-      let titleColor = isFutureDay ? futureDaysColor : daysColor
-      let backgroundColor = isFutureDay ? UIColor.clearColor() : daysBackground
+
+      if dataSource?.weekStatisticsViewIsToday(dayButton.tag) ?? false {
+        titleColor = todayColor
+        backgroundColor = todayBackground
+        let fontDescriptor = daysFont.fontDescriptor().fontDescriptorWithSymbolicTraits(.TraitBold)!
+        font = UIFont(descriptor: fontDescriptor, size: daysFont.pointSize)
+      } else {
+        titleColor = isFutureDay ? futureDaysColor : daysColor
+        backgroundColor = isFutureDay ? UIColor.clearColor() : daysBackground
+        font = daysFont
+      }
       
       UIView.animateWithDuration(0.4) {
         dayButton.setTitleColor(titleColor, forState: .Normal)
         dayButton.backgroundColor = backgroundColor
+        dayButton.titleLabel?.font = font
       }
       dayButton.userInteractionEnabled = !isFutureDay
     }
@@ -170,7 +190,6 @@ protocol WeekStatisticsViewDelegate: class {
     createBackgroundLayer()
     createBarsLayer()
     createGoalsLayer()
-    createScaleLayer()
   }
   
   private func createBackgroundLayer() {
@@ -187,16 +206,6 @@ protocol WeekStatisticsViewDelegate: class {
     layer.insertSublayer(backgroundLayer, atIndex: 0)
   }
 
-  private func createScaleLayer() {
-    scaleLayer = CATextLayer()
-    scaleLayer.font = titleFont
-    scaleLayer.fontSize = titleFont.pointSize
-    scaleLayer.foregroundColor = scaleColor.CGColor
-    scaleLayer.alignmentMode = kCAAlignmentLeft
-    scaleLayer.contentsScale = UIScreen.mainScreen().scale
-    layer.addSublayer(scaleLayer)
-  }
-  
   private func createBarsLayer() {
     // Create layer containing bar shape sub-layers
     barsLayer = CALayer()
@@ -225,6 +234,18 @@ protocol WeekStatisticsViewDelegate: class {
     goalsLayer.lineDashPattern = [3, 3]
     layer.addSublayer(goalsLayer)
   }
+  
+  private func createTitleLabel() {
+    titleLabel?.removeFromSuperview()
+    
+    titleLabel = UILabel()
+    titleLabel.font = titleFont
+    titleLabel.textColor = scaleColor
+    if let backgroundColor = backgroundColor where !backgroundColor.isClearColor() {
+      titleLabel.backgroundColor = backgroundColor.colorWithAlphaComponent(0.7)
+    }
+    addSubview(titleLabel)
+  }
 
   // MARK: Layout -
   
@@ -234,9 +255,10 @@ protocol WeekStatisticsViewDelegate: class {
     calcUIAreasFromRect(bounds)
     
     layoutBackground()
-    layoutScale()
     layoutBars()
     layoutGoals()
+    
+    layoutTitleLabel()
 
     layoutButtons()
     
@@ -260,16 +282,6 @@ protocol WeekStatisticsViewDelegate: class {
       rect = rect.rectsByDividing(rect.height / 2, fromEdge: .MinYEdge).slice
       backgroundLayer.frame = rect
     }
-  }
-  
-  private func layoutScale() {
-    let title = scaleLayer.string as! String
-    let size = calcSizeForText(title, font: titleFont)
-    var rect = CGRect(origin: CGPoint.zeroPoint, size: size)
-    rect.offset(dx: uiAreas.scale.minX, dy: uiAreas.scale.minY + scaleMargin)
-    rect.integerize()
-    
-    scaleLayer.frame = rect
   }
   
   private func layoutBars() {
@@ -316,6 +328,11 @@ protocol WeekStatisticsViewDelegate: class {
       dayButton.frame = dayButtonRect
       dayButton.layer.cornerRadius = round(dayButtonRect.width / 2)
     }
+  }
+  
+  private func layoutTitleLabel() {
+    titleLabel.sizeToFit()
+    titleLabel.frame.origin = CGPoint(x: uiAreas.scale.minX, y: uiAreas.scale.minY + scaleMargin)
   }
   
   private func calcSizeForText(text: String, font: UIFont) -> CGSize {
@@ -418,7 +435,7 @@ protocol WeekStatisticsViewDelegate: class {
 
   // MARK: Other -
   
-  func setItems(items: [ItemType]) {
+  func setItems(items: [ItemType], animate: Bool = true) {
     if items.count != daysPerWeek {
       assert(false, "Count of specified items should equal to days per week")
       return
@@ -426,7 +443,17 @@ protocol WeekStatisticsViewDelegate: class {
 
     self.items = items
     maximumValue = calcMaximumValue()
+
     updateButtons()
+    
+    if animate {
+      titleLabel.setTextWithAnimation(getTitleForScaleValue(maximumValue)) {
+        self.titleLabel.sizeToFit()
+      }
+    } else {
+      titleLabel.text = getTitleForScaleValue(maximumValue)
+    }
+
     setNeedsLayout()
   }
   

@@ -37,7 +37,7 @@ class YearStatisticsViewController: UIViewController {
   }
 
   private func setupUI() {
-    yearStatisticsView.backgroundColor = UIColor.clearColor()
+    yearStatisticsView.backgroundColor = StyleKit.pageBackgroundColor
     yearStatisticsView.backgroundDarkColor = UIColor.clearColor()
     yearStatisticsView.valuesChartLineColor = StyleKit.yearStatisticsChartStrokeColor
     yearStatisticsView.valuesChartFillColor = StyleKit.yearStatisticsChartFillColor

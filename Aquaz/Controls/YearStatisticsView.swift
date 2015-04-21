@@ -40,6 +40,14 @@ protocol YearStatisticsViewDataSource: class {
     }
   }
   
+  override var backgroundColor: UIColor? {
+    didSet {
+      if let backgroundColor = backgroundColor where !backgroundColor.isClearColor() {
+        verticalMaximumLabel.backgroundColor = backgroundColor.colorWithAlphaComponent(0.7)
+      }
+    }
+  }
+  
   var animationDuration = 0.4
   
   let monthsPerYear: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.CalendarUnitMonth).length
@@ -81,6 +89,9 @@ protocol YearStatisticsViewDataSource: class {
     verticalMaximumLabel = UILabel()
     verticalMaximumLabel.font = titleFont
     verticalMaximumLabel.textColor = scaleTextColor
+    if let backgroundColor = backgroundColor where !backgroundColor.isClearColor() {
+      verticalMaximumLabel.backgroundColor = backgroundColor.colorWithAlphaComponent(0.7)
+    }
     addSubview(verticalMaximumLabel)
     
     horizontalMinimumLabel = UILabel()

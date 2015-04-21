@@ -63,11 +63,14 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   private func setupUI() {
+    weekStatisticsView.backgroundColor = StyleKit.pageBackgroundColor
     weekStatisticsView.barsColor = StyleKit.weekStatisticsChartColor
     weekStatisticsView.goalLineColor = StyleKit.weekStatisticsGoalColor
     weekStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     weekStatisticsView.daysFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     weekStatisticsView.daysColor = UIColor.darkGrayColor()
+    weekStatisticsView.todayColor = StyleKit.weekStatisticsTodayTextColor
+    weekStatisticsView.scaleMargin = 10
     weekStatisticsView.dataSource = self
     weekStatisticsView.delegate = self
     
@@ -89,7 +92,7 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
-    updateWeekStatisticsView()
+    updateWeekStatisticsView(animated: true)
   }
 
   func preferredContentSizeChanged() {
@@ -102,7 +105,7 @@ class WeekStatisticsViewController: UIViewController {
   private func updateUI(#animated: Bool) {
     computeStatisticsDateRange()
     updateDatePeriodLabel(animated: animated)
-    updateWeekStatisticsView()
+    updateWeekStatisticsView(animated: animated)
   }
 
   @IBAction func switchToPreviousWeek(sender: AnyObject) {
@@ -176,13 +179,13 @@ class WeekStatisticsViewController: UIViewController {
     return statisticsItems
   }
   
-  private func updateWeekStatisticsView() {
+  private func updateWeekStatisticsView(#animated: Bool) {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { 
       let date = self.date
       let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
       dispatch_async(dispatch_get_main_queue()) {
         if self.date === date {
-          self.weekStatisticsView.setItems(statisticsItems)
+          self.weekStatisticsView.setItems(statisticsItems, animate: animated)
         }
       }
     }
@@ -223,6 +226,11 @@ extension WeekStatisticsViewController: WeekStatisticsViewDataSource {
     let quantity = Quantity(unit: Settings.generalVolumeUnits.value.unit, amount: Double(value))
     let title = quantity.getDescription(0, displayUnits: true)
     return title
+  }
+
+  func weekStatisticsViewIsToday(dayIndex: Int) -> Bool {
+    let date = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
+    return DateHelper.areDatesEqualByDays(NSDate(), date)
   }
   
 }

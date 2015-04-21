@@ -49,6 +49,7 @@ public class StyleKit : NSObject {
 
     static var weekStatisticsChartColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
     static var weekStatisticsGoalColor = UIColor(red: 239/255, green: 64/255, blue: 79/255, alpha: 0.5)
+    static var weekStatisticsTodayTextColor = StyleKit.waterColor
 
     static var monthStatisticsChartStrokeColor = weekStatisticsChartColor
     static var monthStatisticsChartBackgroundColor = monthStatisticsChartStrokeColor.colorWithAlphaComponent(0.2)
@@ -95,6 +96,7 @@ public class StyleKit : NSObject {
 
   public class var weekStatisticsChartColor: UIColor { return Cache.weekStatisticsChartColor }
   public class var weekStatisticsGoalColor: UIColor { return Cache.weekStatisticsGoalColor }
+  public class var weekStatisticsTodayTextColor: UIColor { return Cache.weekStatisticsTodayTextColor }
 
   public class var monthStatisticsChartStrokeColor: UIColor { return Cache.monthStatisticsChartStrokeColor }
   public class var monthStatisticsChartBackgroundColor: UIColor { return Cache.monthStatisticsChartBackgroundColor }
