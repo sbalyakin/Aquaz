@@ -68,7 +68,7 @@ class CalendarContentViewCell: UICollectionViewCell {
   private func computeColors(calendarContentView: CalendarContentView) -> (text: UIColor, background: UIColor) {
     var result = (text: UIColor.blackColor(), background: UIColor.clearColor())
     
-    if let selectedDate = calendarContentView.selectedDate where DateHelper.areDatesEqualByDays(date1: selectedDate, date2: dayInfo.date) {
+    if let selectedDate = calendarContentView.selectedDate where DateHelper.areDatesEqualByDays(selectedDate, dayInfo.date) {
       result.text = calendarContentView.selectedDayTextColor
       result.background = calendarContentView.selectedDayBackgroundColor
     } else if dayInfo.isToday {

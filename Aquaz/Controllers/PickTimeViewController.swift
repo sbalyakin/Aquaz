@@ -32,7 +32,7 @@ class PickTimeViewController: UIViewController {
     timePicker.setDate(time, animated: false)
 
     let today = NSDate()
-    let isTodayTime = DateHelper.areDatesEqualByDays(date1: today, date2: time)
+    let isTodayTime = DateHelper.areDatesEqualByDays(today, time)
     if isTodayTime {
       timePicker.maximumDate = today
     }

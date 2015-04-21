@@ -99,15 +99,15 @@ public class DateHelper {
     }
   }
   
-  public class func areDatesEqualByDays(#date1: NSDate, date2: NSDate) -> Bool {
+  public class func areDatesEqualByDays(date1: NSDate, _ date2: NSDate) -> Bool {
     return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .CalendarUnitDay) == 0
   }
   
-  public class func areDatesEqualByMonths(#date1: NSDate, date2: NSDate) -> Bool {
+  public class func areDatesEqualByMonths(date1: NSDate, _ date2: NSDate) -> Bool {
     return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .CalendarUnitMonth) == 0
   }
   
-  public class func areDatesEqualByYears(#date1: NSDate, date2: NSDate) -> Bool {
+  public class func areDatesEqualByYears(date1: NSDate, _ date2: NSDate) -> Bool {
     return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .CalendarUnitYear) == 0
   }
   

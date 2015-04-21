@@ -103,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
       }
       
-      if let lastIntakeDate = lastIntakeDate where DateHelper.areDatesEqualByDays(date1: lastIntakeDate, date2: NSDate()) {
+      if let lastIntakeDate = lastIntakeDate where DateHelper.areDatesEqualByDays(lastIntakeDate, NSDate()) {
         if Settings.notificationsCheckWaterGoalReaching.value {
           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             let beginDate = NSDate()

@@ -37,7 +37,7 @@ class CalendarViewDataSource {
     let today = DateHelper.dateByClearingTime(ofDate: NSDate())
     let weekdayRange = calendar.maximumRangeOfUnit(.CalendarUnitWeekday)
     var weekdayOfDate = 0
-    let checkForToday = DateHelper.areDatesEqualByMonths(date1: date, date2: today)
+    let checkForToday = DateHelper.areDatesEqualByMonths(date, today)
     let from = 2 - weekdayOfFirstMonthDay
     let to = daysInMonth.length + daysPerWeek - weekdayOfLastMonthDay
     
@@ -56,7 +56,7 @@ class CalendarViewDataSource {
       let isWeekend = (weekdayOfDate == weekdayRange.location) || (weekdayOfDate == weekdayRange.length)
       weekdayOfDate++
       
-      let isToday = checkForToday ? DateHelper.areDatesEqualByDays(date1: date, date2: today) : false
+      let isToday = checkForToday ? DateHelper.areDatesEqualByDays(date, today) : false
       let isCurrentMonth = i >= daysInMonth.location && i <= daysInMonth.length
       let dayOrdinalNumber = isCurrentMonth ? i : calendar.ordinalityOfUnit(.CalendarUnitDay, inUnit: .CalendarUnitMonth, forDate: date)
       let title = "\(dayOrdinalNumber)"

@@ -63,7 +63,7 @@ class IntakeTests: XCTestCase {
     let dateForCheck = startDate.getNextDay()
     
     let generatedIntakesForDay = generatedIntakes.filter() {
-      DateHelper.areDatesEqualByDays(date1: $0.date, date2: dateForCheck)
+      DateHelper.areDatesEqualByDays($0.date, dateForCheck)
     }
     
     let fetchedIntakesForDay = Intake.fetchIntakesForDay(dateForCheck, dayOffsetInHours: 0, managedObjectContext: managedObjectContext)

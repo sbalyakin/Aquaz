@@ -28,7 +28,7 @@ class DayViewController: UIViewController {
   private var currentDate: NSDate! {
     didSet {
       if mode == .General {
-        if DateHelper.areDatesEqualByDays(date1: currentDate, date2: NSDate()) {
+        if DateHelper.areDatesEqualByDays(currentDate, NSDate()) {
           Settings.uiUseCustomDateForDayView.value = false
         } else {
           Settings.uiUseCustomDateForDayView.value = true
@@ -203,7 +203,7 @@ class DayViewController: UIViewController {
   }
   
   func refreshCurrentDay(#showAlert: Bool) {
-    let dayIsSwitched = !DateHelper.areDatesEqualByDays(date1: currentDate, date2: NSDate())
+    let dayIsSwitched = !DateHelper.areDatesEqualByDays(currentDate, NSDate())
     
     if mode == .General && isCurrentDayToday && dayIsSwitched {
       if showAlert {
@@ -443,12 +443,12 @@ class DayViewController: UIViewController {
   }
   
   func checkForCongratulationsAboutWaterGoalReaching() {
-    let isToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
+    let isToday = DateHelper.areDatesEqualByDays(NSDate(), currentDate)
     if !isToday {
       return
     }
     
-    let waterGoalReachingIsShownForToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: Settings.uiWaterGoalReachingIsShownForDate.value)
+    let waterGoalReachingIsShownForToday = DateHelper.areDatesEqualByDays(NSDate(), Settings.uiWaterGoalReachingIsShownForDate.value)
     if waterGoalReachingIsShownForToday {
       return
     }
@@ -557,7 +557,7 @@ class DayViewController: UIViewController {
   
   private var isWaterGoalForCurrentDay: Bool {
     if let waterGoal = waterGoal {
-      return DateHelper.areDatesEqualByDays(date1: waterGoal.date, date2: currentDate)
+      return DateHelper.areDatesEqualByDays(waterGoal.date, currentDate)
     } else {
       return false
     }

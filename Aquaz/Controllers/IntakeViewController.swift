@@ -24,7 +24,7 @@ class IntakeViewController: UIViewController {
   
   var currentDate: NSDate! {
     didSet {
-      isCurrentDayToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
+      isCurrentDayToday = DateHelper.areDatesEqualByDays(NSDate(), currentDate)
     }
   }
   

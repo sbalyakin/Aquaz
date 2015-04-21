@@ -204,7 +204,7 @@ class WeekStatisticsViewController: UIViewController {
 
   private func isFutureDate(dayIndex: Int) -> Bool {
     let date = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
-    let daysBetween = DateHelper.calcDistanceBetweenDates(fromDate: NSDate(), toDate: date, calendarUnit: .CalendarUnitDay)
+    let daysBetween = DateHelper.calcDistanceBetweenCalendarDates(fromDate: NSDate(), toDate: date, calendarUnit: .CalendarUnitDay)
     return daysBetween > 0
   }
   
