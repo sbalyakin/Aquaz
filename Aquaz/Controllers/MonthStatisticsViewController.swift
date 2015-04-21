@@ -46,6 +46,7 @@ class MonthStatisticsViewController: UIViewController {
     monthStatisticsView.dayIntakeFullColor = StyleKit.monthStatisticsChartStrokeColor
     monthStatisticsView.dayIntakeColor = StyleKit.monthStatisticsChartStrokeColor
     monthStatisticsView.dayIntakeBackgroundColor = StyleKit.monthStatisticsChartBackgroundColor
+    monthStatisticsView.todayTextColor = StyleKit.monthStatisticsTodayTextColor
 
     monthStatisticsView.resetToDisplayMonthDate(date)
     monthStatisticsView.dataSource = self
