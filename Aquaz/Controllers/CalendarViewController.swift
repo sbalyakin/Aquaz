@@ -39,6 +39,7 @@ class CalendarViewController: UIViewController {
   private func setupUI() {
     UIHelper.applyStyle(self)
 
+    calendarView.workDayTextColor = StyleKit.calendarWorkDayTextColor
     calendarView.weekendBackgroundColor = StyleKit.calendarWeekendBackgroundColor
     calendarView.weekendTextColor = StyleKit.calendarWeekendTextColor
     calendarView.weekDayTitleTextColor = StyleKit.calendarWeekDayTitleTextColor
@@ -48,6 +49,7 @@ class CalendarViewController: UIViewController {
     calendarView.todayTextColor = StyleKit.calendarTodayTextColor
     calendarView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     calendarView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    calendarView.futureDaysTransparency = 0.1
     calendarView.resetToDisplayMonthDate(date)
     calendarView.selectedDate = date
     calendarView.delegate = self

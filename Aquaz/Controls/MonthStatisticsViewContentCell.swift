@@ -27,7 +27,7 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
       arcLayer?.removeFromSuperlayer()
       arcLayer = nil
       
-      if getDayInfo().isCurrentMonth {
+      if getDayInfo().isCurrentMonth && !getDayInfo().isFuture {
         circleLayer = CAShapeLayer()
         circleLayer.lineWidth = monthStatisticsContentView.dayIntakeLineWidth
         circleLayer.lineCap = kCALineCapRound

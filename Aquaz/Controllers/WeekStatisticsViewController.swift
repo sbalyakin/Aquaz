@@ -63,8 +63,11 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   private func setupUI() {
+    weekStatisticsView.barsColor = StyleKit.weekStatisticsChartColor
+    weekStatisticsView.goalLineColor = StyleKit.weekStatisticsGoalColor
     weekStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     weekStatisticsView.daysFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    weekStatisticsView.daysColor = UIColor.darkGrayColor()
     weekStatisticsView.dataSource = self
     weekStatisticsView.delegate = self
     

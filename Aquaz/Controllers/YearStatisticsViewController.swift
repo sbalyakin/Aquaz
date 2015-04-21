@@ -39,10 +39,10 @@ class YearStatisticsViewController: UIViewController {
   private func setupUI() {
     yearStatisticsView.backgroundColor = UIColor.clearColor()
     yearStatisticsView.backgroundDarkColor = UIColor.clearColor()
-    yearStatisticsView.valuesChartLineColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
-    yearStatisticsView.valuesChartFillColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 0.1)
-    yearStatisticsView.goalsChartColor = UIColor(red: 239/255, green: 64/255, blue: 79/255, alpha: 0.5)
-    yearStatisticsView.scaleTextColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
+    yearStatisticsView.valuesChartLineColor = StyleKit.yearStatisticsChartStrokeColor
+    yearStatisticsView.valuesChartFillColor = StyleKit.yearStatisticsChartFillColor
+    yearStatisticsView.goalsChartColor = StyleKit.yearStatisticsGoalColor
+    yearStatisticsView.scaleTextColor = UIColor.darkGrayColor()
     yearStatisticsView.gridColor = UIColor(red: 230/255, green: 231/255, blue: 232/255, alpha: 1.0)
     yearStatisticsView.pinsColor = UIColor.whiteColor()
     yearStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)

@@ -34,15 +34,18 @@ class MonthStatisticsViewController: UIViewController {
   private func setupUI() {
     monthStatisticsView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     monthStatisticsView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    monthStatisticsView.weekendBackgroundColor = StyleKit.calendarWeekendBackgroundColor
+    monthStatisticsView.workDayTextColor = StyleKit.calendarWorkDayTextColor
+    monthStatisticsView.workDayBackgroundColor = UIColor.whiteColor()
+    monthStatisticsView.weekendBackgroundColor = UIColor.whiteColor()
     monthStatisticsView.weekendTextColor = StyleKit.calendarWeekendTextColor
     monthStatisticsView.weekDayTitleTextColor = StyleKit.calendarWeekDayTitleTextColor
     monthStatisticsView.selectedDayTextColor = StyleKit.calendarSelectedDayTextColor
     monthStatisticsView.selectedDayBackgroundColor = StyleKit.calendarSelectedDayBackgroundColor
-    monthStatisticsView.todayBackgroundColor = StyleKit.calendarTodayBackgroundColor
+    monthStatisticsView.todayBackgroundColor = UIColor.whiteColor()
     monthStatisticsView.todayTextColor = StyleKit.calendarTodayTextColor
-    monthStatisticsView.dayIntakeFullColor = StyleKit.monthStatisticsDayIntakeFullColor
-    monthStatisticsView.dayIntakeColor = StyleKit.monthStatisticsDayIntakeColor
+    monthStatisticsView.dayIntakeFullColor = StyleKit.monthStatisticsChartStrokeColor
+    monthStatisticsView.dayIntakeColor = StyleKit.monthStatisticsChartStrokeColor
+    monthStatisticsView.dayIntakeBackgroundColor = StyleKit.monthStatisticsChartBackgroundColor
 
     monthStatisticsView.resetToDisplayMonthDate(date)
     monthStatisticsView.dataSource = self

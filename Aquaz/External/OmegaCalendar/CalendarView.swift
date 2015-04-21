@@ -31,7 +31,7 @@ protocol CalendarViewDelegate: class {
   @IBInspectable var selectedDayTextColor: UIColor = UIColor.blueColor()
   @IBInspectable var selectedDayBackgroundColor: UIColor = UIColor.clearColor()
   @IBInspectable var anotherMonthTransparency: CGFloat = 0.4
-  @IBInspectable var futureDaysTransparency: CGFloat = 0.1
+  @IBInspectable var futureDaysTransparency: CGFloat = 0.4
   @IBInspectable var futureDaysEnabled: Bool = false
   @IBInspectable var dayRowHeightScale: CGFloat = 1
   @IBInspectable var markSelectedDay: Bool = true

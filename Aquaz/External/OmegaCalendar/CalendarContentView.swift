@@ -28,7 +28,7 @@ class CalendarContentView: UIView {
   var selectedDayTextColor: UIColor = UIColor.blueColor()
   var selectedDayBackgroundColor: UIColor = UIColor.clearColor()
   var anotherMonthTransparency: CGFloat = 0.4
-  var futureDaysTransparency: CGFloat = 0.1
+  var futureDaysTransparency: CGFloat = 0.4
   var futureDaysEnabled: Bool = false
   var dayRowHeightScale: CGFloat = 1
   var markSelectedDay: Bool = true

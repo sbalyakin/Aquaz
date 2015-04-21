@@ -17,7 +17,8 @@ public class StyleKit : NSObject {
   //// Cache
   
   private struct Cache {
-    static var drinksWhiteColor: UIColor = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+    static var drinksWhiteColor: UIColor = UIColor.whiteColor()
+    
     static var waterColor: UIColor = UIColor(red: 0.000, green: 0.580, blue: 0.722, alpha: 1.000)
     static var coffeeColor: UIColor = UIColor(red: 0.624, green: 0.388, blue: 0.322, alpha: 1.000)
     static var teaColor: UIColor = UIColor(red: 234/255, green: 160/255, blue: 34/255, alpha: 1.000)
@@ -27,14 +28,17 @@ public class StyleKit : NSObject {
     static var energyColor: UIColor = UIColor(red: 0.506, green: 0.392, blue: 0.643, alpha: 1.000)
     static var sportColor: UIColor = UIColor(red: 0.396, green: 0.694, blue: 0.424, alpha: 1.000)
     static var wineColor: UIColor = UIColor(red: 0.839, green: 0.259, blue: 0.357, alpha: 1.000)
-    static var controlTintColor: UIColor = StyleKit.waterColor
     static var beerColor: UIColor = UIColor(red: 237/255, green: 177/255, blue: 77/255, alpha: 1.000)
     static var hardLiquorColor: UIColor = UIColor(red: 0.651, green: 0.290, blue: 0.125, alpha: 1.000)
+
+    static var controlTintColor: UIColor = StyleKit.waterColor
+
     static var pageBackgroundColor: UIColor = UIColor(red: 0.945, green: 0.945, blue: 0.949, alpha: 1.000)
+    
     static var barBackgroundColor: UIColor = StyleKit.waterColor
-    static var barTextColor: UIColor = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
-    static var mainMenuBackgroundColor: UIColor = UIColor(red: 0.200, green: 0.231, blue: 0.255, alpha: 1.000)
-    static var mainMenuTextColor: UIColor = StyleKit.waterColor
+    static var barTextColor: UIColor = UIColor.whiteColor()
+    
+    static var calendarWorkDayTextColor = UIColor.darkGrayColor()
     static var calendarWeekendBackgroundColor = UIColor.clearColor()
     static var calendarWeekendTextColor = UIColor(red: 220/255, green: 62/255, blue: 75/255, alpha: 1)
     static var calendarWeekDayTitleTextColor = UIColor(white: 0.5, alpha: 1)
@@ -42,8 +46,17 @@ public class StyleKit : NSObject {
     static var calendarSelectedDayBackgroundColor = StyleKit.waterColor
     static var calendarTodayBackgroundColor = UIColor.clearColor()
     static var calendarTodayTextColor = StyleKit.waterColor
-    static var monthStatisticsDayIntakeColor = StyleKit.waterColor
-    static var monthStatisticsDayIntakeFullColor = StyleKit.waterColor
+
+    static var weekStatisticsChartColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
+    static var weekStatisticsGoalColor = UIColor(red: 239/255, green: 64/255, blue: 79/255, alpha: 0.5)
+
+    static var monthStatisticsChartStrokeColor = weekStatisticsChartColor
+    static var monthStatisticsChartBackgroundColor = monthStatisticsChartStrokeColor.colorWithAlphaComponent(0.2)
+
+    static var yearStatisticsChartStrokeColor = weekStatisticsChartColor
+    static var yearStatisticsChartFillColor = yearStatisticsChartStrokeColor.colorWithAlphaComponent(0.1)
+    static var yearStatisticsGoalColor = weekStatisticsGoalColor
+
     static var settingsTablesValueColor = UIColor.darkGrayColor()
     static var settingsTablesSelectedValueColor = StyleKit.waterColor
   }
@@ -51,6 +64,7 @@ public class StyleKit : NSObject {
   //// Colors
   
   public class var drinksWhiteColor: UIColor { return Cache.drinksWhiteColor }
+  
   public class var waterColor: UIColor { return Cache.waterColor }
   public class var coffeeColor: UIColor { return Cache.coffeeColor }
   public class var teaColor: UIColor { return Cache.teaColor }
@@ -60,14 +74,17 @@ public class StyleKit : NSObject {
   public class var energyColor: UIColor { return Cache.energyColor }
   public class var sportColor: UIColor { return Cache.sportColor }
   public class var wineColor: UIColor { return Cache.wineColor }
-  public class var controlTintColor: UIColor { return Cache.controlTintColor }
   public class var beerColor: UIColor { return Cache.beerColor }
   public class var hardLiquorColor: UIColor { return Cache.hardLiquorColor }
+
+  public class var controlTintColor: UIColor { return Cache.controlTintColor }
+
   public class var pageBackgroundColor: UIColor { return Cache.pageBackgroundColor }
+  
   public class var barBackgroundColor: UIColor { return Cache.barBackgroundColor }
   public class var barTextColor: UIColor { return Cache.barTextColor }
-  public class var mainMenuBackgroundColor: UIColor { return Cache.mainMenuBackgroundColor }
-  public class var mainMenuTextColor: UIColor { return Cache.mainMenuTextColor }
+  
+  public class var calendarWorkDayTextColor: UIColor { return Cache.calendarWorkDayTextColor }
   public class var calendarWeekendBackgroundColor: UIColor { return Cache.calendarWeekendBackgroundColor }
   public class var calendarWeekendTextColor: UIColor { return Cache.calendarWeekendTextColor }
   public class var calendarWeekDayTitleTextColor: UIColor { return Cache.calendarWeekDayTitleTextColor }
@@ -75,11 +92,21 @@ public class StyleKit : NSObject {
   public class var calendarSelectedDayBackgroundColor: UIColor { return Cache.calendarSelectedDayBackgroundColor }
   public class var calendarTodayBackgroundColor: UIColor { return Cache.calendarTodayBackgroundColor }
   public class var calendarTodayTextColor: UIColor { return Cache.calendarTodayTextColor }
-  public class var monthStatisticsDayIntakeColor: UIColor { return Cache.monthStatisticsDayIntakeColor }
-  public class var monthStatisticsDayIntakeFullColor: UIColor { return Cache.monthStatisticsDayIntakeFullColor }
+
+  public class var weekStatisticsChartColor: UIColor { return Cache.weekStatisticsChartColor }
+  public class var weekStatisticsGoalColor: UIColor { return Cache.weekStatisticsGoalColor }
+
+  public class var monthStatisticsChartStrokeColor: UIColor { return Cache.monthStatisticsChartStrokeColor }
+  public class var monthStatisticsChartBackgroundColor: UIColor { return Cache.monthStatisticsChartBackgroundColor }
+
+  public class var yearStatisticsChartStrokeColor: UIColor { return Cache.yearStatisticsChartStrokeColor }
+  public class var yearStatisticsChartFillColor: UIColor { return Cache.yearStatisticsChartFillColor }
+  public class var yearStatisticsGoalColor: UIColor { return Cache.yearStatisticsGoalColor }
+
   public class var settingsTablesValueColor: UIColor { return Cache.settingsTablesValueColor }
   public class var settingsTablesSelectedValueColor: UIColor { return Cache.settingsTablesSelectedValueColor }
 
+  
   //// Drawing Methods
   
   public class func drawWaterDrink(#frame: CGRect) {

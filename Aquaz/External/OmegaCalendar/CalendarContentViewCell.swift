@@ -88,17 +88,13 @@ class CalendarContentViewCell: UICollectionViewCell {
         result.text = result.text.colorWithAlphaComponent(calendarContentView.futureDaysTransparency)
       }
       
-      if !result.background.isClearColor() {
-        result.background = result.background.colorWithAlphaComponent(calendarContentView.futureDaysTransparency)
-      }
+      result.background = UIColor.clearColor()
     } else if !dayInfo.isCurrentMonth {
       if !result.text.isClearColor() {
         result.text = result.text.colorWithAlphaComponent(calendarContentView.anotherMonthTransparency)
       }
       
-      if !result.background.isClearColor() {
-        result.background = result.background.colorWithAlphaComponent(calendarContentView.anotherMonthTransparency)
-      }
+      result.background = UIColor.clearColor()
     }
     
     return result
