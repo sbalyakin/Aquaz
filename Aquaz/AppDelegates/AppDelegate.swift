@@ -51,8 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     }
 
-    showWelcomeWizard()
-
     return true
   }
   
@@ -73,12 +71,67 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       selector: "managedObjectContextDidSave:",
       name: NSManagedObjectContextDidSaveNotification,
       object: CoreDataProvider.sharedInstance.managedObjectContext)
+
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "updateNotifications:",
+      name: NSManagedObjectContextObjectsDidChangeNotification,
+      object: CoreDataProvider.sharedInstance.managedObjectContext)
   }
   
   func managedObjectContextDidSave(notification: NSNotification) {
     wormhole?.passMessageObject(notification, identifier: GlobalConstants.wormholeMessageFromAquaz)
   }
 
+  func updateNotifications(notification: NSNotification) {
+    if !Settings.notificationsEnabled.value {
+      return
+    }
+
+    if !Settings.notificationsCheckWaterGoalReaching.value && !Settings.notificationsSmart.value {
+      return
+    }
+
+    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+      // Searching for the last inserted intake by date
+      var lastIntakeDate: NSDate?
+      
+      for insertedObject in insertedObjects {
+        if let intake = insertedObject as? Intake {
+          if lastIntakeDate == nil || intake.date.isLaterThan(lastIntakeDate!) {
+            lastIntakeDate = intake.date
+          }
+        }
+      }
+      
+      if let lastIntakeDate = lastIntakeDate where DateHelper.areDatesEqualByDays(date1: lastIntakeDate, date2: NSDate()) {
+        if Settings.notificationsCheckWaterGoalReaching.value {
+          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            let beginDate = NSDate()
+            let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
+
+            let todayOverallWaterIntake = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Summary, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext).first!
+            
+            let todayWaterGoal = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext).first!
+            
+            if todayOverallWaterIntake >= todayWaterGoal {
+              dispatch_async(dispatch_get_main_queue()) {
+                NotificationsHelper.removeAllNotifications()
+                let nextDayDate = DateHelper.addToDate(lastIntakeDate, years: 0, months: 0, days: 1)
+                NotificationsHelper.scheduleNotificationsFromSettingsForDate(nextDayDate)
+              }
+            } else if Settings.notificationsSmart.value {
+              dispatch_async(dispatch_get_main_queue()) {
+                NotificationsHelper.rescheduleNotificationsBecauseOfIntake(intakeDate: lastIntakeDate)
+              }
+            }
+          }
+        } else if Settings.notificationsSmart.value {
+          NotificationsHelper.rescheduleNotificationsBecauseOfIntake(intakeDate: lastIntakeDate)
+        }
+      }
+    }
+  }
+  
   func showDefaultRootViewControllerWithAnimation() {
     let storyboard = UIStoryboard(name: Constants.mainStoryboard, bundle: nil)
     let rootViewController: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.defaultRootViewController)!
@@ -95,7 +148,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }, completion: { (finished) -> Void in
         snapShot.removeFromSuperview()
     })
-
   }
   
   private func showWelcomeWizard() {

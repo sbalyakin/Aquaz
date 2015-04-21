@@ -148,6 +148,7 @@ class SelectDrinkViewController: UIViewController {
       let drink = sender as? Drink
     {
       intakeViewController.drink = drink
+      intakeViewController.dayViewController = dayViewController
       intakeViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
     }
   }

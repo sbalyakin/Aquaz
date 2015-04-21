@@ -12,6 +12,8 @@ class DiaryViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
   
+  weak var dayViewController: DayViewController!
+  
   private var intakes: [Intake] = []
   
   private var sizingCell: DiaryTableViewCell!
@@ -44,10 +46,11 @@ class DiaryViewController: UIViewController {
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == Constants.editIntakeSegue,
       let intakeViewController = segue.destinationViewController.contentViewController as? IntakeViewController,
-      indexPath = tableView.indexPathForSelectedRow()
+      let indexPath = tableView.indexPathForSelectedRow()
     {
       let intake = intakes[indexPath.row]
       intakeViewController.intake = intake
+      intakeViewController.dayViewController = dayViewController
     }
   }
   

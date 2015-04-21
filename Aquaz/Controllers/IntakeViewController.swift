@@ -30,6 +30,8 @@ class IntakeViewController: UIViewController {
   
   var drink: Drink!
   
+  weak var dayViewController: DayViewController!
+  
   // Should be nil for add intake mode, and not nil for edit intake mode
   var intake: Intake? {
     didSet {
@@ -180,13 +182,15 @@ class IntakeViewController: UIViewController {
   }
   
   private func applyIntake(amount: Double) {
+    let adjustedAmount = self.prepareAmountForStoring(amount)
+    
+    switch self.viewMode {
+    case .Add: self.addIntake(amount: adjustedAmount)
+    case .Edit: self.updateIntake(amount: adjustedAmount)
+    }
+
     navigationController?.dismissViewControllerAnimated(true) {
-      let adjustedAmount = self.prepareAmountForStoring(amount)
-      
-      switch self.viewMode {
-      case .Add: self.addIntake(amount: adjustedAmount)
-      case .Edit: self.updateIntake(amount: adjustedAmount)
-      }
+      dayViewController?.checkForCongratulationsAboutWaterGoalReaching()
     }
   }
   

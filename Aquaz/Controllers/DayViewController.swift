@@ -263,6 +263,7 @@ class DayViewController: UIViewController {
     
     // Add intakes diary view controller
     diaryViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.diaryViewControllerStoryboardID)
+    diaryViewController.dayViewController = self
     
     pages.append(diaryViewController)
     
@@ -393,15 +394,21 @@ class DayViewController: UIViewController {
   // MARK: Intakes management -
   
   private func fetchWaterGoal() {
-    waterGoal = WaterGoal.fetchWaterGoalForDate(currentDate, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
-    waterGoalWasChanged()
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+      self.waterGoal = WaterGoal.fetchWaterGoalForDate(self.currentDate, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
+      dispatch_async(dispatch_get_main_queue()) {
+        self.waterGoalWasChanged()
+      }
+    }
   }
 
   private func fetchIntakes() {
-    // TODO: Take day offset in hours from settings
-    intakes = Intake.fetchIntakesForDay(currentDate, dayOffsetInHours: 0, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
-
-    intakesWereChanged()
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+      self.intakes = Intake.fetchIntakesForDay(self.currentDate, dayOffsetInHours: 0, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
+      dispatch_async(dispatch_get_main_queue()) {
+        self.intakesWereChanged()
+      }
+    }
   }
 
   private func intakesWereChanged() {
@@ -432,35 +439,9 @@ class DayViewController: UIViewController {
         section.factor = CGFloat(amount)
       }
     }
-    
-    showCongratulationsAboutWaterGoalReaching()
-    
-    updateNotifications()
   }
   
-  private func updateNotifications() {
-    if !Settings.notificationsEnabled.value {
-      return
-    }
-    
-    let isToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
-    if !isToday {
-      return
-    }
-    
-    if let lastIntake = intakes.last {
-      if Settings.notificationsCheckWaterGoalReaching.value && dailyWaterIntake >= waterGoalAmount {
-        NotificationsHelper.removeAllNotifications()
-        
-        let nextDayDate = DateHelper.addToDate(lastIntake.date, years: 0, months: 0, days: 1)
-        NotificationsHelper.scheduleNotificationsFromSettingsForDate(nextDayDate)
-      } else {
-        NotificationsHelper.rescheduleNotificationsBecauseOfIntake(intakeDate: lastIntake.date)
-      }
-    }
-  }
-
-  private func showCongratulationsAboutWaterGoalReaching() {
+  func checkForCongratulationsAboutWaterGoalReaching() {
 //    performSegueWithIdentifier(Constants.showCompleteSegue, sender: self)
     let isToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
     if !isToday {
