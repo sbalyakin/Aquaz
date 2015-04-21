@@ -31,7 +31,6 @@
 		843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055819E2D7800097A833 /* SelectDrinkViewController.swift */; };
 		843B056919E2D80E0097A833 /* WaterGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056819E2D80E0097A833 /* WaterGoal.swift */; };
 		8455DACF1A694487004245F9 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455DACE1A694487004245F9 /* RoundedButton.swift */; };
-		8455DAD11A694D8A004245F9 /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455DAD01A694D8A004245F9 /* CompleteViewController.swift */; };
 		84669A7219DAD78D003C2263 /* Aquaz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Aquaz.xcdatamodeld */; };
 		84669A7719DAD78D003C2263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7519DAD78D003C2263 /* Main.storyboard */; };
 		84669A7919DAD78D003C2263 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7819DAD78D003C2263 /* Images.xcassets */; };
@@ -134,6 +133,7 @@
 		A5B8F9961A87DF3D00145705 /* magic.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98A1A87DF3D00145705 /* magic.caf */; };
 		A5B8F9971A87DF3D00145705 /* tiny-bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */; };
 		A5B8F9981A87DF3D00145705 /* whistle.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98C1A87DF3D00145705 /* whistle.caf */; };
+		A5C374B11AE6708700F91550 /* CongratulationsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5C374AF1AE6708700F91550 /* CongratulationsView.xib */; };
 		A5D3D4211AA5D29700E3C989 /* OmegaSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4121AA5D29700E3C989 /* OmegaSettingsViewController.swift */; };
 		A5D3D4221AA5D29700E3C989 /* BasicTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4141AA5D29700E3C989 /* BasicTableCell.swift */; };
 		A5D3D4231AA5D29700E3C989 /* PickerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4151AA5D29700E3C989 /* PickerTableCell.swift */; };
@@ -224,7 +224,6 @@
 		843B055C19E2D7800097A833 /* Aquaz-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Aquaz-Bridging-Header.h"; sourceTree = "<group>"; };
 		843B056819E2D80E0097A833 /* WaterGoal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoal.swift; sourceTree = "<group>"; };
 		8455DACE1A694487004245F9 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedButton.swift; path = Controls/RoundedButton.swift; sourceTree = "<group>"; };
-		8455DAD01A694D8A004245F9 /* CompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
 		84669A6919DAD78D003C2263 /* Aquaz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aquaz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84669A6D19DAD78D003C2263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84669A7119DAD78D003C2263 /* Aquaz.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Aquaz.xcdatamodel; sourceTree = "<group>"; };
@@ -312,6 +311,7 @@
 		A5B8F98A1A87DF3D00145705 /* magic.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = magic.caf; sourceTree = "<group>"; };
 		A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiny-bell.caf"; sourceTree = "<group>"; };
 		A5B8F98C1A87DF3D00145705 /* whistle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whistle.caf; sourceTree = "<group>"; };
+		A5C374B01AE6708700F91550 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CongratulationsView.xib; sourceTree = "<group>"; };
 		A5D3D4121AA5D29700E3C989 /* OmegaSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmegaSettingsViewController.swift; sourceTree = "<group>"; };
 		A5D3D4141AA5D29700E3C989 /* BasicTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTableCell.swift; sourceTree = "<group>"; };
 		A5D3D4151AA5D29700E3C989 /* PickerTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableCell.swift; sourceTree = "<group>"; };
@@ -389,7 +389,6 @@
 				A5A1681C1A6EA1330027711B /* DaySummaryView.swift */,
 				A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */,
 				A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */,
-				A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */,
 				A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */,
 			);
 			name = Controls;
@@ -427,7 +426,6 @@
 				A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */,
 				84C610B91A319DBC00433EF1 /* MonthStatisticsViewController.swift */,
 				84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */,
-				8455DAD01A694D8A004245F9 /* CompleteViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -487,6 +485,7 @@
 		84669A6B19DAD78D003C2263 /* Aquaz */ = {
 			isa = PBXGroup;
 			children = (
+				A5C374AE1AE6700900F91550 /* UI */,
 				843B055219E2D7800097A833 /* AppDelegates */,
 				843B055419E2D7800097A833 /* Controllers */,
 				8424AA041A0B57F9009C5C47 /* Controls */,
@@ -498,9 +497,6 @@
 				84669A6C19DAD78D003C2263 /* Supporting Files */,
 				84669A7819DAD78D003C2263 /* Images.xcassets */,
 				84669A7019DAD78D003C2263 /* Aquaz.xcdatamodeld */,
-				84669A7519DAD78D003C2263 /* Main.storyboard */,
-				A57D2BE91ACFDE0D00619D62 /* Welcome.storyboard */,
-				A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */,
 				842DE2E31AB30D9400EEA137 /* Localizable.strings */,
 			);
 			path = Aquaz;
@@ -639,6 +635,18 @@
 				84039F171A4B103100C5391E /* NotificationsHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		A5C374AE1AE6700900F91550 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				84669A7519DAD78D003C2263 /* Main.storyboard */,
+				A57D2BE91ACFDE0D00619D62 /* Welcome.storyboard */,
+				A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */,
+				A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */,
+				A5C374AF1AE6708700F91550 /* CongratulationsView.xib */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		A5D3D4111AA5D29700E3C989 /* OmegaSettingsViewController */ = {
@@ -825,6 +833,7 @@
 				A5B8F9941A87DF3D00145705 /* glass.caf in Resources */,
 				A5B8F9971A87DF3D00145705 /* tiny-bell.caf in Resources */,
 				A5B8F98E1A87DF3D00145705 /* aqua.caf in Resources */,
+				A5C374B11AE6708700F91550 /* CongratulationsView.xib in Resources */,
 				A5B8F9911A87DF3D00145705 /* chime.caf in Resources */,
 				A57D2BEB1ACFDE0D00619D62 /* Welcome.storyboard in Resources */,
 				84669A7719DAD78D003C2263 /* Main.storyboard in Resources */,
@@ -923,7 +932,6 @@
 				843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */,
 				A5D3D4281AA5D29700E3C989 /* TableCellWithValue.swift in Sources */,
 				841B13BE1A31FE4F00249426 /* UIHelper.swift in Sources */,
-				8455DAD11A694D8A004245F9 /* CompleteViewController.swift in Sources */,
 				84CD97541ABB2B960011623B /* CalendarContentViewCell.swift in Sources */,
 				84380C2C19E4195A0026398E /* Drink.swift in Sources */,
 				84CD97561ABB2B960011623B /* CalendarViewContentTitleCell.swift in Sources */,
@@ -1080,6 +1088,14 @@
 				842DE2DE1AB30C2300EEA137 /* ru */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		A5C374AF1AE6708700F91550 /* CongratulationsView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5C374B01AE6708700F91550 /* Base */,
+			);
+			name = CongratulationsView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

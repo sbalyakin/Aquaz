@@ -20,6 +20,7 @@ class DayViewController: UIViewController {
   @IBOutlet weak var containerView: UIView!
   @IBOutlet weak var navigationTitleLabel: UILabel!
   @IBOutlet weak var navigationDateLabel: UILabel!
+  @IBOutlet weak var summaryView: DaySummaryView!
 
   // MARK: Public properties -
   
@@ -54,9 +55,9 @@ class DayViewController: UIViewController {
     static let diaryViewControllerStoryboardID = "DiaryViewController"
     static let showCalendarSegue = "ShowCalendar"
     static let pageViewEmbedSegue = "PageViewEmbed"
-    static let showCompleteSegue = "ShowComplete"
     static let dayGuide1ViewControllerStoryboardID = "DayGuide1ViewController"
     static let dayGuide2ViewControllerStoryboardID = "DayGuide2ViewController"
+    static let congratulationsViewNib = "CongratulationsView"
   }
   
   private enum GuideState {
@@ -442,7 +443,6 @@ class DayViewController: UIViewController {
   }
   
   func checkForCongratulationsAboutWaterGoalReaching() {
-//    performSegueWithIdentifier(Constants.showCompleteSegue, sender: self)
     let isToday = DateHelper.areDatesEqualByDays(date1: NSDate(), date2: currentDate)
     if !isToday {
       return
@@ -453,9 +453,45 @@ class DayViewController: UIViewController {
       return
     }
     
-    if dailyWaterIntake >= waterGoalAmount {
-      Settings.uiWaterGoalReachingIsShownForDate.value = NSDate()
-      performSegueWithIdentifier(Constants.showCompleteSegue, sender: self)
+    if dailyWaterIntake < waterGoalAmount {
+      return
+    }
+
+    let nib = UINib(nibName: Constants.congratulationsViewNib, bundle: nil)
+    
+    if let congratulationsView = nib.instantiateWithOwner(nil, options: nil).first as? UIView {
+      let frame = summaryView.convertRect(summaryView.frame, toView: navigationController!.view)
+
+      congratulationsView.frame = frame.rectByInsetting(dx: 0, dy: 1)
+      congratulationsView.layer.opacity = 0
+      congratulationsView.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
+      
+      navigationController!.view.addSubview(congratulationsView)
+        
+      UIView.animateWithDuration(0.6,
+        delay: 0,
+        usingSpringWithDamping: 0.4,
+        initialSpringVelocity: 1.7,
+        options: .CurveEaseInOut | .AllowUserInteraction,
+        animations: {
+          congratulationsView.layer.opacity = 1
+          congratulationsView.layer.transform = CATransform3DMakeScale(1, 1, 1)
+        },
+        completion: { (finished) -> Void in
+          UIView.animateWithDuration(0.6,
+            delay: 5,
+            usingSpringWithDamping: 0.8,
+            initialSpringVelocity: 10,
+            options: .CurveEaseInOut | .AllowUserInteraction,
+            animations: {
+              congratulationsView.layer.opacity = 0
+              congratulationsView.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
+            },
+            completion: { (finished) -> Void in
+              congratulationsView.removeFromSuperview()
+            })
+        }
+      )
     }
   }
 
