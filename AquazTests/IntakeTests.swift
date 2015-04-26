@@ -7,12 +7,17 @@
 //
 
 import Foundation
-import UIKit
+import CoreData
 import XCTest
 import Aquaz
 
 class IntakeTests: XCTestCase {
 
+  override func setUp() {
+    super.setUp()
+    Drink.cacheAllDrinks(managedObjectContext)
+  }
+  
   func testAddEntity() {
     deleteAllIntakes()
 
@@ -22,7 +27,7 @@ class IntakeTests: XCTestCase {
 
     let generatedIntakes = generateIntakes(intakeCount: intakeCount, startDate: startDate, endTimeInterval: timeIntervalForWeek)
 
-    let fetchedIntakes: [Intake] = ModelHelper.fetchManagedObjects(managedObjectContext: managedObjectContext)
+    let fetchedIntakes: [Intake] = CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext)
     
     
     let areEqual = areArraysHaveTheSameIntakes(generatedIntakes, fetchedIntakes)
@@ -280,7 +285,7 @@ class IntakeTests: XCTestCase {
   }
   
   private func deleteAllIntakes() {
-    let intakes: [Intake] = ModelHelper.fetchManagedObjects(managedObjectContext: managedObjectContext)
+    let intakes: [Intake] = CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext)
     
     for intake in intakes {
       managedObjectContext.deleteObject(intake)
@@ -352,6 +357,6 @@ class IntakeTests: XCTestCase {
     return abs(value1 - value2) < DBL_MIN || abs(value1 - value2) < 10 * DBL_EPSILON * abs(value1 + value2)
   }
   
-  private var managedObjectContext = CoreDataHelper.sharedInstance.managedObjectContext
+  private var managedObjectContext: NSManagedObjectContext { return CoreDataSupport.sharedInstance.managedObjectContext }
 
 }

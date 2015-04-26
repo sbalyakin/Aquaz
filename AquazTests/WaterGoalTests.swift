@@ -6,7 +6,8 @@
 //  Copyright (c) 2015 Sergey Balyakin. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import CoreData
 import XCTest
 import Aquaz
 
@@ -145,7 +146,7 @@ class WaterGoalTests: XCTestCase {
   private func addWaterGoal(textDate: String, _ baseAmount: Double, _ isHotDay: Bool = false, _ isHighActivity: Bool = false) -> WaterGoal {
     let date = dateFromString(textDate)
     let waterGoal = WaterGoal.addEntity(date: date, baseAmount: baseAmount, isHotDay: isHotDay, isHighActivity: isHighActivity, managedObjectContext: managedObjectContext, saveImmediately: true)
-    return waterGoal!
+    return waterGoal
   }
 
   private func dateFromString(textDate: String) -> NSDate {
@@ -164,7 +165,7 @@ class WaterGoalTests: XCTestCase {
   }
   
   private func deleteAllWaterGoals() {
-    let waterGoals: [WaterGoal] = ModelHelper.fetchManagedObjects(managedObjectContext: managedObjectContext)
+    let waterGoals: [WaterGoal] = CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext)
     
     for waterGoal in waterGoals {
       managedObjectContext.deleteObject(waterGoal)
@@ -194,6 +195,6 @@ class WaterGoalTests: XCTestCase {
     return abs(value1 - value2) < DBL_MIN || abs(value1 - value2) < 10 * DBL_EPSILON * abs(value1 + value2)
   }
   
-  private var managedObjectContext = CoreDataHelper.sharedInstance.managedObjectContext
+  private var managedObjectContext: NSManagedObjectContext { return CoreDataSupport.sharedInstance.managedObjectContext }
 
 }

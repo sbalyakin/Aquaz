@@ -68,6 +68,8 @@ class DayViewController: UIViewController {
   private var dayGuide1ViewController: DayGuide1ViewController!
   private var dayGuide2ViewController: DayGuide2ViewController!
   
+  private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
+  
   
   // MARK: Page setup -
   
@@ -80,6 +82,7 @@ class DayViewController: UIViewController {
     setupMultiprogressControl()
     obtainCurrentDate()
     updateUIRelatedToCurrentDate(animate: false)
+    updateSummaryBar(animate: false)
   }
   
   deinit {
@@ -100,11 +103,11 @@ class DayViewController: UIViewController {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
       name: NSManagedObjectContextDidSaveNotification,
-      object: CoreDataProvider.sharedInstance.managedObjectContext)
+      object: nil)
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
-    self.fetchIntakes()
+    updateSummaryBar(animate: true)
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -222,6 +225,7 @@ class DayViewController: UIViewController {
 
     if isViewLoaded() {
       updateUIRelatedToCurrentDate(animate: true)
+      updateSummaryBar(animate: true)
     }
   }
   
@@ -246,7 +250,7 @@ class DayViewController: UIViewController {
     intakesMultiProgressView.emptySectionColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1)
     
     for drinkIndex in 0..<Drink.getDrinksCount() {
-      if let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
+      if let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: managedObjectContext) {
         let section = intakesMultiProgressView.addSection(color: drink.mainColor)
         multiProgressSections[drink] = section
       }
@@ -307,18 +311,29 @@ class DayViewController: UIViewController {
       navigationDateLabel.setTextWithAnimation(formattedDate) {
         UIHelper.adjustNavigationTitleViewSize(self.navigationItem)
       }
-      
-      intakesMultiProgressView.updateWithAnimation { [unowned self] in
-        self.fetchWaterGoal()
-        self.fetchIntakes()
-      }
     } else {
       navigationDateLabel.text = formattedDate
       UIHelper.adjustNavigationTitleViewSize(navigationItem)
+    }
+  }
+  
+  private func updateSummaryBar(#animate: Bool) {
+    managedObjectContext.performBlock {
+      self.waterGoal = WaterGoal.fetchWaterGoalForDate(self.currentDate, managedObjectContext: self.managedObjectContext)
+      self.intakes = Intake.fetchIntakesForDay(self.currentDate, dayOffsetInHours: 0, managedObjectContext: self.managedObjectContext)
       
-      intakesMultiProgressView.update { [unowned self] in
-        self.fetchWaterGoal()
-        self.fetchIntakes()
+      dispatch_async(dispatch_get_main_queue()) {
+        if animate {
+          self.intakesMultiProgressView.updateWithAnimation {
+            self.waterGoalWasChanged()
+            self.intakesWereChanged()
+          }
+        } else {
+          self.intakesMultiProgressView.update {
+            self.waterGoalWasChanged()
+            self.intakesWereChanged()
+          }
+        }
       }
     }
   }
@@ -394,24 +409,6 @@ class DayViewController: UIViewController {
   
   // MARK: Intakes management -
   
-  private func fetchWaterGoal() {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-      self.waterGoal = WaterGoal.fetchWaterGoalForDate(self.currentDate, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
-      dispatch_async(dispatch_get_main_queue()) {
-        self.waterGoalWasChanged()
-      }
-    }
-  }
-
-  private func fetchIntakes() {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-      self.intakes = Intake.fetchIntakesForDay(self.currentDate, dayOffsetInHours: 0, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
-      dispatch_async(dispatch_get_main_queue()) {
-        self.intakesWereChanged()
-      }
-    }
-  }
-
   private func intakesWereChanged() {
     // Group intakes by drinks
     var intakesMap: [Drink: Double] = [:]
@@ -548,7 +545,7 @@ class DayViewController: UIViewController {
       baseAmount: baseAmount,
       isHotDay: isHotDay,
       isHighActivity: isHighActivity,
-      managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
+      managedObjectContext: managedObjectContext)
   }
   
   // MARK: Private properties -
@@ -576,7 +573,7 @@ class DayViewController: UIViewController {
         saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: newValue, isHighActivity: false)
       } else {
         waterGoal?.isHotDay = newValue
-        CoreDataProvider.sharedInstance.saveContext()
+        CoreDataStack.saveContext(managedObjectContext)
       }
       
       waterGoalWasChanged()
@@ -596,7 +593,7 @@ class DayViewController: UIViewController {
         saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: false, isHighActivity: newValue)
       } else {
         waterGoal?.isHighActivity = newValue
-        CoreDataProvider.sharedInstance.saveContext()
+        CoreDataStack.saveContext(managedObjectContext)
       }
       
       waterGoalWasChanged()

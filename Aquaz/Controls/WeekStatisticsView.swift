@@ -84,8 +84,6 @@ protocol WeekStatisticsViewDelegate: class {
   
   private var maximumValue: CGFloat = 0
   
-  private var itemsInitializing = false
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
     baseInit()
@@ -122,13 +120,12 @@ protocol WeekStatisticsViewDelegate: class {
   }
 
   private func initItems() {
-    itemsInitializing = true
-    
     var items = [ItemType]()
     for i in 0..<daysPerWeek {
       let item: ItemType = (value: 0, goal: 0)
       items.append(item)
     }
+
     setItems(items, animate: false)
   }
   
@@ -261,8 +258,6 @@ protocol WeekStatisticsViewDelegate: class {
     layoutTitleLabel()
 
     layoutButtons()
-    
-    itemsInitializing = false
   }
 
   private func calcUIAreasFromRect(rect: CGRect) {
@@ -286,18 +281,11 @@ protocol WeekStatisticsViewDelegate: class {
   
   private func layoutBars() {
     barsLayer.frame = uiAreas.bars
-    
-    if itemsInitializing {
-      let zeroRect = CGRect(x: barsLayer.bounds.minX, y: barsLayer.bounds.maxY, width: barsLayer.bounds.width, height: 0)
-      let zeroPaths = calcBarsPathsForRect(zeroRect)
-      layoutBarsPaths(zeroPaths, useAnimation: false)
-    }
-    
     let paths = calcBarsPathsForRect(barsLayer.bounds)
     layoutBarsPaths(paths, useAnimation: true)
   }
   
-  private func layoutBarsPaths(paths: [CGPath], useAnimation: Bool) {
+  private func layoutBarsPaths(paths: [(rect: CGRect, path: CGPath)], useAnimation: Bool) {
     for (index, path) in enumerate(paths) {
       if barsLayer.sublayers == nil || index >= barsLayer.sublayers.count {
         assert(false, "Cannot find necessary shape sub-layers for bars")
@@ -305,21 +293,39 @@ protocol WeekStatisticsViewDelegate: class {
       }
       
       let barLayer = barsLayer.sublayers[index] as! CAShapeLayer
-      transformShape(barLayer, path: path, useAnimation: useAnimation)
+      barLayer.frame = path.rect
     }
   }
   
   private func layoutGoals() {
     goalsLayer.frame = uiAreas.bars
+  }
+
+  private func updateBars(#animate: Bool) {
+    barsLayer.frame = uiAreas.bars
     
-    if itemsInitializing {
-      let zeroRect = CGRect(x: goalsLayer.bounds.minX, y: goalsLayer.bounds.maxY, width: goalsLayer.bounds.width, height: 0)
-      let zeroPath = calcGoalsPathForRect(zeroRect)
-      transformShape(goalsLayer, path: zeroPath, useAnimation: false)
+    let paths = calcBarsPathsForRect(barsLayer.bounds)
+    updateBarsPaths(paths, useAnimation: animate)
+  }
+  
+  private func updateBarsPaths(paths: [(rect: CGRect, path: CGPath)], useAnimation: Bool) {
+    for (index, path) in enumerate(paths) {
+      if barsLayer.sublayers == nil || index >= barsLayer.sublayers.count {
+        assert(false, "Cannot find necessary shape sub-layers for bars")
+        break
+      }
+      
+      let barLayer = barsLayer.sublayers[index] as! CAShapeLayer
+      barLayer.frame = path.rect
+      transformShape(barLayer, path: path.path, useAnimation: useAnimation)
     }
+  }
+
+  private func updateGoals(#animate: Bool) {
+    goalsLayer.frame = uiAreas.bars
     
     let path = calcGoalsPathForRect(goalsLayer.bounds)
-    transformShape(goalsLayer, path: path, useAnimation: true)
+    transformShape(goalsLayer, path: path, useAnimation: animate)
   }
 
   private func layoutButtons() {
@@ -372,31 +378,38 @@ protocol WeekStatisticsViewDelegate: class {
     return path.CGPath
   }
   
-  private func calcBarsPathsForRect(rect: CGRect) -> [CGPath] {
+  private func calcBarsPathsForRect(rect: CGRect) -> [(rect: CGRect, path: CGPath)] {
     let valuesCount = items.count
     let fullBarWidth = rect.width / CGFloat(valuesCount)
     let barWidthInset = (fullBarWidth * (1 - barWidthFraction)) / 2
     let visibleBarWidth = round(fullBarWidth * barWidthFraction)
     var x = rect.minX
     
-    var paths: [CGPath] = []
+    var paths: [(rect: CGRect, path: CGPath)] = []
     
     for (index, item) in enumerate(items) {
       let barHeight = maximumValue > 0 ? (CGFloat(item.value) / maximumValue * rect.height) : 0
       let x = rect.minX + CGFloat(index) * fullBarWidth
       
-      var rect = CGRect(x: x, y: rect.maxY - barHeight, width: fullBarWidth, height: barHeight)
-      rect.inset(dx: barWidthInset, dy: 0)
-      rect.integerize()
-      rect.size.width = visibleBarWidth // to ensure for same width for all bars
+      var barRect = CGRect(x: x, y: rect.maxY - barHeight, width: fullBarWidth, height: barHeight)
+      barRect.inset(dx: barWidthInset, dy: 0)
+      barRect.integerize()
+      barRect.size.width = visibleBarWidth // to ensure for same width for all bars
       
       // If height of a bar is less than double corner radius there will be issues during its animation, so fix the height
-      if rect.size.height < barCornerRadius * 2 {
-        rect.size.height = barCornerRadius * 2
+      if barRect.size.height < barCornerRadius * 2 {
+        barRect.size.height = barCornerRadius * 2
       }
       
-      let path = UIBezierPath(roundedRect: rect, byRoundingCorners: .TopLeft | .TopRight, cornerRadii: CGSize(width: barCornerRadius, height: barCornerRadius))
-      paths.append(path.CGPath)
+      var fullBarRect = barRect
+      fullBarRect.origin.y = 0
+      fullBarRect.size.height = rect.height
+      
+      barRect.origin.x = 0
+      
+      let path = UIBezierPath(roundedRect: barRect, byRoundingCorners: .TopLeft | .TopRight, cornerRadii: CGSize(width: barCornerRadius, height: barCornerRadius))
+      let item = (rect: fullBarRect, path: path.CGPath)
+      paths.append(item)
     }
     
     return paths
@@ -404,13 +417,22 @@ protocol WeekStatisticsViewDelegate: class {
   
   private func transformShape(shape: CAShapeLayer, path: CGPath, useAnimation: Bool) {
     if useAnimation {
+      let startPath: CGPath
+      
+      if let presentation = shape.presentationLayer() as? CAShapeLayer {
+        startPath = presentation.path
+      } else {
+        startPath = shape.path
+      }
+
       let animation = CABasicAnimation(keyPath: "path")
       animation.duration = animationDuration
       animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-      animation.fromValue = shape.path
+      animation.fromValue = startPath
       shape.path = path
-      animation.toValue = shape.path
-      shape.addAnimation(animation, forKey: nil)
+      animation.toValue = path
+      shape.addAnimation(animation, forKey: "path")
+
     } else {
       shape.path = path
     }
@@ -452,9 +474,11 @@ protocol WeekStatisticsViewDelegate: class {
       }
     } else {
       titleLabel.text = getTitleForScaleValue(maximumValue)
+      titleLabel.sizeToFit()
     }
 
-    setNeedsLayout()
+    updateGoals(animate: animate)
+    updateBars(animate: animate)
   }
   
   func dayButtonTapped(sender: UIButton) {

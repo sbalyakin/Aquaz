@@ -24,32 +24,35 @@ public class CoreDataPrePopulation {
   
   private class func prePopulateCoreDataVersion1_0(#managedObjectContext: NSManagedObjectContext) {
     // Add drinks
-    Drink.addEntity(index: Drink.DrinkType.Water.rawValue,   name: "Water",   waterPercent: 1.00, recentAmount: 250, managedObjectContext: managedObjectContext)
-    Drink.addEntity(index: Drink.DrinkType.Coffee.rawValue,  name: "Coffee",  waterPercent: 0.98, recentAmount: 250, managedObjectContext: managedObjectContext)
-    Drink.addEntity(index: Drink.DrinkType.Tea.rawValue,     name: "Tea",     waterPercent: 0.99, recentAmount: 250, managedObjectContext: managedObjectContext)
+    Drink.addEntity(index: Drink.DrinkType.Water.rawValue,   name: "Water",   waterPercent: 1.00, recentAmount: 250, managedObjectContext: managedObjectContext, saveImmediately: false)
+    Drink.addEntity(index: Drink.DrinkType.Coffee.rawValue,  name: "Coffee",  waterPercent: 0.98, recentAmount: 250, managedObjectContext: managedObjectContext, saveImmediately: false)
+    Drink.addEntity(index: Drink.DrinkType.Tea.rawValue,     name: "Tea",     waterPercent: 0.99, recentAmount: 250, managedObjectContext: managedObjectContext, saveImmediately: false)
 
-    Drink.addEntity(index: Drink.DrinkType.Soda.rawValue,    name: "Soda",    waterPercent: 0.89, recentAmount: 250, managedObjectContext: managedObjectContext)
-    Drink.addEntity(index: Drink.DrinkType.Juice.rawValue,   name: "Juice",   waterPercent: 0.85, recentAmount: 250, managedObjectContext: managedObjectContext)
-    Drink.addEntity(index: Drink.DrinkType.Milk.rawValue,    name: "Milk",    waterPercent: 0.87, recentAmount: 250, managedObjectContext: managedObjectContext)
+    Drink.addEntity(index: Drink.DrinkType.Soda.rawValue,    name: "Soda",    waterPercent: 0.89, recentAmount: 250, managedObjectContext: managedObjectContext, saveImmediately: false)
+    Drink.addEntity(index: Drink.DrinkType.Juice.rawValue,   name: "Juice",   waterPercent: 0.85, recentAmount: 250, managedObjectContext: managedObjectContext, saveImmediately: false)
+    Drink.addEntity(index: Drink.DrinkType.Milk.rawValue,    name: "Milk",    waterPercent: 0.87, recentAmount: 250, managedObjectContext: managedObjectContext, saveImmediately: false)
 
-    Drink.addEntity(index: Drink.DrinkType.Sport.rawValue,   name: "Sport",   waterPercent: 1.10, recentAmount: 250, managedObjectContext: managedObjectContext)
-    Drink.addEntity(index: Drink.DrinkType.Energy.rawValue,  name: "Energy",  waterPercent: 0.90, recentAmount: 250, managedObjectContext: managedObjectContext)
+    Drink.addEntity(index: Drink.DrinkType.Sport.rawValue,   name: "Sport",   waterPercent: 1.10, recentAmount: 250, managedObjectContext: managedObjectContext, saveImmediately: false)
+    Drink.addEntity(index: Drink.DrinkType.Energy.rawValue,  name: "Energy",  waterPercent: 0.90, recentAmount: 250, managedObjectContext: managedObjectContext, saveImmediately: false)
 
-    Drink.addEntity(index: Drink.DrinkType.Beer.rawValue, name: "Beer", waterPercent: 0.95, recentAmount: 250, managedObjectContext: managedObjectContext)
-    Drink.addEntity(index: Drink.DrinkType.Wine.rawValue, name: "Wine", waterPercent: 0.80, recentAmount: 250, managedObjectContext: managedObjectContext)
-    Drink.addEntity(index: Drink.DrinkType.HardLiquor.rawValue, name: "HardLiquor", waterPercent: 0.60, recentAmount: 250, managedObjectContext: managedObjectContext)
+    Drink.addEntity(index: Drink.DrinkType.Beer.rawValue, name: "Beer", waterPercent: 0.95, recentAmount: 250, managedObjectContext: managedObjectContext, saveImmediately: false)
+    Drink.addEntity(index: Drink.DrinkType.Wine.rawValue, name: "Wine", waterPercent: 0.80, recentAmount: 250, managedObjectContext: managedObjectContext, saveImmediately: false)
+    Drink.addEntity(index: Drink.DrinkType.HardLiquor.rawValue, name: "HardLiquor", waterPercent: 0.60, recentAmount: 250, managedObjectContext: managedObjectContext, saveImmediately: false)
 
     WaterGoal.addEntity(
       date: NSDate(),
       baseAmount: Settings.userWaterGoal.value,
       isHotDay: false,
       isHighActivity: false,
-      managedObjectContext: managedObjectContext)
+      managedObjectContext: managedObjectContext,
+      saveImmediately: false)
     
     #if DEBUG
     generateIntakes(managedObjectContext: managedObjectContext)
     generateWaterGoals(managedObjectContext: managedObjectContext)
     #endif
+    
+    CoreDataStack.saveContext(managedObjectContext)
   }
   
   private class func generateIntakes(#managedObjectContext: NSManagedObjectContext) {
@@ -59,6 +62,8 @@ public class CoreDataPrePopulation {
     let minAmount = 50
     let maxAmount = 500
     let maxIntakesPerDay = 10
+    
+    Drink.cacheAllDrinks(managedObjectContext)
     
     for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = currentDay.getNextDay() {
       let intakesCount = random() % maxIntakesPerDay
@@ -71,11 +76,6 @@ public class CoreDataPrePopulation {
           Intake.addEntity(drink: drink, amount: amount, date: intakeDate, managedObjectContext: managedObjectContext, saveImmediately: false)
         }
       }
-    }
-    
-    var error: NSError?
-    if !managedObjectContext.save(&error) {
-      Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
     }
   }
   
@@ -101,18 +101,14 @@ public class CoreDataPrePopulation {
           currentWaterGoal = Double(minWaterGoal + random() % (maxWaterGoal - minWaterGoal))
         }
         
-        WaterGoal.addEntity(
+        WaterGoal.rawAddEntity(
           date: currentDay,
           baseAmount: currentWaterGoal,
           isHotDay: enableHotDay,
           isHighActivity: enableHighActivity,
-          managedObjectContext: managedObjectContext)
+          managedObjectContext: managedObjectContext,
+          saveImmediately: false)
       }
-    }
-    
-    var error: NSError?
-    if !managedObjectContext.save(&error) {
-      Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
     }
   }
 }

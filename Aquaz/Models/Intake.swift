@@ -29,25 +29,17 @@ public class Intake: CodingManagedObject, NamedEntity {
   }
   
   /// Adds a new intake's entity into Core Data
-  public class func addEntity(#drink: Drink, amount: Double, date: NSDate, managedObjectContext: NSManagedObjectContext?, saveImmediately: Bool = true) -> Intake? {
-    if let managedObjectContext = managedObjectContext, let intake = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext) {
-      intake.amount = amount
-      intake.drink = drink
-      intake.date = date
+  public class func addEntity(#drink: Drink, amount: Double, date: NSDate, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Intake? {
+    let intake = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext)!
+    intake.amount = amount
+    intake.drink = drink
+    intake.date = date
 
-      if saveImmediately {
-        var error: NSError?
-        if !managedObjectContext.save(&error) {
-          Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
-          return nil
-        }
-      }
-
-      return intake
+    if saveImmediately {
+      CoreDataStack.saveContext(managedObjectContext)
     }
-    
-    assert(false)
-    return nil
+
+    return intake
   }
 
   /// Deletes the intake from Core Data
@@ -56,10 +48,7 @@ public class Intake: CodingManagedObject, NamedEntity {
       managedObjectContext.deleteObject(self)
       
       if saveImmediately {
-        var error: NSError?
-        if !managedObjectContext.save(&error) {
-          Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
-        }
+        CoreDataStack.saveContext(managedObjectContext)
       }
     } else {
       assert(false)
@@ -67,16 +56,16 @@ public class Intake: CodingManagedObject, NamedEntity {
   }
   
   /// Fetches all intakes for the specified date interval (beginDate..<endDate)
-  public class func fetchIntakes(#beginDate: NSDate, endDate: NSDate, managedObjectContext: NSManagedObjectContext?) -> [Intake] {
+  public class func fetchIntakes(#beginDate: NSDate, endDate: NSDate, managedObjectContext: NSManagedObjectContext) -> [Intake] {
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
     let descriptor = NSSortDescriptor(key: "date", ascending: true)
-    return ModelHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: [descriptor])
+    return CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: [descriptor])
   }
 
   /// Fetches all intakes for a day taken from the specified date.
   /// Start of the day is inclusively started from 0:00 + specified offset in hours.
   /// End of the day is exclusive ended with 0:00 of the next day + specified offset in hours.
-  public class func fetchIntakesForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext?) -> [Intake] {
+  public class func fetchIntakesForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> [Intake] {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
     let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
     return fetchIntakes(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
@@ -109,7 +98,7 @@ public class Intake: CodingManagedObject, NamedEntity {
                                              dayOffsetInHours: Int,
                                              groupingUnit: GroupingCalendarUnit,
                                              aggregateFunction aggregateFunctionRaw: AggregateFunction,
-                                             managedObjectContext: NSManagedObjectContext?) -> [Double] {
+                                             managedObjectContext: NSManagedObjectContext) -> [Double] {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: beginDateRaw)
     let endDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: endDateRaw)
     

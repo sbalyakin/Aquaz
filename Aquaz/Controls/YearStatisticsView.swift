@@ -412,23 +412,62 @@ protocol YearStatisticsViewDataSource: class {
       }
       
       let pinLayer = pinsLayer.sublayers[index] as! CAShapeLayer
+      
       let rect = CGRect(x: coord.x - pinDiameter / 2, y: coord.y - pinDiameter / 2, width: pinDiameter, height: pinDiameter)
-      var path = UIBezierPath(ovalInRect: rect).CGPath
+      let path = UIBezierPath(ovalInRect: rect).CGPath
       transformShape(pinLayer, path: path, useAnimation: useAnimation)
     }
   }
   
   private func transformShape(shape: CAShapeLayer, path: CGPath, useAnimation: Bool) {
     if useAnimation {
+      CATransaction.begin()
+      
+      let startPath: CGPath
+      
+      if let presentation = shape.presentationLayer() as? CAShapeLayer {
+        startPath = presentation.path ?? path
+      } else {
+        startPath = shape.path ?? path
+      }
+
       let animation = CABasicAnimation(keyPath: "path")
       animation.duration = animationDuration
       animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-      animation.fromValue = shape.path
+      animation.fromValue = startPath
       shape.path = path
       animation.toValue = shape.path
-      shape.addAnimation(animation, forKey: nil)
+      shape.addAnimation(animation, forKey: "path")
+      
+      CATransaction.commit()
     } else {
       shape.path = path
+    }
+  }
+
+  private func transformShapeFrame(shape: CAShapeLayer, frame: CGRect, useAnimation: Bool) {
+    if useAnimation {
+      CATransaction.begin()
+      
+      let startRect: CGRect
+      
+      if let presentation = shape.presentationLayer() as? CAShapeLayer {
+        startRect = presentation.frame
+      } else {
+        startRect = shape.frame
+      }
+      
+      let animation = CABasicAnimation(keyPath: "position")
+      animation.duration = animationDuration
+      animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+      animation.fromValue = NSValue(CGPoint: startRect.origin)
+      shape.position = frame.origin
+      animation.fromValue = NSValue(CGPoint: frame.origin)
+      shape.addAnimation(animation, forKey: "position")
+      
+      CATransaction.commit()
+    } else {
+      shape.position = frame.origin
     }
   }
 

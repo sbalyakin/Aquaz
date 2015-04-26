@@ -40,10 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     if Settings.generalHasLaunchedOnce.value == false {
       prePopulateCoreData()
+      initDrinks()
       adjustNotifications()
       showWelcomeWizard()
       Settings.generalHasLaunchedOnce.value = true
     } else {
+      initDrinks()
       if let options = launchOptions {
         if let notification = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
           showDayViewControllerForToday()
@@ -54,12 +56,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
   
+  private func initDrinks() {
+    Drink.cacheAllDrinks(CoreDataStack.privateContext)
+  }
+  
   private func setupCoreDataSynchronization() {
     wormhole = MMWormhole(applicationGroupIdentifier: GlobalConstants.appGroupName, optionalDirectory: GlobalConstants.wormholeOptionalDirectory)
     
     wormhole.listenForMessageWithIdentifier(GlobalConstants.wormholeMessageFromWidget) { [unowned self] (messageObject) -> Void in
       if let notification = messageObject as? NSNotification {
-        CoreDataProvider.sharedInstance.managedObjectContext?.mergeChangesFromContextDidSaveNotification(notification)
+        CoreDataStack.mainContext.mergeChangesFromContextDidSaveNotification(notification)
+        CoreDataStack.privateContext.mergeChangesFromContextDidSaveNotification(notification)
         
         NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationManagedObjectContextWasMerged, object: nil)
         
@@ -70,12 +77,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidSave:",
       name: NSManagedObjectContextDidSaveNotification,
-      object: CoreDataProvider.sharedInstance.managedObjectContext)
+      object: nil)
 
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "updateNotifications:",
       name: NSManagedObjectContextObjectsDidChangeNotification,
-      object: CoreDataProvider.sharedInstance.managedObjectContext)
+      object: nil)
   }
   
   func managedObjectContextDidSave(notification: NSNotification) {
@@ -105,13 +112,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
       if let lastIntakeDate = lastIntakeDate where DateHelper.areDatesEqualByDays(lastIntakeDate, NSDate()) {
         if Settings.notificationsCheckWaterGoalReaching.value {
-          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+          CoreDataStack.privateContext.performBlock {
             let beginDate = NSDate()
             let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
-
-            let todayOverallWaterIntake = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Summary, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext).first!
             
-            let todayWaterGoal = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext).first!
+            let todayOverallWaterIntake = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Summary, managedObjectContext: CoreDataStack.privateContext).first!
+            
+            let todayWaterGoal = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: CoreDataStack.privateContext).first!
             
             if todayOverallWaterIntake >= todayWaterGoal {
               dispatch_async(dispatch_get_main_queue()) {
@@ -158,16 +165,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func prePopulateCoreData() {
-    // Pre populate core data if the application is running for the first time
-    if let versionIdentifier = CoreDataProvider.sharedInstance.managedObjectModel.versionIdentifiers.first as? String {
-      if let managedObjectContext = CoreDataProvider.sharedInstance.managedObjectContext {
-        CoreDataPrePopulation.prePopulateCoreData(modelVersion: .Version1_0, managedObjectContext: managedObjectContext)
-      } else {
-        Logger.logSevere("Managed object context is not initialized")
-      }
-    } else {
-      Logger.logSevere("Version identifier for managed object model is not specified")
-    }
+    CoreDataPrePopulation.prePopulateCoreData(modelVersion: .Version1_0, managedObjectContext: CoreDataStack.privateContext)
   }
   
   private func adjustNotifications() {
@@ -271,7 +269,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Localytics.closeSession()
     Localytics.upload()
     
-    CoreDataProvider.sharedInstance.saveContext()
+    CoreDataStack.saveContext(CoreDataStack.privateContext)
+    CoreDataStack.saveContext(CoreDataStack.mainContext)
     
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }

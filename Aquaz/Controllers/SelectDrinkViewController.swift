@@ -20,6 +20,8 @@ class SelectDrinkViewController: UIViewController {
   
   private lazy var popupViewManager: SelectDrinkPopupViewManager = SelectDrinkPopupViewManager(selectDrinkViewController: self)
 
+  private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
+
   private var displayedDrinkTypes: [Drink.DrinkType] = [
     .Water, .Tea,    .Coffee,
     .Milk,  .Juice,  .Sport,
@@ -71,7 +73,7 @@ class SelectDrinkViewController: UIViewController {
     let alcoholIndexPath = NSIndexPath(forRow: displayedDrinkTypes.count - 1, inSection: 0)
     self.collectionView.reloadItemsAtIndexPaths([alcoholIndexPath])
 
-    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
+    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
       performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
     }
   }
@@ -137,7 +139,7 @@ class SelectDrinkViewController: UIViewController {
     
     let drinkType = displayedDrinkTypes[drinkIndex]
     
-    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
+    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
       performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
     }
   }
@@ -178,7 +180,7 @@ extension SelectDrinkViewController: UICollectionViewDataSource {
     
     let drinkType = displayedDrinkTypes[drinkIndex]
     
-    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
+    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
       cell.drinkLabel.text = drink.localizedName + "\n"
       cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
       cell.drinkView.drink = drink
@@ -213,7 +215,8 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
   
   private let popupDrinkTypes: [Drink.DrinkType] = [ .Beer, .Wine, .HardLiquor ]
   private weak var selectDrinkViewController: SelectDrinkViewController!
-  
+  private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
+
   private let columnsCount = 1
   private var rowsCount = 3
   private let padding: CGFloat = 10
@@ -326,7 +329,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     
     let drinkType = popupDrinkTypes[drinkIndex]
     
-    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
+    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
       cell.drinkLabel.text = drink.localizedName + "\n"
       cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
       cell.drinkView.drink = drink

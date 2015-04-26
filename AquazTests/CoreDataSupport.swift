@@ -1,5 +1,5 @@
 //
-//  CoreDataHelper.swift
+//  CoreDataSupport.swift
 //  Aquaz
 //
 //  Created by Admin on 12.02.15.
@@ -9,11 +9,11 @@
 import CoreData
 import Aquaz
 
-class CoreDataHelper {
+class CoreDataSupport {
   
-  class var sharedInstance: CoreDataHelper {
+  class var sharedInstance: CoreDataSupport {
     struct Instance {
-      static let instance = CoreDataHelper()
+      static let instance = CoreDataSupport()
     }
     return Instance.instance
   }

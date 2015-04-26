@@ -25,6 +25,7 @@ class WeekStatisticsViewController: UIViewController {
   private var isShowingDay = false
   private var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
+  private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   
   private struct Constants {
     static let showDaySegue = "Show Day"
@@ -83,7 +84,7 @@ class WeekStatisticsViewController: UIViewController {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
       name: NSManagedObjectContextDidSaveNotification,
-      object: CoreDataProvider.sharedInstance.managedObjectContext)
+      object: nil)
 
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
@@ -156,10 +157,12 @@ class WeekStatisticsViewController: UIViewController {
   }
 
   private func fetchStatisticsItems(#beginDate: NSDate, endDate: NSDate) -> [WeekStatisticsView.ItemType] {
-    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
+    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
+    
     Logger.logSevere(waterIntakes.count == 7, "Unexpected count of grouped water intakes", logDetails: [Logger.Attributes.count: "\(waterIntakes.count)"])
     
-    let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
+    let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
+    
     Logger.logSevere(goals.count == 7, "Unexpected count of water goals", logDetails: [Logger.Attributes.count: "\(goals.count)"])
     
     let displayedVolumeUnits = Settings.generalVolumeUnits.value
@@ -180,7 +183,7 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   private func updateWeekStatisticsView(#animated: Bool) {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { 
+    managedObjectContext.performBlock {
       let date = self.date
       let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
       dispatch_async(dispatch_get_main_queue()) {

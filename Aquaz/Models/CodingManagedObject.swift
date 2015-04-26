@@ -33,11 +33,9 @@ public class CodingManagedObject: NSManagedObject, NSCoding {
   
   private class func getExistingManagedObject(aDecoder: NSCoder) -> NSManagedObject? {
     if let
-      context = CoreDataProvider.sharedInstance.managedObjectContext,
-      coordinator = CoreDataProvider.sharedInstance.persistentStoreCoordinator,
       url = aDecoder.decodeObjectForKey(encodeKey) as? NSURL,
-      managedObjectID = coordinator.managedObjectIDForURIRepresentation(url),
-      managedObject = context.existingObjectWithID(managedObjectID, error: nil)
+      managedObjectID = CoreDataStack.persistentStoreCoordinator.managedObjectIDForURIRepresentation(url),
+      managedObject = CoreDataStack.privateContext.existingObjectWithID(managedObjectID, error: nil)
     {
       return managedObject
     } else {

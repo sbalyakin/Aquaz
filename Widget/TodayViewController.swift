@@ -51,10 +51,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   private var progressViewSection: MultiProgressView.Section!
   private var wormhole: MMWormhole!
 
-  // It's better to create CoreDataProvider in the today extension and do not use sharedInstance of it
-  private var coreDataProvider = CoreDataProvider()
-  private var managedObjectContext: NSManagedObjectContext! {
-    return coreDataProvider.managedObjectContext!
+  // It's better to create CoreDataStack in the today extension and do not use sharedInstance of it
+  private var coreDataStack = CoreDataStack()
+  private var managedObjectContext: NSManagedObjectContext {
+    return coreDataStack.privateContext
   }
 
   override func viewDidLoad() {
@@ -62,13 +62,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     setupCoreDataSynchronization()
     setupProgressView()
+    initDrinks()
     updateWaterIntakeForDate(NSDate(), animate: false)
     updateDrinks()
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidSave:",
       name: NSManagedObjectContextDidSaveNotification,
-      object: coreDataProvider.managedObjectContext)
+      object: nil)
   }
   
   deinit {
@@ -85,12 +86,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     wormhole = MMWormhole(applicationGroupIdentifier: GlobalConstants.appGroupName, optionalDirectory: GlobalConstants.wormholeOptionalDirectory)
   }
 
+  private func initDrinks() {
+    Drink.cacheAllDrinks(managedObjectContext)
+  }
+
   private func updateDrinks() {
     var drinkIndexesToDisplay = [Int]()
     var drinkIndexes = Array(0..<Drink.getDrinksCount())
 
     let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
-    if let intake1: Intake = ModelHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor]) {
+    if let intake1: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor]) {
       let drinkIndex1 = intake1.drink.index.integerValue
       drinkIndexesToDisplay += [drinkIndex1]
       if let index = find(drinkIndexes, drinkIndex1) {
@@ -101,7 +106,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       
       let predicate2 = NSPredicate(format: "%K != %d", "drink.index", drinkIndex1)
       
-      if let intake2: Intake = ModelHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate2, sortDescriptors: [sortDescriptor]) {
+      if let intake2: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate2, sortDescriptors: [sortDescriptor]) {
         let drinkIndex2 = intake2.drink.index.integerValue
         drinkIndexesToDisplay += [drinkIndex2]
         if let index = find(drinkIndexes, drinkIndex2) {
@@ -112,7 +117,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         let predicate3 = NSPredicate(format: "%K != %d AND %K != %d", "drink.index", drinkIndex1, "drink.index", drinkIndex2)
         
-        if let intake3: Intake = ModelHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate3, sortDescriptors: [sortDescriptor]) {
+        if let intake3: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate3, sortDescriptors: [sortDescriptor]) {
           drinkIndexesToDisplay += [intake3.drink.index.integerValue]
         }
       }

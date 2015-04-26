@@ -13,6 +13,11 @@ import Aquaz
 
 class DrinkTests: XCTestCase {
 
+  override func setUp() {
+    super.setUp()
+    Drink.cacheAllDrinks(managedObjectContext)
+  }
+
   func testGetDrinkByIndex() {
     for drinkIndex in 0..<Drink.getDrinksCount() {
       if let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: managedObjectContext) {
@@ -71,6 +76,6 @@ class DrinkTests: XCTestCase {
     drink?.drawDrink(frame: frame)
   }
 
-  private var managedObjectContext = CoreDataHelper.sharedInstance.managedObjectContext
+  private var managedObjectContext: NSManagedObjectContext { return CoreDataSupport.sharedInstance.managedObjectContext }
 
 }

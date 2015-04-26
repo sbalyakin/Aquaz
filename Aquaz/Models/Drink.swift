@@ -35,7 +35,7 @@ public class Drink: CodingManagedObject, NamedEntity {
     static let hardLiquorTitle   = NSLocalizedString("D:Hard Liquor",   value: "Hard Liquor",   comment: "Drink: Title for hard liquor")
     static let darkColorShadowLevel: CGFloat = 0.2
     // Use the cache to store previously used drink objects
-    static var cachedDrinks: [Int: Drink] = [:]
+    static var cachedDrinks = [Int: [Int: Drink]]()
   }
   
   // Important! Order of this enum must NOT be changed in further versions. New drinks must be added to the end.
@@ -188,57 +188,65 @@ public class Drink: CodingManagedObject, NamedEntity {
     drawDrinkFunction(frame: frame)
   }
 
+  public class func cacheAllDrinks(managedObjectContext: NSManagedObjectContext) {
+    if Static.cachedDrinks.indexForKey(managedObjectContext.hash) != nil {
+      return
+    }
+    
+    let sortDescriptor = NSSortDescriptor(key: "index", ascending: true)
+    let drinks: [Drink] = CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor], fetchLimit: nil)
+
+    var cache = [Int: Drink]()
+    for drink in drinks {
+      cache[drink.index.integerValue] = drink
+    }
+    
+    Static.cachedDrinks[managedObjectContext.hash] = cache
+  }
+  
   public class func getDrinksCount() -> Int {
     return DrinkType.count
   }
   
-  public class func getDrinkByType(drinkType: Drink.DrinkType, managedObjectContext: NSManagedObjectContext?) -> Drink? {
+  public class func getDrinkByType(drinkType: Drink.DrinkType, managedObjectContext: NSManagedObjectContext) -> Drink? {
     return getDrinkByIndex(drinkType.rawValue, managedObjectContext: managedObjectContext)
   }
   
-  public class func getDrinkByIndex(index: Int, managedObjectContext: NSManagedObjectContext?) -> Drink? {
-    // Try to search for the drink in the cache
-    if let drink = Static.cachedDrinks[index] {
-      if drink.managedObjectContext === managedObjectContext {
-        return drink
+  public class func getDrinkByIndex(index: Int, managedObjectContext: NSManagedObjectContext) -> Drink? {
+    if let cache = Static.cachedDrinks[managedObjectContext.hash] {
+      // Get the drink from cache
+      let drink = cache[index]
+      if drink == nil {
+        Logger.logDrinkIsNotFound(drinkIndex: index)
       }
-    }
-    
-    // Fetch the drink from Core Data
-    let predicate = NSPredicate(format: "%K = %@", argumentArray: ["index", index])
-    if let drink: Drink = ModelHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate) {
-      Static.cachedDrinks[index] = drink
       return drink
     } else {
-      Logger.logDrinkIsNotFound(drinkIndex: index)
-      return nil
+      // Fetch the drink from Core Data
+      let predicate = NSPredicate(format: "%K = %@", argumentArray: ["index", index])
+      if let drink: Drink = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate) {
+        return drink
+      } else {
+        Logger.logDrinkIsNotFound(drinkIndex: index)
+        return nil
+      }
     }
   }
   
-  class func addEntity(#index: Int, name: String, waterPercent: Double, recentAmount amount: Double, managedObjectContext: NSManagedObjectContext?) -> Drink? {
-    if let managedObjectContext = managedObjectContext {
-      if let drink = LoggedActions.insertNewObjectForEntity(Drink.self, inManagedObjectContext: managedObjectContext) {
-        drink.index = index
-        drink.name = name
-        drink.waterPercent = waterPercent
+  class func addEntity(#index: Int, name: String, waterPercent: Double, recentAmount amount: Double, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Drink {
+    let drink = LoggedActions.insertNewObjectForEntity(Drink.self, inManagedObjectContext: managedObjectContext)!
+    drink.index = index
+    drink.name = name
+    drink.waterPercent = waterPercent
 
-        if let recentAmount = LoggedActions.insertNewObjectForEntity(RecentAmount.self, inManagedObjectContext: managedObjectContext) {
-          recentAmount.drink = drink
-          recentAmount.amount = amount
-        }
-        
-        var error: NSError?
-        if !managedObjectContext.save(&error) {
-          Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
-          return nil
-        }
-        
-        return drink
-      }
+    let recentAmount = LoggedActions.insertNewObjectForEntity(RecentAmount.self, inManagedObjectContext: managedObjectContext)!
+    recentAmount.drink = drink
+    recentAmount.amount = amount
+    
+    if saveImmediately {
+      CoreDataStack.saveContext(managedObjectContext)
     }
     
-    assert(false)
-    return nil
+    return drink
   }
   
   public typealias DrawDrinkFunction = (frame: CGRect) -> Void

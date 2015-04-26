@@ -15,6 +15,8 @@ class MonthStatisticsViewController: UIViewController {
   @IBOutlet weak var monthLabel: UILabel!
   
   private var date: NSDate = DateHelper.startDateFromDate(NSDate(), calendarUnit: .CalendarUnitMonth)
+  
+  private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
 
   private struct Constants {
     static let showDaySegue = "Show Day"
@@ -61,7 +63,7 @@ class MonthStatisticsViewController: UIViewController {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
       name: NSManagedObjectContextDidSaveNotification,
-      object: CoreDataProvider.sharedInstance.managedObjectContext)
+      object: nil)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
@@ -139,12 +141,12 @@ extension MonthStatisticsViewController: CalendarViewDelegate {
 extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
   
   func monthStatisticsGetValuesForDateInterval(#beginDate: NSDate, endDate: NSDate, calendarContentView: CalendarContentView) -> [Double] {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    managedObjectContext.performBlock {
       weak var requestingMonthStatisticsContentView = (calendarContentView as! MonthStatisticsContentView)
       let intakeFractions = self.fetchIntakeFractions(beginDate: beginDate, endDate: endDate)
       dispatch_async(dispatch_get_main_queue()) {
-        if requestingMonthStatisticsContentView != nil {
-          requestingMonthStatisticsContentView?.updateValues(intakeFractions)
+        if let contentView = requestingMonthStatisticsContentView {
+          contentView.updateValues(intakeFractions)
         } else {
           assert(false, "Calendar content view is null now")
         }
@@ -155,9 +157,9 @@ extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
   }
   
   private func fetchIntakeFractions(#beginDate: NSDate, endDate: NSDate) -> [Double] {
-    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
+    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
     
-    let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
+    let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
     Logger.logSevere(waterIntakes.count == goals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     
     var intakeFractions = [Double]()

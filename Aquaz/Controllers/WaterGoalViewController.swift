@@ -11,6 +11,8 @@ import CoreData
 
 class WaterGoalViewController: OmegaSettingsViewController {
   
+  private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -254,17 +256,13 @@ class WaterGoalViewController: OmegaSettingsViewController {
   }
 
   private func saveWaterGoalToCoreData() {
-    let date = NSDate()
-    if let waterGoal = WaterGoal.fetchWaterGoalStrictlyForDate(date, managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext) {
-      waterGoal.baseAmount = dailyWaterIntakeCell.value
-      CoreDataProvider.sharedInstance.saveContext()
-    } else {
+    managedObjectContext.performBlock {
       WaterGoal.addEntity(
-        date: date,
-        baseAmount: dailyWaterIntakeCell.value,
+        date: NSDate(),
+        baseAmount: self.dailyWaterIntakeCell.value,
         isHotDay: false,
         isHighActivity: false,
-        managedObjectContext: CoreDataProvider.sharedInstance.managedObjectContext)
+        managedObjectContext: self.managedObjectContext)
     }
   }
 
