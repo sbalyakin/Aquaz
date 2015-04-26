@@ -72,7 +72,9 @@ class MonthStatisticsViewController: UIViewController {
   }
 
   func managedObjectContextDidChange(notification: NSNotification) {
-    monthStatisticsView.refresh()
+    dispatch_async(dispatch_get_main_queue()) {
+      self.monthStatisticsView.refresh()
+    }
   }
   
   func preferredContentSizeChanged() {
