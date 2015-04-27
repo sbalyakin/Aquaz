@@ -48,8 +48,9 @@ class CalendarContentView: UIView {
   var collectionView: UICollectionView!
   var daysInfo = [CalendarViewDayInfo]()
   
-  private var daysPerWeek = NSCalendar.currentCalendar().maximumRangeOfUnit(.CalendarUnitWeekday).length
-  private var dayTitles = NSCalendar.currentCalendar().veryShortWeekdaySymbols as! [String]
+  private let calendar = NSCalendar.currentCalendar()
+  private let daysPerWeek = NSCalendar.currentCalendar().maximumRangeOfUnit(.CalendarUnitWeekday).length
+  private let dayTitles = NSCalendar.currentCalendar().veryShortWeekdaySymbols as! [String]
   
   private struct Constants {
     static let cellIdentifier = "Cell"
@@ -121,7 +122,9 @@ extension CalendarContentView: UICollectionViewDataSource {
   func getTitleCell(#collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.titleCellIdentifier, forIndexPath: indexPath) as! CalendarContentViewTitleCell
     
-    cell.setText(dayTitles[indexPath.row], calendarContentView: self)
+    let weekDayIndex = (indexPath.row + calendar.firstWeekday - 1) % daysPerWeek
+
+    cell.setText(dayTitles[weekDayIndex], calendarContentView: self)
     
     return cell
   }

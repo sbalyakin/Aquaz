@@ -135,7 +135,9 @@ protocol WeekStatisticsViewDelegate: class {
     let calendar = NSCalendar.currentCalendar()
     
     for dayIndex in 0..<daysPerWeek {
-      let title = calendar.veryShortWeekdaySymbols[dayIndex] as! String
+      let weekDayIndex = (dayIndex + calendar.firstWeekday - 1) % daysPerWeek
+      
+      let title = calendar.veryShortWeekdaySymbols[weekDayIndex] as! String
 
       let dayButton = UIButton()
       dayButton.tag = dayIndex
