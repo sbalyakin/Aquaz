@@ -24,32 +24,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   @IBOutlet weak var drink3View: DrinkView!
   @IBOutlet weak var drink3TitleLabel: UILabel!
   
-  private var drink1: Drink! {
-    didSet {
-      drink1AmountLabel.text = formatWaterVolume(drink1.recentAmount.amount)
-      drink1TitleLabel.text = drink1.localizedName
-      drink1View.drink = drink1
-    }
-  }
-  
-  private var drink2: Drink! {
-    didSet {
-      drink2AmountLabel.text = formatWaterVolume(drink2.recentAmount.amount)
-      drink2TitleLabel.text = drink2.localizedName
-      drink2View.drink = drink2
-    }
-  }
-
-  private var drink3: Drink! {
-    didSet {
-      drink3AmountLabel.text = formatWaterVolume(drink3.recentAmount.amount)
-      drink3TitleLabel.text = drink3.localizedName
-      drink3View.drink = drink3
-    }
-  }
+  private var drink1: Drink!
+  private var drink2: Drink!
+  private var drink3: Drink!
   
   private var progressViewSection: MultiProgressView.Section!
   private var wormhole: MMWormhole!
+  private var waterGoal: Double?
+  private var overallWaterIntake: Double?
 
   // It's better to create CoreDataStack in the today extension and do not use sharedInstance of it
   private var coreDataStack = CoreDataStack()
@@ -63,13 +45,21 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     setupCoreDataSynchronization()
     setupProgressView()
     initDrinks()
-    updateWaterIntakeForDate(NSDate(), animate: false)
-    updateDrinks()
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidSave:",
       name: NSManagedObjectContextDidSaveNotification,
       object: nil)
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    fetchData {
+      dispatch_async(dispatch_get_main_queue()) {
+        self.updateUI(true)
+      }
+    }
   }
   
   deinit {
@@ -86,14 +76,27 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     wormhole = MMWormhole(applicationGroupIdentifier: GlobalConstants.appGroupName, optionalDirectory: GlobalConstants.wormholeOptionalDirectory)
   }
 
+  private func setupProgressView() {
+    progressViewSection = progressView.addSection(color: StyleKit.waterColor)
+  }
+  
   private func initDrinks() {
-    Drink.cacheAllDrinks(managedObjectContext)
+    managedObjectContext.performBlock {
+      Drink.cacheAllDrinks(self.managedObjectContext)
+    }
+    
+    drink1TitleLabel.text = " "
+    drink1AmountLabel.text = " "
+    drink2TitleLabel.text = " "
+    drink2AmountLabel.text = " "
+    drink3TitleLabel.text = " "
+    drink3AmountLabel.text = " "
   }
 
-  private func updateDrinks() {
+  private func fetchDrinks() {
     var drinkIndexesToDisplay = [Int]()
     var drinkIndexes = Array(0..<Drink.getDrinksCount())
-
+    
     let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
     if let intake1: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor]) {
       let drinkIndex1 = intake1.drink.index.integerValue
@@ -126,15 +129,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     if drinkIndexesToDisplay.count < 1 {
       drinkIndexesToDisplay += [drinkIndexes.removeAtIndex(0)]
     }
-
+    
     if drinkIndexesToDisplay.count < 2 {
       drinkIndexesToDisplay += [drinkIndexes.removeAtIndex(0)]
     }
-
+    
     if drinkIndexesToDisplay.count < 3 {
       drinkIndexesToDisplay += [drinkIndexes.removeAtIndex(0)]
     }
-
+    
     drinkIndexesToDisplay.sort(<)
     
     drink1 = Drink.getDrinkByIndex(drinkIndexesToDisplay[0], managedObjectContext: managedObjectContext)!
@@ -142,34 +145,67 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     drink3 = Drink.getDrinkByIndex(drinkIndexesToDisplay[2], managedObjectContext: managedObjectContext)!
   }
   
-  private func setupProgressView() {
-    progressViewSection = progressView.addSection(color: StyleKit.waterColor)
+  private func fetchWaterIntake() {
+    let date = NSDate()
+    
+    waterGoal = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: managedObjectContext)?.amount
+    
+    overallWaterIntake = Intake.fetchGroupedWaterAmounts(
+      beginDate: date,
+      endDate: DateHelper.addToDate(date, years: 0, months: 0, days: 1),
+      dayOffsetInHours: 0,
+      groupingUnit: .Day,
+      aggregateFunction: .Summary,
+      managedObjectContext: managedObjectContext).first
   }
   
-  private func updateWaterIntakeForDate(date: NSDate, animate: Bool) {
-    if let waterGoal = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: managedObjectContext)?.amount
-    {
-      let waterIntake = Intake.fetchGroupedWaterAmounts(
-        beginDate: date,
-        endDate: DateHelper.addToDate(date, years: 0, months: 0, days: 1),
-        dayOffsetInHours: 0,
-        groupingUnit: .Day,
-        aggregateFunction: .Summary,
-        managedObjectContext: managedObjectContext).first ?? 0
-
-      let newFactor = CGFloat(waterIntake / waterGoal)
-      if progressViewSection.factor != newFactor {
-        if animate {
-          progressViewSection.setFactorWithAnimation(newFactor)
-        } else {
-          progressViewSection.factor = newFactor
-        }
-      }
-      updateProgressLabel(waterGoal: waterGoal, waterIntake: waterIntake, animate: animate)
+  private func fetchData(completion: () -> ()) {
+    managedObjectContext.performBlock {
+      self.fetchDrinks()
+      self.fetchWaterIntake()
+      completion()
     }
   }
   
-  private func updateProgressLabel(#waterGoal: Double, waterIntake: Double, animate: Bool) {
+  private func updateUI(animate: Bool) {
+    updateDrinks()
+    updateWaterIntakes(animate)
+  }
+  
+  private func updateDrinks() {
+    drink1AmountLabel.text = formatWaterVolume(drink1.recentAmount.amount)
+    drink1TitleLabel.text = drink1.localizedName
+    drink1View.drink = drink1
+    drink2AmountLabel.text = formatWaterVolume(drink2.recentAmount.amount)
+    drink2TitleLabel.text = drink2.localizedName
+    drink2View.drink = drink2
+    drink3AmountLabel.text = formatWaterVolume(drink3.recentAmount.amount)
+    drink3TitleLabel.text = drink3.localizedName
+    drink3View.drink = drink3
+  }
+
+  private func updateWaterIntakes(animate: Bool) {
+    if let waterGoal = waterGoal, overallWaterIntake = overallWaterIntake {
+      updateProgressView(waterGoal: waterGoal, overallWaterIntake: overallWaterIntake, animate: animate)
+      updateProgressLabel(waterGoal: waterGoal, overallWaterIntake: overallWaterIntake, animate: animate)
+    } else {
+      progressViewSection.factor = 0
+      progressLabel.text = NSLocalizedString("TodayExtension:Updating...", value: "Updating...", comment: "TodayExtension: Temporary text for amount label")
+    }
+  }
+  
+  private func updateProgressView(#waterGoal: Double, overallWaterIntake: Double, animate: Bool) {
+    let newFactor = CGFloat(overallWaterIntake / waterGoal)
+    if progressViewSection.factor != newFactor {
+      if animate {
+        progressViewSection.setFactorWithAnimation(newFactor)
+      } else {
+        progressViewSection.factor = newFactor
+      }
+    }
+  }
+  
+  private func updateProgressLabel(#waterGoal: Double, overallWaterIntake: Double, animate: Bool) {
     let intakeText: String
     
     if Settings.uiDisplayDailyWaterIntakeInPercents.value {
@@ -177,10 +213,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       formatter.numberStyle = .PercentStyle
       formatter.maximumFractionDigits = 0
       formatter.multiplier = 100
-      let drinkedPart = waterIntake / waterGoal
+      let drinkedPart = overallWaterIntake / waterGoal
       intakeText = formatter.stringFromNumber(drinkedPart)!
     } else {
-      intakeText = formatWaterVolume(waterIntake, displayUnits: false)
+      intakeText = formatWaterVolume(overallWaterIntake, displayUnits: false)
     }
     
     let waterGoalText = formatWaterVolume(waterGoal)
@@ -205,7 +241,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
-    completionHandler(.NewData)
+    fetchData {
+      dispatch_async(dispatch_get_main_queue()) {
+        self.updateUI(true)
+        completionHandler(.NewData)
+      }
+    }
   }
   
   func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
@@ -226,9 +267,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   
   private func addIntakeForDrink(drink: Drink!) {
     if drink != nil {
-      let intake = Intake.addEntity(drink: drink, amount: drink.recentAmount.amount, date: NSDate(), managedObjectContext: managedObjectContext, saveImmediately: true)
+      managedObjectContext.performBlock {
+        Intake.addEntity(
+          drink: drink,
+          amount: drink.recentAmount.amount,
+          date: NSDate(),
+          managedObjectContext: self.managedObjectContext,
+          saveImmediately: true)
 
-      updateWaterIntakeForDate(NSDate(), animate: true)
+        self.fetchData {
+          dispatch_async(dispatch_get_main_queue()) {
+            self.updateUI(true)
+          }
+        }
+      }
     }
   }
   
