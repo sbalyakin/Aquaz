@@ -35,6 +35,8 @@ class DayViewController: UIViewController {
           Settings.uiCustomDateForDayView.value = currentDate
         }
       }
+      
+      diaryViewController.date = currentDate
     }
   }
   
@@ -269,6 +271,7 @@ class DayViewController: UIViewController {
     // Add intakes diary view controller
     diaryViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.diaryViewControllerStoryboardID)
     diaryViewController.dayViewController = self
+    diaryViewController.date = currentDate
     
     pages.append(diaryViewController)
     
@@ -421,9 +424,6 @@ class DayViewController: UIViewController {
       }
     }
     
-    // Update diary page
-    diaryViewController.updateTable(intakes)
-    
     // Clear all drink sections
     for (_, section) in multiProgressSections {
       section.factor = 0.0
@@ -540,12 +540,14 @@ class DayViewController: UIViewController {
   }
   
   private func saveWaterGoalForCurrentDate(#baseAmount: Double, isHotDay: Bool, isHighActivity: Bool) {
-    waterGoal = WaterGoal.addEntity(
-      date: currentDate,
-      baseAmount: baseAmount,
-      isHotDay: isHotDay,
-      isHighActivity: isHighActivity,
-      managedObjectContext: managedObjectContext)
+    managedObjectContext.performBlock {
+      self.waterGoal = WaterGoal.addEntity(
+        date: self.currentDate,
+        baseAmount: baseAmount,
+        isHotDay: isHotDay,
+        isHighActivity: isHighActivity,
+        managedObjectContext: self.managedObjectContext)
+    }
   }
   
   // MARK: Private properties -
@@ -562,41 +564,19 @@ class DayViewController: UIViewController {
   
   private var isHotDay: Bool {
     get {
-      if isWaterGoalForCurrentDay {
-        return waterGoal?.isHotDay ?? false
-      } else {
-        return false
-      }
+      return isWaterGoalForCurrentDay ? (waterGoal?.isHotDay ?? false) : false
     }
     set {
-      if !isWaterGoalForCurrentDay {
-        saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: newValue, isHighActivity: false)
-      } else {
-        waterGoal?.isHotDay = newValue
-        CoreDataStack.saveContext(managedObjectContext)
-      }
-      
-      waterGoalWasChanged()
+      saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: newValue, isHighActivity: false)
     }
   }
 
   private var isHighActivity: Bool {
     get {
-      if isWaterGoalForCurrentDay {
-        return waterGoal?.isHighActivity ?? false
-      } else {
-        return false
-      }
+      return isWaterGoalForCurrentDay ? (waterGoal?.isHighActivity ?? false) : false
     }
     set {
-      if !isWaterGoalForCurrentDay {
-        saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: false, isHighActivity: newValue)
-      } else {
-        waterGoal?.isHighActivity = newValue
-        CoreDataStack.saveContext(managedObjectContext)
-      }
-      
-      waterGoalWasChanged()
+      saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: false, isHighActivity: newValue)
     }
   }
   

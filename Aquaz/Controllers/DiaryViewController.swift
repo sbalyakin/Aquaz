@@ -7,14 +7,24 @@
 //
 
 import Foundation
+import CoreData
 
 class DiaryViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
   
   weak var dayViewController: DayViewController!
+  var date: NSDate! {
+    didSet {
+      if date != nil {
+        dateWasChanged()
+      }
+    }
+  }
   
-  private var intakes: [Intake] = []
+  private var fetchedResultsController: NSFetchedResultsController!
+  
+  private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   
   private var sizingCell: DiaryTableViewCell!
 
@@ -25,9 +35,7 @@ class DiaryViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    UIHelper.applyStyle(self)
-    tableView.backgroundView = nil
-    tableView.backgroundColor = StyleKit.pageBackgroundColor
+    applyStyle()
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -37,18 +45,45 @@ class DiaryViewController: UIViewController {
       tableView.deselectRowAtIndexPath(selectedIndexPath, animated: false)
     }
   }
-  
-  func updateTable(intakes: [Intake]) {
-    self.intakes = intakes
-    tableView?.reloadData()
+
+  private func applyStyle() {
+    UIHelper.applyStyle(self)
+    tableView.backgroundView = nil
+    tableView.backgroundColor = StyleKit.pageBackgroundColor
   }
   
+  private func dateWasChanged() {
+    managedObjectContext.performBlock {
+      let beginDate = DateHelper.dateByClearingTime(ofDate: self.date)
+      let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
+      
+      let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
+      let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+
+      let fetchRequest = NSFetchRequest(entityName: Intake.entityName)
+      fetchRequest.sortDescriptors = [sortDescriptor]
+      fetchRequest.predicate = predicate
+
+      self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+      self.fetchedResultsController.delegate = self
+      
+      var error: NSError?
+      if !self.fetchedResultsController.performFetch(&error) {
+        Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
+      }
+      
+      dispatch_async(dispatch_get_main_queue()) {
+        self.tableView?.reloadData()
+      }
+    }
+  }
+
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == Constants.editIntakeSegue,
       let intakeViewController = segue.destinationViewController.contentViewController as? IntakeViewController,
       let indexPath = tableView.indexPathForSelectedRow()
     {
-      let intake = intakes[indexPath.row]
+      let intake = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Intake
       intakeViewController.intake = intake
       intakeViewController.dayViewController = dayViewController
     }
@@ -59,14 +94,20 @@ class DiaryViewController: UIViewController {
 // MARK: UITableViewDataSource
 extension DiaryViewController: UITableViewDataSource {
   
+  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    return fetchedResultsController.sections!.count
+  }
+  
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return intakes.count
+    let sectionInfo = fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
+    return sectionInfo.numberOfObjects
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier, forIndexPath: indexPath) as! DiaryTableViewCell
     
-    let intake = intakes[indexPath.row]
+    let intake = fetchedResultsController.objectAtIndexPath(indexPath) as! Intake
+    
     cell.intake = intake
     
     return cell
@@ -78,8 +119,10 @@ extension DiaryViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if editingStyle == .Delete {
-      let intake = intakes[indexPath.row]
-      intake.deleteEntity()
+      managedObjectContext.performBlock {
+        let intake = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Intake
+        intake.deleteEntity(saveImmediately: true)
+      }
     }
   }
   
@@ -93,7 +136,7 @@ extension DiaryViewController: UITableViewDelegate {
       sizingCell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier) as! DiaryTableViewCell
     }
 
-    let intake = intakes[indexPath.row]
+    let intake = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Intake
     sizingCell.intake = intake
     sizingCell.setNeedsLayout()
     sizingCell.layoutIfNeeded()
@@ -101,4 +144,41 @@ extension DiaryViewController: UITableViewDelegate {
     return size.height
   }
   
+}
+
+// MARK: NSFetchedResultsControllerDelegate
+extension DiaryViewController: NSFetchedResultsControllerDelegate {
+  
+  func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    dispatch_async(dispatch_get_main_queue()) {
+      self.tableView.beginUpdates()
+    }
+  }
+  
+  func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    dispatch_async(dispatch_get_main_queue()) {
+      switch type {
+      case .Insert:
+        self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
+        
+      case .Delete:
+        self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
+        
+      case .Update:
+        let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as! DiaryTableViewCell
+        let intake = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Intake
+        cell.intake = intake
+        
+      case .Move:
+        self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
+        self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
+      }
+    }
+  }
+  
+  func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    dispatch_async(dispatch_get_main_queue()) {
+      self.tableView.endUpdates()
+    }
+  }
 }
