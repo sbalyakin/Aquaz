@@ -71,7 +71,7 @@ class DayViewController: UIViewController {
   private var dayGuide1ViewController: DayGuide1ViewController!
   private var dayGuide2ViewController: DayGuide2ViewController!
   
-  private var volumeObserverIdentifier: Int!
+  private var volumeObserverIdentifier: Int?
   
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   
@@ -96,7 +96,10 @@ class DayViewController: UIViewController {
   
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
-    Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+    
+    if let volumeObserverIdentifier = volumeObserverIdentifier {
+      Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+    }
   }
   
   override func viewWillLayoutSubviews() {

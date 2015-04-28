@@ -26,7 +26,7 @@ class WeekStatisticsViewController: UIViewController {
   private var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
-  private var volumeObserverIdentifier: Int!
+  private var volumeObserverIdentifier: Int?
   
   private struct Constants {
     static let showDaySegue = "Show Day"
@@ -45,7 +45,10 @@ class WeekStatisticsViewController: UIViewController {
 
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
-    Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+    
+    if let volumeObserverIdentifier = volumeObserverIdentifier {
+      Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+    }
   }
 
   override func viewWillAppear(animated: Bool) {

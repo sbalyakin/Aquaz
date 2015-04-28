@@ -25,7 +25,7 @@ class YearStatisticsViewController: UIViewController {
   private var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
-  private var volumeObserverIdentifier: Int!
+  private var volumeObserverIdentifier: Int?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -40,7 +40,10 @@ class YearStatisticsViewController: UIViewController {
 
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
-    Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+
+    if let volumeObserverIdentifier = volumeObserverIdentifier {
+      Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+    }
   }
 
   private func setupUI() {

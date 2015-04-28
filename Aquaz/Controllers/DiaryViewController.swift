@@ -18,7 +18,7 @@ class DiaryViewController: UIViewController {
   private var fetchedResultsController: NSFetchedResultsController!
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   private var sizingCell: DiaryTableViewCell!
-  private var volumeObserverIdentifier: Int!
+  private var volumeObserverIdentifier: Int?
 
   private struct Constants {
     static let diaryCellIdentifier = "DiaryTableViewCell"
@@ -36,7 +36,9 @@ class DiaryViewController: UIViewController {
   }
   
   deinit {
-    Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+    if let volumeObserverIdentifier = volumeObserverIdentifier {
+      Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+    }
   }
   
   override func viewWillAppear(animated: Bool) {
