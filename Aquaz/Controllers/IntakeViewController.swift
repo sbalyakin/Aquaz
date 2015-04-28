@@ -22,22 +22,20 @@ class IntakeViewController: UIViewController {
   @IBOutlet weak var navigationTitleLabel: UILabel!
   @IBOutlet weak var navigationDateLabel: UILabel!
   
-  var currentDate: NSDate! {
+  var date: NSDate! {
     didSet {
-      isCurrentDayToday = DateHelper.areDatesEqualByDays(NSDate(), currentDate)
+      isCurrentDayToday = DateHelper.areDatesEqualByDays(NSDate(), date)
     }
   }
   
   var drink: Drink!
-  
-  weak var dayViewController: DayViewController!
   
   // Should be nil for add intake mode, and not nil for edit intake mode
   var intake: Intake? {
     didSet {
       if let intake = intake {
         drink = intake.drink
-        currentDate = intake.date
+        date = intake.date
         timeIsChoosen = true
       } else {
         timeIsChoosen = false
@@ -55,8 +53,8 @@ class IntakeViewController: UIViewController {
   
   func changeTimeForCurrentDate(time: NSDate) {
     timeIsChoosen = true
-    currentDate = DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: time)
-    navigationDateLabel?.text = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
+    date = DateHelper.dateByJoiningDateTime(datePart: date, timePart: time)
+    navigationDateLabel?.text = DateHelper.stringFromDateTime(date, shortDateStyle: true)
     UIHelper.adjustNavigationTitleViewSize(navigationItem)
   }
   
@@ -135,8 +133,8 @@ class IntakeViewController: UIViewController {
   private func setupNavigationTitle() {
     let dateText: String
     
-    if timeIsChoosen {
-      dateText = DateHelper.stringFromDateTime(currentDate, shortDateStyle: true)
+    if timeIsChoosen || !isCurrentDayToday {
+      dateText = DateHelper.stringFromDateTime(date, shortDateStyle: true)
     } else {
       dateText = NSLocalizedString("IVC:Now", value: "Now", comment: "IntakeViewController: Subtitle of view if user adds intake for today")
     }
@@ -178,7 +176,7 @@ class IntakeViewController: UIViewController {
     if segue.identifier == Constants.pickTimeSegue {
       if let pickTimeViewController = segue.destinationViewController.contentViewController as? PickTimeViewController {
         pickTimeViewController.intakeViewController = self
-        pickTimeViewController.time = currentDate
+        pickTimeViewController.time = date
       }
     }
   }
@@ -191,9 +189,7 @@ class IntakeViewController: UIViewController {
     case .Edit: self.updateIntake(amount: adjustedAmount)
     }
 
-    navigationController?.dismissViewControllerAnimated(true) {
-      dayViewController?.checkForCongratulationsAboutWaterGoalReaching()
-    }
+    navigationController?.dismissViewControllerAnimated(true, completion: nil)
   }
   
   private func prepareAmountForStoring(amount: Double) -> Double {
@@ -202,11 +198,11 @@ class IntakeViewController: UIViewController {
   }
   
   private func addIntake(#amount: Double) {
-    let date: NSDate
-    if timeIsChoosen {
-      date = currentDate
+    let intakeDate: NSDate
+    if timeIsChoosen || !isCurrentDayToday {
+      intakeDate = date
     } else {
-      date = isCurrentDayToday ? NSDate() : DateHelper.dateByJoiningDateTime(datePart: currentDate, timePart: NSDate())
+      intakeDate = isCurrentDayToday ? NSDate() : DateHelper.dateByJoiningDateTime(datePart: date, timePart: NSDate())
     }
     
     managedObjectContext.performBlock {
@@ -214,7 +210,7 @@ class IntakeViewController: UIViewController {
       Intake.addEntity(
         drink: self.drink,
         amount: amount,
-        date: date,
+        date: intakeDate,
         managedObjectContext: self.managedObjectContext,
         saveImmediately: true)
     }
@@ -224,7 +220,7 @@ class IntakeViewController: UIViewController {
     if let intake = intake {
       managedObjectContext.performBlock {
         intake.amount = amount
-        intake.date = self.currentDate
+        intake.date = self.date
         CoreDataStack.saveContext(self.managedObjectContext)
       }
     }

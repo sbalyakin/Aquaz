@@ -71,6 +71,41 @@ public class Intake: CodingManagedObject, NamedEntity {
     return fetchIntakes(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
   }
 
+  public class func fetchTotalWaterAmountsGroupedByDrinksForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> [Drink: Double] {
+    let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
+    let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
+    let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
+    
+    let expression = NSExpression(forFunction: "sum:", arguments: [NSExpression(forKeyPath: "amount")])
+    
+    let overallWaterAmount = NSExpressionDescription()
+    overallWaterAmount.expression = expression
+    overallWaterAmount.expressionResultType = .DoubleAttributeType
+    overallWaterAmount.name = "overallWaterAmount"
+    
+    let fetchRequest = NSFetchRequest()
+    fetchRequest.entity = LoggedActions.entityDescriptionForEntity(Intake.self, inManagedObjectContext: managedObjectContext)
+    fetchRequest.predicate = predicate
+    fetchRequest.propertiesToFetch = ["drink.index", overallWaterAmount]
+    fetchRequest.propertiesToGroupBy = ["drink.index"]
+    fetchRequest.resultType = .DictionaryResultType
+    
+    var error: NSError?
+    if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) {
+      var result = [Drink: Double]()
+      for record in fetchResults as! [NSDictionary] {
+        let drinkIndex = record["drink.index"] as! NSNumber
+        let drink = Drink.getDrinkByIndex(drinkIndex.integerValue, managedObjectContext: managedObjectContext)!
+        let amount = (record["overallWaterAmount"] as! Double) * drink.waterPercent
+        result[drink] = amount
+      }
+      return result
+    } else {
+      Logger.logError(Logger.Messages.failedToExecuteFetchRequest, error: error)
+      return [:]
+    }
+  }
+
   public enum GroupingCalendarUnit {
     case Day
     case Month

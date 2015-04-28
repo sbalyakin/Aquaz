@@ -13,7 +13,7 @@ class SelectDrinkViewController: UIViewController {
   
   @IBOutlet weak var collectionView: UICollectionView!
 
-  weak var dayViewController: DayViewController!
+  var date: NSDate!
   
   private let columnsCount = 3
   private var rowsCount = 0
@@ -150,8 +150,7 @@ class SelectDrinkViewController: UIViewController {
       let drink = sender as? Drink
     {
       intakeViewController.drink = drink
-      intakeViewController.dayViewController = dayViewController
-      intakeViewController.currentDate = DateHelper.dateByJoiningDateTime(datePart: dayViewController.getCurrentDate(), timePart: NSDate())
+      intakeViewController.date = DateHelper.dateByJoiningDateTime(datePart: date, timePart: NSDate())
     }
   }
   

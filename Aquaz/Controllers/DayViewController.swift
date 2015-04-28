@@ -25,18 +25,19 @@ class DayViewController: UIViewController {
   // MARK: Public properties -
   
   /// Current date for managing water intake
-  private var currentDate: NSDate! {
+  private var date: NSDate! {
     didSet {
       if mode == .General {
-        if DateHelper.areDatesEqualByDays(currentDate, NSDate()) {
+        if DateHelper.areDatesEqualByDays(date, NSDate()) {
           Settings.uiUseCustomDateForDayView.value = false
         } else {
           Settings.uiUseCustomDateForDayView.value = true
-          Settings.uiCustomDateForDayView.value = currentDate
+          Settings.uiCustomDateForDayView.value = date
         }
       }
       
-      diaryViewController.date = currentDate
+      diaryViewController?.date = date
+      selectDrinkViewController?.date = date
     }
   }
   
@@ -84,7 +85,7 @@ class DayViewController: UIViewController {
     setupMultiprogressControl()
     obtainCurrentDate()
     updateUIRelatedToCurrentDate(animate: false)
-    updateSummaryBar(animate: false)
+    updateSummaryBar(animate: false, completion: nil)
   }
   
   deinit {
@@ -109,7 +110,9 @@ class DayViewController: UIViewController {
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
-    updateSummaryBar(animate: true)
+    updateSummaryBar(animate: true) {
+      self.checkForCongratulationsAboutWaterGoalReaching(notification)
+    }
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -193,10 +196,10 @@ class DayViewController: UIViewController {
   
   private func obtainCurrentDate() {
     if mode == .General && Settings.uiUseCustomDateForDayView.value {
-      currentDate = Settings.uiCustomDateForDayView.value
+      date = Settings.uiCustomDateForDayView.value
     } else {
-      if currentDate == nil {
-        currentDate = NSDate()
+      if date == nil {
+        date = NSDate()
       }
     }
   }
@@ -208,7 +211,7 @@ class DayViewController: UIViewController {
   }
   
   func refreshCurrentDay(#showAlert: Bool) {
-    let dayIsSwitched = !DateHelper.areDatesEqualByDays(currentDate, NSDate())
+    let dayIsSwitched = !DateHelper.areDatesEqualByDays(date, NSDate())
     
     if mode == .General && isCurrentDayToday && dayIsSwitched {
       if showAlert {
@@ -223,16 +226,16 @@ class DayViewController: UIViewController {
   }
   
   func setCurrentDate(date: NSDate) {
-    currentDate = date
+    self.date = date
 
     if isViewLoaded() {
       updateUIRelatedToCurrentDate(animate: true)
-      updateSummaryBar(animate: true)
+      updateSummaryBar(animate: true, completion: nil)
     }
   }
   
   func getCurrentDate() -> NSDate {
-    return currentDate
+    return date
   }
   
   private func setupGestureRecognizers() {
@@ -264,14 +267,13 @@ class DayViewController: UIViewController {
     
     // Add view controller for drink selection
     selectDrinkViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.selectDrinkViewControllerStoryboardID)
+    selectDrinkViewController.date = date
     
-    selectDrinkViewController.dayViewController = self
     pages.append(selectDrinkViewController)
     
     // Add intakes diary view controller
     diaryViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.diaryViewControllerStoryboardID)
-    diaryViewController.dayViewController = self
-    diaryViewController.date = currentDate
+    diaryViewController.date = date
     
     pages.append(diaryViewController)
     
@@ -286,7 +288,7 @@ class DayViewController: UIViewController {
   
   func leftSwipeGestureIsRecognized(gestureRecognizer: UISwipeGestureRecognizer) {
     if gestureRecognizer.state == .Ended {
-      let daysTillToday = DateHelper.computeUnitsFrom(currentDate, toDate: NSDate(), unit: .CalendarUnitDay)
+      let daysTillToday = DateHelper.computeUnitsFrom(date, toDate: NSDate(), unit: .CalendarUnitDay)
       if daysTillToday > 0 {
         switchToNextDay()
       }
@@ -300,15 +302,15 @@ class DayViewController: UIViewController {
   }
   
   private func switchToNextDay() {
-    setCurrentDate(DateHelper.addToDate(currentDate, years: 0, months: 0, days: 1))
+    setCurrentDate(DateHelper.addToDate(date, years: 0, months: 0, days: 1))
   }
 
   private func switchToPreviousDay() {
-    setCurrentDate(DateHelper.addToDate(currentDate, years: 0, months: 0, days: -1))
+    setCurrentDate(DateHelper.addToDate(date, years: 0, months: 0, days: -1))
   }
 
   private func updateUIRelatedToCurrentDate(#animate: Bool) {
-    let formattedDate = DateHelper.stringFromDate(currentDate)
+    let formattedDate = DateHelper.stringFromDate(date)
     
     if animate {
       navigationDateLabel.setTextWithAnimation(formattedDate) {
@@ -320,23 +322,27 @@ class DayViewController: UIViewController {
     }
   }
   
-  private func updateSummaryBar(#animate: Bool) {
+  private func updateSummaryBar(#animate: Bool, completion: (() -> ())?) {
     managedObjectContext.performBlock {
-      self.waterGoal = WaterGoal.fetchWaterGoalForDate(self.currentDate, managedObjectContext: self.managedObjectContext)
-      self.intakes = Intake.fetchIntakesForDay(self.currentDate, dayOffsetInHours: 0, managedObjectContext: self.managedObjectContext)
+      self.waterGoal = WaterGoal.fetchWaterGoalForDate(self.date, managedObjectContext: self.managedObjectContext)
+      self.intakes = Intake.fetchIntakesForDay(self.date, dayOffsetInHours: 0, managedObjectContext: self.managedObjectContext)
+      
+      let intakeAmounts = Intake.fetchTotalWaterAmountsGroupedByDrinksForDay(self.date, dayOffsetInHours: 0, managedObjectContext: self.managedObjectContext)
       
       dispatch_async(dispatch_get_main_queue()) {
         if animate {
           self.intakesMultiProgressView.updateWithAnimation {
             self.waterGoalWasChanged()
-            self.intakesWereChanged()
+            self.updateWaterIntakeAmounts(intakeAmounts)
           }
         } else {
           self.intakesMultiProgressView.update {
             self.waterGoalWasChanged()
-            self.intakesWereChanged()
+            self.updateWaterIntakeAmounts(intakeAmounts)
           }
         }
+        
+        completion?()
       }
     }
   }
@@ -397,7 +403,7 @@ class DayViewController: UIViewController {
       switch identifier {
       case Constants.showCalendarSegue:
         if let calendarViewController = segue.destinationViewController.contentViewController as? CalendarViewController {
-          calendarViewController.date = currentDate
+          calendarViewController.date = date
           calendarViewController.dayViewController = self
         }
       case Constants.pageViewEmbedSegue:
@@ -412,40 +418,32 @@ class DayViewController: UIViewController {
   
   // MARK: Intakes management -
   
-  private func intakesWereChanged() {
-    // Group intakes by drinks
-    var intakesMap: [Drink: Double] = [:]
-    
-    for intake in intakes {
-      if let amount = intakesMap[intake.drink] {
-        intakesMap[intake.drink] = amount + intake.waterAmount
-      } else {
-        intakesMap[intake.drink] = intake.waterAmount
-      }
-    }
-    
+  private func updateWaterIntakeAmounts(intakeAmounts: [Drink: Double]) {
     // Clear all drink sections
     for (_, section) in multiProgressSections {
       section.factor = 0.0
     }
     
     // Fill sections with fetched intakes and compute daily water intake
-    dailyWaterIntake = 0.0
-    for (drink, amount) in intakesMap {
-      dailyWaterIntake += amount
+    var overallWaterIntake: Double = 0
+    for (drink, amount) in intakeAmounts {
+      overallWaterIntake += amount
       if let section = multiProgressSections[drink] {
         section.factor = CGFloat(amount)
       }
     }
+    dailyWaterIntake = overallWaterIntake
   }
   
-  func checkForCongratulationsAboutWaterGoalReaching() {
-    let isToday = DateHelper.areDatesEqualByDays(NSDate(), currentDate)
+  private func checkForCongratulationsAboutWaterGoalReaching(notification: NSNotification) {
+    let currentDate = NSDate()
+    
+    let isToday = DateHelper.areDatesEqualByDays(currentDate, date)
     if !isToday {
       return
     }
     
-    let waterGoalReachingIsShownForToday = DateHelper.areDatesEqualByDays(NSDate(), Settings.uiWaterGoalReachingIsShownForDate.value)
+    let waterGoalReachingIsShownForToday = DateHelper.areDatesEqualByDays(currentDate, Settings.uiWaterGoalReachingIsShownForDate.value)
     if waterGoalReachingIsShownForToday {
       return
     }
@@ -453,7 +451,19 @@ class DayViewController: UIViewController {
     if dailyWaterIntake < waterGoalAmount {
       return
     }
+    
+    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+      for insertedObject in insertedObjects {
+        if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, currentDate) {
+          Settings.uiWaterGoalReachingIsShownForDate.value = currentDate
+          showCongratulationsAboutWaterGoalReaching()
+          break
+        }
+      }
+    }
+  }
 
+  private func showCongratulationsAboutWaterGoalReaching() {
     let nib = UINib(nibName: Constants.congratulationsViewNib, bundle: nil)
     
     if let congratulationsView = nib.instantiateWithOwner(nil, options: nil).first as? UIView {
@@ -542,7 +552,7 @@ class DayViewController: UIViewController {
   private func saveWaterGoalForCurrentDate(#baseAmount: Double, isHotDay: Bool, isHighActivity: Bool) {
     managedObjectContext.performBlock {
       self.waterGoal = WaterGoal.addEntity(
-        date: self.currentDate,
+        date: self.date,
         baseAmount: baseAmount,
         isHotDay: isHotDay,
         isHighActivity: isHighActivity,
@@ -556,7 +566,7 @@ class DayViewController: UIViewController {
   
   private var isWaterGoalForCurrentDay: Bool {
     if let waterGoal = waterGoal {
-      return DateHelper.areDatesEqualByDays(waterGoal.date, currentDate)
+      return DateHelper.areDatesEqualByDays(waterGoal.date, date)
     } else {
       return false
     }

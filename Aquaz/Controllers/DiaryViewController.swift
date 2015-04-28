@@ -13,12 +13,9 @@ class DiaryViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
   
-  weak var dayViewController: DayViewController!
   var date: NSDate! {
     didSet {
-      if date != nil {
-        dateWasChanged()
-      }
+      dateWasChanged()
     }
   }
   
@@ -36,6 +33,7 @@ class DiaryViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     applyStyle()
+    initFetchedResultsController(completion: nil)
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -53,17 +51,27 @@ class DiaryViewController: UIViewController {
   }
   
   private func dateWasChanged() {
+    if date == nil || fetchedResultsController == nil {
+      return
+    }
+    
+    initFetchedResultsController {
+      self.tableView?.reloadData()
+    }
+  }
+  
+  private func initFetchedResultsController(#completion: (() -> ())?) {
     managedObjectContext.performBlock {
       let beginDate = DateHelper.dateByClearingTime(ofDate: self.date)
       let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
       
       let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
       let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
-
+      
       let fetchRequest = NSFetchRequest(entityName: Intake.entityName)
       fetchRequest.sortDescriptors = [sortDescriptor]
       fetchRequest.predicate = predicate
-
+      
       self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
       self.fetchedResultsController.delegate = self
       
@@ -72,8 +80,10 @@ class DiaryViewController: UIViewController {
         Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
       }
       
-      dispatch_async(dispatch_get_main_queue()) {
-        self.tableView?.reloadData()
+      if let completion = completion {
+        dispatch_async(dispatch_get_main_queue()) {
+          completion()
+        }
       }
     }
   }
@@ -83,9 +93,12 @@ class DiaryViewController: UIViewController {
       let intakeViewController = segue.destinationViewController.contentViewController as? IntakeViewController,
       let indexPath = tableView.indexPathForSelectedRow()
     {
-      let intake = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Intake
-      intakeViewController.intake = intake
-      intakeViewController.dayViewController = dayViewController
+      managedObjectContext.performBlock {
+        let intake = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Intake
+        dispatch_async(dispatch_get_main_queue()) {
+          intakeViewController.intake = intake
+        }
+      }
     }
   }
   
