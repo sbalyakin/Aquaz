@@ -80,7 +80,7 @@ class Units {
       return 0
     }
 
-    let units = self.units[unitType.rawValue]
+    let units = getUnits(unitType)
     let displayedQuantity = Quantity(ownUnit: units.displayedUnit, fromUnit: units.metricUnit, fromAmount: metricAmount)
     let displayedAmount = round(displayedQuantity.amount / roundPrecision) * roundPrecision
     let metricQuantity = Quantity(ownUnit: units.metricUnit, fromUnit: units.displayedUnit, fromAmount: displayedAmount)
@@ -93,7 +93,7 @@ class Units {
       return 0
     }
     
-    let units = self.units[unitType.rawValue]
+    let units = getUnits(unitType)
     var quantity = Quantity(ownUnit: units.displayedUnit, fromUnit: units.metricUnit, fromAmount: metricAmount)
     let displayedAmount = round(quantity.amount / roundPrecision) * roundPrecision
     return displayedAmount
@@ -109,39 +109,17 @@ class Units {
     }
     
     let displayedAmount = convertMetricAmountToDisplayed(metricAmount: metricAmount, unitType: unitType, roundPrecision: roundPrecision)
-    let units = self.units[unitType.rawValue]
+    let units = getUnits(unitType)
     let quantity = Quantity(unit: units.displayedUnit, amount: displayedAmount)
     return quantity.getDescription(decimals, displayUnits: displayUnits)
   }
   
-  private var units: [(metricUnit: Unit, displayedUnit: Unit)] = []
-
-  private func onUpdateVolumeUnitsSettings(value: Units.Volume) {
-    units[UnitType.Volume.rawValue] = (metricUnit: Volume.metric.unit, displayedUnit: value.unit)
-  }
-  
-  private func onUpdateWeightUnitsSettings(value: Units.Weight) {
-    units[UnitType.Weight.rawValue] = (metricUnit: Weight.metric.unit, displayedUnit: value.unit)
-  }
-  
-  private func onUpdateHeightUnitsSettings(value: Units.Length) {
-    units[UnitType.Length.rawValue] = (metricUnit: Length.metric.unit, displayedUnit: value.unit)
-  }
-  
-  private init() {
-    let displayedVolumeUnits = Settings.generalVolumeUnits
-    let displayedWeightUnits = Settings.generalWeightUnits
-    let displayedHeightUnits = Settings.generalHeightUnits
-    
-    // Subscribe for changes of the settings
-    displayedVolumeUnits.addObserver(onUpdateVolumeUnitsSettings)
-    displayedWeightUnits.addObserver(onUpdateWeightUnitsSettings)
-    displayedHeightUnits.addObserver(onUpdateHeightUnitsSettings)
-    
-    // Items order should correspond to UnitType elements order
-    units = [(metricUnit: Volume.metric.unit, displayedUnit: displayedVolumeUnits.value.unit), // volume
-             (metricUnit: Weight.metric.unit, displayedUnit: displayedWeightUnits.value.unit), // weight
-             (metricUnit: Length.metric.unit, displayedUnit: displayedHeightUnits.value.unit)] // height
+  func getUnits(unitType: UnitType) -> (metricUnit: Unit, displayedUnit: Unit) {
+    switch unitType {
+    case .Length: return (metricUnit: Length.metric.unit, displayedUnit: Settings.generalHeightUnits.value.unit)
+    case .Volume: return (metricUnit: Volume.metric.unit, displayedUnit: Settings.generalVolumeUnits.value.unit)
+    case .Weight: return (metricUnit: Weight.metric.unit, displayedUnit: Settings.generalWeightUnits.value.unit)
+    }
   }
 }
 

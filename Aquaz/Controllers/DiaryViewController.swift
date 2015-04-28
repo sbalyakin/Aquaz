@@ -13,17 +13,12 @@ class DiaryViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
   
-  var date: NSDate! {
-    didSet {
-      dateWasChanged()
-    }
-  }
-  
+  var date: NSDate! { didSet { dateWasChanged() } }
+
   private var fetchedResultsController: NSFetchedResultsController!
-  
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
-  
   private var sizingCell: DiaryTableViewCell!
+  private var volumeObserverIdentifier: Int!
 
   private struct Constants {
     static let diaryCellIdentifier = "DiaryTableViewCell"
@@ -34,6 +29,14 @@ class DiaryViewController: UIViewController {
     super.viewDidLoad()
     applyStyle()
     initFetchedResultsController(completion: nil)
+    
+    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [unowned self] value in
+      self.tableView.reloadData()
+    }
+  }
+  
+  deinit {
+    Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
   }
   
   override func viewWillAppear(animated: Bool) {

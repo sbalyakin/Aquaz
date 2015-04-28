@@ -30,7 +30,7 @@ class SettingsViewController: OmegaSettingsViewController {
 
   deinit {
     if let volumeObserverIdentifier = volumeObserverIdentifier {
-      Settings.notificationsSound.removeObserver(volumeObserverIdentifier)
+      Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
     }
   }
 

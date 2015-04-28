@@ -15,7 +15,7 @@ class MonthStatisticsViewController: UIViewController {
   @IBOutlet weak var monthLabel: UILabel!
   
   private var date: NSDate = DateHelper.startDateFromDate(NSDate(), calendarUnit: .CalendarUnitMonth)
-  
+
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
 
   private struct Constants {

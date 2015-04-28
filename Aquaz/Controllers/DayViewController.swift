@@ -71,6 +71,8 @@ class DayViewController: UIViewController {
   private var dayGuide1ViewController: DayGuide1ViewController!
   private var dayGuide2ViewController: DayGuide2ViewController!
   
+  private var volumeObserverIdentifier: Int!
+  
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   
   
@@ -86,10 +88,15 @@ class DayViewController: UIViewController {
     obtainCurrentDate()
     updateUIRelatedToCurrentDate(animate: false)
     updateSummaryBar(animate: false, completion: nil)
+    
+    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [unowned self] value in
+      self.updateIntakeButton()
+    }
   }
   
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
+    Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
   }
   
   override func viewWillLayoutSubviews() {
@@ -622,8 +629,8 @@ class DayViewController: UIViewController {
   private var diaryViewController: DiaryViewController!
   private var selectDrinkViewController: SelectDrinkViewController!
 
-  private let amountPrecision = Settings.generalVolumeUnits.value.precision
-  private let amountDecimals = Settings.generalVolumeUnits.value.decimals
+  private var amountPrecision: Double { return Settings.generalVolumeUnits.value.precision }
+  private var amountDecimals: Int { return Settings.generalVolumeUnits.value.decimals }
 
   private var isCurrentDayToday: Bool {
     return !Settings.uiUseCustomDateForDayView.value

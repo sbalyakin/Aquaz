@@ -20,6 +20,7 @@ class Observable<ValueType> {
   
   /// Removes an observer using its identifier
   func removeObserver(observerIdentifier: Int) {
+    assert(observerFunctions.indexForKey(observerIdentifier) != nil, "Passed observer's identifier is not found")
     observerFunctions.removeValueForKey(observerIdentifier)
   }
 
@@ -28,6 +29,10 @@ class Observable<ValueType> {
     for (_, observerFunction) in observerFunctions {
       observerFunction(value)
     }
+  }
+  
+  deinit {
+    assert(observerFunctions.isEmpty, "There are \(observerFunctions.count) unremoved observers for observable settings item")
   }
   
   private var observerIdentifier = 0

@@ -26,6 +26,7 @@ class WeekStatisticsViewController: UIViewController {
   private var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
+  private var volumeObserverIdentifier: Int!
   
   private struct Constants {
     static let showDaySegue = "Show Day"
@@ -36,10 +37,15 @@ class WeekStatisticsViewController: UIViewController {
     
     setupUI()
     setupNotificationsObservation()
+    
+    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [unowned self] value in
+      self.updateWeekStatisticsView(animated: false)
+    }
   }
 
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
+    Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
   }
 
   override func viewWillAppear(animated: Bool) {
@@ -227,7 +233,8 @@ extension WeekStatisticsViewController: WeekStatisticsViewDataSource {
   
   func weekStatisticsViewGetTitleForValue(value: CGFloat) -> String {
     let quantity = Quantity(unit: Settings.generalVolumeUnits.value.unit, amount: Double(value))
-    let title = quantity.getDescription(0, displayUnits: true)
+    let title = quantity.getDescription(Settings.generalVolumeUnits.value.decimals, displayUnits: true)
+
     return title
   }
 
@@ -238,6 +245,14 @@ extension WeekStatisticsViewController: WeekStatisticsViewDataSource {
   
 }
 
+private extension Units.Volume {
+  var decimals: Int {
+    switch self {
+    case Millilitres: return 0
+    case FluidOunces: return 1
+    }
+  }
+}
 
 extension WeekStatisticsViewController: WeekStatisticsViewDelegate {
   

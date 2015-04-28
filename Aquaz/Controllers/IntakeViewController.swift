@@ -244,9 +244,9 @@ class IntakeViewController: UIViewController {
     return intake == nil ? .Add : .Edit
   }
   
-  private let predefinedAmounts = Settings.generalVolumeUnits.value.predefinedAmounts
-  private let amountPrecision = Settings.generalVolumeUnits.value.precision
-  private let amountDecimals = Settings.generalVolumeUnits.value.decimals
+  private var predefinedAmounts: (small: Double, medium: Double, large: Double) { return Settings.generalVolumeUnits.value.predefinedAmounts }
+  private var amountPrecision: Double { return Settings.generalVolumeUnits.value.precision }
+  private var amountDecimals: Int { return Settings.generalVolumeUnits.value.decimals }
   
   private var isCurrentDayToday: Bool = false
 
