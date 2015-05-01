@@ -34,13 +34,13 @@ class CoreDataStack: NSObject {
   // MARK: - Notifications
   
   func contextDidSaveContext(notification: NSNotification) {
-    if notification.object !== mainContext {
+    if mainContextIsInitialized && notification.object !== mainContext {
       mainContext.performBlock {
         self.mainContext.mergeChangesFromContextDidSaveNotification(notification)
       }
     }
     
-    if notification.object !== privateContext {
+    if privateContextIsInitialized && notification.object !== privateContext {
       privateContext.performBlock {
         self.privateContext.mergeChangesFromContextDidSaveNotification(notification)
       }
@@ -78,10 +78,14 @@ class CoreDataStack: NSObject {
     return coordinator
   }()
 
+  private var mainContextIsInitialized = false
+  private var privateContextIsInitialized = false
+  
   /// Managed object context using the main queue
   lazy var mainContext: NSManagedObjectContext = {
     let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
     context.persistentStoreCoordinator = self.persistentStoreCoordinator
+    self.mainContextIsInitialized = true
     return context
   }()
 
@@ -89,6 +93,7 @@ class CoreDataStack: NSObject {
   lazy var privateContext: NSManagedObjectContext = {
     let context = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
     context.persistentStoreCoordinator = self.persistentStoreCoordinator
+    self.privateContextIsInitialized = true
     return context
   }()
 
