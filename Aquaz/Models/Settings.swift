@@ -51,6 +51,16 @@ public class Settings {
     case Month
     case Year
   }
+  
+  enum DayPageHelpTip: Int {
+    case SlideToChangeDay = 0
+    case HighActivityMode
+    case HotWeatherMode
+    case SwitchToPercentsAndViceVersa
+    case LongPressToChooseAlcohol
+    // It should be the last case indicating that all help tips are already shown to user
+    case None
+  }
 
   static let generalHasLaunchedOnce = SettingsOrdinalItem(
     key: "General - Has Launched Once", initialValue: false,
@@ -120,13 +130,17 @@ public class Settings {
     key: "UI - Selected alcoholic drink", initialValue: Drink.DrinkType.Wine,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  static let uiDayPageHasDisplayedOnce = SettingsOrdinalItem(
-    key: "UI - Day page has displayed one", initialValue: false,
-    userDefaults: UserDefaultsProvider.sharedUserDefaults)
-
   static let uiWaterGoalReachingIsShownForDate = SettingsOrdinalItem(
     key: "UI - Water goal reaching is shown for date",
     initialValue: DateHelper.addToDate(NSDate(), years: -1, months: 0, days: 0), // It should be any not today date
+    userDefaults: UserDefaultsProvider.sharedUserDefaults)
+
+  static let uiDayPageHelpTipToShow = SettingsEnumItem(
+    key: "UI - Day page help tip to show", initialValue: DayPageHelpTip.SlideToChangeDay,
+    userDefaults: UserDefaultsProvider.sharedUserDefaults)
+
+  static let uiDayPageIntakesCountTillHelpTip = SettingsOrdinalItem(
+    key: "UI - Day page intakes count till help tip", initialValue: 0,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
   static let notificationsEnabled = SettingsOrdinalItem(

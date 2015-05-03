@@ -95,8 +95,6 @@
 		A54ED25F1AD5A67900FD37DD /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = A54ED25D1AD5A67900FD37DD /* MMWormhole.m */; };
 		A55F34A61A74D6AC00A529A5 /* DrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */; };
 		A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */; };
-		A55F83981AD1213E00D30BAF /* DayGuide1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55F83971AD1213E00D30BAF /* DayGuide1ViewController.swift */; };
-		A55F839A1AD1231500D30BAF /* DayGuide2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55F83991AD1231500D30BAF /* DayGuide2ViewController.swift */; };
 		A55F839B1AD3DE4B00D30BAF /* MultiProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA051A0B5813009C5C47 /* MultiProgressView.swift */; };
 		A575A5A51A6EBB0300B00E9F /* StyledBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */; };
 		A57D2BEB1ACFDE0D00619D62 /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57D2BE91ACFDE0D00619D62 /* Welcome.storyboard */; };
@@ -134,6 +132,11 @@
 		A5B8F9971A87DF3D00145705 /* tiny-bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */; };
 		A5B8F9981A87DF3D00145705 /* whistle.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98C1A87DF3D00145705 /* whistle.caf */; };
 		A5C374B11AE6708700F91550 /* CongratulationsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5C374AF1AE6708700F91550 /* CongratulationsView.xib */; };
+		A5C894671AF4B75C0042B6DF /* JDFSequentialTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */; };
+		A5C894681AF4B75C0042B6DF /* JDFTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945F1AF4B75C0042B6DF /* JDFTooltipManager.m */; };
+		A5C894691AF4B75C0042B6DF /* JDFTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894621AF4B75C0042B6DF /* JDFTooltipView.m */; };
+		A5C8946A1AF4B75C0042B6DF /* UILabel+JDFTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894641AF4B75C0042B6DF /* UILabel+JDFTooltips.m */; };
+		A5C8946B1AF4B75C0042B6DF /* UIView+JDFTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894661AF4B75C0042B6DF /* UIView+JDFTooltips.m */; };
 		A5D3D4211AA5D29700E3C989 /* OmegaSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4121AA5D29700E3C989 /* OmegaSettingsViewController.swift */; };
 		A5D3D4221AA5D29700E3C989 /* BasicTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4141AA5D29700E3C989 /* BasicTableCell.swift */; };
 		A5D3D4231AA5D29700E3C989 /* PickerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4151AA5D29700E3C989 /* PickerTableCell.swift */; };
@@ -275,8 +278,6 @@
 		A54ED2601AD5AB6200FD37DD /* Widget-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Widget-Bridging-Header.h"; sourceTree = "<group>"; };
 		A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkCollectionViewCell.swift; path = Controls/DrinkCollectionViewCell.swift; sourceTree = "<group>"; };
 		A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DrinkCollectionViewCell.xib; path = Controls/DrinkCollectionViewCell.xib; sourceTree = "<group>"; };
-		A55F83971AD1213E00D30BAF /* DayGuide1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayGuide1ViewController.swift; sourceTree = "<group>"; };
-		A55F83991AD1231500D30BAF /* DayGuide2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayGuide2ViewController.swift; sourceTree = "<group>"; };
 		A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StyledBarButtonItem.swift; path = Controls/StyledBarButtonItem.swift; sourceTree = "<group>"; };
 		A57D2BEA1ACFDE0D00619D62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Welcome.storyboard; sourceTree = "<group>"; };
 		A57D2BED1ACFEA0A00619D62 /* WelcomeWizardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWizardViewController.swift; sourceTree = "<group>"; };
@@ -312,6 +313,17 @@
 		A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiny-bell.caf"; sourceTree = "<group>"; };
 		A5B8F98C1A87DF3D00145705 /* whistle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whistle.caf; sourceTree = "<group>"; };
 		A5C374B01AE6708700F91550 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CongratulationsView.xib; sourceTree = "<group>"; };
+		A5C8945C1AF4B75C0042B6DF /* JDFSequentialTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFSequentialTooltipManager.h; sourceTree = "<group>"; };
+		A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFSequentialTooltipManager.m; sourceTree = "<group>"; };
+		A5C8945E1AF4B75C0042B6DF /* JDFTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFTooltipManager.h; sourceTree = "<group>"; };
+		A5C8945F1AF4B75C0042B6DF /* JDFTooltipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFTooltipManager.m; sourceTree = "<group>"; };
+		A5C894601AF4B75C0042B6DF /* JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFTooltips.h; sourceTree = "<group>"; };
+		A5C894611AF4B75C0042B6DF /* JDFTooltipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFTooltipView.h; sourceTree = "<group>"; };
+		A5C894621AF4B75C0042B6DF /* JDFTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFTooltipView.m; sourceTree = "<group>"; };
+		A5C894631AF4B75C0042B6DF /* UILabel+JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+JDFTooltips.h"; sourceTree = "<group>"; };
+		A5C894641AF4B75C0042B6DF /* UILabel+JDFTooltips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+JDFTooltips.m"; sourceTree = "<group>"; };
+		A5C894651AF4B75C0042B6DF /* UIView+JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JDFTooltips.h"; sourceTree = "<group>"; };
+		A5C894661AF4B75C0042B6DF /* UIView+JDFTooltips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JDFTooltips.m"; sourceTree = "<group>"; };
 		A5D3D4121AA5D29700E3C989 /* OmegaSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmegaSettingsViewController.swift; sourceTree = "<group>"; };
 		A5D3D4141AA5D29700E3C989 /* BasicTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTableCell.swift; sourceTree = "<group>"; };
 		A5D3D4151AA5D29700E3C989 /* PickerTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableCell.swift; sourceTree = "<group>"; };
@@ -407,8 +419,6 @@
 			children = (
 				A57D2BEC1ACFE9C600619D62 /* Welcome Wizard */,
 				843B055719E2D7800097A833 /* DayViewController.swift */,
-				A55F83971AD1213E00D30BAF /* DayGuide1ViewController.swift */,
-				A55F83991AD1231500D30BAF /* DayGuide2ViewController.swift */,
 				843B055819E2D7800097A833 /* SelectDrinkViewController.swift */,
 				8424AA001A0A7009009C5C47 /* DiaryViewController.swift */,
 				8478253619EAC8C200588FE3 /* IntakeViewController.swift */,
@@ -433,6 +443,7 @@
 		843B055919E2D7800097A833 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A5C8945B1AF4B75C0042B6DF /* JDFTooltips */,
 				A54ED25B1AD5A52700FD37DD /* MMWormhole */,
 				84CD974B1ABB2B960011623B /* OmegaCalendar */,
 				A5F0A5CC1AACADE7006452C9 /* Localytics */,
@@ -485,7 +496,7 @@
 		84669A6B19DAD78D003C2263 /* Aquaz */ = {
 			isa = PBXGroup;
 			children = (
-				A5C374AE1AE6700900F91550 /* UI */,
+				A5C374AE1AE6700900F91550 /* Views */,
 				843B055219E2D7800097A833 /* AppDelegates */,
 				843B055419E2D7800097A833 /* Controllers */,
 				8424AA041A0B57F9009C5C47 /* Controls */,
@@ -637,7 +648,7 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		A5C374AE1AE6700900F91550 /* UI */ = {
+		A5C374AE1AE6700900F91550 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				84669A7519DAD78D003C2263 /* Main.storyboard */,
@@ -646,7 +657,25 @@
 				A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */,
 				A5C374AF1AE6708700F91550 /* CongratulationsView.xib */,
 			);
-			name = UI;
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A5C8945B1AF4B75C0042B6DF /* JDFTooltips */ = {
+			isa = PBXGroup;
+			children = (
+				A5C8945C1AF4B75C0042B6DF /* JDFSequentialTooltipManager.h */,
+				A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */,
+				A5C8945E1AF4B75C0042B6DF /* JDFTooltipManager.h */,
+				A5C8945F1AF4B75C0042B6DF /* JDFTooltipManager.m */,
+				A5C894601AF4B75C0042B6DF /* JDFTooltips.h */,
+				A5C894611AF4B75C0042B6DF /* JDFTooltipView.h */,
+				A5C894621AF4B75C0042B6DF /* JDFTooltipView.m */,
+				A5C894631AF4B75C0042B6DF /* UILabel+JDFTooltips.h */,
+				A5C894641AF4B75C0042B6DF /* UILabel+JDFTooltips.m */,
+				A5C894651AF4B75C0042B6DF /* UIView+JDFTooltips.h */,
+				A5C894661AF4B75C0042B6DF /* UIView+JDFTooltips.m */,
+			);
+			path = JDFTooltips;
 			sourceTree = "<group>";
 		};
 		A5D3D4111AA5D29700E3C989 /* OmegaSettingsViewController */ = {
@@ -900,6 +929,7 @@
 				A5EE36261AAD9DAA0038C844 /* Logger.swift in Sources */,
 				A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */,
 				840476571A35FE4A004F0FEF /* WaterGoalViewController.swift in Sources */,
+				A5C894681AF4B75C0042B6DF /* JDFTooltipManager.m in Sources */,
 				847E75FA1AA9F508003B63E1 /* DatePickerTableCell.swift in Sources */,
 				8424AA061A0B5813009C5C47 /* MultiProgressView.swift in Sources */,
 				A5D3D42C1AA5D29700E3C989 /* UISwitchTableViewCell.swift in Sources */,
@@ -910,7 +940,6 @@
 				A5B75A1419E5686C00D0477B /* CoreDataHelper.swift in Sources */,
 				A57D2BF61AD02C5C00619D62 /* WelcomeWizardProVersionViewController.swift in Sources */,
 				8468D6421A0D1C240008D027 /* DateHelper.swift in Sources */,
-				A55F83981AD1213E00D30BAF /* DayGuide1ViewController.swift in Sources */,
 				8406D78119FE9875001C54BF /* Units.swift in Sources */,
 				A5D3D4221AA5D29700E3C989 /* BasicTableCell.swift in Sources */,
 				84CD97571ABB2B960011623B /* CalendarViewDataSource.swift in Sources */,
@@ -924,16 +953,17 @@
 				84B17C8A1AD2C31400ABA3C9 /* UserDefaultsProvider.swift in Sources */,
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
 				84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */,
+				A5C8946B1AF4B75C0042B6DF /* UIView+JDFTooltips.m in Sources */,
 				A59CDC911AD8587100E92EF2 /* CodingManagedObject.swift in Sources */,
 				A575A5A51A6EBB0300B00E9F /* StyledBarButtonItem.swift in Sources */,
 				A5B013E51AE27C7D00C372F8 /* UnitsViewController.swift in Sources */,
-				A55F839A1AD1231500D30BAF /* DayGuide2ViewController.swift in Sources */,
 				A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */,
 				843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */,
 				A5D3D4281AA5D29700E3C989 /* TableCellWithValue.swift in Sources */,
 				841B13BE1A31FE4F00249426 /* UIHelper.swift in Sources */,
 				84CD97541ABB2B960011623B /* CalendarContentViewCell.swift in Sources */,
 				84380C2C19E4195A0026398E /* Drink.swift in Sources */,
+				A5C894691AF4B75C0042B6DF /* JDFTooltipView.m in Sources */,
 				84CD97561ABB2B960011623B /* CalendarViewContentTitleCell.swift in Sources */,
 				84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */,
 				8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */,
@@ -959,6 +989,7 @@
 				A5D3D4231AA5D29700E3C989 /* PickerTableCell.swift in Sources */,
 				8478253719EAC8C200588FE3 /* IntakeViewController.swift in Sources */,
 				A54ED25E1AD5A67900FD37DD /* MMWormhole.m in Sources */,
+				A5C894671AF4B75C0042B6DF /* JDFSequentialTooltipManager.m in Sources */,
 				A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */,
 				A5EE362C1AADD6F10038C844 /* LoggedActions.swift in Sources */,
 				84B639831A25D9EF00889438 /* WeekStatisticsView.swift in Sources */,
@@ -970,6 +1001,7 @@
 				847D0E281A824D6700966538 /* UnitItems.swift in Sources */,
 				84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */,
 				A57F5E6B1AC968A6005C4F46 /* GlobalConstants.swift in Sources */,
+				A5C8946A1AF4B75C0042B6DF /* UILabel+JDFTooltips.m in Sources */,
 				84D251B41AD26489001E6644 /* CoreDataStack.swift in Sources */,
 				84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */,
 				A5D3D42B1AA5D29700E3C989 /* UISegmentedTableViewCell.swift in Sources */,

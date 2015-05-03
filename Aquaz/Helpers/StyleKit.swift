@@ -61,6 +61,8 @@ public class StyleKit : NSObject {
 
     static var settingsTablesValueColor = UIColor.darkGrayColor()
     static var settingsTablesSelectedValueColor = StyleKit.waterColor
+    
+    static var helpTipsColor = UIColor(red: 0.751, green: 0.916, blue: 0.954, alpha: 1.000)
   }
   
   //// Colors
@@ -109,6 +111,8 @@ public class StyleKit : NSObject {
 
   public class var settingsTablesValueColor: UIColor { return Cache.settingsTablesValueColor }
   public class var settingsTablesSelectedValueColor: UIColor { return Cache.settingsTablesSelectedValueColor }
+
+  public class var helpTipsColor: UIColor { return Cache.helpTipsColor }
 
   
   //// Drawing Methods

@@ -7,3 +7,4 @@
 
 #import "Localytics.h"
 #import "MMWormhole.h"
+#import "JDFTooltips.h"

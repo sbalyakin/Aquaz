@@ -52,24 +52,15 @@ class DayViewController: UIViewController {
   }
   
   var mode: Mode = .General
+  private var helptip: JDFTooltipView?
   
   private struct Constants {
     static let selectDrinkViewControllerStoryboardID = "SelectDrinkViewController"
     static let diaryViewControllerStoryboardID = "DiaryViewController"
     static let showCalendarSegue = "ShowCalendar"
     static let pageViewEmbedSegue = "PageViewEmbed"
-    static let dayGuide1ViewControllerStoryboardID = "DayGuide1ViewController"
-    static let dayGuide2ViewControllerStoryboardID = "DayGuide2ViewController"
     static let congratulationsViewNib = "CongratulationsView"
   }
-  
-  private enum GuideState {
-    case None, Page1, Page2, Finished
-  }
-  
-  private var guideState: GuideState = .None
-  private var dayGuide1ViewController: DayGuide1ViewController!
-  private var dayGuide2ViewController: DayGuide2ViewController!
   
   private var volumeObserverIdentifier: Int?
   
@@ -106,7 +97,37 @@ class DayViewController: UIViewController {
     super.viewWillLayoutSubviews()
     UIHelper.adjustNavigationTitleViewSize(navigationItem)
   }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
     
+    refreshCurrentDay(showAlert: false)
+  }
+  
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    
+    helptip?.hideAnimated(true)
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+
+    if mode == .General && Settings.uiDayPageHelpTipToShow.value == .SlideToChangeDay {
+      executeBlockWithDelay(1) {
+        self.showHelpTip()
+      }
+    }
+  }
+  
+  private func executeBlockWithDelay(delay: NSTimeInterval, block: () -> ()) {
+    let executeTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * NSTimeInterval(NSEC_PER_SEC)));
+    
+    dispatch_after(executeTime, dispatch_get_main_queue()) {
+      block()
+    }
+  }
+  
   private func setupNotificationsObservation() {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
@@ -121,89 +142,12 @@ class DayViewController: UIViewController {
   
   func managedObjectContextDidChange(notification: NSNotification) {
     updateSummaryBar(animate: true) {
-      self.checkForCongratulationsAboutWaterGoalReaching(notification)
+      if !self.checkForCongratulationsAboutWaterGoalReaching(notification) {
+        self.checkForHelpTip(notification)
+      }
     }
   }
 
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-
-    refreshCurrentDay(showAlert: false)
-  }
-  
-  override func viewDidAppear(animated: Bool) {
-    super.viewDidAppear(animated)
-
-    if !Settings.uiDayPageHasDisplayedOnce.value {
-//      continueGuide()
-    }
-  }
-  
-  func continueGuide() {
-    switch guideState {
-    case .None: showGuidePage1()
-    case .Page1: showGuidePage2()
-    case .Page2: finishGuide()//Settings.uiDayPageHasDisplayedOnce.value = true
-    case .Finished: break
-    }
-  }
-  
-  private func showGuidePage1() {
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    let window = appDelegate.window!
-
-    dayGuide1ViewController = storyboard!.instantiateViewControllerWithIdentifier(Constants.dayGuide1ViewControllerStoryboardID) as! DayGuide1ViewController
-    dayGuide1ViewController.view.layer.opacity = 0
-    dayGuide1ViewController.view.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
-    dayGuide1ViewController.view.frame = window.frame
-    dayGuide1ViewController.view.backgroundColor = UIColor(white: 0, alpha: 0.7)
-    dayGuide1ViewController.dayViewController = self
-
-    window.addSubview(dayGuide1ViewController.view)
-    
-    UIView.animateWithDuration(0.65, delay: 0, options: .CurveEaseInOut, animations: {
-      self.dayGuide1ViewController.view.layer.opacity = 1
-      self.dayGuide1ViewController.view.layer.transform = CATransform3DMakeScale(1, 1, 1)
-    }, completion: nil)
-
-    guideState = .Page1
-  }
-
-  private func showGuidePage2() {
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    let window = appDelegate.window!
-    
-    dayGuide2ViewController = storyboard!.instantiateViewControllerWithIdentifier(Constants.dayGuide2ViewControllerStoryboardID) as! DayGuide2ViewController
-    dayGuide2ViewController.view.layer.opacity = 0
-    dayGuide2ViewController.view.frame = window.frame
-    dayGuide2ViewController.view.backgroundColor = UIColor(white: 0, alpha: 0.7)
-    dayGuide2ViewController.dayViewController = self
-    
-    window.addSubview(dayGuide2ViewController.view)
-
-    UIView.animateWithDuration(0.65, delay: 0, options: .CurveEaseInOut, animations: {
-      self.dayGuide1ViewController.view.layer.opacity = 0
-      self.dayGuide2ViewController.view.layer.opacity = 1
-    }, completion: { (finished) -> Void in
-      self.dayGuide1ViewController.view.removeFromSuperview()
-      self.dayGuide1ViewController = nil
-    })
-
-    guideState = .Page2
-  }
-
-  private func finishGuide() {
-    UIView.animateWithDuration(0.65, delay: 0, options: .CurveEaseInOut, animations: {
-      self.dayGuide2ViewController.view.layer.opacity = 0
-      self.dayGuide2ViewController.view.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
-    }, completion: { (finished) -> Void in
-      self.dayGuide2ViewController.view.removeFromSuperview()
-      self.dayGuide2ViewController = nil
-    })
-    
-    guideState = .Finished
-  }
-  
   private func obtainCurrentDate() {
     if mode == .General && Settings.uiUseCustomDateForDayView.value {
       date = Settings.uiCustomDateForDayView.value
@@ -445,21 +389,21 @@ class DayViewController: UIViewController {
     dailyWaterIntake = overallWaterIntake
   }
   
-  private func checkForCongratulationsAboutWaterGoalReaching(notification: NSNotification) {
+  private func checkForCongratulationsAboutWaterGoalReaching(notification: NSNotification) -> Bool {
     let currentDate = NSDate()
     
     let isToday = DateHelper.areDatesEqualByDays(currentDate, date)
     if !isToday {
-      return
+      return false
     }
     
     let waterGoalReachingIsShownForToday = DateHelper.areDatesEqualByDays(currentDate, Settings.uiWaterGoalReachingIsShownForDate.value)
     if waterGoalReachingIsShownForToday {
-      return
+      return false
     }
     
     if dailyWaterIntake < waterGoalAmount {
-      return
+      return false
     }
     
     if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
@@ -467,12 +411,36 @@ class DayViewController: UIViewController {
         if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, currentDate) {
           Settings.uiWaterGoalReachingIsShownForDate.value = currentDate
           showCongratulationsAboutWaterGoalReaching()
+          return true
+        }
+      }
+    }
+    
+    return false
+  }
+
+  private func checkForHelpTip(notification: NSNotification) {
+    if Settings.uiDayPageHelpTipToShow.value == .None {
+      return
+    }
+    
+    let currentDate = NSDate()
+
+    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+      for insertedObject in insertedObjects {
+        if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, currentDate) {
+          Settings.uiDayPageIntakesCountTillHelpTip.value = Settings.uiDayPageIntakesCountTillHelpTip.value - 1
+          if Settings.uiDayPageIntakesCountTillHelpTip.value <= 0 {
+            executeBlockWithDelay(1) {
+              self.showHelpTip()
+            }
+          }
           break
         }
       }
     }
   }
-
+  
   private func showCongratulationsAboutWaterGoalReaching() {
     let nib = UINib(nibName: Constants.congratulationsViewNib, bundle: nil)
     
@@ -570,6 +538,80 @@ class DayViewController: UIViewController {
     }
   }
   
+  // MARK: Help tips -
+
+  private func showHelpTip() {
+    if view.window == nil || helptip != nil {
+      // The view is currently invisible so the help tip is useless
+      return
+    }
+    
+    let currentHelpTip = Settings.uiDayPageHelpTipToShow.value
+    
+    switch currentHelpTip {
+    case .SlideToChangeDay: showHelpTip_SlideToChangeDay()
+    case .HighActivityMode: showHelpTip_HighActivityMode()
+    case .HotWeatherMode: showHelpTip_HotWeatherMode()
+    case .SwitchToPercentsAndViceVersa: showHelpTip_SwitchToPercentAndViceVersa()
+    case .LongPressToChooseAlcohol: showHelpTip_LongPressToChooseAlcohol()
+    case .None: return
+    }
+    
+    // Switch to the next help tip
+    Settings.uiDayPageHelpTipToShow.value = Settings.DayPageHelpTip(rawValue: currentHelpTip.rawValue + 1)!
+    Settings.uiDayPageIntakesCountTillHelpTip.value = 2 // Help tips will be shown after every 2 intakes
+  }
+  
+  private func showHelpTip_SlideToChangeDay() {
+    let text = NSLocalizedString("DVC:Swipe to change day", value: "Swipe to change day", comment: "DayViewController: Text for help tip about swiping for changing day")
+    let tooltip = JDFTooltipView(targetView: navigationDateLabel, hostView: navigationController?.view, tooltipText: text, arrowDirection: .Up, width: view.frame.width / 3)
+    showTooltip(tooltip)
+  }
+  
+  private func showHelpTip_HighActivityMode() {
+    let text = NSLocalizedString("DVC:Tap to activate High Activity mode", value: "Tap to activate High Activity mode", comment: "DayViewController: Text for help tip about activating High Activity mode")
+    let tooltip = JDFTooltipView(targetView: highActivityButton, hostView: view, tooltipText: text, arrowDirection: .Up, width: view.frame.width / 2)
+    showTooltip(tooltip)
+  }
+  
+  private func showHelpTip_HotWeatherMode() {
+    let text = NSLocalizedString("DVC:Tap to activate Hot Weather mode", value: "Tap to activate Hot Weather mode", comment: "DayViewController: Text for help tip about activating Hot Weather mode")
+    let tooltip = JDFTooltipView(targetView: hotDayButton, hostView: view, tooltipText: text, arrowDirection: .Up, width: view.frame.width / 2)
+    showTooltip(tooltip)
+  }
+  
+  private func showHelpTip_SwitchToPercentAndViceVersa() {
+    let text = NSLocalizedString("DVC:Tap to switch between percents and volume", value: "Tap to switch between percents and volume", comment: "DayViewController: Text for help tip about switching between percents and volume representation of overall intake for a day")
+    let tooltip = JDFTooltipView(targetView: intakeButton, hostView: view, tooltipText: text, arrowDirection: .Up, width: view.frame.width / 2)
+    showTooltip(tooltip)
+  }
+  
+  private func showHelpTip_LongPressToChooseAlcohol() {
+    let text = NSLocalizedString("DVC:Long press to choose an alcoholic drink", value: "Long press to choose an alcoholic drink", comment: "DayViewController: Text for help tip about choosing an alcoholic drink")
+    let lastCellIndex = selectDrinkViewController!.collectionView.numberOfItemsInSection(0) - 1
+    let cell = selectDrinkViewController!.collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: lastCellIndex, inSection: 0))
+    let tooltip = JDFTooltipView(targetView: cell, hostView: selectDrinkViewController!.collectionView, tooltipText: text, arrowDirection: .Down, width: view.frame.width / 2)
+    showTooltip(tooltip)
+  }
+  
+  private func showTooltip(tooltip: JDFTooltipView) {
+    helptip = tooltip
+    helptip!.tooltipBackgroundColour = StyleKit.helpTipsColor
+    helptip!.textColour = UIColor.blackColor()
+    
+    helptip!.showCompletionBlock = {
+      self.executeBlockWithDelay(4) {
+        self.helptip?.hideAnimated(true)
+      }
+    }
+    
+    helptip!.hideCompletionBlock = {
+      self.helptip = nil
+    }
+    
+    helptip!.show()
+  }
+
   // MARK: Private properties -
   
   private var waterGoal: WaterGoal?
@@ -677,6 +719,7 @@ extension DayViewController: UIPageViewControllerDelegate {
   }
   
 }
+
 
 private extension Units.Volume {
   var precision: Double {
