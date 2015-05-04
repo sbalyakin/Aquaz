@@ -128,9 +128,51 @@ extension DiaryViewController: UITableViewDataSource {
     
     cell.intake = intake
     
+    checkHelpTip(indexPath: indexPath, cell: cell)
+    
     return cell
   }
   
+  private func checkHelpTip(#indexPath: NSIndexPath, cell: DiaryTableViewCell) {
+    if Settings.uiDiaryPageHelpTipIsShown.value || indexPath.row != 0 {
+      return
+    }
+    
+    executeBlockWithDelay(1) {
+      self.showHelpTipForCell(cell)
+    }
+  }
+  
+  private func showHelpTipForCell(cell: DiaryTableViewCell) {
+    if view.window == nil {
+      return
+    }
+    
+    Settings.uiDiaryPageHelpTipIsShown.value = true
+    
+    let text = NSLocalizedString("Amount of pure water of the intake", value: "Amount of pure water of the intake", comment: "DiaryViewController: Text for help tip about pure water amount text of the diary cell")
+    
+    let tooltip = JDFTooltipView(targetView: cell.waterAmountLabel, hostView: cell, tooltipText: text, arrowDirection: .Up, width: self.view.frame.width / 3)
+    
+    tooltip.tooltipBackgroundColour = StyleKit.helpTipsColor
+    tooltip.textColour = UIColor.blackColor()
+    
+    tooltip.showCompletionBlock = {
+      self.executeBlockWithDelay(4) {
+        tooltip.hideAnimated(true)
+      }
+    }
+    tooltip.show()
+  }
+
+  private func executeBlockWithDelay(delay: NSTimeInterval, block: () -> ()) {
+    let executeTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * NSTimeInterval(NSEC_PER_SEC)));
+    
+    dispatch_after(executeTime, dispatch_get_main_queue()) {
+      block()
+    }
+  }
+
   func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
     return true
   }

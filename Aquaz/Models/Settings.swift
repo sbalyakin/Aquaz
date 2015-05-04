@@ -157,6 +157,10 @@ public class Settings {
     key: "Notifications - Writing review alert last shown date", initialValue: NSDate(),
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
+  static let uiDiaryPageHelpTipIsShown = SettingsOrdinalItem(
+    key: "UI - Diary page help tip is shown", initialValue: false,
+    userDefaults: UserDefaultsProvider.sharedUserDefaults)
+
   static let notificationsEnabled = SettingsOrdinalItem(
     key: "Notifications - Enabled", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
