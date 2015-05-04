@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DayViewController: UIViewController {
+class DayViewController: UIViewController, UIAlertViewDelegate {
   
   // MARK: UI elements -
   
@@ -411,6 +411,11 @@ class DayViewController: UIViewController {
         if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, currentDate) {
           Settings.uiWaterGoalReachingIsShownForDate.value = currentDate
           showCongratulationsAboutWaterGoalReaching()
+          
+          executeBlockWithDelay(2) {
+            self.checkForRateApplicationAlert(notification)
+          }
+          
           return true
         }
       }
@@ -441,6 +446,63 @@ class DayViewController: UIViewController {
     }
   }
   
+  private func checkForRateApplicationAlert(notification: NSNotification) {
+    if Settings.uiWritingReviewAlertSelection.value != .RemindLater {
+      return
+    }
+    
+    if DateHelper.calcDistanceBetweenCalendarDates(fromDate: Settings.uiWritingReviewAlertLastShownDate.value, toDate: NSDate(), calendarUnit: .CalendarUnitDay) < 3 {
+      return
+    }
+    
+    let currentDate = NSDate()
+    
+    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+      for insertedObject in insertedObjects {
+        if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, currentDate) {
+          showRateApplicationAlert()
+          break
+        }
+      }
+    }
+  }
+  
+  private func showRateApplicationAlert() {
+    Settings.uiWritingReviewAlertLastShownDate.value = NSDate()
+
+    let title = NSLocalizedString("DVC:Rate Aquaz", value: "Rate Aquaz", comment: "DayViewController: Alert's title suggesting user to rate the application")
+
+    let message = NSLocalizedString("DVC:If you enjoy using Aquaz, would you mind taking a moment to rate it?\nThanks for your support!", value: "If you enjoy using Aquaz, would you mind taking a moment to rate it?\nThanks for your support!", comment: "DayViewController: Alert's message suggesting user to rate the application")
+    
+    let rateText = NSLocalizedString("DVC:Rate It Now", value: "Rate It Now", comment: "DayViewController: Title for alert's button allowing user to rate the application")
+
+    let remindLaterText = NSLocalizedString("DVC:Remind Me Later", value: "Remind Me Later", comment: "DayViewController: Title for alert's button allowing user to postpone rating the application")
+
+    let noText = NSLocalizedString("DVC:No, Thanks", value: "No, Thanks", comment: "DayViewController: Title for alert's button allowing user to reject rating the applcation")
+
+    let alert = UIAlertView(title: title, message: message, delegate: self, cancelButtonTitle: noText, otherButtonTitles: rateText, remindLaterText)
+
+    alert.show()
+  }
+  
+  func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+    switch buttonIndex {
+    case 0: // No, Thanks
+      Settings.uiWritingReviewAlertSelection.value = .No
+      
+    case 1: // Rate It Now
+      if let url = NSURL(string: GlobalConstants.appStoreLink) {
+        UIApplication.sharedApplication().openURL(url)
+      }
+      Settings.uiWritingReviewAlertSelection.value = .RateApplication
+      
+    case 2: // Remind Me Later
+      Settings.uiWritingReviewAlertSelection.value = .RemindLater
+      
+    default: break
+    }
+  }
+
   private func showCongratulationsAboutWaterGoalReaching() {
     let nib = UINib(nibName: Constants.congratulationsViewNib, bundle: nil)
     

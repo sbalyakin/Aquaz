@@ -61,6 +61,12 @@ public class Settings {
     // It should be the last case indicating that all help tips are already shown to user
     case None
   }
+  
+  enum RateApplicationAlertSelection: Int {
+    case RateApplication
+    case RemindLater
+    case No
+  }
 
   static let generalHasLaunchedOnce = SettingsOrdinalItem(
     key: "General - Has Launched Once", initialValue: false,
@@ -141,6 +147,14 @@ public class Settings {
 
   static let uiDayPageIntakesCountTillHelpTip = SettingsOrdinalItem(
     key: "UI - Day page intakes count till help tip", initialValue: 0,
+    userDefaults: UserDefaultsProvider.sharedUserDefaults)
+
+  static let uiWritingReviewAlertSelection = SettingsEnumItem(
+    key: "UI - Writing review alert selection", initialValue: RateApplicationAlertSelection.RemindLater,
+    userDefaults: UserDefaultsProvider.sharedUserDefaults)
+
+  static let uiWritingReviewAlertLastShownDate = SettingsOrdinalItem(
+    key: "Notifications - Writing review alert last shown date", initialValue: NSDate(),
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
   static let notificationsEnabled = SettingsOrdinalItem(
