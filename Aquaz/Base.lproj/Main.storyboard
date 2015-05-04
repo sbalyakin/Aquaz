@@ -535,19 +535,25 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Drink" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vcm-PC-Pd2">
-                                                    <rect key="frame" x="8" y="8" width="54" height="20"/>
+                                                    <rect key="frame" x="8" y="8" width="493" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="500 / 500 fl oz" textAlignment="right" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agg-wE-OgY">
-                                                    <rect key="frame" x="70" y="18" width="489" height="17"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:08 PM" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVd-k1-C1k" userLabel="Intake Time">
+                                                    <rect key="frame" x="8" y="30" width="493" height="15"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="500 ml" textAlignment="right" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agg-wE-OgY" userLabel="Intake Amount">
+                                                    <rect key="frame" x="509" y="8" width="50" height="20"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:08 PM" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVd-k1-C1k">
-                                                    <rect key="frame" x="8" y="30" width="54" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="490 ml" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOd-mb-fl1" userLabel="Water Amount">
+                                                    <rect key="frame" x="509" y="30" width="50" height="15"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -558,19 +564,29 @@
                                                 <constraint firstItem="oVd-k1-C1k" firstAttribute="top" secondItem="Vcm-PC-Pd2" secondAttribute="bottom" constant="2" id="8fh-dF-nCd"/>
                                                 <constraint firstItem="Vcm-PC-Pd2" firstAttribute="top" secondItem="Bhq-Ir-45T" secondAttribute="topMargin" id="BSs-d6-XAY"/>
                                                 <constraint firstItem="Vcm-PC-Pd2" firstAttribute="width" secondItem="oVd-k1-C1k" secondAttribute="width" id="FlD-0e-bh6"/>
+                                                <constraint firstItem="agg-wE-OgY" firstAttribute="centerY" secondItem="Vcm-PC-Pd2" secondAttribute="centerY" id="SfW-Q7-Hz9"/>
+                                                <constraint firstItem="agg-wE-OgY" firstAttribute="width" secondItem="WOd-mb-fl1" secondAttribute="width" id="U5P-4k-wSo"/>
                                                 <constraint firstAttribute="centerY" secondItem="agg-wE-OgY" secondAttribute="centerY" id="Uuc-SH-kJT"/>
                                                 <constraint firstItem="Vcm-PC-Pd2" firstAttribute="leading" secondItem="Bhq-Ir-45T" secondAttribute="leadingMargin" id="ZHH-nQ-grQ"/>
                                                 <constraint firstItem="agg-wE-OgY" firstAttribute="leading" secondItem="Vcm-PC-Pd2" secondAttribute="trailing" constant="8" symbolic="YES" id="Zqu-Jj-IPh"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="oVd-k1-C1k" secondAttribute="bottom" id="aHE-gV-aFO"/>
+                                                <constraint firstItem="oVd-k1-C1k" firstAttribute="centerY" secondItem="WOd-mb-fl1" secondAttribute="centerY" id="ddZ-F2-im3"/>
+                                                <constraint firstItem="WOd-mb-fl1" firstAttribute="trailing" secondItem="Bhq-Ir-45T" secondAttribute="trailingMargin" id="qSl-sj-ef2"/>
                                                 <constraint firstItem="oVd-k1-C1k" firstAttribute="leading" secondItem="Bhq-Ir-45T" secondAttribute="leadingMargin" id="xhu-I4-AfS"/>
                                                 <constraint firstItem="agg-wE-OgY" firstAttribute="trailing" secondItem="Bhq-Ir-45T" secondAttribute="trailingMargin" id="zMh-7K-72Y"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Uuc-SH-kJT"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="amountLabel" destination="agg-wE-OgY" id="hXR-ve-DPy"/>
                                             <outlet property="drinkLabel" destination="Vcm-PC-Pd2" id="8PE-wf-bY3"/>
                                             <outlet property="timeLabel" destination="oVd-k1-C1k" id="Ld3-dz-CHr"/>
+                                            <outlet property="waterAmountLabel" destination="WOd-mb-fl1" id="HyJ-On-Jvg"/>
                                             <segue destination="2WZ-Ss-cV0" kind="presentation" identifier="Edit Intake" id="Y3z-7d-zGG"/>
                                         </connections>
                                     </tableViewCell>
@@ -1655,7 +1671,7 @@
         <image name="tabbarWaterInactive" width="17" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sL9-fM-OF1"/>
+        <segue reference="Y3z-7d-zGG"/>
         <segue reference="cJJ-Wb-0ke"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -13,6 +13,7 @@ class DiaryTableViewCell: UITableViewCell {
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var drinkLabel: UILabel!
   @IBOutlet weak var amountLabel: UILabel!
+  @IBOutlet weak var waterAmountLabel: UILabel!
   
   var intake: Intake! {
     didSet {
@@ -22,8 +23,8 @@ class DiaryTableViewCell: UITableViewCell {
   
   private func applyIntake() {
     let drinkTitle = intake.drink.localizedName
-    let amountTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intake.amount, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: false)
-    let waterTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intake.waterAmount, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: false)
+    let amountTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intake.amount, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: true)
+    let waterTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intake.waterAmount, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: true)
     
     let formatter = NSDateFormatter()
     formatter.dateStyle = .NoStyle
@@ -33,34 +34,8 @@ class DiaryTableViewCell: UITableViewCell {
     timeLabel.text = timeTitle
     drinkLabel.text = drinkTitle
     drinkLabel.textColor = intake.drink.darkColor
-    
-    let amountTitleAt = NSAttributedString(string: amountTitle, attributes: [
-      NSForegroundColorAttributeName: amountLabel.textColor,
-      NSFontAttributeName: amountLabel.font])
-
-    let separatorTitleAt = NSAttributedString(string: " / ", attributes: [
-      NSForegroundColorAttributeName: UIColor.lightGrayColor(),
-      NSFontAttributeName: amountLabel.font])
-
-    let waterColor = Drink.getDarkColorFromDrinkColor(StyleKit.waterColor)
-    
-    let waterTitleAt = NSAttributedString(string: "\(waterTitle) ", attributes: [
-      NSForegroundColorAttributeName: waterColor,
-      NSFontAttributeName: amountLabel.font])
-
-    let unit = Settings.generalVolumeUnits.value.unit.contraction
-    let unitsTitleAt = NSAttributedString(string: unit, attributes: [
-      NSForegroundColorAttributeName: waterColor,
-      NSFontAttributeName: amountLabel.font])
-    
-
-    let title = NSMutableAttributedString()
-    title.appendAttributedString(amountTitleAt)
-    title.appendAttributedString(separatorTitleAt)
-    title.appendAttributedString(waterTitleAt)
-    title.appendAttributedString(unitsTitleAt)
-
-    amountLabel.attributedText = title
+    amountLabel.text = amountTitle
+    waterAmountLabel.text = waterTitle
     
     updateFonts()
   }
