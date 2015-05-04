@@ -151,7 +151,7 @@ extension DiaryViewController: UITableViewDataSource {
     Settings.uiDiaryPageHelpTipIsShown.value = true
     
     let text = NSLocalizedString("Amount of pure water of the intake", value: "Amount of pure water of the intake", comment: "DiaryViewController: Text for help tip about pure water amount text of the diary cell")
-    
+
     let tooltip = JDFTooltipView(targetView: cell.waterAmountLabel, hostView: cell, tooltipText: text, arrowDirection: .Up, width: self.view.frame.width / 3)
     
     tooltip.tooltipBackgroundColour = StyleKit.helpTipsColor

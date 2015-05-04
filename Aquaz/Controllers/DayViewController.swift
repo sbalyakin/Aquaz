@@ -470,15 +470,15 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   private func showRateApplicationAlert() {
     Settings.uiWritingReviewAlertLastShownDate.value = NSDate()
 
-    let title = NSLocalizedString("DVC:Rate Aquaz", value: "Rate Aquaz", comment: "DayViewController: Alert's title suggesting user to rate the application")
+    let title = NSLocalizedString("DVC:Rate Aquaz", value: "Rate Aquaz", comment: "DayViewController: Alert\'s title suggesting user to rate the application")
 
-    let message = NSLocalizedString("DVC:If you enjoy using Aquaz, would you mind taking a moment to rate it?\nThanks for your support!", value: "If you enjoy using Aquaz, would you mind taking a moment to rate it?\nThanks for your support!", comment: "DayViewController: Alert's message suggesting user to rate the application")
+    let message = NSLocalizedString("DVC:If you enjoy using Aquaz, would you mind taking a moment to rate it?\nThanks for your support!", value: "If you enjoy using Aquaz, would you mind taking a moment to rate it?\nThanks for your support!", comment: "DayViewController: Alert\'s message suggesting user to rate the application")
     
-    let rateText = NSLocalizedString("DVC:Rate It Now", value: "Rate It Now", comment: "DayViewController: Title for alert's button allowing user to rate the application")
+    let rateText = NSLocalizedString("DVC:Rate It Now", value: "Rate It Now", comment: "DayViewController: Title for alert\'s button allowing user to rate the application")
 
-    let remindLaterText = NSLocalizedString("DVC:Remind Me Later", value: "Remind Me Later", comment: "DayViewController: Title for alert's button allowing user to postpone rating the application")
+    let remindLaterText = NSLocalizedString("DVC:Remind Me Later", value: "Remind Me Later", comment: "DayViewController: Title for alert\'s button allowing user to postpone rating the application")
 
-    let noText = NSLocalizedString("DVC:No, Thanks", value: "No, Thanks", comment: "DayViewController: Title for alert's button allowing user to reject rating the applcation")
+    let noText = NSLocalizedString("DVC:No, Thanks", value: "No, Thanks", comment: "DayViewController: Title for alert\'s button allowing user to reject rating the applcation")
 
     let alert = UIAlertView(title: title, message: message, delegate: self, cancelButtonTitle: noText, otherButtonTitles: rateText, remindLaterText)
 
