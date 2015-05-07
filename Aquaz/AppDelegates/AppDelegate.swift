@@ -116,11 +116,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let beginDate = NSDate()
             let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
             
-            let todayOverallWaterIntake = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Summary, managedObjectContext: CoreDataStack.privateContext).first!
+            let todayAmountParts = Intake.fetchIntakeAmountPartsGroupedBy(.Day, beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0,  aggregateFunction: .Summary, managedObjectContext: CoreDataStack.privateContext).first!
             
             let todayWaterGoal = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: CoreDataStack.privateContext).first!
             
-            if todayOverallWaterIntake >= todayWaterGoal {
+            if todayAmountParts.hydration >= (todayWaterGoal + todayAmountParts.dehydration) {
               dispatch_async(dispatch_get_main_queue()) {
                 NotificationsHelper.removeAllNotifications()
                 let nextDayDate = DateHelper.addToDate(lastIntakeDate, years: 0, months: 0, days: 1)

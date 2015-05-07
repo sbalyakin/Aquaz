@@ -158,22 +158,31 @@ class YearStatisticsViewController: UIViewController {
   }
   
   private func fetchStatisticsItems(#beginDate: NSDate, endDate: NSDate) -> [YearStatisticsView.ItemType] {
-    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Month, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
+    let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Month,
+      beginDate: beginDate,
+      endDate: endDate,
+      dayOffsetInHours: 0,
+      aggregateFunction: .Average,
+      managedObjectContext: managedObjectContext)
     
-    let goals = WaterGoal.fetchWaterGoalAmountsGroupedByMonths(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
-    Logger.logSevere(waterIntakes.count == goals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
+    let waterGoals = WaterGoal.fetchWaterGoalAmountsGroupedByMonths(
+      beginDate: beginDate,
+      endDate: endDate,
+      managedObjectContext: managedObjectContext)
+    
+    Logger.logSevere(amountPartsList.count == waterGoals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     
     let displayedVolumeUnits = Settings.generalVolumeUnits.value
     
     var statisticsItems: [YearStatisticsView.ItemType] = []
     
-    for (index, metricWaterIntake) in enumerate(waterIntakes) {
-      let metricGoal = goals[index]
+    for (index, amountParts) in enumerate(amountPartsList) {
+      let waterGoal = waterGoals[index] + amountParts.dehydration
       
-      let displayedWaterIntake = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: metricWaterIntake, unitType: .Volume)
-      let displayedGoal = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: metricGoal, unitType: .Volume)
+      let displayedHydrationAmount = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: amountParts.hydration, unitType: .Volume)
+      let displayedGoal = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: waterGoal, unitType: .Volume)
       
-      let item: YearStatisticsView.ItemType = (value: CGFloat(displayedWaterIntake), goal: CGFloat(displayedGoal))
+      let item: YearStatisticsView.ItemType = (value: CGFloat(displayedHydrationAmount), goal: CGFloat(displayedGoal))
       statisticsItems.append(item)
     }
     

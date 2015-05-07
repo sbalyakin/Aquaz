@@ -80,17 +80,17 @@ class IntakeTests: XCTestCase {
   func testFetchWaterIntakeGroupedByDaysRandom() {
     deleteAllIntakes()
     
-    let startDate = DateHelper.dateByClearingTime(ofDate: NSDate())
-    let endDate = DateHelper.addToDate(startDate, years: 0, months: 0, days: 30)
+    let beginDate = DateHelper.dateByClearingTime(ofDate: NSDate())
+    let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 30)
     let intakeCountPerDayRange = 5...50
     let amountOfIntakeRange = 100...2000
 
     // Generate intakes and calculate water intakes
-    var waterAmounts: [Double] = []
+    var waterBalances: [Double] = []
     
-    for var date = startDate; date.isEarlierThan(endDate); date = date.getNextDay() {
+    for var date = beginDate; date.isEarlierThan(endDate); date = date.getNextDay() {
       let intakesPerDay = getRandomInRange(intakeCountPerDayRange)
-      var waterAmount: Double = 0
+      var waterBalance: Double = 0
       
       for i in 0..<intakesPerDay {
         let amount = getRandomInRange(amountOfIntakeRange)
@@ -100,42 +100,51 @@ class IntakeTests: XCTestCase {
         
         let intake = Intake.addEntity(drink: drink, amount: Double(amount), date: intakeDate, managedObjectContext: managedObjectContext, saveImmediately: true)!
         
-        waterAmount += intake.waterAmount
+        waterBalance += intake.waterBalance
       }
       
-      waterAmounts.append(waterAmount)
+      waterBalances.append(waterBalance)
     }
     
-    // Fetch grouped intakes and check them
-    let fetchedWaterAmounts = Intake.fetchGroupedWaterAmounts(beginDate: startDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Summary, managedObjectContext: managedObjectContext)
+    // Fetch grouped hydration amounts and check them
+    let fetchedAmountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
+      beginDate: beginDate,
+      endDate: endDate,
+      dayOffsetInHours: 0,
+      aggregateFunction: .Summary,
+      managedObjectContext: managedObjectContext)
+
+    let fetchedWaterBalances = fetchedAmountPartsList.map { (hydration, dehydration) -> Double in
+      return hydration - dehydration
+    }
 
     // It's wrong to compare arrays of doubles in a standard way because doubles values
     // calculated as a result of the same arithmetical operation
     // can have slightly different values (observed in unsignificant last decimals)
     // depending on order of these operations in a particular case.
     // Taking this into account, arrays of doubles are compared using a special function.
-    XCTAssert(areArraysOfDoublesAreEqual(waterAmounts, fetchedWaterAmounts), "Wrong water amounts grouped by days are fetched")
+    XCTAssert(areArraysOfDoublesAreEqual(waterBalances, fetchedWaterBalances), "Fetching is wrong for intake water balances grouped by days")
   }
 
-  func testFetchWaterIntakeGroupedByDays() {
+  func testFetchWaterBalancesGroupedByDays() {
     deleteAllIntakes()
     
     // Add intakes
-    var waterAmounts: [Double] = []
+    var waterBalances: [Double] = []
     
     typealias IntakeInfo = (textDate: String, drinkType: Drink.DrinkType, amount: Double)
     
     func addGroupedIntakes(intakes: [IntakeInfo]) {
-      var waterAmount: Double = 0
+      var waterBalance: Double = 0
       for intake in intakes {
-        self.addIntake(intake.textDate, intake.drinkType, intake.amount, &waterAmount)
+        self.addIntake(intake.textDate, intake.drinkType, intake.amount, &waterBalance)
       }
-      waterAmounts.append(waterAmount)
+      waterBalances.append(waterBalance)
     }
     
     // Out of check
-    addIntake("01.01.2014 10:00:00", .Water, 1000)
-    addIntake("01.01.2015 20:59:59", .Juice, 2000)
+    addIntake("01.01.2014 10:00:00", .Water,  1000)
+    addIntake("01.01.2015 20:59:59", .Juice,  2000)
     addIntake("01.01.2015 23:59:59", .Coffee, 500)
     
     // 2 January
@@ -156,8 +165,8 @@ class IntakeTests: XCTestCase {
     
     // 5 January
     addGroupedIntakes([
-      ("05.01.2015 01:00:01", .Beer,         1000),
-      ("05.01.2015 15:15:14", .Wine,         1000),
+      ("05.01.2015 01:00:01", .Beer,       1000),
+      ("05.01.2015 15:15:14", .Wine,       1000),
       ("05.01.2015 20:00:10", .HardLiquor, 2000)])
     
     // Out of check
@@ -165,41 +174,50 @@ class IntakeTests: XCTestCase {
     addIntake("05.01.2016 00:00:00", .Juice, 2000)
     
     
-    // Fetch grouped intakes and check them
+    // Fetch grouped water balances and check them
     let beginDate = dateFromString("02.01.2015")
     let endDate = dateFromString("06.01.2015")
-    let fetchedWaterAmounts = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Summary, managedObjectContext: managedObjectContext)
+    
+    let fetchedAmountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
+      beginDate: beginDate,
+      endDate: endDate,
+      dayOffsetInHours: 0,
+      aggregateFunction: .Summary,
+      managedObjectContext: managedObjectContext)
+    
+    let fetchedWaterBalances = fetchedAmountPartsList.map { (hydration, dehydration) -> Double in
+      return hydration - dehydration
+    }
     
     // It's wrong to compare arrays of doubles in a standard way because doubles values
     // calculated as a result of the same arithmetical operation
     // can have slightly different values (observed in unsignificant last decimals)
     // depending on order of these operations in a particular case.
     // Taking this into account, arrays of doubles are compared using a special function.
-    XCTAssert(areArraysOfDoublesAreEqual(waterAmounts, fetchedWaterAmounts), "Fetching for water amounts grouped by days works unproperly")
+    XCTAssert(areArraysOfDoublesAreEqual(waterBalances, fetchedWaterBalances), "Fetching is wrong for intake water balances grouped by days")
   }
 
-  func testFetchWaterIntakeGroupedByMonts() {
+  func testFetchWaterBalancesGroupedByMonts() {
     deleteAllIntakes()
 
     // Add intakes
-    var waterIntakes: [Double] = []
-    var waterIntakesAverage: [Double] = []
-    var waterIntake: Double
+    var waterBalances: [Double] = []
+    var averageWaterBalances: [Double] = []
     
     typealias IntakeInfo = (textDate: String, drinkType: Drink.DrinkType, amount: Double)
     
     func addGroupedIntakes(daysInMonth: Int, intakes: [IntakeInfo]) {
-      var waterIntake: Double = 0
+      var waterBalance: Double = 0
       for intake in intakes {
-        self.addIntake(intake.textDate, intake.drinkType, intake.amount, &waterIntake)
+        self.addIntake(intake.textDate, intake.drinkType, intake.amount, &waterBalance)
       }
-      waterIntakes.append(waterIntake)
-      waterIntakesAverage.append(waterIntake / Double(daysInMonth))
+      waterBalances.append(waterBalance)
+      averageWaterBalances.append(waterBalance / Double(daysInMonth))
     }
     
     // Out of check
-    addIntake("01.01.2015", .Water, 1000)
-    addIntake("03.01.2015", .Juice, 2000)
+    addIntake("01.01.2015", .Water,  1000)
+    addIntake("03.01.2015", .Juice,  2000)
     addIntake("05.01.2015", .Coffee, 500)
     
     // February
@@ -223,38 +241,58 @@ class IntakeTests: XCTestCase {
 
     // May
     addGroupedIntakes(31, [
-      ("10.05.2015", .Beer,         1000),
-      ("01.05.2015", .Wine,         1000),
+      ("10.05.2015", .Beer,       1000),
+      ("01.05.2015", .Wine,       1000),
       ("03.05.2015", .HardLiquor, 2000),
-      ("15.05.2015", .Energy,       500),
-      ("30.05.2015", .Soda,         200)])
+      ("15.05.2015", .Energy,     500),
+      ("30.05.2015", .Soda,       200)])
 
     // Out of check
-    addIntake("01.06.2015", .Water, 1000)
-    addIntake("03.07.2015", .Juice, 2000)
+    addIntake("01.06.2015", .Water,  1000)
+    addIntake("03.07.2015", .Juice,  2000)
     addIntake("05.08.2015", .Coffee, 500)
-    addIntake("01.09.2015", .Water, 1000)
-    addIntake("03.10.2015", .Juice, 2000)
+    addIntake("01.09.2015", .Water,  1000)
+    addIntake("03.10.2015", .Juice,  2000)
     addIntake("05.11.2015", .Coffee, 500)
-    addIntake("01.12.2015", .Water, 1000)
+    addIntake("01.12.2015", .Water,  1000)
     
-    addIntake("03.07.2016", .Juice, 2000)
+    addIntake("03.07.2016", .Juice,  2000)
     addIntake("05.08.2013", .Coffee, 500)
     
     
-    // Fetch grouped intakes and check them
+    // Fetch water balances and compare them to original ones
     let beginDate = dateFromString("01.02.2015")
     let endDate = dateFromString("01.06.2015")
-    let fetchedWaterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Month, aggregateFunction: .Summary, managedObjectContext: managedObjectContext)
-    let fetchedWaterIntakesAverage = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Month, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
     
+    let fetchedAmountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Month,
+      beginDate: beginDate,
+      endDate: endDate,
+      dayOffsetInHours: 0,
+      aggregateFunction: .Summary,
+      managedObjectContext: managedObjectContext)
+    
+    let fetchedAverageAmountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Month,
+      beginDate: beginDate,
+      endDate: endDate,
+      dayOffsetInHours: 0,
+      aggregateFunction: .Average,
+      managedObjectContext: managedObjectContext)
+    
+    let fetchedWaterBalances = fetchedAmountPartsList.map { (hydration, dehydration) -> Double in
+      return hydration - dehydration
+    }
+
+    let fetchedAverageWaterBalances = fetchedAverageAmountPartsList.map { (hydration, dehydration) -> Double in
+      return hydration - dehydration
+    }
+
     // It's wrong to compare arrays of doubles in a standard way because doubles values
     // calculated as a result of the same arithmetical operation
     // can have slightly different values (observed in unsignificant last decimals)
     // depending on order of these operations in a particular case.
     // Taking this into account, arrays of doubles are compared using a special function.
-    XCTAssert(areArraysOfDoublesAreEqual(waterIntakes, fetchedWaterIntakes), "Fetching for water intakes grouped by days works unproperly")
-    XCTAssert(areArraysOfDoublesAreEqual(waterIntakesAverage, fetchedWaterIntakesAverage), "Fetching for average water intakes grouped by days works unproperly")
+    XCTAssert(areArraysOfDoublesAreEqual(waterBalances, fetchedWaterBalances), "Fetching is wrong for water balances grouped by days")
+    XCTAssert(areArraysOfDoublesAreEqual(averageWaterBalances, fetchedAverageWaterBalances), "Fetching is wrong for average water balances grouped by days")
   }
 
   private func addIntake(textDate: String, _ drinkType: Drink.DrinkType, _ amount: Double) -> Intake {
@@ -262,12 +300,12 @@ class IntakeTests: XCTestCase {
     return addIntake(textDate, drinkType, amount, &waterIntake)
   }
 
-  private func addIntake(textDate: String, _ drinkType: Drink.DrinkType, _ amount: Double, inout _ waterIntake: Double) -> Intake {
+  private func addIntake(textDate: String, _ drinkType: Drink.DrinkType, _ amount: Double, inout _ waterBalance: Double) -> Intake {
     let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext)!
     let date = dateFromString(textDate)
     let intake = Intake.addEntity(drink: drink, amount: amount, date: date, managedObjectContext: managedObjectContext, saveImmediately: true)!
     
-    waterIntake += intake.waterAmount
+    waterBalance += intake.waterBalance
     
     return intake
   }
@@ -354,7 +392,7 @@ class IntakeTests: XCTestCase {
   }
   
   private func areDoublesEqual(value1: Double, _ value2: Double) -> Bool {
-    return abs(value1 - value2) < DBL_MIN || abs(value1 - value2) < 10 * DBL_EPSILON * abs(value1 + value2)
+    return abs(value1 - value2) < DBL_MIN || abs(value1 - value2) < 100 * DBL_EPSILON * abs(value1 + value2)
   }
   
   private var managedObjectContext: NSManagedObjectContext { return CoreDataSupport.sharedInstance.managedObjectContext }

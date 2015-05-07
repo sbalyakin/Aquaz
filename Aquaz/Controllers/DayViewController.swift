@@ -41,7 +41,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  private var dailyWaterIntake: Double = 0.0 {
+  private var totalHydrationAmount: Double = 0.0 {
     didSet {
       updateIntakeButton()
     }
@@ -279,20 +279,23 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   private func updateSummaryBar(#animate: Bool, completion: (() -> ())?) {
     managedObjectContext.performBlock {
       self.waterGoal = WaterGoal.fetchWaterGoalForDate(self.date, managedObjectContext: self.managedObjectContext)
-      self.intakes = Intake.fetchIntakesForDay(self.date, dayOffsetInHours: 0, managedObjectContext: self.managedObjectContext)
       
-      let intakeAmounts = Intake.fetchTotalWaterAmountsGroupedByDrinksForDay(self.date, dayOffsetInHours: 0, managedObjectContext: self.managedObjectContext)
+      self.totalDehydrationAmount = Intake.fetchTotalDehydrationAmountForDay(self.date,
+        dayOffsetInHours: 0, managedObjectContext: self.managedObjectContext)
+      
+      let intakeHydrationAmounts = Intake.fetchHydrationAmountsGroupedByDrinksForDay(self.date,
+        dayOffsetInHours: 0, managedObjectContext: self.managedObjectContext)
       
       dispatch_async(dispatch_get_main_queue()) {
         if animate {
           self.intakesMultiProgressView.updateWithAnimation {
             self.waterGoalWasChanged()
-            self.updateWaterIntakeAmounts(intakeAmounts)
+            self.updateIntakeHydrationAmounts(intakeHydrationAmounts)
           }
         } else {
           self.intakesMultiProgressView.update {
             self.waterGoalWasChanged()
-            self.updateWaterIntakeAmounts(intakeAmounts)
+            self.updateIntakeHydrationAmounts(intakeHydrationAmounts)
           }
         }
         
@@ -372,21 +375,22 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   // MARK: Intakes management -
   
-  private func updateWaterIntakeAmounts(intakeAmounts: [Drink: Double]) {
+  private func updateIntakeHydrationAmounts(intakeHydrationAmounts: [Drink: Double]) {
     // Clear all drink sections
     for (_, section) in multiProgressSections {
       section.factor = 0.0
     }
     
     // Fill sections with fetched intakes and compute daily water intake
-    var overallWaterIntake: Double = 0
-    for (drink, amount) in intakeAmounts {
-      overallWaterIntake += amount
+    var totalHydrationAmount: Double = 0
+    for (drink, hydrationAmount) in intakeHydrationAmounts {
+      totalHydrationAmount += hydrationAmount
       if let section = multiProgressSections[drink] {
-        section.factor = CGFloat(amount)
+        section.factor = CGFloat(hydrationAmount)
       }
     }
-    dailyWaterIntake = overallWaterIntake
+    
+    self.totalHydrationAmount = totalHydrationAmount
   }
   
   private func checkForCongratulationsAboutWaterGoalReaching(notification: NSNotification) -> Bool {
@@ -402,7 +406,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
       return false
     }
     
-    if dailyWaterIntake < waterGoalAmount {
+    if totalHydrationAmount < waterGoalAmount {
       return false
     }
     
@@ -555,11 +559,11 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
       formatter.numberStyle = .PercentStyle
       formatter.maximumFractionDigits = 0
       formatter.multiplier = 100
-      let drinkedPart = dailyWaterIntake / waterGoalAmount
-      intakeText = formatter.stringFromNumber(drinkedPart)!
+      let hydrationFactor = totalHydrationAmount / waterGoalAmount
+      intakeText = formatter.stringFromNumber(hydrationFactor)!
     } else {
       intakeText = Units.sharedInstance.formatMetricAmountToText(
-        metricAmount: dailyWaterIntake,
+        metricAmount: totalHydrationAmount,
         unitType: .Volume,
         roundPrecision: amountPrecision,
         decimals: amountDecimals,
@@ -678,6 +682,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   private var waterGoal: WaterGoal?
   
+  private var totalDehydrationAmount: Double = 0
+  
   private var isWaterGoalForCurrentDay: Bool {
     if let waterGoal = waterGoal {
       return DateHelper.areDatesEqualByDays(waterGoal.date, date)
@@ -709,7 +715,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   private var waterGoalAmount: Double {
-    return waterGoalBaseAmount * (1 + hotDayExtraFactor + highActivityExtraFactor)
+    return waterGoalBaseAmount * (1 + hotDayExtraFactor + highActivityExtraFactor) + totalDehydrationAmount
   }
   
   private var hotDayExtraFactor: Double {
@@ -728,7 +734,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  private var intakes: [Intake] = []
   private var multiProgressSections: [Drink: MultiProgressView.Section] = [:]
   
   private var pages: [UIViewController] = []

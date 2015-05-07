@@ -17,7 +17,8 @@ public class Drink: CodingManagedObject, NamedEntity {
 
   @NSManaged public var index: NSNumber
   @NSManaged public var name: String
-  @NSManaged public var waterPercent: Double
+  @NSManaged public var hydrationFactor: Double
+  @NSManaged public var dehydrationFactor: Double
   @NSManaged public var intakes: NSSet
   @NSManaged public var recentAmount: RecentAmount
 
@@ -232,11 +233,12 @@ public class Drink: CodingManagedObject, NamedEntity {
     }
   }
   
-  class func addEntity(#index: Int, name: String, waterPercent: Double, recentAmount amount: Double, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Drink {
+  class func addEntity(#index: Int, name: String, hydrationFactor: Double, dehydrationFactor: Double, recentAmount amount: Double, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Drink {
     let drink = LoggedActions.insertNewObjectForEntity(Drink.self, inManagedObjectContext: managedObjectContext)!
     drink.index = index
     drink.name = name
-    drink.waterPercent = waterPercent
+    drink.hydrationFactor = hydrationFactor
+    drink.dehydrationFactor = dehydrationFactor
 
     let recentAmount = LoggedActions.insertNewObjectForEntity(RecentAmount.self, inManagedObjectContext: managedObjectContext)!
     recentAmount.drink = drink

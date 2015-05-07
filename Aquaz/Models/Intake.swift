@@ -23,11 +23,21 @@ public class Intake: CodingManagedObject, NamedEntity {
   /// What drink was consumed
   @NSManaged public var drink: Drink
   
-  /// Amount of pure water of the intake taking into account water percentage of the drink
-  public var waterAmount: Double {
-    return amount * drink.waterPercent
+  /// Water balance of the intake based on hydration and dehydration factors of the corresponding drink
+  public var waterBalance: Double {
+    return amount * (drink.hydrationFactor - drink.dehydrationFactor)
   }
-  
+
+  /// Hydration amount of the intake based on a hydration factor of the corresponding drink
+  public var hydrationAmount: Double {
+    return amount * drink.hydrationFactor
+  }
+
+  /// Dehydration amount of the intake based on a dehydration factor of the corresponding drink
+  public var dehydrationAmount: Double {
+    return amount * drink.dehydrationFactor
+  }
+
   /// Adds a new intake's entity into Core Data
   public class func addEntity(#drink: Drink, amount: Double, date: NSDate, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Intake? {
     let intake = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext)!
@@ -71,7 +81,8 @@ public class Intake: CodingManagedObject, NamedEntity {
     return fetchIntakes(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
   }
 
-  public class func fetchTotalWaterAmountsGroupedByDrinksForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> [Drink: Double] {
+  /// Fetches overall hydration amounts of intakes grouped by drinks for passed date
+  public class func fetchHydrationAmountsGroupedByDrinksForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> [Drink: Double] {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
     let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
@@ -96,7 +107,7 @@ public class Intake: CodingManagedObject, NamedEntity {
       for record in fetchResults as! [NSDictionary] {
         let drinkIndex = record["drink.index"] as! NSNumber
         let drink = Drink.getDrinkByIndex(drinkIndex.integerValue, managedObjectContext: managedObjectContext)!
-        let amount = (record["overallWaterAmount"] as! Double) * drink.waterPercent
+        let amount = (record[overallWaterAmount.name] as! Double) * drink.hydrationFactor
         result[drink] = amount
       }
       return result
@@ -106,6 +117,44 @@ public class Intake: CodingManagedObject, NamedEntity {
     }
   }
 
+  /// Fetches total dehydration amount based on intakes of a passed day
+  public class func fetchTotalDehydrationAmountForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> Double {
+    let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
+    let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
+    let predicate = NSPredicate(format: "(date >= %@) AND (date < %@) AND (drink.dehydrationFactor != 0)", argumentArray: [beginDate, endDate])
+    
+    let expression = NSExpression(forFunction: "sum:", arguments: [NSExpression(forKeyPath: "amount")])
+    
+    let overallWaterAmount = NSExpressionDescription()
+    overallWaterAmount.expression = expression
+    overallWaterAmount.expressionResultType = .DoubleAttributeType
+    overallWaterAmount.name = "overallWaterAmount"
+    
+    let fetchRequest = NSFetchRequest()
+    fetchRequest.entity = LoggedActions.entityDescriptionForEntity(Intake.self, inManagedObjectContext: managedObjectContext)
+    fetchRequest.predicate = predicate
+    fetchRequest.propertiesToFetch = ["drink.index", overallWaterAmount]
+    fetchRequest.propertiesToGroupBy = ["drink.index"]
+    fetchRequest.resultType = .DictionaryResultType
+    
+    var error: NSError?
+    if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) {
+      var totalDehydration: Double = 0
+      
+      for record in fetchResults as! [NSDictionary] {
+        let drinkIndex = record["drink.index"] as! NSNumber
+        let drink = Drink.getDrinkByIndex(drinkIndex.integerValue, managedObjectContext: managedObjectContext)!
+        let dehydration = (record[overallWaterAmount.name] as! Double) * drink.dehydrationFactor
+        totalDehydration = dehydration
+      }
+      
+      return totalDehydration
+    } else {
+      Logger.logError(Logger.Messages.failedToExecuteFetchRequest, error: error)
+      return 0
+    }
+  }
+  
   public enum GroupingCalendarUnit {
     case Day
     case Month
@@ -123,17 +172,19 @@ public class Intake: CodingManagedObject, NamedEntity {
     case Summary
   }
   
-  /// Fetches water amounts (taking water percent of drinks into account)
-  /// for specified time period (beginDate..<endDate) grouping results by specified calendar unit.
+  /// Fetches amounts of intakes (return both hydration and dehydration amounts)
+  /// for passed time period (beginDate..<endDate) grouping results by passed calendar unit.
   /// It's also possible to specify aggregate function for grouping.
   /// Note: Average function calculates an average value taking into account ALL days in a specified calendar unit,
   /// not only days with intakes.
-  public class func fetchGroupedWaterAmounts(beginDate beginDateRaw: NSDate,
-                                             endDate endDateRaw: NSDate,
-                                             dayOffsetInHours: Int,
-                                             groupingUnit: GroupingCalendarUnit,
-                                             aggregateFunction aggregateFunctionRaw: AggregateFunction,
-                                             managedObjectContext: NSManagedObjectContext) -> [Double] {
+  public class func fetchIntakeAmountPartsGroupedBy(
+    groupingUnit: GroupingCalendarUnit,
+    beginDate beginDateRaw: NSDate,
+    endDate endDateRaw: NSDate,
+    dayOffsetInHours: Int,
+    aggregateFunction aggregateFunctionRaw: AggregateFunction,
+    managedObjectContext: NSManagedObjectContext) -> [(hydration: Double, dehydration: Double)]
+  {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: beginDateRaw)
     let endDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: endDateRaw)
     
@@ -152,7 +203,7 @@ public class Intake: CodingManagedObject, NamedEntity {
     let calendarUnit = groupingUnit.getCalendarUnit()
     let calendar = NSCalendar.currentCalendar()
     
-    var groupedWaterAmounts: [Double] = []
+    var groupedAmountParts: [(hydration: Double, dehydration: Double)] = []
     var nextDate: NSDate!
     var intakeIndex = 0
     var daysInCalendarUnit = 0
@@ -171,7 +222,8 @@ public class Intake: CodingManagedObject, NamedEntity {
         break
       }
 
-      var waterAmountForUnit: Double = 0
+      var hydrationAmountForUnit: Double = 0
+      var dehydrationAmountForUnit: Double = 0
 
       for ; intakeIndex < intakes.count; intakeIndex++ {
         let intake = intakes[intakeIndex]
@@ -180,17 +232,20 @@ public class Intake: CodingManagedObject, NamedEntity {
           break
         }
 
-        waterAmountForUnit += intake.waterAmount
+        hydrationAmountForUnit += intake.hydrationAmount
+        dehydrationAmountForUnit += intake.dehydrationAmount
       }
       
       if aggregateFunction == .Average {
-        waterAmountForUnit /= Double(daysInCalendarUnit)
+        hydrationAmountForUnit /= Double(daysInCalendarUnit)
+        dehydrationAmountForUnit /= Double(daysInCalendarUnit)
       }
       
-      groupedWaterAmounts.append(waterAmountForUnit)
+      let amountPartsItem = (hydration: hydrationAmountForUnit, dehydration: dehydrationAmountForUnit)
+      groupedAmountParts.append(amountPartsItem)
     }
     
-    return groupedWaterAmounts
+    return groupedAmountParts
   }
   
 }

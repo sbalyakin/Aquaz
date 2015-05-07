@@ -13,7 +13,7 @@ class DiaryTableViewCell: UITableViewCell {
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var drinkLabel: UILabel!
   @IBOutlet weak var amountLabel: UILabel!
-  @IBOutlet weak var waterAmountLabel: UILabel!
+  @IBOutlet weak var waterBalanceLabel: UILabel!
   
   var intake: Intake! {
     didSet {
@@ -24,7 +24,7 @@ class DiaryTableViewCell: UITableViewCell {
   private func applyIntake() {
     let drinkTitle = intake.drink.localizedName
     let amountTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intake.amount, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: true)
-    let waterTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intake.waterAmount, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: true)
+    let waterBalanceTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intake.waterBalance, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: true)
     
     let formatter = NSDateFormatter()
     formatter.dateStyle = .NoStyle
@@ -35,7 +35,7 @@ class DiaryTableViewCell: UITableViewCell {
     drinkLabel.text = drinkTitle
     drinkLabel.textColor = intake.drink.darkColor
     amountLabel.text = amountTitle
-    waterAmountLabel.text = waterTitle
+    waterBalanceLabel.text = waterBalanceTitle
     
     updateFonts()
   }

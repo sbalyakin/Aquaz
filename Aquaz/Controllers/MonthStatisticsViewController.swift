@@ -145,10 +145,10 @@ extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
   func monthStatisticsGetValuesForDateInterval(#beginDate: NSDate, endDate: NSDate, calendarContentView: CalendarContentView) -> [Double] {
     managedObjectContext.performBlock {
       weak var requestingMonthStatisticsContentView = (calendarContentView as! MonthStatisticsContentView)
-      let intakeFractions = self.fetchIntakeFractions(beginDate: beginDate, endDate: endDate)
+      let hydrationFractions = self.fetchHydrationFractions(beginDate: beginDate, endDate: endDate)
       dispatch_async(dispatch_get_main_queue()) {
         if let contentView = requestingMonthStatisticsContentView {
-          contentView.updateValues(intakeFractions)
+          contentView.updateValues(hydrationFractions)
         } else {
           assert(false, "Calendar content view is null now")
         }
@@ -158,27 +158,36 @@ extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
     return []
   }
   
-  private func fetchIntakeFractions(#beginDate: NSDate, endDate: NSDate) -> [Double] {
-    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
+  private func fetchHydrationFractions(#beginDate: NSDate, endDate: NSDate) -> [Double] {
+    let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
+      beginDate: beginDate,
+      endDate: endDate,
+      dayOffsetInHours: 0,
+      aggregateFunction: .Average,
+      managedObjectContext: managedObjectContext)
     
-    let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
-    Logger.logSevere(waterIntakes.count == goals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
+    let waterGoals = WaterGoal.fetchWaterGoalAmounts(
+      beginDate: beginDate,
+      endDate: endDate,
+      managedObjectContext: managedObjectContext)
     
-    var intakeFractions = [Double]()
+    Logger.logSevere(amountPartsList.count == waterGoals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     
-    for (index, waterIntake) in enumerate(waterIntakes) {
-      let goal = goals[index]
-      let intakeFraction: Double
-      if goal > 0 {
-        intakeFraction = waterIntake / goal
+    var hydrationFractions = [Double]()
+    
+    for (index, amountParts) in enumerate(amountPartsList) {
+      let waterGoal = waterGoals[index] + amountParts.dehydration
+      let hydrationFraction: Double
+      if waterGoal > 0 {
+        hydrationFraction = amountParts.hydration / waterGoal
       } else {
-        Logger.logError("Wrong water goal", logDetails: ["goal": "\(goal)"])
-        intakeFraction = 0
+        Logger.logError("Wrong water goal", logDetails: ["goal": "\(waterGoal)"])
+        hydrationFraction = 0
       }
-      intakeFractions.append(intakeFraction)
+      hydrationFractions.append(hydrationFraction)
     }
     
-    return intakeFractions
+    return hydrationFractions
   }
 
 }

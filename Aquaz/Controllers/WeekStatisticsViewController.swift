@@ -166,25 +166,33 @@ class WeekStatisticsViewController: UIViewController {
   }
 
   private func fetchStatisticsItems(#beginDate: NSDate, endDate: NSDate) -> [WeekStatisticsView.ItemType] {
-    let waterIntakes = Intake.fetchGroupedWaterAmounts(beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0, groupingUnit: .Day, aggregateFunction: .Average, managedObjectContext: managedObjectContext)
+    let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
+      beginDate: beginDate,
+      endDate: endDate,
+      dayOffsetInHours: 0,
+      aggregateFunction: .Average,
+      managedObjectContext: managedObjectContext)
     
-    Logger.logSevere(waterIntakes.count == 7, "Unexpected count of grouped water intakes", logDetails: [Logger.Attributes.count: "\(waterIntakes.count)"])
+    Logger.logSevere(amountPartsList.count == 7, "Unexpected count of grouped water intakes", logDetails: [Logger.Attributes.count: "\(amountPartsList.count)"])
     
-    let goals = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
+    let waterGoals = WaterGoal.fetchWaterGoalAmounts(
+      beginDate: beginDate,
+      endDate: endDate,
+      managedObjectContext: managedObjectContext)
     
-    Logger.logSevere(goals.count == 7, "Unexpected count of water goals", logDetails: [Logger.Attributes.count: "\(goals.count)"])
+    Logger.logSevere(waterGoals.count == 7, "Unexpected count of water goals", logDetails: [Logger.Attributes.count: "\(waterGoals.count)"])
     
     let displayedVolumeUnits = Settings.generalVolumeUnits.value
     
     var statisticsItems: [WeekStatisticsView.ItemType] = []
     
-    for (index, metricWaterIntake) in enumerate(waterIntakes) {
-      let metricGoal = goals[index]
+    for (index, amountPart) in enumerate(amountPartsList) {
+      let waterGoal = waterGoals[index] + amountPart.dehydration
       
-      let displayedWaterIntake = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: metricWaterIntake, unitType: .Volume)
-      let displayedGoal = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: metricGoal, unitType: .Volume)
+      let displayedWaterHydration = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: amountPart.hydration, unitType: .Volume)
+      let displayedWaterGoal = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: waterGoal, unitType: .Volume)
       
-      let item: WeekStatisticsView.ItemType = (value: CGFloat(displayedWaterIntake), goal: CGFloat(displayedGoal))
+      let item: WeekStatisticsView.ItemType = (value: CGFloat(displayedWaterHydration), goal: CGFloat(displayedWaterGoal))
       statisticsItems.append(item)
     }
     

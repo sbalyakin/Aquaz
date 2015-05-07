@@ -31,7 +31,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   private var progressViewSection: MultiProgressView.Section!
   private var wormhole: MMWormhole!
   private var waterGoal: Double?
-  private var overallWaterIntake: Double?
+  private var hydration: Double?
+  private var dehydration: Double?
 
   // It's better to create CoreDataStack in the today extension and do not use sharedInstance of it
   private var coreDataStack = CoreDataStack()
@@ -150,13 +151,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     waterGoal = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: managedObjectContext)?.amount
     
-    overallWaterIntake = Intake.fetchGroupedWaterAmounts(
+    let amount = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
       beginDate: date,
       endDate: DateHelper.addToDate(date, years: 0, months: 0, days: 1),
       dayOffsetInHours: 0,
-      groupingUnit: .Day,
       aggregateFunction: .Summary,
-      managedObjectContext: managedObjectContext).first
+      managedObjectContext: managedObjectContext).first!
+    
+    hydration = amount.hydration
+    dehydration = amount.dehydration
   }
   
   private func fetchData(completion: () -> ()) {
@@ -185,9 +188,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
 
   private func updateWaterIntakes(animate: Bool) {
-    if let waterGoal = waterGoal, overallWaterIntake = overallWaterIntake {
-      updateProgressView(waterGoal: waterGoal, overallWaterIntake: overallWaterIntake, animate: animate)
-      updateProgressLabel(waterGoal: waterGoal, overallWaterIntake: overallWaterIntake, animate: animate)
+    if let waterGoal = waterGoal,
+       let hydration = hydration,
+       let dehydration = dehydration
+    {
+      updateProgressView(waterGoal: waterGoal + dehydration, overallWaterIntake: hydration, animate: animate)
+      updateProgressLabel(waterGoal: waterGoal + dehydration, overallWaterIntake: hydration, animate: animate)
     } else {
       progressViewSection.factor = 0
       progressLabel.text = NSLocalizedString("TodayExtension:Updating...", value: "Updating...", comment: "TodayExtension: Temporary text for amount label")
