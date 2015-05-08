@@ -23,5 +23,6 @@ class GlobalConstants {
   static let wormholeMessageFromWidget = "From Widget"
   
   static let notificationManagedObjectContextWasMerged = "AquazManagedObjectContextWasMerged"
-  
+
+  static let numberOfIntakesToShowAd = 5
 }

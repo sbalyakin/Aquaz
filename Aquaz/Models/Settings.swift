@@ -91,7 +91,15 @@ public class Settings {
   static let generalHighActivityExtraFactor = SettingsOrdinalItem<Double>(
     key: "General - High activity extra factor", initialValue: 0.5,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
-  
+
+  static let generalProVersion = SettingsOrdinalItem<Bool>(
+    key: "General - Pro version", initialValue: false,
+    userDefaults: UserDefaultsProvider.sharedUserDefaults)
+
+  static let generalAdCounter = SettingsOrdinalItem<Int>(
+    key: "General - Ad counter", initialValue: GlobalConstants.numberOfIntakesToShowAd,
+    userDefaults: UserDefaultsProvider.sharedUserDefaults)
+
   static let userHeight = SettingsOrdinalItem<Double>(
     key: "User - Height", initialValue: 170,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)

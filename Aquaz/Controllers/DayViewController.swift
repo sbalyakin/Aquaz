@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreData
+import iAd
 
-class DayViewController: UIViewController, UIAlertViewDelegate {
+class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAdDelegate {
   
   // MARK: UI elements -
   
@@ -66,6 +67,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   
+  private var interstitialAd: ADInterstitialAd?
+  private var viewForAd: UIView?
   
   // MARK: Page setup -
   
@@ -82,6 +85,10 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     
     volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [unowned self] value in
       self.updateIntakeButton()
+    }
+    
+    if !Settings.generalProVersion.value {
+      initInterstitialAd()
     }
   }
   
@@ -144,6 +151,10 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     updateSummaryBar(animate: true) {
       if !self.checkForCongratulationsAboutWaterGoalReaching(notification) {
         self.checkForHelpTip(notification)
+      }
+      
+      if !Settings.generalProVersion.value {
+        self.checkForShowInterstialAd(notification)
       }
     }
   }
@@ -602,6 +613,80 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
         isHighActivity: isHighActivity,
         managedObjectContext: self.managedObjectContext)
     }
+  }
+  
+  // MARK: iAd -
+  
+  private func initInterstitialAd() {
+    interstitialPresentationPolicy = .Manual
+  }
+  
+  private func showInterstitialAd() {
+    if interstitialAd != nil {
+      return
+    }
+    
+    interstitialAd = ADInterstitialAd()
+    interstitialAd!.delegate = self
+    UIViewController.prepareInterstitialAds()
+    
+    requestInterstitialAdPresentation()
+  }
+  
+  private func checkForShowInterstialAd(notification: NSNotification) {
+    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> where !insertedObjects.isEmpty {
+      Settings.generalAdCounter.value = Settings.generalAdCounter.value - 1
+      
+      if Settings.generalAdCounter.value <= 0 {
+        showInterstitialAd()
+      }
+    }	
+  }
+
+  private func closeAd() {
+    if interstitialAd == nil {
+      return
+    }
+    
+    UIView.animateWithDuration(0.5, animations: {
+      self.viewForAd!.alpha = 0
+      self.viewForAd!.frame.offset(dx: 0, dy: self.viewForAd!.frame.height)
+    }) { (finished) -> Void in
+      self.interstitialAd = nil
+      self.viewForAd?.removeFromSuperview()
+      self.viewForAd = nil
+    }
+  }
+  
+  func interstitialAdDidLoad(interstitialAd: ADInterstitialAd!) {
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate,
+       let rootView = appDelegate.window?.rootViewController?.view
+    {
+      Settings.generalAdCounter.value = GlobalConstants.numberOfIntakesToShowAd
+
+      viewForAd = UIView(frame: rootView.frame.rectByOffsetting(dx: 0, dy: rootView.frame.height))
+      viewForAd!.alpha = 0
+      interstitialAd.presentInView(viewForAd!)
+
+      rootView.addSubview(self.viewForAd!)
+
+      UIView.animateWithDuration(0.5, animations: {
+        self.viewForAd!.alpha = 1
+        self.viewForAd!.frame = rootView.frame
+      }, completion: nil)
+    }
+  }
+  
+  func interstitialAdDidUnload(interstitialAd: ADInterstitialAd!) {
+    closeAd()
+  }
+  
+  func interstitialAd(interstitialAd: ADInterstitialAd!, didFailWithError error: NSError!) {
+    closeAd()
+  }
+  
+  func interstitialAdActionDidFinish(interstitialAd: ADInterstitialAd!) {
+    closeAd()
   }
   
   // MARK: Help tips -
