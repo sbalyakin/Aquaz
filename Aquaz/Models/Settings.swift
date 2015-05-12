@@ -92,8 +92,8 @@ public class Settings {
     key: "General - High activity extra factor", initialValue: 0.5,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  static let generalProVersion = SettingsOrdinalItem<Bool>(
-    key: "General - Pro version", initialValue: false,
+  static let generalFullVersion = SettingsOrdinalItem<Bool>(
+    key: "General - Full version", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
   static let generalAdCounter = SettingsOrdinalItem<Int>(

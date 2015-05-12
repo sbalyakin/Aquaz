@@ -113,6 +113,8 @@
 		A59CE8F41A8FC3CA00FDD2B2 /* WaterGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CE8F31A8FC3CA00FDD2B2 /* WaterGoalTests.swift */; };
 		A59CE8F61A9119A300FDD2B2 /* WaterGoalCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CE8F51A9119A300FDD2B2 /* WaterGoalCalculatorTests.swift */; };
 		A5A1681D1A6EA1330027711B /* DaySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A1681C1A6EA1330027711B /* DaySummaryView.swift */; };
+		A5A335891B01F980004579A4 /* FullVersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A335881B01F980004579A4 /* FullVersionViewController.swift */; };
+		A5A3358B1B0218CE004579A4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A3358A1B0218CE004579A4 /* StoreKit.framework */; };
 		A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */; };
 		A5AAA1D91A77A9CF008C3C56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */; };
 		A5B013E31AE27C4900C372F8 /* ExtraFactorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B013E21AE27C4900C372F8 /* ExtraFactorsViewController.swift */; };
@@ -294,6 +296,8 @@
 		A59CE8F31A8FC3CA00FDD2B2 /* WaterGoalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoalTests.swift; sourceTree = "<group>"; };
 		A59CE8F51A9119A300FDD2B2 /* WaterGoalCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoalCalculatorTests.swift; sourceTree = "<group>"; };
 		A5A1681C1A6EA1330027711B /* DaySummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DaySummaryView.swift; path = Controls/DaySummaryView.swift; sourceTree = "<group>"; };
+		A5A335881B01F980004579A4 /* FullVersionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullVersionViewController.swift; sourceTree = "<group>"; };
+		A5A3358A1B0218CE004579A4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekStatisticsViewController.swift; sourceTree = "<group>"; };
 		A5AAA1D81A77A9CF008C3C56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A5B013E21AE27C4900C372F8 /* ExtraFactorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraFactorsViewController.swift; sourceTree = "<group>"; };
@@ -357,6 +361,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5A3358B1B0218CE004579A4 /* StoreKit.framework in Frameworks */,
 				A5EE362A1AADB2890038C844 /* AdSupport.framework in Frameworks */,
 				A5EE36281AADAF2D0038C844 /* Fabric.framework in Frameworks */,
 				A5EE36271AADAF250038C844 /* Crashlytics.framework in Frameworks */,
@@ -430,6 +435,7 @@
 				840476581A35FE82004F0FEF /* NotificationsViewController.swift */,
 				8488A18D1A53FE6500258EC8 /* NotificationsSoundViewController.swift */,
 				8404765A1A360273004F0FEF /* SupportViewController.swift */,
+				A5A335881B01F980004579A4 /* FullVersionViewController.swift */,
 				843B055619E2D7800097A833 /* StatisticsViewController.swift */,
 				8435FEAE1AC52FFC00702727 /* StatisticsPageViewController.swift */,
 				84F9DD971A16574E003D6444 /* PickTimeViewController.swift */,
@@ -582,6 +588,7 @@
 		84D251951AD2511E001E6644 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5A3358A1B0218CE004579A4 /* StoreKit.framework */,
 				A5EE36291AADB2890038C844 /* AdSupport.framework */,
 				A5F0A5B01AAC7F04006452C9 /* Fabric.framework */,
 				A5F0A5AF1AAC7F04006452C9 /* Crashlytics.framework */,
@@ -814,6 +821,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 						};
 					};
 					84669A8019DAD78D003C2263 = {
@@ -967,6 +977,7 @@
 				84CD97561ABB2B960011623B /* CalendarViewContentTitleCell.swift in Sources */,
 				84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */,
 				8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */,
+				A5A335891B01F980004579A4 /* FullVersionViewController.swift in Sources */,
 				84669A7219DAD78D003C2263 /* Aquaz.xcdatamodeld in Sources */,
 				A5D3D4291AA5D29700E3C989 /* TextFieldTableCell.swift in Sources */,
 				84CD97581ABB2B960011623B /* CalendarViewDayInfo.swift in Sources */,

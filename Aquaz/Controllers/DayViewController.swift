@@ -87,7 +87,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       self.updateIntakeButton()
     }
     
-    if !Settings.generalProVersion.value {
+    if !Settings.generalFullVersion.value {
       initInterstitialAd()
     }
   }
@@ -153,7 +153,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
         self.checkForHelpTip(notification)
       }
       
-      if !Settings.generalProVersion.value {
+      if !Settings.generalFullVersion.value {
         self.checkForShowInterstialAd(notification)
       }
     }

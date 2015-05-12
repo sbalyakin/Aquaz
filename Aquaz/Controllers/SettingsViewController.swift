@@ -11,6 +11,7 @@ import UIKit
 class SettingsViewController: OmegaSettingsViewController {
 
   private var volumeObserverIdentifier: Int?
+  private var fullVersionObserverIdentifier: Int?
   
   private struct Constants {
     static let calculateWaterIntakeSegue = "Calculate Water Intake"
@@ -18,6 +19,7 @@ class SettingsViewController: OmegaSettingsViewController {
     static let showExtraFactorsSegue = "Show Extra Factors"
     static let showUnitsSegue = "Show Units"
     static let showSupportSegue = "Show Support"
+    static let manageFullVersionSegue = "Manage Full Version"
   }
   
   override func viewDidLoad() {
@@ -31,6 +33,10 @@ class SettingsViewController: OmegaSettingsViewController {
   deinit {
     if let volumeObserverIdentifier = volumeObserverIdentifier {
       Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+    }
+
+    if let fullVersionObserverIdentifier = fullVersionObserverIdentifier {
+      Settings.generalVolumeUnits.removeObserver(fullVersionObserverIdentifier)
     }
   }
 
@@ -49,6 +55,12 @@ class SettingsViewController: OmegaSettingsViewController {
 
     let supportTitle = NSLocalizedString("SVC:Support", value: "Support",
       comment: "SettingsViewController: Table cell title for [Support] settings block")
+
+    let fullVersionTitle = NSLocalizedString("SVC:Full Version", value: "Full Version",
+      comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is not purchased yet")
+    
+    let fullVersionPurchasedTitle = NSLocalizedString("SVC:Full Version Is Purchased", value: "Full Version Is Purchased",
+      comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is purchased")
 
     // Water goal section
     let dailyWaterIntakeCell = createRightDetailTableCell(
@@ -115,8 +127,28 @@ class SettingsViewController: OmegaSettingsViewController {
     let supportSection = TableCellsSection()
     supportSection.tableCells = [supportCell]
     
+    // Full Version section
+    let fullVersionCell = createBasicTableCell(
+      title: Settings.generalFullVersion.value ? fullVersionPurchasedTitle : fullVersionTitle,
+      accessoryType: .DisclosureIndicator)
+    { [unowned self]
+      (tableCell, active) -> () in
+      if active {
+        self.performSegueWithIdentifier(Constants.manageFullVersionSegue, sender: tableCell)
+      }
+    }
+
+    fullVersionObserverIdentifier = Settings.generalFullVersion.addObserver { fullVersion in
+      fullVersionCell.title = fullVersion ? fullVersionPurchasedTitle : fullVersionTitle
+    }
+
+    fullVersionCell.image = UIImage(named: "settingsFullVersion")
+
+    let fullVersionSection = TableCellsSection()
+    fullVersionSection.tableCells = [fullVersionCell]
+    
     // Adding sections
-    return [recommendationsSection, unitsSection, notificationsSection, supportSection]
+    return [recommendationsSection, unitsSection, notificationsSection, supportSection, fullVersionSection]
   }
   
   private func stringFromWaterGoal(waterGoal: Double) -> String {
