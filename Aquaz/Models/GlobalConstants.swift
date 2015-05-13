@@ -14,7 +14,7 @@ class GlobalConstants {
   static let appGroupName = "group.com.devmanifest.Aquaz"
   static let appStoreLink = "http://itunes.apple.com/app/id\(GlobalConstants.applicationIdentifier)"
 
-  static let inAppPurchaseFullVersion = "com.devmanifest.aquaz.fullversion"
+  static let inAppPurchaseFullVersion = "com.devmanifest.Aquaz.fullversion"
 
   static let localyticsApplicationKey = "5f18fc62efbdeb52bd87247-87c1e42e-c5ae-11e4-ae01-009c5fda0a25"
   
