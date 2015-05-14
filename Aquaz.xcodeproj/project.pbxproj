@@ -30,6 +30,7 @@
 		843B056119E2D7800097A833 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055719E2D7800097A833 /* DayViewController.swift */; };
 		843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055819E2D7800097A833 /* SelectDrinkViewController.swift */; };
 		843B056919E2D80E0097A833 /* WaterGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056819E2D80E0097A833 /* WaterGoal.swift */; };
+		8445BF5D1B04711E00029982 /* FullVersionBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8445BF5B1B04711E00029982 /* FullVersionBannerView.xib */; };
 		8455DACF1A694487004245F9 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455DACE1A694487004245F9 /* RoundedButton.swift */; };
 		84669A7219DAD78D003C2263 /* Aquaz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Aquaz.xcdatamodeld */; };
 		84669A7719DAD78D003C2263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7519DAD78D003C2263 /* Main.storyboard */; };
@@ -112,7 +113,7 @@
 		A59CDC921AD8587100E92EF2 /* CodingManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CDC901AD8587100E92EF2 /* CodingManagedObject.swift */; };
 		A59CE8F41A8FC3CA00FDD2B2 /* WaterGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CE8F31A8FC3CA00FDD2B2 /* WaterGoalTests.swift */; };
 		A59CE8F61A9119A300FDD2B2 /* WaterGoalCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CE8F51A9119A300FDD2B2 /* WaterGoalCalculatorTests.swift */; };
-		A5A1681D1A6EA1330027711B /* DaySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A1681C1A6EA1330027711B /* DaySummaryView.swift */; };
+		A5A1681D1A6EA1330027711B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A1681C1A6EA1330027711B /* BannerView.swift */; };
 		A5A335891B01F980004579A4 /* FullVersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A335881B01F980004579A4 /* FullVersionViewController.swift */; };
 		A5A3358B1B0218CE004579A4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A3358A1B0218CE004579A4 /* StoreKit.framework */; };
 		A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */; };
@@ -228,6 +229,7 @@
 		843B055819E2D7800097A833 /* SelectDrinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SelectDrinkViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		843B055C19E2D7800097A833 /* Aquaz-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Aquaz-Bridging-Header.h"; sourceTree = "<group>"; };
 		843B056819E2D80E0097A833 /* WaterGoal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoal.swift; sourceTree = "<group>"; };
+		8445BF5C1B04711E00029982 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FullVersionBannerView.xib; sourceTree = "<group>"; };
 		8455DACE1A694487004245F9 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedButton.swift; path = Controls/RoundedButton.swift; sourceTree = "<group>"; };
 		84669A6919DAD78D003C2263 /* Aquaz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aquaz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84669A6D19DAD78D003C2263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -295,7 +297,7 @@
 		A59CDC901AD8587100E92EF2 /* CodingManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodingManagedObject.swift; sourceTree = "<group>"; };
 		A59CE8F31A8FC3CA00FDD2B2 /* WaterGoalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoalTests.swift; sourceTree = "<group>"; };
 		A59CE8F51A9119A300FDD2B2 /* WaterGoalCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoalCalculatorTests.swift; sourceTree = "<group>"; };
-		A5A1681C1A6EA1330027711B /* DaySummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DaySummaryView.swift; path = Controls/DaySummaryView.swift; sourceTree = "<group>"; };
+		A5A1681C1A6EA1330027711B /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BannerView.swift; path = Controls/BannerView.swift; sourceTree = "<group>"; };
 		A5A335881B01F980004579A4 /* FullVersionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullVersionViewController.swift; sourceTree = "<group>"; };
 		A5A3358A1B0218CE004579A4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekStatisticsViewController.swift; sourceTree = "<group>"; };
@@ -403,7 +405,7 @@
 				8424AA051A0B5813009C5C47 /* MultiProgressView.swift */,
 				8455DACE1A694487004245F9 /* RoundedButton.swift */,
 				A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */,
-				A5A1681C1A6EA1330027711B /* DaySummaryView.swift */,
+				A5A1681C1A6EA1330027711B /* BannerView.swift */,
 				A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */,
 				A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */,
 				A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */,
@@ -663,6 +665,7 @@
 				A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */,
 				A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */,
 				A5C374AF1AE6708700F91550 /* CongratulationsView.xib */,
+				8445BF5B1B04711E00029982 /* FullVersionBannerView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -876,6 +879,7 @@
 				A5B8F9911A87DF3D00145705 /* chime.caf in Resources */,
 				A57D2BEB1ACFDE0D00619D62 /* Welcome.storyboard in Resources */,
 				84669A7719DAD78D003C2263 /* Main.storyboard in Resources */,
+				8445BF5D1B04711E00029982 /* FullVersionBannerView.xib in Resources */,
 				A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */,
 				A5B8F9921A87DF3D00145705 /* chirp.caf in Resources */,
 				A5B8F9981A87DF3D00145705 /* whistle.caf in Resources */,
@@ -1019,7 +1023,7 @@
 				843B056019E2D7800097A833 /* StatisticsViewController.swift in Sources */,
 				A5D3D4271AA5D29700E3C989 /* TableCell.swift in Sources */,
 				A5D3D4261AA5D29700E3C989 /* SwitchTableCell.swift in Sources */,
-				A5A1681D1A6EA1330027711B /* DaySummaryView.swift in Sources */,
+				A5A1681D1A6EA1330027711B /* BannerView.swift in Sources */,
 				A57D2BF41AD02A7100619D62 /* WelcomeWizardMetricsViewController.swift in Sources */,
 				84CD97651ABB2C3A0011623B /* MonthStatisticsView.swift in Sources */,
 			);
@@ -1095,6 +1099,14 @@
 				842DE2E51AB30DCA00EEA137 /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		8445BF5B1B04711E00029982 /* FullVersionBannerView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8445BF5C1B04711E00029982 /* Base */,
+			);
+			name = FullVersionBannerView.xib;
 			sourceTree = "<group>";
 		};
 		84669A7519DAD78D003C2263 /* Main.storyboard */ = {

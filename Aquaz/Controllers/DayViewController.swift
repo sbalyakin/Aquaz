@@ -21,7 +21,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   @IBOutlet weak var containerView: UIView!
   @IBOutlet weak var navigationTitleLabel: UILabel!
   @IBOutlet weak var navigationDateLabel: UILabel!
-  @IBOutlet weak var summaryView: DaySummaryView!
+  @IBOutlet weak var summaryView: BannerView!
 
   // MARK: Public properties -
   
@@ -524,7 +524,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     if let congratulationsView = nib.instantiateWithOwner(nil, options: nil).first as? UIView {
       let frame = summaryView.convertRect(summaryView.frame, toView: navigationController!.view)
 
-      congratulationsView.frame = frame.rectByInsetting(dx: 0, dy: 1)
+      congratulationsView.frame = frame
       congratulationsView.layer.opacity = 0
       congratulationsView.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
       

@@ -1,5 +1,5 @@
 //
-//  DaySummaryView.swift
+//  BannerView.swift
 //  Aquaz
 //
 //  Created by Sergey Balyakin on 20.01.15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DaySummaryView: UIView {
+class BannerView: UIView {
   
   override func drawRect(rect: CGRect) {
     let color = UIColor(red: 167/255, green: 169/255, blue: 171/255, alpha: 0.6)

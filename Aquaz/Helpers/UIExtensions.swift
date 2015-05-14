@@ -74,6 +74,12 @@ extension UIView {
       }
     #endif
   }
+  
+  func addConstraints(constraintsVisualFormat: String, views: [String: UIView], metrics: [NSObject: AnyObject]? = nil, options: NSLayoutFormatOptions = NSLayoutFormatOptions.allZeros) {
+    let constraints = NSLayoutConstraint.constraintsWithVisualFormat(constraintsVisualFormat, options: options, metrics: metrics, views: views)
+    self.addConstraints(constraints)
+  }
+  
 }
 
 extension UILabel {

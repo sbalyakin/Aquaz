@@ -18,6 +18,8 @@ class MonthStatisticsViewController: UIViewController {
 
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
 
+  private var fullVersionObserverIdentifier: Int?
+
   private struct Constants {
     static let showDaySegue = "Show Day"
   }
@@ -27,10 +29,18 @@ class MonthStatisticsViewController: UIViewController {
 
     setupUI()
     setupNotificationsObservation()
+    
+    fullVersionObserverIdentifier = Settings.generalFullVersion.addObserver { [unowned self] value in
+      self.monthStatisticsView.refresh()
+    }
   }
   
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
+
+    if let fullVersionObserverIdentifier = fullVersionObserverIdentifier {
+      Settings.generalVolumeUnits.removeObserver(fullVersionObserverIdentifier)
+    }
   }
 
   private func setupUI() {
@@ -143,19 +153,32 @@ extension MonthStatisticsViewController: CalendarViewDelegate {
 extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
   
   func monthStatisticsGetValuesForDateInterval(#beginDate: NSDate, endDate: NSDate, calendarContentView: CalendarContentView) -> [Double] {
-    managedObjectContext.performBlock {
-      weak var requestingMonthStatisticsContentView = (calendarContentView as! MonthStatisticsContentView)
-      let hydrationFractions = self.fetchHydrationFractions(beginDate: beginDate, endDate: endDate)
-      dispatch_async(dispatch_get_main_queue()) {
-        if let contentView = requestingMonthStatisticsContentView {
-          contentView.updateValues(hydrationFractions)
-        } else {
-          assert(false, "Calendar content view is null now")
+    if Settings.generalFullVersion.value {
+      managedObjectContext.performBlock {
+        weak var requestingMonthStatisticsContentView = (calendarContentView as! MonthStatisticsContentView)
+        let hydrationFractions = self.fetchHydrationFractions(beginDate: beginDate, endDate: endDate)
+        dispatch_async(dispatch_get_main_queue()) {
+          if let contentView = requestingMonthStatisticsContentView {
+            contentView.updateValues(hydrationFractions)
+          } else {
+            assert(false, "Calendar content view is null now")
+          }
         }
       }
-    }
 
-    return []
+      return []
+    } else {
+      // Demo mode
+      var index = 0
+      var values = [Double]()
+      for var date = beginDate; date.isEarlierThan(endDate); date = date.getNextDay() {
+        let value = sin(Double(index % 28) / 28 * M_PI)
+        values.append(value)
+        index++
+      }
+      
+      return values
+    }
   }
   
   private func fetchHydrationFractions(#beginDate: NSDate, endDate: NSDate) -> [Double] {

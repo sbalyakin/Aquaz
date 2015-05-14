@@ -40,7 +40,7 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KHN-d8-Fus" userLabel="Summary View" customClass="DaySummaryView" customModule="Aquaz" customModuleProvider="target">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KHN-d8-Fus" userLabel="Summary View" customClass="BannerView" customModule="Aquaz" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Teo-xX-LXi" userLabel="Hot Button">
@@ -64,16 +64,6 @@
                                             <constraint firstAttribute="height" constant="15" id="QGv-dn-EL6"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9h2-YY-Qq4">
-                                        <rect key="frame" x="60" y="9" width="480" height="30"/>
-                                        <state key="normal" title="2000 ml">
-                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="intakeButtonWasTapped:" destination="x3I-fN-BQH" eventType="touchUpInside" id="koI-6p-I6v"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sw2-pb-ue3" userLabel="High Activity Button">
                                         <rect key="frame" x="20" y="8" width="32" height="32"/>
                                         <constraints>
@@ -86,6 +76,16 @@
                                         <state key="selected" image="iconHighActivityActive"/>
                                         <connections>
                                             <action selector="toggleHighActivityMode:" destination="x3I-fN-BQH" eventType="touchUpInside" id="vRf-Ex-FBV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9h2-YY-Qq4">
+                                        <rect key="frame" x="60" y="9" width="480" height="30"/>
+                                        <state key="normal" title="2000 ml">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="intakeButtonWasTapped:" destination="x3I-fN-BQH" eventType="touchUpInside" id="koI-6p-I6v"/>
                                         </connections>
                                     </button>
                                 </subviews>

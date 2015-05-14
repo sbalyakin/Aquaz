@@ -27,6 +27,7 @@ class WeekStatisticsViewController: UIViewController {
   private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   private var volumeObserverIdentifier: Int?
+  private var fullVersionObserverIdentifier: Int?
   
   private struct Constants {
     static let showDaySegue = "Show Day"
@@ -41,6 +42,10 @@ class WeekStatisticsViewController: UIViewController {
     volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [unowned self] value in
       self.updateWeekStatisticsView(animated: false)
     }
+
+    fullVersionObserverIdentifier = Settings.generalFullVersion.addObserver { [unowned self] value in
+      self.updateWeekStatisticsView(animated: false)
+    }
   }
 
   deinit {
@@ -48,6 +53,10 @@ class WeekStatisticsViewController: UIViewController {
     
     if let volumeObserverIdentifier = volumeObserverIdentifier {
       Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+    }
+
+    if let fullVersionObserverIdentifier = fullVersionObserverIdentifier {
+      Settings.generalVolumeUnits.removeObserver(fullVersionObserverIdentifier)
     }
   }
 
@@ -200,14 +209,24 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   private func updateWeekStatisticsView(#animated: Bool) {
-    managedObjectContext.performBlock {
-      let date = self.date
-      let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
-      dispatch_async(dispatch_get_main_queue()) {
-        if self.date === date {
-          self.weekStatisticsView.setItems(statisticsItems, animate: animated)
+    if Settings.generalFullVersion.value {
+      managedObjectContext.performBlock {
+        let date = self.date
+        let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
+        dispatch_async(dispatch_get_main_queue()) {
+          if self.date === date {
+            self.weekStatisticsView.setItems(statisticsItems, animate: animated)
+          }
         }
       }
+    } else {
+      // Demo mode
+      var items: [WeekStatisticsView.ItemType] = []
+      for index in 0..<weekStatisticsView.daysPerWeek {
+        let item: WeekStatisticsView.ItemType = (value: CGFloat(200 + index * 300), goal: 1800)
+        items.append(item)
+      }
+      weekStatisticsView.setItems(items, animate: animated)
     }
   }
 

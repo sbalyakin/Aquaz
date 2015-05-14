@@ -26,6 +26,7 @@ class YearStatisticsViewController: UIViewController {
   private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   private var volumeObserverIdentifier: Int?
+  private var fullVersionObserverIdentifier: Int?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -36,6 +37,10 @@ class YearStatisticsViewController: UIViewController {
     volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [unowned self] value in
       self.updateYearStatisticsView()
     }
+    
+    fullVersionObserverIdentifier = Settings.generalFullVersion.addObserver { [unowned self] value in
+      self.updateYearStatisticsView()
+    }
   }
 
   deinit {
@@ -43,6 +48,10 @@ class YearStatisticsViewController: UIViewController {
 
     if let volumeObserverIdentifier = volumeObserverIdentifier {
       Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+    }
+    
+    if let fullVersionObserverIdentifier = fullVersionObserverIdentifier {
+      Settings.generalVolumeUnits.removeObserver(fullVersionObserverIdentifier)
     }
   }
 
@@ -190,14 +199,26 @@ class YearStatisticsViewController: UIViewController {
   }
   
   private func updateYearStatisticsView() {
-    managedObjectContext.performBlock {
-      let date = self.date
-      let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
-      dispatch_async(dispatch_get_main_queue()) {
-        if self.date === date {
-          self.yearStatisticsView.setItems(statisticsItems)
+    if Settings.generalFullVersion.value {
+      managedObjectContext.performBlock {
+        let date = self.date
+        let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
+        dispatch_async(dispatch_get_main_queue()) {
+          if self.date === date {
+            self.yearStatisticsView.setItems(statisticsItems)
+          }
         }
       }
+    } else {
+      // Demo mode
+      var items: [YearStatisticsView.ItemType] = []
+      
+      for i in 0..<yearStatisticsView.monthsPerYear {
+        let value = 1200 + cos(CGFloat(i + 4) / 2) * 700
+        items.append((value: CGFloat(value), goal: 2000))
+      }
+      
+      yearStatisticsView.setItems(items)
     }
   }
   

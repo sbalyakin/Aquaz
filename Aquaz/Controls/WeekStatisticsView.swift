@@ -283,24 +283,12 @@ protocol WeekStatisticsViewDelegate: class {
   
   private func layoutBars() {
     barsLayer.frame = uiAreas.bars
-    let paths = calcBarsPathsForRect(barsLayer.bounds)
-    layoutBarsPaths(paths, useAnimation: true)
-  }
-  
-  private func layoutBarsPaths(paths: [(rect: CGRect, path: CGPath)], useAnimation: Bool) {
-    for (index, path) in enumerate(paths) {
-      if barsLayer.sublayers == nil || index >= barsLayer.sublayers.count {
-        assert(false, "Cannot find necessary shape sub-layers for bars")
-        break
-      }
-      
-      let barLayer = barsLayer.sublayers[index] as! CAShapeLayer
-      barLayer.frame = path.rect
-    }
+    updateBars(animate: false)
   }
   
   private func layoutGoals() {
     goalsLayer.frame = uiAreas.bars
+    updateGoals(animate: false)
   }
 
   private func updateBars(#animate: Bool) {
@@ -410,8 +398,8 @@ protocol WeekStatisticsViewDelegate: class {
       barRect.origin.x = 0
       
       let path = UIBezierPath(roundedRect: barRect, byRoundingCorners: .TopLeft | .TopRight, cornerRadii: CGSize(width: barCornerRadius, height: barCornerRadius))
-      let item = (rect: fullBarRect, path: path.CGPath)
-      paths.append(item)
+      let pathItem = (rect: fullBarRect, path: path.CGPath)
+      paths.append(pathItem)
     }
     
     return paths
