@@ -19,6 +19,7 @@ class StatisticsViewController: UIViewController {
   private struct Constants {
     static let pageViewControllerEmbeddingSegue = "Page View Controller Embedding"
     static let fullVersionBannerViewNib = "FullVersionBannerView"
+    static let fullVersionViewControllerIdentifier = "FullVersionViewController"
   }
 
   override func viewDidLoad() {
@@ -97,20 +98,44 @@ class StatisticsViewController: UIViewController {
     
     fullVersionBannerView = nib.instantiateWithOwner(nil, options: nil).first as? BannerView
     fullVersionBannerView!.setTranslatesAutoresizingMaskIntoConstraints(false)
-    fullVersionBannerView!.backgroundColor = UIColor(white: 1, alpha: 0.8)
+    fullVersionBannerView!.backgroundColor = UIColor(white: 1, alpha: 0.9)
+    fullVersionBannerView!.layer.opacity = 0
+    fullVersionBannerView!.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
     view.addSubview(fullVersionBannerView!)
     
-    // Setup constraints
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "fullVersionBannerWasTapped:")
+    fullVersionBannerView!.addGestureRecognizer(tapGestureRecognizer)
     
+    // Setup constraints
     let views = ["banner": fullVersionBannerView!]
     view.addConstraints("H:|-0-[banner]", views: views)
     view.addConstraints("H:[banner]-0-|", views: views)
     view.addConstraints("V:|-0-[banner(75)]", views: views)
+    
+    // Show the banner with animation
+    UIView.animateWithDuration(0.6,
+      delay: 1,
+      usingSpringWithDamping: 0.4,
+      initialSpringVelocity: 1.7,
+      options: .CurveEaseInOut | .AllowUserInteraction,
+      animations: {
+        self.fullVersionBannerView!.layer.opacity = 1
+        self.fullVersionBannerView!.layer.transform = CATransform3DMakeScale(1, 1, 1)
+      },
+      completion: nil)
   }
   
   private func hideFullVersionBanner() {
     fullVersionBannerView?.removeFromSuperview()
     fullVersionBannerView = nil
+  }
+  
+  func fullVersionBannerWasTapped(gestureRecognizer: UITapGestureRecognizer) {
+    if gestureRecognizer.state == .Ended {
+      if let fullVersionViewController: FullVersionViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.fullVersionViewControllerIdentifier) {
+        navigationController!.pushViewController(fullVersionViewController, animated: true)
+      }
+    }
   }
   
   private func showDemoOverlay() {

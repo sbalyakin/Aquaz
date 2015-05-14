@@ -59,7 +59,7 @@ class SettingsViewController: OmegaSettingsViewController {
     let fullVersionTitle = NSLocalizedString("SVC:Full Version", value: "Full Version",
       comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is not purchased yet")
     
-    let fullVersionPurchasedTitle = NSLocalizedString("SVC:Full Version Is Purchased", value: "Full Version Is Purchased",
+    let fullVersionIsPurchasedTitle = NSLocalizedString("SVC:Full Version Is Purchased", value: "Full Version Is Purchased",
       comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is purchased")
 
     // Water goal section
@@ -128,18 +128,33 @@ class SettingsViewController: OmegaSettingsViewController {
     supportSection.tableCells = [supportCell]
     
     // Full Version section
-    let fullVersionCell = createBasicTableCell(
-      title: Settings.generalFullVersion.value ? fullVersionPurchasedTitle : fullVersionTitle,
-      accessoryType: .DisclosureIndicator)
-    { [unowned self]
-      (tableCell, active) -> () in
+    let fullVersionCellDidActivateFunction = { (tableCell: TableCell, active: Bool) -> () in
       if active {
         self.performSegueWithIdentifier(Constants.manageFullVersionSegue, sender: tableCell)
       }
     }
 
+    let fullVersionCell: BasicTableCell
+    
+    if Settings.generalFullVersion.value {
+      fullVersionCell = createBasicTableCell(title: fullVersionIsPurchasedTitle)
+    } else {
+      fullVersionCell = createBasicTableCell(
+        title: fullVersionTitle,
+        accessoryType: .DisclosureIndicator,
+        selectionChangedFunction: fullVersionCellDidActivateFunction)
+    }
+    
     fullVersionObserverIdentifier = Settings.generalFullVersion.addObserver { fullVersion in
-      fullVersionCell.title = fullVersion ? fullVersionPurchasedTitle : fullVersionTitle
+      if fullVersion {
+        fullVersionCell.title = fullVersionIsPurchasedTitle
+        fullVersionCell.accessoryType = nil
+        fullVersionCell.tableCellDidActivateFunction = nil
+      } else {
+        fullVersionCell.title = fullVersionTitle
+        fullVersionCell.accessoryType = .DisclosureIndicator
+        fullVersionCell.tableCellDidActivateFunction = fullVersionCellDidActivateFunction
+      }
     }
 
     fullVersionCell.image = UIImage(named: "settingsFullVersion")

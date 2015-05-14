@@ -1548,7 +1548,7 @@
         <!--Full Version-->
         <scene sceneID="4an-JL-3bG">
             <objects>
-                <viewController id="FHB-5E-W7x" customClass="FullVersionViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FullVersionViewController" id="FHB-5E-W7x" customClass="FullVersionViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EWN-6l-Jbh"/>
                         <viewControllerLayoutGuide type="bottom" id="tKX-Ww-197"/>
