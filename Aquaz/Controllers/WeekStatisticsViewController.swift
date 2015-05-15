@@ -27,7 +27,6 @@ class WeekStatisticsViewController: UIViewController {
   private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   private var volumeObserverIdentifier: Int?
-  private var fullVersionObserverIdentifier: Int?
   
   private struct Constants {
     static let showDaySegue = "Show Day"
@@ -42,10 +41,6 @@ class WeekStatisticsViewController: UIViewController {
     volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [unowned self] value in
       self.updateWeekStatisticsView(animated: false)
     }
-
-    fullVersionObserverIdentifier = Settings.generalFullVersion.addObserver { [unowned self] value in
-      self.updateWeekStatisticsView(animated: false)
-    }
   }
 
   deinit {
@@ -53,10 +48,6 @@ class WeekStatisticsViewController: UIViewController {
     
     if let volumeObserverIdentifier = volumeObserverIdentifier {
       Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
-    }
-
-    if let fullVersionObserverIdentifier = fullVersionObserverIdentifier {
-      Settings.generalVolumeUnits.removeObserver(fullVersionObserverIdentifier)
     }
   }
 
@@ -97,21 +88,29 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   private func setupNotificationsObservation() {
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "preferredContentSizeChanged",
+      name: UIContentSizeCategoryDidChangeNotification, object: nil)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
-      name: NSManagedObjectContextDidSaveNotification,
-      object: nil)
+      name: NSManagedObjectContextDidSaveNotification, object: nil)
 
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
-      name: GlobalConstants.notificationManagedObjectContextWasMerged,
-      object: nil)
+      name: GlobalConstants.notificationManagedObjectContextWasMerged, object: nil)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "fullVersionIsPurchased:",
+      name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
     updateWeekStatisticsView(animated: true)
+  }
+
+  func fullVersionIsPurchased(notification: NSNotification) {
+    updateWeekStatisticsView(animated: false)
   }
 
   func preferredContentSizeChanged() {

@@ -27,6 +27,7 @@ public class Logger {
     static let logLevel = "logLevel"
     static let fileName = "fileName"
     static let lineNumber = "lineNumber"
+    static let functionName = "functionName"
     static let details = "details"
     static let storyboardID = "storyboardID"
     static let drinkIndex = "drinkIndex"
@@ -45,9 +46,11 @@ public class Logger {
   
   var logLevel: LogLevel = .Warning
   var assertLevel: LogLevel = .Error
+  var consoleLevel: LogLevel = .Warning
   var showLogLevel = true
   var showFileNames = true
   var showLineNumbers = true
+  var showFunctionNames = true
   
   public enum LogLevel: Int, Printable {
     case Verbose = 0
@@ -71,12 +74,14 @@ public class Logger {
     }
   }
 
-  public func setup(logLevel: LogLevel = .Warning, assertLevel: LogLevel = .Error, showLogLevel: Bool = true, showFileNames: Bool = true, showLineNumbers: Bool = true) {
+  public func setup(logLevel: LogLevel = .Warning, assertLevel: LogLevel = .Error, consoleLevel: LogLevel = .Warning, showLogLevel: Bool = true, showFileNames: Bool = true, showLineNumbers: Bool = true, showFunctionNames: Bool = true) {
     self.logLevel = logLevel
     self.assertLevel = assertLevel
+    self.consoleLevel = consoleLevel
     self.showLogLevel = showLogLevel
     self.showFileNames = showFileNames
     self.showLineNumbers = showLineNumbers
+    self.showFunctionNames = showFunctionNames
   }
 
   public func isEnabledForLogLevel(logLevel: LogLevel) -> Bool {
@@ -84,43 +89,59 @@ public class Logger {
   }
   
   public func isAssertsEnabledForLogLevel(logLevel: LogLevel) -> Bool {
-    return assertLevel.rawValue >= self.logLevel.rawValue
+    return logLevel.rawValue >= self.assertLevel.rawValue
   }
-  
+
+  public func isConsoleEnabledForLogLevel(logLevel: LogLevel) -> Bool {
+    return logLevel.rawValue >= self.consoleLevel.rawValue
+  }
+
   // MARK: logMessage
   public func logMessage(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], logLevel: LogLevel, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__, forceAssert: Bool = false) {
     if forceAssert || isAssertsEnabledForLogLevel(logLevel) {
-      assert(condition(), logMessage + "\r\n" + logDetails.description)
+      let message = logDetails.isEmpty ? logMessage : "\(logMessage) \r\n \(logDetails.description)"
+      assert(condition(), message)
     }
     
     #if AQUAZ
-    if !isEnabledForLogLevel(logLevel) {
-      return
-    }
-
-    if condition() == true {
-      return
-    }
-
-    var attributes: [String: String] = [Attributes.message: logMessage]
-    
-    for (key, value) in logDetails {
-      attributes.updateValue(value, forKey: key)
-    }
-    
-    if showLogLevel {
-      attributes[Attributes.logLevel] = self.logLevel.description
-    }
-    
-    if showFileNames {
-      attributes[Attributes.fileName] = fileName
-    }
-    
-    if showLineNumbers {
-      attributes[Attributes.lineNumber] = "\(lineNumber)"
-    }
-    
-    Localytics.tagEvent(logLevel.description, attributes: attributes)
+      if !isEnabledForLogLevel(logLevel) && !isConsoleEnabledForLogLevel(logLevel) {
+        return
+      }
+      
+      if condition() == true {
+        return
+      }
+      
+      var attributes: [String: String] = [Attributes.message: logMessage]
+      
+      for (key, value) in logDetails {
+        attributes.updateValue(value, forKey: key)
+      }
+      
+      if showLogLevel {
+        attributes[Attributes.logLevel] = self.logLevel.description
+      }
+      
+      if showFileNames {
+        attributes[Attributes.fileName] = fileName
+      }
+      
+      if showLineNumbers {
+        attributes[Attributes.lineNumber] = "\(lineNumber)"
+      }
+      
+      if showFunctionNames {
+        attributes[Attributes.functionName] = functionName
+      }
+      
+      if isEnabledForLogLevel(logLevel) {
+        Localytics.tagEvent(logLevel.description, attributes: attributes)
+      }
+      
+      if isConsoleEnabledForLogLevel(logLevel) {
+        let message = logDetails.isEmpty ? logMessage : "\(logMessage) \r\n \(logDetails.description)"
+        println(message)
+      }
     #endif
   }
 
@@ -246,8 +267,8 @@ public class Logger {
   
   // MARK: Convenience class methods -
   
-  public class func setup(logLevel: LogLevel = .Warning, assertLevel: LogLevel = .Error, showLogLevel: Bool = true, showFileNames: Bool = true, showLineNumbers: Bool = true) {
-    sharedInstance.setup(logLevel: logLevel, assertLevel: assertLevel, showLogLevel: showLogLevel, showFileNames: showFileNames, showLineNumbers: showLineNumbers)
+  public class func setup(logLevel: LogLevel = .Warning, assertLevel: LogLevel = .Error, consoleLevel: LogLevel = .Warning, showLogLevel: Bool = true, showFileNames: Bool = true, showLineNumbers: Bool = true, showFunctionNames: Bool = true) {
+    sharedInstance.setup(logLevel: logLevel, assertLevel: assertLevel, consoleLevel: consoleLevel, showLogLevel: showLogLevel, showFileNames: showFileNames, showLineNumbers: showLineNumbers, showFunctionNames: showFunctionNames)
   }
 
   // MARK: logMessage

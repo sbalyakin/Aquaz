@@ -11,9 +11,9 @@ import UIKit
 class StatisticsViewController: UIViewController {
   
   @IBOutlet weak var segmentedControl: UISegmentedControl!
+
   weak var pageViewController: StatisticsPageViewController!
   private var fullVersionBannerView: BannerView?
-  private var fullVersionObserverIdentifier: Int?
   private var demoOverlayView: UIView?
   
   private struct Constants {
@@ -33,15 +33,13 @@ class StatisticsViewController: UIViewController {
     
     checkFullVersion()
     
-    fullVersionObserverIdentifier = Settings.generalFullVersion.addObserver { [unowned self] fullVersion in
-      self.checkFullVersion()
-    }
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "fullVersionIsPurchased:",
+      name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
   }
 
   deinit {
-    if let fullVersionObserverIdentifier = fullVersionObserverIdentifier {
-      Settings.generalVolumeUnits.removeObserver(fullVersionObserverIdentifier)
-    }
+    NSNotificationCenter.defaultCenter().removeObserver(self)
   }
   
   private func applyStyle() {
@@ -82,10 +80,7 @@ class StatisticsViewController: UIViewController {
   }
   
   private func checkFullVersion() {
-    if Settings.generalFullVersion.value {
-      hideDemoOverlay()
-      hideFullVersionBanner()
-    } else {
+    if !Settings.generalFullVersion.value {
       showDemoOverlay()
       showFullVersionBanner()
     }
@@ -123,6 +118,11 @@ class StatisticsViewController: UIViewController {
         self.fullVersionBannerView!.layer.transform = CATransform3DMakeScale(1, 1, 1)
       },
       completion: nil)
+  }
+  
+  func fullVersionIsPurchased(notification: NSNotification) {
+    hideDemoOverlay()
+    hideFullVersionBanner()
   }
   
   private func hideFullVersionBanner() {

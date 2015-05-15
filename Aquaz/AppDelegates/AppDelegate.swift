@@ -31,7 +31,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     Localytics.integrate(GlobalConstants.localyticsApplicationKey)
     
-    Logger.setup(logLevel: .Warning, assertLevel: .Error, showLogLevel: false, showFileNames: true, showLineNumbers: true)
+    #if DEBUG
+      Logger.setup(logLevel: .Debug, assertLevel: .Error, consoleLevel: .Debug, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
+      #else
+      Logger.setup(logLevel: .Warning, assertLevel: .Error, consoleLevel: .Error, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
+    #endif
     
     setupCoreDataSynchronization()
     

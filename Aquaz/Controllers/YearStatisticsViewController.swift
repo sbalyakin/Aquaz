@@ -26,7 +26,6 @@ class YearStatisticsViewController: UIViewController {
   private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   private var volumeObserverIdentifier: Int?
-  private var fullVersionObserverIdentifier: Int?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -37,10 +36,6 @@ class YearStatisticsViewController: UIViewController {
     volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [unowned self] value in
       self.updateYearStatisticsView()
     }
-    
-    fullVersionObserverIdentifier = Settings.generalFullVersion.addObserver { [unowned self] value in
-      self.updateYearStatisticsView()
-    }
   }
 
   deinit {
@@ -48,10 +43,6 @@ class YearStatisticsViewController: UIViewController {
 
     if let volumeObserverIdentifier = volumeObserverIdentifier {
       Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
-    }
-    
-    if let fullVersionObserverIdentifier = fullVersionObserverIdentifier {
-      Settings.generalVolumeUnits.removeObserver(fullVersionObserverIdentifier)
     }
   }
 
@@ -71,20 +62,28 @@ class YearStatisticsViewController: UIViewController {
   }
   
   private func setupNotificationsObservation() {
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "preferredContentSizeChanged",
+      name: UIContentSizeCategoryDidChangeNotification, object: nil)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
-      name: NSManagedObjectContextDidSaveNotification,
-      object: nil)
+      name: NSManagedObjectContextDidSaveNotification, object: nil)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
-      name: GlobalConstants.notificationManagedObjectContextWasMerged,
-      object: nil)
+      name: GlobalConstants.notificationManagedObjectContextWasMerged, object: nil)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "fullVersionIsPurchased:",
+      name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
+    updateYearStatisticsView()
+  }
+
+  func fullVersionIsPurchased(notification: NSNotification) {
     updateYearStatisticsView()
   }
 

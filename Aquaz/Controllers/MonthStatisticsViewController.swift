@@ -18,8 +18,6 @@ class MonthStatisticsViewController: UIViewController {
 
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
 
-  private var fullVersionObserverIdentifier: Int?
-
   private struct Constants {
     static let showDaySegue = "Show Day"
   }
@@ -29,18 +27,10 @@ class MonthStatisticsViewController: UIViewController {
 
     setupUI()
     setupNotificationsObservation()
-    
-    fullVersionObserverIdentifier = Settings.generalFullVersion.addObserver { [unowned self] value in
-      self.monthStatisticsView.refresh()
-    }
   }
   
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
-
-    if let fullVersionObserverIdentifier = fullVersionObserverIdentifier {
-      Settings.generalVolumeUnits.removeObserver(fullVersionObserverIdentifier)
-    }
   }
 
   private func setupUI() {
@@ -68,17 +58,21 @@ class MonthStatisticsViewController: UIViewController {
   }
   
   private func setupNotificationsObservation() {
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "preferredContentSizeChanged",
+      name: UIContentSizeCategoryDidChangeNotification, object: nil)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
-      name: NSManagedObjectContextDidSaveNotification,
-      object: nil)
+      name: NSManagedObjectContextDidSaveNotification, object: nil)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
-      name: GlobalConstants.notificationManagedObjectContextWasMerged,
-      object: nil)
+      name: GlobalConstants.notificationManagedObjectContextWasMerged, object: nil)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "fullVersionIsPurchased:",
+      name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
   }
 
   func managedObjectContextDidChange(notification: NSNotification) {
@@ -93,6 +87,10 @@ class MonthStatisticsViewController: UIViewController {
     monthStatisticsView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     monthStatisticsView.refresh()
     view.invalidateIntrinsicContentSize()
+  }
+
+  func fullVersionIsPurchased(notification: NSNotification) {
+    monthStatisticsView.refresh()
   }
 
   private func updateUI(#animated: Bool) {

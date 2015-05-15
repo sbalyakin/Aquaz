@@ -25,6 +25,9 @@ class GlobalConstants {
   static let wormholeMessageFromWidget = "From Widget"
   
   static let notificationManagedObjectContextWasMerged = "AquazManagedObjectContextWasMerged"
+  static let notificationFullVersionIsPurchased = "AquazFullVersionIsPurchased"
+  static let notificationInAppPurchaseManagerDidStartTask = "AquazInAppPurchaseManagerDidStartTask"
+  static let notificationInAppPurchaseManagerDidFinishTask = "AquazInAppPurchaseManagerDidFinishTask"
 
   static let numberOfIntakesToShowAd = 5
 }
