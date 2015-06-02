@@ -17,7 +17,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     return Static.instance
   }
 
-  class Strings {
+  private class Strings {
     
     lazy var forbiddenPaymentsAlertMessage = NSLocalizedString("IAPM:It\'s forbidden to make payments due to parental controls",
       value: "It\'s forbidden to make payments due to parental controls",
@@ -26,10 +26,6 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     lazy var fullVersionRestoredAlertMessage = NSLocalizedString("IAPM:Full Version has been successfully restored",
       value: "Full Version has been successfully restored",
       comment: "InAppPurchaseManager: Message shown after successful restoring Full Version purchase")
-    
-    lazy var fullVersionPurchasedAlertMessage = NSLocalizedString("IAPM:Full Version has been successfully purchased",
-      value: "Full Version has been successfully purchased",
-      comment: "InAppPurchaseManager: Message shown after successful purchasing Full Version")
     
     lazy var errorAlertTitle = NSLocalizedString("IAPM:Error", value: "Error",
       comment: "InAppPurchaseManager: Message title for alert shown if a purchase is failed")
@@ -66,22 +62,34 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
   
   private var priceRequests: [SKProductsRequest: PriceCompletionFunction] = [:]
   
-  private var isPurchasing = false {
-    didSet {
-      if isPurchasing == oldValue {
-        return
-      }
-      
-      if isPurchasing {
-        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationInAppPurchaseManagerDidStartTask, object: nil)
-      } else {
-        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationInAppPurchaseManagerDidFinishTask, object: nil)
+  var isPurchasing: Bool {
+    if purchaseRequest != nil {
+      return true
+    }
+    
+    for transaction in SKPaymentQueue.defaultQueue().transactions as! [SKPaymentTransaction] {
+      if transaction.payment.productIdentifier == GlobalConstants.inAppPurchaseFullVersion {
+        return true
       }
     }
+    
+    return false
   }
-  
-  var isBusy: Bool {
-    return isPurchasing
+
+  // Returns true if a purchasing transaction is deferred and a user are waiting for an approval from parents
+  var isWaitingForApproval: Bool {
+    for transaction in SKPaymentQueue.defaultQueue().transactions as! [SKPaymentTransaction] {
+      if transaction.payment.productIdentifier == GlobalConstants.inAppPurchaseFullVersion &&
+        transaction.transactionState == .Deferred {
+          return true
+      }
+    }
+    
+    return false
+  }
+
+  var paymentAreAllowed: Bool {
+    return SKPaymentQueue.canMakePayments()
   }
   
   private override init() {
@@ -91,8 +99,6 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
   
   deinit {
     SKPaymentQueue.defaultQueue().removeTransactionObserver(self)
-    
-    purchaseRequest?.cancel()
     
     for (request, _) in priceRequests {
       request.cancel()
@@ -112,8 +118,6 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
       return false
     }
     
-    isPurchasing = true
-    
     purchaseRequest = SKProductsRequest(productIdentifiers: Set([GlobalConstants.inAppPurchaseFullVersion]))
     purchaseRequest!.delegate = self
     purchaseRequest!.start()
@@ -132,7 +136,6 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
   
   func restorePurchases() {
     Logger.logDebug("restorePurchases()")
-    isPurchasing = true
     SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
   }
 
@@ -170,11 +173,15 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     }
 
     // Purchase request
+    if request != purchaseRequest {
+      Logger.logError("Unknown product request. Purchase request is expected")
+      return
+    }
+    
     if let product = response.products.first as? SKProduct {
       makePaymentForProduct(product)
     } else {
       assert(false)
-      isPurchasing = false
     }
   }
   
@@ -198,15 +205,16 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     if request == purchaseRequest {
       Logger.logDebug("requestDidFinish(:didFailWithError) for a purchase request")
       purchaseRequest = nil
-      isPurchasing = false
+
+      let message = error.localizedDescription
+      let alert = UIAlertView(title: strings.errorAlertTitle, message: message, delegate: nil, cancelButtonTitle: strings.okButtonTitle)
+      alert.show()
     } else {
       Logger.logDebug("requestDidFinish(:didFailWithError) for a price request")
       if let completion = priceRequests.removeValueForKey(request as! SKProductsRequest!) {
         completion(price: "")
       }
     }
-    
-    processError(error)
   }
   
   func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!) {
@@ -214,63 +222,66 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     
     for transaction in transactions as! [SKPaymentTransaction] {
       if transaction.payment.productIdentifier != GlobalConstants.inAppPurchaseFullVersion {
-        Logger.logError("Unknown in-app purchase", logDetails: "identifier: \(transaction.payment.productIdentifier)")
+        Logger.logWarning("Unknown in-app purchase", logDetails: "identifier: \(transaction.payment.productIdentifier)")
+        SKPaymentQueue.defaultQueue().finishTransaction(transaction)
         continue
       }
       
       switch transaction.transactionState {
+      case .Purchasing:
+        // Do nothing
+        break
+        
       case .Purchased:
         processPurchasedTransaction(transaction)
         
       case .Restored:
         processRestoredTransaction(transaction)
         
+      case .Deferred:
+        processDeferredTransaction(transaction)
+        
       case .Failed:
         processFailedTransaction(transaction)
-        
-      default: break;
       }
+      
+      NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationFullVersionPurchaseStateDidChange, object: nil)
     }
-    
-    isPurchasing = false
   }
   
   func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue!) {
     Logger.logDebug("paymentQueueRestoreCompletedTransactionsFinished()")
-    isPurchasing = false
   }
 
   func paymentQueue(queue: SKPaymentQueue!, restoreCompletedTransactionsFailedWithError error: NSError!) {
     Logger.logDebug("paymentQueue(queue:restoreCompletedTransactionsFailedWithError:), error: \(error.localizedDescription)")
     processError(error)
-    isPurchasing = false
   }
   
   private func processPurchasedTransaction(transaction: SKPaymentTransaction) {
     Logger.logDebug("processPurchasedTransaction()")
     
-    SKPaymentQueue.defaultQueue().finishTransaction(transaction)
-
-    let alert = UIAlertView(title: nil, message: strings.fullVersionPurchasedAlertMessage, delegate: self, cancelButtonTitle: strings.okButtonTitle)
-    alert.show()
-    
     activateFullVersion()
+    SKPaymentQueue.defaultQueue().finishTransaction(transaction)
   }
   
   private func processRestoredTransaction(transaction: SKPaymentTransaction) {
     Logger.logDebug("processRestoredTransaction()")
     
-    SKPaymentQueue.defaultQueue().finishTransaction(transaction)
-    
     let alert = UIAlertView(title: nil, message: strings.fullVersionRestoredAlertMessage, delegate: self, cancelButtonTitle: strings.okButtonTitle)
     alert.show()
     
     activateFullVersion()
+    SKPaymentQueue.defaultQueue().finishTransaction(transaction)
   }
   
   private func activateFullVersion() {
     Settings.generalFullVersion.value = true
     NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationFullVersionIsPurchased, object: nil)
+  }
+  
+  private func processDeferredTransaction(transaction: SKPaymentTransaction) {
+    Logger.logDebug("processDeferredTransaction()")
   }
   
   private func processFailedTransaction(transaction: SKPaymentTransaction) {
@@ -280,7 +291,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     
     processError(transaction.error)
   }
-  
+
   private func processError(error: NSError) {
     let message: String?
     

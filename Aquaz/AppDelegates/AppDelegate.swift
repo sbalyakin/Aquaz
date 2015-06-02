@@ -37,6 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       Logger.setup(logLevel: .Warning, assertLevel: .Error, consoleLevel: .Error, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
     #endif
     
+    if !Settings.generalFullVersion.value {
+      // Just for creating shared instance of in-app purchase manager and to start observing transaction states
+      InAppPurchaseManager.sharedInstance
+    }
+    
     setupCoreDataSynchronization()
     
     UIHelper.applyStylization()

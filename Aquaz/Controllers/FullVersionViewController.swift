@@ -25,12 +25,17 @@ class FullVersionViewController: UIViewController {
 
   }
   
+  private struct Constants {
+    static let approvalBannerViewNib = "ApprovalBannerView"
+  }
+
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var priceLabel: UILabel!
   @IBOutlet weak var purchaseFullVersionButton: RoundedButton!
 
   private let strings = Strings()
-  var activityIndicatorView: UIActivityIndicatorView?
+  
+  private var approvalBannerView: UIView?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -40,30 +45,89 @@ class FullVersionViewController: UIViewController {
     fetchPrices()
   }
 
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+
+    checkDeferredState()
+  }
+  
   private func initUI() {
     UIHelper.applyStyle(self)
 
     purchaseFullVersionButton.backgroundColor = StyleKit.controlTintColor
     
     descriptionLabel.text = strings.descriptionLabelText
-    
-    if InAppPurchaseManager.sharedInstance.isBusy {
-      showActivityIndicator()
+  }
+
+  private func checkDeferredState() {
+    if InAppPurchaseManager.sharedInstance.isWaitingForApproval {
+      showApprovalBanner()
+    } else {
+      hideApprovalBanner()
     }
   }
+
+  private func showApprovalBanner() {
+    if approvalBannerView != nil {
+      return
+    }
+    
+    let nib = UINib(nibName: Constants.approvalBannerViewNib, bundle: nil)
+    
+    approvalBannerView = nib.instantiateWithOwner(nil, options: nil).first as? BannerView
+    approvalBannerView!.setTranslatesAutoresizingMaskIntoConstraints(false)
+    approvalBannerView!.backgroundColor = UIColor(white: 1, alpha: 0.9)
+    approvalBannerView!.layer.opacity = 0
+    approvalBannerView!.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
+    view.addSubview(approvalBannerView!)
+    
+    // Setup constraints
+    let views = ["banner": approvalBannerView!]
+    view.addConstraints("H:|-0-[banner]", views: views)
+    view.addConstraints("H:[banner]-0-|", views: views)
+    view.addConstraints("V:|-0-[banner(75)]", views: views)
+    
+    // Show the banner with animation
+    UIView.animateWithDuration(0.6,
+      delay: 0,
+      usingSpringWithDamping: 0.4,
+      initialSpringVelocity: 1.7,
+      options: .CurveEaseInOut | .AllowUserInteraction,
+      animations: {
+        self.approvalBannerView!.layer.opacity = 1
+        self.approvalBannerView!.layer.transform = CATransform3DMakeScale(1, 1, 1)
+      },
+      completion: nil)
+  }
   
+  private func hideApprovalBanner() {
+    if approvalBannerView == nil {
+      return
+    }
+    
+    UIView.animateWithDuration(0.6,
+      delay: 0,
+      usingSpringWithDamping: 0.8,
+      initialSpringVelocity: 10,
+      options: .CurveEaseInOut | .AllowUserInteraction,
+      animations: {
+        self.approvalBannerView!.layer.opacity = 0
+        self.approvalBannerView!.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
+      },
+      completion: { (finished) -> Void in
+        self.approvalBannerView!.removeFromSuperview()
+        self.approvalBannerView = nil
+    })
+  }
+
   private func setupNotificationsObservation() {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "fullVersionIsPurchased:",
       name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
 
     NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "inAppPurchaseManagedDidStartTask:",
-      name: GlobalConstants.notificationInAppPurchaseManagerDidStartTask, object: nil)
-
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "inAppPurchaseManagedDidFinishTask:",
-      name: GlobalConstants.notificationInAppPurchaseManagerDidFinishTask, object: nil)
+      selector: "fullVersionPurchaseStateDidChange:",
+      name: GlobalConstants.notificationFullVersionPurchaseStateDidChange, object: nil)
   }
   
   private func fetchPrices() {
@@ -79,52 +143,16 @@ class FullVersionViewController: UIViewController {
     navigationController?.popViewControllerAnimated(true)
   }
 
-  func inAppPurchaseManagedDidStartTask(notification: NSNotification) {
-    showActivityIndicator()
+  func fullVersionPurchaseStateDidChange(notification: NSNotification) {
+    checkDeferredState()
   }
-
-  func inAppPurchaseManagedDidFinishTask(notification: NSNotification) {
-    hideActivityIndicator()
-  }
-
+  
   @IBAction func purchaseFullVersion() {
-    if InAppPurchaseManager.sharedInstance.purchaseFullVersion() {
-      showActivityIndicator()
-    }
+    InAppPurchaseManager.sharedInstance.purchaseFullVersion()
   }
   
   @IBAction func restorePurchases() {
-    showActivityIndicator()
     InAppPurchaseManager.sharedInstance.restorePurchases()
   }
   
-  private func showActivityIndicator() {
-    if activityIndicatorView != nil {
-      return
-    }
-    
-    activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
-    view.addSubview(activityIndicatorView!)
-    activityIndicatorView!.layer.backgroundColor = UIColor(white: 0, alpha: 0.3).CGColor
-    activityIndicatorView!.alpha = 0
-    activityIndicatorView!.startAnimating()
-    activityIndicatorView!.center = view.center
-    activityIndicatorView!.frame = view.bounds
-    
-    UIView.animateWithDuration(0.3, animations: {
-      self.activityIndicatorView!.alpha = 1
-    }, completion: nil)
-  }
-  
-  private func hideActivityIndicator() {
-    if let activityIndicatorView = activityIndicatorView {
-      UIView.animateWithDuration(0.3, animations: {
-        activityIndicatorView.layer.opacity = 0
-        }) { (finished) -> Void in
-          activityIndicatorView.removeFromSuperview()
-          self.activityIndicatorView = nil
-      }
-    }
-  }
-
 }

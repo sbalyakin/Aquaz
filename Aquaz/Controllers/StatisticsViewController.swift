@@ -109,7 +109,7 @@ class StatisticsViewController: UIViewController {
     
     // Show the banner with animation
     UIView.animateWithDuration(0.6,
-      delay: 1,
+      delay: 0.6,
       usingSpringWithDamping: 0.4,
       initialSpringVelocity: 1.7,
       options: .CurveEaseInOut | .AllowUserInteraction,
