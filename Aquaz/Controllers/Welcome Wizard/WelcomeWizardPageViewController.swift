@@ -12,6 +12,7 @@ class WelcomeWizardPageViewController: UIPageViewController {
 
   private var ownViewControllers: [UIViewController!] = [nil, nil, nil]
   weak var pageControl: UIPageControl!
+  weak var skipButton: UIButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,7 +23,7 @@ class WelcomeWizardPageViewController: UIPageViewController {
     let welcomePage: UIViewController    = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Welcome Page")!
     let unitsPage: UIViewController      = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Units Page")!
     let metricsPage: UIViewController    = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Metrics Page")!
-    let proVersionPage: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Pro Version Page")!
+    let proVersionPage: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Full Version Page")!
     
     ownViewControllers = [
       welcomePage,
@@ -79,6 +80,21 @@ extension WelcomeWizardPageViewController: UIPageViewControllerDelegate {
     if let currentViewController = pageViewController.viewControllers[0] as? UIViewController {
       let pageIndex = getPageIndexForViewController(currentViewController)
       pageControl.currentPage = pageIndex
+      
+      if pageIndex == ownViewControllers.count - 1 {
+        UIView.animateWithDuration(0.4, animations: {
+          self.skipButton.alpha = 0
+        }) { (finished) -> Void in
+          self.skipButton.hidden = true
+        }
+      } else if skipButton.hidden {
+        skipButton.alpha = 0
+        skipButton.hidden = false
+        
+        UIView.animateWithDuration(0.4) {
+          self.skipButton.alpha = 1
+        }
+      }
     }
   }
 

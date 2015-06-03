@@ -142,7 +142,7 @@ class SettingsViewController: OmegaSettingsViewController {
       fullVersionCell = createBasicTableCell(
         title: fullVersionTitle,
         accessoryType: .DisclosureIndicator,
-        selectionChangedFunction: fullVersionCellDidActivateFunction)
+        activationChangedFunction: fullVersionCellDidActivateFunction)
     }
     
     fullVersionObserverIdentifier = Settings.generalFullVersion.addObserver { fullVersion in

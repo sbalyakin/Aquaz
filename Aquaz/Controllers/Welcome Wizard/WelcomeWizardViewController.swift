@@ -32,6 +32,7 @@ class WelcomeWizardViewController: UIViewController {
     if segue.identifier == Constants.pageEmbedSegue {
       if let pageViewController = segue.destinationViewController.contentViewController as? WelcomeWizardPageViewController {
         pageViewController.pageControl = pageControl
+        pageViewController.skipButton = skipButton
         self.pageViewController = pageViewController
       }
     }

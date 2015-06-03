@@ -190,11 +190,11 @@ public class Settings {
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
   static let notificationsSmart = SettingsOrdinalItem(
-    key: "Notifications - Smart", initialValue: true,
+    key: "Notifications - Smart", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  static let notificationsCheckWaterGoalReaching = SettingsOrdinalItem(
-    key: "Notifications - Check water goal reaching", initialValue: true,
+  static let notificationsLimit = SettingsOrdinalItem(
+    key: "Notifications - Check water goal reaching", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
   private class var isMetric: Bool {

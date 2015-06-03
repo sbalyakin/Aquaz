@@ -19,8 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private var wormhole: MMWormhole!
   
   private struct Constants {
-    static let mainStoryboard = "Main"
-    static let welcomeStoryboard = "Welcome"
     static let defaultRootViewController = "Root View Controller"
     static let welcomeViewController = "Welcome Wizard"
   }
@@ -103,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       return
     }
 
-    if !Settings.notificationsCheckWaterGoalReaching.value && !Settings.notificationsSmart.value {
+    if !Settings.notificationsLimit.value && !Settings.notificationsSmart.value {
       return
     }
 
@@ -120,7 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
       
       if let lastIntakeDate = lastIntakeDate where DateHelper.areDatesEqualByDays(lastIntakeDate, NSDate()) {
-        if Settings.notificationsCheckWaterGoalReaching.value {
+        if Settings.notificationsLimit.value {
           CoreDataStack.privateContext.performBlock {
             let beginDate = NSDate()
             let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
@@ -149,7 +147,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func showDefaultRootViewControllerWithAnimation() {
-    let storyboard = UIStoryboard(name: Constants.mainStoryboard, bundle: nil)
+    let storyboard = UIStoryboard(name: GlobalConstants.storyboardMain, bundle: nil)
     let rootViewController: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.defaultRootViewController)!
 
     let snapShot = window!.snapshotViewAfterScreenUpdates(true)
@@ -167,7 +165,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func showWelcomeWizard() {
-    let storyboard = UIStoryboard(name: Constants.welcomeStoryboard, bundle: nil)
+    let storyboard = UIStoryboard(name: GlobalConstants.storyboardWelcome, bundle: nil)
     if let welcomeWizard: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.welcomeViewController) {
       window?.rootViewController = welcomeWizard
     }

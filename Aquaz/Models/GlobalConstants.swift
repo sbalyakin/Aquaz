@@ -29,4 +29,8 @@ class GlobalConstants {
   static let notificationFullVersionPurchaseStateDidChange = "AquazFullVersionPurchaseStateDidChange"
 
   static let numberOfIntakesToShowAd = 5
+  
+  static let storyboardMain = "Main"
+  static let storyboardWelcome = "Welcome"
+
 }

@@ -44,9 +44,9 @@ class OmegaSettingsViewController: UIViewController {
     return []
   }
   
-  func createBasicTableCell(#title: String, accessoryType: UITableViewCellAccessoryType? = nil, selectionChangedFunction: TableCell.TableCellActivatedFunction? = nil) -> BasicTableCell {
+  func createBasicTableCell(#title: String, accessoryType: UITableViewCellAccessoryType? = nil, activationChangedFunction: TableCell.TableCellActivatedFunction? = nil) -> BasicTableCell {
     let cell = BasicTableCell(title: title, container: self, accessoryType: accessoryType)
-    cell.tableCellDidActivateFunction = selectionChangedFunction
+    cell.tableCellDidActivateFunction = activationChangedFunction
     return cell
   }
   

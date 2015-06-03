@@ -104,7 +104,7 @@
 		A57D2BF01ACFEA5A00619D62 /* WelcomeWizardPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D2BEF1ACFEA5A00619D62 /* WelcomeWizardPageViewController.swift */; };
 		A57D2BF21ACFFB3900619D62 /* WelcomeWizardUnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D2BF11ACFFB3900619D62 /* WelcomeWizardUnitsViewController.swift */; };
 		A57D2BF41AD02A7100619D62 /* WelcomeWizardMetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D2BF31AD02A7100619D62 /* WelcomeWizardMetricsViewController.swift */; };
-		A57D2BF61AD02C5C00619D62 /* WelcomeWizardProVersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D2BF51AD02C5C00619D62 /* WelcomeWizardProVersionViewController.swift */; };
+		A57D2BF61AD02C5C00619D62 /* WelcomeWizardFullVersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D2BF51AD02C5C00619D62 /* WelcomeWizardFullVersionViewController.swift */; };
 		A57F5E6B1AC968A6005C4F46 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */; };
 		A581FEF01A76D5F60025CDEF /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */; };
 		A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */; };
@@ -291,7 +291,7 @@
 		A57D2BEF1ACFEA5A00619D62 /* WelcomeWizardPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWizardPageViewController.swift; sourceTree = "<group>"; };
 		A57D2BF11ACFFB3900619D62 /* WelcomeWizardUnitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWizardUnitsViewController.swift; sourceTree = "<group>"; };
 		A57D2BF31AD02A7100619D62 /* WelcomeWizardMetricsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWizardMetricsViewController.swift; sourceTree = "<group>"; };
-		A57D2BF51AD02C5C00619D62 /* WelcomeWizardProVersionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWizardProVersionViewController.swift; sourceTree = "<group>"; };
+		A57D2BF51AD02C5C00619D62 /* WelcomeWizardFullVersionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWizardFullVersionViewController.swift; sourceTree = "<group>"; };
 		A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomSlider.swift; path = Controls/CustomSlider.swift; sourceTree = "<group>"; };
 		A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -643,7 +643,7 @@
 				A57D2BEF1ACFEA5A00619D62 /* WelcomeWizardPageViewController.swift */,
 				A57D2BF11ACFFB3900619D62 /* WelcomeWizardUnitsViewController.swift */,
 				A57D2BF31AD02A7100619D62 /* WelcomeWizardMetricsViewController.swift */,
-				A57D2BF51AD02C5C00619D62 /* WelcomeWizardProVersionViewController.swift */,
+				A57D2BF51AD02C5C00619D62 /* WelcomeWizardFullVersionViewController.swift */,
 			);
 			path = "Welcome Wizard";
 			sourceTree = "<group>";
@@ -959,7 +959,7 @@
 				843B055E19E2D7800097A833 /* AppDelegate.swift in Sources */,
 				84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */,
 				A5B75A1419E5686C00D0477B /* CoreDataHelper.swift in Sources */,
-				A57D2BF61AD02C5C00619D62 /* WelcomeWizardProVersionViewController.swift in Sources */,
+				A57D2BF61AD02C5C00619D62 /* WelcomeWizardFullVersionViewController.swift in Sources */,
 				8468D6421A0D1C240008D027 /* DateHelper.swift in Sources */,
 				843A2B2C1B05D14D00041E3F /* InAppPurchaseManager.swift in Sources */,
 				8406D78119FE9875001C54BF /* Units.swift in Sources */,

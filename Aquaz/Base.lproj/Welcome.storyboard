@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--Welcome Wizard View Controller-->
@@ -81,14 +80,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCv-mw-a1w">
-                                <rect key="frame" x="20" y="168" width="560" height="424"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcomeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="qxF-xt-VVw">
                                 <rect key="frame" x="250" y="60" width="100" height="100"/>
                                 <constraints>
@@ -96,24 +87,21 @@
                                     <constraint firstAttribute="height" constant="100" id="tGw-6A-Uhq"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!  Swite to set up Aquaz." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="LR1-R9-kgb">
+                                <rect key="frame" x="20" y="168" width="560" height="62"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="qxF-xt-VVw" secondAttribute="centerX" id="0o6-3I-2ID"/>
-                            <constraint firstItem="JCv-mw-a1w" firstAttribute="leading" secondItem="JK0-F0-9qX" secondAttribute="leadingMargin" id="3BD-H0-FMh"/>
-                            <constraint firstItem="JCv-mw-a1w" firstAttribute="trailing" secondItem="JK0-F0-9qX" secondAttribute="trailingMargin" id="3Kl-r9-TZy"/>
-                            <constraint firstItem="Hdp-zE-AyN" firstAttribute="top" secondItem="JCv-mw-a1w" secondAttribute="bottom" constant="8" symbolic="YES" id="ZfX-TH-JIV"/>
-                            <constraint firstItem="JCv-mw-a1w" firstAttribute="top" secondItem="qxF-xt-VVw" secondAttribute="bottom" constant="8" symbolic="YES" id="f6G-BB-fUi"/>
-                            <constraint firstItem="JCv-mw-a1w" firstAttribute="leading" secondItem="JK0-F0-9qX" secondAttribute="leading" constant="20" symbolic="YES" id="hLR-bO-qs3"/>
+                            <constraint firstItem="LR1-R9-kgb" firstAttribute="leading" secondItem="JK0-F0-9qX" secondAttribute="leading" constant="20" symbolic="YES" id="5YP-KT-yz7"/>
+                            <constraint firstItem="LR1-R9-kgb" firstAttribute="top" secondItem="qxF-xt-VVw" secondAttribute="bottom" constant="8" symbolic="YES" id="IsD-ns-d5P"/>
                             <constraint firstItem="qxF-xt-VVw" firstAttribute="top" secondItem="Df6-SC-1xI" secondAttribute="bottom" constant="40" id="tAh-Cw-RQ6"/>
-                            <constraint firstAttribute="trailing" secondItem="JCv-mw-a1w" secondAttribute="trailing" constant="20" symbolic="YES" id="v7N-KC-vm8"/>
+                            <constraint firstAttribute="trailing" secondItem="LR1-R9-kgb" secondAttribute="trailing" constant="20" symbolic="YES" id="xZO-Sy-iN9"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="3BD-H0-FMh"/>
-                                <exclude reference="3Kl-r9-TZy"/>
-                            </mask>
-                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kh1-qj-eny" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -260,10 +248,10 @@
             </objects>
             <point key="canvasLocation" x="3411" y="319"/>
         </scene>
-        <!--Pro Version Page-->
+        <!--Full Version Page-->
         <scene sceneID="SK2-rg-Sep">
             <objects>
-                <viewController storyboardIdentifier="Pro Version Page" id="ZlN-Yh-fjp" userLabel="Pro Version Page" customClass="WelcomeWizardProVersionViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Full Version Page" id="ZlN-Yh-fjp" userLabel="Full Version Page" customClass="WelcomeWizardFullVersionViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="t2B-iV-jqM"/>
                         <viewControllerLayoutGuide type="bottom" id="9s4-Db-LRI"/>
@@ -279,15 +267,6 @@
                                     <constraint firstAttribute="height" constant="100" id="RRm-I7-aWr"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="250" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ryj-49-ZHL">
-                                <rect key="frame" x="20" y="148" width="560" height="402"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5j-Nk-rv9" customClass="RoundedButton" customModule="Aquaz" customModuleProvider="target">
                                 <rect key="frame" x="240" y="558" width="120" height="34"/>
                                 <color key="backgroundColor" red="0.0" green="0.58039215690000001" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -308,28 +287,34 @@
                                     <action selector="getStartedButtonWasTapped" destination="ZlN-Yh-fjp" eventType="touchUpInside" id="Sna-jR-2dj"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchase the full version of Aquaz in order to: • Get smart notifications • Enjoy extended statistics • Remove ads" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="UTf-EX-vft">
+                                <rect key="frame" x="20" y="148" width="560" height="83"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhP-uX-50v">
+                                <rect key="frame" x="261" y="239" width="78" height="30"/>
+                                <state key="normal" title="See Details">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="seeFullVersionButtonWasTapped" destination="ZlN-Yh-fjp" eventType="touchUpInside" id="lOA-oa-Mz1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ryj-49-ZHL" firstAttribute="top" secondItem="2Og-5u-iVS" secondAttribute="bottom" constant="8" symbolic="YES" id="0h4-s1-CFK"/>
-                            <constraint firstItem="Ryj-49-ZHL" firstAttribute="leading" secondItem="YWB-lP-cgU" secondAttribute="leading" constant="20" symbolic="YES" id="2dl-Hz-mHp"/>
                             <constraint firstAttribute="centerX" secondItem="2Og-5u-iVS" secondAttribute="centerX" id="5qz-P9-RtZ"/>
-                            <constraint firstItem="Ryj-49-ZHL" firstAttribute="leading" secondItem="YWB-lP-cgU" secondAttribute="leadingMargin" id="7DH-YJ-X5F"/>
                             <constraint firstAttribute="centerX" secondItem="J5j-Nk-rv9" secondAttribute="centerX" id="7O0-f7-zfU"/>
-                            <constraint firstAttribute="trailing" secondItem="Ryj-49-ZHL" secondAttribute="trailing" constant="20" symbolic="YES" id="Glz-Nt-K93"/>
-                            <constraint firstItem="Ryj-49-ZHL" firstAttribute="leading" secondItem="2Og-5u-iVS" secondAttribute="trailing" constant="-334" id="Ize-Kd-in4"/>
-                            <constraint firstItem="J5j-Nk-rv9" firstAttribute="top" secondItem="Ryj-49-ZHL" secondAttribute="bottom" constant="8" symbolic="YES" id="UhA-98-OzJ"/>
+                            <constraint firstItem="UTf-EX-vft" firstAttribute="top" secondItem="2Og-5u-iVS" secondAttribute="bottom" constant="8" symbolic="YES" id="8Dh-a1-a4p"/>
                             <constraint firstItem="9s4-Db-LRI" firstAttribute="top" secondItem="J5j-Nk-rv9" secondAttribute="bottom" constant="8" symbolic="YES" id="XdP-sI-MvF"/>
-                            <constraint firstItem="Ryj-49-ZHL" firstAttribute="trailing" secondItem="YWB-lP-cgU" secondAttribute="trailingMargin" id="jJp-79-P0c"/>
+                            <constraint firstAttribute="centerX" secondItem="rhP-uX-50v" secondAttribute="centerX" id="bRB-ow-VGz"/>
+                            <constraint firstItem="UTf-EX-vft" firstAttribute="leading" secondItem="YWB-lP-cgU" secondAttribute="leading" constant="20" symbolic="YES" id="eei-Yj-DID"/>
                             <constraint firstItem="2Og-5u-iVS" firstAttribute="top" secondItem="t2B-iV-jqM" secondAttribute="bottom" constant="40" id="qAe-1p-guE"/>
+                            <constraint firstItem="rhP-uX-50v" firstAttribute="top" secondItem="UTf-EX-vft" secondAttribute="bottom" constant="8" symbolic="YES" id="rhm-n9-wwY"/>
+                            <constraint firstAttribute="trailing" secondItem="UTf-EX-vft" secondAttribute="trailing" constant="20" symbolic="YES" id="zpQ-ya-stp"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="7DH-YJ-X5F"/>
-                                <exclude reference="Ize-Kd-in4"/>
-                                <exclude reference="jJp-79-P0c"/>
-                            </mask>
-                        </variation>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>

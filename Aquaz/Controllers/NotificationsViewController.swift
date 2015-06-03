@@ -20,6 +20,8 @@ class NotificationsViewController: OmegaSettingsViewController {
   
   private struct Constants {
     static let chooseSoundSegue = "Choose Sound"
+    static let fullVersionBannerViewNib = "FullVersionBannerView"
+    static let fullVersionViewControllerIdentifier = "FullVersionViewController"
   }
   
   override func viewDidLoad() {
@@ -146,6 +148,8 @@ class NotificationsViewController: OmegaSettingsViewController {
       title: smartNotificationsTitle,
       settingsItem: Settings.notificationsSmart)
     
+    smartNotificationsCell.valueChangedFunction = { [unowned self] in self.fullVersionFeatureValueChanged($0) }
+
     let smartNotificationsSection = TableCellsSection()
     smartNotificationsSection.footerTitle = smartNotificationsSectionFooter
     smartNotificationsSection.tableCells = [smartNotificationsCell]
@@ -154,8 +158,10 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     let limitNotificationsCell = createSwitchTableCell(
       title: limitNotificationsTitle,
-      settingsItem: Settings.notificationsCheckWaterGoalReaching)
-    
+      settingsItem: Settings.notificationsLimit)
+
+    limitNotificationsCell.valueChangedFunction = { [unowned self] in self.fullVersionFeatureValueChanged($0) }
+
     let limitNotificationsSection = TableCellsSection()
     limitNotificationsSection.footerTitle = limitNotificationsSectionFooter
     limitNotificationsSection.tableCells = [limitNotificationsCell]
@@ -178,6 +184,67 @@ class NotificationsViewController: OmegaSettingsViewController {
     return dateFormatter.stringFromDate(date)
   }
   
+  private func fullVersionFeatureValueChanged(tableCell: TableCell) {
+    if let valueCell = tableCell as? TableCellWithValue<Bool> where !Settings.generalFullVersion.value && valueCell.value {
+      showFullVersionBanner()
+      valueCell.value = false
+    }
+  }
+  
+  private func showFullVersionBanner() {
+    let nib = UINib(nibName: Constants.fullVersionBannerViewNib, bundle: nil)
+    
+    let fullVersionBannerView = nib.instantiateWithOwner(nil, options: nil).first as! BannerView
+    fullVersionBannerView.setTranslatesAutoresizingMaskIntoConstraints(false)
+    fullVersionBannerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+    fullVersionBannerView.layer.opacity = 0
+    fullVersionBannerView.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
+    view.addSubview(fullVersionBannerView)
+    
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "fullVersionBannerWasTapped:")
+    fullVersionBannerView.addGestureRecognizer(tapGestureRecognizer)
+    
+    // Setup constraints
+    let views = ["banner": fullVersionBannerView]
+    view.addConstraints("H:|-0-[banner]", views: views)
+    view.addConstraints("H:[banner]-0-|", views: views)
+    view.addConstraints("V:|-0-[banner(75)]", views: views)
+    
+    // Show the banner with animation
+    UIView.animateWithDuration(0.6,
+      delay: 0,
+      usingSpringWithDamping: 0.4,
+      initialSpringVelocity: 1.7,
+      options: .CurveEaseInOut | .AllowUserInteraction,
+      animations: {
+        fullVersionBannerView.layer.opacity = 1
+        fullVersionBannerView.layer.transform = CATransform3DMakeScale(1, 1, 1)
+      },
+      completion: { (finished) -> Void in
+        UIView.animateWithDuration(0.6,
+          delay: 5,
+          usingSpringWithDamping: 0.8,
+          initialSpringVelocity: 10,
+          options: .CurveEaseInOut | .AllowUserInteraction,
+          animations: {
+            fullVersionBannerView.layer.opacity = 0
+            fullVersionBannerView.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
+          },
+          completion: { (finished) -> Void in
+            fullVersionBannerView.removeFromSuperview()
+        })
+      }
+    )
+  }
+  
+  func fullVersionBannerWasTapped(gestureRecognizer: UITapGestureRecognizer) {
+    if gestureRecognizer.state == .Ended {
+      if let fullVersionViewController: FullVersionViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.fullVersionViewControllerIdentifier) {
+        navigationController!.pushViewController(fullVersionViewController, animated: true)
+      }
+    }
+  }
+
   private class func stringFromSoundFileName(filename: String) -> String {
     return filename.stringByDeletingPathExtension.capitalizedString
   }
