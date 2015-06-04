@@ -31,7 +31,9 @@
 		843B056119E2D7800097A833 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055719E2D7800097A833 /* DayViewController.swift */; };
 		843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055819E2D7800097A833 /* SelectDrinkViewController.swift */; };
 		843B056919E2D80E0097A833 /* WaterGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056819E2D80E0097A833 /* WaterGoal.swift */; };
-		8445BF5D1B04711E00029982 /* FullVersionBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8445BF5B1B04711E00029982 /* FullVersionBannerView.xib */; };
+		8444F1941B207C09007577C8 /* InfoBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8444F1921B207C09007577C8 /* InfoBannerView.xib */; };
+		8444F1961B207D75007577C8 /* InfoBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444F1951B207D75007577C8 /* InfoBannerView.swift */; };
+		8444F1981B209250007577C8 /* SystemHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444F1971B209250007577C8 /* SystemHelper.swift */; };
 		8455DACF1A694487004245F9 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455DACE1A694487004245F9 /* RoundedButton.swift */; };
 		84669A7219DAD78D003C2263 /* Aquaz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Aquaz.xcdatamodeld */; };
 		84669A7719DAD78D003C2263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7519DAD78D003C2263 /* Main.storyboard */; };
@@ -232,7 +234,9 @@
 		843B055819E2D7800097A833 /* SelectDrinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SelectDrinkViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		843B055C19E2D7800097A833 /* Aquaz-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Aquaz-Bridging-Header.h"; sourceTree = "<group>"; };
 		843B056819E2D80E0097A833 /* WaterGoal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoal.swift; sourceTree = "<group>"; };
-		8445BF5C1B04711E00029982 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FullVersionBannerView.xib; sourceTree = "<group>"; };
+		8444F1931B207C09007577C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/InfoBannerView.xib; sourceTree = "<group>"; };
+		8444F1951B207D75007577C8 /* InfoBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoBannerView.swift; path = Controls/InfoBannerView.swift; sourceTree = "<group>"; };
+		8444F1971B209250007577C8 /* SystemHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemHelper.swift; sourceTree = "<group>"; };
 		8455DACE1A694487004245F9 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedButton.swift; path = Controls/RoundedButton.swift; sourceTree = "<group>"; };
 		84669A6919DAD78D003C2263 /* Aquaz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aquaz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84669A6D19DAD78D003C2263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -410,6 +414,7 @@
 				8455DACE1A694487004245F9 /* RoundedButton.swift */,
 				A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */,
 				A5A1681C1A6EA1330027711B /* BannerView.swift */,
+				8444F1951B207D75007577C8 /* InfoBannerView.swift */,
 				A575A5A41A6EBB0300B00E9F /* StyledBarButtonItem.swift */,
 				A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */,
 				A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */,
@@ -657,6 +662,7 @@
 				841B13BD1A31FE4F00249426 /* UIHelper.swift */,
 				A54ED2581AD447A600FD37DD /* UIExtensions.swift */,
 				84039F171A4B103100C5391E /* NotificationsHelper.swift */,
+				8444F1971B209250007577C8 /* SystemHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -669,8 +675,8 @@
 				A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */,
 				A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */,
 				A5C374AF1AE6708700F91550 /* CongratulationsView.xib */,
-				8445BF5B1B04711E00029982 /* FullVersionBannerView.xib */,
 				A5B2F03C1B1DCF4100DAB091 /* ApprovalBannerView.xib */,
+				8444F1921B207C09007577C8 /* InfoBannerView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -886,7 +892,6 @@
 				A5B2F03E1B1DCF4100DAB091 /* ApprovalBannerView.xib in Resources */,
 				A57D2BEB1ACFDE0D00619D62 /* Welcome.storyboard in Resources */,
 				84669A7719DAD78D003C2263 /* Main.storyboard in Resources */,
-				8445BF5D1B04711E00029982 /* FullVersionBannerView.xib in Resources */,
 				A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */,
 				A5B8F9921A87DF3D00145705 /* chirp.caf in Resources */,
 				A5B8F9981A87DF3D00145705 /* whistle.caf in Resources */,
@@ -895,6 +900,7 @@
 				84669A7919DAD78D003C2263 /* Images.xcassets in Resources */,
 				A5B8F98F1A87DF3D00145705 /* bells.caf in Resources */,
 				A5B8F98D1A87DF3D00145705 /* alarm.caf in Resources */,
+				8444F1941B207C09007577C8 /* InfoBannerView.xib in Resources */,
 				A5B8F9951A87DF3D00145705 /* hand-bell.caf in Resources */,
 				A5B8F9901A87DF3D00145705 /* bubbles.caf in Resources */,
 				A5B8F9931A87DF3D00145705 /* chord.caf in Resources */,
@@ -990,8 +996,10 @@
 				84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */,
 				8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */,
 				A5A335891B01F980004579A4 /* FullVersionViewController.swift in Sources */,
+				8444F1981B209250007577C8 /* SystemHelper.swift in Sources */,
 				84669A7219DAD78D003C2263 /* Aquaz.xcdatamodeld in Sources */,
 				A5D3D4291AA5D29700E3C989 /* TextFieldTableCell.swift in Sources */,
+				8444F1961B207D75007577C8 /* InfoBannerView.swift in Sources */,
 				84CD97581ABB2B960011623B /* CalendarViewDayInfo.swift in Sources */,
 				84C610BA1A319DBC00433EF1 /* MonthStatisticsViewController.swift in Sources */,
 				A5D3D42D1AA5D29700E3C989 /* UITextFieldTableViewCell.swift in Sources */,
@@ -1109,12 +1117,12 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		8445BF5B1B04711E00029982 /* FullVersionBannerView.xib */ = {
+		8444F1921B207C09007577C8 /* InfoBannerView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8445BF5C1B04711E00029982 /* Base */,
+				8444F1931B207C09007577C8 /* Base */,
 			);
-			name = FullVersionBannerView.xib;
+			name = InfoBannerView.xib;
 			sourceTree = "<group>";
 		};
 		84669A7519DAD78D003C2263 /* Main.storyboard */ = {

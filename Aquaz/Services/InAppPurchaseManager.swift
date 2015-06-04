@@ -17,7 +17,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     return Static.instance
   }
 
-  private class Strings {
+  private class LocalizedStrings {
     
     lazy var forbiddenPaymentsAlertMessage = NSLocalizedString("IAPM:It\'s forbidden to make payments due to parental controls",
       value: "It\'s forbidden to make payments due to parental controls",
@@ -54,7 +54,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     
   }
   
-  private let strings = Strings()
+  private let localizedStrings = LocalizedStrings()
   
   typealias PriceCompletionFunction = (price: String) -> ()
   
@@ -113,7 +113,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     Logger.logDebug("purchaseFullVersion()")
 
     if !SKPaymentQueue.canMakePayments() {
-      let alert = UIAlertView(title: nil, message: strings.forbiddenPaymentsAlertMessage, delegate: nil, cancelButtonTitle: strings.okButtonTitle)
+      let alert = UIAlertView(title: nil, message: localizedStrings.forbiddenPaymentsAlertMessage, delegate: nil, cancelButtonTitle: localizedStrings.okButtonTitle)
       alert.show()
       return false
     }
@@ -161,7 +161,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
       Logger.logError("No products are available for in-app purchases", logDetails: details)
       
       // Show an alert about an unknown error to user to indicate an error somehow
-      let alert = UIAlertView(title: strings.errorAlertTitle, message: strings.transactionFailedUnknownError, delegate: nil, cancelButtonTitle: strings.okButtonTitle)
+      let alert = UIAlertView(title: localizedStrings.errorAlertTitle, message: localizedStrings.transactionFailedUnknownError, delegate: nil, cancelButtonTitle: localizedStrings.okButtonTitle)
       alert.show()
     }
 
@@ -207,7 +207,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
       purchaseRequest = nil
 
       let message = error.localizedDescription
-      let alert = UIAlertView(title: strings.errorAlertTitle, message: message, delegate: nil, cancelButtonTitle: strings.okButtonTitle)
+      let alert = UIAlertView(title: localizedStrings.errorAlertTitle, message: message, delegate: nil, cancelButtonTitle: localizedStrings.okButtonTitle)
       alert.show()
     } else {
       Logger.logDebug("requestDidFinish(:didFailWithError) for a price request")
@@ -268,7 +268,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
   private func processRestoredTransaction(transaction: SKPaymentTransaction) {
     Logger.logDebug("processRestoredTransaction()")
     
-    let alert = UIAlertView(title: nil, message: strings.fullVersionRestoredAlertMessage, delegate: self, cancelButtonTitle: strings.okButtonTitle)
+    let alert = UIAlertView(title: nil, message: localizedStrings.fullVersionRestoredAlertMessage, delegate: self, cancelButtonTitle: localizedStrings.okButtonTitle)
     alert.show()
     
     activateFullVersion()
@@ -300,19 +300,19 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
       message = nil // do not show an alert because user cancelled the request by himself
       
     case SKErrorClientInvalid:
-      message = strings.transactionFailedClientInvalid
+      message = localizedStrings.transactionFailedClientInvalid
       
     case SKErrorPaymentInvalid:
       Logger.logError("Payment transaction error", logDetails: "The payment parameters was not recognized by the Apple App Store")
-      message = strings.transactionFailedPaymentInvalid
+      message = localizedStrings.transactionFailedPaymentInvalid
       
     case SKErrorPaymentNotAllowed:
       Logger.logError("Payment transaction error", logDetails: "The client is not allowed to authorize payments")
-      message = strings.transactionFailedPaymentNotAllowed
+      message = localizedStrings.transactionFailedPaymentNotAllowed
       
     case SKErrorStoreProductNotAvailable:
       Logger.logError("Payment transaction error", logDetails: "The requested product is not available in the store")
-      message = strings.transactionFailedProductIsNotAvailable
+      message = localizedStrings.transactionFailedProductIsNotAvailable
       
     default:
       //Logger.logError("Payment transaction error", logDetails: "An unknown error occured")
@@ -320,7 +320,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     }
     
     if let message = message {
-      let alert = UIAlertView(title: strings.errorAlertTitle, message: message, delegate: nil, cancelButtonTitle: strings.okButtonTitle)
+      let alert = UIAlertView(title: localizedStrings.errorAlertTitle, message: message, delegate: nil, cancelButtonTitle: localizedStrings.okButtonTitle)
       alert.show()
     }
   }

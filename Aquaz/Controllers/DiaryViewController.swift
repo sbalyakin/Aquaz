@@ -138,7 +138,7 @@ extension DiaryViewController: UITableViewDataSource {
       return
     }
     
-    executeBlockWithDelay(1) {
+    SystemHelper.executeBlockWithDelay(1) {
       self.showHelpTipForCell(cell)
     }
   }
@@ -158,19 +158,11 @@ extension DiaryViewController: UITableViewDataSource {
     tooltip.textColour = UIColor.blackColor()
     
     tooltip.showCompletionBlock = {
-      self.executeBlockWithDelay(4) {
+      SystemHelper.executeBlockWithDelay(4) {
         tooltip.hideAnimated(true)
       }
     }
     tooltip.show()
-  }
-
-  private func executeBlockWithDelay(delay: NSTimeInterval, block: () -> ()) {
-    let executeTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * NSTimeInterval(NSEC_PER_SEC)));
-    
-    dispatch_after(executeTime, dispatch_get_main_queue()) {
-      block()
-    }
   }
 
   func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

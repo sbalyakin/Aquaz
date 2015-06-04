@@ -121,17 +121,9 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     super.viewDidAppear(animated)
 
     if mode == .General && Settings.uiDayPageHelpTipToShow.value == .SlideToChangeDay {
-      executeBlockWithDelay(1) {
+      SystemHelper.executeBlockWithDelay(1) {
         self.showHelpTip()
       }
-    }
-  }
-  
-  private func executeBlockWithDelay(delay: NSTimeInterval, block: () -> ()) {
-    let executeTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * NSTimeInterval(NSEC_PER_SEC)));
-    
-    dispatch_after(executeTime, dispatch_get_main_queue()) {
-      block()
     }
   }
   
@@ -427,7 +419,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
           Settings.uiWaterGoalReachingIsShownForDate.value = currentDate
           showCongratulationsAboutWaterGoalReaching()
           
-          executeBlockWithDelay(2) {
+          SystemHelper.executeBlockWithDelay(2) {
             self.checkForRateApplicationAlert(notification)
           }
           
@@ -451,7 +443,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
         if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, currentDate) {
           Settings.uiDayPageIntakesCountTillHelpTip.value = Settings.uiDayPageIntakesCountTillHelpTip.value - 1
           if Settings.uiDayPageIntakesCountTillHelpTip.value <= 0 {
-            executeBlockWithDelay(1) {
+            SystemHelper.executeBlockWithDelay(1) {
               self.showHelpTip()
             }
           }
@@ -751,7 +743,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     helptip!.textColour = UIColor.blackColor()
     
     helptip!.showCompletionBlock = {
-      self.executeBlockWithDelay(4) {
+      SystemHelper.executeBlockWithDelay(4) {
         self.helptip?.hideAnimated(true)
       }
     }

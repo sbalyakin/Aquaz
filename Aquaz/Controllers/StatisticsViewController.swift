@@ -13,14 +13,23 @@ class StatisticsViewController: UIViewController {
   @IBOutlet weak var segmentedControl: UISegmentedControl!
 
   weak var pageViewController: StatisticsPageViewController!
-  private var fullVersionBannerView: BannerView?
+  private var fullVersionBannerView: InfoBannerView?
   private var demoOverlayView: UIView?
   
   private struct Constants {
     static let pageViewControllerEmbeddingSegue = "Page View Controller Embedding"
-    static let fullVersionBannerViewNib = "FullVersionBannerView"
     static let fullVersionViewControllerIdentifier = "FullVersionViewController"
   }
+
+  private class LocalizedStrings {
+    
+    lazy var fullVersionBannerText = NSLocalizedString("SVC:Statistics is available in the full version only.",
+      value: "Statistics is available in the full version only.",
+      comment: "StatisticsViewController: Text for banner shown to promote the full version of Aquaz")
+    
+  }
+  
+  private let localizedStrings = LocalizedStrings()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -89,35 +98,11 @@ class StatisticsViewController: UIViewController {
   private func showFullVersionBanner() {
     assert(fullVersionBannerView == nil)
     
-    let nib = UINib(nibName: Constants.fullVersionBannerViewNib, bundle: nil)
-    
-    fullVersionBannerView = nib.instantiateWithOwner(nil, options: nil).first as? BannerView
-    fullVersionBannerView!.setTranslatesAutoresizingMaskIntoConstraints(false)
-    fullVersionBannerView!.backgroundColor = UIColor(white: 1, alpha: 0.9)
-    fullVersionBannerView!.layer.opacity = 0
-    fullVersionBannerView!.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
-    view.addSubview(fullVersionBannerView!)
-    
-    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "fullVersionBannerWasTapped:")
-    fullVersionBannerView!.addGestureRecognizer(tapGestureRecognizer)
-    
-    // Setup constraints
-    let views = ["banner": fullVersionBannerView!]
-    view.addConstraints("H:|-0-[banner]", views: views)
-    view.addConstraints("H:[banner]-0-|", views: views)
-    view.addConstraints("V:|-0-[banner(75)]", views: views)
-    
-    // Show the banner with animation
-    UIView.animateWithDuration(0.6,
-      delay: 0.6,
-      usingSpringWithDamping: 0.4,
-      initialSpringVelocity: 1.7,
-      options: .CurveEaseInOut | .AllowUserInteraction,
-      animations: {
-        self.fullVersionBannerView!.layer.opacity = 1
-        self.fullVersionBannerView!.layer.transform = CATransform3DMakeScale(1, 1, 1)
-      },
-      completion: nil)
+    fullVersionBannerView = InfoBannerView.create()
+    fullVersionBannerView!.infoLabel.text = localizedStrings.fullVersionBannerText
+    fullVersionBannerView!.infoImageView.image = UIImage(named: "welcomeFullVersion")
+    fullVersionBannerView!.bannerWasTappedFunction = { [unowned self] infoBannerView in self.fullVersionBannerWasTapped() }
+    fullVersionBannerView!.show(animated: true, parentView: view)
   }
   
   func fullVersionIsPurchased(notification: NSNotification) {
@@ -126,15 +111,13 @@ class StatisticsViewController: UIViewController {
   }
   
   private func hideFullVersionBanner() {
-    fullVersionBannerView?.removeFromSuperview()
+    fullVersionBannerView?.hide(animated: false)
     fullVersionBannerView = nil
   }
   
-  func fullVersionBannerWasTapped(gestureRecognizer: UITapGestureRecognizer) {
-    if gestureRecognizer.state == .Ended {
-      if let fullVersionViewController: FullVersionViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.fullVersionViewControllerIdentifier) {
-        navigationController!.pushViewController(fullVersionViewController, animated: true)
-      }
+  func fullVersionBannerWasTapped() {
+    if let fullVersionViewController: FullVersionViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.fullVersionViewControllerIdentifier) {
+      navigationController!.pushViewController(fullVersionViewController, animated: true)
     }
   }
   

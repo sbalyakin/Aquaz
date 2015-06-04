@@ -17,22 +17,42 @@ extension String: Printable {
 class NotificationsViewController: OmegaSettingsViewController {
   
   private var soundObserverIdentifier: Int?
+  private var fullVersionBannerView: InfoBannerView?
   
   private struct Constants {
     static let chooseSoundSegue = "Choose Sound"
-    static let fullVersionBannerViewNib = "FullVersionBannerView"
     static let fullVersionViewControllerIdentifier = "FullVersionViewController"
   }
   
+  private class LocalizedStrings {
+    
+    lazy var smartNotificationsBannerText = NSLocalizedString("SVC:Smart Notifications mode is available in the full version only.",
+      value: "Smart Notifications mode are available in the full version only.",
+      comment: "StatisticsViewController: Text for banner shown to promote the full version of Aquaz if user tries to activate Smart notifications mode")
+
+    lazy var limitNotificationsBannerText = NSLocalizedString("SVC:Limit Notifications mode is available in the full version only.",
+      value: "Limit Notifications mode is available in the full version only.",
+      comment: "StatisticsViewController: Text for banner shown to promote the full version of Aquaz if user tries to activate Limit notifications mode")
+
+  }
+  
+  private let localizedStrings = LocalizedStrings()
+
   override func viewDidLoad() {
     super.viewDidLoad()
     
     UIHelper.applyStyle(self)
     rightDetailValueColor = StyleKit.settingsTablesValueColor
     rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
+
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "fullVersionIsPurchased:",
+      name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
   }
   
   deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+
     if let soundObserverIdentifier = soundObserverIdentifier {
       Settings.notificationsSound.removeObserver(soundObserverIdentifier)
     }
@@ -148,7 +168,7 @@ class NotificationsViewController: OmegaSettingsViewController {
       title: smartNotificationsTitle,
       settingsItem: Settings.notificationsSmart)
     
-    smartNotificationsCell.valueChangedFunction = { [unowned self] in self.fullVersionFeatureValueChanged($0) }
+    smartNotificationsCell.valueChangedFunction = { [unowned self] in self.smartNotificationsValueChanged($0) }
 
     let smartNotificationsSection = TableCellsSection()
     smartNotificationsSection.footerTitle = smartNotificationsSectionFooter
@@ -160,7 +180,7 @@ class NotificationsViewController: OmegaSettingsViewController {
       title: limitNotificationsTitle,
       settingsItem: Settings.notificationsLimit)
 
-    limitNotificationsCell.valueChangedFunction = { [unowned self] in self.fullVersionFeatureValueChanged($0) }
+    limitNotificationsCell.valueChangedFunction = { [unowned self] in self.limitNotificationsValueChanged($0) }
 
     let limitNotificationsSection = TableCellsSection()
     limitNotificationsSection.footerTitle = limitNotificationsSectionFooter
@@ -184,64 +204,46 @@ class NotificationsViewController: OmegaSettingsViewController {
     return dateFormatter.stringFromDate(date)
   }
   
-  private func fullVersionFeatureValueChanged(tableCell: TableCell) {
+  private func smartNotificationsValueChanged(tableCell: TableCell) {
     if let valueCell = tableCell as? TableCellWithValue<Bool> where !Settings.generalFullVersion.value && valueCell.value {
-      showFullVersionBanner()
+      showFullVersionBanner(text: localizedStrings.smartNotificationsBannerText)
       valueCell.value = false
     }
   }
-  
-  private func showFullVersionBanner() {
-    let nib = UINib(nibName: Constants.fullVersionBannerViewNib, bundle: nil)
+
+  private func limitNotificationsValueChanged(tableCell: TableCell) {
+    if let valueCell = tableCell as? TableCellWithValue<Bool> where !Settings.generalFullVersion.value && valueCell.value {
+      showFullVersionBanner(text: localizedStrings.limitNotificationsBannerText)
+      valueCell.value = false
+    }
+  }
+
+  private func showFullVersionBanner(#text: String) {
+    if fullVersionBannerView != nil {
+      return
+    }
     
-    let fullVersionBannerView = nib.instantiateWithOwner(nil, options: nil).first as! BannerView
-    fullVersionBannerView.setTranslatesAutoresizingMaskIntoConstraints(false)
-    fullVersionBannerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
-    fullVersionBannerView.layer.opacity = 0
-    fullVersionBannerView.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
-    view.addSubview(fullVersionBannerView)
-    
-    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "fullVersionBannerWasTapped:")
-    fullVersionBannerView.addGestureRecognizer(tapGestureRecognizer)
-    
-    // Setup constraints
-    let views = ["banner": fullVersionBannerView]
-    view.addConstraints("H:|-0-[banner]", views: views)
-    view.addConstraints("H:[banner]-0-|", views: views)
-    view.addConstraints("V:|-0-[banner(75)]", views: views)
-    
-    // Show the banner with animation
-    UIView.animateWithDuration(0.6,
-      delay: 0,
-      usingSpringWithDamping: 0.4,
-      initialSpringVelocity: 1.7,
-      options: .CurveEaseInOut | .AllowUserInteraction,
-      animations: {
-        fullVersionBannerView.layer.opacity = 1
-        fullVersionBannerView.layer.transform = CATransform3DMakeScale(1, 1, 1)
-      },
-      completion: { (finished) -> Void in
-        UIView.animateWithDuration(0.6,
-          delay: 5,
-          usingSpringWithDamping: 0.8,
-          initialSpringVelocity: 10,
-          options: .CurveEaseInOut | .AllowUserInteraction,
-          animations: {
-            fullVersionBannerView.layer.opacity = 0
-            fullVersionBannerView.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
-          },
-          completion: { (finished) -> Void in
-            fullVersionBannerView.removeFromSuperview()
-        })
-      }
-    )
+    fullVersionBannerView = InfoBannerView.create()
+    fullVersionBannerView!.infoLabel.text = text
+    fullVersionBannerView!.infoImageView.image = UIImage(named: "welcomeFullVersion")
+    fullVersionBannerView!.bannerWasTappedFunction = { [unowned self] _ in self.fullVersionBannerWasTapped() }
+    fullVersionBannerView!.showAndHide(animated: true, displayTime: 3, parentView: view) { finished in
+      self.fullVersionBannerView = nil
+    }
   }
   
-  func fullVersionBannerWasTapped(gestureRecognizer: UITapGestureRecognizer) {
-    if gestureRecognizer.state == .Ended {
-      if let fullVersionViewController: FullVersionViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.fullVersionViewControllerIdentifier) {
-        navigationController!.pushViewController(fullVersionViewController, animated: true)
-      }
+  func fullVersionIsPurchased(notification: NSNotification) {
+    hideFullVersionBanner()
+  }
+
+  private func hideFullVersionBanner() {
+    fullVersionBannerView?.hide(animated: true)
+    fullVersionBannerView = nil
+  }
+  
+  func fullVersionBannerWasTapped() {
+    if let fullVersionViewController: FullVersionViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.fullVersionViewControllerIdentifier) {
+      navigationController!.pushViewController(fullVersionViewController, animated: true)
     }
   }
 

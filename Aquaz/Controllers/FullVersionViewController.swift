@@ -11,7 +11,7 @@ import StoreKit
 
 class FullVersionViewController: UIViewController {
 
-  class Strings {
+  private class LocalizedStrings {
     
     lazy var descriptionLabelText = NSLocalizedString("FVVC:Description about full version purchase",
       value: "Purchase the full version of Aquaz in order to get:\n\t• Smart notifications\n\t• Extended statistics\n\t• No ads",
@@ -33,7 +33,7 @@ class FullVersionViewController: UIViewController {
   @IBOutlet weak var priceLabel: UILabel!
   @IBOutlet weak var purchaseFullVersionButton: RoundedButton!
 
-  private let strings = Strings()
+  private let localizedStrings = LocalizedStrings()
   
   private var approvalBannerView: UIView?
   
@@ -56,7 +56,7 @@ class FullVersionViewController: UIViewController {
 
     purchaseFullVersionButton.backgroundColor = StyleKit.controlTintColor
     
-    descriptionLabel.text = strings.descriptionLabelText
+    descriptionLabel.text = localizedStrings.descriptionLabelText
   }
 
   private func checkDeferredState() {
@@ -133,8 +133,8 @@ class FullVersionViewController: UIViewController {
   private func fetchPrices() {
     InAppPurchaseManager.sharedInstance.fetchFullVersionPrice { [weak self] price in
       if self != nil {
-        let priceProcessed = price.isEmpty ? self!.strings.priceLabelErrorText : price
-        self!.priceLabel.text = String.localizedStringWithFormat(self!.strings.priceLabelText, priceProcessed)
+        let priceProcessed = price.isEmpty ? self!.localizedStrings.priceLabelErrorText : price
+        self!.priceLabel.text = String.localizedStringWithFormat(self!.localizedStrings.priceLabelText, priceProcessed)
       }
     }
   }
