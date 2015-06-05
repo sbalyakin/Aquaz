@@ -23,7 +23,79 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   @IBOutlet weak var navigationDateLabel: UILabel!
   @IBOutlet weak var summaryView: BannerView!
 
-  // MARK: Public properties -
+  // MARK: Localization -
+  
+  private class LocalizedStrings {
+    
+    lazy var welcomeToNextDayMessage = NSLocalizedString("DVC:Welcome to the next day",
+      value: "Welcome to the next day",
+      comment: "DayViewController: Title for alert displayed if tomorrow has come")
+    
+    lazy var okButtonTitle = NSLocalizedString("DVC:OK",
+      value: "OK",
+      comment: "DayViewController: Cancel button title for alert displayed if tomorrow has come")
+    
+    lazy var drinksTitle = NSLocalizedString("DVC:Drinks",
+      value: "Drinks",
+      comment: "DayViewController: Top bar title for page with drinks selection")
+    
+    lazy var diaryTitle = NSLocalizedString("DVC:Diary",
+      value: "Diary",
+      comment: "DayViewController: Top bar title for water intakes diary")
+    
+    lazy var rateApplicationAlertTitle = NSLocalizedString("DVC:Rate Aquaz",
+      value: "Rate Aquaz",
+      comment: "DayViewController: Alert\'s title suggesting user to rate the application")
+    
+    lazy var rateApplicationAlertMessage = NSLocalizedString("DVC:If you enjoy using Aquaz, would you mind taking a moment to rate it?\nThanks for your support!",
+      value: "If you enjoy using Aquaz, would you mind taking a moment to rate it?\nThanks for your support!",
+      comment: "DayViewController: Alert\'s message suggesting user to rate the application")
+    
+    lazy var rateApplicationAlertRateText = NSLocalizedString("DVC:Rate It Now",
+      value: "Rate It Now",
+      comment: "DayViewController: Title for alert\'s button allowing user to rate the application")
+    
+    lazy var rateApplicationAlertRemindLaterText = NSLocalizedString("DVC:Remind Me Later",
+      value: "Remind Me Later",
+      comment: "DayViewController: Title for alert\'s button allowing user to postpone rating the application")
+    
+    lazy var rateApplicationAlertNoText = NSLocalizedString("DVC:No, Thanks",
+      value: "No, Thanks",
+      comment: "DayViewController: Title for alert\'s button allowing user to reject rating the applcation")
+    
+    lazy var intakeButtonTextTemplate = NSLocalizedString("DVC:%1$@ of %2$@",
+      value: "%1$@ of %2$@",
+      comment: "DayViewController: Current daily water intake of water intake goal")
+
+    lazy var helpTipSwipeToChangeDay = NSLocalizedString("DVC:Swipe to change day",
+      value: "Swipe to change day",
+      comment: "DayViewController: Text for help tip about swiping for changing day")
+
+    lazy var helpTipHighActivityMode = NSLocalizedString("DVC:Tap to activate High Activity mode",
+      value: "Tap to activate High Activity mode",
+      comment: "DayViewController: Text for help tip about activating High Activity mode")
+    
+    lazy var helpTipHotWeatherMode = NSLocalizedString("DVC:Tap to activate Hot Weather mode",
+      value: "Tap to activate Hot Weather mode",
+      comment: "DayViewController: Text for help tip about activating Hot Weather mode")
+
+    lazy var helpTipSwitchToPercentAndViceVersa = NSLocalizedString("DVC:Tap to switch between percents and volume",
+      value: "Tap to switch between percents and volume",
+      comment: "DayViewController: Text for help tip about switching between percents and volume representation of overall intake for a day")
+
+    lazy var helpTipLongPressToChooseAlcohol = NSLocalizedString("DVC:Long press to choose an alcoholic drink",
+      value: "Long press to choose an alcoholic drink",
+      comment: "DayViewController: Text for help tip about choosing an alcoholic drink")
+
+    lazy var congratulationsBannerText = NSLocalizedString("DVC:Congratulations!\nYou have drunk your daily water intake.",
+      value: "Congratulations!\nYou have drunk your daily water intake.",
+      comment: "DayViewController: Text for banner shown if a user drink his daily water intake")
+
+  }
+  
+  private let localizedStrings = LocalizedStrings()
+
+  // MARK: Properties -
   
   /// Current date for managing water intake
   private var date: NSDate! {
@@ -60,7 +132,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     static let diaryViewControllerStoryboardID = "DiaryViewController"
     static let showCalendarSegue = "ShowCalendar"
     static let pageViewEmbedSegue = "PageViewEmbed"
-    static let congratulationsViewNib = "CongratulationsView"
   }
   
   private var volumeObserverIdentifier: Int?
@@ -172,9 +243,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     
     if mode == .General && isCurrentDayToday && dayIsSwitched {
       if showAlert {
-        let message = NSLocalizedString("DVC:Welcome to the next day", value: "Welcome to the next day", comment: "DayViewController: Title for alert displayed if tomorrow has come")
-        let cancelButtonTitle = NSLocalizedString("DVC:OK", value: "OK", comment: "DayViewController: Cancel button title for alert displayed if tomorrow has come")
-        let alert = UIAlertView(title: nil, message: message, delegate: nil, cancelButtonTitle: cancelButtonTitle)
+        let alert = UIAlertView(title: nil, message: localizedStrings.welcomeToNextDayMessage, delegate: nil, cancelButtonTitle: localizedStrings.okButtonTitle)
         alert.show()
       }
 
@@ -341,12 +410,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       return
     }
     
-    let title: String
-    if page == selectDrinkViewController {
-      title = NSLocalizedString("DVC:Drinks", value: "Drinks", comment: "DayViewController: Top bar title for page with drinks selection")
-    } else {
-      title = NSLocalizedString("DVC:Diary", value: "Diary", comment: "DayViewController: Top bar title for water intakes diary")
-    }
+    let title = (page == selectDrinkViewController) ? localizedStrings.drinksTitle : localizedStrings.diaryTitle
     
     if initial {
       navigationTitleLabel.text = title
@@ -477,17 +541,12 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   private func showRateApplicationAlert() {
     Settings.uiWritingReviewAlertLastShownDate.value = NSDate()
 
-    let title = NSLocalizedString("DVC:Rate Aquaz", value: "Rate Aquaz", comment: "DayViewController: Alert\'s title suggesting user to rate the application")
-
-    let message = NSLocalizedString("DVC:If you enjoy using Aquaz, would you mind taking a moment to rate it?\nThanks for your support!", value: "If you enjoy using Aquaz, would you mind taking a moment to rate it?\nThanks for your support!", comment: "DayViewController: Alert\'s message suggesting user to rate the application")
-    
-    let rateText = NSLocalizedString("DVC:Rate It Now", value: "Rate It Now", comment: "DayViewController: Title for alert\'s button allowing user to rate the application")
-
-    let remindLaterText = NSLocalizedString("DVC:Remind Me Later", value: "Remind Me Later", comment: "DayViewController: Title for alert\'s button allowing user to postpone rating the application")
-
-    let noText = NSLocalizedString("DVC:No, Thanks", value: "No, Thanks", comment: "DayViewController: Title for alert\'s button allowing user to reject rating the applcation")
-
-    let alert = UIAlertView(title: title, message: message, delegate: self, cancelButtonTitle: noText, otherButtonTitles: rateText, remindLaterText)
+    let alert = UIAlertView(
+      title: localizedStrings.rateApplicationAlertTitle,
+      message: localizedStrings.rateApplicationAlertMessage,
+      delegate: self,
+      cancelButtonTitle: localizedStrings.rateApplicationAlertNoText,
+      otherButtonTitles: localizedStrings.rateApplicationAlertRateText, localizedStrings.rateApplicationAlertRemindLaterText)
 
     alert.show()
   }
@@ -511,42 +570,14 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
 
   private func showCongratulationsAboutWaterGoalReaching() {
-    let nib = UINib(nibName: Constants.congratulationsViewNib, bundle: nil)
-    
-    if let congratulationsView = nib.instantiateWithOwner(nil, options: nil).first as? UIView {
-      let frame = summaryView.convertRect(summaryView.frame, toView: navigationController!.view)
+    let banner = InfoBannerView.create()
+    banner.infoLabel.text = localizedStrings.congratulationsBannerText
+    banner.infoImageView.image = UIImage(named: "reward")
+    banner.bannerWasTappedFunction = { _ in banner.hide(animated: true) }
+    banner.accessoryImageView.hidden = true
 
-      congratulationsView.frame = frame
-      congratulationsView.layer.opacity = 0
-      congratulationsView.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
-      
-      navigationController!.view.addSubview(congratulationsView)
-        
-      UIView.animateWithDuration(0.6,
-        delay: 0,
-        usingSpringWithDamping: 0.4,
-        initialSpringVelocity: 1.7,
-        options: .CurveEaseInOut | .AllowUserInteraction,
-        animations: {
-          congratulationsView.layer.opacity = 1
-          congratulationsView.layer.transform = CATransform3DMakeScale(1, 1, 1)
-        },
-        completion: { (finished) -> Void in
-          UIView.animateWithDuration(0.6,
-            delay: 5,
-            usingSpringWithDamping: 0.8,
-            initialSpringVelocity: 10,
-            options: .CurveEaseInOut | .AllowUserInteraction,
-            animations: {
-              congratulationsView.layer.opacity = 0
-              congratulationsView.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
-            },
-            completion: { (finished) -> Void in
-              congratulationsView.removeFromSuperview()
-            })
-        }
-      )
-    }
+    let frame = summaryView.convertRect(summaryView.frame, toView: navigationController!.view)
+    banner.showAndHide(animated: true, displayTime: 4, parentView: navigationController!.view, height: frame.height, minY: frame.minY)
   }
 
   @IBAction func intakeButtonWasTapped(sender: AnyObject) {
@@ -579,8 +610,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       roundPrecision: amountPrecision,
       decimals: amountDecimals)
     
-    let template = NSLocalizedString("DVC:%1$@ of %2$@", value: "%1$@ of %2$@", comment: "DayViewController: Current daily water intake of water intake goal")
-    let text = NSString(format: template, intakeText, waterGoalText)
+    let text = NSString(format: localizedStrings.intakeButtonTextTemplate, intakeText, waterGoalText)
     intakeButton.setTitle(text as String, forState: .Normal)
   }
   
@@ -692,11 +722,11 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     let currentHelpTip = Settings.uiDayPageHelpTipToShow.value
     
     switch currentHelpTip {
-    case .SlideToChangeDay: showHelpTip_SlideToChangeDay()
-    case .HighActivityMode: showHelpTip_HighActivityMode()
-    case .HotWeatherMode: showHelpTip_HotWeatherMode()
-    case .SwitchToPercentsAndViceVersa: showHelpTip_SwitchToPercentAndViceVersa()
-    case .LongPressToChooseAlcohol: showHelpTip_LongPressToChooseAlcohol()
+    case .SlideToChangeDay: showHelpTipForSlideToChangeDay()
+    case .HighActivityMode: showHelpTipForHighActivityMode()
+    case .HotWeatherMode: showHelpTipForHotWeatherMode()
+    case .SwitchToPercentsAndViceVersa: showHelpTipForSwitchToPercentAndViceVersa()
+    case .LongPressToChooseAlcohol: showHelpTipForLongPressToChooseAlcohol()
     case .None: return
     }
     
@@ -705,35 +735,61 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     Settings.uiDayPageIntakesCountTillHelpTip.value = 2 // Help tips will be shown after every 2 intakes
   }
   
-  private func showHelpTip_SlideToChangeDay() {
-    let text = NSLocalizedString("DVC:Swipe to change day", value: "Swipe to change day", comment: "DayViewController: Text for help tip about swiping for changing day")
-    let tooltip = JDFTooltipView(targetView: navigationDateLabel, hostView: navigationController?.view, tooltipText: text, arrowDirection: .Up, width: view.frame.width / 3)
+  private func showHelpTipForSlideToChangeDay() {
+    let tooltip = JDFTooltipView(
+      targetView: navigationDateLabel,
+      hostView: navigationController?.view,
+      tooltipText: localizedStrings.helpTipSwipeToChangeDay,
+      arrowDirection: .Up,
+      width: view.frame.width / 3)
+    
     showTooltip(tooltip)
   }
   
-  private func showHelpTip_HighActivityMode() {
-    let text = NSLocalizedString("DVC:Tap to activate High Activity mode", value: "Tap to activate High Activity mode", comment: "DayViewController: Text for help tip about activating High Activity mode")
-    let tooltip = JDFTooltipView(targetView: highActivityButton, hostView: view, tooltipText: text, arrowDirection: .Up, width: view.frame.width / 2)
+  private func showHelpTipForHighActivityMode() {
+    let tooltip = JDFTooltipView(
+      targetView: highActivityButton,
+      hostView: view,
+      tooltipText: localizedStrings.helpTipHighActivityMode,
+      arrowDirection: .Up,
+      width: view.frame.width / 2)
+    
     showTooltip(tooltip)
   }
   
-  private func showHelpTip_HotWeatherMode() {
-    let text = NSLocalizedString("DVC:Tap to activate Hot Weather mode", value: "Tap to activate Hot Weather mode", comment: "DayViewController: Text for help tip about activating Hot Weather mode")
-    let tooltip = JDFTooltipView(targetView: hotDayButton, hostView: view, tooltipText: text, arrowDirection: .Up, width: view.frame.width / 2)
+  private func showHelpTipForHotWeatherMode() {
+    let tooltip = JDFTooltipView(
+      targetView: hotDayButton,
+      hostView: view,
+      tooltipText: localizedStrings.helpTipHotWeatherMode,
+      arrowDirection: .Up,
+      width: view.frame.width / 2)
+    
     showTooltip(tooltip)
   }
   
-  private func showHelpTip_SwitchToPercentAndViceVersa() {
-    let text = NSLocalizedString("DVC:Tap to switch between percents and volume", value: "Tap to switch between percents and volume", comment: "DayViewController: Text for help tip about switching between percents and volume representation of overall intake for a day")
-    let tooltip = JDFTooltipView(targetView: intakeButton, hostView: view, tooltipText: text, arrowDirection: .Up, width: view.frame.width / 2)
+  private func showHelpTipForSwitchToPercentAndViceVersa() {
+    let tooltip = JDFTooltipView(
+      targetView: intakeButton,
+      hostView: view,
+      tooltipText: localizedStrings.helpTipSwitchToPercentAndViceVersa,
+      arrowDirection: .Up,
+      width: view.frame.width / 2)
+    
     showTooltip(tooltip)
   }
   
-  private func showHelpTip_LongPressToChooseAlcohol() {
-    let text = NSLocalizedString("DVC:Long press to choose an alcoholic drink", value: "Long press to choose an alcoholic drink", comment: "DayViewController: Text for help tip about choosing an alcoholic drink")
+  private func showHelpTipForLongPressToChooseAlcohol() {
     let lastCellIndex = selectDrinkViewController!.collectionView.numberOfItemsInSection(0) - 1
     let cell = selectDrinkViewController!.collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: lastCellIndex, inSection: 0))
-    let tooltip = JDFTooltipView(targetView: cell, hostView: selectDrinkViewController!.collectionView, tooltipText: text, arrowDirection: .Down, width: view.frame.width / 2)
+    
+    let tooltip = JDFTooltipView(
+      targetView: cell,
+      hostView: selectDrinkViewController!.collectionView,
+      tooltipText: localizedStrings.helpTipLongPressToChooseAlcohol,
+      arrowDirection: .Down,
+      width: view.frame.width / 2)
+    
     showTooltip(tooltip)
   }
   

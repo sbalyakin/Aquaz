@@ -17,25 +17,27 @@ class FullVersionViewController: UIViewController {
       value: "Purchase the full version of Aquaz in order to get:\n\t• Smart notifications\n\t• Extended statistics\n\t• No ads",
       comment: "FullVersionViewController: Description about full version purchase")
 
-    lazy var priceLabelText = NSLocalizedString("FVVC:Price: %@", value: "Price: %@",
+    lazy var priceLabelText = NSLocalizedString("FVVC:Price: %@",
+      value: "Price: %@",
       comment: "FullVersionViewController: Template of price label for Full Version purchase")
 
-    lazy var priceLabelErrorText = NSLocalizedString("FVVC:Error", value: "Error",
+    lazy var priceLabelErrorText = NSLocalizedString("FVVC:Error",
+      value: "Error",
       comment: "FullVersionViewController: Text displayed as a value of price label if price fetching is failed")
 
+    lazy var approvalBannerText = NSLocalizedString("FVVC:Waiting for an approval from your family delegate...",
+      value: "Waiting for an approval from your family delegate...",
+      comment: "FullVersionViewController: Text for a banner shown if full version purchase is deffered and waits for an approval from parents")
+    
   }
   
-  private struct Constants {
-    static let approvalBannerViewNib = "ApprovalBannerView"
-  }
-
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var priceLabel: UILabel!
   @IBOutlet weak var purchaseFullVersionButton: RoundedButton!
 
   private let localizedStrings = LocalizedStrings()
   
-  private var approvalBannerView: UIView?
+  private var approvalBannerView: InfoBannerView?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -72,52 +74,21 @@ class FullVersionViewController: UIViewController {
       return
     }
     
-    let nib = UINib(nibName: Constants.approvalBannerViewNib, bundle: nil)
-    
-    approvalBannerView = nib.instantiateWithOwner(nil, options: nil).first as? BannerView
-    approvalBannerView!.setTranslatesAutoresizingMaskIntoConstraints(false)
-    approvalBannerView!.backgroundColor = UIColor(white: 1, alpha: 0.9)
-    approvalBannerView!.layer.opacity = 0
-    approvalBannerView!.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
-    view.addSubview(approvalBannerView!)
-    
-    // Setup constraints
-    let views = ["banner": approvalBannerView!]
-    view.addConstraints("H:|-0-[banner]", views: views)
-    view.addConstraints("H:[banner]-0-|", views: views)
-    view.addConstraints("V:|-0-[banner(75)]", views: views)
-    
-    // Show the banner with animation
-    UIView.animateWithDuration(0.6,
-      delay: 0,
-      usingSpringWithDamping: 0.4,
-      initialSpringVelocity: 1.7,
-      options: .CurveEaseInOut | .AllowUserInteraction,
-      animations: {
-        self.approvalBannerView!.layer.opacity = 1
-        self.approvalBannerView!.layer.transform = CATransform3DMakeScale(1, 1, 1)
-      },
-      completion: nil)
+    approvalBannerView = InfoBannerView.create()
+    approvalBannerView!.infoLabel.text = localizedStrings.approvalBannerText
+    approvalBannerView!.infoImageView.image = UIImage(named: "welcomeFullVersion")
+    approvalBannerView!.accessoryImageView.hidden = true
+    approvalBannerView!.show(animated: true, parentView: view)
   }
   
   private func hideApprovalBanner() {
     if approvalBannerView == nil {
       return
     }
-    
-    UIView.animateWithDuration(0.6,
-      delay: 0,
-      usingSpringWithDamping: 0.8,
-      initialSpringVelocity: 10,
-      options: .CurveEaseInOut | .AllowUserInteraction,
-      animations: {
-        self.approvalBannerView!.layer.opacity = 0
-        self.approvalBannerView!.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
-      },
-      completion: { (finished) -> Void in
-        self.approvalBannerView!.removeFromSuperview()
-        self.approvalBannerView = nil
-    })
+
+    approvalBannerView?.hide(animated: false) { _ in
+      self.approvalBannerView = nil
+    }
   }
 
   private func setupNotificationsObservation() {

@@ -102,6 +102,7 @@ class StatisticsViewController: UIViewController {
     fullVersionBannerView!.infoLabel.text = localizedStrings.fullVersionBannerText
     fullVersionBannerView!.infoImageView.image = UIImage(named: "welcomeFullVersion")
     fullVersionBannerView!.bannerWasTappedFunction = { [unowned self] infoBannerView in self.fullVersionBannerWasTapped() }
+    fullVersionBannerView!.showDelay = 0.6
     fullVersionBannerView!.show(animated: true, parentView: view)
   }
   
@@ -111,8 +112,9 @@ class StatisticsViewController: UIViewController {
   }
   
   private func hideFullVersionBanner() {
-    fullVersionBannerView?.hide(animated: false)
-    fullVersionBannerView = nil
+    fullVersionBannerView?.hide(animated: false) { _ in
+      self.fullVersionBannerView = nil
+    }
   }
   
   func fullVersionBannerWasTapped() {
