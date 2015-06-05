@@ -1,0 +1,24 @@
+
+/* Class = "UILabel"; text = "{Drink}"; ObjectID = "5Wh-Vx-QHv"; */
+"5Wh-Vx-QHv.text" = "{Drink}";
+
+/* Class = "UILabel"; text = "Updating..."; ObjectID = "9e7-xk-npV"; */
+"9e7-xk-npV.text" = "Обновление...";
+
+/* Class = "UILabel"; text = "{Drink}"; ObjectID = "Omk-iq-t3r"; */
+"Omk-iq-t3r.text" = "{Drink}";
+
+/* Class = "UILabel"; text = "{Amount}"; ObjectID = "agh-hU-OBc"; */
+"agh-hU-OBc.text" = "{Amount}";
+
+/* Class = "UILabel"; text = "{Amount}"; ObjectID = "bNh-iL-tK7"; */
+"bNh-iL-tK7.text" = "{Amount}";
+
+/* Class = "UILabel"; text = "{Drink}"; ObjectID = "dNy-lo-PmP"; */
+"dNy-lo-PmP.text" = "{Drink}";
+
+/* Class = "UILabel"; text = "{Amount}"; ObjectID = "spF-wi-ff1"; */
+"spF-wi-ff1.text" = "{Amount}";
+
+/* Class = "UIButton"; normalTitle = "Open application"; ObjectID = "ze7-qb-OsM"; */
+"ze7-qb-OsM.normalTitle" = "Открыть приложение";

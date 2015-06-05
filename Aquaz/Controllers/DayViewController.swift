@@ -71,13 +71,13 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       value: "Swipe to change day",
       comment: "DayViewController: Text for help tip about swiping for changing day")
 
-    lazy var helpTipHighActivityMode = NSLocalizedString("DVC:Tap to activate High Activity mode",
-      value: "Tap to activate High Activity mode",
-      comment: "DayViewController: Text for help tip about activating High Activity mode")
+    lazy var helpTipHighActivityMode = NSLocalizedString("DVC:Tap to toggle High Activity mode",
+      value: "Tap to toggle High Activity mode",
+      comment: "DayViewController: Text for help tip about activating/deactivating High Activity mode")
     
-    lazy var helpTipHotWeatherMode = NSLocalizedString("DVC:Tap to activate Hot Weather mode",
-      value: "Tap to activate Hot Weather mode",
-      comment: "DayViewController: Text for help tip about activating Hot Weather mode")
+    lazy var helpTipHotWeatherMode = NSLocalizedString("DVC:Tap to toggle Hot Weather mode",
+      value: "Tap to toggle Hot Weather mode",
+      comment: "DayViewController: Text for help tip about activating/deactivating Hot Weather mode")
 
     lazy var helpTipSwitchToPercentAndViceVersa = NSLocalizedString("DVC:Tap to switch between percents and volume",
       value: "Tap to switch between percents and volume",

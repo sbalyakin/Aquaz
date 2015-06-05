@@ -1,38 +1,35 @@
-/* Class = "UINavigationItem"; title = "Time Selection"; ObjectID = "1ri-5R-qlM"; */
-"1ri-5R-qlM.title" = "Выбор Времени";
+/* Class = "UINavigationItem"; title = "Choose Time"; ObjectID = "1ri-5R-qlM"; */
+"1ri-5R-qlM.title" = "Выберите Время";
 
-/* Class = "UINavigationItem"; title = "Support"; ObjectID = "4Do-hQ-n3x"; */
-"4Do-hQ-n3x.title" = "Поддержка";
+/* Class = "UINavigationItem"; title = "Choose Day"; ObjectID = "4v4-BL-wZE"; */
+"4v4-BL-wZE.title" = "Выберите День";
 
-/* Class = "UINavigationItem"; title = "Day Selection"; ObjectID = "4v4-BL-wZE"; */
-"4v4-BL-wZE.title" = "Выбор Дня";
+/* Class = "UINavigationItem"; title = "Full Version"; ObjectID = "7r8-aG-k9f"; */
+"7r8-aG-k9f.title" = "Полная Версия";
 
-/* Class = "UILabel"; text = "Support"; ObjectID = "5ut-mi-WHN"; */
-"5ut-mi-WHN.text" = "Поддержка";
+/* Class = "UIButton"; normalTitle = "{Large}"; ObjectID = "7xm-eq-yWQ"; */
+"7xm-eq-yWQ.normalTitle" = "{Large}";
 
-/* Class = "UIButton"; normalTitle = "500 ml"; ObjectID = "7xm-eq-yWQ"; */
-"7xm-eq-yWQ.normalTitle" = "500 мл";
-
-/* Class = "UILabel"; text = "Title"; ObjectID = "9Es-8S-l6b"; */
-"9Es-8S-l6b.text" = "Заголовок";
-
-/* Class = "UIButton"; normalTitle = "2000 ml"; ObjectID = "9h2-YY-Qq4"; */
-"9h2-YY-Qq4.normalTitle" = "2000 мл";
+/* Class = "UIButton"; normalTitle = "{DrunkAmount}"; ObjectID = "9h2-YY-Qq4"; */
+"9h2-YY-Qq4.normalTitle" = "{DrunkAmount}";
 
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "A5t-FE-O50"; */
 "A5t-FE-O50.normalTitle" = "Добавить";
 
-/* Class = "UILabel"; text = "Settings"; ObjectID = "FrE-C7-t6Y"; */
-"FrE-C7-t6Y.text" = "Настройки";
+/* Class = "UILabel"; text = "Date"; ObjectID = "C2o-ot-hlM"; */
+"C2o-ot-hlM.text" = "Дата";
 
-/* Class = "UINavigationController"; title = "Notifications Navigation Controller"; ObjectID = "I1B-Ue-Dul"; */
-"I1B-Ue-Dul.title" = "";
+/* Class = "UILabel"; text = "{Subtitle}"; ObjectID = "Ceg-X5-AVk"; */
+"Ceg-X5-AVk.text" = "{Subtitle}";
 
-/* Class = "UILabel"; text = "Volume"; ObjectID = "IVh-g5-6lW"; */
-"IVh-g5-6lW.text" = "Объём";
+/* Class = "UILabel"; text = "{PuchaseDescription}"; ObjectID = "Hcp-mP-3Xi"; */
+"Hcp-mP-3Xi.text" = "{PuchaseDescription}";
 
-/* Class = "UILabel"; text = "Congratulations! You are reached your water intake for today!"; ObjectID = "LdP-9M-cRB"; */
-"LdP-9M-cRB.text" = "Поздравляем! Вы сегодня выпили необходимое количество воды!";
+/* Class = "UILabel"; text = "{Volume}"; ObjectID = "IVh-g5-6lW"; */
+"IVh-g5-6lW.text" = "{Volume}";
+
+/* Class = "UINavigationItem"; title = "Special Modes"; ObjectID = "LeW-y3-3hQ"; */
+"LeW-y3-3hQ.title" = "Специальные Режимы";
 
 /* Class = "UISegmentedControl"; Mbn-bY-c57.segmentTitles[0] = "Week"; ObjectID = "Mbn-bY-c57"; */
 "Mbn-bY-c57.segmentTitles[0]" = "Неделя";
@@ -43,72 +40,102 @@
 /* Class = "UISegmentedControl"; Mbn-bY-c57.segmentTitles[2] = "Year"; ObjectID = "Mbn-bY-c57"; */
 "Mbn-bY-c57.segmentTitles[2]" = "Год";
 
-/* Class = "UILabel"; text = "Month"; ObjectID = "ORs-BH-u1n"; */
-"ORs-BH-u1n.text" = "Месяц";
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "NmH-l2-53C"; */
+"NmH-l2-53C.title" = "Настройки";
 
-/* Class = "UINavigationItem"; title = "Water Balance"; ObjectID = "Oy2-YR-KpK"; */
-"Oy2-YR-KpK.title" = "Водный баланс";
+/* Class = "UILabel"; text = "{Month}"; ObjectID = "ORs-BH-u1n"; */
+"ORs-BH-u1n.text" = "{Month}";
 
-/* Class = "UILabel"; text = "Drink"; ObjectID = "Vcm-PC-Pd2"; */
-"Vcm-PC-Pd2.text" = "Напиток";
+/* Class = "UITextView"; text = "If you have any suggestions, questions or you have noticed an issue, please send feedback to us."; ObjectID = "SbH-8R-2bi"; */
+"SbH-8R-2bi.text" = "Если у вас есть предложения, вопросы или вы заметили ошибку, пожалуйста, напишите нам об этом.";
 
-/* Class = "UILabel"; text = "Water Balance"; ObjectID = "aa5-MK-5Sc"; */
-"aa5-MK-5Sc.text" = "Водный баланс";
+/* Class = "UILabel"; text = "Price: Loading..."; ObjectID = "Sly-LE-jrD"; */
+"Sly-LE-jrD.text" = "Цена: Загрузка...";
 
-/* Class = "UILabel"; text = "500 / 500 fl oz"; ObjectID = "agg-wE-OgY"; */
-"agg-wE-OgY.text" = "500 / 500 fl oz";
+/* Class = "UINavigationItem"; title = "Water Goal"; ObjectID = "Tue-QT-MbV"; */
+"Tue-QT-MbV.title" = "Суточная Норма";
 
-/* Class = "UIButton"; normalTitle = "Today"; ObjectID = "byd-yV-Sp4"; */
-"byd-yV-Sp4.normalTitle" = "Today";
+/* Class = "UILabel"; text = "{AquazVersion}"; ObjectID = "Tyr-d0-jgd"; */
+"Tyr-d0-jgd.text" = "{AquazVersion}";
 
-/* Class = "UINavigationController"; title = "Support Navigation Controller"; ObjectID = "cH4-x3-tAR"; */
-"cH4-x3-tAR.title" = "";
+/* Class = "UILabel"; text = "{Drink}"; ObjectID = "Vcm-PC-Pd2"; */
+"Vcm-PC-Pd2.text" = "{Drink}";
 
-/* Class = "UILabel"; text = "Notifications"; ObjectID = "dsu-8k-u3L"; */
-"dsu-8k-u3L.text" = "Оповещения";
+/* Class = "UIButton"; normalTitle = "Send Feedback"; ObjectID = "W7K-jU-fAL"; */
+"W7K-jU-fAL.normalTitle" = "Обратная Связь";
 
-/* Class = "UINavigationItem"; title = "Statistics"; ObjectID = "gqT-gh-oAs"; */
-"gqT-gh-oAs.title" = "Статистика";
+/* Class = "UILabel"; text = "{WaterAmount}"; ObjectID = "WOd-mb-fl1"; */
+"WOd-mb-fl1.text" = "{WaterAmount}";
 
-/* Class = "UIButton"; normalTitle = "100 ml"; ObjectID = "hoF-aO-Mum"; */
-"hoF-aO-Mum.normalTitle" = "100 мл";
+/* Class = "UITabBarItem"; title = "Drinks"; ObjectID = "ZJP-Cb-pl3"; */
+"ZJP-Cb-pl3.title" = "Напитки";
 
-/* Class = "UILabel"; text = "Year"; ObjectID = "i3n-ub-LA6"; */
-"i3n-ub-LA6.text" = "Год";
+/* Class = "UILabel"; text = "{Amount}"; ObjectID = "agg-wE-OgY"; */
+"agg-wE-OgY.text" = "{Amount}";
 
-/* Class = "UINavigationController"; title = "Settings Navigation Controller"; ObjectID = "j8p-Wz-faw"; */
-"j8p-Wz-faw.title" = "";
+/* Class = "UILabel"; text = "{Title}"; ObjectID = "fPs-Mt-tMn"; */
+"fPs-Mt-tMn.text" = "{Title}";
 
-/* Class = "UILabel"; text = "Drinking diary:"; ObjectID = "kXx-WV-9Rz"; */
-"kXx-WV-9Rz.text" = "Дневник употребления напитков:";
+/* Class = "UILabel"; text = "{Title}"; ObjectID = "g9K-Ug-min"; */
+"g9K-Ug-min.text" = "{Title}";
+
+/* Class = "UINavigationItem"; title = "Measurement Units"; ObjectID = "gpX-c9-GbZ"; */
+"gpX-c9-GbZ.title" = "Единицы Измерения";
+
+/* Class = "UIButton"; normalTitle = "{Small}"; ObjectID = "hoF-aO-Mum"; */
+"hoF-aO-Mum.normalTitle" = "{Small}";
+
+/* Class = "UIButton"; normalTitle = "Rate in AppStore"; ObjectID = "hxP-2K-M6b"; */
+"hxP-2K-M6b.normalTitle" = "Оценить в AppStore";
+
+/* Class = "UILabel"; text = "{Year}"; ObjectID = "i3n-ub-LA6"; */
+"i3n-ub-LA6.text" = "{Year}";
+
+/* Class = "UIButton"; normalTitle = "Restore Purchases"; ObjectID = "ihc-Bi-XaL"; */
+"ihc-Bi-XaL.normalTitle" = "Восстановить Покупки";
+
+/* Class = "UITextView"; text = "Thank you for using Aquaz! If you like it, please support us and tell your friends about our app using buttons below."; ObjectID = "j2j-PD-0hx"; */
+"j2j-PD-0hx.text" = "Спасибо что используете Aquaz! Если он вам нравится, пожалуйста, поддержите нас и сообщите своим друзьям о нашем приложении.";
 
 /* Class = "UIBarButtonItem"; title = "Today"; ObjectID = "nSq-92-OEq"; */
 "nSq-92-OEq.title" = "Сегодня";
 
-/* Class = "UILabel"; text = "Month"; ObjectID = "oGq-1N-zd1"; */
-"oGq-1N-zd1.text" = "Месяц";
+/* Class = "UILabel"; text = "{Month}"; ObjectID = "oGq-1N-zd1"; */
+"oGq-1N-zd1.text" = "{Month}";
 
-/* Class = "UILabel"; text = "12:08 PM"; ObjectID = "oVd-k1-C1k"; */
-"oVd-k1-C1k.text" = "12:08 PM";
+/* Class = "UILabel"; text = "{Time}"; ObjectID = "oVd-k1-C1k"; */
+"oVd-k1-C1k.text" = "{Time}";
 
-/* Class = "UILabel"; text = "Week"; ObjectID = "qpS-Mu-cye"; */
-"qpS-Mu-cye.text" = "Неделя";
+/* Class = "UINavigationItem"; title = "Support"; ObjectID = "osk-6N-lDf"; */
+"osk-6N-lDf.title" = "Поддержка";
 
-/* Class = "UILabel"; text = "Statistics"; ObjectID = "tUc-b1-0b4"; */
-"tUc-b1-0b4.text" = "Статистика";
+/* Class = "UILabel"; text = "{Week}"; ObjectID = "qpS-Mu-cye"; */
+"qpS-Mu-cye.text" = "{Week}";
 
-/* Class = "UIButton"; normalTitle = "Close"; ObjectID = "tul-MI-hEV"; */
-"tul-MI-hEV.normalTitle" = "Закрыть";
+/* Class = "UITabBarItem"; title = "Statistics"; ObjectID = "rSh-yD-2IJ"; */
+"rSh-yD-2IJ.title" = "Статистика";
+
+/* Class = "UIButton"; normalTitle = "Purchase Full Version"; ObjectID = "sQ3-dy-K2d"; */
+"sQ3-dy-K2d.normalTitle" = "Купить Полную Версию";
 
 /* Class = "UINavigationItem"; title = "Notifications"; ObjectID = "usu-OE-mrJ"; */
 "usu-OE-mrJ.title" = "Оповещения";
 
-/* Class = "UIButton"; normalTitle = "200 ml"; ObjectID = "vXw-gW-sSA"; */
-"vXw-gW-sSA.normalTitle" = "200 ml";
+/* Class = "UIButton"; normalTitle = "{Medium}"; ObjectID = "vXw-gW-sSA"; */
+"vXw-gW-sSA.normalTitle" = "{Medium}";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "w3B-ay-B3d"; */
+"w3B-ay-B3d.title" = "Отмена";
 
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "wX0-fI-2mT"; */
 "wX0-fI-2mT.title" = "Настройки";
 
 /* Class = "UIButton"; normalTitle = "Choose"; ObjectID = "wsf-j2-xNS"; */
 "wsf-j2-xNS.normalTitle" = "Выбрать";
+
+/* Class = "UINavigationItem"; title = "Notification Sound"; ObjectID = "ywR-B4-HoE"; */
+"ywR-B4-HoE.title" = "Звук Оповещения";
+
+/* Class = "UILabel"; text = "Drinks"; ObjectID = "z84-wB-oAh"; */
+"z84-wB-oAh.text" = "Напитки";
 

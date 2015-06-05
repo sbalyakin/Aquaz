@@ -1,0 +1,26 @@
+/* Class = "UIButton"; normalTitle = "Get Started"; ObjectID = "J5j-Nk-rv9"; */
+"J5j-Nk-rv9.normalTitle" = "Начать";
+
+/* Class = "UILabel"; text = "Welcome!
+
+Swite to set up Aquaz."; ObjectID = "LR1-R9-kgb"; */
+"LR1-R9-kgb.text" = "";
+
+/* Class = "UILabel"; text = "Enter information to calculate daily water intake."; ObjectID = "OZc-wd-LVi"; */
+"OZc-wd-LVi.text" = "Укажите информацию для расчета суточной нормы воды.";
+
+/* Class = "UILabel"; text = "Purchase the full version of Aquaz in order to:
+• Get smart notifications
+• Enjoy extended statistics
+• Remove ads"; ObjectID = "UTf-EX-vft"; */
+"UTf-EX-vft.text" = "";
+
+/* Class = "UILabel"; text = "Choose preferred measurement units."; ObjectID = "qtN-V8-hVa"; */
+"qtN-V8-hVa.text" = "Выберите единицы измерения.";
+
+/* Class = "UIButton"; normalTitle = "See Details"; ObjectID = "rhP-uX-50v"; */
+"rhP-uX-50v.normalTitle" = "Подробнее";
+
+/* Class = "UIButton"; normalTitle = "Skip this"; ObjectID = "tep-fO-IDh"; */
+"tep-fO-IDh.normalTitle" = "Пропустить";
+

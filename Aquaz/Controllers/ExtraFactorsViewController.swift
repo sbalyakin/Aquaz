@@ -30,8 +30,6 @@ class ExtraFactorsViewController: OmegaSettingsViewController {
       value: "Specify daily water intake increasing when High Physical Activity mode is turned on.",
       comment: "ExtraFactorsViewController: Footer for high physical activity section")
     
-    // TODO: move to a localization file
-    //let a = "Укажите повышение суточной нормы при включении режима Высокая Физическая Активность"
     let highActivityTitle = NSLocalizedString("EFVC:High Physical Activity", value: "High Physical Activity",
       comment: "ExtraFactorsViewController: Table cell title for [High Physical Activity] setting")
     

@@ -46,9 +46,6 @@ class WaterGoalViewController: OmegaSettingsViewController {
     let dailyWaterIntakeTitle = NSLocalizedString("WGVC:Daily Water Intake", value: "Daily Water Intake",
       comment: "WaterGoalViewController: Table cell title for [Daily Water Intake] setting")
 
-    // TODO: move to a localization file
-    let a = "Рассчитанная суточная норма потребления воды носит общий характер. Всегда руководствуйтесь потребностями своего организма. Пожалуйста, проконсультируйтесь со специалистом для получения информации о возможных противопоказаниях."
-
     let dailyWaterIntakeSectionHeader = NSLocalizedString("WGVC:Recommendations", value: "Recommendations",
       comment: "WaterGoalViewController: Header for section with daily water intake")
 

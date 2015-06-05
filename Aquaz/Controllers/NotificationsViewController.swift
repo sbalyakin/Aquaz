@@ -86,9 +86,6 @@ class NotificationsViewController: OmegaSettingsViewController {
     let limitNotificationsTitle = NSLocalizedString("NVC:Limit Notifications", value: "Limit Notifications",
       comment: "NotificationsViewController: Title for [Limit Notifications] setting")
     
-    // TODO: move to a localization file
-    // "Включите режим Умные Оповещения чтобы откладывать оповещения, учитывая время употребления напитков."
-    
     let smartNotificationsSectionFooter = NSLocalizedString(
       "NVC:Enable to snooze notifications taking into account time of drink intakes.",
       value: "Enable to snooze notifications taking into account time of drink intakes.",

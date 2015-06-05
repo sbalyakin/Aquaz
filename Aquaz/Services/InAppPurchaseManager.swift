@@ -36,18 +36,6 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
       value: "You is not allowed to perform the attempted action",
       comment: "InAppPurchaseManager: Message shown when payment transaction failed by reason: Client is not allowed to perform the attempted action")
     
-    lazy var transactionFailedPaymentInvalid = NSLocalizedString("IAPM:Payment parameters was not recognized by the App Store",
-      value: "Payment parameters was not recognized by the App Store",
-      comment: "InAppPurchaseManager: Message shown when payment transaction failed by reason: Payment parameters was not recognized by the App Store")
-    
-    lazy var transactionFailedPaymentNotAllowed = NSLocalizedString("IAPM:You is not allowed to authorize payments",
-      value: "You is not allowed to authorize payments",
-      comment: "InAppPurchaseManager: Message shown when payment transaction failed by reason: User is not allowed to authorize payments")
-    
-    lazy var transactionFailedProductIsNotAvailable = NSLocalizedString("IAPM:The requested product is not available in the store",
-      value: "The requested product is not available in the store",
-      comment: "InAppPurchaseManager: Message shown when payment transaction failed by reason: The requested product is not available in the store")
-    
     lazy var transactionFailedUnknownError = NSLocalizedString("IAPM:An unknown error occured",
       value: "An unknown error occured",
       comment: "InAppPurchaseManager: Message shown when payment transaction failed by reason: An unknown error occured")
@@ -304,18 +292,17 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
       
     case SKErrorPaymentInvalid:
       Logger.logError("Payment transaction error", logDetails: "The payment parameters was not recognized by the Apple App Store")
-      message = localizedStrings.transactionFailedPaymentInvalid
+      message = localizedStrings.transactionFailedUnknownError
       
     case SKErrorPaymentNotAllowed:
       Logger.logError("Payment transaction error", logDetails: "The client is not allowed to authorize payments")
-      message = localizedStrings.transactionFailedPaymentNotAllowed
+      message = localizedStrings.transactionFailedUnknownError
       
     case SKErrorStoreProductNotAvailable:
       Logger.logError("Payment transaction error", logDetails: "The requested product is not available in the store")
-      message = localizedStrings.transactionFailedProductIsNotAvailable
+      message = localizedStrings.transactionFailedUnknownError
       
     default:
-      //Logger.logError("Payment transaction error", logDetails: "An unknown error occured")
       message = error.localizedDescription
     }
     
