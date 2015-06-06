@@ -233,7 +233,9 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
         processFailedTransaction(transaction)
       }
       
-      NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationFullVersionPurchaseStateDidChange, object: nil)
+      dispatch_async(dispatch_get_main_queue()) {
+        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationFullVersionPurchaseStateDidChange, object: nil)
+      }
     }
   }
   
@@ -265,7 +267,10 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
   
   private func activateFullVersion() {
     Settings.generalFullVersion.value = true
-    NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationFullVersionIsPurchased, object: nil)
+    
+    dispatch_async(dispatch_get_main_queue()) {
+      NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationFullVersionIsPurchased, object: nil)
+    }
   }
   
   private func processDeferredTransaction(transaction: SKPaymentTransaction) {
