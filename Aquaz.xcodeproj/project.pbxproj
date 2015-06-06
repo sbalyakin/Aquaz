@@ -92,6 +92,8 @@
 		84ED8A211A84C8660042BAF2 /* UnitsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED8A201A84C8660042BAF2 /* UnitsTests.swift */; };
 		84ED8A231A84ED9E0042BAF2 /* DrinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */; };
 		84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9DD971A16574E003D6444 /* PickTimeViewController.swift */; };
+		A5062A6D1B22E039008ADB89 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5062A6B1B22E039008ADB89 /* Security.framework */; };
+		A5062A6E1B22E039008ADB89 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A5062A6C1B22E039008ADB89 /* libc++.dylib */; };
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
 		A54ED2591AD447A600FD37DD /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54ED2581AD447A600FD37DD /* UIExtensions.swift */; };
 		A54ED25A1AD447C000FD37DD /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54ED2581AD447A600FD37DD /* UIExtensions.swift */; };
@@ -279,6 +281,8 @@
 		84ED8A201A84C8660042BAF2 /* UnitsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsTests.swift; sourceTree = "<group>"; };
 		84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkTests.swift; sourceTree = "<group>"; };
 		84F9DD971A16574E003D6444 /* PickTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTimeViewController.swift; sourceTree = "<group>"; };
+		A5062A6B1B22E039008ADB89 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A5062A6C1B22E039008ADB89 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A54ED2581AD447A600FD37DD /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		A54ED25C1AD5A67900FD37DD /* MMWormhole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMWormhole.h; sourceTree = "<group>"; };
@@ -372,6 +376,8 @@
 				A5EE36271AADAF250038C844 /* Crashlytics.framework in Frameworks */,
 				A5E660A41AACB95800C24627 /* SystemConfiguration.framework in Frameworks */,
 				A5E660A21AACB95200C24627 /* libsqlite3.dylib in Frameworks */,
+				A5062A6D1B22E039008ADB89 /* Security.framework in Frameworks */,
+				A5062A6E1B22E039008ADB89 /* libc++.dylib in Frameworks */,
 				A5E660A01AACB94B00C24627 /* libz.dylib in Frameworks */,
 				A5F0A5CF1AACADE7006452C9 /* libLocalytics.a in Frameworks */,
 				A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */,
@@ -508,11 +514,11 @@
 		84669A6B19DAD78D003C2263 /* Aquaz */ = {
 			isa = PBXGroup;
 			children = (
-				A5C374AE1AE6700900F91550 /* Views */,
 				843B055219E2D7800097A833 /* AppDelegates */,
+				843B055D19E2D7800097A833 /* Models */,
+				A5C374AE1AE6700900F91550 /* Views */,
 				843B055419E2D7800097A833 /* Controllers */,
 				8424AA041A0B57F9009C5C47 /* Controls */,
-				843B055D19E2D7800097A833 /* Models */,
 				A5EE36241AAD9D820038C844 /* Services */,
 				A5B75A1219E55CBB00D0477B /* Helpers */,
 				843B055919E2D7800097A833 /* External */,
@@ -593,13 +599,15 @@
 		84D251951AD2511E001E6644 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5062A6C1B22E039008ADB89 /* libc++.dylib */,
+				A5E660A11AACB95200C24627 /* libsqlite3.dylib */,
+				A5E6609F1AACB94B00C24627 /* libz.dylib */,
+				A5062A6B1B22E039008ADB89 /* Security.framework */,
 				A5A3358A1B0218CE004579A4 /* StoreKit.framework */,
 				A5EE36291AADB2890038C844 /* AdSupport.framework */,
 				A5F0A5B01AAC7F04006452C9 /* Fabric.framework */,
 				A5F0A5AF1AAC7F04006452C9 /* Crashlytics.framework */,
 				A5E660A31AACB95800C24627 /* SystemConfiguration.framework */,
-				A5E660A11AACB95200C24627 /* libsqlite3.dylib */,
-				A5E6609F1AACB94B00C24627 /* libz.dylib */,
 				A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */,
 				84D251961AD2511E001E6644 /* NotificationCenter.framework */,
 			);
@@ -1316,10 +1324,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1328,6 +1332,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aquaz.app/Aquaz";
 			};
@@ -1339,14 +1344,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = AquazTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aquaz.app/Aquaz";
 			};

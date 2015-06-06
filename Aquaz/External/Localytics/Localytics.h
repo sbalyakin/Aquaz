@@ -12,8 +12,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-
-#define LOCALYTICS_LIBRARY_VERSION      @"3.1.0"
+#define LOCALYTICS_LIBRARY_VERSION      @"3.3.0"
 
 typedef NS_ENUM(NSUInteger, LLInAppMessageDismissButtonLocation){
     LLInAppMessageDismissButtonLocationLeft,
@@ -335,6 +334,30 @@ typedef NS_ENUM(NSInteger, LLProfileScope){
  */
 + (void)deleteProfileAttribute:(NSString *)attribute;
 
+/** Convenience method to set a customer's email as both a profile attribute and
+ as a customer identifier (scope: Organization)
+ @param email Customer's email
+ */
++ (void)setCustomerEmail:(NSString *)email;
+
+/** Convenience method to set a customer's first name as both a profile attribute and
+ as a customer identifier (scope: Organization)
+ @param firstName Customer's first name
+ */
++ (void)setCustomerFirstName:(NSString *)firstName;
+
+/** Convenience method to set a customer's last name as both a profile attribute and
+ as a customer identifier (scope: Organization)
+ @param lastName Customer's last name
+ */
++ (void)setCustomerLastName:(NSString *)lastName;
+
+/** Convenience method to set a customer's full name as both a profile attribute and
+ as a customer identifier (scope: Organization)
+ @param fullName Customer's full name
+ */
++ (void)setCustomerFullName:(NSString *)fullName;
+
 #pragma mark - Push
 /** ---------------------------------------------------------------------------------------
  * @name Push
@@ -564,6 +587,22 @@ typedef NS_ENUM(NSInteger, LLProfileScope){
  */
 + (void)removeAnalyticsDelegate:(id<LLAnalyticsDelegate>)delegate;
 
+#pragma mark - WatchKit
+/** ---------------------------------------------------------------------------------------
+ * @name WatchKit
+ *  ---------------------------------------------------------------------------------------
+ */
+
+/** Handle calls to the SDK from a WatchKit Extension app
+ 
+ Call this in the UIApplicationDelegate's application:handleWatchKitExtensionRequest:reply: 
+ method.
+ 
+ @param userInfo the userInfo provided by application:handleWatchKitExtensionRequest:reply:
+ @param reply The reply provided by application:handleWatchKitExtensionRequest:reply:
+ @return YES if the Localytics SDK has handled replying to the WatchKit Extension; NO otherwise
+ */
++ (BOOL)handleWatchKitExtensionRequest:(NSDictionary *)userInfo reply:(void (^)(NSDictionary *replyInfo))reply;
 
 @end
 

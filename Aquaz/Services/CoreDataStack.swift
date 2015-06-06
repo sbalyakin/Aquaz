@@ -78,6 +78,16 @@ class CoreDataStack: NSObject {
     return coordinator
   }()
 
+  func saveAllContexts() {
+    if mainContextIsInitialized {
+      CoreDataStack.saveContext(mainContext)
+    }
+
+    if privateContextIsInitialized {
+      CoreDataStack.saveContext(privateContext)
+    }
+  }
+  
   private var mainContextIsInitialized = false
   private var privateContextIsInitialized = false
   
@@ -104,6 +114,10 @@ class CoreDataStack: NSObject {
     if managedObjectContext.hasChanges && !managedObjectContext.save(&error) {
       Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
     }
+  }
+  
+  class func saveAllContexts() {
+    sharedInstance.saveAllContexts()
   }
   
   // MARK: - Convenient accessors to the shared instance's stuff

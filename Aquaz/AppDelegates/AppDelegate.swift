@@ -24,17 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    // Override point for customization after application launch.
     Fabric.with([Crashlytics()])
     
     Localytics.integrate(GlobalConstants.localyticsApplicationKey)
     
     #if DEBUG
-      Logger.setup(logLevel: .Debug, assertLevel: .Error, consoleLevel: .Debug, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
+      Logger.setup(logLevel: .Warning, assertLevel: .Error, consoleLevel: .Debug, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
       #else
       Logger.setup(logLevel: .Warning, assertLevel: .Error, consoleLevel: .Error, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
     #endif
-    
+
     if !Settings.generalFullVersion.value {
       // Just for creating shared instance of in-app purchase manager and to start observing transaction states
       InAppPurchaseManager.sharedInstance
@@ -241,12 +240,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationDidBecomeActive(application: UIApplication) {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
+    // Just for getting sqlite DB folder
+    //let appFolder = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+    //println("App dir: \(appFolder[0])");
     Localytics.openSession()
     Localytics.upload()
     
-    // TODO: Just for getting sqlite DB folder
-    //let appFolder = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-    //println("App dir: \(appFolder[0])");
     NotificationsHelper.setApplicationIconBadgeNumber(0)
 
     refreshCurrentDayForDayViewController(showAlert: false)
@@ -273,13 +272,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationWillTerminate(application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
-    Localytics.closeSession()
-    Localytics.upload()
-    
-    CoreDataStack.saveContext(CoreDataStack.privateContext)
-    CoreDataStack.saveContext(CoreDataStack.mainContext)
+    CoreDataStack.saveAllContexts()
     
     NSNotificationCenter.defaultCenter().removeObserver(self)
+
+    Localytics.closeSession()
+    Localytics.upload()
   }
   
 }
