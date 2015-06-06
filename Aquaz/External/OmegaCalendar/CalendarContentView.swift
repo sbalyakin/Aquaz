@@ -99,7 +99,9 @@ extension CalendarContentView: UICollectionViewDataSource {
     switch section {
     case 0: return dayTitles.count
     case 1: return daysInfo.count
-    default: assert(false)
+    default:
+      assert(false)
+      return 0
     }
   }
   
@@ -107,7 +109,9 @@ extension CalendarContentView: UICollectionViewDataSource {
     switch indexPath.section {
     case 0: return getTitleCell(collectionView: collectionView, indexPath: indexPath)
     case 1: return getCell(collectionView: collectionView, indexPath: indexPath)
-    default: assert(false)
+    default:
+      assert(false)
+      return UICollectionViewCell()
     }
   }
   
