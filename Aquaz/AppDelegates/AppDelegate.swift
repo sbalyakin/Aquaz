@@ -24,9 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    Fabric.with([Crashlytics()])
-    
     Localytics.integrate(GlobalConstants.localyticsApplicationKey)
+    
+    Fabric.with([Crashlytics()])
     
     #if DEBUG
       Logger.setup(logLevel: .Warning, assertLevel: .Error, consoleLevel: .Debug, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
