@@ -17,7 +17,9 @@ class DiaryTableViewCell: UITableViewCell {
   
   var intake: Intake! {
     didSet {
-      applyIntake()
+      if intake != nil {
+        applyIntake()
+      }
     }
   }
   

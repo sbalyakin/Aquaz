@@ -15,7 +15,7 @@ class DiaryViewController: UIViewController {
   
   var date: NSDate! { didSet { dateWasChanged() } }
 
-  private var fetchedResultsController: NSFetchedResultsController!
+  private var fetchedResultsController: NSFetchedResultsController?
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   private var sizingCell: DiaryTableViewCell!
   private var volumeObserverIdentifier: Int?
@@ -78,10 +78,10 @@ class DiaryViewController: UIViewController {
       fetchRequest.predicate = predicate
       
       self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-      self.fetchedResultsController.delegate = self
+      self.fetchedResultsController!.delegate = self
       
       var error: NSError?
-      if !self.fetchedResultsController.performFetch(&error) {
+      if !self.fetchedResultsController!.performFetch(&error) {
         Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
       }
       
@@ -99,9 +99,10 @@ class DiaryViewController: UIViewController {
       let indexPath = tableView.indexPathForSelectedRow()
     {
       managedObjectContext.performBlock {
-        let intake = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Intake
-        dispatch_async(dispatch_get_main_queue()) {
-          intakeViewController.intake = intake
+        if let intake = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Intake {
+          dispatch_async(dispatch_get_main_queue()) {
+            intakeViewController.intake = intake
+          }
         }
       }
     }
@@ -113,22 +114,24 @@ class DiaryViewController: UIViewController {
 extension DiaryViewController: UITableViewDataSource {
   
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return fetchedResultsController.sections!.count
+    return fetchedResultsController?.sections?.count ?? 1
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let sectionInfo = fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
-    return sectionInfo.numberOfObjects
+    if let sectionInfo = fetchedResultsController?.sections?[section] as? NSFetchedResultsSectionInfo {
+      return sectionInfo.numberOfObjects
+    } else {
+      return 0
+    }
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier, forIndexPath: indexPath) as! DiaryTableViewCell
     
-    let intake = fetchedResultsController.objectAtIndexPath(indexPath) as! Intake
-    
-    cell.intake = intake
-    
-    checkHelpTip(indexPath: indexPath, cell: cell)
+    if let intake = fetchedResultsController?.objectAtIndexPath(indexPath) as? Intake {
+      cell.intake = intake
+      checkHelpTip(indexPath: indexPath, cell: cell)
+    }
     
     return cell
   }
@@ -172,8 +175,9 @@ extension DiaryViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if editingStyle == .Delete {
       managedObjectContext.performBlock {
-        let intake = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Intake
-        intake.deleteEntity(saveImmediately: true)
+        if let intake = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Intake {
+          intake.deleteEntity(saveImmediately: true)
+        }
       }
     }
   }
@@ -188,8 +192,10 @@ extension DiaryViewController: UITableViewDelegate {
       sizingCell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier) as! DiaryTableViewCell
     }
 
-    let intake = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Intake
-    sizingCell.intake = intake
+    if let intake = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Intake {
+      sizingCell.intake = intake
+    }
+    
     sizingCell.setNeedsLayout()
     sizingCell.layoutIfNeeded()
     let size = sizingCell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
@@ -218,8 +224,9 @@ extension DiaryViewController: NSFetchedResultsControllerDelegate {
         
       case .Update:
         let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as! DiaryTableViewCell
-        let intake = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Intake
-        cell.intake = intake
+        if let intake = self.fetchedResultsController?.objectAtIndexPath(indexPath!) as? Intake {
+          cell.intake = intake
+        }
         
       case .Move:
         self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
