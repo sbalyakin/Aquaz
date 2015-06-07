@@ -95,6 +95,7 @@
 		A5062A6D1B22E039008ADB89 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5062A6B1B22E039008ADB89 /* Security.framework */; };
 		A5062A6E1B22E039008ADB89 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A5062A6C1B22E039008ADB89 /* libc++.dylib */; };
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
+		A52A7D871B245C88007A71ED /* NotificationSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52A7D861B245C88007A71ED /* NotificationSounds.swift */; };
 		A54ED2591AD447A600FD37DD /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54ED2581AD447A600FD37DD /* UIExtensions.swift */; };
 		A54ED25A1AD447C000FD37DD /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54ED2581AD447A600FD37DD /* UIExtensions.swift */; };
 		A54ED25E1AD5A67900FD37DD /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = A54ED25D1AD5A67900FD37DD /* MMWormhole.m */; };
@@ -284,6 +285,7 @@
 		A5062A6B1B22E039008ADB89 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A5062A6C1B22E039008ADB89 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		A52A7D861B245C88007A71ED /* NotificationSounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSounds.swift; sourceTree = "<group>"; };
 		A54ED2581AD447A600FD37DD /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		A54ED25C1AD5A67900FD37DD /* MMWormhole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMWormhole.h; sourceTree = "<group>"; };
 		A54ED25D1AD5A67900FD37DD /* MMWormhole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWormhole.m; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 				A5E70A6F19E30BEE006E5FC0 /* Settings.swift */,
 				847D0E241A824CA900966538 /* SettingItems.swift */,
 				A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */,
+				A52A7D861B245C88007A71ED /* NotificationSounds.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1014,6 +1017,7 @@
 				A5D3D4251AA5D29700E3C989 /* SegmentedTableCell.swift in Sources */,
 				A5B013E31AE27C4900C372F8 /* ExtraFactorsViewController.swift in Sources */,
 				A57D2BF01ACFEA5A00619D62 /* WelcomeWizardPageViewController.swift in Sources */,
+				A52A7D871B245C88007A71ED /* NotificationSounds.swift in Sources */,
 				843A8C9C1AA8992B00ED9507 /* TimeIntervalPickerTableCell.swift in Sources */,
 				84C610BC1A31A98900433EF1 /* YearStatisticsViewController.swift in Sources */,
 				A5D3D4231AA5D29700E3C989 /* PickerTableCell.swift in Sources */,

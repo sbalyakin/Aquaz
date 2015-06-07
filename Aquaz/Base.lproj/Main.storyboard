@@ -1392,38 +1392,36 @@
                                             <constraint firstAttribute="height" constant="60" id="oB5-jr-6mz"/>
                                         </constraints>
                                     </imageView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Thank you for using Aquaz! If you like it, please support us and tell your friends about our app using buttons below." textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2j-PD-0hx" userLabel="Tell to friends text">
-                                        <rect key="frame" x="20" y="110" width="561" height="58"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Thank you for using Aquaz! If you like it, please support us and tell your friends about our app using buttons below." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="j2j-PD-0hx" userLabel="Tell to friends text">
+                                        <rect key="frame" x="20" y="118" width="561" height="20"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Vf1-bs-SL9" userLabel="Gap1">
-                                        <rect key="frame" x="0.0" y="176" width="124" height="60"/>
+                                        <rect key="frame" x="0.0" y="146" width="124" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="fgq-hd-SNH" userLabel="Gap2">
-                                        <rect key="frame" x="184" y="176" width="86" height="60"/>
+                                        <rect key="frame" x="184" y="146" width="86" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="mRJ-jf-Oho" userLabel="Gap3">
-                                        <rect key="frame" x="330" y="176" width="87" height="60"/>
+                                        <rect key="frame" x="330" y="146" width="87" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="8xZ-Ol-jFH" userLabel="Gap4">
-                                        <rect key="frame" x="477" y="176" width="124" height="60"/>
+                                        <rect key="frame" x="477" y="146" width="124" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="If you have any suggestions, questions or you have noticed an issue, please send feedback to us." textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SbH-8R-2bi" userLabel="Support text">
-                                        <rect key="frame" x="20" y="252" width="561" height="58"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="If you have any suggestions, questions or you have noticed an issue, please send feedback to us." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="SbH-8R-2bi" userLabel="Support text">
+                                        <rect key="frame" x="20" y="238" width="561" height="20"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W7K-jU-fAL">
-                                        <rect key="frame" x="246" y="318" width="108" height="30"/>
+                                        <rect key="frame" x="246" y="266" width="108" height="30"/>
                                         <state key="normal" title="Send Feedback">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1432,7 +1430,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9g-99-crR" userLabel="Twitter">
-                                        <rect key="frame" x="124" y="176" width="60" height="60"/>
+                                        <rect key="frame" x="124" y="146" width="60" height="60"/>
                                         <state key="normal" image="supportTwitter">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1441,7 +1439,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfq-sz-KOz" userLabel="Facebook">
-                                        <rect key="frame" x="270" y="176" width="60" height="60"/>
+                                        <rect key="frame" x="270" y="146" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="oSM-rZ-PcI"/>
                                             <constraint firstAttribute="width" constant="60" id="uvz-mQ-z3n"/>
@@ -1454,7 +1452,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPJ-Kp-lYM" userLabel="Mail">
-                                        <rect key="frame" x="417" y="176" width="60" height="60"/>
+                                        <rect key="frame" x="417" y="146" width="60" height="60"/>
                                         <state key="normal" image="supportMail">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1463,7 +1461,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hxP-2K-M6b">
-                                        <rect key="frame" x="244" y="356" width="113" height="30"/>
+                                        <rect key="frame" x="244" y="304" width="113" height="30"/>
                                         <state key="normal" title="Rate Application">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1483,7 +1481,7 @@
                                     <constraint firstItem="OPJ-Kp-lYM" firstAttribute="centerY" secondItem="tfq-sz-KOz" secondAttribute="centerY" id="508-G2-sJv"/>
                                     <constraint firstItem="Vf1-bs-SL9" firstAttribute="leading" secondItem="xpa-Ss-Tf5" secondAttribute="leading" id="57u-IA-ngc"/>
                                     <constraint firstItem="W7K-jU-fAL" firstAttribute="top" secondItem="SbH-8R-2bi" secondAttribute="bottom" constant="8" symbolic="YES" id="5CT-7v-f2E"/>
-                                    <constraint firstItem="SbH-8R-2bi" firstAttribute="top" secondItem="tfq-sz-KOz" secondAttribute="bottom" constant="16" id="7Kx-lf-zCS"/>
+                                    <constraint firstItem="SbH-8R-2bi" firstAttribute="top" secondItem="tfq-sz-KOz" secondAttribute="bottom" constant="32" id="7Kx-lf-zCS"/>
                                     <constraint firstItem="Tyr-d0-jgd" firstAttribute="top" secondItem="Ccx-CA-a4U" secondAttribute="bottom" constant="8" symbolic="YES" id="ANj-Jo-5yG"/>
                                     <constraint firstItem="fgq-hd-SNH" firstAttribute="centerY" secondItem="tfq-sz-KOz" secondAttribute="centerY" id="C1C-4q-Jfh"/>
                                     <constraint firstItem="8xZ-Ol-jFH" firstAttribute="height" secondItem="tfq-sz-KOz" secondAttribute="height" id="D67-cB-LZz"/>
@@ -1493,7 +1491,7 @@
                                     <constraint firstItem="OPJ-Kp-lYM" firstAttribute="leading" secondItem="mRJ-jf-Oho" secondAttribute="trailing" id="NAf-Yj-dj0"/>
                                     <constraint firstItem="fgq-hd-SNH" firstAttribute="width" secondItem="Vf1-bs-SL9" secondAttribute="width" multiplier="0.7" id="OAN-FS-iMv"/>
                                     <constraint firstItem="8xZ-Ol-jFH" firstAttribute="centerY" secondItem="tfq-sz-KOz" secondAttribute="centerY" id="Pvl-1Q-32o"/>
-                                    <constraint firstItem="j2j-PD-0hx" firstAttribute="top" secondItem="Tyr-d0-jgd" secondAttribute="bottom" constant="8" symbolic="YES" id="Qio-1J-sZs"/>
+                                    <constraint firstItem="j2j-PD-0hx" firstAttribute="top" secondItem="Tyr-d0-jgd" secondAttribute="bottom" constant="16" id="Qio-1J-sZs"/>
                                     <constraint firstItem="mRJ-jf-Oho" firstAttribute="leading" secondItem="tfq-sz-KOz" secondAttribute="trailing" id="RKR-Yv-enq"/>
                                     <constraint firstAttribute="centerX" secondItem="Ccx-CA-a4U" secondAttribute="centerX" id="RRk-av-ddA"/>
                                     <constraint firstAttribute="trailing" secondItem="j2j-PD-0hx" secondAttribute="trailing" constant="20" symbolic="YES" id="TUa-w5-stY"/>

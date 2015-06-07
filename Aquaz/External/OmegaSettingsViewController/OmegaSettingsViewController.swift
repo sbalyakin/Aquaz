@@ -123,14 +123,24 @@ class OmegaSettingsViewController: UIViewController {
   }
   
   func createEnumRightDetailTableCell<Value: RawRepresentable where Value: Printable, Value: Equatable, Value.RawValue == Int>(#title: String, settingsItem: SettingsItemBase<Value>, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
-    let cell = createRangedRightDetailTableCell(title: title, settingsItem: settingsItem, collection: EnumCollection<Value>(), pickerTableCellHeight: pickerTableCellHeight)
-    cell.stringFromValueFunction = stringFromValueFunction
+    let cell = createRangedRightDetailTableCell(
+      title: title,
+      settingsItem: settingsItem,
+      collection: EnumCollection<Value>(),
+      pickerTableCellHeight: pickerTableCellHeight,
+      stringFromValueFunction: stringFromValueFunction)
+    
     return cell
   }
   
   func createEnumRightDetailTableCell<Value: RawRepresentable where Value: Printable, Value: Equatable, Value.RawValue == Int>(#title: String, value: Value, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
-    let cell = createRangedRightDetailTableCell(title: title, value: value, collection: EnumCollection<Value>(), pickerTableCellHeight: pickerTableCellHeight)
-    cell.stringFromValueFunction = stringFromValueFunction
+    let cell = createRangedRightDetailTableCell(
+      title: title,
+      value: value,
+      collection: EnumCollection<Value>(),
+      pickerTableCellHeight: pickerTableCellHeight,
+      stringFromValueFunction: stringFromValueFunction)
+    
     return cell
   }
   

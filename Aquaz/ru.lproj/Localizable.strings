@@ -149,44 +149,44 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* NotificationsHelper: Text for alert body of notifications */
 "NH:It is time to drink!" = "Время выпить воды!";
 
-/* NotificationsSoundViewController: alarm sound named [Alarm] */
-"NSVC:Alarm" = "Тревога";
+/* NotificationSounds: alarm sound named [Alarm] */
+"NS:Alarm" = "Тревога";
 
-/* NotificationsSoundViewController: alarm sound named [Aqua] */
-"NSVC:Aqua" = "Аква";
+/* NotificationSounds: alarm sound named [Aqua] */
+"NS:Aqua" = "Аква";
 
-/* NotificationsSoundViewController: alarm sound named [Bells] */
-"NSVC:Bells" = "Перезвон";
+/* NotificationSounds: alarm sound named [Bells] */
+"NS:Bells" = "Перезвон";
 
-/* NotificationsSoundViewController: alarm sound named [Bubbles] */
-"NSVC:Bubbles" = "Пызури";
+/* NotificationSounds: alarm sound named [Bubbles] */
+"NS:Bubbles" = "Пызури";
 
-/* NotificationsSoundViewController: alarm sound named [Chime] */
-"NSVC:Chime" = "Звонок";
+/* NotificationSounds: alarm sound named [Chime] */
+"NS:Chime" = "Звонок";
 
-/* NotificationsSoundViewController: alarm sound named [Chirp] */
-"NSVC:Chirp" = "Щебет";
+/* NotificationSounds: alarm sound named [Chirp] */
+"NS:Chirp" = "Щебет";
 
-/* NotificationsSoundViewController: alarm sound named [Chord] */
-"NSVC:Chord" = "Аккорд";
+/* NotificationSounds: alarm sound named [Chord] */
+"NS:Chord" = "Аккорд";
 
-/* NotificationsSoundViewController: alarm sound named [Glass] */
-"NSVC:Glass" = "Стекло";
+/* NotificationSounds: alarm sound named [Glass] */
+"NS:Glass" = "Стекло";
 
-/* NotificationsSoundViewController: alarm sound named [Hand Bell] */
-"NSVC:Hand Bell" = "Колокольчик";
+/* NotificationSounds: alarm sound named [Hand Bell] */
+"NS:Hand Bell" = "Колокольчик";
 
-/* NotificationsSoundViewController: alarm sound named [Magic] */
-"NSVC:Magic" = "Магия";
+/* NotificationSounds: alarm sound named [Magic] */
+"NS:Magic" = "Магия";
 
 /* NotificationsSoundViewController: header title for [NSVC:Notification sounds] section */
 "NSVC:Notification sounds" = "Звуки оповещения";
 
-/* NotificationsSoundViewController: alarm sound named [Tiny Bell] */
-"NSVC:Tiny Bell" = "Тихий звонок";
+/* NotificationSounds: alarm sound named [Tiny Bell] */
+"NS:Tiny Bell" = "Тихий звонок";
 
-/* NotificationsSoundViewController: alarm sound named [Whistle] */
-"NSVC:Whistle" = "Свист";
+/* NotificationSounds: alarm sound named [Whistle] */
+"NS:Whistle" = "Свист";
 
 /* NotificationsViewController: Template string for time interval */
 "NVC:%u hr %u min" = "%1$u ч %2$u мин";
@@ -330,7 +330,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "WGVC:Age" = "Возраст";
 
 /* WaterGoalViewController: [Breastfeeding female] option for gender */
-"WGVC:Breastfeeding female" = "Женщина: грудное вскармливание";
+"WGVC:Breastfeeding female" = "Женщина: кормление грудью";
 
 /* WaterGoalViewController: [Daily] option for physical activity */
 "WGVC:Daily" = "Ежедневная";
@@ -357,7 +357,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "WGVC:Physical Activity" = "Физическая Активность";
 
 /* WaterGoalViewController: [Pregnant female] option for gender */
-"WGVC:Pregnant female" = "Женщина: Беременность";
+"WGVC:Pregnant female" = "Женщина: беременность";
 
 /* WaterGoalViewController: [Rare] option for physical activity */
 "WGVC:Rare" = "Редкая";

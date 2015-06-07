@@ -126,8 +126,8 @@ class NotificationsViewController: OmegaSettingsViewController {
     toCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
     
     let timeComponents = [
-      TimeIntervalPickerTableCellComponent(calendarUnit: NSCalendarUnit.CalendarUnitHour, minValue: 1, maxValue: 6, step: 1, title: intervalHourTitle, width: nil),
-      TimeIntervalPickerTableCellComponent(calendarUnit: NSCalendarUnit.CalendarUnitMinute, minValue: 0, maxValue: 59, step: 5, title: intervalMinuteTitle, width: nil)]
+      TimeIntervalPickerTableCellComponent(calendarUnit: NSCalendarUnit.CalendarUnitHour, minValue: 1, maxValue: 6, step: 1, title: intervalHourTitle, width: 100),
+      TimeIntervalPickerTableCellComponent(calendarUnit: NSCalendarUnit.CalendarUnitMinute, minValue: 0, maxValue: 59, step: 5, title: intervalMinuteTitle, width: 100)]
     
     let intervalCell = createTimeIntervalRightDetailTableCell(
       title: intervalTitle,
@@ -245,6 +245,12 @@ class NotificationsViewController: OmegaSettingsViewController {
   }
 
   private class func stringFromSoundFileName(filename: String) -> String {
+    for sound in NotificationSounds.soundList {
+      if sound.fileName == filename {
+        return sound.title
+      }
+    }
+    
     return filename.stringByDeletingPathExtension.capitalizedString
   }
   

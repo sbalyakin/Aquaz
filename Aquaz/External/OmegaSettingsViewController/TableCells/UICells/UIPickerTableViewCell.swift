@@ -76,7 +76,7 @@ class UIPickerTableViewCell: UITableViewCell {
   
   private func setupPickerView() {
     for label in componentTitleLabels {
-      label.removeFromSuperview()
+      label?.removeFromSuperview()
     }
     
     componentTitleLabels = []
@@ -86,15 +86,19 @@ class UIPickerTableViewCell: UITableViewCell {
     }
     
     for component in 0..<pickerView.numberOfComponents {
-      let title = dataSource!.pickerView(pickerView, titleForComponent: component)
-      let titleLabel = UILabel()
-      titleLabel.font = pickerViewFont
-      titleLabel.text = title
-      titleLabel.textColor = UIColor.blackColor()
-      titleLabel.backgroundColor = UIColor.clearColor()
-      titleLabel.sizeToFit()
-      pickerView.addSubview(titleLabel)
-      componentTitleLabels += [titleLabel]
+      let title = dataSource?.pickerView(pickerView, titleForComponent: component) ?? ""
+      if !title.isEmpty {
+        let titleLabel = UILabel()
+        titleLabel.font = pickerViewFont
+        titleLabel.text = title
+        titleLabel.textColor = UIColor.blackColor()
+        titleLabel.backgroundColor = UIColor.clearColor()
+        titleLabel.sizeToFit()
+        pickerView.addSubview(titleLabel)
+        componentTitleLabels.append(titleLabel)
+      } else {
+        componentTitleLabels.append(nil)
+      }
     }
   }
   
@@ -108,16 +112,19 @@ class UIPickerTableViewCell: UITableViewCell {
     let midY = pickerView.bounds.midY
     
     for component in 0..<pickerView.numberOfComponents {
-      let componentTitle = dataSource?.pickerView(pickerView, titleForComponent: component) ?? ""
-      let componentTitleSize = computeSizeForText(componentTitle, font: pickerViewFont)
-      let componentSize = pickerView.rowSizeForComponent(component)
-      let labelMinX = x + componentSize.width - componentTitleSize.width
-      let labelMinY = midY - componentTitleSize.height / 2
-      
-      let label = componentTitleLabels[component]
-      label.frame.origin = CGPoint(x: labelMinX, y: labelMinY)
-      
-      x += componentSize.width + pickerViewGapBetweenComponents
+      if let label = componentTitleLabels[component] {
+        let componentTitle = dataSource?.pickerView(pickerView, titleForComponent: component) ?? ""
+        let componentTitleSize = computeSizeForText(componentTitle, font: pickerViewFont)
+        let componentSize = pickerView.rowSizeForComponent(component)
+        let labelMinX = x + componentSize.width - componentTitleSize.width
+        let labelMinY = midY - componentTitleSize.height / 2
+        
+        label.frame.origin = CGPoint(x: labelMinX, y: labelMinY)
+        
+        x += componentSize.width + pickerViewGapBetweenComponents
+      } else {
+        x += pickerViewGapBetweenComponents
+      }
     }
   }
 
@@ -137,7 +144,7 @@ class UIPickerTableViewCell: UITableViewCell {
     return totalWidth
   }
 
-  private var componentTitleLabels: [UILabel] = []
+  private var componentTitleLabels: [UILabel?] = []
   private let pickerViewGapBetweenComponents: CGFloat = 5 // default gap between components for the picker view
   private let pickerViewMargin: CGFloat = 40 // overall margin for the picker view
   
@@ -176,7 +183,7 @@ extension UIPickerTableViewCell: UIPickerViewDataSource {
     paragraphStyle.alignment = componentTitle.isEmpty ? .Center : .Right
     paragraphStyle.tailIndent = -componentTitleWidth
     
-    return NSMutableAttributedString(string: rowTitle, attributes: [NSParagraphStyleAttributeName: paragraphStyle])
+    return NSAttributedString(string: rowTitle, attributes: [NSParagraphStyleAttributeName: paragraphStyle])
   }
 
 }
@@ -193,8 +200,7 @@ extension UIPickerTableViewCell: UIPickerViewDelegate {
     } else {
       let numberOfComponents = dataSource?.numberOfComponentsInPickerView(pickerView) ?? 1
       let totalGaps = CGFloat(numberOfComponents - 1) * pickerViewGapBetweenComponents
-      let maxWidth = round(bounds.width / 3) - 1 // The formula discovered after series of experiments
-      let width = min(maxWidth, (bounds.width - pickerViewMargin - totalGaps) / CGFloat(numberOfComponents))
+      let width = (bounds.width - pickerViewMargin - totalGaps) / CGFloat(numberOfComponents)
       return width
     }
   }

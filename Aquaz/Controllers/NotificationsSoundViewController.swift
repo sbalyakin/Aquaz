@@ -16,7 +16,7 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    checkSoundsList()
+    fillSoundsList()
     findCheckedIndex()
     UIHelper.applyStyle(self)
   }
@@ -42,18 +42,16 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
     }
   }
 
-  private func checkSoundsList() {
+  private func fillSoundsList() {
     if let bundlePath = NSBundle.mainBundle().resourcePath {
       if let allFiles = NSFileManager().contentsOfDirectoryAtPath(bundlePath, error: nil) as? [String] {
-        var checkedSounds: [SoundInfo] = []
-        for soundInfo in soundList {
+        for soundInfo in NotificationSounds.soundList {
           if contains(allFiles, soundInfo.fileName) {
-            checkedSounds.append(soundInfo)
+            soundList.append(soundInfo)
           } else {
             Logger.logError("Sound file is not found", logDetails: [Logger.Attributes.fileName: soundInfo.fileName])
           }
         }
-        soundList = checkedSounds
       } else {
         Logger.logError("Failed to get contents of resource directory")
       }
@@ -76,23 +74,8 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
     checkedIndex == 0
   }
   
-  private typealias SoundInfo = (fileName: String, title: String)
-  
-  private var soundList: [SoundInfo] = [
-    ("aqua.caf",      NSLocalizedString("NSVC:Aqua",      value: "Aqua",      comment: "NotificationsSoundViewController: alarm sound named [Aqua]")),
-    ("alarm.caf",     NSLocalizedString("NSVC:Alarm",     value: "Alarm",     comment: "NotificationsSoundViewController: alarm sound named [Alarm]")),
-    ("bells.caf",     NSLocalizedString("NSVC:Bells",     value: "Bells",     comment: "NotificationsSoundViewController: alarm sound named [Bells]")),
-    ("bubbles.caf",   NSLocalizedString("NSVC:Bubbles",   value: "Bubbles",   comment: "NotificationsSoundViewController: alarm sound named [Bubbles]")),
-    ("chime.caf",     NSLocalizedString("NSVC:Chime",     value: "Chime",     comment: "NotificationsSoundViewController: alarm sound named [Chime]")),
-    ("chirp.caf",     NSLocalizedString("NSVC:Chirp",     value: "Chirp",     comment: "NotificationsSoundViewController: alarm sound named [Chirp]")),
-    ("chord.caf",     NSLocalizedString("NSVC:Chord",     value: "Chord",     comment: "NotificationsSoundViewController: alarm sound named [Chord]")),
-    ("glass.caf",     NSLocalizedString("NSVC:Glass",     value: "Glass",     comment: "NotificationsSoundViewController: alarm sound named [Glass]")),
-    ("hand-bell.caf", NSLocalizedString("NSVC:Hand Bell", value: "Hand Bell", comment: "NotificationsSoundViewController: alarm sound named [Hand Bell]")),
-    ("magic.caf",     NSLocalizedString("NSVC:Magic",     value: "Magic",     comment: "NotificationsSoundViewController: alarm sound named [Magic]")),
-    ("tiny-bell.caf", NSLocalizedString("NSVC:Tiny Bell", value: "Tiny Bell", comment: "NotificationsSoundViewController: alarm sound named [Tiny Bell]")),
-    ("whistle.caf",   NSLocalizedString("NSVC:Whistle",   value: "Whistle",   comment: "NotificationsSoundViewController: alarm sound named [Whistle]")),
-  ]
-  
+  private var soundList: [NotificationSounds.SoundInfo] = []
+
   private var checkedIndex: Int = 0
 }
 
