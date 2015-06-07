@@ -114,11 +114,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     }
   }
   
-  private var totalHydrationAmount: Double = 0.0 {
-    didSet {
-      updateIntakeButton()
-    }
-  }
+  private var totalHydrationAmount: Double = 0.0
   
   enum Mode {
     case General, Statistics
@@ -151,11 +147,14 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     setupGestureRecognizers()
     setupMultiprogressControl()
     obtainCurrentDate()
-    updateUIRelatedToCurrentDate(animate: false)
-    updateSummaryBar(animate: false, completion: nil)
+    
+    intakeButton.setTitle("", forState: .Normal)
+
+    updateUIRelatedToCurrentDate(animated: false)
+    updateSummaryBar(animated: false, completion: nil)
     
     volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [unowned self] value in
-      self.updateIntakeButton()
+      self.updateIntakeButton(animated: false)
     }
     
     if !Settings.generalFullVersion.value {
@@ -211,7 +210,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
-    updateSummaryBar(animate: true) {
+    updateSummaryBar(animated: true) {
       if !self.checkForCongratulationsAboutWaterGoalReaching(notification) {
         self.checkForHelpTip(notification)
       }
@@ -255,8 +254,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     self.date = date
 
     if isViewLoaded() {
-      updateUIRelatedToCurrentDate(animate: true)
-      updateSummaryBar(animate: true, completion: nil)
+      updateUIRelatedToCurrentDate(animated: true)
+      updateSummaryBar(animated: true, completion: nil)
     }
   }
   
@@ -335,10 +334,10 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     setCurrentDate(DateHelper.addToDate(date, years: 0, months: 0, days: -1))
   }
 
-  private func updateUIRelatedToCurrentDate(#animate: Bool) {
+  private func updateUIRelatedToCurrentDate(#animated: Bool) {
     let formattedDate = DateHelper.stringFromDate(date)
     
-    if animate {
+    if animated {
       navigationDateLabel.setTextWithAnimation(formattedDate) {
         UIHelper.adjustNavigationTitleViewSize(self.navigationItem)
       }
@@ -348,7 +347,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     }
   }
   
-  private func updateSummaryBar(#animate: Bool, completion: (() -> ())?) {
+  private func updateSummaryBar(#animated: Bool, completion: (() -> ())?) {
     managedObjectContext.performBlock {
       self.waterGoal = WaterGoal.fetchWaterGoalForDate(self.date, managedObjectContext: self.managedObjectContext)
       
@@ -359,15 +358,15 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
         dayOffsetInHours: 0, managedObjectContext: self.managedObjectContext)
       
       dispatch_async(dispatch_get_main_queue()) {
-        if animate {
+        if animated {
           self.intakesMultiProgressView.updateWithAnimation {
-            self.waterGoalWasChanged()
             self.updateIntakeHydrationAmounts(intakeHydrationAmounts)
+            self.waterGoalWasChanged(animated: animated)
           }
         } else {
           self.intakesMultiProgressView.update {
-            self.waterGoalWasChanged()
             self.updateIntakeHydrationAmounts(intakeHydrationAmounts)
+            self.waterGoalWasChanged(animated: animated)
           }
         }
         
@@ -582,10 +581,10 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
 
   @IBAction func intakeButtonWasTapped(sender: AnyObject) {
     Settings.uiDisplayDailyWaterIntakeInPercents.value = !Settings.uiDisplayDailyWaterIntakeInPercents.value
-    updateIntakeButton()
+    updateIntakeButton(animated: true)
   }
   
-  private func updateIntakeButton() {
+  private func updateIntakeButton(#animated: Bool) {
     let intakeText: String
     
     if Settings.uiDisplayDailyWaterIntakeInPercents.value {
@@ -610,16 +609,31 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       roundPrecision: amountPrecision,
       decimals: amountDecimals)
     
-    let text = NSString(format: localizedStrings.intakeButtonTextTemplate, intakeText, waterGoalText)
-    intakeButton.setTitle(text as String, forState: .Normal)
+    let text = String.localizedStringWithFormat(localizedStrings.intakeButtonTextTemplate, intakeText, waterGoalText)
+    
+    if animated {
+      intakeButton.setTitle(text, forState: .Normal)
+    } else {
+      UIView.performWithoutAnimation {
+        self.intakeButton.setTitle(text, forState: .Normal)
+        self.intakeButton.layoutIfNeeded()
+      }
+    }
   }
   
-  private func waterGoalWasChanged() {
-    updateIntakeButton()
+  private func waterGoalWasChanged(#animated: Bool) {
+    updateIntakeButton(animated: animated)
 
-    // Update maximum for multi progress control
-    intakesMultiProgressView.updateWithAnimation { [unowned self] in
-      self.intakesMultiProgressView.maximum = CGFloat(self.waterGoalAmount)
+    if animated {
+      // Update maximum for multi progress control
+      intakesMultiProgressView.updateWithAnimation { [unowned self] in
+        self.intakesMultiProgressView.maximum = CGFloat(self.waterGoalAmount)
+      }
+    } else {
+      // Update maximum for multi progress control
+      intakesMultiProgressView.update { [unowned self] in
+        self.intakesMultiProgressView.maximum = CGFloat(self.waterGoalAmount)
+      }
     }
 
     highActivityButton.selected = isHighActivity
