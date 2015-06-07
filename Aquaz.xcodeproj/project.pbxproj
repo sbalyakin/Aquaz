@@ -775,6 +775,7 @@
 			buildPhases = (
 				84669A6519DAD78D003C2263 /* Sources */,
 				84669A6619DAD78D003C2263 /* Frameworks */,
+				A5BED0C81B24779B000365A1 /* ShellScript */,
 				84669A6719DAD78D003C2263 /* Resources */,
 				A571D50D1AB180B1006265C7 /* ShellScript */,
 				84D251A51AD2511E001E6644 /* Embed App Extensions */,
@@ -940,6 +941,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 05704a14be9c8590ae8ea81e57283c4e84ca67f3 55072d54e985e08a6262ca78f74607f2a5a5f546c18fb4b4623ed469a350539e";
+		};
+		A5BED0C81B24779B000365A1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
