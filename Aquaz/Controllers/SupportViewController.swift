@@ -141,6 +141,14 @@ class SupportViewController: UIViewController {
   }
   
   private func showEmailComposer(#subject: String, body: String, recipients: [String]?) {
+    // Change navigation bar's appearance to white, because MFMailComposeViewController 
+    // accidently changes bar buttons color if bar background is blue.
+    // Default navigation bar's appearance will be restored later.
+    UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
+    UINavigationBar.appearance().barStyle = .Default
+    UINavigationBar.appearance().tintColor = StyleKit.controlTintColor
+    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor()]
+
     let mailComposer = MFMailComposeViewController()
     mailComposer.setSubject(subject)
     mailComposer.setMessageBody(body, isHTML: true)
@@ -148,11 +156,8 @@ class SupportViewController: UIViewController {
       mailComposer.setToRecipients(recipients)
     }
     mailComposer.mailComposeDelegate = self
-    UIHelper.applyStyleToNavigationBar(mailComposer.navigationBar)
-    
-    presentViewController(mailComposer, animated: true) {
-      UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
-    }
+
+    presentViewController(mailComposer, animated: true, completion: nil)
   }
   
   @IBAction func reviewAppInAppstore() {
@@ -206,6 +211,7 @@ extension SupportViewController: UIActionSheetDelegate {
 extension SupportViewController: MFMailComposeViewControllerDelegate {
   
   func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    UIHelper.applyStylization()
     dismissViewControllerAnimated(true, completion: nil)
   }
 
