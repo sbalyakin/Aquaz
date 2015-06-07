@@ -49,17 +49,18 @@ You have drunk your daily water intake." = "Поздравляем!
 "DVC:Drinks" = "Напитки";
 
 /* DiaryViewController: Text for help tip about hydration effect of an intake of a diary cell */
-"DVC:Hydration effect of the intake" = "";
+"DVC:Hydration effect of the intake" = "Влияние выпитого на водный баланс";
 
 /* DayViewController: Alert\'s message suggesting user to rate the application */
 "DVC:If you enjoy using Aquaz, would you mind taking a moment to rate it?
-Thanks for your support!" = "Если вам нравится Aquaz, могли бы вы оценить его?";
+Thanks for your support!" = "Если вам нравится Aquaz, могли бы вы оценить его?
+Спасибо за поддержку!";
 
 /* DayViewController: Text for help tip about choosing an alcoholic drink */
 "DVC:Long press to choose an alcoholic drink" = "Нажмите и удерживайте для выбора алкогольного напитка";
 
 /* DayViewController: Title for alert\'s button allowing user to reject rating the applcation */
-"DVC:No, Thanks" = "Нет, спасибо";
+"DVC:No, Thanks" = "Нет, Спасибо";
 
 /* DayViewController: Cancel button title for alert displayed if tomorrow has come */
 "DVC:OK" = "ОК";
@@ -74,13 +75,13 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "DVC:Remind Me Later" = "Напомнить Позже";
 
 /* DayViewController: Text for help tip about swiping for changing day */
-"DVC:Swipe to change day" = "Смахните чтобы изменить день";
+"DVC:Swipe to change day" = "Проведите чтобы изменить день";
 
 /* DayViewController: Text for help tip about activating/deactivating High Activity mode */
-"DVC:Tap to toggle High Activity mode" = "Нажмите чтобы переключить режим Высокая Физическая Активность";
+"DVC:Tap to toggle High Activity mode" = "Нажмите чтобы переключить режим Высокой Активности";
 
 /* DayViewController: Text for help tip about activating/deactivating Hot Weather mode */
-"DVC:Tap to toggle Hot Weather mode" = "Нажмите чтобы переключить режим Жаркая Погода";
+"DVC:Tap to toggle Hot Weather mode" = "Нажмите чтобы переключить режим Жаркой Погоды";
 
 /* DayViewController: Text for help tip about switching between percents and volume representation of overall intake for a day */
 "DVC:Tap to switch between percents and volume" = "Нажмите чтобы переключиться между процентами и объёмом";
@@ -88,20 +89,23 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* DayViewController: Title for alert displayed if tomorrow has come */
 "DVC:Welcome to the next day" = "Добро пожаловать в следующий день";
 
-/* ExtraFactorsViewController: Table cell title for [High Physical Activity] setting */
-"EFVC:High Physical Activity" = "Высокая Физическая Активность";
+/* ExtraFactorsViewController: Table cell title for [High Activity] setting */
+"EFVC:High Activity" = "Высокая Активность";
 
 /* ExtraFactorsViewController: Table cell title for [Hot Weather] setting */
 "EFVC:Hot Weather" = "Жаркая Погода";
 
-/* ExtraFactorsViewController: Footer for high physical activity section */
-"EFVC:Specify daily water intake increasing when High Physical Activity mode is turned on." = "Укажите повышение суточной нормы при включении режима Высокая Физическая Активность";
+/* ExtraFactorsViewController: Footer for high activity section */
+"EFVC:Specify daily water intake increasing when High Activity mode is turned on." = "Укажите повышение суточной нормы при включении режима Высокой Активности.";
 
 /* ExtraFactorsViewController: Footer for hot weather section */
-"EFVC:Specify daily water intake increasing when Hot Weather mode is turned on." = "Укажите повышение суточной нормы при включении режима Жаркая Погода";
+"EFVC:Specify daily water intake increasing when Hot Weather mode is turned on." = "Укажите повышение суточной нормы при включении режима Жаркой Погоды.";
 
 /* FullVersionViewController: Description about full version purchase */
-"FVVC:Description about full version purchase" = "";
+"FVVC:Description about full version purchase" = "Купите полную версию Aquaz чтобы:
+  • получить доступ к умных оповещениям
+  • включить статистику
+  • удалить рекламу";
 
 /* FullVersionViewController: Text displayed as a value of price label if price fetching is failed */
 "FVVC:Error" = "Ошибка";
@@ -122,7 +126,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "IAPM:Full Version has been successfully restored" = "Полная версия успешно восстановлена";
 
 /* InAppPurchaseManager: Message shown to user if payments are forbidden according to parental controls */
-"IAPM:It's forbidden to make payments due to parental controls" = "Встроенные покупки запрещены в соответствии с родительским контролем";
+"IAPM:It's forbidden to make payments due to parental controls" = "Встроенные покупки запрещены в соответствии с настройками родительского контроля";
 
 /* InAppPurchaseManager: Title of OK button */
 "IAPM:OK" = "ОК";
@@ -143,7 +147,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "NH:Drink" = "Напиток";
 
 /* NotificationsHelper: Text for alert body of notifications */
-"NH:It is time to drink!" = "Время утолить жажду!";
+"NH:It is time to drink!" = "Время выпить воды!";
 
 /* NotificationsSoundViewController: alarm sound named [Alarm] */
 "NSVC:Alarm" = "Тревога";
@@ -179,7 +183,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "NSVC:Notification sounds" = "Звуки оповещения";
 
 /* NotificationsSoundViewController: alarm sound named [Tiny Bell] */
-"NSVC:Tiny Bell" = "Легкий звонок";
+"NSVC:Tiny Bell" = "Тихий звонок";
 
 /* NotificationsSoundViewController: alarm sound named [Whistle] */
 "NSVC:Whistle" = "Свист";
@@ -191,7 +195,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "NVC:Enable Notifications" = "Включить Оповещения";
 
 /* NotificationsViewController: Footer text for [Smart Notifications] section */
-"NVC:Enable to snooze notifications taking into account time of drink intakes." = "Включите режим Умные Оповещения чтобы откладывать оповещения, учитывая время употребления напитков.";
+"NVC:Enable to snooze notifications taking into account time of drink intakes." = "Включите этот режим чтобы откладывать оповещения, учитывая время употребления напитков.";
 
 /* NotificationsViewController: Title for [From] setting */
 "NVC:From" = "С";
@@ -212,7 +216,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "NVC:To" = "До";
 
 /* NotificationsViewController: Footer text for [Limit Notifications] section */
-"NVC:When enabled, notifications will not be shown if you already drink your daily water intake." = "Если данные режим включен, то оповещения не будут показываться если вы выпили суточную норму.";
+"NVC:When enabled, notifications will not be shown if you already drink your daily water intake." = "Если данный режим включен, то оповещения не будут показываться если вы выпили суточную норму.";
 
 /* NotificationsViewController: contraction for hour */
 "NVC:hr" = "ч";
@@ -226,8 +230,8 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* SupportViewController: Title for cancel button */
 "SVC:Cancel" = "Отмена";
 
-/* SettingsViewController: Table cell title for [Daily Water Intake] settings blok */
-"SVC:Daily Water Intake" = "";
+/* SettingsViewController: Table cell title for [Daily Water Intake] settings bloсk */
+"SVC:Daily Water Intake" = "Суточная Норма";
 
 /* StatisticsViewController: Caption above statistics page shown for not-full version of Aquaz */
 "SVC:Demo" = "ДЕМО";
@@ -248,13 +252,13 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "SVC:Hey people! I've been using Aquaz and thought you might like it. It's an easy way to track your water intakes." = "Всем привет! Я использую Aquaz и думаю вам он может понравиться. Приложение поможет отслеживать потребление воды.";
 
 /* SupportViewController: Body of tell-to-friend e-mail */
-"SVC:Hey there!<br><br>I've been using Aquaz and thought you might like it. It's an easy way to track your water intakes." = "Привет!<>br<br>Я использую Aquaz и думаю тебе он может понравиться. Приложение поможет отслеживать потребление воды.";
+"SVC:Hey there!<br><br>I've been using Aquaz and thought you might like it. It's an easy way to track your water intakes." = "Привет!<br><br>Я использую Aquaz и думаю тебе он может понравиться. Приложение поможет отслеживать потребление воды.";
 
 /* SupportViewController: Subject of tell-to-friend e-mail */
 "SVC:I suggest you to try Aquaz" = "Я предлагаю тебе попробовать Aquaz";
 
 /* StatisticsViewController: Text for banner shown to promote the full version of Aquaz if user tries to activate Limit notifications mode */
-"SVC:Limit Notifications mode is available in the full version only." = "Режим ограничения оповещения доступен только в Полной версии.";
+"SVC:Limit Notifications mode is available in the full version only." = "Режим ограничения оповещений доступен только в Полной версии.";
 
 /* SettingsViewController: Table cell title for [Meathurement Units] settings block */
 "SVC:Measurement Units" = "Единицы Измерения";
@@ -275,7 +279,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "SVC:Send a suggestion" = "Отправить предложение";
 
 /* StatisticsViewController: Text for banner shown to promote the full version of Aquaz if user tries to activate Smart notifications mode */
-"SVC:Smart Notifications mode is available in the full version only." = "Режим умных оповещения доступен только в Полной версии.";
+"SVC:Smart Notifications mode is available in the full version only." = "Режим Умных Оповещений доступен только в Полной версии.";
 
 /* SettingsViewController: Table cell title for [Special Modes] settings block */
 "SVC:Special Modes" = "Специальные Режимы";
@@ -291,9 +295,6 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 
 /* SettingsViewController: Table cell title for [Volume] setting */
 "SVC:Volume" = "Объём";
-
-/* SettingsViewController: Table cell title for [Water Goal] setting */
-"SVC:Water Goal" = "Суточная Норма";
 
 /* SettingsViewController: Table cell title for [Weight] setting */
 "SVC:Weight" = "Вес";
@@ -329,10 +330,10 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "WGVC:Age" = "Возраст";
 
 /* WaterGoalViewController: [Breastfeeding female] option for gender */
-"WGVC:Breastfeeding female" = "Женщина: Кормящая грудью";
+"WGVC:Breastfeeding female" = "Женщина: грудное вскармливание";
 
 /* WaterGoalViewController: [Daily] option for physical activity */
-"WGVC:Daily" = "Ежедневно";
+"WGVC:Daily" = "Ежедневная";
 
 /* WaterGoalViewController: Table cell title for [Daily Water Intake] setting */
 "WGVC:Daily Water Intake" = "Суточная Норма";
@@ -350,22 +351,22 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "WGVC:Man" = "Мужчина";
 
 /* WaterGoalViewController: [Occasional] option for physical activity */
-"WGVC:Occasional" = "Иногда";
+"WGVC:Occasional" = "Нерегулярная";
 
 /* WaterGoalViewController: Table cell title for [Physical Activity] setting */
-"WGVC:Physical Activity" = "Физическая активность";
+"WGVC:Physical Activity" = "Физическая Активность";
 
 /* WaterGoalViewController: [Pregnant female] option for gender */
 "WGVC:Pregnant female" = "Женщина: Беременность";
 
 /* WaterGoalViewController: [Rare] option for physical activity */
-"WGVC:Rare" = "Редко";
+"WGVC:Rare" = "Редкая";
 
 /* WaterGoalViewController: Header for section with daily water intake */
 "WGVC:Recommendations" = "Рекомендации";
 
 /* WaterGoalViewController: [Weekly] option for physical activity */
-"WGVC:Weekly" = "Еженедельно";
+"WGVC:Weekly" = "Еженедельная";
 
 /* WaterGoalViewController: Table cell title for [Weight] setting */
 "WGVC:Weight" = "Вес";

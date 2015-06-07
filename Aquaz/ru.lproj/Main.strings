@@ -52,7 +52,7 @@
 /* Class = "UILabel"; text = "Price: Loading..."; ObjectID = "Sly-LE-jrD"; */
 "Sly-LE-jrD.text" = "Цена: Загрузка...";
 
-/* Class = "UINavigationItem"; title = "Water Goal"; ObjectID = "Tue-QT-MbV"; */
+/* Class = "UINavigationItem"; title = "Daily Water Intake"; ObjectID = "Tue-QT-MbV"; */
 "Tue-QT-MbV.title" = "Суточная Норма";
 
 /* Class = "UILabel"; text = "{AquazVersion}"; ObjectID = "Tyr-d0-jgd"; */
@@ -85,8 +85,8 @@
 /* Class = "UIButton"; normalTitle = "{Small}"; ObjectID = "hoF-aO-Mum"; */
 "hoF-aO-Mum.normalTitle" = "{Small}";
 
-/* Class = "UIButton"; normalTitle = "Rate in AppStore"; ObjectID = "hxP-2K-M6b"; */
-"hxP-2K-M6b.normalTitle" = "Оценить в AppStore";
+/* Class = "UIButton"; normalTitle = "Rate Application"; ObjectID = "hxP-2K-M6b"; */
+"hxP-2K-M6b.normalTitle" = "Оценить Приложение";
 
 /* Class = "UILabel"; text = "{Year}"; ObjectID = "i3n-ub-LA6"; */
 "i3n-ub-LA6.text" = "{Year}";
@@ -95,7 +95,7 @@
 "ihc-Bi-XaL.normalTitle" = "Восстановить Покупки";
 
 /* Class = "UITextView"; text = "Thank you for using Aquaz! If you like it, please support us and tell your friends about our app using buttons below."; ObjectID = "j2j-PD-0hx"; */
-"j2j-PD-0hx.text" = "Спасибо что используете Aquaz! Если он вам нравится, пожалуйста, поддержите нас и сообщите своим друзьям о нашем приложении.";
+"j2j-PD-0hx.text" = "Спасибо, что используете Aquaz! Если вам нравится приложение, пожалуйста, расскажите о нем своим друзьям.";
 
 /* Class = "UIBarButtonItem"; title = "Today"; ObjectID = "nSq-92-OEq"; */
 "nSq-92-OEq.title" = "Сегодня";

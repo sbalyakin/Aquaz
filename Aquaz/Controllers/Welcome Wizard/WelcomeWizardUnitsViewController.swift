@@ -50,8 +50,8 @@ class WelcomeWizardUnitsViewController: OmegaSettingsViewController {
     let heightTitle = NSLocalizedString("SVC:Height", value: "Height",
       comment: "SettingsViewController: Table cell title for [Height] setting")
     
-    let waterGoalTitle = NSLocalizedString("SVC:Water Goal", value: "Water Goal",
-      comment: "SettingsViewController: Table cell title for [Water Goal] setting")
+    let waterGoalTitle = NSLocalizedString("SVC:Daily Water Intake", value: "Daily Water Intake",
+      comment: "SettingsViewController: Table cell title for [Daily Water Intake] setting")
     
     // Measurements section
     let volumeCell = createEnumSegmentedTableCell(

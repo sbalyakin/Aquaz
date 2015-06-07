@@ -14,7 +14,7 @@ class FullVersionViewController: UIViewController {
   private class LocalizedStrings {
     
     lazy var descriptionLabelText = NSLocalizedString("FVVC:Description about full version purchase",
-      value: "Purchase the full version of Aquaz in order to:\n\t• get smart notifications\n\t• enjoy statistics\n\t• remove ads",
+      value: "Purchase the full version of Aquaz in order to:\n\t• get smart notifications\n\t• activate statistics\n\t• remove ads",
       comment: "FullVersionViewController: Description about full version purchase")
 
     lazy var priceLabelText = NSLocalizedString("FVVC:Price: %@",

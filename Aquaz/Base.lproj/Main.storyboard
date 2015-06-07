@@ -1099,7 +1099,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="{Title}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fPs-Mt-tMn">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1243,7 +1243,7 @@
             </objects>
             <point key="canvasLocation" x="1886" y="2396"/>
         </scene>
-        <!--Water Goal-->
+        <!--Daily Water Intake-->
         <scene sceneID="JxF-rr-6gg">
             <objects>
                 <viewController id="B00-4Z-J9C" customClass="WaterGoalViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
@@ -1272,7 +1272,7 @@
                             <constraint firstAttribute="trailing" secondItem="FSI-hh-OFx" secondAttribute="trailing" id="tC2-iI-O7E"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Water Goal" id="Tue-QT-MbV">
+                    <navigationItem key="navigationItem" title="Daily Water Intake" id="Tue-QT-MbV">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="w3B-ay-B3d">
                             <connections>
                                 <action selector="cancelButtonWasTapped:" destination="B00-4Z-J9C" id="oEa-3P-31T"/>
@@ -1463,8 +1463,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hxP-2K-M6b">
-                                        <rect key="frame" x="242" y="356" width="117" height="30"/>
-                                        <state key="normal" title="Rate in AppStore">
+                                        <rect key="frame" x="244" y="356" width="113" height="30"/>
+                                        <state key="normal" title="Rate Application">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>

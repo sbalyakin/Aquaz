@@ -42,7 +42,7 @@ class SettingsViewController: OmegaSettingsViewController {
 
   override func createTableCellsSections() -> [TableCellsSection] {
     let dailyWaterIntakeTitle = NSLocalizedString("SVC:Daily Water Intake", value: "Daily Water Intake",
-      comment: "SettingsViewController: Table cell title for [Daily Water Intake] settings blok")
+      comment: "SettingsViewController: Table cell title for [Daily Water Intake] settings bloсk")
 
     let specialModesTitle = NSLocalizedString("SVC:Special Modes", value: "Special Modes",
       comment: "SettingsViewController: Table cell title for [Special Modes] settings block")
