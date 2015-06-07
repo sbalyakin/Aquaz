@@ -155,13 +155,13 @@ extension DiaryViewController: UITableViewDataSource {
     
     let text = NSLocalizedString("DVC:Hydration effect of the intake", value: "Hydration effect of the intake", comment: "DiaryViewController: Text for help tip about hydration effect of an intake of a diary cell")
 
-    let tooltip = JDFTooltipView(targetView: cell.waterBalanceLabel, hostView: cell, tooltipText: text, arrowDirection: .Up, width: self.view.frame.width / 3)
+    let tooltip = JDFTooltipView(targetView: cell.waterBalanceLabel, hostView: tableView, tooltipText: text, arrowDirection: .Up, width: view.frame.width / 2)
     
     tooltip.tooltipBackgroundColour = StyleKit.helpTipsColor
     tooltip.textColour = UIColor.blackColor()
     
     tooltip.showCompletionBlock = {
-      SystemHelper.executeBlockWithDelay(4) {
+      SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDisplayTime) {
         tooltip.hideAnimated(true)
       }
     }

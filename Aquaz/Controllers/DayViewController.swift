@@ -741,7 +741,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       hostView: navigationController?.view,
       tooltipText: localizedStrings.helpTipSwipeToChangeDay,
       arrowDirection: .Up,
-      width: view.frame.width / 3)
+      width: view.frame.width / 2)
     
     showTooltip(tooltip)
   }
@@ -799,7 +799,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     helptip!.textColour = UIColor.blackColor()
     
     helptip!.showCompletionBlock = {
-      SystemHelper.executeBlockWithDelay(4) {
+      SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDisplayTime) {
         self.helptip?.hideAnimated(true)
       }
     }
