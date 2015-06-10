@@ -10,8 +10,43 @@ import UIKit
 
 class SettingsViewController: OmegaSettingsViewController {
 
+  private struct LocalyzedStrings {
+    lazy var dailyWaterIntakeTitle = NSLocalizedString("SVC:Daily Water Intake",
+      value: "Daily Water Intake",
+      comment: "SettingsViewController: Table cell title for [Daily Water Intake] settings bloсk")
+    
+    lazy var specialModesTitle = NSLocalizedString("SVC:Special Modes",
+      value: "Special Modes",
+      comment: "SettingsViewController: Table cell title for [Special Modes] settings block")
+    
+    lazy var unitsTitle = NSLocalizedString("SVC:Measurement Units",
+      value: "Measurement Units",
+      comment: "SettingsViewController: Table cell title for [Meathurement Units] settings block")
+    
+    lazy var notificationsTitle = NSLocalizedString("SVC:Notifications",
+      value: "Notifications",
+      comment: "SettingsViewController: Table cell title for [Notifications] settings block")
+    
+    lazy var supportTitle = NSLocalizedString("SVC:Support",
+      value: "Support",
+      comment: "SettingsViewController: Table cell title for [Support] settings block")
+    
+    lazy var fullVersionTitle = NSLocalizedString("SVC:Full Version",
+      value: "Full Version",
+      comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is not purchased yet")
+    
+    lazy var fullVersionIsPurchasedTitle = NSLocalizedString("SVC:Full Version Is Purchased",
+      value: "Full Version Is Purchased",
+      comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is purchased")
+  }
+  
   private var volumeObserverIdentifier: Int?
-  private var fullVersionObserverIdentifier: Int?
+  private var waterGoalObserverIdentifier: Int?
+  
+  private var localizedStrings = LocalyzedStrings()
+  
+  var fullVersionCell: BasicTableCell!
+
   
   private struct Constants {
     static let calculateWaterIntakeSegue = "Calculate Water Intake"
@@ -28,44 +63,29 @@ class SettingsViewController: OmegaSettingsViewController {
     UIHelper.applyStyle(self)
     rightDetailValueColor = StyleKit.settingsTablesValueColor
     rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
+    
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "fullVersionIsPurchased:",
+      name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
   }
 
   deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+
     if let volumeObserverIdentifier = volumeObserverIdentifier {
       Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
     }
 
-    if let fullVersionObserverIdentifier = fullVersionObserverIdentifier {
-      Settings.generalVolumeUnits.removeObserver(fullVersionObserverIdentifier)
+    if let waterGoalObserverIdentifier = waterGoalObserverIdentifier {
+      Settings.generalVolumeUnits.removeObserver(waterGoalObserverIdentifier)
     }
   }
 
   override func createTableCellsSections() -> [TableCellsSection] {
-    let dailyWaterIntakeTitle = NSLocalizedString("SVC:Daily Water Intake", value: "Daily Water Intake",
-      comment: "SettingsViewController: Table cell title for [Daily Water Intake] settings bloсk")
-
-    let specialModesTitle = NSLocalizedString("SVC:Special Modes", value: "Special Modes",
-      comment: "SettingsViewController: Table cell title for [Special Modes] settings block")
-
-    let unitsTitle = NSLocalizedString("SVC:Measurement Units", value: "Measurement Units",
-      comment: "SettingsViewController: Table cell title for [Meathurement Units] settings block")
-
-    let notificationsTitle = NSLocalizedString("SVC:Notifications", value: "Notifications",
-      comment: "SettingsViewController: Table cell title for [Notifications] settings block")
-
-    let supportTitle = NSLocalizedString("SVC:Support", value: "Support",
-      comment: "SettingsViewController: Table cell title for [Support] settings block")
-
-    let fullVersionTitle = NSLocalizedString("SVC:Full Version", value: "Full Version",
-      comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is not purchased yet")
-    
-    let fullVersionIsPurchasedTitle = NSLocalizedString("SVC:Full Version Is Purchased", value: "Full Version Is Purchased",
-      comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is purchased")
-
     // Water goal section
     let dailyWaterIntakeCell = createRightDetailTableCell(
-      title: dailyWaterIntakeTitle,
-      settingsItem: Settings.userWaterGoal,
+      title: localizedStrings.dailyWaterIntakeTitle,
+      settingsItem: Settings.userDailyWaterIntake,
       accessoryType: .DisclosureIndicator,
       activationChangedFunction: { [unowned self] in self.waterGoalCellWasSelected($0, active: $1) },
       stringFromValueFunction: { [unowned self] in self.stringFromWaterGoal($0) })
@@ -76,7 +96,11 @@ class SettingsViewController: OmegaSettingsViewController {
       dailyWaterIntakeCell.readFromExternalStorage()
     }
 
-    let extraFactorsCell = createBasicTableCell(title: specialModesTitle, accessoryType: .DisclosureIndicator) { [unowned self]
+    waterGoalObserverIdentifier = Settings.userDailyWaterIntake.addObserver { value in
+      dailyWaterIntakeCell.readFromExternalStorage()
+    }
+    
+    let extraFactorsCell = createBasicTableCell(title: localizedStrings.specialModesTitle, accessoryType: .DisclosureIndicator) { [unowned self]
       (tableCell, active) -> () in
       if active {
         self.performSegueWithIdentifier(Constants.showExtraFactorsSegue, sender: tableCell)
@@ -89,7 +113,7 @@ class SettingsViewController: OmegaSettingsViewController {
     recommendationsSection.tableCells = [dailyWaterIntakeCell, extraFactorsCell]
     
     // Units section
-    let unitsCell = createBasicTableCell(title: unitsTitle, accessoryType: .DisclosureIndicator) { [unowned self]
+    let unitsCell = createBasicTableCell(title: localizedStrings.unitsTitle, accessoryType: .DisclosureIndicator) { [unowned self]
       (tableCell, active) -> () in
       if active {
         self.performSegueWithIdentifier(Constants.showUnitsSegue, sender: tableCell)
@@ -102,7 +126,7 @@ class SettingsViewController: OmegaSettingsViewController {
     unitsSection.tableCells = [unitsCell]
 
     // Notifications section
-    let notificationsCell = createBasicTableCell(title: notificationsTitle, accessoryType: .DisclosureIndicator) { [unowned self]
+    let notificationsCell = createBasicTableCell(title: localizedStrings.notificationsTitle, accessoryType: .DisclosureIndicator) { [unowned self]
       (tableCell, active) -> () in
       if active {
         self.performSegueWithIdentifier(Constants.showNotificationsSegue, sender: tableCell)
@@ -115,7 +139,7 @@ class SettingsViewController: OmegaSettingsViewController {
     notificationsSection.tableCells = [notificationsCell]
     
     // Support section
-    let supportCell = createBasicTableCell(title: supportTitle, accessoryType: .DisclosureIndicator) { [unowned self]
+    let supportCell = createBasicTableCell(title: localizedStrings.supportTitle, accessoryType: .DisclosureIndicator) { [unowned self]
         (tableCell, active) -> () in
         if active {
           self.performSegueWithIdentifier(Constants.showSupportSegue, sender: tableCell)
@@ -128,35 +152,18 @@ class SettingsViewController: OmegaSettingsViewController {
     supportSection.tableCells = [supportCell]
     
     // Full Version section
-    let fullVersionCellDidActivateFunction = { (tableCell: TableCell, active: Bool) -> () in
-      if active {
-        self.performSegueWithIdentifier(Constants.manageFullVersionSegue, sender: tableCell)
-      }
-    }
-
-    let fullVersionCell: BasicTableCell
-    
     if Settings.generalFullVersion.value {
-      fullVersionCell = createBasicTableCell(title: fullVersionIsPurchasedTitle)
+      fullVersionCell = createBasicTableCell(title: localizedStrings.fullVersionIsPurchasedTitle)
     } else {
       fullVersionCell = createBasicTableCell(
-        title: fullVersionTitle,
-        accessoryType: .DisclosureIndicator,
-        activationChangedFunction: fullVersionCellDidActivateFunction)
+        title: localizedStrings.fullVersionTitle,
+        accessoryType: .DisclosureIndicator) { [unowned self] tableCell, active in
+          if active {
+            self.performSegueWithIdentifier(Constants.manageFullVersionSegue, sender: tableCell)
+          }
+        }
     }
     
-    fullVersionObserverIdentifier = Settings.generalFullVersion.addObserver { fullVersion in
-      if fullVersion {
-        fullVersionCell.title = fullVersionIsPurchasedTitle
-        fullVersionCell.accessoryType = nil
-        fullVersionCell.tableCellDidActivateFunction = nil
-      } else {
-        fullVersionCell.title = fullVersionTitle
-        fullVersionCell.accessoryType = .DisclosureIndicator
-        fullVersionCell.tableCellDidActivateFunction = fullVersionCellDidActivateFunction
-      }
-    }
-
     fullVersionCell.image = UIImage(named: "settingsFullVersion")
 
     let fullVersionSection = TableCellsSection()
@@ -166,6 +173,12 @@ class SettingsViewController: OmegaSettingsViewController {
     return [recommendationsSection, unitsSection, notificationsSection, supportSection, fullVersionSection]
   }
   
+  func fullVersionIsPurchased(notification: NSNotification) {
+    fullVersionCell.title = localizedStrings.fullVersionIsPurchasedTitle
+    fullVersionCell.accessoryType = nil
+    fullVersionCell.tableCellDidActivateFunction = nil
+  }
+
   private func stringFromWaterGoal(waterGoal: Double) -> String {
     let volumeUnit = Settings.generalVolumeUnits.value
     let text = Units.sharedInstance.formatMetricAmountToText(metricAmount: waterGoal, unitType: .Volume, roundPrecision: volumeUnit.precision, decimals: volumeUnit.decimals, displayUnits: true)

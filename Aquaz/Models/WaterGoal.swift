@@ -225,7 +225,7 @@ public class WaterGoal: CodingManagedObject, NamedEntity {
         amount = laterWaterGoal.baseAmount
       } else { // unreal case
         Logger.logError(Logger.Messages.logicalError)
-        amount = Settings.userWaterGoal.value
+        amount = Settings.userDailyWaterIntake.value
       }
     }
 

@@ -174,7 +174,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     
     dailyWaterIntakeCell = createTextFieldTableCell(
       title: dailyWaterIntakeTitleFinal, settingsItem:
-      Settings.userWaterGoal,
+      Settings.userDailyWaterIntake,
       valueFromStringFunction: WelcomeWizardMetricsViewController.metricWaterGoalFromString,
       stringFromValueFunction: WelcomeWizardMetricsViewController.stringFromWaterGoal,
       keyboardType: .DecimalPad)

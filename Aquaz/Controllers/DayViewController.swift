@@ -858,7 +858,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   private var waterGoalBaseAmount: Double {
-    return waterGoal?.baseAmount ?? Settings.userWaterGoal.value
+    return waterGoal?.baseAmount ?? Settings.userDailyWaterIntake.value
   }
   
   private var waterGoalAmount: Double {

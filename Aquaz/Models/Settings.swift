@@ -120,7 +120,7 @@ public class Settings {
     key: "User - Age", initialValue: 30,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  static let userWaterGoal = SettingsOrdinalItem(
+  static let userDailyWaterIntake = SettingsOrdinalItem(
     key: "User - Daily water intake", initialValue: Settings.calcUserDailyWaterIntakeSetting(),
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
