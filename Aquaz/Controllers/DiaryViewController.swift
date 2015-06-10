@@ -28,7 +28,10 @@ class DiaryViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     applyStyle()
-    initFetchedResultsController(completion: nil)
+    
+    initFetchedResultsController {
+      self.tableView?.reloadData()
+    }
     
     volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [unowned self] value in
       self.tableView.reloadData()
