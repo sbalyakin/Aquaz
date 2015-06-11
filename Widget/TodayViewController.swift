@@ -2,7 +2,7 @@
 //  TodayViewController.swift
 //  Widget
 //
-//  Created by Admin on 06.04.15.
+//  Created by Sergey Balyakin on 06.04.15.
 //  Copyright (c) 2015 Sergey Balyakin. All rights reserved.
 //
 
