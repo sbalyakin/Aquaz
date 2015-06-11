@@ -31,6 +31,9 @@
 		843B056119E2D7800097A833 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055719E2D7800097A833 /* DayViewController.swift */; };
 		843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055819E2D7800097A833 /* SelectDrinkViewController.swift */; };
 		843B056919E2D80E0097A833 /* WaterGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056819E2D80E0097A833 /* WaterGoal.swift */; };
+		8443DF281B29663100FDD294 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F0A5AF1AAC7F04006452C9 /* Crashlytics.framework */; };
+		8443DF291B29663100FDD294 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F0A5B01AAC7F04006452C9 /* Fabric.framework */; };
+		8443DF421B29737D00FDD294 /* WidgetImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8443DF411B29737D00FDD294 /* WidgetImages.xcassets */; };
 		8444F1941B207C09007577C8 /* InfoBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8444F1921B207C09007577C8 /* InfoBannerView.xib */; };
 		8444F1961B207D75007577C8 /* InfoBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444F1951B207D75007577C8 /* InfoBannerView.swift */; };
 		8444F1981B209250007577C8 /* SystemHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444F1971B209250007577C8 /* SystemHelper.swift */; };
@@ -231,6 +234,7 @@
 		843B055819E2D7800097A833 /* SelectDrinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SelectDrinkViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		843B055C19E2D7800097A833 /* Aquaz-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Aquaz-Bridging-Header.h"; sourceTree = "<group>"; };
 		843B056819E2D80E0097A833 /* WaterGoal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoal.swift; sourceTree = "<group>"; };
+		8443DF411B29737D00FDD294 /* WidgetImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WidgetImages.xcassets; sourceTree = "<group>"; };
 		8444F1931B207C09007577C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/InfoBannerView.xib; sourceTree = "<group>"; };
 		8444F1951B207D75007577C8 /* InfoBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoBannerView.swift; path = Controls/InfoBannerView.swift; sourceTree = "<group>"; };
 		8444F1971B209250007577C8 /* SystemHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemHelper.swift; sourceTree = "<group>"; };
@@ -397,6 +401,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8443DF281B29663100FDD294 /* Crashlytics.framework in Frameworks */,
+				8443DF291B29663100FDD294 /* Fabric.framework in Frameworks */,
 				84D251971AD2511E001E6644 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -517,10 +523,10 @@
 		84669A6B19DAD78D003C2263 /* Aquaz */ = {
 			isa = PBXGroup;
 			children = (
-				843B055219E2D7800097A833 /* AppDelegates */,
 				843B055D19E2D7800097A833 /* Models */,
 				A5C374AE1AE6700900F91550 /* Views */,
 				843B055419E2D7800097A833 /* Controllers */,
+				843B055219E2D7800097A833 /* AppDelegates */,
 				8424AA041A0B57F9009C5C47 /* Controls */,
 				A5EE36241AAD9D820038C844 /* Services */,
 				A5B75A1219E55CBB00D0477B /* Helpers */,
@@ -624,6 +630,7 @@
 				A54ED2601AD5AB6200FD37DD /* Widget-Bridging-Header.h */,
 				844B248D1B21991B0059E28A /* MainInterface.storyboard */,
 				84D251991AD2511E001E6644 /* Supporting Files */,
+				8443DF411B29737D00FDD294 /* WidgetImages.xcassets */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -815,6 +822,7 @@
 				84D251901AD2511E001E6644 /* Sources */,
 				84D251911AD2511E001E6644 /* Frameworks */,
 				84D251921AD2511E001E6644 /* Resources */,
+				8443DF271B29658100FDD294 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -921,6 +929,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8443DF421B29737D00FDD294 /* WidgetImages.xcassets in Resources */,
 				844B248B1B21991B0059E28A /* MainInterface.storyboard in Resources */,
 				844B24881B2195490059E28A /* Localizable.strings in Resources */,
 			);
@@ -929,6 +938,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8443DF271B29658100FDD294 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 05704a14be9c8590ae8ea81e57283c4e84ca67f3 55072d54e985e08a6262ca78f74607f2a5a5f546c18fb4b4623ed469a350539e";
+		};
 		A571D50D1AB180B1006265C7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1376,10 +1398,11 @@
 		84D251A21AD2511E001E6644 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = WidgetAppIcon;
 				CODE_SIGN_ENTITLEMENTS = Widget/Widget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1406,6 +1429,7 @@
 		84D251A31AD2511E001E6644 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = WidgetAppIcon;
 				CODE_SIGN_ENTITLEMENTS = Widget/Widget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

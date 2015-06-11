@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 import NotificationCenter
+import Fabric
+import Crashlytics
 
 class TodayViewController: UIViewController, NCWidgetProviding {
         
@@ -40,6 +42,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     return coreDataStack.privateContext
   }
 
+  required init(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+
+    Fabric.with([Crashlytics()])
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -58,7 +66,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     fetchData {
       dispatch_async(dispatch_get_main_queue()) {
-        self.updateUI(true)
+        self.updateUI(animated: false)
       }
     }
   }
@@ -171,9 +179,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
   }
   
-  private func updateUI(animate: Bool) {
+  private func updateUI(#animated: Bool) {
     updateDrinks()
-    updateWaterIntakes(animate)
+    updateWaterIntakes(animated: animated)
   }
   
   private func updateDrinks() {
@@ -188,23 +196,23 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     drink3View.drink = drink3
   }
 
-  private func updateWaterIntakes(animate: Bool) {
+  private func updateWaterIntakes(#animated: Bool) {
     if let waterGoal = waterGoal,
        let hydration = hydration,
        let dehydration = dehydration
     {
-      updateProgressView(waterGoal: waterGoal + dehydration, overallWaterIntake: hydration, animate: animate)
-      updateProgressLabel(waterGoal: waterGoal + dehydration, overallWaterIntake: hydration, animate: animate)
+      updateProgressView(waterGoal: waterGoal + dehydration, overallWaterIntake: hydration, animated: animated)
+      updateProgressLabel(waterGoal: waterGoal + dehydration, overallWaterIntake: hydration, animated: animated)
     } else {
       progressViewSection.factor = 0
       progressLabel.text = NSLocalizedString("TodayExtension:Updating...", value: "Updating...", comment: "TodayExtension: Temporary text for amount label")
     }
   }
   
-  private func updateProgressView(#waterGoal: Double, overallWaterIntake: Double, animate: Bool) {
+  private func updateProgressView(#waterGoal: Double, overallWaterIntake: Double, animated: Bool) {
     let newFactor = CGFloat(overallWaterIntake / waterGoal)
     if progressViewSection.factor != newFactor {
-      if animate {
+      if animated {
         progressViewSection.setFactorWithAnimation(newFactor)
       } else {
         progressViewSection.factor = newFactor
@@ -212,7 +220,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
   }
   
-  private func updateProgressLabel(#waterGoal: Double, overallWaterIntake: Double, animate: Bool) {
+  private func updateProgressLabel(#waterGoal: Double, overallWaterIntake: Double, animated: Bool) {
     let intakeText: String
     
     if Settings.uiDisplayDailyWaterIntakeInPercents.value {
@@ -232,7 +240,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       comment: "TodayExtension: Current daily water intake of water intake goal")
     let text = String.localizedStringWithFormat(template, intakeText, waterGoalText)
     
-    if animate {
+    if animated {
       progressLabel.setTextWithAnimation(text)
     } else {
       progressLabel.text = text
@@ -250,7 +258,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
     fetchData {
       dispatch_async(dispatch_get_main_queue()) {
-        self.updateUI(true)
+        self.updateUI(animated: false)
         completionHandler(.NewData)
       }
     }
@@ -284,7 +292,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
         self.fetchData {
           dispatch_async(dispatch_get_main_queue()) {
-            self.updateUI(true)
+            self.updateUI(animated: true)
           }
         }
       }
