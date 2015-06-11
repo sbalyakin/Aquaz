@@ -845,7 +845,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       return isWaterGoalForCurrentDay ? (waterGoal?.isHotDay ?? false) : false
     }
     set {
-      saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: newValue, isHighActivity: false)
+      saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: newValue, isHighActivity: isHighActivity)
     }
   }
 
@@ -854,7 +854,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       return isWaterGoalForCurrentDay ? (waterGoal?.isHighActivity ?? false) : false
     }
     set {
-      saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: false, isHighActivity: newValue)
+      saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: isHotDay, isHighActivity: newValue)
     }
   }
   
