@@ -78,6 +78,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
 
   private func setupProgressView() {
+    progressView.animationDuration = 0.7
     progressViewSection = progressView.addSection(color: StyleKit.waterColor)
   }
   

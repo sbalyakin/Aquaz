@@ -36,23 +36,27 @@ class MultiProgressView: UIView {
   
   class Section {
     var factor: CGFloat = 0.0 { didSet { multiProgressView?.layoutSections() } }
+
     var color: UIColor {
       didSet {
-        layer.backgroundColor = color.CGColor
+        view.backgroundColor = color
       }
     }
-    
+
+    private weak var multiProgressView: MultiProgressView!
+    private var view: UIView
+
     init(color: UIColor, multiProgressView: MultiProgressView) {
       self.color = color
       self.multiProgressView = multiProgressView
 
-      layer = CALayer()
-      layer.backgroundColor = color.CGColor
-      multiProgressView.layer.addSublayer(layer)
+      view = UIView()
+      view.backgroundColor = color
+      multiProgressView.addSubview(view)
     }
     
     deinit {
-      layer.removeFromSuperlayer()
+      view.removeFromSuperview()
     }
 
     func setFactorWithAnimation(factor: CGFloat) {
@@ -62,11 +66,9 @@ class MultiProgressView: UIView {
     }
 
     func setFrame(rect: CGRect) {
-      layer.frame = rect
+      view.frame = rect
     }
 
-    private weak var multiProgressView: MultiProgressView!
-    private var layer: CALayer
   }
 
   override init(frame: CGRect) {
@@ -80,6 +82,7 @@ class MultiProgressView: UIView {
   }
 
   private func baseInit() {
+    clipsToBounds = true
     setTranslatesAutoresizingMaskIntoConstraints(false)
     layer.borderColor = borderColor.CGColor
     layer.borderWidth = borderWidth
@@ -192,9 +195,19 @@ class MultiProgressView: UIView {
     isBulkUpdating = true
     updateFunction()
     isBulkUpdating = false
-    UIView.animateWithDuration(CFTimeInterval(animationDuration)) {
-      self.layoutSections()
-    }
+    
+    UIView.animateWithDuration(NSTimeInterval(animationDuration),
+      delay: 0,
+      usingSpringWithDamping: 0.5,
+      initialSpringVelocity: 0,
+      options: nil,
+      animations: {
+        self.layoutSections()
+      }, completion: nil)
+    
+//    UIView.animateWithDuration(CFTimeInterval(animationDuration)) {
+//      self.layoutSections()
+//    }
   }
   
   private func calcSectionsRect(rect: CGRect) -> CGRect {

@@ -276,6 +276,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   private func setupMultiprogressControl() {
+    intakesMultiProgressView.animationDuration = 0.7
     intakesMultiProgressView.borderColor = UIColor(red: 167/255, green: 169/255, blue: 171/255, alpha: 0.8)
     intakesMultiProgressView.emptySectionColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1)
     
