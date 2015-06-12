@@ -76,7 +76,7 @@ class FullVersionViewController: UIViewController {
     
     approvalBannerView = InfoBannerView.create()
     approvalBannerView!.infoLabel.text = localizedStrings.approvalBannerText
-    approvalBannerView!.infoImageView.image = UIImage(named: "welcomeFullVersion")
+    approvalBannerView!.infoImageView.image = ImageHelper.loadImage(.BannerParentalControl)
     approvalBannerView!.accessoryImageView.hidden = true
     approvalBannerView!.show(animated: true, parentView: view)
   }

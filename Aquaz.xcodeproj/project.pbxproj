@@ -125,6 +125,7 @@
 		A5A1681D1A6EA1330027711B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A1681C1A6EA1330027711B /* BannerView.swift */; };
 		A5A335891B01F980004579A4 /* FullVersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A335881B01F980004579A4 /* FullVersionViewController.swift */; };
 		A5A3358B1B0218CE004579A4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A3358A1B0218CE004579A4 /* StoreKit.framework */; };
+		A5A639BE1B2B219800E2DB60 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A639BD1B2B219800E2DB60 /* ImageHelper.swift */; };
 		A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */; };
 		A5AAA1D91A77A9CF008C3C56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */; };
 		A5B013E31AE27C4900C372F8 /* ExtraFactorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B013E21AE27C4900C372F8 /* ExtraFactorsViewController.swift */; };
@@ -319,6 +320,7 @@
 		A5A1681C1A6EA1330027711B /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BannerView.swift; path = Controls/BannerView.swift; sourceTree = "<group>"; };
 		A5A335881B01F980004579A4 /* FullVersionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullVersionViewController.swift; sourceTree = "<group>"; };
 		A5A3358A1B0218CE004579A4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		A5A639BD1B2B219800E2DB60 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekStatisticsViewController.swift; sourceTree = "<group>"; };
 		A5AAA1D81A77A9CF008C3C56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A5B013E21AE27C4900C372F8 /* ExtraFactorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraFactorsViewController.swift; sourceTree = "<group>"; };
@@ -681,6 +683,7 @@
 				A54ED2581AD447A600FD37DD /* UIExtensions.swift */,
 				84039F171A4B103100C5391E /* NotificationsHelper.swift */,
 				8444F1971B209250007577C8 /* SystemHelper.swift */,
+				A5A639BD1B2B219800E2DB60 /* ImageHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1053,6 +1056,7 @@
 				A598D50A1A6559FB00AA89CB /* DrinkView.swift in Sources */,
 				84CD97531ABB2B960011623B /* CalendarContentView.swift in Sources */,
 				A57D2BF21ACFFB3900619D62 /* WelcomeWizardUnitsViewController.swift in Sources */,
+				A5A639BE1B2B219800E2DB60 /* ImageHelper.swift in Sources */,
 				847E75F81AA9F502003B63E1 /* UIDatePickerTableViewCell.swift in Sources */,
 				84B0C7041AA75E36006889E9 /* UITimeIntervalPickerTableViewCell.swift in Sources */,
 				A5D3D4251AA5D29700E3C989 /* SegmentedTableCell.swift in Sources */,

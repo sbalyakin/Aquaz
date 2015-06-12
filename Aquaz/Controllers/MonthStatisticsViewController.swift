@@ -76,8 +76,10 @@ class MonthStatisticsViewController: UIViewController {
   }
 
   func managedObjectContextDidChange(notification: NSNotification) {
-    dispatch_async(dispatch_get_main_queue()) {
-      self.monthStatisticsView.refresh()
+    if Settings.generalFullVersion.value {
+      dispatch_async(dispatch_get_main_queue()) {
+        self.monthStatisticsView.refresh()
+      }
     }
   }
   

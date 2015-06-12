@@ -100,7 +100,7 @@ class StatisticsViewController: UIViewController {
     
     fullVersionBannerView = InfoBannerView.create()
     fullVersionBannerView!.infoLabel.text = localizedStrings.fullVersionBannerText
-    fullVersionBannerView!.infoImageView.image = UIImage(named: "welcomeFullVersion")
+    fullVersionBannerView!.infoImageView.image = ImageHelper.loadImage(.BannerFullVersion)
     fullVersionBannerView!.bannerWasTappedFunction = { [unowned self] infoBannerView in self.fullVersionBannerWasTapped() }
     fullVersionBannerView!.showDelay = 0.6
     fullVersionBannerView!.show(animated: true, parentView: view)

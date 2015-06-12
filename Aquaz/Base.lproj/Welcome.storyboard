@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
@@ -80,7 +79,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcomeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="qxF-xt-VVw">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="qxF-xt-VVw">
                                 <rect key="frame" x="250" y="60" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="9q4-qZ-mGc"/>
@@ -128,7 +127,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="203"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcomeUnits" translatesAutoresizingMaskIntoConstraints="NO" id="myP-ji-UuI">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeUnits" translatesAutoresizingMaskIntoConstraints="NO" id="myP-ji-UuI">
                                             <rect key="frame" x="250" y="40" width="100" height="100"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="100" id="nPr-XL-CwQ"/>
@@ -198,7 +197,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="203"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcomeMetrica" translatesAutoresizingMaskIntoConstraints="NO" id="lue-71-Aet">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeMetrics" translatesAutoresizingMaskIntoConstraints="NO" id="lue-71-Aet">
                                             <rect key="frame" x="250" y="40" width="100" height="100"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="100" id="Hyw-fQ-sAj"/>
@@ -260,7 +259,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcomeFullVersion" translatesAutoresizingMaskIntoConstraints="NO" id="2Og-5u-iVS">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeFullVersion" translatesAutoresizingMaskIntoConstraints="NO" id="2Og-5u-iVS">
                                 <rect key="frame" x="250" y="40" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="7cg-Rl-vyi"/>
@@ -329,9 +328,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="welcomeFullVersion" width="100" height="100"/>
-        <image name="welcomeLogo" width="100" height="100"/>
-        <image name="welcomeMetrica" width="100" height="100"/>
-        <image name="welcomeUnits" width="100" height="100"/>
+        <image name="WelcomeFullVersion" width="100" height="100"/>
+        <image name="WelcomeLogo" width="100" height="100"/>
+        <image name="WelcomeMetrics" width="100" height="100"/>
+        <image name="WelcomeUnits" width="100" height="100"/>
     </resources>
 </document>

@@ -222,7 +222,7 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     fullVersionBannerView = InfoBannerView.create()
     fullVersionBannerView!.infoLabel.text = text
-    fullVersionBannerView!.infoImageView.image = UIImage(named: "welcomeFullVersion")
+    fullVersionBannerView!.infoImageView.image = ImageHelper.loadImage(.BannerFullVersion)
     fullVersionBannerView!.bannerWasTappedFunction = { [unowned self] _ in self.fullVersionBannerWasTapped() }
     fullVersionBannerView!.showAndHide(animated: true, displayTime: 3, parentView: view) { finished in
       self.fullVersionBannerView = nil

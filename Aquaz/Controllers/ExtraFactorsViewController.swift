@@ -54,7 +54,7 @@ class ExtraFactorsViewController: OmegaSettingsViewController {
       pickerTableCellHeight: .Large,
       stringFromValueFunction: { [unowned self] in self.stringFromFactor($0) })
     
-    highActivityCell.image = UIImage(named: "iconHighActivityActive")
+    highActivityCell.image = ImageHelper.loadImage(.IconHighActivityActive)
     
     let highActivitySection = TableCellsSection()
     highActivitySection.footerTitle = highActivitySectionFooter
@@ -68,7 +68,7 @@ class ExtraFactorsViewController: OmegaSettingsViewController {
       pickerTableCellHeight: .Large,
       stringFromValueFunction: { [unowned self] in self.stringFromFactor($0) })
     
-    hotWeatherCell.image = UIImage(named: "iconHotActive")
+    hotWeatherCell.image = ImageHelper.loadImage(.IconHotWeatherActive)
     
     let hotWeatherSection = TableCellsSection()
     hotWeatherSection.footerTitle = hotWeatherSectionFooter

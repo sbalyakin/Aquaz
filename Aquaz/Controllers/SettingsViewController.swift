@@ -90,7 +90,7 @@ class SettingsViewController: OmegaSettingsViewController {
       activationChangedFunction: { [unowned self] in self.waterGoalCellWasSelected($0, active: $1) },
       stringFromValueFunction: { [unowned self] in self.stringFromWaterGoal($0) })
     
-    dailyWaterIntakeCell.image = UIImage(named: "settingsWater")
+    dailyWaterIntakeCell.image = ImageHelper.loadImage(.SettingsWater)
     
     volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { value in
       dailyWaterIntakeCell.readFromExternalStorage()
@@ -107,7 +107,7 @@ class SettingsViewController: OmegaSettingsViewController {
       }
     }
     
-    extraFactorsCell.image = UIImage(named: "settingsExtraFactors")
+    extraFactorsCell.image = ImageHelper.loadImage(.SettingsExtraFactors)
 
     let recommendationsSection = TableCellsSection()
     recommendationsSection.tableCells = [dailyWaterIntakeCell, extraFactorsCell]
@@ -120,7 +120,7 @@ class SettingsViewController: OmegaSettingsViewController {
       }
     }
 
-    unitsCell.image = UIImage(named: "settingsUnits")
+    unitsCell.image = ImageHelper.loadImage(.SettingsUnits)
 
     let unitsSection = TableCellsSection()
     unitsSection.tableCells = [unitsCell]
@@ -133,7 +133,7 @@ class SettingsViewController: OmegaSettingsViewController {
       }
     }
     
-    notificationsCell.image = UIImage(named: "settingsNotifications")
+    notificationsCell.image = ImageHelper.loadImage(.SettingsNotifications)
     
     let notificationsSection = TableCellsSection()
     notificationsSection.tableCells = [notificationsCell]
@@ -146,7 +146,7 @@ class SettingsViewController: OmegaSettingsViewController {
         }
     }
     
-    supportCell.image = UIImage(named: "settingsFeedback")
+    supportCell.image = ImageHelper.loadImage(.SettingsFeedback)
     
     let supportSection = TableCellsSection()
     supportSection.tableCells = [supportCell]
@@ -164,7 +164,7 @@ class SettingsViewController: OmegaSettingsViewController {
         }
     }
     
-    fullVersionCell.image = UIImage(named: "settingsFullVersion")
+    fullVersionCell.image = ImageHelper.loadImage(.SettingsFullVersion)
 
     let fullVersionSection = TableCellsSection()
     fullVersionSection.tableCells = [fullVersionCell]

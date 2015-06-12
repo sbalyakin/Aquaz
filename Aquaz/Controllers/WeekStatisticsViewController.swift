@@ -106,7 +106,9 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
-    updateWeekStatisticsView(animated: true)
+    if Settings.generalFullVersion.value {
+      updateWeekStatisticsView(animated: true)
+    }
   }
 
   func fullVersionIsPurchased(notification: NSNotification) {

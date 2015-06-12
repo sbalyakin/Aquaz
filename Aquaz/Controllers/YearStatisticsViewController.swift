@@ -80,7 +80,9 @@ class YearStatisticsViewController: UIViewController {
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
-    updateYearStatisticsView()
+    if Settings.generalFullVersion.value {
+      updateYearStatisticsView()
+    }
   }
 
   func fullVersionIsPurchased(notification: NSNotification) {

@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconRightActive" translatesAutoresizingMaskIntoConstraints="NO" id="eoT-wl-v5s">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconRightActive" translatesAutoresizingMaskIntoConstraints="NO" id="eoT-wl-v5s">
                     <rect key="frame" x="570" y="289" width="22" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="9ut-lO-GfM"/>
@@ -52,6 +52,6 @@
         </view>
     </objects>
     <resources>
-        <image name="iconRightActive" width="22" height="22"/>
+        <image name="IconRightActive" width="22" height="22"/>
     </resources>
 </document>

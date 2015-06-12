@@ -37,7 +37,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Z5E-Gz-oNX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="keI-ET-C2O">
-                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KHN-d8-Fus" userLabel="Summary View" customClass="BannerView" customModule="Aquaz" customModuleProvider="target">
@@ -49,10 +49,10 @@
                                             <constraint firstAttribute="width" constant="32" id="Xcx-6a-HwT"/>
                                             <constraint firstAttribute="height" constant="32" id="fiH-7P-Ikh"/>
                                         </constraints>
-                                        <state key="normal" image="iconHot">
+                                        <state key="normal" image="IconHotWeatherInactive">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <state key="selected" image="iconHotActive"/>
+                                        <state key="selected" image="IconHotWeatherActive"/>
                                         <connections>
                                             <action selector="toggleHotDayMode:" destination="x3I-fN-BQH" eventType="touchUpInside" id="zh4-ul-GSE"/>
                                         </connections>
@@ -70,10 +70,10 @@
                                             <constraint firstAttribute="width" constant="32" id="0FJ-Gr-Lyf"/>
                                             <constraint firstAttribute="height" constant="32" id="MtV-p2-B0X"/>
                                         </constraints>
-                                        <state key="normal" image="iconHighActivity">
+                                        <state key="normal" image="IconHighActivityInactive">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <state key="selected" image="iconHighActivityActive"/>
+                                        <state key="selected" image="IconHighActivityActive"/>
                                         <connections>
                                             <action selector="toggleHighActivityMode:" destination="x3I-fN-BQH" eventType="touchUpInside" id="vRf-Ex-FBV"/>
                                         </connections>
@@ -105,7 +105,7 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qSt-Nh-d9B">
-                                <rect key="frame" x="0.0" y="75" width="600" height="525"/>
+                                <rect key="frame" x="0.0" y="75" width="600" height="412"/>
                                 <connections>
                                     <segue destination="bT2-56-xxf" kind="embed" identifier="PageViewEmbed" id="GFT-cZ-45e"/>
                                 </connections>
@@ -152,7 +152,7 @@
                                 <constraint firstAttribute="centerX" secondItem="z84-wB-oAh" secondAttribute="centerX" id="yN9-Hh-ZH2"/>
                             </constraints>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" image="iconCalendar" id="GKO-c9-CDb" customClass="StyledBarButtonItem" customModule="Aquaz" customModuleProvider="target">
+                        <barButtonItem key="rightBarButtonItem" image="IconCalendar" id="GKO-c9-CDb" customClass="StyledBarButtonItem" customModule="Aquaz" customModuleProvider="target">
                             <connections>
                                 <segue destination="DQq-BJ-pPF" kind="presentation" identifier="ShowCalendar" id="KCV-GD-Ez5"/>
                             </connections>
@@ -410,7 +410,7 @@
                                 <constraint firstItem="Ceg-X5-AVk" firstAttribute="top" secondItem="g9K-Ug-min" secondAttribute="bottom" id="xHj-ul-g7d"/>
                             </constraints>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" image="iconTime" id="3j1-xd-PoU" customClass="StyledBarButtonItem" customModule="Aquaz" customModuleProvider="target">
+                        <barButtonItem key="rightBarButtonItem" image="IconTime" id="3j1-xd-PoU" customClass="StyledBarButtonItem" customModule="Aquaz" customModuleProvider="target">
                             <connections>
                                 <segue destination="5dn-TH-wLd" kind="presentation" identifier="PickTime" id="8ds-MG-2sv"/>
                             </connections>
@@ -679,35 +679,35 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6io-9A-Yq4" userLabel="&lt;">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6io-9A-Yq4" userLabel="&lt;">
                                 <rect key="frame" x="16" y="72" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="UZ6-fr-E0p"/>
                                     <constraint firstAttribute="width" constant="32" id="rHb-QX-S9C"/>
                                 </constraints>
-                                <state key="normal" image="iconLeftActive">
+                                <state key="normal" image="IconLeftActive">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="disabled" image="iconLeft"/>
+                                <state key="disabled" image="IconLeftInactive"/>
                                 <connections>
                                     <action selector="switchToPreviousMonth:" destination="nY1-e6-BNo" eventType="touchUpInside" id="1dt-YW-E0Y"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8PO-QY-6SQ" userLabel="&gt;">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8PO-QY-6SQ" userLabel="&gt;">
                                 <rect key="frame" x="552" y="72" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="0uC-ib-lKZ"/>
                                     <constraint firstAttribute="width" constant="32" id="icy-nY-Csx"/>
                                 </constraints>
-                                <state key="normal" image="iconRightActive">
+                                <state key="normal" image="IconRightActive">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="disabled" image="iconRight"/>
+                                <state key="disabled" image="IconRightInactive"/>
                                 <connections>
                                     <action selector="switchToNextMonth:" destination="nY1-e6-BNo" eventType="touchUpInside" id="sJR-yG-M3X"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Qj-Pw-bGE" customClass="CalendarView" customModule="Aquaz" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qj-Pw-bGE" customClass="CalendarView" customModule="Aquaz" customModuleProvider="target">
                                 <rect key="frame" x="16" y="104" width="568" height="488"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
@@ -716,7 +716,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="{Month}" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORs-BH-u1n">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Month}" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORs-BH-u1n">
                                 <rect key="frame" x="56" y="78" width="488" height="20"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -842,8 +842,8 @@
                                     <constraint firstAttribute="height" constant="32" id="ccy-Zb-NCO"/>
                                     <constraint firstAttribute="width" constant="32" id="sKI-kV-PXA"/>
                                 </constraints>
-                                <state key="normal" image="iconLeftActive"/>
-                                <state key="disabled" image="iconLeft"/>
+                                <state key="normal" image="IconLeftActive"/>
+                                <state key="disabled" image="IconLeftInactive"/>
                                 <connections>
                                     <action selector="switchToPreviousWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="48x-ud-NiQ"/>
                                 </connections>
@@ -858,10 +858,10 @@
                                     <constraint firstAttribute="height" constant="32" id="LeP-TD-6rE"/>
                                     <constraint firstAttribute="width" constant="32" id="nY7-3q-DM2"/>
                                 </constraints>
-                                <state key="normal" image="iconRightActive">
+                                <state key="normal" image="IconRightActive">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="disabled" image="iconRight"/>
+                                <state key="disabled" image="IconRightInactive"/>
                                 <connections>
                                     <action selector="switchToNextWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="FWB-hj-tac"/>
                                 </connections>
@@ -918,10 +918,10 @@
                                     <constraint firstAttribute="width" constant="32" id="qXE-qf-3eg"/>
                                     <constraint firstAttribute="height" constant="32" id="y5b-9Q-pl4"/>
                                 </constraints>
-                                <state key="normal" image="iconRightActive">
+                                <state key="normal" image="IconRightActive">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="disabled" image="iconRight"/>
+                                <state key="disabled" image="IconRightInactive"/>
                                 <connections>
                                     <action selector="switchToNextMonth:" destination="7ff-6R-UZu" eventType="touchUpInside" id="tPt-zZ-Hvm"/>
                                     <action selector="switchToNextWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="lR3-hG-z7D"/>
@@ -949,8 +949,8 @@
                                     <constraint firstAttribute="width" constant="32" id="BFC-0e-fKN"/>
                                     <constraint firstAttribute="height" constant="32" id="k7u-f6-u4T"/>
                                 </constraints>
-                                <state key="normal" image="iconLeftActive"/>
-                                <state key="disabled" image="iconLeft"/>
+                                <state key="normal" image="IconLeftActive"/>
+                                <state key="disabled" image="IconLeftInactive"/>
                                 <connections>
                                     <action selector="switchToPreviousMonth:" destination="7ff-6R-UZu" eventType="touchUpInside" id="lrD-2v-0EP"/>
                                     <action selector="switchToPreviousWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="DeK-oQ-GCl"/>
@@ -1008,10 +1008,10 @@
                                     <constraint firstAttribute="height" constant="32" id="dWk-R6-vxy"/>
                                     <constraint firstAttribute="width" constant="32" id="ot1-hn-GUu"/>
                                 </constraints>
-                                <state key="normal" image="iconRightActive">
+                                <state key="normal" image="IconRightActive">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="disabled" image="iconRight"/>
+                                <state key="disabled" image="IconRightInactive"/>
                                 <connections>
                                     <action selector="switchToNextMonth:" destination="7ff-6R-UZu" eventType="touchUpInside" id="3MC-9U-MgE"/>
                                     <action selector="switchToNextWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="3TL-Lh-9r3"/>
@@ -1033,8 +1033,8 @@
                                     <constraint firstAttribute="height" constant="32" id="Kn5-Vv-idj"/>
                                     <constraint firstAttribute="width" constant="32" id="Lvf-jM-46M"/>
                                 </constraints>
-                                <state key="normal" image="iconLeftActive"/>
-                                <state key="disabled" image="iconLeft"/>
+                                <state key="normal" image="IconLeftActive"/>
+                                <state key="disabled" image="IconLeftInactive"/>
                                 <connections>
                                     <action selector="switchToPreviousMonth:" destination="7ff-6R-UZu" eventType="touchUpInside" id="A08-y8-SiI"/>
                                     <action selector="switchToPreviousWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="nhs-nc-imX"/>
@@ -1180,9 +1180,9 @@
         <scene sceneID="Ui8-rF-iey">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="j8p-Wz-faw" userLabel="Settings Navigation Controller" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="tabbarSettingsInactive" id="NmH-l2-53C">
+                    <tabBarItem key="tabBarItem" title="Settings" image="TabbarSettingsInactive" id="NmH-l2-53C">
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="tabbarSettingsActive"/>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="TabbarSettingsActive"/>
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
@@ -1384,7 +1384,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpa-Ss-Tf5">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="supportLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Ccx-CA-a4U" userLabel="Logo">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SupportLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Ccx-CA-a4U" userLabel="Logo">
                                         <rect key="frame" x="270" y="20" width="60" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1431,7 +1431,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9g-99-crR" userLabel="Twitter">
                                         <rect key="frame" x="124" y="146" width="60" height="60"/>
-                                        <state key="normal" image="supportTwitter">
+                                        <state key="normal" image="SupportTwitter">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1444,7 +1444,7 @@
                                             <constraint firstAttribute="height" constant="60" id="oSM-rZ-PcI"/>
                                             <constraint firstAttribute="width" constant="60" id="uvz-mQ-z3n"/>
                                         </constraints>
-                                        <state key="normal" image="supportFacebook">
+                                        <state key="normal" image="SupportFacebook">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1453,7 +1453,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPJ-Kp-lYM" userLabel="Mail">
                                         <rect key="frame" x="417" y="146" width="60" height="60"/>
-                                        <state key="normal" image="supportMail">
+                                        <state key="normal" image="SupportMail">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1583,7 +1583,7 @@
                                     <action selector="purchaseFullVersion" destination="FHB-5E-W7x" eventType="touchUpInside" id="1s2-Yx-7bs"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="249" verticalCompressionResistancePriority="249" image="welcomeFullVersion" translatesAutoresizingMaskIntoConstraints="NO" id="GfI-Ri-SVf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="249" verticalCompressionResistancePriority="249" image="WelcomeFullVersion" translatesAutoresizingMaskIntoConstraints="NO" id="GfI-Ri-SVf">
                                 <rect key="frame" x="250" y="87" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="BOe-hm-4R3"/>
@@ -1661,9 +1661,9 @@
         <scene sceneID="FtE-Ot-0fq">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DbZ-Sj-oMQ" userLabel="Day Navigation Controller" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Drinks" image="tabbarWaterInactive" id="ZJP-Cb-pl3">
+                    <tabBarItem key="tabBarItem" title="Drinks" image="TabbarWaterInactive" id="ZJP-Cb-pl3">
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="tabbarWaterActive"/>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="TabbarWaterActive"/>
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
@@ -1676,7 +1676,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="x3I-fN-BQH" kind="relationship" relationship="rootViewController" id="kff-4M-IxV"/>
+                        <segue destination="x3I-fN-BQH" kind="relationship" relationship="rootViewController" id="ydb-Ny-Uqg"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BO6-P6-OAZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1687,9 +1687,9 @@
         <scene sceneID="prQ-iP-Pcm">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TkU-Ak-jIk" userLabel="Statistics Navigation Controller" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Statistics" image="tabbarStatisticInactive" id="rSh-yD-2IJ">
+                    <tabBarItem key="tabBarItem" title="Statistics" image="TabbarStatisticInactive" id="rSh-yD-2IJ">
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="tabbarStatisticActive"/>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="TabbarStatisticActive"/>
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
@@ -1762,30 +1762,30 @@
         </scene>
     </scenes>
     <resources>
-        <image name="iconCalendar" width="22" height="18"/>
-        <image name="iconHighActivity" width="22" height="22"/>
-        <image name="iconHighActivityActive" width="22" height="22"/>
-        <image name="iconHot" width="22" height="22"/>
-        <image name="iconHotActive" width="22" height="22"/>
-        <image name="iconLeft" width="22" height="22"/>
-        <image name="iconLeftActive" width="22" height="22"/>
-        <image name="iconRight" width="22" height="22"/>
-        <image name="iconRightActive" width="22" height="22"/>
-        <image name="iconTime" width="22" height="22"/>
-        <image name="supportFacebook" width="60" height="60"/>
-        <image name="supportLogo" width="60" height="60"/>
-        <image name="supportMail" width="60" height="60"/>
-        <image name="supportTwitter" width="60" height="60"/>
-        <image name="tabbarSettingsActive" width="25" height="25"/>
-        <image name="tabbarSettingsInactive" width="25" height="25"/>
-        <image name="tabbarStatisticActive" width="21" height="25"/>
-        <image name="tabbarStatisticInactive" width="21" height="25"/>
-        <image name="tabbarWaterActive" width="17" height="25"/>
-        <image name="tabbarWaterInactive" width="17" height="25"/>
-        <image name="welcomeFullVersion" width="100" height="100"/>
+        <image name="IconCalendar" width="22" height="18"/>
+        <image name="IconHighActivityActive" width="22" height="22"/>
+        <image name="IconHighActivityInactive" width="22" height="22"/>
+        <image name="IconHotWeatherActive" width="22" height="22"/>
+        <image name="IconHotWeatherInactive" width="22" height="22"/>
+        <image name="IconLeftActive" width="22" height="22"/>
+        <image name="IconLeftInactive" width="22" height="22"/>
+        <image name="IconRightActive" width="22" height="22"/>
+        <image name="IconRightInactive" width="22" height="22"/>
+        <image name="IconTime" width="22" height="22"/>
+        <image name="SupportFacebook" width="60" height="60"/>
+        <image name="SupportLogo" width="60" height="60"/>
+        <image name="SupportMail" width="60" height="60"/>
+        <image name="SupportTwitter" width="60" height="60"/>
+        <image name="TabbarSettingsActive" width="25" height="25"/>
+        <image name="TabbarSettingsInactive" width="25" height="25"/>
+        <image name="TabbarStatisticActive" width="21" height="25"/>
+        <image name="TabbarStatisticInactive" width="21" height="25"/>
+        <image name="TabbarWaterActive" width="17" height="25"/>
+        <image name="TabbarWaterInactive" width="17" height="25"/>
+        <image name="WelcomeFullVersion" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="a5J-vo-YYv"/>
-        <segue reference="Y3z-7d-zGG"/>
+        <segue reference="sL9-fM-OF1"/>
+        <segue reference="ydb-Ny-Uqg"/>
     </inferredMetricsTieBreakers>
 </document>

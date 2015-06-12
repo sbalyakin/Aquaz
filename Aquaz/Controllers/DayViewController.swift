@@ -572,7 +572,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   private func showCongratulationsAboutWaterGoalReaching() {
     let banner = InfoBannerView.create()
     banner.infoLabel.text = localizedStrings.congratulationsBannerText
-    banner.infoImageView.image = UIImage(named: "reward")
+    banner.infoImageView.image = ImageHelper.loadImage(.BannerReward)
     banner.bannerWasTappedFunction = { _ in banner.hide(animated: true) }
     banner.accessoryImageView.hidden = true
 

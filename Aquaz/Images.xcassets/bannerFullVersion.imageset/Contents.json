@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "reward.png"
+      "filename" : "bannerFullVersion.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "reward@2x.png"
+      "filename" : "bannerFullVersion@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "reward@3x.png"
+      "filename" : "bannerFullVersion@3x.png"
     }
   ],
   "info" : {
