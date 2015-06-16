@@ -20,7 +20,7 @@
 "D:Milk" = "Молоко";
 
 /* Drink: Title for soda */
-"D:Soda" = "Газированная вода";
+"D:Soda" = "Газировка";
 
 /* Drink: Title for sport drink */
 "D:Sport" = "Спортивный напиток";
@@ -75,7 +75,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "DVC:Remind Me Later" = "Напомнить Позже";
 
 /* DayViewController: Text for help tip about swiping for changing day */
-"DVC:Swipe to change day" = "Проведите чтобы изменить день";
+"DVC:Swipe to change day" = "Проведите чтобы сменить день";
 
 /* DayViewController: Text for help tip about activating/deactivating High Activity mode */
 "DVC:Tap to toggle High Activity mode" = "Нажмите чтобы переключить режим Высокой Активности";
@@ -102,10 +102,10 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "EFVC:Specify daily water intake increasing when Hot Weather mode is turned on." = "Укажите повышение суточной нормы при включении режима Жаркой Погоды.";
 
 /* FullVersionViewController: Description about full version purchase */
-"FVVC:Description about full version purchase" = "Купите полную версию Aquaz чтобы:
-  • получить доступ к умных оповещениям
-  • включить статистику
-  • удалить рекламу";
+"FVVC:Description about full version purchase" = "Полная версия Aquaz это:
+  • умные оповещения
+  • доступ к статистике
+  • отсутствие рекламы";
 
 /* FullVersionViewController: Text displayed as a value of price label if price fetching is failed */
 "FVVC:Error" = "Ошибка";
@@ -329,8 +329,8 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* WaterGoalViewController: Table cell title for [Age] setting */
 "WGVC:Age" = "Возраст";
 
-/* WaterGoalViewController: [Breastfeeding female] option for gender */
-"WGVC:Breastfeeding female" = "Женщина: кормление грудью";
+/* WaterGoalViewController: [Woman: breastfeeding] option for gender */
+"WGVC:Woman: breastfeeding" = "Женщина: кормление грудью";
 
 /* WaterGoalViewController: [Daily] option for physical activity */
 "WGVC:Daily" = "Ежедневная";
@@ -354,10 +354,10 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "WGVC:Occasional" = "Нерегулярная";
 
 /* WaterGoalViewController: Table cell title for [Physical Activity] setting */
-"WGVC:Physical Activity" = "Физическая Активность";
+"WGVC:Physical Activity" = "Активность";
 
-/* WaterGoalViewController: [Pregnant female] option for gender */
-"WGVC:Pregnant female" = "Женщина: беременность";
+/* WaterGoalViewController: [Woman: pregnant] option for gender */
+"WGVC:Woman: pregnant" = "Женщина: беременность";
 
 /* WaterGoalViewController: [Rare] option for physical activity */
 "WGVC:Rare" = "Редкая";

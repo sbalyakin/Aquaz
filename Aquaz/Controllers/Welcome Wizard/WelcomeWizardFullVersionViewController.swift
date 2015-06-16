@@ -1,5 +1,5 @@
 //
-//  WelcomeWizardFullVersionViewController.swift
+//  WelcomeWizardLastPageViewController.swift
 //  Aquaz
 //
 //  Created by Sergey Balyakin on 04.04.15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WelcomeWizardFullVersionViewController: UIViewController {
+class WelcomeWizardLastPageViewController: UIViewController {
 
   @IBOutlet weak var getStartedButton: RoundedButton!
   
@@ -24,13 +24,6 @@ class WelcomeWizardFullVersionViewController: UIViewController {
   @IBAction func getStartedButtonWasTapped() {
     if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
       appDelegate.showDefaultRootViewControllerWithAnimation()
-    }
-  }
-  
-  @IBAction func seeFullVersionButtonWasTapped() {
-    let storyboard = UIStoryboard(name: GlobalConstants.storyboardMain, bundle: nil)
-    if let fullVersionViewController: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.fullVersionViewControllerIdentifier) {
-      presentViewController(fullVersionViewController, animated: true, completion: nil)
     }
   }
   

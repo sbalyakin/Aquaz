@@ -12,6 +12,14 @@ class PickerTableCell<Value: Printable, Collection: CollectionType where Value: 
   
   let collection: Collection
   let height: UIPickerViewHeight
+  var font: UIFont? {
+    didSet {
+      if let font = font {
+        uiCell?.pickerViewFont = font
+        uiCell?.refresh()
+      }
+    }
+  }
 
   var uiCell: UIPickerTableViewCell?
   
@@ -28,6 +36,9 @@ class PickerTableCell<Value: Printable, Collection: CollectionType where Value: 
     
     uiCell!.dataSource = self
     uiCell!.delegate = self
+    if let font = font {
+      uiCell!.pickerViewFont = font
+    }
     updateUICell()
     return uiCell!
   }

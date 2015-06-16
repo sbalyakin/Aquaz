@@ -38,10 +38,24 @@ class UIPickerTableViewCell: UITableViewCell {
   
   var delegate: UIPickerTableViewCellDelegate?
   
-  var pickerViewFont: UIFont = UIFont.systemFontOfSize(21) {
+  var pickerViewFont: UIFont? = nil {
     didSet {
-      setNeedsDisplay()
+      if pickerViewFont == nil {
+        pickerViewDelegate = UIPickerTableViewCellInternalAttributedTitleDelegate(pickerTableViewCell: self)
+      } else {
+        pickerViewDelegate = UIPickerTableViewCellInternalCustomLabelDelegate(pickerTableViewCell: self)
+      }
     }
+  }
+  
+  private var pickerViewDelegate: UIPickerTableViewCellInternalBaseDelegate! {
+    didSet {
+      pickerView?.delegate = pickerViewDelegate
+    }
+  }
+  
+  private var fontForComponentTitle: UIFont {
+    return pickerViewFont ?? UIFont.systemFontOfSize(21)
   }
   
   init(reuseIdentifier: String? = nil) {
@@ -56,22 +70,27 @@ class UIPickerTableViewCell: UITableViewCell {
   
   private func baseInit() {
     selectionStyle = .None
-    
     layer.zPosition = -1
+
     if self.pickerView == nil {
       let pickerView = UIPickerView()
+      self.pickerView = pickerView
       pickerView.backgroundColor = UIColor.clearColor()
       pickerView.dataSource = self
-      pickerView.delegate = self
+      pickerViewDelegate = UIPickerTableViewCellInternalAttributedTitleDelegate(pickerTableViewCell: self)
       contentView.addSubview(pickerView)
       contentView.sendSubviewToBack(pickerView)
-      self.pickerView = pickerView
     }
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
     layoutPickerView()
+  }
+  
+  func refresh() {
+    pickerView.reloadAllComponents()
+    setupPickerView()
   }
   
   private func setupPickerView() {
@@ -89,7 +108,7 @@ class UIPickerTableViewCell: UITableViewCell {
       let title = dataSource?.pickerView(pickerView, titleForComponent: component) ?? ""
       if !title.isEmpty {
         let titleLabel = UILabel()
-        titleLabel.font = pickerViewFont
+        titleLabel.font = fontForComponentTitle
         titleLabel.text = title
         titleLabel.textColor = UIColor.blackColor()
         titleLabel.backgroundColor = UIColor.clearColor()
@@ -114,7 +133,7 @@ class UIPickerTableViewCell: UITableViewCell {
     for component in 0..<pickerView.numberOfComponents {
       if let label = componentTitleLabels[component] {
         let componentTitle = dataSource?.pickerView(pickerView, titleForComponent: component) ?? ""
-        let componentTitleSize = computeSizeForText(componentTitle, font: pickerViewFont)
+        let componentTitleSize = computeSizeForText(componentTitle, font: fontForComponentTitle)
         let componentSize = pickerView.rowSizeForComponent(component)
         let labelMinX = x + componentSize.width - componentTitleSize.width
         let labelMinY = midY - componentTitleSize.height / 2
@@ -128,6 +147,24 @@ class UIPickerTableViewCell: UITableViewCell {
     }
   }
 
+  private func composeAttributedTitleForPickerView(pickerView: UIPickerView, row: Int, component: Int) -> NSAttributedString {
+    let rowTitle = dataSource?.pickerView(pickerView, titleForRow: row, forComponent: component) ?? ""
+    let componentTitle: String
+    if let title = dataSource?.pickerView(pickerView, titleForComponent: component) {
+      componentTitle = " \(title)"
+    } else {
+      componentTitle = ""
+    }
+    
+    let componentTitleWidth = computeSizeForText(componentTitle, font: fontForComponentTitle).width
+    
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.alignment = componentTitle.isEmpty ? .Center : .Right
+    paragraphStyle.tailIndent = -componentTitleWidth
+    
+    return NSAttributedString(string: rowTitle, attributes: [NSParagraphStyleAttributeName: paragraphStyle])
+  }
+  
   private func computeSizeForText(text: String, font: UIFont) -> CGSize {
     let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
     let fontAttributes = [NSFontAttributeName: font, NSParagraphStyleAttributeName: textStyle]
@@ -160,49 +197,55 @@ extension UIPickerTableViewCell: UIPickerViewDataSource {
     return dataSource?.pickerView(pickerView, numberOfRowsInComponent: component) ?? 0
   }
   
-  func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-    return dataSource?.pickerView(pickerView, titleForRow: row, forComponent: component) ?? ""
+}
+
+class UIPickerTableViewCellInternalBaseDelegate: NSObject, UIPickerViewDelegate {
+  
+  weak var pickerTableViewCell: UIPickerTableViewCell!
+  
+  init(pickerTableViewCell: UIPickerTableViewCell) {
+    self.pickerTableViewCell = pickerTableViewCell
+    super.init()
   }
   
-  func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-    if dataSource == nil {
-      return nil
-    }
-    
-    let rowTitle = dataSource?.pickerView(pickerView, titleForRow: row, forComponent: component) ?? ""
-    let componentTitle: String
-    if let title = dataSource?.pickerView(pickerView, titleForComponent: component) {
-      componentTitle = " \(title)"
+  func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    pickerTableViewCell.delegate?.pickerView(pickerView, didSelectRow: row, inComponent: component)
+  }
+  
+  func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+    if let width = pickerTableViewCell.delegate?.pickerView(pickerView, widthForComponent: component) {
+      return width
     } else {
-      componentTitle = ""
+      let numberOfComponents = pickerTableViewCell.dataSource?.numberOfComponentsInPickerView(pickerView) ?? 1
+      let totalGaps = CGFloat(numberOfComponents - 1) * pickerTableViewCell.pickerViewGapBetweenComponents
+      let width = (pickerTableViewCell.bounds.width - pickerTableViewCell.pickerViewMargin - totalGaps) / CGFloat(numberOfComponents)
+      return width
     }
-    
-    let componentTitleWidth = computeSizeForText(componentTitle, font: pickerViewFont).width
-    
-    let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.alignment = componentTitle.isEmpty ? .Center : .Right
-    paragraphStyle.tailIndent = -componentTitleWidth
-    
-    return NSAttributedString(string: rowTitle, attributes: [NSParagraphStyleAttributeName: paragraphStyle])
   }
 
 }
 
-extension UIPickerTableViewCell: UIPickerViewDelegate {
-  
-  func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    delegate?.pickerView(pickerView, didSelectRow: row, inComponent: component)
+class UIPickerTableViewCellInternalAttributedTitleDelegate: UIPickerTableViewCellInternalBaseDelegate {
+
+  func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+    return pickerTableViewCell.composeAttributedTitleForPickerView(pickerView, row: row, component: component)
   }
   
-  func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-    if let width = delegate?.pickerView(pickerView, widthForComponent: component) {
-      return width
-    } else {
-      let numberOfComponents = dataSource?.numberOfComponentsInPickerView(pickerView) ?? 1
-      let totalGaps = CGFloat(numberOfComponents - 1) * pickerViewGapBetweenComponents
-      let width = (bounds.width - pickerViewMargin - totalGaps) / CGFloat(numberOfComponents)
-      return width
+}
+
+class UIPickerTableViewCellInternalCustomLabelDelegate: UIPickerTableViewCellInternalBaseDelegate {
+  
+  func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+    var pickerLabel = view as? UILabel
+    if pickerLabel == nil {
+      pickerLabel = UILabel()
+      pickerLabel!.font = pickerTableViewCell.pickerViewFont
+      pickerLabel!.backgroundColor = UIColor.clearColor()
     }
+
+    pickerLabel!.attributedText = pickerTableViewCell.composeAttributedTitleForPickerView(pickerView, row: row, component: component)
+
+    return pickerLabel!
   }
 
 }

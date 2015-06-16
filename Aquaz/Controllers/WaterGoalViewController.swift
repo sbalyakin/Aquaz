@@ -62,6 +62,10 @@ class WaterGoalViewController: OmegaSettingsViewController {
       pickerTableCellHeight: .Small,
       stringFromValueFunction: WaterGoalViewController.stringFromGender)
     
+    if let pickerTableCell = genderCell.supportingTableCell as? PickerTableCell<Settings.Gender, EnumCollection<Settings.Gender>> {
+      pickerTableCell.font = UIFont.systemFontOfSize(18)
+    }
+
     genderCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
     
     // Height cell
@@ -179,15 +183,15 @@ class WaterGoalViewController: OmegaSettingsViewController {
         comment: "WaterGoalViewController: [Woman] option for gender")
       
     case .PregnantFemale:
-      return NSLocalizedString("WGVC:Pregnant female", value: "Pregnant female",
-        comment: "WaterGoalViewController: [Pregnant female] option for gender")
+      return NSLocalizedString("WGVC:Woman: pregnant", value: "Woman: pregnant",
+        comment: "WaterGoalViewController: [Woman: pregnant] option for gender")
       
     case .BreastfeedingFemale:
-      return NSLocalizedString("WGVC:Breastfeeding female", value: "Breastfeeding female",
-        comment: "WaterGoalViewController: [Breastfeeding female] option for gender")
+      return NSLocalizedString("WGVC:Woman: breastfeeding", value: "Woman: breastfeeding",
+        comment: "WaterGoalViewController: [Woman: breastfeeding] option for gender")
     }
   }
-  
+
   private class func stringFromPhysicalActivity(physicalActivity: Settings.PhysicalActivity) -> String {
     switch physicalActivity {
     case .Rare:
@@ -271,7 +275,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
     dailyWaterIntakeCell.value = waterGoalAmount
   }
   
-  private var genderCell: TableCellWithValue<Settings.Gender>!
+  private var genderCell: RightDetailTableCell<Settings.Gender>!
   private var heightCell: TableCellWithValue<Double>!
   private var weightCell: TableCellWithValue<Double>!
   private var ageCell: TableCellWithValue<Int>!

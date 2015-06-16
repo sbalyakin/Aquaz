@@ -10,7 +10,7 @@ import UIKit
 
 class WelcomeWizardPageViewController: UIPageViewController {
 
-  private var ownViewControllers: [UIViewController!] = [nil, nil, nil]
+  private var ownViewControllers = [UIViewController]()
   weak var pageControl: UIPageControl!
   weak var skipButton: UIButton!
   
@@ -23,13 +23,13 @@ class WelcomeWizardPageViewController: UIPageViewController {
     let welcomePage: UIViewController    = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Welcome Page")!
     let unitsPage: UIViewController      = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Units Page")!
     let metricsPage: UIViewController    = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Metrics Page")!
-    let proVersionPage: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Full Version Page")!
+    let lastPage: UIViewController       = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Last Page")!
     
     ownViewControllers = [
       welcomePage,
       unitsPage,
       metricsPage,
-      proVersionPage]
+      lastPage]
     
     dataSource = self
     delegate = self
