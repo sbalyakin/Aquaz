@@ -75,16 +75,16 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "DVC:Remind Me Later" = "Напомнить Позже";
 
 /* DayViewController: Text for help tip about swiping for changing day */
-"DVC:Swipe to change day" = "Проведите чтобы сменить день";
-
-/* DayViewController: Text for help tip about activating/deactivating High Activity mode */
-"DVC:Tap to toggle High Activity mode" = "Нажмите чтобы переключить режим Высокой Активности";
-
-/* DayViewController: Text for help tip about activating/deactivating Hot Weather mode */
-"DVC:Tap to toggle Hot Weather mode" = "Нажмите чтобы переключить режим Жаркой Погоды";
+"DVC:Swipe to change day" = "Проведите для смены дня";
 
 /* DayViewController: Text for help tip about switching between percents and volume representation of overall intake for a day */
-"DVC:Tap to switch between percents and volume" = "Нажмите чтобы переключиться между процентами и объёмом";
+"DVC:Tap to switch between percents and volume" = "Нажмите для переключения между процентами и объёмом";
+
+/* DayViewController: Text for help tip about activating/deactivating High Activity mode */
+"DVC:Tap to toggle High Activity mode" = "Нажмите для переключения режима Высокой Активности";
+
+/* DayViewController: Text for help tip about activating/deactivating Hot Weather mode */
+"DVC:Tap to toggle Hot Weather mode" = "Нажмите для переключения режима Жаркой Погоды";
 
 /* DayViewController: Title for alert displayed if tomorrow has come */
 "DVC:Welcome to the next day" = "Добро пожаловать в следующий день";
@@ -179,14 +179,14 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* NotificationSounds: alarm sound named [Magic] */
 "NS:Magic" = "Магия";
 
-/* NotificationsSoundViewController: header title for [NSVC:Notification sounds] section */
-"NSVC:Notification sounds" = "Звуки оповещения";
-
 /* NotificationSounds: alarm sound named [Tiny Bell] */
 "NS:Tiny Bell" = "Тихий звонок";
 
 /* NotificationSounds: alarm sound named [Whistle] */
 "NS:Whistle" = "Свист";
+
+/* NotificationsSoundViewController: header title for [NSVC:Notification sounds] section */
+"NSVC:Notification sounds" = "Звуки оповещения";
 
 /* NotificationsViewController: Template string for time interval */
 "NVC:%u hr %u min" = "%1$u ч %2$u мин";
@@ -195,7 +195,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "NVC:Enable Notifications" = "Включить Оповещения";
 
 /* NotificationsViewController: Footer text for [Smart Notifications] section */
-"NVC:Enable to snooze notifications taking into account time of drink intakes." = "Включите этот режим чтобы откладывать оповещения, учитывая время употребления напитков.";
+"NVC:Enable to snooze notifications taking into account time of drink intakes." = "Включите этот режим, чтобы откладывать оповещения, учитывая время употребления напитков.";
 
 /* NotificationsViewController: Title for [From] setting */
 "NVC:From" = "С";
@@ -216,7 +216,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "NVC:To" = "До";
 
 /* NotificationsViewController: Footer text for [Limit Notifications] section */
-"NVC:When enabled, notifications will not be shown if you already drink your daily water intake." = "Если данный режим включен, то оповещения не будут показываться если вы выпили суточную норму.";
+"NVC:When enabled, notifications will not be shown if you already drink your daily water intake." = "Если данный режим включен, то оповещения не будут показываться, если вы выпили суточную норму.";
 
 /* NotificationsViewController: contraction for hour */
 "NVC:hr" = "ч";
@@ -249,10 +249,10 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "SVC:Height" = "Рост";
 
 /* SupportViewController: Text for social message */
-"SVC:Hey people! I've been using Aquaz and thought you might like it. It's an easy way to track your water intakes." = "Всем привет! Я использую Aquaz и думаю вам он может понравиться. Приложение поможет отслеживать потребление воды.";
+"SVC:Hey people! I've been using Aquaz and thought you might like it. It's an easy way to track your water intakes." = "Всем привет! Я использую Aquaz и думаю, вам он может понравиться. Приложение поможет отслеживать потребление воды.";
 
 /* SupportViewController: Body of tell-to-friend e-mail */
-"SVC:Hey there!<br><br>I've been using Aquaz and thought you might like it. It's an easy way to track your water intakes." = "Привет!<br><br>Я использую Aquaz и думаю тебе он может понравиться. Приложение поможет отслеживать потребление воды.";
+"SVC:Hey there!<br><br>I've been using Aquaz and thought you might like it. It's an easy way to track your water intakes." = "Привет!<br><br>Я использую Aquaz и думаю, тебе он может понравиться. Приложение поможет отслеживать потребление воды.";
 
 /* SupportViewController: Subject of tell-to-friend e-mail */
 "SVC:I suggest you to try Aquaz" = "Я предлагаю тебе попробовать Aquaz";
@@ -329,9 +329,6 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* WaterGoalViewController: Table cell title for [Age] setting */
 "WGVC:Age" = "Возраст";
 
-/* WaterGoalViewController: [Woman: breastfeeding] option for gender */
-"WGVC:Woman: breastfeeding" = "Женщина: кормление грудью";
-
 /* WaterGoalViewController: [Daily] option for physical activity */
 "WGVC:Daily" = "Ежедневная";
 
@@ -345,7 +342,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "WGVC:Height" = "Рост";
 
 /* WaterGoalViewController: Header for section with personal information about user */
-"WGVC:Information About You" = "Информация О Вас";
+"WGVC:Information About You" = "Информация о Вас";
 
 /* WaterGoalViewController: [Man] option for gender */
 "WGVC:Man" = "Мужчина";
@@ -355,9 +352,6 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 
 /* WaterGoalViewController: Table cell title for [Physical Activity] setting */
 "WGVC:Physical Activity" = "Активность";
-
-/* WaterGoalViewController: [Woman: pregnant] option for gender */
-"WGVC:Woman: pregnant" = "Женщина: беременность";
 
 /* WaterGoalViewController: [Rare] option for physical activity */
 "WGVC:Rare" = "Редкая";
@@ -373,4 +367,10 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 
 /* WaterGoalViewController: [Woman] option for gender */
 "WGVC:Woman" = "Женщина";
+
+/* WaterGoalViewController: [Woman: breastfeeding] option for gender */
+"WGVC:Woman: breastfeeding" = "Женщина: кормление грудью";
+
+/* WaterGoalViewController: [Woman: pregnant] option for gender */
+"WGVC:Woman: pregnant" = "Женщина: беременность";
 

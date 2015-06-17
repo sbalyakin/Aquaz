@@ -4,14 +4,14 @@
 /* Class = "UILabel"; text = "Welcome!"; ObjectID = "LR1-R9-kgb"; */
 "LR1-R9-kgb.text" = "Добро пожаловать!";
 
-/* Class = "UILabel"; text = "Swipe to setup Aquaz."; ObjectID = "mdo-Wx-K3f"; */
-"mdo-Wx-K3f.text" = "Пройдите несколько простых шагов чтобы настроить Aquaz.";
-
 /* Class = "UILabel"; text = "Enter information to calculate daily water intake."; ObjectID = "OZc-wd-LVi"; */
 "OZc-wd-LVi.text" = "Укажите информацию для расчета суточной нормы воды.";
 
 /* Class = "UILabel"; text = "Easy water tracking starts here."; ObjectID = "UTf-EX-vft"; */
-"UTf-EX-vft.text" = "Учет воды это проще чем кажется.";
+"UTf-EX-vft.text" = "Учет воды - это проще, чем кажется.";
+
+/* Class = "UILabel"; text = "Swipe to set up Aquaz."; ObjectID = "mdo-Wx-K3f"; */
+"mdo-Wx-K3f.text" = "Пройдите несколько простых шагов для настройки Aquaz.";
 
 /* Class = "UILabel"; text = "Choose preferred measurement units."; ObjectID = "qtN-V8-hVa"; */
 "qtN-V8-hVa.text" = "Выберите единицы измерения.";
