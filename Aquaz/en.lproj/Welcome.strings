@@ -1,3 +1,12 @@
-//  Created by Sergey Balyakin on 11.06.15.
-//  Note: English is a base language, so translation is not needed.
-//  This file is added just to make XCode happy.
+/*
+ 
+ Created by Sergey Balyakin on 11.06.15.
+ 
+ English is a base language, so translation is not needed.
+ This file is added just to make XCode happy.
+ 
+ Warning: Do not replace the block comments with one-line comments
+ because they require an extra blank line at the end of the file.
+ Otherwise XCode 6.3 crashes on "Export For Localization..." operation.
+ 
+*/
