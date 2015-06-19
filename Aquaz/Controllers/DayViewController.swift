@@ -67,6 +67,10 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       value: "%1$@ of %2$@",
       comment: "DayViewController: Current daily water intake of water intake goal")
 
+    lazy var helpTipSwipeToSeeDiary = NSLocalizedString("DVC:Swipe up to see the diary",
+      value: "Swipe up to see the diary",
+      comment: "DayViewController: Text for help tip about swiping for seeing the diary")
+
     lazy var helpTipSwipeToChangeDay = NSLocalizedString("DVC:Swipe to change day",
       value: "Swipe to change day",
       comment: "DayViewController: Text for help tip about swiping for changing day")
@@ -737,6 +741,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     let currentHelpTip = Settings.uiDayPageHelpTipToShow.value
     
     switch currentHelpTip {
+    case .SlideToSeeDiary: showHelpTipForSlideToSeeDiary()
     case .SlideToChangeDay: showHelpTipForSlideToChangeDay()
     case .HighActivityMode: showHelpTipForHighActivityMode()
     case .HotWeatherMode: showHelpTipForHotWeatherMode()
@@ -748,6 +753,17 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     // Switch to the next help tip
     Settings.uiDayPageHelpTipToShow.value = Settings.DayPageHelpTip(rawValue: currentHelpTip.rawValue + 1)!
     Settings.uiDayPageIntakesCountTillHelpTip.value = 2 // Help tips will be shown after every 2 intakes
+  }
+  
+  private func showHelpTipForSlideToSeeDiary() {
+    let tooltip = JDFTooltipView(
+      targetPoint: CGPoint(x: view.center.x, y: view.bounds.maxY - 10),
+      hostView: view,
+      tooltipText: localizedStrings.helpTipSwipeToSeeDiary,
+      arrowDirection: .Down,
+      width: view.frame.width / 2)
+    
+    showTooltip(tooltip)
   }
   
   private func showHelpTipForSlideToChangeDay() {

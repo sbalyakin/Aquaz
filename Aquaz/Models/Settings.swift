@@ -53,7 +53,8 @@ public class Settings {
   }
   
   enum DayPageHelpTip: Int {
-    case SlideToChangeDay = 0
+    case SlideToSeeDiary = 0
+    case SlideToChangeDay
     case HighActivityMode
     case HotWeatherMode
     case SwitchToPercentsAndViceVersa
@@ -150,7 +151,7 @@ public class Settings {
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
   static let uiDayPageHelpTipToShow = SettingsEnumItem(
-    key: "UI - Day page help tip to show", initialValue: DayPageHelpTip.SlideToChangeDay,
+    key: "UI - Day page help tip to show", initialValue: DayPageHelpTip(rawValue: 0)!,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
   static let uiDayPageIntakesCountTillHelpTip = SettingsOrdinalItem(
