@@ -32,8 +32,6 @@
 		843B056119E2D7800097A833 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055719E2D7800097A833 /* DayViewController.swift */; };
 		843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055819E2D7800097A833 /* SelectDrinkViewController.swift */; };
 		843B056919E2D80E0097A833 /* WaterGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056819E2D80E0097A833 /* WaterGoal.swift */; };
-		8443DF281B29663100FDD294 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F0A5AF1AAC7F04006452C9 /* Crashlytics.framework */; };
-		8443DF291B29663100FDD294 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F0A5B01AAC7F04006452C9 /* Fabric.framework */; };
 		8443DF421B29737D00FDD294 /* WidgetImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8443DF411B29737D00FDD294 /* WidgetImages.xcassets */; };
 		8444F1961B207D75007577C8 /* InfoBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444F1951B207D75007577C8 /* InfoBannerView.swift */; };
 		8444F1981B209250007577C8 /* SystemHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444F1971B209250007577C8 /* SystemHelper.swift */; };
@@ -51,6 +49,10 @@
 		847E75F81AA9F502003B63E1 /* UIDatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E75F71AA9F502003B63E1 /* UIDatePickerTableViewCell.swift */; };
 		847E75FA1AA9F508003B63E1 /* DatePickerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E75F91AA9F508003B63E1 /* DatePickerTableCell.swift */; };
 		8488A18E1A53FE6500258EC8 /* NotificationsSoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488A18D1A53FE6500258EC8 /* NotificationsSoundViewController.swift */; };
+		848A987B1B344C2B0077B088 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848A98791B344C2B0077B088 /* Fabric.framework */; };
+		848A987C1B344C2B0077B088 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848A98791B344C2B0077B088 /* Fabric.framework */; };
+		848A987D1B344C2B0077B088 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848A987A1B344C2B0077B088 /* Crashlytics.framework */; };
+		848A987E1B344C2B0077B088 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848A987A1B344C2B0077B088 /* Crashlytics.framework */; };
 		84B0C7041AA75E36006889E9 /* UITimeIntervalPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0C7031AA75E36006889E9 /* UITimeIntervalPickerTableViewCell.swift */; };
 		84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */; };
 		84B17C881AD293DF00ABA3C9 /* Aquaz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Aquaz.xcdatamodeld */; };
@@ -169,8 +171,6 @@
 		A5E660A41AACB95800C24627 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E660A31AACB95800C24627 /* SystemConfiguration.framework */; };
 		A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
 		A5EE36261AAD9DAA0038C844 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EE36251AAD9DAA0038C844 /* Logger.swift */; };
-		A5EE36271AADAF250038C844 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F0A5AF1AAC7F04006452C9 /* Crashlytics.framework */; };
-		A5EE36281AADAF2D0038C844 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F0A5B01AAC7F04006452C9 /* Fabric.framework */; };
 		A5EE362A1AADB2890038C844 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5EE36291AADB2890038C844 /* AdSupport.framework */; };
 		A5EE362C1AADD6F10038C844 /* LoggedActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EE362B1AADD6F10038C844 /* LoggedActions.swift */; };
 		A5EF375D1A81618F00854A8D /* WaterGoalCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF375C1A81618F00854A8D /* WaterGoalCalculator.swift */; };
@@ -266,6 +266,8 @@
 		847E75F71AA9F502003B63E1 /* UIDatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		847E75F91AA9F508003B63E1 /* DatePickerTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTableCell.swift; sourceTree = "<group>"; };
 		8488A18D1A53FE6500258EC8 /* NotificationsSoundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsSoundViewController.swift; sourceTree = "<group>"; };
+		848A98791B344C2B0077B088 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		848A987A1B344C2B0077B088 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		84B0C7031AA75E36006889E9 /* UITimeIntervalPickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITimeIntervalPickerTableViewCell.swift; sourceTree = "<group>"; };
 		84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataPrePopulation.swift; path = ../Models/CoreDataPrePopulation.swift; sourceTree = "<group>"; };
 		84B17C891AD2C31400ABA3C9 /* UserDefaultsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsProvider.swift; sourceTree = "<group>"; };
@@ -374,8 +376,6 @@
 		A5EE36291AADB2890038C844 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		A5EE362B1AADD6F10038C844 /* LoggedActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedActions.swift; sourceTree = "<group>"; };
 		A5EF375C1A81618F00854A8D /* WaterGoalCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoalCalculator.swift; sourceTree = "<group>"; };
-		A5F0A5AF1AAC7F04006452C9 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		A5F0A5B01AAC7F04006452C9 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		A5F0A5CD1AACADE7006452C9 /* libLocalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLocalytics.a; sourceTree = "<group>"; };
 		A5F0A5CE1AACADE7006452C9 /* Localytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Localytics.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -387,8 +387,7 @@
 			files = (
 				A5A3358B1B0218CE004579A4 /* StoreKit.framework in Frameworks */,
 				A5EE362A1AADB2890038C844 /* AdSupport.framework in Frameworks */,
-				A5EE36281AADAF2D0038C844 /* Fabric.framework in Frameworks */,
-				A5EE36271AADAF250038C844 /* Crashlytics.framework in Frameworks */,
+				848A987D1B344C2B0077B088 /* Crashlytics.framework in Frameworks */,
 				A5E660A41AACB95800C24627 /* SystemConfiguration.framework in Frameworks */,
 				A5E660A21AACB95200C24627 /* libsqlite3.dylib in Frameworks */,
 				A5062A6D1B22E039008ADB89 /* Security.framework in Frameworks */,
@@ -396,6 +395,7 @@
 				A5E660A01AACB94B00C24627 /* libz.dylib in Frameworks */,
 				A5F0A5CF1AACADE7006452C9 /* libLocalytics.a in Frameworks */,
 				A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */,
+				848A987B1B344C2B0077B088 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,9 +410,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8443DF281B29663100FDD294 /* Crashlytics.framework in Frameworks */,
-				8443DF291B29663100FDD294 /* Fabric.framework in Frameworks */,
+				848A987E1B344C2B0077B088 /* Crashlytics.framework in Frameworks */,
 				84D251971AD2511E001E6644 /* NotificationCenter.framework in Frameworks */,
+				848A987C1B344C2B0077B088 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,14 +617,14 @@
 		84D251951AD2511E001E6644 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				848A98791B344C2B0077B088 /* Fabric.framework */,
+				848A987A1B344C2B0077B088 /* Crashlytics.framework */,
 				A5062A6C1B22E039008ADB89 /* libc++.dylib */,
 				A5E660A11AACB95200C24627 /* libsqlite3.dylib */,
 				A5E6609F1AACB94B00C24627 /* libz.dylib */,
 				A5062A6B1B22E039008ADB89 /* Security.framework */,
 				A5A3358A1B0218CE004579A4 /* StoreKit.framework */,
 				A5EE36291AADB2890038C844 /* AdSupport.framework */,
-				A5F0A5B01AAC7F04006452C9 /* Fabric.framework */,
-				A5F0A5AF1AAC7F04006452C9 /* Crashlytics.framework */,
 				A5E660A31AACB95800C24627 /* SystemConfiguration.framework */,
 				A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */,
 				84D251961AD2511E001E6644 /* NotificationCenter.framework */,
