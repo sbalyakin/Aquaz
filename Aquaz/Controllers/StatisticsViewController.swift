@@ -21,7 +21,7 @@ class StatisticsViewController: UIViewController {
     static let fullVersionViewControllerIdentifier = "FullVersionViewController"
   }
 
-  private class LocalizedStrings {
+  private struct LocalizedStrings {
     
     lazy var fullVersionBannerText = NSLocalizedString("SVC:Statistics is available in the full version only.",
       value: "Statistics is available in the full version only.",
@@ -29,7 +29,7 @@ class StatisticsViewController: UIViewController {
     
   }
   
-  private let localizedStrings = LocalizedStrings()
+  private var localizedStrings = LocalizedStrings()
 
   override func viewDidLoad() {
     super.viewDidLoad()

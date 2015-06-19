@@ -11,7 +11,7 @@ import StoreKit
 
 class FullVersionViewController: UIViewController {
 
-  private class LocalizedStrings {
+  private struct LocalizedStrings {
     
     lazy var descriptionLabelText = NSLocalizedString("FVVC:Description about full version purchase",
       value: "Purchase the full version of Aquaz in order to:\n\t• use smart notifications\n\t• activate statistics\n\t• remove ads",
@@ -35,7 +35,7 @@ class FullVersionViewController: UIViewController {
   @IBOutlet weak var priceLabel: UILabel!
   @IBOutlet weak var purchaseFullVersionButton: RoundedButton!
 
-  private let localizedStrings = LocalizedStrings()
+  private var localizedStrings = LocalizedStrings()
   
   private var approvalBannerView: InfoBannerView?
   

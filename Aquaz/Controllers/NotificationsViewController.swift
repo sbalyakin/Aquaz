@@ -24,7 +24,7 @@ class NotificationsViewController: OmegaSettingsViewController {
     static let fullVersionViewControllerIdentifier = "FullVersionViewController"
   }
   
-  private class LocalizedStrings {
+  private struct LocalizedStrings {
     
     lazy var smartNotificationsBannerText = NSLocalizedString("SVC:Smart Notifications mode is available in the full version only.",
       value: "Smart Notifications mode are available in the full version only.",
@@ -36,7 +36,7 @@ class NotificationsViewController: OmegaSettingsViewController {
 
   }
   
-  private let localizedStrings = LocalizedStrings()
+  private var localizedStrings = LocalizedStrings()
 
   override func viewDidLoad() {
     super.viewDidLoad()

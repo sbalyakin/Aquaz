@@ -17,7 +17,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     return Static.instance
   }
 
-  private class LocalizedStrings {
+  private struct LocalizedStrings {
     
     lazy var forbiddenPaymentsAlertMessage = NSLocalizedString("IAPM:It\'s forbidden to make payments due to parental controls",
       value: "It\'s forbidden to make payments due to parental controls",
@@ -42,7 +42,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     
   }
   
-  private let localizedStrings = LocalizedStrings()
+  private var localizedStrings = LocalizedStrings()
   
   typealias PriceCompletionFunction = (price: String) -> ()
   

@@ -11,6 +11,7 @@ import UIKit
 class SettingsViewController: OmegaSettingsViewController {
 
   private struct LocalyzedStrings {
+    
     lazy var dailyWaterIntakeTitle = NSLocalizedString("SVC:Daily Water Intake",
       value: "Daily Water Intake",
       comment: "SettingsViewController: Table cell title for [Daily Water Intake] settings bloсk")
@@ -38,6 +39,7 @@ class SettingsViewController: OmegaSettingsViewController {
     lazy var fullVersionIsPurchasedTitle = NSLocalizedString("SVC:Full Version Is Purchased",
       value: "Full Version Is Purchased",
       comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is purchased")
+    
   }
   
   private var volumeObserverIdentifier: Int?

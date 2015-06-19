@@ -25,7 +25,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
 
   // MARK: Localization -
   
-  private class LocalizedStrings {
+  private struct LocalizedStrings {
     
     lazy var welcomeToNextDayMessage = NSLocalizedString("DVC:Welcome to the next day",
       value: "Welcome to the next day",
@@ -93,7 +93,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
 
   }
   
-  private let localizedStrings = LocalizedStrings()
+  private var localizedStrings = LocalizedStrings()
 
   // MARK: Properties -
   
