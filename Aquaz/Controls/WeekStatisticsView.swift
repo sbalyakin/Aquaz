@@ -144,6 +144,9 @@ protocol WeekStatisticsViewDelegate: class {
       dayButton.titleLabel?.font = daysFont
       dayButton.setTitle(title, forState: .Normal)
       dayButton.addTarget(self, action: "dayButtonTapped:", forControlEvents: .TouchUpInside)
+      dayButton.backgroundColor = UIColor.clearColor()
+      dayButton.userInteractionEnabled = false // will be enabled later
+
       addSubview(dayButton)
       dayButtons.append(dayButton)
     }
@@ -183,6 +186,10 @@ protocol WeekStatisticsViewDelegate: class {
       }
       dayButton.userInteractionEnabled = !isFutureDay
     }
+  }
+  
+  func getDayButtonWithIndex(index: Int) -> UIButton {
+    return dayButtons[index]
   }
   
   private func createLayers() {

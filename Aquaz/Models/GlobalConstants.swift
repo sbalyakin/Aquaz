@@ -33,6 +33,7 @@ class GlobalConstants {
   static let storyboardMain = "Main"
   static let storyboardWelcome = "Welcome"
   
-  static let helpTipDisplayTime: NSTimeInterval = 5
+  static let helpTipDelayToShow: NSTimeInterval = 1
+  static let helpTipDisplayTime: NSTimeInterval = 6
 
 }

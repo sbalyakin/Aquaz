@@ -32,6 +32,20 @@ class WeekStatisticsViewController: UIViewController {
     static let showDaySegue = "Show Day"
   }
   
+  private struct LocalizedStrings {
+    
+    lazy var helpTipForTapSeeDayDetails = NSLocalizedString("WSVC:Tap a day button to see details",
+      value: "Tap a day button to see details",
+      comment: "WeekStatisticsViewController: Text for help tip about tapping a day button for details")
+    
+    lazy var helpTipForSwipeToChangeWeek = NSLocalizedString("WSVC:Swipe left or right to switch current week",
+      value: "Swipe left or right to switch current week",
+      comment: "WeekStatisticsViewController: Text for help tip about switching current week by swipe gesture")
+
+  }
+  
+  private var localizedStrings = LocalizedStrings()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -63,6 +77,11 @@ class WeekStatisticsViewController: UIViewController {
     weekStatisticsView.addGestureRecognizer(rightSwipeGestureRecognizer)
   }
   
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    checkHelpTip()
+  }
+
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
     
@@ -254,7 +273,59 @@ class WeekStatisticsViewController: UIViewController {
     return daysBetween > 0
   }
   
+  // MARK: Help tips
+  
+  private func checkHelpTip() {
+    if !Settings.generalFullVersion.value {
+      return
+    }
+    
+    switch Settings.uiWeekStatisticsPageHelpTipToShow.value {
+    case .TapToSeeDayDetails: showHelpTipForTapSeeDayDetails()
+    case .SwipeToChangeWeek: showHelpTipForSwipeToChangeWeek()
+    case .None: return
+    }
+  }
+  
+  private func showHelpTipForTapSeeDayDetails() {
+    SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
+      if self.view.window == nil {
+        return
+      }
+
+      let dayButton = self.weekStatisticsView.getDayButtonWithIndex(0)
+
+      let helpTip = JDFTooltipView(targetView: dayButton, hostView: self.weekStatisticsView, tooltipText: self.localizedStrings.helpTipForTapSeeDayDetails, arrowDirection: .Down, width: self.view.frame.width / 2)
+      
+      UIHelper.showHelpTip(helpTip)
+      
+      // Switch to the next help tip
+      Settings.uiWeekStatisticsPageHelpTipToShow.value =
+        Settings.WeekStatisticsPageHelpTip(rawValue: Settings.uiWeekStatisticsPageHelpTipToShow.value.rawValue + 1)!
+    }
+  }
+  
+  private func showHelpTipForSwipeToChangeWeek() {
+    SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
+      if self.view.window == nil {
+        return
+      }
+
+      let point = CGPoint(x: self.weekStatisticsView.bounds.midX, y: self.weekStatisticsView.bounds.midY)
+
+      let helpTip = JDFTooltipView(targetPoint: point, hostView: self.weekStatisticsView, tooltipText: self.localizedStrings.helpTipForSwipeToChangeWeek, arrowDirection: .Down, width: self.view.frame.width / 2)
+      
+      UIHelper.showHelpTip(helpTip)
+
+      // Switch to the next help tip
+      Settings.uiWeekStatisticsPageHelpTipToShow.value =
+        Settings.WeekStatisticsPageHelpTip(rawValue: Settings.uiWeekStatisticsPageHelpTipToShow.value.rawValue + 1)!
+    }
+  }
+
 }
+
+// MARK: WeekStatisticsViewDataSource -
 
 extension WeekStatisticsViewController: WeekStatisticsViewDataSource {
   
@@ -284,6 +355,8 @@ private extension Units.Volume {
     }
   }
 }
+
+// MARK: WeekStatisticsViewDelegate -
 
 extension WeekStatisticsViewController: WeekStatisticsViewDelegate {
   

@@ -62,5 +62,19 @@ class UIHelper {
     }
   }
   
+  class func showHelpTip(helpTip: JDFTooltipView, hideCompletionHandler: (() -> ())? = nil) {
+    helpTip.tooltipBackgroundColour = StyleKit.helpTipsColor
+    helpTip.textColour = UIColor.blackColor()
+    
+    helpTip.showCompletionBlock = {
+      SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDisplayTime) {
+        helpTip.hideAnimated(true)
+      }
+    }
+    
+    helpTip.hideCompletionBlock = hideCompletionHandler
+
+    helpTip.show()
+  }
 }
 

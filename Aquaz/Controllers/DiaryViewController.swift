@@ -140,35 +140,27 @@ extension DiaryViewController: UITableViewDataSource {
   }
   
   private func checkHelpTip(#indexPath: NSIndexPath, cell: DiaryTableViewCell) {
-    if Settings.uiDiaryPageHelpTipIsShown.value || indexPath.row != 0 {
+    if Settings.uiDiaryPageHelpTipIsShown.value || indexPath.row != 0 || view.window == nil {
       return
     }
     
-    SystemHelper.executeBlockWithDelay(1) {
-      self.showHelpTipForCell(cell)
-    }
+    showHelpTipForCell(cell)
   }
   
   private func showHelpTipForCell(cell: DiaryTableViewCell) {
-    if view.window == nil {
-      return
-    }
-    
-    Settings.uiDiaryPageHelpTipIsShown.value = true
-    
-    let text = NSLocalizedString("DVC:Hydration effect of the intake", value: "Hydration effect of the intake", comment: "DiaryViewController: Text for help tip about hydration effect of an intake of a diary cell")
-
-    let tooltip = JDFTooltipView(targetView: cell.waterBalanceLabel, hostView: tableView, tooltipText: text, arrowDirection: .Up, width: view.frame.width / 2)
-    
-    tooltip.tooltipBackgroundColour = StyleKit.helpTipsColor
-    tooltip.textColour = UIColor.blackColor()
-    
-    tooltip.showCompletionBlock = {
-      SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDisplayTime) {
-        tooltip.hideAnimated(true)
+    SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
+      if self.view.window == nil {
+        return
       }
+      
+      let text = NSLocalizedString("DVC:Hydration effect of the intake", value: "Hydration effect of the intake", comment: "DiaryViewController: Text for help tip about hydration effect of an intake of a diary cell")
+      
+      let helpTip = JDFTooltipView(targetView: cell.waterBalanceLabel, hostView: self.tableView, tooltipText: text, arrowDirection: .Up, width: self.view.frame.width / 2)
+      
+      UIHelper.showHelpTip(helpTip)
+
+      Settings.uiDiaryPageHelpTipIsShown.value = true
     }
-    tooltip.show()
   }
 
   func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

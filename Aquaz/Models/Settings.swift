@@ -62,7 +62,14 @@ public class Settings {
     // It should be the last case indicating that all help tips are already shown to user
     case None
   }
-  
+
+  enum WeekStatisticsPageHelpTip: Int {
+    case TapToSeeDayDetails = 0
+    case SwipeToChangeWeek
+    // It should be the last case indicating that all help tips are already shown to user
+    case None
+  }
+
   enum RateApplicationAlertSelection: Int {
     case RateApplication
     case RemindLater
@@ -168,6 +175,18 @@ public class Settings {
 
   static let uiDiaryPageHelpTipIsShown = SettingsOrdinalItem(
     key: "UI - Diary page help tip is shown", initialValue: false,
+    userDefaults: UserDefaultsProvider.sharedUserDefaults)
+  
+  static let uiWeekStatisticsPageHelpTipToShow = SettingsEnumItem(
+    key: "UI - Week statistics page help tip to show", initialValue: WeekStatisticsPageHelpTip(rawValue: 0)!,
+    userDefaults: UserDefaultsProvider.sharedUserDefaults)
+
+  static let uiMonthStatisticsPageHelpTipIsShown = SettingsOrdinalItem(
+    key: "UI - Month statistics page help tip is shown", initialValue: false,
+    userDefaults: UserDefaultsProvider.sharedUserDefaults)
+
+  static let uiYearStatisticsPageHelpTipIsShown = SettingsOrdinalItem(
+    key: "UI - Year statistics page help tip is shown", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
   static let notificationsEnabled = SettingsOrdinalItem(

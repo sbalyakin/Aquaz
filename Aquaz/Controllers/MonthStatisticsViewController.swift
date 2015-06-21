@@ -29,6 +29,12 @@ class MonthStatisticsViewController: UIViewController {
     setupNotificationsObservation()
   }
   
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    checkHelpTip()
+  }
+  
+  
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }
@@ -126,6 +132,34 @@ class MonthStatisticsViewController: UIViewController {
     }
   }
   
+  private func checkHelpTip() {
+    if !Settings.generalFullVersion.value || Settings.uiMonthStatisticsPageHelpTipIsShown.value  {
+      return
+    }
+    
+    showHelpTip()
+  }
+  
+  private func showHelpTip() {
+    SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
+      if self.view.window == nil {
+        return
+      }
+      
+      let text = NSLocalizedString("MSVC:Tap an active day to see details",
+        value: "Tap an active day to see details",
+        comment: "MonthStatisticsViewController: Text for help tip about tapping an active day for details")
+      
+      let dayRectWidth = self.monthStatisticsView.frame.width / CGFloat(self.monthStatisticsView.daysPerWeek)
+      let point = CGPoint(x: self.monthStatisticsView.frame.width / 2, y: dayRectWidth * 2 + 5)
+      let helpTip = JDFTooltipView(targetPoint: point, hostView: self.monthStatisticsView, tooltipText: text, arrowDirection: .Up, width: self.view.frame.width / 2)
+      
+      UIHelper.showHelpTip(helpTip)
+      
+      Settings.uiMonthStatisticsPageHelpTipIsShown.value = true
+    }
+  }
+
   private lazy var dateFormatter: NSDateFormatter = {
     let formatter = NSDateFormatter()
     let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMyyyy", options: 0, locale: NSLocale.currentLocale())
@@ -134,6 +168,8 @@ class MonthStatisticsViewController: UIViewController {
     }()
 
 }
+
+// MARK: CalendarViewDelegate -
 
 extension MonthStatisticsViewController: CalendarViewDelegate {
 
@@ -149,6 +185,8 @@ extension MonthStatisticsViewController: CalendarViewDelegate {
   }
 
 }
+
+// MARK: MonthStatisticsViewDataSource -
 
 extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
   

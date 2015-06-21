@@ -101,6 +101,11 @@ class YearStatisticsViewController: UIViewController {
     yearStatisticsView.addGestureRecognizer(rightSwipeGestureRecognizer)
   }
   
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    checkHelpTip()
+  }
+  
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
     
@@ -233,7 +238,36 @@ class YearStatisticsViewController: UIViewController {
     statisticsEndDate = DateHelper.addToDate(statisticsBeginDate, years: 1, months: 0, days: 0)
   }
 
+  private func checkHelpTip() {
+    if !Settings.generalFullVersion.value || Settings.uiYearStatisticsPageHelpTipIsShown.value {
+      return
+    }
+    
+    showHelpTip()
+  }
+  
+  private func showHelpTip() {
+    SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
+      if self.view.window == nil {
+        return
+      }
+      
+      let text = NSLocalizedString("YSVC:Swipe left or right to switch current year",
+        value: "Swipe left or right to switch current year",
+        comment: "YearStatisticsViewController: Text for help tip about switching current year by swipe gesture")
+      
+      let point = CGPoint(x: self.yearStatisticsView.bounds.midX, y: self.yearStatisticsView.bounds.midY)
+      let helpTip = JDFTooltipView(targetPoint: point, hostView: self.yearStatisticsView, tooltipText: text, arrowDirection: .Down, width: self.view.frame.width / 2)
+      
+      UIHelper.showHelpTip(helpTip)
+      
+      Settings.uiYearStatisticsPageHelpTipIsShown.value = true
+    }
+  }
+
 }
+
+// MARK: YearStatisticsViewDataSource -
 
 extension YearStatisticsViewController: YearStatisticsViewDataSource {
   
