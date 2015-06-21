@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "WelcomeMetrica.png"
+      "filename" : "SettingsNotifications.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "WelcomeMetrica@2x.png"
+      "filename" : "SettingsNotifications@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "WelcomeMetrica@3x.png"
+      "filename" : "SettingsNotifications@3x.png"
     }
   ],
   "info" : {

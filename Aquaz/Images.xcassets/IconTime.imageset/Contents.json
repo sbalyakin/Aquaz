@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "WelcomeMetrica.png"
+      "filename" : "IconTime.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "WelcomeMetrica@2x.png"
+      "filename" : "IconTime@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "WelcomeMetrica@3x.png"
+      "filename" : "IconTime@3x.png"
     }
   ],
   "info" : {
