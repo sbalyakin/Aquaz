@@ -74,8 +74,11 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* DayViewController: Title for alert\'s button allowing user to postpone rating the application */
 "DVC:Remind Me Later" = "Напомнить Позже";
 
-/* DayViewController: Text for help tip about swiping for changing day */
-"DVC:Swipe to change day" = "Проведите для смены дня";
+/* DayViewController: Text for help tip about swiping for switching displaying day */
+"DVC:Swipe left or right to switch day" = "Листайте влево или вправо для смены дня";
+
+/* DayViewController: Text for help tip about swiping for seeing the diary */
+"DVC:Swipe up to see the diary" = "Листните вверх, чтобы посмотреть дневник";
 
 /* DayViewController: Text for help tip about switching between percents and volume representation of overall intake for a day */
 "DVC:Tap to switch between percents and volume" = "Нажмите для переключения между процентами и объёмом";
@@ -142,6 +145,9 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 
 /* IntakeViewController: Subtitle of view if user adds intake for today */
 "IVC:Now" = "Сейчас";
+
+/* MonthStatisticsViewController: Text for help tip about tapping an active day for details */
+"MSVC:Tap an active day to see details" = "Нажмите на активную кнопку дня, чтобы посмотреть подробности";
 
 /* NotificationsHelper: Text for alert action of notifications */
 "NH:Drink" = "Напиток";
@@ -373,4 +379,13 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 
 /* WaterGoalViewController: [Woman: pregnant] option for gender */
 "WGVC:Woman: pregnant" = "Женщина: беременность";
+
+/* WeekStatisticsViewController: Text for help tip about switching current week by swipe gesture */
+"WSVC:Swipe left or right to switch week" = "Листайте влево или вправо для смены недели";
+
+/* WeekStatisticsViewController: Text for help tip about tapping a day button for details */
+"WSVC:Tap a day button to see details" = "Нажмите на кнопку дня, чтобы посмотреть подробности";
+
+/* YearStatisticsViewController: Text for help tip about switching current year by swipe gesture */
+"YSVC:Swipe left or right to switch year" = "Листайте влево или вправо для смены года";
 

@@ -252,8 +252,8 @@ class YearStatisticsViewController: UIViewController {
         return
       }
       
-      let text = NSLocalizedString("YSVC:Swipe left or right to switch current year",
-        value: "Swipe left or right to switch current year",
+      let text = NSLocalizedString("YSVC:Swipe left or right to switch year",
+        value: "Swipe left or right to switch year",
         comment: "YearStatisticsViewController: Text for help tip about switching current year by swipe gesture")
       
       let point = CGPoint(x: self.yearStatisticsView.bounds.midX, y: self.yearStatisticsView.bounds.midY)

@@ -71,9 +71,9 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       value: "Swipe up to see the diary",
       comment: "DayViewController: Text for help tip about swiping for seeing the diary")
 
-    lazy var helpTipSwipeToChangeDay = NSLocalizedString("DVC:Swipe to change day",
-      value: "Swipe to change day",
-      comment: "DayViewController: Text for help tip about swiping for changing day")
+    lazy var helpTipSwipeToChangeDay = NSLocalizedString("DVC:Swipe left or right to switch day",
+      value: "Swipe left or right to switch day",
+      comment: "DayViewController: Text for help tip about swiping for switching displaying day")
 
     lazy var helpTipHighActivityMode = NSLocalizedString("DVC:Tap to toggle High Activity mode",
       value: "Tap to toggle High Activity mode",
@@ -125,7 +125,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   var mode: Mode = .General
-  private var helptip: JDFTooltipView?
+  private var helpTip: JDFTooltipView?
   
   private struct Constants {
     static let selectDrinkViewControllerStoryboardID = "SelectDrinkViewController"
@@ -188,7 +188,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
     
-    helptip?.hideAnimated(true)
+    helpTip?.hideAnimated(true)
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -729,7 +729,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   // MARK: Help tips -
 
   private func checkHelpTip() {
-    if helptip != nil {
+    if helpTip != nil {
       return
     }
     
@@ -765,7 +765,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   
   private func showHelpTipForSlideToSeeDiary() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil {
+      if self.view.window == nil || self.helpTip != nil {
         return
       }
       
@@ -782,7 +782,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   
   private func showHelpTipForSlideToChangeDay() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil {
+      if self.view.window == nil || self.helpTip != nil {
         return
       }
       
@@ -799,7 +799,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   
   private func showHelpTipForHighActivityMode() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil {
+      if self.view.window == nil || self.helpTip != nil {
         return
       }
       
@@ -816,7 +816,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   
   private func showHelpTipForHotWeatherMode() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil {
+      if self.view.window == nil || self.helpTip != nil {
         return
       }
       
@@ -833,7 +833,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   
   private func showHelpTipForSwitchToPercentAndViceVersa() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil {
+      if self.view.window == nil || self.helpTip != nil {
         return
       }
       
@@ -850,7 +850,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   
   private func showHelpTipForLongPressToChooseAlcohol() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil {
+      if self.view.window == nil || self.helpTip != nil {
         return
       }
       
@@ -869,12 +869,12 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   private func showHelpTip(helpTip: JDFTooltipView) {
-    self.helptip = helpTip
+    self.helpTip = helpTip
 
     switchToNextHelpTip()
 
     UIHelper.showHelpTip(helpTip) {
-      self.helptip = nil
+      self.helpTip = nil
     }
   }
 
