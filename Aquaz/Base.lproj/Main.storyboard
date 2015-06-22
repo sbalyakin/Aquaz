@@ -192,9 +192,103 @@
                         <viewControllerLayoutGuide type="bottom" id="Rvc-MZ-Z2x"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ghr-HL-bIJ">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="O6z-C1-DNP" userLabel="Top Gap">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="16"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="r7t-TT-se4"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vml-tJ-hK9" userLabel="Drink Image" customClass="DrinkView">
+                                <rect key="frame" x="215" y="16" width="171" height="171"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="vml-tJ-hK9" secondAttribute="height" id="PbN-uK-ypP"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="dMO-zT-TFB" userLabel="Bottom Gap">
+                                <rect key="frame" x="0.0" y="210" width="600" height="16"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L4p-4h-EUq" userLabel="Gap 1">
+                                <rect key="frame" x="0.0" y="226" width="60" height="120"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoF-aO-Mum" customClass="RoundedButton" customModule="Aquaz" customModuleProvider="target">
+                                <rect key="frame" x="60" y="226" width="120" height="120"/>
+                                <color key="backgroundColor" red="0.48085978159452591" green="0.71272731469806072" blue="0.91973080842391308" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hoF-aO-Mum" secondAttribute="height" multiplier="1:1" id="PzV-V5-X8d"/>
+                                </constraints>
+                                <state key="normal" title="{Small}">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="roundMode">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="applySmallIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="ebN-Sa-j0P"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0h0-m7-z4v" userLabel="Gap 2">
+                                <rect key="frame" x="180" y="226" width="60" height="120"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXw-gW-sSA" customClass="RoundedButton" customModule="Aquaz" customModuleProvider="target">
+                                <rect key="frame" x="240" y="226" width="120" height="120"/>
+                                <color key="backgroundColor" red="0.48085978159452591" green="0.71272731469806072" blue="0.91973080842391308" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="vXw-gW-sSA" secondAttribute="height" multiplier="1:1" id="tNu-aH-OJP"/>
+                                </constraints>
+                                <state key="normal" title="{Medium}">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="roundMode">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="applyMediumIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="E76-LZ-JlQ"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k8o-7o-NcI" userLabel="Gap 3">
+                                <rect key="frame" x="360" y="226" width="60" height="120"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xm-eq-yWQ" customClass="RoundedButton" customModule="Aquaz" customModuleProvider="target">
+                                <rect key="frame" x="420" y="226" width="120" height="120"/>
+                                <color key="backgroundColor" red="0.48085978159452591" green="0.71272731469806072" blue="0.91973080842391308" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7xm-eq-yWQ" secondAttribute="height" multiplier="1:1" id="Brh-NI-aXw"/>
+                                </constraints>
+                                <state key="normal" title="{Large}">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="roundMode">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="applyLargeIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="pJv-e2-GoY"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61a-by-wpw" userLabel="Gap 4">
+                                <rect key="frame" x="540" y="226" width="60" height="120"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="{Volume}" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVh-g5-6lW">
+                                <rect key="frame" x="16" y="376" width="568" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="275" minValue="50" maxValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="Ajg-rM-Vkb" customClass="CustomSlider" customModule="Aquaz" customModuleProvider="target">
                                 <rect key="frame" x="14" y="412" width="572" height="37"/>
                                 <constraints>
@@ -227,104 +321,12 @@
                                     <action selector="applyCustomIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="kw9-f2-CwV"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vml-tJ-hK9" customClass="DrinkView">
-                                <rect key="frame" x="204" y="16" width="194" height="194"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="vml-tJ-hK9" secondAttribute="height" id="PbN-uK-ypP"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXw-gW-sSA" customClass="RoundedButton" customModule="Aquaz" customModuleProvider="target">
-                                <rect key="frame" x="240" y="226" width="120" height="120"/>
-                                <color key="backgroundColor" red="0.48085978159452591" green="0.71272731469806072" blue="0.91973080842391308" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="vXw-gW-sSA" secondAttribute="height" multiplier="1:1" id="tNu-aH-OJP"/>
-                                </constraints>
-                                <state key="normal" title="{Medium}">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="roundMode">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="applyMediumIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="E76-LZ-JlQ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoF-aO-Mum" customClass="RoundedButton" customModule="Aquaz" customModuleProvider="target">
-                                <rect key="frame" x="60" y="226" width="120" height="120"/>
-                                <color key="backgroundColor" red="0.48085978159452591" green="0.71272731469806072" blue="0.91973080842391308" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="hoF-aO-Mum" secondAttribute="height" multiplier="1:1" id="PzV-V5-X8d"/>
-                                </constraints>
-                                <state key="normal" title="{Small}">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="roundMode">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="applySmallIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="ebN-Sa-j0P"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L4p-4h-EUq" userLabel="Gap 1">
-                                <rect key="frame" x="0.0" y="226" width="60" height="120"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0h0-m7-z4v" userLabel="Gap 2">
-                                <rect key="frame" x="180" y="226" width="60" height="120"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k8o-7o-NcI" userLabel="Gap 3">
-                                <rect key="frame" x="360" y="226" width="60" height="120"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61a-by-wpw" userLabel="Gap 4">
-                                <rect key="frame" x="540" y="226" width="60" height="120"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="O6z-C1-DNP" userLabel="Top Gap">
-                                <rect key="frame" x="275" y="0.0" width="50" height="16"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="e5c-ir-Yc0"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="r7t-TT-se4"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="dMO-zT-TFB" userLabel="Bottom Gap">
-                                <rect key="frame" x="275" y="210" width="50" height="16"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="9Sp-wP-Ojv"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="{Volume}" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVh-g5-6lW">
-                                <rect key="frame" x="16" y="376" width="568" height="20"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="{Information}" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="6uE-Fx-o1B">
+                                <rect key="frame" x="16" y="195" width="568" height="15"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xm-eq-yWQ" customClass="RoundedButton" customModule="Aquaz" customModuleProvider="target">
-                                <rect key="frame" x="420" y="226" width="120" height="120"/>
-                                <color key="backgroundColor" red="0.48085978159452591" green="0.71272731469806072" blue="0.91973080842391308" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="7xm-eq-yWQ" secondAttribute="height" multiplier="1:1" id="Brh-NI-aXw"/>
-                                </constraints>
-                                <state key="normal" title="{Large}">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="roundMode">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="applyLargeIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="pJv-e2-GoY"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -334,17 +336,23 @@
                             <constraint firstItem="IVh-g5-6lW" firstAttribute="top" secondItem="vXw-gW-sSA" secondAttribute="bottom" constant="30" id="9Il-bU-3S1"/>
                             <constraint firstItem="k8o-7o-NcI" firstAttribute="centerY" secondItem="L4p-4h-EUq" secondAttribute="centerY" id="9zq-08-VW6"/>
                             <constraint firstItem="hoF-aO-Mum" firstAttribute="leading" secondItem="L4p-4h-EUq" secondAttribute="trailing" id="Aa6-ht-s6U"/>
-                            <constraint firstAttribute="centerX" secondItem="dMO-zT-TFB" secondAttribute="centerX" id="Cth-Ud-zHO"/>
+                            <constraint firstItem="6uE-Fx-o1B" firstAttribute="trailing" secondItem="ghr-HL-bIJ" secondAttribute="trailingMargin" id="CFA-I6-Ymy"/>
                             <constraint firstAttribute="height" secondItem="O6z-C1-DNP" secondAttribute="height" multiplier="8" priority="250" id="Dyb-Ya-QoS"/>
-                            <constraint firstItem="O6z-C1-DNP" firstAttribute="top" secondItem="Sjb-I3-Ntn" secondAttribute="bottom" id="GTD-fU-9tG"/>
+                            <constraint firstAttribute="trailing" secondItem="dMO-zT-TFB" secondAttribute="trailing" id="EnR-r0-twh"/>
+                            <constraint firstItem="dMO-zT-TFB" firstAttribute="top" secondItem="6uE-Fx-o1B" secondAttribute="bottom" id="EpS-tN-f7h"/>
+                            <constraint firstItem="O6z-C1-DNP" firstAttribute="leading" secondItem="ghr-HL-bIJ" secondAttribute="leading" id="Ey0-2h-Jjc"/>
                             <constraint firstAttribute="trailing" secondItem="61a-by-wpw" secondAttribute="trailing" id="HjW-bO-zv9"/>
                             <constraint firstItem="vXw-gW-sSA" firstAttribute="height" secondItem="7xm-eq-yWQ" secondAttribute="height" id="Ib2-xv-8FF"/>
                             <constraint firstItem="IVh-g5-6lW" firstAttribute="leading" secondItem="ghr-HL-bIJ" secondAttribute="leadingMargin" id="J5L-LA-cWx"/>
                             <constraint firstItem="7xm-eq-yWQ" firstAttribute="leading" secondItem="vml-tJ-hK9" secondAttribute="trailing" priority="750" constant="-20" id="LzC-gy-bQn"/>
+                            <constraint firstItem="dMO-zT-TFB" firstAttribute="leading" secondItem="ghr-HL-bIJ" secondAttribute="leading" id="NJs-Pt-dsx"/>
                             <constraint firstItem="k8o-7o-NcI" firstAttribute="width" secondItem="L4p-4h-EUq" secondAttribute="width" id="NfQ-is-eKp"/>
                             <constraint firstItem="7xm-eq-yWQ" firstAttribute="leading" secondItem="k8o-7o-NcI" secondAttribute="trailing" id="PdZ-kw-7o5"/>
                             <constraint firstItem="A5t-FE-O50" firstAttribute="leading" secondItem="ghr-HL-bIJ" secondAttribute="leadingMargin" id="PwP-sK-efF"/>
                             <constraint firstItem="Rvc-MZ-Z2x" firstAttribute="top" secondItem="A5t-FE-O50" secondAttribute="bottom" constant="16" id="REQ-gd-D4K"/>
+                            <constraint firstItem="O6z-C1-DNP" firstAttribute="top" secondItem="Sjb-I3-Ntn" secondAttribute="bottom" id="SNX-Fe-oU2"/>
+                            <constraint firstAttribute="trailing" secondItem="O6z-C1-DNP" secondAttribute="trailing" id="TJ2-Sy-fiA"/>
+                            <constraint firstItem="6uE-Fx-o1B" firstAttribute="leading" secondItem="ghr-HL-bIJ" secondAttribute="leadingMargin" id="TOx-v6-eJ8"/>
                             <constraint firstItem="dMO-zT-TFB" firstAttribute="height" secondItem="O6z-C1-DNP" secondAttribute="height" id="VUT-JP-nsr"/>
                             <constraint firstItem="61a-by-wpw" firstAttribute="height" secondItem="L4p-4h-EUq" secondAttribute="height" id="YDN-XZ-FtK"/>
                             <constraint firstItem="k8o-7o-NcI" firstAttribute="leading" secondItem="vXw-gW-sSA" secondAttribute="trailing" id="aYm-lP-86F"/>
@@ -353,7 +361,6 @@
                             <constraint firstAttribute="centerX" secondItem="vml-tJ-hK9" secondAttribute="centerX" id="bZJ-oE-hzS"/>
                             <constraint firstItem="hoF-aO-Mum" firstAttribute="centerY" secondItem="vXw-gW-sSA" secondAttribute="centerY" id="cOf-JA-f9B"/>
                             <constraint firstItem="L4p-4h-EUq" firstAttribute="height" secondItem="vXw-gW-sSA" secondAttribute="height" id="d6Z-sA-hex"/>
-                            <constraint firstAttribute="centerX" secondItem="O6z-C1-DNP" secondAttribute="centerX" id="dQ9-3g-IUn"/>
                             <constraint firstItem="L4p-4h-EUq" firstAttribute="height" secondItem="0h0-m7-z4v" secondAttribute="height" id="eJP-3m-OM8"/>
                             <constraint firstItem="A5t-FE-O50" firstAttribute="top" secondItem="Ajg-rM-Vkb" secondAttribute="bottom" constant="30" id="fjQ-wN-25b"/>
                             <constraint firstItem="61a-by-wpw" firstAttribute="width" secondItem="L4p-4h-EUq" secondAttribute="width" id="fyb-6L-h4g"/>
@@ -361,18 +368,19 @@
                             <constraint firstItem="A5t-FE-O50" firstAttribute="trailing" secondItem="ghr-HL-bIJ" secondAttribute="trailingMargin" id="hA3-nq-p45"/>
                             <constraint firstItem="L4p-4h-EUq" firstAttribute="width" secondItem="0h0-m7-z4v" secondAttribute="width" id="hWc-3D-YZV"/>
                             <constraint firstItem="vXw-gW-sSA" firstAttribute="centerY" secondItem="7xm-eq-yWQ" secondAttribute="centerY" id="iLh-7y-nmm"/>
+                            <constraint firstItem="vXw-gW-sSA" firstAttribute="top" secondItem="dMO-zT-TFB" secondAttribute="bottom" id="iky-7u-cyS"/>
                             <constraint firstItem="L4p-4h-EUq" firstAttribute="leading" secondItem="ghr-HL-bIJ" secondAttribute="leading" id="kBr-6S-5xx"/>
                             <constraint firstItem="61a-by-wpw" firstAttribute="leading" secondItem="7xm-eq-yWQ" secondAttribute="trailing" id="kVk-sW-mSm"/>
                             <constraint firstItem="vml-tJ-hK9" firstAttribute="leading" secondItem="hoF-aO-Mum" secondAttribute="trailing" priority="750" constant="-20" id="kXu-K8-PCr"/>
+                            <constraint firstItem="dMO-zT-TFB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vml-tJ-hK9" secondAttribute="bottom" id="lNL-nF-Zht"/>
                             <constraint firstItem="vml-tJ-hK9" firstAttribute="top" secondItem="O6z-C1-DNP" secondAttribute="bottom" id="ljX-MC-1jv"/>
+                            <constraint firstItem="6uE-Fx-o1B" firstAttribute="top" secondItem="vml-tJ-hK9" secondAttribute="bottom" constant="8" symbolic="YES" id="n1d-vk-dGn"/>
                             <constraint firstItem="hoF-aO-Mum" firstAttribute="height" secondItem="vXw-gW-sSA" secondAttribute="height" id="o4Z-sm-o59"/>
                             <constraint firstItem="L4p-4h-EUq" firstAttribute="centerY" secondItem="0h0-m7-z4v" secondAttribute="centerY" id="qpM-EP-jSD"/>
                             <constraint firstItem="Ajg-rM-Vkb" firstAttribute="leading" secondItem="ghr-HL-bIJ" secondAttribute="leadingMargin" id="r38-66-3k7"/>
                             <constraint firstItem="Ajg-rM-Vkb" firstAttribute="trailing" secondItem="ghr-HL-bIJ" secondAttribute="trailingMargin" id="sov-ei-1ta"/>
-                            <constraint firstItem="vXw-gW-sSA" firstAttribute="top" secondItem="dMO-zT-TFB" secondAttribute="bottom" id="tGV-J5-buv"/>
                             <constraint firstAttribute="centerX" secondItem="vXw-gW-sSA" secondAttribute="centerX" id="tbg-XF-hTO"/>
                             <constraint firstAttribute="width" secondItem="vXw-gW-sSA" secondAttribute="width" multiplier="5" id="w3G-yk-NS8"/>
-                            <constraint firstItem="dMO-zT-TFB" firstAttribute="top" secondItem="vml-tJ-hK9" secondAttribute="bottom" id="zuc-0i-dug"/>
                             <constraint firstItem="61a-by-wpw" firstAttribute="centerY" secondItem="L4p-4h-EUq" secondAttribute="centerY" id="zzN-LO-uYv"/>
                         </constraints>
                     </view>
@@ -383,16 +391,16 @@
                                 <action selector="cancelIntake:" destination="JfU-Cw-4n3" id="LBq-sv-CFy"/>
                             </connections>
                         </barButtonItem>
-                        <view key="titleView" contentMode="scaleToFill" id="sXq-bO-dFR">
+                        <view key="titleView" autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="sXq-bO-dFR">
                             <rect key="frame" x="180" y="6" width="240" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Title}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9K-Ug-min">
+                                <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Title}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9K-Ug-min">
                                     <rect key="frame" x="99" y="0.0" width="42" height="20"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Subtitle}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ceg-X5-AVk">
+                                <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Subtitle}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ceg-X5-AVk">
                                     <rect key="frame" x="94" y="20" width="52" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <nil key="highlightedColor"/>
@@ -422,6 +430,7 @@
                         <outlet property="amountLabel" destination="IVh-g5-6lW" id="Ua6-W1-yLG"/>
                         <outlet property="amountSlider" destination="Ajg-rM-Vkb" id="I7n-YL-Yg5"/>
                         <outlet property="applyButton" destination="A5t-FE-O50" id="yOs-s5-Ecp"/>
+                        <outlet property="drinkInformationLabel" destination="6uE-Fx-o1B" id="ANQ-mF-akt"/>
                         <outlet property="drinkView" destination="vml-tJ-hK9" id="OM3-t4-cMz"/>
                         <outlet property="largeAmountButton" destination="7xm-eq-yWQ" id="RQm-AW-Ubf"/>
                         <outlet property="mediumAmountButton" destination="vXw-gW-sSA" id="Wov-pS-zpI"/>
@@ -1709,11 +1718,14 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2WZ-Ss-cV0" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Se-rb-nXp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="7Se-rb-nXp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="FJL-oI-M1h">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="JfU-Cw-4n3" kind="relationship" relationship="rootViewController" id="fRl-1z-TFa"/>
                     </connections>

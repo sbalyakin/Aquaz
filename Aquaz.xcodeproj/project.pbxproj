@@ -101,6 +101,9 @@
 		A5062A6E1B22E039008ADB89 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A5062A6C1B22E039008ADB89 /* libc++.dylib */; };
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
 		A52A7D871B245C88007A71ED /* NotificationSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52A7D861B245C88007A71ED /* NotificationSounds.swift */; };
+		A52E0CDB1B3854E500599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CDD1B3854E500599D81 /* InfoPlist.strings */; };
+		A52E0CE01B3854E500599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CE21B3854E500599D81 /* InfoPlist.strings */; };
+		A52E0CE51B3854E600599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CE71B3854E600599D81 /* InfoPlist.strings */; };
 		A54ED2591AD447A600FD37DD /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54ED2581AD447A600FD37DD /* UIExtensions.swift */; };
 		A54ED25A1AD447C000FD37DD /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54ED2581AD447A600FD37DD /* UIExtensions.swift */; };
 		A54ED25E1AD5A67900FD37DD /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = A54ED25D1AD5A67900FD37DD /* MMWormhole.m */; };
@@ -299,6 +302,9 @@
 		A5062A6C1B22E039008ADB89 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A52A7D861B245C88007A71ED /* NotificationSounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSounds.swift; sourceTree = "<group>"; };
+		A52E0CDC1B3854E500599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A52E0CE11B3854E500599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A52E0CE61B3854E600599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A54ED2581AD447A600FD37DD /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		A54ED25C1AD5A67900FD37DD /* MMWormhole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMWormhole.h; sourceTree = "<group>"; };
 		A54ED25D1AD5A67900FD37DD /* MMWormhole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWormhole.m; sourceTree = "<group>"; };
@@ -551,6 +557,7 @@
 		84669A6C19DAD78D003C2263 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A52E0CDD1B3854E500599D81 /* InfoPlist.strings */,
 				842DE2E31AB30D9400EEA137 /* Localizable.strings */,
 				84D251BE1AD26C9E001E6644 /* Aquaz.entitlements */,
 				84669A6D19DAD78D003C2263 /* Info.plist */,
@@ -576,6 +583,7 @@
 		84669A8519DAD78D003C2263 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A52E0CE21B3854E500599D81 /* InfoPlist.strings */,
 				84669A8619DAD78D003C2263 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -647,6 +655,7 @@
 		84D251991AD2511E001E6644 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A52E0CE71B3854E600599D81 /* InfoPlist.strings */,
 				844B248A1B2195490059E28A /* Localizable.strings */,
 				84D251BF1AD26D06001E6644 /* Widget.entitlements */,
 				84D2519A1AD2511E001E6644 /* Info.plist */,
@@ -916,6 +925,7 @@
 				A57D2BEB1ACFDE0D00619D62 /* Welcome.storyboard in Resources */,
 				84669A7719DAD78D003C2263 /* Main.storyboard in Resources */,
 				A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */,
+				A52E0CDB1B3854E500599D81 /* InfoPlist.strings in Resources */,
 				A5B8F9921A87DF3D00145705 /* chirp.caf in Resources */,
 				A5B8F9981A87DF3D00145705 /* whistle.caf in Resources */,
 				A5B8F9961A87DF3D00145705 /* magic.caf in Resources */,
@@ -933,6 +943,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A52E0CE01B3854E500599D81 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -941,6 +952,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8443DF421B29737D00FDD294 /* WidgetImages.xcassets in Resources */,
+				A52E0CE51B3854E600599D81 /* InfoPlist.strings in Resources */,
 				844B248B1B21991B0059E28A /* MainInterface.storyboard in Resources */,
 				844B24881B2195490059E28A /* Localizable.strings in Resources */,
 			);
@@ -1195,6 +1207,30 @@
 				840D5A841B29B7F700388920 /* en */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A52E0CDD1B3854E500599D81 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A52E0CDC1B3854E500599D81 /* ru */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A52E0CE21B3854E500599D81 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A52E0CE11B3854E500599D81 /* ru */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A52E0CE71B3854E600599D81 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A52E0CE61B3854E600599D81 /* ru */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		A57D2BE91ACFDE0D00619D62 /* Welcome.storyboard */ = {

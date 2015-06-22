@@ -22,7 +22,7 @@ public class Drink: CodingManagedObject, NamedEntity {
   @NSManaged public var intakes: NSSet
   @NSManaged public var recentAmount: RecentAmount
 
-  private struct Static {
+  private struct LocalizedStrings {
     static let waterTitle        = NSLocalizedString("D:Water",         value: "Water",         comment: "Drink: Title for water")
     static let coffeeTitle       = NSLocalizedString("D:Coffee",        value: "Coffee",        comment: "Drink: Title for coffee")
     static let teaTitle          = NSLocalizedString("D:Tea",           value: "Tea",           comment: "Drink: Title for tea")
@@ -34,6 +34,9 @@ public class Drink: CodingManagedObject, NamedEntity {
     static let beerTitle         = NSLocalizedString("D:Beer",          value: "Beer",          comment: "Drink: Title for beer")
     static let wineTitle         = NSLocalizedString("D:Wine",          value: "Wine",          comment: "Drink: Title for wine")
     static let hardLiquorTitle   = NSLocalizedString("D:Hard Liquor",   value: "Hard Liquor",   comment: "Drink: Title for hard liquor")
+  }
+  
+  private struct Static {
     static let darkColorShadowLevel: CGFloat = 0.2
     // Use the cache to store previously used drink objects
     static var cachedDrinks = [Int: [Int: Drink]]()
@@ -123,57 +126,57 @@ public class Drink: CodingManagedObject, NamedEntity {
     
     switch drinkType {
     case .Water:
-      _localizedName = Static.waterTitle
+      _localizedName = LocalizedStrings.waterTitle
       _drawDrinkFunction = StyleKit.drawWaterDrink
       _mainColor = StyleKit.waterColor
       
     case .Coffee:
-      _localizedName = Static.coffeeTitle
+      _localizedName = LocalizedStrings.coffeeTitle
       _drawDrinkFunction = StyleKit.drawCoffeeDrink
       _mainColor = StyleKit.coffeeColor
       
     case .Tea:
-      _localizedName = Static.teaTitle
+      _localizedName = LocalizedStrings.teaTitle
       _drawDrinkFunction = StyleKit.drawTeaDrink
       _mainColor = StyleKit.teaColor
       
     case .Soda:
-      _localizedName = Static.sodaTitle
+      _localizedName = LocalizedStrings.sodaTitle
       _drawDrinkFunction = StyleKit.drawSodaDrink
       _mainColor = StyleKit.sodaColor
       
     case .Juice:
-      _localizedName = Static.juiceTitle
+      _localizedName = LocalizedStrings.juiceTitle
       _drawDrinkFunction = StyleKit.drawJuiceDrink
       _mainColor = StyleKit.juiceColor
       
     case .Milk:
-      _localizedName = Static.milkTitle
+      _localizedName = LocalizedStrings.milkTitle
       _drawDrinkFunction = StyleKit.drawMilkDrink
       _mainColor = StyleKit.milkColor
       
     case .Sport:
-      _localizedName = Static.sportTitle
+      _localizedName = LocalizedStrings.sportTitle
       _drawDrinkFunction = StyleKit.drawSportDrink
       _mainColor = StyleKit.sportColor
       
     case .Energy:
-      _localizedName = Static.energyTitle
+      _localizedName = LocalizedStrings.energyTitle
       _drawDrinkFunction = StyleKit.drawEnergyDrink
       _mainColor = StyleKit.energyColor
 
     case .Beer:
-      _localizedName = Static.beerTitle
+      _localizedName = LocalizedStrings.beerTitle
       _drawDrinkFunction = StyleKit.drawBeerDrink
       _mainColor = StyleKit.beerColor
       
     case .Wine:
-      _localizedName = Static.wineTitle
+      _localizedName = LocalizedStrings.wineTitle
       _drawDrinkFunction = StyleKit.drawWineDrink
       _mainColor = StyleKit.wineColor
       
     case .HardLiquor:
-      _localizedName = Static.hardLiquorTitle
+      _localizedName = LocalizedStrings.hardLiquorTitle
       _drawDrinkFunction = StyleKit.drawHardLiquorDrink
       _mainColor = StyleKit.hardLiquorColor
     }

@@ -19,8 +19,26 @@ class IntakeViewController: UIViewController {
   @IBOutlet weak var largeAmountButton: UIButton!
   @IBOutlet weak var pickTimeButton: UIBarButtonItem!
   @IBOutlet weak var drinkView: DrinkView!
+  @IBOutlet weak var drinkInformationLabel: UILabel!
   @IBOutlet weak var navigationTitleLabel: UILabel!
   @IBOutlet weak var navigationDateLabel: UILabel!
+  
+  private struct LocalizedStrings {
+    
+    lazy var addButtonTitle = NSLocalizedString("IVC:Add", value: "Add", comment: "IntakeViewController: Title for Add button")
+    
+    lazy var applyButtonTitle = NSLocalizedString("IVC:Apply", value: "Apply", comment: "IntakeViewController: Title for Apply button")
+    
+    lazy var nowNavigationSubtitle = NSLocalizedString("IVC:Now", value: "Now", comment: "IntakeViewController: Subtitle of view if user adds intake for today")
+    
+    lazy var alcoholicDrinkInformation = NSLocalizedString(
+      "IVC:Alcoholic drinks cause dehydration by requiring more water to metabolise and by acting as diuretics.",
+      value: "Alcoholic drinks cause dehydration by requiring more water to metabolise and by acting as diuretics.",
+      comment: "IntakeViewController: Information about alcoholic drinks")
+    
+  }
+  
+  private var localizedStrings = LocalizedStrings()
   
   var date: NSDate! {
     didSet {
@@ -61,20 +79,25 @@ class IntakeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setupUI()
+    
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "preferredContentSizeChanged",
+      name: UIContentSizeCategoryDidChangeNotification,
+      object: nil)
+  }
+  
+  private func setupUI() {
     setupPredefinedAmountButtons()
     setupAmountRelatedControlsWithInitialAmount()
     setupApplyButton()
     setupNavigationTitle()
     setupDrinkView()
     setupSlider()
+    setupDrinkInformation()
     
     UIHelper.applyStyle(self)
     applyColorScheme()
-
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "preferredContentSizeChanged",
-      name: UIContentSizeCategoryDidChangeNotification,
-      object: nil)
   }
   
   deinit {
@@ -84,6 +107,14 @@ class IntakeViewController: UIViewController {
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     UIHelper.adjustNavigationTitleViewSize(navigationItem)
+    
+    // If the navigation item contains a custom title view with children views,
+    // on view controller dismissing the status bar is not taken into account
+    // when the view is layouted.
+    // It's a quite ugly solution, but now I don't have a better one.
+    let deltaY = navigationController!.navigationBar.frame.maxY - view.frame.origin.y
+    view.frame.origin.y += deltaY
+    view.frame.size.height -= deltaY
   }
 
   func preferredContentSizeChanged() {
@@ -109,10 +140,7 @@ class IntakeViewController: UIViewController {
   }
   
   private func setupApplyButton() {
-    let title = (viewMode == .Add)
-      ? NSLocalizedString("IVC:Add", value: "Add", comment: "IntakeViewController: Title for Add button")
-      : NSLocalizedString("IVC:Apply", value: "Apply", comment: "IntakeViewController: Title for Apply button")
-    
+    let title = (viewMode == .Add) ? localizedStrings.addButtonTitle : localizedStrings.applyButtonTitle
     applyButton.setTitle(title, forState: .Normal)
   }
 
@@ -126,17 +154,13 @@ class IntakeViewController: UIViewController {
     navigationDateLabel.textColor = StyleKit.barTextColor
   }
   
-  @IBAction func cancelIntake(sender: UIBarButtonItem) {
-    navigationController?.dismissViewControllerAnimated(true, completion: nil)
-  }
-  
   private func setupNavigationTitle() {
     let dateText: String
     
     if timeIsChoosen || !isCurrentDayToday {
       dateText = DateHelper.stringFromDateTime(date, shortDateStyle: true)
     } else {
-      dateText = NSLocalizedString("IVC:Now", value: "Now", comment: "IntakeViewController: Subtitle of view if user adds intake for today")
+      dateText = localizedStrings.nowNavigationSubtitle
     }
 
     navigationTitleLabel.text = drink.localizedName
@@ -150,6 +174,20 @@ class IntakeViewController: UIViewController {
   private func setupSlider() {
     amountSlider.tintColor = drink.mainColor
     amountSlider.maximumTrackTintColor = UIColor.blackColor().colorWithAlpha(0.2)
+  }
+  
+  private func setupDrinkInformation() {
+    if drink.dehydrationFactor > 0 {
+      drinkInformationLabel.text = localizedStrings.alcoholicDrinkInformation
+      drinkInformationLabel.hidden = false
+    } else {
+      drinkInformationLabel.hidden = true
+      drinkInformationLabel.text = ""
+    }
+  }
+  
+  @IBAction func cancelIntake(sender: UIBarButtonItem) {
+    navigationController?.dismissViewControllerAnimated(true, completion: nil)
   }
   
   @IBAction func amountSliderValueChanged(sender: AnyObject) {

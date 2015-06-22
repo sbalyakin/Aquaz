@@ -140,6 +140,9 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* IntakeViewController: Title for Add button */
 "IVC:Add" = "Добавить";
 
+/* IntakeViewController: Information about alcoholic drinks */
+"IVC:Alcoholic drinks cause dehydration by requiring more water to metabolise and by acting as diuretics." = "Алкогольные напитки приводят к обезвоживанию, повышая необходимое количество воды для метаболизма и действуя как диуретики.";
+
 /* IntakeViewController: Title for Apply button */
 "IVC:Apply" = "Применить";
 
