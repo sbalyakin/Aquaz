@@ -70,12 +70,15 @@ class SelectDrinkViewController: UIViewController {
   private func changeAlcoholicDrinkTo(#drinkType: Drink.DrinkType) {
     displayedDrinkTypes[displayedDrinkTypes.count - 1] = drinkType
     Settings.uiSelectedAlcoholicDrink.value = drinkType
-    let alcoholIndexPath = NSIndexPath(forRow: displayedDrinkTypes.count - 1, inSection: 0)
-    self.collectionView.reloadItemsAtIndexPaths([alcoholIndexPath])
-
-    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
-      performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
-    }
+    
+    collectionView.performBatchUpdates( {
+      self.collectionView.reloadSections(NSIndexSet(index: 0))
+      },
+      completion: { finished in
+        if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: self.managedObjectContext) {
+          self.performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
+        }
+    })
   }
   
   func handleDrinkCellLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
