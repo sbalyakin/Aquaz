@@ -180,7 +180,7 @@ extension SelectDrinkViewController: UICollectionViewDataSource {
     let drinkType = displayedDrinkTypes[drinkIndex]
     
     if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
-      cell.drinkLabel.text = drink.localizedName + "\n"
+      cell.drinkLabel.text = drink.localizedName
       cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
       cell.drinkView.drink = drink
       cell.drinkView.isGroup = drinkIndex == displayedDrinkTypes.count - 1
@@ -329,7 +329,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     let drinkType = popupDrinkTypes[drinkIndex]
     
     if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
-      cell.drinkLabel.text = drink.localizedName + "\n"
+      cell.drinkLabel.text = drink.localizedName
       cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
       cell.drinkView.drink = drink
       cell.drinkView.isGroup = false

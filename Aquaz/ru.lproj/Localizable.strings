@@ -11,7 +11,7 @@
 "D:Energy" = "Энергетик";
 
 /* Drink: Title for hard liquor */
-"D:Hard Liquor" = "Крепкий алкоголь";
+"D:Hard Liquor" = "Алкоголь 40°";
 
 /* Drink: Title for juice */
 "D:Juice" = "Сок";
@@ -23,7 +23,7 @@
 "D:Soda" = "Газировка";
 
 /* Drink: Title for sport drink */
-"D:Sport" = "Спортивный напиток";
+"D:Sport" = "Спортивный";
 
 /* Drink: Title for tea */
 "D:Tea" = "Чай";

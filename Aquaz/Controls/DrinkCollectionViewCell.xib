@@ -15,12 +15,6 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="268" height="323"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="1000" text="Drink" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="BUc-80-Uzd" userLabel="Drink Label">
-                        <rect key="frame" x="0.0" y="292" width="268" height="15"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                        <color key="textColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNx-R0-1cK" userLabel="Top Gap">
                         <rect key="frame" x="0.0" y="0.0" width="268" height="16"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -28,9 +22,12 @@
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="5" id="VbF-g5-NiN"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qwL-cz-7l9" userLabel="Bottom Gap">
-                        <rect key="frame" x="0.0" y="307" width="268" height="16"/>
+                    <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="7g6-1f-VKo" userLabel="Drink Image" customClass="DrinkView">
+                        <rect key="frame" x="0.0" y="16" width="268" height="268"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="7g6-1f-VKo" secondAttribute="height" multiplier="1:1" id="OOi-fO-p5u"/>
+                        </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G3l-li-d4z" userLabel="Middle Gap">
                         <rect key="frame" x="0.0" y="284" width="268" height="8"/>
@@ -39,12 +36,15 @@
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="4" id="jze-aW-amg"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="7g6-1f-VKo" customClass="DrinkView">
-                        <rect key="frame" x="0.0" y="16" width="268" height="268"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="1000" text="Drink" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="BUc-80-Uzd" userLabel="Drink Label">
+                        <rect key="frame" x="0.0" y="292" width="268" height="15"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                        <color key="textColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="qwL-cz-7l9" userLabel="Bottom Gap">
+                        <rect key="frame" x="0.0" y="307" width="268" height="16"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="7g6-1f-VKo" secondAttribute="height" multiplier="1:1" id="OOi-fO-p5u"/>
-                        </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

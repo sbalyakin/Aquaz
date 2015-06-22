@@ -53,7 +53,7 @@ class DrinkView: UIView {
     }
     
     if isGroup {
-      let dotRadius: CGFloat = 2
+      let dotRadius: CGFloat = rect.width / 40
       let dotsCount = 3
       let dx = dotRadius * 3
       let y = drawRect.minY + dotRadius
