@@ -151,21 +151,22 @@ extension CalendarContentView: UICollectionViewDelegateFlowLayout {
 extension CalendarContentView: UICollectionViewDelegate {
   
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let cell = collectionView.cellForItemAtIndexPath(indexPath) as! CalendarContentViewCell
-    let dayInfo = cell.getDayInfo()
-    
-    if !futureDaysEnabled && dayInfo.isFuture {
-      return
-    }
-    
-    if markSelectedDay {
-      selectedDate = dayInfo.date
-    }
-    
-    delegate?.calendarViewDaySelected(dayInfo)
-    
-    if markSelectedDay {
-      collectionView.reloadData()
+    if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? CalendarContentViewCell {
+      let dayInfo = cell.getDayInfo()
+      
+      if !futureDaysEnabled && dayInfo.isFuture {
+        return
+      }
+      
+      if markSelectedDay {
+        selectedDate = dayInfo.date
+      }
+      
+      delegate?.calendarViewDaySelected(dayInfo)
+      
+      if markSelectedDay {
+        collectionView.reloadData()
+      }
     }
   }
 

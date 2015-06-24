@@ -17,23 +17,29 @@ class CalendarContentViewCell: UICollectionViewCell {
   func setDayInfo(dayInfo: CalendarViewDayInfo, calendarContentView: CalendarContentView) {
     self.dayInfo = dayInfo
 
-    label?.removeFromSuperview()
-    label = nil
-    backgroundLayer?.removeFromSuperlayer()
-    backgroundLayer = nil
-    
     let colors = computeColors(calendarContentView)
-    
+
     if !colors.background.isClearColor() {
-      backgroundLayer = CAShapeLayer()
+      if backgroundLayer == nil {
+        backgroundLayer = CAShapeLayer()
+        contentView.layer.insertSublayer(backgroundLayer, atIndex: 0)
+      }
+
       backgroundLayer.fillColor = colors.background.CGColor
-      contentView.layer.addSublayer(backgroundLayer)
+    } else {
+      backgroundLayer?.removeFromSuperlayer()
+      backgroundLayer = nil
     }
-    
-    label = UILabel()
+
+    if label == nil {
+      label = UILabel()
+      label.userInteractionEnabled = false
+      label.textAlignment = .Center
+      contentView.addSubview(label)
+    } 
+
     label.text = dayInfo.title
     label.textColor = colors.text
-    label.textAlignment = .Center
     if dayInfo.isToday {
       let fontDescriptor = calendarContentView.font.fontDescriptor().fontDescriptorWithSymbolicTraits(.TraitBold)!
       let boldFont = UIFont(descriptor: fontDescriptor, size: calendarContentView.font.pointSize)
@@ -41,9 +47,6 @@ class CalendarContentViewCell: UICollectionViewCell {
     } else {
       label.font = calendarContentView.font
     }
-    label.userInteractionEnabled = false
-    
-    contentView.addSubview(label)
     
     setNeedsLayout()
   }

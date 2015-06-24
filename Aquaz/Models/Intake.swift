@@ -208,15 +208,20 @@ public class Intake: CodingManagedObject, NamedEntity {
     var intakeIndex = 0
     var daysInCalendarUnit = 0
     
+    let nextDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitTimeZone | .CalendarUnitCalendar, fromDate: beginDate)
+    nextDateComponents.hour = 0
+    nextDateComponents.minute = 0
+    nextDateComponents.second = 0
+    
     while true {
-      let currentDate = nextDate ?? beginDate
-      
       if aggregateFunction == .Average {
+        let currentDate = nextDate ?? beginDate
         daysInCalendarUnit = calendar.rangeOfUnit(.CalendarUnitDay, inUnit: calendarUnit, forDate: currentDate).length
       }
 
-      nextDate = DateHelper.addToDate(currentDate, years: 0, months: deltaMonths, days: deltaDays)
-      nextDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: nextDate)
+      nextDateComponents.month += deltaMonths
+      nextDateComponents.day += deltaDays
+      nextDate = calendar.dateFromComponents(nextDateComponents)
       
       if nextDate.isLaterThan(endDate) {
         break

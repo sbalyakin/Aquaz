@@ -27,6 +27,8 @@ class YearStatisticsViewController: UIViewController {
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   private var volumeObserverIdentifier: Int?
 
+  private let shortMonthSymbols = NSCalendar.currentCalendar().shortMonthSymbols as! [String]
+  
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -273,14 +275,13 @@ extension YearStatisticsViewController: YearStatisticsViewDataSource {
   
   func yearStatisticsViewGetTitleForHorizontalValue(value: CGFloat) -> String {
     let index = Int(value)
-    let calendar = NSCalendar.currentCalendar()
     
-    if index < 0 || index >= calendar.shortMonthSymbols.count {
+    if index < 0 || index >= shortMonthSymbols.count {
       assert(false)
       return ""
     }
     
-    return calendar.shortMonthSymbols[index] as! String
+    return shortMonthSymbols[index]
   }
   
   func yearStatisticsViewGetTitleForVerticalValue(value: CGFloat) -> String {

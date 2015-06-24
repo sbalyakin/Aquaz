@@ -41,7 +41,6 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
           arcLayer.lineCap = kCALineCapRound
           arcLayer.fillColor = nil
           arcLayer.strokeStart = 0
-          arcLayer.strokeEnd = 0
           if value < 1 {
             arcLayer.strokeColor = monthStatisticsContentView.dayIntakeColor.CGColor
           } else {
@@ -49,16 +48,26 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
           }
 
           contentView.layer.addSublayer(arcLayer)
+
+          let centerOnScreenPoint = convertPoint(bounds.origin, toView: nil)
+          let isVisible = UIScreen.mainScreen().bounds.contains(centerOnScreenPoint)
           
-          let animation = CABasicAnimation(keyPath: "strokeEnd")
-          animation.duration = 0.4
-          animation.fromValue = 0
-          animation.toValue = value
-          animation.fillMode = kCAFillModeForwards
-          animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-          animation.removedOnCompletion = false
-          arcLayer.strokeEnd = value
-          arcLayer.addAnimation(animation, forKey: "animateStrokeEnd")
+          if isVisible {
+            arcLayer.strokeEnd = 0
+
+            let animation = CABasicAnimation(keyPath: "strokeEnd")
+            animation.duration = 0.4
+            animation.fromValue = 0
+            animation.toValue = value
+            animation.fillMode = kCAFillModeForwards
+            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            animation.removedOnCompletion = false
+            arcLayer.strokeEnd = value
+            arcLayer.addAnimation(animation, forKey: "animateStrokeEnd")
+          } else {
+            // If cell is invisible we skip animation
+            arcLayer.strokeEnd = value
+          }
         }
         
         setNeedsLayout()
