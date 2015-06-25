@@ -22,6 +22,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   @IBOutlet weak var navigationTitleLabel: UILabel!
   @IBOutlet weak var navigationDateLabel: UILabel!
   @IBOutlet weak var summaryView: BannerView!
+  @IBOutlet weak var leftArrowForDateImage: UIImageView!
+  @IBOutlet weak var rightArrowForDateImage: UIImageView!
 
   // MARK: Localization -
   
@@ -237,6 +239,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     UIHelper.applyStyle(self)
     navigationTitleLabel.textColor = StyleKit.barTextColor
     navigationDateLabel.textColor = StyleKit.barTextColor
+    leftArrowForDateImage.tintColor = StyleKit.barTextColor
+    rightArrowForDateImage.tintColor = StyleKit.barTextColor
   }
   
   func refreshCurrentDay(#showAlert: Bool) {
@@ -338,6 +342,30 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
 
   private func updateUIRelatedToCurrentDate(#animated: Bool) {
+    updateDateArrows(animated: animated)
+    updateDateLabel(animated: animated)
+  }
+  
+  private func updateDateArrows(#animated: Bool) {
+    let rightArrowIsVisible = DateHelper.computeUnitsFrom(date, toDate: NSDate(), unit: .CalendarUnitDay) > 0
+    let newAlphaForRightImage: CGFloat = rightArrowIsVisible ? 1 : 0
+    
+    if animated {
+      UIView.animateWithDuration(0.15, animations: {
+        self.leftArrowForDateImage.alpha = 0
+        self.rightArrowForDateImage.alpha = 0
+        }, completion: { finished in
+          UIView.animateWithDuration(0.15) {
+            self.leftArrowForDateImage.alpha = 1
+            self.rightArrowForDateImage.alpha = newAlphaForRightImage
+          }
+      })
+    } else {
+      rightArrowForDateImage.alpha = newAlphaForRightImage
+    }
+  }
+  
+  private func updateDateLabel(#animated: Bool) {
     let formattedDate = DateHelper.stringFromDate(date)
     
     if animated {
