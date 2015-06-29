@@ -54,8 +54,8 @@ class WeekStatisticsViewController: UIViewController {
     setupUI()
     setupNotificationsObservation()
     
-    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [unowned self] value in
-      self.updateWeekStatisticsView(animated: false)
+    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [weak self] _ in
+      self?.updateWeekStatisticsView(animated: false)
     }
   }
 

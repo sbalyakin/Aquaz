@@ -142,12 +142,12 @@ class NotificationsViewController: OmegaSettingsViewController {
       title: soundTitle,
       settingsItem: Settings.notificationsSound,
       accessoryType: UITableViewCellAccessoryType.DisclosureIndicator,
-      activationChangedFunction: { [unowned self] in self.soundTableCellDidActivate($0, active: $1) },
+      activationChangedFunction: { [weak self] in self?.soundTableCellDidActivate($0, active: $1) },
       stringFromValueFunction: NotificationsViewController.stringFromSoundFileName)
     
     soundCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
     
-    soundObserverIdentifier = Settings.notificationsSound.addObserver { value in
+    soundObserverIdentifier = Settings.notificationsSound.addObserver { _ in
       soundCell.readFromExternalStorage()
     }
     
@@ -165,7 +165,7 @@ class NotificationsViewController: OmegaSettingsViewController {
       title: smartNotificationsTitle,
       settingsItem: Settings.notificationsSmart)
     
-    smartNotificationsCell.valueChangedFunction = { [unowned self] in self.smartNotificationsValueChanged($0) }
+    smartNotificationsCell.valueChangedFunction = { [weak self] in self?.smartNotificationsValueChanged($0) }
 
     let smartNotificationsSection = TableCellsSection()
     smartNotificationsSection.footerTitle = smartNotificationsSectionFooter
@@ -177,7 +177,7 @@ class NotificationsViewController: OmegaSettingsViewController {
       title: limitNotificationsTitle,
       settingsItem: Settings.notificationsLimit)
 
-    limitNotificationsCell.valueChangedFunction = { [unowned self] in self.limitNotificationsValueChanged($0) }
+    limitNotificationsCell.valueChangedFunction = { [weak self] in self?.limitNotificationsValueChanged($0) }
 
     let limitNotificationsSection = TableCellsSection()
     limitNotificationsSection.footerTitle = limitNotificationsSectionFooter
@@ -223,9 +223,9 @@ class NotificationsViewController: OmegaSettingsViewController {
     fullVersionBannerView = InfoBannerView.create()
     fullVersionBannerView!.infoLabel.text = text
     fullVersionBannerView!.infoImageView.image = ImageHelper.loadImage(.BannerFullVersion)
-    fullVersionBannerView!.bannerWasTappedFunction = { [unowned self] _ in self.fullVersionBannerWasTapped() }
-    fullVersionBannerView!.showAndHide(animated: true, displayTime: 3, parentView: view) { finished in
-      self.fullVersionBannerView = nil
+    fullVersionBannerView!.bannerWasTappedFunction = { [weak self] _ in self?.fullVersionBannerWasTapped() }
+    fullVersionBannerView!.showAndHide(animated: true, displayTime: 3, parentView: view) { [weak self] _ in
+      self?.fullVersionBannerView = nil
     }
   }
   

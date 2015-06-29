@@ -86,8 +86,8 @@ class FullVersionViewController: UIViewController {
       return
     }
 
-    approvalBannerView?.hide(animated: false) { _ in
-      self.approvalBannerView = nil
+    approvalBannerView?.hide(animated: false) { [weak self] _ in
+      self?.approvalBannerView = nil
     }
   }
 
@@ -103,9 +103,9 @@ class FullVersionViewController: UIViewController {
   
   private func fetchPrices() {
     InAppPurchaseManager.sharedInstance.fetchFullVersionPrice { [weak self] price in
-      if self != nil {
-        let priceProcessed = price.isEmpty ? self!.localizedStrings.priceLabelErrorText : price
-        self!.priceLabel.text = String.localizedStringWithFormat(self!.localizedStrings.priceLabelText, priceProcessed)
+      if let _self = self {
+        let priceProcessed = price.isEmpty ? _self.localizedStrings.priceLabelErrorText : price
+        _self.priceLabel.text = String.localizedStringWithFormat(_self.localizedStrings.priceLabelText, priceProcessed)
       }
     }
   }

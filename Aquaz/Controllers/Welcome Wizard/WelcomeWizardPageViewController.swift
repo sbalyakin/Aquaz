@@ -84,9 +84,9 @@ extension WelcomeWizardPageViewController: UIPageViewControllerDelegate {
       if pageIndex == ownViewControllers.count - 1 {
         UIView.animateWithDuration(0.4, animations: {
           self.skipButton.alpha = 0
-        }) { (finished) -> Void in
+        }, completion: { _ in
           self.skipButton.hidden = true
-        }
+        })
       } else if skipButton.hidden {
         skipButton.alpha = 0
         skipButton.hidden = false

@@ -52,7 +52,7 @@ class ExtraFactorsViewController: OmegaSettingsViewController {
       settingsItem: Settings.generalHighActivityExtraFactor,
       collection: factorsCollection,
       pickerTableCellHeight: .Large,
-      stringFromValueFunction: { [unowned self] in self.stringFromFactor($0) })
+      stringFromValueFunction: { [weak self] in self?.stringFromFactor($0) ?? "\($0)" })
     
     highActivityCell.image = ImageHelper.loadImage(.IconHighActivityActive)
     
@@ -66,7 +66,7 @@ class ExtraFactorsViewController: OmegaSettingsViewController {
       settingsItem: Settings.generalHotDayExtraFactor,
       collection: factorsCollection,
       pickerTableCellHeight: .Large,
-      stringFromValueFunction: { [unowned self] in self.stringFromFactor($0) })
+      stringFromValueFunction: { [weak self] in self?.stringFromFactor($0) ?? "\($0)" })
     
     hotWeatherCell.image = ImageHelper.loadImage(.IconHotWeatherActive)
     

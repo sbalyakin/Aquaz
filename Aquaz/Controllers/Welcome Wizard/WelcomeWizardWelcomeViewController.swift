@@ -31,10 +31,11 @@ class WelcomeWizardWelcomeViewController: UIViewController {
       
       UIView.animateWithDuration(1, delay: 0, options: .CurveEaseInOut, animations: {
         self.logo.layoutIfNeeded()
-      }, completion: { finished in
+      }, completion: { _ in
         UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {
           self.welcomeLabel.alpha = 1
           }, completion: nil)
+        
         UIView.animateWithDuration(0.5, delay: 0.25, options: .CurveEaseInOut, animations: {
           self.swipeLabel.alpha = 1
         }, completion: nil)

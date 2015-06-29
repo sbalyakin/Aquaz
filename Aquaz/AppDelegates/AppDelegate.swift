@@ -69,14 +69,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private func setupCoreDataSynchronization() {
     wormhole = MMWormhole(applicationGroupIdentifier: GlobalConstants.appGroupName, optionalDirectory: GlobalConstants.wormholeOptionalDirectory)
     
-    wormhole.listenForMessageWithIdentifier(GlobalConstants.wormholeMessageFromWidget) { [unowned self] (messageObject) -> Void in
+    wormhole.listenForMessageWithIdentifier(GlobalConstants.wormholeMessageFromWidget) { [weak self] messageObject in
       if let notification = messageObject as? NSNotification {
         CoreDataStack.mainContext.mergeChangesFromContextDidSaveNotification(notification)
         CoreDataStack.privateContext.mergeChangesFromContextDidSaveNotification(notification)
         
         NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationManagedObjectContextWasMerged, object: nil)
         
-        self.wormhole.clearMessageContentsForIdentifier(GlobalConstants.wormholeMessageFromWidget)
+        self?.wormhole?.clearMessageContentsForIdentifier(GlobalConstants.wormholeMessageFromWidget)
       }
     }
 
@@ -158,7 +158,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UIView.animateWithDuration(0.65, animations: {
       snapShot.layer.opacity = 0
       snapShot.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
-      }, completion: { (finished) -> Void in
+    }, completion: { _ in
         snapShot.removeFromSuperview()
     })
   }

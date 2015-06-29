@@ -89,23 +89,23 @@ class SettingsViewController: OmegaSettingsViewController {
       title: localizedStrings.dailyWaterIntakeTitle,
       settingsItem: Settings.userDailyWaterIntake,
       accessoryType: .DisclosureIndicator,
-      activationChangedFunction: { [unowned self] in self.waterGoalCellWasSelected($0, active: $1) },
-      stringFromValueFunction: { [unowned self] in self.stringFromWaterGoal($0) })
+      activationChangedFunction: { [weak self] in self?.waterGoalCellWasSelected($0, active: $1) },
+      stringFromValueFunction: { [weak self] in self?.stringFromWaterGoal($0) ?? "\($0)" })
     
     dailyWaterIntakeCell.image = ImageHelper.loadImage(.SettingsWater)
     
-    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { value in
+    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { _ in
       dailyWaterIntakeCell.readFromExternalStorage()
     }
 
-    waterGoalObserverIdentifier = Settings.userDailyWaterIntake.addObserver { value in
+    waterGoalObserverIdentifier = Settings.userDailyWaterIntake.addObserver { _ in
       dailyWaterIntakeCell.readFromExternalStorage()
     }
     
-    let extraFactorsCell = createBasicTableCell(title: localizedStrings.specialModesTitle, accessoryType: .DisclosureIndicator) { [unowned self]
+    let extraFactorsCell = createBasicTableCell(title: localizedStrings.specialModesTitle, accessoryType: .DisclosureIndicator) { [weak self]
       (tableCell, active) -> () in
       if active {
-        self.performSegueWithIdentifier(Constants.showExtraFactorsSegue, sender: tableCell)
+        self?.performSegueWithIdentifier(Constants.showExtraFactorsSegue, sender: tableCell)
       }
     }
     
@@ -115,10 +115,10 @@ class SettingsViewController: OmegaSettingsViewController {
     recommendationsSection.tableCells = [dailyWaterIntakeCell, extraFactorsCell]
     
     // Units section
-    let unitsCell = createBasicTableCell(title: localizedStrings.unitsTitle, accessoryType: .DisclosureIndicator) { [unowned self]
+    let unitsCell = createBasicTableCell(title: localizedStrings.unitsTitle, accessoryType: .DisclosureIndicator) { [weak self]
       (tableCell, active) -> () in
       if active {
-        self.performSegueWithIdentifier(Constants.showUnitsSegue, sender: tableCell)
+        self?.performSegueWithIdentifier(Constants.showUnitsSegue, sender: tableCell)
       }
     }
 
@@ -128,10 +128,10 @@ class SettingsViewController: OmegaSettingsViewController {
     unitsSection.tableCells = [unitsCell]
 
     // Notifications section
-    let notificationsCell = createBasicTableCell(title: localizedStrings.notificationsTitle, accessoryType: .DisclosureIndicator) { [unowned self]
+    let notificationsCell = createBasicTableCell(title: localizedStrings.notificationsTitle, accessoryType: .DisclosureIndicator) { [weak self]
       (tableCell, active) -> () in
       if active {
-        self.performSegueWithIdentifier(Constants.showNotificationsSegue, sender: tableCell)
+        self?.performSegueWithIdentifier(Constants.showNotificationsSegue, sender: tableCell)
       }
     }
     
@@ -141,10 +141,10 @@ class SettingsViewController: OmegaSettingsViewController {
     notificationsSection.tableCells = [notificationsCell]
     
     // Support section
-    let supportCell = createBasicTableCell(title: localizedStrings.supportTitle, accessoryType: .DisclosureIndicator) { [unowned self]
+    let supportCell = createBasicTableCell(title: localizedStrings.supportTitle, accessoryType: .DisclosureIndicator) { [weak self]
         (tableCell, active) -> () in
         if active {
-          self.performSegueWithIdentifier(Constants.showSupportSegue, sender: tableCell)
+          self?.performSegueWithIdentifier(Constants.showSupportSegue, sender: tableCell)
         }
     }
     
@@ -159,9 +159,9 @@ class SettingsViewController: OmegaSettingsViewController {
     } else {
       fullVersionCell = createBasicTableCell(
         title: localizedStrings.fullVersionTitle,
-        accessoryType: .DisclosureIndicator) { [unowned self] tableCell, active in
+        accessoryType: .DisclosureIndicator) { [weak self] tableCell, active in
           if active {
-            self.performSegueWithIdentifier(Constants.manageFullVersionSegue, sender: tableCell)
+            self?.performSegueWithIdentifier(Constants.manageFullVersionSegue, sender: tableCell)
           }
         }
     }

@@ -105,7 +105,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
       pickerTableCell.font = UIFont.systemFontOfSize(18)
     }
     
-    genderCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
+    genderCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
     // Height cell
     let heightUnit = Settings.generalHeightUnits.value
@@ -121,7 +121,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
       pickerTableCellHeight: .Large,
       stringFromValueFunction: WelcomeWizardMetricsViewController.stringFromHeight)
     
-    heightCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
+    heightCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
     // Weight cell
     let weightUnit = Settings.generalWeightUnits.value
@@ -137,7 +137,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
       pickerTableCellHeight: .Large,
       stringFromValueFunction: WelcomeWizardMetricsViewController.stringFromWeight)
     
-    weightCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
+    weightCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
     // Age cell
     let ageCollection = IntCollection(
@@ -152,7 +152,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
       pickerTableCellHeight: .Large,
       stringFromValueFunction: WelcomeWizardMetricsViewController.stringFromAge)
     
-    ageCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
+    ageCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
     // Physical activity cell
     physicalActivityCell = createEnumRightDetailTableCell(
@@ -161,7 +161,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
       pickerTableCellHeight: .Small,
       stringFromValueFunction: WelcomeWizardMetricsViewController.stringFromPhysicalActivity)
     
-    physicalActivityCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
+    physicalActivityCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
     let volumeUnit = Settings.generalVolumeUnits.value.unit
     let dailyWaterIntakeTitleFinal = dailyWaterIntakeTitle +  " (\(volumeUnit.contraction))"

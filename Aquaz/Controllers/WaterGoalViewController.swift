@@ -66,7 +66,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
       pickerTableCell.font = UIFont.systemFontOfSize(18)
     }
 
-    genderCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
+    genderCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
     // Height cell
     let heightUnit = Settings.generalHeightUnits.value
@@ -82,7 +82,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
       pickerTableCellHeight: .Large,
       stringFromValueFunction: WaterGoalViewController.stringFromHeight)
     
-    heightCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
+    heightCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
     // Weight cell
     let weightUnit = Settings.generalWeightUnits.value
@@ -98,7 +98,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
       pickerTableCellHeight: .Large,
       stringFromValueFunction: WaterGoalViewController.stringFromWeight)
     
-    weightCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
+    weightCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
     // Age cell
     let ageCollection = IntCollection(
@@ -113,7 +113,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
       pickerTableCellHeight: .Large,
       stringFromValueFunction: WaterGoalViewController.stringFromAge)
     
-    ageCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
+    ageCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
     // Physical activity cell
     physicalActivityCell = createEnumRightDetailTableCell(
@@ -122,7 +122,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
       pickerTableCellHeight: .Small,
       stringFromValueFunction: WaterGoalViewController.stringFromPhysicalActivity)
     
-    physicalActivityCell.valueChangedFunction = { [unowned self] in self.sourceCellValueChanged($0) }
+    physicalActivityCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
     let informationSection = TableCellsSection()
     informationSection.headerTitle = informationSectionHeader

@@ -74,10 +74,10 @@ class SelectDrinkViewController: UIViewController {
     collectionView.performBatchUpdates( {
       self.collectionView.reloadSections(NSIndexSet(index: 0))
       },
-      completion: { finished in
-        if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: self.managedObjectContext) {
-          self.performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
-        }
+    completion: { _ in
+      if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: self.managedObjectContext) {
+        self.performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
+      }
     })
   }
   

@@ -159,8 +159,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     updateUIRelatedToCurrentDate(animated: false)
     updateSummaryBar(animated: false, completion: nil)
     
-    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [unowned self] value in
-      self.updateIntakeButton(animated: false)
+    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [weak self] _ in
+      self?.updateIntakeButton(animated: false)
     }
     
     if !Settings.generalFullVersion.value {
@@ -354,7 +354,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       UIView.animateWithDuration(0.15, animations: {
         self.leftArrowForDateImage.alpha = 0
         self.rightArrowForDateImage.alpha = 0
-        }, completion: { finished in
+        }, completion: { _ in
           UIView.animateWithDuration(0.15) {
             self.leftArrowForDateImage.alpha = 1
             self.rightArrowForDateImage.alpha = newAlphaForRightImage
@@ -655,13 +655,17 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
 
     if animated {
       // Update maximum for multi progress control
-      intakesMultiProgressView.updateWithAnimation { [unowned self] in
-        self.intakesMultiProgressView.maximum = CGFloat(self.waterGoalAmount)
+      intakesMultiProgressView.updateWithAnimation { [weak self] in
+        if let _self = self {
+          _self.intakesMultiProgressView.maximum = CGFloat(_self.waterGoalAmount)
+        }
       }
     } else {
       // Update maximum for multi progress control
-      intakesMultiProgressView.update { [unowned self] in
-        self.intakesMultiProgressView.maximum = CGFloat(self.waterGoalAmount)
+      intakesMultiProgressView.update { [weak self] in
+        if let _self = self {
+          _self.intakesMultiProgressView.maximum = CGFloat(_self.waterGoalAmount)
+        }
       }
     }
 
@@ -716,7 +720,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     UIView.animateWithDuration(0.5, animations: {
       self.viewForAd!.alpha = 0
       self.viewForAd!.frame.offset(dx: 0, dy: self.viewForAd!.frame.height)
-    }) { (finished) -> Void in
+    }) { _ in
       self.interstitialAd = nil
       self.viewForAd?.removeFromSuperview()
       self.viewForAd = nil

@@ -83,7 +83,7 @@ class InfoBannerView: BannerView {
           self.layer.opacity = 0
           self.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
         },
-        completion: { (finished) -> Void in
+        completion: { finished in
           self.removeFromSuperview()
           completion?(finished)
       })

@@ -29,12 +29,12 @@ class DiaryViewController: UIViewController {
     super.viewDidLoad()
     applyStyle()
     
-    initFetchedResultsController {
-      self.tableView?.reloadData()
+    initFetchedResultsController { [weak self] _ in
+      self?.tableView?.reloadData()
     }
     
-    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [unowned self] value in
-      self.tableView.reloadData()
+    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [weak self] _ in
+      self?.tableView?.reloadData()
     }
   }
   
