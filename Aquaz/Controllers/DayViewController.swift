@@ -106,6 +106,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   /// Current date for managing water intake
   private var date: NSDate! {
     didSet {
+      Logger.logError(date != nil, "Nil date for DayViewController is passed")
+      
       if mode == .General {
         if DateHelper.areDatesEqualByDays(date, NSDate()) {
           Settings.uiUseCustomDateForDayView.value = false
@@ -148,24 +150,15 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    applyStyle()
-    setupNotificationsObservation()
-    setupGestureRecognizers()
-    setupMultiprogressControl()
-    obtainCurrentDate()
-    
-    intakeButton.setTitle("", forState: .Normal)
+    setupCurrentDate()
 
-    updateUIRelatedToCurrentDate(animated: false)
-    updateSummaryBar(animated: false, completion: nil)
+    setupUI()
     
-    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [weak self] _ in
-      self?.updateIntakeButton(animated: false)
-    }
+    setupNotificationsObservation()
+
+    setupGestureRecognizers()
     
-    if !Settings.generalFullVersion.value {
-      initInterstitialAd()
-    }
+    initInterstitialAd()
   }
   
   deinit {
@@ -201,6 +194,22 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     }
   }
   
+  private func setupUI() {
+    applyStyle()
+    
+    setupMultiprogressControl()
+    
+    intakeButton.setTitle("", forState: .Normal)
+    
+    updateUIRelatedToCurrentDate(animated: false)
+    
+    updateSummaryBar(animated: false, completion: nil)
+    
+    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [weak self] _ in
+      self?.updateIntakeButton(animated: false)
+    }
+  }
+  
   private func setupNotificationsObservation() {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
@@ -219,13 +228,11 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
         self.checkForHelpTip(notification)
       }
       
-      if !Settings.generalFullVersion.value {
-        self.checkForShowInterstialAd(notification)
-      }
+      self.checkForShowInterstialAd(notification)
     }
   }
 
-  private func obtainCurrentDate() {
+  private func setupCurrentDate() {
     if mode == .General && Settings.uiUseCustomDateForDayView.value {
       date = Settings.uiCustomDateForDayView.value
     } else {
@@ -244,6 +251,11 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   func refreshCurrentDay(#showAlert: Bool) {
+    if date == nil {
+      // It's useless to refresh current date if it's not specified yet. So just go away.
+      return
+    }
+    
     let dayIsSwitched = !DateHelper.areDatesEqualByDays(date, NSDate())
     
     if mode == .General && isCurrentDayToday && dayIsSwitched {
@@ -266,7 +278,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   func getCurrentDate() -> NSDate {
-    return date
+    return date ?? NSDate()
   }
   
   private func setupGestureRecognizers() {
@@ -687,9 +699,25 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   // MARK: iAd -
   
   private func initInterstitialAd() {
-    interstitialPresentationPolicy = .Manual
+    if !Settings.generalFullVersion.value {
+      interstitialPresentationPolicy = .Manual
+    }
   }
   
+  private func checkForShowInterstialAd(notification: NSNotification) {
+    if Settings.generalFullVersion.value {
+      return
+    }
+
+    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> where !insertedObjects.isEmpty {
+      Settings.generalAdCounter.value = Settings.generalAdCounter.value - 1
+      
+      if Settings.generalAdCounter.value <= 0 {
+        showInterstitialAd()
+      }
+    }	
+  }
+
   private func showInterstitialAd() {
     if interstitialAd != nil {
       return
@@ -702,28 +730,20 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     requestInterstitialAdPresentation()
   }
   
-  private func checkForShowInterstialAd(notification: NSNotification) {
-    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> where !insertedObjects.isEmpty {
-      Settings.generalAdCounter.value = Settings.generalAdCounter.value - 1
-      
-      if Settings.generalAdCounter.value <= 0 {
-        showInterstitialAd()
-      }
-    }	
-  }
-
   private func closeAd() {
     if interstitialAd == nil {
       return
     }
     
-    UIView.animateWithDuration(0.5, animations: {
-      self.viewForAd!.alpha = 0
-      self.viewForAd!.frame.offset(dx: 0, dy: self.viewForAd!.frame.height)
-    }) { _ in
-      self.interstitialAd = nil
-      self.viewForAd?.removeFromSuperview()
-      self.viewForAd = nil
+    if let viewForAd = viewForAd {
+      UIView.animateWithDuration(0.5, animations: {
+        viewForAd.alpha = 0
+        viewForAd.frame.offset(dx: 0, dy: viewForAd.frame.height)
+      }, completion: { _ in
+        self.interstitialAd = nil
+        viewForAd.removeFromSuperview()
+        self.viewForAd = nil
+      })
     }
   }
   

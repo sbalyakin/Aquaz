@@ -206,7 +206,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       viewControllers = tabBarController.viewControllers as? [UIViewController]
     {
       for (index, viewController) in enumerate(viewControllers) {
-        if let dayViewController = viewController.contentViewController() as? DayViewController {
+        if let dayViewController = viewController.contentViewController() as? DayViewController where dayViewController.mode == .General {
           dayViewController.refreshCurrentDay(showAlert: false)
           dayViewController.switchToSelectDrinkPage()
           tabBarController.selectedIndex = index

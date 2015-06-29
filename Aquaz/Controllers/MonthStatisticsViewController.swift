@@ -124,11 +124,14 @@ class MonthStatisticsViewController: UIViewController {
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == Constants.showDaySegue {
-      if let viewController = segue.destinationViewController.contentViewController as? DayViewController, date = sender as? NSDate {
-        viewController.mode = .Statistics
-        viewController.setCurrentDate(date)
-      }
+    if segue.identifier == Constants.showDaySegue,
+       let viewController = segue.destinationViewController.contentViewController as? DayViewController,
+       let date = sender as? NSDate
+    {
+      viewController.mode = .Statistics
+      viewController.setCurrentDate(date)
+    } else {
+      Logger.logError("Unable to setup DayViewController properly from month statistics")
     }
   }
   
