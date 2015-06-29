@@ -32,8 +32,8 @@ class IntakeViewController: UIViewController {
     lazy var nowNavigationSubtitle = NSLocalizedString("IVC:Now", value: "Now", comment: "IntakeViewController: Subtitle of view if user adds intake for today")
     
     lazy var alcoholicDrinkInformation = NSLocalizedString(
-      "IVC:Alcoholic drinks cause dehydration by requiring more water to metabolise and by acting as diuretics.",
-      value: "Alcoholic drinks cause dehydration by requiring more water to metabolise and by acting as diuretics.",
+      "IVC:Alcoholic drinks cause dehydration by requiring more water to metabolize and by acting as diuretics.",
+      value: "Alcoholic drinks cause dehydration by requiring more water to metabolize and by acting as diuretics.",
       comment: "IntakeViewController: Information about alcoholic drinks")
     
   }

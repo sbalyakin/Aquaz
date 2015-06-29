@@ -80,8 +80,8 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* DayViewController: Text for help tip about swiping for seeing the diary */
 "DVC:Swipe up to see the diary" = "Листните вверх, чтобы посмотреть дневник";
 
-/* DayViewController: Text for help tip about switching between percents and volume representation of overall intake for a day */
-"DVC:Tap to switch between percents and volume" = "Нажмите для переключения между процентами и объёмом";
+/* DayViewController: Text for help tip about switching between percentages and volume representation of overall intake for a day */
+"DVC:Tap to switch between percentages and volume" = "Нажмите для переключения между процентами и объёмом";
 
 /* DayViewController: Text for help tip about activating/deactivating High Activity mode */
 "DVC:Tap to toggle High Activity mode" = "Нажмите для переключения режима Высокой Активности";
@@ -141,7 +141,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "IVC:Add" = "Добавить";
 
 /* IntakeViewController: Information about alcoholic drinks */
-"IVC:Alcoholic drinks cause dehydration by requiring more water to metabolise and by acting as diuretics." = "Алкогольные напитки приводят к обезвоживанию, повышая необходимое количество воды для метаболизма и действуя как диуретики.";
+"IVC:Alcoholic drinks cause dehydration by requiring more water to metabolize and by acting as diuretics." = "Алкогольные напитки приводят к обезвоживанию, повышая необходимое количество воды для метаболизма и действуя как диуретики.";
 
 /* IntakeViewController: Title for Apply button */
 "IVC:Apply" = "Применить";
