@@ -129,6 +129,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   var mode: Mode = .General
+  
   private var helpTip: JDFTooltipView?
   
   private struct Constants {
@@ -699,13 +700,13 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   // MARK: iAd -
   
   private func initInterstitialAd() {
-    if !Settings.generalFullVersion.value {
+    if !Settings.generalFullVersion.value && mode == .General {
       interstitialPresentationPolicy = .Manual
     }
   }
   
   private func checkForShowInterstialAd(notification: NSNotification) {
-    if Settings.generalFullVersion.value {
+    if Settings.generalFullVersion.value || mode != .General {
       return
     }
 
