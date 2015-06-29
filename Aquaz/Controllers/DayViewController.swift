@@ -191,7 +191,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     super.viewDidAppear(animated)
 
     if mode == .General && Settings.uiDayPageHelpTipToShow.value == Settings.DayPageHelpTip(rawValue: 0)! {
-        checkHelpTip()
+      checkHelpTip()
     }
   }
   
@@ -462,6 +462,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       navigationTitleLabel.setTextWithAnimation(title) {
         UIHelper.adjustNavigationTitleViewSize(self.navigationItem)
       }
+      
+      helpTip?.hideAnimated(false)
     }
   }
   
@@ -785,13 +787,13 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     if helpTip != nil {
       return
     }
-    
+
     switch Settings.uiDayPageHelpTipToShow.value {
-    case .SlideToSeeDiary:
-      showHelpTipForSlideToSeeDiary()
+    case .SwipeToSeeDiary:
+      showHelpTipForSwipeToSeeDiary()
       
-    case .SlideToChangeDay:
-      showHelpTipForSlideToChangeDay()
+    case .SwipeToChangeDay:
+      showHelpTipForSwipeToChangeDay()
       
     case .HighActivityMode:
       showHelpTipForHighActivityMode()
@@ -810,30 +812,32 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   private func switchToNextHelpTip() {
-    Settings.uiDayPageHelpTipToShow.value = Settings.DayPageHelpTip(rawValue: Settings.uiDayPageHelpTipToShow.value.rawValue + 1)!
+    Settings.uiDayPageHelpTipToShow.value = Settings.DayPageHelpTip(rawValue: Settings.uiDayPageHelpTipToShow.value.rawValue + 1) ?? .None
     
     // Reset help tips counter. Help tips should be shown after every 2 intakes.
     Settings.uiDayPageIntakesCountTillHelpTip.value = 2
   }
   
-  private func showHelpTipForSlideToSeeDiary() {
+  private func showHelpTipForSwipeToSeeDiary() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
       if self.view.window == nil || self.helpTip != nil {
         return
       }
       
+      let bounds = self.selectDrinkViewController!.collectionView.bounds
+      
       let helpTip = JDFTooltipView(
-        targetPoint: CGPoint(x: self.view.center.x, y: self.view.bounds.maxY - 10),
-        hostView: self.view,
+        targetPoint: CGPoint(x: bounds.midX, y: bounds.height * 0.65),
+        hostView: self.selectDrinkViewController!.collectionView,
         tooltipText: self.localizedStrings.helpTipSwipeToSeeDiary,
-        arrowDirection: .Down,
+        arrowDirection: .Up,
         width: self.view.frame.width / 2)
       
       self.showHelpTip(helpTip)
     }
   }
   
-  private func showHelpTipForSlideToChangeDay() {
+  private func showHelpTipForSwipeToChangeDay() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
       if self.view.window == nil || self.helpTip != nil {
         return

@@ -53,8 +53,8 @@ public class Settings {
   }
   
   enum DayPageHelpTip: Int {
-    case SlideToSeeDiary = 0
-    case SlideToChangeDay
+    case SwipeToSeeDiary = 0
+    case SwipeToChangeDay
     case HighActivityMode
     case HotWeatherMode
     case SwitchToPercentsAndViceVersa
