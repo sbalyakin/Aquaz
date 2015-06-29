@@ -22,7 +22,7 @@ class SettingsViewController: OmegaSettingsViewController {
     
     lazy var unitsTitle = NSLocalizedString("SVC:Measurement Units",
       value: "Measurement Units",
-      comment: "SettingsViewController: Table cell title for [Meathurement Units] settings block")
+      comment: "SettingsViewController: Table cell title for [Measurement Units] settings block")
     
     lazy var notificationsTitle = NSLocalizedString("SVC:Notifications",
       value: "Notifications",

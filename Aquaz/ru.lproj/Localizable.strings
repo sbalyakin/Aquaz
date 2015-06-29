@@ -269,7 +269,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* StatisticsViewController: Text for banner shown to promote the full version of Aquaz if user tries to activate Limit notifications mode */
 "SVC:Limit Notifications mode is available in the full version only." = "Режим ограничения оповещений доступен только в Полной версии.";
 
-/* SettingsViewController: Table cell title for [Meathurement Units] settings block */
+/* SettingsViewController: Table cell title for [Measurement Units] settings block */
 "SVC:Measurement Units" = "Единицы Измерения";
 
 /* SettingsViewController: Table cell title for [Notifications] settings block */
