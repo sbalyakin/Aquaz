@@ -431,20 +431,12 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   
   // MARK: Change current screen -
   
-  private func toggleCurrentPage() {
-    let currentPage = pageViewController.viewControllers.last as! UIViewController
-    updateUIAccordingToCurrentPage(currentPage, initial: false)
-    if currentPage == pages[0] {
-      pageViewController.setViewControllers([pages[1]], direction: .Forward, animated: true, completion: nil)
-    } else if currentPage == pages[1] {
-      pageViewController.setViewControllers([pages[0]], direction: .Reverse, animated: true, completion: nil)
-    }
-  }
-  
   func switchToSelectDrinkPage() {
-    let currentPage = pageViewController.viewControllers.last as! UIViewController
-    if currentPage != pages[0] {
-      toggleCurrentPage()
+    if let currentPage = pageViewController?.viewControllers.last as? UIViewController
+      where selectDrinkViewController != nil && currentPage != selectDrinkViewController
+    {
+      updateUIAccordingToCurrentPage(currentPage, initial: false)
+      pageViewController.setViewControllers([selectDrinkViewController], direction: .Reverse, animated: true, completion: nil)
     }
   }
 
@@ -1038,8 +1030,9 @@ extension DayViewController: UIPageViewControllerDataSource {
 extension DayViewController: UIPageViewControllerDelegate {
 
   func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
-    let currentPage = pageViewController.viewControllers.last as! UIViewController
-    updateUIAccordingToCurrentPage(currentPage, initial: false)
+    if let currentPage = pageViewController.viewControllers.last as? UIViewController {
+      updateUIAccordingToCurrentPage(currentPage, initial: false)
+    }
   }
   
 }

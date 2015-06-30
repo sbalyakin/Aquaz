@@ -218,8 +218,9 @@ extension DiaryViewController: NSFetchedResultsControllerDelegate {
         self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
         
       case .Update:
-        let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as! DiaryTableViewCell
-        if let intake = self.fetchedResultsController?.objectAtIndexPath(indexPath!) as? Intake {
+        if let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as? DiaryTableViewCell,
+           let intake = self.fetchedResultsController?.objectAtIndexPath(indexPath!) as? Intake
+        {
           cell.intake = intake
         }
         
