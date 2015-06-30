@@ -34,6 +34,42 @@ class NotificationsViewController: OmegaSettingsViewController {
       value: "Limit Notifications mode is available in the full version only.",
       comment: "StatisticsViewController: Text for banner shown to promote the full version of Aquaz if user tries to activate Limit notifications mode")
 
+    lazy var enableNotificationsTitle = NSLocalizedString("NVC:Enable Notifications", value: "Enable Notifications",
+      comment: "NotificationsViewController: Title for [Enable Notification] setting")
+    
+    lazy var fromTitle = NSLocalizedString("NVC:From", value: "From",
+      comment: "NotificationsViewController: Title for [From] setting")
+    
+    lazy var toTitle = NSLocalizedString("NVC:To", value: "To",
+      comment: "NotificationsViewController: Title for [To] setting")
+    
+    lazy var intervalTitle = NSLocalizedString("NVC:Interval", value: "Interval",
+      comment: "NotificationsViewController: Title for [Interval] setting")
+    
+    lazy var intervalHourTitle = NSLocalizedString("NVC:hr", value: "hr",
+      comment: "NotificationsViewController: contraction for hour")
+    
+    lazy var intervalMinuteTitle = NSLocalizedString("NVC:min", value: "min",
+      comment: "NotificationsViewController: contraction for minute")
+    
+    lazy var soundTitle = NSLocalizedString("NVC:Notification Sound", value: "Notification Sound",
+      comment: "NotificationsViewController: Title for [Notification Sound] setting")
+    
+    lazy var smartNotificationsTitle = NSLocalizedString("NVC:Smart Notifications", value: "Smart Notifications",
+      comment: "NotificationsViewController: Title for [Smart Notifications] setting")
+    
+    lazy var limitNotificationsTitle = NSLocalizedString("NVC:Limit Notifications", value: "Limit Notifications",
+      comment: "NotificationsViewController: Title for [Limit Notifications] setting")
+    
+    lazy var smartNotificationsSectionFooter = NSLocalizedString(
+      "NVC:Enable to snooze notifications taking into account time of drink intakes.",
+      value: "Enable to snooze notifications taking into account time of drink intakes.",
+      comment: "NotificationsViewController: Footer text for [Smart Notifications] section")
+    
+    lazy var limitNotificationsSectionFooter = NSLocalizedString("NVC:When enabled, notifications will not be shown if you already drink your daily water intake.",
+      value: "When enabled, notifications will not be shown if you already drink your daily water intake.",
+      comment: "NotificationsViewController: Footer text for [Limit Notifications] section")
+
   }
   
   private var localizedStrings = LocalizedStrings()
@@ -59,52 +95,16 @@ class NotificationsViewController: OmegaSettingsViewController {
   }
 
   override func createTableCellsSections() -> [TableCellsSection] {
-    let enableNotificationsTitle = NSLocalizedString("NVC:Enable Notifications", value: "Enable Notifications",
-      comment: "NotificationsViewController: Title for [Enable Notification] setting")
-
-    let fromTitle = NSLocalizedString("NVC:From", value: "From",
-      comment: "NotificationsViewController: Title for [From] setting")
-
-    let toTitle = NSLocalizedString("NVC:To", value: "To",
-      comment: "NotificationsViewController: Title for [To] setting")
-    
-    let intervalTitle = NSLocalizedString("NVC:Interval", value: "Interval",
-      comment: "NotificationsViewController: Title for [Interval] setting")
-
-    let intervalHourTitle = NSLocalizedString("NVC:hr", value: "hr",
-      comment: "NotificationsViewController: contraction for hour")
-
-    let intervalMinuteTitle = NSLocalizedString("NVC:min", value: "min",
-      comment: "NotificationsViewController: contraction for minute")
-
-    let soundTitle = NSLocalizedString("NVC:Notification Sound", value: "Notification Sound",
-      comment: "NotificationsViewController: Title for [Notification Sound] setting")
-    
-    let smartNotificationsTitle = NSLocalizedString("NVC:Smart Notifications", value: "Smart Notifications",
-      comment: "NotificationsViewController: Title for [Smart Notifications] setting")
-    
-    let limitNotificationsTitle = NSLocalizedString("NVC:Limit Notifications", value: "Limit Notifications",
-      comment: "NotificationsViewController: Title for [Limit Notifications] setting")
-    
-    let smartNotificationsSectionFooter = NSLocalizedString(
-      "NVC:Enable to snooze notifications taking into account time of drink intakes.",
-      value: "Enable to snooze notifications taking into account time of drink intakes.",
-      comment: "NotificationsViewController: Footer text for [Smart Notifications] section")
-    
-    let limitNotificationsSectionFooter = NSLocalizedString("NVC:When enabled, notifications will not be shown if you already drink your daily water intake.",
-      value: "When enabled, notifications will not be shown if you already drink your daily water intake.",
-      comment: "NotificationsViewController: Footer text for [Limit Notifications] section")
-    
     // General section
     
     let enableNotificationsCell = createSwitchTableCell(
-      title: enableNotificationsTitle,
+      title: localizedStrings.enableNotificationsTitle,
       settingsItem: Settings.notificationsEnabled)
     
     enableNotificationsCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
     
     let fromCell = createDateRightDetailTableCell(
-      title: fromTitle,
+      title: localizedStrings.fromTitle,
       settingsItem: Settings.notificationsFrom,
       datePickerMode: .Time,
       minimumDate: nil,
@@ -115,7 +115,7 @@ class NotificationsViewController: OmegaSettingsViewController {
     fromCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
 
     let toCell = createDateRightDetailTableCell(
-      title: toTitle,
+      title: localizedStrings.toTitle,
       settingsItem: Settings.notificationsTo,
       datePickerMode: .Time,
       minimumDate: nil,
@@ -126,11 +126,15 @@ class NotificationsViewController: OmegaSettingsViewController {
     toCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
     
     let timeComponents = [
-      TimeIntervalPickerTableCellComponent(calendarUnit: NSCalendarUnit.CalendarUnitHour, minValue: 1, maxValue: 6, step: 1, title: intervalHourTitle, width: 100),
-      TimeIntervalPickerTableCellComponent(calendarUnit: NSCalendarUnit.CalendarUnitMinute, minValue: 0, maxValue: 59, step: 5, title: intervalMinuteTitle, width: 100)]
+      TimeIntervalPickerTableCellComponent(
+        calendarUnit: NSCalendarUnit.CalendarUnitHour,
+        minValue: 1, maxValue: 6, step: 1, title: localizedStrings.intervalHourTitle, width: 100),
+      TimeIntervalPickerTableCellComponent(
+        calendarUnit: NSCalendarUnit.CalendarUnitMinute,
+        minValue: 0, maxValue: 59, step: 5, title: localizedStrings.intervalMinuteTitle, width: 100)]
     
     let intervalCell = createTimeIntervalRightDetailTableCell(
-      title: intervalTitle,
+      title: localizedStrings.intervalTitle,
       settingsItem: Settings.notificationsInterval,
       timeComponents: timeComponents,
       height: .Large,
@@ -139,7 +143,7 @@ class NotificationsViewController: OmegaSettingsViewController {
     intervalCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
   
     let soundCell = createRightDetailTableCell(
-      title: soundTitle,
+      title: localizedStrings.soundTitle,
       settingsItem: Settings.notificationsSound,
       accessoryType: UITableViewCellAccessoryType.DisclosureIndicator,
       activationChangedFunction: { [weak self] in self?.soundTableCellDidActivate($0, active: $1) },
@@ -162,25 +166,25 @@ class NotificationsViewController: OmegaSettingsViewController {
     // Smart Notifications section
     
     let smartNotificationsCell = createSwitchTableCell(
-      title: smartNotificationsTitle,
+      title: localizedStrings.smartNotificationsTitle,
       settingsItem: Settings.notificationsSmart)
     
     smartNotificationsCell.valueChangedFunction = { [weak self] in self?.smartNotificationsValueChanged($0) }
 
     let smartNotificationsSection = TableCellsSection()
-    smartNotificationsSection.footerTitle = smartNotificationsSectionFooter
+    smartNotificationsSection.footerTitle = localizedStrings.smartNotificationsSectionFooter
     smartNotificationsSection.tableCells = [smartNotificationsCell]
     
     // Limit Notifications section
     
     let limitNotificationsCell = createSwitchTableCell(
-      title: limitNotificationsTitle,
+      title: localizedStrings.limitNotificationsTitle,
       settingsItem: Settings.notificationsLimit)
 
     limitNotificationsCell.valueChangedFunction = { [weak self] in self?.limitNotificationsValueChanged($0) }
 
     let limitNotificationsSection = TableCellsSection()
-    limitNotificationsSection.footerTitle = limitNotificationsSectionFooter
+    limitNotificationsSection.footerTitle = localizedStrings.limitNotificationsSectionFooter
     limitNotificationsSection.tableCells = [limitNotificationsCell]
 
     return [mainSection, smartNotificationsSection, limitNotificationsSection]

@@ -65,7 +65,6 @@ class TimeIntervalPickerTableCell<T: TimeIntervalPickerTableCellHelper>: MultiPi
       var value = Int(timeInterval / duration) % unitMaximum
       value = min(timeComponent.maxValue, value)
       value = max(timeComponent.minValue, value)
-      value -= timeComponent.minValue
       let row = (value - timeComponent.minValue) / timeComponent.step
       selectedRows += [row]
     }
