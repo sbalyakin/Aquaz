@@ -94,7 +94,7 @@
 /* Class = "UIButton"; normalTitle = "Restore Purchases"; ObjectID = "ihc-Bi-XaL"; */
 "ihc-Bi-XaL.normalTitle" = "Восстановить Покупки";
 
-/* Class = "UILabel"; text = "Thank you for using Aquaz! If you like it, please support us and tell your friends about our app using buttons below."; ObjectID = "j2j-PD-0hx"; */
+/* Class = "UILabel"; text = "Thank you for using Aquaz! If you like it, please support us and tell your friends about our app using the buttons below."; ObjectID = "j2j-PD-0hx"; */
 "j2j-PD-0hx.text" = "Спасибо, что используете Aquaz! Если вам нравится приложение, пожалуйста, расскажите о нем своим друзьям.";
 
 /* Class = "UIBarButtonItem"; title = "Today"; ObjectID = "nSq-92-OEq"; */

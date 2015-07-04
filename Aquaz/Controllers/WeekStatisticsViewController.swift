@@ -36,8 +36,8 @@ class WeekStatisticsViewController: UIViewController {
   
   private struct LocalizedStrings {
     
-    lazy var helpTipForTapSeeDayDetails = NSLocalizedString("WSVC:Tap a day button to see details",
-      value: "Tap a day button to see details",
+    lazy var helpTipForTapSeeDayDetails = NSLocalizedString("WSVC:Tap a day to see details",
+      value: "Tap a day to see details",
       comment: "WeekStatisticsViewController: Text for help tip about tapping a day button for details")
     
     lazy var helpTipForSwipeToChangeWeek = NSLocalizedString("WSVC:Swipe left or right to switch week",

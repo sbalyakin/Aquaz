@@ -49,8 +49,8 @@ class WaterGoalViewController: OmegaSettingsViewController {
     let dailyWaterIntakeSectionHeader = NSLocalizedString("WGVC:Recommendations", value: "Recommendations",
       comment: "WaterGoalViewController: Header for section with daily water intake")
 
-    let dailyWaterIntakeSectionFooter = NSLocalizedString("Calculated daily water intake is only an estimate. Always take into account needs of your body. Please consult your health care provider for advice about a specific medical condition.",
-      value: "Calculated daily water intake is only an estimate. Always take into account needs of your body. Please consult your health care provider for advice about a specific medical condition.",
+    let dailyWaterIntakeSectionFooter = NSLocalizedString("The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
+      value: "The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
       comment: "Footer for section with calculated daily water intake")
 
     // Information section

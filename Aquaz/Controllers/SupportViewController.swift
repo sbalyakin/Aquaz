@@ -28,8 +28,8 @@ class SupportViewController: UIViewController {
       comment: "SupportViewController: Subject of tell-to-friend e-mail")
     
     lazy var mailToFriendsWelcomeBody: String = NSLocalizedString(
-      "SVC:Hey there!<br><br>I\'ve been using Aquaz and thought you might like it. It\'s an easy way to track your water intakes.",
-      value: "Hey there!<br><br>I\'ve been using Aquaz and thought you might like it. It\'s an easy way to track your water intakes.",
+      "SVC:Hey there!<br><br>I\'ve been using Aquaz and thought you might like it. It\'s an easy way to track your water intake.",
+      value: "Hey there!<br><br>I\'ve been using Aquaz and thought you might like it. It\'s an easy way to track your water intake.",
       comment: "SupportViewController: Body of tell-to-friend e-mail")
 
     lazy var cancel: String = NSLocalizedString(
@@ -58,8 +58,8 @@ class SupportViewController: UIViewController {
       comment: "SupportViewController: Title for [Request help] item in the action sheet used for choosing type of e-mail for developers")
     
     lazy var facebookText: String = NSLocalizedString(
-      "SVC:Hey people! I\'ve been using Aquaz and thought you might like it. It\'s an easy way to track your water intakes.",
-      value: "Hey people! I\'ve been using Aquaz and thought you might like it. It\'s an easy way to track your water intakes.",
+      "SVC:Hey people! I\'ve been using Aquaz and thought you might like it. It\'s an easy way to track your water intake.",
+      value: "Hey people! I\'ve been using Aquaz and thought you might like it. It\'s an easy way to track your water intake.",
       comment: "SupportViewController: Text for social message")
 
     lazy var twitterText: String = self.facebookText

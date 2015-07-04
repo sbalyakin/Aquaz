@@ -62,12 +62,12 @@ class NotificationsViewController: OmegaSettingsViewController {
       comment: "NotificationsViewController: Title for [Limit Notifications] setting")
     
     lazy var smartNotificationsSectionFooter = NSLocalizedString(
-      "NVC:Enable to snooze notifications taking into account time of drink intakes.",
-      value: "Enable to snooze notifications taking into account time of drink intakes.",
+      "NVC:Enable snooze notifications taking into account time of drink intake.",
+      value: "Enable snooze notifications taking into account time of drink intake.",
       comment: "NotificationsViewController: Footer text for [Smart Notifications] section")
     
-    lazy var limitNotificationsSectionFooter = NSLocalizedString("NVC:When enabled, notifications will not be shown if you already drink your daily water intake.",
-      value: "When enabled, notifications will not be shown if you already drink your daily water intake.",
+    lazy var limitNotificationsSectionFooter = NSLocalizedString("NVC:When enabled, notifications will not be shown if you have already drunk your daily water intake.",
+      value: "When enabled, notifications will not be shown if you have already drunk your daily water intake.",
       comment: "NotificationsViewController: Footer text for [Limit Notifications] section")
 
   }

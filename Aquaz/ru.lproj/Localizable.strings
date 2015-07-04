@@ -1,5 +1,5 @@
 /* Footer for section with calculated daily water intake */
-"Calculated daily water intake is only an estimate. Always take into account needs of your body. Please consult your health care provider for advice about a specific medical condition." = "Рассчитанная суточная норма потребления воды носит общий характер. Всегда руководствуйтесь потребностями своего организма. Пожалуйста, проконсультируйтесь со специалистом для получения информации о возможных противопоказаниях.";
+"The calculated daily water intake is only an estimate. Always take into account your body's needs. Please consult your health care provider for advice about a specific medical condition." = "Рассчитанная суточная норма потребления воды носит общий характер. Всегда руководствуйтесь потребностями своего организма. Пожалуйста, проконсультируйтесь со специалистом для получения информации о возможных противопоказаниях.";
 
 /* Drink: Title for beer */
 "D:Beer" = "Пиво";
@@ -99,10 +99,10 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "EFVC:Hot Weather" = "Жаркая Погода";
 
 /* ExtraFactorsViewController: Footer for high activity section */
-"EFVC:Specify daily water intake increasing when High Activity mode is turned on." = "Укажите повышение суточной нормы при включении режима Высокой Активности.";
+"EFVC:Specify an increase in daily water intake when High Activity mode is turned on." = "Укажите повышение суточной нормы при включении режима Высокой Активности.";
 
 /* ExtraFactorsViewController: Footer for hot weather section */
-"EFVC:Specify daily water intake increasing when Hot Weather mode is turned on." = "Укажите повышение суточной нормы при включении режима Жаркой Погоды.";
+"EFVC:Specify an increase in daily water intake when Hot Weather mode is turned on." = "Укажите повышение суточной нормы при включении режима Жаркой Погоды.";
 
 /* FullVersionViewController: Description about full version purchase */
 "FVVC:Description about full version purchase" = "Полная версия Aquaz это:
@@ -204,7 +204,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "NVC:Enable Notifications" = "Включить Оповещения";
 
 /* NotificationsViewController: Footer text for [Smart Notifications] section */
-"NVC:Enable to snooze notifications taking into account time of drink intakes." = "Включите этот режим, чтобы откладывать оповещения, учитывая время употребления напитков.";
+"NVC:Enable snooze notifications taking into account time of drink intake." = "Включите этот режим, чтобы откладывать оповещения, учитывая время употребления напитков.";
 
 /* NotificationsViewController: Title for [From] setting */
 "NVC:From" = "С";
@@ -225,7 +225,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "NVC:To" = "До";
 
 /* NotificationsViewController: Footer text for [Limit Notifications] section */
-"NVC:When enabled, notifications will not be shown if you already drink your daily water intake." = "Если данный режим включен, то оповещения не будут показываться, если вы выпили суточную норму.";
+"NVC:When enabled, notifications will not be shown if you have already drunk your daily water intake." = "Если данный режим включен, то оповещения не будут показываться, если вы выпили суточную норму.";
 
 /* NotificationsViewController: contraction for hour */
 "NVC:hr" = "ч";
@@ -258,10 +258,10 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "SVC:Height" = "Рост";
 
 /* SupportViewController: Text for social message */
-"SVC:Hey people! I've been using Aquaz and thought you might like it. It's an easy way to track your water intakes." = "Всем привет! Я использую Aquaz и думаю, вам он может понравиться. Приложение поможет отслеживать потребление воды.";
+"SVC:Hey people! I've been using Aquaz and thought you might like it. It's an easy way to track your water intake." = "Всем привет! Я использую Aquaz и думаю, вам он может понравиться. Приложение поможет отслеживать потребление воды.";
 
 /* SupportViewController: Body of tell-to-friend e-mail */
-"SVC:Hey there!<br><br>I've been using Aquaz and thought you might like it. It's an easy way to track your water intakes." = "Привет!<br><br>Я использую Aquaz и думаю, тебе он может понравиться. Приложение поможет отслеживать потребление воды.";
+"SVC:Hey there!<br><br>I've been using Aquaz and thought you might like it. It's an easy way to track your water intake." = "Привет!<br><br>Я использую Aquaz и думаю, тебе он может понравиться. Приложение поможет отслеживать потребление воды.";
 
 /* SupportViewController: Subject of tell-to-friend e-mail */
 "SVC:I suggest you to try Aquaz" = "Я предлагаю тебе попробовать Aquaz";
@@ -294,7 +294,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "SVC:Special Modes" = "Специальные Режимы";
 
 /* StatisticsViewController: Text for banner shown to promote the full version of Aquaz */
-"SVC:Statistics is available in the full version only." = "Статистика доступна только в Полной версии.";
+"SVC:Statistics are available in the full version only." = "Статистика доступна только в Полной версии.";
 
 /* SettingsViewController: Table cell title for [Support] settings block */
 "SVC:Support" = "Поддержка";
@@ -387,7 +387,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "WSVC:Swipe left or right to switch week" = "Листайте влево или вправо для смены недели";
 
 /* WeekStatisticsViewController: Text for help tip about tapping a day button for details */
-"WSVC:Tap a day button to see details" = "Нажмите на кнопку дня, чтобы посмотреть подробности";
+"WSVC:Tap a day to see details" = "Нажмите на день, чтобы посмотреть подробности";
 
 /* YearStatisticsViewController: Text for help tip about switching current year by swipe gesture */
 "YSVC:Swipe left or right to switch year" = "Листайте влево или вправо для смены года";

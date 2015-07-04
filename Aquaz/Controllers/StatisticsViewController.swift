@@ -23,8 +23,8 @@ class StatisticsViewController: UIViewController {
 
   private struct LocalizedStrings {
     
-    lazy var fullVersionBannerText = NSLocalizedString("SVC:Statistics is available in the full version only.",
-      value: "Statistics is available in the full version only.",
+    lazy var fullVersionBannerText = NSLocalizedString("SVC:Statistics are available in the full version only.",
+      value: "Statistics are available in the full version only.",
       comment: "StatisticsViewController: Text for banner shown to promote the full version of Aquaz")
     
   }
