@@ -102,10 +102,10 @@ func -=(inout left: Quantity, right: Quantity) {
   left.amount = amount - left.amount
 }
 
-private let milliliterUnitContraction = NSLocalizedString("U:ml",    value: "ml",    comment: "Units: contraction for milliliters")
+private let milliliterUnitContraction = NSLocalizedString("U:mL",    value: "mL",    comment: "Units: contraction for milliliters")
 private let fluidOunceUnitContraction = NSLocalizedString("U:fl oz", value: "fl oz", comment: "Units: contraction for fluid ounces")
 private let kilogramUnitContraction   = NSLocalizedString("U:kg",    value: "kg",    comment: "Units: contraction for kilogrames")
-private let poundUnitContraction      = NSLocalizedString("U:lbs",   value: "lbs",   comment: "Units: contraction for pounds")
+private let poundUnitContraction      = NSLocalizedString("U:lb",    value: "lb",    comment: "Units: contraction for pounds")
 private let centimiterUnitContraction = NSLocalizedString("U:cm",    value: "cm",    comment: "Units: contraction for centimeters")
 private let footUnitContraction       = NSLocalizedString("U:ft",    value: "ft",    comment: "Units: contraction for feet")
 

@@ -315,16 +315,16 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "U:fl oz" = "унц";
 
 /* Units: contraction for feet */
-"U:ft" = "фт";
+"U:ft" = "фут";
 
 /* Units: contraction for kilogrames */
 "U:kg" = "кг";
 
 /* Units: contraction for pounds */
-"U:lbs" = "фнт";
+"U:lb" = "фнт";
 
 /* Units: contraction for milliliters */
-"U:ml" = "мл";
+"U:mL" = "мл";
 
 /* UnitsViewController: Table cell title for [Height] setting */
 "UVC:Height" = "Высота";
