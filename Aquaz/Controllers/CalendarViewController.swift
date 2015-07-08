@@ -58,7 +58,7 @@ class CalendarViewController: UIViewController {
   }
   
   func preferredContentSizeChanged() {
-    currentMonthLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    currentMonthLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     calendarView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     calendarView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     calendarView.refresh()

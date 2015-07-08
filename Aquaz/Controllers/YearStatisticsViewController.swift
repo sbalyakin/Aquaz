@@ -118,8 +118,8 @@ class YearStatisticsViewController: UIViewController {
   }
 
   func preferredContentSizeChanged() {
+    yearLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     yearStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    yearLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     view.invalidateIntrinsicContentSize()
   }
   

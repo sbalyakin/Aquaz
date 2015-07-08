@@ -90,7 +90,7 @@ class MonthStatisticsViewController: UIViewController {
   }
   
   func preferredContentSizeChanged() {
-    monthLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    monthLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     monthStatisticsView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     monthStatisticsView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     monthStatisticsView.refresh()

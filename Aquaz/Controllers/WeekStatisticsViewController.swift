@@ -137,7 +137,7 @@ class WeekStatisticsViewController: UIViewController {
   }
 
   func preferredContentSizeChanged() {
-    datePeriodLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    datePeriodLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     weekStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     weekStatisticsView.daysFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     view.invalidateIntrinsicContentSize()
