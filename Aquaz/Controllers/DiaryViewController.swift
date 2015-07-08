@@ -23,15 +23,14 @@ class DiaryViewController: UIViewController {
   private struct Constants {
     static let diaryCellIdentifier = "DiaryTableViewCell"
     static let editIntakeSegue = "Edit Intake"
+    static let fetchedResultsControllerCacheName = "diary"
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     applyStyle()
     
-    initFetchedResultsController { [weak self] _ in
-      self?.tableView?.reloadData()
-    }
+    initFetchedResultsController()
     
     volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [weak self] _ in
       self?.tableView?.reloadData()
@@ -51,6 +50,11 @@ class DiaryViewController: UIViewController {
       tableView.deselectRowAtIndexPath(selectedIndexPath, animated: false)
     }
   }
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    checkHelpTip()
+  }
 
   private func applyStyle() {
     UIHelper.applyStyle(self)
@@ -63,24 +67,19 @@ class DiaryViewController: UIViewController {
       return
     }
     
-    initFetchedResultsController {
-      self.tableView?.reloadData()
-    }
+    updateFetchedResultsController()
   }
   
-  private func initFetchedResultsController(#completion: (() -> ())?) {
+  private func initFetchedResultsController() {
     managedObjectContext.performBlock {
-      let beginDate = DateHelper.dateByClearingTime(ofDate: self.date)
-      let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
+      let fetchRequest = self.getFetchRequestForDate(self.date)
       
-      let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
-      let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+      self.fetchedResultsController = NSFetchedResultsController(
+        fetchRequest: fetchRequest,
+        managedObjectContext: self.managedObjectContext,
+        sectionNameKeyPath: nil,
+        cacheName: Constants.fetchedResultsControllerCacheName)
       
-      let fetchRequest = NSFetchRequest(entityName: Intake.entityName)
-      fetchRequest.sortDescriptors = [sortDescriptor]
-      fetchRequest.predicate = predicate
-      
-      self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
       self.fetchedResultsController!.delegate = self
       
       var error: NSError?
@@ -88,10 +87,44 @@ class DiaryViewController: UIViewController {
         Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
       }
       
-      if let completion = completion {
-        dispatch_async(dispatch_get_main_queue()) {
-          completion()
-        }
+      dispatch_async(dispatch_get_main_queue()) {
+        self.tableView?.reloadData()
+      }
+    }
+  }
+
+  private func getFetchRequestForDate(date: NSDate) -> NSFetchRequest {
+    let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+    
+    let fetchRequest = NSFetchRequest(entityName: Intake.entityName)
+    fetchRequest.sortDescriptors = [sortDescriptor]
+    fetchRequest.predicate = getFetchRequestPredicateForDate(date)
+    fetchRequest.fetchBatchSize = 15 // it's maximum number of visible rows in diary
+    
+    return fetchRequest
+  }
+  
+  private func getFetchRequestPredicateForDate(date: NSDate) -> NSPredicate {
+    let beginDate = DateHelper.dateByClearingTime(ofDate: date)
+    let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
+    
+    return NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
+  }
+  
+  private func updateFetchedResultsController() {
+    managedObjectContext.performBlock {
+      NSFetchedResultsController.deleteCacheWithName(Constants.fetchedResultsControllerCacheName)
+      
+      let predicate = self.getFetchRequestPredicateForDate(self.date)
+      self.fetchedResultsController?.fetchRequest.predicate = predicate
+      
+      var error: NSError?
+      if !self.fetchedResultsController!.performFetch(&error) {
+        Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
+      }
+      
+      dispatch_async(dispatch_get_main_queue()) {
+        self.tableView?.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
       }
     }
   }
@@ -133,18 +166,19 @@ extension DiaryViewController: UITableViewDataSource {
     
     if let intake = fetchedResultsController?.objectAtIndexPath(indexPath) as? Intake {
       cell.intake = intake
-      checkHelpTip(indexPath: indexPath, cell: cell)
     }
     
     return cell
   }
   
-  private func checkHelpTip(#indexPath: NSIndexPath, cell: DiaryTableViewCell) {
-    if Settings.uiDiaryPageHelpTipIsShown.value || indexPath.row != 0 || view.window == nil {
+  private func checkHelpTip() {
+    if Settings.uiDiaryPageHelpTipIsShown.value || view.window == nil {
       return
     }
-    
-    showHelpTipForCell(cell)
+
+    if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as? DiaryTableViewCell {
+      showHelpTipForCell(cell)
+    }
   }
   
   private func showHelpTipForCell(cell: DiaryTableViewCell) {
@@ -233,7 +267,7 @@ extension DiaryViewController: NSFetchedResultsControllerDelegate {
   
   func controllerDidChangeContent(controller: NSFetchedResultsController) {
     dispatch_async(dispatch_get_main_queue()) {
-      self.tableView.endUpdates()
+      self.tableView?.endUpdates()
     }
   }
 }
