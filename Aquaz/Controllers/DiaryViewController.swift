@@ -23,7 +23,6 @@ class DiaryViewController: UIViewController {
   private struct Constants {
     static let diaryCellIdentifier = "DiaryTableViewCell"
     static let editIntakeSegue = "Edit Intake"
-    static let fetchedResultsControllerCacheName = "diary"
   }
   
   override func viewDidLoad() {
@@ -69,8 +68,20 @@ class DiaryViewController: UIViewController {
     
     updateFetchedResultsController()
   }
-  
+
   private func initFetchedResultsController() {
+    createFetchedResultsController {
+      self.tableView?.reloadData()
+    }
+  }
+
+  private func updateFetchedResultsController() {
+    createFetchedResultsController {
+      self.tableView?.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
+    }
+  }
+
+  private func createFetchedResultsController(completion: () -> ()) {
     managedObjectContext.performBlock {
       let fetchRequest = self.getFetchRequestForDate(self.date)
       
@@ -78,7 +89,7 @@ class DiaryViewController: UIViewController {
         fetchRequest: fetchRequest,
         managedObjectContext: self.managedObjectContext,
         sectionNameKeyPath: nil,
-        cacheName: Constants.fetchedResultsControllerCacheName)
+        cacheName: nil)
       
       self.fetchedResultsController!.delegate = self
       
@@ -88,7 +99,7 @@ class DiaryViewController: UIViewController {
       }
       
       dispatch_async(dispatch_get_main_queue()) {
-        self.tableView?.reloadData()
+        completion()
       }
     }
   }
@@ -111,24 +122,6 @@ class DiaryViewController: UIViewController {
     return NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
   }
   
-  private func updateFetchedResultsController() {
-    managedObjectContext.performBlock {
-      NSFetchedResultsController.deleteCacheWithName(Constants.fetchedResultsControllerCacheName)
-      
-      let predicate = self.getFetchRequestPredicateForDate(self.date)
-      self.fetchedResultsController?.fetchRequest.predicate = predicate
-      
-      var error: NSError?
-      if !self.fetchedResultsController!.performFetch(&error) {
-        Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
-      }
-      
-      dispatch_async(dispatch_get_main_queue()) {
-        self.tableView?.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
-      }
-    }
-  }
-
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == Constants.editIntakeSegue,
       let intakeViewController = segue.destinationViewController.contentViewController as? IntakeViewController,
