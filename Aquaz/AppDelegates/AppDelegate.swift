@@ -71,8 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     wormhole.listenForMessageWithIdentifier(GlobalConstants.wormholeMessageFromWidget) { [weak self] messageObject in
       if let notification = messageObject as? NSNotification {
-        CoreDataStack.mainContext.mergeChangesFromContextDidSaveNotification(notification)
-        CoreDataStack.privateContext.mergeChangesFromContextDidSaveNotification(notification)
+        CoreDataStack.mergeAllContextsWithNotification(notification)
         
         NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationManagedObjectContextWasMerged, object: nil)
         

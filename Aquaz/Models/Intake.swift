@@ -40,16 +40,19 @@ public class Intake: CodingManagedObject, NamedEntity {
 
   /// Adds a new intake's entity into Core Data
   public class func addEntity(#drink: Drink, amount: Double, date: NSDate, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Intake? {
-    let intake = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext)!
-    intake.amount = amount
-    intake.drink = drink
-    intake.date = date
+    if let intake = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext) {
+      intake.amount = amount
+      intake.drink = drink
+      intake.date = date
 
-    if saveImmediately {
-      CoreDataStack.saveContext(managedObjectContext)
+      if saveImmediately {
+        CoreDataStack.saveContext(managedObjectContext)
+      }
+
+      return intake
     }
-
-    return intake
+    
+    return nil
   }
 
   /// Deletes the intake from Core Data

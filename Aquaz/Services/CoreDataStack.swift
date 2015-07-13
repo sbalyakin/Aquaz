@@ -88,6 +88,16 @@ class CoreDataStack: NSObject {
     }
   }
   
+  func mergeAllContextsWithNotification(notification: NSNotification) {
+    if mainContextIsInitialized {
+      mainContext.mergeChangesFromContextDidSaveNotification(notification)
+    }
+    
+    if privateContextIsInitialized {
+      privateContext.mergeChangesFromContextDidSaveNotification(notification)
+    }
+  }
+  
   private var mainContextIsInitialized = false
   private var privateContextIsInitialized = false
   
@@ -118,6 +128,10 @@ class CoreDataStack: NSObject {
   
   class func saveAllContexts() {
     sharedInstance.saveAllContexts()
+  }
+  
+  class func mergeAllContextsWithNotification(notification: NSNotification) {
+    sharedInstance.mergeAllContextsWithNotification(notification)
   }
   
   // MARK: - Convenient accessors to the shared instance's stuff

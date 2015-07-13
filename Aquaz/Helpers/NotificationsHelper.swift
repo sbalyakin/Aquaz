@@ -81,7 +81,7 @@ class NotificationsHelper {
     let toDate = DateHelper.dateByJoiningDateTime(datePart: intakeDate, timePart: toTime)
     let interval = Settings.notificationsInterval.value
     
-    for var fireDate = intakeDate; !fireDate.isLaterThan(toDate); fireDate = fireDate.dateByAddingTimeInterval(interval) {
+    for var fireDate = intakeDate.dateByAddingTimeInterval(interval); !fireDate.isLaterThan(toDate); fireDate = fireDate.dateByAddingTimeInterval(interval) {
       scheduleNotification(fireDate: fireDate, repeatInterval: nil)
     }
   }
