@@ -840,6 +840,7 @@
 			buildConfigurationList = 84D251A41AD2511E001E6644 /* Build configuration list for PBXNativeTarget "Widget" */;
 			buildPhases = (
 				84D251901AD2511E001E6644 /* Sources */,
+				848C39FB1B53EFF00038E522 /* ShellScript */,
 				84D251911AD2511E001E6644 /* Frameworks */,
 				84D251921AD2511E001E6644 /* Resources */,
 				8443DF271B29658100FDD294 /* ShellScript */,
@@ -973,6 +974,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 05704a14be9c8590ae8ea81e57283c4e84ca67f3 55072d54e985e08a6262ca78f74607f2a5a5f546c18fb4b4623ed469a350539e";
+		};
+		848C39FB1B53EFF00038E522 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "# Increase build number\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\necho \"### Build number has been bumped to $buildNumber.\"";
 		};
 		A571D50D1AB180B1006265C7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1459,7 +1473,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Widget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1486,7 +1500,7 @@
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Widget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
