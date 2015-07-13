@@ -13,33 +13,20 @@ import UIKit
 @objc(Drink)
 public class Drink: CodingManagedObject, NamedEntity {
 
-  public static var entityName = "Drink"
-
-  @NSManaged public var index: NSNumber
-  @NSManaged public var name: String
-  @NSManaged public var hydrationFactor: Double
-  @NSManaged public var dehydrationFactor: Double
-  @NSManaged public var intakes: NSSet
-  @NSManaged public var recentAmount: RecentAmount
-
-  private struct LocalizedStrings {
-    static let waterTitle        = NSLocalizedString("D:Water",         value: "Water",         comment: "Drink: Title for water")
-    static let coffeeTitle       = NSLocalizedString("D:Coffee",        value: "Coffee",        comment: "Drink: Title for coffee")
-    static let teaTitle          = NSLocalizedString("D:Tea",           value: "Tea",           comment: "Drink: Title for tea")
-    static let sodaTitle         = NSLocalizedString("D:Soda",          value: "Soda",          comment: "Drink: Title for soda")
-    static let juiceTitle        = NSLocalizedString("D:Juice",         value: "Juice",         comment: "Drink: Title for juice")
-    static let milkTitle         = NSLocalizedString("D:Milk",          value: "Milk",          comment: "Drink: Title for milk")
-    static let sportTitle        = NSLocalizedString("D:Sport",         value: "Sport",         comment: "Drink: Title for sport drink")
-    static let energyTitle       = NSLocalizedString("D:Energy",        value: "Energy",        comment: "Drink: Title for energetic drink")
-    static let beerTitle         = NSLocalizedString("D:Beer",          value: "Beer",          comment: "Drink: Title for beer")
-    static let wineTitle         = NSLocalizedString("D:Wine",          value: "Wine",          comment: "Drink: Title for wine")
-    static let hardLiquorTitle   = NSLocalizedString("D:Hard Liquor",   value: "Hard Liquor",   comment: "Drink: Title for hard liquor")
-  }
+  // MARK: Types
   
-  private struct Static {
-    static let darkColorShadowLevel: CGFloat = 0.2
-    // Use the cache to store previously used drink objects
-    static var cachedDrinks = [Int: [Int: Drink]]()
+  private struct LocalizedStrings {
+    static let waterTitle      = NSLocalizedString("D:Water",       value: "Water",       comment: "Drink: Title for water")
+    static let coffeeTitle     = NSLocalizedString("D:Coffee",      value: "Coffee",      comment: "Drink: Title for coffee")
+    static let teaTitle        = NSLocalizedString("D:Tea",         value: "Tea",         comment: "Drink: Title for tea")
+    static let sodaTitle       = NSLocalizedString("D:Soda",        value: "Soda",        comment: "Drink: Title for soda")
+    static let juiceTitle      = NSLocalizedString("D:Juice",       value: "Juice",       comment: "Drink: Title for juice")
+    static let milkTitle       = NSLocalizedString("D:Milk",        value: "Milk",        comment: "Drink: Title for milk")
+    static let sportTitle      = NSLocalizedString("D:Sport",       value: "Sport",       comment: "Drink: Title for sport drink")
+    static let energyTitle     = NSLocalizedString("D:Energy",      value: "Energy",      comment: "Drink: Title for energetic drink")
+    static let beerTitle       = NSLocalizedString("D:Beer",        value: "Beer",        comment: "Drink: Title for beer")
+    static let wineTitle       = NSLocalizedString("D:Wine",        value: "Wine",        comment: "Drink: Title for wine")
+    static let hardLiquorTitle = NSLocalizedString("D:Hard Liquor", value: "Hard Liquor", comment: "Drink: Title for hard liquor")
   }
   
   // Important! Order of this enum must NOT be changed in further versions. New drinks must be added to the end.
@@ -60,180 +47,166 @@ public class Drink: CodingManagedObject, NamedEntity {
     static var count: Int {
       return HardLiquor.rawValue + 1
     }
+    
+    var localizedName: String {
+      switch self {
+      case Water:      return LocalizedStrings.waterTitle
+      case Coffee:     return LocalizedStrings.coffeeTitle
+      case Tea:        return LocalizedStrings.teaTitle
+      case Soda:       return LocalizedStrings.sodaTitle
+      case Juice:      return LocalizedStrings.juiceTitle
+      case Milk:       return LocalizedStrings.milkTitle
+      case Sport:      return LocalizedStrings.sportTitle
+      case Energy:     return LocalizedStrings.energyTitle
+      case Beer:       return LocalizedStrings.beerTitle
+      case Wine:       return LocalizedStrings.waterTitle
+      case HardLiquor: return LocalizedStrings.hardLiquorTitle
+      }
+    }
+    
+    var mainColor: UIColor {
+      switch self {
+      case Water:      return StyleKit.waterColor
+      case Coffee:     return StyleKit.coffeeColor
+      case Tea:        return StyleKit.teaColor
+      case Soda:       return StyleKit.sodaColor
+      case Juice:      return StyleKit.juiceColor
+      case Milk:       return StyleKit.milkColor
+      case Sport:      return StyleKit.sportColor
+      case Energy:     return StyleKit.energyColor
+      case Beer:       return StyleKit.beerColor
+      case Wine:       return StyleKit.wineColor
+      case HardLiquor: return StyleKit.hardLiquorColor
+      }
+    }
+    
+    var darkColor: UIColor {
+      return StyleKit.getDarkDrinkColor(fromMainColor: mainColor)
+    }
+    
+    var drawFunction: DrawDrinkFunction {
+      switch self {
+      case Water:      return StyleKit.drawWaterDrink
+      case Coffee:     return StyleKit.drawCoffeeDrink
+      case Tea:        return StyleKit.drawTeaDrink
+      case Soda:       return StyleKit.drawSodaDrink
+      case Juice:      return StyleKit.drawJuiceDrink
+      case Milk:       return StyleKit.drawMilkDrink
+      case Sport:      return StyleKit.drawSportDrink
+      case Energy:     return StyleKit.drawEnergyDrink
+      case Beer:       return StyleKit.drawBeerDrink
+      case Wine:       return StyleKit.drawWineDrink
+      case HardLiquor: return StyleKit.drawHardLiquorDrink
+      }
+    }
   }
+
+  public typealias DrawDrinkFunction = (frame: CGRect) -> Void
+  
+  
+  // MARK: Properties
+  
+  public static var entityName = "Drink"
+  
+  @NSManaged public var index: NSNumber
+  @NSManaged public var name: String
+  @NSManaged public var hydrationFactor: Double
+  @NSManaged public var dehydrationFactor: Double
+  @NSManaged public var intakes: NSSet
+  @NSManaged public var recentAmount: RecentAmount
+  
 
   public var drinkType: DrinkType {
     if _drinkType == nil {
-      initIndexRelatedProperties()
-      assert(_drinkType != nil)
+      initDrinkType()
     }
     return _drinkType
   }
 
+  private var _drinkType: DrinkType!
+
   public var localizedName: String {
-    if _localizedName == nil {
-      initIndexRelatedProperties()
-      assert(_localizedName != nil)
-    }
-    return _localizedName
+    return drinkType.localizedName
   }
   
   public var mainColor: UIColor {
-    if _mainColor == nil {
-      initIndexRelatedProperties()
-      assert(_mainColor != nil)
-    }
-    return _mainColor
+    return drinkType.mainColor
   }
 
   public var darkColor: UIColor {
-    if _darkColor == nil {
-      initIndexRelatedProperties()
-      assert(_darkColor != nil)
-    }
-    return _darkColor
+    return drinkType.darkColor
   }
   
   public var drawDrinkFunction: DrawDrinkFunction {
-    if _drawDrinkFunction == nil {
-      initIndexRelatedProperties()
-      assert(_drawDrinkFunction != nil)
-    }
-    return _drawDrinkFunction
+    return drinkType.drawFunction
   }
 
+  
+  // MARK: Methods
+  
   override public func didChangeValueForKey(key: String) {
     super.didChangeValueForKey(key)
     if key == "index" {
-      clearCachedProperties()
+      _drinkType = nil
     }
   }
 
-  private func clearCachedProperties() {
-    _drinkType = nil
-    _drawDrinkFunction = nil
-    _localizedName = nil
-    _mainColor = nil
-    _darkColor = nil
-  }
-  
-  private func initIndexRelatedProperties() {
-    if let drinkTypeRaw = DrinkType(rawValue: index.integerValue) {
-      _drinkType = drinkTypeRaw
+  private func initDrinkType() {
+    if let drinkType = DrinkType(rawValue: index.integerValue) {
+      _drinkType = drinkType
     } else {
+      _drinkType = .Water // Just for exclude uncertainty
       Logger.logDrinkIsNotFound(drinkIndex: index.integerValue)
     }
-    
-    switch drinkType {
-    case .Water:
-      _localizedName = LocalizedStrings.waterTitle
-      _drawDrinkFunction = StyleKit.drawWaterDrink
-      _mainColor = StyleKit.waterColor
-      
-    case .Coffee:
-      _localizedName = LocalizedStrings.coffeeTitle
-      _drawDrinkFunction = StyleKit.drawCoffeeDrink
-      _mainColor = StyleKit.coffeeColor
-      
-    case .Tea:
-      _localizedName = LocalizedStrings.teaTitle
-      _drawDrinkFunction = StyleKit.drawTeaDrink
-      _mainColor = StyleKit.teaColor
-      
-    case .Soda:
-      _localizedName = LocalizedStrings.sodaTitle
-      _drawDrinkFunction = StyleKit.drawSodaDrink
-      _mainColor = StyleKit.sodaColor
-      
-    case .Juice:
-      _localizedName = LocalizedStrings.juiceTitle
-      _drawDrinkFunction = StyleKit.drawJuiceDrink
-      _mainColor = StyleKit.juiceColor
-      
-    case .Milk:
-      _localizedName = LocalizedStrings.milkTitle
-      _drawDrinkFunction = StyleKit.drawMilkDrink
-      _mainColor = StyleKit.milkColor
-      
-    case .Sport:
-      _localizedName = LocalizedStrings.sportTitle
-      _drawDrinkFunction = StyleKit.drawSportDrink
-      _mainColor = StyleKit.sportColor
-      
-    case .Energy:
-      _localizedName = LocalizedStrings.energyTitle
-      _drawDrinkFunction = StyleKit.drawEnergyDrink
-      _mainColor = StyleKit.energyColor
-
-    case .Beer:
-      _localizedName = LocalizedStrings.beerTitle
-      _drawDrinkFunction = StyleKit.drawBeerDrink
-      _mainColor = StyleKit.beerColor
-      
-    case .Wine:
-      _localizedName = LocalizedStrings.wineTitle
-      _drawDrinkFunction = StyleKit.drawWineDrink
-      _mainColor = StyleKit.wineColor
-      
-    case .HardLiquor:
-      _localizedName = LocalizedStrings.hardLiquorTitle
-      _drawDrinkFunction = StyleKit.drawHardLiquorDrink
-      _mainColor = StyleKit.hardLiquorColor
-    }
-    
-    _darkColor = Drink.getDarkColorFromDrinkColor(_mainColor)
-  }
-  
-  class func getDarkColorFromDrinkColor(color: UIColor) -> UIColor {
-    return color.colorWithShadow(Static.darkColorShadowLevel)
   }
   
   public func drawDrink(#frame: CGRect) {
     drawDrinkFunction(frame: frame)
   }
 
-  public class func cacheAllDrinks(managedObjectContext: NSManagedObjectContext) {
-    if Static.cachedDrinks.indexForKey(managedObjectContext.hash) != nil {
-      return
-    }
-    
-    let sortDescriptor = NSSortDescriptor(key: "index", ascending: true)
-    let drinks: [Drink] = CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor], fetchLimit: nil)
-
-    var cache = [Int: Drink]()
-    for drink in drinks {
-      cache[drink.index.integerValue] = drink
-    }
-    
-    Static.cachedDrinks[managedObjectContext.hash] = cache
-  }
-  
   public class func getDrinksCount() -> Int {
     return DrinkType.count
   }
   
-  public class func getDrinkByType(drinkType: Drink.DrinkType, managedObjectContext: NSManagedObjectContext) -> Drink? {
-    return getDrinkByIndex(drinkType.rawValue, managedObjectContext: managedObjectContext)
+  public class func fetchDrinkByType(drinkType: Drink.DrinkType, managedObjectContext: NSManagedObjectContext) -> Drink? {
+    return fetchDrinkByIndex(drinkType.rawValue, managedObjectContext: managedObjectContext)
   }
   
-  public class func getDrinkByIndex(index: Int, managedObjectContext: NSManagedObjectContext) -> Drink? {
-    if let cache = Static.cachedDrinks[managedObjectContext.hash] {
-      // Get the drink from cache
-      let drink = cache[index]
-      if drink == nil {
-        Logger.logDrinkIsNotFound(drinkIndex: index)
-      }
+  public class func fetchDrinkByIndex(index: Int, managedObjectContext: NSManagedObjectContext) -> Drink? {
+    let predicate = NSPredicate(format: "%K = %@", argumentArray: ["index", index])
+    if let drink: Drink = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate) {
       return drink
     } else {
-      // Fetch the drink from Core Data
-      let predicate = NSPredicate(format: "%K = %@", argumentArray: ["index", index])
-      if let drink: Drink = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate) {
-        return drink
+      Logger.logDrinkIsNotFound(drinkIndex: index)
+      return nil
+    }
+  }
+
+  public class func fetchAllDrinksIndexed(#managedObjectContext: NSManagedObjectContext) -> [Int: Drink] {
+    let drinks: [Drink] = CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: nil, fetchLimit: nil)
+    
+    var drinksMap = [Int: Drink]()
+    for drink in drinks {
+      drinksMap[drink.index.integerValue] = drink
+    }
+    
+    return drinksMap
+  }
+
+  public class func fetchAllDrinksTyped(#managedObjectContext: NSManagedObjectContext) -> [DrinkType: Drink] {
+    let drinksIndexed = fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
+
+    var drinksMap = [DrinkType: Drink]()
+
+    for (index, drink) in drinksIndexed {
+      if let drinkType = DrinkType(rawValue: index) {
+        drinksMap[drinkType] = drink
       } else {
-        Logger.logDrinkIsNotFound(drinkIndex: index)
-        return nil
+        assert(false, "Drink type with index (\(index)) is not found.")
       }
     }
+    
+    return drinksMap
   }
   
   class func addEntity(#index: Int, name: String, hydrationFactor: Double, dehydrationFactor: Double, recentAmount amount: Double, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Drink {
@@ -253,13 +226,5 @@ public class Drink: CodingManagedObject, NamedEntity {
     
     return drink
   }
-  
-  public typealias DrawDrinkFunction = (frame: CGRect) -> Void
-  
-  private var _drinkType: DrinkType!
-  private var _drawDrinkFunction: DrawDrinkFunction!
-  private var _localizedName: String!
-  private var _mainColor: UIColor!
-  private var _darkColor: UIColor!
 
 }

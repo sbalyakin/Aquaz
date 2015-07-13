@@ -300,9 +300,11 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     intakesMultiProgressView.emptySectionColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1)
     
     for drinkIndex in 0..<Drink.getDrinksCount() {
-      if let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: managedObjectContext) {
-        let section = intakesMultiProgressView.addSection(color: drink.mainColor)
-        multiProgressSections[drink] = section
+      if let drinkType = Drink.DrinkType(rawValue: drinkIndex) {
+        let section = intakesMultiProgressView.addSection(color: drinkType.mainColor)
+        multiProgressSections[drinkIndex] = section
+      } else {
+        Logger.logError("Drink type with index(\(drinkIndex)) is not found.")
       }
     }
   }
@@ -489,7 +491,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     var totalHydrationAmount: Double = 0
     for (drink, hydrationAmount) in intakeHydrationAmounts {
       totalHydrationAmount += hydrationAmount
-      if let section = multiProgressSections[drink] {
+      if let section = multiProgressSections[drink.index.integerValue] {
         section.factor = CGFloat(hydrationAmount)
       }
     }
@@ -983,7 +985,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     }
   }
   
-  private var multiProgressSections: [Drink: MultiProgressView.Section] = [:]
+  private var multiProgressSections: [Int: MultiProgressView.Section] = [:]
   
   private var pages: [UIViewController] = []
   private weak var pageViewController: UIPageViewController!

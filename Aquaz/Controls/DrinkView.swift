@@ -12,7 +12,7 @@ import UIKit
 @objc(DrinkView)
 class DrinkView: UIView {
 
-  var drink: Drink! {
+  var drinkType: Drink.DrinkType! {
     didSet {
       setNeedsDisplay()
     }
@@ -34,8 +34,8 @@ class DrinkView: UIView {
     #if TARGET_INTERFACE_BUILDER
       drawDrink(rect, drawFunction: StyleKit.drawWaterDrink, drinkColor: StyleKit.waterColor)
     #else
-      if drink != nil {
-        drawDrink(rect, drawFunction: drink.drawDrinkFunction, drinkColor: drink.mainColor)
+      if drinkType != nil {
+        drawDrink(rect, drawFunction: drinkType.drawFunction, drinkColor: drinkType.mainColor)
       }
     #endif
   }

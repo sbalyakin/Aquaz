@@ -148,13 +148,14 @@ public class CoreDataPrePopulation {
     let maxAmount = 500
     let maxIntakesPerDay = 10
     
-    Drink.cacheAllDrinks(managedObjectContext)
+    let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
     
     for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = currentDay.getNextDay() {
       let intakesCount = random() % maxIntakesPerDay
       for i in 0..<intakesCount {
         let drinkIndex = random() % Drink.getDrinksCount()
-        if let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: managedObjectContext) {
+        
+        if let drink = drinks[drinkIndex] {
           let amount = Double(minAmount + random() % (maxAmount - minAmount))
           let timeInterval = NSTimeInterval(random() % secondsPerDay)
           let intakeDate = NSDate(timeInterval: timeInterval, sinceDate: currentDay)

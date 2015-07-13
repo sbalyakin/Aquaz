@@ -13,11 +13,6 @@ import Aquaz
 
 class IntakeTests: XCTestCase {
 
-  override func setUp() {
-    super.setUp()
-    Drink.cacheAllDrinks(managedObjectContext)
-  }
-  
   func testAddEntity() {
     deleteAllIntakes()
 
@@ -95,7 +90,7 @@ class IntakeTests: XCTestCase {
       for i in 0..<intakesPerDay {
         let amount = getRandomInRange(amountOfIntakeRange)
         let drinkIndex = random() % Drink.getDrinksCount()
-        let drink = Drink.getDrinkByIndex(drinkIndex, managedObjectContext: managedObjectContext)!
+        let drink = Drink.fetchDrinkByIndex(drinkIndex, managedObjectContext: managedObjectContext)!
         let intakeDate = DateHelper.dateBySettingHour(0, minute: 0, second: i, ofDate: date)
         
         let intake = Intake.addEntity(drink: drink, amount: Double(amount), date: intakeDate, managedObjectContext: managedObjectContext, saveImmediately: true)!
@@ -301,7 +296,7 @@ class IntakeTests: XCTestCase {
   }
 
   private func addIntake(textDate: String, _ drinkType: Drink.DrinkType, _ amount: Double, inout _ waterBalance: Double) -> Intake {
-    let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext)!
+    let drink = Drink.fetchDrinkByType(drinkType, managedObjectContext: managedObjectContext)!
     let date = dateFromString(textDate)
     let intake = Intake.addEntity(drink: drink, amount: amount, date: date, managedObjectContext: managedObjectContext, saveImmediately: true)!
     
@@ -339,7 +334,7 @@ class IntakeTests: XCTestCase {
     
     var generatedIntakes: [Intake] = []
 
-    if let drink = Drink.getDrinkByType(.Water, managedObjectContext: managedObjectContext) {
+    if let drink = Drink.fetchDrinkByType(.Water, managedObjectContext: managedObjectContext) {
       // Generate intakes
       let timeIntervalDelta = endTimeInterval / NSTimeInterval(intakeCount)
       for i in 0..<intakeCount {

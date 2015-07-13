@@ -14,7 +14,7 @@ import UIKit
 
 public class StyleKit : NSObject {
   
-  //// Cache
+  // MARK: Cache
   
   private struct Cache {
     static var drinksWhiteColor: UIColor = UIColor.whiteColor()
@@ -65,7 +65,7 @@ public class StyleKit : NSObject {
     static var helpTipsColor = UIColor(red: 0.751, green: 0.916, blue: 0.954, alpha: 1.000)
   }
   
-  //// Colors
+  // MARK: Colors
   
   public class var drinksWhiteColor: UIColor { return Cache.drinksWhiteColor }
   
@@ -114,8 +114,13 @@ public class StyleKit : NSObject {
 
   public class var helpTipsColor: UIColor { return Cache.helpTipsColor }
 
+  // MARK: Helper Methods
   
-  //// Drawing Methods
+  public class func getDarkDrinkColor(fromMainColor color: UIColor) -> UIColor {
+    return color.colorWithShadow(0.2)
+  }
+  
+  // MARK: Drawing Methods
   
   public class func drawWaterDrink(#frame: CGRect) {
     

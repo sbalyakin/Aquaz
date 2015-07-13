@@ -46,12 +46,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     if Settings.generalHasLaunchedOnce.value == false {
       prePopulateCoreData()
-      initDrinks()
       adjustNotifications()
       showWelcomeWizard()
       Settings.generalHasLaunchedOnce.value = true
     } else {
-      initDrinks()
       if let options = launchOptions {
         if let notification = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
           showDayViewControllerForToday()
@@ -60,10 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     return true
-  }
-  
-  private func initDrinks() {
-    Drink.cacheAllDrinks(CoreDataStack.privateContext)
   }
   
   private func setupCoreDataSynchronization() {

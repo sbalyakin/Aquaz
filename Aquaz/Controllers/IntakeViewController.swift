@@ -168,7 +168,7 @@ class IntakeViewController: UIViewController {
   }
   
   private func setupDrinkView() {
-    drinkView.drink = drink
+    drinkView.drinkType = drink.drinkType
   }
   
   private func setupSlider() {

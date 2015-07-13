@@ -27,6 +27,12 @@ class SelectDrinkViewController: UIViewController {
     .Milk,  .Juice,  .Sport,
     .Soda,  .Energy, Settings.uiSelectedAlcoholicDrink.value]
   
+  private var drinks: [Drink.DrinkType: Drink] = [:]
+  
+  private var areDrinksLoaded: Bool {
+    return !drinks.isEmpty
+  }
+  
   private struct Constants {
     static let addIntakeSegue = "Add Intake"
   }
@@ -34,28 +40,31 @@ class SelectDrinkViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    UIHelper.applyStyle(self)
-
-    let nib = UINib(nibName: drinkCellNibName, bundle: nil)
-    collectionView.registerNib(nib, forCellWithReuseIdentifier: drinkCellReuseIdentifier)
-
-    rowsCount = Int(ceil(Float(displayedDrinkTypes.count) / Float(columnsCount)))
+    loadDrinks()
+    setupUI()
     setupGestureRecognizers()
-    
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "preferredContentSizeChanged",
-      name: UIContentSizeCategoryDidChangeNotification,
-      object: nil)
+    setupNotificationsObservation()
   }
   
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }
-  
-  func preferredContentSizeChanged() {
-    collectionView.reloadData()
-  }
 
+  private func loadDrinks() {
+    managedObjectContext.performBlock {
+      self.drinks = Drink.fetchAllDrinksTyped(managedObjectContext: self.managedObjectContext)
+    }
+  }
+  
+  private func setupUI() {
+    UIHelper.applyStyle(self)
+    
+    let nib = UINib(nibName: drinkCellNibName, bundle: nil)
+    collectionView.registerNib(nib, forCellWithReuseIdentifier: drinkCellReuseIdentifier)
+    
+    rowsCount = Int(ceil(Float(displayedDrinkTypes.count) / Float(columnsCount)))
+  }
+  
   private func setupGestureRecognizers() {
     let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "handleDrinkCellLongPress:")
     longPressGestureRecognizer.minimumPressDuration = 0.5
@@ -66,6 +75,17 @@ class SelectDrinkViewController: UIViewController {
     tapGestureRecognizer.numberOfTapsRequired = 1
     collectionView.addGestureRecognizer(tapGestureRecognizer)
   }
+
+  private func setupNotificationsObservation() {
+    NSNotificationCenter.defaultCenter().addObserver(self,
+      selector: "preferredContentSizeChanged",
+      name: UIContentSizeCategoryDidChangeNotification,
+      object: nil)
+  }
+  
+  func preferredContentSizeChanged() {
+    collectionView.reloadData()
+  }
   
   private func changeAlcoholicDrinkTo(#drinkType: Drink.DrinkType) {
     displayedDrinkTypes[displayedDrinkTypes.count - 1] = drinkType
@@ -75,7 +95,8 @@ class SelectDrinkViewController: UIViewController {
       self.collectionView.reloadSections(NSIndexSet(index: 0))
       },
     completion: { _ in
-      if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: self.managedObjectContext) {
+      if self.areDrinksLoaded {
+        let drink = self.drinks[drinkType]
         self.performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
       }
     })
@@ -137,14 +158,17 @@ class SelectDrinkViewController: UIViewController {
   }
 
   private func collectionViewCellIsSelected(#indexPath: NSIndexPath) {
+    if !areDrinksLoaded {
+      return
+    }
+    
     let drinkIndex = indexPath.row
     assert(drinkIndex < displayedDrinkTypes.count)
     
     let drinkType = displayedDrinkTypes[drinkIndex]
+    let drink = drinks[drinkType]
     
-    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
-      performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
-    }
+    performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -182,13 +206,11 @@ extension SelectDrinkViewController: UICollectionViewDataSource {
     
     let drinkType = displayedDrinkTypes[drinkIndex]
     
-    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
-      cell.drinkLabel.text = drink.localizedName
-      cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-      cell.drinkView.drink = drink
-      cell.drinkView.isGroup = drinkIndex == displayedDrinkTypes.count - 1
-      cell.invalidateIntrinsicContentSize()
-    }
+    cell.drinkLabel.text = drinkType.localizedName
+    cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
+    cell.drinkView.drinkType = drinkType
+    cell.drinkView.isGroup = drinkIndex == displayedDrinkTypes.count - 1
+    cell.invalidateIntrinsicContentSize()
     
     return cell
   }
@@ -331,13 +353,11 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     
     let drinkType = popupDrinkTypes[drinkIndex]
     
-    if let drink = Drink.getDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
-      cell.drinkLabel.text = drink.localizedName
-      cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-      cell.drinkView.drink = drink
-      cell.drinkView.isGroup = false
-      cell.invalidateIntrinsicContentSize()
-    }
+    cell.drinkLabel.text = drinkType.localizedName
+    cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
+    cell.drinkView.drinkType = drinkType
+    cell.drinkView.isGroup = false
+    cell.invalidateIntrinsicContentSize()
     
     return cell
   }
