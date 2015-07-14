@@ -27,6 +27,9 @@ class StatisticsViewController: UIViewController {
       value: "Statistics are available in the full version only.",
       comment: "StatisticsViewController: Text for banner shown to promote the full version of Aquaz")
     
+    lazy var demoOverlayText = NSLocalizedString("SVC:DEMO",
+      value: "DEMO",
+      comment: "StatisticsViewController: Caption above statistics page shown for not-full version of Aquaz. It should be uppercased.")
   }
   
   private var localizedStrings = LocalizedStrings()
@@ -140,9 +143,7 @@ class StatisticsViewController: UIViewController {
     demoLabel.adjustsFontSizeToFitWidth = true
     demoLabel.textAlignment = .Center
     demoLabel.numberOfLines = 1
-
-    demoLabel.text = NSLocalizedString("SVC:Demo", value: "Demo",
-      comment: "StatisticsViewController: Caption above statistics page shown for not-full version of Aquaz").uppercaseString
+    demoLabel.text = localizedStrings.demoOverlayText
 
     demoOverlayView!.addSubview(demoLabel)
 

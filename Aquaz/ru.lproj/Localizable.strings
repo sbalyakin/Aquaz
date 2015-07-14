@@ -243,7 +243,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "SVC:Daily Water Intake" = "Суточная Норма";
 
 /* StatisticsViewController: Caption above statistics page shown for not-full version of Aquaz */
-"SVC:Demo" = "ДЕМО";
+"SVC:DEMO" = "ДЕМО";
 
 /* SupportViewController: Information message if no Facebook account found on device */
 "SVC:Facebook account is not found" = "Учетная запись Facebook не найдена";
