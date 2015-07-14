@@ -69,6 +69,10 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       value: "%1$@ of %2$@",
       comment: "DayViewController: Current daily water intake of water intake goal")
 
+    lazy var helpTipAlcoholicDehydration = NSLocalizedString("DVC:Alcoholic drinks increase required daily water intake",
+      value: "Alcoholic drinks increase required daily water intake",
+      comment: "DayViewController: Text for help tip about dehydration because of intake of an alcoholic drink")
+
     lazy var helpTipSwipeToSeeDiary = NSLocalizedString("DVC:Swipe up to see the diary",
       value: "Swipe up to see the diary",
       comment: "DayViewController: Text for help tip about swiping for seeing the diary")
@@ -191,7 +195,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     super.viewDidAppear(animated)
 
     if mode == .General && Settings.uiDayPageHelpTipToShow.value == Settings.DayPageHelpTip(rawValue: 0)! {
-      checkHelpTip()
+      showNextHelpTip()
     }
   }
   
@@ -534,26 +538,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     return false
   }
 
-  private func checkForHelpTip(notification: NSNotification) {
-    if Settings.uiDayPageHelpTipToShow.value == .None {
-      return
-    }
-    
-    let currentDate = NSDate()
-
-    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
-      for insertedObject in insertedObjects {
-        if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, currentDate) {
-          Settings.uiDayPageIntakesCountTillHelpTip.value = Settings.uiDayPageIntakesCountTillHelpTip.value - 1
-          if Settings.uiDayPageIntakesCountTillHelpTip.value <= 0 {
-            checkHelpTip()
-          }
-          break
-        }
-      }
-    }
-  }
-  
   private func checkForRateApplicationAlert(notification: NSNotification) {
     if Settings.uiWritingReviewAlertSelection.value != .RemindLater {
       return
@@ -649,14 +633,49 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     
     let text = String.localizedStringWithFormat(localizedStrings.intakeButtonTextTemplate, intakeText, waterGoalText)
     
-    if animated {
-      intakeButton.setTitle(text, forState: .Normal)
+    if totalDehydrationAmount == 0 {
+      intakeButton.setAttributedTitle(nil, forState: .Normal)
+
+      if animated {
+        intakeButton.setTitle(text, forState: .Normal)
+        intakeButton.layoutIfNeeded()
+      } else {
+        UIView.performWithoutAnimation {
+          self.intakeButton.setTitle(text, forState: .Normal)
+          self.intakeButton.layoutIfNeeded()
+        }
+      }
     } else {
-      UIView.performWithoutAnimation {
-        self.intakeButton.setTitle(text, forState: .Normal)
-        self.intakeButton.layoutIfNeeded()
+      // If user does intake of an alcoholic drink, water goal is increased.
+      // In order to make it noticeable paint water goal part of title with different color.
+      let coloredText = makeColoredText(text, mainColor: UIColor.darkGrayColor(), coloredParts: [(text: waterGoalText, color: StyleKit.wineColor)])
+      if animated {
+        intakeButton.setAttributedTitle(coloredText, forState: .Normal)
+        intakeButton.layoutIfNeeded()
+      } else {
+        UIView.performWithoutAnimation {
+          self.intakeButton.setAttributedTitle(coloredText, forState: .Normal)
+          self.intakeButton.layoutIfNeeded()
+        }
       }
     }
+  }
+  
+  private func makeColoredText(text: NSString, mainColor: UIColor, coloredParts: [(text: String, color: UIColor)]) -> NSAttributedString {
+    let attributes = [NSForegroundColorAttributeName: mainColor]
+    var coloredText = NSMutableAttributedString(string: text as String, attributes: attributes)
+    coloredText.beginEditing()
+    
+    for (textPart, color) in coloredParts {
+      let range = text.rangeOfString(textPart)
+      if range.length > 0 {
+        coloredText.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
+      }
+    }
+    
+    coloredText.endEditing()
+    
+    return coloredText
   }
   
   private func waterGoalWasChanged(#animated: Bool) {
@@ -777,7 +796,69 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   
   // MARK: Help tips -
 
-  private func checkHelpTip() {
+  private func checkForHelpTip(notification: NSNotification) {
+    if checkForHighPriorityHelpTips(notification) {
+      return
+    }
+    
+    checkForRegularHelpTips(notification)
+  }
+  
+  private func checkForHighPriorityHelpTips(notification: NSNotification) -> Bool {
+    if Settings.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value == true {
+      return false
+    }
+    
+    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+      for insertedObject in insertedObjects {
+        if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, date) && intake.dehydrationAmount > 0 {
+          showAlcoholicDehydrationHelpTip()
+          return true
+        }
+      }
+    }
+    
+    return false
+  }
+  
+  private func checkForRegularHelpTips(notification: NSNotification) {
+    if Settings.uiDayPageHelpTipToShow.value == .None {
+      return
+    }
+    
+    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+      for insertedObject in insertedObjects {
+        if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, date) {
+          Settings.uiDayPageIntakesCountTillHelpTip.value = Settings.uiDayPageIntakesCountTillHelpTip.value - 1
+          if Settings.uiDayPageIntakesCountTillHelpTip.value <= 0 {
+            showNextHelpTip()
+          }
+          break
+        }
+      }
+    }
+  }
+  
+  private func showAlcoholicDehydrationHelpTip() {
+    SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
+      if self.view.window == nil || self.helpTip != nil {
+        return
+      }
+      
+      let helpTip = JDFTooltipView(
+        targetView: self.intakeButton,
+        hostView: self.view,
+        tooltipText: self.localizedStrings.helpTipAlcoholicDehydration,
+        arrowDirection: .Up,
+        width: self.view.frame.width / 2)
+      
+      self.showHelpTip(helpTip)
+      
+      Settings.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value = true
+    }
+  }
+  
+  private func showNextHelpTip() {
     if helpTip != nil {
       return
     }
@@ -805,13 +886,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     }
   }
   
-  private func switchToNextHelpTip() {
-    Settings.uiDayPageHelpTipToShow.value = Settings.DayPageHelpTip(rawValue: Settings.uiDayPageHelpTipToShow.value.rawValue + 1) ?? .None
-    
-    // Reset help tips counter. Help tips should be shown after every 2 intakes.
-    Settings.uiDayPageIntakesCountTillHelpTip.value = 2
-  }
-  
   private func showHelpTipForSwipeToSeeDiary() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
       if self.view.window == nil || self.helpTip != nil {
@@ -828,6 +902,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
         width: self.view.frame.width / 2)
       
       self.showHelpTip(helpTip)
+
+      self.switchToNextHelpTip()
     }
   }
   
@@ -845,6 +921,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
         width: self.view.frame.width / 2)
       
       self.showHelpTip(helpTip)
+
+      self.switchToNextHelpTip()
     }
   }
   
@@ -862,6 +940,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
         width: self.view.frame.width / 2)
       
       self.showHelpTip(helpTip)
+
+      self.switchToNextHelpTip()
     }
   }
   
@@ -879,6 +959,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
         width: self.view.frame.width / 2)
       
       self.showHelpTip(helpTip)
+
+      self.switchToNextHelpTip()
     }
   }
   
@@ -896,6 +978,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
         width: self.view.frame.width / 2)
       
       self.showHelpTip(helpTip)
+
+      self.switchToNextHelpTip()
     }
   }
   
@@ -916,19 +1000,26 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
         width: self.view.frame.width / 2)
       
       self.showHelpTip(tooltip)
+      
+      self.switchToNextHelpTip()
     }
   }
   
   private func showHelpTip(helpTip: JDFTooltipView) {
     self.helpTip = helpTip
 
-    switchToNextHelpTip()
-
     UIHelper.showHelpTip(helpTip) {
       self.helpTip = nil
     }
   }
 
+  private func switchToNextHelpTip() {
+    Settings.uiDayPageHelpTipToShow.value = Settings.DayPageHelpTip(rawValue: Settings.uiDayPageHelpTipToShow.value.rawValue + 1) ?? .None
+    
+    // Reset help tips counter. Help tips should be shown after every 2 intakes.
+    Settings.uiDayPageIntakesCountTillHelpTip.value = 2
+  }
+  
   // MARK: Private properties -
   
   private var waterGoal: WaterGoal?

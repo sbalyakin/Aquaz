@@ -53,8 +53,8 @@ public class Settings {
   }
   
   enum DayPageHelpTip: Int {
-    case SwipeToSeeDiary = 0
-    case SwipeToChangeDay
+    case SwipeToChangeDay = 0
+    case SwipeToSeeDiary
     case HighActivityMode
     case HotWeatherMode
     case SwitchToPercentsAndViceVersa
@@ -159,6 +159,10 @@ public class Settings {
 
   static let uiDayPageHelpTipToShow = SettingsEnumItem(
     key: "UI - Day page help tip to show", initialValue: DayPageHelpTip(rawValue: 0)!,
+    userDefaults: UserDefaultsProvider.sharedUserDefaults)
+  
+  static let uiDayPageAlcoholicDehydratrionHelpTipIsShown = SettingsOrdinalItem(
+    key: "UI - Day page alcoholic dehydration help tip is shown", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
   static let uiDayPageIntakesCountTillHelpTip = SettingsOrdinalItem(
