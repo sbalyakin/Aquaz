@@ -133,10 +133,11 @@ public class Logger {
       if showFunctionNames {
         attributes[Attributes.functionName] = functionName
       }
-      
-      if isEnabledForLogLevel(logLevel) {
-        Localytics.tagEvent(logLevel.description, attributes: attributes)
-      }
+
+// Sergey Balyakin: Localytics framework has been removed, it should be replaced with some other one later.
+//      if isEnabledForLogLevel(logLevel) {
+//        Localytics.tagEvent(logLevel.description, attributes: attributes)
+//      }
       
       if isConsoleEnabledForLogLevel(logLevel) {
         let message = logDetails.isEmpty ? logMessage : "\(logMessage) \r\n \(logDetails.description)"

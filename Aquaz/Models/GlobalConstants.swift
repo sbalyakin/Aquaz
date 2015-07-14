@@ -16,8 +16,6 @@ class GlobalConstants {
 
   static let inAppPurchaseFullVersion = "com.devmanifest.Aquaz.fullversion"
 
-  static let localyticsApplicationKey = "8bcf40f515617dd5c3c5f48-061ebe74-0c2f-11e5-4ab9-00712085a1eb"
-  
   static let developerMail = "devmanifest@gmail.com"
   
   static let wormholeOptionalDirectory = "wormhole"

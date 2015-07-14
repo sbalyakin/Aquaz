@@ -97,8 +97,6 @@
 		84ED8A211A84C8660042BAF2 /* UnitsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED8A201A84C8660042BAF2 /* UnitsTests.swift */; };
 		84ED8A231A84ED9E0042BAF2 /* DrinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */; };
 		84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9DD971A16574E003D6444 /* PickTimeViewController.swift */; };
-		A5062A6D1B22E039008ADB89 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5062A6B1B22E039008ADB89 /* Security.framework */; };
-		A5062A6E1B22E039008ADB89 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A5062A6C1B22E039008ADB89 /* libc++.dylib */; };
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
 		A52A7D871B245C88007A71ED /* NotificationSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52A7D861B245C88007A71ED /* NotificationSounds.swift */; };
 		A52E0CDB1B3854E500599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CDD1B3854E500599D81 /* InfoPlist.strings */; };
@@ -169,15 +167,10 @@
 		A5D3D42D1AA5D29700E3C989 /* UITextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4201AA5D29700E3C989 /* UITextFieldTableViewCell.swift */; };
 		A5D740761B301CA100FC2BAF /* WelcomeWizardWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D740751B301CA100FC2BAF /* WelcomeWizardWelcomeViewController.swift */; };
 		A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */; };
-		A5E660A01AACB94B00C24627 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E6609F1AACB94B00C24627 /* libz.dylib */; };
-		A5E660A21AACB95200C24627 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E660A11AACB95200C24627 /* libsqlite3.dylib */; };
-		A5E660A41AACB95800C24627 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E660A31AACB95800C24627 /* SystemConfiguration.framework */; };
 		A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
 		A5EE36261AAD9DAA0038C844 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EE36251AAD9DAA0038C844 /* Logger.swift */; };
-		A5EE362A1AADB2890038C844 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5EE36291AADB2890038C844 /* AdSupport.framework */; };
 		A5EE362C1AADD6F10038C844 /* LoggedActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EE362B1AADD6F10038C844 /* LoggedActions.swift */; };
 		A5EF375D1A81618F00854A8D /* WaterGoalCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF375C1A81618F00854A8D /* WaterGoalCalculator.swift */; };
-		A5F0A5CF1AACADE7006452C9 /* libLocalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F0A5CD1AACADE7006452C9 /* libLocalytics.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -298,8 +291,6 @@
 		84ED8A201A84C8660042BAF2 /* UnitsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsTests.swift; sourceTree = "<group>"; };
 		84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkTests.swift; sourceTree = "<group>"; };
 		84F9DD971A16574E003D6444 /* PickTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTimeViewController.swift; sourceTree = "<group>"; };
-		A5062A6B1B22E039008ADB89 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		A5062A6C1B22E039008ADB89 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A52A7D861B245C88007A71ED /* NotificationSounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSounds.swift; sourceTree = "<group>"; };
 		A52E0CDC1B3854E500599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -374,16 +365,12 @@
 		A5D3D4201AA5D29700E3C989 /* UITextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		A5D740751B301CA100FC2BAF /* WelcomeWizardWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWizardWelcomeViewController.swift; sourceTree = "<group>"; };
 		A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryTableViewCell.swift; path = Controls/DiaryTableViewCell.swift; sourceTree = "<group>"; };
-		A5E6609F1AACB94B00C24627 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		A5E660A11AACB95200C24627 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		A5E660A31AACB95800C24627 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A5E70A6F19E30BEE006E5FC0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Settings.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A5EE36251AAD9DAA0038C844 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		A5EE36291AADB2890038C844 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		A5EE362B1AADD6F10038C844 /* LoggedActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedActions.swift; sourceTree = "<group>"; };
 		A5EF375C1A81618F00854A8D /* WaterGoalCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoalCalculator.swift; sourceTree = "<group>"; };
-		A5F0A5CD1AACADE7006452C9 /* libLocalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLocalytics.a; sourceTree = "<group>"; };
-		A5F0A5CE1AACADE7006452C9 /* Localytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Localytics.h; sourceTree = "<group>"; };
+		A5F62E9A1B558D6F002F91BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A5F62E9B1B558D80002F91BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,14 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5A3358B1B0218CE004579A4 /* StoreKit.framework in Frameworks */,
-				A5EE362A1AADB2890038C844 /* AdSupport.framework in Frameworks */,
 				843D955F1B4FF6E1007CAC01 /* Crashlytics.framework in Frameworks */,
-				A5E660A41AACB95800C24627 /* SystemConfiguration.framework in Frameworks */,
-				A5E660A21AACB95200C24627 /* libsqlite3.dylib in Frameworks */,
-				A5062A6D1B22E039008ADB89 /* Security.framework in Frameworks */,
-				A5062A6E1B22E039008ADB89 /* libc++.dylib in Frameworks */,
-				A5E660A01AACB94B00C24627 /* libz.dylib in Frameworks */,
-				A5F0A5CF1AACADE7006452C9 /* libLocalytics.a in Frameworks */,
 				A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */,
 				843D955D1B4FF6E1007CAC01 /* Fabric.framework in Frameworks */,
 			);
@@ -487,7 +467,6 @@
 				A5C8945B1AF4B75C0042B6DF /* JDFTooltips */,
 				A54ED25B1AD5A52700FD37DD /* MMWormhole */,
 				84CD974B1ABB2B960011623B /* OmegaCalendar */,
-				A5F0A5CC1AACADE7006452C9 /* Localytics */,
 				A5D3D4111AA5D29700E3C989 /* OmegaSettingsViewController */,
 				843B055C19E2D7800097A833 /* Aquaz-Bridging-Header.h */,
 			);
@@ -627,13 +606,7 @@
 			children = (
 				843D955B1B4FF6E1007CAC01 /* Fabric.framework */,
 				843D955C1B4FF6E1007CAC01 /* Crashlytics.framework */,
-				A5062A6C1B22E039008ADB89 /* libc++.dylib */,
-				A5E660A11AACB95200C24627 /* libsqlite3.dylib */,
-				A5E6609F1AACB94B00C24627 /* libz.dylib */,
-				A5062A6B1B22E039008ADB89 /* Security.framework */,
 				A5A3358A1B0218CE004579A4 /* StoreKit.framework */,
-				A5EE36291AADB2890038C844 /* AdSupport.framework */,
-				A5E660A31AACB95800C24627 /* SystemConfiguration.framework */,
 				A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */,
 				84D251961AD2511E001E6644 /* NotificationCenter.framework */,
 			);
@@ -782,15 +755,6 @@
 				843A2B2B1B05D14D00041E3F /* InAppPurchaseManager.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		A5F0A5CC1AACADE7006452C9 /* Localytics */ = {
-			isa = PBXGroup;
-			children = (
-				A5F0A5CD1AACADE7006452C9 /* libLocalytics.a */,
-				A5F0A5CE1AACADE7006452C9 /* Localytics.h */,
-			);
-			path = Localytics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1227,6 +1191,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A52E0CDC1B3854E500599D81 /* ru */,
+				A5F62E9A1B558D6F002F91BC /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1243,6 +1208,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A52E0CE61B3854E600599D81 /* ru */,
+				A5F62E9B1B558D80002F91BC /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1373,10 +1339,7 @@
 				INFOPLIST_FILE = Aquaz/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Aquaz/External/Localytics",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG -D AQUAZ";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1407,10 +1370,7 @@
 				INFOPLIST_FILE = Aquaz/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Aquaz/External/Localytics",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D AQUAZ";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1475,10 +1435,7 @@
 				INFOPLIST_FILE = Widget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Aquaz/External/Localytics",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -1502,10 +1459,7 @@
 				INFOPLIST_FILE = Widget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Aquaz/External/Localytics",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
