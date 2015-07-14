@@ -750,7 +750,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Month}" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORs-BH-u1n">
                                 <rect key="frame" x="56" y="60" width="488" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1818,6 +1818,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cJJ-Wb-0ke"/>
-        <segue reference="sL9-fM-OF1"/>
+        <segue reference="Y3z-7d-zGG"/>
     </inferredMetricsTieBreakers>
 </document>
