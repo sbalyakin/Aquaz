@@ -49,7 +49,7 @@ class ExtraFactorsViewController: OmegaSettingsViewController {
     
     let highActivityCell = createRangedRightDetailTableCell(
       title: highActivityTitle,
-      settingsItem: Settings.generalHighActivityExtraFactor,
+      settingsItem: Settings.sharedInstance.generalHighActivityExtraFactor,
       collection: factorsCollection,
       pickerTableCellHeight: .Large,
       stringFromValueFunction: { [weak self] in self?.stringFromFactor($0) ?? "\($0)" })
@@ -63,7 +63,7 @@ class ExtraFactorsViewController: OmegaSettingsViewController {
     // Hot Weather section
     let hotWeatherCell = createRangedRightDetailTableCell(
       title: hotWeatherTitle,
-      settingsItem: Settings.generalHotDayExtraFactor,
+      settingsItem: Settings.sharedInstance.generalHotDayExtraFactor,
       collection: factorsCollection,
       pickerTableCellHeight: .Large,
       stringFromValueFunction: { [weak self] in self?.stringFromFactor($0) ?? "\($0)" })

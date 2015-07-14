@@ -94,7 +94,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
   }
   
   func purchaseFullVersion() -> Bool {
-    if Settings.generalFullVersion.value || isPurchasing {
+    if Settings.sharedInstance.generalFullVersion.value || isPurchasing {
       return false
     }
     
@@ -266,7 +266,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
   }
   
   private func activateFullVersion() {
-    Settings.generalFullVersion.value = true
+    Settings.sharedInstance.generalFullVersion.value = true
     
     dispatch_async(dispatch_get_main_queue()) {
       NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationFullVersionIsPurchased, object: nil)

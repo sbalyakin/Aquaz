@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       Logger.setup(logLevel: .Warning, assertLevel: .Error, consoleLevel: .Error, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
     #endif
 
-    if !Settings.generalFullVersion.value {
+    if !Settings.sharedInstance.generalFullVersion.value {
       // Just for creating shared instance of in-app purchase manager and to start observing transaction states
       InAppPurchaseManager.sharedInstance
     }
@@ -44,11 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UIHelper.applyStylization()
     NotificationsHelper.setApplicationIconBadgeNumber(0)
     
-    if Settings.generalHasLaunchedOnce.value == false {
+    if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
       prePopulateCoreData()
       adjustNotifications()
       showWelcomeWizard()
-      Settings.generalHasLaunchedOnce.value = true
+      Settings.sharedInstance.generalHasLaunchedOnce.value = true
     } else {
       if let options = launchOptions {
         if let notification = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
@@ -89,11 +89,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func updateNotifications(notification: NSNotification) {
-    if !Settings.notificationsEnabled.value {
+    if !Settings.sharedInstance.notificationsEnabled.value {
       return
     }
 
-    if !Settings.notificationsLimit.value && !Settings.notificationsSmart.value {
+    if !Settings.sharedInstance.notificationsLimit.value && !Settings.sharedInstance.notificationsSmart.value {
       return
     }
 
@@ -110,7 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
       
       if let lastIntakeDate = lastIntakeDate where DateHelper.areDatesEqualByDays(lastIntakeDate, NSDate()) {
-        if Settings.notificationsLimit.value {
+        if Settings.sharedInstance.notificationsLimit.value {
           CoreDataStack.privateContext.performBlock {
             let beginDate = NSDate()
             let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
@@ -125,13 +125,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let nextDayDate = DateHelper.addToDate(lastIntakeDate, years: 0, months: 0, days: 1)
                 NotificationsHelper.scheduleNotificationsFromSettingsForDate(nextDayDate)
               }
-            } else if Settings.notificationsSmart.value {
+            } else if Settings.sharedInstance.notificationsSmart.value {
               dispatch_async(dispatch_get_main_queue()) {
                 NotificationsHelper.rescheduleNotificationsBecauseOfIntake(intakeDate: lastIntakeDate)
               }
             }
           }
-        } else if Settings.notificationsSmart.value {
+        } else if Settings.sharedInstance.notificationsSmart.value {
           NotificationsHelper.rescheduleNotificationsBecauseOfIntake(intakeDate: lastIntakeDate)
         }
       }
@@ -168,7 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func adjustNotifications() {
-    if !Settings.notificationsEnabled.value {
+    if !Settings.sharedInstance.notificationsEnabled.value {
       NotificationsHelper.removeAllNotifications()
     }
   }

@@ -49,8 +49,8 @@ class DiaryTableViewCell: UITableViewCell {
     invalidateIntrinsicContentSize()
   }
   
-  private var amountPrecision: Double { return Settings.generalVolumeUnits.value.precision }
-  private var amountDecimals: Int { return Settings.generalVolumeUnits.value.decimals }
+  private var amountPrecision: Double { return Settings.sharedInstance.generalVolumeUnits.value.precision }
+  private var amountDecimals: Int { return Settings.sharedInstance.generalVolumeUnits.value.decimals }
 
 }
 

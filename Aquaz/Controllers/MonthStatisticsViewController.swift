@@ -82,7 +82,7 @@ class MonthStatisticsViewController: UIViewController {
   }
 
   func managedObjectContextDidChange(notification: NSNotification) {
-    if Settings.generalFullVersion.value {
+    if Settings.sharedInstance.generalFullVersion.value {
       dispatch_async(dispatch_get_main_queue()) {
         self.monthStatisticsView.refresh()
       }
@@ -136,7 +136,7 @@ class MonthStatisticsViewController: UIViewController {
   }
   
   private func checkHelpTip() {
-    if !Settings.generalFullVersion.value || Settings.uiMonthStatisticsPageHelpTipIsShown.value  {
+    if !Settings.sharedInstance.generalFullVersion.value || Settings.sharedInstance.uiMonthStatisticsPageHelpTipIsShown.value  {
       return
     }
     
@@ -159,7 +159,7 @@ class MonthStatisticsViewController: UIViewController {
       
       UIHelper.showHelpTip(helpTip)
       
-      Settings.uiMonthStatisticsPageHelpTipIsShown.value = true
+      Settings.sharedInstance.uiMonthStatisticsPageHelpTipIsShown.value = true
     }
   }
 
@@ -194,7 +194,7 @@ extension MonthStatisticsViewController: CalendarViewDelegate {
 extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
   
   func monthStatisticsGetValuesForDateInterval(#beginDate: NSDate, endDate: NSDate, calendarContentView: CalendarContentView) -> [Double] {
-    if Settings.generalFullVersion.value {
+    if Settings.sharedInstance.generalFullVersion.value {
       managedObjectContext.performBlock {
         weak var requestingMonthStatisticsContentView = (calendarContentView as! MonthStatisticsContentView)
         let hydrationFractions = self.fetchHydrationFractions(beginDate: beginDate, endDate: endDate)

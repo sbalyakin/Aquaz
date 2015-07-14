@@ -126,7 +126,7 @@ public class CoreDataPrePopulation {
 
     WaterGoal.addEntity(
       date: NSDate(),
-      baseAmount: Settings.userDailyWaterIntake.value,
+      baseAmount: Settings.sharedInstance.userDailyWaterIntake.value,
       isHotDay: false,
       isHighActivity: false,
       managedObjectContext: managedObjectContext,

@@ -90,7 +90,7 @@ class NotificationsViewController: OmegaSettingsViewController {
     NSNotificationCenter.defaultCenter().removeObserver(self)
 
     if let soundObserverIdentifier = soundObserverIdentifier {
-      Settings.notificationsSound.removeObserver(soundObserverIdentifier)
+      Settings.sharedInstance.notificationsSound.removeObserver(soundObserverIdentifier)
     }
   }
 
@@ -99,13 +99,13 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     let enableNotificationsCell = createSwitchTableCell(
       title: localizedStrings.enableNotificationsTitle,
-      settingsItem: Settings.notificationsEnabled)
+      settingsItem: Settings.sharedInstance.notificationsEnabled)
     
     enableNotificationsCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
     
     let fromCell = createDateRightDetailTableCell(
       title: localizedStrings.fromTitle,
-      settingsItem: Settings.notificationsFrom,
+      settingsItem: Settings.sharedInstance.notificationsFrom,
       datePickerMode: .Time,
       minimumDate: nil,
       maximumDate: nil,
@@ -116,7 +116,7 @@ class NotificationsViewController: OmegaSettingsViewController {
 
     let toCell = createDateRightDetailTableCell(
       title: localizedStrings.toTitle,
-      settingsItem: Settings.notificationsTo,
+      settingsItem: Settings.sharedInstance.notificationsTo,
       datePickerMode: .Time,
       minimumDate: nil,
       maximumDate: nil,
@@ -135,7 +135,7 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     let intervalCell = createTimeIntervalRightDetailTableCell(
       title: localizedStrings.intervalTitle,
-      settingsItem: Settings.notificationsInterval,
+      settingsItem: Settings.sharedInstance.notificationsInterval,
       timeComponents: timeComponents,
       height: .Large,
       stringFromValueFunction: NotificationsViewController.stringFromTimeInterval)
@@ -144,14 +144,14 @@ class NotificationsViewController: OmegaSettingsViewController {
   
     let soundCell = createRightDetailTableCell(
       title: localizedStrings.soundTitle,
-      settingsItem: Settings.notificationsSound,
+      settingsItem: Settings.sharedInstance.notificationsSound,
       accessoryType: UITableViewCellAccessoryType.DisclosureIndicator,
       activationChangedFunction: { [weak self] in self?.soundTableCellDidActivate($0, active: $1) },
       stringFromValueFunction: NotificationsViewController.stringFromSoundFileName)
     
     soundCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
     
-    soundObserverIdentifier = Settings.notificationsSound.addObserver { _ in
+    soundObserverIdentifier = Settings.sharedInstance.notificationsSound.addObserver { _ in
       soundCell.readFromExternalStorage()
     }
     
@@ -167,7 +167,7 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     let smartNotificationsCell = createSwitchTableCell(
       title: localizedStrings.smartNotificationsTitle,
-      settingsItem: Settings.notificationsSmart)
+      settingsItem: Settings.sharedInstance.notificationsSmart)
     
     smartNotificationsCell.valueChangedFunction = { [weak self] in self?.smartNotificationsValueChanged($0) }
 
@@ -179,7 +179,7 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     let limitNotificationsCell = createSwitchTableCell(
       title: localizedStrings.limitNotificationsTitle,
-      settingsItem: Settings.notificationsLimit)
+      settingsItem: Settings.sharedInstance.notificationsLimit)
 
     limitNotificationsCell.valueChangedFunction = { [weak self] in self?.limitNotificationsValueChanged($0) }
 
@@ -206,14 +206,14 @@ class NotificationsViewController: OmegaSettingsViewController {
   }
   
   private func smartNotificationsValueChanged(tableCell: TableCell) {
-    if let valueCell = tableCell as? TableCellWithValue<Bool> where !Settings.generalFullVersion.value && valueCell.value {
+    if let valueCell = tableCell as? TableCellWithValue<Bool> where !Settings.sharedInstance.generalFullVersion.value && valueCell.value {
       showFullVersionBanner(text: localizedStrings.smartNotificationsBannerText)
       valueCell.value = false
     }
   }
 
   private func limitNotificationsValueChanged(tableCell: TableCell) {
-    if let valueCell = tableCell as? TableCellWithValue<Bool> where !Settings.generalFullVersion.value && valueCell.value {
+    if let valueCell = tableCell as? TableCellWithValue<Bool> where !Settings.sharedInstance.generalFullVersion.value && valueCell.value {
       showFullVersionBanner(text: localizedStrings.limitNotificationsBannerText)
       valueCell.value = false
     }
@@ -271,7 +271,7 @@ class NotificationsViewController: OmegaSettingsViewController {
   class func recreateNotifications() {
     NotificationsHelper.removeAllNotifications()
 
-    if Settings.notificationsEnabled.value {
+    if Settings.sharedInstance.notificationsEnabled.value {
       if NotificationsHelper.areLocalNotificationsRegistered() {
         NotificationsHelper.scheduleNotificationsFromSettingsForDate(NSDate())
       } else {

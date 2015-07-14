@@ -35,7 +35,7 @@ class YearStatisticsViewController: UIViewController {
     setupUI()
     setupNotificationsObservation()
     
-    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [weak self] _ in
+    volumeObserverIdentifier = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
       self?.updateYearStatisticsView()
     }
   }
@@ -44,7 +44,7 @@ class YearStatisticsViewController: UIViewController {
     NSNotificationCenter.defaultCenter().removeObserver(self)
 
     if let volumeObserverIdentifier = volumeObserverIdentifier {
-      Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+      Settings.sharedInstance.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
     }
   }
 
@@ -82,7 +82,7 @@ class YearStatisticsViewController: UIViewController {
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
-    if Settings.generalFullVersion.value {
+    if Settings.sharedInstance.generalFullVersion.value {
       updateYearStatisticsView()
     }
   }
@@ -189,7 +189,7 @@ class YearStatisticsViewController: UIViewController {
     
     Logger.logSevere(amountPartsList.count == waterGoals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     
-    let displayedVolumeUnits = Settings.generalVolumeUnits.value
+    let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
     
     var statisticsItems: [YearStatisticsView.ItemType] = []
     
@@ -207,7 +207,7 @@ class YearStatisticsViewController: UIViewController {
   }
   
   private func updateYearStatisticsView() {
-    if Settings.generalFullVersion.value {
+    if Settings.sharedInstance.generalFullVersion.value {
       managedObjectContext.performBlock {
         let date = self.date
         let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
@@ -241,7 +241,7 @@ class YearStatisticsViewController: UIViewController {
   }
 
   private func checkHelpTip() {
-    if !Settings.generalFullVersion.value || Settings.uiYearStatisticsPageHelpTipIsShown.value {
+    if !Settings.sharedInstance.generalFullVersion.value || Settings.sharedInstance.uiYearStatisticsPageHelpTipIsShown.value {
       return
     }
     
@@ -263,7 +263,7 @@ class YearStatisticsViewController: UIViewController {
       
       UIHelper.showHelpTip(helpTip)
       
-      Settings.uiYearStatisticsPageHelpTipIsShown.value = true
+      Settings.sharedInstance.uiYearStatisticsPageHelpTipIsShown.value = true
     }
   }
 
@@ -285,8 +285,8 @@ extension YearStatisticsViewController: YearStatisticsViewDataSource {
   }
   
   func yearStatisticsViewGetTitleForVerticalValue(value: CGFloat) -> String {
-    let quantity = Quantity(unit: Settings.generalVolumeUnits.value.unit, amount: Double(value))
-    let title = quantity.getDescription(Settings.generalVolumeUnits.value.decimals, displayUnits: true)
+    let quantity = Quantity(unit: Settings.sharedInstance.generalVolumeUnits.value.unit, amount: Double(value))
+    let title = quantity.getDescription(Settings.sharedInstance.generalVolumeUnits.value.decimals, displayUnits: true)
 
     return title
   }

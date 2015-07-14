@@ -73,14 +73,14 @@ class StatisticsViewController: UIViewController {
   }
   
   private func initStatisticsPage() {
-    let lastStatisticsPage = Settings.uiSelectedStatisticsPage.value
+    let lastStatisticsPage = Settings.sharedInstance.uiSelectedStatisticsPage.value
     segmentedControl.selectedSegmentIndex = lastStatisticsPage.rawValue
     activateStatisticsPage(lastStatisticsPage)
   }
   
   private func activateStatisticsPage(page: Settings.StatisticsViewPage) {
     pageViewController.currentPage = page
-    Settings.uiSelectedStatisticsPage.value = page
+    Settings.sharedInstance.uiSelectedStatisticsPage.value = page
   }
 
   @IBAction func segmentChanged(sender: UISegmentedControl) {
@@ -92,7 +92,7 @@ class StatisticsViewController: UIViewController {
   }
   
   private func checkFullVersion() {
-    if !Settings.generalFullVersion.value {
+    if !Settings.sharedInstance.generalFullVersion.value {
       showDemoOverlay()
       showFullVersionBanner()
     }

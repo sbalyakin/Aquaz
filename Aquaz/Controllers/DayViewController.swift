@@ -114,10 +114,10 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       
       if mode == .General {
         if DateHelper.areDatesEqualByDays(date, NSDate()) {
-          Settings.uiUseCustomDateForDayView.value = false
+          Settings.sharedInstance.uiUseCustomDateForDayView.value = false
         } else {
-          Settings.uiUseCustomDateForDayView.value = true
-          Settings.uiCustomDateForDayView.value = date
+          Settings.sharedInstance.uiUseCustomDateForDayView.value = true
+          Settings.sharedInstance.uiCustomDateForDayView.value = date
         }
       }
       
@@ -170,7 +170,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     NSNotificationCenter.defaultCenter().removeObserver(self)
     
     if let volumeObserverIdentifier = volumeObserverIdentifier {
-      Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+      Settings.sharedInstance.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
     }
   }
   
@@ -194,7 +194,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    if mode == .General && Settings.uiDayPageHelpTipToShow.value == Settings.DayPageHelpTip(rawValue: 0)! {
+    if mode == .General && Settings.sharedInstance.uiDayPageHelpTipToShow.value == Settings.DayPageHelpTip(rawValue: 0)! {
       showNextHelpTip()
     }
   }
@@ -210,7 +210,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     
     updateSummaryBar(animated: false, completion: nil)
     
-    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [weak self] _ in
+    volumeObserverIdentifier = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
       self?.updateIntakeButton(animated: false)
     }
   }
@@ -238,8 +238,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
 
   private func setupCurrentDate() {
-    if mode == .General && Settings.uiUseCustomDateForDayView.value {
-      date = Settings.uiCustomDateForDayView.value
+    if mode == .General && Settings.sharedInstance.uiUseCustomDateForDayView.value {
+      date = Settings.sharedInstance.uiCustomDateForDayView.value
     } else {
       if date == nil {
         date = NSDate()
@@ -511,7 +511,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       return false
     }
     
-    let waterGoalReachingIsShownForToday = DateHelper.areDatesEqualByDays(currentDate, Settings.uiWaterGoalReachingIsShownForDate.value)
+    let waterGoalReachingIsShownForToday = DateHelper.areDatesEqualByDays(currentDate, Settings.sharedInstance.uiWaterGoalReachingIsShownForDate.value)
     if waterGoalReachingIsShownForToday {
       return false
     }
@@ -523,7 +523,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
       for insertedObject in insertedObjects {
         if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, currentDate) {
-          Settings.uiWaterGoalReachingIsShownForDate.value = currentDate
+          Settings.sharedInstance.uiWaterGoalReachingIsShownForDate.value = currentDate
           showCongratulationsAboutWaterGoalReaching()
           
           SystemHelper.executeBlockWithDelay(2) {
@@ -539,11 +539,11 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
 
   private func checkForRateApplicationAlert(notification: NSNotification) {
-    if Settings.uiWritingReviewAlertSelection.value != .RemindLater {
+    if Settings.sharedInstance.uiWritingReviewAlertSelection.value != .RemindLater {
       return
     }
     
-    if DateHelper.calcDistanceBetweenCalendarDates(fromDate: Settings.uiWritingReviewAlertLastShownDate.value, toDate: NSDate(), calendarUnit: .CalendarUnitDay) < 3 {
+    if DateHelper.calcDistanceBetweenCalendarDates(fromDate: Settings.sharedInstance.uiWritingReviewAlertLastShownDate.value, toDate: NSDate(), calendarUnit: .CalendarUnitDay) < 3 {
       return
     }
     
@@ -560,7 +560,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   private func showRateApplicationAlert() {
-    Settings.uiWritingReviewAlertLastShownDate.value = NSDate()
+    Settings.sharedInstance.uiWritingReviewAlertLastShownDate.value = NSDate()
 
     let alert = UIAlertView(
       title: localizedStrings.rateApplicationAlertTitle,
@@ -575,16 +575,16 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
     switch buttonIndex {
     case 0: // No, Thanks
-      Settings.uiWritingReviewAlertSelection.value = .No
+      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .No
       
     case 1: // Rate It Now
       if let url = NSURL(string: GlobalConstants.appStoreLink) {
         UIApplication.sharedApplication().openURL(url)
       }
-      Settings.uiWritingReviewAlertSelection.value = .RateApplication
+      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .RateApplication
       
     case 2: // Remind Me Later
-      Settings.uiWritingReviewAlertSelection.value = .RemindLater
+      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .RemindLater
       
     default: break
     }
@@ -602,14 +602,14 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
 
   @IBAction func intakeButtonWasTapped(sender: AnyObject) {
-    Settings.uiDisplayDailyWaterIntakeInPercents.value = !Settings.uiDisplayDailyWaterIntakeInPercents.value
+    Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value = !Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value
     updateIntakeButton(animated: true)
   }
   
   private func updateIntakeButton(#animated: Bool) {
     let intakeText: String
     
-    if Settings.uiDisplayDailyWaterIntakeInPercents.value {
+    if Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value {
       let formatter = NSNumberFormatter()
       formatter.numberStyle = .PercentStyle
       formatter.maximumFractionDigits = 0
@@ -715,20 +715,20 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   // MARK: iAd -
   
   private func initInterstitialAd() {
-    if !Settings.generalFullVersion.value && mode == .General {
+    if !Settings.sharedInstance.generalFullVersion.value && mode == .General {
       interstitialPresentationPolicy = .Manual
     }
   }
   
   private func checkForShowInterstialAd(notification: NSNotification) {
-    if Settings.generalFullVersion.value || mode != .General {
+    if Settings.sharedInstance.generalFullVersion.value || mode != .General {
       return
     }
 
     if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> where !insertedObjects.isEmpty {
-      Settings.generalAdCounter.value = Settings.generalAdCounter.value - 1
+      Settings.sharedInstance.generalAdCounter.value = Settings.sharedInstance.generalAdCounter.value - 1
       
-      if Settings.generalAdCounter.value <= 0 {
+      if Settings.sharedInstance.generalAdCounter.value <= 0 {
         showInterstitialAd()
       }
     }	
@@ -767,7 +767,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate,
        let rootView = appDelegate.window?.rootViewController?.view
     {
-      Settings.generalAdCounter.value = GlobalConstants.numberOfIntakesToShowAd
+      Settings.sharedInstance.generalAdCounter.value = GlobalConstants.numberOfIntakesToShowAd
 
       viewForAd = UIView(frame: rootView.frame.rectByOffsetting(dx: 0, dy: rootView.frame.height))
       viewForAd!.alpha = 0
@@ -805,7 +805,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   private func checkForHighPriorityHelpTips(notification: NSNotification) -> Bool {
-    if Settings.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value == true {
+    if Settings.sharedInstance.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value == true {
       return false
     }
     
@@ -822,15 +822,15 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   private func checkForRegularHelpTips(notification: NSNotification) {
-    if Settings.uiDayPageHelpTipToShow.value == .None {
+    if Settings.sharedInstance.uiDayPageHelpTipToShow.value == .None {
       return
     }
     
     if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
       for insertedObject in insertedObjects {
         if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, date) {
-          Settings.uiDayPageIntakesCountTillHelpTip.value = Settings.uiDayPageIntakesCountTillHelpTip.value - 1
-          if Settings.uiDayPageIntakesCountTillHelpTip.value <= 0 {
+          Settings.sharedInstance.uiDayPageIntakesCountTillHelpTip.value = Settings.sharedInstance.uiDayPageIntakesCountTillHelpTip.value - 1
+          if Settings.sharedInstance.uiDayPageIntakesCountTillHelpTip.value <= 0 {
             showNextHelpTip()
           }
           break
@@ -854,7 +854,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       
       self.showHelpTip(helpTip)
       
-      Settings.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value = true
+      Settings.sharedInstance.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value = true
     }
   }
   
@@ -863,7 +863,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       return
     }
 
-    switch Settings.uiDayPageHelpTipToShow.value {
+    switch Settings.sharedInstance.uiDayPageHelpTipToShow.value {
     case .SwipeToSeeDiary:
       showHelpTipForSwipeToSeeDiary()
       
@@ -1014,10 +1014,10 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
 
   private func switchToNextHelpTip() {
-    Settings.uiDayPageHelpTipToShow.value = Settings.DayPageHelpTip(rawValue: Settings.uiDayPageHelpTipToShow.value.rawValue + 1) ?? .None
+    Settings.sharedInstance.uiDayPageHelpTipToShow.value = Settings.DayPageHelpTip(rawValue: Settings.sharedInstance.uiDayPageHelpTipToShow.value.rawValue + 1) ?? .None
     
     // Reset help tips counter. Help tips should be shown after every 2 intakes.
-    Settings.uiDayPageIntakesCountTillHelpTip.value = 2
+    Settings.sharedInstance.uiDayPageIntakesCountTillHelpTip.value = 2
   }
   
   // MARK: Private properties -
@@ -1053,7 +1053,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   private var waterGoalBaseAmount: Double {
-    return waterGoal?.baseAmount ?? Settings.userDailyWaterIntake.value
+    return waterGoal?.baseAmount ?? Settings.sharedInstance.userDailyWaterIntake.value
   }
   
   private var waterGoalAmount: Double {
@@ -1083,11 +1083,11 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   private var diaryViewController: DiaryViewController!
   private var selectDrinkViewController: SelectDrinkViewController!
 
-  private var amountPrecision: Double { return Settings.generalVolumeUnits.value.precision }
-  private var amountDecimals: Int { return Settings.generalVolumeUnits.value.decimals }
+  private var amountPrecision: Double { return Settings.sharedInstance.generalVolumeUnits.value.precision }
+  private var amountDecimals: Int { return Settings.sharedInstance.generalVolumeUnits.value.decimals }
 
   private var isCurrentDayToday: Bool {
-    return !Settings.uiUseCustomDateForDayView.value
+    return !Settings.sharedInstance.uiUseCustomDateForDayView.value
   }
   
 }

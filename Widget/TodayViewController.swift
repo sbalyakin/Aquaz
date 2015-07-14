@@ -232,7 +232,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   private func updateProgressLabel(#waterGoal: Double, overallWaterIntake: Double, animated: Bool) {
     let intakeText: String
     
-    if Settings.uiDisplayDailyWaterIntakeInPercents.value {
+    if Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value {
       let formatter = NSNumberFormatter()
       formatter.numberStyle = .PercentStyle
       formatter.maximumFractionDigits = 0
@@ -260,8 +260,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     return Units.sharedInstance.formatMetricAmountToText(
       metricAmount: value,
       unitType: .Volume,
-      roundPrecision: Settings.generalVolumeUnits.value.precision,
-      decimals: Settings.generalVolumeUnits.value.decimals)
+      roundPrecision: Settings.sharedInstance.generalVolumeUnits.value.precision,
+      decimals: Settings.sharedInstance.generalVolumeUnits.value.decimals)
   }
   
   func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {

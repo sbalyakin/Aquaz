@@ -54,7 +54,7 @@ class WeekStatisticsViewController: UIViewController {
     setupUI()
     setupNotificationsObservation()
     
-    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [weak self] _ in
+    volumeObserverIdentifier = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
       self?.updateWeekStatisticsView(animated: false)
     }
   }
@@ -63,7 +63,7 @@ class WeekStatisticsViewController: UIViewController {
     NSNotificationCenter.defaultCenter().removeObserver(self)
     
     if let volumeObserverIdentifier = volumeObserverIdentifier {
-      Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+      Settings.sharedInstance.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
     }
   }
 
@@ -127,7 +127,7 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
-    if Settings.generalFullVersion.value {
+    if Settings.sharedInstance.generalFullVersion.value {
       updateWeekStatisticsView(animated: true)
     }
   }
@@ -213,7 +213,7 @@ class WeekStatisticsViewController: UIViewController {
     
     Logger.logSevere(waterGoals.count == 7, "Unexpected count of water goals", logDetails: [Logger.Attributes.count: "\(waterGoals.count)"])
     
-    let displayedVolumeUnits = Settings.generalVolumeUnits.value
+    let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
     
     var statisticsItems: [WeekStatisticsView.ItemType] = []
     
@@ -231,7 +231,7 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   private func updateWeekStatisticsView(#animated: Bool) {
-    if Settings.generalFullVersion.value {
+    if Settings.sharedInstance.generalFullVersion.value {
       managedObjectContext.performBlock {
         let date = self.date
         let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
@@ -281,11 +281,11 @@ class WeekStatisticsViewController: UIViewController {
   // MARK: Help tips
   
   private func checkHelpTip() {
-    if helpTip != nil || !Settings.generalFullVersion.value {
+    if helpTip != nil || !Settings.sharedInstance.generalFullVersion.value {
       return
     }
     
-    switch Settings.uiWeekStatisticsPageHelpTipToShow.value {
+    switch Settings.sharedInstance.uiWeekStatisticsPageHelpTipToShow.value {
     case .TapToSeeDayDetails: showHelpTipForTapSeeDayDetails()
     case .SwipeToChangeWeek: showHelpTipForSwipeToChangeWeek()
     case .None: return
@@ -312,8 +312,8 @@ class WeekStatisticsViewController: UIViewController {
       }
       
       // Switch to the next help tip
-      Settings.uiWeekStatisticsPageHelpTipToShow.value =
-        Settings.WeekStatisticsPageHelpTip(rawValue: Settings.uiWeekStatisticsPageHelpTipToShow.value.rawValue + 1)!
+      Settings.sharedInstance.uiWeekStatisticsPageHelpTipToShow.value =
+        Settings.WeekStatisticsPageHelpTip(rawValue: Settings.sharedInstance.uiWeekStatisticsPageHelpTipToShow.value.rawValue + 1)!
     }
   }
   
@@ -337,8 +337,8 @@ class WeekStatisticsViewController: UIViewController {
       }
 
       // Switch to the next help tip
-      Settings.uiWeekStatisticsPageHelpTipToShow.value =
-        Settings.WeekStatisticsPageHelpTip(rawValue: Settings.uiWeekStatisticsPageHelpTipToShow.value.rawValue + 1)!
+      Settings.sharedInstance.uiWeekStatisticsPageHelpTipToShow.value =
+        Settings.WeekStatisticsPageHelpTip(rawValue: Settings.sharedInstance.uiWeekStatisticsPageHelpTipToShow.value.rawValue + 1)!
     }
   }
 
@@ -353,8 +353,8 @@ extension WeekStatisticsViewController: WeekStatisticsViewDataSource {
   }
   
   func weekStatisticsViewGetTitleForValue(value: CGFloat) -> String {
-    let quantity = Quantity(unit: Settings.generalVolumeUnits.value.unit, amount: Double(value))
-    let title = quantity.getDescription(Settings.generalVolumeUnits.value.decimals, displayUnits: true)
+    let quantity = Quantity(unit: Settings.sharedInstance.generalVolumeUnits.value.unit, amount: Double(value))
+    let title = quantity.getDescription(Settings.sharedInstance.generalVolumeUnits.value.decimals, displayUnits: true)
 
     return title
   }

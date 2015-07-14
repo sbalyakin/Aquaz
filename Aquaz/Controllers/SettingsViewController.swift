@@ -75,11 +75,11 @@ class SettingsViewController: OmegaSettingsViewController {
     NSNotificationCenter.defaultCenter().removeObserver(self)
 
     if let volumeObserverIdentifier = volumeObserverIdentifier {
-      Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+      Settings.sharedInstance.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
     }
 
     if let waterGoalObserverIdentifier = waterGoalObserverIdentifier {
-      Settings.generalVolumeUnits.removeObserver(waterGoalObserverIdentifier)
+      Settings.sharedInstance.generalVolumeUnits.removeObserver(waterGoalObserverIdentifier)
     }
   }
 
@@ -87,18 +87,18 @@ class SettingsViewController: OmegaSettingsViewController {
     // Water goal section
     let dailyWaterIntakeCell = createRightDetailTableCell(
       title: localizedStrings.dailyWaterIntakeTitle,
-      settingsItem: Settings.userDailyWaterIntake,
+      settingsItem: Settings.sharedInstance.userDailyWaterIntake,
       accessoryType: .DisclosureIndicator,
       activationChangedFunction: { [weak self] in self?.waterGoalCellWasSelected($0, active: $1) },
       stringFromValueFunction: { [weak self] in self?.stringFromWaterGoal($0) ?? "\($0)" })
     
     dailyWaterIntakeCell.image = ImageHelper.loadImage(.SettingsWater)
     
-    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { _ in
+    volumeObserverIdentifier = Settings.sharedInstance.generalVolumeUnits.addObserver { _ in
       dailyWaterIntakeCell.readFromExternalStorage()
     }
 
-    waterGoalObserverIdentifier = Settings.userDailyWaterIntake.addObserver { _ in
+    waterGoalObserverIdentifier = Settings.sharedInstance.userDailyWaterIntake.addObserver { _ in
       dailyWaterIntakeCell.readFromExternalStorage()
     }
     
@@ -154,7 +154,7 @@ class SettingsViewController: OmegaSettingsViewController {
     supportSection.tableCells = [supportCell]
     
     // Full Version section
-    if Settings.generalFullVersion.value {
+    if Settings.sharedInstance.generalFullVersion.value {
       fullVersionCell = createBasicTableCell(title: localizedStrings.fullVersionIsPurchasedTitle)
     } else {
       fullVersionCell = createBasicTableCell(
@@ -182,7 +182,7 @@ class SettingsViewController: OmegaSettingsViewController {
   }
 
   private func stringFromWaterGoal(waterGoal: Double) -> String {
-    let volumeUnit = Settings.generalVolumeUnits.value
+    let volumeUnit = Settings.sharedInstance.generalVolumeUnits.value
     let text = Units.sharedInstance.formatMetricAmountToText(metricAmount: waterGoal, unitType: .Volume, roundPrecision: volumeUnit.precision, decimals: volumeUnit.decimals, displayUnits: true)
     return text
   }

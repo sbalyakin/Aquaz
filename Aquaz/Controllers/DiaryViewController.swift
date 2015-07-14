@@ -31,14 +31,14 @@ class DiaryViewController: UIViewController {
     
     initFetchedResultsController()
     
-    volumeObserverIdentifier = Settings.generalVolumeUnits.addObserver { [weak self] _ in
+    volumeObserverIdentifier = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
       self?.tableView?.reloadData()
     }
   }
   
   deinit {
     if let volumeObserverIdentifier = volumeObserverIdentifier {
-      Settings.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
+      Settings.sharedInstance.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
     }
   }
   
@@ -165,7 +165,7 @@ extension DiaryViewController: UITableViewDataSource {
   }
   
   private func checkHelpTip() {
-    if Settings.uiDiaryPageHelpTipIsShown.value || view.window == nil {
+    if Settings.sharedInstance.uiDiaryPageHelpTipIsShown.value || view.window == nil {
       return
     }
 
@@ -186,7 +186,7 @@ extension DiaryViewController: UITableViewDataSource {
       
       UIHelper.showHelpTip(helpTip)
 
-      Settings.uiDiaryPageHelpTipIsShown.value = true
+      Settings.sharedInstance.uiDiaryPageHelpTipIsShown.value = true
     }
   }
 

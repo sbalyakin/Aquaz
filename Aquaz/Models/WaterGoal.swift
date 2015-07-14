@@ -31,11 +31,11 @@ public class WaterGoal: CodingManagedObject, NamedEntity {
   }
   
   public var hotDayFactor: Double {
-    return isHotDay ? Settings.generalHotDayExtraFactor.value : 0
+    return isHotDay ? Settings.sharedInstance.generalHotDayExtraFactor.value : 0
   }
   
   public var highActivityFactor: Double {
-    return isHighActivity ? Settings.generalHighActivityExtraFactor.value : 0
+    return isHighActivity ? Settings.sharedInstance.generalHighActivityExtraFactor.value : 0
   }
 
   /// Adds a new water goal entity into Core Data. If a water goal with passed date is already exist, it will be returned as a result.
@@ -225,7 +225,7 @@ public class WaterGoal: CodingManagedObject, NamedEntity {
         amount = laterWaterGoal.baseAmount
       } else { // unreal case
         Logger.logError(Logger.Messages.logicalError)
-        amount = Settings.userDailyWaterIntake.value
+        amount = Settings.sharedInstance.userDailyWaterIntake.value
       }
     }
 

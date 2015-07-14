@@ -116,9 +116,9 @@ class Units {
   
   func getUnits(unitType: UnitType) -> (metricUnit: Unit, displayedUnit: Unit) {
     switch unitType {
-    case .Length: return (metricUnit: Length.metric.unit, displayedUnit: Settings.generalHeightUnits.value.unit)
-    case .Volume: return (metricUnit: Volume.metric.unit, displayedUnit: Settings.generalVolumeUnits.value.unit)
-    case .Weight: return (metricUnit: Weight.metric.unit, displayedUnit: Settings.generalWeightUnits.value.unit)
+    case .Length: return (metricUnit: Length.metric.unit, displayedUnit: Settings.sharedInstance.generalHeightUnits.value.unit)
+    case .Volume: return (metricUnit: Volume.metric.unit, displayedUnit: Settings.sharedInstance.generalVolumeUnits.value.unit)
+    case .Weight: return (metricUnit: Weight.metric.unit, displayedUnit: Settings.sharedInstance.generalWeightUnits.value.unit)
     }
   }
 }

@@ -25,7 +25,7 @@ class SelectDrinkViewController: UIViewController {
   private var displayedDrinkTypes: [Drink.DrinkType] = [
     .Water, .Tea,    .Coffee,
     .Milk,  .Juice,  .Sport,
-    .Soda,  .Energy, Settings.uiSelectedAlcoholicDrink.value]
+    .Soda,  .Energy, Settings.sharedInstance.uiSelectedAlcoholicDrink.value]
   
   private var drinks: [Drink.DrinkType: Drink] = [:]
   
@@ -89,7 +89,7 @@ class SelectDrinkViewController: UIViewController {
   
   private func changeAlcoholicDrinkTo(#drinkType: Drink.DrinkType) {
     displayedDrinkTypes[displayedDrinkTypes.count - 1] = drinkType
-    Settings.uiSelectedAlcoholicDrink.value = drinkType
+    Settings.sharedInstance.uiSelectedAlcoholicDrink.value = drinkType
     
     collectionView.performBatchUpdates( {
       self.collectionView.reloadSections(NSIndexSet(index: 0))
