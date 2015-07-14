@@ -59,7 +59,7 @@ public class Drink: CodingManagedObject, NamedEntity {
       case Sport:      return LocalizedStrings.sportTitle
       case Energy:     return LocalizedStrings.energyTitle
       case Beer:       return LocalizedStrings.beerTitle
-      case Wine:       return LocalizedStrings.waterTitle
+      case Wine:       return LocalizedStrings.wineTitle
       case HardLiquor: return LocalizedStrings.hardLiquorTitle
       }
     }
