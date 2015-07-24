@@ -253,6 +253,9 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     navigationDateLabel.textColor = StyleKit.barTextColor
     leftArrowForDateImage.tintColor = StyleKit.barTextColor
     rightArrowForDateImage.tintColor = StyleKit.barTextColor
+    // Just for sure in iOS 7
+    leftArrowForDateImage.image = leftArrowForDateImage.image?.imageWithRenderingMode(.AlwaysTemplate)
+    rightArrowForDateImage.image = rightArrowForDateImage.image?.imageWithRenderingMode(.AlwaysTemplate)
   }
   
   func refreshCurrentDay(#showAlert: Bool) {

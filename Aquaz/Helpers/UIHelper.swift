@@ -51,7 +51,9 @@ class UIHelper {
   class func adjustNavigationTitleViewSize(navigationItem: UINavigationItem) {
     if let titleView = navigationItem.titleView {
       navigationItem.titleView = nil
-      titleView.frame.size = titleView.systemLayoutSizeFittingSize(CGSizeZero)
+      titleView.setNeedsLayout()
+      titleView.layoutIfNeeded()
+      titleView.frame.size = titleView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
       navigationItem.titleView = titleView
     }
   }
