@@ -57,7 +57,7 @@ class SelectDrinkViewController: UIViewController {
   }
   
   private func setupUI() {
-    UIHelper.applyStyle(self)
+    UIHelper.applyStyleToViewController(self)
     
     let nib = UINib(nibName: drinkCellNibName, bundle: nil)
     collectionView.registerNib(nib, forCellWithReuseIdentifier: drinkCellReuseIdentifier)

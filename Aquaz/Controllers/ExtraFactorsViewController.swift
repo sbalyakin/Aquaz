@@ -19,7 +19,7 @@ class ExtraFactorsViewController: OmegaSettingsViewController {
     numberFormatter.maximumFractionDigits = 0
     numberFormatter.multiplier = 100
     
-    UIHelper.applyStyle(self)
+    UIHelper.applyStyleToViewController(self)
     rightDetailValueColor = StyleKit.settingsTablesValueColor
     rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
   }

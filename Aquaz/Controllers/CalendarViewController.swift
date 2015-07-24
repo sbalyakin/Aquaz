@@ -37,7 +37,7 @@ class CalendarViewController: UIViewController {
   }
 
   private func setupUI() {
-    UIHelper.applyStyle(self)
+    UIHelper.applyStyleToViewController(self)
 
     calendarView.workDayTextColor = StyleKit.calendarWorkDayTextColor
     calendarView.weekendBackgroundColor = StyleKit.calendarWeekendBackgroundColor

@@ -39,7 +39,7 @@ class PickTimeViewController: UIViewController {
   }
   
   private func applyStyle() {
-    UIHelper.applyStyle(self)
+    UIHelper.applyStyleToViewController(self)
     chooseButton.backgroundColor = drink?.darkColor
     navigationController?.navigationBar.barTintColor = drink?.mainColor
   }

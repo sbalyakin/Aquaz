@@ -80,7 +80,7 @@ class SupportViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    UIHelper.applyStyle(self)
+    UIHelper.applyStyleToViewController(self)
     setupApplicationTitle()
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
@@ -141,20 +141,14 @@ class SupportViewController: UIViewController {
   }
   
   private func showEmailComposer(#subject: String, body: String, recipients: [String]?) {
-    // Change navigation bar's appearance to white, because MFMailComposeViewController 
-    // accidently changes bar buttons color if bar background is blue.
-    // Default navigation bar's appearance will be restored later.
-    UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
-    UINavigationBar.appearance().barStyle = .Default
-    UINavigationBar.appearance().tintColor = StyleKit.controlTintColor
-    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor()]
-
     let mailComposer = MFMailComposeViewController()
     mailComposer.setSubject(subject)
     mailComposer.setMessageBody(body, isHTML: true)
+    
     if let recipients = recipients {
       mailComposer.setToRecipients(recipients)
     }
+    
     mailComposer.mailComposeDelegate = self
 
     presentViewController(mailComposer, animated: true, completion: nil)
@@ -211,7 +205,6 @@ extension SupportViewController: UIActionSheetDelegate {
 extension SupportViewController: MFMailComposeViewControllerDelegate {
   
   func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
-    UIHelper.applyStylization()
     dismissViewControllerAnimated(true, completion: nil)
   }
 

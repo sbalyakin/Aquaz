@@ -20,29 +20,10 @@ class UIHelper {
     
     UISwitch.appearance().onTintColor = StyleKit.controlTintColor
     
-    UIBarButtonItem.appearance().tintColor = StyleKit.barTextColor
-    UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: StyleKit.barTextColor], forState: .Normal)
-    
-    UINavigationBar.appearance().barTintColor = StyleKit.barBackgroundColor
-    UINavigationBar.appearance().barStyle = .Black
-    UINavigationBar.appearance().tintColor = StyleKit.barTextColor
-    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: StyleKit.barTextColor]
-    UINavigationBar.appearance().translucent = false
-    UINavigationBar.appearance().tintAdjustmentMode = .Normal
-    
     UITabBar.appearance().tintColor = StyleKit.controlTintColor
   }
   
-  class func applyStyleToNavigationBar(navigationBar: UINavigationBar) {
-    navigationBar.barTintColor = StyleKit.barBackgroundColor
-    navigationBar.barStyle = .Black
-    navigationBar.tintColor = StyleKit.barTextColor
-    navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: StyleKit.barTextColor]
-    navigationBar.translucent = false
-    navigationBar.tintAdjustmentMode = .Normal
-  }
-  
-  class func applyStyle(viewController: UIViewController) {
+  class func applyStyleToViewController(viewController: UIViewController) {
     viewController.view.backgroundColor = StyleKit.pageBackgroundColor
 
     if let tableViewController = viewController as? UITableViewController {
@@ -52,8 +33,21 @@ class UIHelper {
       settingsViewController.tableView.backgroundView = nil
       settingsViewController.tableView.backgroundColor = UIColor.clearColor()
     }
+    
+    if let navigationBar = viewController.navigationController?.navigationBar {
+      applyStyleToNavigationBar(navigationBar)
+    }
   }
 
+  class func applyStyleToNavigationBar(navigationBar: UINavigationBar) {
+    navigationBar.barTintColor = StyleKit.barBackgroundColor
+    navigationBar.barStyle = .Black
+    navigationBar.tintColor = StyleKit.barTextColor
+    navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: StyleKit.barTextColor]
+    navigationBar.translucent = false
+    navigationBar.tintAdjustmentMode = .Normal
+  }
+  
   class func adjustNavigationTitleViewSize(navigationItem: UINavigationItem) {
     if let titleView = navigationItem.titleView {
       navigationItem.titleView = nil

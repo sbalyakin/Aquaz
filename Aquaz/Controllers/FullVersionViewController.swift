@@ -54,7 +54,7 @@ class FullVersionViewController: UIViewController {
   }
   
   private func initUI() {
-    UIHelper.applyStyle(self)
+    UIHelper.applyStyleToViewController(self)
 
     purchaseFullVersionButton.backgroundColor = StyleKit.controlTintColor
     

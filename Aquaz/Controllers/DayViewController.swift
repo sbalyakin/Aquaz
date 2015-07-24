@@ -248,7 +248,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   private func applyStyle() {
-    UIHelper.applyStyle(self)
+    UIHelper.applyStyleToViewController(self)
     navigationTitleLabel.textColor = StyleKit.barTextColor
     navigationDateLabel.textColor = StyleKit.barTextColor
     leftArrowForDateImage.tintColor = StyleKit.barTextColor

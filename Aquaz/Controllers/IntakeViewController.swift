@@ -96,7 +96,7 @@ class IntakeViewController: UIViewController {
     setupSlider()
     setupDrinkInformation()
     
-    UIHelper.applyStyle(self)
+    UIHelper.applyStyleToViewController(self)
     applyColorScheme()
   }
   

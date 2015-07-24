@@ -13,7 +13,7 @@ class UnitsViewController: OmegaSettingsViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    UIHelper.applyStyle(self)
+    UIHelper.applyStyleToViewController(self)
     rightDetailValueColor = StyleKit.settingsTablesValueColor
     rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
   }

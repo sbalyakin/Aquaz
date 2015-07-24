@@ -55,7 +55,7 @@ class StatisticsViewController: UIViewController {
   }
   
   private func applyStyle() {
-    UIHelper.applyStyle(self)
+    UIHelper.applyStyleToViewController(self)
     segmentedControl.layer.cornerRadius = 3
     segmentedControl.layer.masksToBounds = true
   }

@@ -56,7 +56,7 @@ class DiaryViewController: UIViewController {
   }
 
   private func applyStyle() {
-    UIHelper.applyStyle(self)
+    UIHelper.applyStyleToViewController(self)
     tableView.backgroundView = nil
     tableView.backgroundColor = StyleKit.pageBackgroundColor
   }
