@@ -20,10 +20,10 @@ class WelcomeWizardPageViewController: UIPageViewController {
   }
   
   private func baseSetup() {
-    let welcomePage: UIViewController    = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Welcome Page")!
-    let unitsPage: UIViewController      = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Units Page")!
-    let metricsPage: UIViewController    = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Metrics Page")!
-    let lastPage: UIViewController       = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Last Page")!
+    let welcomePage: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Welcome Page")!
+    let unitsPage: UIViewController   = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Units Page")!
+    let metricsPage: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Metrics Page")!
+    let lastPage: UIViewController    = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Last Page")!
     
     ownViewControllers = [
       welcomePage,

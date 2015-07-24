@@ -36,6 +36,7 @@ class WelcomeWizardUnitsViewController: OmegaSettingsViewController {
       if deltaHeight != 0 {
         headerView.frame.size.height += deltaHeight
         tableView.tableHeaderView = headerView
+        view.layoutIfNeeded()
       }
     }
   }
