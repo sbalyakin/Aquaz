@@ -31,7 +31,7 @@ class UITextFieldTableViewCell: UITableViewCell {
   private func baseInit() {
     if self.textField == nil {
       let textField = UITextField()
-      textField.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
+      textField.frame = CGRect(x: 0, y: 0, width: 80, height: 30)
       textField.delegate = self
       self.accessoryView = textField
       self.textField = textField

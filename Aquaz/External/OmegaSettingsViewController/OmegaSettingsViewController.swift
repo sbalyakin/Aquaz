@@ -44,6 +44,11 @@ class OmegaSettingsViewController: UIViewController {
     return []
   }
   
+  func recreateTableCellsSections() {
+    tableCellsSections = createTableCellsSections()
+    tableView.reloadData()
+  }
+  
   func createBasicTableCell(#title: String, accessoryType: UITableViewCellAccessoryType? = nil, activationChangedFunction: TableCell.TableCellActivatedFunction? = nil) -> BasicTableCell {
     let cell = BasicTableCell(title: title, container: self, accessoryType: accessoryType)
     cell.tableCellDidActivateFunction = activationChangedFunction

@@ -11,10 +11,41 @@ import CoreData
 
 class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
 
+  private struct LocalizedStrings {
+    
+    lazy var genderTitle = NSLocalizedString("WGVC:Gender", value: "Gender",
+      comment: "WaterGoalViewController: Table cell title for [Gender] setting")
+    
+    lazy var heightTitle = NSLocalizedString("WGVC:Height", value: "Height",
+      comment: "WaterGoalViewController: Table cell title for [Height] setting")
+    
+    lazy var weightTitle = NSLocalizedString("WGVC:Weight", value: "Weight",
+      comment: "WaterGoalViewController: Table cell title for [Weight] setting")
+    
+    lazy var ageTitle = NSLocalizedString("WGVC:Age", value: "Age",
+      comment: "WaterGoalViewController: Table cell title for [Age] setting")
+    
+    lazy var physicalActivityTitle = NSLocalizedString("WGVC:Physical Activity", value: "Physical Activity",
+      comment: "WaterGoalViewController: Table cell title for [Physical Activity] setting")
+    
+    lazy var dailyWaterIntakeTitle = NSLocalizedString("WGVC:Daily Water Intake", value: "Daily Water Intake",
+      comment: "WaterGoalViewController: Table cell title for [Daily Water Intake] setting")
+    
+    lazy var dailyWaterIntakeSectionFooter = NSLocalizedString("The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
+      value: "The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
+      comment: "Footer for section with calculated daily water intake")
+    
+  }
+  
   @IBOutlet weak var descriptionLabel: UILabel!
   
-  private var isOutdated = false
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
+  
+  private var heightObserverIdentifier: Int?
+  private var weightObserverIdentifier: Int?
+  private var volumeObserverIdentifier: Int?
+  
+  private var localizedStrings = LocalizedStrings()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,6 +53,36 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     UIHelper.applyStyleToViewController(self)
     rightDetailValueColor = StyleKit.settingsTablesValueColor
     rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
+
+    initObserving()
+  }
+
+  private func initObserving() {
+    heightObserverIdentifier = Settings.sharedInstance.generalHeightUnits.addObserver { [weak self] _ in
+      self?.recreateTableCellsSections()
+    }
+    
+    weightObserverIdentifier = Settings.sharedInstance.generalWeightUnits.addObserver { [weak self] _ in
+      self?.recreateTableCellsSections()
+    }
+    
+    volumeObserverIdentifier = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
+      self?.recreateTableCellsSections()
+    }
+  }
+  
+  deinit {
+    if let identifier = heightObserverIdentifier {
+      Settings.sharedInstance.generalHeightUnits.removeObserver(identifier)
+    }
+
+    if let identifier = weightObserverIdentifier {
+      Settings.sharedInstance.generalHeightUnits.removeObserver(identifier)
+    }
+
+    if let identifier = volumeObserverIdentifier {
+      Settings.sharedInstance.generalHeightUnits.removeObserver(identifier)
+    }
   }
 
   override func viewDidLayoutSubviews() {
@@ -45,20 +106,9 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     }
   }
 
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-    
-    if isOutdated {
-      tableCellsSections = createTableCellsSections()
-      tableView.reloadData()
-      isOutdated = true
-    }
-  }
-  
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
     saveWaterGoalToCoreData()
-    isOutdated = true
   }
 
   override func viewDidAppear(animated: Bool) {
@@ -71,33 +121,11 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
   }
   
   override func createTableCellsSections() -> [TableCellsSection] {
-    let genderTitle = NSLocalizedString("WGVC:Gender", value: "Gender",
-      comment: "WaterGoalViewController: Table cell title for [Gender] setting")
-    
-    let heightTitle = NSLocalizedString("WGVC:Height", value: "Height",
-      comment: "WaterGoalViewController: Table cell title for [Height] setting")
-    
-    let weightTitle = NSLocalizedString("WGVC:Weight", value: "Weight",
-      comment: "WaterGoalViewController: Table cell title for [Weight] setting")
-    
-    let ageTitle = NSLocalizedString("WGVC:Age", value: "Age",
-      comment: "WaterGoalViewController: Table cell title for [Age] setting")
-    
-    let physicalActivityTitle = NSLocalizedString("WGVC:Physical Activity", value: "Physical Activity",
-      comment: "WaterGoalViewController: Table cell title for [Physical Activity] setting")
-    
-    let dailyWaterIntakeTitle = NSLocalizedString("WGVC:Daily Water Intake", value: "Daily Water Intake",
-      comment: "WaterGoalViewController: Table cell title for [Daily Water Intake] setting")
-    
-    let dailyWaterIntakeSectionFooter = NSLocalizedString("The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
-      value: "The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
-      comment: "Footer for section with calculated daily water intake")
-
     // Information section
     
     // Gender cell
     genderCell = createEnumRightDetailTableCell(
-      title: genderTitle,
+      title: localizedStrings.genderTitle,
       settingsItem: Settings.sharedInstance.userGender,
       pickerTableCellHeight: .Small,
       stringFromValueFunction: WelcomeWizardMetricsViewController.stringFromGender)
@@ -110,13 +138,14 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     
     // Height cell
     let heightUnit = Settings.sharedInstance.generalHeightUnits.value
+
     let heightCollection = DoubleCollection(
       minimumValue: heightUnit.minimumValue,
       maximumValue: heightUnit.maximumValue,
       step: heightUnit.step)
     
     heightCell = createRangedRightDetailTableCell(
-      title: heightTitle,
+      title: localizedStrings.heightTitle,
       settingsItem: Settings.sharedInstance.userHeight,
       collection: heightCollection,
       pickerTableCellHeight: .Large,
@@ -126,13 +155,14 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     
     // Weight cell
     let weightUnit = Settings.sharedInstance.generalWeightUnits.value
+
     let weightCollection = DoubleCollection(
       minimumValue: weightUnit.minimumValue,
       maximumValue: weightUnit.maximumValue,
       step: weightUnit.step)
     
     weightCell = createRangedRightDetailTableCell(
-      title: weightTitle,
+      title: localizedStrings.weightTitle,
       settingsItem: Settings.sharedInstance.userWeight,
       collection: weightCollection,
       pickerTableCellHeight: .Large,
@@ -147,7 +177,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
       step: 1)
     
     ageCell = createRangedRightDetailTableCell(
-      title: ageTitle,
+      title: localizedStrings.ageTitle,
       settingsItem: Settings.sharedInstance.userAge,
       collection: ageCollection,
       pickerTableCellHeight: .Large,
@@ -157,7 +187,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     
     // Physical activity cell
     physicalActivityCell = createEnumRightDetailTableCell(
-      title: physicalActivityTitle,
+      title: localizedStrings.physicalActivityTitle,
       settingsItem: Settings.sharedInstance.userPhysicalActivity,
       pickerTableCellHeight: .Small,
       stringFromValueFunction: WelcomeWizardMetricsViewController.stringFromPhysicalActivity)
@@ -165,7 +195,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     physicalActivityCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
     let volumeUnit = Settings.sharedInstance.generalVolumeUnits.value.unit
-    let dailyWaterIntakeTitleFinal = dailyWaterIntakeTitle +  " (\(volumeUnit.contraction))"
+    let dailyWaterIntakeTitleFinal = "\(localizedStrings.dailyWaterIntakeTitle) (\(volumeUnit.contraction))"
 
     let informationSection = TableCellsSection()
     informationSection.tableCells = [
@@ -185,7 +215,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
       keyboardType: .DecimalPad)
     
     let dailyWaterIntakeSection = TableCellsSection()
-    dailyWaterIntakeSection.footerTitle = dailyWaterIntakeSectionFooter
+    dailyWaterIntakeSection.footerTitle = localizedStrings.dailyWaterIntakeSectionFooter
     dailyWaterIntakeSection.tableCells = [dailyWaterIntakeCell]
     
     return [informationSection, dailyWaterIntakeSection]
