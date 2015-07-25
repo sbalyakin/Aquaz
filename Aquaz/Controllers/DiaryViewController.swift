@@ -229,29 +229,43 @@ extension DiaryViewController: UITableViewDelegate {
 // MARK: NSFetchedResultsControllerDelegate
 extension DiaryViewController: NSFetchedResultsControllerDelegate {
   
+  // All methods below use dispatch_sync for the main queue 
+  // because it guarantees sequential calls for tableView's methods:
+  //
+  // tableView.beginUpdates() -> updating tableView -> tableView.endUpdates()
+  //
+  // It's safe to execute them in a synchronized way because 
+  // NSFetchedResultsController is running in a separate queue of managedObjectContext.
+  
   func controllerWillChangeContent(controller: NSFetchedResultsController) {
-    dispatch_async(dispatch_get_main_queue()) {
+    dispatch_sync(dispatch_get_main_queue()) {
       self.tableView.beginUpdates()
     }
   }
   
   func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-    dispatch_async(dispatch_get_main_queue()) {
-      switch type {
-      case .Insert:
+    switch type {
+    case .Insert:
+      dispatch_sync(dispatch_get_main_queue()) {
         self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
-        
-      case .Delete:
+      }
+      
+    case .Delete:
+      dispatch_sync(dispatch_get_main_queue()) {
         self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
-        
-      case .Update:
-        if let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as? DiaryTableViewCell,
-           let intake = self.fetchedResultsController?.objectAtIndexPath(indexPath!) as? Intake
-        {
-          cell.intake = intake
+      }
+      
+    case .Update:
+      if let intake = self.fetchedResultsController?.objectAtIndexPath(indexPath!) as? Intake {
+        dispatch_sync(dispatch_get_main_queue()) {
+          if let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as? DiaryTableViewCell {
+            cell.intake = intake
+          }
         }
-        
-      case .Move:
+      }
+      
+    case .Move:
+      dispatch_sync(dispatch_get_main_queue()) {
         self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
         self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
       }
@@ -259,8 +273,8 @@ extension DiaryViewController: NSFetchedResultsControllerDelegate {
   }
   
   func controllerDidChangeContent(controller: NSFetchedResultsController) {
-    dispatch_async(dispatch_get_main_queue()) {
-      self.tableView?.endUpdates()
+    dispatch_sync(dispatch_get_main_queue()) {
+      self.tableView.endUpdates()
     }
   }
 }
