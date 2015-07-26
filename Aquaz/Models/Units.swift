@@ -64,12 +64,7 @@ class Units {
     }
   }
   
-  class var sharedInstance: Units {
-    struct Instance {
-      static let instance = Units()
-    }
-    return Instance.instance
-  }
+  static let sharedInstance = Units()
   
   /// Prepares specified amount for storing into Core Data. It converts metric units of amount to current units from settings.
   /// Then it rounds converted amount and makes reverse conversion to metric units.

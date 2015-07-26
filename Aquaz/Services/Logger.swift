@@ -37,12 +37,7 @@ public class Logger {
     static let count = "count"
   }
   
-  public class var sharedInstance: Logger {
-    struct Static {
-      static var instance = Logger()
-    }
-    return Static.instance
-  }
+  static let sharedInstance = Logger()
   
   var logLevel: LogLevel = .Warning
   var assertLevel: LogLevel = .Error

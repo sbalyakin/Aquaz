@@ -11,12 +11,7 @@ import CoreData
 
 class CoreDataStack: NSObject {
 
-  class var sharedInstance: CoreDataStack {
-    struct Static {
-      static let instance = CoreDataStack()
-    }
-    return Static.instance
-  }
+  static let sharedInstance = CoreDataStack()
   
   override init() {
     super.init()

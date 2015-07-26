@@ -10,12 +10,7 @@ import StoreKit
 
 class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
 
-  class var sharedInstance: InAppPurchaseManager {
-    struct Static {
-      static let instance = InAppPurchaseManager()
-    }
-    return Static.instance
-  }
+  static let sharedInstance = InAppPurchaseManager()
 
   private struct LocalizedStrings {
     
@@ -191,14 +186,14 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
   
   func request(request: SKRequest!, didFailWithError error: NSError!) {
     if request == purchaseRequest {
-      Logger.logDebug("requestDidFinish(:didFailWithError) for a purchase request")
+      Logger.logDebug("requestDidFinish(:didFailWithError) for a purchase request", logDetails: error.localizedDescription)
       purchaseRequest = nil
 
       let message = error.localizedDescription
       let alert = UIAlertView(title: localizedStrings.errorAlertTitle, message: message, delegate: nil, cancelButtonTitle: localizedStrings.okButtonTitle)
       alert.show()
     } else {
-      Logger.logDebug("requestDidFinish(:didFailWithError) for a price request")
+      Logger.logDebug("requestDidFinish(:didFailWithError) for a price request", logDetails: error.localizedDescription)
       if let completion = priceRequests.removeValueForKey(request as! SKProductsRequest!) {
         completion(price: "")
       }

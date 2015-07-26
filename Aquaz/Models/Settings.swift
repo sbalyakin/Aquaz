@@ -10,12 +10,7 @@ import Foundation
 
 public class Settings {
 
-  public class var sharedInstance: Settings {
-    struct Instance {
-      static var instance = Settings()
-    }
-    return Instance.instance
-  }
+  public static let sharedInstance = Settings()
   
   // MARK: Initializer
   

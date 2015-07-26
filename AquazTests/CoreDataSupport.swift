@@ -11,12 +11,7 @@ import Aquaz
 
 class CoreDataSupport {
   
-  class var sharedInstance: CoreDataSupport {
-    struct Instance {
-      static let instance = CoreDataSupport()
-    }
-    return Instance.instance
-  }
+  static let sharedInstance = CoreDataSupport()
   
   let managedObjectContext: NSManagedObjectContext
   
