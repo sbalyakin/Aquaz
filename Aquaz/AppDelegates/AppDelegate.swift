@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     #if DEBUG
       Logger.setup(logLevel: .Warning, assertLevel: .Error, consoleLevel: .Debug, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
       #else
-      Logger.setup(logLevel: .Warning, assertLevel: .Error, consoleLevel: .Error, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
+      Logger.setup(logLevel: .Warning, assertLevel: .None, consoleLevel: .None, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
     #endif
 
     if !Settings.sharedInstance.generalFullVersion.value {

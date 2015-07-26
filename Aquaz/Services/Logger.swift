@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Crashlytics
 
 public class Logger {
 
@@ -129,10 +130,9 @@ public class Logger {
         attributes[Attributes.functionName] = functionName
       }
 
-// Sergey Balyakin: Localytics framework has been removed, it should be replaced with some other one later.
-//      if isEnabledForLogLevel(logLevel) {
-//        Localytics.tagEvent(logLevel.description, attributes: attributes)
-//      }
+      if isEnabledForLogLevel(logLevel) {
+        Answers.logCustomEventWithName(logLevel.description, customAttributes: attributes)
+      }
       
       if isConsoleEnabledForLogLevel(logLevel) {
         let message = logDetails.isEmpty ? logMessage : "\(logMessage) \r\n \(logDetails.description)"
