@@ -31,7 +31,7 @@ class WeekStatisticsViewController: UIViewController {
   private var helpTip: JDFTooltipView?
 
   private struct Constants {
-    static let showDaySegue = "Show Day"
+    static let dayViewController = "DayViewController"
   }
   
   private struct LocalizedStrings {
@@ -260,18 +260,6 @@ class WeekStatisticsViewController: UIViewController {
     statisticsEndDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: daysPerWeek)
   }
   
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == Constants.showDaySegue,
-       let viewController = segue.destinationViewController.contentViewController as? DayViewController,
-       let date = sender as? NSDate
-    {
-      viewController.mode = .Statistics
-      viewController.setCurrentDate(date)
-    } else {
-      Logger.logError("Unable to setup DayViewController properly from week statistics")
-    }
-  }
-
   private func isFutureDate(dayIndex: Int) -> Bool {
     let date = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
     let daysBetween = DateHelper.calcDistanceBetweenCalendarDates(fromDate: NSDate(), toDate: date, calendarUnit: .CalendarUnitDay)
@@ -380,9 +368,19 @@ private extension Units.Volume {
 extension WeekStatisticsViewController: WeekStatisticsViewDelegate {
   
   func weekStatisticsViewDaySelected(dayIndex: Int) {
-    if !isFutureDate(dayIndex) {
+    if isFutureDate(dayIndex) {
+      return
+    }
+
+    // Unfortunately Show seque does not work properly in iOS 7, so straight pushViewController() method is used instead.
+
+    if let dayViewController: DayViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "DayViewController") {
       let selectedDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
-      performSegueWithIdentifier(Constants.showDaySegue, sender: selectedDate)
+      dayViewController.mode = .Statistics
+      dayViewController.setCurrentDate(selectedDate)
+      
+      navigationController?.pushViewController(dayViewController, animated: true)
+      
       isShowingDay = true
     }
   }

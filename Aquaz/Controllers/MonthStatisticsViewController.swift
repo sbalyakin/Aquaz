@@ -19,7 +19,7 @@ class MonthStatisticsViewController: UIViewController {
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
 
   private struct Constants {
-    static let showDaySegue = "Show Day"
+    static let dayViewController = "DayViewController"
   }
   
   override func viewDidLoad() {
@@ -123,18 +123,6 @@ class MonthStatisticsViewController: UIViewController {
     updateUI(animated: true) // Updating month label before scroll view animation is finished
   }
   
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == Constants.showDaySegue,
-       let viewController = segue.destinationViewController.contentViewController as? DayViewController,
-       let date = sender as? NSDate
-    {
-      viewController.mode = .Statistics
-      viewController.setCurrentDate(date)
-    } else {
-      Logger.logError("Unable to setup DayViewController properly from month statistics")
-    }
-  }
-  
   private func checkHelpTip() {
     if !Settings.sharedInstance.generalFullVersion.value || Settings.sharedInstance.uiMonthStatisticsPageHelpTipIsShown.value  {
       return
@@ -177,8 +165,17 @@ class MonthStatisticsViewController: UIViewController {
 extension MonthStatisticsViewController: CalendarViewDelegate {
 
   func calendarViewDaySelected(dayInfo: CalendarViewDayInfo) {
-    if dayInfo.isCurrentMonth {
-      performSegueWithIdentifier(Constants.showDaySegue, sender: dayInfo.date)
+    if !dayInfo.isCurrentMonth {
+      return
+    }
+
+    // Unfortunately Show seque does not work properly in iOS 7, so straight pushViewController() method is used instead.
+
+    if let dayViewController: DayViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "DayViewController") {
+      dayViewController.mode = .Statistics
+      dayViewController.setCurrentDate(dayInfo.date)
+      
+      navigationController?.pushViewController(dayViewController, animated: true)
     }
   }
 
