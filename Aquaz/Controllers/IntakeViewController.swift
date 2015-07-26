@@ -173,7 +173,7 @@ class IntakeViewController: UIViewController {
   
   private func setupSlider() {
     amountSlider.tintColor = drink.mainColor
-    amountSlider.maximumTrackTintColor = UIColor.blackColor().colorWithAlpha(0.2)
+    amountSlider.maximumTrackTintColor = UIColor(white: 0.8, alpha: 1)
   }
   
   private func setupDrinkInformation() {
