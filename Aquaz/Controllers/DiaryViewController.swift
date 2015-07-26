@@ -19,6 +19,7 @@ class DiaryViewController: UIViewController {
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   private var sizingCell: DiaryTableViewCell!
   private var volumeObserverIdentifier: Int?
+  private let isIOS8AndLater = UIDevice.currentDevice().systemVersion.compare("8.0.0", options: NSStringCompareOptions.NumericSearch) != .OrderedAscending
 
   private struct Constants {
     static let diaryCellIdentifier = "DiaryTableViewCell"
@@ -33,6 +34,11 @@ class DiaryViewController: UIViewController {
     
     volumeObserverIdentifier = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
       self?.tableView?.reloadData()
+    }
+    
+    if isIOS8AndLater {
+      tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.estimatedRowHeight = 54
     }
   }
   
@@ -210,18 +216,30 @@ extension DiaryViewController: UITableViewDataSource {
 extension DiaryViewController: UITableViewDelegate {
 
   func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    if sizingCell == nil {
-      sizingCell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier) as! DiaryTableViewCell
-    }
+    if isIOS8AndLater {
+      return UITableViewAutomaticDimension
+    } else {
+      if sizingCell == nil {
+        sizingCell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier) as! DiaryTableViewCell
+      }
 
-    if let intake = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Intake {
-      sizingCell.intake = intake
+      if let intake = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Intake {
+        sizingCell.intake = intake
+      }
+      
+      sizingCell.bounds = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: sizingCell.bounds.height)
+      
+      sizingCell.setNeedsLayout()
+      sizingCell.layoutIfNeeded()
+      
+      let height = sizingCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+      
+      return height
     }
-    
-    sizingCell.setNeedsLayout()
-    sizingCell.layoutIfNeeded()
-    let size = sizingCell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
-    return size.height
+  }
+  
+  func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    return 54 // Estimated height is taken from storyboard
   }
   
 }

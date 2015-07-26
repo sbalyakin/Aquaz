@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -559,19 +558,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="{Drink}" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vcm-PC-Pd2">
-                                                    <rect key="frame" x="8" y="8" width="458" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="{Drink}" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vcm-PC-Pd2">
+                                                    <rect key="frame" x="20" y="8" width="446" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Time}" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVd-k1-C1k" userLabel="Intake Time">
-                                                    <rect key="frame" x="8" y="30" width="458" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="{Time}" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVd-k1-C1k" userLabel="Intake Time">
+                                                    <rect key="frame" x="20" y="30" width="446" height="15"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="{Amount}" textAlignment="right" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agg-wE-OgY" userLabel="Intake Amount">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Amount}" textAlignment="right" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agg-wE-OgY" userLabel="Intake Amount">
                                                     <rect key="frame" x="474" y="8" width="85" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -587,16 +586,16 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="oVd-k1-C1k" firstAttribute="top" secondItem="Vcm-PC-Pd2" secondAttribute="bottom" constant="2" id="8fh-dF-nCd"/>
-                                                <constraint firstItem="Vcm-PC-Pd2" firstAttribute="top" secondItem="Bhq-Ir-45T" secondAttribute="topMargin" id="BSs-d6-XAY"/>
+                                                <constraint firstItem="Vcm-PC-Pd2" firstAttribute="top" secondItem="Bhq-Ir-45T" secondAttribute="top" constant="8" id="BSs-d6-XAY"/>
                                                 <constraint firstItem="Vcm-PC-Pd2" firstAttribute="width" secondItem="oVd-k1-C1k" secondAttribute="width" id="FlD-0e-bh6"/>
                                                 <constraint firstItem="agg-wE-OgY" firstAttribute="centerY" secondItem="Vcm-PC-Pd2" secondAttribute="centerY" id="SfW-Q7-Hz9"/>
                                                 <constraint firstItem="agg-wE-OgY" firstAttribute="width" secondItem="WOd-mb-fl1" secondAttribute="width" id="U5P-4k-wSo"/>
-                                                <constraint firstItem="Vcm-PC-Pd2" firstAttribute="leading" secondItem="Bhq-Ir-45T" secondAttribute="leading" constant="8" id="ZHH-nQ-grQ"/>
+                                                <constraint firstItem="Vcm-PC-Pd2" firstAttribute="leading" secondItem="Bhq-Ir-45T" secondAttribute="leading" constant="20" symbolic="YES" id="ZHH-nQ-grQ"/>
                                                 <constraint firstItem="agg-wE-OgY" firstAttribute="leading" secondItem="Vcm-PC-Pd2" secondAttribute="trailing" constant="8" symbolic="YES" id="Zqu-Jj-IPh"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="oVd-k1-C1k" secondAttribute="bottom" id="aHE-gV-aFO"/>
+                                                <constraint firstAttribute="bottom" secondItem="oVd-k1-C1k" secondAttribute="bottom" constant="8" id="aHE-gV-aFO"/>
                                                 <constraint firstItem="oVd-k1-C1k" firstAttribute="centerY" secondItem="WOd-mb-fl1" secondAttribute="centerY" id="ddZ-F2-im3"/>
                                                 <constraint firstAttribute="trailing" secondItem="WOd-mb-fl1" secondAttribute="trailing" constant="8" id="qSl-sj-ef2"/>
-                                                <constraint firstItem="oVd-k1-C1k" firstAttribute="leading" secondItem="Bhq-Ir-45T" secondAttribute="leading" constant="8" id="xhu-I4-AfS"/>
+                                                <constraint firstItem="oVd-k1-C1k" firstAttribute="leading" secondItem="Bhq-Ir-45T" secondAttribute="leading" constant="20" symbolic="YES" id="xhu-I4-AfS"/>
                                                 <constraint firstAttribute="trailing" secondItem="agg-wE-OgY" secondAttribute="trailing" constant="8" id="zMh-7K-72Y"/>
                                             </constraints>
                                         </tableViewCellContentView>
