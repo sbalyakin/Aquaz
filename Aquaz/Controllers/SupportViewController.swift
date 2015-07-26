@@ -184,8 +184,8 @@ extension SupportViewController: UIActionSheetDelegate {
 
     switch buttonIndex {
     case 0: return // Cancel
-    case 1: subject = "Aquaz: Offer"
-    case 2: subject = "Aquaz: Bug"
+    case 1: subject = "Aquaz: Suggestion"
+    case 2: subject = "Aquaz: Issue"
     case 3: subject = "Aquaz: Help"
     default: return
     }
