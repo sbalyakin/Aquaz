@@ -87,6 +87,27 @@ class DiaryViewController: UIViewController {
     }
   }
 
+  // This function is like the fetchedResultsController.objectAtIndexPath but with bounds checks.
+  private func getIntakeAtIndexPath(indexPath: NSIndexPath) -> Intake? {
+    if let fetchedResultsController = fetchedResultsController,
+       let sections = fetchedResultsController.sections
+    {
+      if indexPath.section >= sections.count {
+        return nil
+      }
+      
+      let section = sections[indexPath.section] as! NSFetchedResultsSectionInfo
+
+      if indexPath.row >= section.numberOfObjects {
+        return nil
+      }
+      
+      return section.objects[indexPath.row] as? Intake
+    } else {
+      return nil
+    }
+  }
+  
   private func createFetchedResultsController(completion: () -> ()) {
     managedObjectContext.performBlock {
       let fetchRequest = self.getFetchRequestForDate(self.date)
@@ -133,8 +154,8 @@ class DiaryViewController: UIViewController {
       let intakeViewController = segue.destinationViewController.contentViewController as? IntakeViewController,
       let indexPath = tableView.indexPathForSelectedRow()
     {
-      managedObjectContext.performBlock {
-        if let intake = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Intake {
+      managedObjectContext.performBlock() {
+        if let intake = self.getIntakeAtIndexPath(indexPath) {
           dispatch_async(dispatch_get_main_queue()) {
             intakeViewController.intake = intake
           }
@@ -153,6 +174,11 @@ extension DiaryViewController: UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    let actualSectionsCount = fetchedResultsController?.sections?.count ?? 0
+    if section >= actualSectionsCount {
+      return 0
+    }
+    
     if let sectionInfo = fetchedResultsController?.sections?[section] as? NSFetchedResultsSectionInfo {
       return sectionInfo.numberOfObjects
     } else {
@@ -163,8 +189,12 @@ extension DiaryViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier, forIndexPath: indexPath) as! DiaryTableViewCell
     
-    if let intake = fetchedResultsController?.objectAtIndexPath(indexPath) as? Intake {
-      cell.intake = intake
+    managedObjectContext.performBlock {
+      if let intake = self.getIntakeAtIndexPath(indexPath) {
+        dispatch_async(dispatch_get_main_queue()) {
+          cell.intake = intake
+        }
+      }
     }
     
     return cell
@@ -203,7 +233,7 @@ extension DiaryViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if editingStyle == .Delete {
       managedObjectContext.performBlock {
-        if let intake = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Intake {
+        if let intake = self.getIntakeAtIndexPath(indexPath) {
           intake.deleteEntity(saveImmediately: true)
         }
       }
@@ -223,9 +253,7 @@ extension DiaryViewController: UITableViewDelegate {
         sizingCell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier) as! DiaryTableViewCell
       }
 
-      if let intake = self.fetchedResultsController?.objectAtIndexPath(indexPath) as? Intake {
-        sizingCell.intake = intake
-      }
+      sizingCell.updateFonts()
       
       sizingCell.bounds = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: sizingCell.bounds.height)
       
@@ -274,7 +302,7 @@ extension DiaryViewController: NSFetchedResultsControllerDelegate {
       }
       
     case .Update:
-      if let intake = self.fetchedResultsController?.objectAtIndexPath(indexPath!) as? Intake {
+      if let intake = getIntakeAtIndexPath(indexPath!) {
         dispatch_sync(dispatch_get_main_queue()) {
           if let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as? DiaryTableViewCell {
             cell.intake = intake

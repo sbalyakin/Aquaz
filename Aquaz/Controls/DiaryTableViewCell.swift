@@ -42,7 +42,7 @@ class DiaryTableViewCell: UITableViewCell {
     updateFonts()
   }
   
-  private func updateFonts() {
+  func updateFonts() {
     drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     timeLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
     amountLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
