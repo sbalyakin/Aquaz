@@ -32,10 +32,6 @@
 		843B056119E2D7800097A833 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055719E2D7800097A833 /* DayViewController.swift */; };
 		843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055819E2D7800097A833 /* SelectDrinkViewController.swift */; };
 		843B056919E2D80E0097A833 /* WaterGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B056819E2D80E0097A833 /* WaterGoal.swift */; };
-		843D955D1B4FF6E1007CAC01 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843D955B1B4FF6E1007CAC01 /* Fabric.framework */; };
-		843D955E1B4FF6E1007CAC01 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843D955B1B4FF6E1007CAC01 /* Fabric.framework */; };
-		843D955F1B4FF6E1007CAC01 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843D955C1B4FF6E1007CAC01 /* Crashlytics.framework */; };
-		843D95601B4FF6E1007CAC01 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843D955C1B4FF6E1007CAC01 /* Crashlytics.framework */; };
 		8443DF421B29737D00FDD294 /* WidgetImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8443DF411B29737D00FDD294 /* WidgetImages.xcassets */; };
 		8444F1961B207D75007577C8 /* InfoBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444F1951B207D75007577C8 /* InfoBannerView.swift */; };
 		8444F1981B209250007577C8 /* SystemHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444F1971B209250007577C8 /* SystemHelper.swift */; };
@@ -118,6 +114,10 @@
 		A57D2BF61AD02C5C00619D62 /* WelcomeWizardFullVersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D2BF51AD02C5C00619D62 /* WelcomeWizardFullVersionViewController.swift */; };
 		A57F5E6B1AC968A6005C4F46 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */; };
 		A581FEF01A76D5F60025CDEF /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */; };
+		A586450A1B640786009DFB24 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58645081B640786009DFB24 /* Fabric.framework */; };
+		A586450B1B640786009DFB24 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58645081B640786009DFB24 /* Fabric.framework */; };
+		A586450C1B640786009DFB24 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58645091B640786009DFB24 /* Crashlytics.framework */; };
+		A586450D1B640786009DFB24 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58645091B640786009DFB24 /* Crashlytics.framework */; };
 		A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */; };
 		A598D5081A6558C100AA89CB /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5071A6558C100AA89CB /* StyleKit.swift */; };
 		A598D50A1A6559FB00AA89CB /* DrinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5091A6559FB00AA89CB /* DrinkView.swift */; };
@@ -239,8 +239,6 @@
 		843B055819E2D7800097A833 /* SelectDrinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SelectDrinkViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		843B055C19E2D7800097A833 /* Aquaz-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Aquaz-Bridging-Header.h"; sourceTree = "<group>"; };
 		843B056819E2D80E0097A833 /* WaterGoal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoal.swift; sourceTree = "<group>"; };
-		843D955B1B4FF6E1007CAC01 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		843D955C1B4FF6E1007CAC01 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		8443DF411B29737D00FDD294 /* WidgetImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WidgetImages.xcassets; sourceTree = "<group>"; };
 		8444F1951B207D75007577C8 /* InfoBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoBannerView.swift; path = Controls/InfoBannerView.swift; sourceTree = "<group>"; };
 		8444F1971B209250007577C8 /* SystemHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemHelper.swift; sourceTree = "<group>"; };
@@ -311,6 +309,8 @@
 		A57D2BF51AD02C5C00619D62 /* WelcomeWizardFullVersionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWizardFullVersionViewController.swift; sourceTree = "<group>"; };
 		A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomSlider.swift; path = Controls/CustomSlider.swift; sourceTree = "<group>"; };
+		A58645081B640786009DFB24 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		A58645091B640786009DFB24 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A598D5071A6558C100AA89CB /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		A598D5091A6559FB00AA89CB /* DrinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkView.swift; path = Controls/DrinkView.swift; sourceTree = "<group>"; };
@@ -379,9 +379,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5A3358B1B0218CE004579A4 /* StoreKit.framework in Frameworks */,
-				843D955F1B4FF6E1007CAC01 /* Crashlytics.framework in Frameworks */,
 				A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */,
-				843D955D1B4FF6E1007CAC01 /* Fabric.framework in Frameworks */,
+				A586450C1B640786009DFB24 /* Crashlytics.framework in Frameworks */,
+				A586450A1B640786009DFB24 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,9 +396,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				843D95601B4FF6E1007CAC01 /* Crashlytics.framework in Frameworks */,
 				84D251971AD2511E001E6644 /* NotificationCenter.framework in Frameworks */,
-				843D955E1B4FF6E1007CAC01 /* Fabric.framework in Frameworks */,
+				A586450D1B640786009DFB24 /* Crashlytics.framework in Frameworks */,
+				A586450B1B640786009DFB24 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,8 +604,8 @@
 		84D251951AD2511E001E6644 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				843D955B1B4FF6E1007CAC01 /* Fabric.framework */,
-				843D955C1B4FF6E1007CAC01 /* Crashlytics.framework */,
+				A58645081B640786009DFB24 /* Fabric.framework */,
+				A58645091B640786009DFB24 /* Crashlytics.framework */,
 				A5A3358A1B0218CE004579A4 /* StoreKit.framework */,
 				A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */,
 				84D251961AD2511E001E6644 /* NotificationCenter.framework */,
