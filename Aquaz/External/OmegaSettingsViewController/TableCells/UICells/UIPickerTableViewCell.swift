@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol UIPickerTableViewCellDataSource {
+protocol UIPickerTableViewCellDataSource: class {
   func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int
   func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
   func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String!
   func pickerView(pickerView: UIPickerView, titleForComponent: Int) -> String?
 }
 
-protocol UIPickerTableViewCellDelegate {
+protocol UIPickerTableViewCellDelegate: class {
   func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
   func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat?
 }
@@ -30,13 +30,13 @@ class UIPickerTableViewCell: UITableViewCell {
   
   weak var pickerView: UIPickerView!
   
-  var dataSource: UIPickerTableViewCellDataSource? {
+  weak var dataSource: UIPickerTableViewCellDataSource? {
     didSet {
       setupPickerView()
     }
   }
   
-  var delegate: UIPickerTableViewCellDelegate?
+  weak var delegate: UIPickerTableViewCellDelegate?
   
   var pickerViewFont: UIFont? = nil {
     didSet {

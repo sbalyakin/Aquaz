@@ -16,7 +16,7 @@ protocol UITextFieldTableViewCellDelegate: class {
 class UITextFieldTableViewCell: UITableViewCell {
   
   weak var textField: UITextField!
-  var delegate: UITextFieldTableViewCellDelegate?
+  weak var delegate: UITextFieldTableViewCellDelegate?
   
   init(reuseIdentifier: String? = nil) {
     super.init(style: .Default, reuseIdentifier: reuseIdentifier)

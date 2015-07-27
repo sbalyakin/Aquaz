@@ -29,8 +29,8 @@ class TimeIntervalPickerTableCell<T: TimeIntervalPickerTableCellHelper>: MultiPi
     self.timeComponents = timeComponents
     let components = TimeIntervalPickerTableCell.generateComponentsFromTimeComponents(timeComponents)
     super.init(value: value, components: components, container: container, height: height)
-    selectionToValueFunction = convertSelectedRowsToTimeInterval
-    valueToSelectionFunction = convertTimeIntervalToSelectedRows
+    selectionToValueFunction = { [weak self] in return self?.convertSelectedRowsToTimeInterval($0) ?? 0 }
+    valueToSelectionFunction = { [weak self] in return self?.convertTimeIntervalToSelectedRows($0) ?? [] }
   }
   
   private class func generateComponentsFromTimeComponents(timeComponents: [TimeIntervalPickerTableCellComponent]) -> [Component] {

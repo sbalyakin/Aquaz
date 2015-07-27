@@ -140,8 +140,8 @@ class WaterGoalViewController: OmegaSettingsViewController {
     let dailyWaterIntakeTitleFinal = dailyWaterIntakeTitle +  " (\(volumeUnit.contraction))"
     
     dailyWaterIntakeCell = createTextFieldTableCell(
-      title: dailyWaterIntakeTitleFinal, settingsItem:
-      Settings.sharedInstance.userDailyWaterIntake,
+      title: dailyWaterIntakeTitleFinal,
+      settingsItem: Settings.sharedInstance.userDailyWaterIntake,
       valueFromStringFunction: WaterGoalViewController.metricWaterGoalFromString,
       stringFromValueFunction: WaterGoalViewController.stringFromWaterGoal,
       keyboardType: .DecimalPad)

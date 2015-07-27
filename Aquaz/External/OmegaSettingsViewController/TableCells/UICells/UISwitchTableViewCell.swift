@@ -8,14 +8,17 @@
 
 import UIKit
 
-protocol UISwitchTableViewCellDelegate {
+protocol UISwitchTableViewCellDelegate: class {
+  
   func switchControlValueChanged(switchControl: UISwitch, on: Bool)
+  
 }
 
 class UISwitchTableViewCell: UITableViewCell {
   
   weak var switchControl: UISwitch!
-  var delegate: UISwitchTableViewCellDelegate?
+  
+  weak var delegate: UISwitchTableViewCellDelegate?
 
   init(reuseIdentifier: String? = nil) {
     super.init(style: .Default, reuseIdentifier: reuseIdentifier)

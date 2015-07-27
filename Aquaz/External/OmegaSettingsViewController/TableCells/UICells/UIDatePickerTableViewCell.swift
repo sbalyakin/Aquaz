@@ -8,15 +8,17 @@
 
 import UIKit
 
-protocol UIDatePickerTableViewCellDelegate {
+protocol UIDatePickerTableViewCellDelegate: class {
+  
   func datePickerValueDidChange(datePicker: UIDatePicker)
+  
 }
 
 class UIDatePickerTableViewCell: UITableViewCell {
   
   weak var datePicker: UIDatePicker!
   
-  var delegate: UIDatePickerTableViewCellDelegate?
+  weak var delegate: UIDatePickerTableViewCellDelegate?
   
   init(reuseIdentifier: String? = nil) {
     super.init(style: .Default, reuseIdentifier: reuseIdentifier)

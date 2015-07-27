@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 
-protocol InfiniteScrollViewDataSource {
+protocol InfiniteScrollViewDataSource: class {
   
   func infiniteScrollViewNeedsPage(#index: Int) -> UIView
   
 }
 
-protocol InfiniteScrollViewDelegate {
+protocol InfiniteScrollViewDelegate: class {
   
   func infiniteScrollViewPageCanBeRemoved(#index: Int, view: UIView?)
   
@@ -26,14 +26,14 @@ protocol InfiniteScrollViewDelegate {
 
 class InfiniteScrollView: UIView {
 
-  var dataSource: InfiniteScrollViewDataSource? {
+  weak var dataSource: InfiniteScrollViewDataSource? {
     didSet {
       initPages()
       layoutPages()
     }
   }
   
-  var delegate: InfiniteScrollViewDelegate?
+  weak var delegate: InfiniteScrollViewDelegate?
 
   /// Number of side pages laying next to current page
   var sidePagesCount = 5 {

@@ -8,14 +8,18 @@
 
 import UIKit
 
-protocol UISegmentedTableViewCellDelegate {
+protocol UISegmentedTableViewCellDelegate: class {
+  
   func segmentedControlValueChanged(segmentedControl: UISegmentedControl, segmentIndex: Int)
+  
 }
 
 class UISegmentedTableViewCell: UITableViewCell {
   
   weak var segmentedControl: UISegmentedControl!
-  var delegate: UISegmentedTableViewCellDelegate?
+  
+  weak var delegate: UISegmentedTableViewCellDelegate?
+  
   var segmentsWidth: CGFloat = 0 {
     didSet {
       for segment in 0..<segmentedControl.numberOfSegments {
