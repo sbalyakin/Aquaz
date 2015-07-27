@@ -87,7 +87,7 @@ class TimeIntervalPickerTableCell<T: TimeIntervalPickerTableCellHelper>: MultiPi
     case NSCalendarUnit.CalendarUnitSecond: return 60
     case NSCalendarUnit.CalendarUnitMinute: return 60
     case NSCalendarUnit.CalendarUnitHour  : return 24
-    case NSCalendarUnit.CalendarUnitDay   : return Int.max
+    case NSCalendarUnit.CalendarUnitDay   : return Int.max - 1
     default: return 0
     }
   }

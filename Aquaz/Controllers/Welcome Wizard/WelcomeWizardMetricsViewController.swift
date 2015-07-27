@@ -343,8 +343,8 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
 private extension Units.Weight {
   var minimumValue: Double {
     switch self {
-    case Kilograms: return 1
-    case Pounds:    return 1
+    case Kilograms: return 30
+    case Pounds:    return 66
     }
   }
   

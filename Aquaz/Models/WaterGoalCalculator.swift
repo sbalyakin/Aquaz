@@ -153,7 +153,7 @@ public class WaterGoalCalculator {
     switch age {
     case Int.min..<30: ageFactor = factors[0]
     case 30..<60     : ageFactor = factors[1]
-    case 60...Int.max: ageFactor = factors[2]
+    case 60..<Int.max: ageFactor = factors[2]
     default:
       Logger.logError(Logger.Messages.logicalError)
       ageFactor = factors[0]
