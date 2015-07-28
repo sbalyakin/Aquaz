@@ -77,11 +77,11 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     }
 
     if let identifier = weightObserverIdentifier {
-      Settings.sharedInstance.generalHeightUnits.removeObserver(identifier)
+      Settings.sharedInstance.generalWeightUnits.removeObserver(identifier)
     }
 
     if let identifier = volumeObserverIdentifier {
-      Settings.sharedInstance.generalHeightUnits.removeObserver(identifier)
+      Settings.sharedInstance.generalVolumeUnits.removeObserver(identifier)
     }
   }
 
