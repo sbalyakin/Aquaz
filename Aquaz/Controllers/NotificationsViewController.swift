@@ -228,8 +228,8 @@ class NotificationsViewController: OmegaSettingsViewController {
     fullVersionBannerView!.infoLabel.text = text
     fullVersionBannerView!.infoImageView.image = ImageHelper.loadImage(.BannerFullVersion)
     fullVersionBannerView!.bannerWasTappedFunction = { [weak self] _ in self?.fullVersionBannerWasTapped() }
-    fullVersionBannerView!.showAndHide(animated: true, displayTime: 3, parentView: view) { [weak self] _ in
-      self?.fullVersionBannerView = nil
+    fullVersionBannerView!.showAndHide(animated: true, displayTime: 3, parentView: view) { _ in
+      self.fullVersionBannerView = nil
     }
   }
   
@@ -238,8 +238,9 @@ class NotificationsViewController: OmegaSettingsViewController {
   }
 
   private func hideFullVersionBanner() {
-    fullVersionBannerView?.hide(animated: true)
-    fullVersionBannerView = nil
+    fullVersionBannerView?.hide(animated: true) { _ in
+      self.fullVersionBannerView = nil
+    }
   }
   
   func fullVersionBannerWasTapped() {

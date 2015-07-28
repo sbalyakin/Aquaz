@@ -89,6 +89,7 @@ class InfoBannerView: BannerView {
       })
     } else {
       removeFromSuperview()
+      completion?(true)
     }
   }
   
