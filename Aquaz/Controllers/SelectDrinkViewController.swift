@@ -178,6 +178,8 @@ class SelectDrinkViewController: UIViewController {
     {
       intakeViewController.drink = drink
       intakeViewController.date = DateHelper.dateByJoiningDateTime(datePart: date, timePart: NSDate())
+    } else {
+      Logger.logError("An error occured on preparing segue for showing Intake scene from Select Drink scene")
     }
   }
   

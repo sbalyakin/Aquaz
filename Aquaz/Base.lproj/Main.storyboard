@@ -605,7 +605,6 @@
                                             <outlet property="drinkLabel" destination="Vcm-PC-Pd2" id="8PE-wf-bY3"/>
                                             <outlet property="timeLabel" destination="oVd-k1-C1k" id="Ld3-dz-CHr"/>
                                             <outlet property="waterBalanceLabel" destination="WOd-mb-fl1" id="HyJ-On-Jvg"/>
-                                            <segue destination="2WZ-Ss-cV0" kind="presentation" identifier="Edit Intake" id="Y3z-7d-zGG"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -626,6 +625,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="okf-PN-JP4" id="Uq3-k7-1Vz"/>
+                        <segue destination="2WZ-Ss-cV0" kind="presentation" identifier="Edit Intake" id="u79-hn-TyC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z0N-YC-Zdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1801,6 +1801,6 @@
         <image name="WelcomeFullVersion" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Y3z-7d-zGG"/>
+        <segue reference="u79-hn-TyC"/>
     </inferredMetricsTieBreakers>
 </document>

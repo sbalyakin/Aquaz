@@ -152,15 +152,11 @@ class DiaryViewController: UIViewController {
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == Constants.editIntakeSegue,
       let intakeViewController = segue.destinationViewController.contentViewController as? IntakeViewController,
-      let indexPath = tableView.indexPathForSelectedRow()
+      let intake = sender as? Intake
     {
-      managedObjectContext.performBlock() {
-        if let intake = self.getIntakeAtIndexPath(indexPath) {
-          dispatch_async(dispatch_get_main_queue()) {
-            intakeViewController.intake = intake
-          }
-        }
-      }
+      intakeViewController.intake = intake
+    } else {
+      Logger.logError("An error occured on preparing segue for showing Intake scene from Diary scene")
     }
   }
   
@@ -244,6 +240,18 @@ extension DiaryViewController: UITableViewDataSource {
 
 // MARK: UITableViewDelegate
 extension DiaryViewController: UITableViewDelegate {
+
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    managedObjectContext.performBlock() {
+      if let intake = self.getIntakeAtIndexPath(indexPath) {
+        dispatch_async(dispatch_get_main_queue()) {
+          self.performSegueWithIdentifier(Constants.editIntakeSegue, sender: intake)
+        }
+      } else {
+        Logger.logError("Failed to get an intake related to selected cell of tableview")
+      }
+    }
+  }
 
   func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
     if isIOS8AndLater {
