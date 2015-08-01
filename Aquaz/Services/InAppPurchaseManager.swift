@@ -280,30 +280,36 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     processError(transaction.error)
   }
 
-  private func processError(error: NSError) {
+  private func processError(error: NSError!) {
     let message: String?
     
-    switch error.code {
-    case SKErrorPaymentCancelled:
-      message = nil // do not show an alert because user cancelled the request by himself
-      
-    case SKErrorClientInvalid:
-      message = localizedStrings.transactionFailedClientInvalid
-      
-    case SKErrorPaymentInvalid:
-      Logger.logError("Payment transaction error", logDetails: "The payment parameters was not recognized by the Apple App Store")
+    if error != nil {
+      switch error.code {
+      case SKErrorPaymentCancelled:
+        message = nil // do not show an alert because user cancelled the request by himself
+        
+      case SKErrorClientInvalid:
+        message = localizedStrings.transactionFailedClientInvalid
+        
+      case SKErrorPaymentInvalid:
+        Logger.logError("Payment transaction error", logDetails: "The payment parameters was not recognized by the Apple App Store")
+        message = localizedStrings.transactionFailedUnknownError
+        
+      case SKErrorPaymentNotAllowed:
+        Logger.logError("Payment transaction error", logDetails: "The client is not allowed to authorize payments")
+        message = localizedStrings.transactionFailedUnknownError
+        
+      case SKErrorStoreProductNotAvailable:
+        Logger.logError("Payment transaction error", logDetails: "The requested product is not available in the store")
+        message = localizedStrings.transactionFailedUnknownError
+        
+      default:
+        Logger.logError("Payment transaction error", logDetails: "An unknown error occured - \(error.localizedDescription)")
+        message = error.localizedDescription
+      }
+    } else {
+      Logger.logError("Payment transaction error", logDetails: "An unknown error occured")
       message = localizedStrings.transactionFailedUnknownError
-      
-    case SKErrorPaymentNotAllowed:
-      Logger.logError("Payment transaction error", logDetails: "The client is not allowed to authorize payments")
-      message = localizedStrings.transactionFailedUnknownError
-      
-    case SKErrorStoreProductNotAvailable:
-      Logger.logError("Payment transaction error", logDetails: "The requested product is not available in the store")
-      message = localizedStrings.transactionFailedUnknownError
-      
-    default:
-      message = error.localizedDescription
     }
     
     if let message = message {
