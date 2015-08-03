@@ -39,6 +39,12 @@ class OmegaSettingsViewController: UIViewController {
     tableCellsSections = createTableCellsSections()
   }
   
+  deinit {
+    // It prevents EXC_BAD_ACCESS on deferred reloading the table view
+    tableView?.dataSource = nil
+    tableView?.delegate = nil
+  }
+  
   func createTableCellsSections() -> [TableCellsSection] {
     assert(false, "This method should be overriden by descendants")
     return []

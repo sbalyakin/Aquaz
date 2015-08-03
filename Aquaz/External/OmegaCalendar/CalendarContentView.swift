@@ -82,6 +82,12 @@ class CalendarContentView: UIView {
     addSubview(collectionView)
   }
   
+  deinit {
+    // It prevents EXC_BAD_ACCESS on deferred reloading the collection view
+    collectionView?.delegate = nil
+    collectionView?.dataSource = nil
+  }
+  
   override func layoutSubviews() {
     super.layoutSubviews()
     collectionView?.frame = bounds

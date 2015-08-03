@@ -167,6 +167,9 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   deinit {
+    pageViewController?.dataSource = nil
+    pageViewController?.delegate = nil
+
     NSNotificationCenter.defaultCenter().removeObserver(self)
     
     if let volumeObserverIdentifier = volumeObserverIdentifier {

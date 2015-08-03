@@ -167,12 +167,9 @@ extension CalendarView: InfiniteScrollViewDelegate {
     // Do nothing, because a calendar view does not manage its content views
   }
   
-  func infinteScrollViewPageWasSwitched(#pageIndex: Int) {
+  func infiniteScrollViewPageWasSwitched(#pageIndex: Int) {
     displayedMonthDate = DateHelper.addToDate(initialDisplayedMonthDate, years: 0, months: pageIndex, days: 0)
-
-    if let delegate = delegate {
-      delegate.calendarViewDayWasSwitched(displayedMonthDate)
-    }
+    delegate?.calendarViewDayWasSwitched(displayedMonthDate)
   }
   
 }

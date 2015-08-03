@@ -41,8 +41,13 @@ class DiaryViewController: UIViewController {
       tableView.estimatedRowHeight = 54
     }
   }
-  
+
   deinit {
+    // It prevents EXC_BAD_ACCESS on deferred reloading the table view
+    tableView?.dataSource = nil
+    tableView?.delegate = nil
+    fetchedResultsController?.delegate = nil
+
     if let volumeObserverIdentifier = volumeObserverIdentifier {
       Settings.sharedInstance.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
     }

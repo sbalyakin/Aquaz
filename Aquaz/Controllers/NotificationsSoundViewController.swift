@@ -20,6 +20,12 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
     findCheckedIndex()
     UIHelper.applyStyleToViewController(self)
   }
+  
+  deinit {
+    // It prevents EXC_BAD_ACCESS on deferred reloading the table view
+    tableView?.dataSource = nil
+    tableView?.delegate = nil
+  }
 
   @IBAction func saveWasTapped(sender: AnyObject) {
     let soundInfo = soundList[checkedIndex]

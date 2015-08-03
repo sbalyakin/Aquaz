@@ -20,7 +20,7 @@ protocol InfiniteScrollViewDelegate: class {
   
   func infiniteScrollViewPageCanBeRemoved(#index: Int, view: UIView?)
   
-  func infinteScrollViewPageWasSwitched(#pageIndex: Int)
+  func infiniteScrollViewPageWasSwitched(#pageIndex: Int)
   
 }
 
@@ -59,7 +59,7 @@ class InfiniteScrollView: UIView {
   private var pages = [Int: UIView]()
   private var currentIndex: Int = 0 {
     didSet {
-      delegate?.infinteScrollViewPageWasSwitched(pageIndex: currentIndex)
+      delegate?.infiniteScrollViewPageWasSwitched(pageIndex: currentIndex)
     }
   }
   
@@ -85,6 +85,11 @@ class InfiniteScrollView: UIView {
     addSubview(scrollView)
   }
 
+  deinit {
+    // It prevents EXC_BAD_ACCESS on deferred animation
+    scrollView?.delegate = nil
+  }
+  
   func refresh() {
     removePages()
     initPages()
