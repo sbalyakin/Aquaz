@@ -143,7 +143,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     static let pageViewEmbedSegue = "PageViewEmbed"
   }
   
-  private var volumeObserverIdentifier: Int?
+  private var volumeObserver: SettingsObserver?
   
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   
@@ -171,10 +171,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     pageViewController?.delegate = nil
 
     NSNotificationCenter.defaultCenter().removeObserver(self)
-    
-    if let volumeObserverIdentifier = volumeObserverIdentifier {
-      Settings.sharedInstance.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
-    }
   }
   
   override func viewWillLayoutSubviews() {
@@ -213,7 +209,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     
     updateSummaryBar(animated: false, completion: nil)
     
-    volumeObserverIdentifier = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
+    volumeObserver = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
       self?.updateIntakeButton(animated: false)
     }
   }

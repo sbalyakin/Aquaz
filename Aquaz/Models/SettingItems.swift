@@ -9,17 +9,26 @@
 import Foundation
 
 /// Generic class allows its clients to add/remove observers and notify them
-class Observable<ValueType> {
+class ObservableSettingsItem<ValueType>: ObservationRemover {
+
   typealias ObserverFunction = (ValueType) -> ()
   
-  /// Adds an observer and returns it unique identifier (in a scope of class instance)
-  func addObserver(observerFunction: ObserverFunction) -> Int {
+  /// Adds an observer and returns its smart wrapper which removes the observation on deinitialization.
+  /// It is preferrable way to use observation.
+  func addObserver(observerFunction: ObserverFunction) -> SettingsObserver {
+    let observerIdentifier = internalAddObserver(observerFunction)
+    return SettingsObserver(observerIdentifier: observerIdentifier, observationRemover: self)
+  }
+  
+  /// Adds an observer and returns its unique identifier (in a scope of class instance)
+  /// Should not be used directly in the most of cases.
+  func internalAddObserver(observerFunction: ObserverFunction) -> Int {
     observerFunctions[observerIdentifier] = observerFunction
     return observerIdentifier++
   }
   
-  /// Removes an observer using its identifier
-  func removeObserver(observerIdentifier: Int) {
+  /// Removes an observer using its identifier. Should not be used directly in the most of cases.
+  func internalRemoveObserver(observerIdentifier: Int) {
     assert(observerFunctions.indexForKey(observerIdentifier) != nil, "Passed observer's identifier is not found")
     observerFunctions.removeValueForKey(observerIdentifier)
   }
@@ -37,10 +46,34 @@ class Observable<ValueType> {
   
   private var observerIdentifier = 0
   private var observerFunctions: [Int: ObserverFunction] = [:]
+  
 }
 
+class SettingsObserver {
+  
+  let observerIdentifier: Int
+  private let observationRemover: ObservationRemover
+  
+  init(observerIdentifier: Int, observationRemover: ObservationRemover) {
+    self.observerIdentifier = observerIdentifier
+    self.observationRemover = observationRemover
+  }
+  
+  deinit {
+    observationRemover.internalRemoveObserver(observerIdentifier)
+  }
+  
+}
+
+protocol ObservationRemover : class {
+  
+  func internalRemoveObserver(observerIdentifier: Int)
+  
+}
+
+
 /// Generic class for settings item. Automatically writes changes of a value to user defaults. Provides possibility to observe changes of a value by observers.
-public class SettingsItemBase<ValueType>: Observable<ValueType> {
+public class SettingsItemBase<ValueType>: ObservableSettingsItem<ValueType> {
   
   let key: String
   let userDefaults: NSUserDefaults

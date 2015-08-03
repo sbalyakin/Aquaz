@@ -16,7 +16,7 @@ extension String: Printable {
 
 class NotificationsViewController: OmegaSettingsViewController {
   
-  private var soundObserverIdentifier: Int?
+  private var notificationSoundObserver: SettingsObserver?
   private var fullVersionBannerView: InfoBannerView?
   
   private struct Constants {
@@ -88,10 +88,6 @@ class NotificationsViewController: OmegaSettingsViewController {
   
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
-
-    if let soundObserverIdentifier = soundObserverIdentifier {
-      Settings.sharedInstance.notificationsSound.removeObserver(soundObserverIdentifier)
-    }
   }
 
   override func createTableCellsSections() -> [TableCellsSection] {
@@ -151,7 +147,7 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     soundCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
     
-    soundObserverIdentifier = Settings.sharedInstance.notificationsSound.addObserver { _ in
+    notificationSoundObserver = Settings.sharedInstance.notificationsSound.addObserver { _ in
       soundCell.readFromExternalStorage()
     }
     

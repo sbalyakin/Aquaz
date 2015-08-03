@@ -41,9 +41,9 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
   
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   
-  private var heightObserverIdentifier: Int?
-  private var weightObserverIdentifier: Int?
-  private var volumeObserverIdentifier: Int?
+  private var heightObserver: SettingsObserver?
+  private var weightObserver: SettingsObserver?
+  private var volumeObserver: SettingsObserver?
   
   private var localizedStrings = LocalizedStrings()
   
@@ -58,33 +58,19 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
   }
 
   private func initObserving() {
-    heightObserverIdentifier = Settings.sharedInstance.generalHeightUnits.addObserver { [weak self] _ in
+    heightObserver = Settings.sharedInstance.generalHeightUnits.addObserver { [weak self] _ in
       self?.recreateTableCellsSections()
     }
     
-    weightObserverIdentifier = Settings.sharedInstance.generalWeightUnits.addObserver { [weak self] _ in
+    weightObserver = Settings.sharedInstance.generalWeightUnits.addObserver { [weak self] _ in
       self?.recreateTableCellsSections()
     }
     
-    volumeObserverIdentifier = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
+    volumeObserver = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
       self?.recreateTableCellsSections()
     }
   }
   
-  deinit {
-    if let identifier = heightObserverIdentifier {
-      Settings.sharedInstance.generalHeightUnits.removeObserver(identifier)
-    }
-
-    if let identifier = weightObserverIdentifier {
-      Settings.sharedInstance.generalWeightUnits.removeObserver(identifier)
-    }
-
-    if let identifier = volumeObserverIdentifier {
-      Settings.sharedInstance.generalVolumeUnits.removeObserver(identifier)
-    }
-  }
-
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     

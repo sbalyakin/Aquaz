@@ -26,7 +26,7 @@ class WeekStatisticsViewController: UIViewController {
   private var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
-  private var volumeObserverIdentifier: Int?
+  private var volumeObserver: SettingsObserver?
   
   private var helpTip: JDFTooltipView?
 
@@ -54,17 +54,13 @@ class WeekStatisticsViewController: UIViewController {
     setupUI()
     setupNotificationsObservation()
     
-    volumeObserverIdentifier = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
+    volumeObserver = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
       self?.updateWeekStatisticsView(animated: false)
     }
   }
 
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
-    
-    if let volumeObserverIdentifier = volumeObserverIdentifier {
-      Settings.sharedInstance.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
-    }
   }
 
   override func viewWillAppear(animated: Bool) {

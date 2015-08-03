@@ -42,8 +42,8 @@ class SettingsViewController: OmegaSettingsViewController {
     
   }
   
-  private var volumeObserverIdentifier: Int?
-  private var waterGoalObserverIdentifier: Int?
+  private var volumeObserver: SettingsObserver?
+  private var waterGoalObserver: SettingsObserver?
   
   private var localizedStrings = LocalyzedStrings()
   
@@ -73,14 +73,6 @@ class SettingsViewController: OmegaSettingsViewController {
 
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
-
-    if let volumeObserverIdentifier = volumeObserverIdentifier {
-      Settings.sharedInstance.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
-    }
-
-    if let waterGoalObserverIdentifier = waterGoalObserverIdentifier {
-      Settings.sharedInstance.generalVolumeUnits.removeObserver(waterGoalObserverIdentifier)
-    }
   }
 
   override func createTableCellsSections() -> [TableCellsSection] {
@@ -94,11 +86,11 @@ class SettingsViewController: OmegaSettingsViewController {
     
     dailyWaterIntakeCell.image = ImageHelper.loadImage(.SettingsWater)
     
-    volumeObserverIdentifier = Settings.sharedInstance.generalVolumeUnits.addObserver { _ in
+    volumeObserver = Settings.sharedInstance.generalVolumeUnits.addObserver { _ in
       dailyWaterIntakeCell.readFromExternalStorage()
     }
 
-    waterGoalObserverIdentifier = Settings.sharedInstance.userDailyWaterIntake.addObserver { _ in
+    waterGoalObserver = Settings.sharedInstance.userDailyWaterIntake.addObserver { _ in
       dailyWaterIntakeCell.readFromExternalStorage()
     }
     

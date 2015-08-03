@@ -18,7 +18,7 @@ class DiaryViewController: UIViewController {
   private var fetchedResultsController: NSFetchedResultsController?
   private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   private var sizingCell: DiaryTableViewCell!
-  private var volumeObserverIdentifier: Int?
+  private var volumeObserver: SettingsObserver?
   private let isIOS8AndLater = UIDevice.currentDevice().systemVersion.compare("8.0.0", options: NSStringCompareOptions.NumericSearch) != .OrderedAscending
 
   private struct Constants {
@@ -32,7 +32,7 @@ class DiaryViewController: UIViewController {
     
     initFetchedResultsController()
     
-    volumeObserverIdentifier = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
+    volumeObserver = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
       self?.tableView?.reloadData()
     }
     
@@ -47,10 +47,6 @@ class DiaryViewController: UIViewController {
     tableView?.dataSource = nil
     tableView?.delegate = nil
     fetchedResultsController?.delegate = nil
-
-    if let volumeObserverIdentifier = volumeObserverIdentifier {
-      Settings.sharedInstance.generalVolumeUnits.removeObserver(volumeObserverIdentifier)
-    }
   }
   
   override func viewWillAppear(animated: Bool) {
