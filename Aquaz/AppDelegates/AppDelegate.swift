@@ -42,8 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UIHelper.applyStylization()
     NotificationsHelper.setApplicationIconBadgeNumber(0)
     
-    Settings.sharedInstance.generalFullVersion.value = true
-    
     if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
       prePopulateCoreData()
       removeDisabledNotifications()
