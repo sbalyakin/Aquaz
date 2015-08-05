@@ -24,7 +24,7 @@ class YearStatisticsViewController: UIViewController {
   private var statisticsEndDate: NSDate!
   private var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
-  private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
+  private var privateManagedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   private var volumeObserver: SettingsObserver?
 
   private let shortMonthSymbols = NSCalendar.currentCalendar().shortMonthSymbols as! [String]
@@ -66,11 +66,11 @@ class YearStatisticsViewController: UIViewController {
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
-      name: NSManagedObjectContextDidSaveNotification, object: nil)
+      name: NSManagedObjectContextDidSaveNotification, object: privateManagedObjectContext)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
-      name: GlobalConstants.notificationManagedObjectContextWasMerged, object: nil)
+      name: GlobalConstants.notificationManagedObjectContextWasMerged, object: privateManagedObjectContext)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "fullVersionIsPurchased:",
@@ -176,12 +176,12 @@ class YearStatisticsViewController: UIViewController {
       endDate: endDate,
       dayOffsetInHours: 0,
       aggregateFunction: .Average,
-      managedObjectContext: managedObjectContext)
+      managedObjectContext: privateManagedObjectContext)
     
     let waterGoals = WaterGoal.fetchWaterGoalAmountsGroupedByMonths(
       beginDate: beginDate,
       endDate: endDate,
-      managedObjectContext: managedObjectContext)
+      managedObjectContext: privateManagedObjectContext)
     
     Logger.logSevere(amountPartsList.count == waterGoals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     
@@ -204,7 +204,7 @@ class YearStatisticsViewController: UIViewController {
   
   private func updateYearStatisticsView() {
     if Settings.sharedInstance.generalFullVersion.value {
-      managedObjectContext.performBlock {
+      privateManagedObjectContext.performBlock {
         let date = self.date
         let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
         dispatch_async(dispatch_get_main_queue()) {

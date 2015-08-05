@@ -145,7 +145,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   
   private var volumeObserver: SettingsObserver?
   
-  private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
+  private var mainManagedObjectContext: NSManagedObjectContext { return CoreDataStack.mainContext }
   
   private var interstitialAd: ADInterstitialAd?
   private var viewForAd: UIView?
@@ -218,12 +218,12 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
       name: GlobalConstants.notificationManagedObjectContextWasMerged,
-      object: nil)
+      object: mainManagedObjectContext)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
       name: NSManagedObjectContextDidSaveNotification,
-      object: nil)
+      object: mainManagedObjectContext)
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
@@ -232,7 +232,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
         self.checkForHelpTip(notification)
       }
       
-      self.checkForShowInterstialAd(notification)
+      self.checkForShowInterstitialAd(notification)
     }
   }
 
@@ -400,14 +400,14 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   private func updateSummaryBar(#animated: Bool, completion: (() -> ())?) {
-    managedObjectContext.performBlock {
-      self.waterGoal = WaterGoal.fetchWaterGoalForDate(self.date, managedObjectContext: self.managedObjectContext)
+    mainManagedObjectContext.performBlock {
+      self.waterGoal = WaterGoal.fetchWaterGoalForDate(self.date, managedObjectContext: self.mainManagedObjectContext)
       
       self.totalDehydrationAmount = Intake.fetchTotalDehydrationAmountForDay(self.date,
-        dayOffsetInHours: 0, managedObjectContext: self.managedObjectContext)
+        dayOffsetInHours: 0, managedObjectContext: self.mainManagedObjectContext)
       
       let intakeHydrationAmounts = Intake.fetchHydrationAmountsGroupedByDrinksForDay(self.date,
-        dayOffsetInHours: 0, managedObjectContext: self.managedObjectContext)
+        dayOffsetInHours: 0, managedObjectContext: self.mainManagedObjectContext)
       
       dispatch_async(dispatch_get_main_queue()) {
         if animated {
@@ -704,13 +704,13 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
   
   private func saveWaterGoalForCurrentDate(#baseAmount: Double, isHotDay: Bool, isHighActivity: Bool) {
-    managedObjectContext.performBlock {
+    mainManagedObjectContext.performBlock {
       self.waterGoal = WaterGoal.addEntity(
         date: self.date,
         baseAmount: baseAmount,
         isHotDay: isHotDay,
         isHighActivity: isHighActivity,
-        managedObjectContext: self.managedObjectContext)
+        managedObjectContext: self.mainManagedObjectContext)
     }
   }
   
@@ -722,7 +722,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     }
   }
   
-  private func checkForShowInterstialAd(notification: NSNotification) {
+  private func checkForShowInterstitialAd(notification: NSNotification) {
     if Settings.sharedInstance.generalFullVersion.value || mode != .General {
       return
     }

@@ -42,11 +42,6 @@ class DrinkTests: XCTestCase {
     XCTAssert(drinks.count == Drink.getDrinksCount(), "Number of fetched drinks (\(drinks.count)) is incorrect (expected \(Drink.getDrinksCount()))")
   }
 
-  func testFetchAllDrinksTyped() {
-    let drinks = Drink.fetchAllDrinksTyped(managedObjectContext: managedObjectContext)
-    XCTAssert(drinks.count == Drink.getDrinksCount(), "Number of fetched drinks (\(drinks.count)) is incorrect (expected \(Drink.getDrinksCount()))")
-  }
-
   private func drawDrinkWithType(drinkType: Drink.DrinkType, frame: CGRect) {
     let drink = Drink.fetchDrinkByType(drinkType, managedObjectContext: managedObjectContext)
     drink?.drawDrink(frame: frame)

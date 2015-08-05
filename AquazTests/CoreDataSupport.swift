@@ -28,7 +28,7 @@ class CoreDataSupport {
     managedObjectContext.persistentStoreCoordinator = coordinator
 
     // Pre-populate core data
-    CoreDataPrePopulation.prePopulateCoreData(modelVersion: CoreDataPrePopulation.ModelVersion.Version1_0, managedObjectContext: managedObjectContext)
+    CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: managedObjectContext)
   }
   
 }

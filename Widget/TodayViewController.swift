@@ -42,8 +42,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   // in order to exclude synchronization problems for managed object contexts.
   private var coreDataStack = CoreDataStack()
   
-  private var managedObjectContext: NSManagedObjectContext {
-    return coreDataStack.privateContext
+  private var mainManagedObjectContext: NSManagedObjectContext {
+    return coreDataStack.mainContext
   }
 
   required init(coder aDecoder: NSCoder) {
@@ -74,7 +74,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
     // It's necessary to reset the managed object context in order to finalize background tasks correctly.
-    managedObjectContext.reset()
+    mainManagedObjectContext.reset()
   }
 
   private func setupCoreDataSynchronization() {
@@ -101,7 +101,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidSave:",
       name: NSManagedObjectContextDidSaveNotification,
-      object: nil)
+      object: mainManagedObjectContext)
   }
   
   func managedObjectContextDidSave(notification: NSNotification) {
@@ -113,7 +113,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var drinkIndexes = Array(0..<Drink.getDrinksCount())
     
     let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
-    if let intake1: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor]) {
+    if let intake1: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: mainManagedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor]) {
       let drinkIndex1 = intake1.drink.index.integerValue
       drinkIndexesToDisplay += [drinkIndex1]
       if let index = find(drinkIndexes, drinkIndex1) {
@@ -124,7 +124,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       
       let predicate2 = NSPredicate(format: "%K != %d", "drink.index", drinkIndex1)
       
-      if let intake2: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate2, sortDescriptors: [sortDescriptor]) {
+      if let intake2: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: mainManagedObjectContext, predicate: predicate2, sortDescriptors: [sortDescriptor]) {
         let drinkIndex2 = intake2.drink.index.integerValue
         drinkIndexesToDisplay += [drinkIndex2]
         if let index = find(drinkIndexes, drinkIndex2) {
@@ -135,7 +135,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         let predicate3 = NSPredicate(format: "%K != %d AND %K != %d", "drink.index", drinkIndex1, "drink.index", drinkIndex2)
         
-        if let intake3: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate3, sortDescriptors: [sortDescriptor]) {
+        if let intake3: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: mainManagedObjectContext, predicate: predicate3, sortDescriptors: [sortDescriptor]) {
           drinkIndexesToDisplay += [intake3.drink.index.integerValue]
         }
       }
@@ -155,7 +155,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     drinkIndexesToDisplay.sort(<)
     
-    let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
+    let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: mainManagedObjectContext)
     
     drink1 = drinks[drinkIndexesToDisplay[0]]
     drink2 = drinks[drinkIndexesToDisplay[1]]
@@ -165,21 +165,21 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   private func fetchWaterIntake() {
     let date = NSDate()
     
-    waterGoal = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: managedObjectContext)?.amount
+    waterGoal = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: mainManagedObjectContext)?.amount
     
     let amount = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
       beginDate: date,
       endDate: DateHelper.addToDate(date, years: 0, months: 0, days: 1),
       dayOffsetInHours: 0,
       aggregateFunction: .Summary,
-      managedObjectContext: managedObjectContext).first!
+      managedObjectContext: mainManagedObjectContext).first!
     
     hydration = amount.hydration
     dehydration = amount.dehydration
   }
   
   private func fetchData(completion: () -> ()) {
-    managedObjectContext.performBlock {
+    mainManagedObjectContext.performBlock {
       self.fetchDrinks()
       self.fetchWaterIntake()
       completion()
@@ -294,12 +294,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       return
     }
     
-    managedObjectContext.performBlock {
+    mainManagedObjectContext.performBlock {
       Intake.addEntity(
         drink: drink,
         amount: drink.recentAmount.amount,
         date: NSDate(),
-        managedObjectContext: self.managedObjectContext,
+        managedObjectContext: self.mainManagedObjectContext,
         saveImmediately: true)
 
       self.fetchData {

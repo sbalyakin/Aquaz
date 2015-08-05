@@ -16,7 +16,7 @@ class DiaryViewController: UIViewController {
   var date: NSDate! { didSet { dateWasChanged() } }
 
   private var fetchedResultsController: NSFetchedResultsController?
-  private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
+  private var mainManagedObjectContext: NSManagedObjectContext { return CoreDataStack.mainContext }
   private var sizingCell: DiaryTableViewCell!
   private var volumeObserver: SettingsObserver?
   private let isIOS8AndLater = UIDevice.currentDevice().systemVersion.compare("8.0.0", options: NSStringCompareOptions.NumericSearch) != .OrderedAscending
@@ -77,15 +77,13 @@ class DiaryViewController: UIViewController {
   }
 
   private func initFetchedResultsController() {
-    createFetchedResultsController {
-      self.tableView?.reloadData()
-    }
+    createFetchedResultsController()
+    tableView.reloadData()
   }
 
   private func updateFetchedResultsController() {
-    createFetchedResultsController {
-      self.tableView?.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
-    }
+    createFetchedResultsController()
+    tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
   }
 
   // This function is like the fetchedResultsController.objectAtIndexPath but with bounds checks.
@@ -109,26 +107,20 @@ class DiaryViewController: UIViewController {
     }
   }
   
-  private func createFetchedResultsController(completion: () -> ()) {
-    managedObjectContext.performBlock {
-      let fetchRequest = self.getFetchRequestForDate(self.date)
-      
-      self.fetchedResultsController = NSFetchedResultsController(
-        fetchRequest: fetchRequest,
-        managedObjectContext: self.managedObjectContext,
-        sectionNameKeyPath: nil,
-        cacheName: nil)
-      
-      self.fetchedResultsController!.delegate = self
-      
-      var error: NSError?
-      if !self.fetchedResultsController!.performFetch(&error) {
-        Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
-      }
-      
-      dispatch_async(dispatch_get_main_queue()) {
-        completion()
-      }
+  private func createFetchedResultsController() {
+    let fetchRequest = getFetchRequestForDate(self.date)
+    
+    self.fetchedResultsController = NSFetchedResultsController(
+      fetchRequest: fetchRequest,
+      managedObjectContext: self.mainManagedObjectContext,
+      sectionNameKeyPath: nil,
+      cacheName: nil)
+    
+    self.fetchedResultsController!.delegate = self
+    
+    var error: NSError?
+    if !self.fetchedResultsController!.performFetch(&error) {
+      Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
     }
   }
 
@@ -186,12 +178,8 @@ extension DiaryViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier, forIndexPath: indexPath) as! DiaryTableViewCell
     
-    managedObjectContext.performBlock {
-      if let intake = self.getIntakeAtIndexPath(indexPath) {
-        dispatch_async(dispatch_get_main_queue()) {
-          cell.intake = intake
-        }
-      }
+    if let intake = getIntakeAtIndexPath(indexPath) {
+       cell.intake = intake
     }
     
     return cell
@@ -228,12 +216,8 @@ extension DiaryViewController: UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle == .Delete {
-      managedObjectContext.performBlock {
-        if let intake = self.getIntakeAtIndexPath(indexPath) {
-          intake.deleteEntity(saveImmediately: true)
-        }
-      }
+    if editingStyle == .Delete, let intake = self.getIntakeAtIndexPath(indexPath) {
+      intake.deleteEntity(saveImmediately: true)
     }
   }
   
@@ -243,7 +227,7 @@ extension DiaryViewController: UITableViewDataSource {
 extension DiaryViewController: UITableViewDelegate {
 
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    managedObjectContext.performBlock() {
+    mainManagedObjectContext.performBlock {
       if let intake = self.getIntakeAtIndexPath(indexPath) {
         dispatch_async(dispatch_get_main_queue()) {
           self.performSegueWithIdentifier(Constants.editIntakeSegue, sender: intake)
@@ -284,52 +268,25 @@ extension DiaryViewController: UITableViewDelegate {
 // MARK: NSFetchedResultsControllerDelegate
 extension DiaryViewController: NSFetchedResultsControllerDelegate {
   
-  // All methods below use dispatch_sync for the main queue 
-  // because it guarantees sequential calls for tableView's methods:
-  //
-  // tableView.beginUpdates() -> updating tableView -> tableView.endUpdates()
-  //
-  // It's safe to execute them in a synchronized way because 
-  // NSFetchedResultsController is running in a separate queue of managedObjectContext.
-  
-  func controllerWillChangeContent(controller: NSFetchedResultsController) {
-    dispatch_sync(dispatch_get_main_queue()) {
-      self.tableView.beginUpdates()
-    }
-  }
-  
   func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
     switch type {
     case .Insert:
-      dispatch_sync(dispatch_get_main_queue()) {
-        self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
-      }
+      tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
       
     case .Delete:
-      dispatch_sync(dispatch_get_main_queue()) {
-        self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
-      }
+      tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
       
     case .Update:
-      if let intake = getIntakeAtIndexPath(indexPath!) {
-        dispatch_sync(dispatch_get_main_queue()) {
-          if let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as? DiaryTableViewCell {
-            cell.intake = intake
-          }
-        }
+      if let intake = getIntakeAtIndexPath(indexPath!),
+         let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as? DiaryTableViewCell
+      {
+        cell.intake = intake
       }
       
     case .Move:
-      dispatch_sync(dispatch_get_main_queue()) {
-        self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
-        self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
-      }
+      self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
+      self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
     }
   }
-  
-  func controllerDidChangeContent(controller: NSFetchedResultsController) {
-    dispatch_sync(dispatch_get_main_queue()) {
-      self.tableView.endUpdates()
-    }
-  }
+
 }

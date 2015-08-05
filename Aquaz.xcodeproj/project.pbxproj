@@ -35,6 +35,10 @@
 		8443DF421B29737D00FDD294 /* WidgetImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8443DF411B29737D00FDD294 /* WidgetImages.xcassets */; };
 		8444F1961B207D75007577C8 /* InfoBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444F1951B207D75007577C8 /* InfoBannerView.swift */; };
 		8444F1981B209250007577C8 /* SystemHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444F1971B209250007577C8 /* SystemHelper.swift */; };
+		8445A1531B72123400CDAA03 /* MMWormholeCoordinatedFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 8445A1501B72123400CDAA03 /* MMWormholeCoordinatedFileTransiting.m */; };
+		8445A1541B72123400CDAA03 /* MMWormholeCoordinatedFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 8445A1501B72123400CDAA03 /* MMWormholeCoordinatedFileTransiting.m */; };
+		8445A1551B72123400CDAA03 /* MMWormholeFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 8445A1521B72123400CDAA03 /* MMWormholeFileTransiting.m */; };
+		8445A1561B72123400CDAA03 /* MMWormholeFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 8445A1521B72123400CDAA03 /* MMWormholeFileTransiting.m */; };
 		844B24881B2195490059E28A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 844B248A1B2195490059E28A /* Localizable.strings */; };
 		844B248B1B21991B0059E28A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844B248D1B21991B0059E28A /* MainInterface.storyboard */; };
 		8455DACF1A694487004245F9 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455DACE1A694487004245F9 /* RoundedButton.swift */; };
@@ -242,6 +246,10 @@
 		8443DF411B29737D00FDD294 /* WidgetImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WidgetImages.xcassets; sourceTree = "<group>"; };
 		8444F1951B207D75007577C8 /* InfoBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoBannerView.swift; path = Controls/InfoBannerView.swift; sourceTree = "<group>"; };
 		8444F1971B209250007577C8 /* SystemHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemHelper.swift; sourceTree = "<group>"; };
+		8445A14F1B72123400CDAA03 /* MMWormholeCoordinatedFileTransiting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMWormholeCoordinatedFileTransiting.h; sourceTree = "<group>"; };
+		8445A1501B72123400CDAA03 /* MMWormholeCoordinatedFileTransiting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWormholeCoordinatedFileTransiting.m; sourceTree = "<group>"; };
+		8445A1511B72123400CDAA03 /* MMWormholeFileTransiting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMWormholeFileTransiting.h; sourceTree = "<group>"; };
+		8445A1521B72123400CDAA03 /* MMWormholeFileTransiting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWormholeFileTransiting.m; sourceTree = "<group>"; };
 		844B247A1B2195480059E28A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Welcome.strings; sourceTree = "<group>"; };
 		844B24891B2195490059E28A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		844B248C1B21991B0059E28A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -639,6 +647,10 @@
 		A54ED25B1AD5A52700FD37DD /* MMWormhole */ = {
 			isa = PBXGroup;
 			children = (
+				8445A14F1B72123400CDAA03 /* MMWormholeCoordinatedFileTransiting.h */,
+				8445A1501B72123400CDAA03 /* MMWormholeCoordinatedFileTransiting.m */,
+				8445A1511B72123400CDAA03 /* MMWormholeFileTransiting.h */,
+				8445A1521B72123400CDAA03 /* MMWormholeFileTransiting.m */,
 				A54ED25C1AD5A67900FD37DD /* MMWormhole.h */,
 				A54ED25D1AD5A67900FD37DD /* MMWormhole.m */,
 			);
@@ -1024,6 +1036,7 @@
 				A59CDC911AD8587100E92EF2 /* CodingManagedObject.swift in Sources */,
 				A575A5A51A6EBB0300B00E9F /* StyledBarButtonItem.swift in Sources */,
 				A5B013E51AE27C7D00C372F8 /* UnitsViewController.swift in Sources */,
+				8445A1551B72123400CDAA03 /* MMWormholeFileTransiting.m in Sources */,
 				A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */,
 				843B056219E2D7800097A833 /* SelectDrinkViewController.swift in Sources */,
 				A5D3D4281AA5D29700E3C989 /* TableCellWithValue.swift in Sources */,
@@ -1067,6 +1080,7 @@
 				A5EE362C1AADD6F10038C844 /* LoggedActions.swift in Sources */,
 				84B639831A25D9EF00889438 /* WeekStatisticsView.swift in Sources */,
 				A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */,
+				8445A1531B72123400CDAA03 /* MMWormholeCoordinatedFileTransiting.m in Sources */,
 				A5D3D42A1AA5D29700E3C989 /* UIPickerTableViewCell.swift in Sources */,
 				8435FEAF1AC52FFC00702727 /* StatisticsPageViewController.swift in Sources */,
 				843B055F19E2D7800097A833 /* SettingsViewController.swift in Sources */,
@@ -1127,8 +1141,10 @@
 				84D251B61AD26852001E6644 /* Intake.swift in Sources */,
 				84D251BD1AD268AE001E6644 /* DateHelper.swift in Sources */,
 				84D251BA1AD2688B001E6644 /* Units.swift in Sources */,
+				8445A1541B72123400CDAA03 /* MMWormholeCoordinatedFileTransiting.m in Sources */,
 				A54ED25A1AD447C000FD37DD /* UIExtensions.swift in Sources */,
 				84D251B91AD26871001E6644 /* SettingItems.swift in Sources */,
+				8445A1561B72123400CDAA03 /* MMWormholeFileTransiting.m in Sources */,
 				A55F839B1AD3DE4B00D30BAF /* MultiProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

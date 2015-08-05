@@ -16,7 +16,7 @@ class MonthStatisticsViewController: UIViewController {
   
   private var date: NSDate = DateHelper.startDateFromDate(NSDate(), calendarUnit: .CalendarUnitMonth)
 
-  private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
+  private var privateManagedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
 
   private struct Constants {
     static let dayViewController = "DayViewController"
@@ -70,11 +70,11 @@ class MonthStatisticsViewController: UIViewController {
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
-      name: NSManagedObjectContextDidSaveNotification, object: nil)
+      name: NSManagedObjectContextDidSaveNotification, object: privateManagedObjectContext)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "managedObjectContextDidChange:",
-      name: GlobalConstants.notificationManagedObjectContextWasMerged, object: nil)
+      name: GlobalConstants.notificationManagedObjectContextWasMerged, object: privateManagedObjectContext)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "fullVersionIsPurchased:",
@@ -192,7 +192,7 @@ extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
   
   func monthStatisticsGetValuesForDateInterval(#beginDate: NSDate, endDate: NSDate, calendarContentView: CalendarContentView) -> [Double] {
     if Settings.sharedInstance.generalFullVersion.value {
-      managedObjectContext.performBlock {
+      privateManagedObjectContext.performBlock {
         weak var requestingMonthStatisticsContentView = (calendarContentView as! MonthStatisticsContentView)
         let hydrationFractions = self.fetchHydrationFractions(beginDate: beginDate, endDate: endDate)
         dispatch_async(dispatch_get_main_queue()) {
@@ -225,12 +225,12 @@ extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
       endDate: endDate,
       dayOffsetInHours: 0,
       aggregateFunction: .Average,
-      managedObjectContext: managedObjectContext)
+      managedObjectContext: privateManagedObjectContext)
     
     let waterGoals = WaterGoal.fetchWaterGoalAmounts(
       beginDate: beginDate,
       endDate: endDate,
-      managedObjectContext: managedObjectContext)
+      managedObjectContext: privateManagedObjectContext)
     
     Logger.logSevere(amountPartsList.count == waterGoals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     

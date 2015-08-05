@@ -32,12 +32,14 @@ class CoreDataStack: NSObject {
     if mainContextIsInitialized && notification.object !== mainContext {
       mainContext.performBlock {
         self.mainContext.mergeChangesFromContextDidSaveNotification(notification)
+        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationManagedObjectContextWasMerged, object: self.mainContext)
       }
     }
     
     if privateContextIsInitialized && notification.object !== privateContext {
       privateContext.performBlock {
         self.privateContext.mergeChangesFromContextDidSaveNotification(notification)
+        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationManagedObjectContextWasMerged, object: self.privateContext)
       }
     }
   }
@@ -84,12 +86,18 @@ class CoreDataStack: NSObject {
   }
   
   func mergeAllContextsWithNotification(notification: NSNotification) {
-    if mainContextIsInitialized {
-      mainContext.mergeChangesFromContextDidSaveNotification(notification)
+    if mainContextIsInitialized && notification.object !== mainContext {
+      mainContext.performBlock {
+        self.mainContext.mergeChangesFromContextDidSaveNotification(notification)
+        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationManagedObjectContextWasMerged, object: self.mainContext)
+      }
     }
     
-    if privateContextIsInitialized {
-      privateContext.mergeChangesFromContextDidSaveNotification(notification)
+    if privateContextIsInitialized && notification.object !== privateContext {
+      privateContext.performBlock {
+        self.privateContext.mergeChangesFromContextDidSaveNotification(notification)
+        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationManagedObjectContextWasMerged, object: self.privateContext)
+      }
     }
   }
   
@@ -115,9 +123,15 @@ class CoreDataStack: NSObject {
   // MARK: - Core Data Saving support
   
   class func saveContext(managedObjectContext: NSManagedObjectContext) {
-    var error: NSError?
-    if managedObjectContext.hasChanges && !managedObjectContext.save(&error) {
-      Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
+    if !managedObjectContext.hasChanges {
+      return
+    }
+    
+    managedObjectContext.performBlock {
+      var error: NSError?
+      if !managedObjectContext.save(&error) {
+        Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
+      }
     }
   }
   

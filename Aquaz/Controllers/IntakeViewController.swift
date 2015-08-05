@@ -63,7 +63,7 @@ class IntakeViewController: UIViewController {
 
   private var timeIsChoosen = false
   
-  private var managedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
+  private var mainManagedObjectContext: NSManagedObjectContext { return CoreDataStack.mainContext }
   
   private struct Constants {
     static let pickTimeSegue = "PickTime"
@@ -243,23 +243,23 @@ class IntakeViewController: UIViewController {
       intakeDate = isCurrentDayToday ? NSDate() : DateHelper.dateByJoiningDateTime(datePart: date, timePart: NSDate())
     }
     
-    managedObjectContext.performBlock {
+    mainManagedObjectContext.performBlock {
       self.drink.recentAmount.amount = amount
       Intake.addEntity(
         drink: self.drink,
         amount: amount,
         date: intakeDate,
-        managedObjectContext: self.managedObjectContext,
+        managedObjectContext: self.mainManagedObjectContext,
         saveImmediately: true)
     }
   }
   
   private func updateIntake(#amount: Double) {
     if let intake = intake {
-      managedObjectContext.performBlock {
+      mainManagedObjectContext.performBlock {
         intake.amount = amount
         intake.date = self.date
-        CoreDataStack.saveContext(self.managedObjectContext)
+        CoreDataStack.saveContext(self.mainManagedObjectContext)
       }
     }
   }

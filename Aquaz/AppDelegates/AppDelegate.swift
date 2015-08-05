@@ -42,9 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UIHelper.applyStylization()
     NotificationsHelper.setApplicationIconBadgeNumber(0)
     
+    Settings.sharedInstance.generalFullVersion.value = true
+    
     if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
       prePopulateCoreData()
-      adjustNotifications()
+      removeDisabledNotifications()
       showWelcomeWizard()
       Settings.sharedInstance.generalHasLaunchedOnce.value = true
     } else {
@@ -64,9 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     wormhole.listenForMessageWithIdentifier(GlobalConstants.wormholeMessageFromWidget) { [weak self] messageObject in
       if let notification = messageObject as? NSNotification {
         CoreDataStack.mergeAllContextsWithNotification(notification)
-        
-        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.notificationManagedObjectContextWasMerged, object: nil)
-        
         self?.wormhole?.clearMessageContentsForIdentifier(GlobalConstants.wormholeMessageFromWidget)
       }
     }
@@ -162,10 +161,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func prePopulateCoreData() {
-    CoreDataPrePopulation.prePopulateCoreData(modelVersion: .Version1_0, managedObjectContext: CoreDataStack.privateContext)
+    CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: CoreDataStack.privateContext)
   }
   
-  private func adjustNotifications() {
+  private func removeDisabledNotifications() {
     if !Settings.sharedInstance.notificationsEnabled.value {
       NotificationsHelper.removeAllNotifications()
     }
