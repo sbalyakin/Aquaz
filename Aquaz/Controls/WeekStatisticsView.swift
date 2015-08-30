@@ -57,7 +57,7 @@ protocol WeekStatisticsViewDelegate: class {
   override var backgroundColor: UIColor? {
     didSet {
       if let backgroundColor = backgroundColor where !backgroundColor.isClearColor() {
-        titleLabel.backgroundColor = backgroundColor.colorWithAlphaComponent(0.7)
+        titleLabel?.backgroundColor = backgroundColor.colorWithAlphaComponent(0.7)
       }
     }
   }
