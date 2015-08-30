@@ -108,18 +108,18 @@ class DiaryViewController: UIViewController {
   }
   
   private func createFetchedResultsController() {
-    let fetchRequest = getFetchRequestForDate(self.date)
+    let fetchRequest = getFetchRequestForDate(date)
     
-    self.fetchedResultsController = NSFetchedResultsController(
+    fetchedResultsController = NSFetchedResultsController(
       fetchRequest: fetchRequest,
-      managedObjectContext: self.mainManagedObjectContext,
+      managedObjectContext: mainManagedObjectContext,
       sectionNameKeyPath: nil,
       cacheName: nil)
     
-    self.fetchedResultsController!.delegate = self
+    fetchedResultsController!.delegate = self
     
     var error: NSError?
-    if !self.fetchedResultsController!.performFetch(&error) {
+    if !fetchedResultsController!.performFetch(&error) {
       Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
     }
   }
@@ -168,11 +168,8 @@ extension DiaryViewController: UITableViewDataSource {
       return 0
     }
     
-    if let sectionInfo = fetchedResultsController?.sections?[section] as? NSFetchedResultsSectionInfo {
-      return sectionInfo.numberOfObjects
-    } else {
-      return 0
-    }
+    let sectionInfo = fetchedResultsController?.sections?[section] as? NSFetchedResultsSectionInfo
+    return sectionInfo?.numberOfObjects ?? 0
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -216,7 +213,7 @@ extension DiaryViewController: UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle == .Delete, let intake = self.getIntakeAtIndexPath(indexPath) {
+    if editingStyle == .Delete, let intake = getIntakeAtIndexPath(indexPath) {
       intake.deleteEntity(saveImmediately: true)
     }
   }
@@ -268,25 +265,52 @@ extension DiaryViewController: UITableViewDelegate {
 // MARK: NSFetchedResultsControllerDelegate
 extension DiaryViewController: NSFetchedResultsControllerDelegate {
   
+  func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    tableView?.beginUpdates()
+  }
+
+  func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    switch type {
+    case .Insert:
+      tableView?.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+      
+    case .Delete:
+      tableView?.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+      
+    default:
+      break
+    }
+  }
+  
   func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
     switch type {
     case .Insert:
-      tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
-      
-    case .Delete:
-      tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
-      
-    case .Update:
-      if let intake = getIntakeAtIndexPath(indexPath!),
-         let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as? DiaryTableViewCell
-      {
-        cell.intake = intake
+      if let newIndexPath = newIndexPath {
+        tableView?.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
       }
       
+    case .Delete:
+      if let indexPath = indexPath {
+        tableView?.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+      }
+      
+    case .Update:
+      if let indexPath = indexPath {
+        tableView?.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+      }
+
     case .Move:
-      self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
-      self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
+      if let indexPath = indexPath {
+        tableView?.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+      }
+      
+      if let newIndexPath = newIndexPath {
+        tableView?.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+      }
     }
   }
 
+  func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    tableView?.endUpdates()
+  }
 }
