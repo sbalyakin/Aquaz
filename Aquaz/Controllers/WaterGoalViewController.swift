@@ -268,11 +268,26 @@ class WaterGoalViewController: OmegaSettingsViewController {
   }
 
   private func sourceCellValueChanged(tableCell: TableCell) {
-    let data = WaterGoalCalculator.Data(physicalActivity: physicalActivityCell.value, gender: genderCell.value, age: ageCell.value, height: heightCell.value, weight: weightCell.value, country: .Average)
-    
-    let waterGoalAmount = WaterGoalCalculator.calcDailyWaterIntake(data: data)
+    // Just for sure that cell are still alive
+    if let physicalActivityCell = physicalActivityCell,
+       let genderCell = genderCell,
+       let ageCell = ageCell,
+       let heightCell = heightCell,
+       let weightCell = weightCell,
+       let dailyWaterIntakeCell = dailyWaterIntakeCell
+    {
+      let data = WaterGoalCalculator.Data(
+        physicalActivity: physicalActivityCell.value,
+        gender:           genderCell.value,
+        age:              ageCell.value,
+        height:           heightCell.value,
+        weight:           weightCell.value,
+        country:          .Average)
+      
+      let waterGoalAmount = WaterGoalCalculator.calcDailyWaterIntake(data: data)
 
-    dailyWaterIntakeCell.value = waterGoalAmount
+      dailyWaterIntakeCell.value = waterGoalAmount
+    }
   }
   
   private var genderCell: RightDetailTableCell<Settings.Gender>!

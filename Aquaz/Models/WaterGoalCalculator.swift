@@ -150,13 +150,12 @@ public class WaterGoalCalculator {
     
     let ageFactor: (weightFactor: Double, extraCalory: Double)
     
-    switch age {
-    case Int.min..<30: ageFactor = factors[0]
-    case 30..<60     : ageFactor = factors[1]
-    case 60..<Int.max: ageFactor = factors[2]
-    default:
-      Logger.logError(Logger.Messages.logicalError)
+    if age < 30 {
       ageFactor = factors[0]
+    } else if age >= 60 {
+      ageFactor = factors[2]
+    } else { // 30..<60
+      ageFactor = factors[1]
     }
     
     let caloryExpendidure = activityFactor * (ageFactor.weightFactor * weight + ageFactor.extraCalory)
