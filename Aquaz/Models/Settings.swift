@@ -185,8 +185,8 @@ public class Settings {
     key: "UI - Writing review alert selection", initialValue: RateApplicationAlertSelection.RemindLater,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var uiWritingReviewAlertLastShownDate = SettingsOrdinalItem(
-    key: "UI - Writing review alert last shown date", initialValue: NSDate(),
+  lazy var uiIntakesCountTillShowWritingReviewAlert = SettingsOrdinalItem(
+    key: "UI - Intakes count till show writing review alert", initialValue: GlobalConstants.numberOfIntakesToShowReviewAlert,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
   lazy var uiDiaryPageHelpTipIsShown = SettingsOrdinalItem(

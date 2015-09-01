@@ -232,7 +232,11 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
         self.checkForHelpTip(notification)
       }
       
-      self.checkForShowInterstitialAd(notification)
+      if !self.checkForShowInterstitialAd(notification) {
+        SystemHelper.executeBlockWithDelay(0.5) {
+          self.checkForRateApplicationAlert(notification)
+        }
+      }
     }
   }
 
@@ -528,10 +532,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
           Settings.sharedInstance.uiWaterGoalReachingIsShownForDate.value = currentDate
           showCongratulationsAboutWaterGoalReaching()
           
-          SystemHelper.executeBlockWithDelay(2) {
-            self.checkForRateApplicationAlert(notification)
-          }
-          
           return true
         }
       }
@@ -545,25 +545,27 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       return
     }
     
-    if DateHelper.calcDistanceBetweenCalendarDates(fromDate: Settings.sharedInstance.uiWritingReviewAlertLastShownDate.value, toDate: NSDate(), calendarUnit: .CalendarUnitDay) < 3 {
-      return
-    }
     
     let currentDate = NSDate()
     
     if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
       for insertedObject in insertedObjects {
-        if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, currentDate) {
+        if insertedObject is Intake {
+          Settings.sharedInstance.uiIntakesCountTillShowWritingReviewAlert.value -= 1
+          
+          if Settings.sharedInstance.uiIntakesCountTillShowWritingReviewAlert.value > 0 {
+            return
+          }
+
           showRateApplicationAlert()
-          break
+          Settings.sharedInstance.uiIntakesCountTillShowWritingReviewAlert.value = GlobalConstants.numberOfIntakesToShowReviewAlert * 2
+          return
         }
       }
     }
   }
   
   private func showRateApplicationAlert() {
-    Settings.sharedInstance.uiWritingReviewAlertLastShownDate.value = NSDate()
-
     let alert = UIAlertView(
       title: localizedStrings.rateApplicationAlertTitle,
       message: localizedStrings.rateApplicationAlertMessage,
@@ -580,7 +582,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
       Settings.sharedInstance.uiWritingReviewAlertSelection.value = .No
       
     case 1: // Rate It Now
-      if let url = NSURL(string: GlobalConstants.appStoreLink) {
+      if let url = NSURL(string: GlobalConstants.appReviewLink) {
         UIApplication.sharedApplication().openURL(url)
       }
       Settings.sharedInstance.uiWritingReviewAlertSelection.value = .RateApplication
@@ -722,23 +724,25 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     }
   }
   
-  private func checkForShowInterstitialAd(notification: NSNotification) {
+  private func checkForShowInterstitialAd(notification: NSNotification) -> Bool {
     if Settings.sharedInstance.generalFullVersion.value || mode != .General {
-      return
+      return false
     }
 
     if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> where !insertedObjects.isEmpty {
       Settings.sharedInstance.generalAdCounter.value = Settings.sharedInstance.generalAdCounter.value - 1
       
       if Settings.sharedInstance.generalAdCounter.value <= 0 {
-        showInterstitialAd()
+        return showInterstitialAd()
       }
-    }	
+    }
+    
+    return false
   }
 
-  private func showInterstitialAd() {
+  private func showInterstitialAd() -> Bool {
     if interstitialAd != nil {
-      return
+      return false
     }
     
     interstitialAd = ADInterstitialAd()
@@ -746,6 +750,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     UIViewController.prepareInterstitialAds()
     
     requestInterstitialAdPresentation()
+    
+    return true
   }
   
   private func closeAd() {

@@ -13,6 +13,7 @@ class GlobalConstants {
  
   static let appGroupName = "group.com.devmanifest.Aquaz"
   static let appStoreLink = "http://itunes.apple.com/app/id\(GlobalConstants.applicationIdentifier)"
+  static let appReviewLink = "itms-apps://itunes.apple.com/app/id\(GlobalConstants.applicationIdentifier)"
 
   static let inAppPurchaseFullVersion = "com.devmanifest.Aquaz.fullversion"
 
@@ -27,6 +28,7 @@ class GlobalConstants {
   static let notificationFullVersionPurchaseStateDidChange = "AquazFullVersionPurchaseStateDidChange"
 
   static let numberOfIntakesToShowAd = 5
+  static let numberOfIntakesToShowReviewAlert = 25
   
   static let storyboardMain = "Main"
   static let storyboardWelcome = "Welcome"
