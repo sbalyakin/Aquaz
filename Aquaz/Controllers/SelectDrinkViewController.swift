@@ -208,6 +208,7 @@ extension SelectDrinkViewController: UICollectionViewDataSource {
     
     let drinkType = displayedDrinkTypes[drinkIndex]
     
+    cell.backgroundColor = StyleKit.pageBackgroundColor
     cell.drinkLabel.text = drinkType.localizedName
     cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
     cell.drinkView.drinkType = drinkType
@@ -355,6 +356,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     
     let drinkType = popupDrinkTypes[drinkIndex]
     
+    cell.backgroundColor = StyleKit.pageBackgroundColor
     cell.drinkLabel.text = drinkType.localizedName
     cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
     cell.drinkView.drinkType = drinkType

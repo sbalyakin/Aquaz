@@ -39,6 +39,7 @@ class CalendarViewController: UIViewController {
   private func setupUI() {
     UIHelper.applyStyleToViewController(self)
 
+    calendarView.backgroundColor = StyleKit.pageBackgroundColor
     calendarView.workDayTextColor = StyleKit.calendarWorkDayTextColor
     calendarView.weekendBackgroundColor = StyleKit.calendarWeekendBackgroundColor
     calendarView.weekendTextColor = StyleKit.calendarWeekendTextColor
@@ -53,6 +54,8 @@ class CalendarViewController: UIViewController {
     calendarView.resetToDisplayMonthDate(date)
     calendarView.selectedDate = date
     calendarView.delegate = self
+    
+    currentMonthLabel.backgroundColor = StyleKit.pageBackgroundColor // remove blending
     
     updateUI(initial: true)
   }

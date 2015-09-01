@@ -173,13 +173,7 @@ extension DiaryViewController: UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier, forIndexPath: indexPath) as! DiaryTableViewCell
-    
-    if let intake = getIntakeAtIndexPath(indexPath) {
-       cell.intake = intake
-    }
-    
-    return cell
+    return tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
   }
   
   private func checkHelpTip() {
@@ -222,6 +216,14 @@ extension DiaryViewController: UITableViewDataSource {
 
 // MARK: UITableViewDelegate
 extension DiaryViewController: UITableViewDelegate {
+
+  func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    if let diaryCell = cell as? DiaryTableViewCell,
+       let intake = getIntakeAtIndexPath(indexPath)
+    {
+      diaryCell.intake = intake
+    }
+  }
 
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     mainManagedObjectContext.performBlock {

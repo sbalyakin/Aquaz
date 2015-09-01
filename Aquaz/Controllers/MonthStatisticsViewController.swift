@@ -40,6 +40,7 @@ class MonthStatisticsViewController: UIViewController {
   }
 
   private func setupUI() {
+    monthStatisticsView.backgroundColor = StyleKit.pageBackgroundColor
     monthStatisticsView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     monthStatisticsView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     monthStatisticsView.workDayTextColor = StyleKit.calendarWorkDayTextColor
@@ -60,6 +61,8 @@ class MonthStatisticsViewController: UIViewController {
     monthStatisticsView.dataSource = self
     monthStatisticsView.delegate = self
 
+    monthLabel.backgroundColor = StyleKit.pageBackgroundColor // remove blending
+    
     updateUI(animated: false)
   }
   

@@ -13,6 +13,14 @@ class CalendarContentViewCell: UICollectionViewCell {
   private var label: UILabel!
   private var backgroundLayer: CAShapeLayer!
   private var dayInfo: CalendarViewDayInfo!
+  
+  override var backgroundColor: UIColor! {
+    didSet {
+      contentView.backgroundColor = backgroundColor
+      backgroundView?.backgroundColor = backgroundColor
+      label?.backgroundColor = backgroundColor
+    }
+  }
     
   func setDayInfo(dayInfo: CalendarViewDayInfo, calendarContentView: CalendarContentView) {
     self.dayInfo = dayInfo
@@ -33,6 +41,7 @@ class CalendarContentViewCell: UICollectionViewCell {
 
     if label == nil {
       label = UILabel()
+      label.backgroundColor = backgroundColor // remove useless blending
       label.userInteractionEnabled = false
       label.textAlignment = .Center
       contentView.addSubview(label)

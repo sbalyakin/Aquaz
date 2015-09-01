@@ -36,7 +36,8 @@ class MonthStatisticsContentView: CalendarContentView {
   
   override func getCell(#collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.statisticsCellIdentifier, forIndexPath: indexPath) as! MonthStatisticsContentViewCell
-    
+
+    cell.backgroundColor = backgroundColor // remove blending
     cell.setDayInfo(daysInfo[indexPath.row], calendarContentView: self)
     
     return cell

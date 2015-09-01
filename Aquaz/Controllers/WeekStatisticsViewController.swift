@@ -101,6 +101,8 @@ class WeekStatisticsViewController: UIViewController {
     weekStatisticsView.dataSource = self
     weekStatisticsView.delegate = self
     
+    datePeriodLabel.backgroundColor = StyleKit.pageBackgroundColor // remove blending
+    
     updateUI(animated: false)
   }
   

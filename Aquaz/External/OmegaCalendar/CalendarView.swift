@@ -133,7 +133,7 @@ extension CalendarView: InfiniteScrollViewDataSource {
     viewContent.dataSource = self
     viewContent.delegate = delegate
     viewContent.date = DateHelper.addToDate(initialDisplayedMonthDate, years: 0, months: index, days: 0)
-    viewContent.backgroundColor = UIColor.clearColor()
+    viewContent.backgroundColor = backgroundColor
     viewContent.weekDayTitleTextColor = weekDayTitleTextColor
     viewContent.workDayTextColor = workDayTextColor
     viewContent.workDayBackgroundColor = workDayBackgroundColor

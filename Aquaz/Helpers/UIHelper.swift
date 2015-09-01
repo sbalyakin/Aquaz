@@ -28,10 +28,10 @@ class UIHelper {
 
     if let tableViewController = viewController as? UITableViewController {
       tableViewController.tableView.backgroundView = nil
-      tableViewController.tableView.backgroundColor = UIColor.clearColor()
+      tableViewController.tableView.backgroundColor = StyleKit.pageBackgroundColor
     } else if let settingsViewController = viewController as? OmegaSettingsViewController {
       settingsViewController.tableView.backgroundView = nil
-      settingsViewController.tableView.backgroundColor = UIColor.clearColor()
+      settingsViewController.tableView.backgroundColor = StyleKit.pageBackgroundColor
     }
     
     if let navigationBar = viewController.navigationController?.navigationBar {

@@ -56,6 +56,8 @@ class YearStatisticsViewController: UIViewController {
     yearStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     yearStatisticsView.dataSource = self
     
+    yearLabel.backgroundColor = StyleKit.pageBackgroundColor // remove blending
+    
     updateUI(animated: false)
   }
   

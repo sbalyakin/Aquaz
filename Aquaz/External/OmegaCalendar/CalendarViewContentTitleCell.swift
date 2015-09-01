@@ -13,10 +13,18 @@ class CalendarContentViewTitleCell: UICollectionViewCell {
   
   private var label: UILabel!
   
+  override var backgroundColor: UIColor! {
+    didSet {
+      contentView.backgroundColor = backgroundColor
+      backgroundView?.backgroundColor = backgroundColor
+      label?.backgroundColor = backgroundColor
+    }
+  }
+
   func setText(text: String, calendarContentView: CalendarContentView) {
     if label == nil {
       label = UILabel(frame: contentView.bounds)
-      label.backgroundColor = UIColor.clearColor()
+      label.backgroundColor = backgroundColor
       label.userInteractionEnabled = false
       label.font = calendarContentView.weekDayFont
       label.textAlignment = .Center

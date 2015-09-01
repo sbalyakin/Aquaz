@@ -123,9 +123,10 @@ extension CalendarContentView: UICollectionViewDataSource {
   
   func getCell(#collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.cellIdentifier, forIndexPath: indexPath) as! CalendarContentViewCell
-    
+
+    cell.backgroundColor = backgroundColor // remove blending
     cell.setDayInfo(daysInfo[indexPath.row], calendarContentView: self)
-    
+
     return cell
   }
 
@@ -134,6 +135,7 @@ extension CalendarContentView: UICollectionViewDataSource {
     
     let weekDayIndex = (indexPath.row + calendar.firstWeekday - 1) % daysPerWeek
 
+    cell.backgroundColor = backgroundColor // remove blending
     cell.setText(dayTitles[weekDayIndex], calendarContentView: self)
     
     return cell

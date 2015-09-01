@@ -10,10 +10,29 @@ import UIKit
 
 class DiaryTableViewCell: UITableViewCell {
   
-  @IBOutlet weak var timeLabel: UILabel!
-  @IBOutlet weak var drinkLabel: UILabel!
-  @IBOutlet weak var amountLabel: UILabel!
-  @IBOutlet weak var waterBalanceLabel: UILabel!
+  @IBOutlet weak var timeLabel: UILabel! {
+    didSet {
+      timeLabel.backgroundColor = StyleKit.pageBackgroundColor
+    }
+  }
+  
+  @IBOutlet weak var drinkLabel: UILabel! {
+    didSet {
+      drinkLabel.backgroundColor = StyleKit.pageBackgroundColor
+    }
+  }
+  
+  @IBOutlet weak var amountLabel: UILabel! {
+    didSet {
+      amountLabel.backgroundColor = StyleKit.pageBackgroundColor
+    }
+  }
+  
+  @IBOutlet weak var waterBalanceLabel: UILabel! {
+    didSet {
+      waterBalanceLabel.backgroundColor = StyleKit.pageBackgroundColor
+    }
+  }
   
   var intake: Intake! {
     didSet {
