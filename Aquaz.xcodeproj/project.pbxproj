@@ -97,6 +97,10 @@
 		84ED8A211A84C8660042BAF2 /* UnitsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED8A201A84C8660042BAF2 /* UnitsTests.swift */; };
 		84ED8A231A84ED9E0042BAF2 /* DrinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */; };
 		84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9DD971A16574E003D6444 /* PickTimeViewController.swift */; };
+		A51EEB9E1B95BFD3008AC43A /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51EEB9C1B95BFD3008AC43A /* Fabric.framework */; };
+		A51EEB9F1B95BFD3008AC43A /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51EEB9C1B95BFD3008AC43A /* Fabric.framework */; };
+		A51EEBA01B95BFD3008AC43A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51EEB9D1B95BFD3008AC43A /* Crashlytics.framework */; };
+		A51EEBA11B95BFD3008AC43A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A51EEB9D1B95BFD3008AC43A /* Crashlytics.framework */; };
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
 		A52A7D871B245C88007A71ED /* NotificationSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52A7D861B245C88007A71ED /* NotificationSounds.swift */; };
 		A52E0CDB1B3854E500599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CDD1B3854E500599D81 /* InfoPlist.strings */; };
@@ -118,10 +122,6 @@
 		A57D2BF61AD02C5C00619D62 /* WelcomeWizardFullVersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D2BF51AD02C5C00619D62 /* WelcomeWizardFullVersionViewController.swift */; };
 		A57F5E6B1AC968A6005C4F46 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */; };
 		A581FEF01A76D5F60025CDEF /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */; };
-		A586450A1B640786009DFB24 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58645081B640786009DFB24 /* Fabric.framework */; };
-		A586450B1B640786009DFB24 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58645081B640786009DFB24 /* Fabric.framework */; };
-		A586450C1B640786009DFB24 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58645091B640786009DFB24 /* Crashlytics.framework */; };
-		A586450D1B640786009DFB24 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58645091B640786009DFB24 /* Crashlytics.framework */; };
 		A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */; };
 		A598D5081A6558C100AA89CB /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5071A6558C100AA89CB /* StyleKit.swift */; };
 		A598D50A1A6559FB00AA89CB /* DrinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5091A6559FB00AA89CB /* DrinkView.swift */; };
@@ -297,6 +297,8 @@
 		84ED8A201A84C8660042BAF2 /* UnitsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsTests.swift; sourceTree = "<group>"; };
 		84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkTests.swift; sourceTree = "<group>"; };
 		84F9DD971A16574E003D6444 /* PickTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTimeViewController.swift; sourceTree = "<group>"; };
+		A51EEB9C1B95BFD3008AC43A /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		A51EEB9D1B95BFD3008AC43A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A52A7D861B245C88007A71ED /* NotificationSounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSounds.swift; sourceTree = "<group>"; };
 		A52E0CDC1B3854E500599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -317,8 +319,6 @@
 		A57D2BF51AD02C5C00619D62 /* WelcomeWizardFullVersionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWizardFullVersionViewController.swift; sourceTree = "<group>"; };
 		A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomSlider.swift; path = Controls/CustomSlider.swift; sourceTree = "<group>"; };
-		A58645081B640786009DFB24 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		A58645091B640786009DFB24 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A598D5071A6558C100AA89CB /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		A598D5091A6559FB00AA89CB /* DrinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkView.swift; path = Controls/DrinkView.swift; sourceTree = "<group>"; };
@@ -388,8 +388,8 @@
 			files = (
 				A5A3358B1B0218CE004579A4 /* StoreKit.framework in Frameworks */,
 				A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */,
-				A586450C1B640786009DFB24 /* Crashlytics.framework in Frameworks */,
-				A586450A1B640786009DFB24 /* Fabric.framework in Frameworks */,
+				A51EEBA01B95BFD3008AC43A /* Crashlytics.framework in Frameworks */,
+				A51EEB9E1B95BFD3008AC43A /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,8 +405,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				84D251971AD2511E001E6644 /* NotificationCenter.framework in Frameworks */,
-				A586450D1B640786009DFB24 /* Crashlytics.framework in Frameworks */,
-				A586450B1B640786009DFB24 /* Fabric.framework in Frameworks */,
+				A51EEBA11B95BFD3008AC43A /* Crashlytics.framework in Frameworks */,
+				A51EEB9F1B95BFD3008AC43A /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,8 +612,8 @@
 		84D251951AD2511E001E6644 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A58645081B640786009DFB24 /* Fabric.framework */,
-				A58645091B640786009DFB24 /* Crashlytics.framework */,
+				A51EEB9C1B95BFD3008AC43A /* Fabric.framework */,
+				A51EEB9D1B95BFD3008AC43A /* Crashlytics.framework */,
 				A5A3358A1B0218CE004579A4 /* StoreKit.framework */,
 				A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */,
 				84D251961AD2511E001E6644 /* NotificationCenter.framework */,
