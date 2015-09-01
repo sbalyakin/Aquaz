@@ -8,9 +8,9 @@
 
 import UIKit
 import CoreData
-import iAd
+import Appodeal
 
-class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAdDelegate {
+class DayViewController: UIViewController, UIAlertViewDelegate {
   
   // MARK: UI elements -
   
@@ -147,9 +147,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   
   private var mainManagedObjectContext: NSManagedObjectContext { return CoreDataStack.mainContext }
   
-  private var interstitialAd: ADInterstitialAd?
-  private var viewForAd: UIView?
-  
   // MARK: Page setup -
   
   override func viewDidLoad() {
@@ -162,8 +159,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     setupNotificationsObservation()
 
     setupGestureRecognizers()
-    
-    initInterstitialAd()
   }
   
   deinit {
@@ -232,7 +227,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
         self.checkForHelpTip(notification)
       }
       
-      if !self.checkForShowInterstitialAd(notification) {
+      if !self.checkForInterstitialAd(notification) {
         SystemHelper.executeBlockWithDelay(0.5) {
           self.checkForRateApplicationAlert(notification)
         }
@@ -716,24 +711,26 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
     }
   }
   
-  // MARK: iAd -
+  // MARK: Ads -
   
-  private func initInterstitialAd() {
-    if !Settings.sharedInstance.generalFullVersion.value && mode == .General {
-      interstitialPresentationPolicy = .Manual
-    }
-  }
-  
-  private func checkForShowInterstitialAd(notification: NSNotification) -> Bool {
+  private func checkForInterstitialAd(notification: NSNotification) -> Bool {
     if Settings.sharedInstance.generalFullVersion.value || mode != .General {
       return false
     }
 
-    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> where !insertedObjects.isEmpty {
-      Settings.sharedInstance.generalAdCounter.value = Settings.sharedInstance.generalAdCounter.value - 1
-      
-      if Settings.sharedInstance.generalAdCounter.value <= 0 {
-        return showInterstitialAd()
+    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+      for insertedObject in insertedObjects {
+        if insertedObject is Intake {
+          Settings.sharedInstance.generalAdCounter.value -= 1
+          
+          if Settings.sharedInstance.generalAdCounter.value > 0 {
+            return false
+          }
+          
+          Settings.sharedInstance.generalAdCounter.value = GlobalConstants.numberOfIntakesToShowAd
+          
+          return showInterstitialAd()
+        }
       }
     }
     
@@ -741,65 +738,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate, ADInterstitialAd
   }
 
   private func showInterstitialAd() -> Bool {
-    if interstitialAd != nil {
-      return false
-    }
-    
-    interstitialAd = ADInterstitialAd()
-    interstitialAd!.delegate = self
-    UIViewController.prepareInterstitialAds()
-    
-    requestInterstitialAdPresentation()
-    
-    return true
-  }
-  
-  private func closeAd() {
-    if interstitialAd == nil {
-      return
-    }
-    
-    if let viewForAd = viewForAd {
-      UIView.animateWithDuration(0.5, animations: {
-        viewForAd.alpha = 0
-        viewForAd.frame.offset(dx: 0, dy: viewForAd.frame.height)
-      }, completion: { _ in
-        self.interstitialAd = nil
-        viewForAd.removeFromSuperview()
-        self.viewForAd = nil
-      })
-    }
-  }
-  
-  func interstitialAdDidLoad(interstitialAd: ADInterstitialAd!) {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate,
-       let rootView = appDelegate.window?.rootViewController?.view
-    {
-      Settings.sharedInstance.generalAdCounter.value = GlobalConstants.numberOfIntakesToShowAd
-
-      viewForAd = UIView(frame: rootView.frame.rectByOffsetting(dx: 0, dy: rootView.frame.height))
-      viewForAd!.alpha = 0
-      interstitialAd.presentInView(viewForAd!)
-
-      rootView.addSubview(self.viewForAd!)
-
-      UIView.animateWithDuration(0.5, animations: {
-        self.viewForAd!.alpha = 1
-        self.viewForAd!.frame = rootView.frame
-      }, completion: nil)
-    }
-  }
-  
-  func interstitialAdDidUnload(interstitialAd: ADInterstitialAd!) {
-    closeAd()
-  }
-  
-  func interstitialAd(interstitialAd: ADInterstitialAd!, didFailWithError error: NSError!) {
-    closeAd()
-  }
-  
-  func interstitialAdActionDidFinish(interstitialAd: ADInterstitialAd!) {
-    closeAd()
+    return Appodeal.showAd(AppodealShowStyle.Interstitial, rootViewController: self)
   }
   
   // MARK: Help tips -

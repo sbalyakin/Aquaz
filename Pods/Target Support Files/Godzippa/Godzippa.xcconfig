@@ -1,0 +1,1 @@
+GODZIPPA_OTHER_LDFLAGS = -l"z"

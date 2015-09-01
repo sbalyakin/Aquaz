@@ -30,6 +30,8 @@ class GlobalConstants {
   static let numberOfIntakesToShowAd = 5
   static let numberOfIntakesToShowReviewAlert = 25
   
+  static let appodealApiKey = "415fd842e6bed692baf66af065cc4620722e24ac20aac2db"
+  
   static let storyboardMain = "Main"
   static let storyboardWelcome = "Welcome"
   
