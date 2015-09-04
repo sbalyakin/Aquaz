@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import Appodeal
 
 class DayViewController: UIViewController, UIAlertViewDelegate {
   
@@ -223,14 +222,14 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   func managedObjectContextDidChange(notification: NSNotification) {
     updateSummaryBar(animated: true) {
+      self.checkCounterForInterstitialAds(notification)
+
       if !self.checkForCongratulationsAboutWaterGoalReaching(notification) {
         self.checkForHelpTip(notification)
       }
       
-      if !self.checkForInterstitialAd(notification) {
-        SystemHelper.executeBlockWithDelay(0.5) {
-          self.checkForRateApplicationAlert(notification)
-        }
+      SystemHelper.executeBlockWithDelay(0.5) {
+        self.checkForRateApplicationAlert(notification)
       }
     }
   }
@@ -713,34 +712,21 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   // MARK: Ads -
   
-  private func checkForInterstitialAd(notification: NSNotification) -> Bool {
-    if Settings.sharedInstance.generalFullVersion.value || mode != .General {
-      return false
+  private func checkCounterForInterstitialAds(notification: NSNotification) {
+    if Settings.sharedInstance.generalFullVersion.value || Settings.sharedInstance.generalAdCounter.value <= 0 {
+      return
     }
 
     if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
       for insertedObject in insertedObjects {
         if insertedObject is Intake {
           Settings.sharedInstance.generalAdCounter.value -= 1
-          
-          if Settings.sharedInstance.generalAdCounter.value > 0 {
-            return false
-          }
-          
-          Settings.sharedInstance.generalAdCounter.value = GlobalConstants.numberOfIntakesToShowAd
-          
-          return showInterstitialAd()
+          break
         }
       }
     }
-    
-    return false
   }
 
-  private func showInterstitialAd() -> Bool {
-    return Appodeal.showAd(AppodealShowStyle.Interstitial, rootViewController: self)
-  }
-  
   // MARK: Help tips -
 
   private func checkForHelpTip(notification: NSNotification) {

@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Appodeal
 
 class IntakeViewController: UIViewController {
 
@@ -79,6 +80,8 @@ class IntakeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    showInterstitialAds()
+    
     setupUI()
     
     NSNotificationCenter.defaultCenter().addObserver(self,
@@ -87,6 +90,16 @@ class IntakeViewController: UIViewController {
       object: nil)
   }
   
+  private func showInterstitialAds() {
+    if Settings.sharedInstance.generalFullVersion.value || Settings.sharedInstance.generalAdCounter.value > 0 {
+      return
+    }
+    
+    Settings.sharedInstance.generalAdCounter.value = GlobalConstants.numberOfIntakesToShowAd
+    Appodeal.showAd(.Interstitial, rootViewController: self)
+  }
+  
+
   private func setupUI() {
     setupPredefinedAmountButtons()
     setupAmountRelatedControlsWithInitialAmount()
