@@ -23,11 +23,11 @@ class StatisticsViewController: UIViewController {
 
   private struct LocalizedStrings {
     
-    lazy var fullVersionBannerText = NSLocalizedString("SVC:Statistics are available in the full version only.",
+    lazy var fullVersionBannerText: String = NSLocalizedString("SVC:Statistics are available in the full version only.",
       value: "Statistics are available in the full version only.",
       comment: "StatisticsViewController: Text for banner shown to promote the full version of Aquaz")
     
-    lazy var demoOverlayText = NSLocalizedString("SVC:DEMO",
+    lazy var demoOverlayText: String = NSLocalizedString("SVC:DEMO",
       value: "DEMO",
       comment: "StatisticsViewController: Caption above statistics page shown for not-full version of Aquaz. It should be uppercased.")
   }
@@ -130,12 +130,12 @@ class StatisticsViewController: UIViewController {
     assert(demoOverlayView == nil)
     
     demoOverlayView = UIView()
-    demoOverlayView!.setTranslatesAutoresizingMaskIntoConstraints(false)
+    demoOverlayView!.translatesAutoresizingMaskIntoConstraints = false
     demoOverlayView!.backgroundColor = view.backgroundColor!.colorWithAlpha(0.7)
     view.addSubview(demoOverlayView!)
 
     let demoLabel = UILabel()
-    demoLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+    demoLabel.translatesAutoresizingMaskIntoConstraints = false
     demoLabel.textColor = UIColor.whiteColor()
     demoLabel.backgroundColor = UIColor.clearColor()
     demoLabel.alpha = 0.85

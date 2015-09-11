@@ -39,7 +39,7 @@ public class WaterGoal: CodingManagedObject, NamedEntity {
   }
 
   /// Adds a new water goal entity into Core Data. If a water goal with passed date is already exist, it will be returned as a result.
-  public class func addEntity(#date: NSDate, baseAmount: Double, isHotDay: Bool, isHighActivity: Bool, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> WaterGoal {
+  public class func addEntity(date date: NSDate, baseAmount: Double, isHotDay: Bool, isHighActivity: Bool, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> WaterGoal {
     if let waterGoal = self.fetchWaterGoalStrictlyForDate(date, managedObjectContext: managedObjectContext) {
       waterGoal.baseAmount = baseAmount
       waterGoal.isHotDay = isHotDay
@@ -60,7 +60,7 @@ public class WaterGoal: CodingManagedObject, NamedEntity {
   }
 
   /// Adds a new water goal entity into Core Data without any checks for water goal existance for passed date
-  class func rawAddEntity(#date: NSDate, baseAmount: Double, isHotDay: Bool, isHighActivity: Bool, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> WaterGoal {
+  class func rawAddEntity(date date: NSDate, baseAmount: Double, isHotDay: Bool, isHighActivity: Bool, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> WaterGoal {
     let waterGoal = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext)!
     waterGoal.date = DateHelper.dateByClearingTime(ofDate: date)
     waterGoal.baseAmount = baseAmount
@@ -148,12 +148,12 @@ public class WaterGoal: CodingManagedObject, NamedEntity {
     var processedDaysCount = 0
     var overallWaterGoal: Double = 0
 
-    let beginDayComponents = calendar.components(.CalendarUnitDay, fromDate: beginDate)
+    let beginDayComponents = calendar.components(.Day, fromDate: beginDate)
     var currentDayIndex = beginDayComponents.day
 
     for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = currentDay.getNextDay() {
       if daysInMonth == nil {
-        daysInMonth = calendar.rangeOfUnit(.CalendarUnitDay, inUnit: .CalendarUnitMonth, forDate: currentDay).length
+        daysInMonth = calendar.rangeOfUnit(.Day, inUnit: .Month, forDate: currentDay).length
       }
 
       let waterGoalAmount = findWaterGoalForDate(currentDay,
@@ -246,7 +246,7 @@ public class WaterGoal: CodingManagedObject, NamedEntity {
     return CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: [sortDescriptor])
   }
   
-  private class func fetchWaterGoalsForDateInterval(#beginDate: NSDate, endDate: NSDate, managedObjectContext: NSManagedObjectContext) -> [WaterGoal] {
+  private class func fetchWaterGoalsForDateInterval(beginDate beginDate: NSDate, endDate: NSDate, managedObjectContext: NSManagedObjectContext) -> [WaterGoal] {
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
     let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
     return CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: [sortDescriptor])

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol CalendarViewContentDataSource: class {
-  func createCalendarViewDaysInfoForMonth(#calendarContentView: CalendarContentView, monthDate: NSDate) -> [CalendarViewDayInfo]
+  func createCalendarViewDaysInfoForMonth(calendarContentView calendarContentView: CalendarContentView, monthDate: NSDate) -> [CalendarViewDayInfo]
 }
 
 class CalendarContentView: UIView {
@@ -49,15 +49,15 @@ class CalendarContentView: UIView {
   var daysInfo = [CalendarViewDayInfo]()
   
   private let calendar = NSCalendar.currentCalendar()
-  private let daysPerWeek = NSCalendar.currentCalendar().maximumRangeOfUnit(.CalendarUnitWeekday).length
-  private let dayTitles = NSCalendar.currentCalendar().veryShortWeekdaySymbols as! [String]
+  private let daysPerWeek = NSCalendar.currentCalendar().maximumRangeOfUnit(.Weekday).length
+  private let dayTitles = NSCalendar.currentCalendar().veryShortWeekdaySymbols
   
   private struct Constants {
     static let cellIdentifier = "Cell"
     static let titleCellIdentifier = "Title Cell"
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     baseInit()
   }
@@ -121,7 +121,7 @@ extension CalendarContentView: UICollectionViewDataSource {
     }
   }
   
-  func getCell(#collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
+  func getCell(collectionView collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.cellIdentifier, forIndexPath: indexPath) as! CalendarContentViewCell
 
     cell.backgroundColor = backgroundColor // remove blending
@@ -130,7 +130,7 @@ extension CalendarContentView: UICollectionViewDataSource {
     return cell
   }
 
-  func getTitleCell(#collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
+  func getTitleCell(collectionView collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.titleCellIdentifier, forIndexPath: indexPath) as! CalendarContentViewTitleCell
     
     let weekDayIndex = (indexPath.row + calendar.firstWeekday - 1) % daysPerWeek

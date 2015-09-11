@@ -122,7 +122,7 @@ public class StyleKit : NSObject {
   
   // MARK: Drawing Methods
   
-  public class func drawWaterDrink(#frame: CGRect) {
+  public class func drawWaterDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -131,13 +131,13 @@ public class StyleKit : NSObject {
     
     //// Group
     //// Oval-1 Drawing
-    var oval1Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, floor(group.width + 0.5), floor(group.height + 0.5)))
+    let oval1Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, floor(group.width + 0.5), floor(group.height + 0.5)))
     StyleKit.waterColor.setFill()
     oval1Path.fill()
     
     
     //// Bezier 2 Drawing
-    var bezier2Path = UIBezierPath()
+    let bezier2Path = UIBezierPath()
     bezier2Path.moveToPoint(CGPointMake(group.minX + 0.72263 * group.width, group.minY + 0.20000 * group.height))
     bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.71053 * group.width, group.minY + 0.19474 * group.height), controlPoint1: CGPointMake(group.minX + 0.71947 * group.width, group.minY + 0.19632 * group.height), controlPoint2: CGPointMake(group.minX + 0.71526 * group.width, group.minY + 0.19474 * group.height))
     bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.28947 * group.width, group.minY + 0.19474 * group.height))
@@ -164,7 +164,7 @@ public class StyleKit : NSObject {
     bezier2Path.fill()
   }
   
-  public class func drawCoffeeDrink(#frame: CGRect) {
+  public class func drawCoffeeDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -173,7 +173,7 @@ public class StyleKit : NSObject {
     
     //// Group
     //// Oval-1 Drawing
-    var oval1Path = UIBezierPath()
+    let oval1Path = UIBezierPath()
     oval1Path.moveToPoint(CGPointMake(group.minX + 0.50000 * group.width, group.minY + group.height))
     oval1Path.addCurveToPoint(CGPointMake(group.minX + group.width, group.minY + 0.50000 * group.height), controlPoint1: CGPointMake(group.minX + 0.77632 * group.width, group.minY + group.height), controlPoint2: CGPointMake(group.minX + group.width, group.minY + 0.77632 * group.height))
     oval1Path.addCurveToPoint(CGPointMake(group.minX + 0.50000 * group.width, group.minY), controlPoint1: CGPointMake(group.minX + group.width, group.minY + 0.22368 * group.height), controlPoint2: CGPointMake(group.minX + 0.77632 * group.width, group.minY))
@@ -187,7 +187,7 @@ public class StyleKit : NSObject {
     
     
     //// Bezier 3 Drawing
-    var bezier3Path = UIBezierPath()
+    let bezier3Path = UIBezierPath()
     bezier3Path.moveToPoint(CGPointMake(group.minX + 0.68474 * group.width, group.minY + 0.72632 * group.height))
     bezier3Path.addLineToPoint(CGPointMake(group.minX + 0.31579 * group.width, group.minY + 0.72632 * group.height))
     bezier3Path.addCurveToPoint(CGPointMake(group.minX + 0.30000 * group.width, group.minY + 0.71053 * group.height), controlPoint1: CGPointMake(group.minX + 0.30684 * group.width, group.minY + 0.72632 * group.height), controlPoint2: CGPointMake(group.minX + 0.30000 * group.width, group.minY + 0.71947 * group.height))
@@ -203,7 +203,7 @@ public class StyleKit : NSObject {
     
     
     //// Bezier 5 Drawing
-    var bezier5Path = UIBezierPath()
+    let bezier5Path = UIBezierPath()
     bezier5Path.moveToPoint(CGPointMake(group.minX + 0.77579 * group.width, group.minY + 0.40474 * group.height))
     bezier5Path.addCurveToPoint(CGPointMake(group.minX + 0.70000 * group.width, group.minY + 0.38842 * group.height), controlPoint1: CGPointMake(group.minX + 0.75368 * group.width, group.minY + 0.38632 * group.height), controlPoint2: CGPointMake(group.minX + 0.71789 * group.width, group.minY + 0.38684 * group.height))
     bezier5Path.addLineToPoint(CGPointMake(group.minX + 0.70000 * group.width, group.minY + 0.33684 * group.height))
@@ -261,7 +261,7 @@ public class StyleKit : NSObject {
     bezier5Path.fill()
   }
   
-  public class func drawTeaDrink(#frame: CGRect) {
+  public class func drawTeaDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -270,7 +270,7 @@ public class StyleKit : NSObject {
     
     //// Group
     //// Oval-1 Drawing
-    var oval1Path = UIBezierPath()
+    let oval1Path = UIBezierPath()
     oval1Path.moveToPoint(CGPointMake(group.minX + 0.50000 * group.width, group.minY + group.height))
     oval1Path.addCurveToPoint(CGPointMake(group.minX + group.width, group.minY + 0.50000 * group.height), controlPoint1: CGPointMake(group.minX + 0.77632 * group.width, group.minY + group.height), controlPoint2: CGPointMake(group.minX + group.width, group.minY + 0.77632 * group.height))
     oval1Path.addCurveToPoint(CGPointMake(group.minX + 0.50000 * group.width, group.minY), controlPoint1: CGPointMake(group.minX + group.width, group.minY + 0.22368 * group.height), controlPoint2: CGPointMake(group.minX + 0.77632 * group.width, group.minY))
@@ -284,7 +284,7 @@ public class StyleKit : NSObject {
     
     
     //// Bezier 3 Drawing
-    var bezier3Path = UIBezierPath()
+    let bezier3Path = UIBezierPath()
     bezier3Path.moveToPoint(CGPointMake(group.minX + 0.68474 * group.width, group.minY + 0.69474 * group.height))
     bezier3Path.addLineToPoint(CGPointMake(group.minX + 0.31579 * group.width, group.minY + 0.69474 * group.height))
     bezier3Path.addCurveToPoint(CGPointMake(group.minX + 0.30000 * group.width, group.minY + 0.71053 * group.height), controlPoint1: CGPointMake(group.minX + 0.30684 * group.width, group.minY + 0.69474 * group.height), controlPoint2: CGPointMake(group.minX + 0.30000 * group.width, group.minY + 0.70158 * group.height))
@@ -300,7 +300,7 @@ public class StyleKit : NSObject {
     
     
     //// Bezier 5 Drawing
-    var bezier5Path = UIBezierPath()
+    let bezier5Path = UIBezierPath()
     bezier5Path.moveToPoint(CGPointMake(group.minX + 0.77579 * group.width, group.minY + 0.40474 * group.height))
     bezier5Path.addCurveToPoint(CGPointMake(group.minX + 0.70000 * group.width, group.minY + 0.38842 * group.height), controlPoint1: CGPointMake(group.minX + 0.75368 * group.width, group.minY + 0.38632 * group.height), controlPoint2: CGPointMake(group.minX + 0.71789 * group.width, group.minY + 0.38684 * group.height))
     bezier5Path.addLineToPoint(CGPointMake(group.minX + 0.70000 * group.width, group.minY + 0.33684 * group.height))
@@ -338,7 +338,7 @@ public class StyleKit : NSObject {
     bezier5Path.fill()
   }
   
-  public class func drawJuiceDrink(#frame: CGRect) {
+  public class func drawJuiceDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -347,13 +347,13 @@ public class StyleKit : NSObject {
     
     //// Group
     //// Oval-1 Drawing
-    var oval1Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, floor(group.width + 0.5), floor(group.height + 0.5)))
+    let oval1Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, floor(group.width + 0.5), floor(group.height + 0.5)))
     StyleKit.juiceColor.setFill()
     oval1Path.fill()
     
     
     //// Bezier 2 Drawing
-    var bezier2Path = UIBezierPath()
+    let bezier2Path = UIBezierPath()
     bezier2Path.moveToPoint(CGPointMake(group.minX + 0.52526 * group.width, group.minY + 0.68579 * group.height))
     bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.56316 * group.width, group.minY + 0.65684 * group.height), controlPoint1: CGPointMake(group.minX + 0.53895 * group.width, group.minY + 0.67947 * group.height), controlPoint2: CGPointMake(group.minX + 0.55158 * group.width, group.minY + 0.67000 * group.height))
     bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.50684 * group.width, group.minY + 0.61579 * group.height))
@@ -366,7 +366,7 @@ public class StyleKit : NSObject {
     
     
     //// Bezier 4 Drawing
-    var bezier4Path = UIBezierPath()
+    let bezier4Path = UIBezierPath()
     bezier4Path.moveToPoint(CGPointMake(group.minX + 0.58211 * group.width, group.minY + 0.63158 * group.height))
     bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.59789 * group.width, group.minY + 0.58632 * group.height), controlPoint1: CGPointMake(group.minX + 0.59158 * group.width, group.minY + 0.61579 * group.height), controlPoint2: CGPointMake(group.minX + 0.59632 * group.width, group.minY + 0.60053 * group.height))
     bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.52474 * group.width, group.minY + 0.59000 * group.height))
@@ -379,7 +379,7 @@ public class StyleKit : NSObject {
     
     
     //// Bezier 6 Drawing
-    var bezier6Path = UIBezierPath()
+    let bezier6Path = UIBezierPath()
     bezier6Path.moveToPoint(CGPointMake(group.minX + 0.72263 * group.width, group.minY + 0.20000 * group.height))
     bezier6Path.addCurveToPoint(CGPointMake(group.minX + 0.71053 * group.width, group.minY + 0.19474 * group.height), controlPoint1: CGPointMake(group.minX + 0.71947 * group.width, group.minY + 0.19632 * group.height), controlPoint2: CGPointMake(group.minX + 0.71526 * group.width, group.minY + 0.19474 * group.height))
     bezier6Path.addLineToPoint(CGPointMake(group.minX + 0.28947 * group.width, group.minY + 0.19474 * group.height))
@@ -416,7 +416,7 @@ public class StyleKit : NSObject {
     
     
     //// Bezier 8 Drawing
-    var bezier8Path = UIBezierPath()
+    let bezier8Path = UIBezierPath()
     bezier8Path.moveToPoint(CGPointMake(group.minX + 0.42526 * group.width, group.minY + 0.67842 * group.height))
     bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.48579 * group.width, group.minY + 0.69421 * group.height), controlPoint1: CGPointMake(group.minX + 0.43895 * group.width, group.minY + 0.68526 * group.height), controlPoint2: CGPointMake(group.minX + 0.46105 * group.width, group.minY + 0.69421 * group.height))
     bezier8Path.addCurveToPoint(CGPointMake(group.minX + 0.49474 * group.width, group.minY + 0.69368 * group.height), controlPoint1: CGPointMake(group.minX + 0.48895 * group.width, group.minY + 0.69421 * group.height), controlPoint2: CGPointMake(group.minX + 0.49158 * group.width, group.minY + 0.69421 * group.height))
@@ -430,7 +430,7 @@ public class StyleKit : NSObject {
     
     
     //// Bezier 10 Drawing
-    var bezier10Path = UIBezierPath()
+    let bezier10Path = UIBezierPath()
     bezier10Path.moveToPoint(CGPointMake(group.minX + 0.51211 * group.width, group.minY + 0.55947 * group.height))
     bezier10Path.addLineToPoint(CGPointMake(group.minX + 0.59684 * group.width, group.minY + 0.55526 * group.height))
     bezier10Path.addCurveToPoint(CGPointMake(group.minX + 0.56053 * group.width, group.minY + 0.49316 * group.height), controlPoint1: CGPointMake(group.minX + 0.59053 * group.width, group.minY + 0.52684 * group.height), controlPoint2: CGPointMake(group.minX + 0.57263 * group.width, group.minY + 0.50526 * group.height))
@@ -442,7 +442,7 @@ public class StyleKit : NSObject {
     bezier10Path.fill()
   }
   
-  public class func drawMilkDrink(#frame: CGRect) {
+  public class func drawMilkDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -451,13 +451,13 @@ public class StyleKit : NSObject {
     
     //// Group
     //// Oval-1 Drawing
-    var oval1Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, floor(group.width + 0.5), floor(group.height + 0.5)))
+    let oval1Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, floor(group.width + 0.5), floor(group.height + 0.5)))
     StyleKit.milkColor.setFill()
     oval1Path.fill()
     
     
     //// Bezier 2 Drawing
-    var bezier2Path = UIBezierPath()
+    let bezier2Path = UIBezierPath()
     bezier2Path.moveToPoint(CGPointMake(group.minX + 0.64474 * group.width, group.minY + 0.34421 * group.height))
     bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.59211 * group.width, group.minY + 0.26000 * group.height))
     bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.57895 * group.width, group.minY + 0.25263 * group.height), controlPoint1: CGPointMake(group.minX + 0.58947 * group.width, group.minY + 0.25526 * group.height), controlPoint2: CGPointMake(group.minX + 0.58421 * group.width, group.minY + 0.25263 * group.height))
@@ -489,7 +489,7 @@ public class StyleKit : NSObject {
     
     
     //// Bezier 4 Drawing
-    var bezier4Path = UIBezierPath()
+    let bezier4Path = UIBezierPath()
     bezier4Path.moveToPoint(CGPointMake(group.minX + 0.42105 * group.width, group.minY + 0.22632 * group.height))
     bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.57842 * group.width, group.minY + 0.22632 * group.height))
     bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.59421 * group.width, group.minY + 0.21053 * group.height), controlPoint1: CGPointMake(group.minX + 0.58737 * group.width, group.minY + 0.22632 * group.height), controlPoint2: CGPointMake(group.minX + 0.59421 * group.width, group.minY + 0.21947 * group.height))
@@ -504,7 +504,7 @@ public class StyleKit : NSObject {
     bezier4Path.fill()
   }
   
-  public class func drawSodaDrink(#frame: CGRect) {
+  public class func drawSodaDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -513,13 +513,13 @@ public class StyleKit : NSObject {
     
     //// Group
     //// Oval-1 Drawing
-    var oval1Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, floor(group.width + 0.5), floor(group.height + 0.5)))
+    let oval1Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, floor(group.width + 0.5), floor(group.height + 0.5)))
     StyleKit.sodaColor.setFill()
     oval1Path.fill()
     
     
     //// Bezier 2 Drawing
-    var bezier2Path = UIBezierPath()
+    let bezier2Path = UIBezierPath()
     bezier2Path.moveToPoint(CGPointMake(group.minX + 0.72263 * group.width, group.minY + 0.20000 * group.height))
     bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.71053 * group.width, group.minY + 0.19474 * group.height), controlPoint1: CGPointMake(group.minX + 0.71947 * group.width, group.minY + 0.19632 * group.height), controlPoint2: CGPointMake(group.minX + 0.71526 * group.width, group.minY + 0.19474 * group.height))
     bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.28947 * group.width, group.minY + 0.19474 * group.height))
@@ -594,7 +594,7 @@ public class StyleKit : NSObject {
     bezier2Path.fill()
   }
   
-  public class func drawEnergyDrink(#frame: CGRect) {
+  public class func drawEnergyDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -603,13 +603,13 @@ public class StyleKit : NSObject {
     
     //// Group
     //// Oval-1 Drawing
-    var oval1Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, floor(group.width + 0.5), floor(group.height + 0.5)))
+    let oval1Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, floor(group.width + 0.5), floor(group.height + 0.5)))
     StyleKit.energyColor.setFill()
     oval1Path.fill()
     
     
     //// Bezier 2 Drawing
-    var bezier2Path = UIBezierPath()
+    let bezier2Path = UIBezierPath()
     bezier2Path.moveToPoint(CGPointMake(group.minX + 0.64474 * group.width, group.minY + 0.34421 * group.height))
     bezier2Path.addLineToPoint(CGPointMake(group.minX + 0.59211 * group.width, group.minY + 0.26000 * group.height))
     bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.57895 * group.width, group.minY + 0.25263 * group.height), controlPoint1: CGPointMake(group.minX + 0.58947 * group.width, group.minY + 0.25526 * group.height), controlPoint2: CGPointMake(group.minX + 0.58421 * group.width, group.minY + 0.25263 * group.height))
@@ -655,7 +655,7 @@ public class StyleKit : NSObject {
     
     
     //// Bezier 4 Drawing
-    var bezier4Path = UIBezierPath()
+    let bezier4Path = UIBezierPath()
     bezier4Path.moveToPoint(CGPointMake(group.minX + 0.42105 * group.width, group.minY + 0.22632 * group.height))
     bezier4Path.addLineToPoint(CGPointMake(group.minX + 0.57842 * group.width, group.minY + 0.22632 * group.height))
     bezier4Path.addCurveToPoint(CGPointMake(group.minX + 0.59421 * group.width, group.minY + 0.21053 * group.height), controlPoint1: CGPointMake(group.minX + 0.58737 * group.width, group.minY + 0.22632 * group.height), controlPoint2: CGPointMake(group.minX + 0.59421 * group.width, group.minY + 0.21947 * group.height))
@@ -670,7 +670,7 @@ public class StyleKit : NSObject {
     bezier4Path.fill()
   }
   
-  public class func drawHardLiquorDrink(#frame: CGRect) {
+  public class func drawHardLiquorDrink(frame frame: CGRect) {
     //// Color Declarations
     let hardLiquorColor = UIColor(red: 0.651, green: 0.290, blue: 0.125, alpha: 1.000)
     
@@ -681,7 +681,7 @@ public class StyleKit : NSObject {
     
     //// Group
     //// Oval-1 Drawing
-    var oval1Path = UIBezierPath()
+    let oval1Path = UIBezierPath()
     oval1Path.moveToPoint(CGPointMake(group.minX + 0.50000 * group.width, group.minY + group.height))
     oval1Path.addCurveToPoint(CGPointMake(group.minX + group.width, group.minY + 0.50000 * group.height), controlPoint1: CGPointMake(group.minX + 0.77632 * group.width, group.minY + group.height), controlPoint2: CGPointMake(group.minX + group.width, group.minY + 0.77632 * group.height))
     oval1Path.addCurveToPoint(CGPointMake(group.minX + 0.50000 * group.width, group.minY), controlPoint1: CGPointMake(group.minX + group.width, group.minY + 0.22368 * group.height), controlPoint2: CGPointMake(group.minX + 0.77632 * group.width, group.minY))
@@ -695,7 +695,7 @@ public class StyleKit : NSObject {
     
     
     //// Bezier 3 Drawing
-    var bezier3Path = UIBezierPath()
+    let bezier3Path = UIBezierPath()
     bezier3Path.moveToPoint(CGPointMake(group.minX + 0.72263 * group.width, group.minY + 0.31632 * group.height))
     bezier3Path.addCurveToPoint(CGPointMake(group.minX + 0.71053 * group.width, group.minY + 0.31053 * group.height), controlPoint1: CGPointMake(group.minX + 0.71947 * group.width, group.minY + 0.31263 * group.height), controlPoint2: CGPointMake(group.minX + 0.71526 * group.width, group.minY + 0.31053 * group.height))
     bezier3Path.addLineToPoint(CGPointMake(group.minX + 0.28947 * group.width, group.minY + 0.31053 * group.height))
@@ -752,7 +752,7 @@ public class StyleKit : NSObject {
     bezier3Path.fill()
   }
   
-  public class func drawSportDrink(#frame: CGRect) {
+  public class func drawSportDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -761,13 +761,13 @@ public class StyleKit : NSObject {
     
     //// Group
     //// Oval-1 Drawing
-    var oval1Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, floor(group.width + 0.5), floor(group.height + 0.5)))
+    let oval1Path = UIBezierPath(ovalInRect: CGRectMake(group.minX, group.minY, floor(group.width + 0.5), floor(group.height + 0.5)))
     StyleKit.sportColor.setFill()
     oval1Path.fill()
     
     
     //// Bezier 2 Drawing
-    var bezier2Path = UIBezierPath()
+    let bezier2Path = UIBezierPath()
     bezier2Path.moveToPoint(CGPointMake(group.minX + 0.70632 * group.width, group.minY + 0.16789 * group.height))
     bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.58789 * group.width, group.minY + 0.13895 * group.height), controlPoint1: CGPointMake(group.minX + 0.68526 * group.width, group.minY + 0.14895 * group.height), controlPoint2: CGPointMake(group.minX + 0.64211 * group.width, group.minY + 0.13000 * group.height))
     bezier2Path.addCurveToPoint(CGPointMake(group.minX + 0.51053 * group.width, group.minY + 0.16842 * group.height), controlPoint1: CGPointMake(group.minX + 0.56000 * group.width, group.minY + 0.14368 * group.height), controlPoint2: CGPointMake(group.minX + 0.53000 * group.width, group.minY + 0.15737 * group.height))
@@ -846,7 +846,7 @@ public class StyleKit : NSObject {
     bezier2Path.fill()
   }
   
-  public class func drawWineDrink(#frame: CGRect) {
+  public class func drawWineDrink(frame frame: CGRect) {
 
     //// Subframes
     let group: CGRect = CGRectMake(frame.minX, frame.minY, floor(frame.width + 0.5), floor(frame.height + 0.5))
@@ -854,7 +854,7 @@ public class StyleKit : NSObject {
     
     //// Group
     //// Oval-1 Drawing
-    var oval1Path = UIBezierPath()
+    let oval1Path = UIBezierPath()
     oval1Path.moveToPoint(CGPointMake(group.minX + 0.50000 * group.width, group.minY + group.height))
     oval1Path.addCurveToPoint(CGPointMake(group.minX + group.width, group.minY + 0.50000 * group.height), controlPoint1: CGPointMake(group.minX + 0.77632 * group.width, group.minY + group.height), controlPoint2: CGPointMake(group.minX + group.width, group.minY + 0.77632 * group.height))
     oval1Path.addCurveToPoint(CGPointMake(group.minX + 0.50000 * group.width, group.minY), controlPoint1: CGPointMake(group.minX + group.width, group.minY + 0.22368 * group.height), controlPoint2: CGPointMake(group.minX + 0.77632 * group.width, group.minY))
@@ -868,7 +868,7 @@ public class StyleKit : NSObject {
     
     
     //// Bezier 3 Drawing
-    var bezier3Path = UIBezierPath()
+    let bezier3Path = UIBezierPath()
     bezier3Path.moveToPoint(CGPointMake(group.minX + 0.62105 * group.width, group.minY + 0.77368 * group.height))
     bezier3Path.addLineToPoint(CGPointMake(group.minX + 0.51579 * group.width, group.minY + 0.77368 * group.height))
     bezier3Path.addLineToPoint(CGPointMake(group.minX + 0.51579 * group.width, group.minY + 0.60421 * group.height))
@@ -900,7 +900,7 @@ public class StyleKit : NSObject {
     bezier3Path.fill()
   }
   
-  public class func drawBeerDrink(#frame: CGRect) {
+  public class func drawBeerDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -909,7 +909,7 @@ public class StyleKit : NSObject {
     
     //// Group
     //// Oval-1 Drawing
-    var oval1Path = UIBezierPath()
+    let oval1Path = UIBezierPath()
     oval1Path.moveToPoint(CGPointMake(group.minX + 0.50000 * group.width, group.minY + group.height))
     oval1Path.addCurveToPoint(CGPointMake(group.minX + group.width, group.minY + 0.50000 * group.height), controlPoint1: CGPointMake(group.minX + 0.77632 * group.width, group.minY + group.height), controlPoint2: CGPointMake(group.minX + group.width, group.minY + 0.77632 * group.height))
     oval1Path.addCurveToPoint(CGPointMake(group.minX + 0.50000 * group.width, group.minY), controlPoint1: CGPointMake(group.minX + group.width, group.minY + 0.22368 * group.height), controlPoint2: CGPointMake(group.minX + 0.77632 * group.width, group.minY))
@@ -923,7 +923,7 @@ public class StyleKit : NSObject {
     
     
     //// Bezier 3 Drawing
-    var bezier3Path = UIBezierPath()
+    let bezier3Path = UIBezierPath()
     bezier3Path.moveToPoint(CGPointMake(group.minX + 0.73684 * group.width, group.minY + 0.34737 * group.height))
     bezier3Path.addLineToPoint(CGPointMake(group.minX + 0.66632 * group.width, group.minY + 0.34737 * group.height))
     bezier3Path.addLineToPoint(CGPointMake(group.minX + 0.64737 * group.width, group.minY + 0.20842 * group.height))

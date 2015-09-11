@@ -39,7 +39,7 @@ class DatePickerTableCell<T: NSDate>: TableCellWithValue<NSDate>, UIDatePickerTa
     super.init(value: value, container: container)
   }
  
-  override func createUICell(#tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  override func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
     if uiCell == nil {
       uiCell = UIDatePickerTableViewCell()
     }

@@ -22,7 +22,7 @@ class SettingsTests: XCTestCase {
     super.tearDown()
   }
   
-  func testOrdinalItem<T: Equatable>(#key: String, initialValue: T, testValue: T) {
+  func testOrdinalItem<T: Equatable>(key key: String, initialValue: T, testValue: T) {
     if let userDefaults = NSUserDefaults(suiteName: "SettingsTests") {
       let settingItem = SettingsOrdinalItem<T>(key: key, initialValue: initialValue, userDefaults: userDefaults)
       settingItem.removeFromUserDefaults()

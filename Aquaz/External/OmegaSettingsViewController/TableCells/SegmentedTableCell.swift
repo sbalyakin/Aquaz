@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SegmentedTableCell<Value: Printable, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>: TableCellWithValue<Value>, UISegmentedTableViewCellDelegate {
+class SegmentedTableCell<Value: CustomStringConvertible, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>: TableCellWithValue<Value>, UISegmentedTableViewCellDelegate {
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
   var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
@@ -27,9 +27,9 @@ class SegmentedTableCell<Value: Printable, Collection: CollectionType where Valu
     super.init(value: value, container: container)
   }
   
-  override func createUICell(#tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  override func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
     if uiCell == nil {
-      let segmentTitles = map(collection) { return self.stringFromValueFunction?($0) ?? $0.description }
+      let segmentTitles = collection.map { return self.stringFromValueFunction?($0) ?? $0.description }
       uiCell = UISegmentedTableViewCell(segmentTitles: segmentTitles)
     }
     
@@ -47,7 +47,7 @@ class SegmentedTableCell<Value: Printable, Collection: CollectionType where Valu
   }
   
   private func updateUICell() {
-    if let uiCell = uiCell, let row = find(collection, value) {
+    if let uiCell = uiCell, let row = collection.indexOf(value) {
       uiCell.segmentedControl.selectedSegmentIndex = row
     }
   }

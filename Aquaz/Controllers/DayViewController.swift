@@ -28,75 +28,75 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   private struct LocalizedStrings {
     
-    lazy var welcomeToNextDayMessage = NSLocalizedString("DVC:Welcome to the next day",
+    lazy var welcomeToNextDayMessage: String = NSLocalizedString("DVC:Welcome to the next day",
       value: "Welcome to the next day",
       comment: "DayViewController: Title for alert displayed if tomorrow has come")
     
-    lazy var okButtonTitle = NSLocalizedString("DVC:OK",
+    lazy var okButtonTitle: String = NSLocalizedString("DVC:OK",
       value: "OK",
       comment: "DayViewController: Cancel button title for alert displayed if tomorrow has come")
     
-    lazy var drinksTitle = NSLocalizedString("DVC:Drinks",
+    lazy var drinksTitle: String = NSLocalizedString("DVC:Drinks",
       value: "Drinks",
       comment: "DayViewController: Top bar title for page with drinks selection")
     
-    lazy var diaryTitle = NSLocalizedString("DVC:Diary",
+    lazy var diaryTitle: String = NSLocalizedString("DVC:Diary",
       value: "Diary",
       comment: "DayViewController: Top bar title for water intakes diary")
     
-    lazy var rateApplicationAlertTitle = NSLocalizedString("DVC:Rate Aquaz",
+    lazy var rateApplicationAlertTitle: String = NSLocalizedString("DVC:Rate Aquaz",
       value: "Rate Aquaz",
       comment: "DayViewController: Alert\'s title suggesting user to rate the application")
     
-    lazy var rateApplicationAlertMessage = NSLocalizedString("DVC:If you enjoy using Aquaz, would you mind taking a moment to rate it?\nThanks for your support!",
+    lazy var rateApplicationAlertMessage: String = NSLocalizedString("DVC:If you enjoy using Aquaz, would you mind taking a moment to rate it?\nThanks for your support!",
       value: "If you enjoy using Aquaz, would you mind taking a moment to rate it?\nThanks for your support!",
       comment: "DayViewController: Alert\'s message suggesting user to rate the application")
     
-    lazy var rateApplicationAlertRateText = NSLocalizedString("DVC:Rate It Now",
+    lazy var rateApplicationAlertRateText: String = NSLocalizedString("DVC:Rate It Now",
       value: "Rate It Now",
       comment: "DayViewController: Title for alert\'s button allowing user to rate the application")
     
-    lazy var rateApplicationAlertRemindLaterText = NSLocalizedString("DVC:Remind Me Later",
+    lazy var rateApplicationAlertRemindLaterText: String = NSLocalizedString("DVC:Remind Me Later",
       value: "Remind Me Later",
       comment: "DayViewController: Title for alert\'s button allowing user to postpone rating the application")
     
-    lazy var rateApplicationAlertNoText = NSLocalizedString("DVC:No, Thanks",
+    lazy var rateApplicationAlertNoText: String = NSLocalizedString("DVC:No, Thanks",
       value: "No, Thanks",
       comment: "DayViewController: Title for alert\'s button allowing user to reject rating the applcation")
     
-    lazy var intakeButtonTextTemplate = NSLocalizedString("DVC:%1$@ of %2$@",
+    lazy var intakeButtonTextTemplate: String = NSLocalizedString("DVC:%1$@ of %2$@",
       value: "%1$@ of %2$@",
       comment: "DayViewController: Current daily water intake of water intake goal")
 
-    lazy var helpTipAlcoholicDehydration = NSLocalizedString("DVC:Alcoholic drinks increase required daily water intake",
+    lazy var helpTipAlcoholicDehydration: String = NSLocalizedString("DVC:Alcoholic drinks increase required daily water intake",
       value: "Alcoholic drinks increase required daily water intake",
       comment: "DayViewController: Text for help tip about dehydration because of intake of an alcoholic drink")
 
-    lazy var helpTipSwipeToSeeDiary = NSLocalizedString("DVC:Swipe up to see the diary",
+    lazy var helpTipSwipeToSeeDiary: String = NSLocalizedString("DVC:Swipe up to see the diary",
       value: "Swipe up to see the diary",
       comment: "DayViewController: Text for help tip about swiping for seeing the diary")
 
-    lazy var helpTipSwipeToChangeDay = NSLocalizedString("DVC:Swipe left or right to switch day",
+    lazy var helpTipSwipeToChangeDay: String = NSLocalizedString("DVC:Swipe left or right to switch day",
       value: "Swipe left or right to switch day",
       comment: "DayViewController: Text for help tip about swiping for switching displaying day")
 
-    lazy var helpTipHighActivityMode = NSLocalizedString("DVC:Tap to toggle High Activity mode",
+    lazy var helpTipHighActivityMode: String = NSLocalizedString("DVC:Tap to toggle High Activity mode",
       value: "Tap to toggle High Activity mode",
       comment: "DayViewController: Text for help tip about activating/deactivating High Activity mode")
     
-    lazy var helpTipHotWeatherMode = NSLocalizedString("DVC:Tap to toggle Hot Weather mode",
+    lazy var helpTipHotWeatherMode: String = NSLocalizedString("DVC:Tap to toggle Hot Weather mode",
       value: "Tap to toggle Hot Weather mode",
       comment: "DayViewController: Text for help tip about activating/deactivating Hot Weather mode")
 
-    lazy var helpTipSwitchToPercentAndViceVersa = NSLocalizedString("DVC:Tap to switch between percentages and volume",
+    lazy var helpTipSwitchToPercentAndViceVersa: String = NSLocalizedString("DVC:Tap to switch between percentages and volume",
       value: "Tap to switch between percentages and volume",
       comment: "DayViewController: Text for help tip about switching between percentages and volume representation of overall intake for a day")
 
-    lazy var helpTipLongPressToChooseAlcohol = NSLocalizedString("DVC:Long press to choose an alcoholic drink",
+    lazy var helpTipLongPressToChooseAlcohol: String = NSLocalizedString("DVC:Long press to choose an alcoholic drink",
       value: "Long press to choose an alcoholic drink",
       comment: "DayViewController: Text for help tip about choosing an alcoholic drink")
 
-    lazy var congratulationsBannerText = NSLocalizedString("DVC:Congratulations!\nYou have drunk your daily water intake.",
+    lazy var congratulationsBannerText: String = NSLocalizedString("DVC:Congratulations!\nYou have drunk your daily water intake.",
       value: "Congratulations!\nYou have drunk your daily water intake.",
       comment: "DayViewController: Text for banner shown if a user drink his daily water intake")
 
@@ -255,7 +255,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     rightArrowForDateImage.image = rightArrowForDateImage.image?.imageWithRenderingMode(.AlwaysTemplate)
   }
   
-  func refreshCurrentDay(#showAlert: Bool) {
+  func refreshCurrentDay(showAlert showAlert: Bool) {
     if date == nil {
       // It's useless to refresh current date if it's not specified yet. So just go away.
       return
@@ -339,7 +339,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   func leftSwipeGestureIsRecognized(gestureRecognizer: UISwipeGestureRecognizer) {
     if gestureRecognizer.state == .Ended {
-      let daysTillToday = DateHelper.computeUnitsFrom(date, toDate: NSDate(), unit: .CalendarUnitDay)
+      let daysTillToday = DateHelper.computeUnitsFrom(date, toDate: NSDate(), unit: .Day)
       if daysTillToday > 0 {
         switchToNextDay()
       }
@@ -360,13 +360,13 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     setCurrentDate(DateHelper.addToDate(date, years: 0, months: 0, days: -1))
   }
 
-  private func updateUIRelatedToCurrentDate(#animated: Bool) {
+  private func updateUIRelatedToCurrentDate(animated animated: Bool) {
     updateDateArrows(animated: animated)
     updateDateLabel(animated: animated)
   }
   
-  private func updateDateArrows(#animated: Bool) {
-    let rightArrowIsVisible = DateHelper.computeUnitsFrom(date, toDate: NSDate(), unit: .CalendarUnitDay) > 0
+  private func updateDateArrows(animated animated: Bool) {
+    let rightArrowIsVisible = DateHelper.computeUnitsFrom(date, toDate: NSDate(), unit: .Day) > 0
     let newAlphaForRightImage: CGFloat = rightArrowIsVisible ? 1 : 0
     
     if animated {
@@ -384,7 +384,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  private func updateDateLabel(#animated: Bool) {
+  private func updateDateLabel(animated animated: Bool) {
     let formattedDate = DateHelper.stringFromDate(date)
     
     if animated {
@@ -397,7 +397,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  private func updateSummaryBar(#animated: Bool, completion: (() -> ())?) {
+  private func updateSummaryBar(animated animated: Bool, completion: (() -> ())?) {
     mainManagedObjectContext.performBlock {
       self.waterGoal = WaterGoal.fetchWaterGoalForDate(self.date, managedObjectContext: self.mainManagedObjectContext)
       
@@ -438,7 +438,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   // MARK: Change current screen -
   
   func switchToSelectDrinkPage() {
-    if let currentPage = pageViewController?.viewControllers.last as? UIViewController
+    if let currentPage = pageViewController?.viewControllers?.last
       where selectDrinkViewController != nil && currentPage != selectDrinkViewController
     {
       updateUIAccordingToCurrentPage(currentPage, initial: false)
@@ -539,9 +539,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
       return
     }
     
-    
-    let currentDate = NSDate()
-    
     if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
       for insertedObject in insertedObjects {
         if insertedObject is Intake {
@@ -604,7 +601,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     updateIntakeButton(animated: true)
   }
   
-  private func updateIntakeButton(#animated: Bool) {
+  private func updateIntakeButton(animated animated: Bool) {
     let intakeText: String
     
     if Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value {
@@ -661,7 +658,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   private func makeColoredText(text: NSString, mainColor: UIColor, coloredParts: [(text: String, color: UIColor)]) -> NSAttributedString {
     let attributes = [NSForegroundColorAttributeName: mainColor]
-    var coloredText = NSMutableAttributedString(string: text as String, attributes: attributes)
+    let coloredText = NSMutableAttributedString(string: text as String, attributes: attributes)
     coloredText.beginEditing()
     
     for (textPart, color) in coloredParts {
@@ -676,7 +673,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     return coloredText
   }
   
-  private func waterGoalWasChanged(#animated: Bool) {
+  private func waterGoalWasChanged(animated animated: Bool) {
     updateIntakeButton(animated: animated)
 
     if animated {
@@ -699,7 +696,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     hotDayButton.selected = isHotDay
   }
   
-  private func saveWaterGoalForCurrentDate(#baseAmount: Double, isHotDay: Bool, isHighActivity: Bool) {
+  private func saveWaterGoalForCurrentDate(baseAmount baseAmount: Double, isHotDay: Bool, isHighActivity: Bool) {
     mainManagedObjectContext.performBlock {
       self.waterGoal = WaterGoal.addEntity(
         date: self.date,
@@ -1030,7 +1027,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
 extension DayViewController: UIPageViewControllerDataSource {
   
   func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-    if let index = find(pages, viewController) {
+    if let index = pages.indexOf(viewController) {
       if index > 0 {
         return pages[index - 1]
       }
@@ -1040,7 +1037,7 @@ extension DayViewController: UIPageViewControllerDataSource {
   }
   
   func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-    if let index = find(pages, viewController) {
+    if let index = pages.indexOf(viewController) {
       if index < pages.count - 1 {
         return pages[index + 1]
       }
@@ -1055,8 +1052,8 @@ extension DayViewController: UIPageViewControllerDataSource {
 
 extension DayViewController: UIPageViewControllerDelegate {
 
-  func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
-    if let currentPage = pageViewController.viewControllers.last as? UIViewController {
+  func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    if let currentPage = pageViewController.viewControllers?.last {
       updateUIAccordingToCurrentPage(currentPage, initial: false)
     }
   }

@@ -52,7 +52,7 @@ class DiaryViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
-    if let selectedIndexPath = tableView.indexPathForSelectedRow() {
+    if let selectedIndexPath = tableView.indexPathForSelectedRow {
       tableView.deselectRowAtIndexPath(selectedIndexPath, animated: false)
     }
   }
@@ -95,13 +95,13 @@ class DiaryViewController: UIViewController {
         return nil
       }
       
-      let section = sections[indexPath.section] as! NSFetchedResultsSectionInfo
+      let section = sections[indexPath.section]
 
       if indexPath.row >= section.numberOfObjects {
         return nil
       }
       
-      return section.objects[indexPath.row] as? Intake
+      return section.objects?[indexPath.row] as? Intake
     } else {
       return nil
     }
@@ -118,8 +118,9 @@ class DiaryViewController: UIViewController {
     
     fetchedResultsController!.delegate = self
     
-    var error: NSError?
-    if !fetchedResultsController!.performFetch(&error) {
+    do {
+      try fetchedResultsController!.performFetch()
+    } catch let error as NSError {
       Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
     }
   }
@@ -168,12 +169,12 @@ extension DiaryViewController: UITableViewDataSource {
       return 0
     }
     
-    let sectionInfo = fetchedResultsController?.sections?[section] as? NSFetchedResultsSectionInfo
+    let sectionInfo = fetchedResultsController?.sections?[section]
     return sectionInfo?.numberOfObjects ?? 0
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    return tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+    return tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier, forIndexPath: indexPath) 
   }
   
   private func checkHelpTip() {

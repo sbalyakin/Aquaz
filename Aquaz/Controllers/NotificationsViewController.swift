@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension String: Printable {
+extension String: CustomStringConvertible {
   public var description: String {
     return self
   }
@@ -26,47 +26,47 @@ class NotificationsViewController: OmegaSettingsViewController {
   
   private struct LocalizedStrings {
     
-    lazy var smartNotificationsBannerText = NSLocalizedString("SVC:Smart Notifications mode is available in the full version only.",
+    lazy var smartNotificationsBannerText: String = NSLocalizedString("SVC:Smart Notifications mode is available in the full version only.",
       value: "Smart Notifications mode are available in the full version only.",
       comment: "StatisticsViewController: Text for banner shown to promote the full version of Aquaz if user tries to activate Smart notifications mode")
 
-    lazy var limitNotificationsBannerText = NSLocalizedString("SVC:Limit Notifications mode is available in the full version only.",
+    lazy var limitNotificationsBannerText: String = NSLocalizedString("SVC:Limit Notifications mode is available in the full version only.",
       value: "Limit Notifications mode is available in the full version only.",
       comment: "StatisticsViewController: Text for banner shown to promote the full version of Aquaz if user tries to activate Limit notifications mode")
 
-    lazy var enableNotificationsTitle = NSLocalizedString("NVC:Enable Notifications", value: "Enable Notifications",
+    lazy var enableNotificationsTitle: String = NSLocalizedString("NVC:Enable Notifications", value: "Enable Notifications",
       comment: "NotificationsViewController: Title for [Enable Notification] setting")
     
-    lazy var fromTitle = NSLocalizedString("NVC:From", value: "From",
+    lazy var fromTitle: String = NSLocalizedString("NVC:From", value: "From",
       comment: "NotificationsViewController: Title for [From] setting")
     
-    lazy var toTitle = NSLocalizedString("NVC:To", value: "To",
+    lazy var toTitle: String = NSLocalizedString("NVC:To", value: "To",
       comment: "NotificationsViewController: Title for [To] setting")
     
-    lazy var intervalTitle = NSLocalizedString("NVC:Interval", value: "Interval",
+    lazy var intervalTitle: String = NSLocalizedString("NVC:Interval", value: "Interval",
       comment: "NotificationsViewController: Title for [Interval] setting")
     
-    lazy var intervalHourTitle = NSLocalizedString("NVC:hr", value: "hr",
+    lazy var intervalHourTitle: String = NSLocalizedString("NVC:hr", value: "hr",
       comment: "NotificationsViewController: contraction for hour")
     
-    lazy var intervalMinuteTitle = NSLocalizedString("NVC:min", value: "min",
+    lazy var intervalMinuteTitle: String = NSLocalizedString("NVC:min", value: "min",
       comment: "NotificationsViewController: contraction for minute")
     
-    lazy var soundTitle = NSLocalizedString("NVC:Notification Sound", value: "Notification Sound",
+    lazy var soundTitle: String = NSLocalizedString("NVC:Notification Sound", value: "Notification Sound",
       comment: "NotificationsViewController: Title for [Notification Sound] setting")
     
-    lazy var smartNotificationsTitle = NSLocalizedString("NVC:Smart Notifications", value: "Smart Notifications",
+    lazy var smartNotificationsTitle: String = NSLocalizedString("NVC:Smart Notifications", value: "Smart Notifications",
       comment: "NotificationsViewController: Title for [Smart Notifications] setting")
     
-    lazy var limitNotificationsTitle = NSLocalizedString("NVC:Limit Notifications", value: "Limit Notifications",
+    lazy var limitNotificationsTitle: String = NSLocalizedString("NVC:Limit Notifications", value: "Limit Notifications",
       comment: "NotificationsViewController: Title for [Limit Notifications] setting")
     
-    lazy var smartNotificationsSectionFooter = NSLocalizedString(
+    lazy var smartNotificationsSectionFooter: String = NSLocalizedString(
       "NVC:Enable snooze notifications taking into account time of drink intake.",
       value: "Enable snooze notifications taking into account time of drink intake.",
       comment: "NotificationsViewController: Footer text for [Smart Notifications] section")
     
-    lazy var limitNotificationsSectionFooter = NSLocalizedString("NVC:When enabled, notifications will not be shown if you have already drunk your daily water intake.",
+    lazy var limitNotificationsSectionFooter: String = NSLocalizedString("NVC:When enabled, notifications will not be shown if you have already drunk your daily water intake.",
       value: "When enabled, notifications will not be shown if you have already drunk your daily water intake.",
       comment: "NotificationsViewController: Footer text for [Limit Notifications] section")
 
@@ -123,10 +123,10 @@ class NotificationsViewController: OmegaSettingsViewController {
     
     let timeComponents = [
       TimeIntervalPickerTableCellComponent(
-        calendarUnit: NSCalendarUnit.CalendarUnitHour,
+        calendarUnit: NSCalendarUnit.Hour,
         minValue: 1, maxValue: 6, step: 1, title: localizedStrings.intervalHourTitle, width: 100),
       TimeIntervalPickerTableCellComponent(
-        calendarUnit: NSCalendarUnit.CalendarUnitMinute,
+        calendarUnit: NSCalendarUnit.Minute,
         minValue: 0, maxValue: 59, step: 5, title: localizedStrings.intervalMinuteTitle, width: 100)]
     
     let intervalCell = createTimeIntervalRightDetailTableCell(
@@ -215,7 +215,7 @@ class NotificationsViewController: OmegaSettingsViewController {
     }
   }
 
-  private func showFullVersionBanner(#text: String) {
+  private func showFullVersionBanner(text text: String) {
     if fullVersionBannerView != nil {
       return
     }
@@ -252,7 +252,8 @@ class NotificationsViewController: OmegaSettingsViewController {
       }
     }
     
-    return filename.stringByDeletingPathExtension.capitalizedString
+    let url = NSURL(fileURLWithPath: filename)
+    return url.URLByDeletingPathExtension?.lastPathComponent?.capitalizedString ?? filename.capitalizedString
   }
   
   private func soundTableCellDidActivate(tableCell: TableCell, active: Bool) {

@@ -12,17 +12,20 @@ import CoreData
 public class CoreDataHelper {
 
   /// Fetches managed objects from Core Data taking into account specified predicate and sort descriptors
-  public class func fetchManagedObjects<EntityType: NSManagedObject where EntityType: NamedEntity>(#managedObjectContext: NSManagedObjectContext, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil, fetchLimit: Int? = nil) -> [EntityType] {
+  public class func fetchManagedObjects<EntityType: NSManagedObject where EntityType: NamedEntity>(managedObjectContext managedObjectContext: NSManagedObjectContext, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil, fetchLimit: Int? = nil) -> [EntityType] {
     let fetchRequest = NSFetchRequest()
     fetchRequest.entity = LoggedActions.entityDescriptionForEntity(EntityType.self, inManagedObjectContext: managedObjectContext)
     fetchRequest.sortDescriptors = sortDescriptors
     fetchRequest.predicate = predicate
     fetchRequest.fetchLimit = fetchLimit ?? 0
     
-    var error: NSError?
-    if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as? [EntityType] {
-      return fetchResults
-    } else {
+    do {
+      if let fetchResults = try managedObjectContext.executeFetchRequest(fetchRequest) as? [EntityType] {
+        return fetchResults
+      } else {
+        return []
+      }
+    } catch let error as NSError {
       Logger.logError(Logger.Messages.failedToExecuteFetchRequest, error: error)
       return []
     }
@@ -30,7 +33,7 @@ public class CoreDataHelper {
   
   /// Fetches a managed object from Core Data taking into account specified predicate and sort descriptors
   public class func fetchManagedObject<EntityType: NSManagedObject where EntityType: NamedEntity>
-    (#managedObjectContext: NSManagedObjectContext, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> EntityType? {
+    (managedObjectContext managedObjectContext: NSManagedObjectContext, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> EntityType? {
     let entities: [EntityType] = fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: sortDescriptors, fetchLimit: 1)
     return entities.first
   }

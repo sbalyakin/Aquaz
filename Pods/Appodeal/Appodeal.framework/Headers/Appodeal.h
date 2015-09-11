@@ -47,6 +47,10 @@ typedef NS_ENUM(NSInteger, AppodealShowStyle) {
 + (void)initializeWithApiKey:(NSString *)apiKey; // All ad types with autocache
 + (void)initializeWithApiKey:(NSString *)apiKey types:(AppodealAdType)types;
 
++ (void)deinitialize;
+
++ (BOOL)isInitalized;
+
 + (void)setInterstitialDelegate:(id<AppodealInterstitialDelegate>)interstitialDelegate;
 + (void)setBannerDelegate:(id<AppodealBannerDelegate>)bannerDelegate;
 + (void)setVideoDelegate:(id<AppodealVideoDelegate>)videoDelegate;
@@ -77,6 +81,6 @@ typedef NS_ENUM(NSInteger, AppodealShowStyle) {
 + (void)setUserRelationship:(AppodealUserRelationship)relationship;
 + (void)setUserSmokingAttitude:(AppodealUserSmokingAttitude)smokingAttitude;
 + (void)setUserAlcoholAttitude:(AppodealUserAlcoholAttitude)alcoholAttitude;
-+ (void)setUserInterest:(NSString *)userInterest;
++ (void)setUserInterests:(NSString *)interests;
 
 @end

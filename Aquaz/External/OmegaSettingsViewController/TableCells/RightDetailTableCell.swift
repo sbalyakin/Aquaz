@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RightDetailTableCell<Value: Printable>: TableCellWithValue<Value> {
+class RightDetailTableCell<Value: CustomStringConvertible>: TableCellWithValue<Value> {
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
   var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
@@ -31,7 +31,7 @@ class RightDetailTableCell<Value: Printable>: TableCellWithValue<Value> {
     super.init(value: value, container: container)
   }
   
-  override func createUICell(#tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  override func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
     if uiCell == nil {
       uiCell = UITableViewCell(style: .Value1, reuseIdentifier: nil)
     }

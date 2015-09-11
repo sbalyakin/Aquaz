@@ -12,7 +12,7 @@ import CoreData
 
 public class LoggedActions {
   
-  public class func instantiateViewController<ViewControllerType>(#storyboard: UIStoryboard?, storyboardID: String) -> ViewControllerType? {
+  public class func instantiateViewController<ViewControllerType>(storyboard storyboard: UIStoryboard?, storyboardID: String) -> ViewControllerType? {
     let viewController = storyboard?.instantiateViewControllerWithIdentifier(storyboardID) as? ViewControllerType
     Logger.checkViewController(viewController != nil, storyboardID: storyboardID)
     return viewController

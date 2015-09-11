@@ -21,7 +21,7 @@ class CoreDataSupport {
     assert(model != nil, "Failed to create managed object model")
     
     let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model!)
-    let store = coordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil, error: nil)
+    let store = try? coordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
     assert(store != nil, "Failed to create persistent store")
     
     managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)

@@ -22,7 +22,7 @@ class TableCell {
     self.container = container
   }
   
-  func createUICell(#tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
     assert(false, "createUICell function must be overriden by descendants")
     return UITableViewCell()
   }

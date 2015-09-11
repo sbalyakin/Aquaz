@@ -19,7 +19,7 @@ class SwitchTableCell<Value: BooleanType where Value: BooleanLiteralConvertible,
     super.init(value: value, container: container)
   }
   
-  override func createUICell(#tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  override func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
     if uiCell == nil {
       uiCell = UISwitchTableViewCell()
     }

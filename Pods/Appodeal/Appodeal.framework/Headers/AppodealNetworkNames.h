@@ -26,5 +26,6 @@ FOUNDATION_EXPORT NSString *const kAppodealSmaatoNetworkName;
 FOUNDATION_EXPORT NSString *const kAppodealYandexNetworkName;
 FOUNDATION_EXPORT NSString *const kAppodealStarAppNetworkName;
 FOUNDATION_EXPORT NSString *const kAppodealAppNexusNetworkName;
+FOUNDATION_EXPORT NSString *const kAppodealRubiconNetworkName;
 
 FOUNDATION_EXPORT NSString * AppodealPrettyNetworkName(NSString *networkName);

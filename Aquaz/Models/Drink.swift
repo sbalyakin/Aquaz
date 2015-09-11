@@ -160,7 +160,7 @@ public class Drink: CodingManagedObject, NamedEntity {
     }
   }
   
-  public func drawDrink(#frame: CGRect) {
+  public func drawDrink(frame frame: CGRect) {
     drawDrinkFunction(frame: frame)
   }
 
@@ -182,7 +182,7 @@ public class Drink: CodingManagedObject, NamedEntity {
     }
   }
 
-  public class func fetchAllDrinksIndexed(#managedObjectContext: NSManagedObjectContext) -> [Int: Drink] {
+  public class func fetchAllDrinksIndexed(managedObjectContext managedObjectContext: NSManagedObjectContext) -> [Int: Drink] {
     let drinks: [Drink] = CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: nil, fetchLimit: nil)
     
     var drinksMap = [Int: Drink]()
@@ -193,7 +193,7 @@ public class Drink: CodingManagedObject, NamedEntity {
     return drinksMap
   }
 
-  public class func fetchAllDrinksTyped(#managedObjectContext: NSManagedObjectContext) -> [DrinkType: Drink] {
+  public class func fetchAllDrinksTyped(managedObjectContext managedObjectContext: NSManagedObjectContext) -> [DrinkType: Drink] {
     let drinksIndexed = fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
 
     var drinksMap = [DrinkType: Drink]()
@@ -209,7 +209,7 @@ public class Drink: CodingManagedObject, NamedEntity {
     return drinksMap
   }
   
-  class func addEntity(#index: Int, name: String, hydrationFactor: Double, dehydrationFactor: Double, recentAmount amount: Double, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Drink {
+  class func addEntity(index index: Int, name: String, hydrationFactor: Double, dehydrationFactor: Double, recentAmount amount: Double, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Drink {
     let drink = LoggedActions.insertNewObjectForEntity(Drink.self, inManagedObjectContext: managedObjectContext)!
     drink.index = index
     drink.name = name

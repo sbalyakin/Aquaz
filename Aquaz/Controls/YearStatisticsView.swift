@@ -50,7 +50,7 @@ protocol YearStatisticsViewDataSource: class {
   
   var animationDuration = 0.4
   
-  let monthsPerYear: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.CalendarUnitMonth).length
+  let monthsPerYear: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.Month).length
   
   let pinShadowOffsetByX: CGFloat = 0
   let pinShadowOffsetByY: CGFloat = 1
@@ -71,7 +71,7 @@ protocol YearStatisticsViewDataSource: class {
     baseInit()
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     baseInit()
   }
@@ -107,7 +107,7 @@ protocol YearStatisticsViewDataSource: class {
     updateLabels(initial: true)
   }
   
-  private func updateLabels(#initial: Bool) {
+  private func updateLabels(initial initial: Bool) {
     let verticalMaximumTitle = getVerticalTitleForValue(verticalMaximum)
     if initial {
       verticalMaximumLabel.text = verticalMaximumTitle
@@ -193,7 +193,7 @@ protocol YearStatisticsViewDataSource: class {
     layer.addSublayer(pinsLayer)
     
     // Create shape layer for each pin
-    for i in 0..<items.count {
+    for _ in 0..<items.count {
       let pinLayer = CAShapeLayer()
       pinLayer.strokeColor = nil
       pinLayer.fillColor = pinsColor.CGColor
@@ -213,6 +213,7 @@ protocol YearStatisticsViewDataSource: class {
     layer.addSublayer(gridLayer)
   }
   
+  @available(iOS 8.0, *)
   override func prepareForInterfaceBuilder() {
     super.prepareForInterfaceBuilder()
 
@@ -292,12 +293,12 @@ protocol YearStatisticsViewDataSource: class {
     horizontalMaximumLabel.sizeToFit()
 
     let bottomRectangleHeight = max(horizontalMinimumLabel.frame.height, horizontalMaximumLabel.frame.height) + horizontalScaleMargin
-    let verticalRectangles = rect.rectsByDividing(bottomRectangleHeight, fromEdge: .MaxYEdge)
+    let verticalRectangles = rect.divide(bottomRectangleHeight, fromEdge: .MaxYEdge)
     var result: UIAreas
-    result.chart = verticalRectangles.remainder.rectByInsetting(dx: horizontalMargin + pinDiameter / 2, dy: pinDiameter / 2).integerRect
+    result.chart = verticalRectangles.remainder.insetBy(dx: horizontalMargin + pinDiameter / 2, dy: pinDiameter / 2).integral
     result.verticalScale = result.chart
-    result.horizontalScale = verticalRectangles.slice.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
-    result.background = verticalRectangles.remainder.integerRect
+    result.horizontalScale = verticalRectangles.slice.insetBy(dx: horizontalMargin, dy: 0).integral
+    result.background = verticalRectangles.remainder.integral
     return result
   }
 
@@ -347,7 +348,7 @@ protocol YearStatisticsViewDataSource: class {
     let goalsPath = UIBezierPath()
     var previousGoal: CGPoint = CGPointZero
 
-    for (index, item) in enumerate(items) {
+    for (index, item) in items.enumerate() {
       let x = rect.minX + CGFloat(index) / maxIndex * rect.width
       let y = verticalMaximum > 0 ? rect.maxY - item.goal / verticalMaximum * rect.height : 0
       let point = CGPoint(x: round(x), y: round(y))
@@ -369,7 +370,7 @@ protocol YearStatisticsViewDataSource: class {
     let valuesFillPath = UIBezierPath()
     var valuesPoints: [CGPoint] = []
     
-    for (index, item) in enumerate(items) {
+    for (index, item) in items.enumerate() {
       let x = rect.minX + CGFloat(index) / maxIndex * rect.width
       let y = verticalMaximum > 0 ? rect.maxY - item.value / verticalMaximum * rect.height : 0
       let point = CGPoint(x: round(x), y: round(y))
@@ -406,12 +407,12 @@ protocol YearStatisticsViewDataSource: class {
   }
   
   private func layoutPins(coords: [CGPoint], useAnimation: Bool) {
-    for (index, coord) in enumerate(coords) {
-      if pinsLayer.sublayers == nil || index >= pinsLayer.sublayers.count {
+    for (index, coord) in coords.enumerate() {
+      if pinsLayer.sublayers == nil || index >= pinsLayer.sublayers!.count {
         break
       }
       
-      let pinLayer = pinsLayer.sublayers[index] as! CAShapeLayer
+      let pinLayer = pinsLayer.sublayers![index] as! CAShapeLayer
       
       let rect = CGRect(x: coord.x - pinDiameter / 2, y: coord.y - pinDiameter / 2, width: pinDiameter, height: pinDiameter)
       let path = UIBezierPath(ovalInRect: rect).CGPath

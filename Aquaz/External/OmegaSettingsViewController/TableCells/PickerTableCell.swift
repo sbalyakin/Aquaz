@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PickerTableCell<Value: Printable, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>: TableCellWithValue<Value>, UIPickerTableViewCellDataSource, UIPickerTableViewCellDelegate {
+class PickerTableCell<Value: CustomStringConvertible, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>: TableCellWithValue<Value>, UIPickerTableViewCellDataSource, UIPickerTableViewCellDelegate {
   
   let collection: Collection
   let height: UIPickerViewHeight
@@ -29,7 +29,7 @@ class PickerTableCell<Value: Printable, Collection: CollectionType where Value: 
     super.init(value: value, container: container)
   }
   
-  override func createUICell(#tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  override func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
     if uiCell == nil {
       uiCell = UIPickerTableViewCell()
     }
@@ -54,7 +54,7 @@ class PickerTableCell<Value: Printable, Collection: CollectionType where Value: 
       if let numberValue = value as? NSNumber {
         row = findRowWithNearestValue(numberValue)
       } else {
-        row = find(collection, value)
+        row = collection.indexOf(value)
       }
       
       if let row = row {
@@ -66,7 +66,7 @@ class PickerTableCell<Value: Printable, Collection: CollectionType where Value: 
   private func findRowWithNearestValue(value: NSNumber) -> Int? {
     var minimumDelta: Double!
     var row: Int?
-    for (index, item) in enumerate(collection) {
+    for (index, item) in collection.enumerate() {
       let numberItem = item as! NSNumber
       let delta = abs(value.doubleValue - numberItem.doubleValue)
       if minimumDelta == nil || delta < minimumDelta {
@@ -88,7 +88,7 @@ class PickerTableCell<Value: Printable, Collection: CollectionType where Value: 
   }
   
   func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return count(collection)
+    return collection.count
   }
   
   func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {

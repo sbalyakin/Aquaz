@@ -18,12 +18,11 @@ public class CodingManagedObject: NSManagedObject, NSCoding {
   }
   
   // It's a fake initializer, real decoding will be made in awakeAfterUsingCoder
-  public convenience required init(coder aDecoder: NSCoder) {
+  public convenience required init?(coder aDecoder: NSCoder) {
     if let managedObject = CodingManagedObject.getExistingManagedObject(aDecoder) {
       self.init(entity: managedObject.entity, insertIntoManagedObjectContext: nil)
     } else {
-      assert(false)
-      self.init()
+      return nil
     }
   }
   
@@ -41,7 +40,7 @@ public class CodingManagedObject: NSManagedObject, NSCoding {
       var managedObject: NSManagedObject?
 
       CoreDataStack.privateContext.performBlock {
-        managedObject = CoreDataStack.privateContext.existingObjectWithID(managedObjectID, error: nil)
+        managedObject = try? CoreDataStack.privateContext.existingObjectWithID(managedObjectID)
         dispatch_group_leave(group)
       }
 

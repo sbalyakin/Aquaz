@@ -12,15 +12,15 @@ import UIKit
 
 protocol InfiniteScrollViewDataSource: class {
   
-  func infiniteScrollViewNeedsPage(#index: Int) -> UIView
+  func infiniteScrollViewNeedsPage(index index: Int) -> UIView
   
 }
 
 protocol InfiniteScrollViewDelegate: class {
   
-  func infiniteScrollViewPageCanBeRemoved(#index: Int, view: UIView?)
+  func infiniteScrollViewPageCanBeRemoved(index index: Int, view: UIView?)
   
-  func infiniteScrollViewPageWasSwitched(#pageIndex: Int)
+  func infiniteScrollViewPageWasSwitched(pageIndex pageIndex: Int)
   
 }
 
@@ -63,7 +63,7 @@ class InfiniteScrollView: UIView {
     }
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     baseInit()
   }
@@ -111,15 +111,15 @@ class InfiniteScrollView: UIView {
     }
   }
   
-  func switchForward(#pageNumbers: Int, animated: Bool) {
+  func switchForward(pageNumbers pageNumbers: Int, animated: Bool) {
     switchToIndex(currentIndex + pageNumbers, animated: animated)
   }
   
-  func switchToNextPage(#animated: Bool) {
+  func switchToNextPage(animated animated: Bool) {
     switchToIndex(currentIndex + 1, animated: animated)
   }
   
-  func switchToPreviousPage(#animated: Bool) {
+  func switchToPreviousPage(animated animated: Bool) {
     switchToIndex(currentIndex - 1, animated: animated)
   }
   

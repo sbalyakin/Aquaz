@@ -76,14 +76,14 @@ class MultiProgressView: UIView {
     baseInit()
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     baseInit()
   }
 
   private func baseInit() {
     clipsToBounds = true
-    setTranslatesAutoresizingMaskIntoConstraints(false)
+    translatesAutoresizingMaskIntoConstraints = false
     layer.borderColor = borderColor.CGColor
     layer.borderWidth = borderWidth
     setupEmptySection()
@@ -129,7 +129,7 @@ class MultiProgressView: UIView {
     var factorsTotal: CGFloat = 0
     let scaleX = 1 / displayedMaximum * rect.width
     
-    for (index, section) in enumerate(sections) {
+    for section in sections {
       var x = rect.minX + trunc(factorsTotal * scaleX)
       var width = ceil(section.factor * scaleX)
       factorsTotal += section.factor
@@ -147,6 +147,7 @@ class MultiProgressView: UIView {
     }
   }
   
+  @available(iOS 8.0, *)
   override func prepareForInterfaceBuilder() {
     super.prepareForInterfaceBuilder()
 
@@ -158,19 +159,19 @@ class MultiProgressView: UIView {
     }
   }
 
-  func addSection(#color: UIColor) -> Section {
+  func addSection(color color: UIColor) -> Section {
     let section = Section(color: color, multiProgressView: self)
     sections.append(section)
     setNeedsLayout()
     return section
   }
   
-  func removeSection(#index: Int) {
+  func removeSection(index index: Int) {
     sections.removeAtIndex(index)
     setNeedsLayout()
   }
   
-  func getSection(#index: Int) -> Section {
+  func getSection(index index: Int) -> Section {
     return sections[index]
   }
 
@@ -200,18 +201,15 @@ class MultiProgressView: UIView {
       delay: 0,
       usingSpringWithDamping: 0.5,
       initialSpringVelocity: 0,
-      options: nil,
+      options: [],
       animations: {
         self.layoutSections()
       }, completion: nil)
-    
-//    UIView.animateWithDuration(CFTimeInterval(animationDuration)) {
-//      self.layoutSections()
-//    }
+
   }
   
   private func calcSectionsRect(rect: CGRect) -> CGRect {
-    return rect.rectByInsetting(dx: borderWidth + sectionsPadding, dy: borderWidth + sectionsPadding)
+    return rect.insetBy(dx: borderWidth + sectionsPadding, dy: borderWidth + sectionsPadding)
   }
   
   private var isBulkUpdating = false

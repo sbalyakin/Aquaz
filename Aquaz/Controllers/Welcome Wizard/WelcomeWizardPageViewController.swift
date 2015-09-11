@@ -40,7 +40,7 @@ class WelcomeWizardPageViewController: UIPageViewController {
   }
   
   private func getPageIndexForViewController(viewController: UIViewController) -> Int {
-    for (index, ownViewController) in enumerate(ownViewControllers) {
+    for (index, ownViewController) in ownViewControllers.enumerate() {
       if ownViewController === viewController {
         return index
       }
@@ -76,8 +76,8 @@ extension WelcomeWizardPageViewController: UIPageViewControllerDataSource {
 // MARK: UIPageViewControllerDelegate
 extension WelcomeWizardPageViewController: UIPageViewControllerDelegate {
 
-  func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
-    if let currentViewController = pageViewController.viewControllers[0] as? UIViewController {
+  func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    if let currentViewController = pageViewController.viewControllers?[0] {
       let pageIndex = getPageIndexForViewController(currentViewController)
       pageControl.currentPage = pageIndex
       

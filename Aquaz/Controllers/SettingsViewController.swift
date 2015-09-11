@@ -12,31 +12,31 @@ class SettingsViewController: OmegaSettingsViewController {
 
   private struct LocalyzedStrings {
     
-    lazy var dailyWaterIntakeTitle = NSLocalizedString("SVC:Daily Water Intake",
+    lazy var dailyWaterIntakeTitle: String = NSLocalizedString("SVC:Daily Water Intake",
       value: "Daily Water Intake",
       comment: "SettingsViewController: Table cell title for [Daily Water Intake] settings bloсk")
     
-    lazy var specialModesTitle = NSLocalizedString("SVC:Special Modes",
+    lazy var specialModesTitle: String = NSLocalizedString("SVC:Special Modes",
       value: "Special Modes",
       comment: "SettingsViewController: Table cell title for [Special Modes] settings block")
     
-    lazy var unitsTitle = NSLocalizedString("SVC:Measurement Units",
+    lazy var unitsTitle: String = NSLocalizedString("SVC:Measurement Units",
       value: "Measurement Units",
       comment: "SettingsViewController: Table cell title for [Measurement Units] settings block")
     
-    lazy var notificationsTitle = NSLocalizedString("SVC:Notifications",
+    lazy var notificationsTitle: String = NSLocalizedString("SVC:Notifications",
       value: "Notifications",
       comment: "SettingsViewController: Table cell title for [Notifications] settings block")
     
-    lazy var supportTitle = NSLocalizedString("SVC:Support",
+    lazy var supportTitle: String = NSLocalizedString("SVC:Support",
       value: "Support",
       comment: "SettingsViewController: Table cell title for [Support] settings block")
     
-    lazy var fullVersionTitle = NSLocalizedString("SVC:Full Version",
+    lazy var fullVersionTitle: String = NSLocalizedString("SVC:Full Version",
       value: "Full Version",
       comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is not purchased yet")
     
-    lazy var fullVersionIsPurchasedTitle = NSLocalizedString("SVC:Full Version Is Purchased",
+    lazy var fullVersionIsPurchasedTitle: String = NSLocalizedString("SVC:Full Version Is Purchased",
       value: "Full Version Is Purchased",
       comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is purchased")
     

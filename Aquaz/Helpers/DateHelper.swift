@@ -12,7 +12,7 @@ public class DateHelper {
 
   public class func dateBySettingHour(hour: Int, minute: Int, second: Int, ofDate: NSDate) -> NSDate {
     let calendar = NSCalendar.currentCalendar()
-    let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitTimeZone | .CalendarUnitCalendar, fromDate: ofDate)
+    let components = calendar.components([.Year, .Month, .Day, .TimeZone, .Calendar], fromDate: ofDate)
     components.hour = hour
     components.minute = minute
     components.second = second
@@ -40,13 +40,13 @@ public class DateHelper {
     }
   }
 
-  public class func dateByClearingTime(#ofDate: NSDate) -> NSDate {
-    return dateBySettingHour(0, minute: 0, second: 0, ofDate: ofDate)
+  public class func dateByClearingTime(ofDate date: NSDate) -> NSDate {
+    return dateBySettingHour(0, minute: 0, second: 0, ofDate: date)
   }
   
-  public class func dateByJoiningDateTime(#datePart: NSDate, timePart: NSDate) -> NSDate {
+  public class func dateByJoiningDateTime(datePart datePart: NSDate, timePart: NSDate) -> NSDate {
     let calendar = NSCalendar.currentCalendar()
-    let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond, fromDate: timePart)
+    let components = calendar.components([.Hour, .Minute, .Second], fromDate: timePart)
     return dateBySettingHour(components.hour, minute: components.minute, second: components.second, ofDate: datePart)
   }
   
@@ -63,12 +63,12 @@ public class DateHelper {
 
   public class func computeUnitsFrom(date: NSDate, toDate: NSDate, unit: NSCalendarUnit) -> Int {
     let calendar = NSCalendar.currentCalendar()
-    let valueFrom = calendar.ordinalityOfUnit(unit, inUnit: .CalendarUnitEra, forDate: dateByClearingTime(ofDate: date))
-    let valueTo = calendar.ordinalityOfUnit(unit, inUnit: .CalendarUnitEra, forDate: dateByClearingTime(ofDate: toDate))
+    let valueFrom = calendar.ordinalityOfUnit(unit, inUnit: .Era, forDate: dateByClearingTime(ofDate: date))
+    let valueTo = calendar.ordinalityOfUnit(unit, inUnit: .Era, forDate: dateByClearingTime(ofDate: toDate))
     return valueTo - valueFrom
   }
   
-  public class func calcDistanceBetweenCalendarDates(#fromDate: NSDate, toDate: NSDate, calendarUnit: NSCalendarUnit) -> Int {
+  public class func calcDistanceBetweenCalendarDates(fromDate fromDate: NSDate, toDate: NSDate, calendarUnit: NSCalendarUnit) -> Int {
     let calendar = NSCalendar.currentCalendar()
     
     var fromDay: NSDate?
@@ -79,42 +79,42 @@ public class DateHelper {
     let difference = calendar.components(calendarUnit, fromDate: fromDay!, toDate: toDay!, options: .MatchStrictly)
     
     switch calendarUnit {
-    case NSCalendarUnit.CalendarUnitDay:   return difference.day
-    case NSCalendarUnit.CalendarUnitMonth: return difference.month
-    case NSCalendarUnit.CalendarUnitYear:  return difference.year
+    case NSCalendarUnit.Day:   return difference.day
+    case NSCalendarUnit.Month: return difference.month
+    case NSCalendarUnit.Year:  return difference.year
     default: return 0
     }
   }
 
-  public class func calcDistanceBetweenDates(#fromDate: NSDate, toDate: NSDate, calendarUnit: NSCalendarUnit) -> Int {
+  public class func calcDistanceBetweenDates(fromDate fromDate: NSDate, toDate: NSDate, calendarUnit: NSCalendarUnit) -> Int {
     let calendar = NSCalendar.currentCalendar()
     
     let difference = calendar.components(calendarUnit, fromDate: fromDate, toDate: toDate, options: .MatchStrictly)
     
     switch calendarUnit {
-    case NSCalendarUnit.CalendarUnitDay:   return difference.day
-    case NSCalendarUnit.CalendarUnitMonth: return difference.month
-    case NSCalendarUnit.CalendarUnitYear:  return difference.year
+    case NSCalendarUnit.Day:   return difference.day
+    case NSCalendarUnit.Month: return difference.month
+    case NSCalendarUnit.Year:  return difference.year
     default: return 0
     }
   }
   
   public class func areDatesEqualByDays(date1: NSDate, _ date2: NSDate) -> Bool {
-    return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .CalendarUnitDay) == 0
+    return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .Day) == 0
   }
   
   public class func areDatesEqualByMonths(date1: NSDate, _ date2: NSDate) -> Bool {
-    return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .CalendarUnitMonth) == 0
+    return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .Month) == 0
   }
   
   public class func areDatesEqualByYears(date1: NSDate, _ date2: NSDate) -> Bool {
-    return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .CalendarUnitYear) == 0
+    return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .Year) == 0
   }
   
   /// Generates string for the specified date. If year of a current date is year of today, the function hides it.
   public class func stringFromDate(date: NSDate, shortDateStyle: Bool = false) -> String {
     let today = NSDate()
-    let daysTillToday = calcDistanceBetweenDates(fromDate: today, toDate: date, calendarUnit: .CalendarUnitDay)
+    let daysTillToday = calcDistanceBetweenDates(fromDate: today, toDate: date, calendarUnit: .Day)
     let dateFormatter = NSDateFormatter()
     
     if abs(daysTillToday) <= 1 {
@@ -125,7 +125,7 @@ public class DateHelper {
       dateFormatter.doesRelativeDateFormatting = true
     } else {
       // Use custom formatting. If year of a current date is year of today, hide it.
-      let yearsTillToday = calcDistanceBetweenDates(fromDate: today, toDate: date, calendarUnit: .CalendarUnitYear)
+      let yearsTillToday = calcDistanceBetweenDates(fromDate: today, toDate: date, calendarUnit: .Year)
       let monthFormat = shortDateStyle ? "MMM" : "MMMM"
       let template = yearsTillToday == 0 ? "d\(monthFormat)" : "d\(monthFormat)yyyy"
       let formatString = NSDateFormatter.dateFormatFromTemplate(template, options: 0, locale: NSLocale.currentLocale())

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MultiPickerTableCell<Value: Equatable, ComponentCollection: CollectionType where ComponentCollection.Generator.Element: Printable, ComponentCollection.Index == Int>: TableCellWithValue<Value>, UIPickerTableViewCellDataSource, UIPickerTableViewCellDelegate {
+class MultiPickerTableCell<Value: Equatable, ComponentCollection: CollectionType where ComponentCollection.Generator.Element: CustomStringConvertible, ComponentCollection.Index == Int>: TableCellWithValue<Value>, UIPickerTableViewCellDataSource, UIPickerTableViewCellDelegate {
   
   let components: [Component]
   let height: UIPickerViewHeight
@@ -29,7 +29,7 @@ class MultiPickerTableCell<Value: Equatable, ComponentCollection: CollectionType
     super.init(value: value, container: container)
   }
   
-  override func createUICell(#tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  override func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
     if uiCell == nil {
       uiCell = UIPickerTableViewCell()
     }
@@ -48,7 +48,7 @@ class MultiPickerTableCell<Value: Equatable, ComponentCollection: CollectionType
   private func updateUICell() {
     if let uiCell = uiCell, let selectedRows = valueToSelectionFunction?(value) {
       assert(selectedRows.count == uiCell.pickerView.numberOfComponents)
-      for (component, row) in enumerate(selectedRows) {
+      for (component, row) in selectedRows.enumerate() {
         uiCell.pickerView.selectRow(row, inComponent: component, animated: true)
       }
     }
@@ -66,7 +66,7 @@ class MultiPickerTableCell<Value: Equatable, ComponentCollection: CollectionType
   }
   
   func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return count(components[component].collection)
+    return (components[component].collection).count
   }
   
   func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {

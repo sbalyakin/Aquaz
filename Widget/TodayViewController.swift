@@ -46,7 +46,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     return coreDataStack.mainContext
   }
 
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
 
     Fabric.with([Crashlytics()])
@@ -116,7 +116,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     if let intake1: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: mainManagedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor]) {
       let drinkIndex1 = intake1.drink.index.integerValue
       drinkIndexesToDisplay += [drinkIndex1]
-      if let index = find(drinkIndexes, drinkIndex1) {
+      if let index = drinkIndexes.indexOf(drinkIndex1) {
         drinkIndexes.removeAtIndex(index)
       } else {
         assert(false)
@@ -127,7 +127,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       if let intake2: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: mainManagedObjectContext, predicate: predicate2, sortDescriptors: [sortDescriptor]) {
         let drinkIndex2 = intake2.drink.index.integerValue
         drinkIndexesToDisplay += [drinkIndex2]
-        if let index = find(drinkIndexes, drinkIndex2) {
+        if let index = drinkIndexes.indexOf(drinkIndex2) {
           drinkIndexes.removeAtIndex(index)
         } else {
           assert(false)
@@ -153,7 +153,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       drinkIndexesToDisplay += [drinkIndexes.removeAtIndex(0)]
     }
     
-    drinkIndexesToDisplay.sort(<)
+    drinkIndexesToDisplay.sortInPlace(<)
     
     let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: mainManagedObjectContext)
     
@@ -186,7 +186,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
   }
   
-  private func updateUI(#animated: Bool) {
+  private func updateUI(animated animated: Bool) {
     updateDrinks()
     updateWaterIntakes(animated: animated)
   }
@@ -205,7 +205,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     drink3View.drinkType = drink3.drinkType
   }
 
-  private func updateWaterIntakes(#animated: Bool) {
+  private func updateWaterIntakes(animated animated: Bool) {
     if let waterGoal = waterGoal,
        let hydration = hydration,
        let dehydration = dehydration
@@ -218,7 +218,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
   }
   
-  private func updateProgressView(#waterGoal: Double, overallWaterIntake: Double, animated: Bool) {
+  private func updateProgressView(waterGoal waterGoal: Double, overallWaterIntake: Double, animated: Bool) {
     let newFactor = CGFloat(overallWaterIntake / waterGoal)
     if progressViewSection.factor != newFactor {
       if animated {
@@ -229,7 +229,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
   }
   
-  private func updateProgressLabel(#waterGoal: Double, overallWaterIntake: Double, animated: Bool) {
+  private func updateProgressLabel(waterGoal waterGoal: Double, overallWaterIntake: Double, animated: Bool) {
     let intakeText: String
     
     if Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value {
@@ -264,7 +264,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       decimals: Settings.sharedInstance.generalVolumeUnits.value.decimals)
   }
   
-  func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
+  func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
     fetchData {
       dispatch_async(dispatch_get_main_queue()) {
         self.updateUI(animated: false)

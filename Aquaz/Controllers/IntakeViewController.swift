@@ -26,13 +26,13 @@ class IntakeViewController: UIViewController {
   
   private struct LocalizedStrings {
     
-    lazy var addButtonTitle = NSLocalizedString("IVC:Add", value: "Add", comment: "IntakeViewController: Title for Add button")
+    lazy var addButtonTitle: String = NSLocalizedString("IVC:Add", value: "Add", comment: "IntakeViewController: Title for Add button")
     
-    lazy var applyButtonTitle = NSLocalizedString("IVC:Apply", value: "Apply", comment: "IntakeViewController: Title for Apply button")
+    lazy var applyButtonTitle: String = NSLocalizedString("IVC:Apply", value: "Apply", comment: "IntakeViewController: Title for Apply button")
     
-    lazy var nowNavigationSubtitle = NSLocalizedString("IVC:Now", value: "Now", comment: "IntakeViewController: Subtitle of view if user adds intake for today")
+    lazy var nowNavigationSubtitle: String = NSLocalizedString("IVC:Now", value: "Now", comment: "IntakeViewController: Subtitle of view if user adds intake for today")
     
-    lazy var alcoholicDrinkInformation = NSLocalizedString(
+    lazy var alcoholicDrinkInformation: String = NSLocalizedString(
       "IVC:Alcoholic drinks cause dehydration by requiring more water to metabolize and by acting as diuretics.",
       value: "Alcoholic drinks cause dehydration by requiring more water to metabolize and by acting as diuretics.",
       comment: "IntakeViewController: Information about alcoholic drinks")
@@ -248,7 +248,7 @@ class IntakeViewController: UIViewController {
     return Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: amount, unitType: .Volume, roundPrecision: precision)
   }
   
-  private func addIntake(#amount: Double) {
+  private func addIntake(amount amount: Double) {
     let intakeDate: NSDate
     if timeIsChoosen || !isCurrentDayToday {
       intakeDate = date
@@ -267,7 +267,7 @@ class IntakeViewController: UIViewController {
     }
   }
   
-  private func updateIntake(#amount: Double) {
+  private func updateIntake(amount amount: Double) {
     if let intake = intake {
       mainManagedObjectContext.performBlock {
         intake.amount = amount

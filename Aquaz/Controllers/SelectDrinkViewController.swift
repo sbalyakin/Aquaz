@@ -87,7 +87,7 @@ class SelectDrinkViewController: UIViewController {
     collectionView.reloadData()
   }
   
-  private func changeAlcoholicDrinkTo(#drinkType: Drink.DrinkType) {
+  private func changeAlcoholicDrinkTo(drinkType drinkType: Drink.DrinkType) {
     displayedDrinkTypes[displayedDrinkTypes.count - 1] = drinkType
     Settings.sharedInstance.uiSelectedAlcoholicDrink.value = drinkType
     
@@ -129,7 +129,7 @@ class SelectDrinkViewController: UIViewController {
       
       if let cell = collectionView.cellForItemAtIndexPath(indexPath) {
         var rect = CGRect(x: cell.frame.minX, y: 0, width: cell.frame.width, height: collectionView.bounds.height)
-        rect.inset(dx: -popupViewManager.padding, dy: -popupViewManager.padding)
+        rect.insetInPlace(dx: -popupViewManager.padding, dy: -popupViewManager.padding)
         rect = collectionView.convertRect(rect, toView: navigationController!.view)
         let dy = rect.height / 3
         rect.size.height -= dy
@@ -157,7 +157,7 @@ class SelectDrinkViewController: UIViewController {
     }
   }
 
-  private func collectionViewCellIsSelected(#indexPath: NSIndexPath) {
+  private func collectionViewCellIsSelected(indexPath indexPath: NSIndexPath) {
     if !areDrinksLoaded {
       return
     }
@@ -257,7 +257,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     super.init()
   }
   
-  func showPopupView(#frame: CGRect) {
+  func showPopupView(frame frame: CGRect) {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "preferredContentSizeChanged",
       name: UIContentSizeCategoryDidChangeNotification,
@@ -274,7 +274,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     layout.minimumLineSpacing = 0
     layout.minimumInteritemSpacing = 0
     
-    let collectionViewRect = backgroundView.bounds.rectByInsetting(dx: padding, dy: padding)
+    let collectionViewRect = backgroundView.bounds.insetBy(dx: padding, dy: padding)
     let contentWidth = collectionViewRect.width - layout.minimumInteritemSpacing * CGFloat(columnsCount - 1)
     let contentHeight = collectionViewRect.height - layout.minimumLineSpacing * CGFloat(rowsCount - 1)
     let cellWidth = trunc(contentWidth / CGFloat(columnsCount))
@@ -370,7 +370,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     popupCellIsSelected(indexPath: indexPath)
   }
   
-  private func popupCellIsSelected(#indexPath: NSIndexPath) {
+  private func popupCellIsSelected(indexPath indexPath: NSIndexPath) {
     hidePopupView()
     
     let drinkIndex = indexPath.row
@@ -410,11 +410,9 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
       return
     }
 
-    for currentCell in popupCollectionView.visibleCells() {
-      if let visibleCell = currentCell as? UICollectionViewCell {
-        visibleCell.highlighted = false
-        visibleCell.setNeedsDisplay()
-      }
+    for visibleCell in popupCollectionView.visibleCells() {
+      visibleCell.highlighted = false
+      visibleCell.setNeedsDisplay()
     }
 
     let pointInCollectionView = gestureRecognizer.locationInView(popupCollectionView)

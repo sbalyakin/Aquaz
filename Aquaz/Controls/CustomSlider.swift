@@ -29,7 +29,7 @@ import UIKit
     }
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     baseInit()
   }
@@ -42,7 +42,7 @@ import UIKit
   private func baseInit() {
     if thumbRadius > 0 {
       let imageSize = calcThumbImageSize()
-      let thumbRect = CGRect(origin: CGPoint.zeroPoint, size: imageSize)
+      let thumbRect = CGRect(origin: CGPoint.zero, size: imageSize)
       let thumbImage = StyleImages.imageOfThumb(frame: thumbRect)
       setThumbImage(thumbImage, forState: .Normal)
     }
@@ -65,6 +65,7 @@ import UIKit
     return rect
   }
   
+  @available(iOS 8.0, *)
   override func prepareForInterfaceBuilder() {
     super.prepareForInterfaceBuilder()
     
@@ -77,7 +78,7 @@ class StyleImages : NSObject {
   
   //// Drawing Methods
   
-  class func drawThumb(#frame: CGRect) {
+  class func drawThumb(frame frame: CGRect) {
     //// General Declarations
     let context = UIGraphicsGetCurrentContext()
     
@@ -99,7 +100,7 @@ class StyleImages : NSObject {
     
     //// Group 4
     //// Oval 5 Drawing
-    var oval5Path = UIBezierPath(ovalInRect: CGRectMake(group4.minX + floor(group4.width * 0.00000 + 0.5), group4.minY + floor(group4.height * 0.00000 + 0.5), floor(group4.width * 1.00000 + 0.5) - floor(group4.width * 0.00000 + 0.5), floor(group4.height * 1.00000 + 0.5) - floor(group4.height * 0.00000 + 0.5)))
+    let oval5Path = UIBezierPath(ovalInRect: CGRectMake(group4.minX + floor(group4.width * 0.00000 + 0.5), group4.minY + floor(group4.height * 0.00000 + 0.5), floor(group4.width * 1.00000 + 0.5) - floor(group4.width * 0.00000 + 0.5), floor(group4.height * 1.00000 + 0.5) - floor(group4.height * 0.00000 + 0.5)))
     CGContextSaveGState(context)
     CGContextSetShadowWithColor(context, shadowOffset, shadowBlurRadius, (shadow as UIColor).CGColor)
     backgroundColor.setFill()
@@ -112,7 +113,7 @@ class StyleImages : NSObject {
     
     
     //// Polygon Drawing
-    var polygonPath = UIBezierPath()
+    let polygonPath = UIBezierPath()
     polygonPath.moveToPoint(CGPointMake(group4.minX + 0.19375 * group4.width, group4.minY + 0.50625 * group4.height))
     polygonPath.addLineToPoint(CGPointMake(group4.minX + 0.44219 * group4.width, group4.minY + 0.25727 * group4.height))
     polygonPath.addLineToPoint(CGPointMake(group4.minX + 0.44219 * group4.width, group4.minY + 0.75523 * group4.height))
@@ -126,7 +127,7 @@ class StyleImages : NSObject {
     
     
     //// Polygon 2 Drawing
-    var polygon2Path = UIBezierPath()
+    let polygon2Path = UIBezierPath()
     polygon2Path.moveToPoint(CGPointMake(group4.minX + 0.80625 * group4.width, group4.minY + 0.50625 * group4.height))
     polygon2Path.addLineToPoint(CGPointMake(group4.minX + 0.55781 * group4.width, group4.minY + 0.25727 * group4.height))
     polygon2Path.addLineToPoint(CGPointMake(group4.minX + 0.55781 * group4.width, group4.minY + 0.75523 * group4.height))
@@ -141,7 +142,7 @@ class StyleImages : NSObject {
   
   //// Generated Images
   
-  class func imageOfThumb(#frame: CGRect) -> UIImage {
+  class func imageOfThumb(frame frame: CGRect) -> UIImage {
     UIGraphicsBeginImageContextWithOptions(frame.size, false, 0)
     StyleImages.drawThumb(frame: frame)
     

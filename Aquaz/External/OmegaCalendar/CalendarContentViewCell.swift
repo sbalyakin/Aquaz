@@ -50,7 +50,7 @@ class CalendarContentViewCell: UICollectionViewCell {
     label.text = dayInfo.title
     label.textColor = colors.text
     if dayInfo.isToday {
-      let fontDescriptor = calendarContentView.font.fontDescriptor().fontDescriptorWithSymbolicTraits(.TraitBold)!
+      let fontDescriptor = calendarContentView.font.fontDescriptor().fontDescriptorWithSymbolicTraits(.TraitBold)
       let boldFont = UIFont(descriptor: fontDescriptor, size: calendarContentView.font.pointSize)
       label.font = boldFont
     } else {

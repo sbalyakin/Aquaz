@@ -36,11 +36,11 @@ class WeekStatisticsViewController: UIViewController {
   
   private struct LocalizedStrings {
     
-    lazy var helpTipForTapSeeDayDetails = NSLocalizedString("WSVC:Tap a day to see details",
+    lazy var helpTipForTapSeeDayDetails: String = NSLocalizedString("WSVC:Tap a day to see details",
       value: "Tap a day to see details",
       comment: "WeekStatisticsViewController: Text for help tip about tapping a day button for details")
     
-    lazy var helpTipForSwipeToChangeWeek = NSLocalizedString("WSVC:Swipe left or right to switch week",
+    lazy var helpTipForSwipeToChangeWeek: String = NSLocalizedString("WSVC:Swipe left or right to switch week",
       value: "Swipe left or right to switch week",
       comment: "WeekStatisticsViewController: Text for help tip about switching current week by swipe gesture")
 
@@ -141,7 +141,7 @@ class WeekStatisticsViewController: UIViewController {
     view.invalidateIntrinsicContentSize()
   }
 
-  private func updateUI(#animated: Bool) {
+  private func updateUI(animated animated: Bool) {
     computeStatisticsDateRange()
     updateDatePeriodLabel(animated: animated)
     updateWeekStatisticsView(animated: animated)
@@ -182,7 +182,7 @@ class WeekStatisticsViewController: UIViewController {
     return formatter
     }()
 
-  private func updateDatePeriodLabel(#animated: Bool) {
+  private func updateDatePeriodLabel(animated animated: Bool) {
     let maxDate = DateHelper.addToDate(statisticsEndDate, years: 0, months: 0, days: -1)
     let fromDateTitle = dateFormatter.stringFromDate(statisticsBeginDate)
     let toDateTitle = dateFormatter.stringFromDate(maxDate)
@@ -194,7 +194,7 @@ class WeekStatisticsViewController: UIViewController {
     }
   }
 
-  private func fetchStatisticsItems(#beginDate: NSDate, endDate: NSDate) -> [WeekStatisticsView.ItemType] {
+  private func fetchStatisticsItems(beginDate beginDate: NSDate, endDate: NSDate) -> [WeekStatisticsView.ItemType] {
     let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
       beginDate: beginDate,
       endDate: endDate,
@@ -211,11 +211,9 @@ class WeekStatisticsViewController: UIViewController {
     
     Logger.logSevere(waterGoals.count == 7, "Unexpected count of water goals", logDetails: [Logger.Attributes.count: "\(waterGoals.count)"])
     
-    let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
-    
     var statisticsItems: [WeekStatisticsView.ItemType] = []
     
-    for (index, amountPart) in enumerate(amountPartsList) {
+    for (index, amountPart) in amountPartsList.enumerate() {
       let waterGoal = waterGoals[index] + amountPart.dehydration
       
       let displayedWaterHydration = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: amountPart.hydration, unitType: .Volume)
@@ -228,7 +226,7 @@ class WeekStatisticsViewController: UIViewController {
     return statisticsItems
   }
   
-  private func updateWeekStatisticsView(#animated: Bool) {
+  private func updateWeekStatisticsView(animated animated: Bool) {
     if Settings.sharedInstance.generalFullVersion.value {
       privateManagedObjectContext.performBlock {
         let date = self.date
@@ -252,15 +250,15 @@ class WeekStatisticsViewController: UIViewController {
 
   private func computeStatisticsDateRange() {
     let calendar = NSCalendar.currentCalendar()
-    let weekdayOfDate = calendar.ordinalityOfUnit(.CalendarUnitWeekday, inUnit: .CalendarUnitWeekOfMonth, forDate: date)
-    let daysPerWeek = calendar.maximumRangeOfUnit(.CalendarUnitWeekday).length
+    let weekdayOfDate = calendar.ordinalityOfUnit(.Weekday, inUnit: .WeekOfMonth, forDate: date)
+    let daysPerWeek = calendar.maximumRangeOfUnit(.Weekday).length
     statisticsBeginDate = DateHelper.addToDate(date, years: 0, months: 0, days: -weekdayOfDate + 1)
     statisticsEndDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: daysPerWeek)
   }
   
   private func isFutureDate(dayIndex: Int) -> Bool {
     let date = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
-    let daysBetween = DateHelper.calcDistanceBetweenCalendarDates(fromDate: NSDate(), toDate: date, calendarUnit: .CalendarUnitDay)
+    let daysBetween = DateHelper.calcDistanceBetweenCalendarDates(fromDate: NSDate(), toDate: date, calendarUnit: .Day)
     return daysBetween > 0
   }
   

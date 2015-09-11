@@ -14,7 +14,7 @@ class MonthStatisticsViewController: UIViewController {
   @IBOutlet weak var monthStatisticsView: MonthStatisticsView!
   @IBOutlet weak var monthLabel: UILabel!
   
-  private var date: NSDate = DateHelper.startDateFromDate(NSDate(), calendarUnit: .CalendarUnitMonth)
+  private var date: NSDate = DateHelper.startDateFromDate(NSDate(), calendarUnit: .Month)
 
   private var privateManagedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
 
@@ -104,7 +104,7 @@ class MonthStatisticsViewController: UIViewController {
     monthStatisticsView.refresh()
   }
 
-  private func updateUI(#animated: Bool) {
+  private func updateUI(animated animated: Bool) {
     let title = dateFormatter.stringFromDate(date)
     
     if animated {
@@ -193,7 +193,7 @@ extension MonthStatisticsViewController: CalendarViewDelegate {
 
 extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
   
-  func monthStatisticsGetValuesForDateInterval(#beginDate: NSDate, endDate: NSDate, calendarContentView: CalendarContentView) -> [Double] {
+  func monthStatisticsGetValuesForDateInterval(beginDate beginDate: NSDate, endDate: NSDate, calendarContentView: CalendarContentView) -> [Double] {
     if Settings.sharedInstance.generalFullVersion.value {
       privateManagedObjectContext.performBlock {
         weak var requestingMonthStatisticsContentView = (calendarContentView as! MonthStatisticsContentView)
@@ -222,7 +222,7 @@ extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
     }
   }
   
-  private func fetchHydrationFractions(#beginDate: NSDate, endDate: NSDate) -> [Double] {
+  private func fetchHydrationFractions(beginDate beginDate: NSDate, endDate: NSDate) -> [Double] {
     let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
       beginDate: beginDate,
       endDate: endDate,
@@ -239,7 +239,7 @@ extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
     
     var hydrationFractions = [Double]()
     
-    for (index, amountParts) in enumerate(amountPartsList) {
+    for (index, amountParts) in amountPartsList.enumerate() {
       let waterGoal = waterGoals[index] + amountParts.dehydration
       let hydrationFraction: Double
       if waterGoal > 0 {

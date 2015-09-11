@@ -27,7 +27,7 @@ class YearStatisticsViewController: UIViewController {
   private var privateManagedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   private var volumeObserver: SettingsObserver?
 
-  private let shortMonthSymbols = NSCalendar.currentCalendar().shortMonthSymbols as! [String]
+  private let shortMonthSymbols = NSCalendar.currentCalendar().shortMonthSymbols 
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -121,7 +121,7 @@ class YearStatisticsViewController: UIViewController {
     view.invalidateIntrinsicContentSize()
   }
   
-  private func updateUI(#animated: Bool) {
+  private func updateUI(animated animated: Bool) {
     computeStatisticsDateRange()
     updateYearLabel(animated: animated)
     updateYearStatisticsView()
@@ -162,7 +162,7 @@ class YearStatisticsViewController: UIViewController {
     return formatter
     }()
 
-  private func updateYearLabel(#animated: Bool) {
+  private func updateYearLabel(animated animated: Bool) {
     let title = dateFormatter.stringFromDate(date)
     
     if animated {
@@ -172,7 +172,7 @@ class YearStatisticsViewController: UIViewController {
     }
   }
   
-  private func fetchStatisticsItems(#beginDate: NSDate, endDate: NSDate) -> [YearStatisticsView.ItemType] {
+  private func fetchStatisticsItems(beginDate beginDate: NSDate, endDate: NSDate) -> [YearStatisticsView.ItemType] {
     let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Month,
       beginDate: beginDate,
       endDate: endDate,
@@ -187,11 +187,9 @@ class YearStatisticsViewController: UIViewController {
     
     Logger.logSevere(amountPartsList.count == waterGoals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     
-    let displayedVolumeUnits = Settings.sharedInstance.generalVolumeUnits.value
-    
     var statisticsItems: [YearStatisticsView.ItemType] = []
     
-    for (index, amountParts) in enumerate(amountPartsList) {
+    for (index, amountParts) in amountPartsList.enumerate() {
       let waterGoal = waterGoals[index] + amountParts.dehydration
       
       let displayedHydrationAmount = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: amountParts.hydration, unitType: .Volume)
@@ -230,7 +228,7 @@ class YearStatisticsViewController: UIViewController {
   
   private func computeStatisticsDateRange() {
     let calendar = NSCalendar.currentCalendar()
-    let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitTimeZone | .CalendarUnitCalendar, fromDate: date)
+    let dateComponents = calendar.components([.Year, .Month, .Day, .TimeZone, .Calendar], fromDate: date)
     
     dateComponents.day = 1
     dateComponents.month = 1

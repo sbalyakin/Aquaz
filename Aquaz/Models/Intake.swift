@@ -39,7 +39,7 @@ public class Intake: CodingManagedObject, NamedEntity {
   }
 
   /// Adds a new intake's entity into Core Data
-  public class func addEntity(#drink: Drink, amount: Double, date: NSDate, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Intake? {
+  public class func addEntity(drink drink: Drink, amount: Double, date: NSDate, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Intake? {
     if let intake = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext) {
       intake.amount = amount
       intake.drink = drink
@@ -56,7 +56,7 @@ public class Intake: CodingManagedObject, NamedEntity {
   }
 
   /// Deletes the intake from Core Data
-  public func deleteEntity(saveImmediately: Bool = true) {
+  public func deleteEntity(saveImmediately saveImmediately: Bool = true) {
     if let managedObjectContext = managedObjectContext {
       managedObjectContext.deleteObject(self)
       
@@ -69,7 +69,7 @@ public class Intake: CodingManagedObject, NamedEntity {
   }
   
   /// Fetches all intakes for the specified date interval (beginDate..<endDate)
-  public class func fetchIntakes(#beginDate: NSDate, endDate: NSDate, managedObjectContext: NSManagedObjectContext) -> [Intake] {
+  public class func fetchIntakes(beginDate beginDate: NSDate, endDate: NSDate, managedObjectContext: NSManagedObjectContext) -> [Intake] {
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
     let descriptor = NSSortDescriptor(key: "date", ascending: true)
     return CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: [descriptor])
@@ -106,8 +106,8 @@ public class Intake: CodingManagedObject, NamedEntity {
     
     let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
     
-    var error: NSError?
-    if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) {
+    do {
+      let fetchResults = try managedObjectContext.executeFetchRequest(fetchRequest)
       var result = [Drink: Double]()
       for record in fetchResults as! [NSDictionary] {
         let drinkIndex = record["drink.index"] as! NSNumber
@@ -116,7 +116,7 @@ public class Intake: CodingManagedObject, NamedEntity {
         result[drink] = amount
       }
       return result
-    } else {
+    } catch let error as NSError {
       Logger.logError(Logger.Messages.failedToExecuteFetchRequest, error: error)
       return [:]
     }
@@ -144,8 +144,8 @@ public class Intake: CodingManagedObject, NamedEntity {
     
     let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
 
-    var error: NSError?
-    if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) {
+    do {
+      let fetchResults = try managedObjectContext.executeFetchRequest(fetchRequest)
       var totalDehydration: Double = 0
       
       for record in fetchResults as! [NSDictionary] {
@@ -156,7 +156,7 @@ public class Intake: CodingManagedObject, NamedEntity {
       }
       
       return totalDehydration
-    } else {
+    } catch let error as NSError {
       Logger.logError(Logger.Messages.failedToExecuteFetchRequest, error: error)
       return 0
     }
@@ -168,8 +168,8 @@ public class Intake: CodingManagedObject, NamedEntity {
     
     func getCalendarUnit() -> NSCalendarUnit {
       switch self {
-      case .Day  : return .CalendarUnitDay
-      case .Month: return .CalendarUnitMonth
+      case .Day  : return .Day
+      case .Month: return .Month
       }
     }
   }
@@ -215,7 +215,7 @@ public class Intake: CodingManagedObject, NamedEntity {
     var intakeIndex = 0
     var daysInCalendarUnit = 0
     
-    let nextDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitTimeZone | .CalendarUnitCalendar, fromDate: beginDate)
+    let nextDateComponents = calendar.components([.Year, .Month, .Day, .TimeZone, .Calendar], fromDate: beginDate)
     nextDateComponents.hour = 0
     nextDateComponents.minute = 0
     nextDateComponents.second = 0
@@ -223,7 +223,7 @@ public class Intake: CodingManagedObject, NamedEntity {
     while true {
       if aggregateFunction == .Average {
         let currentDate = nextDate ?? beginDate
-        daysInCalendarUnit = calendar.rangeOfUnit(.CalendarUnitDay, inUnit: calendarUnit, forDate: currentDate).length
+        daysInCalendarUnit = calendar.rangeOfUnit(.Day, inUnit: calendarUnit, forDate: currentDate).length
       }
 
       nextDateComponents.month += deltaMonths

@@ -64,12 +64,12 @@ class SupportViewController: UIViewController {
 
     lazy var twitterText: String = self.facebookText
 
-    lazy var facebookNotFound = NSLocalizedString(
+    lazy var facebookNotFound: String = NSLocalizedString(
       "SVC:Facebook account is not found",
       value: "Facebook account is not found",
       comment: "SupportViewController: Information message if no Facebook account found on device")
     
-    lazy var twitterNotFound = NSLocalizedString(
+    lazy var twitterNotFound: String = NSLocalizedString(
       "SVC:Twitter account is not found",
       value: "Twitter account is not found",
       comment: "SupportViewController: Information message if no Twitter account found on device")
@@ -140,7 +140,7 @@ class SupportViewController: UIViewController {
     actionSheet.showInView(view)
   }
   
-  private func showEmailComposer(#subject: String, body: String, recipients: [String]?) {
+  private func showEmailComposer(subject subject: String, body: String, recipients: [String]?) {
     let mailComposer = MFMailComposeViewController()
     mailComposer.setSubject(subject)
     mailComposer.setMessageBody(body, isHTML: true)
@@ -204,7 +204,7 @@ extension SupportViewController: UIActionSheetDelegate {
 
 extension SupportViewController: MFMailComposeViewControllerDelegate {
   
-  func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+  func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
     dismissViewControllerAnimated(true, completion: nil)
   }
 

@@ -1,32 +1,32 @@
 PODS:
   - AdColony (2.5.3)
-  - AFNetworking (2.5.4):
-    - AFNetworking/NSURLConnection (= 2.5.4)
-    - AFNetworking/NSURLSession (= 2.5.4)
-    - AFNetworking/Reachability (= 2.5.4)
-    - AFNetworking/Security (= 2.5.4)
-    - AFNetworking/Serialization (= 2.5.4)
-    - AFNetworking/UIKit (= 2.5.4)
-  - AFNetworking/NSURLConnection (2.5.4):
+  - AFNetworking (2.6.0):
+    - AFNetworking/NSURLConnection (= 2.6.0)
+    - AFNetworking/NSURLSession (= 2.6.0)
+    - AFNetworking/Reachability (= 2.6.0)
+    - AFNetworking/Security (= 2.6.0)
+    - AFNetworking/Serialization (= 2.6.0)
+    - AFNetworking/UIKit (= 2.6.0)
+  - AFNetworking/NSURLConnection (2.6.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.4):
+  - AFNetworking/NSURLSession (2.6.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.4)
-  - AFNetworking/Security (2.5.4)
-  - AFNetworking/Serialization (2.5.4)
-  - AFNetworking/UIKit (2.5.4):
+  - AFNetworking/Reachability (2.6.0)
+  - AFNetworking/Security (2.6.0)
+  - AFNetworking/Serialization (2.6.0)
+  - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AmazonAds (2.2.8)
+  - AmazonAds (2.2.10)
   - AppLovinSDK (3.1.2)
-  - Appodeal (0.4.5.2):
-    - AdColony (~> 2.5.2)
-    - AFNetworking (~> 2.5.4)
-    - AmazonAds (~> 2.2.8)
+  - Appodeal (0.4.7.1):
+    - AdColony (~> 2.5.3)
+    - AFNetworking (~> 2.6.0)
+    - AmazonAds (~> 2.2.10)
     - AppLovinSDK (~> 3.1.2)
     - ChartboostSDK (~> 5.5.3)
     - CocoaLumberjack (~> 2.0.1)
@@ -35,8 +35,10 @@ PODS:
     - Google-Mobile-Ads-SDK (~> 7.4.1)
     - InMobiSDK (~> 4.5.1)
     - Mantle (~> 2.0.4)
-    - mopub-ios-sdk (~> 3.10.0)
-    - MyTarget (~> 4.0.13)
+    - mopub-ios-sdk (~> 3.12.0)
+    - MyTarget (~> 4.0.17)
+    - NexageSourceKitMRAID (~> 1.0.6)
+    - RevvForMobile (~> 3.1.4)
     - StartApp (~> 3.1.0)
     - SVProgressHUD (~> 1.1.3)
     - UnityAds (~> 1.4.7)
@@ -50,6 +52,10 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.0.1):
     - CocoaLumberjack/Default
+  - Crashlytics (3.3.0)
+  - Fabric (1.5.0):
+    - Fabric/Base (= 1.5.0)
+  - Fabric/Base (1.5.0)
   - FBAudienceNetwork (4.5.0)
   - Godzippa (1.1.0)
   - Google-Mobile-Ads-SDK (7.4.1)
@@ -57,10 +63,17 @@ PODS:
   - Mantle (2.0.4):
     - Mantle/extobjc (= 2.0.4)
   - Mantle/extobjc (2.0.4)
-  - mopub-ios-sdk (3.10.0):
-    - mopub-ios-sdk/MoPubSDK (= 3.10.0)
-  - mopub-ios-sdk/MoPubSDK (3.10.0)
+  - MMWormhole (1.2.0):
+    - MMWormhole/Core (= 1.2.0)
+  - MMWormhole/Core (1.2.0)
+  - mopub-ios-sdk (3.12.0):
+    - mopub-ios-sdk/MoPubSDK (= 3.12.0)
+  - mopub-ios-sdk/MoPubSDK (3.12.0)
   - MyTarget (4.0.17)
+  - NexageSourceKitCommon (1.0.3)
+  - NexageSourceKitMRAID (1.0.6):
+    - NexageSourceKitCommon (~> 1.0.3)
+  - RevvForMobile (3.1.4)
   - StartApp (3.1.0)
   - SVProgressHUD (1.1.3)
   - UnityAds (1.4.7)
@@ -68,22 +81,31 @@ PODS:
 
 DEPENDENCIES:
   - Appodeal (~> 0.4.2)
+  - Crashlytics
+  - Fabric
+  - MMWormhole (~> 1.2.0)
 
 SPEC CHECKSUMS:
   AdColony: 389b39a185cf61a18cc7d4e1d910046246508e80
-  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  AmazonAds: 772ea5a808c936cc6eeee8eb9fbb0da34a8a53c2
+  AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  AmazonAds: 6f523bdb457b1c06c7058aca3eba75d29c7322f3
   AppLovinSDK: 4d37c6fa500a22d50903ad00d883726f2ee1e435
-  Appodeal: ed6a489aa70b919c9908112839f72a9c06e56d56
+  Appodeal: ff062a054f999904673eeb0b2e06244284f62199
   ChartboostSDK: 9bf9427b4c306773ea9f7d8cf974b4a3a0f1e61e
   CocoaLumberjack: 019d1361244274a6138c788c6cb80baabc13fb8f
+  Crashlytics: 6524671d48a4c3f4100b8c56ee8dd7e34aac820a
+  Fabric: 374a4a0bbefa219ed201cbc84f2f42e4029302a6
   FBAudienceNetwork: e43e37a65d2f067be97903c93618f948a16c2c96
   Godzippa: 21621e8ddc2f1521db473a72b48148c3f0e79d76
   Google-Mobile-Ads-SDK: dce4c2728daa0bcbd88b6e3dc111b718a07b1eb6
   InMobiSDK: f16f6462a0068d9410618ab07e78c4041beb7a70
   Mantle: 6bee68168423948be0c0c5924832bf3af188e099
-  mopub-ios-sdk: 74c66841809637f750b6ecba93e8c131da3969c6
+  MMWormhole: 696de5a8d2ef93f028ade4cff34958943c3bfa1e
+  mopub-ios-sdk: 918d38259ad1945e4da10fb8e6241b8754ae4dd2
   MyTarget: 0952098d7f7ea835042ebad20f1ef29ab02903af
+  NexageSourceKitCommon: 629eff3bc2135384e817ff8462a602269b100608
+  NexageSourceKitMRAID: 143794bbd822a07d4506e222f0f72860c63fe3ec
+  RevvForMobile: 147d51ce0a8248df82759afecf29ca035240f344
   StartApp: a03e4d3e13bb7d8d5e681ac011e3524dafaf2e37
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   UnityAds: 2eb8cb033f38953fcda04408098cb2d18cab3795

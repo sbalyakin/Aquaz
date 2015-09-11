@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Sergey Balyakin. All rights reserved.
 //
 
+import Foundation
+
 class GlobalConstants {
 
   static let applicationIdentifier = "963482552"

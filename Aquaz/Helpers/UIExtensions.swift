@@ -75,7 +75,7 @@ extension UIView {
     #endif
   }
   
-  func addConstraints(constraintsVisualFormat: String, views: [String: UIView], metrics: [NSObject: AnyObject]? = nil, options: NSLayoutFormatOptions = NSLayoutFormatOptions.allZeros) {
+  func addConstraints(constraintsVisualFormat: String, views: [String: UIView], metrics: [String: AnyObject]? = nil, options: NSLayoutFormatOptions = NSLayoutFormatOptions()) {
     let constraints = NSLayoutConstraint.constraintsWithVisualFormat(constraintsVisualFormat, options: options, metrics: metrics, views: views)
     self.addConstraints(constraints)
   }
@@ -106,9 +106,9 @@ extension UILabel {
 
 extension UIViewController {
   
-  func contentViewController() -> UIViewController {
+  var contentViewController: UIViewController {
     if let navigationController = self as? UINavigationController {
-      return navigationController.visibleViewController
+      return navigationController.visibleViewController ?? self
     } else {
       return self
     }

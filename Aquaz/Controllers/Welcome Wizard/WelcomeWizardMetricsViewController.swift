@@ -13,25 +13,25 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
 
   private struct LocalizedStrings {
     
-    lazy var genderTitle = NSLocalizedString("WGVC:Gender", value: "Gender",
+    lazy var genderTitle: String = NSLocalizedString("WGVC:Gender", value: "Gender",
       comment: "WaterGoalViewController: Table cell title for [Gender] setting")
     
-    lazy var heightTitle = NSLocalizedString("WGVC:Height", value: "Height",
+    lazy var heightTitle: String = NSLocalizedString("WGVC:Height", value: "Height",
       comment: "WaterGoalViewController: Table cell title for [Height] setting")
     
-    lazy var weightTitle = NSLocalizedString("WGVC:Weight", value: "Weight",
+    lazy var weightTitle: String = NSLocalizedString("WGVC:Weight", value: "Weight",
       comment: "WaterGoalViewController: Table cell title for [Weight] setting")
     
-    lazy var ageTitle = NSLocalizedString("WGVC:Age", value: "Age",
+    lazy var ageTitle: String = NSLocalizedString("WGVC:Age", value: "Age",
       comment: "WaterGoalViewController: Table cell title for [Age] setting")
     
-    lazy var physicalActivityTitle = NSLocalizedString("WGVC:Physical Activity", value: "Physical Activity",
+    lazy var physicalActivityTitle: String = NSLocalizedString("WGVC:Physical Activity", value: "Physical Activity",
       comment: "WaterGoalViewController: Table cell title for [Physical Activity] setting")
     
-    lazy var dailyWaterIntakeTitle = NSLocalizedString("WGVC:Daily Water Intake", value: "Daily Water Intake",
+    lazy var dailyWaterIntakeTitle: String = NSLocalizedString("WGVC:Daily Water Intake", value: "Daily Water Intake",
       comment: "WaterGoalViewController: Table cell title for [Daily Water Intake] setting")
     
-    lazy var dailyWaterIntakeSectionFooter = NSLocalizedString("The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
+    lazy var dailyWaterIntakeSectionFooter: String = NSLocalizedString("The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
       value: "The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
       comment: "Footer for section with calculated daily water intake")
     

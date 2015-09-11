@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum UnitType: Int, Printable {
+public enum UnitType: Int, CustomStringConvertible {
   case Volume = 0
   case Weight
   case Length
@@ -33,7 +33,7 @@ public protocol Unit {
   var contraction: String { get }
 }
 
-public class Quantity: Printable {
+public class Quantity: CustomStringConvertible {
   /// Initalizes quantity with specified unit and amount
   public init(unit: Unit, amount: Double = 0.0) {
     self.unit = unit
@@ -74,7 +74,7 @@ public class Quantity: Printable {
     return description
   }
   
-  public func convertFrom(#amount: Double, unit: Unit) {
+  public func convertFrom(amount amount: Double, unit: Unit) {
     if unit.type != self.unit.type {
       assert(false, "Incompatible unit is specified")
       return
@@ -82,7 +82,7 @@ public class Quantity: Printable {
     self.amount = amount * unit.factor / self.unit.factor
   }
   
-  public func convertFrom(#quantity: Quantity) {
+  public func convertFrom(quantity quantity: Quantity) {
     convertFrom(amount: quantity.amount, unit: quantity.unit)
   }
   

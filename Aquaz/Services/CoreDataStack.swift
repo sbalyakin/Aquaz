@@ -59,17 +59,21 @@ class CoreDataStack: NSObject {
   lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
     let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
     let url = self.containerURL.URLByAppendingPathComponent("Aquaz.sqlite")
-    var error: NSError?
-    let store = coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error)
-      
-    if store == nil {
+
+    let store: NSPersistentStore?
+    do {
+      store = try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+    } catch var error as NSError {
       var dict: [NSObject: AnyObject] = [:]
       dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
       dict[NSLocalizedFailureReasonErrorKey] = "There was an error creating or loading the application's saved data."
       dict[NSUnderlyingErrorKey] = error
       error = NSError(domain: "com.devmanifest.Aquaz", code: 9999, userInfo: dict)
       Logger.logError("Core Data initialization error", error: error)
-      abort()
+      fatalError()
+    } catch {
+      Logger.logError("Core Data initialization error")
+      fatalError()
     }
     
     return coordinator
@@ -128,9 +132,13 @@ class CoreDataStack: NSObject {
     }
     
     managedObjectContext.performBlock {
-      var error: NSError?
-      if !managedObjectContext.save(&error) {
+      do {
+        try managedObjectContext.save()
+      } catch let error as NSError {
         Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
+      } catch {
+        Logger.logError(Logger.Messages.failedToSaveManagedObjectContext)
+        fatalError()
       }
     }
   }

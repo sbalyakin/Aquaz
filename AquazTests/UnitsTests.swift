@@ -22,7 +22,7 @@ class UnitsTests: XCTestCase {
     super.tearDown()
   }
   
-  private func testQuantityDoubleConversion<From: Unit, To: Unit>(#amount: Double, accuracy: Double, from fromUnit: From, to toUnit: To) {
+  private func testQuantityDoubleConversion<From: Unit, To: Unit>(amount amount: Double, accuracy: Double, from fromUnit: From, to toUnit: To) {
     let from = Quantity(unit: fromUnit, amount: amount)
     let to = Quantity(unit: toUnit)
     to.convertFrom(quantity: from)
@@ -31,7 +31,7 @@ class UnitsTests: XCTestCase {
     XCTAssertEqualWithAccuracy(from.amount, check.amount, accuracy, "Double conversion test is failed: Unit type is \(from.unit.type.description), conversion from \(from.unit.contraction) to \(to.unit.contraction), amount \(amount)")
   }
   
-  private func testConversion<From: Unit, To: Unit>(#fromAmount: Double, expectedAmount: Double, accuracy: Double, from fromUnit: From, to toUnit: To) {
+  private func testConversion<From: Unit, To: Unit>(fromAmount fromAmount: Double, expectedAmount: Double, accuracy: Double, from fromUnit: From, to toUnit: To) {
     let from = Quantity(unit: fromUnit, amount: fromAmount)
     let to = Quantity(ownUnit: toUnit, fromQuantity: from)
     XCTAssertEqualWithAccuracy(to.amount, expectedAmount, accuracy, "Conversion test is failed: \(from.amount) \(from.unit.contraction) is converted to \(to.amount) \(to.unit.contraction). It should be \(expectedAmount) \(to.unit.contraction)")

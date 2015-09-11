@@ -30,6 +30,7 @@ import UIKit
     applyCornerRadius()
   }
   
+  @available(iOS 8.0, *)
   override func prepareForInterfaceBuilder() {
     super.prepareForInterfaceBuilder()
 

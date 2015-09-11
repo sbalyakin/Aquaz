@@ -63,7 +63,7 @@ protocol WeekStatisticsViewDelegate: class {
   }
 
   var animationDuration = 0.4
-  let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.CalendarUnitWeekday).length
+  let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.Weekday).length
   
   weak var delegate: WeekStatisticsViewDelegate?
   weak var dataSource: WeekStatisticsViewDataSource?
@@ -89,7 +89,7 @@ protocol WeekStatisticsViewDelegate: class {
     baseInit()
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     baseInit()
   }
@@ -98,6 +98,7 @@ protocol WeekStatisticsViewDelegate: class {
     return CGSizeMake(300, 300)
   }
   
+  @available(iOS 8.0, *)
   override func prepareForInterfaceBuilder() {
     super.prepareForInterfaceBuilder()
     
@@ -121,7 +122,7 @@ protocol WeekStatisticsViewDelegate: class {
 
   private func initItems() {
     var items = [ItemType]()
-    for i in 0..<daysPerWeek {
+    for _ in 0..<daysPerWeek {
       let item: ItemType = (value: 0, goal: 0)
       items.append(item)
     }
@@ -137,7 +138,7 @@ protocol WeekStatisticsViewDelegate: class {
     for dayIndex in 0..<daysPerWeek {
       let weekDayIndex = (dayIndex + calendar.firstWeekday - 1) % daysPerWeek
       
-      let title = calendar.veryShortWeekdaySymbols[weekDayIndex] as! String
+      let title = calendar.veryShortWeekdaySymbols[weekDayIndex]
 
       let dayButton = UIButton()
       dayButton.tag = dayIndex
@@ -171,7 +172,7 @@ protocol WeekStatisticsViewDelegate: class {
       if dataSource?.weekStatisticsViewIsToday(dayButton.tag) ?? false {
         titleColor = todayColor
         backgroundColor = todayBackground
-        let fontDescriptor = daysFont.fontDescriptor().fontDescriptorWithSymbolicTraits(.TraitBold)!
+        let fontDescriptor = daysFont.fontDescriptor().fontDescriptorWithSymbolicTraits(.TraitBold)
         font = UIFont(descriptor: fontDescriptor, size: daysFont.pointSize)
       } else {
         titleColor = isFutureDay ? futureDaysColor : daysColor
@@ -221,7 +222,7 @@ protocol WeekStatisticsViewDelegate: class {
     layer.addSublayer(barsLayer)
     
     // Create shape layer for each bar
-    for i in 0..<daysPerWeek {
+    for _ in 0..<daysPerWeek {
       let barLayer = CAShapeLayer()
       barLayer.strokeColor = nil
       barLayer.fillColor = barsColor.CGColor
@@ -271,19 +272,18 @@ protocol WeekStatisticsViewDelegate: class {
 
   private func calcUIAreasFromRect(rect: CGRect) {
     let barWidth = round(rect.width / CGFloat(daysPerWeek))
-    let verticalRectangles = rect.rectsByDividing(barWidth, fromEdge: .MaxYEdge)
-    let scaleRect = verticalRectangles.remainder.integerRect
+    let verticalRectangles = rect.divide(barWidth, fromEdge: .MaxYEdge)
     
-    uiAreas.scale = verticalRectangles.remainder.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
+    uiAreas.scale = verticalRectangles.remainder.insetBy(dx: horizontalMargin, dy: 0).integral
     uiAreas.bars = uiAreas.scale
-    uiAreas.days = verticalRectangles.slice.rectByInsetting(dx: horizontalMargin, dy: 0).integerRect
-    uiAreas.background = verticalRectangles.remainder.integerRect
+    uiAreas.days = verticalRectangles.slice.insetBy(dx: horizontalMargin, dy: 0).integral
+    uiAreas.background = verticalRectangles.remainder.integral
   }
 
   private func layoutBackground() {
     if backgroundLayer != nil {
       var rect = uiAreas.background
-      rect = rect.rectsByDividing(rect.height / 2, fromEdge: .MinYEdge).slice
+      rect = rect.divide(rect.height / 2, fromEdge: .MinYEdge).slice
       backgroundLayer.frame = rect
     }
   }
@@ -298,7 +298,7 @@ protocol WeekStatisticsViewDelegate: class {
     updateGoals(animate: false)
   }
 
-  private func updateBars(#animate: Bool) {
+  private func updateBars(animate animate: Bool) {
     barsLayer.frame = uiAreas.bars
     
     let paths = calcBarsPathsForRect(barsLayer.bounds)
@@ -306,19 +306,19 @@ protocol WeekStatisticsViewDelegate: class {
   }
   
   private func updateBarsPaths(paths: [(rect: CGRect, path: CGPath)], useAnimation: Bool) {
-    for (index, path) in enumerate(paths) {
-      if barsLayer.sublayers == nil || index >= barsLayer.sublayers.count {
+    for (index, path) in paths.enumerate() {
+      if barsLayer.sublayers == nil || index >= barsLayer.sublayers!.count {
         assert(false, "Cannot find necessary shape sub-layers for bars")
         break
       }
       
-      let barLayer = barsLayer.sublayers[index] as! CAShapeLayer
+      let barLayer = barsLayer.sublayers?[index] as! CAShapeLayer
       barLayer.frame = path.rect
       transformShape(barLayer, path: path.path, useAnimation: useAnimation)
     }
   }
 
-  private func updateGoals(#animate: Bool) {
+  private func updateGoals(animate animate: Bool) {
     goalsLayer.frame = uiAreas.bars
     
     let path = calcGoalsPathForRect(goalsLayer.bounds)
@@ -326,7 +326,7 @@ protocol WeekStatisticsViewDelegate: class {
   }
 
   private func layoutButtons() {
-    for (index, dayButton) in enumerate(dayButtons) {
+    for (index, dayButton) in dayButtons.enumerate() {
       let dayButtonRect = calcRectangleForDayButtonWithIndex(index, containerRect: uiAreas.days)
       dayButton.frame = dayButtonRect
       dayButton.layer.cornerRadius = round(dayButtonRect.width / 2)
@@ -353,7 +353,7 @@ protocol WeekStatisticsViewDelegate: class {
     
     let path = UIBezierPath()
     
-    for (index, item) in enumerate(items) {
+    for (index, item) in items.enumerate() {
       let goalHeight = maximumValue > 0 ? CGFloat(item.goal) / maximumValue * rect.height : 0
       let y = round(rect.maxY - goalHeight)
       let xTo = xFrom + barWidth
@@ -380,17 +380,16 @@ protocol WeekStatisticsViewDelegate: class {
     let fullBarWidth = rect.width / CGFloat(valuesCount)
     let barWidthInset = (fullBarWidth * (1 - barWidthFraction)) / 2
     let visibleBarWidth = round(fullBarWidth * barWidthFraction)
-    var x = rect.minX
     
     var paths: [(rect: CGRect, path: CGPath)] = []
     
-    for (index, item) in enumerate(items) {
+    for (index, item) in items.enumerate() {
       let barHeight = maximumValue > 0 ? (CGFloat(item.value) / maximumValue * rect.height) : 0
       let x = rect.minX + CGFloat(index) * fullBarWidth
       
       var barRect = CGRect(x: x, y: rect.maxY - barHeight, width: fullBarWidth, height: barHeight)
-      barRect.inset(dx: barWidthInset, dy: 0)
-      barRect.integerize()
+      barRect.insetInPlace(dx: barWidthInset, dy: 0)
+      barRect.makeIntegralInPlace()
       barRect.size.width = visibleBarWidth // to ensure for same width for all bars
       
       // If height of a bar is less than double corner radius there will be issues during its animation, so fix the height
@@ -404,7 +403,7 @@ protocol WeekStatisticsViewDelegate: class {
       
       barRect.origin.x = 0
       
-      let path = UIBezierPath(roundedRect: barRect, byRoundingCorners: .TopLeft | .TopRight, cornerRadii: CGSize(width: barCornerRadius, height: barCornerRadius))
+      let path = UIBezierPath(roundedRect: barRect, byRoundingCorners: [.TopLeft, .TopRight], cornerRadii: CGSize(width: barCornerRadius, height: barCornerRadius))
       let pathItem = (rect: fullBarRect, path: path.CGPath)
       paths.append(pathItem)
     }
@@ -417,9 +416,9 @@ protocol WeekStatisticsViewDelegate: class {
       let startPath: CGPath
       
       if let presentation = shape.presentationLayer() as? CAShapeLayer {
-        startPath = presentation.path
+        startPath = presentation.path!
       } else {
-        startPath = shape.path
+        startPath = shape.path!
       }
 
       let animation = CABasicAnimation(keyPath: "path")
@@ -448,7 +447,7 @@ protocol WeekStatisticsViewDelegate: class {
     let minSize = min(buttonWidth, buttonHeight)
     let dx = (buttonWidth - minSize) / 2
     let dy = (buttonHeight - minSize) / 2
-    buttonRect.inset(dx: dx, dy: dy)
+    buttonRect.insetInPlace(dx: dx, dy: dy)
     return CGRect(x: trunc(buttonRect.minX), y: trunc(buttonRect.minY), width: ceil(buttonRect.width), height: trunc(buttonRect.height))
   }
 

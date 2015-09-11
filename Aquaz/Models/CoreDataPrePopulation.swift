@@ -12,7 +12,7 @@ import UIKit
 
 public class CoreDataPrePopulation {
   
-  public class func prePopulateCoreData(#managedObjectContext: NSManagedObjectContext) {
+  public class func prePopulateCoreData(managedObjectContext managedObjectContext: NSManagedObjectContext) {
     managedObjectContext.performBlock {
       Drink.addEntity(
         index: Drink.DrinkType.Water.rawValue,
@@ -130,7 +130,7 @@ public class CoreDataPrePopulation {
     }
   }
   
-  private class func generateIntakes(#managedObjectContext: NSManagedObjectContext) {
+  private class func generateIntakes(managedObjectContext managedObjectContext: NSManagedObjectContext) {
     let secondsPerDay = 60 * 60 * 24
     let endDate = DateHelper.dateBySettingHour(0, minute: 0, second: 0, ofDate: NSDate())
     let beginDate = DateHelper.addToDate(endDate, years: -2, months: 0, days: 0)
@@ -142,7 +142,7 @@ public class CoreDataPrePopulation {
     
     for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = currentDay.getNextDay() {
       let intakesCount = random() % maxIntakesPerDay
-      for i in 0..<intakesCount {
+      for _ in 0..<intakesCount {
         let drinkIndex = random() % Drink.getDrinksCount()
         
         if let drink = drinks[drinkIndex] {
@@ -155,7 +155,7 @@ public class CoreDataPrePopulation {
     }
   }
   
-  private class func generateWaterGoals(#managedObjectContext: NSManagedObjectContext) {
+  private class func generateWaterGoals(managedObjectContext managedObjectContext: NSManagedObjectContext) {
     let endDate = DateHelper.dateBySettingHour(0, minute: 0, second: 0, ofDate: NSDate())
     let beginDate = DateHelper.addToDate(endDate, years: -2, months: 0, days: 0)
     let minWaterGoal = 1500

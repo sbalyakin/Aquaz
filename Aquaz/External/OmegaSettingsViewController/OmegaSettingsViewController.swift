@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: TableCellsContainer -
 protocol TableCellsContainer: class {
-  func addSupportingTableCell(#baseTableCell: TableCell, supportingTableCell: TableCell)
+  func addSupportingTableCell(baseTableCell baseTableCell: TableCell, supportingTableCell: TableCell)
   func deleteSupportingTableCell()
   func activateTableCell(tableCell: TableCell?)
   
@@ -55,56 +55,56 @@ class OmegaSettingsViewController: UIViewController {
     tableView.reloadData()
   }
   
-  func createBasicTableCell(#title: String, accessoryType: UITableViewCellAccessoryType? = nil, activationChangedFunction: TableCell.TableCellActivatedFunction? = nil) -> BasicTableCell {
+  func createBasicTableCell(title title: String, accessoryType: UITableViewCellAccessoryType? = nil, activationChangedFunction: TableCell.TableCellActivatedFunction? = nil) -> BasicTableCell {
     let cell = BasicTableCell(title: title, container: self, accessoryType: accessoryType)
     cell.tableCellDidActivateFunction = activationChangedFunction
     return cell
   }
   
-  func createSwitchTableCell<T>(#title: String, settingsItem: SettingsItemBase<T>) -> SwitchTableCell<T> {
+  func createSwitchTableCell<T>(title title: String, settingsItem: SettingsItemBase<T>) -> SwitchTableCell<T> {
     let cell = SwitchTableCell(title: title, value: settingsItem.value, container: self)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     return cell
   }
   
-  func createSwitchTableCell(#title: String, value: Bool) -> SwitchTableCell<Bool> {
+  func createSwitchTableCell(title title: String, value: Bool) -> SwitchTableCell<Bool> {
     return SwitchTableCell(title: title, value: value, container: self)
   }
   
-  func createRangedSegmentedTableCell<Value: Printable, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(#title: String, value: Value, collection: Collection, stringFromValueFunction: ((Value) -> String)? = nil) -> SegmentedTableCell<Value, Collection> {
+  func createRangedSegmentedTableCell<Value: CustomStringConvertible, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(title title: String, value: Value, collection: Collection, stringFromValueFunction: ((Value) -> String)? = nil) -> SegmentedTableCell<Value, Collection> {
     let cell = SegmentedTableCell(title: title, value: value, collection: collection, container: self)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createRangedSegmentedTableCell<Value: Printable, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(#title: String, settingsItem: SettingsItemBase<Value>, collection: Collection, stringFromValueFunction: ((Value) -> String)? = nil) -> SegmentedTableCell<Value, Collection> {
+  func createRangedSegmentedTableCell<Value: CustomStringConvertible, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(title title: String, settingsItem: SettingsItemBase<Value>, collection: Collection, stringFromValueFunction: ((Value) -> String)? = nil) -> SegmentedTableCell<Value, Collection> {
     let cell = SegmentedTableCell(title: title, value: settingsItem.value, collection: collection, container: self)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createEnumSegmentedTableCell<Value>(#title: String, value: Value, segmentsWidth: CGFloat = 0, stringFromValueFunction: (((Value) -> String)?) = nil) -> SegmentedTableCell<Value, EnumCollection<Value>> {
+  func createEnumSegmentedTableCell<Value>(title title: String, value: Value, segmentsWidth: CGFloat = 0, stringFromValueFunction: (((Value) -> String)?) = nil) -> SegmentedTableCell<Value, EnumCollection<Value>> {
     let cell = SegmentedTableCell(title: title, value: value, collection: EnumCollection<Value>(), container: self, segmentsWidth: segmentsWidth)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createEnumSegmentedTableCell<Value>(#title: String, settingsItem: SettingsItemBase<Value>, segmentsWidth: CGFloat = 0, stringFromValueFunction: (((Value) -> String)?) = nil) -> SegmentedTableCell<Value, EnumCollection<Value>> {
+  func createEnumSegmentedTableCell<Value>(title title: String, settingsItem: SettingsItemBase<Value>, segmentsWidth: CGFloat = 0, stringFromValueFunction: (((Value) -> String)?) = nil) -> SegmentedTableCell<Value, EnumCollection<Value>> {
     let cell = SegmentedTableCell(title: title, value: settingsItem.value, collection: EnumCollection<Value>(), container: self, segmentsWidth: segmentsWidth)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createRightDetailTableCell<Value: Printable>(#title: String, value: Value, accessoryType: UITableViewCellAccessoryType = .None, activationChangedFunction: TableCell.TableCellActivatedFunction? = nil, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
+  func createRightDetailTableCell<Value: CustomStringConvertible>(title title: String, value: Value, accessoryType: UITableViewCellAccessoryType = .None, activationChangedFunction: TableCell.TableCellActivatedFunction? = nil, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
     let cell = RightDetailTableCell(title: title, value: value, container: self, accessoryType: accessoryType)
     cell.tableCellDidActivateFunction = activationChangedFunction
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createRightDetailTableCell<Value: Printable>(#title: String, settingsItem: SettingsItemBase<Value>, accessoryType: UITableViewCellAccessoryType = .None, activationChangedFunction: TableCell.TableCellActivatedFunction? = nil, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
+  func createRightDetailTableCell<Value: CustomStringConvertible>(title title: String, settingsItem: SettingsItemBase<Value>, accessoryType: UITableViewCellAccessoryType = .None, activationChangedFunction: TableCell.TableCellActivatedFunction? = nil, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
     let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: accessoryType)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     cell.tableCellDidActivateFunction = activationChangedFunction
@@ -112,7 +112,7 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createRangedRightDetailTableCell<Value: Printable, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(#title: String, settingsItem: SettingsItemBase<Value>, collection: Collection, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
+  func createRangedRightDetailTableCell<Value: CustomStringConvertible, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(title title: String, settingsItem: SettingsItemBase<Value>, collection: Collection, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
     let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: .None)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     cell.supportingTableCell = PickerTableCell(value: settingsItem.value, collection: collection, container: self, height: pickerTableCellHeight)
@@ -123,7 +123,7 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createRangedRightDetailTableCell<Value: Printable, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(#title: String, value: Value, collection: Collection, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
+  func createRangedRightDetailTableCell<Value: CustomStringConvertible, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(title title: String, value: Value, collection: Collection, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
     let cell = RightDetailTableCell(title: title, value: value, container: self, accessoryType: .None)
     cell.supportingTableCell = PickerTableCell(value: value, collection: collection, container: self, height: pickerTableCellHeight)
     
@@ -133,7 +133,7 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createEnumRightDetailTableCell<Value: RawRepresentable where Value: Printable, Value: Equatable, Value.RawValue == Int>(#title: String, settingsItem: SettingsItemBase<Value>, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
+  func createEnumRightDetailTableCell<Value: RawRepresentable where Value: CustomStringConvertible, Value: Equatable, Value.RawValue == Int>(title title: String, settingsItem: SettingsItemBase<Value>, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
     let cell = createRangedRightDetailTableCell(
       title: title,
       settingsItem: settingsItem,
@@ -144,7 +144,7 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createEnumRightDetailTableCell<Value: RawRepresentable where Value: Printable, Value: Equatable, Value.RawValue == Int>(#title: String, value: Value, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
+  func createEnumRightDetailTableCell<Value: RawRepresentable where Value: CustomStringConvertible, Value: Equatable, Value.RawValue == Int>(title title: String, value: Value, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
     let cell = createRangedRightDetailTableCell(
       title: title,
       value: value,
@@ -155,7 +155,7 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createTimeIntervalRightDetailTableCell(#title: String, value: NSTimeInterval, timeComponents: [TimeIntervalPickerTableCellComponent], height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSTimeInterval) -> String)? = nil) -> RightDetailTableCell<NSTimeInterval> {
+  func createTimeIntervalRightDetailTableCell(title title: String, value: NSTimeInterval, timeComponents: [TimeIntervalPickerTableCellComponent], height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSTimeInterval) -> String)? = nil) -> RightDetailTableCell<NSTimeInterval> {
     let pickerCell = TimeIntervalPickerTableCell(value: value, timeComponents: timeComponents, container: self, height: height)
     
     let cell = RightDetailTableCell(title: title, value: value, container: self)
@@ -164,7 +164,7 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createTimeIntervalRightDetailTableCell(#title: String, settingsItem: SettingsItemBase<NSTimeInterval>, timeComponents: [TimeIntervalPickerTableCellComponent], height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSTimeInterval) -> String)? = nil) -> RightDetailTableCell<NSTimeInterval> {
+  func createTimeIntervalRightDetailTableCell(title title: String, settingsItem: SettingsItemBase<NSTimeInterval>, timeComponents: [TimeIntervalPickerTableCellComponent], height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSTimeInterval) -> String)? = nil) -> RightDetailTableCell<NSTimeInterval> {
     let pickerCell = TimeIntervalPickerTableCell(value: settingsItem.value, timeComponents: timeComponents, container: self, height: height)
 
     let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self)
@@ -174,7 +174,7 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createDateRightDetailTableCell(#title: String, value: NSDate, datePickerMode: DatePickerTableCellMode, minimumDate: NSDate? = nil, maximumDate: NSDate? = nil, height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSDate) -> String)? = nil) -> RightDetailTableCell<NSDate> {
+  func createDateRightDetailTableCell(title title: String, value: NSDate, datePickerMode: DatePickerTableCellMode, minimumDate: NSDate? = nil, maximumDate: NSDate? = nil, height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSDate) -> String)? = nil) -> RightDetailTableCell<NSDate> {
     let pickerCell = DatePickerTableCell(value: value, container: self, datePickerMode: datePickerMode, minimumDate: minimumDate, maximumDate: maximumDate, height: height)
     
     let cell = RightDetailTableCell(title: title, value: value, container: self)
@@ -183,7 +183,7 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createDateRightDetailTableCell(#title: String, settingsItem: SettingsItemBase<NSDate>, datePickerMode: DatePickerTableCellMode, minimumDate: NSDate? = nil, maximumDate: NSDate? = nil, height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSDate) -> String)? = nil) -> RightDetailTableCell<NSDate> {
+  func createDateRightDetailTableCell(title title: String, settingsItem: SettingsItemBase<NSDate>, datePickerMode: DatePickerTableCellMode, minimumDate: NSDate? = nil, maximumDate: NSDate? = nil, height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSDate) -> String)? = nil) -> RightDetailTableCell<NSDate> {
     let pickerCell = DatePickerTableCell(value: settingsItem.value, container: self, datePickerMode: datePickerMode, minimumDate: minimumDate, maximumDate: maximumDate, height: height)
     
     let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self)
@@ -193,13 +193,13 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createTextFieldTableCell<Value: Printable>(#title: String, value: Value, valueFromStringFunction: ((String) -> Value?), stringFromValueFunction: (((Value) -> String)?) = nil, keyboardType: UIKeyboardType = .Default, borderStyle: UITextBorderStyle = .None) -> TextFieldTableCell<Value> {
+  func createTextFieldTableCell<Value: CustomStringConvertible>(title title: String, value: Value, valueFromStringFunction: ((String) -> Value?), stringFromValueFunction: (((Value) -> String)?) = nil, keyboardType: UIKeyboardType = .Default, borderStyle: UITextBorderStyle = .None) -> TextFieldTableCell<Value> {
     let cell = TextFieldTableCell(title: title, value: value, valueFromStringFunction: valueFromStringFunction, container: self, keyboardType: keyboardType, textFieldBorderStyle: borderStyle)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createTextFieldTableCell<Value: Printable>(#title: String, settingsItem: SettingsItemBase<Value>, valueFromStringFunction: ((String) -> Value?), stringFromValueFunction: (((Value) -> String)?) = nil, keyboardType: UIKeyboardType = .Default, borderStyle: UITextBorderStyle = .None) -> TextFieldTableCell<Value> {
+  func createTextFieldTableCell<Value: CustomStringConvertible>(title title: String, settingsItem: SettingsItemBase<Value>, valueFromStringFunction: ((String) -> Value?), stringFromValueFunction: (((Value) -> String)?) = nil, keyboardType: UIKeyboardType = .Default, borderStyle: UITextBorderStyle = .None) -> TextFieldTableCell<Value> {
     let cell = TextFieldTableCell(title: title, value: settingsItem.value, valueFromStringFunction: valueFromStringFunction, container: self, keyboardType: keyboardType, textFieldBorderStyle: borderStyle)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     cell.stringFromValueFunction = stringFromValueFunction
@@ -227,7 +227,7 @@ class OmegaSettingsViewController: UIViewController {
   func handleKeyboardWillShowNotification(notification: NSNotification) {
     let userInfo = notification.userInfo!
     
-    let infoRect = userInfo[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue()
+    let infoRect = userInfo[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue
     let size = infoRect!.size
     
     let contentInsets: UIEdgeInsets
@@ -269,12 +269,12 @@ class OmegaSettingsViewController: UIViewController {
 
 // MARK: TableCellsContainer
 extension OmegaSettingsViewController: TableCellsContainer {
-  func addSupportingTableCell(#baseTableCell: TableCell, supportingTableCell: TableCell) {
+  func addSupportingTableCell(baseTableCell baseTableCell: TableCell, supportingTableCell: TableCell) {
     var insertedIndexPath: NSIndexPath!
     tableView.beginUpdates()
     
-    section: for (sectionIndex, section) in enumerate(tableCellsSections) {
-      for (cellIndex, tableCell) in enumerate(section.tableCells) {
+    section: for (sectionIndex, section) in tableCellsSections.enumerate() {
+      for (cellIndex, tableCell) in section.tableCells.enumerate() {
         if tableCell === baseTableCell {
           let insertIndex = cellIndex + 1
           insertedIndexPath = NSIndexPath(forRow: insertIndex, inSection: sectionIndex)
@@ -308,10 +308,8 @@ extension OmegaSettingsViewController: TableCellsContainer {
   func deleteSupportingTableCell() {
     tableView.beginUpdates()
     
-    section: for (sectionIndex, section) in enumerate(tableCellsSections) {
-      var indexesToDelete = [Int]()
-      
-      for (cellIndex, tableCell) in enumerate(section.tableCells) {
+    section: for (sectionIndex, section) in tableCellsSections.enumerate() {
+      for (cellIndex, tableCell) in section.tableCells.enumerate() {
         if tableCell.isSupportingCell {
           let indexPath = NSIndexPath(forRow: cellIndex, inSection: sectionIndex)
           tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
@@ -404,9 +402,9 @@ class EnumCollection<T: RawRepresentable where T.RawValue == Int>: CollectionTyp
     self.endIndex = endIndex!
   }
   
-  func generate() -> GeneratorOf<T> {
+  func generate() -> AnyGenerator<T> {
     var index = startIndex
-    return GeneratorOf<T> {
+    return anyGenerator {
       return index <= self.endIndex ? T(rawValue: index++) : nil
     }
   }
@@ -435,9 +433,9 @@ class IntCollection: CollectionType {
     endIndex = (maximumValue - minimumValue) / step
   }
   
-  func generate() -> GeneratorOf<Int> {
+  func generate() -> AnyGenerator<Int> {
     var index = startIndex
-    return GeneratorOf<Int> {
+    return anyGenerator {
       if index <= self.endIndex {
         let value = self.minimumValue + index * self.step
         index++
@@ -472,9 +470,9 @@ class DoubleCollection: CollectionType {
     endIndex = Int((maximumValue - minimumValue) / step)
   }
   
-  func generate() -> GeneratorOf<Double> {
+  func generate() -> AnyGenerator<Double> {
     var index = startIndex
-    return GeneratorOf<Double> {
+    return anyGenerator {
       if index <= self.endIndex {
         let value = self.minimumValue + Double(index) * self.step
         index++

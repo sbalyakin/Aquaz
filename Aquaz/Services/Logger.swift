@@ -48,7 +48,7 @@ public class Logger {
   var showLineNumbers = true
   var showFunctionNames = true
   
-  public enum LogLevel: Int, Printable {
+  public enum LogLevel: Int, CustomStringConvertible {
     case Verbose = 0
     case Debug
     case Info
@@ -70,7 +70,7 @@ public class Logger {
     }
   }
 
-  public func setup(logLevel: LogLevel = .Warning, assertLevel: LogLevel = .Error, consoleLevel: LogLevel = .Warning, showLogLevel: Bool = true, showFileNames: Bool = true, showLineNumbers: Bool = true, showFunctionNames: Bool = true) {
+  public func setup(logLevel logLevel: LogLevel = .Warning, assertLevel: LogLevel = .Error, consoleLevel: LogLevel = .Warning, showLogLevel: Bool = true, showFileNames: Bool = true, showLineNumbers: Bool = true, showFunctionNames: Bool = true) {
     self.logLevel = logLevel
     self.assertLevel = assertLevel
     self.consoleLevel = consoleLevel
@@ -136,7 +136,7 @@ public class Logger {
       
       if isConsoleEnabledForLogLevel(logLevel) {
         let message = logDetails.isEmpty ? logMessage : "\(logMessage) \r\n \(logDetails.description)"
-        println(message)
+        print(message)
       }
     #endif
   }
@@ -263,7 +263,7 @@ public class Logger {
   
   // MARK: Convenience class methods -
   
-  public class func setup(logLevel: LogLevel = .Warning, assertLevel: LogLevel = .Error, consoleLevel: LogLevel = .Warning, showLogLevel: Bool = true, showFileNames: Bool = true, showLineNumbers: Bool = true, showFunctionNames: Bool = true) {
+  public class func setup(logLevel logLevel: LogLevel = .Warning, assertLevel: LogLevel = .Error, consoleLevel: LogLevel = .Warning, showLogLevel: Bool = true, showFileNames: Bool = true, showLineNumbers: Bool = true, showFunctionNames: Bool = true) {
     sharedInstance.setup(logLevel: logLevel, assertLevel: assertLevel, consoleLevel: consoleLevel, showLogLevel: showLogLevel, showFileNames: showFileNames, showLineNumbers: showLineNumbers, showFunctionNames: showFunctionNames)
   }
 
@@ -402,7 +402,7 @@ extension Logger {
     logMessage(condition, Messages.failedToInstantiateViewController, logDetails: [Attributes.storyboardID: storyboardID], logLevel: .Severe, functionName: __FUNCTION__, fileName: __FILE__, lineNumber: __LINE__, forceAssert: false)
   }
   
-  public class func logDrinkIsNotFound(#drinkIndex: Int, logLevel: LogLevel = .Error) {
+  public class func logDrinkIsNotFound(drinkIndex drinkIndex: Int, logLevel: LogLevel = .Error) {
     logMessage(Messages.drinkIsNotFound, logDetails: [Attributes.drinkIndex: "\(drinkIndex)"], logLevel: logLevel)
   }
   

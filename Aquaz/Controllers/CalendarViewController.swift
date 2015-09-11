@@ -68,7 +68,7 @@ class CalendarViewController: UIViewController {
     view.invalidateIntrinsicContentSize()
   }
   
-  private func updateUI(#initial: Bool) {
+  private func updateUI(initial initial: Bool) {
     let title = dateFormatter.stringFromDate(date)
     
     if initial {

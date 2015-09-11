@@ -12,7 +12,7 @@ import Foundation
 
 public class WaterGoalCalculator {
 
-  public struct Data: Printable {
+  public struct Data: CustomStringConvertible {
     public let physicalActivity: Settings.PhysicalActivity
     public let gender: Settings.Gender
     public let age: Int
@@ -35,7 +35,7 @@ public class WaterGoalCalculator {
     }
   }
   
-  public enum Country: String, Printable {
+  public enum Country: String, CustomStringConvertible {
     case Argentina     = "argentina"
     case Mexico        = "mexico"
     case Brazil        = "brazil"
@@ -81,18 +81,18 @@ public class WaterGoalCalculator {
     }
   }
 
-  public class func calcDailyWaterIntake(#data: Data) -> Double {
+  public class func calcDailyWaterIntake(data data: Data) -> Double {
     let lostWater = calcLostWater(data: data)
     let supplyWater = calcSupplyWater(data: data)
     return roundAmount(lostWater - supplyWater)
   }
   
-  public class func calcLostWater(#data: Data) -> Double {
+  public class func calcLostWater(data data: Data) -> Double {
     let netWaterLosses = calcNetWaterLosses(data: data, pregnancyAndLactation: true, waterInFood: false)
     return roundAmount(netWaterLosses)
   }
   
-  public class func calcSupplyWater(#data: Data) -> Double {
+  public class func calcSupplyWater(data data: Data) -> Double {
     let waterLossesWithNoFood = calcNetWaterLosses(data: data, pregnancyAndLactation: false, waterInFood: false)
     let waterLossesWithFood = calcNetWaterLosses(data: data, pregnancyAndLactation: false, waterInFood: true)
     return roundAmount(waterLossesWithNoFood - waterLossesWithFood)
@@ -102,7 +102,7 @@ public class WaterGoalCalculator {
     return round(amount / 100) * 100
   }
   
-  private class func calcNetWaterLosses(#data: Data, pregnancyAndLactation: Bool, waterInFood useWater: Bool) -> Double {
+  private class func calcNetWaterLosses(data data: Data, pregnancyAndLactation: Bool, waterInFood useWater: Bool) -> Double {
     let bodySurface = calcBodySurface(weight: data.weight, height: data.height)
     let caloryExpediture = calcCaloryExpendidure(physicalActivity: data.physicalActivity, weight: data.weight, gender: data.gender, age: data.age)
     let caloryExpeditureRare = calcCaloryExpendidure(physicalActivity: .Rare, weight: data.weight, gender: data.gender, age: data.age)
@@ -130,11 +130,11 @@ public class WaterGoalCalculator {
     return waterIntake
   }
   
-  private class func calcBodySurface(#weight: Double, height: Double) -> Double {
+  private class func calcBodySurface(weight weight: Double, height: Double) -> Double {
     return 0.007184 * pow(height, 0.725) * pow(weight, 0.425)
   }
   
-  private class func calcCaloryExpendidure(#physicalActivity: Settings.PhysicalActivity, weight: Double, gender: Settings.Gender, age: Int) -> Double {
+  private class func calcCaloryExpendidure(physicalActivity physicalActivity: Settings.PhysicalActivity, weight: Double, gender: Settings.Gender, age: Int) -> Double {
     let activityFactor: Double
     
     switch physicalActivity {
@@ -163,15 +163,15 @@ public class WaterGoalCalculator {
     return caloryExpendidure
   }
   
-  private class func calcLossesSkin(#bodySurface: Double) -> Double {
+  private class func calcLossesSkin(bodySurface bodySurface: Double) -> Double {
     return bodySurface * 7 * 24
   }
   
-  private class func calcLossesRespiratory(#caloryExpediture: Double) -> Double {
+  private class func calcLossesRespiratory(caloryExpediture caloryExpediture: Double) -> Double {
     return 0.107 * caloryExpediture + 92.2
   }
   
-  private class func calcSweatAmount(#physicalActivity: Settings.PhysicalActivity, caloryExpediture: Double, caloryExpeditureRare: Double) -> Double {
+  private class func calcSweatAmount(physicalActivity physicalActivity: Settings.PhysicalActivity, caloryExpediture: Double, caloryExpeditureRare: Double) -> Double {
     let sweatAmount: Double
     
     switch physicalActivity {
@@ -185,7 +185,7 @@ public class WaterGoalCalculator {
     return sweatAmount
   }
   
-  private class func calcGainMetabolicWater(#caloryExpediture: Double) -> Double {
+  private class func calcGainMetabolicWater(caloryExpediture caloryExpediture: Double) -> Double {
     return 0.119 * caloryExpediture - 2.25
   }
   

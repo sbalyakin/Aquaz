@@ -12,30 +12,30 @@ class CalendarViewDataSource {
   
   class func createCalendarViewDaysInfoForMonth(monthDate: NSDate) -> [CalendarViewDayInfo] {
     let calendar = NSCalendar.currentCalendar()
-    let daysPerWeek = calendar.maximumRangeOfUnit(.CalendarUnitWeekday).length
+    let daysPerWeek = calendar.maximumRangeOfUnit(.Weekday).length
 
     var daysInfo = [CalendarViewDayInfo]()
     
     let date = monthDate
     
     // Separate the date to components
-    let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitTimeZone | .CalendarUnitCalendar, fromDate: date)
+    let components = calendar.components([.Year, .Month, .Day, .TimeZone, .Calendar], fromDate: date)
     
     // Compute the first and the last days of the month
-    let daysInMonth = calendar.rangeOfUnit(.CalendarUnitDay, inUnit: .CalendarUnitMonth, forDate: date)
+    let daysInMonth = calendar.rangeOfUnit(.Day, inUnit: .Month, forDate: date)
     
     components.day = daysInMonth.location
     let firstMonthDay = calendar.dateFromComponents(components)!
-    let weekdayOfFirstMonthDay = calendar.ordinalityOfUnit(.CalendarUnitWeekday, inUnit: .CalendarUnitWeekOfMonth, forDate: firstMonthDay)
+    let weekdayOfFirstMonthDay = calendar.ordinalityOfUnit(.Weekday, inUnit: .WeekOfMonth, forDate: firstMonthDay)
     
     components.day = daysInMonth.length
     let lastMonthDay = calendar.dateFromComponents(components)!
-    let weekdayOfLastMonthDay = calendar.ordinalityOfUnit(.CalendarUnitWeekday, inUnit: .CalendarUnitWeekOfMonth, forDate: lastMonthDay)
+    let weekdayOfLastMonthDay = calendar.ordinalityOfUnit(.Weekday, inUnit: .WeekOfMonth, forDate: lastMonthDay)
     
     // Fill days and days titles
     daysInfo = []
     let today = DateHelper.dateByClearingTime(ofDate: NSDate())
-    let weekdayRange = calendar.maximumRangeOfUnit(.CalendarUnitWeekday)
+    let weekdayRange = calendar.maximumRangeOfUnit(.Weekday)
     var weekdayOfDate = 0
     let checkForToday = DateHelper.areDatesEqualByMonths(date, today)
     let from = 2 - weekdayOfFirstMonthDay
@@ -46,7 +46,7 @@ class CalendarViewDataSource {
       let date = calendar.dateFromComponents(components)!
       
       if i == from {
-        let weekDayComponents = calendar.components(.CalendarUnitWeekday, fromDate: date)
+        let weekDayComponents = calendar.components(.Weekday, fromDate: date)
         weekdayOfDate = weekDayComponents.weekday
       } else {
         if weekdayOfDate > daysPerWeek {
@@ -58,7 +58,7 @@ class CalendarViewDataSource {
       
       let isToday = checkForToday ? DateHelper.areDatesEqualByDays(date, today) : false
       let isCurrentMonth = i >= daysInMonth.location && i <= daysInMonth.length
-      let dayOrdinalNumber = isCurrentMonth ? i : calendar.ordinalityOfUnit(.CalendarUnitDay, inUnit: .CalendarUnitMonth, forDate: date)
+      let dayOrdinalNumber = isCurrentMonth ? i : calendar.ordinalityOfUnit(.Day, inUnit: .Month, forDate: date)
       let title = "\(dayOrdinalNumber)"
       let isFuture = date.compare(today) == .OrderedDescending
       

@@ -20,7 +20,7 @@ class MonthStatisticsContentView: CalendarContentView {
     static let statisticsCellIdentifier = "Statistics Cell"
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     baseInit()
   }
@@ -34,7 +34,7 @@ class MonthStatisticsContentView: CalendarContentView {
     collectionView.registerClass(MonthStatisticsContentViewCell.self, forCellWithReuseIdentifier: Constants.statisticsCellIdentifier)
   }
   
-  override func getCell(#collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
+  override func getCell(collectionView collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.statisticsCellIdentifier, forIndexPath: indexPath) as! MonthStatisticsContentViewCell
 
     cell.backgroundColor = backgroundColor // remove blending

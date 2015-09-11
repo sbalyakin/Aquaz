@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       Settings.sharedInstance.generalHasLaunchedOnce.value = true
     } else {
       if let options = launchOptions {
-        if let notification = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
+        if let _ = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
           showDayViewControllerForToday()
         }
       }
@@ -186,18 +186,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     showDayViewControllerForToday()
   }
   
+  @available(iOS 8.0, *)
   func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
     NotificationsHelper.removeAllNotifications()
     NotificationsHelper.scheduleNotificationsFromSettingsForDate(NSDate())
   }
   
   private func showDayViewControllerForToday() {
-    if let
-      tabBarController = window?.rootViewController as? UITabBarController,
-      viewControllers = tabBarController.viewControllers as? [UIViewController]
+    if let tabBarController = window?.rootViewController as? UITabBarController,
+       let viewControllers = tabBarController.viewControllers
     {
-      for (index, viewController) in enumerate(viewControllers) {
-        if let dayViewController = viewController.contentViewController() as? DayViewController where dayViewController.mode == .General {
+      for (index, viewController) in viewControllers.enumerate() {
+        if let dayViewController = viewController.contentViewController as? DayViewController where dayViewController.mode == .General {
           dayViewController.refreshCurrentDay(showAlert: false)
           dayViewController.switchToSelectDrinkPage()
           tabBarController.selectedIndex = index
@@ -228,13 +228,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     refreshCurrentDayForDayViewController(showAlert: showAlert)
   }
   
-  private func refreshCurrentDayForDayViewController(#showAlert: Bool) {
-    if let
-      tabBarController = window?.rootViewController as? UITabBarController,
-      viewControllers = tabBarController.viewControllers as? [UIViewController]
+  private func refreshCurrentDayForDayViewController(showAlert showAlert: Bool) {
+    if let tabBarController = window?.rootViewController as? UITabBarController,
+       let viewControllers = tabBarController.viewControllers
     {
       for viewController in viewControllers {
-        if let dayViewController = viewController.contentViewController() as? DayViewController {
+        if let dayViewController = viewController.contentViewController as? DayViewController {
           dayViewController.refreshCurrentDay(showAlert: showAlert)
         }
       }

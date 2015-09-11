@@ -20,7 +20,7 @@ public class Settings {
   
   // MARK: Types
   
-  public enum Gender: Int, Printable {
+  public enum Gender: Int, CustomStringConvertible {
     case Man = 0
     case Woman
     case PregnantFemale
@@ -36,7 +36,7 @@ public class Settings {
     }
   }
 
-  public enum PhysicalActivity: Int, Printable {
+  public enum PhysicalActivity: Int, CustomStringConvertible {
     case Rare = 0
     case Occasional
     case Weekly
@@ -84,154 +84,154 @@ public class Settings {
 
   // MARK: General
   
-  lazy var generalHasLaunchedOnce = SettingsOrdinalItem(
+  lazy var generalHasLaunchedOnce: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "General - Has Launched Once", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var generalWeightUnits = SettingsEnumItem<Units.Weight>(
+  lazy var generalWeightUnits: SettingsEnumItem<Units.Weight> = SettingsEnumItem(
     key: "General - Weight units", initialValue: isMetric ? .Kilograms : .Pounds,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var generalHeightUnits = SettingsEnumItem<Units.Length>(
+  lazy var generalHeightUnits: SettingsEnumItem<Units.Length> = SettingsEnumItem(
     key: "General - Height units", initialValue: isMetric ? .Centimeters : .Feet,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var generalVolumeUnits = SettingsEnumItem<Units.Volume>(
+  lazy var generalVolumeUnits: SettingsEnumItem<Units.Volume> = SettingsEnumItem(
     key: "General - Volume units", initialValue: isMetric ? .Millilitres : .FluidOunces,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var generalHotDayExtraFactor = SettingsOrdinalItem<Double>(
+  lazy var generalHotDayExtraFactor: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
     key: "General - Hot day extra factor", initialValue: 0.5,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var generalHighActivityExtraFactor = SettingsOrdinalItem<Double>(
+  lazy var generalHighActivityExtraFactor: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
     key: "General - High activity extra factor", initialValue: 0.5,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var generalFullVersion = SettingsOrdinalItem<Bool>(
+  lazy var generalFullVersion: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "General - Full version", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var generalAdCounter = SettingsOrdinalItem<Int>(
+  lazy var generalAdCounter: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
     key: "General - Ad counter", initialValue: GlobalConstants.numberOfIntakesToShowAd,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
   // MARK: User
   
-  lazy var userHeight = SettingsOrdinalItem<Double>(
+  lazy var userHeight: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
     key: "User - Height", initialValue: 170,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var userWeight = SettingsOrdinalItem<Double>(
+  lazy var userWeight: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
     key: "User - Weight", initialValue: 70,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var userPhysicalActivity = SettingsEnumItem(
-    key: "User - Physical activity", initialValue: PhysicalActivity.Occasional,
+  lazy var userPhysicalActivity: SettingsEnumItem<PhysicalActivity> = SettingsEnumItem(
+    key: "User - Physical activity", initialValue: .Occasional,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var userGender = SettingsEnumItem(
-    key: "User - Gender", initialValue: Gender.Man,
+  lazy var userGender: SettingsEnumItem<Gender> = SettingsEnumItem(
+    key: "User - Gender", initialValue: .Man,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var userAge = SettingsOrdinalItem<Int>(
+  lazy var userAge: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
     key: "User - Age", initialValue: 30,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var userDailyWaterIntake = SettingsOrdinalItem(
+  lazy var userDailyWaterIntake: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
     key: "User - Daily water intake", initialValue: Settings.calcUserDailyWaterIntakeSetting(),
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
   // MARK: User Interface
   
-  lazy var uiUseCustomDateForDayView = SettingsOrdinalItem(
+  lazy var uiUseCustomDateForDayView: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "UI - Use custom day page date", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var uiCustomDateForDayView = SettingsOrdinalItem(
+  lazy var uiCustomDateForDayView: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
     key: "UI - Day page date", initialValue: NSDate(),
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var uiDisplayDailyWaterIntakeInPercents = SettingsOrdinalItem(
+  lazy var uiDisplayDailyWaterIntakeInPercents: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "UI - Display daily water intake in percents", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var uiSelectedStatisticsPage = SettingsEnumItem(
-    key: "UI - Selected statistics page", initialValue: StatisticsViewPage.Week,
+  lazy var uiSelectedStatisticsPage: SettingsEnumItem<StatisticsViewPage> = SettingsEnumItem(
+    key: "UI - Selected statistics page", initialValue: .Week,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var uiSelectedAlcoholicDrink = SettingsEnumItem(
-    key: "UI - Selected alcoholic drink", initialValue: Drink.DrinkType.Wine,
+  lazy var uiSelectedAlcoholicDrink: SettingsEnumItem<Drink.DrinkType> = SettingsEnumItem(
+    key: "UI - Selected alcoholic drink", initialValue: .Wine,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var uiWaterGoalReachingIsShownForDate = SettingsOrdinalItem(
+  lazy var uiWaterGoalReachingIsShownForDate: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
     key: "UI - Water goal reaching is shown for date",
     initialValue: DateHelper.addToDate(NSDate(), years: -1, months: 0, days: 0), // It should be any not today date
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var uiDayPageHelpTipToShow = SettingsEnumItem(
+  lazy var uiDayPageHelpTipToShow: SettingsEnumItem<DayPageHelpTip> = SettingsEnumItem(
     key: "UI - Day page help tip to show", initialValue: DayPageHelpTip(rawValue: 0)!,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var uiDayPageAlcoholicDehydratrionHelpTipIsShown = SettingsOrdinalItem(
+  lazy var uiDayPageAlcoholicDehydratrionHelpTipIsShown: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "UI - Day page alcoholic dehydration help tip is shown", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var uiDayPageIntakesCountTillHelpTip = SettingsOrdinalItem(
+  lazy var uiDayPageIntakesCountTillHelpTip: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
     key: "UI - Day page intakes count till help tip", initialValue: 0,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var uiWritingReviewAlertSelection = SettingsEnumItem(
-    key: "UI - Writing review alert selection", initialValue: RateApplicationAlertSelection.RemindLater,
+  lazy var uiWritingReviewAlertSelection: SettingsEnumItem<RateApplicationAlertSelection> = SettingsEnumItem(
+    key: "UI - Writing review alert selection", initialValue: .RemindLater,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var uiIntakesCountTillShowWritingReviewAlert = SettingsOrdinalItem(
+  lazy var uiIntakesCountTillShowWritingReviewAlert: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
     key: "UI - Intakes count till show writing review alert", initialValue: GlobalConstants.numberOfIntakesToShowReviewAlert,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var uiDiaryPageHelpTipIsShown = SettingsOrdinalItem(
+  lazy var uiDiaryPageHelpTipIsShown: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "UI - Diary page help tip is shown", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var uiWeekStatisticsPageHelpTipToShow = SettingsEnumItem(
+  lazy var uiWeekStatisticsPageHelpTipToShow: SettingsEnumItem<WeekStatisticsPageHelpTip> = SettingsEnumItem(
     key: "UI - Week statistics page help tip to show", initialValue: WeekStatisticsPageHelpTip(rawValue: 0)!,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var uiMonthStatisticsPageHelpTipIsShown = SettingsOrdinalItem(
+  lazy var uiMonthStatisticsPageHelpTipIsShown: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "UI - Month statistics page help tip is shown", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var uiYearStatisticsPageHelpTipIsShown = SettingsOrdinalItem(
+  lazy var uiYearStatisticsPageHelpTipIsShown: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "UI - Year statistics page help tip is shown", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
   // MARK: Notifications
   
-  lazy var notificationsEnabled = SettingsOrdinalItem(
+  lazy var notificationsEnabled: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "Notifications - Enabled", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var notificationsFrom = SettingsOrdinalItem(
+  lazy var notificationsFrom: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
     key: "Notifications - From", initialValue: DateHelper.dateBySettingHour(9, minute: 0, second: 0, ofDate: NSDate()),
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var notificationsTo = SettingsOrdinalItem(
+  lazy var notificationsTo: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
     key: "Notifications - To", initialValue: DateHelper.dateBySettingHour(21, minute: 0, second: 0, ofDate: NSDate()),
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var notificationsInterval = SettingsOrdinalItem<NSTimeInterval>(
+  lazy var notificationsInterval: SettingsOrdinalItem<NSTimeInterval> = SettingsOrdinalItem(
     key: "Notifications - Interval", initialValue: 60 * 60 * 1.5,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var notificationsSound = SettingsOrdinalItem(
+  lazy var notificationsSound: SettingsOrdinalItem<String> = SettingsOrdinalItem(
     key: "Notifications - Sound", initialValue: "aqua.caf",
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
   
-  lazy var notificationsSmart = SettingsOrdinalItem(
+  lazy var notificationsSmart: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "Notifications - Smart", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 
-  lazy var notificationsLimit = SettingsOrdinalItem(
+  lazy var notificationsLimit: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "Notifications - Check water goal reaching", initialValue: false,
     userDefaults: UserDefaultsProvider.sharedUserDefaults)
 

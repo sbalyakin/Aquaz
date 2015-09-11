@@ -16,7 +16,7 @@ protocol CalendarViewDelegate: class {
   
 }
 
-@IBDesignable class CalendarView: UIView {
+@IBDesignable class CalendarView: UIView, CalendarViewContentDataSource {
   
   @IBInspectable var font: UIFont = UIFont.systemFontOfSize(16)
   @IBInspectable var weekDayTitleTextColor: UIColor = UIColor.blackColor()
@@ -40,7 +40,7 @@ protocol CalendarViewDelegate: class {
   
   var selectedDate: NSDate?
   
-  let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.CalendarUnitWeekday).length
+  let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.Weekday).length
 
   weak var delegate: CalendarViewDelegate?
 
@@ -48,7 +48,7 @@ protocol CalendarViewDelegate: class {
   private var scrollView: InfiniteScrollView!
   
   override init(frame: CGRect) {
-    let startOfMonth = DateHelper.startDateFromDate(NSDate(), calendarUnit: .CalendarUnitMonth)
+    let startOfMonth = DateHelper.startDateFromDate(NSDate(), calendarUnit: .Month)
     initialDisplayedMonthDate = startOfMonth
     displayedMonthDate = startOfMonth
     
@@ -56,8 +56,8 @@ protocol CalendarViewDelegate: class {
     baseInit()
   }
   
-  required init(coder aDecoder: NSCoder) {
-    let startOfMonth = DateHelper.startDateFromDate(NSDate(), calendarUnit: .CalendarUnitMonth)
+  required init?(coder aDecoder: NSCoder) {
+    let startOfMonth = DateHelper.startDateFromDate(NSDate(), calendarUnit: .Month)
     initialDisplayedMonthDate = startOfMonth
     displayedMonthDate = startOfMonth
 
@@ -76,7 +76,7 @@ protocol CalendarViewDelegate: class {
   }
   
   func resetToDisplayMonthDate(date: NSDate) {
-    let startOfMonth = DateHelper.startDateFromDate(date, calendarUnit: .CalendarUnitMonth)
+    let startOfMonth = DateHelper.startDateFromDate(date, calendarUnit: .Month)
     initialDisplayedMonthDate = startOfMonth
     displayedMonthDate = startOfMonth
     refresh()
@@ -107,7 +107,7 @@ protocol CalendarViewDelegate: class {
   }
   
   func switchToMonth(date: NSDate) {
-    setDisplayedMonthDate(DateHelper.startDateFromDate(date, calendarUnit: .CalendarUnitMonth))
+    setDisplayedMonthDate(DateHelper.startDateFromDate(date, calendarUnit: .Month))
   }
   
   func switchToNextMonth() {
@@ -118,15 +118,19 @@ protocol CalendarViewDelegate: class {
     setDisplayedMonthDate(DateHelper.addToDate(displayedMonthDate, years:0, months: -1, days: 0))
   }
   
-  func calcDeltaMonthsBetweenDates(#fromDate: NSDate, toDate: NSDate) -> Int {
-    return DateHelper.calcDistanceBetweenDates(fromDate: fromDate, toDate: toDate, calendarUnit: .CalendarUnitMonth)
+  func calcDeltaMonthsBetweenDates(fromDate fromDate: NSDate, toDate: NSDate) -> Int {
+    return DateHelper.calcDistanceBetweenDates(fromDate: fromDate, toDate: toDate, calendarUnit: .Month)
+  }
+
+  func createCalendarViewDaysInfoForMonth(calendarContentView calendarContentView: CalendarContentView, monthDate: NSDate) -> [CalendarViewDayInfo] {
+    return CalendarViewDataSource.createCalendarViewDaysInfoForMonth(monthDate)
   }
 
 }
 
 extension CalendarView: InfiniteScrollViewDataSource {
 
-  func infiniteScrollViewNeedsPage(#index: Int) -> UIView {
+  func infiniteScrollViewNeedsPage(index index: Int) -> UIView {
     let viewContent = createCalendarViewContent()
     
     viewContent.selectedDate = selectedDate
@@ -163,22 +167,13 @@ extension CalendarView: InfiniteScrollViewDataSource {
 
 extension CalendarView: InfiniteScrollViewDelegate {
 
-  func infiniteScrollViewPageCanBeRemoved(#index: Int, view: UIView?) {
+  func infiniteScrollViewPageCanBeRemoved(index index: Int, view: UIView?) {
     // Do nothing, because a calendar view does not manage its content views
   }
   
-  func infiniteScrollViewPageWasSwitched(#pageIndex: Int) {
+  func infiniteScrollViewPageWasSwitched(pageIndex pageIndex: Int) {
     displayedMonthDate = DateHelper.addToDate(initialDisplayedMonthDate, years: 0, months: pageIndex, days: 0)
     delegate?.calendarViewDayWasSwitched(displayedMonthDate)
   }
   
 }
-
-extension CalendarView: CalendarViewContentDataSource {
-  
-  func createCalendarViewDaysInfoForMonth(#calendarContentView: CalendarContentView, monthDate: NSDate) -> [CalendarViewDayInfo] {
-    return CalendarViewDataSource.createCalendarViewDaysInfoForMonth(monthDate)
-  }
-  
-}
-

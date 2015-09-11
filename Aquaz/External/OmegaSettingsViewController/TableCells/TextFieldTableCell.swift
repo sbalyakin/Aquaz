@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TextFieldTableCell<Value: Printable>: TableCellWithValue<Value>, UITextFieldTableViewCellDelegate {
+class TextFieldTableCell<Value: CustomStringConvertible>: TableCellWithValue<Value>, UITextFieldTableViewCellDelegate {
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
   var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
@@ -38,7 +38,7 @@ class TextFieldTableCell<Value: Printable>: TableCellWithValue<Value>, UITextFie
     super.init(value: value, container: container)
   }
   
-  override func createUICell(#tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  override func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
     if uiCell == nil {
       uiCell = UITextFieldTableViewCell()
     }
@@ -83,7 +83,7 @@ class TextFieldTableCell<Value: Printable>: TableCellWithValue<Value>, UITextFie
   }
   
   func textFieldDidEndEditing(textField: UITextField) {
-    if let value = valueFromStringFunction(textField.text) {
+    if let value = valueFromStringFunction(textField.text ?? "") {
       self.value = value
     }
     uiCell?.textField?.textColor = container.rightDetailValueColor

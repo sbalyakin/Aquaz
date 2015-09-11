@@ -171,8 +171,9 @@ class WaterGoalTests: XCTestCase {
       managedObjectContext.deleteObject(waterGoal)
     }
     
-    var error: NSError?
-    if !managedObjectContext.save(&error) {
+    do {
+      try managedObjectContext.save()
+    } catch {
       XCTFail("Failed to save managed object context after deleting all water goals")
     }
   }
@@ -182,7 +183,7 @@ class WaterGoalTests: XCTestCase {
       return false
     }
     
-    for (index, item) in enumerate(array1) {
+    for (index, item) in array1.enumerate() {
       if !areDoublesEqual(item, array2[index]) {
         return false
       }

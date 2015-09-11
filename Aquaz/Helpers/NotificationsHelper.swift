@@ -18,33 +18,30 @@ class NotificationsHelper {
   }
   
   class func areLocalNotificationsRegistered() -> Bool {
-    if UIApplication.instancesRespondToSelector(Selector("currentUserNotificationSettings")) {
-      let notificationPermissions = UIApplication.sharedApplication().currentUserNotificationSettings()
-      if notificationPermissions.types & UIUserNotificationType.Sound == .Sound ||
-         notificationPermissions.types & UIUserNotificationType.Alert == .Alert ||
-         notificationPermissions.types & UIUserNotificationType.Badge == .Badge {
-        return true
+    if #available(iOS 8.0, *) {
+      if let notificationPermissions = UIApplication.sharedApplication().currentUserNotificationSettings() {
+        return notificationPermissions.types.contains(.Sound) ||
+               notificationPermissions.types.contains(.Alert) ||
+               notificationPermissions.types.contains(.Badge)
       }
-      
-      return false
     }
     
     return true
   }
   
   class func registerApplicationForLocalNotifications() {
-    if UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:"))
-    {
-      let notificationTypes: UIUserNotificationType = .Sound | .Alert | .Badge
+    if #available(iOS 8.0, *) {
+      let notificationTypes: UIUserNotificationType = [.Sound, .Alert, .Badge]
       let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
       UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
     }
   }
   
   class func setApplicationIconBadgeNumber(number: Int) {
-    if UIApplication.instancesRespondToSelector(Selector("currentUserNotificationSettings")) {
-      let notificationPermissions = UIApplication.sharedApplication().currentUserNotificationSettings()
-      if notificationPermissions.types & UIUserNotificationType.Badge == .Badge {
+    if #available(iOS 8.0, *) {
+      if let notificationPermissions = UIApplication.sharedApplication().currentUserNotificationSettings()
+        where notificationPermissions.types.contains(.Badge)
+      {
         UIApplication.sharedApplication().applicationIconBadgeNumber = number
       }
     } else {
@@ -65,11 +62,11 @@ class NotificationsHelper {
     let toDate = DateHelper.dateByJoiningDateTime(datePart: date, timePart: toTime)
     
     for var fireDate = fromDate; !fireDate.isLaterThan(toDate); fireDate = fireDate.dateByAddingTimeInterval(interval) {
-      scheduleNotification(fireDate: fireDate, repeatInterval: .CalendarUnitDay)
+      scheduleNotification(fireDate: fireDate, repeatInterval: .Day)
     }
   }
   
-  class func rescheduleNotificationsBecauseOfIntake(#intakeDate: NSDate) {
+  class func rescheduleNotificationsBecauseOfIntake(intakeDate intakeDate: NSDate) {
     removeAllNotifications()
     
     // Schedule all notifications from the next day
@@ -86,7 +83,7 @@ class NotificationsHelper {
     }
   }
 
-  class func scheduleNotification(#fireDate: NSDate, repeatInterval: NSCalendarUnit?) {
+  class func scheduleNotification(fireDate fireDate: NSDate, repeatInterval: NSCalendarUnit?) {
     let notification = UILocalNotification()
     notification.fireDate = fireDate
     notification.alertBody = Strings.notificationAlertBody

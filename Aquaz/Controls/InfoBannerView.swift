@@ -41,7 +41,7 @@ class InfoBannerView: BannerView {
     return infoBannerView
   }
   
-  func show(#animated: Bool, parentView: UIView, height: CGFloat = Defaults.height, minY: CGFloat = Defaults.minY, completion: ((Bool) -> Void)? = nil) {
+  func show(animated animated: Bool, parentView: UIView, height: CGFloat = Defaults.height, minY: CGFloat = Defaults.minY, completion: ((Bool) -> Void)? = nil) {
     setupUI(parentView: parentView, height: height, minY: minY)
     
     if animated {
@@ -53,7 +53,7 @@ class InfoBannerView: BannerView {
         delay: showDelay,
         usingSpringWithDamping: 0.4,
         initialSpringVelocity: 1.7,
-        options: .CurveEaseInOut | .AllowUserInteraction,
+        options: [.CurveEaseInOut, .AllowUserInteraction],
         animations: {
           self.layer.opacity = 1
           self.layer.transform = CATransform3DMakeScale(1, 1, 1)
@@ -64,7 +64,7 @@ class InfoBannerView: BannerView {
     }
   }
   
-  func showAndHide(#animated: Bool, displayTime: NSTimeInterval, parentView: UIView, height: CGFloat = Defaults.height, minY: CGFloat = Defaults.minY, completion: ((Bool) -> Void)? = nil) {
+  func showAndHide(animated animated: Bool, displayTime: NSTimeInterval, parentView: UIView, height: CGFloat = Defaults.height, minY: CGFloat = Defaults.minY, completion: ((Bool) -> Void)? = nil) {
     show(animated: animated, parentView: parentView, height: height, minY: minY) { _ in
       SystemHelper.executeBlockWithDelay(displayTime) {
         self.hide(animated: animated, completion: completion)
@@ -72,13 +72,13 @@ class InfoBannerView: BannerView {
     }
   }
   
-  func hide(#animated: Bool, completion: ((Bool) -> Void)? = nil) {
+  func hide(animated animated: Bool, completion: ((Bool) -> Void)? = nil) {
     if animated {
       UIView.animateWithDuration(hideDuration,
         delay: hideDelay,
         usingSpringWithDamping: 0.8,
         initialSpringVelocity: 10,
-        options: .CurveEaseInOut | .AllowUserInteraction,
+        options: [.CurveEaseInOut, .AllowUserInteraction],
         animations: {
           self.layer.opacity = 0
           self.layer.transform = CATransform3DMakeScale(0.7, 0.7, 0.7)
@@ -93,8 +93,8 @@ class InfoBannerView: BannerView {
     }
   }
   
-  private func setupUI(#parentView: UIView, height: CGFloat, minY: CGFloat) {
-    setTranslatesAutoresizingMaskIntoConstraints(false)
+  private func setupUI(parentView parentView: UIView, height: CGFloat, minY: CGFloat) {
+    translatesAutoresizingMaskIntoConstraints = false
     
     backgroundColor = Defaults.backgroundColor
     hidden = true

@@ -13,19 +13,19 @@ class FullVersionViewController: UIViewController {
 
   private struct LocalizedStrings {
     
-    lazy var descriptionLabelText = NSLocalizedString("FVVC:Description about full version purchase",
+    lazy var descriptionLabelText: String = NSLocalizedString("FVVC:Description about full version purchase",
       value: "Purchase the full version of Aquaz in order to:\n\t• use smart notifications\n\t• activate statistics\n\t• remove ads",
       comment: "FullVersionViewController: Description about full version purchase")
 
-    lazy var priceLabelText = NSLocalizedString("FVVC:Price: %@",
+    lazy var priceLabelText: String = NSLocalizedString("FVVC:Price: %@",
       value: "Price: %@",
       comment: "FullVersionViewController: Template of price label for Full Version purchase")
 
-    lazy var priceLabelErrorText = NSLocalizedString("FVVC:Error",
+    lazy var priceLabelErrorText: String = NSLocalizedString("FVVC:Error",
       value: "Error",
       comment: "FullVersionViewController: Text displayed as a value of price label if price fetching is failed")
 
-    lazy var approvalBannerText = NSLocalizedString("FVVC:Waiting for an approval from your family delegate...",
+    lazy var approvalBannerText: String = NSLocalizedString("FVVC:Waiting for an approval from your family delegate...",
       value: "Waiting for an approval from your family delegate...",
       comment: "FullVersionViewController: Text for a banner shown if full version purchase is deffered and waits for an approval from parents")
     

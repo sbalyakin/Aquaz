@@ -14,24 +14,24 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
 
   private struct LocalizedStrings {
     
-    lazy var forbiddenPaymentsAlertMessage = NSLocalizedString("IAPM:It\'s forbidden to make payments due to parental controls",
+    lazy var forbiddenPaymentsAlertMessage: String = NSLocalizedString("IAPM:It\'s forbidden to make payments due to parental controls",
       value: "It\'s forbidden to make payments due to parental controls",
       comment: "InAppPurchaseManager: Message shown to user if payments are forbidden according to parental controls")
     
-    lazy var fullVersionRestoredAlertMessage = NSLocalizedString("IAPM:Full Version has been successfully restored",
+    lazy var fullVersionRestoredAlertMessage: String = NSLocalizedString("IAPM:Full Version has been successfully restored",
       value: "Full Version has been successfully restored",
       comment: "InAppPurchaseManager: Message shown after successful restoring Full Version purchase")
     
-    lazy var errorAlertTitle = NSLocalizedString("IAPM:Error", value: "Error",
+    lazy var errorAlertTitle: String = NSLocalizedString("IAPM:Error", value: "Error",
       comment: "InAppPurchaseManager: Message title for alert shown if a purchase is failed")
     
-    lazy var okButtonTitle = NSLocalizedString("IAPM:OK", value: "OK", comment: "InAppPurchaseManager: Title of OK button")
+    lazy var okButtonTitle: String = NSLocalizedString("IAPM:OK", value: "OK", comment: "InAppPurchaseManager: Title of OK button")
     
-    lazy var transactionFailedClientInvalid = NSLocalizedString("IAPM:You is not allowed to perform the attempted action",
+    lazy var transactionFailedClientInvalid: String = NSLocalizedString("IAPM:You is not allowed to perform the attempted action",
       value: "You is not allowed to perform the attempted action",
       comment: "InAppPurchaseManager: Message shown when payment transaction failed by reason: Client is not allowed to perform the attempted action")
     
-    lazy var transactionFailedUnknownError = NSLocalizedString("IAPM:An unknown error occured",
+    lazy var transactionFailedUnknownError: String = NSLocalizedString("IAPM:An unknown error occured",
       value: "An unknown error occured",
       comment: "InAppPurchaseManager: Message shown when payment transaction failed by reason: An unknown error occured")
     
@@ -50,7 +50,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
       return true
     }
     
-    for transaction in SKPaymentQueue.defaultQueue().transactions as! [SKPaymentTransaction] {
+    for transaction in SKPaymentQueue.defaultQueue().transactions {
       if transaction.payment.productIdentifier == GlobalConstants.inAppPurchaseFullVersion {
         return true
       }
@@ -61,14 +61,19 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
 
   // Returns true if a purchasing transaction is deferred and a user are waiting for an approval from parents
   var isWaitingForApproval: Bool {
-    for transaction in SKPaymentQueue.defaultQueue().transactions as! [SKPaymentTransaction] {
-      if transaction.payment.productIdentifier == GlobalConstants.inAppPurchaseFullVersion &&
-        transaction.transactionState == .Deferred {
-          return true
+    if #available(iOS 8.0, *) {
+      for transaction in SKPaymentQueue.defaultQueue().transactions {
+        if transaction.payment.productIdentifier == GlobalConstants.inAppPurchaseFullVersion &&
+          transaction.transactionState == .Deferred {
+            return true
+        }
       }
+      return false
+      
+    } else {
+      // Fallback on earlier versions
+      return false
     }
-    
-    return false
   }
 
   var paymentAreAllowed: Bool {
@@ -107,7 +112,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     return true
   }
   
-  func fetchFullVersionPrice(#completion: PriceCompletionFunction) {
+  func fetchFullVersionPrice(completion completion: PriceCompletionFunction) {
     Logger.logDebug("fetchFullVersionPrice()")
 
     let request = SKProductsRequest(productIdentifiers: Set([GlobalConstants.inAppPurchaseFullVersion]))
@@ -122,8 +127,8 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
   }
 
-  private func formatPrice(#response: SKProductsResponse) -> String {
-    if let product = response.products.first as? SKProduct where product.productIdentifier == GlobalConstants.inAppPurchaseFullVersion {
+  private func formatPrice(response response: SKProductsResponse) -> String {
+    if let product = response.products.first where product.productIdentifier == GlobalConstants.inAppPurchaseFullVersion {
       let numberFormatter = NSNumberFormatter()
       numberFormatter.formatterBehavior = .Behavior10_4
       numberFormatter.numberStyle = .CurrencyStyle
@@ -135,12 +140,12 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     return ""
   }
   
-  func productsRequest(request: SKProductsRequest!, didReceiveResponse response: SKProductsResponse!) {
+  func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
     Logger.logDebug("productsRequest()")
 
     if response.products.count == 0 {
-      let invalidIdentifiers = response.invalidProductIdentifiers as! [String]
-      let details = ", ".join(invalidIdentifiers)
+      let invalidIdentifiers = response.invalidProductIdentifiers 
+      let details = invalidIdentifiers.joinWithSeparator(", ")
       Logger.logError("No products are available for in-app purchases", logDetails: details)
       
       // Show an alert about an unknown error to user to indicate an error somehow
@@ -161,7 +166,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
       return
     }
     
-    if let product = response.products.first as? SKProduct {
+    if let product = response.products.first {
       makePaymentForProduct(product)
     } else {
       assert(false)
@@ -174,17 +179,17 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     SKPaymentQueue.defaultQueue().addPayment(payment)
   }
   
-  func requestDidFinish(request: SKRequest!) {
+  func requestDidFinish(request: SKRequest) {
     if request == purchaseRequest {
       Logger.logDebug("requestDidFinish() for a purchase request")
       purchaseRequest = nil
     } else {
       Logger.logDebug("requestDidFinish() for a price request")
-      priceRequests.removeValueForKey(request as! SKProductsRequest!)
+      priceRequests.removeValueForKey(request as! SKProductsRequest)
     }
   }
   
-  func request(request: SKRequest!, didFailWithError error: NSError!) {
+  func request(request: SKRequest, didFailWithError error: NSError) {
     if request == purchaseRequest {
       Logger.logDebug("requestDidFinish(:didFailWithError) for a purchase request", logDetails: error.localizedDescription)
       purchaseRequest = nil
@@ -194,16 +199,16 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
       alert.show()
     } else {
       Logger.logDebug("requestDidFinish(:didFailWithError) for a price request", logDetails: error.localizedDescription)
-      if let completion = priceRequests.removeValueForKey(request as! SKProductsRequest!) {
+      if let completion = priceRequests.removeValueForKey(request as! SKProductsRequest) {
         completion(price: "")
       }
     }
   }
   
-  func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!) {
+  func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
     Logger.logDebug("paymentQueue()")
     
-    for transaction in transactions as! [SKPaymentTransaction] {
+    for transaction in transactions {
       if transaction.payment.productIdentifier != GlobalConstants.inAppPurchaseFullVersion {
         Logger.logWarning("Unknown in-app purchase", logDetails: "identifier: \(transaction.payment.productIdentifier)")
         SKPaymentQueue.defaultQueue().finishTransaction(transaction)
@@ -234,11 +239,11 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     }
   }
   
-  func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue!) {
+  func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
     Logger.logDebug("paymentQueueRestoreCompletedTransactionsFinished()")
   }
 
-  func paymentQueue(queue: SKPaymentQueue!, restoreCompletedTransactionsFailedWithError error: NSError!) {
+  func paymentQueue(queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: NSError) {
     Logger.logDebug("paymentQueue(queue:restoreCompletedTransactionsFailedWithError:), error: \(error.localizedDescription)")
     processError(error)
   }

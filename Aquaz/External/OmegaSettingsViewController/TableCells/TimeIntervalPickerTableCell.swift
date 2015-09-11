@@ -47,7 +47,7 @@ class TimeIntervalPickerTableCell<T: TimeIntervalPickerTableCellHelper>: MultiPi
     assert(selectedRows.count == timeComponents.count)
     
     var timeInterval: NSTimeInterval = 0
-    for (index, timeComponent) in enumerate(timeComponents) {
+    for (index, timeComponent) in timeComponents.enumerate() {
       let duration = getDurationForCalendarUnit(timeComponent.calendarUnit)
       let row = selectedRows[index]
       timeInterval += duration * NSTimeInterval(timeComponent.minValue + timeComponent.step * row)
@@ -74,20 +74,20 @@ class TimeIntervalPickerTableCell<T: TimeIntervalPickerTableCellHelper>: MultiPi
   
   private func getDurationForCalendarUnit(calendarUnit: NSCalendarUnit) -> NSTimeInterval {
     switch calendarUnit {
-    case NSCalendarUnit.CalendarUnitSecond: return 1
-    case NSCalendarUnit.CalendarUnitMinute: return 60
-    case NSCalendarUnit.CalendarUnitHour  : return 60 * 60
-    case NSCalendarUnit.CalendarUnitDay   : return 24 * 60 * 60
+    case NSCalendarUnit.Second: return 1
+    case NSCalendarUnit.Minute: return 60
+    case NSCalendarUnit.Hour  : return 60 * 60
+    case NSCalendarUnit.Day   : return 24 * 60 * 60
     default: return 0
     }
   }
   
   private func getMaximumForCalendarUnit(calendarUnit: NSCalendarUnit) -> Int {
     switch calendarUnit {
-    case NSCalendarUnit.CalendarUnitSecond: return 60
-    case NSCalendarUnit.CalendarUnitMinute: return 60
-    case NSCalendarUnit.CalendarUnitHour  : return 24
-    case NSCalendarUnit.CalendarUnitDay   : return Int.max - 1
+    case NSCalendarUnit.Second: return 60
+    case NSCalendarUnit.Minute: return 60
+    case NSCalendarUnit.Hour  : return 24
+    case NSCalendarUnit.Day   : return Int.max - 1
     default: return 0
     }
   }

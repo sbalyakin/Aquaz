@@ -35,7 +35,7 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
   }
 
   private func playSound(fileName: String) {
-    if let soundURL = NSBundle.mainBundle().URLForResource(fileName.stringByDeletingPathExtension, withExtension: fileName.pathExtension) {
+    if let soundURL = NSBundle.mainBundle().URLForResource(fileName, withExtension: nil) {
       var mySound: SystemSoundID = 0
       let status = AudioServicesCreateSystemSoundID(soundURL, &mySound)
       if status == OSStatus(kAudioServicesNoError) {
@@ -50,9 +50,9 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
 
   private func fillSoundsList() {
     if let bundlePath = NSBundle.mainBundle().resourcePath {
-      if let allFiles = NSFileManager().contentsOfDirectoryAtPath(bundlePath, error: nil) as? [String] {
+      if let allFiles = (try? NSFileManager().contentsOfDirectoryAtPath(bundlePath)) {
         for soundInfo in NotificationSounds.soundList {
-          if contains(allFiles, soundInfo.fileName) {
+          if allFiles.contains((soundInfo.fileName)) {
             soundList.append(soundInfo)
           } else {
             Logger.logError("Sound file is not found", logDetails: [Logger.Attributes.fileName: soundInfo.fileName])
@@ -69,7 +69,7 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
   private func findCheckedIndex() {
     let fileName = Settings.sharedInstance.notificationsSound.value
     
-    for (index, sound) in enumerate(soundList) {
+    for (index, sound) in soundList.enumerate() {
       if sound.fileName == fileName {
         checkedIndex = index
         return
@@ -101,7 +101,7 @@ extension NotificationsSoundViewController {
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("SoundCell") as! UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("SoundCell")!
     
     let index = indexPath.row
     let sound = soundList[index]

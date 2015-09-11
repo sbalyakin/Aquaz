@@ -91,7 +91,7 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
 
   private func layoutCircleLayer(rect: CGRect) {
     if let circleLayer = circleLayer {
-      let circlePath = UIBezierPath(ovalInRect: rect.rectByInsetting(dx: circleLayer.lineWidth / 2, dy: circleLayer.lineWidth / 2))
+      let circlePath = UIBezierPath(ovalInRect: rect.insetBy(dx: circleLayer.lineWidth / 2, dy: circleLayer.lineWidth / 2))
       
       circleLayer.path = circlePath.CGPath
     }

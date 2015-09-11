@@ -10,7 +10,7 @@ import Foundation
 
 class Units {
   
-  enum Volume: Int, Printable {
+  enum Volume: Int, CustomStringConvertible {
     case Millilitres = 0
     case FluidOunces
     
@@ -28,7 +28,7 @@ class Units {
     }
   }
   
-  enum Weight: Int, Printable {
+  enum Weight: Int, CustomStringConvertible {
     case Kilograms = 0
     case Pounds
 
@@ -46,7 +46,7 @@ class Units {
     }
   }
   
-  enum Length: Int, Printable {
+  enum Length: Int, CustomStringConvertible {
     case Centimeters = 0
     case Feet
     
@@ -69,7 +69,7 @@ class Units {
   /// Prepares specified amount for storing into Core Data. It converts metric units of amount to current units from settings.
   /// Then it rounds converted amount and makes reverse conversion to metric units.
   /// This methods allows getting amount equals to formatted amount (formatAmountToText) but represented in metric units.
-  func adjustMetricAmountForStoring(#metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1) -> Double {
+  func adjustMetricAmountForStoring(metricAmount metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1) -> Double {
     if roundPrecision <= 0 {
       assert(false, "Round precision should be positive number")
       return 0
@@ -82,14 +82,14 @@ class Units {
     return metricQuantity.amount
   }
   
-  func convertMetricAmountToDisplayed(#metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1) -> Double {
+  func convertMetricAmountToDisplayed(metricAmount metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1) -> Double {
     if roundPrecision <= 0 {
       assert(false, "Round precision should be positive number")
       return 0
     }
     
     let units = getUnits(unitType)
-    var quantity = Quantity(ownUnit: units.displayedUnit, fromUnit: units.metricUnit, fromAmount: metricAmount)
+    let quantity = Quantity(ownUnit: units.displayedUnit, fromUnit: units.metricUnit, fromAmount: metricAmount)
     let displayedAmount = round(quantity.amount / roundPrecision) * roundPrecision
     return displayedAmount
   }
@@ -97,7 +97,7 @@ class Units {
   /// Returns specified amount as formatted string taking into account current units settings.
   /// Amount should be specified in metric units.
   /// It's possible to specify final precision and numbers of decimals of formatted text.
-  func formatMetricAmountToText(#metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1, decimals: Int = 0, displayUnits: Bool = true) -> String {
+  func formatMetricAmountToText(metricAmount metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1, decimals: Int = 0, displayUnits: Bool = true) -> String {
     if roundPrecision <= 0 {
       assert(false, "Round precision should be positive number")
       return ""

@@ -1,0 +1,614 @@
+# Acknowledgements
+This application makes use of the following third party libraries:
+
+## AFNetworking
+
+Copyright (c) 2011–2015 Alamofire Software Foundation (http://alamofire.org/)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
+## AdColony
+
+You must accept the terms and conditions on the AdColony website by registering in order to legally use the AdColony SDK. U.S. based companies will need to complete the W-9 form and send it to us, as well as complete the section on payment information on clients.adcolony.com, before publisher payments can be issued.
+
+## AmazonAds
+
+This software is licensed as "Program Materials" under the Program Materials License Agreement (the "License") of the Amazon Mobile App Distribution program, which is available at  https://developer.amazon.com/sdk/pml.html.  See the License for the specific language governing permissions and limitations under the License.
+Portions of the Amazon Maps API are licensed by HERE North America, LLC or its affiliates ("Here") under Here's Location Platform Services Terms and Conditions (the "Here Terms"), which are available at http://developer.here.com/terms_conditions.  See the Here Terms for the specific language governing permissions and limitations under the Here Terms. 
+Use of the Amazon Mobile Ads API is also subject to the Amazon Mobile Ad Network Publisher Agreement (the "Publisher Agreement"), available at https://developer.amazon.com/sdk/mobileads/publisher-agreement.html.  See the Publisher Agreement for the specific language governing permissions and limitations under the Publisher Agreement.
+Use of the Login with Amazon API and the Cloud Drive API is also subject to the Login with Amazon Services Agreement (the "Services Agreement"), available at https://login.amazon.com/services-agreement.  See the Services Agreement for the specific language governing permissions and limitations under the Services Agreement.
+These materials may include third party software that is copyrighted by other parties and is subject to separate license terms.  Information on that software and the applicable copyright notices and license terms are included in the AMAZON LEGAL NOTICES.txt file accompanying these materials or in separate NOTICE.txt or LICENSE.txt files accompanying applicable software.  You acknowledge and agree that your license to use and distribute these materials is conditioned on your providing to your users the notices and disclaimers that are specified by such license terms.
+These materials are distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+
+
+## AppLovinSDK
+
+SDK EULA
+
+AppLovin Software Development Kit -- End User License Agreement
+
+This End User License Agreement (the "Agreement") is a legal agreement
+between you (either an individual or an entity) and AppLovin
+Corporation ("Company") regarding the use of Company's software
+development kit entitled AppLovin SDK, which may include user
+documentation provided in "online" or electronic form, object code,
+interface declarations, assemblies, and sample source code (the
+"Software"). By filling in the user information and clicking the
+button marked "Agree", you agree to be bound by the terms of this
+Agreement. IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THIS AGREEMENT,
+DO NOT SELECT THE "AGREE" BOX. YOU WILL NOT BE PROVIDED THE SOFTWARE
+UNLESS AND UNTIL YOU HAVE AGREED TO BE BOUND BY THESE TERMS.
+
+Grant of License. Company grants to you:
+
+(a) A nonexclusive, nontransferable, worldwide, royalty-free right and
+(license to use, copy and distribute the Software in conjunction with
+(the distribution of your own products the 'Products') and b) A
+(nonexclusive, nontransferable, worldwide, royalty-free right and
+(license to use the relevant and necessary components of the Software
+(solely to incorporate the Software into the Products.
+
+Proprietary Rights.
+
+Company and its licensors own, and shall retain ownership of, all
+right, title, and interest to the Software, including, without
+limitation, all copyrights and other intellectual property rights
+therein. Without limiting the foregoing, the Software is protected by
+United States copyright laws and international treaty provisions.
+Therefore, you may not use, copy, or distribute the Software without
+authorization.
+
+Restrictions.
+
+You may not (1) modify, create derivative works of, reverse engineer,
+reverse compile, or disassemble the Software, except that you may
+modify and create derivative works based upon the sample source code
+included within the Software (the 'Sample Code') and distribute the
+modified Sample Code in connection with the Product ; (2) distribute,
+sell, lease, rent, lend, or sublicense any part of the Software to any
+third party except as expressly provided herein and as necessary to
+distribute the Product; (3) use the Software to develop software to
+upload or otherwise transmit any material containing software viruses
+or other computer code, files or programs designed to interrupt,
+destroy, or limit the functionality of any software or hardware.
+
+You may not represent that the Products are certified or otherwise
+endorsed by Company. You may not use the Company name or any other
+trademarks or service marks of Company in connection with the
+Products.
+
+You will not receive any support or subscription services for the
+Software or any services from Company in connection with the Software,
+except as expressly provided in this Agreement.
+
+Data.
+
+The Software is designed to, based on permission to be secured by you,
+obtain and transmit to Company data from end users using the Products
+to facilitate the serving of ads to such end users. Such data is
+explained in the Company’s privacy policy. Without prejudice to
+Section 16 of the AppLovin Terms of Use to which you are also a party,
+you represent and warrant that in each instance you have been given
+the right by your end users to collect and transmit such data to
+Company and that you have and will abide by a privacy policy that (1)
+discloses that third parties may be using cookies, web beacons, and
+other technologies to collect information in connection with ad
+serving through the Software and (2) permits your end users to opt-out
+of tailored ad content.
+
+Confidentiality.
+
+You agree to maintain the confidentiality of any proprietary
+information received by you during, or prior to entering into, this
+Agreement, including, without limitation, the Software, that you
+should know is confidential or proprietary based on the circumstances
+surrounding the disclosure, including, without limitation, non-public
+technical and business information ('Confidential Information') for a
+period of five (5) years after the termination of this Agreement. This
+section shall not apply to any publicly available or independently
+developed information. You agree not to use said Confidential
+Information for any purpose except as necessary to fulfill your
+obligations and exercise your rights under this Agreement. You shall
+protect the secrecy of and avoid disclosure and unauthorized use of
+the Company's Confidential Information to the same degree that you
+take to protect your own confidential information and in no event less
+than reasonable care.
+
+Indemnification.
+
+You agree to defend, indemnify and hold harmless Company, and any of
+its directors, officers, employees, affiliates or agents, from and
+against any and all claims, losses, damages, liabilities and other
+expenses (including attorneys' fees), arising from your use,
+modification and distribution of the Software or breach of this
+Agreement.
+
+Term and Termination.
+
+This Agreement shall continue as long as you are in compliance with
+the terms specified herein or until otherwise terminated. You and or
+Company may terminate this Agreement for any reason at any time. You
+agree, upon termination, to destroy all copies of the Software within
+your possession or control. The Confidentiality, Indemnification, No
+Warranties, Limitation of Liability, and General sections set out in
+this Agreement shall survive any termination of this Agreement.
+
+NO WARRANTIES.
+
+YOU ASSUME THE ENTIRE COST OF ANY DAMAGE RESULTING FROM THE
+INFORMATION CONTAINED IN OR COMPILED BY THE SOFTWARE. YOU ASSUME ALL
+RESPONSIBILITIES FOR SELECTION OF THE SOFTWARE TO ACHIEVE YOUR
+INTENDED RESULTS, AND FOR THE INSTALLATION OF, USE OF, AND RESULTS
+OBTAINED FROM THE SOFTWARE. THE SOFTWARE IS PROVIDED 'AS IS' WITHOUT
+WARRANTIES OF ANY KIND. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE
+LAW, COMPANY DISCLAIMS ALL WARRANTIES, EITHER EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT WITH RESPECT TO
+THE SOFTWARE. SOME STATES DO NOT ALLOW LIMITATIONS ON IMPLIED
+WARRANTIES, SO THE ABOVE LIMITATION MAY NOT APPLY TO YOU.
+
+LIMITATION OF LIABILITY.
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, COMPANY AND ITS
+SUPPLIERS WILL NOT BE LIABLE FOR ANY DAMAGES WHATSOEVER (INCLUDING,
+WITHOUT LIMITATION, DAMAGES FOR LOSS OF BUSINESS PROFITS, BUSINESS
+INTERRUPTION, LOSS OF BUSINESS INFORMATION, OR OTHER PECUNIARY LOSS)
+ARISING OUT OF THE USE OR INABILITY TO USE THE SOFTWARE, EVEN IF
+COMPANY OR SUCH PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGES. IN NO EVENT WILL COMPANY'S TOTAL LIABILITY TO YOU FOR ALL
+DAMAGES IN ANY ONE OR MORE CAUSE OF ACTION EXCEED $50. THIS LIMITATION
+WILL APPLY REGARDLESS OF THE FAILURE OF ANY ESSENTIAL REMEDY. BECAUSE
+SOME STATES DO NOT ALLOW THE EXCLUSION OR LIMITATION OF LIABILITY FOR
+CONSEQUENTIAL OR INCIDENTAL DAMAGES, THE ABOVE LIMITATION MAY NOT
+APPLY TO YOU.
+
+U.S. Government-Restricted Rights.
+
+The Software and accompanying documentation are deemed to be
+"commercial computer software" and "commercial computer Software
+documentation," respectively, pursuant to DFAR Section 227.7202 and
+FAR Section 12.212, as applicable. Any use, modification, reproduction
+release, performance, display or disclosure of the Software and
+accompanying documentation by the U.S. Government will be governed
+solely by the terms of this Agreement and shall be prohibited except
+to the extent expressly permitted by the terms of this Agreement.
+
+Export Restrictions.
+
+You may not download, export, or re-export the Software (a) into, or
+to a national or resident of, Cuba, Iraq, Libya, Yugoslavia, North
+Korea, Iran, Syria or any other country to which the United States has
+embargoed goods, or (b) to anyone on the United States Treasury
+Department's list of Specially Designated Nationals or the U.S.
+Commerce Department's Table of Deny Orders. By downloading or using
+the Software, you are representing and warranting that you are not
+located in, under the control of, or a national or resident of any
+such country or on any such list.
+
+General.
+
+This Agreement is governed by the laws of the United States and the
+State of California, without reference to conflict of laws principles.
+Any dispute between you and Company regarding this Agreement will be
+subject to the exclusive venue of the state and federal courts in the
+Northern District of California. This Agreement is the entire
+agreement between you and Company and supersedes any other
+communications or advertising with respect to the Software and
+documentation. If any provision of this Agreement is held invalid, the
+remainder of this Agreement shall continue in full force and effect.
+
+Correspondence.
+
+Should you have any questions concerning this Agreement, or if you
+desire to contact Company for any reason, please direct all
+correspondence to care@AppLovin.com.
+
+
+## Appodeal
+
+
+[Source](http://www.appodeal.com/privacy-policy "Permalink to Privacy Policy | Appodeal")
+
+# Privacy Policy | Appodeal
+
+Privacy Policy
+
+Appodeal Inc. ("Appodeal") provides advertising technology services (the "Services") that allow publishers of mobile applications ("apps") and websites to show ads on their apps, and advertisers to reach audiences that may be interested in their products or services. This Privacy Policy explains how Appodeal collects and uses information about (a) end users of apps and sites that use the Services, (b) publisher and advertiser customers that use the Services (collectively, "Appodeal Customers"), and (c) visitors to Appodeal's website.
+
+## Collection and Use of End User Information
+
+###  The Information We Collect
+
+When you interact with a website or app that uses the Services, we may collect information about your device and the ads you view or click, including but not limited to: (a) information about your device, such as the type and model, manufacturer, operating system, carrier name, Internet Protocol (IP) address, mobile browser, applications using the Services and the version of such applications, and identifiers assigned to your device; (b) log information, including the app or website visited, session start/stop time, time zone, and network connection type, and cookie information; (c) geo-location of your device, when location services have been enabled; (d) information about ads served, viewed, or clicked on; and (e) information Appodeal Customers have collected and share with Appodeal about your activity in their sites and apps.
+
+### How We Use the Information We Collect
+
+We use the information we collect to provide and improve the Services, including but not limited to the following purposes: (a) serving ads, (b) ad reporting (ads shown and ads clicked), (c) frequency capping: Preventing users from seeing the same ad too many times, (d) fraud detection and prevention, (e) interest-based advertising, (f) geo-targeting of ads, (g) providing and improving the Services.
+
+### How We Share the Information We Collect
+
+We share with advertiser customers information that our publisher customers direct us to share with them so that they can decide whether to bid on ad inventory or serve an advertisement and choose the best ad for that device. We share aggregate information about the use of our Services with Appodeal Customers. We also share information as described elsewhere in this Privacy Policy.
+
+### Privacy Practices of Appodeal Customers
+
+Appodeal requires Appodeal Customers to comply with all applicable laws and regulations and to provide end users with notice of the collection of data for advertising purposes. We encourage all users to review the privacy policies of sites and apps they visit for information about those sites' and apps' data collection and use practices.
+
+## Collection and Use of Appodeal Customer Information and Visitors of Appodeal's Website
+
+### Personal Information
+
+To become a Customer of Appodeal, you may be asked to provide certain personal information, including your name, email address, physical address, phone number, and company name. You also may be asked to provide personal information in certain fields on this website. Registration information is used to provide the Services and to send promotional information about the Services.
+
+### Technologies that Allow Us to Customize Your Experience
+
+We use various technologies to collect information about your visit to our website to enhance and customize your experience. For example, we may collect the numerical IP address identifying your computer or device which may indicate your geographic location. In some instances, we may use these technologies in combination with the personal information you provide. These technologies may provide a variety of information such as whether you have visited the website before. They also may enable you to save your preferences. Each technology is explained below.
+
+#### Web Beacons and Tracking Links.
+
+Web beacons (also called clear gifs and pixel tags), tracking links and/or similar technology consist of a few lines of code that are embedded on the pages of the website. They are often used in combination with cookies and are often not visible to the user of the website. Web beacons may relay information to third parties such as our service providers and may be used in order to track customer response to certain advertising, to better target interactive advertising and to enhance customer support and usability. If you reject our cookies (see "Cookies" section below), you will prevent Web beacons from relaying this information about you and may limit your use of some of the website's features.
+
+#### Cookies.
+
+Browser cookies are bits of text that are placed on your computer's hard drive when you visit the website. Flash cookies are similar to browser cookies except that they can store more data and are stored in your browser rather than on your hard drive. You can have your browser and/or plug-ins to your browser notify you of, or automatically reject, cookies. If you reject our cookies, you may still use the website, but you may be limited in the use of some of its features. In the event that you reject our cookies, temporary or "session" cookies will be used to help you shop and will expire when the browser is closed.
+
+### Information Sharing and Disclosure
+
+We may disclose information about Appodeal Customers when necessary to provide the Services to them. We may also share information as described elsewhere in this Privacy Policy.
+
+## General Information
+
+### Information Sharing and Disclosure
+
+We engage service providers to perform functions and provide services to us in the United States and abroad. We may share the information we collect with such service providers subject to confidentiality obligations consistent with this Privacy Policy, and on the condition that the third parties use your information only on our behalf and pursuant to our instructions.
+
+Notwithstanding anything to the contrary in this Privacy Policy, we may disclose information if we believe that it is reasonably necessary to comply with a law, regulation or legal request; to protect the safety of any person; to address fraud, security or technical issues; or to protect Appodeal's rights or property.
+
+### Information Collected by Others
+
+Please be advised that we do not control and are not responsible for the privacy practices of any third party, including, but not limited to, Appodeal Customers and any website or service that links to or from our website or the Services. Please be sure to review the privacy policies of any websites and applications that you may use, including those of Appodeal Customers. Appodeal's webiste and Services may contain links to other sites. Appodeal is not responsible for the privacy practices or content of these other sites. When you leave our site or view a portion of a third party's site through our site, we encourage you to read the privacy policies of each such site. This Privacy Policy applies solely to information collected by Appodeal.
+
+### How We Protect Your Personal Information
+
+We maintain reasonable safeguards to protect against unauthorized disclosure, use, alteration or destruction of the personal information you provide. If you have any security questions, you can send an email us at legal@appodeal.com.
+
+### Changes to This Privacy Policy
+
+We may, in its sole and absolute discretion, modify or change any aspect of this Privacy Policy at any time (for any reason or no reason), effective immediately upon posting such modifications or changes (or a revised version of this Privacy Policy incorporating such modifications or changes therein) on our website, or by sending You a notice via email or postal mail. Please periodically consult the end of this Privacy Policy to determine when the Privacy Policy was last revised. You agree to periodically review this Privacy Policy to ensure that you are in compliance with any ongoing changes or modifications that are made. Your continued use of the website and Services after any such modifications or changes are posted will constitute your complete and unequivocal acceptance of such any modifications or changes to this Privacy Policy.
+
+### Business Transfer
+
+Appodeal may sell, or transfer some or all of its assets, including our website, the Services and your personal information, in connection with a merger, acquisition, consolidation, joint venture, reorganization or sale of its assets.
+
+### Transfer of Data
+
+Appodeal and third parties who may receive your personal information in accordance with this Privacy Policy may store your personal information in the United States or a foreign country, which may not guarantee the same level of protection for personal information as where you reside. By submitting your personal information to Appodeal, you unconditionally accept the risk that a database maintained Appodeal or any third party who may receive your personal information in accordance with this Privacy Policy may not be secure.
+
+### Our Commitment to Children's Privacy
+
+We are strongly committed to protecting the safety and privacy of children who use our website and Services. We do not knowingly collect personal information online from children under 13. We encourage all parents to talk to their kids about online safety and to monitor their children's use of the Internet. We not attempt to, or knowingly ask for or collect information from any person under the age of 13. We recommend that children ask a parent for permission before sending any personal information anywhere using the Internet.
+
+### California Online Privacy Protection Act Compliance
+
+Under California Law SB 27, California residents have the right to receive, once a year, information about third parties with whom we have shared information about you or your family for their marketing purposes during the previous calendar year, and a description of the categories of personal information shared. To make such a request, please send an email to contact@Appodeal.com and please include the phrase "California Privacy Request" in the subject line, and provide us with your name, address and email address. We will respond to you within thirty days of receiving such a request.
+
+### Comments
+
+We have taken great measures to ensure that your experience with our website and Services is an excellent one and that your privacy is constantly respected. If you have any questions, comments or concerns about our privacy practices, please contact us by e-mail at legal@appodeal.com.
+
+**Last updated:** May 6, 2015  
+
+## ChartboostSDK
+
+LICENSE © 2011-2015 Chartboost. All rights reserved. LICENSE
+
+## CocoaLumberjack
+
+Software License Agreement (BSD License)
+
+Copyright (c) 2010-2015, Deusty, LLC
+All rights reserved.
+
+Redistribution and use of this software in source and binary forms,
+with or without modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above
+  copyright notice, this list of conditions and the
+  following disclaimer.
+
+* Neither the name of Deusty nor the names of its
+  contributors may be used to endorse or promote products
+  derived from this software without specific prior
+  written permission of Deusty, LLC.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+## Crashlytics
+
+Fabric: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. Crashlytics Kit: Copyright 2015 Crashlytics, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Crashlytics Terms of Service located at http://try.crashlytics.com/terms/terms-of-service.pdf and the Crashlytics Privacy Policy located at http://try.crashlytics.com/terms/privacy-policy.pdf. OSS: http://get.fabric.io/terms/opensource.txt
+
+## FBAudienceNetwork
+
+Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
+
+You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
+copy, modify, and distribute this software in source code or binary form for use
+in connection with the web services and APIs provided by Facebook.
+
+As with any software that integrates with the Facebook platform, your use of
+this software is subject to the Facebook Developer Principles and Policies
+[http://developers.facebook.com/policy/]. This copyright notice shall be
+included in all copies or substantial portions of the software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+## Fabric
+
+Fabric: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. OSS: http://get.fabric.io/terms/opensource.txt
+
+## Godzippa
+
+Copyright (c) 2012 Mattt Thompson (http://mattt.me/)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
+## Google-Mobile-Ads-SDK
+
+Copyright 2011 Google Inc. All Rights Reserved.
+
+## InMobiSDK
+
+Copyright (C) InMobi. All Right Reserved.
+
+
+## MMWormhole
+
+The MIT License (MIT)
+
+Copyright (c) 2014 Mutual Mobile
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+
+## Mantle
+
+**Copyright (c) GitHub, Inc.**
+**All rights reserved.**
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+**This project uses portions of code from the Proton framework.**
+**Proton is copyright (c) 2012, Bitswift, Inc.**
+**All rights reserved.**
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+ * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * Neither the name of the Bitswift, Inc. nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+## MyTarget
+
+Оферта для разработчиков Дополнительное соглашение №1(далее – «Соглашение») к оферте на оказание услуг по привлечению пользователей к Сайту (далее – «Оферта»)  1. Стороны пришли к соглашению, об оказании дополнительных услуг Заказчику по размещению рекламных материалов Рекламодателей в рамках выделенного Информационного пространства за вознаграждение размер и порядок расчета которого предусмотрен в настоящем Соглашении. 2. Исполнитель оказывает услугу путем предоставления Заказчику права размещать рекламные материалы Рекламодателей в автоматическом режиме в рамках выделенного Информационного пространства. 3. Доступ к Информационному пространству с целью размещения рекламных материалов обеспечивается с помощью Системы Заказчика. 4. Стороны прикладывают все необходимые и достаточные усилия, позволяющие поддерживать работоспособность Системы Заказчика и осуществлять взаимодействие программных средств Заказчика и Исполнителя. 5. Неотъемлемой частью настоящего Соглашения являются Правила оказания рекламных услуг для Исполнителя, которые размещены в сети Интернет по адресу: https://target.odnoklassniki.ru/partner/doc/partner_rules_dev.    6. Порядок расчета стоимости услуг Исполнителя (вознаграждение Исполнителя) указывается в Приложении № 1 к настоящему Соглашению.   7. Расчет стоимости услуг Исполнителя производится в рублях РФ. 8. По факту оказания услуг Исполнителя по размещению рекламных материалов в Информационном пространстве Стороны, при отсутствии разногласий, подписывают Акт об оказанных услугах согласно Данным статистики Заказчика. 9. Сроки и порядок направления/выставления Исполнителем Справки, Акта и счета, указанны в разделе 4 Правил оказания услуг к Оферте. 10. Оплата услуг Исполнителя, указанных в п. 1 настоящего Соглашения, за соответствующий Отчетный период, производится Заказчиком в сроки и в соответствии с условиями указанными в п.6 и п.7 Оферты. 11. Настоящее Соглашение является неотъемлемой частью Оферты. 12. Недействительность какого-либо из положений настоящего Соглашения или Правил не влечет за собой недействительности других положений или Соглашения в целом. 13. Иные условия оказания услуг содержаться в Правилах оказания рекламных услуг для Исполнителя, которые являются Приложением к настоящему Соглашению.  ООО «Одноклассники»    Р/С 40702810300001431102  Банк ЗАО "РАЙФФАЙЗЕНБАНК" Г. МОСКВА  К/С 30101810200000000700  БИК 044525700  ИНН/КПП 7705773443/771401001  ОГРН 1077746039271  Юридический адрес: 125167, г. Москва, Ленинградский проспект, д. 47, стр. 2  Телефон/факс: +7 (495) 725-63-57 Приложение №1к Соглашению                  1. Стороны установили следующий размер и порядок расчета вознаграждения Исполнителя: размер вознаграждения Исполнителя представляет долю от общей суммы денежных средств (без учета НДС), полученных Заказчиком от размещения рекламных материалов через Систему Заказчика в Отчетном периоде. Размер вознаграждения определяется в зависимости от следующих факторов: а) количество Кликов по рекламным материалам Рекламодателей, б) количество Показов рекламных материалов Рекламодателей  и (или) г) любые другие события, включая Действия, произошедшие в связи с отображением рекламных материалов Рекламодателей. Размер вознаграждения периодически определяется Заказчиком по ее собственному усмотрению. 2. Стороны соглашаются, что Заказчик не будет и не должен сообщать Исполнителю, каким образом рассчитывается доля  от общей суммы денежных средств (без учета НДС), полученных Заказчиком от размещения рекламных материалов через Систему Заказчика в Информационном пространстве Исполнителя в Отчетном периоде. Размер вознаграждения рассчитывается только на основании Данных статистики, ведущихся Заказчиком. 3. Заказчик размещает информацию о размере вознаграждения Исполнителя  в Личном кабинете Исполнителя. 4. Стороны соглашаются, что в случае выявления Заказчиком недобросовестного (искусственного) воспроизведения кликов и/или показов рекламных материалов, и/или  Действий размер вознаграждения Заказчика подлежит пересмотру и уменьшению на стоимость общего количества кликов и/или показов, и/или Действий, воспроизведенных таким способом. 5. В случае неоднократного выявления  недобросовестного (искусственного) воспроизведения Кликов и/или Показов рекламных материалов, и/или  иных Действий, Заказчик оставляет за собой право в одностороннем порядке расторгнуть Договор без предварительного письменного уведомления Исполнителя и возмещения каких-либо убытков последнему.  ООО «Одноклассники»    Р/С 40702810300001431102  Банк ЗАО "РАЙФФАЙЗЕНБАНК" Г. МОСКВА  К/С 30101810200000000700  БИК 044525700  ИНН/КПП 7705773443/771401001  ОГРН 1077746039271  Юридический адрес: 125167, г. Москва, Ленинградский проспект, д. 47, стр. 2  Телефон/факс: +7 (495) 725-63-57
+
+
+## NexageSourceKitCommon
+
+Copyright (c) 2013, Nexage, Inc.
+All rights reserved.
+Provided under BSD-3 license as follows:
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+Neither the name of Nexage nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+## NexageSourceKitMRAID
+
+Copyright (c) 2013, Nexage, Inc.
+All rights reserved.
+Provided under BSD-3 license as follows:
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+Neither the name of Nexage nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+## RevvForMobile
+
+License text here
+
+
+## SVProgressHUD
+
+Copyright (c) 2011-2014 Sam Vermette
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+A different license may apply to other resources included in this package, 
+including Freepik Icons. Please consult their 
+respective headers for the terms of their individual licenses.
+
+## StartApp
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+
+## UnityAds
+
+See http://www.apache.org/licenses/LICENSE-2.0.html
+
+## VungleAdvertiserSDK
+
+   	Vungle SDK License and Publisher Terms
+ The Vungle SDK is made available by Vungle, Inc. ("Vungle"). 
+ By downloading or using the Vungle SDK, you and any company, entity, or organization on behalf of which you are accepting these Vungle SDK License and Publisher Terms (this "Agreement") hereby agree to be bound by all terms and conditions of this Agreement. If you do not agree to all terms and conditions of this Agreement, do not download or use the Vungle SDK. 
+ If you are downloading or using the Vungle SDK on behalf of a company, entity, or organization, then you represent and warrant that you are an authorized representative of such company, entity, or organization with the authority to bind such company, entity, or organization to this Agreement; and agree to be bound by this Agreement on behalf of such company, entity, or organization. You and, if applicable, such company, entity, or organization may be referred to as the "Developer". 
+ Definitions 
+ "Developer Apps" means the mobile applications owned and/or controlled by Developer for which Developer wishes to use the Vungle SDK. 
+ "Vungle Platform" means Vungle’s hosted video advertising system, which supports video advertisement insertion within mobile applications, and related advertisement reporting tools.
+"Vungle SDK" means the software development kit and any other software that may be provided by Vungle to Developer with the software development kit (including any updates to the foregoing).
+Vungle SDK License. During the term of this Agreement, Vungle hereby grants Developer a worldwide, non-transferable (except for a permitted assignment of this Agreement), non-exclusive license to (a) use the Vungle SDK internally for the sole purpose integrating the Vungle SDK with Developer Apps, (b) use, reproduce and distribute certain portions of the Vungle SDK solely as required for Developer’s distribution of Developer Apps, solely in the manner enabled by Vungle and in accordance with any applicable documentation provided by Vungle, and provided that any such distribution to an end user is subject to terms at least as protective of the Vungle SDK as those set forth herein; (c) use the Vungle SDK and Vungle Platform to have video advertisements inserted within Developer Apps pursuant to this Agreement and any insertion order entered into between the parties, in the manner enabled by Vungle and in accordance with any applicable documentation provided by Vungle; and (d) to internally use any provided documentation for the sole purpose of exercising the foregoing licenses.
+License Restrictions. Developer has no rights or licenses with respect to the Vungle SDK or any documentation (collectively, the "Vungle Materials") except as expressly provided in this Agreement. Without limiting the generality of the foregoing, except as expressly provided in this Agreement, Developer may not (a) copy, distribute, rent, lease, lend, sublicense, transfer or make the Vungle Materials available to any third party or use the Vungle Materials on a service bureau basis, (b) decompile, reverse engineer, or disassemble the Vungle Materials, (c) create derivative works based on the Vungle Materials; or (d) modify, remove, or obscure any copyright, trademark, patent or other notices or legends that appear on the Vungle Materials or during the use and operation thereof.
+Insertion of Advertising. Vungle and Developer agree that any insertion order agreed to by the parties for the serving and insertion of advertisements from the Vungle Platform to or through the Developer Apps shall be subject to the terms and conditions of Exhibit A.
+Ownership 
+
+Vungle Rights. As between Vungle and Developer, Vungle retains all right, title and interest in and to the Vungle Platform, the Vungle Materials and any materials created, developed or provided by Vungle in connection with this Agreement, including all intellectual property rights related to each of the foregoing. All rights not expressly granted by Vungle to Developer herein are hereby reserved by Vungle.
+Developer Rights. Subject to Section 5.1, as between Developer and Vungle, Developer retains all right, title and interest in and to the Developer Apps, including all intellectual property rights related to each of the foregoing. All rights not expressly granted by Developer to Vungle herein are hereby reserved by Developer.
+Collection of Unique Identifiers. Developer acknowledges that unique identifiers and other technologies may be used in connection with the Vungle SDK and Vungle Advertisements in order to collect and use data regarding advertisement performance and end user interests and to display Vungle Advertisments to end users, and that the collection of such data is regulated by the Children's Online Privacy Protection Act, 15 U.S.C. §§ 6501-6506 and the Federal Trade Commission's COPPA Rule, 16 C.F.R. Part 312 (collectively, "COPPA") and other applicable laws. Vungle will collect and use such unique identifiers in accordance with the Vungle Privacy Policy, which is available at http://www.vungle.com/privacy.html (as updated from time to time) and incorporated by reference into this Agreement.
+Compliance with Laws. Developer acknowledges and agrees that Vungle may collect unique identifiers from end users via the Vungle SDK and use them in accordance with the Vungle Privacy Policy. Developer further acknowledges and agrees that it is responsible for providing adequate notice and obtaining any required end user or parental consent, including as required by the Children's Online Privacy Protection Act, 15 U.S.C. §§ 6501-6506 and the Federal Trade Commission's COPPA Rule, 16 C.F.R. Part 312 (collectively, "COPPA"), to the collection of unique identifiers and other information via the Vungle SDK and Developer's App. Developer expressly represents, warrants and covenants that it and its App shall fully comply with, and Developer shall ensure that the collection of unique identifiers and other information by the Vungle SDK as set forth in the Vungle Privacy Policy (as amended from time to time) complies with, COPPA and all other applicable laws, rules and regulations. For the avoidance of doubt, as between Vungle and Developer, Developer shall be responsible for ensuring that Developer's App, and the information collected from end users of Developer's App (including by the Vungle SDK), complies with COPPA and all applicable laws, rules and regulations. Developer shall fully indemnify, defend, and hold harmless Vungle and its directors, officers, agents, representatives, assigns, and employees from and against any liabilities, damages, costs, fines, penalties and expenses (including reasonable attorneys’ fees) arising out of or relating to a violation of this paragraph 7 and/or any claims of COPPA violations or other violations of laws relating to Developers Apps.
+Support.
+  Vungle shall have no obligation under this Agreement to provide any upgrades, patches, enhancements, fixes or any other support for the Vungle Platform or Vungle Materials. Vungle may make maintenance and support services available under a separate agreement.
+Term and Termination. 
+ 
+Term. This Agreement is effective until terminated. 
+ 
+Termination by Vungle. Vungle may terminate this Agreement at any time by providing sixty (60) days’ notice to Developer.Additionally, Vungle may terminate this Agreement and the licenses granted herein immediately if Developer breaches any provision of this Agreement.
+Termination by Developer. Developer may terminate this Agreement and the licenses granted herein at any time by ceasing all use of the Vungle Platform and Vungle Materials and destroying or removing from all hard drives, networks, and other storage media all copies of the Vungle Materials.
+Effect of Termination. Sections 3, 4, 5, 7.4, and 8 through 12 shall survive any expiration or termination of this Agreement. 
+ Confidentiality 
+
+Definition. "Confidential Information" means any and all information disclosed by Vungle to Developer, either directly or indirectly, in writing, orally or by inspection of tangible objects, including without limitation the Vungle SDK, the features and functionality of the Vungle Platform and the results and performance of the Vungle Materials. Confidential Information does not include information that: (i) is or becomes generally known to the public through no fault of or breach of this Agreement by Developer; (ii) is rightfully known by Developer at the time of disclosure without an obligation of confidentiality; or (iii) Developer rightfully obtains from a third party without restriction on use or disclosure.
+Use and Disclosure Restrictions. Developer shall not use the Confidential Information except as necessary to exercise its rights or perform its obligations under this Agreement. Developer shall not disclose the Confidential Information to any third party except to those of its employees, subcontractors, and advisers that need to know such Confidential Information for the purposes of this Agreement, provided that each such employee and subcontractor is subject to a written agreement that includes binding use and disclosure restrictions that are at least as protective of Confidential Information as those set forth herein. Developer will use at least the efforts Developer ordinarily uses with respect to its own proprietary information of similar nature and importance to maintain the confidentiality of all Confidential Information in its possession or control, but in no event less than reasonable efforts. The foregoing obligations will not restrict Developer from disclosing Confidential Information pursuant to the order or requirement of a court, administrative agency, or other governmental body, provided that Developer gives reasonable notice to Vungle to contest such order or requirement.
+Warranty Disclaimer. EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, VUNGLE DOES NOT MAKE ANY WARRANTIES, EXPRESS, IMPLIED, STATUTORY OR OTHERWISE, WITH RESPECT TO THE SUBJECT MATTER OF THIS AGREEMENT, AND VUNGLE EXPRESSLY DISCLAIMS THE IMPLIED WARRANTIES OF MERCHANTABILITY, NONINFRINGEMENT, FITNESS FOR A PARTICULAR PURPOSE, AND ANY IMPLIED WARRANTIES ARISING FROM COURSE OF DEALING OR PERFORMANCE. VUNGLE AND ITS SUPPLIERS, LICENSORS, AND PARTNERS DO NOT WARRANT THAT THE VUNGLE PLATFORM OR VUNGLE SDK WILL BE CORRECT, UNINTERRUPTED OR ERROR-FREE, THAT DEFECTS WILL BE CORRECTED, OR THAT THE VUNGLE PLATFORM OR VUNGLE SDK ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS. VUNGLE DOES NOT WARRANT THE RESULTS OF USE OF THE VUNGLE PLATFORM OR VUNGLE SDK. DEVELOPER ACKNOWLEDGES THAT VUNGLE MAY MODIFY OR SUSPEND THE VUNGLE PLATFORM AT ANY TIME IN ITS SOLE DISCRETION AND WITHOUT NOTICE.
+Indemnification. Developer agrees to indemnify, defend, and hold harmless Vungle and its directors, officers, and employees from and against any liabilities, damages, costs and expenses (including reasonable attorneys’ fees) arising out of any claim, demand, action, or proceeding initiated by a third party to the extent attributable to the alleged or actual breach of Developer’s obligations, representations or warranties set forth in this Agreement, provided that Vungle: (a) promptly notifies Developer in writing of the claim, except that any failure to provide this notice promptly only relieves Developer of its responsibility pursuant to this Section 10 to the extent its defense is materially prejudiced by the delay; (b) grants Developer sole control of the defense and/or settlement of the claim; and (c) provides Developer, at Developer’s expense, with all assistance, information and authority reasonably required for the defense and/or settlement of the claim, but in a manner consistent with Vungle’s respective confidentiality obligations and preservation of attorney/client, work product, and other privileges.
+Limitation of Liability. VUNGLE SHALL NOT BE LIABLE TO DEVELOPER FOR ANY PUNITIVE, INCIDENTAL, INDIRECT, SPECIAL, RELIANCE OR CONSEQUENTIAL DAMAGES, INCLUDING LOST BUSINESS, REVENUE, OR ANTICIPATED PROFITS, WHETHER BASED ON BREACH OF CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE, AND WHETHER OR NOT VUNGLE WAS ADVISED OF THE POSSIBILITY OF SUCH LOSS OR DAMAGES. IN NO EVENT WILL VUNGLE’S AGGREGATE LIABILITY UNDER THIS AGREEMENT EXCEED THE GREATER OF ONE HUNDRED DOLLARS ($100) AND THE TOTAL FEES PAYABLE TO DEVELOPER UNDER THIS AGREEMENT DURING THE TWELVE MONTHS IMMEDIATELY PRECEDING THE DATE THE CLAIM FIRST AROSE. THE PARTIES AGREE THAT THE LIMITATIONS OF LIABILITY SET FORTH IN THIS SECTION WILL APPLY EVEN IF ANY LIMITED REMEDY SPECIFIED IN THIS AGREEMENT IS FOUND TO HAVE FAILED OF ITS ESSENTIAL PURPOSE.
+General 
+ 
+Relationship of the Parties. The parties are independent contractors with respect to each other. This Agreement does not constitute and shall not be construed as constituting a partnership or joint venture among the parties hereto, or an employee-employer relationship. No party shall have any right to obligate or bind any other party in any manner whatsoever, and nothing herein contained shall give, or is intended to give, any rights of any kind to any third parties.
+Assignment. Neither party may assign any of its rights or obligations under this Agreement without the prior written consent of the other party, except that either party may assign its rights and obligations under this Agreement without the consent of the other party in connection with any merger (by operation of law or otherwise), consolidation, reorganization, change in control or sale of all or substantially all of its assets related to this Agreement or similar transaction. This Agreement inures to the benefit of and shall be binding on the parties’ permitted assignees, transferees and successors.
+Force Majeure. Neither party will be responsible for any failure or delay in its performance under this Agreement due to causes beyond its reasonable control, including, but not limited to, labor disputes, strikes, lockouts, internet or telecommunications failures, shortages of or inability to obtain labor, energy, or supplies, war, terrorism, riot, acts of God or governmental action, acts by hackers or other malicious third parties and problems with the Internet generally, and such performance shall be excused to the extent that it is prevented or delayed by reason of any of the foregoing.
+Headings and Wording. Unless otherwise expressly stated in this Agreement, the words "herein," "hereof," "hereto," and "hereunder" and other words of similar import refer to this Agreement as a whole and not to any particular Article, Section, Subsection, or other subdivision. The words "include" and "including" are not and should not be construed or interpreted as terms of limitation. The words "day," "month," and "year" mean, respectively, calendar day, calendar month, and calendar year. Section headings are for reference purposes only, and should not be used in the interpretation hereof. No provision of this Agreement will be construed against either party as the drafter thereof.
+Notices. All notices under the terms of this Agreement shall be given in writing and sent by registered mail, internationally recognized carrier, or facsimile transmission with machine confirmation or shall be delivered by hand.
+Amendments. An amendment of this Agreement shall be binding upon the parties so long as it is either in writing and executed by both parties or is presented by Vungle electronically via the Vungle Platform and accepted by Developer by clicking on "I Accept" or similar language.
+Waiver. A waiver of any provision of this Agreement will only be valid if provided in writing and will only be applicable to the specific incident and occurrence so waived. The failure by either party to insist upon the strict performance of this Agreement, or to exercise any term hereof, will not act as a waiver of any right, promise or term, which will continue in full force and effect.
+Construction. This Agreement shall be fairly interpreted and construed in accordance with its terms and without strict interpretation or construction in favor of or against either party.
+Severability. If any provision, or portion thereof, of this Agreement is determined by a court of competent jurisdiction to be invalid, illegal or unenforceable, such determination will not impair or affect the validity, legality, or enforceability of the remaining provisions of this Agreement, and each provision, or portion thereof, is hereby declared to be separate, severable, and distinct.
+Governing Law; Jurisdiction. This Agreement shall be governed by, and construed in accordance with, the laws of the State of California, without reference to conflicts of laws principles. The parties agree that the federal and state courts in San Francisco County, California will have exclusive jurisdiction and venue under this Agreement, and the parties hereby agree to submit to such jurisdiction exclusively.
+Entire Agreement. This Agreement, together with the Exhibits attached hereto and hereby incorporated herein by reference, constitutes the complete, final and exclusive agreement between the parties with respect to the subject matter hereof, and supersedes any and all prior or contemporaneous oral or written representations, understandings, agreements or communications between them concerning the subject matter hereof. Neither party is relying upon any warranties, representations, assurances or inducements not expressly set forth herein.
+
+Exhibit A 
+ 
+
+Advertising Insertion Order Terms 
+ 
+Definitions 
+
+"Advertisers" means third-party advertisers.
+"Content" means any content or materials
+available in, distributed with, or that otherwise may be viewed or downloaded by end users of the Developer Apps (excluding Vungle Advertisements).
+"CPM" means the cost per thousand advertisement impressions.
+"Net Revenue" means the gross revenue actually collected by Vungle from Advertisers for Vungle Advertisements, less (i) any refunds to Advertisers; (ii) a deduction of 10% to cover expenses related to discounts, payment transaction fees, telecommunications, data center and other serving costs, ; (iii) any amounts payable by Vungle to providers of targeting, reporting, verification or other data, technology or services used in connection with a given advertisement campaign hereunder.
+"Vungle Advertisements" means video advertisements, sourced by or on behalf of Vungle, which are routed and/or served by the Vungle Platform to the Developer Apps.
+Vungle Advertisement Sales. Upon agreement between Developer and Vungle on an insertion order for the placement of Vungle Advertisements in Developer Apps, Developer hereby grants Vungle the right to sell and have sold advertisement inventory in the Developer Apps and to insert Vungle Advertisements within such inventory during the term of the applicable insertion order, including the right to list such inventory in pitch materials to prospective Advertisers and to report such inventory as being part of Vungle’s advertising network. In addition, Developer hereby grants Vungle a nonexclusive license during the term of this Agreement to use Developer’s trademarks and logos and images of the Developer Apps in connection with exercising the foregoing right. Vungle is solely responsible for, and has final authority on, decisions related on how to sell Vungle Advertisement inventory, including packaging, pricing, promotional offers, and all other related deal terms and conditions. Developer shall designate a representative that will serve as the point of contact on an ongoing basis with Vungle’s account management team.
+Developer Permissions. Developer agrees that, in connection with fulfillment of any insertion order entered into between the parties, Vungle may: (a) access or call to the Developer Apps or the servers that make them available and to cause the routing, transmission, reproduction, and display of Vungle Advertisements as contemplated herein; and (b) collect data and information, including unique identifiers, usage data, and streaming data, with regard to the Content and Developer Apps within which Vungle Advertisements are routed and/or served and (i) use such information for Vungle’s internal business purposes; (ii) disclose such information to third parties (including Advertisers and partners) as reasonably necessary in connection with the operation of the Vungle Platform or as may be required by law or legal process; and (iii) disclose such information generally when it is aggregated with similar information relating to other Vungle publishers such that the specific information relating to Developer is not identified as such.
+Representations and Warranties of Developer. During the term of this Agreement, Developer represents, warrants and covenants to Vungle that: (a) it has all necessary rights, title, and interest in and to the Developer Apps to allow Vungle to insert Vungle Advertisements as contemplated herein; (b) it shall not use the Vungle Materials in connection with any Developer Apps, Content or technology that violate any law, rule or regulation, including without limitation applicable FTC regulations and COPPA; (c) it has any and all consents, authorizations and clearances from end users of the Developer Apps as may be required for Vungle to provide services hereunder; and (d) the Developer Apps do not and will not (i) infringe upon, violate, or misappropriate any third-party right, including any copyright, trademark, patent, trade secret, moral right, privacy right, right of publicity, or any other intellectual property or proprietary right or (ii) slander, defame, or libel any person.
+<
+Restrictions. Developer may not, and may not authorize or encourage any third party to: (i) generate fraudulent impressions of or fraudulent clicks on any advertisements, including through repeated manual clicks, the use of robots or other automated tools or any other method that may lead to artificially high numbers of impressions, downloads, or clicks; (ii) edit, modify, filter, or change the order of the information contained in any Vungle Advertisement, or remove, obscure or minimize any Vungle Advertisement in any way; and (iii) redirect an end user away from any web page accessed by an end user after selecting or clicking on any part of a Vungle Advertisement ("Advertiser Page"), provide a version of the Advertiser Page different from the page an end user would access by going directly to the Advertiser Page, or intersperse any content between the Vungle Advertisement and the Advertiser Page. Vungle may suspend Developer’s use of the Vungle Platform and/or terminate this Agreement immediately should Developer violate the foregoing provisions of this Section 5.
+Content. Developer acknowledges and agrees that it may not use the Vungle Platform in connection with any Developer Apps or Content containing, consisting of or promoting discrimination, illegal activities, hate speech, graphic violence, firearms, tobacco, illegal drugs, pornography, profanity, obscenity or sexually explicit material, and that it will notify Vungle immediately of any Developer Apps or Content relating to alcohol or gambling. Developer agrees that Vungle has no responsibility for any Content, and Vungle has no obligation or ability to monitor or edit the Developer Apps. Developer agrees to provide as much advance notice as is reasonably practicable (but in no event less than fifteen (15) days’ notice) regarding any material changes to the nature or design of any Developer App, including without limitation changes to the placement of Vungle Advertisement inventory, the type of Content, or the target audience.
+Tracking Data. Developer acknowledges that unique identifiers and other technologies may be used in connection with the Vungle SDK Vungle Advertisements in order to collect and use data regarding advertisement performance and end user interests and to display Vungle Advertisements to end users, and that the collection of such data is regulated by the Children's Online Privacy Protection Act, 15 U.S.C. §§ 6501-6506 and the Federal Trade Commission's COPPA Rule, 16 C.F.R. Part 312 (collectively, "COPPA"). Developer hereby grants Vungle a perpetual, irrevocable, worldwide, sublicenseable right and license to ussde, copy, modify, distribute and otherwise exploit data collected through such cookies, beacons, and other technologies for Vungle’s business purposes. Without limiting any other terms of the Agreement or (including paragraphs 6 and 7) and this Exhibit A, during the term of this Agreement, Developer shall obtain all consents, authorizations and clearances from end users of the Developer Apps required in connection with the use of such cookies, beacons, and other technologies. Developer shall provide or make available to users of each Developer App a privacy notification in a conspicuous manner (via a privacy policy or other method appropriate for the type of such Developer App)which (i) complies with all applicable laws, rules and regulations; and (ii) to the extent applicable to the type of such Developer App, discloses to users of such Developer App that cookies, web beacons and other technologies may be used in connection with such Developer App. Developer shall comply with such other requirements that Vungle may issue in writing from time to time (including through the Vungle Platform) that relate to compliance with laws, rules, regulations, guidelines and industry standards relating to online advertising.
+Payment Amounts. Subject to the terms and conditions of this Agreement, Vungle shall pay to Developer amounts calculated in accordance with the applicable insertion order entered into between the parties and the definitions of CPM and Net Revenue set forth herein. Developer acknowledges that all payments hereunder shall be based on the impression counts used by the applicable Advertisers to pay Vungle. For the avoidance of doubt, all payments hereunder are based on advertisement requests from the Developer Apps that are actually fulfilled with a Vungle Advertisement, except as expressly provided in this Agreement. All amounts received from activities Vungle deems to be fraudulent may be refunded to Advertisers in Vungle’s sole discretion.
+Payment Terms. Vungle agrees to pay all amounts due hereunder within 60 days after the last day of the month in which Vungle received the corresponding payment from the Advertiser, provided that no check will be issued for any amount less than $50 U.S. If there are any payment fees from the receiving bank, immediate bank or from paypal, Developer will be responsible for these fees. All unpaid earnings will rollover to the next pay period. All payments will be made in U.S. dollars ($U.S.). Vungle may deduct from such payments any withholding, sales, value added, and other applicable taxes (other than its net income taxes) which Vungle is required by law to deduct. Developer is responsible for paying any other taxes, duties, or fees for which Developer is legally responsible.
+ 
+
+
+## mopub-ios-sdk
+
+The MoPub SDK License can be found at http://www.mopub.com/legal/sdk-license-agreement/
+Generated by CocoaPods - http://cocoapods.org
