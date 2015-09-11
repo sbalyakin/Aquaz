@@ -9,10 +9,10 @@
 import Foundation
 import CoreData
 
-public class CoreDataHelper {
+class CoreDataHelper {
 
   /// Fetches managed objects from Core Data taking into account specified predicate and sort descriptors
-  public class func fetchManagedObjects<EntityType: NSManagedObject where EntityType: NamedEntity>(managedObjectContext managedObjectContext: NSManagedObjectContext, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil, fetchLimit: Int? = nil) -> [EntityType] {
+  class func fetchManagedObjects<EntityType: NSManagedObject where EntityType: NamedEntity>(managedObjectContext managedObjectContext: NSManagedObjectContext, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil, fetchLimit: Int? = nil) -> [EntityType] {
     let fetchRequest = NSFetchRequest()
     fetchRequest.entity = LoggedActions.entityDescriptionForEntity(EntityType.self, inManagedObjectContext: managedObjectContext)
     fetchRequest.sortDescriptors = sortDescriptors
@@ -32,7 +32,7 @@ public class CoreDataHelper {
   }
   
   /// Fetches a managed object from Core Data taking into account specified predicate and sort descriptors
-  public class func fetchManagedObject<EntityType: NSManagedObject where EntityType: NamedEntity>
+  class func fetchManagedObject<EntityType: NSManagedObject where EntityType: NamedEntity>
     (managedObjectContext managedObjectContext: NSManagedObjectContext, predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> EntityType? {
     let entities: [EntityType] = fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: sortDescriptors, fetchLimit: 1)
     return entities.first

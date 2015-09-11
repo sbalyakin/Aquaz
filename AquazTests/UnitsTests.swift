@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-import Aquaz
+@testable import Aquaz
 
 class UnitsTests: XCTestCase {
   
@@ -28,13 +28,13 @@ class UnitsTests: XCTestCase {
     to.convertFrom(quantity: from)
     let check = Quantity(unit: fromUnit)
     check.convertFrom(quantity: to)
-    XCTAssertEqualWithAccuracy(from.amount, check.amount, accuracy, "Double conversion test is failed: Unit type is \(from.unit.type.description), conversion from \(from.unit.contraction) to \(to.unit.contraction), amount \(amount)")
+    XCTAssertEqualWithAccuracy(from.amount, check.amount, accuracy: accuracy, "Double conversion test is failed: Unit type is \(from.unit.type.description), conversion from \(from.unit.contraction) to \(to.unit.contraction), amount \(amount)")
   }
   
   private func testConversion<From: Unit, To: Unit>(fromAmount fromAmount: Double, expectedAmount: Double, accuracy: Double, from fromUnit: From, to toUnit: To) {
     let from = Quantity(unit: fromUnit, amount: fromAmount)
     let to = Quantity(ownUnit: toUnit, fromQuantity: from)
-    XCTAssertEqualWithAccuracy(to.amount, expectedAmount, accuracy, "Conversion test is failed: \(from.amount) \(from.unit.contraction) is converted to \(to.amount) \(to.unit.contraction). It should be \(expectedAmount) \(to.unit.contraction)")
+    XCTAssertEqualWithAccuracy(to.amount, expectedAmount, accuracy: accuracy, "Conversion test is failed: \(from.amount) \(from.unit.contraction) is converted to \(to.amount) \(to.unit.contraction). It should be \(expectedAmount) \(to.unit.contraction)")
   }
   
   func testVolumeUnits() {

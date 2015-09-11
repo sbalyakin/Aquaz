@@ -54,7 +54,7 @@ extension UIColor {
 }
 
 extension UIView {
-  public func liveDebugLog(message: String) {
+  func liveDebugLog(message: String) {
     #if !(TARGET_OS_IPHONE)
       let logPath = "/tmp/XcodeLiveRendering.log"
       if !NSFileManager.defaultManager().fileExistsAtPath(logPath) {

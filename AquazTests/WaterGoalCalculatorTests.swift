@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-import Aquaz
+@testable import Aquaz
 
 class WaterGoalCalculatorTests: XCTestCase {
   

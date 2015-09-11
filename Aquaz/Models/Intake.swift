@@ -10,36 +10,36 @@ import Foundation
 import CoreData
 
 @objc(Intake)
-public class Intake: CodingManagedObject, NamedEntity {
+class Intake: CodingManagedObject, NamedEntity {
   
-  public static var entityName = "Intake"
+  static var entityName = "Intake"
 
   /// Amount of intake in millilitres
-  @NSManaged public var amount: Double
+  @NSManaged var amount: Double
   
   /// Date of intake
-  @NSManaged public var date: NSDate
+  @NSManaged var date: NSDate
   
   /// What drink was consumed
-  @NSManaged public var drink: Drink
+  @NSManaged var drink: Drink
   
   /// Water balance of the intake based on hydration and dehydration factors of the corresponding drink
-  public var waterBalance: Double {
+  var waterBalance: Double {
     return amount * (drink.hydrationFactor - drink.dehydrationFactor)
   }
 
   /// Hydration amount of the intake based on a hydration factor of the corresponding drink
-  public var hydrationAmount: Double {
+  var hydrationAmount: Double {
     return amount * drink.hydrationFactor
   }
 
   /// Dehydration amount of the intake based on a dehydration factor of the corresponding drink
-  public var dehydrationAmount: Double {
+  var dehydrationAmount: Double {
     return amount * drink.dehydrationFactor
   }
 
   /// Adds a new intake's entity into Core Data
-  public class func addEntity(drink drink: Drink, amount: Double, date: NSDate, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Intake? {
+  class func addEntity(drink drink: Drink, amount: Double, date: NSDate, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Intake? {
     if let intake = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext) {
       intake.amount = amount
       intake.drink = drink
@@ -56,7 +56,7 @@ public class Intake: CodingManagedObject, NamedEntity {
   }
 
   /// Deletes the intake from Core Data
-  public func deleteEntity(saveImmediately saveImmediately: Bool = true) {
+  func deleteEntity(saveImmediately saveImmediately: Bool = true) {
     if let managedObjectContext = managedObjectContext {
       managedObjectContext.deleteObject(self)
       
@@ -69,7 +69,7 @@ public class Intake: CodingManagedObject, NamedEntity {
   }
   
   /// Fetches all intakes for the specified date interval (beginDate..<endDate)
-  public class func fetchIntakes(beginDate beginDate: NSDate, endDate: NSDate, managedObjectContext: NSManagedObjectContext) -> [Intake] {
+  class func fetchIntakes(beginDate beginDate: NSDate, endDate: NSDate, managedObjectContext: NSManagedObjectContext) -> [Intake] {
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
     let descriptor = NSSortDescriptor(key: "date", ascending: true)
     return CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: [descriptor])
@@ -78,14 +78,14 @@ public class Intake: CodingManagedObject, NamedEntity {
   /// Fetches all intakes for a day taken from the specified date.
   /// Start of the day is inclusively started from 0:00 + specified offset in hours.
   /// End of the day is exclusive ended with 0:00 of the next day + specified offset in hours.
-  public class func fetchIntakesForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> [Intake] {
+  class func fetchIntakesForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> [Intake] {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
     let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
     return fetchIntakes(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
   }
 
   /// Fetches overall hydration amounts of intakes grouped by drinks for passed date
-  public class func fetchHydrationAmountsGroupedByDrinksForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> [Drink: Double] {
+  class func fetchHydrationAmountsGroupedByDrinksForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> [Drink: Double] {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
     let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
@@ -123,7 +123,7 @@ public class Intake: CodingManagedObject, NamedEntity {
   }
 
   /// Fetches total dehydration amount based on intakes of a passed day
-  public class func fetchTotalDehydrationAmountForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> Double {
+  class func fetchTotalDehydrationAmountForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> Double {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
     let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@) AND (drink.dehydrationFactor != 0)", argumentArray: [beginDate, endDate])
@@ -162,7 +162,7 @@ public class Intake: CodingManagedObject, NamedEntity {
     }
   }
   
-  public enum GroupingCalendarUnit {
+  enum GroupingCalendarUnit {
     case Day
     case Month
     
@@ -174,7 +174,7 @@ public class Intake: CodingManagedObject, NamedEntity {
     }
   }
   
-  public enum AggregateFunction {
+  enum AggregateFunction {
     case Average
     case Summary
   }
@@ -184,7 +184,7 @@ public class Intake: CodingManagedObject, NamedEntity {
   /// It's also possible to specify aggregate function for grouping.
   /// Note: Average function calculates an average value taking into account ALL days in a specified calendar unit,
   /// not only days with intakes.
-  public class func fetchIntakeAmountPartsGroupedBy(
+  class func fetchIntakeAmountPartsGroupedBy(
     groupingUnit: GroupingCalendarUnit,
     beginDate beginDateRaw: NSDate,
     endDate endDateRaw: NSDate,

@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 import UIKit
 
-public class CoreDataPrePopulation {
+class CoreDataPrePopulation {
   
-  public class func prePopulateCoreData(managedObjectContext managedObjectContext: NSManagedObjectContext) {
-    managedObjectContext.performBlock {
+  class func prePopulateCoreData(managedObjectContext managedObjectContext: NSManagedObjectContext) {
+    managedObjectContext.performBlockAndWait {
       Drink.addEntity(
         index: Drink.DrinkType.Water.rawValue,
         name: "Water",

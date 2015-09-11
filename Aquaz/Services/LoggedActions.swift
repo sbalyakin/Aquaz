@@ -10,22 +10,22 @@ import Foundation
 import UIKit
 import CoreData
 
-public class LoggedActions {
+class LoggedActions {
   
-  public class func instantiateViewController<ViewControllerType>(storyboard storyboard: UIStoryboard?, storyboardID: String) -> ViewControllerType? {
+  class func instantiateViewController<ViewControllerType>(storyboard storyboard: UIStoryboard?, storyboardID: String) -> ViewControllerType? {
     let viewController = storyboard?.instantiateViewControllerWithIdentifier(storyboardID) as? ViewControllerType
     Logger.checkViewController(viewController != nil, storyboardID: storyboardID)
     return viewController
   }
 
-  public class func insertNewObjectForEntity<Entity: NamedEntity>(entityType: Entity.Type, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> Entity? {
+  class func insertNewObjectForEntity<Entity: NamedEntity>(entityType: Entity.Type, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> Entity? {
     let entity = NSEntityDescription.insertNewObjectForEntityForName(entityType.entityName, inManagedObjectContext: managedObjectContext) as? Entity
     let logDetails = [Logger.Attributes.entity: entityType.entityName]
     Logger.logSevere(entity != nil, Logger.Messages.failedToInsertNewObjectForEntity, logDetails: logDetails)
     return entity
   }
   
-  public class func entityDescriptionForEntity<Entity: NamedEntity>(entityType: Entity.Type, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
+  class func entityDescriptionForEntity<Entity: NamedEntity>(entityType: Entity.Type, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> NSEntityDescription? {
     let entityDescription = NSEntityDescription.entityForName(entityType.entityName, inManagedObjectContext: managedObjectContext)
     let logDetails = [Logger.Attributes.entity: entityType.entityName]
     Logger.logSevere(entityDescription != nil, Logger.Messages.failedToCreateEntityDescription, logDetails: logDetails)

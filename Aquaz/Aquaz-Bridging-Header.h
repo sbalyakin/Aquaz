@@ -5,5 +5,5 @@
 //  Copyright (c) 2014 Sergey Balyakin. All rights reserved.
 //
 
-#import "JDFTooltips/JDFTooltips.h"
+#import "External/JDFTooltips/JDFTooltips.h"
 #import "MMWormhole.h"

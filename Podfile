@@ -18,3 +18,8 @@ target 'Widget' do
   pod 'Fabric'
   pod 'Crashlytics'
 end
+
+target 'AquazTests' do
+  platform :ios, '7.0'
+  pod 'MMWormhole', '~> 1.2.0'
+end

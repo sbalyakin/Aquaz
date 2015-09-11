@@ -9,16 +9,16 @@
 import Foundation
 import CoreData
 
-public class CodingManagedObject: NSManagedObject, NSCoding {
+class CodingManagedObject: NSManagedObject, NSCoding {
   
   private static let encodeKey = "URIRepresentation"
   
-  public override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+  override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
     super.init(entity: entity, insertIntoManagedObjectContext: context)
   }
   
   // It's a fake initializer, real decoding will be made in awakeAfterUsingCoder
-  public convenience required init?(coder aDecoder: NSCoder) {
+  convenience required init?(coder aDecoder: NSCoder) {
     if let managedObject = CodingManagedObject.getExistingManagedObject(aDecoder) {
       self.init(entity: managedObject.entity, insertIntoManagedObjectContext: nil)
     } else {
@@ -26,7 +26,7 @@ public class CodingManagedObject: NSManagedObject, NSCoding {
     }
   }
   
-  public override func awakeAfterUsingCoder(aDecoder: NSCoder) -> AnyObject? {
+  override func awakeAfterUsingCoder(aDecoder: NSCoder) -> AnyObject? {
     return CodingManagedObject.getExistingManagedObject(aDecoder)
   }
   
@@ -52,7 +52,7 @@ public class CodingManagedObject: NSManagedObject, NSCoding {
     }
   }
   
-  public func encodeWithCoder(aCoder: NSCoder) {
+  func encodeWithCoder(aCoder: NSCoder) {
     aCoder.encodeObject(objectID.URIRepresentation(), forKey: CodingManagedObject.encodeKey)
   }
   

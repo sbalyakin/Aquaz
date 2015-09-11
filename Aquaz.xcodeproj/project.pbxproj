@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		056E48E10B6792ADC03F0918 /* libPods-Aquaz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1457E12B5C79A344CF58FF8B /* libPods-Aquaz.a */; };
+		076CC88012ACEF2173F20D8D /* libPods-AquazTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D57A794D1EFAB13C4134C264 /* libPods-AquazTests.a */; };
 		84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84039F171A4B103100C5391E /* NotificationsHelper.swift */; };
 		840476571A35FE4A004F0FEF /* WaterGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840476561A35FE4A004F0FEF /* WaterGoalViewController.swift */; };
 		840476591A35FE82004F0FEF /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840476581A35FE82004F0FEF /* NotificationsViewController.swift */; };
@@ -235,7 +236,6 @@
 		843B055619E2D7800097A833 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		843B055719E2D7800097A833 /* DayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
 		843B055819E2D7800097A833 /* SelectDrinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SelectDrinkViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		843B055C19E2D7800097A833 /* Aquaz-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Aquaz-Bridging-Header.h"; sourceTree = "<group>"; };
 		843B056819E2D80E0097A833 /* WaterGoal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoal.swift; sourceTree = "<group>"; };
 		8443DF411B29737D00FDD294 /* WidgetImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WidgetImages.xcassets; sourceTree = "<group>"; };
 		8444F1951B207D75007577C8 /* InfoBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoBannerView.swift; path = Controls/InfoBannerView.swift; sourceTree = "<group>"; };
@@ -265,6 +265,7 @@
 		84B17C891AD2C31400ABA3C9 /* UserDefaultsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsProvider.swift; sourceTree = "<group>"; };
 		84B639811A25D9EF00889438 /* WeekStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeekStatisticsView.swift; path = Controls/WeekStatisticsView.swift; sourceTree = "<group>"; };
 		84B639821A25D9EF00889438 /* YearStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YearStatisticsView.swift; path = Controls/YearStatisticsView.swift; sourceTree = "<group>"; };
+		84BFFF081BA2DE6600AE938B /* Aquaz-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Aquaz-Bridging-Header.h"; path = "../Aquaz-Bridging-Header.h"; sourceTree = "<group>"; };
 		84C610B91A319DBC00433EF1 /* MonthStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthStatisticsViewController.swift; sourceTree = "<group>"; };
 		84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YearStatisticsViewController.swift; sourceTree = "<group>"; };
 		84CD974C1ABB2B960011623B /* CalendarContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarContentView.swift; sourceTree = "<group>"; };
@@ -287,6 +288,7 @@
 		84ED8A201A84C8660042BAF2 /* UnitsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsTests.swift; sourceTree = "<group>"; };
 		84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkTests.swift; sourceTree = "<group>"; };
 		84F9DD971A16574E003D6444 /* PickTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTimeViewController.swift; sourceTree = "<group>"; };
+		8F6F46D39C9BFB9B50DD7E2C /* Pods-AquazTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AquazTests/Pods-AquazTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A52A7D861B245C88007A71ED /* NotificationSounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSounds.swift; sourceTree = "<group>"; };
 		A52E0CDC1B3854E500599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -364,8 +366,10 @@
 		A5EF375C1A81618F00854A8D /* WaterGoalCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoalCalculator.swift; sourceTree = "<group>"; };
 		A5F62E9A1B558D6F002F91BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A5F62E9B1B558D80002F91BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C160D2A921F1F2F3D56A02A3 /* Pods-AquazTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AquazTests/Pods-AquazTests.release.xcconfig"; sourceTree = "<group>"; };
 		C32195F17D188FBE7C8F49C7 /* libPods-Widget.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Widget.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD0994C4FBDD3D0B9158FEDD /* Pods-Aquaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz.debug.xcconfig"; sourceTree = "<group>"; };
+		D57A794D1EFAB13C4134C264 /* libPods-AquazTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AquazTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80A69B2457D22E2D551BE46 /* Pods-Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Widget/Pods-Widget.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -384,6 +388,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				076CC88012ACEF2173F20D8D /* libPods-AquazTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,10 +462,10 @@
 		843B055919E2D7800097A833 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				84BFFF081BA2DE6600AE938B /* Aquaz-Bridging-Header.h */,
 				A5C8945B1AF4B75C0042B6DF /* JDFTooltips */,
 				84CD974B1ABB2B960011623B /* OmegaCalendar */,
 				A5D3D4111AA5D29700E3C989 /* OmegaSettingsViewController */,
-				843B055C19E2D7800097A833 /* Aquaz-Bridging-Header.h */,
 			);
 			path = External;
 			sourceTree = "<group>";
@@ -602,6 +607,7 @@
 				84D251961AD2511E001E6644 /* NotificationCenter.framework */,
 				1457E12B5C79A344CF58FF8B /* libPods-Aquaz.a */,
 				C32195F17D188FBE7C8F49C7 /* libPods-Widget.a */,
+				D57A794D1EFAB13C4134C264 /* libPods-AquazTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -636,6 +642,8 @@
 				D80A69B2457D22E2D551BE46 /* Pods-Widget.release.xcconfig */,
 				CD0994C4FBDD3D0B9158FEDD /* Pods-Aquaz.debug.xcconfig */,
 				1F5F7D088D43B47E8F6BDDBC /* Pods-Aquaz.release.xcconfig */,
+				8F6F46D39C9BFB9B50DD7E2C /* Pods-AquazTests.debug.xcconfig */,
+				C160D2A921F1F2F3D56A02A3 /* Pods-AquazTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -782,9 +790,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84669A8E19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "AquazTests" */;
 			buildPhases = (
+				538497E1ECA39C51D394214A /* Check Pods Manifest.lock */,
 				84669A7D19DAD78D003C2263 /* Sources */,
 				84669A7E19DAD78D003C2263 /* Frameworks */,
 				84669A7F19DAD78D003C2263 /* Resources */,
+				F5C06FC01D36C0176156D61B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -972,6 +982,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		538497E1ECA39C51D394214A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		8443DF271B29658100FDD294 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1038,6 +1063,21 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# Check repository for uncommited changes\nif [ \"`git status -s 2>&1 | egrep '^\\?\\?|^ M|^A |^ D|^fatal:'`\" ] ; then\necho \"error: Uncommited changes are detected. Commit them into git before deployment.\"\nexit 1\nfi\n\necho \"### Repository is up-to-date.\"\n\nAQUAZ_INFOPLIST_FILE=$SRCROOT/Aquaz/Info.plist\n\n# Increase build number\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$AQUAZ_INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\necho \"### Build number has been bumped to $buildNumber.\"\n";
+		};
+		F5C06FC01D36C0176156D61B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AquazTests/Pods-AquazTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1406,7 +1446,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Aquaz/External/Aquaz-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Aquaz/Aquaz-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1439,12 +1479,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Aquaz/External/Aquaz-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Aquaz/Aquaz-Bridging-Header.h";
 			};
 			name = Release;
 		};
 		84669A8F19DAD78D003C2263 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F6F46D39C9BFB9B50DD7E2C /* Pods-AquazTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1460,12 +1501,14 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aquaz.app/Aquaz";
 			};
 			name = Debug;
 		};
 		84669A9019DAD78D003C2263 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C160D2A921F1F2F3D56A02A3 /* Pods-AquazTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1477,6 +1520,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aquaz.app/Aquaz";
 			};
 			name = Release;

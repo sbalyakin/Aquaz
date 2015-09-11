@@ -10,11 +10,11 @@ import Foundation
 import CoreData
 
 @objc(RecentAmount)
-public class RecentAmount: CodingManagedObject, NamedEntity {
+class RecentAmount: CodingManagedObject, NamedEntity {
   
-  public static var entityName = "RecentAmount"
+  static var entityName = "RecentAmount"
   
-  @NSManaged public var amount: Double
-  @NSManaged public var drink: Drink
+  @NSManaged var amount: Double
+  @NSManaged var drink: Drink
   
 }

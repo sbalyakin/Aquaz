@@ -8,9 +8,9 @@
 
 import Foundation
 
-public class DateHelper {
+class DateHelper {
 
-  public class func dateBySettingHour(hour: Int, minute: Int, second: Int, ofDate: NSDate) -> NSDate {
+  class func dateBySettingHour(hour: Int, minute: Int, second: Int, ofDate: NSDate) -> NSDate {
     let calendar = NSCalendar.currentCalendar()
     let components = calendar.components([.Year, .Month, .Day, .TimeZone, .Calendar], fromDate: ofDate)
     components.hour = hour
@@ -25,7 +25,7 @@ public class DateHelper {
     }
   }
 
-  public class func addToDate(date: NSDate, years: Int, months: Int, days: Int) -> NSDate {
+  class func addToDate(date: NSDate, years: Int, months: Int, days: Int) -> NSDate {
     let components = NSDateComponents()
     components.year = years
     components.month = months
@@ -40,17 +40,17 @@ public class DateHelper {
     }
   }
 
-  public class func dateByClearingTime(ofDate date: NSDate) -> NSDate {
+  class func dateByClearingTime(ofDate date: NSDate) -> NSDate {
     return dateBySettingHour(0, minute: 0, second: 0, ofDate: date)
   }
   
-  public class func dateByJoiningDateTime(datePart datePart: NSDate, timePart: NSDate) -> NSDate {
+  class func dateByJoiningDateTime(datePart datePart: NSDate, timePart: NSDate) -> NSDate {
     let calendar = NSCalendar.currentCalendar()
     let components = calendar.components([.Hour, .Minute, .Second], fromDate: timePart)
     return dateBySettingHour(components.hour, minute: components.minute, second: components.second, ofDate: datePart)
   }
   
-  public class func startDateFromDate(date: NSDate, calendarUnit: NSCalendarUnit) -> NSDate {
+  class func startDateFromDate(date: NSDate, calendarUnit: NSCalendarUnit) -> NSDate {
     var startDate: NSDate?
     NSCalendar.currentCalendar().rangeOfUnit(calendarUnit, startDate: &startDate, interval: nil, forDate: date)
     if let startDate = startDate {
@@ -61,14 +61,14 @@ public class DateHelper {
     return date
   }
 
-  public class func computeUnitsFrom(date: NSDate, toDate: NSDate, unit: NSCalendarUnit) -> Int {
+  class func computeUnitsFrom(date: NSDate, toDate: NSDate, unit: NSCalendarUnit) -> Int {
     let calendar = NSCalendar.currentCalendar()
     let valueFrom = calendar.ordinalityOfUnit(unit, inUnit: .Era, forDate: dateByClearingTime(ofDate: date))
     let valueTo = calendar.ordinalityOfUnit(unit, inUnit: .Era, forDate: dateByClearingTime(ofDate: toDate))
     return valueTo - valueFrom
   }
   
-  public class func calcDistanceBetweenCalendarDates(fromDate fromDate: NSDate, toDate: NSDate, calendarUnit: NSCalendarUnit) -> Int {
+  class func calcDistanceBetweenCalendarDates(fromDate fromDate: NSDate, toDate: NSDate, calendarUnit: NSCalendarUnit) -> Int {
     let calendar = NSCalendar.currentCalendar()
     
     var fromDay: NSDate?
@@ -86,7 +86,7 @@ public class DateHelper {
     }
   }
 
-  public class func calcDistanceBetweenDates(fromDate fromDate: NSDate, toDate: NSDate, calendarUnit: NSCalendarUnit) -> Int {
+  class func calcDistanceBetweenDates(fromDate fromDate: NSDate, toDate: NSDate, calendarUnit: NSCalendarUnit) -> Int {
     let calendar = NSCalendar.currentCalendar()
     
     let difference = calendar.components(calendarUnit, fromDate: fromDate, toDate: toDate, options: .MatchStrictly)
@@ -99,20 +99,20 @@ public class DateHelper {
     }
   }
   
-  public class func areDatesEqualByDays(date1: NSDate, _ date2: NSDate) -> Bool {
+  class func areDatesEqualByDays(date1: NSDate, _ date2: NSDate) -> Bool {
     return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .Day) == 0
   }
   
-  public class func areDatesEqualByMonths(date1: NSDate, _ date2: NSDate) -> Bool {
+  class func areDatesEqualByMonths(date1: NSDate, _ date2: NSDate) -> Bool {
     return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .Month) == 0
   }
   
-  public class func areDatesEqualByYears(date1: NSDate, _ date2: NSDate) -> Bool {
+  class func areDatesEqualByYears(date1: NSDate, _ date2: NSDate) -> Bool {
     return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .Year) == 0
   }
   
   /// Generates string for the specified date. If year of a current date is year of today, the function hides it.
-  public class func stringFromDate(date: NSDate, shortDateStyle: Bool = false) -> String {
+  class func stringFromDate(date: NSDate, shortDateStyle: Bool = false) -> String {
     let today = NSDate()
     let daysTillToday = calcDistanceBetweenDates(fromDate: today, toDate: date, calendarUnit: .Day)
     let dateFormatter = NSDateFormatter()
@@ -134,14 +134,14 @@ public class DateHelper {
     return dateFormatter.stringFromDate(date)
   }
   
-  public class func stringFromTime(time: NSDate) -> String {
+  class func stringFromTime(time: NSDate) -> String {
     let dateFormatter = NSDateFormatter()
     dateFormatter.dateStyle = .NoStyle
     dateFormatter.timeStyle = .ShortStyle
     return dateFormatter.stringFromDate(time)
   }
   
-  public class func stringFromDateTime(dateTime: NSDate, shortDateStyle: Bool = false) -> String {
+  class func stringFromDateTime(dateTime: NSDate, shortDateStyle: Bool = false) -> String {
     let datePart = stringFromDate(dateTime, shortDateStyle: shortDateStyle)
     let timePart = stringFromTime(dateTime)
     return "\(datePart), \(timePart)"
@@ -149,16 +149,16 @@ public class DateHelper {
   
 }
 
-public extension NSDate {
-  public func isLaterThan(date: NSDate) -> Bool {
+extension NSDate {
+  func isLaterThan(date: NSDate) -> Bool {
     return date.compare(self) == .OrderedAscending
   }
   
-  public func isEarlierThan(date: NSDate) -> Bool {
+  func isEarlierThan(date: NSDate) -> Bool {
     return date.compare(self) == .OrderedDescending
   }
   
-  public func getNextDay() -> NSDate {
+  func getNextDay() -> NSDate {
     return DateHelper.addToDate(self, years: 0, months: 0, days: 1)
   }
 }

@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 import CoreData
-import Aquaz
+@testable import Aquaz
 
 class DrinkTests: XCTestCase {
 

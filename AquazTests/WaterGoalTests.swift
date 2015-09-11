@@ -9,14 +9,14 @@
 import Foundation
 import CoreData
 import XCTest
-import Aquaz
+@testable import Aquaz
 
 class WaterGoalTests: XCTestCase {
 
   func testFetchWaterGoalForDate() {
     deleteAllWaterGoals()
     
-    func testForExistance(textDate: String, expectedWaterGoal: WaterGoal) {
+    func testForExistance(textDate: String, _ expectedWaterGoal: WaterGoal) {
       let fcr = self.fetchWaterGoalForDate(textDate)
 
       XCTAssert(fcr != nil, "Water goal fitting for a date (\(textDate)) should exist")
@@ -42,7 +42,7 @@ class WaterGoalTests: XCTestCase {
   func testFetchWaterGoalStrictlyForDate() {
     deleteAllWaterGoals()
     
-    func testForExistance(textDate: String, expectedWaterGoal: WaterGoal) {
+    func testForExistance(textDate: String, _ expectedWaterGoal: WaterGoal) {
       let fcr = self.fetchWaterGoalStrictlyForDate(textDate)
       
       XCTAssert(fcr != nil, "Water goal strictly matching for a date (\(textDate)) should exist")

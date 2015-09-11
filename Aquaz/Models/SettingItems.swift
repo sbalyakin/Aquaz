@@ -73,13 +73,13 @@ protocol ObservationRemover : class {
 
 
 /// Generic class for settings item. Automatically writes changes of a value to user defaults. Provides possibility to observe changes of a value by observers.
-public class SettingsItemBase<ValueType>: ObservableSettingsItem<ValueType> {
+class SettingsItemBase<ValueType>: ObservableSettingsItem<ValueType> {
   
   let key: String
   let userDefaults: NSUserDefaults
   let initialValue: ValueType
   
-  public var value: ValueType {
+  var value: ValueType {
     didSet {
       writeValue(value)
       notify(value)
@@ -87,11 +87,11 @@ public class SettingsItemBase<ValueType>: ObservableSettingsItem<ValueType> {
     }
   }
   
-  public convenience init(key: String, initialValue: ValueType) {
+  convenience init(key: String, initialValue: ValueType) {
     self.init(key: key, initialValue: initialValue, userDefaults: NSUserDefaults.standardUserDefaults())
   }
   
-  public init(key: String, initialValue: ValueType, userDefaults: NSUserDefaults) {
+  init(key: String, initialValue: ValueType, userDefaults: NSUserDefaults) {
     self.value = initialValue
     self.key = key
     self.initialValue = initialValue
@@ -103,17 +103,17 @@ public class SettingsItemBase<ValueType>: ObservableSettingsItem<ValueType> {
   }
   
   /// Reads the value from user defaults
-  public func readFromUserDefaults() {
+  func readFromUserDefaults() {
     readValue(&value)
   }
   
   /// Write the value to user defaults
-  public func writeToUserDefaults() {
+  func writeToUserDefaults() {
     writeValue(value)
   }
   
   /// Removes the value from user defaults
-  public func removeFromUserDefaults() {
+  func removeFromUserDefaults() {
     userDefaults.removeObjectForKey(key)
     value = initialValue
   }
@@ -129,13 +129,13 @@ public class SettingsItemBase<ValueType>: ObservableSettingsItem<ValueType> {
 }
 
 /// Settings item class for enumerations
-public class SettingsEnumItem<T: RawRepresentable where T.RawValue == Int>: SettingsItemBase<T> {
+class SettingsEnumItem<T: RawRepresentable where T.RawValue == Int>: SettingsItemBase<T> {
   
-  public convenience init(key: String, initialValue: T) {
+  convenience init(key: String, initialValue: T) {
     self.init(key: key, initialValue: initialValue, userDefaults: NSUserDefaults.standardUserDefaults())
   }
   
-  public override init(key: String, initialValue: T, userDefaults: NSUserDefaults) {
+  override init(key: String, initialValue: T, userDefaults: NSUserDefaults) {
     super.init(key: key, initialValue: initialValue, userDefaults: userDefaults)
   }
   
@@ -154,13 +154,13 @@ public class SettingsEnumItem<T: RawRepresentable where T.RawValue == Int>: Sett
 }
 
 /// Settings item class for ordinal types (Int, Bool etc.)
-public class SettingsOrdinalItem<T>: SettingsItemBase<T> {
+class SettingsOrdinalItem<T>: SettingsItemBase<T> {
   
-  public convenience init(key: String, initialValue: T) {
+  convenience init(key: String, initialValue: T) {
     self.init(key: key, initialValue: initialValue, userDefaults: NSUserDefaults.standardUserDefaults())
   }
   
-  public override init(key: String, initialValue: T, userDefaults: NSUserDefaults) {
+  override init(key: String, initialValue: T, userDefaults: NSUserDefaults) {
     super.init(key: key, initialValue: initialValue, userDefaults: userDefaults)
   }
   

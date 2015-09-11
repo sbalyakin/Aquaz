@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 import XCTest
-import Aquaz
+@testable import Aquaz
 
 class IntakeTests: XCTestCase {
 
@@ -201,7 +201,7 @@ class IntakeTests: XCTestCase {
     
     typealias IntakeInfo = (textDate: String, drinkType: Drink.DrinkType, amount: Double)
     
-    func addGroupedIntakes(daysInMonth: Int, intakes: [IntakeInfo]) {
+    func addGroupedIntakes(daysInMonth: Int, _ intakes: [IntakeInfo]) {
       var waterBalance: Double = 0
       for intake in intakes {
         self.addIntake(intake.textDate, intake.drinkType, intake.amount, &waterBalance)

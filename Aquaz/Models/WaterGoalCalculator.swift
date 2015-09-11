@@ -10,32 +10,22 @@ import Foundation
 
 // Based on calculator from http://www.h4hinitiative.com/
 
-public class WaterGoalCalculator {
+class WaterGoalCalculator {
 
-  public struct Data: CustomStringConvertible {
-    public let physicalActivity: Settings.PhysicalActivity
-    public let gender: Settings.Gender
-    public let age: Int
-    public let height: Double
-    public let weight: Double
-    public let country: Country
+  struct Data: CustomStringConvertible {
+    let physicalActivity: Settings.PhysicalActivity
+    let gender: Settings.Gender
+    let age: Int
+    let height: Double
+    let weight: Double
+    let country: Country
     
-    // Unfortunately Swift 1.2 create only internal synthesised initializers, so it's necessary to create own public one
-    public init(physicalActivity: Settings.PhysicalActivity, gender: Settings.Gender, age: Int, height: Double, weight: Double, country: Country) {
-      self.physicalActivity = physicalActivity
-      self.gender = gender
-      self.age = age
-      self.height = height
-      self.weight = weight
-      self.country = country
-    }
-    
-    public var description: String {
+    var description: String {
       return "Physical activity: \(physicalActivity), Gender: \(gender), Age: \(age), Height: \(height), Weight: \(weight), Country: \(country)"
     }
   }
   
-  public enum Country: String, CustomStringConvertible {
+  enum Country: String, CustomStringConvertible {
     case Argentina     = "argentina"
     case Mexico        = "mexico"
     case Brazil        = "brazil"
@@ -76,23 +66,23 @@ public class WaterGoalCalculator {
       }
     }
     
-    public var description: String {
+    var description: String {
       return self.rawValue
     }
   }
 
-  public class func calcDailyWaterIntake(data data: Data) -> Double {
+  class func calcDailyWaterIntake(data data: Data) -> Double {
     let lostWater = calcLostWater(data: data)
     let supplyWater = calcSupplyWater(data: data)
     return roundAmount(lostWater - supplyWater)
   }
   
-  public class func calcLostWater(data data: Data) -> Double {
+  class func calcLostWater(data data: Data) -> Double {
     let netWaterLosses = calcNetWaterLosses(data: data, pregnancyAndLactation: true, waterInFood: false)
     return roundAmount(netWaterLosses)
   }
   
-  public class func calcSupplyWater(data data: Data) -> Double {
+  class func calcSupplyWater(data data: Data) -> Double {
     let waterLossesWithNoFood = calcNetWaterLosses(data: data, pregnancyAndLactation: false, waterInFood: false)
     let waterLossesWithFood = calcNetWaterLosses(data: data, pregnancyAndLactation: false, waterInFood: true)
     return roundAmount(waterLossesWithNoFood - waterLossesWithFood)

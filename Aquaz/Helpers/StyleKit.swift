@@ -12,7 +12,7 @@
 
 import UIKit
 
-public class StyleKit : NSObject {
+class StyleKit : NSObject {
   
   // MARK: Cache
   
@@ -67,62 +67,62 @@ public class StyleKit : NSObject {
   
   // MARK: Colors
   
-  public class var drinksWhiteColor: UIColor { return Cache.drinksWhiteColor }
+  class var drinksWhiteColor: UIColor { return Cache.drinksWhiteColor }
   
-  public class var waterColor: UIColor { return Cache.waterColor }
-  public class var coffeeColor: UIColor { return Cache.coffeeColor }
-  public class var teaColor: UIColor { return Cache.teaColor }
-  public class var juiceColor: UIColor { return Cache.juiceColor }
-  public class var milkColor: UIColor { return Cache.milkColor }
-  public class var sodaColor: UIColor { return Cache.sodaColor }
-  public class var energyColor: UIColor { return Cache.energyColor }
-  public class var sportColor: UIColor { return Cache.sportColor }
-  public class var wineColor: UIColor { return Cache.wineColor }
-  public class var beerColor: UIColor { return Cache.beerColor }
-  public class var hardLiquorColor: UIColor { return Cache.hardLiquorColor }
+  class var waterColor: UIColor { return Cache.waterColor }
+  class var coffeeColor: UIColor { return Cache.coffeeColor }
+  class var teaColor: UIColor { return Cache.teaColor }
+  class var juiceColor: UIColor { return Cache.juiceColor }
+  class var milkColor: UIColor { return Cache.milkColor }
+  class var sodaColor: UIColor { return Cache.sodaColor }
+  class var energyColor: UIColor { return Cache.energyColor }
+  class var sportColor: UIColor { return Cache.sportColor }
+  class var wineColor: UIColor { return Cache.wineColor }
+  class var beerColor: UIColor { return Cache.beerColor }
+  class var hardLiquorColor: UIColor { return Cache.hardLiquorColor }
 
-  public class var controlTintColor: UIColor { return Cache.controlTintColor }
+  class var controlTintColor: UIColor { return Cache.controlTintColor }
 
-  public class var pageBackgroundColor: UIColor { return Cache.pageBackgroundColor }
+  class var pageBackgroundColor: UIColor { return Cache.pageBackgroundColor }
   
-  public class var barBackgroundColor: UIColor { return Cache.barBackgroundColor }
-  public class var barTextColor: UIColor { return Cache.barTextColor }
+  class var barBackgroundColor: UIColor { return Cache.barBackgroundColor }
+  class var barTextColor: UIColor { return Cache.barTextColor }
   
-  public class var calendarWorkDayTextColor: UIColor { return Cache.calendarWorkDayTextColor }
-  public class var calendarWeekendBackgroundColor: UIColor { return Cache.calendarWeekendBackgroundColor }
-  public class var calendarWeekendTextColor: UIColor { return Cache.calendarWeekendTextColor }
-  public class var calendarWeekDayTitleTextColor: UIColor { return Cache.calendarWeekDayTitleTextColor }
-  public class var calendarSelectedDayTextColor: UIColor { return Cache.calendarSelectedDayTextColor }
-  public class var calendarSelectedDayBackgroundColor: UIColor { return Cache.calendarSelectedDayBackgroundColor }
-  public class var calendarTodayBackgroundColor: UIColor { return Cache.calendarTodayBackgroundColor }
-  public class var calendarTodayTextColor: UIColor { return Cache.calendarTodayTextColor }
+  class var calendarWorkDayTextColor: UIColor { return Cache.calendarWorkDayTextColor }
+  class var calendarWeekendBackgroundColor: UIColor { return Cache.calendarWeekendBackgroundColor }
+  class var calendarWeekendTextColor: UIColor { return Cache.calendarWeekendTextColor }
+  class var calendarWeekDayTitleTextColor: UIColor { return Cache.calendarWeekDayTitleTextColor }
+  class var calendarSelectedDayTextColor: UIColor { return Cache.calendarSelectedDayTextColor }
+  class var calendarSelectedDayBackgroundColor: UIColor { return Cache.calendarSelectedDayBackgroundColor }
+  class var calendarTodayBackgroundColor: UIColor { return Cache.calendarTodayBackgroundColor }
+  class var calendarTodayTextColor: UIColor { return Cache.calendarTodayTextColor }
 
-  public class var weekStatisticsChartColor: UIColor { return Cache.weekStatisticsChartColor }
-  public class var weekStatisticsGoalColor: UIColor { return Cache.weekStatisticsGoalColor }
-  public class var weekStatisticsTodayTextColor: UIColor { return Cache.weekStatisticsTodayTextColor }
+  class var weekStatisticsChartColor: UIColor { return Cache.weekStatisticsChartColor }
+  class var weekStatisticsGoalColor: UIColor { return Cache.weekStatisticsGoalColor }
+  class var weekStatisticsTodayTextColor: UIColor { return Cache.weekStatisticsTodayTextColor }
 
-  public class var monthStatisticsChartStrokeColor: UIColor { return Cache.monthStatisticsChartStrokeColor }
-  public class var monthStatisticsChartBackgroundColor: UIColor { return Cache.monthStatisticsChartBackgroundColor }
-  public class var monthStatisticsTodayTextColor: UIColor { return Cache.monthStatisticsTodayTextColor }
+  class var monthStatisticsChartStrokeColor: UIColor { return Cache.monthStatisticsChartStrokeColor }
+  class var monthStatisticsChartBackgroundColor: UIColor { return Cache.monthStatisticsChartBackgroundColor }
+  class var monthStatisticsTodayTextColor: UIColor { return Cache.monthStatisticsTodayTextColor }
 
-  public class var yearStatisticsChartStrokeColor: UIColor { return Cache.yearStatisticsChartStrokeColor }
-  public class var yearStatisticsChartFillColor: UIColor { return Cache.yearStatisticsChartFillColor }
-  public class var yearStatisticsGoalColor: UIColor { return Cache.yearStatisticsGoalColor }
+  class var yearStatisticsChartStrokeColor: UIColor { return Cache.yearStatisticsChartStrokeColor }
+  class var yearStatisticsChartFillColor: UIColor { return Cache.yearStatisticsChartFillColor }
+  class var yearStatisticsGoalColor: UIColor { return Cache.yearStatisticsGoalColor }
 
-  public class var settingsTablesValueColor: UIColor { return Cache.settingsTablesValueColor }
-  public class var settingsTablesSelectedValueColor: UIColor { return Cache.settingsTablesSelectedValueColor }
+  class var settingsTablesValueColor: UIColor { return Cache.settingsTablesValueColor }
+  class var settingsTablesSelectedValueColor: UIColor { return Cache.settingsTablesSelectedValueColor }
 
-  public class var helpTipsColor: UIColor { return Cache.helpTipsColor }
+  class var helpTipsColor: UIColor { return Cache.helpTipsColor }
 
   // MARK: Helper Methods
   
-  public class func getDarkDrinkColor(fromMainColor color: UIColor) -> UIColor {
+  class func getDarkDrinkColor(fromMainColor color: UIColor) -> UIColor {
     return color.colorWithShadow(0.2)
   }
   
   // MARK: Drawing Methods
   
-  public class func drawWaterDrink(frame frame: CGRect) {
+  class func drawWaterDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -164,7 +164,7 @@ public class StyleKit : NSObject {
     bezier2Path.fill()
   }
   
-  public class func drawCoffeeDrink(frame frame: CGRect) {
+  class func drawCoffeeDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -261,7 +261,7 @@ public class StyleKit : NSObject {
     bezier5Path.fill()
   }
   
-  public class func drawTeaDrink(frame frame: CGRect) {
+  class func drawTeaDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -338,7 +338,7 @@ public class StyleKit : NSObject {
     bezier5Path.fill()
   }
   
-  public class func drawJuiceDrink(frame frame: CGRect) {
+  class func drawJuiceDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -442,7 +442,7 @@ public class StyleKit : NSObject {
     bezier10Path.fill()
   }
   
-  public class func drawMilkDrink(frame frame: CGRect) {
+  class func drawMilkDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -504,7 +504,7 @@ public class StyleKit : NSObject {
     bezier4Path.fill()
   }
   
-  public class func drawSodaDrink(frame frame: CGRect) {
+  class func drawSodaDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -594,7 +594,7 @@ public class StyleKit : NSObject {
     bezier2Path.fill()
   }
   
-  public class func drawEnergyDrink(frame frame: CGRect) {
+  class func drawEnergyDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -670,7 +670,7 @@ public class StyleKit : NSObject {
     bezier4Path.fill()
   }
   
-  public class func drawHardLiquorDrink(frame frame: CGRect) {
+  class func drawHardLiquorDrink(frame frame: CGRect) {
     //// Color Declarations
     let hardLiquorColor = UIColor(red: 0.651, green: 0.290, blue: 0.125, alpha: 1.000)
     
@@ -752,7 +752,7 @@ public class StyleKit : NSObject {
     bezier3Path.fill()
   }
   
-  public class func drawSportDrink(frame frame: CGRect) {
+  class func drawSportDrink(frame frame: CGRect) {
     
     
     //// Subframes
@@ -846,7 +846,7 @@ public class StyleKit : NSObject {
     bezier2Path.fill()
   }
   
-  public class func drawWineDrink(frame frame: CGRect) {
+  class func drawWineDrink(frame frame: CGRect) {
 
     //// Subframes
     let group: CGRect = CGRectMake(frame.minX, frame.minY, floor(frame.width + 0.5), floor(frame.height + 0.5))
@@ -900,7 +900,7 @@ public class StyleKit : NSObject {
     bezier3Path.fill()
   }
   
-  public class func drawBeerDrink(frame frame: CGRect) {
+  class func drawBeerDrink(frame frame: CGRect) {
     
     
     //// Subframes

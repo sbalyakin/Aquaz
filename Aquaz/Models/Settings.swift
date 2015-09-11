@@ -8,9 +8,9 @@
 
 import Foundation
 
-public class Settings {
+class Settings {
 
-  public static let sharedInstance = Settings()
+  static let sharedInstance = Settings()
   
   // MARK: Initializer
   
@@ -20,13 +20,13 @@ public class Settings {
   
   // MARK: Types
   
-  public enum Gender: Int, CustomStringConvertible {
+  enum Gender: Int, CustomStringConvertible {
     case Man = 0
     case Woman
     case PregnantFemale
     case BreastfeedingFemale
     
-    public var description: String {
+    var description: String {
       switch self {
       case .Man: return "Man"
       case .Woman: return "Woman"
@@ -36,13 +36,13 @@ public class Settings {
     }
   }
 
-  public enum PhysicalActivity: Int, CustomStringConvertible {
+  enum PhysicalActivity: Int, CustomStringConvertible {
     case Rare = 0
     case Occasional
     case Weekly
     case Daily
     
-    public var description: String {
+    var description: String {
       switch self {
       case .Rare: return "Rare"
       case .Occasional: return "Occasional"
@@ -52,13 +52,13 @@ public class Settings {
     }
   }
   
-  public enum StatisticsViewPage: Int {
+  enum StatisticsViewPage: Int {
     case Week = 0
     case Month
     case Year
   }
   
-  public enum DayPageHelpTip: Int {
+  enum DayPageHelpTip: Int {
     case SwipeToChangeDay = 0
     case SwipeToSeeDiary
     case HighActivityMode
@@ -69,14 +69,14 @@ public class Settings {
     case None
   }
 
-  public enum WeekStatisticsPageHelpTip: Int {
+  enum WeekStatisticsPageHelpTip: Int {
     case TapToSeeDayDetails = 0
     case SwipeToChangeWeek
     // It should be the last case indicating that all help tips are already shown to user
     case None
   }
 
-  public enum RateApplicationAlertSelection: Int {
+  enum RateApplicationAlertSelection: Int {
     case RateApplication
     case RemindLater
     case No

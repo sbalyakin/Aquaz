@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 @objc(Drink)
-public class Drink: CodingManagedObject, NamedEntity {
+class Drink: CodingManagedObject, NamedEntity {
 
   // MARK: Types
   
@@ -30,7 +30,7 @@ public class Drink: CodingManagedObject, NamedEntity {
   }
   
   // Important! Order of this enum must NOT be changed in further versions. New drinks must be added to the end.
-  public enum DrinkType: Int {
+  enum DrinkType: Int {
     case Water = 0
     case Coffee
     case Tea
@@ -101,22 +101,22 @@ public class Drink: CodingManagedObject, NamedEntity {
     }
   }
 
-  public typealias DrawDrinkFunction = (frame: CGRect) -> Void
+  typealias DrawDrinkFunction = (frame: CGRect) -> Void
   
   
   // MARK: Properties
   
-  public static var entityName = "Drink"
+  static var entityName = "Drink"
   
-  @NSManaged public var index: NSNumber
-  @NSManaged public var name: String
-  @NSManaged public var hydrationFactor: Double
-  @NSManaged public var dehydrationFactor: Double
-  @NSManaged public var intakes: NSSet
-  @NSManaged public var recentAmount: RecentAmount
+  @NSManaged var index: NSNumber
+  @NSManaged var name: String
+  @NSManaged var hydrationFactor: Double
+  @NSManaged var dehydrationFactor: Double
+  @NSManaged var intakes: NSSet
+  @NSManaged var recentAmount: RecentAmount
   
 
-  public var drinkType: DrinkType {
+  var drinkType: DrinkType {
     if _drinkType == nil {
       initDrinkType()
     }
@@ -125,26 +125,26 @@ public class Drink: CodingManagedObject, NamedEntity {
 
   private var _drinkType: DrinkType!
 
-  public var localizedName: String {
+  var localizedName: String {
     return drinkType.localizedName
   }
   
-  public var mainColor: UIColor {
+  var mainColor: UIColor {
     return drinkType.mainColor
   }
 
-  public var darkColor: UIColor {
+  var darkColor: UIColor {
     return drinkType.darkColor
   }
   
-  public var drawDrinkFunction: DrawDrinkFunction {
+  var drawDrinkFunction: DrawDrinkFunction {
     return drinkType.drawFunction
   }
 
   
   // MARK: Methods
   
-  override public func didChangeValueForKey(key: String) {
+  override func didChangeValueForKey(key: String) {
     super.didChangeValueForKey(key)
     if key == "index" {
       _drinkType = nil
@@ -160,19 +160,19 @@ public class Drink: CodingManagedObject, NamedEntity {
     }
   }
   
-  public func drawDrink(frame frame: CGRect) {
+  func drawDrink(frame frame: CGRect) {
     drawDrinkFunction(frame: frame)
   }
 
-  public class func getDrinksCount() -> Int {
+  class func getDrinksCount() -> Int {
     return DrinkType.count
   }
   
-  public class func fetchDrinkByType(drinkType: Drink.DrinkType, managedObjectContext: NSManagedObjectContext) -> Drink? {
+  class func fetchDrinkByType(drinkType: Drink.DrinkType, managedObjectContext: NSManagedObjectContext) -> Drink? {
     return fetchDrinkByIndex(drinkType.rawValue, managedObjectContext: managedObjectContext)
   }
   
-  public class func fetchDrinkByIndex(index: Int, managedObjectContext: NSManagedObjectContext) -> Drink? {
+  class func fetchDrinkByIndex(index: Int, managedObjectContext: NSManagedObjectContext) -> Drink? {
     let predicate = NSPredicate(format: "%K = %@", argumentArray: ["index", index])
     if let drink: Drink = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate) {
       return drink
@@ -182,7 +182,7 @@ public class Drink: CodingManagedObject, NamedEntity {
     }
   }
 
-  public class func fetchAllDrinksIndexed(managedObjectContext managedObjectContext: NSManagedObjectContext) -> [Int: Drink] {
+  class func fetchAllDrinksIndexed(managedObjectContext managedObjectContext: NSManagedObjectContext) -> [Int: Drink] {
     let drinks: [Drink] = CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: nil, fetchLimit: nil)
     
     var drinksMap = [Int: Drink]()
@@ -193,7 +193,7 @@ public class Drink: CodingManagedObject, NamedEntity {
     return drinksMap
   }
 
-  public class func fetchAllDrinksTyped(managedObjectContext managedObjectContext: NSManagedObjectContext) -> [DrinkType: Drink] {
+  class func fetchAllDrinksTyped(managedObjectContext managedObjectContext: NSManagedObjectContext) -> [DrinkType: Drink] {
     let drinksIndexed = fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
 
     var drinksMap = [DrinkType: Drink]()
