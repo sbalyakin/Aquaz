@@ -1,1 +1,1 @@
-../../../../StartApp/StartApp.framework/Versions/A/Headers/STASplashPreferences.h
+../../../../StartApp/StartAppSDK/StartApp.framework/Versions/A/Headers/STASplashPreferences.h

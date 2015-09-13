@@ -1,1 +1,1 @@
-../../../../RevvForMobile/RFM_SDK_3.1.4_iOS/SDK/RFMAdSDK.framework/Versions/A/Headers/RFMBaseMediatorDelegate.h
+../../../../RevvForMobile/SDK/RFMAdSDK.framework/Versions/A/Headers/RFMBaseMediatorDelegate.h

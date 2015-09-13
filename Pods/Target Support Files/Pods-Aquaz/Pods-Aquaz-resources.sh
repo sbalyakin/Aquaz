@@ -60,9 +60,9 @@ install_resource()
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "Appodeal/Resources/appodeal_pattern.png"
   install_resource "Appodeal/Resources/appodeal_pattern@2x.png"
-  install_resource "RevvForMobile/RFM_SDK_3.1.4_iOS/SDK/RFMAdSDK.bundle"
+  install_resource "RevvForMobile/SDK/RFMAdSDK.bundle"
   install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
-  install_resource "StartApp/StartApp.bundle"
+  install_resource "StartApp/StartAppSDK/StartApp.bundle"
   install_resource "UnityAds/UnityAds.bundle"
   install_resource "VungleAdvertiserSDK/VungleSDK.embeddedframework/Resources/__vungle.db"
   install_resource "VungleAdvertiserSDK/VungleSDK.embeddedframework/Resources/vg_close.png"
@@ -82,9 +82,9 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "Appodeal/Resources/appodeal_pattern.png"
   install_resource "Appodeal/Resources/appodeal_pattern@2x.png"
-  install_resource "RevvForMobile/RFM_SDK_3.1.4_iOS/SDK/RFMAdSDK.bundle"
+  install_resource "RevvForMobile/SDK/RFMAdSDK.bundle"
   install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
-  install_resource "StartApp/StartApp.bundle"
+  install_resource "StartApp/StartAppSDK/StartApp.bundle"
   install_resource "UnityAds/UnityAds.bundle"
   install_resource "VungleAdvertiserSDK/VungleSDK.embeddedframework/Resources/__vungle.db"
   install_resource "VungleAdvertiserSDK/VungleSDK.embeddedframework/Resources/vg_close.png"

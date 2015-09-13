@@ -1,1 +1,1 @@
-../../../../StartApp/StartApp.framework/Versions/A/Headers/StartApp.h
+../../../../StartApp/StartAppSDK/StartApp.framework/Versions/A/Headers/StartApp.h
