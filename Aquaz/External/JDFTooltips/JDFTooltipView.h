@@ -185,6 +185,12 @@ typedef void (^JDFTooltipViewCompletionBlock)();
  */
 - (instancetype)initWithTargetBarButtonItem:(UIBarButtonItem *)barButtonItem hostView:(UIView *)hostView tooltipText:(NSString *)tooltipText arrowDirection:(JDFTooltipViewArrowDirection)arrowDirection width:(CGFloat)width showCompletionBlock:(JDFTooltipViewCompletionBlock)showCompletionBlock hideCompletionBlock:(JDFTooltipViewCompletionBlock)hideCompletionBlock;
 
+- (instancetype)init NS_UNAVAILABLE;
+  
+-(instancetype)initWithFrame:(CGRect)frame;
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder;
+  
 #pragma mark Showing/Hiding Tooltips
 /**
  *  Shows the tooltip.

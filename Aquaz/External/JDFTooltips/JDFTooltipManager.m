@@ -56,6 +56,11 @@
     return self;
 }
 
+- (instancetype)init;
+{
+  @throw nil;
+}
+
 - (void)commonInit
 {
     self.showsBackdropView = NO;

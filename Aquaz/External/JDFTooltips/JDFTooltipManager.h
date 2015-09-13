@@ -130,6 +130,8 @@
  */
 - (instancetype)initWithHostView:(UIView *)view tooltips:(NSArray *)tooltips NS_DESIGNATED_INITIALIZER;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 
 #pragma mark Adding Tooltips
 

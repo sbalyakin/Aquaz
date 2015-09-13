@@ -147,6 +147,23 @@
     return self;
 }
 
+- (instancetype)init;
+{
+  @throw nil;
+}
+
+-(instancetype)initWithFrame:(CGRect)frame;
+{
+  @throw nil;
+  return [self initWithFrame:frame];
+}
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder;
+{
+  @throw nil;
+  return [self initWithCoder:aDecoder];
+}
+  
 - (void)commonInit
 {
     // Options
