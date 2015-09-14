@@ -54,8 +54,6 @@
 		84B0C7041AA75E36006889E9 /* UITimeIntervalPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0C7031AA75E36006889E9 /* UITimeIntervalPickerTableViewCell.swift */; };
 		84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */; };
 		84B17C881AD293DF00ABA3C9 /* Aquaz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Aquaz.xcdatamodeld */; };
-		84B17C8A1AD2C31400ABA3C9 /* UserDefaultsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B17C891AD2C31400ABA3C9 /* UserDefaultsProvider.swift */; };
-		84B17C8B1AD2C31400ABA3C9 /* UserDefaultsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B17C891AD2C31400ABA3C9 /* UserDefaultsProvider.swift */; };
 		84B17C8C1AD2C58000ABA3C9 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */; };
 		84B639831A25D9EF00889438 /* WeekStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B639811A25D9EF00889438 /* WeekStatisticsView.swift */; };
 		84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B639821A25D9EF00889438 /* YearStatisticsView.swift */; };
@@ -262,7 +260,6 @@
 		8488A18D1A53FE6500258EC8 /* NotificationsSoundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsSoundViewController.swift; sourceTree = "<group>"; };
 		84B0C7031AA75E36006889E9 /* UITimeIntervalPickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITimeIntervalPickerTableViewCell.swift; sourceTree = "<group>"; };
 		84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataPrePopulation.swift; path = ../Models/CoreDataPrePopulation.swift; sourceTree = "<group>"; };
-		84B17C891AD2C31400ABA3C9 /* UserDefaultsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsProvider.swift; sourceTree = "<group>"; };
 		84B639811A25D9EF00889438 /* WeekStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeekStatisticsView.swift; path = Controls/WeekStatisticsView.swift; sourceTree = "<group>"; };
 		84B639821A25D9EF00889438 /* YearStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YearStatisticsView.swift; path = Controls/YearStatisticsView.swift; sourceTree = "<group>"; };
 		84BFFF081BA2DE6600AE938B /* Aquaz-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Aquaz-Bridging-Header.h"; path = "../Aquaz-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -754,7 +751,6 @@
 				A5EE362B1AADD6F10038C844 /* LoggedActions.swift */,
 				84D251B31AD26489001E6644 /* CoreDataStack.swift */,
 				84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */,
-				84B17C891AD2C31400ABA3C9 /* UserDefaultsProvider.swift */,
 				843A2B2B1B05D14D00041E3F /* InAppPurchaseManager.swift */,
 			);
 			path = Services;
@@ -1118,7 +1114,6 @@
 				A5EF375D1A81618F00854A8D /* WaterGoalCalculator.swift in Sources */,
 				843A8C9E1AA89D5800ED9507 /* MultiPickerTableCell.swift in Sources */,
 				8404765B1A360273004F0FEF /* SupportViewController.swift in Sources */,
-				84B17C8A1AD2C31400ABA3C9 /* UserDefaultsProvider.swift in Sources */,
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
 				84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */,
 				A5C8946B1AF4B75C0042B6DF /* UIView+JDFTooltips.m in Sources */,
@@ -1207,7 +1202,6 @@
 				84D251AA1AD25FF3001E6644 /* StyleKit.swift in Sources */,
 				84D2519C1AD2511E001E6644 /* TodayViewController.swift in Sources */,
 				84D251B81AD2686F001E6644 /* Settings.swift in Sources */,
-				84B17C8B1AD2C31400ABA3C9 /* UserDefaultsProvider.swift in Sources */,
 				84B17C8C1AD2C58000ABA3C9 /* GlobalConstants.swift in Sources */,
 				84B17C881AD293DF00ABA3C9 /* Aquaz.xcdatamodeld in Sources */,
 				84D251A71AD25DE2001E6644 /* Drink.swift in Sources */,
