@@ -3,7 +3,7 @@
 //  OmegaSettingsViewController
 //
 //  Created by Sergey Balyakin on 03.03.15.
-//  Copyright (c) 2015 Sergey Balyakin. All rights reserved.
+//  Copyright © 2015 Sergey Balyakin. All rights reserved.
 //
 
 import UIKit

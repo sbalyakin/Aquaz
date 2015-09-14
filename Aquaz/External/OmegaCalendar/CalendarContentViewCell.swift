@@ -3,7 +3,7 @@
 //  OmegaCalendar
 //
 //  Created by Sergey Balyakin on 17.03.15.
-//  Copyright (c) 2015 Sergey Balyakin. All rights reserved.
+//  Copyright © 2015 Sergey Balyakin. All rights reserved.
 //
 
 import UIKit

@@ -2,8 +2,8 @@
 //  InAppPurchaseManager.swift
 //  Aquaz
 //
-//  Created by Admin on 15.05.15.
-//  Copyright (c) 2015 Sergey Balyakin. All rights reserved.
+//  Created by Sergey Balyakin on 15.05.15.
+//  Copyright © 2015 Sergey Balyakin. All rights reserved.
 //
 
 import StoreKit

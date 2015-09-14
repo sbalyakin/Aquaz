@@ -2,8 +2,8 @@
 //  SystemHelper.swift
 //  Aquaz
 //
-//  Created by Admin on 04.06.15.
-//  Copyright (c) 2015 Sergey Balyakin. All rights reserved.
+//  Created by Sergey Balyakin on 04.06.15.
+//  Copyright © 2015 Sergey Balyakin. All rights reserved.
 //
 
 import Foundation
