@@ -42,6 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     setupCoreDataSynchronization()
     
+    if #available(iOS 9.0, *) {
+      setupHealthKitSynchronization()
+    }
+    
     UIHelper.applyStylization()
     NotificationsHelper.setApplicationIconBadgeNumber(0)
     
@@ -81,7 +85,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       name: NSManagedObjectContextObjectsDidChangeNotification,
       object: nil)
   }
-  
+
+  @available(iOS 9.0, *)
+  private func setupHealthKitSynchronization() {
+    // Just create intance for HealthKitProvider, it setups synchonization by itself
+    HealthKitProvider.sharedInstance
+  }
+
   func managedObjectContextDidSave(notification: NSNotification) {
     wormhole?.passMessageObject(notification, identifier: GlobalConstants.wormholeMessageFromAquaz)
   }

@@ -40,7 +40,7 @@ class WelcomeWizardUnitsViewController: OmegaSettingsViewController {
       }
     }
   }
-
+  
   override func createTableCellsSections() -> [TableCellsSection] {
     let volumeTitle = NSLocalizedString("SVC:Volume", value: "Volume",
       comment: "SettingsViewController: Table cell title for [Volume] setting")

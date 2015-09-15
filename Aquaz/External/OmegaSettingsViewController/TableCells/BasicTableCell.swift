@@ -11,6 +11,7 @@ import UIKit
 class BasicTableCell: TableCell {
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
+  var textColor: UIColor? { didSet { uiCell?.textLabel?.textColor = textColor ?? UIColor.blackColor() } }
   var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
   var accessoryType: UITableViewCellAccessoryType? { didSet { uiCell?.accessoryType = accessoryType ?? .None } }
   var uiCell: UITableViewCell?
@@ -28,8 +29,13 @@ class BasicTableCell: TableCell {
     
     uiCell!.textLabel?.text = title
     uiCell!.imageView?.image = image
+
     if let accessoryType = accessoryType {
       uiCell!.accessoryType = accessoryType
+    }
+    
+    if let textColor = textColor {
+      uiCell!.textLabel?.textColor = textColor
     }
     
     return uiCell!

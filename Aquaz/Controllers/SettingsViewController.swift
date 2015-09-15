@@ -39,7 +39,12 @@ class SettingsViewController: OmegaSettingsViewController {
     lazy var fullVersionIsPurchasedTitle: String = NSLocalizedString("SVC:Full Version Is Purchased",
       value: "Full Version Is Purchased",
       comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is purchased")
-    
+
+    @available(iOS 9.0, *)
+    lazy var exportToHealthAppTitle: String = NSLocalizedString("SVC:Export to Apple Health",
+      value: "Export to Apple Health",
+      comment: "SettingsViewController: Table title for [Export to Apple Health] cell")
+
   }
   
   private var volumeObserver: SettingsObserver?
@@ -57,6 +62,7 @@ class SettingsViewController: OmegaSettingsViewController {
     static let showUnitsSegue = "Show Units"
     static let showSupportSegue = "Show Support"
     static let manageFullVersionSegue = "Manage Full Version"
+    static let exportToHealthKit = "Export To HealthKit"
   }
   
   override func viewDidLoad() {
@@ -162,9 +168,28 @@ class SettingsViewController: OmegaSettingsViewController {
 
     let fullVersionSection = TableCellsSection()
     fullVersionSection.tableCells = [fullVersionCell]
-    
+
     // Adding sections
-    return [recommendationsSection, unitsSection, notificationsSection, supportSection, fullVersionSection]
+    var sections = [recommendationsSection, unitsSection, notificationsSection, supportSection, fullVersionSection]
+
+    // Export to the Health App section
+    if #available(iOS 9.0, *) {
+      let healthCell = createBasicTableCell(
+        title: localizedStrings.exportToHealthAppTitle,
+        accessoryType: .DisclosureIndicator,
+        activationChangedFunction: { [weak self] tableCell, active in
+          if active {
+            self?.performSegueWithIdentifier(Constants.exportToHealthKit, sender: tableCell)
+          }
+      })
+      
+      let healthSection = TableCellsSection()
+      healthSection.tableCells = [healthCell]
+      
+      sections += [healthSection]
+    }
+    
+    return sections
   }
   
   func fullVersionIsPurchased(notification: NSNotification) {
@@ -184,6 +209,7 @@ class SettingsViewController: OmegaSettingsViewController {
       performSegueWithIdentifier(Constants.calculateWaterIntakeSegue, sender: tableCell)
     }
   }
+  
 }
 
 private extension Units.Volume {

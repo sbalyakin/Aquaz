@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Settings {
+final class Settings {
 
   static let sharedInstance = Settings()
   
@@ -116,6 +116,16 @@ class Settings {
 
   lazy var generalAdCounter: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
     key: "General - Ad counter", initialValue: GlobalConstants.numberOfIntakesToShowAd,
+    userDefaults: userDefaults)
+
+  // MARK: HealthKit
+  
+  lazy var healthKitApplicationIsAuthorized: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
+    key: "HealthKit - Application is authorized", initialValue: false,
+    userDefaults: userDefaults)
+
+  lazy var healthKitAuthorizationIsRequested: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
+    key: "HealthKit - Authorization is requested", initialValue: false,
     userDefaults: userDefaults)
 
   // MARK: User

@@ -8,10 +8,62 @@
 
 import UIKit
 import CoreData
+import HealthKit
 
 class WaterGoalViewController: OmegaSettingsViewController {
+
+  private struct LocalizedStrings {
+
+    lazy var informationSectionHeader: String = NSLocalizedString("WGVC:Information About You", value: "Information About You",
+      comment: "WaterGoalViewController: Header for section with personal information about user")
+    
+    lazy var genderTitle: String = NSLocalizedString("WGVC:Gender", value: "Gender",
+      comment: "WaterGoalViewController: Table cell title for [Gender] setting")
+    
+    lazy var heightTitle: String = NSLocalizedString("WGVC:Height", value: "Height",
+      comment: "WaterGoalViewController: Table cell title for [Height] setting")
+    
+    lazy var weightTitle: String = NSLocalizedString("WGVC:Weight", value: "Weight",
+      comment: "WaterGoalViewController: Table cell title for [Weight] setting")
+    
+    lazy var ageTitle: String = NSLocalizedString("WGVC:Age", value: "Age",
+      comment: "WaterGoalViewController: Table cell title for [Age] setting")
+    
+    lazy var physicalActivityTitle: String = NSLocalizedString("WGVC:Physical Activity", value: "Physical Activity",
+      comment: "WaterGoalViewController: Table cell title for [Physical Activity] setting")
+    
+    lazy var dailyWaterIntakeTitle: String = NSLocalizedString("WGVC:Daily Water Intake", value: "Daily Water Intake",
+      comment: "WaterGoalViewController: Table cell title for [Daily Water Intake] setting")
+    
+    lazy var dailyWaterIntakeSectionHeader: String = NSLocalizedString("WGVC:Recommendations", value: "Recommendations",
+      comment: "WaterGoalViewController: Header for section with daily water intake")
+    
+    lazy var dailyWaterIntakeSectionFooter: String = NSLocalizedString("The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
+      value: "The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
+      comment: "Footer for section with calculated daily water intake")
+    
+    @available(iOS 9.0, *)
+    lazy var readFromHealthTitle: String = NSLocalizedString("WGVC:Read Data from the Health App", value: "Read Data from the Health App",
+      comment: "WaterGoalViewController: Table cell title for [Read Data from the Health App] cell")
+    
+  }
   
   private var privateManagedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
+  
+  private var genderCell: RightDetailTableCell<Settings.Gender>!
+  private var heightCell: TableCellWithValue<Double>!
+  private var weightCell: TableCellWithValue<Double>!
+  private var ageCell: TableCellWithValue<Int>!
+  private var physicalActivityCell: TableCellWithValue<Settings.PhysicalActivity>!
+  private var dailyWaterIntakeCell: TableCellWithValue<Double>!
+  
+  private let minimumAge = 10
+  private let maximumAge = 100
+  
+  private var originalTableViewContentInset: UIEdgeInsets = UIEdgeInsetsZero
+  
+  private var localizedStrings = LocalizedStrings()
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,39 +77,11 @@ class WaterGoalViewController: OmegaSettingsViewController {
     // Settings should be saved to user defaults only if user taps Done button
     saveToSettingsOnValueUpdate = false
 
-    let informationSectionHeader = NSLocalizedString("WGVC:Information About You", value: "Information About You",
-      comment: "WaterGoalViewController: Header for section with personal information about user")
-    
-    let genderTitle = NSLocalizedString("WGVC:Gender", value: "Gender",
-      comment: "WaterGoalViewController: Table cell title for [Gender] setting")
-    
-    let heightTitle = NSLocalizedString("WGVC:Height", value: "Height",
-      comment: "WaterGoalViewController: Table cell title for [Height] setting")
-    
-    let weightTitle = NSLocalizedString("WGVC:Weight", value: "Weight",
-      comment: "WaterGoalViewController: Table cell title for [Weight] setting")
-    
-    let ageTitle = NSLocalizedString("WGVC:Age", value: "Age",
-      comment: "WaterGoalViewController: Table cell title for [Age] setting")
-    
-    let physicalActivityTitle = NSLocalizedString("WGVC:Physical Activity", value: "Physical Activity",
-      comment: "WaterGoalViewController: Table cell title for [Physical Activity] setting")
-    
-    let dailyWaterIntakeTitle = NSLocalizedString("WGVC:Daily Water Intake", value: "Daily Water Intake",
-      comment: "WaterGoalViewController: Table cell title for [Daily Water Intake] setting")
-
-    let dailyWaterIntakeSectionHeader = NSLocalizedString("WGVC:Recommendations", value: "Recommendations",
-      comment: "WaterGoalViewController: Header for section with daily water intake")
-
-    let dailyWaterIntakeSectionFooter = NSLocalizedString("The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
-      value: "The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
-      comment: "Footer for section with calculated daily water intake")
-
     // Information section
 
     // Gender cell
     genderCell = createEnumRightDetailTableCell(
-      title: genderTitle,
+      title: localizedStrings.genderTitle,
       settingsItem: Settings.sharedInstance.userGender,
       pickerTableCellHeight: .Small,
       stringFromValueFunction: WaterGoalViewController.stringFromGender)
@@ -76,7 +100,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
       step: heightUnit.step)
     
     heightCell = createRangedRightDetailTableCell(
-      title: heightTitle,
+      title: localizedStrings.heightTitle,
       settingsItem: Settings.sharedInstance.userHeight,
       collection: heightCollection,
       pickerTableCellHeight: .Large,
@@ -92,7 +116,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
       step: weightUnit.step)
     
     weightCell = createRangedRightDetailTableCell(
-      title: weightTitle,
+      title: localizedStrings.weightTitle,
       settingsItem: Settings.sharedInstance.userWeight,
       collection: weightCollection,
       pickerTableCellHeight: .Large,
@@ -107,7 +131,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
       step: 1)
     
     ageCell = createRangedRightDetailTableCell(
-      title: ageTitle,
+      title: localizedStrings.ageTitle,
       settingsItem: Settings.sharedInstance.userAge,
       collection: ageCollection,
       pickerTableCellHeight: .Large,
@@ -117,7 +141,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
     
     // Physical activity cell
     physicalActivityCell = createEnumRightDetailTableCell(
-      title: physicalActivityTitle,
+      title: localizedStrings.physicalActivityTitle,
       settingsItem: Settings.sharedInstance.userPhysicalActivity,
       pickerTableCellHeight: .Small,
       stringFromValueFunction: WaterGoalViewController.stringFromPhysicalActivity)
@@ -125,7 +149,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
     physicalActivityCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
     let informationSection = TableCellsSection()
-    informationSection.headerTitle = informationSectionHeader
+    informationSection.headerTitle = localizedStrings.informationSectionHeader
     informationSection.tableCells = [
       genderCell,
       heightCell,
@@ -137,7 +161,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
     // Daily water intake section
     
     let volumeUnit = Settings.sharedInstance.generalVolumeUnits.value.unit
-    let dailyWaterIntakeTitleFinal = dailyWaterIntakeTitle +  " (\(volumeUnit.contraction))"
+    let dailyWaterIntakeTitleFinal = "\(localizedStrings.dailyWaterIntakeTitle) (\(volumeUnit.contraction))"
     
     dailyWaterIntakeCell = createTextFieldTableCell(
       title: dailyWaterIntakeTitleFinal,
@@ -147,11 +171,34 @@ class WaterGoalViewController: OmegaSettingsViewController {
       keyboardType: .DecimalPad)
     
     let dailyWaterIntakeSection = TableCellsSection()
-    dailyWaterIntakeSection.headerTitle = dailyWaterIntakeSectionHeader
-    dailyWaterIntakeSection.footerTitle = dailyWaterIntakeSectionFooter
+    dailyWaterIntakeSection.headerTitle = localizedStrings.dailyWaterIntakeSectionHeader
+    dailyWaterIntakeSection.footerTitle = localizedStrings.dailyWaterIntakeSectionFooter
     dailyWaterIntakeSection.tableCells = [dailyWaterIntakeCell]
     
-    return [informationSection, dailyWaterIntakeSection]
+    let sections: [TableCellsSection]
+    
+    // Read From Health section
+    if #available(iOS 9.0, *) {
+      let readFromHealthCell = createBasicTableCell(
+        title: localizedStrings.readFromHealthTitle,
+        accessoryType: nil,
+        activationChangedFunction: { [weak self] _, active in
+          if active {
+            self?.checkHealthAuthorizationAndRead()
+          }
+        })
+      
+      readFromHealthCell.textColor = StyleKit.controlTintColor
+      
+      let healthSection = TableCellsSection()
+      healthSection.tableCells = [readFromHealthCell]
+      
+      sections = [informationSection, healthSection, dailyWaterIntakeSection]
+    } else {
+      sections = [informationSection, dailyWaterIntakeSection]
+    }
+    
+    return sections
   }
   
   private class func stringFromHeight(value: Double) -> String {
@@ -290,18 +337,43 @@ class WaterGoalViewController: OmegaSettingsViewController {
     }
   }
   
-  private var genderCell: RightDetailTableCell<Settings.Gender>!
-  private var heightCell: TableCellWithValue<Double>!
-  private var weightCell: TableCellWithValue<Double>!
-  private var ageCell: TableCellWithValue<Int>!
-  private var physicalActivityCell: TableCellWithValue<Settings.PhysicalActivity>!
-  private var dailyWaterIntakeCell: TableCellWithValue<Double>!
+  // MARK: HealthKit
+  @available(iOS 9.0, *)
+  private func checkHealthAuthorizationAndRead() {
+    HealthKitProvider.sharedInstance.authorizeHealthKit { authorized, _ in
+      if authorized {
+        self.readFromHealthKit()
+      }
+    }
+  }
   
-  private let minimumAge = 10
-  private let maximumAge = 100
-  
-  private var originalTableViewContentInset: UIEdgeInsets = UIEdgeInsetsZero
-  
+  @available(iOS 9.0, *)
+  private func readFromHealthKit() {
+    HealthKitProvider.sharedInstance.readUserProfile { age, biologicalSex, bodyMass, height in
+      dispatch_async(dispatch_get_main_queue()) {
+        if let age = age {
+          Settings.sharedInstance.userAge.value = age
+        }
+        
+        if let biologicalSex = biologicalSex {
+          Settings.sharedInstance.userGender.value.applyBiologicalSex(biologicalSex)
+        }
+        
+        if let bodyMass = bodyMass {
+          let bodyMassInKilograms = bodyMass.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo))
+          Settings.sharedInstance.userWeight.value = bodyMassInKilograms
+        }
+        
+        if let height = height {
+          let heightInCentimeter = height.quantity.doubleValueForUnit(HKUnit.meterUnitWithMetricPrefix(.Centi))
+          Settings.sharedInstance.userHeight.value = heightInCentimeter
+        }
+        
+        self.recreateTableCellsSections()
+      }
+    }
+  }
+
 }
 
 private extension Units.Weight {
@@ -394,3 +466,14 @@ private extension Units.Volume {
   }
 }
 
+@available(iOS 9.0, *)
+private extension Settings.Gender {
+  mutating func applyBiologicalSex(biologicalSex: HKBiologicalSex) {
+    switch biologicalSex {
+    case .Male:   self = .Man
+    case .Female: self = .Woman
+    case .NotSet: return
+    case .Other:  return
+    }
+  }
+}

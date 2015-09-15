@@ -160,6 +160,9 @@
 		A5D3D42C1AA5D29700E3C989 /* UISwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D41F1AA5D29700E3C989 /* UISwitchTableViewCell.swift */; };
 		A5D3D42D1AA5D29700E3C989 /* UITextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4201AA5D29700E3C989 /* UITextFieldTableViewCell.swift */; };
 		A5D740761B301CA100FC2BAF /* WelcomeWizardWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D740751B301CA100FC2BAF /* WelcomeWizardWelcomeViewController.swift */; };
+		A5DEB05F1BA75B1300ABD3C8 /* HealthKitProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DEB05E1BA75B1300ABD3C8 /* HealthKitProvider.swift */; settings = {ASSET_TAGS = (); }; };
+		A5DEB0611BA75B4B00ABD3C8 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DEB0601BA75B4B00ABD3C8 /* HealthKit.framework */; };
+		A5DEB0631BA86DCB00ABD3C8 /* HealthKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DEB0621BA86DCB00ABD3C8 /* HealthKitViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */; };
 		A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
 		A5EE36261AAD9DAA0038C844 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EE36251AAD9DAA0038C844 /* Logger.swift */; };
@@ -356,6 +359,9 @@
 		A5D3D41F1AA5D29700E3C989 /* UISwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISwitchTableViewCell.swift; sourceTree = "<group>"; };
 		A5D3D4201AA5D29700E3C989 /* UITextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		A5D740751B301CA100FC2BAF /* WelcomeWizardWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWizardWelcomeViewController.swift; sourceTree = "<group>"; };
+		A5DEB05E1BA75B1300ABD3C8 /* HealthKitProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitProvider.swift; sourceTree = "<group>"; };
+		A5DEB0601BA75B4B00ABD3C8 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		A5DEB0621BA86DCB00ABD3C8 /* HealthKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitViewController.swift; sourceTree = "<group>"; };
 		A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiaryTableViewCell.swift; path = Controls/DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		A5E70A6F19E30BEE006E5FC0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Settings.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A5EE36251AAD9DAA0038C844 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -376,6 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5A3358B1B0218CE004579A4 /* StoreKit.framework in Frameworks */,
+				A5DEB0611BA75B4B00ABD3C8 /* HealthKit.framework in Frameworks */,
 				A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */,
 				056E48E10B6792ADC03F0918 /* libPods-Aquaz.a in Frameworks */,
 			);
@@ -452,6 +459,7 @@
 				A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */,
 				84C610B91A319DBC00433EF1 /* MonthStatisticsViewController.swift */,
 				84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */,
+				A5DEB0621BA86DCB00ABD3C8 /* HealthKitViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -599,6 +607,7 @@
 		84D251951AD2511E001E6644 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5DEB0601BA75B4B00ABD3C8 /* HealthKit.framework */,
 				A5A3358A1B0218CE004579A4 /* StoreKit.framework */,
 				A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */,
 				84D251961AD2511E001E6644 /* NotificationCenter.framework */,
@@ -752,6 +761,7 @@
 				84D251B31AD26489001E6644 /* CoreDataStack.swift */,
 				84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */,
 				843A2B2B1B05D14D00041E3F /* InAppPurchaseManager.swift */,
+				A5DEB05E1BA75B1300ABD3C8 /* HealthKitProvider.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -839,6 +849,9 @@
 						DevelopmentTeam = BEWTR7XXXS;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.HealthKit = {
 								enabled = 1;
 							};
 							com.apple.InAppPurchase = {
@@ -1165,6 +1178,7 @@
 				8435FEAF1AC52FFC00702727 /* StatisticsPageViewController.swift in Sources */,
 				843B055F19E2D7800097A833 /* SettingsViewController.swift in Sources */,
 				8455DACF1A694487004245F9 /* RoundedButton.swift in Sources */,
+				A5DEB0631BA86DCB00ABD3C8 /* HealthKitViewController.swift in Sources */,
 				847D0E281A824D6700966538 /* UnitItems.swift in Sources */,
 				84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */,
 				A57F5E6B1AC968A6005C4F46 /* GlobalConstants.swift in Sources */,
@@ -1175,6 +1189,7 @@
 				843B056019E2D7800097A833 /* StatisticsViewController.swift in Sources */,
 				A5D3D4271AA5D29700E3C989 /* TableCell.swift in Sources */,
 				A5D3D4261AA5D29700E3C989 /* SwitchTableCell.swift in Sources */,
+				A5DEB05F1BA75B1300ABD3C8 /* HealthKitProvider.swift in Sources */,
 				A5A1681D1A6EA1330027711B /* BannerView.swift in Sources */,
 				A57D2BF41AD02A7100619D62 /* WelcomeWizardMetricsViewController.swift in Sources */,
 				84CD97651ABB2C3A0011623B /* MonthStatisticsView.swift in Sources */,

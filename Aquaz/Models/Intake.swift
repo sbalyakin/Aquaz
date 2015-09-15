@@ -69,8 +69,17 @@ class Intake: CodingManagedObject, NamedEntity {
   }
   
   /// Fetches all intakes for the specified date interval (beginDate..<endDate)
-  class func fetchIntakes(beginDate beginDate: NSDate, endDate: NSDate, managedObjectContext: NSManagedObjectContext) -> [Intake] {
-    let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
+  class func fetchIntakes(beginDate beginDate: NSDate?, endDate: NSDate?, managedObjectContext: NSManagedObjectContext) -> [Intake] {
+    var predicate: NSPredicate?
+    
+    if let beginDate = beginDate, let endDate = endDate {
+      predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
+    } else if let beginDate = beginDate {
+      predicate = NSPredicate(format: "date >= %@", argumentArray: [beginDate])
+    } else if let endDate = endDate {
+      predicate = NSPredicate(format: "date < %@", argumentArray: [endDate])
+    }
+    
     let descriptor = NSSortDescriptor(key: "date", ascending: true)
     return CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: [descriptor])
   }

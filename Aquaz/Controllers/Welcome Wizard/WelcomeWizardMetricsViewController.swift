@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import HealthKit
 
 class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
 
@@ -35,11 +36,26 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
       value: "The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
       comment: "Footer for section with calculated daily water intake")
     
+    @available(iOS 9.0, *)
+    lazy var readFromHealthTitle: String = NSLocalizedString("WGVC:Read Data from the Health App", value: "Read Data from the Health App",
+      comment: "WaterGoalViewController: Table cell title for [Read Data from the Health App] cell")
   }
   
   @IBOutlet weak var descriptionLabel: UILabel!
   
   private var privateManagedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
+  
+  private var genderCell: RightDetailTableCell<Settings.Gender>!
+  private var heightCell: TableCellWithValue<Double>!
+  private var weightCell: TableCellWithValue<Double>!
+  private var ageCell: TableCellWithValue<Int>!
+  private var physicalActivityCell: TableCellWithValue<Settings.PhysicalActivity>!
+  private var dailyWaterIntakeCell: TableCellWithValue<Double>!
+  
+  private let minimumAge = 10
+  private let maximumAge = 100
+  
+  private var originalTableViewContentInset: UIEdgeInsets = UIEdgeInsetsZero
   
   private var heightObserver: SettingsObserver?
   private var weightObserver: SettingsObserver?
@@ -191,7 +207,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
       ageCell,
       physicalActivityCell]
 
-    // Daily Water Intke section
+    // Daily Water Intake section
     
     dailyWaterIntakeCell = createTextFieldTableCell(
       title: dailyWaterIntakeTitleFinal, settingsItem:
@@ -203,8 +219,31 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     let dailyWaterIntakeSection = TableCellsSection()
     dailyWaterIntakeSection.footerTitle = localizedStrings.dailyWaterIntakeSectionFooter
     dailyWaterIntakeSection.tableCells = [dailyWaterIntakeCell]
+
+    let sections: [TableCellsSection]
     
-    return [informationSection, dailyWaterIntakeSection]
+    // Read From Health section
+    if #available(iOS 9.0, *) {
+      let readFromHealthCell = createBasicTableCell(
+        title: localizedStrings.readFromHealthTitle,
+        accessoryType: nil,
+        activationChangedFunction: { [weak self] _, active in
+          if active {
+            self?.checkHealthAuthorizationAndRead()
+          }
+        })
+      
+      readFromHealthCell.textColor = StyleKit.controlTintColor
+      
+      let healthSection = TableCellsSection()
+      healthSection.tableCells = [readFromHealthCell]
+      
+      sections = [informationSection, healthSection, dailyWaterIntakeSection]
+    } else {
+      sections = [informationSection, dailyWaterIntakeSection]
+    }
+
+    return sections
   }
   
   private class func stringFromHeight(value: Double) -> String {
@@ -311,19 +350,44 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     
     dailyWaterIntakeCell.value = waterGoalAmount
   }
+
+  // MARK: HealthKit
+  @available(iOS 9.0, *)
+  private func checkHealthAuthorizationAndRead() {
+    HealthKitProvider.sharedInstance.authorizeHealthKit { authorized, _ in
+      if authorized {
+        self.readFromHealthKit()
+      }
+    }
+  }
   
-  private var genderCell: RightDetailTableCell<Settings.Gender>!
-  private var heightCell: TableCellWithValue<Double>!
-  private var weightCell: TableCellWithValue<Double>!
-  private var ageCell: TableCellWithValue<Int>!
-  private var physicalActivityCell: TableCellWithValue<Settings.PhysicalActivity>!
-  private var dailyWaterIntakeCell: TableCellWithValue<Double>!
-  
-  private let minimumAge = 10
-  private let maximumAge = 100
-  
-  private var originalTableViewContentInset: UIEdgeInsets = UIEdgeInsetsZero
-  
+  @available(iOS 9.0, *)
+  private func readFromHealthKit() {
+    HealthKitProvider.sharedInstance.readUserProfile { age, biologicalSex, bodyMass, height in
+      dispatch_async(dispatch_get_main_queue()) {
+        if let age = age {
+          Settings.sharedInstance.userAge.value = age
+        }
+        
+        if let biologicalSex = biologicalSex {
+          Settings.sharedInstance.userGender.value.applyBiologicalSex(biologicalSex)
+        }
+        
+        if let bodyMass = bodyMass {
+          let bodyMassInKilograms = bodyMass.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo))
+          Settings.sharedInstance.userWeight.value = bodyMassInKilograms
+        }
+        
+        if let height = height {
+          let heightInCentimeter = height.quantity.doubleValueForUnit(HKUnit.meterUnitWithMetricPrefix(.Centi))
+          Settings.sharedInstance.userHeight.value = heightInCentimeter
+        }
+        
+        self.recreateTableCellsSections()
+      }
+    }
+  }
+
 }
 
 private extension Units.Weight {
@@ -412,6 +476,18 @@ private extension Units.Volume {
     switch self {
     case Millilitres: return 0
     case FluidOunces: return 1
+    }
+  }
+}
+
+@available(iOS 9.0, *)
+private extension Settings.Gender {
+  mutating func applyBiologicalSex(biologicalSex: HKBiologicalSex) {
+    switch biologicalSex {
+    case .Male:   self = .Man
+    case .Female: self = .Woman
+    case .NotSet: return
+    case .Other:  return
     }
   }
 }
