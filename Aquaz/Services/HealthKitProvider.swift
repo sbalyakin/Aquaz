@@ -228,6 +228,9 @@ final class HealthKitProvider: NSObject {
     healthKitStore.executeQuery(sampleQuery)
   }
 
+  func isAllowedToWriteWaterSamples() -> Bool {
+    return healthKitStore.authorizationStatusForType(waterQuantityType) == .SharingAuthorized
+  }
   
   /// Saves water intake to HealthKit
   private func saveWaterIntake(intake: Intake, completion: ((success: Bool) -> Void)? = nil) {

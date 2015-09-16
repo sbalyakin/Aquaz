@@ -31,6 +31,15 @@ final class HealthKitViewController: UIViewController {
     
     lazy var doneTitle: String = NSLocalizedString("HKVC:Export is done.", value: "Export is done.",
       comment: "HealthKitViewController: Label title displaying end of export")
+
+    lazy var checkAppleHealthTitle: String = NSLocalizedString("HKVC:Aquaz is not allowed to write Water data to Apple Health", value: "Aquaz is not allowed to write Water data to Apple Health",
+      comment: "HealthKitViewController: Title of alert displayed when Aquaz is not allowed to write data into Apple Health.")
+
+    lazy var checkAppleHealthMessage: String = NSLocalizedString("HKVC:Check Apple Health settings in the Health app under the Sources tab", value: "Check Apple Health settings in the Health app under the Sources tab",
+      comment: "HealthKitViewController: Message of alert displayed when Aquaz is not allowed to write data into Apple Health.")
+
+    lazy var okTitle: String = NSLocalizedString("HKVC:OK", value: "OK",
+      comment: "HealthKitViewController: Title for OK button")
     
   }
   
@@ -46,8 +55,8 @@ final class HealthKitViewController: UIViewController {
     
     progressLabel.alpha = 0
 
-    labelIntakesInAquaz.text = String.localizedStringWithFormat(localizedStrings.intakesInAquazTitle, "...")
-    labelIntakesInHealthApp.text = String.localizedStringWithFormat(localizedStrings.intakesInHealthAppTitle, "...")
+    labelIntakesInAquaz.text = String.localizedStringWithFormat(localizedStrings.intakesInAquazTitle, "--")
+    labelIntakesInHealthApp.text = String.localizedStringWithFormat(localizedStrings.intakesInHealthAppTitle, "--")
 
     if #available(iOS 9.0, *) {
       updateUI()
@@ -79,6 +88,10 @@ final class HealthKitViewController: UIViewController {
   
   @available(iOS 9.0, *)
   private func updateNumberOfIntakesInHealthApp() {
+    if !HealthKitProvider.sharedInstance.isAllowedToWriteWaterSamples() {
+      return
+    }
+
     HealthKitProvider.sharedInstance.requestNumberOfIntakesInHealthApp { count in
       dispatch_async(dispatch_get_main_queue()) {
         self.labelIntakesInHealthApp.text = String.localizedStringWithFormat(self.localizedStrings.intakesInHealthAppTitle, NSNumber(integer: count))
@@ -88,6 +101,12 @@ final class HealthKitViewController: UIViewController {
   
   @IBAction func exportToHealthKit() {
     if #available(iOS 9.0, *) {
+      if !HealthKitProvider.sharedInstance.isAllowedToWriteWaterSamples() {
+        let alert = UIAlertView(title: localizedStrings.checkAppleHealthTitle, message: localizedStrings.checkAppleHealthMessage, delegate: nil, cancelButtonTitle: localizedStrings.okTitle)
+        alert.show()
+        return
+      }
+      
       progressView.progress = 0
       progressView.alpha = 1
       

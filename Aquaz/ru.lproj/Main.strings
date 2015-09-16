@@ -4,6 +4,9 @@
 /* Class = "UINavigationItem"; title = "Choose Day"; ObjectID = "4v4-BL-wZE"; */
 "4v4-BL-wZE.title" = "Выберите День";
 
+/* Class = "UILabel"; text = "{Information}"; ObjectID = "6uE-Fx-o1B"; */
+"6uE-Fx-o1B.text" = "{Information}";
+
 /* Class = "UINavigationItem"; title = "Full Version"; ObjectID = "7r8-aG-k9f"; */
 "7r8-aG-k9f.title" = "Полная Версия";
 
@@ -13,6 +16,9 @@
 /* Class = "UIButton"; normalTitle = "{DrunkAmount}"; ObjectID = "9h2-YY-Qq4"; */
 "9h2-YY-Qq4.normalTitle" = "{DrunkAmount}";
 
+/* Class = "UILabel"; text = "Here you can export your intakes into Apple Health. Take into account that all existing water intakes related to Aquaz in Apple Health will be replaced."; ObjectID = "46K-bz-bSn"; */
+"46K-bz-bSn.text" = "Здесь вы можете экспортировать данные по выпитым напиткам в Apple Health. Обратите внимание, что все существующие записи в Apple Health, связанные с Aquaz, будут заменены.";
+
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "A5t-FE-O50"; */
 "A5t-FE-O50.normalTitle" = "Добавить";
 
@@ -21,6 +27,9 @@
 
 /* Class = "UILabel"; text = "{Subtitle}"; ObjectID = "Ceg-X5-AVk"; */
 "Ceg-X5-AVk.text" = "{Subtitle}";
+
+/* Class = "UILabel"; text = "{Number of intakes in Apple Health:}"; ObjectID = "GTw-uH-gd5"; */
+"GTw-uH-gd5.text" = "{Number of intakes in Apple Health:}";
 
 /* Class = "UILabel"; text = "{PuchaseDescription}"; ObjectID = "Hcp-mP-3Xi"; */
 "Hcp-mP-3Xi.text" = "{PuchaseDescription}";
@@ -46,6 +55,9 @@
 /* Class = "UILabel"; text = "{Month}"; ObjectID = "ORs-BH-u1n"; */
 "ORs-BH-u1n.text" = "{Month}";
 
+/* Class = "UILabel"; text = "{Number of intakes in Aquaz:}"; ObjectID = "QDR-6Y-S3l"; */
+"QDR-6Y-S3l.text" = "{Number of intakes in Aquaz:}";
+
 /* Class = "UILabel"; text = "If you have any suggestions, questions or you have noticed an issue, please send feedback to us."; ObjectID = "SbH-8R-2bi"; */
 "SbH-8R-2bi.text" = "Если у вас есть предложения, вопросы или вы заметили ошибку, пожалуйста, напишите нам об этом.";
 
@@ -63,6 +75,9 @@
 
 /* Class = "UIButton"; normalTitle = "Send Feedback"; ObjectID = "W7K-jU-fAL"; */
 "W7K-jU-fAL.normalTitle" = "Обратная Связь";
+
+/* Class = "UIButton"; normalTitle = "Export to Apple Health"; ObjectID = "WFY-JM-Z5S"; */
+"WFY-JM-Z5S.normalTitle" = "Экспорт в Apple Health";
 
 /* Class = "UILabel"; text = "{WaterAmount}"; ObjectID = "WOd-mb-fl1"; */
 "WOd-mb-fl1.text" = "{WaterAmount}";
@@ -96,6 +111,9 @@
 
 /* Class = "UILabel"; text = "Thank you for using Aquaz! If you like it, please support us and tell your friends about our app using the buttons below."; ObjectID = "j2j-PD-0hx"; */
 "j2j-PD-0hx.text" = "Спасибо, что используете Aquaz! Если вам нравится приложение, пожалуйста, расскажите о нем своим друзьям.";
+
+/* Class = "UILabel"; text = "{Progress}"; ObjectID = "jLb-br-Ssq"; */
+"jLb-br-Ssq.text" = "{Progress}";
 
 /* Class = "UIBarButtonItem"; title = "Today"; ObjectID = "nSq-92-OEq"; */
 "nSq-92-OEq.title" = "Сегодня";
@@ -138,4 +156,7 @@
 
 /* Class = "UILabel"; text = "Drinks"; ObjectID = "z84-wB-oAh"; */
 "z84-wB-oAh.text" = "Напитки";
+
+/* Class = "UINavigationItem"; title = "Apple Health"; ObjectID = "zCj-bV-hRt"; */
+"zCj-bV-hRt.title" = "Apple Health";
 

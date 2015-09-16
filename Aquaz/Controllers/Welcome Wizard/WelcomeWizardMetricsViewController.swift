@@ -37,8 +37,8 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
       comment: "Footer for section with calculated daily water intake")
     
     @available(iOS 9.0, *)
-    lazy var readFromHealthTitle: String = NSLocalizedString("WGVC:Read Data from the Health App", value: "Read Data from the Health App",
-      comment: "WaterGoalViewController: Table cell title for [Read Data from the Health App] cell")
+    lazy var readFromHealthTitle: String = NSLocalizedString("WGVC:Read Data from Apple Health", value: "Read Data from Apple Health",
+      comment: "WaterGoalViewController: Table cell title for [Read Data from Apple Health] cell")
   }
   
   @IBOutlet weak var descriptionLabel: UILabel!

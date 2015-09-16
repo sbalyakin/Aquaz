@@ -1,6 +1,3 @@
-/* Footer for section with calculated daily water intake */
-"The calculated daily water intake is only an estimate. Always take into account your body's needs. Please consult your health care provider for advice about a specific medical condition." = "Рассчитанная суточная норма потребления воды носит общий характер. Всегда руководствуйтесь потребностями своего организма. Пожалуйста, проконсультируйтесь со специалистом для получения информации о возможных противопоказаниях.";
-
 /* Drink: Title for beer */
 "D:Beer" = "Пиво";
 
@@ -36,6 +33,9 @@
 
 /* DayViewController: Current daily water intake of water intake goal */
 "DVC:%1$@ of %2$@" = "%1$@ из %2$@";
+
+/* DayViewController: Text for help tip about dehydration because of intake of an alcoholic drink */
+"DVC:Alcoholic drinks increase required daily water intake" = "Алкогольные напитки повышают необходимую суточную норму воды";
 
 /* DayViewController: Text for banner shown if a user drink his daily water intake */
 "DVC:Congratulations!
@@ -76,9 +76,6 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 
 /* DayViewController: Text for help tip about swiping for switching displaying day */
 "DVC:Swipe left or right to switch day" = "Листайте влево или вправо для смены дня";
-
-/* DayViewController: Text for help tip about dehydration because of intake of an alcoholic drink */
-"DVC:Alcoholic drinks increase required daily water intake" = "Алкогольные напитки повышают необходимую суточную норму воды";
 
 /* DayViewController: Text for help tip about swiping for seeing the diary */
 "DVC:Swipe up to see the diary" = "Листните вверх, чтобы посмотреть дневник";
@@ -121,6 +118,30 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 
 /* FullVersionViewController: Text for a banner shown if full version purchase is deffered and waits for an approval from parents */
 "FVVC:Waiting for an approval from your family delegate..." = "Ожидание подтверждения покупки от родителей...";
+
+/* HealthKitProvider: Title for metadata key (Drink) used in Health app */
+"HKP:Drink" = "Напиток";
+
+/* HealthKitViewController: Label title displaying progress of export */
+"HKVC:%1$d of %2$d" = "%1$d из %2$d";
+
+/* HealthKitViewController: Title of alert displayed when Aquaz is not allowed to write data into Apple Health. */
+"HKVC:Aquaz is not allowed to write Water data to Apple Health" = "У Aquaz нет доступа для записи данных по Воде в Apple Health";
+
+/* HealthKitViewController: Message of alert displayed when Aquaz is not allowed to write data into Apple Health. */
+"HKVC:Check Apple Health settings in the Health app under the Sources tab" = "Проверьте настройки Apple Health в приложении Health во вкладке Источники";
+
+/* HealthKitViewController: Label title displaying end of export */
+"HKVC:Export is done." = "Экспорт завершен.";
+
+/* HealthKitViewController: Label title displaying number of intakes in Health app */
+"HKVC:Number of intakes in Apple Health: %@" = "Число записей в Apple Health: %@";
+
+/* HealthKitViewController: Label title displaying number of intakes in Aquaz */
+"HKVC:Number of intakes in Aquaz: %@" = "Число записей в Aquaz: %@";
+
+/* HealthKitViewController: Title for OK button */
+"HKVC:OK" = "ОК";
 
 /* InAppPurchaseManager: Message shown when payment transaction failed by reason: An unknown error occured */
 "IAPM:An unknown error occured" = "Произошла неизвестная ошибка";
@@ -242,11 +263,14 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* SupportViewController: Title for cancel button */
 "SVC:Cancel" = "Отмена";
 
+/* StatisticsViewController: Caption above statistics page shown for not-full version of Aquaz. It should be uppercased. */
+"SVC:DEMO" = "ДЕМО";
+
 /* SettingsViewController: Table cell title for [Daily Water Intake] settings bloсk */
 "SVC:Daily Water Intake" = "Суточная Норма";
 
-/* StatisticsViewController: Caption above statistics page shown for not-full version of Aquaz */
-"SVC:DEMO" = "ДЕМО";
+/* SettingsViewController: Table title for [Export to Apple Health] cell */
+"SVC:Export to Apple Health" = "Экспорт в Apple Health";
 
 /* SupportViewController: Information message if no Facebook account found on device */
 "SVC:Facebook account is not found" = "Учетная запись Facebook не найдена";
@@ -311,6 +335,9 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* SettingsViewController: Table cell title for [Weight] setting */
 "SVC:Weight" = "Вес";
 
+/* Footer for section with calculated daily water intake */
+"The calculated daily water intake is only an estimate. Always take into account your body's needs. Please consult your health care provider for advice about a specific medical condition." = "Рассчитанная суточная норма потребления воды носит общий характер. Всегда руководствуйтесь потребностями своего организма. Пожалуйста, проконсультируйтесь со специалистом для получения информации о возможных противопоказаниях.";
+
 /* Units: contraction for centimeters */
 "U:cm" = "см";
 
@@ -367,6 +394,9 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 
 /* WaterGoalViewController: [Rare] option for physical activity */
 "WGVC:Rare" = "Редкая";
+
+/* WaterGoalViewController: Table cell title for [Read Data from Apple Health] cell */
+"WGVC:Read Data from Apple Health" = "Считать данные из Apple Health";
 
 /* WaterGoalViewController: Header for section with daily water intake */
 "WGVC:Recommendations" = "Рекомендации";
