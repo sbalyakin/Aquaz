@@ -96,6 +96,8 @@
 		8C98C1FD8252030CA4F3F16C /* libPods-Widget.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C32195F17D188FBE7C8F49C7 /* libPods-Widget.a */; };
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
 		A52A7D871B245C88007A71ED /* NotificationSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52A7D861B245C88007A71ED /* NotificationSounds.swift */; };
+		A52BFC601BAF28AC00B76345 /* HealthKitProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DEB05E1BA75B1300ABD3C8 /* HealthKitProvider.swift */; settings = {ASSET_TAGS = (); }; };
+		A52BFC611BAF293400B76345 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DEB0601BA75B4B00ABD3C8 /* HealthKit.framework */; };
 		A52E0CDB1B3854E500599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CDD1B3854E500599D81 /* InfoPlist.strings */; };
 		A52E0CE01B3854E500599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CE21B3854E500599D81 /* InfoPlist.strings */; };
 		A52E0CE51B3854E600599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CE71B3854E600599D81 /* InfoPlist.strings */; };
@@ -400,6 +402,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A52BFC611BAF293400B76345 /* HealthKit.framework in Frameworks */,
 				84D251971AD2511E001E6644 /* NotificationCenter.framework in Frameworks */,
 				8C98C1FD8252030CA4F3F16C /* libPods-Widget.a in Frameworks */,
 			);
@@ -871,6 +874,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -1217,6 +1223,7 @@
 				84D251AA1AD25FF3001E6644 /* StyleKit.swift in Sources */,
 				84D2519C1AD2511E001E6644 /* TodayViewController.swift in Sources */,
 				84D251B81AD2686F001E6644 /* Settings.swift in Sources */,
+				A52BFC601BAF28AC00B76345 /* HealthKitProvider.swift in Sources */,
 				84B17C8C1AD2C58000ABA3C9 /* GlobalConstants.swift in Sources */,
 				84B17C881AD293DF00ABA3C9 /* Aquaz.xcdatamodeld in Sources */,
 				84D251A71AD25DE2001E6644 /* Drink.swift in Sources */,

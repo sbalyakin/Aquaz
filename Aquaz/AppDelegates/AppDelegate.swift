@@ -88,8 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   @available(iOS 9.0, *)
   private func setupHealthKitSynchronization() {
-    // Just create intance for HealthKitProvider, it setups synchonization by itself
-    HealthKitProvider.sharedInstance
+    HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContenxt(CoreDataStack.mainContext)
   }
 
   func managedObjectContextDidSave(notification: NSNotification) {

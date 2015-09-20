@@ -59,6 +59,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     setupProgressView()
     setupCoreDataSynchronization()
     setupNotificationsObservation()
+    
+    if #available(iOSApplicationExtension 9.0, *) {
+        setupHeathKitSynchronization()
+    }
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -104,6 +108,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       object: mainManagedObjectContext)
   }
   
+  @available(iOSApplicationExtension 9.0, *)
+  private func setupHeathKitSynchronization() {
+    HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContenxt(mainManagedObjectContext)
+  }
+
   func managedObjectContextDidSave(notification: NSNotification) {
     wormhole.passMessageObject(notification, identifier: GlobalConstants.wormholeMessageFromWidget)
   }
