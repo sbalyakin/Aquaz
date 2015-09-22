@@ -135,10 +135,10 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "HKVC:Export is done." = "Экспорт завершен.";
 
 /* HealthKitViewController: Label title displaying number of intakes in Health app */
-"HKVC:Number of intakes in Apple Health: %@" = "Число записей в Apple Health: %@";
+"HKVC:Intakes in Apple Health: %@" = "Записей в Apple Health: %@";
 
 /* HealthKitViewController: Label title displaying number of intakes in Aquaz */
-"HKVC:Number of intakes in Aquaz: %@" = "Число записей в Aquaz: %@";
+"HKVC:Intakes in Aquaz: %@" = "Записей в Aquaz: %@";
 
 /* HealthKitViewController: Title for OK button */
 "HKVC:OK" = "ОК";

@@ -49,11 +49,9 @@ final class HealthKitProvider: NSObject {
   
   /// Asks HealthKit for authorization, executes completion closure as a result
   func authorizeHealthKit(completion: (authorized: Bool, error: NSError?) -> Void) {
-    if Settings.sharedInstance.healthKitAuthorizationIsRequested.value {
-      completion(authorized: Settings.sharedInstance.healthKitApplicationIsAuthorized.value, error: nil)
-      return
-    }
-    
+    // It's just an internal flag, it does not takes into account real settings in the Health app
+    Settings.sharedInstance.healthKitWaterIntakesIntegrationIsAllowed.value = true
+
     // If the store is not available (for instance, iPad) throw an exception
     if !HKHealthStore.isHealthDataAvailable()
     {
@@ -74,12 +72,8 @@ final class HealthKitProvider: NSObject {
     let typesToShare: Set<HKSampleType> = [
       HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater)!]
     
-    // Request HealthKit authorization
-    Settings.sharedInstance.healthKitAuthorizationIsRequested.value = true
-    
     healthKitStore.requestAuthorizationToShareTypes(typesToShare, readTypes: typesToRead) {
       authorized, error in
-      Settings.sharedInstance.healthKitApplicationIsAuthorized.value = authorized
       completion(authorized: authorized, error: error)
     }
   }
@@ -286,6 +280,10 @@ final class HealthKitProvider: NSObject {
   // MARK: Synchronization with CoreData
   
   func contextDidSaveContext(notification: NSNotification) {
+    if !Settings.sharedInstance.healthKitWaterIntakesIntegrationIsAllowed.value {
+      return
+    }
+    
     authorizeHealthKit { authorized, _ in
       if authorized {
         self.synchronizeWithHealthKit(notification)

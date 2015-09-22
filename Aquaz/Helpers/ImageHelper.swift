@@ -22,6 +22,7 @@ struct ImageHelper {
     case SettingsNotifications = "SettingsNotifications"
     case SettingsFeedback = "SettingsFeedback"
     case SettingsFullVersion = "SettingsFullVersion"
+    case SettingsHealthKit = "SettingsHealthKit"
   }
   
   static func loadImage(image: Image) -> UIImage? {

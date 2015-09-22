@@ -120,12 +120,12 @@ final class Settings {
 
   // MARK: HealthKit
   
-  lazy var healthKitApplicationIsAuthorized: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "HealthKit - Application is authorized", initialValue: false,
+  lazy var healthKitWaterIntakesIntegrationIsRequested: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
+    key: "HealthKit - Water intakes integration is requested", initialValue: false,
     userDefaults: userDefaults)
 
-  lazy var healthKitAuthorizationIsRequested: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "HealthKit - Authorization is requested", initialValue: false,
+  lazy var healthKitWaterIntakesIntegrationIsAllowed: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
+    key: "HealthKit - Water intakes integration is requested", initialValue: false,
     userDefaults: userDefaults)
 
   // MARK: User

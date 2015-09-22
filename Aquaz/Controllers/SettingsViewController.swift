@@ -183,6 +183,8 @@ class SettingsViewController: OmegaSettingsViewController {
           }
       })
       
+      healthCell.image = ImageHelper.loadImage(.SettingsHealthKit)
+      
       let healthSection = TableCellsSection()
       healthSection.tableCells = [healthCell]
       

@@ -1706,13 +1706,13 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Number of intakes in Aquaz:}" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDR-6Y-S3l">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Intakes in Aquaz:}" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDR-6Y-S3l">
                                 <rect key="frame" x="20" y="90" width="560" height="20"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Number of intakes in Apple Health:}" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTw-uH-gd5">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Intakes in Apple Health:}" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTw-uH-gd5">
                                 <rect key="frame" x="20" y="118" width="560" height="20"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -1735,7 +1735,7 @@
                             <constraint firstItem="86f-em-621" firstAttribute="top" secondItem="WFY-JM-Z5S" secondAttribute="bottom" constant="20" id="oNn-ov-uw6"/>
                             <constraint firstItem="GTw-uH-gd5" firstAttribute="leading" secondItem="nBh-2N-3kX" secondAttribute="leading" constant="20" symbolic="YES" id="okz-gr-42h"/>
                             <constraint firstItem="WFY-JM-Z5S" firstAttribute="top" secondItem="M38-N5-4RB" secondAttribute="bottom" constant="23" id="t74-CE-OfC"/>
-                            <constraint firstItem="46K-bz-bSn" firstAttribute="top" secondItem="1IX-Ur-S81" secondAttribute="bottom" constant="40" id="wMJ-Ml-bU7"/>
+                            <constraint firstItem="46K-bz-bSn" firstAttribute="top" secondItem="1IX-Ur-S81" secondAttribute="bottom" constant="40" id="w8M-Yp-0Tx"/>
                             <constraint firstItem="QDR-6Y-S3l" firstAttribute="top" secondItem="46K-bz-bSn" secondAttribute="bottom" constant="30" id="x52-P4-daS"/>
                         </constraints>
                     </view>

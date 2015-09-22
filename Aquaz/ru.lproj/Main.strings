@@ -28,8 +28,8 @@
 /* Class = "UILabel"; text = "{Subtitle}"; ObjectID = "Ceg-X5-AVk"; */
 "Ceg-X5-AVk.text" = "{Subtitle}";
 
-/* Class = "UILabel"; text = "{Number of intakes in Apple Health:}"; ObjectID = "GTw-uH-gd5"; */
-"GTw-uH-gd5.text" = "{Number of intakes in Apple Health:}";
+/* Class = "UILabel"; text = "{Intakes in Apple Health:}"; ObjectID = "GTw-uH-gd5"; */
+"GTw-uH-gd5.text" = "{Intakes in Apple Health:}";
 
 /* Class = "UILabel"; text = "{PuchaseDescription}"; ObjectID = "Hcp-mP-3Xi"; */
 "Hcp-mP-3Xi.text" = "{PuchaseDescription}";
@@ -55,8 +55,8 @@
 /* Class = "UILabel"; text = "{Month}"; ObjectID = "ORs-BH-u1n"; */
 "ORs-BH-u1n.text" = "{Month}";
 
-/* Class = "UILabel"; text = "{Number of intakes in Aquaz:}"; ObjectID = "QDR-6Y-S3l"; */
-"QDR-6Y-S3l.text" = "{Number of intakes in Aquaz:}";
+/* Class = "UILabel"; text = "{Intakes in Aquaz:}"; ObjectID = "QDR-6Y-S3l"; */
+"QDR-6Y-S3l.text" = "{Intakes in Aquaz:}";
 
 /* Class = "UILabel"; text = "If you have any suggestions, questions or you have noticed an issue, please send feedback to us."; ObjectID = "SbH-8R-2bi"; */
 "SbH-8R-2bi.text" = "Если у вас есть предложения, вопросы или вы заметили ошибку, пожалуйста, напишите нам об этом.";

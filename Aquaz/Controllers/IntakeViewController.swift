@@ -236,16 +236,41 @@ class IntakeViewController: UIViewController {
     let adjustedAmount = self.prepareAmountForStoring(amount)
     
     switch self.viewMode {
-    case .Add: self.addIntake(amount: adjustedAmount)
+    case .Add: self.addIntakeWithHealthKitChecks(amount: adjustedAmount)
     case .Edit: self.updateIntake(amount: adjustedAmount)
     }
-
-    navigationController?.dismissViewControllerAnimated(true, completion: nil)
   }
   
   private func prepareAmountForStoring(amount: Double) -> Double {
     let precision = Settings.sharedInstance.generalVolumeUnits.value.precision
     return Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: amount, unitType: .Volume, roundPrecision: precision)
+  }
+  
+  private func addIntakeWithHealthKitChecks(amount amount: Double) {
+    if #available(iOS 9.0, *) {
+      if !Settings.sharedInstance.healthKitWaterIntakesIntegrationIsRequested.value {
+        Settings.sharedInstance.healthKitWaterIntakesIntegrationIsRequested.value = true
+        
+        let alert = UIAlertController(title: "Integration with Apple Health", message: "Aquaz will save your intakes to Apple Health", preferredStyle: .Alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { _ in
+          HealthKitProvider.sharedInstance.authorizeHealthKit { authorized, _ in
+            self.addIntake(amount: amount)
+          }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: { _ in
+          Settings.sharedInstance.healthKitWaterIntakesIntegrationIsAllowed.value = false
+          self.addIntake(amount: amount)
+        }))
+        
+        presentViewController(alert, animated: true, completion: nil)
+      } else {
+        addIntake(amount: amount)
+      }
+    } else {
+      addIntake(amount: amount)
+    }
   }
   
   private func addIntake(amount amount: Double) {
@@ -265,6 +290,8 @@ class IntakeViewController: UIViewController {
         managedObjectContext: self.mainManagedObjectContext,
         saveImmediately: true)
     }
+    
+    navigationController?.dismissViewControllerAnimated(true, completion: nil)
   }
   
   private func updateIntake(amount amount: Double) {
@@ -275,6 +302,8 @@ class IntakeViewController: UIViewController {
         CoreDataStack.saveContext(self.mainManagedObjectContext)
       }
     }
+    
+    navigationController?.dismissViewControllerAnimated(true, completion: nil)
   }
 
   private func formatAmount(amount: Double, precision: Double? = nil, decimals: Int? = nil) -> String {

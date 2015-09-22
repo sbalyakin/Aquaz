@@ -20,10 +20,10 @@ final class HealthKitViewController: UIViewController {
   
   private struct LocalizedStrings {
 
-    lazy var intakesInAquazTitle: String = NSLocalizedString("HKVC:Number of intakes in Aquaz: %@", value: "Number of intakes in Aquaz: %@",
+    lazy var intakesInAquazTitle: String = NSLocalizedString("HKVC:Intakes in Aquaz: %@", value: "Intakes in Aquaz: %@",
       comment: "HealthKitViewController: Label title displaying number of intakes in Aquaz")
     
-    lazy var intakesInHealthAppTitle: String = NSLocalizedString("HKVC:Number of intakes in Apple Health: %@", value: "Number of intakes in Apple Health: %@",
+    lazy var intakesInHealthAppTitle: String = NSLocalizedString("HKVC:Intakes in Apple Health: %@", value: "Intakes in Apple Health: %@",
       comment: "HealthKitViewController: Label title displaying number of intakes in Health app")
 
     lazy var progressTitle: String = NSLocalizedString("HKVC:%1$d of %2$d", value: "%1$d of %2$d",
@@ -66,7 +66,9 @@ final class HealthKitViewController: UIViewController {
   @available(iOS 9.0, *)
   private func updateUI() {
     updateNumberOfIntakesInAquaz()
-    updateNumberOfIntakesInHealthApp()
+    HealthKitProvider.sharedInstance.authorizeHealthKit { authorized, error in
+      self.updateNumberOfIntakesInHealthApp()
+    }
   }
   
   private func updateNumberOfIntakesInAquaz() {
