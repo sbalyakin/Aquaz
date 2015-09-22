@@ -12,6 +12,16 @@ import UIKit
 
 class CoreDataPrePopulation {
   
+  class func isCoreDataPrePopulated(managedObjectContext managedObjectContext: NSManagedObjectContext) -> Bool {
+    var drink: Drink?
+    
+    managedObjectContext.performBlockAndWait {
+      drink = Drink.fetchDrinkByIndex(0, managedObjectContext: managedObjectContext)
+    }
+    
+    return drink != nil
+  }
+  
   class func prePopulateCoreData(managedObjectContext managedObjectContext: NSManagedObjectContext) {
     managedObjectContext.performBlockAndWait {
       Drink.addEntity(

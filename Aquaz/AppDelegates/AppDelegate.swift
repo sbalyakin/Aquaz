@@ -171,7 +171,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func prePopulateCoreData() {
-    CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: CoreDataStack.privateContext)
+    if !CoreDataPrePopulation.isCoreDataPrePopulated(managedObjectContext: CoreDataStack.privateContext) {
+      CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: CoreDataStack.privateContext)
+    }
   }
   
   private func removeDisabledNotifications() {

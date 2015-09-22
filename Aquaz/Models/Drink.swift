@@ -174,12 +174,7 @@ class Drink: CodingManagedObject, NamedEntity {
   
   class func fetchDrinkByIndex(index: Int, managedObjectContext: NSManagedObjectContext) -> Drink? {
     let predicate = NSPredicate(format: "%K = %@", argumentArray: ["index", index])
-    if let drink: Drink = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate) {
-      return drink
-    } else {
-      Logger.logDrinkIsNotFound(drinkIndex: index)
-      return nil
-    }
+    return CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate)
   }
 
   class func fetchAllDrinksIndexed(managedObjectContext managedObjectContext: NSManagedObjectContext) -> [Int: Drink] {

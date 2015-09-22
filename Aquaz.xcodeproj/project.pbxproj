@@ -94,6 +94,7 @@
 		84ED8A231A84ED9E0042BAF2 /* DrinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */; };
 		84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9DD971A16574E003D6444 /* PickTimeViewController.swift */; };
 		8C98C1FD8252030CA4F3F16C /* libPods-Widget.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C32195F17D188FBE7C8F49C7 /* libPods-Widget.a */; };
+		A50275E61BB1824500BD440A /* CoreDataPrePopulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */; settings = {ASSET_TAGS = (); }; };
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
 		A52A7D871B245C88007A71ED /* NotificationSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52A7D861B245C88007A71ED /* NotificationSounds.swift */; };
 		A52BFC601BAF28AC00B76345 /* HealthKitProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DEB05E1BA75B1300ABD3C8 /* HealthKitProvider.swift */; settings = {ASSET_TAGS = (); }; };
@@ -1232,6 +1233,7 @@
 				84D251A91AD25FE3001E6644 /* RecentAmount.swift in Sources */,
 				A59CDC921AD8587100E92EF2 /* CodingManagedObject.swift in Sources */,
 				84D251BC1AD2689A001E6644 /* WaterGoalCalculator.swift in Sources */,
+				A50275E61BB1824500BD440A /* CoreDataPrePopulation.swift in Sources */,
 				84D251AD1AD26181001E6644 /* CoreDataHelper.swift in Sources */,
 				84D251A81AD25FD9001E6644 /* NamedEntity.swift in Sources */,
 				84D251A61AD25D9A001E6644 /* DrinkView.swift in Sources */,

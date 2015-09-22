@@ -61,7 +61,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     setupNotificationsObservation()
     
     if #available(iOSApplicationExtension 9.0, *) {
-        setupHeathKitSynchronization()
+      setupHeathKitSynchronization()
     }
   }
   
@@ -188,6 +188,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   private func fetchData(completion: () -> ()) {
+    if !Settings.sharedInstance.generalHasLaunchedOnce.value {
+      CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: mainManagedObjectContext)
+    }
+    
     mainManagedObjectContext.performBlock {
       self.fetchDrinks()
       self.fetchWaterIntake()
