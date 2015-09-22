@@ -111,4 +111,4 @@ SPEC CHECKSUMS:
   UnityAds: 6078c1cc50a900e6f3d49cd8a56a3cc4c05c52dd
   VungleAdvertiserSDK: 31f17fea4935d0879eedfd7cebbeecb411f8a879
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0.beta.4

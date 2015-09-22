@@ -1,1 +1,5 @@
-PODS_AQUAZ_MMWORMHOLE_OTHER_LDFLAGS = -framework "Foundation"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/MMWormhole" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/AdColony" "${PODS_ROOT}/Headers/Public/AmazonAds" "${PODS_ROOT}/Headers/Public/AppLovinSDK" "${PODS_ROOT}/Headers/Public/Appodeal" "${PODS_ROOT}/Headers/Public/ChartboostSDK" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/Crashlytics" "${PODS_ROOT}/Headers/Public/FBAudienceNetwork" "${PODS_ROOT}/Headers/Public/Fabric" "${PODS_ROOT}/Headers/Public/Godzippa" "${PODS_ROOT}/Headers/Public/Google-Mobile-Ads-SDK" "${PODS_ROOT}/Headers/Public/InMobiSDK" "${PODS_ROOT}/Headers/Public/MMWormhole" "${PODS_ROOT}/Headers/Public/Mantle" "${PODS_ROOT}/Headers/Public/MyTarget" "${PODS_ROOT}/Headers/Public/NexageSourceKitCommon" "${PODS_ROOT}/Headers/Public/NexageSourceKitMRAID" "${PODS_ROOT}/Headers/Public/RevvForMobile" "${PODS_ROOT}/Headers/Public/SVProgressHUD" "${PODS_ROOT}/Headers/Public/StartApp" "${PODS_ROOT}/Headers/Public/UnityAds" "${PODS_ROOT}/Headers/Public/VungleAdvertiserSDK" "${PODS_ROOT}/Headers/Public/mopub-ios-sdk"
+OTHER_LDFLAGS = -framework "Foundation"
+PODS_ROOT = ${SRCROOT}
+SKIP_INSTALL = YES
