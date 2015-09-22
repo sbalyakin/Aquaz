@@ -34,17 +34,17 @@ final class HealthKitProvider: NSObject {
     
   }
   
-  private override init() {
-    super.init()
-    
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+
+  /// Setups synchronization with passed managed object context. On saving the context HealthKitProvider
+  /// will add/remove or change corresponding samples in HealthKit.
+  func initSynchronizationForManagedObjectContenxt(managedObjectContext: NSManagedObjectContext) {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "contextDidSaveContext:",
       name: NSManagedObjectContextDidSaveNotification,
-      object: CoreDataStack.mainContext)
-  }
-  
-  deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+      object: managedObjectContext)
   }
   
   /// Asks HealthKit for authorization, executes completion closure as a result
