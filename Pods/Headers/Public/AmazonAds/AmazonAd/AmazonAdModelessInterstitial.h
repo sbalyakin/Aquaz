@@ -1,1 +1,1 @@
-../../../../AmazonAds/iOS/Ads/AmazonAd.framework/Versions/A/Headers/AmazonAdModelessInterstitial.h
+../../../../AmazonAds/AmazonAd.framework/Versions/A/Headers/AmazonAdModelessInterstitial.h

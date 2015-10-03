@@ -1,1 +1,1 @@
-../../../InMobiSDK/InMobi-iOS-SDK/Libs/IMInterstitial.h
+../../../InMobiSDK/InMobiSDK/InMobi-iOS-SDK/Libs/IMInterstitial.h

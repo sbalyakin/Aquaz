@@ -1,1 +1,1 @@
-../../../../AmazonAds/iOS/Ads/AmazonAd.framework/Versions/A/Headers/AmazonAdRegistration.h
+../../../../AmazonAds/AmazonAd.framework/Versions/A/Headers/AmazonAdRegistration.h

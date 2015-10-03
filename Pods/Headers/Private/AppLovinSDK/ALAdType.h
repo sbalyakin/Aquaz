@@ -1,1 +1,0 @@
-../../../AppLovinSDK/headers/ALAdType.h

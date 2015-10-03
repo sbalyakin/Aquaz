@@ -1,1 +1,1 @@
-../../../InMobiSDK/InMobi-iOS-SDK/Libs/InMobi.h
+../../../InMobiSDK/InMobiSDK/InMobi-iOS-SDK/Libs/InMobi.h

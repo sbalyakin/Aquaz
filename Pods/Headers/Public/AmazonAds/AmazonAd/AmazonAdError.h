@@ -1,1 +1,1 @@
-../../../../AmazonAds/iOS/Ads/AmazonAd.framework/Versions/A/Headers/AmazonAdError.h
+../../../../AmazonAds/AmazonAd.framework/Versions/A/Headers/AmazonAdError.h

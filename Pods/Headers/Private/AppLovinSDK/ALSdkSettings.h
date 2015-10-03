@@ -1,1 +1,0 @@
-../../../AppLovinSDK/headers/ALSdkSettings.h

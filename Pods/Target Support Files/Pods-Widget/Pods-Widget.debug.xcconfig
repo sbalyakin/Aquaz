@@ -2,5 +2,5 @@ FRAMEWORK_SEARCH_PATHS = $(inherited) "$(PODS_ROOT)/Crashlytics" "$(PODS_ROOT)/F
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Crashlytics" "${PODS_ROOT}/Headers/Public/Fabric" "${PODS_ROOT}/Headers/Public/MMWormhole"
 OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/Crashlytics" -isystem "${PODS_ROOT}/Headers/Public/Fabric" -isystem "${PODS_ROOT}/Headers/Public/MMWormhole"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-Widget-MMWormhole" -l"c++" -l"z" -framework "Crashlytics" -framework "Fabric" -framework "Foundation" -framework "Security" -framework "SystemConfiguration" -framework "UIKit"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-Widget-MMWormhole" -l"c++" -l"z" -framework "Crashlytics" -framework "Fabric" -framework "Foundation" -framework "Security" -framework "SystemConfiguration" -framework "UIKit" -framework "WatchConnectivity"
 PODS_ROOT = ${SRCROOT}/Pods

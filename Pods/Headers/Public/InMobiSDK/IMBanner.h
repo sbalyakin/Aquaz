@@ -1,1 +1,1 @@
-../../../InMobiSDK/InMobi-iOS-SDK/Libs/IMBanner.h
+../../../InMobiSDK/InMobiSDK/InMobi-iOS-SDK/Libs/IMBanner.h

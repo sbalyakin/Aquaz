@@ -62,7 +62,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "Appodeal/Resources/appodeal_pattern@2x.png"
   install_resource "RevvForMobile/SDK/RFMAdSDK.bundle"
   install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
-  install_resource "StartApp/StartAppSDK/StartApp.bundle"
+  install_resource "StartApp/StartApp.bundle"
   install_resource "UnityAds/UnityAds.bundle"
   install_resource "VungleAdvertiserSDK/VungleSDK.embeddedframework/Resources/__vungle.db"
   install_resource "VungleAdvertiserSDK/VungleSDK.embeddedframework/Resources/vg_close.png"
@@ -78,13 +78,14 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "mopub-ios-sdk/MoPubSDK/Resources/MPDAAIcon@2x.png"
   install_resource "mopub-ios-sdk/MoPubSDK/Resources/MPDAAIcon@3x.png"
   install_resource "mopub-ios-sdk/MoPubSDK/Resources/MRAID.bundle"
+  install_resource "${BUILT_PRODUCTS_DIR}/TOWebViewControllerLocalizable.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "Appodeal/Resources/appodeal_pattern.png"
   install_resource "Appodeal/Resources/appodeal_pattern@2x.png"
   install_resource "RevvForMobile/SDK/RFMAdSDK.bundle"
   install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
-  install_resource "StartApp/StartAppSDK/StartApp.bundle"
+  install_resource "StartApp/StartApp.bundle"
   install_resource "UnityAds/UnityAds.bundle"
   install_resource "VungleAdvertiserSDK/VungleSDK.embeddedframework/Resources/__vungle.db"
   install_resource "VungleAdvertiserSDK/VungleSDK.embeddedframework/Resources/vg_close.png"
@@ -100,6 +101,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "mopub-ios-sdk/MoPubSDK/Resources/MPDAAIcon@2x.png"
   install_resource "mopub-ios-sdk/MoPubSDK/Resources/MPDAAIcon@3x.png"
   install_resource "mopub-ios-sdk/MoPubSDK/Resources/MRAID.bundle"
+  install_resource "${BUILT_PRODUCTS_DIR}/TOWebViewControllerLocalizable.bundle"
 fi
 
 mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

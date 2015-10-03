@@ -1,0 +1,1 @@
+../../../YandexMobileAds/YandexMobileAdsSDK/YandexMobileAds/YMAVersion.h

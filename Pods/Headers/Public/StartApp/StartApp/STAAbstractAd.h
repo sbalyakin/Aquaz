@@ -1,1 +1,1 @@
-../../../../StartApp/StartAppSDK/StartApp.framework/Versions/A/Headers/STAAbstractAd.h
+../../../../StartApp/StartApp.framework/Versions/A/Headers/STAAbstractAd.h

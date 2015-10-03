@@ -1,1 +1,1 @@
-../../../InMobiSDK/InMobi-iOS-SDK/Libs/IMError.h
+../../../InMobiSDK/InMobiSDK/InMobi-iOS-SDK/Libs/IMError.h

@@ -1,1 +1,1 @@
-../../../../StartApp/StartAppSDK/StartApp.framework/Versions/A/Headers/STABannerSize.h
+../../../../StartApp/StartApp.framework/Versions/A/Headers/STABannerSize.h

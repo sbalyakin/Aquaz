@@ -1,1 +1,1 @@
-../../../../StartApp/StartAppSDK/StartApp.framework/Versions/A/Headers/STANativeAdDetails.h
+../../../../StartApp/StartApp.framework/Versions/A/Headers/STANativeAdDetails.h

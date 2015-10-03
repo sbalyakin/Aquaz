@@ -1,1 +1,1 @@
-../../../InMobiSDK/InMobi-iOS-SDK/Libs/IMIncentivisedDelegate.h
+../../../InMobiSDK/InMobiSDK/InMobi-iOS-SDK/Libs/IMIncentivisedDelegate.h
