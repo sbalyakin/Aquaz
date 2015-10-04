@@ -188,11 +188,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   private func fetchData(completion: () -> ()) {
-    if !Settings.sharedInstance.generalHasLaunchedOnce.value {
-      CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: mainManagedObjectContext)
-    }
-    
     mainManagedObjectContext.performBlock {
+      if !Settings.sharedInstance.generalHasLaunchedOnce.value {
+        CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: self.mainManagedObjectContext, saveContext: true)
+      }
+    
       self.fetchDrinks()
       self.fetchWaterIntake()
       completion()

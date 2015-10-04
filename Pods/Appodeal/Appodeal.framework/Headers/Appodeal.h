@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import <Appodeal/AppodealInterstitialDelegate.h>
-#import <Appodeal/AppodealBannerDelegate.h>
-#import <Appodeal/AppodealVideoDelegate.h>
-#import <Appodeal/AppodealNetworkNames.h>
-#import <Appodeal/AppodealUnitSizes.h>
-#import <Appodeal/AppodealConstants.h>
+#import "AppodealInterstitialDelegate.h"
+#import "AppodealBannerDelegate.h"
+#import "AppodealVideoDelegate.h"
+#import "AppodealNetworkNames.h"
+#import "AppodealUnitSizes.h"
+#import "AppodealConstants.h"
 
 
 typedef NS_OPTIONS(NSInteger, AppodealAdType) {

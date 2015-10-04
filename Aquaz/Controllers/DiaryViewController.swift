@@ -209,7 +209,9 @@ extension DiaryViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if editingStyle == .Delete, let intake = getIntakeAtIndexPath(indexPath) {
-      intake.deleteEntity(saveImmediately: true)
+      mainManagedObjectContext.performBlock {
+        intake.deleteEntity(saveImmediately: true)
+      }
     }
   }
   

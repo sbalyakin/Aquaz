@@ -89,6 +89,7 @@ PODS:
     - NexageSourceKitCommon (~> 1.0.3)
   - protobuf-c (1.0.1)
   - RevvForMobile (3.1.4)
+  - SimulatorStatusMagic (1.7)
   - StartApp (3.2.0)
   - SVProgressHUD (1.1.3)
   - TOWebViewController (2.0.19)
@@ -109,6 +110,8 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - MMWormhole (~> 2.0.0)
+  - SimulatorStatusMagic
+  - TOWebViewController
 
 SPEC CHECKSUMS:
   AdColony: ab47c3e22be7843e08f90989381a222884be4a62
@@ -135,6 +138,7 @@ SPEC CHECKSUMS:
   NexageSourceKitMRAID: 143794bbd822a07d4506e222f0f72860c63fe3ec
   protobuf-c: 87088f5a154d5293d9c75b44fc48b497056f4e76
   RevvForMobile: 3ab1fd579640962b3a72e517d0f7c0faa6ed5d6d
+  SimulatorStatusMagic: 46c90a12f73abeda6d7c16876e1e0998b6ca5f4f
   StartApp: 7c1e8f315b813ef856230ece46d69f30e817a85c
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   TOWebViewController: accd62ec0acc8d5c2e1e195c6f7ff7654c3c840c

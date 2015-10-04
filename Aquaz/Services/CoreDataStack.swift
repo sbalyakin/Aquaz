@@ -81,11 +81,15 @@ class CoreDataStack: NSObject {
 
   func saveAllContexts() {
     if mainContextIsInitialized {
-      CoreDataStack.saveContext(mainContext)
+      mainContext.performBlock {
+        CoreDataStack.saveContext(self.mainContext)
+      }
     }
 
     if privateContextIsInitialized {
-      CoreDataStack.saveContext(privateContext)
+      privateContext.performBlock {
+        CoreDataStack.saveContext(self.privateContext)
+      }
     }
   }
   
@@ -131,15 +135,13 @@ class CoreDataStack: NSObject {
       return
     }
     
-    managedObjectContext.performBlock {
-      do {
-        try managedObjectContext.save()
-      } catch let error as NSError {
-        Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
-      } catch {
-        Logger.logError(Logger.Messages.failedToSaveManagedObjectContext)
-        fatalError()
-      }
+    do {
+      try managedObjectContext.save()
+    } catch let error as NSError {
+      Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
+    } catch {
+      Logger.logError(Logger.Messages.failedToSaveManagedObjectContext)
+      fatalError()
     }
   }
   

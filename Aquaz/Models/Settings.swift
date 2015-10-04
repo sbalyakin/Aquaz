@@ -253,7 +253,7 @@ final class Settings {
     return NSLocale.currentLocale().objectForKey(NSLocaleUsesMetricSystem)! as! Bool
   }
 
-  private class func calcUserDailyWaterIntakeSetting() -> Double {
+  class func calcUserDailyWaterIntakeSetting() -> Double {
     let data = WaterGoalCalculator.Data(
       physicalActivity: Settings.sharedInstance.userPhysicalActivity.value,
       gender: Settings.sharedInstance.userGender.value,

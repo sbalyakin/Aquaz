@@ -7,10 +7,12 @@ source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/appodeal/CocoaPods.git'
 
 target 'Aquaz' do
+  pod 'TOWebViewController'
   pod 'Appodeal', '~> 0.4.9'
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'MMWormhole', '~> 2.0.0'
+  pod 'SimulatorStatusMagic', :configurations => ['Debug']
 end
 
 target 'AquazTests' do

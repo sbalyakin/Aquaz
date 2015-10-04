@@ -7,3 +7,7 @@
 
 #import "External/JDFTooltips/JDFTooltips.h"
 #import "MMWormhole.h"
+
+#ifdef DEBUG
+#import <SimulatorStatusMagic/SDStatusBarManager.h>
+#endif

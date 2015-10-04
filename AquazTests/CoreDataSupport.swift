@@ -31,7 +31,9 @@ class CoreDataSupport {
     managedObjectContext.persistentStoreCoordinator = coordinator
 
     // Pre-populate core data
-    CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: managedObjectContext)
+    managedObjectContext.performBlockAndWait {
+      CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: self.managedObjectContext, saveContext: true)
+    }
   }
   
 }

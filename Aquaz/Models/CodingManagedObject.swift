@@ -34,17 +34,11 @@ class CodingManagedObject: NSManagedObject, NSCoding {
     if let url = aDecoder.decodeObjectForKey(encodeKey) as? NSURL,
        let managedObjectID = CoreDataStack.persistentStoreCoordinator.managedObjectIDForURIRepresentation(url)
     {
-      let group = dispatch_group_create()
-      dispatch_group_enter(group)
-
       var managedObject: NSManagedObject?
 
-      CoreDataStack.privateContext.performBlock {
+      CoreDataStack.privateContext.performBlockAndWaitUsingGroup {
         managedObject = try? CoreDataStack.privateContext.existingObjectWithID(managedObjectID)
-        dispatch_group_leave(group)
       }
-
-      dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
       
       return managedObject
     } else {

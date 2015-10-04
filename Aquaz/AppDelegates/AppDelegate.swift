@@ -29,19 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     #if DEBUG
       Logger.setup(logLevel: .Warning, assertLevel: .Error, consoleLevel: .Debug, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
-      #else
+    #else
       Logger.setup(logLevel: .Warning, assertLevel: .None, consoleLevel: .None, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
     #endif
 
-    Appodeal.initializeWithApiKey(GlobalConstants.appodealApiKey, types: AppodealAdType.Interstitial)
-
-    if !Settings.sharedInstance.generalFullVersion.value {
-      // Just for creating shared instance of in-app purchase manager and to start observing transaction states
-      InAppPurchaseManager.sharedInstance
-    }
-    
-    setupCoreDataSynchronization()
-    
     if #available(iOS 9.0, *) {
       setupHealthKitSynchronization()
     }
@@ -49,18 +40,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UIHelper.applyStylization()
     NotificationsHelper.setApplicationIconBadgeNumber(0)
     
-    if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
-      prePopulateCoreData()
-      removeDisabledNotifications()
-      showWelcomeWizard()
-      Settings.sharedInstance.generalHasLaunchedOnce.value = true
+    let isSnapshotMode = NSProcessInfo.processInfo().arguments.contains("-SNAPSHOT")
+
+    if isSnapshotMode {
+      if #available(iOS 9.0, *) {
+        SnapshotsInitializer.prepareUserData()
+      }
     } else {
-      if let options = launchOptions {
-        if let _ = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
-          showDayViewControllerForToday()
+      // General case
+      if !Settings.sharedInstance.generalFullVersion.value {
+        Appodeal.initializeWithApiKey(GlobalConstants.appodealApiKey, types: AppodealAdType.Interstitial)
+        
+        // Just for creating shared instance of in-app purchase manager and to start observing transaction states
+        InAppPurchaseManager.sharedInstance
+      }
+      
+      if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
+        prePopulateCoreData()
+        removeDisabledNotifications()
+        showWelcomeWizard()
+        Settings.sharedInstance.generalHasLaunchedOnce.value = true
+      } else {
+        if let options = launchOptions {
+          if let _ = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
+            showDayViewControllerForToday()
+          }
         }
       }
     }
+
+    setupCoreDataSynchronization()
 
     return true
   }
@@ -82,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "updateNotifications:",
-      name: NSManagedObjectContextObjectsDidChangeNotification,
+      name: NSManagedObjectContextDidSaveNotification,
       object: nil)
   }
 
@@ -171,8 +180,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func prePopulateCoreData() {
-    if !CoreDataPrePopulation.isCoreDataPrePopulated(managedObjectContext: CoreDataStack.privateContext) {
-      CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: CoreDataStack.privateContext)
+    CoreDataStack.privateContext.performBlockAndWaitUsingGroup {
+      if !CoreDataPrePopulation.isCoreDataPrePopulated(managedObjectContext: CoreDataStack.privateContext) {
+        CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: CoreDataStack.privateContext, saveContext: true)
+      }
     }
   }
   
