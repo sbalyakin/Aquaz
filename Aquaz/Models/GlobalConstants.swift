@@ -30,7 +30,7 @@ class GlobalConstants {
   static let notificationFullVersionPurchaseStateDidChange = "AquazFullVersionPurchaseStateDidChange"
 
   static let numberOfIntakesToShowAd = 5
-  static let numberOfIntakesToShowReviewAlert = 25
+  static let numberOfIntakesToShowReviewAlert = 15
   
   static let appodealApiKey = "415fd842e6bed692baf66af065cc4620722e24ac20aac2db"
   
