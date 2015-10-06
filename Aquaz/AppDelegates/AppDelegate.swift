@@ -33,10 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       Logger.setup(logLevel: .Warning, assertLevel: .None, consoleLevel: .None, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
     #endif
 
-    if #available(iOS 9.0, *) {
-      setupHealthKitSynchronization()
-    }
-    
     UIHelper.applyStylization()
     NotificationsHelper.setApplicationIconBadgeNumber(0)
     
@@ -69,12 +65,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     }
 
-    setupCoreDataSynchronization()
+    setupSynchronizationWithCoreData()
+
+    if #available(iOS 9.0, *) {
+      setupHealthKitSynchronization()
+    }
 
     return true
   }
   
-  private func setupCoreDataSynchronization() {
+  private func setupSynchronizationWithCoreData() {
     wormhole = MMWormhole(applicationGroupIdentifier: GlobalConstants.appGroupName, optionalDirectory: GlobalConstants.wormholeOptionalDirectory)
     
     wormhole.listenForMessageWithIdentifier(GlobalConstants.wormholeMessageFromWidget) { [weak self] messageObject in

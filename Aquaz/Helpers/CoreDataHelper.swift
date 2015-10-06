@@ -55,8 +55,8 @@ extension NSManagedObjectContext {
       dispatch_group_enter(dispatchGroup)
       
       performBlock {
-        dispatch_group_leave(dispatchGroup)
         block()
+        dispatch_group_leave(dispatchGroup)
       }
       
       dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER);
