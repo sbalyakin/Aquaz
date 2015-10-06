@@ -213,7 +213,7 @@ class WaterGoal: CodingManagedObject, NamedEntity {
         laterWaterGoal = waterGoal
         
       case .OrderedDescending: // unreal case
-        Logger.logError(Logger.Messages.logicalError)
+        Logger.logError(Logger.Messages.logicalError, logDetails: ["currentDay": currentDay.description, "waterGoalDate": waterGoalDate.description])
         earlierWaterGoal = waterGoal
       }
     }
