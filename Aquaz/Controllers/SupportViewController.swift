@@ -16,7 +16,8 @@ class SupportViewController: UIViewController {
   @IBOutlet weak var tellToFriendTextView: UITextView!
   @IBOutlet weak var reviewTextView: UITextView!
   
-  private struct Strings {
+  private struct LocalizedStrings {
+    
     lazy var applicationTitleTemplate: String = NSLocalizedString(
       "SVC:Aquaz %@",
       value: "Aquaz %@",
@@ -73,9 +74,19 @@ class SupportViewController: UIViewController {
       "SVC:Twitter account is not found",
       value: "Twitter account is not found",
       comment: "SupportViewController: Information message if no Twitter account found on device")
+
+    lazy var cantSendEmailsTitle: String = NSLocalizedString(
+      "SVC:Unable to send mail",
+      value: "Unable to send mail",
+      comment: "SupportViewController: Title of an alert shown if the device is not set up to send e-mails")
+
+    lazy var cantSendEmailsBody: String = NSLocalizedString(
+      "SVC:Please check your mail settings",
+      value: "Please check you mail settings",
+      comment: "SupportViewController: Body of an alert shown if the device is not set up to send e-mails")
   }
   
-  private var strings = Strings()
+  private var localizedStrings = LocalizedStrings()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -98,24 +109,28 @@ class SupportViewController: UIViewController {
   }
 
   private func setupApplicationTitle() {
-    applicationTitle.text = String.localizedStringWithFormat(strings.applicationTitleTemplate, applicationVersion)
+    applicationTitle.text = String.localizedStringWithFormat(localizedStrings.applicationTitleTemplate, applicationVersion)
   }
   
   @IBAction func tellToFriendsByMail() {
-    let link = "<a href=\(GlobalConstants.appStoreLink)>\(GlobalConstants.appStoreLink)</a>"
-    let body = "\(strings.mailToFriendsWelcomeBody)<br><br>\(link)"
+    if !checkSendingEmailAvailability() {
+      return
+    }
     
-    showEmailComposer(subject: strings.mailToFriendsSubject, body: body, recipients: nil)
+    let link = "<a href=\(GlobalConstants.appStoreLink)>\(GlobalConstants.appStoreLink)</a>"
+    let body = "\(localizedStrings.mailToFriendsWelcomeBody)<br><br>\(link)"
+    
+    showEmailComposer(subject: localizedStrings.mailToFriendsSubject, body: body, recipients: nil)
   }
   
   @IBAction func tellToFriendsByTwitter() {
     if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
       let controller = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-      let text = "\(strings.twitterText) \(GlobalConstants.appStoreLink)"
+      let text = "\(localizedStrings.twitterText) \(GlobalConstants.appStoreLink)"
       controller.setInitialText(text)
       presentViewController(controller, animated:true, completion:nil)
     } else {
-      let alert = UIAlertView(title: nil, message: strings.twitterNotFound, delegate: nil, cancelButtonTitle: strings.ok)
+      let alert = UIAlertView(title: nil, message: localizedStrings.twitterNotFound, delegate: nil, cancelButtonTitle: localizedStrings.ok)
       alert.show()
     }
   }
@@ -123,21 +138,36 @@ class SupportViewController: UIViewController {
   @IBAction func tellToFriendsByFacebook() {
     if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
       let controller = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-      let text = "\(strings.twitterText) \(GlobalConstants.appStoreLink)"
+      let text = "\(localizedStrings.twitterText) \(GlobalConstants.appStoreLink)"
       controller.setInitialText(text)
       presentViewController(controller, animated:true, completion:nil)
     } else {
-      let alert = UIAlertView(title: nil, message: strings.facebookNotFound, delegate: nil, cancelButtonTitle: strings.ok)
+      let alert = UIAlertView(title: nil, message: localizedStrings.facebookNotFound, delegate: nil, cancelButtonTitle: localizedStrings.ok)
       alert.show()
     }
   }
   
   @IBAction func sendMailToDevelopers() {
+    if !checkSendingEmailAvailability() {
+      return
+    }
+    
     let actionSheet = UIActionSheet(title: nil, delegate: self,
-      cancelButtonTitle: strings.cancel,
+      cancelButtonTitle: localizedStrings.cancel,
       destructiveButtonTitle: nil,
-      otherButtonTitles: strings.feedbackOfferAction, strings.feedbackBugAction, strings.feedbackHelpAction)
+      otherButtonTitles: localizedStrings.feedbackOfferAction, localizedStrings.feedbackBugAction, localizedStrings.feedbackHelpAction)
     actionSheet.showInView(view)
+  }
+  
+  private func checkSendingEmailAvailability() -> Bool {
+    if MFMailComposeViewController.canSendMail() {
+      return true
+    }
+    
+    let alert = UIAlertView(title: localizedStrings.cantSendEmailsTitle, message: localizedStrings.cantSendEmailsBody, delegate: nil, cancelButtonTitle: localizedStrings.ok)
+    alert.show()
+    
+    return false
   }
   
   private func showEmailComposer(subject subject: String, body: String, recipients: [String]?) {
