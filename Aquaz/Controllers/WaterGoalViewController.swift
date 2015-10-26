@@ -380,14 +380,14 @@ private extension Units.Weight {
   var minimumValue: Double {
     switch self {
     case Kilograms: return 30
-    case Pounds:    return 66
+    case Pounds:    return 29.93709642
     }
   }
   
   var maximumValue: Double {
     switch self {
     case Kilograms: return 300
-    case Pounds:    return 660
+    case Pounds:    return 299.3709642
     }
   }
   
