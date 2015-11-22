@@ -12,7 +12,7 @@ import UIKit
 @objc(DrinkView)
 class DrinkView: UIView {
 
-  var drinkType: Drink.DrinkType! {
+  var drinkType: DrinkType! {
     didSet {
       setNeedsDisplay()
     }
@@ -40,7 +40,7 @@ class DrinkView: UIView {
     #endif
   }
 
-  private func drawDrink(rect: CGRect, drawFunction: Drink.DrawDrinkFunction, drinkColor: UIColor) {
+  private func drawDrink(rect: CGRect, drawFunction: StyleKit.DrawDrinkFunction, drinkColor: UIColor) {
     let minDimension = trunc(min(rect.width, rect.height))
     let drawRect = CGRect(x: trunc(rect.minX + (rect.width - minDimension) / 2), y: trunc(rect.minY + (rect.height - minDimension) / 2), width: minDimension, height: minDimension)
     

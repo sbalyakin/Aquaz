@@ -22,12 +22,12 @@ class SelectDrinkViewController: UIViewController {
 
   private var mainManagedObjectContext: NSManagedObjectContext { return CoreDataStack.mainContext }
 
-  private var displayedDrinkTypes: [Drink.DrinkType] = [
+  private var displayedDrinkTypes: [DrinkType] = [
     .Water, .Tea,    .Coffee,
     .Milk,  .Juice,  .Sport,
     .Soda,  .Energy, Settings.sharedInstance.uiSelectedAlcoholicDrink.value]
   
-  private var drinks: [Drink.DrinkType: Drink] = [:]
+  private var drinks: [DrinkType: Drink] = [:]
   
   private var areDrinksLoaded: Bool {
     return !drinks.isEmpty
@@ -87,7 +87,7 @@ class SelectDrinkViewController: UIViewController {
     collectionView.reloadData()
   }
   
-  private func changeAlcoholicDrinkTo(drinkType drinkType: Drink.DrinkType) {
+  private func changeAlcoholicDrinkTo(drinkType drinkType: DrinkType) {
     displayedDrinkTypes[displayedDrinkTypes.count - 1] = drinkType
     Settings.sharedInstance.uiSelectedAlcoholicDrink.value = drinkType
     
@@ -240,7 +240,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
   private var popupView: UIView!
   private var popupCollectionView: UICollectionView!
   
-  private let popupDrinkTypes: [Drink.DrinkType] = [ .Beer, .Wine, .HardLiquor ]
+  private let popupDrinkTypes: [DrinkType] = [ .Beer, .Wine, .HardLiquor ]
   private weak var selectDrinkViewController: SelectDrinkViewController!
   private var mainManagedObjectContext: NSManagedObjectContext { return CoreDataStack.mainContext }
 

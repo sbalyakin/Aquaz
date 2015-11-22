@@ -12,7 +12,7 @@ final class Settings {
 
   static let sharedInstance = Settings()
   
-  private static let userDefaults = NSUserDefaults(suiteName: GlobalConstants.appGroupName)!
+  static let userDefaults = NSUserDefaults(suiteName: GlobalConstants.appGroupName)!
 
   // MARK: Initializer
   
@@ -172,7 +172,7 @@ final class Settings {
     key: "UI - Selected statistics page", initialValue: .Week,
     userDefaults: userDefaults)
 
-  lazy var uiSelectedAlcoholicDrink: SettingsEnumItem<Drink.DrinkType> = SettingsEnumItem(
+  lazy var uiSelectedAlcoholicDrink: SettingsEnumItem<DrinkType> = SettingsEnumItem(
     key: "UI - Selected alcoholic drink", initialValue: .Wine,
     userDefaults: userDefaults)
 
@@ -247,6 +247,22 @@ final class Settings {
     key: "Notifications - Check water goal reaching", initialValue: false,
     userDefaults: userDefaults)
 
+  // MARK: Setting items for Apple Watch
+  
+  func getExportedSettingsForWatchApp() -> [String: AnyObject] {
+    var exportedSettings = [String: AnyObject]()
+    
+    addSettingItemToDictionary(dictionary: &exportedSettings, settingItem: generalVolumeUnits)
+    
+    return exportedSettings
+  }
+  
+  private func addSettingItemToDictionary<T>(inout dictionary dictionary: [String: AnyObject], settingItem: SettingsItemBase<T>) {
+    if let pair = settingItem.keyValuePair {
+      dictionary[pair.key] = pair.value
+    }
+  }
+  
   // MARK: Helpers
   
   private class var isMetric: Bool {
@@ -265,4 +281,22 @@ final class Settings {
     return WaterGoalCalculator.calcDailyWaterIntake(data: data)
   }
   
+}
+
+extension Units.Length {
+  static var settings: Units.Length {
+    return Settings.sharedInstance.generalHeightUnits.value
+  }
+}
+
+extension Units.Volume {
+  static var settings: Units.Volume {
+    return Settings.sharedInstance.generalVolumeUnits.value
+  }
+}
+
+extension Units.Weight {
+  static var settings: Units.Weight {
+    return Settings.sharedInstance.generalWeightUnits.value
+  }
 }

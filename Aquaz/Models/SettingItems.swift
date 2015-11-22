@@ -73,53 +73,88 @@ protocol ObservationRemover : class {
 
 
 /// Generic class for settings item. Automatically writes changes of a value to user defaults. Provides possibility to observe changes of a value by observers.
-class SettingsItemBase<ValueType>: ObservableSettingsItem<ValueType> {
+class SettingsItemBase<ValueType: Equatable>: ObservableSettingsItem<ValueType> {
+
+  // MARK: Properties
   
   let key: String
-  let userDefaults: NSUserDefaults
-  let initialValue: ValueType
   
   var value: ValueType {
-    didSet {
-      writeValue(value)
-      notify(value)
+    get {
+      return rawValue
+    }
+    set {
+      if (newValue == value) {
+        return
+      }
+      
+      rawValue = newValue
+      
+      writeValue(rawValue)
       userDefaults.synchronize()
+      notify(rawValue)
     }
   }
+
+  var keyValuePair: (key: String, value: AnyObject)? {
+    if let value = userDefaults.objectForKey(key) {
+      return (key: key, value: value)
+    }
+    
+    return nil
+  }
+  
+  private let userDefaults: NSUserDefaults
+  private let initialValue: ValueType
+  private var rawValue: ValueType
+
+  // MARK: Methods
   
   convenience init(key: String, initialValue: ValueType) {
     self.init(key: key, initialValue: initialValue, userDefaults: NSUserDefaults.standardUserDefaults())
   }
   
   init(key: String, initialValue: ValueType, userDefaults: NSUserDefaults) {
-    self.value = initialValue
+    self.rawValue = initialValue
     self.key = key
     self.initialValue = initialValue
     self.userDefaults = userDefaults
     
     super.init()
     
-    readFromUserDefaults()
+    if (!readFromUserDefaults(sendNotification: false)) {
+      // Initialize the setting item in the user defaults
+      writeToUserDefaults()
+    }
   }
   
   /// Reads the value from user defaults
-  func readFromUserDefaults() {
-    readValue(&value)
+  func readFromUserDefaults(sendNotification sendNotification: Bool) -> Bool {
+    let oldValue = rawValue
+    
+    let success = readValue(&rawValue)
+    
+    if rawValue != oldValue && sendNotification {
+      notify(rawValue)
+    }
+    
+    return success
   }
   
   /// Write the value to user defaults
   func writeToUserDefaults() {
-    writeValue(value)
+    writeValue(rawValue)
   }
   
   /// Removes the value from user defaults
   func removeFromUserDefaults() {
     userDefaults.removeObjectForKey(key)
-    value = initialValue
+    rawValue = initialValue
   }
   
-  private func readValue(inout outValue: ValueType) {
+  private func readValue(inout outValue: ValueType) -> Bool {
     assert(false, "readValue function must be overriden")
+    return false
   }
   
   private func writeValue(value: ValueType) {
@@ -129,7 +164,7 @@ class SettingsItemBase<ValueType>: ObservableSettingsItem<ValueType> {
 }
 
 /// Settings item class for enumerations
-class SettingsEnumItem<T: RawRepresentable where T.RawValue == Int>: SettingsItemBase<T> {
+class SettingsEnumItem<T: RawRepresentable where T: Equatable, T.RawValue == Int>: SettingsItemBase<T> {
   
   convenience init(key: String, initialValue: T) {
     self.init(key: key, initialValue: initialValue, userDefaults: NSUserDefaults.standardUserDefaults())
@@ -139,12 +174,15 @@ class SettingsEnumItem<T: RawRepresentable where T.RawValue == Int>: SettingsIte
     super.init(key: key, initialValue: initialValue, userDefaults: userDefaults)
   }
   
-  private override func readValue(inout outValue: T) {
+  private override func readValue(inout outValue: T) -> Bool {
     if let rawValue = userDefaults.objectForKey(key) as? T.RawValue {
       if let value = T(rawValue: rawValue) {
         outValue = value
+        return true
       }
     }
+    
+    return false
   }
   
   private override func writeValue(value: T) {
@@ -154,7 +192,7 @@ class SettingsEnumItem<T: RawRepresentable where T.RawValue == Int>: SettingsIte
 }
 
 /// Settings item class for ordinal types (Int, Bool etc.)
-class SettingsOrdinalItem<T>: SettingsItemBase<T> {
+class SettingsOrdinalItem<T: Equatable>: SettingsItemBase<T> {
   
   convenience init(key: String, initialValue: T) {
     self.init(key: key, initialValue: initialValue, userDefaults: NSUserDefaults.standardUserDefaults())
@@ -164,10 +202,13 @@ class SettingsOrdinalItem<T>: SettingsItemBase<T> {
     super.init(key: key, initialValue: initialValue, userDefaults: userDefaults)
   }
   
-  private override func readValue(inout outValue: T) {
+  private override func readValue(inout outValue: T) -> Bool {
     if let value = userDefaults.objectForKey(key) as? T {
       outValue = value
+      return true
     }
+    
+    return false
   }
   
   private override func writeValue(value: T) {

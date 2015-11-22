@@ -490,7 +490,7 @@ class DoubleCollection: CollectionType {
 }
 
 // MARK: SettingsItemConnector -
-class SettingsItemConnector<Value>: ValueExternalStorage<Value> {
+class SettingsItemConnector<Value: Equatable>: ValueExternalStorage<Value> {
   
   override var value: Value {
     didSet {

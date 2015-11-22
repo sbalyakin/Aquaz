@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
   
-  private var wormhole: MMWormhole!
+  private var wormholeDataProvider: WormholeDataProvider!
   
   private struct Constants {
     static let defaultRootViewController = "Root View Controller"
@@ -65,30 +65,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     }
 
+    wormholeDataProvider = WormholeDataProvider()
+    
     setupSynchronizationWithCoreData()
 
     if #available(iOS 9.0, *) {
       setupHealthKitSynchronization()
+      
+      // Just for creating an instance of the connectivity provider
+      ConnectivityProvider.sharedInstance
     }
 
     return true
   }
   
   private func setupSynchronizationWithCoreData() {
-    wormhole = MMWormhole(applicationGroupIdentifier: GlobalConstants.appGroupName, optionalDirectory: GlobalConstants.wormholeOptionalDirectory)
-    
-    wormhole.listenForMessageWithIdentifier(GlobalConstants.wormholeMessageFromWidget) { [weak self] messageObject in
-      if let notification = messageObject as? NSNotification {
-        CoreDataStack.mergeAllContextsWithNotification(notification)
-        self?.wormhole?.clearMessageContentsForIdentifier(GlobalConstants.wormholeMessageFromWidget)
-      }
-    }
-
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "managedObjectContextDidSave:",
-      name: NSManagedObjectContextDidSaveNotification,
-      object: nil)
-
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "updateNotifications:",
       name: NSManagedObjectContextDidSaveNotification,
@@ -98,10 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   @available(iOS 9.0, *)
   private func setupHealthKitSynchronization() {
     HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContenxt(CoreDataStack.mainContext)
-  }
-
-  func managedObjectContextDidSave(notification: NSNotification) {
-    wormhole?.passMessageObject(notification, identifier: GlobalConstants.wormholeMessageFromAquaz)
   }
 
   func updateNotifications(notification: NSNotification) {

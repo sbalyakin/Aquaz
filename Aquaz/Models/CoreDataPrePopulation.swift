@@ -18,100 +18,100 @@ class CoreDataPrePopulation {
   
   class func prePopulateCoreData(managedObjectContext managedObjectContext: NSManagedObjectContext, saveContext: Bool) {
     Drink.addEntity(
-      index: Drink.DrinkType.Water.rawValue,
+      index: DrinkType.Water.rawValue,
       name: "Water",
-      hydrationFactor: 1.00,
-      dehydrationFactor: 0,
+      hydrationFactor: DrinkType.Water.hydrationFactor,
+      dehydrationFactor: DrinkType.Water.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
     
     Drink.addEntity(
-      index: Drink.DrinkType.Coffee.rawValue,
+      index: DrinkType.Coffee.rawValue,
       name: "Coffee",
-      hydrationFactor: 0.98,
-      dehydrationFactor: 0,
+      hydrationFactor: DrinkType.Coffee.hydrationFactor,
+      dehydrationFactor: DrinkType.Coffee.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
     
     Drink.addEntity(
-      index: Drink.DrinkType.Tea.rawValue,
+      index: DrinkType.Tea.rawValue,
       name: "Tea",
-      hydrationFactor: 0.99,
-      dehydrationFactor: 0,
+      hydrationFactor: DrinkType.Tea.hydrationFactor,
+      dehydrationFactor: DrinkType.Tea.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
 
     Drink.addEntity(
-      index: Drink.DrinkType.Soda.rawValue,
+      index: DrinkType.Soda.rawValue,
       name: "Soda",
-      hydrationFactor: 0.89,
-      dehydrationFactor: 0,
+      hydrationFactor: DrinkType.Soda.hydrationFactor,
+      dehydrationFactor: DrinkType.Soda.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
     
     Drink.addEntity(
-      index: Drink.DrinkType.Juice.rawValue,
+      index: DrinkType.Juice.rawValue,
       name: "Juice",
-      hydrationFactor: 0.85,
-      dehydrationFactor: 0,
+      hydrationFactor: DrinkType.Juice.hydrationFactor,
+      dehydrationFactor: DrinkType.Juice.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
     
     Drink.addEntity(
-      index: Drink.DrinkType.Milk.rawValue,
+      index: DrinkType.Milk.rawValue,
       name: "Milk",
-      hydrationFactor: 0.87,
-      dehydrationFactor: 0,
+      hydrationFactor: DrinkType.Milk.hydrationFactor,
+      dehydrationFactor: DrinkType.Milk.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
 
     Drink.addEntity(
-      index: Drink.DrinkType.Sport.rawValue,
+      index: DrinkType.Sport.rawValue,
       name: "Sport",
-      hydrationFactor: 0.95,
-      dehydrationFactor: 0,
+      hydrationFactor: DrinkType.Sport.hydrationFactor,
+      dehydrationFactor: DrinkType.Sport.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
     
     Drink.addEntity(
-      index: Drink.DrinkType.Energy.rawValue,
+      index: DrinkType.Energy.rawValue,
       name: "Energy",
-      hydrationFactor: 0.90,
-      dehydrationFactor: 0,
+      hydrationFactor: DrinkType.Energy.hydrationFactor,
+      dehydrationFactor: DrinkType.Energy.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
 
     Drink.addEntity(
-      index: Drink.DrinkType.Beer.rawValue,
+      index: DrinkType.Beer.rawValue,
       name: "Beer",
-      hydrationFactor: 0.95,
-      dehydrationFactor: 0.5,
+      hydrationFactor: DrinkType.Beer.hydrationFactor,
+      dehydrationFactor: DrinkType.Beer.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
     
     Drink.addEntity(
-      index: Drink.DrinkType.Wine.rawValue,
+      index: DrinkType.Wine.rawValue,
       name: "Wine",
-      hydrationFactor: 0.85,
-      dehydrationFactor: 1.5,
+      hydrationFactor: DrinkType.Wine.hydrationFactor,
+      dehydrationFactor: DrinkType.Wine.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
     
     Drink.addEntity(
-      index: Drink.DrinkType.HardLiquor.rawValue,
+      index: DrinkType.HardLiquor.rawValue,
       name: "HardLiquor",
-      hydrationFactor: 0.6,
-      dehydrationFactor: 4,
+      hydrationFactor: DrinkType.HardLiquor.hydrationFactor,
+      dehydrationFactor: DrinkType.HardLiquor.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)

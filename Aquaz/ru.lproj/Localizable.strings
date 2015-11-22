@@ -180,7 +180,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "NH:Drink" = "Напиток";
 
 /* NotificationsHelper: Text for alert body of notifications */
-"NH:It is time to drink!" = "Время выпить воды!";
+"NH:It's time to drink water!" = "Время выпить воды!";
 
 /* NotificationSounds: alarm sound named [Alarm] */
 "NS:Alarm" = "Тревога";

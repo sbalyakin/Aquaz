@@ -10,7 +10,7 @@
 
 import UIKit
 
-final class StyleKit : NSObject {
+final class StyleKit {
   
   // MARK: Cache
   
@@ -120,6 +120,8 @@ final class StyleKit : NSObject {
   
   // MARK: Drawing Methods
   
+  typealias DrawDrinkFunction = (frame: CGRect) -> Void
+
   class func drawWaterDrink(frame frame: CGRect) {
     
     
@@ -1004,13 +1006,4 @@ final class StyleKit : NSObject {
     bezier3Path.fill()
   }
   
-}
-
-
-@objc protocol StyleKitSettableImage {
-  func setImage(image: UIImage!)
-}
-
-@objc protocol StyleKitSettableSelectedImage {
-  func setSelectedImage(image: UIImage!)
 }

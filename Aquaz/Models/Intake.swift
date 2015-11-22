@@ -161,10 +161,50 @@ class Intake: CodingManagedObject, NamedEntity {
         let drinkIndex = record["drink.index"] as! NSNumber
         let drink = drinks[drinkIndex.integerValue]!
         let dehydration = (record[overallWaterAmount.name] as! Double) * drink.dehydrationFactor
-        totalDehydration = dehydration
+        totalDehydration += dehydration
       }
       
       return totalDehydration
+    } catch let error as NSError {
+      Logger.logError(Logger.Messages.failedToExecuteFetchRequest, error: error)
+      return 0
+    }
+  }
+  
+  /// Fetches total hydration amount based on intakes of a passed day
+  class func fetchTotalHydrationAmountForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> Double {
+    let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
+    let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
+    let predicate = NSPredicate(format: "(date >= %@) AND (date < %@) AND (drink.hydrationFactor != 0)", argumentArray: [beginDate, endDate])
+    
+    let expression = NSExpression(forFunction: "sum:", arguments: [NSExpression(forKeyPath: "amount")])
+    
+    let overallWaterAmount = NSExpressionDescription()
+    overallWaterAmount.expression = expression
+    overallWaterAmount.expressionResultType = .DoubleAttributeType
+    overallWaterAmount.name = "overallWaterAmount"
+    
+    let fetchRequest = NSFetchRequest()
+    fetchRequest.entity = LoggedActions.entityDescriptionForEntity(Intake.self, inManagedObjectContext: managedObjectContext)
+    fetchRequest.predicate = predicate
+    fetchRequest.propertiesToFetch = ["drink.index", overallWaterAmount]
+    fetchRequest.propertiesToGroupBy = ["drink.index"]
+    fetchRequest.resultType = .DictionaryResultType
+    
+    let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
+    
+    do {
+      let fetchResults = try managedObjectContext.executeFetchRequest(fetchRequest)
+      var totalHydration: Double = 0
+      
+      for record in fetchResults as! [NSDictionary] {
+        let drinkIndex = record["drink.index"] as! NSNumber
+        let drink = drinks[drinkIndex.integerValue]!
+        let hydration = (record[overallWaterAmount.name] as! Double) * drink.hydrationFactor
+        totalHydration += hydration
+      }
+      
+      return totalHydration
     } catch let error as NSError {
       Logger.logError(Logger.Messages.failedToExecuteFetchRequest, error: error)
       return 0

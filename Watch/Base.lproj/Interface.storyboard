@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9019"/>
+    </dependencies>
+    <scenes>
+        <!--Main Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="MainInterfaceController" customModule="Watch_Extension">
+                    <items>
+                        <group width="109" height="109" alignment="center" id="frh-W9-RKR">
+                            <items>
+                                <imageView width="1" height="1" alignment="center" contentMode="scaleAspectFit" id="REa-oF-Lxe"/>
+                            </items>
+                            <variation key="device=watch42mm" height="132" width="132"/>
+                        </group>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Add Intake" id="juT-2H-hl6">
+                            <connections>
+                                <segue destination="AM9-b2-pZ0" kind="push" id="rqy-iS-Ekp"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="progressGroup" destination="frh-W9-RKR" id="9Tp-2a-JYt"/>
+                        <outlet property="progressImage" destination="REa-oF-Lxe" id="K6i-bb-n09"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="235" y="347"/>
+        </scene>
+        <!--DrinksInterfaceController-->
+        <scene sceneID="LRv-Nu-MKq">
+            <objects>
+                <controller identifier="DrinksInterfaceController" id="AM9-b2-pZ0" customClass="DrinksInterfaceController" customModule="Watch_Extension">
+                    <items>
+                        <picker width="82" height="82" alignment="center" style="stack" indicatorMode="shownWhileFocused" id="MI8-NV-rYM">
+                            <variation key="device=watch42mm" height="105" width="105"/>
+                            <connections>
+                                <action selector="pickerValueWasChanged:" destination="AM9-b2-pZ0" id="6FB-Ub-dVr"/>
+                            </connections>
+                        </picker>
+                        <label alignment="center" text="{Drink}" id="lOU-9h-lSi"/>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Choose" id="Rga-XY-7I4">
+                            <connections>
+                                <segue destination="1Fc-bJ-WRS" kind="push" identifier="" id="Q9h-PF-yon"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="drinkLabel" destination="lOU-9h-lSi" id="J6R-8F-gH5"/>
+                        <outlet property="picker" destination="MI8-NV-rYM" id="gba-rT-lug"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="444" y="348"/>
+        </scene>
+        <!--Amount Interface Controller-->
+        <scene sceneID="RCg-de-BVc">
+            <objects>
+                <controller id="1Fc-bJ-WRS" customClass="AmountInterfaceController" customModule="Watch_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="Nvl-ib-kOV" userLabel="Main Group">
+                            <items>
+                                <picker width="2" height="2" alignment="left" style="sequence" id="7yK-Ie-Ffd">
+                                    <connections>
+                                        <action selector="pickerValueWasChanged:" destination="1Fc-bJ-WRS" id="1N9-j0-B7b"/>
+                                    </connections>
+                                </picker>
+                                <group width="109" height="109" alignment="center" backgroundImage="AmountBackground" id="fh4-4A-ciD" userLabel="Progress Background Group">
+                                    <items>
+                                        <group width="1" height="1" alignment="center" id="kVT-IB-qHi" userLabel="Text Progress Group">
+                                            <items>
+                                                <imageView width="1" height="1" alignment="center" contentMode="scaleAspectFit" id="UTb-gu-qPu" userLabel="Progress Image"/>
+                                            </items>
+                                        </group>
+                                    </items>
+                                    <variation key="device=watch42mm" height="132" width="132"/>
+                                </group>
+                            </items>
+                        </group>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Save" id="vsy-5i-44g">
+                            <connections>
+                                <action selector="saveWasTapped" destination="1Fc-bJ-WRS" id="Ind-w6-uzB"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="picker" destination="7yK-Ie-Ffd" id="WuD-SD-8cH"/>
+                        <outlet property="progressBackgroundGroup" destination="fh4-4A-ciD" id="cOm-ZP-aUT"/>
+                        <outlet property="progressImage" destination="UTb-gu-qPu" id="62D-6L-Joa"/>
+                        <outlet property="textProgressGroup" destination="kVT-IB-qHi" id="o7K-tI-lqB"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="647" y="347"/>
+        </scene>
+        <!--Glance Interface Controller-->
+        <scene sceneID="BOz-TT-tkC">
+            <objects>
+                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="Watch" customModuleProvider="target">
+                    <items>
+                        <group alignment="left" id="1Sn-Qd-RJu">
+                            <items>
+                                <imageView width="47" height="47" alignment="left" image="AppLogo" id="Yes-oX-nmJ"/>
+                                <label alignment="left" verticalAlignment="center" text="Aquaz" textAlignment="center" id="08b-v5-9vn"/>
+                            </items>
+                        </group>
+                        <group alignment="left" id="uCw-4Q-Ouw">
+                            <items>
+                                <group width="102" height="102" alignment="center" id="7Hp-hv-1az">
+                                    <items>
+                                        <imageView width="1" height="1" alignment="center" contentMode="scaleAspectFit" id="ZhL-ek-24O"/>
+                                    </items>
+                                    <variation key="device=watch42mm" height="114" width="114"/>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
+                    <connections>
+                        <outlet property="progressGroup" destination="7Hp-hv-1az" id="OJF-zk-NUN"/>
+                        <outlet property="progressImage" destination="ZhL-ek-24O" id="sIa-W9-LvM"/>
+                    </connections>
+                </glanceController>
+            </objects>
+            <point key="canvasLocation" x="235" y="672"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Drink water" id="XkS-y5-khE"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf">
+                        <color key="sashColor" red="0.011764705882352941" green="0.23137254901960785" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                    </notificationCategory>
+                    <color key="backgroundColor" red="0.0" green="0.60392156862745094" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="XkS-y5-khE" id="49B-RR-99y"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="235" y="1001"/>
+        </scene>
+    </scenes>
+</document>

@@ -28,6 +28,7 @@ class GlobalConstants {
   static let notificationManagedObjectContextWasMerged = "AquazManagedObjectContextWasMerged"
   static let notificationFullVersionIsPurchased = "AquazFullVersionIsPurchased"
   static let notificationFullVersionPurchaseStateDidChange = "AquazFullVersionPurchaseStateDidChange"
+  static let notificationWatchAddIntake = "AquazWatchAddIntake"
 
   static let numberOfIntakesToShowAd = 5
   static let numberOfIntakesToShowReviewAlert = 15

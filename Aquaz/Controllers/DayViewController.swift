@@ -304,7 +304,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     intakesMultiProgressView.emptySectionColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1)
     
     for drinkIndex in 0..<Drink.getDrinksCount() {
-      if let drinkType = Drink.DrinkType(rawValue: drinkIndex) {
+      if let drinkType = DrinkType(rawValue: drinkIndex) {
         let section = intakesMultiProgressView.addSection(color: drinkType.mainColor)
         multiProgressSections[drinkIndex] = section
       } else {
