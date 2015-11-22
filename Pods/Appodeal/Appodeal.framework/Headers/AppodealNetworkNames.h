@@ -24,8 +24,15 @@ FOUNDATION_EXPORT NSString *const kAppodealUnityAdsNetworkName;
 FOUNDATION_EXPORT NSString *const kAppodealVungleNetworkName;
 FOUNDATION_EXPORT NSString *const kAppodealSmaatoNetworkName;
 FOUNDATION_EXPORT NSString *const kAppodealYandexNetworkName;
-FOUNDATION_EXPORT NSString *const kAppodealStarAppNetworkName;
+FOUNDATION_EXPORT NSString *const kAppodealStartAppNetworkName;
 FOUNDATION_EXPORT NSString *const kAppodealAppNexusNetworkName;
 FOUNDATION_EXPORT NSString *const kAppodealRubiconNetworkName;
+FOUNDATION_EXPORT NSString *const kAppodealAvocarrotNetworkName;
+FOUNDATION_EXPORT NSString *const kAppodealPubNativeNetworkName;
+FOUNDATION_EXPORT NSString *const kAppodealFlurryNetworkName;
+FOUNDATION_EXPORT NSString *const kAppodealLiveRailNetworkName;
+FOUNDATION_EXPORT NSString *const kAppodealSpotXNetworkName;
+FOUNDATION_EXPORT NSString *const kAppodealVASTNetworkName;
+FOUNDATION_EXPORT NSString *const kAppodealInnerActiveNetworkName;
 
 FOUNDATION_EXPORT NSString * AppodealPrettyNetworkName(NSString *networkName);

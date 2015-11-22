@@ -34,6 +34,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, copy, readonly, nullable) NSArray *contextTags;
 
+/**
+ * Custom parameters containing NSString keys and values.
+ */
+@property (nonatomic, copy, readonly, nullable) NSDictionary *parameters;
+
 - (instancetype)init __attribute__((unavailable("Use designated initializer")));
 
 /**
@@ -46,7 +51,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithLocation:(nullable CLLocation *)location
                     contextQuery:(nullable NSString *)contextQuery
-                     contextTags:(nullable NSArray *)contextTags NS_DESIGNATED_INITIALIZER;
+                     contextTags:(nullable NSArray *)contextTags;
+
+- (instancetype)initWithLocation:(nullable CLLocation *)location
+                    contextQuery:(nullable NSString *)contextQuery
+                     contextTags:(nullable NSArray *)contextTags
+                      parameters:(nullable NSDictionary *)parameters NS_DESIGNATED_INITIALIZER;
 
 @end
 

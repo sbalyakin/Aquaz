@@ -1,1 +1,1 @@
-../../../InMobiSDK/InMobiSDK/InMobi-iOS-SDK/Libs/IMNative.h
+../../../InMobiSDK/Libs/Headers/IMNative.h

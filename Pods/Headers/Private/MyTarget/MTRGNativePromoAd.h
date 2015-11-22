@@ -1,1 +1,0 @@
-../../../MyTarget/lib/MTRGNativePromoAd.h

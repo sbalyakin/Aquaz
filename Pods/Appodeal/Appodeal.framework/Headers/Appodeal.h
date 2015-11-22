@@ -9,28 +9,44 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import "AppodealInterstitialDelegate.h"
-#import "AppodealBannerDelegate.h"
-#import "AppodealVideoDelegate.h"
-#import "AppodealNetworkNames.h"
-#import "AppodealUnitSizes.h"
-#import "AppodealConstants.h"
+#import <Appodeal/AppodealInterstitialDelegate.h>
+#import <Appodeal/AppodealBannerDelegate.h>
+#import <Appodeal/AppodealVideoDelegate.h>
+#import <Appodeal/AppodealRewardedVideoDelegate.h>
+#import <Appodeal/AppodealNetworkNames.h>
+#import <Appodeal/AppodealUnitSizes.h>
+#import <Appodeal/AppodealConstants.h>
 
+#import <Appodeal/AppodealBannerView.h>
+
+#import <Appodeal/AppodealImage.h>
+#import <Appodeal/AppodealNativeAdService.h>
+#import <Appodeal/AppodealNativeAdViewAttributes.h>
+#import <Appodeal/AppodealNativeAdView.h>
+#import <Appodeal/UIView+AppodealNativeAd.h>
+#import <Appodeal/AppodealNativeAdService.h>
 
 typedef NS_OPTIONS(NSInteger, AppodealAdType) {
-    AppodealAdTypeInterstitial = 1 << 0,
-    AppodealAdTypeVideo        = 1 << 1,
-    AppodealAdTypeBanner       = 1 << 2,
-    AppodealAdTypeAll          = AppodealAdTypeInterstitial | AppodealAdTypeVideo | AppodealAdTypeBanner
+    AppodealAdTypeInterstitial      = 1 << 0,
+    AppodealAdTypeSkippableVideo    = 1 << 1,
+    AppodealAdTypeVideo __attribute__((deprecated("use AppodealAdTypeSkippableVideo"))) = AppodealAdTypeSkippableVideo,
+    AppodealAdTypeBanner            = 1 << 2,
+    AppodealAdTypeNativeAd          = 1 << 3,
+    AppodealAdTypeRewardedVideo     = 1 << 4,
+    AppodealAdTypeNonSkippableVideo = AppodealAdTypeRewardedVideo,
+    AppodealAdTypeAll               = AppodealAdTypeInterstitial | AppodealAdTypeSkippableVideo | AppodealAdTypeBanner | AppodealAdTypeNativeAd | AppodealAdTypeRewardedVideo
 };
 
 typedef NS_ENUM(NSInteger, AppodealShowStyle) {
     AppodealShowStyleInterstitial = 1,
-    AppodealShowStyleVideo,
+    AppodealShowStyleSkippableVideo,
     AppodealShowStyleVideoOrInterstitial,
     AppodealShowStyleBannerTop,
     AppodealShowStyleBannerCenter,
-    AppodealShowStyleBannerBottom
+    AppodealShowStyleBannerBottom,
+    AppodealShowStyleRewardedVideo,
+    AppodealShowStyleVideo  __attribute__((deprecated("use AppodealShowStyleSkippableVideo"))) = AppodealShowStyleSkippableVideo,
+    AppodealShowStyleNonSkippableVideo = AppodealShowStyleRewardedVideo
 };
 
 @interface Appodeal : NSObject
@@ -44,7 +60,7 @@ typedef NS_ENUM(NSInteger, AppodealShowStyle) {
 + (void)setAutocache:(BOOL)autocache types:(AppodealAdType)types;
 + (BOOL)isAutocacheEnabled:(AppodealAdType)types;
 
-+ (void)initializeWithApiKey:(NSString *)apiKey; // All ad types with autocache
++ (void)initializeWithApiKey:(NSString *)apiKey __attribute__((deprecated));
 + (void)initializeWithApiKey:(NSString *)apiKey types:(AppodealAdType)types;
 
 + (void)deinitialize;
@@ -54,6 +70,7 @@ typedef NS_ENUM(NSInteger, AppodealShowStyle) {
 + (void)setInterstitialDelegate:(id<AppodealInterstitialDelegate>)interstitialDelegate;
 + (void)setBannerDelegate:(id<AppodealBannerDelegate>)bannerDelegate;
 + (void)setVideoDelegate:(id<AppodealVideoDelegate>)videoDelegate;
++ (void)setRewardedVideoDelegate:(id<AppodealRewardedVideoDelegate>)rewardedVideoDelegate;
 
 + (UIView *)banner;
 
@@ -66,6 +83,8 @@ typedef NS_ENUM(NSInteger, AppodealShowStyle) {
 + (NSString *)getVersion;
 
 + (BOOL)isReadyForShowWithStyle:(AppodealShowStyle)showStyle;
+
++ (void)confirmUsage:(AppodealAdType)adTypes;
 
 @end
 

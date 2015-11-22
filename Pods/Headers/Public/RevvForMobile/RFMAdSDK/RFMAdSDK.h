@@ -1,1 +1,1 @@
-../../../../RevvForMobile/SDK/RFMAdSDK.framework/Versions/A/Headers/RFMAdSDK.h
+../../../../RevvForMobile/SDK/RFMSDK/RFMAdSDK.framework/Versions/A/Headers/RFMAdSDK.h

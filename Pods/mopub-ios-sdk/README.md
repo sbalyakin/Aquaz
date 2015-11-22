@@ -24,7 +24,7 @@ The MoPub SDK is distributed as source code that you can include in your applica
 
   Includes everything you need to serve HTML, MRAID, and Native MoPub advertisements.  No third party ad networks are included.
 
-The current version of the SDK is 3.12.0
+The current version of the SDK is 4.1.0
 
 ## Integrate
 
@@ -36,17 +36,18 @@ More detailed class documentation is available in the repo under the `ClassDocum
 
 Please view the [changelog](https://github.com/mopub/mopub-ios-sdk/blob/master/CHANGELOG.md) for details.
 
-- **Added Privacy Information icon support for MoPub native ads**.
-- **GA of rewarded video ad mediation**.
-	- Added mediation support for AdColony, Chartboost, Vungle, and Unity rewarded video ads.
+- **Added MoPub prefixes to constants and category methods**.
+- **Certified Tapjoy 11.2.2**.
+- **Certified Vungle 3.2.0**.
 
-### IMPORTANT UPGRADE INSTRUCTIONS
+### IMPORTANT 4.0 UPGRADE INSTRUCTIONS
 
-As of version 3.0.0, the MoPub SDK uses Automatic Reference Counting. If you're upgrading from an earlier version (2.4.0 or earlier) that uses Manual Reference Counting, in order to minimize integration errors with the manual removal of the `-fno-objc-arc` compiler flag, our recommendation is to completely remove the existing MoPub SDK from your project and then integrate the latest version. Alternatively, you can manually remove the `-fno-objc-arc` compiler flag from all MoPub SDK files. If your project uses Manual Reference Counting, you must add the `-fobjc-arc` compiler flag to all MoPub SDK files.
+See our [upgrade document](https://github.com/mopub/mopub-ios-sdk/wiki/Upgrading-Native-Ads-Integration-to-4.0) for complete native ads integration migration instructions.
+
 
 ## Requirements
 
-iOS 5.0 and up
+iOS 6.0 and up
 
 ## License
 

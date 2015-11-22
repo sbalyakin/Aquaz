@@ -8,7 +8,8 @@ source 'https://github.com/appodeal/CocoaPods.git'
 
 target 'Aquaz' do
   pod 'TOWebViewController'
-  pod 'Appodeal', '~> 0.4.9'
+  pod 'Appodeal', '~> 0.5'
+  pod 'AppLovin', '~> 3.1.6'
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'MMWormhole', '~> 2.0.0'
@@ -30,7 +31,7 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['ENABLE_BITCODE'] = 'NO'
-      config.build_settings['CLANG_ENABLE_MODULES'] = 'NO'
+      config.build_settings['CLANG_ENABLE_MODULES'] = 'YES'
       config.build_settings['GCC_PRECOMPILE_PREFIX_HEADER'] = 'NO'
       
       if config.name == "Debug" then

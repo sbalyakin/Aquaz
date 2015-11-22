@@ -385,6 +385,15 @@ We have taken great measures to ensure that your experience with our website and
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>License text here
+</string>
+			<key>Title</key>
+			<string>Avocarrot</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>LICENSE &#169; 2011-2015 Chartboost. All rights reserved. LICENSE</string>
 			<key>Title</key>
 			<string>ChartboostSDK</string>
@@ -547,6 +556,39 @@ THE SOFTWARE.</string>
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
+
+You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
+copy, modify, and distribute this software in source code or binary form for use
+in connection with the web services and APIs provided by Facebook.
+
+As with any software that integrates with the Facebook platform, your use of
+this software is subject to the Facebook Developer Principles and Policies
+[http://developers.facebook.com/policy/]. This copyright notice shall be
+included in all copies or substantial portions of the software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</string>
+			<key>Title</key>
+			<string>FacebookAdsSDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Developer's use of the SDK is governed by the license in the applicable Flurry Terms of Service. Some components of the SDK are governed by open source software licenses. In the event of any conflict between the license in the applicable Flurry Terms of Service and the applicable open source license, the terms of the open source license shall prevail with respect to those components.</string>
+			<key>Title</key>
+			<string>Flurry-iOS-SDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>Copyright (c) 2012 Mattt Thompson (http://mattt.me/)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -577,6 +619,243 @@ THE SOFTWARE.
 			<string>Copyright 2011 Google Inc. All Rights Reserved.</string>
 			<key>Title</key>
 			<string>Google-Mobile-Ads-SDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright (c) 2015 Hugo Sousa
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</string>
+			<key>Title</key>
+			<string>HCSStarRatingView</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "{}"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright {yyyy} {name of copyright owner}
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+</string>
+			<key>Title</key>
+			<string>Haneke</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
@@ -665,6 +944,32 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Copyright (c) 2011-2012 Masonry Team - https://github.com/Masonry
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</string>
+			<key>Title</key>
+			<string>Masonry</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>&#1054;&#1092;&#1077;&#1088;&#1090;&#1072; &#1076;&#1083;&#1103; &#1088;&#1072;&#1079;&#1088;&#1072;&#1073;&#1086;&#1090;&#1095;&#1080;&#1082;&#1086;&#1074; &#1044;&#1086;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1100;&#1085;&#1086;&#1077; &#1089;&#1086;&#1075;&#1083;&#1072;&#1096;&#1077;&#1085;&#1080;&#1077; &#8470;1(&#1076;&#1072;&#1083;&#1077;&#1077; &#8211; &#171;&#1057;&#1086;&#1075;&#1083;&#1072;&#1096;&#1077;&#1085;&#1080;&#1077;&#187;) &#1082; &#1086;&#1092;&#1077;&#1088;&#1090;&#1077; &#1085;&#1072; &#1086;&#1082;&#1072;&#1079;&#1072;&#1085;&#1080;&#1077; &#1091;&#1089;&#1083;&#1091;&#1075; &#1087;&#1086; &#1087;&#1088;&#1080;&#1074;&#1083;&#1077;&#1095;&#1077;&#1085;&#1080;&#1102; &#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1090;&#1077;&#1083;&#1077;&#1081; &#1082; &#1057;&#1072;&#1081;&#1090;&#1091; (&#1076;&#1072;&#1083;&#1077;&#1077; &#8211; &#171;&#1054;&#1092;&#1077;&#1088;&#1090;&#1072;&#187;)  1. &#1057;&#1090;&#1086;&#1088;&#1086;&#1085;&#1099; &#1087;&#1088;&#1080;&#1096;&#1083;&#1080; &#1082; &#1089;&#1086;&#1075;&#1083;&#1072;&#1096;&#1077;&#1085;&#1080;&#1102;, &#1086;&#1073; &#1086;&#1082;&#1072;&#1079;&#1072;&#1085;&#1080;&#1080; &#1076;&#1086;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1100;&#1085;&#1099;&#1093; &#1091;&#1089;&#1083;&#1091;&#1075; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1091; &#1087;&#1086; &#1088;&#1072;&#1079;&#1084;&#1077;&#1097;&#1077;&#1085;&#1080;&#1102; &#1088;&#1077;&#1082;&#1083;&#1072;&#1084;&#1085;&#1099;&#1093; &#1084;&#1072;&#1090;&#1077;&#1088;&#1080;&#1072;&#1083;&#1086;&#1074; &#1056;&#1077;&#1082;&#1083;&#1072;&#1084;&#1086;&#1076;&#1072;&#1090;&#1077;&#1083;&#1077;&#1081; &#1074; &#1088;&#1072;&#1084;&#1082;&#1072;&#1093; &#1074;&#1099;&#1076;&#1077;&#1083;&#1077;&#1085;&#1085;&#1086;&#1075;&#1086; &#1048;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1086;&#1075;&#1086; &#1087;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1072; &#1079;&#1072; &#1074;&#1086;&#1079;&#1085;&#1072;&#1075;&#1088;&#1072;&#1078;&#1076;&#1077;&#1085;&#1080;&#1077; &#1088;&#1072;&#1079;&#1084;&#1077;&#1088; &#1080; &#1087;&#1086;&#1088;&#1103;&#1076;&#1086;&#1082; &#1088;&#1072;&#1089;&#1095;&#1077;&#1090;&#1072; &#1082;&#1086;&#1090;&#1086;&#1088;&#1086;&#1075;&#1086; &#1087;&#1088;&#1077;&#1076;&#1091;&#1089;&#1084;&#1086;&#1090;&#1088;&#1077;&#1085; &#1074; &#1085;&#1072;&#1089;&#1090;&#1086;&#1103;&#1097;&#1077;&#1084; &#1057;&#1086;&#1075;&#1083;&#1072;&#1096;&#1077;&#1085;&#1080;&#1080;. 2. &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1100; &#1086;&#1082;&#1072;&#1079;&#1099;&#1074;&#1072;&#1077;&#1090; &#1091;&#1089;&#1083;&#1091;&#1075;&#1091; &#1087;&#1091;&#1090;&#1077;&#1084; &#1087;&#1088;&#1077;&#1076;&#1086;&#1089;&#1090;&#1072;&#1074;&#1083;&#1077;&#1085;&#1080;&#1103; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1091; &#1087;&#1088;&#1072;&#1074;&#1072; &#1088;&#1072;&#1079;&#1084;&#1077;&#1097;&#1072;&#1090;&#1100; &#1088;&#1077;&#1082;&#1083;&#1072;&#1084;&#1085;&#1099;&#1077; &#1084;&#1072;&#1090;&#1077;&#1088;&#1080;&#1072;&#1083;&#1099; &#1056;&#1077;&#1082;&#1083;&#1072;&#1084;&#1086;&#1076;&#1072;&#1090;&#1077;&#1083;&#1077;&#1081; &#1074; &#1072;&#1074;&#1090;&#1086;&#1084;&#1072;&#1090;&#1080;&#1095;&#1077;&#1089;&#1082;&#1086;&#1084; &#1088;&#1077;&#1078;&#1080;&#1084;&#1077; &#1074; &#1088;&#1072;&#1084;&#1082;&#1072;&#1093; &#1074;&#1099;&#1076;&#1077;&#1083;&#1077;&#1085;&#1085;&#1086;&#1075;&#1086; &#1048;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1086;&#1075;&#1086; &#1087;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1072;. 3. &#1044;&#1086;&#1089;&#1090;&#1091;&#1087; &#1082; &#1048;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1086;&#1084;&#1091; &#1087;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1091; &#1089; &#1094;&#1077;&#1083;&#1100;&#1102; &#1088;&#1072;&#1079;&#1084;&#1077;&#1097;&#1077;&#1085;&#1080;&#1103; &#1088;&#1077;&#1082;&#1083;&#1072;&#1084;&#1085;&#1099;&#1093; &#1084;&#1072;&#1090;&#1077;&#1088;&#1080;&#1072;&#1083;&#1086;&#1074; &#1086;&#1073;&#1077;&#1089;&#1087;&#1077;&#1095;&#1080;&#1074;&#1072;&#1077;&#1090;&#1089;&#1103; &#1089; &#1087;&#1086;&#1084;&#1086;&#1097;&#1100;&#1102; &#1057;&#1080;&#1089;&#1090;&#1077;&#1084;&#1099; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1072;. 4. &#1057;&#1090;&#1086;&#1088;&#1086;&#1085;&#1099; &#1087;&#1088;&#1080;&#1082;&#1083;&#1072;&#1076;&#1099;&#1074;&#1072;&#1102;&#1090; &#1074;&#1089;&#1077; &#1085;&#1077;&#1086;&#1073;&#1093;&#1086;&#1076;&#1080;&#1084;&#1099;&#1077; &#1080; &#1076;&#1086;&#1089;&#1090;&#1072;&#1090;&#1086;&#1095;&#1085;&#1099;&#1077; &#1091;&#1089;&#1080;&#1083;&#1080;&#1103;, &#1087;&#1086;&#1079;&#1074;&#1086;&#1083;&#1103;&#1102;&#1097;&#1080;&#1077; &#1087;&#1086;&#1076;&#1076;&#1077;&#1088;&#1078;&#1080;&#1074;&#1072;&#1090;&#1100; &#1088;&#1072;&#1073;&#1086;&#1090;&#1086;&#1089;&#1087;&#1086;&#1089;&#1086;&#1073;&#1085;&#1086;&#1089;&#1090;&#1100; &#1057;&#1080;&#1089;&#1090;&#1077;&#1084;&#1099; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1072; &#1080; &#1086;&#1089;&#1091;&#1097;&#1077;&#1089;&#1090;&#1074;&#1083;&#1103;&#1090;&#1100; &#1074;&#1079;&#1072;&#1080;&#1084;&#1086;&#1076;&#1077;&#1081;&#1089;&#1090;&#1074;&#1080;&#1077; &#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1085;&#1099;&#1093; &#1089;&#1088;&#1077;&#1076;&#1089;&#1090;&#1074; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1072; &#1080; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1103;. 5. &#1053;&#1077;&#1086;&#1090;&#1098;&#1077;&#1084;&#1083;&#1077;&#1084;&#1086;&#1081; &#1095;&#1072;&#1089;&#1090;&#1100;&#1102; &#1085;&#1072;&#1089;&#1090;&#1086;&#1103;&#1097;&#1077;&#1075;&#1086; &#1057;&#1086;&#1075;&#1083;&#1072;&#1096;&#1077;&#1085;&#1080;&#1103; &#1103;&#1074;&#1083;&#1103;&#1102;&#1090;&#1089;&#1103; &#1055;&#1088;&#1072;&#1074;&#1080;&#1083;&#1072; &#1086;&#1082;&#1072;&#1079;&#1072;&#1085;&#1080;&#1103; &#1088;&#1077;&#1082;&#1083;&#1072;&#1084;&#1085;&#1099;&#1093; &#1091;&#1089;&#1083;&#1091;&#1075; &#1076;&#1083;&#1103; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1103;, &#1082;&#1086;&#1090;&#1086;&#1088;&#1099;&#1077; &#1088;&#1072;&#1079;&#1084;&#1077;&#1097;&#1077;&#1085;&#1099; &#1074; &#1089;&#1077;&#1090;&#1080; &#1048;&#1085;&#1090;&#1077;&#1088;&#1085;&#1077;&#1090; &#1087;&#1086; &#1072;&#1076;&#1088;&#1077;&#1089;&#1091;: https://target.odnoklassniki.ru/partner/doc/partner_rules_dev.    6. &#1055;&#1086;&#1088;&#1103;&#1076;&#1086;&#1082; &#1088;&#1072;&#1089;&#1095;&#1077;&#1090;&#1072; &#1089;&#1090;&#1086;&#1080;&#1084;&#1086;&#1089;&#1090;&#1080; &#1091;&#1089;&#1083;&#1091;&#1075; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1103; (&#1074;&#1086;&#1079;&#1085;&#1072;&#1075;&#1088;&#1072;&#1078;&#1076;&#1077;&#1085;&#1080;&#1077; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1103;) &#1091;&#1082;&#1072;&#1079;&#1099;&#1074;&#1072;&#1077;&#1090;&#1089;&#1103; &#1074; &#1055;&#1088;&#1080;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1080; &#8470; 1 &#1082; &#1085;&#1072;&#1089;&#1090;&#1086;&#1103;&#1097;&#1077;&#1084;&#1091; &#1057;&#1086;&#1075;&#1083;&#1072;&#1096;&#1077;&#1085;&#1080;&#1102;.   7. &#1056;&#1072;&#1089;&#1095;&#1077;&#1090; &#1089;&#1090;&#1086;&#1080;&#1084;&#1086;&#1089;&#1090;&#1080; &#1091;&#1089;&#1083;&#1091;&#1075; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1103; &#1087;&#1088;&#1086;&#1080;&#1079;&#1074;&#1086;&#1076;&#1080;&#1090;&#1089;&#1103; &#1074; &#1088;&#1091;&#1073;&#1083;&#1103;&#1093; &#1056;&#1060;. 8. &#1055;&#1086; &#1092;&#1072;&#1082;&#1090;&#1091; &#1086;&#1082;&#1072;&#1079;&#1072;&#1085;&#1080;&#1103; &#1091;&#1089;&#1083;&#1091;&#1075; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1103; &#1087;&#1086; &#1088;&#1072;&#1079;&#1084;&#1077;&#1097;&#1077;&#1085;&#1080;&#1102; &#1088;&#1077;&#1082;&#1083;&#1072;&#1084;&#1085;&#1099;&#1093; &#1084;&#1072;&#1090;&#1077;&#1088;&#1080;&#1072;&#1083;&#1086;&#1074; &#1074; &#1048;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1086;&#1084; &#1087;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1077; &#1057;&#1090;&#1086;&#1088;&#1086;&#1085;&#1099;, &#1087;&#1088;&#1080; &#1086;&#1090;&#1089;&#1091;&#1090;&#1089;&#1090;&#1074;&#1080;&#1080; &#1088;&#1072;&#1079;&#1085;&#1086;&#1075;&#1083;&#1072;&#1089;&#1080;&#1081;, &#1087;&#1086;&#1076;&#1087;&#1080;&#1089;&#1099;&#1074;&#1072;&#1102;&#1090; &#1040;&#1082;&#1090; &#1086;&#1073; &#1086;&#1082;&#1072;&#1079;&#1072;&#1085;&#1085;&#1099;&#1093; &#1091;&#1089;&#1083;&#1091;&#1075;&#1072;&#1093; &#1089;&#1086;&#1075;&#1083;&#1072;&#1089;&#1085;&#1086; &#1044;&#1072;&#1085;&#1085;&#1099;&#1084; &#1089;&#1090;&#1072;&#1090;&#1080;&#1089;&#1090;&#1080;&#1082;&#1080; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1072;. 9. &#1057;&#1088;&#1086;&#1082;&#1080; &#1080; &#1087;&#1086;&#1088;&#1103;&#1076;&#1086;&#1082; &#1085;&#1072;&#1087;&#1088;&#1072;&#1074;&#1083;&#1077;&#1085;&#1080;&#1103;/&#1074;&#1099;&#1089;&#1090;&#1072;&#1074;&#1083;&#1077;&#1085;&#1080;&#1103; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1077;&#1084; &#1057;&#1087;&#1088;&#1072;&#1074;&#1082;&#1080;, &#1040;&#1082;&#1090;&#1072; &#1080; &#1089;&#1095;&#1077;&#1090;&#1072;, &#1091;&#1082;&#1072;&#1079;&#1072;&#1085;&#1085;&#1099; &#1074; &#1088;&#1072;&#1079;&#1076;&#1077;&#1083;&#1077; 4 &#1055;&#1088;&#1072;&#1074;&#1080;&#1083; &#1086;&#1082;&#1072;&#1079;&#1072;&#1085;&#1080;&#1103; &#1091;&#1089;&#1083;&#1091;&#1075; &#1082; &#1054;&#1092;&#1077;&#1088;&#1090;&#1077;. 10. &#1054;&#1087;&#1083;&#1072;&#1090;&#1072; &#1091;&#1089;&#1083;&#1091;&#1075; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1103;, &#1091;&#1082;&#1072;&#1079;&#1072;&#1085;&#1085;&#1099;&#1093; &#1074; &#1087;. 1 &#1085;&#1072;&#1089;&#1090;&#1086;&#1103;&#1097;&#1077;&#1075;&#1086; &#1057;&#1086;&#1075;&#1083;&#1072;&#1096;&#1077;&#1085;&#1080;&#1103;, &#1079;&#1072; &#1089;&#1086;&#1086;&#1090;&#1074;&#1077;&#1090;&#1089;&#1090;&#1074;&#1091;&#1102;&#1097;&#1080;&#1081; &#1054;&#1090;&#1095;&#1077;&#1090;&#1085;&#1099;&#1081; &#1087;&#1077;&#1088;&#1080;&#1086;&#1076;, &#1087;&#1088;&#1086;&#1080;&#1079;&#1074;&#1086;&#1076;&#1080;&#1090;&#1089;&#1103; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1086;&#1084; &#1074; &#1089;&#1088;&#1086;&#1082;&#1080; &#1080; &#1074; &#1089;&#1086;&#1086;&#1090;&#1074;&#1077;&#1090;&#1089;&#1090;&#1074;&#1080;&#1080; &#1089; &#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1103;&#1084;&#1080; &#1091;&#1082;&#1072;&#1079;&#1072;&#1085;&#1085;&#1099;&#1084;&#1080; &#1074; &#1087;.6 &#1080; &#1087;.7 &#1054;&#1092;&#1077;&#1088;&#1090;&#1099;. 11. &#1053;&#1072;&#1089;&#1090;&#1086;&#1103;&#1097;&#1077;&#1077; &#1057;&#1086;&#1075;&#1083;&#1072;&#1096;&#1077;&#1085;&#1080;&#1077; &#1103;&#1074;&#1083;&#1103;&#1077;&#1090;&#1089;&#1103; &#1085;&#1077;&#1086;&#1090;&#1098;&#1077;&#1084;&#1083;&#1077;&#1084;&#1086;&#1081; &#1095;&#1072;&#1089;&#1090;&#1100;&#1102; &#1054;&#1092;&#1077;&#1088;&#1090;&#1099;. 12. &#1053;&#1077;&#1076;&#1077;&#1081;&#1089;&#1090;&#1074;&#1080;&#1090;&#1077;&#1083;&#1100;&#1085;&#1086;&#1089;&#1090;&#1100; &#1082;&#1072;&#1082;&#1086;&#1075;&#1086;-&#1083;&#1080;&#1073;&#1086; &#1080;&#1079; &#1087;&#1086;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1081; &#1085;&#1072;&#1089;&#1090;&#1086;&#1103;&#1097;&#1077;&#1075;&#1086; &#1057;&#1086;&#1075;&#1083;&#1072;&#1096;&#1077;&#1085;&#1080;&#1103; &#1080;&#1083;&#1080; &#1055;&#1088;&#1072;&#1074;&#1080;&#1083; &#1085;&#1077; &#1074;&#1083;&#1077;&#1095;&#1077;&#1090; &#1079;&#1072; &#1089;&#1086;&#1073;&#1086;&#1081; &#1085;&#1077;&#1076;&#1077;&#1081;&#1089;&#1090;&#1074;&#1080;&#1090;&#1077;&#1083;&#1100;&#1085;&#1086;&#1089;&#1090;&#1080; &#1076;&#1088;&#1091;&#1075;&#1080;&#1093; &#1087;&#1086;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1081; &#1080;&#1083;&#1080; &#1057;&#1086;&#1075;&#1083;&#1072;&#1096;&#1077;&#1085;&#1080;&#1103; &#1074; &#1094;&#1077;&#1083;&#1086;&#1084;. 13. &#1048;&#1085;&#1099;&#1077; &#1091;&#1089;&#1083;&#1086;&#1074;&#1080;&#1103; &#1086;&#1082;&#1072;&#1079;&#1072;&#1085;&#1080;&#1103; &#1091;&#1089;&#1083;&#1091;&#1075; &#1089;&#1086;&#1076;&#1077;&#1088;&#1078;&#1072;&#1090;&#1100;&#1089;&#1103; &#1074; &#1055;&#1088;&#1072;&#1074;&#1080;&#1083;&#1072;&#1093; &#1086;&#1082;&#1072;&#1079;&#1072;&#1085;&#1080;&#1103; &#1088;&#1077;&#1082;&#1083;&#1072;&#1084;&#1085;&#1099;&#1093; &#1091;&#1089;&#1083;&#1091;&#1075; &#1076;&#1083;&#1103; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1103;, &#1082;&#1086;&#1090;&#1086;&#1088;&#1099;&#1077; &#1103;&#1074;&#1083;&#1103;&#1102;&#1090;&#1089;&#1103; &#1055;&#1088;&#1080;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077;&#1084; &#1082; &#1085;&#1072;&#1089;&#1090;&#1086;&#1103;&#1097;&#1077;&#1084;&#1091; &#1057;&#1086;&#1075;&#1083;&#1072;&#1096;&#1077;&#1085;&#1080;&#1102;.  &#1054;&#1054;&#1054; &#171;&#1054;&#1076;&#1085;&#1086;&#1082;&#1083;&#1072;&#1089;&#1089;&#1085;&#1080;&#1082;&#1080;&#187;&#8194;&#8194;&#8194; &#1056;/&#1057; 40702810300001431102  &#1041;&#1072;&#1085;&#1082; &#1047;&#1040;&#1054; "&#1056;&#1040;&#1049;&#1060;&#1060;&#1040;&#1049;&#1047;&#1045;&#1053;&#1041;&#1040;&#1053;&#1050;" &#1043;. &#1052;&#1054;&#1057;&#1050;&#1042;&#1040;  &#1050;/&#1057; 30101810200000000700  &#1041;&#1048;&#1050; 044525700  &#1048;&#1053;&#1053;/&#1050;&#1055;&#1055; 7705773443/771401001  &#1054;&#1043;&#1056;&#1053; 1077746039271  &#1070;&#1088;&#1080;&#1076;&#1080;&#1095;&#1077;&#1089;&#1082;&#1080;&#1081; &#1072;&#1076;&#1088;&#1077;&#1089;: 125167, &#1075;. &#1052;&#1086;&#1089;&#1082;&#1074;&#1072;, &#1051;&#1077;&#1085;&#1080;&#1085;&#1075;&#1088;&#1072;&#1076;&#1089;&#1082;&#1080;&#1081; &#1087;&#1088;&#1086;&#1089;&#1087;&#1077;&#1082;&#1090;, &#1076;. 47, &#1089;&#1090;&#1088;. 2  &#1058;&#1077;&#1083;&#1077;&#1092;&#1086;&#1085;/&#1092;&#1072;&#1082;&#1089;: +7 (495) 725-63-57 &#1055;&#1088;&#1080;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077; &#8470;1&#1082; &#1057;&#1086;&#1075;&#1083;&#1072;&#1096;&#1077;&#1085;&#1080;&#1102;                  1. &#1057;&#1090;&#1086;&#1088;&#1086;&#1085;&#1099; &#1091;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1080;&#1083;&#1080; &#1089;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1080;&#1081; &#1088;&#1072;&#1079;&#1084;&#1077;&#1088; &#1080; &#1087;&#1086;&#1088;&#1103;&#1076;&#1086;&#1082; &#1088;&#1072;&#1089;&#1095;&#1077;&#1090;&#1072; &#1074;&#1086;&#1079;&#1085;&#1072;&#1075;&#1088;&#1072;&#1078;&#1076;&#1077;&#1085;&#1080;&#1103; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1103;: &#1088;&#1072;&#1079;&#1084;&#1077;&#1088; &#1074;&#1086;&#1079;&#1085;&#1072;&#1075;&#1088;&#1072;&#1078;&#1076;&#1077;&#1085;&#1080;&#1103; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1103; &#1087;&#1088;&#1077;&#1076;&#1089;&#1090;&#1072;&#1074;&#1083;&#1103;&#1077;&#1090; &#1076;&#1086;&#1083;&#1102; &#1086;&#1090; &#1086;&#1073;&#1097;&#1077;&#1081; &#1089;&#1091;&#1084;&#1084;&#1099; &#1076;&#1077;&#1085;&#1077;&#1078;&#1085;&#1099;&#1093; &#1089;&#1088;&#1077;&#1076;&#1089;&#1090;&#1074; (&#1073;&#1077;&#1079; &#1091;&#1095;&#1077;&#1090;&#1072; &#1053;&#1044;&#1057;), &#1087;&#1086;&#1083;&#1091;&#1095;&#1077;&#1085;&#1085;&#1099;&#1093; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1086;&#1084; &#1086;&#1090; &#1088;&#1072;&#1079;&#1084;&#1077;&#1097;&#1077;&#1085;&#1080;&#1103; &#1088;&#1077;&#1082;&#1083;&#1072;&#1084;&#1085;&#1099;&#1093; &#1084;&#1072;&#1090;&#1077;&#1088;&#1080;&#1072;&#1083;&#1086;&#1074; &#1095;&#1077;&#1088;&#1077;&#1079; &#1057;&#1080;&#1089;&#1090;&#1077;&#1084;&#1091; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1072; &#1074; &#1054;&#1090;&#1095;&#1077;&#1090;&#1085;&#1086;&#1084; &#1087;&#1077;&#1088;&#1080;&#1086;&#1076;&#1077;. &#1056;&#1072;&#1079;&#1084;&#1077;&#1088; &#1074;&#1086;&#1079;&#1085;&#1072;&#1075;&#1088;&#1072;&#1078;&#1076;&#1077;&#1085;&#1080;&#1103; &#1086;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1103;&#1077;&#1090;&#1089;&#1103; &#1074; &#1079;&#1072;&#1074;&#1080;&#1089;&#1080;&#1084;&#1086;&#1089;&#1090;&#1080; &#1086;&#1090; &#1089;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1080;&#1093; &#1092;&#1072;&#1082;&#1090;&#1086;&#1088;&#1086;&#1074;: &#1072;) &#1082;&#1086;&#1083;&#1080;&#1095;&#1077;&#1089;&#1090;&#1074;&#1086; &#1050;&#1083;&#1080;&#1082;&#1086;&#1074; &#1087;&#1086; &#1088;&#1077;&#1082;&#1083;&#1072;&#1084;&#1085;&#1099;&#1084; &#1084;&#1072;&#1090;&#1077;&#1088;&#1080;&#1072;&#1083;&#1072;&#1084; &#1056;&#1077;&#1082;&#1083;&#1072;&#1084;&#1086;&#1076;&#1072;&#1090;&#1077;&#1083;&#1077;&#1081;, &#1073;) &#1082;&#1086;&#1083;&#1080;&#1095;&#1077;&#1089;&#1090;&#1074;&#1086; &#1055;&#1086;&#1082;&#1072;&#1079;&#1086;&#1074; &#1088;&#1077;&#1082;&#1083;&#1072;&#1084;&#1085;&#1099;&#1093; &#1084;&#1072;&#1090;&#1077;&#1088;&#1080;&#1072;&#1083;&#1086;&#1074; &#1056;&#1077;&#1082;&#1083;&#1072;&#1084;&#1086;&#1076;&#1072;&#1090;&#1077;&#1083;&#1077;&#1081;  &#1080; (&#1080;&#1083;&#1080;) &#1075;) &#1083;&#1102;&#1073;&#1099;&#1077; &#1076;&#1088;&#1091;&#1075;&#1080;&#1077; &#1089;&#1086;&#1073;&#1099;&#1090;&#1080;&#1103;, &#1074;&#1082;&#1083;&#1102;&#1095;&#1072;&#1103; &#1044;&#1077;&#1081;&#1089;&#1090;&#1074;&#1080;&#1103;, &#1087;&#1088;&#1086;&#1080;&#1079;&#1086;&#1096;&#1077;&#1076;&#1096;&#1080;&#1077; &#1074; &#1089;&#1074;&#1103;&#1079;&#1080; &#1089; &#1086;&#1090;&#1086;&#1073;&#1088;&#1072;&#1078;&#1077;&#1085;&#1080;&#1077;&#1084; &#1088;&#1077;&#1082;&#1083;&#1072;&#1084;&#1085;&#1099;&#1093; &#1084;&#1072;&#1090;&#1077;&#1088;&#1080;&#1072;&#1083;&#1086;&#1074; &#1056;&#1077;&#1082;&#1083;&#1072;&#1084;&#1086;&#1076;&#1072;&#1090;&#1077;&#1083;&#1077;&#1081;. &#1056;&#1072;&#1079;&#1084;&#1077;&#1088; &#1074;&#1086;&#1079;&#1085;&#1072;&#1075;&#1088;&#1072;&#1078;&#1076;&#1077;&#1085;&#1080;&#1103; &#1087;&#1077;&#1088;&#1080;&#1086;&#1076;&#1080;&#1095;&#1077;&#1089;&#1082;&#1080; &#1086;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1103;&#1077;&#1090;&#1089;&#1103; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1086;&#1084; &#1087;&#1086; &#1077;&#1077; &#1089;&#1086;&#1073;&#1089;&#1090;&#1074;&#1077;&#1085;&#1085;&#1086;&#1084;&#1091; &#1091;&#1089;&#1084;&#1086;&#1090;&#1088;&#1077;&#1085;&#1080;&#1102;. 2. &#1057;&#1090;&#1086;&#1088;&#1086;&#1085;&#1099; &#1089;&#1086;&#1075;&#1083;&#1072;&#1096;&#1072;&#1102;&#1090;&#1089;&#1103;, &#1095;&#1090;&#1086; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082; &#1085;&#1077; &#1073;&#1091;&#1076;&#1077;&#1090; &#1080; &#1085;&#1077; &#1076;&#1086;&#1083;&#1078;&#1077;&#1085; &#1089;&#1086;&#1086;&#1073;&#1097;&#1072;&#1090;&#1100; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1102;, &#1082;&#1072;&#1082;&#1080;&#1084; &#1086;&#1073;&#1088;&#1072;&#1079;&#1086;&#1084; &#1088;&#1072;&#1089;&#1089;&#1095;&#1080;&#1090;&#1099;&#1074;&#1072;&#1077;&#1090;&#1089;&#1103; &#1076;&#1086;&#1083;&#1103;  &#1086;&#1090; &#1086;&#1073;&#1097;&#1077;&#1081; &#1089;&#1091;&#1084;&#1084;&#1099; &#1076;&#1077;&#1085;&#1077;&#1078;&#1085;&#1099;&#1093; &#1089;&#1088;&#1077;&#1076;&#1089;&#1090;&#1074; (&#1073;&#1077;&#1079; &#1091;&#1095;&#1077;&#1090;&#1072; &#1053;&#1044;&#1057;), &#1087;&#1086;&#1083;&#1091;&#1095;&#1077;&#1085;&#1085;&#1099;&#1093; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1086;&#1084; &#1086;&#1090; &#1088;&#1072;&#1079;&#1084;&#1077;&#1097;&#1077;&#1085;&#1080;&#1103; &#1088;&#1077;&#1082;&#1083;&#1072;&#1084;&#1085;&#1099;&#1093; &#1084;&#1072;&#1090;&#1077;&#1088;&#1080;&#1072;&#1083;&#1086;&#1074; &#1095;&#1077;&#1088;&#1077;&#1079; &#1057;&#1080;&#1089;&#1090;&#1077;&#1084;&#1091; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1072; &#1074; &#1048;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1086;&#1084; &#1087;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1077; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1103; &#1074; &#1054;&#1090;&#1095;&#1077;&#1090;&#1085;&#1086;&#1084; &#1087;&#1077;&#1088;&#1080;&#1086;&#1076;&#1077;. &#1056;&#1072;&#1079;&#1084;&#1077;&#1088; &#1074;&#1086;&#1079;&#1085;&#1072;&#1075;&#1088;&#1072;&#1078;&#1076;&#1077;&#1085;&#1080;&#1103; &#1088;&#1072;&#1089;&#1089;&#1095;&#1080;&#1090;&#1099;&#1074;&#1072;&#1077;&#1090;&#1089;&#1103; &#1090;&#1086;&#1083;&#1100;&#1082;&#1086; &#1085;&#1072; &#1086;&#1089;&#1085;&#1086;&#1074;&#1072;&#1085;&#1080;&#1080; &#1044;&#1072;&#1085;&#1085;&#1099;&#1093; &#1089;&#1090;&#1072;&#1090;&#1080;&#1089;&#1090;&#1080;&#1082;&#1080;, &#1074;&#1077;&#1076;&#1091;&#1097;&#1080;&#1093;&#1089;&#1103; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1086;&#1084;. 3. &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082; &#1088;&#1072;&#1079;&#1084;&#1077;&#1097;&#1072;&#1077;&#1090; &#1080;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&#1102; &#1086; &#1088;&#1072;&#1079;&#1084;&#1077;&#1088;&#1077; &#1074;&#1086;&#1079;&#1085;&#1072;&#1075;&#1088;&#1072;&#1078;&#1076;&#1077;&#1085;&#1080;&#1103; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1103;  &#1074; &#1051;&#1080;&#1095;&#1085;&#1086;&#1084; &#1082;&#1072;&#1073;&#1080;&#1085;&#1077;&#1090;&#1077; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1103;. 4. &#1057;&#1090;&#1086;&#1088;&#1086;&#1085;&#1099; &#1089;&#1086;&#1075;&#1083;&#1072;&#1096;&#1072;&#1102;&#1090;&#1089;&#1103;, &#1095;&#1090;&#1086; &#1074; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077; &#1074;&#1099;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1103; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1086;&#1084; &#1085;&#1077;&#1076;&#1086;&#1073;&#1088;&#1086;&#1089;&#1086;&#1074;&#1077;&#1089;&#1090;&#1085;&#1086;&#1075;&#1086; (&#1080;&#1089;&#1082;&#1091;&#1089;&#1089;&#1090;&#1074;&#1077;&#1085;&#1085;&#1086;&#1075;&#1086;) &#1074;&#1086;&#1089;&#1087;&#1088;&#1086;&#1080;&#1079;&#1074;&#1077;&#1076;&#1077;&#1085;&#1080;&#1103; &#1082;&#1083;&#1080;&#1082;&#1086;&#1074; &#1080;/&#1080;&#1083;&#1080; &#1087;&#1086;&#1082;&#1072;&#1079;&#1086;&#1074; &#1088;&#1077;&#1082;&#1083;&#1072;&#1084;&#1085;&#1099;&#1093; &#1084;&#1072;&#1090;&#1077;&#1088;&#1080;&#1072;&#1083;&#1086;&#1074;, &#1080;/&#1080;&#1083;&#1080;  &#1044;&#1077;&#1081;&#1089;&#1090;&#1074;&#1080;&#1081; &#1088;&#1072;&#1079;&#1084;&#1077;&#1088; &#1074;&#1086;&#1079;&#1085;&#1072;&#1075;&#1088;&#1072;&#1078;&#1076;&#1077;&#1085;&#1080;&#1103; &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082;&#1072; &#1087;&#1086;&#1076;&#1083;&#1077;&#1078;&#1080;&#1090; &#1087;&#1077;&#1088;&#1077;&#1089;&#1084;&#1086;&#1090;&#1088;&#1091; &#1080; &#1091;&#1084;&#1077;&#1085;&#1100;&#1096;&#1077;&#1085;&#1080;&#1102; &#1085;&#1072; &#1089;&#1090;&#1086;&#1080;&#1084;&#1086;&#1089;&#1090;&#1100; &#1086;&#1073;&#1097;&#1077;&#1075;&#1086; &#1082;&#1086;&#1083;&#1080;&#1095;&#1077;&#1089;&#1090;&#1074;&#1072; &#1082;&#1083;&#1080;&#1082;&#1086;&#1074; &#1080;/&#1080;&#1083;&#1080; &#1087;&#1086;&#1082;&#1072;&#1079;&#1086;&#1074;, &#1080;/&#1080;&#1083;&#1080; &#1044;&#1077;&#1081;&#1089;&#1090;&#1074;&#1080;&#1081;, &#1074;&#1086;&#1089;&#1087;&#1088;&#1086;&#1080;&#1079;&#1074;&#1077;&#1076;&#1077;&#1085;&#1085;&#1099;&#1093; &#1090;&#1072;&#1082;&#1080;&#1084; &#1089;&#1087;&#1086;&#1089;&#1086;&#1073;&#1086;&#1084;. 5. &#1042; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077; &#1085;&#1077;&#1086;&#1076;&#1085;&#1086;&#1082;&#1088;&#1072;&#1090;&#1085;&#1086;&#1075;&#1086; &#1074;&#1099;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1103;  &#1085;&#1077;&#1076;&#1086;&#1073;&#1088;&#1086;&#1089;&#1086;&#1074;&#1077;&#1089;&#1090;&#1085;&#1086;&#1075;&#1086; (&#1080;&#1089;&#1082;&#1091;&#1089;&#1089;&#1090;&#1074;&#1077;&#1085;&#1085;&#1086;&#1075;&#1086;) &#1074;&#1086;&#1089;&#1087;&#1088;&#1086;&#1080;&#1079;&#1074;&#1077;&#1076;&#1077;&#1085;&#1080;&#1103; &#1050;&#1083;&#1080;&#1082;&#1086;&#1074; &#1080;/&#1080;&#1083;&#1080; &#1055;&#1086;&#1082;&#1072;&#1079;&#1086;&#1074; &#1088;&#1077;&#1082;&#1083;&#1072;&#1084;&#1085;&#1099;&#1093; &#1084;&#1072;&#1090;&#1077;&#1088;&#1080;&#1072;&#1083;&#1086;&#1074;, &#1080;/&#1080;&#1083;&#1080;  &#1080;&#1085;&#1099;&#1093; &#1044;&#1077;&#1081;&#1089;&#1090;&#1074;&#1080;&#1081;, &#1047;&#1072;&#1082;&#1072;&#1079;&#1095;&#1080;&#1082; &#1086;&#1089;&#1090;&#1072;&#1074;&#1083;&#1103;&#1077;&#1090; &#1079;&#1072; &#1089;&#1086;&#1073;&#1086;&#1081; &#1087;&#1088;&#1072;&#1074;&#1086; &#1074; &#1086;&#1076;&#1085;&#1086;&#1089;&#1090;&#1086;&#1088;&#1086;&#1085;&#1085;&#1077;&#1084; &#1087;&#1086;&#1088;&#1103;&#1076;&#1082;&#1077; &#1088;&#1072;&#1089;&#1090;&#1086;&#1088;&#1075;&#1085;&#1091;&#1090;&#1100; &#1044;&#1086;&#1075;&#1086;&#1074;&#1086;&#1088; &#1073;&#1077;&#1079; &#1087;&#1088;&#1077;&#1076;&#1074;&#1072;&#1088;&#1080;&#1090;&#1077;&#1083;&#1100;&#1085;&#1086;&#1075;&#1086; &#1087;&#1080;&#1089;&#1100;&#1084;&#1077;&#1085;&#1085;&#1086;&#1075;&#1086; &#1091;&#1074;&#1077;&#1076;&#1086;&#1084;&#1083;&#1077;&#1085;&#1080;&#1103; &#1048;&#1089;&#1087;&#1086;&#1083;&#1085;&#1080;&#1090;&#1077;&#1083;&#1103; &#1080; &#1074;&#1086;&#1079;&#1084;&#1077;&#1097;&#1077;&#1085;&#1080;&#1103; &#1082;&#1072;&#1082;&#1080;&#1093;-&#1083;&#1080;&#1073;&#1086; &#1091;&#1073;&#1099;&#1090;&#1082;&#1086;&#1074; &#1087;&#1086;&#1089;&#1083;&#1077;&#1076;&#1085;&#1077;&#1084;&#1091;.  &#1054;&#1054;&#1054; &#171;&#1054;&#1076;&#1085;&#1086;&#1082;&#1083;&#1072;&#1089;&#1089;&#1085;&#1080;&#1082;&#1080;&#187;&#8194;&#8194;&#8194; &#1056;/&#1057; 40702810300001431102  &#1041;&#1072;&#1085;&#1082; &#1047;&#1040;&#1054; "&#1056;&#1040;&#1049;&#1060;&#1060;&#1040;&#1049;&#1047;&#1045;&#1053;&#1041;&#1040;&#1053;&#1050;" &#1043;. &#1052;&#1054;&#1057;&#1050;&#1042;&#1040;  &#1050;/&#1057; 30101810200000000700  &#1041;&#1048;&#1050; 044525700  &#1048;&#1053;&#1053;/&#1050;&#1055;&#1055; 7705773443/771401001  &#1054;&#1043;&#1056;&#1053; 1077746039271  &#1070;&#1088;&#1080;&#1076;&#1080;&#1095;&#1077;&#1089;&#1082;&#1080;&#1081; &#1072;&#1076;&#1088;&#1077;&#1089;: 125167, &#1075;. &#1052;&#1086;&#1089;&#1082;&#1074;&#1072;, &#1051;&#1077;&#1085;&#1080;&#1085;&#1075;&#1088;&#1072;&#1076;&#1089;&#1082;&#1080;&#1081; &#1087;&#1088;&#1086;&#1089;&#1087;&#1077;&#1082;&#1090;, &#1076;. 47, &#1089;&#1090;&#1088;. 2  &#1058;&#1077;&#1083;&#1077;&#1092;&#1086;&#1085;/&#1092;&#1072;&#1082;&#1089;: +7 (495) 725-63-57
 </string>
 			<key>Title</key>
@@ -701,6 +1006,52 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 </string>
 			<key>Title</key>
 			<string>NexageSourceKitMRAID</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright (c) 2013, Nexage, Inc.
+All rights reserved.
+Provided under BSD-3 license as follows:
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+Neither the name of Nexage nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</string>
+			<key>Title</key>
+			<string>NexageSourceKitVAST</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>The MIT License (MIT)
+
+Copyright (c) 2014 
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+</string>
+			<key>Title</key>
+			<string>PubNative</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
@@ -773,6 +1124,48 @@ SOFTWARE.
 </string>
 			<key>Title</key>
 			<string>SimulatorStatusMagic</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>THE SOFTWARE - Terms and conditions
+	.	Preamble: This Agreement, signed on Mar 26, 2015 [hereinafter: Effective Date] governs the relationship between Anyone, a Business Entity, (hereinafter: Licensee) and LICENSOR, a LICENSOR AFFILIATION whose principal place of business is (Hereinafter: Licensor). This Agreement sets the terms, rights, restrictions and obligations on using [{software}] (hereinafter: The Software) created and owned by Licensor, as detailed herein
+	.	License Grant: Licensor hereby grants Licensee a Personal, Non-assignable &amp; non-transferable, Commercial, Royalty free, Without the rights to create derivative works, Non-exclusive license, all with accordance with the terms set forth and other legal restrictions set forth in 3rd party software used while running Software.
+	.	Limited: Licensee may use Software for the purpose of:
+	.	Running Software on Licensee&#8217;s Website[s] and Server[s];
+	.	Allowing 3rd Parties to run Software on Licensee&#8217;s Website[s] and Server[s];
+	.	Publishing Software&#8217;s output to Licensee and 3rd Parties;
+	.	Distribute verbatim copies of Software&#8217;s output (including compiled binaries);
+	.	Modify Software to suit Licensee&#8217;s needs and specifications.
+	.	Binary Restricted: Licensee may sublicense Software as a part of a larger work containing more than Software, distributed solely in Object or Binary form under a personal, non-sublicensable, limited license. Such redistribution shall be limited to unlimited codebases.
+	.	Non Assignable &amp; Non-Transferable: Licensee may not assign or transfer his rights and duties under this license.
+	.	Commercial, Royalty Free: Licensee may use Software for any purpose, including paid-services, without any royalties
+	.	Term &amp; Termination: The Term of this license shall be until terminated. Licensor may terminate this Agreement, including Licensee&#8217;s license in the case where Licensee :
+	.	became insolvent or otherwise entered into any liquidation process; or
+	.	exported The Software to any jurisdiction where licensor may not enforce his rights under this agreements in; or
+	.	Licensee was in breach of any of this license's terms and conditions and such breach was not cured, immediately upon notification; or
+	.	Licensee in breach of any of the terms of clause 2 to this license; or
+	.	Licensee otherwise entered into any arrangement which caused Licensor to be unable to enforce his rights under this License.
+	.	Payment: In consideration of the License granted under clause 2, Licensee shall pay Licensor a FEE, via Credit-Card, PayPal or any other mean which Licensor may deem adequate. Failure to perform payment shall construe as material breach of this Agreement.
+	.	Upgrades, Updates and Fixes: Licensor may provide Licensee, from time to time, with Upgrades, Updates or Fixes, as detailed herein and according to his sole discretion. Licensee hereby warrants to keep The Software up-to-date and install all relevant updates and fixes, and may, at his sole discretion, purchase upgrades, according to the rates set by Licensor. Licensor shall provide any update or Fix free of charge; however, nothing in this Agreement shall require Licensor to provide Updates or Fixes.
+	.	Upgrades: for the purpose of this license, an Upgrade shall be a material amendment in The Software, which contains new features and or major performance improvements and shall be marked as a new version number. For example, should Licensee purchase The Software under version 1.X.X, an upgrade shall commence under number 2.0.0.
+	.	Updates: for the purpose of this license, an update shall be a minor amendment in The Software, which may contain new features or minor improvements and shall be marked as a new sub-version number. For example, should Licensee purchase The Software under version 1.1.X, an upgrade shall commence under number 1.2.0.
+	.	Fix: for the purpose of this license, a fix shall be a minor amendment in The Software, intended to remove bugs or alter minor features which impair the The Software's functionality. A fix shall be marked as a new sub-sub-version number. For example, should Licensee purchase Software under version 1.1.1, an upgrade shall commence under number 1.1.2.
+	.	Support: Software is provided under an AS-IS basis and without any support, updates or maintenance. Nothing in this Agreement shall require Licensor to provide Licensee with support or fixes to any bug, failure, mis-performance or other defect in The Software.
+	.	Bug Notification: Licensee may provide Licensor of details regarding any bug, defect or failure in The Software promptly and with no delay from such event; Licensee shall comply with Licensor's request for information regarding bugs, defects or failures and furnish him with information, screenshots and try to reproduce such bugs, defects or failures.
+	.	Feature Request: Licensee may request additional features in Software, provided, however, that (i) Licensee shall waive any claim or right in such feature should feature be developed by Licensor; (ii) Licensee shall be prohibited from developing the feature, or disclose such feature request, or feature, to any 3rd party directly competing with Licensor or any 3rd party which may be, following the development of such feature, in direct competition with Licensor; (iii) Licensee warrants that feature does not infringe any 3rd party patent, trademark, trade-secret or any other intellectual property right; and (iv) Licensee developed, envisioned or created the feature solely by himself.
+	.	Liability:  To the extent permitted under Law, The Software is provided under an AS-IS basis. Licensor shall never, and without any limit, be liable for any damage, cost, expense or any other payment incurred by Licensee as a result of Software&#8217;s actions, failure, bugs and/or any other interaction between The Software  and Licensee&#8217;s end-equipment, computers, other software or any 3rd party, end-equipment, computer or services.  Moreover, Licensor shall never be liable for any defect in source code written by Licensee when relying on The Software or using The Software&#8217;s source code.
+	.	Warranty:  
+	.	Intellectual Property: Licensor hereby warrants that The Software does not violate or infringe any 3rd party claims in regards to intellectual property, patents and/or trademarks and that to the best of its knowledge no legal action has been taken against it for any infringement or violation of any 3rd party intellectual property rights.
+	.	No-Warranty: The Software is provided without any warranty; Licensor hereby disclaims any warranty that The Software shall be error free, without defects or code which may cause damage to Licensee&#8217;s computers or to Licensee, and that Software shall be functional. Licensee shall be solely liable to any damage, defect or loss incurred as a result of operating software and undertake the risks contained in running The Software on License&#8217;s Server[s] and Website[s].
+	.	Prior Inspection: Licensee hereby states that he inspected The Software thoroughly and found it satisfactory and adequate to his needs, that it does not interfere with his regular operation and that it does meet the standards and scope of his computer systems and architecture. Licensee found that The Software interacts with his development, website and server environment and that it does not infringe any of End User License Agreement of any software Licensee may use in performing his services. Licensee hereby waives any claims regarding The Software's incompatibility, performance, results and features, and warrants that he inspected the The Software.
+	.	No Refunds: Licensee warrants that he inspected The Software according to clause 7(c) and that it is adequate to his needs. Accordingly, as The Software is intangible goods, Licensee shall not be, ever, entitled to any refund, rebate, compensation or restitution for any reason whatsoever, even if The Software contains material flaws.
+	.	Indemnification: Licensee hereby warrants to hold Licensor harmless and indemnify Licensor for any lawsuit brought against it in regards to Licensee&#8217;s use of The Software in means that violate, breach or otherwise circumvent this license, Licensor's intellectual property rights or Licensor's title in The Software. Licensor shall promptly notify Licensee in case of such legal action and request Licensee&#8217;s consent prior to any settlement in relation to such lawsuit or claim.
+	.	Governing Law, Jurisdiction: Licensee hereby agrees not to initiate class-action lawsuits against Licensor in relation to this license and to compensate Licensor for any legal fees, cost or attorney fees should any claim brought by Licensee against Licensor be denied, in part or in full.
+</string>
+			<key>Title</key>
+			<string>SpotX-SDK</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

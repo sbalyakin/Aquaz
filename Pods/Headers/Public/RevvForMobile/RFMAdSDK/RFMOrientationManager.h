@@ -1,1 +1,0 @@
-../../../../RevvForMobile/SDK/RFMAdSDK.framework/Versions/A/Headers/RFMOrientationManager.h

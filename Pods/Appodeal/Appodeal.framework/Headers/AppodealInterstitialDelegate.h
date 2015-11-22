@@ -13,13 +13,9 @@
 @optional
 
 - (void)interstitialDidLoadAd;
-
 - (void)interstitialDidFailToLoadAd;
-
 - (void)interstitialWillPresent;
-
 - (void)interstitialDidDismiss;
-
 - (void)interstitialDidClick;
 
 @end

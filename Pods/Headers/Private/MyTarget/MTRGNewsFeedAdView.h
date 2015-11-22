@@ -1,1 +1,0 @@
-../../../MyTarget/lib/MTRGNewsFeedAdView.h
