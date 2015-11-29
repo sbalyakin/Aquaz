@@ -9,22 +9,22 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import <Appodeal/AppodealInterstitialDelegate.h>
-#import <Appodeal/AppodealBannerDelegate.h>
-#import <Appodeal/AppodealVideoDelegate.h>
-#import <Appodeal/AppodealRewardedVideoDelegate.h>
-#import <Appodeal/AppodealNetworkNames.h>
-#import <Appodeal/AppodealUnitSizes.h>
-#import <Appodeal/AppodealConstants.h>
+#import "AppodealInterstitialDelegate.h"
+#import "AppodealBannerDelegate.h"
+#import "AppodealVideoDelegate.h"
+#import "AppodealRewardedVideoDelegate.h"
+#import "AppodealNetworkNames.h"
+#import "AppodealUnitSizes.h"
+#import "AppodealConstants.h"
 
-#import <Appodeal/AppodealBannerView.h>
+#import "AppodealBannerView.h"
 
-#import <Appodeal/AppodealImage.h>
-#import <Appodeal/AppodealNativeAdService.h>
-#import <Appodeal/AppodealNativeAdViewAttributes.h>
-#import <Appodeal/AppodealNativeAdView.h>
-#import <Appodeal/UIView+AppodealNativeAd.h>
-#import <Appodeal/AppodealNativeAdService.h>
+#import "AppodealImage.h"
+#import "AppodealNativeAdService.h"
+#import "AppodealNativeAdViewAttributes.h"
+#import "AppodealNativeAdView.h"
+#import "UIView+AppodealNativeAd.h"
+#import "AppodealNativeAdService.h"
 
 typedef NS_OPTIONS(NSInteger, AppodealAdType) {
     AppodealAdTypeInterstitial      = 1 << 0,

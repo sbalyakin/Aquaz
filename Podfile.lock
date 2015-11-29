@@ -116,7 +116,7 @@ PODS:
   - StartApp (3.2.3)
   - SVProgressHUD (1.1.3)
   - TOWebViewController (2.0.19)
-  - UnityAds (1.5.3)
+  - UnityAds (1.5.4)
   - VungleAdvertiserSDK (3.1.2)
   - YandexMobileAds (1.9.2):
     - ColorArt
@@ -174,7 +174,7 @@ SPEC CHECKSUMS:
   StartApp: c57f444ac839f55a8bce285422b73baaa5a1830c
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   TOWebViewController: accd62ec0acc8d5c2e1e195c6f7ff7654c3c840c
-  UnityAds: 35bc780d6765bdfdaa5f37db9ca244ba2b76ca39
+  UnityAds: cda709cad036bc34c6fed722c1d1256f503e4d70
   VungleAdvertiserSDK: 31f17fea4935d0879eedfd7cebbeecb411f8a879
   YandexMobileAds: 204cd6aacf253d9272c89c68e60131a2c3ee3184
   YandexMobileMetrica: cfc5935da0dae6494c8e1c9adc78bc6904776725
