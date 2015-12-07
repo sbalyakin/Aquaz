@@ -68,7 +68,9 @@ final class SnapshotsInitializer {
   }
   
   private class func setupStatusBar() {
+    #if DEBUG
     SDStatusBarManager.sharedInstance().enableOverrides()
+    #endif
   }
 
   private class func deactivateHelpTips() {
