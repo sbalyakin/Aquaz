@@ -101,6 +101,7 @@
 		A52E0CDB1B3854E500599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CDD1B3854E500599D81 /* InfoPlist.strings */; };
 		A52E0CE01B3854E500599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CE21B3854E500599D81 /* InfoPlist.strings */; };
 		A52E0CE51B3854E600599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CE71B3854E600599D81 /* InfoPlist.strings */; };
+		A5340CD11C158A4F00B01C30 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5340CD01C158A4F00B01C30 /* readme.txt */; };
 		A549A8551BF273B800340486 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406D78019FE9875001C54BF /* Units.swift */; };
 		A549A8561BF273CF00340486 /* UnitItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E271A824D6700966538 /* UnitItems.swift */; };
 		A549A8571BF273E300340486 /* SettingItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E241A824CA900966538 /* SettingItems.swift */; };
@@ -391,6 +392,9 @@
 		A52E0CE11B3854E500599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A52E0CE61B3854E600599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A5301BA21BD6D0C400136813 /* Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Watch.entitlements; path = Watch/Watch.entitlements; sourceTree = "<group>"; };
+		A5340CCE1C15858300B01C30 /* IncreaseBuildNumber.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = IncreaseBuildNumber.sh; sourceTree = "<group>"; };
+		A5340CCF1C1589F200B01C30 /* UpdateRepository.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = UpdateRepository.sh; sourceTree = "<group>"; };
+		A5340CD01C158A4F00B01C30 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		A54ED2601AD5AB6200FD37DD /* Widget-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Widget-Bridging-Header.h"; sourceTree = "<group>"; };
 		A554B4F81BE504360095593B /* WormholeDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WormholeDataProvider.swift; sourceTree = "<group>"; };
 		A554B4F91BE504360095593B /* ConnectivityMessageCurrentState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivityMessageCurrentState.swift; sourceTree = "<group>"; };
@@ -678,6 +682,7 @@
 				84669A6A19DAD78D003C2263 /* Products */,
 				A566BF011BC19C6C0067CDFA /* Snapshot */,
 				1D24AA4CE519A80B830BD3CE /* Pods */,
+				A5340CCD1C1584E800B01C30 /* Distribution */,
 			);
 			sourceTree = "<group>";
 		};
@@ -820,6 +825,16 @@
 				84D2519A1AD2511E001E6644 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A5340CCD1C1584E800B01C30 /* Distribution */ = {
+			isa = PBXGroup;
+			children = (
+				A5340CCE1C15858300B01C30 /* IncreaseBuildNumber.sh */,
+				A5340CCF1C1589F200B01C30 /* UpdateRepository.sh */,
+				A5340CD01C158A4F00B01C30 /* readme.txt */,
+			);
+			path = Distribution;
 			sourceTree = "<group>";
 		};
 		A566BF011BC19C6C0067CDFA /* Snapshot */ = {
@@ -1035,7 +1050,6 @@
 			buildPhases = (
 				7FD228C65421DD6C67190C1A /* Check Pods Manifest.lock */,
 				84669A6519DAD78D003C2263 /* Sources */,
-				A5BED0C81B24779B000365A1 /* ShellScript */,
 				84669A6619DAD78D003C2263 /* Frameworks */,
 				84669A6719DAD78D003C2263 /* Resources */,
 				A571D50D1AB180B1006265C7 /* ShellScript */,
@@ -1082,7 +1096,6 @@
 			buildPhases = (
 				DB0E1D9EF54D72BCE46CA10A /* Check Pods Manifest.lock */,
 				84D251901AD2511E001E6644 /* Sources */,
-				A5F62E991B558586002F91BC /* ShellScript */,
 				84D251911AD2511E001E6644 /* Frameworks */,
 				84D251921AD2511E001E6644 /* Resources */,
 				8443DF271B29658100FDD294 /* ShellScript */,
@@ -1265,6 +1278,7 @@
 				A5B8F98F1A87DF3D00145705 /* bells.caf in Resources */,
 				A5B8F98D1A87DF3D00145705 /* alarm.caf in Resources */,
 				A5B8F9951A87DF3D00145705 /* hand-bell.caf in Resources */,
+				A5340CD11C158A4F00B01C30 /* readme.txt in Resources */,
 				A5B8F9901A87DF3D00145705 /* bubbles.caf in Resources */,
 				A5B8F9931A87DF3D00145705 /* chord.caf in Resources */,
 			);
@@ -1461,32 +1475,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 05704a14be9c8590ae8ea81e57283c4e84ca67f3 55072d54e985e08a6262ca78f74607f2a5a5f546c18fb4b4623ed469a350539e";
-		};
-		A5BED0C81B24779B000365A1 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "# Increase build number\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\necho \"### Build number has been bumped to $buildNumber.\"\n\n# Commit updated Info.plist\necho \"### Commit the updated $INFOPLIST_FILE.\"\ngit commit -a -m \"Task #108, Build number has been updated to $buildNumber.\"\n\n# Push the changes\necho \"### Push the changes.\"\ngit push --all\n\n# Add tag\nshortVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$INFOPLIST_FILE\")\nfullVersion=$shortVersion.$buildNumber\necho \"### Add tag for version $fullVersion.\"\ngit tag -a v$fullVersion -m \"Version $fullVersion\"\n\n# Push the tag\necho \"### Push the new tag.\"\ngit push origin v$fullVersion";
-		};
-		A5F62E991B558586002F91BC /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "# Check repository for uncommited changes\nif [ \"`git status -s 2>&1 | egrep '^\\?\\?|^ M|^A |^ D|^fatal:'`\" ] ; then\necho \"error: Uncommited changes are detected. Commit them into git before deployment.\"\nexit 1\nfi\n\necho \"### Repository is up-to-date.\"\n\nAQUAZ_INFOPLIST_FILE=$SRCROOT/Aquaz/Info.plist\n\n# Increase build number\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$AQUAZ_INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\necho \"### Build number has been bumped to $buildNumber.\"\n";
 		};
 		DB0E1D9EF54D72BCE46CA10A /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2286,6 +2274,7 @@
 				A5AC5A591C0B149D0010898E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
