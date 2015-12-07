@@ -103,7 +103,9 @@
                     <items>
                         <group alignment="left" id="1Sn-Qd-RJu">
                             <items>
-                                <imageView width="47" height="47" alignment="left" image="AppLogo" id="Yes-oX-nmJ"/>
+                                <imageView width="47" height="47" alignment="left" image="GlanceLogo" id="Yes-oX-nmJ">
+                                    <variation key="device=watch42mm" height="52" width="52"/>
+                                </imageView>
                                 <label alignment="left" verticalAlignment="center" text="Aquaz" textAlignment="center" id="08b-v5-9vn"/>
                             </items>
                         </group>
