@@ -60,7 +60,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A5B422F61C0B0EE600319D51"
+               BlueprintIdentifier = "A5AC5A501C0B149D0010898E"
                BuildableName = "AquazUITests.xctest"
                BlueprintName = "AquazUITests"
                ReferencedContainer = "container:Aquaz.xcodeproj">
@@ -88,7 +88,11 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
+      allowLocationSimulation = "YES"
+      showNonLocalizedStrings = "YES"
+      language = "ru"
+      region = "RU"
+      notificationPayloadFile = "Watch Extension/PushNotificationPayload.apns">
       <RemoteRunnable
          runnableDebuggingMode = "2"
          BundleIdentifier = "com.apple.carousel"

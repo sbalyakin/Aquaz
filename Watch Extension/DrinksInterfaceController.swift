@@ -43,6 +43,7 @@ class DrinksInterfaceController: WKInterfaceController {
     
     let recentDrinkIndex = WatchSettings.sharedInstance.recentDrinkType.value.rawValue
     picker.setSelectedItemIndex(recentDrinkIndex)
+    pickerValueWasChanged(recentDrinkIndex)
   }
   
   @IBAction func pickerValueWasChanged(value: Int) {
