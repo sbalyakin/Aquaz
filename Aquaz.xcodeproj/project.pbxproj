@@ -156,6 +156,8 @@
 		A5A639BE1B2B219800E2DB60 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A639BD1B2B219800E2DB60 /* ImageHelper.swift */; };
 		A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */; };
 		A5AAA1D91A77A9CF008C3C56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */; };
+		A5AC5A541C0B149D0010898E /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AC5A531C0B149D0010898E /* SnapshotUITests.swift */; };
+		A5AC5A5B1C0B15090010898E /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B423011C0B0F1D00319D51 /* SnapshotHelper.swift */; };
 		A5B013E31AE27C4900C372F8 /* ExtraFactorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B013E21AE27C4900C372F8 /* ExtraFactorsViewController.swift */; };
 		A5B013E51AE27C7D00C372F8 /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B013E41AE27C7D00C372F8 /* UnitsViewController.swift */; };
 		A5B017B81BEFBD6200E3F8AB /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B017B71BEFBD6200E3F8AB /* UIExtensions.swift */; };
@@ -244,6 +246,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A587AA9E1BD65224000B48E9;
 			remoteInfo = Watch;
+		};
+		A5AC5A561C0B149D0010898E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84669A6119DAD78D003C2263 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84669A6819DAD78D003C2263;
+			remoteInfo = Aquaz;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -390,8 +399,6 @@
 		A55F34A41A74D6AC00A529A5 /* DrinkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkCollectionViewCell.swift; path = Controls/DrinkCollectionViewCell.swift; sourceTree = "<group>"; };
 		A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DrinkCollectionViewCell.xib; path = Controls/DrinkCollectionViewCell.xib; sourceTree = "<group>"; };
 		A566BEFF1BC139DB0067CDFA /* SnapshotsInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotsInitializer.swift; sourceTree = "<group>"; };
-		A566BF021BC19D520067CDFA /* Snapshot.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Snapshot.js; sourceTree = "<group>"; };
-		A566BF031BC19D520067CDFA /* SnapshotHelper.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SnapshotHelper.js; sourceTree = "<group>"; };
 		A566BF041BC19D6B0067CDFA /* Snapfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Snapfile; sourceTree = SOURCE_ROOT; };
 		A57D2BEA1ACFDE0D00619D62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Welcome.storyboard; sourceTree = "<group>"; };
 		A57D2BED1ACFEA0A00619D62 /* WelcomeWizardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWizardViewController.swift; sourceTree = "<group>"; };
@@ -432,6 +439,9 @@
 		A5A639BD1B2B219800E2DB60 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekStatisticsViewController.swift; sourceTree = "<group>"; };
 		A5AAA1D81A77A9CF008C3C56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		A5AC5A511C0B149D0010898E /* AquazUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AquazUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5AC5A531C0B149D0010898E /* SnapshotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotUITests.swift; sourceTree = "<group>"; };
+		A5AC5A551C0B149D0010898E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5B013E21AE27C4900C372F8 /* ExtraFactorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraFactorsViewController.swift; sourceTree = "<group>"; };
 		A5B013E41AE27C7D00C372F8 /* UnitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsViewController.swift; sourceTree = "<group>"; };
 		A5B017B71BEFBD6200E3F8AB /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
@@ -439,6 +449,7 @@
 		A5B255E21BFB2DD3009AD8DA /* IntakeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntakeHelper.swift; sourceTree = "<group>"; };
 		A5B255E51BFB469A009AD8DA /* ConnectivityMessageUpdatedSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivityMessageUpdatedSettings.swift; sourceTree = "<group>"; };
 		A5B255E81BFCF998009AD8DA /* CurrentStateInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentStateInterfaceController.swift; sourceTree = "<group>"; };
+		A5B423011C0B0F1D00319D51 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		A5B75A1319E5686C00D0477B /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		A5B75A1519E57D3500D0477B /* NamedEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamedEntity.swift; sourceTree = "<group>"; };
 		A5B8F9811A87DF3D00145705 /* alarm.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm.caf; sourceTree = "<group>"; };
@@ -536,6 +547,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A587AAA81BD65224000B48E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5AC5A4E1C0B149D0010898E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -655,6 +673,7 @@
 				84D251981AD2511E001E6644 /* Today Extension */,
 				A587AAA01BD65224000B48E9 /* Watch App */,
 				A587AAAF1BD65224000B48E9 /* Watch Extension */,
+				A5AC5A521C0B149D0010898E /* AquazUITests */,
 				84D251951AD2511E001E6644 /* Frameworks */,
 				84669A6A19DAD78D003C2263 /* Products */,
 				A566BF011BC19C6C0067CDFA /* Snapshot */,
@@ -670,6 +689,7 @@
 				84D251941AD2511E001E6644 /* Widget.appex */,
 				A587AA9F1BD65224000B48E9 /* Watch.app */,
 				A587AAAB1BD65224000B48E9 /* Watch Extension.appex */,
+				A5AC5A511C0B149D0010898E /* AquazUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -806,8 +826,7 @@
 			isa = PBXGroup;
 			children = (
 				A566BF041BC19D6B0067CDFA /* Snapfile */,
-				A566BF021BC19D520067CDFA /* Snapshot.js */,
-				A566BF031BC19D520067CDFA /* SnapshotHelper.js */,
+				A5B423011C0B0F1D00319D51 /* SnapshotHelper.swift */,
 			);
 			path = Snapshot;
 			sourceTree = "<group>";
@@ -879,6 +898,15 @@
 				A5B255DA1BF877F4009AD8DA /* WatchSettings.swift */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		A5AC5A521C0B149D0010898E /* AquazUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A5AC5A531C0B149D0010898E /* SnapshotUITests.swift */,
+				A5AC5A551C0B149D0010898E /* Info.plist */,
+			);
+			path = AquazUITests;
 			sourceTree = "<group>";
 		};
 		A5B255E41BFB4655009AD8DA /* Connectivity */ = {
@@ -1105,6 +1133,24 @@
 			productReference = A587AAAB1BD65224000B48E9 /* Watch Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
+		A5AC5A501C0B149D0010898E /* AquazUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5AC5A5A1C0B149D0010898E /* Build configuration list for PBXNativeTarget "AquazUITests" */;
+			buildPhases = (
+				A5AC5A4D1C0B149D0010898E /* Sources */,
+				A5AC5A4E1C0B149D0010898E /* Frameworks */,
+				A5AC5A4F1C0B149D0010898E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5AC5A571C0B149D0010898E /* PBXTargetDependency */,
+			);
+			name = AquazUITests;
+			productName = AquazUITests;
+			productReference = A5AC5A511C0B149D0010898E /* AquazUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1112,7 +1158,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Sergey Balyakin";
 				TargetAttributes = {
@@ -1166,6 +1212,10 @@
 							};
 						};
 					};
+					A5AC5A501C0B149D0010898E = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = 84669A6819DAD78D003C2263;
+					};
 				};
 			};
 			buildConfigurationList = 84669A6419DAD78D003C2263 /* Build configuration list for PBXProject "Aquaz" */;
@@ -1187,6 +1237,7 @@
 				84D251931AD2511E001E6644 /* Widget */,
 				A587AA9E1BD65224000B48E9 /* Watch */,
 				A587AAAA1BD65224000B48E9 /* Watch Extension */,
+				A5AC5A501C0B149D0010898E /* AquazUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1252,6 +1303,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A587AABB1BD65224000B48E9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5AC5A4F1C0B149D0010898E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1641,6 +1699,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5AC5A4D1C0B149D0010898E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5AC5A541C0B149D0010898E /* SnapshotUITests.swift in Sources */,
+				A5AC5A5B1C0B15090010898E /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1663,6 +1730,11 @@
 			isa = PBXTargetDependency;
 			target = A587AA9E1BD65224000B48E9 /* Watch */;
 			targetProxy = A587AABD1BD65224000B48E9 /* PBXContainerItemProxy */;
+		};
+		A5AC5A571C0B149D0010898E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84669A6819DAD78D003C2263 /* Aquaz */;
+			targetProxy = A5AC5A561C0B149D0010898E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2119,6 +2191,37 @@
 			};
 			name = Release;
 		};
+		A5AC5A581C0B149D0010898E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = AquazUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.Aquaz.AquazUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_TARGET_NAME = Aquaz;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		A5AC5A591C0B149D0010898E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = AquazUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.Aquaz.AquazUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Aquaz;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2175,6 +2278,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		A5AC5A5A1C0B149D0010898E /* Build configuration list for PBXNativeTarget "AquazUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5AC5A581C0B149D0010898E /* Debug */,
+				A5AC5A591C0B149D0010898E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

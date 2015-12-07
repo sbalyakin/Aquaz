@@ -127,7 +127,7 @@ class IntakeTests: XCTestCase {
     // Add intakes
     var waterBalances: [Double] = []
     
-    typealias IntakeInfo = (textDate: String, drinkType: Drink.DrinkType, amount: Double)
+    typealias IntakeInfo = (textDate: String, drinkType: DrinkType, amount: Double)
     
     func addGroupedIntakes(intakes: [IntakeInfo]) {
       var waterBalance: Double = 0
@@ -199,7 +199,7 @@ class IntakeTests: XCTestCase {
     var waterBalances: [Double] = []
     var averageWaterBalances: [Double] = []
     
-    typealias IntakeInfo = (textDate: String, drinkType: Drink.DrinkType, amount: Double)
+    typealias IntakeInfo = (textDate: String, drinkType: DrinkType, amount: Double)
     
     func addGroupedIntakes(daysInMonth: Int, _ intakes: [IntakeInfo]) {
       var waterBalance: Double = 0
@@ -290,12 +290,12 @@ class IntakeTests: XCTestCase {
     XCTAssert(areArraysOfDoublesAreEqual(averageWaterBalances, fetchedAverageWaterBalances), "Fetching is wrong for average water balances grouped by days")
   }
 
-  private func addIntake(textDate: String, _ drinkType: Drink.DrinkType, _ amount: Double) -> Intake {
+  private func addIntake(textDate: String, _ drinkType: DrinkType, _ amount: Double) -> Intake {
     var waterIntake: Double = 0
     return addIntake(textDate, drinkType, amount, &waterIntake)
   }
 
-  private func addIntake(textDate: String, _ drinkType: Drink.DrinkType, _ amount: Double, inout _ waterBalance: Double) -> Intake {
+  private func addIntake(textDate: String, _ drinkType: DrinkType, _ amount: Double, inout _ waterBalance: Double) -> Intake {
     let drink = Drink.fetchDrinkByType(drinkType, managedObjectContext: managedObjectContext)!
     let date = dateFromString(textDate)
     let intake = Intake.addEntity(drink: drink, amount: amount, date: date, managedObjectContext: managedObjectContext, saveImmediately: true)!

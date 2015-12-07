@@ -38,6 +38,16 @@
                ReferencedContainer = "container:Aquaz.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A5AC5A501C0B149D0010898E"
+               BuildableName = "AquazUITests.xctest"
+               BlueprintName = "AquazUITests"
+               ReferencedContainer = "container:Aquaz.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

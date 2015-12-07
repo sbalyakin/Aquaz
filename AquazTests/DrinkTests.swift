@@ -25,7 +25,7 @@ class DrinkTests: XCTestCase {
   
   func testFetchDrinkByType() {
     for drinkIndex in 0..<Drink.getDrinksCount() {
-      if let drinkType = Drink.DrinkType(rawValue: drinkIndex) {
+      if let drinkType = DrinkType(rawValue: drinkIndex) {
         if let drink = Drink.fetchDrinkByType(drinkType, managedObjectContext: managedObjectContext) {
           XCTAssert(drink.drinkType == drinkType, "Wrong drink is get for type with index \(drinkType.rawValue)")
         } else {
@@ -42,7 +42,7 @@ class DrinkTests: XCTestCase {
     XCTAssert(drinks.count == Drink.getDrinksCount(), "Number of fetched drinks (\(drinks.count)) is incorrect (expected \(Drink.getDrinksCount()))")
   }
 
-  private func drawDrinkWithType(drinkType: Drink.DrinkType, frame: CGRect) {
+  private func drawDrinkWithType(drinkType: DrinkType, frame: CGRect) {
     let drink = Drink.fetchDrinkByType(drinkType, managedObjectContext: managedObjectContext)
     drink?.drawDrink(frame: frame)
   }
