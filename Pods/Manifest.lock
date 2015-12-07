@@ -92,9 +92,9 @@ PODS:
     - KSCrash/Reporting/Filters/Base
   - KSCrash/Reporting/Filters/Base (0.0.8):
     - KSCrash/Recording
-  - Mantle (2.0.5):
-    - Mantle/extobjc (= 2.0.5)
-  - Mantle/extobjc (2.0.5)
+  - Mantle (2.0.6):
+    - Mantle/extobjc (= 2.0.6)
+  - Mantle/extobjc (2.0.6)
   - Masonry (0.6.3)
   - MMWormhole (2.0.0):
     - MMWormhole/Core (= 2.0.0)
@@ -158,7 +158,7 @@ SPEC CHECKSUMS:
   HCSStarRatingView: bada6ae98258c3019531e0218030e2d5ad10765a
   InMobiSDK: 79f32a9a13625cd5dd5330d14ea38b08e309ccf3
   KSCrash: a928da877b18f70c9ec3b50d4e8960271e2a10e5
-  Mantle: 1912395033f601de5adc8ee91e48f46e4c7051ad
+  Mantle: 299966b00759634931699f69cb6a30b9239b944d
   Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   mopub-ios-sdk: 5d4c1e7de62a33c83da9b94032a405a0859437cd
