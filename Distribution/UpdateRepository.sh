@@ -9,6 +9,8 @@
 ###########################################################################################
 # IMPORTANT: read readme.txt file before usage
 
+AQUAZ_INFOPLIST_FILE=../Aquaz/Info.plist
+
 # Commit updated Info.plist
 echo "### Commit the updated Info.plist files."
 git commit -a -m "Task #108, Build number has been updated to $buildNumber."
