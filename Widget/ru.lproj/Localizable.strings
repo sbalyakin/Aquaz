@@ -8,7 +8,7 @@
 "D:Energy" = "Энергетик";
 
 /* Drink: Title for hard liquor */
-"D:Hard Liquor" = "Крепкий алкоголь";
+"D:Hard Liquor" = "Алкоголь 40°";
 
 /* Drink: Title for juice */
 "D:Juice" = "Сок";
@@ -20,7 +20,7 @@
 "D:Soda" = "Газировка";
 
 /* Drink: Title for sport drink */
-"D:Sport" = "Спортивный напиток";
+"D:Sport" = "Спортивный";
 
 /* Drink: Title for tea */
 "D:Tea" = "Чай";
@@ -30,6 +30,9 @@
 
 /* Drink: Title for wine */
 "D:Wine" = "Вино";
+
+/* HealthKitProvider: Title for metadata key (Drink) used in Health app */
+"HKP:Drink" = "";
 
 /* TodayExtension: Current daily water intake of water intake goal */
 "TodayExtension:%1$@ of %2$@" = "%1$@ из %2$@";

@@ -293,12 +293,6 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* SupportViewController: Subject of tell-to-friend e-mail */
 "SVC:I suggest you to try Aquaz" = "Я предлагаю тебе попробовать Aquaz";
 
-/* SupportViewController: Title of an alert shown if the device is not set up to send e-mails */
-"SVC:Unable to send mail" = "Невозможно отправить письмо";
-
-/* SupportViewController: Body of an alert shown if the device is not set up to send e-mails */
-"SVC:Please check your mail settings" = "Пожалуйста, проверьте настройки почты";
-
 /* StatisticsViewController: Text for banner shown to promote the full version of Aquaz if user tries to activate Limit notifications mode */
 "SVC:Limit Notifications mode is available in the full version only." = "Режим ограничения оповещений доступен только в Полной версии.";
 
@@ -310,6 +304,9 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 
 /* SupportViewController: Title for OK button */
 "SVC:OK" = "ОК";
+
+/* SupportViewController: Body of an alert shown if the device is not set up to send e-mails */
+"SVC:Please check your mail settings" = "Пожалуйста, проверьте настройки почты";
 
 /* SupportViewController: Title for [Report an issue] item in the action sheet used for choosing type of e-mail for developers */
 "SVC:Report an issue" = "Сообщить об ошибке";
@@ -334,6 +331,9 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 
 /* SupportViewController: Information message if no Twitter account found on device */
 "SVC:Twitter account is not found" = "Учетная запись Twitter не найдена";
+
+/* SupportViewController: Title of an alert shown if the device is not set up to send e-mails */
+"SVC:Unable to send mail" = "Невозможно отправить письмо";
 
 /* SettingsViewController: Table cell title for [Volume] setting */
 "SVC:Volume" = "Объём";
