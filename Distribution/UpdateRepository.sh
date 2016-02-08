@@ -10,6 +10,7 @@
 # IMPORTANT: read readme.txt file before usage
 
 AQUAZ_INFOPLIST_FILE=../Aquaz/Info.plist
+buildNumber=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$AQUAZ_INFOPLIST_FILE")
 
 # Commit updated Info.plist
 echo "### Commit the updated Info.plist files."
