@@ -136,6 +136,13 @@ extension ConnectivityProvider: WCSessionDelegate {
     }
   }
   
+  func session(session: WCSession, didFinishUserInfoTransfer userInfoTransfer: WCSessionUserInfoTransfer, error: NSError?) {
+    if let _ = error {
+      // Trying to transfer the user info again
+      session.transferUserInfo(userInfoTransfer.userInfo)
+    }
+  }
+  
   private func addIntakeInfoWasReceived(message: ConnectivityMessageAddIntake) {
     let context = CoreDataStack.privateContext
     

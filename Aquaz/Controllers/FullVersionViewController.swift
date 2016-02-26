@@ -53,6 +53,10 @@ class FullVersionViewController: UIViewController {
     checkDeferredState()
   }
   
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+  
   private func initUI() {
     UIHelper.applyStyleToViewController(self)
 

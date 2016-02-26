@@ -12,6 +12,8 @@ import CoreData
 
 final class IntakeHelper {
   
+  // MARK: Functions -
+  
   static func addIntakeWithHealthKitChecks(
     amount amount: Double,
     drink: Drink,
@@ -21,33 +23,51 @@ final class IntakeHelper {
     actionBeforeAddingIntakeToCoreData: (() -> ())?,
     actionAfterAddingIntakeToCoreData: (() -> ())?)
   {
-    func addIntakeSugar() {
-      addIntake(amount: amount, drink: drink, intakeDate: intakeDate, managedObjectContext: managedObjectContext, actionBeforeAddingIntakeToCoreData: actionBeforeAddingIntakeToCoreData, actionAfterAddingIntakeToCoreData: actionAfterAddingIntakeToCoreData)
+    func addIntakeInternal() {
+      addIntake(
+        amount: amount,
+        drink: drink,
+        intakeDate: intakeDate,
+        managedObjectContext: managedObjectContext,
+        actionBeforeAddingIntakeToCoreData: actionBeforeAddingIntakeToCoreData,
+        actionAfterAddingIntakeToCoreData: actionAfterAddingIntakeToCoreData)
     }
     
     if #available(iOS 9.0, *) {
       if !Settings.sharedInstance.healthKitWaterIntakesIntegrationIsRequested.value {
         Settings.sharedInstance.healthKitWaterIntakesIntegrationIsRequested.value = true
+
+        let alertTitle = NSLocalizedString("IH:Integration with Apple Health", value: "Integration with Apple Health",
+          comment: "IntakeHelper: Title for alert asking for integration with Apple Health")
         
-        let alert = UIAlertController(title: "Integration with Apple Health", message: "Aquaz will save your intakes to Apple Health", preferredStyle: .Alert)
+        let alertMessage = NSLocalizedString("IH:Aquaz will save your intakes to Apple Health", value: "Aquaz will save your intakes to Apple Health",
+          comment: "IntakeHelper: Message for alert asking for integration with Apple Health")
         
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { _ in
+        let alertOK = NSLocalizedString("IH:OK", value: "OK",
+          comment: "IntakeHelper: OK choice for alert asking for integration with Apple Health")
+        
+        let alertCancel = NSLocalizedString("IH:Cancel", value: "Cancel",
+          comment: "IntakeHelper: Cancel choice for alert asking for integration with Apple Health")
+
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+        
+        alert.addAction(UIAlertAction(title: alertOK, style: UIAlertActionStyle.Cancel, handler: { _ in
           HealthKitProvider.sharedInstance.authorizeHealthKit { authorized, _ in
-            addIntakeSugar()
+            addIntakeInternal()
           }
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: { _ in
+        alert.addAction(UIAlertAction(title: alertCancel, style: UIAlertActionStyle.Default, handler: { _ in
           Settings.sharedInstance.healthKitWaterIntakesIntegrationIsAllowed.value = false
-          addIntakeSugar()
+          addIntakeInternal()
         }))
         
         viewController.presentViewController(alert, animated: true, completion: nil)
       } else {
-        addIntakeSugar()
+        addIntakeInternal()
       }
     } else {
-      addIntakeSugar()
+      addIntakeInternal()
     }
   }
   
@@ -59,10 +79,11 @@ final class IntakeHelper {
     actionBeforeAddingIntakeToCoreData: (() -> ())?,
     actionAfterAddingIntakeToCoreData: (() -> ())?)
   {
-    actionBeforeAddingIntakeToCoreData?()
-    
     managedObjectContext.performBlock {
+      actionBeforeAddingIntakeToCoreData?()
+
       drink.recentAmount.amount = amount
+      
       Intake.addEntity(
         drink: drink,
         amount: amount,

@@ -2,7 +2,7 @@
 //  InterfaceController.swift
 //  Watch Extension
 //
-//  Created by Sergey Balyakin on 20/10/15.
+//  Created by Sergey Balyakin on 20.10.15.
 //  Copyright © 2015 Sergey Balyakin. All rights reserved.
 //
 

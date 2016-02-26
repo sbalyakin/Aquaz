@@ -60,11 +60,11 @@ class CurrentStateInterfaceController: WKInterfaceController {
   
   private var amountDecimals: Int { return WatchSettings.sharedInstance.generalVolumeUnits.value.decimals }
   
-  // MARK: Methods
+  // MARK: Constructor
   
-  override func awakeWithContext(context: AnyObject?) {
-    super.awakeWithContext(context)
-    
+  override init() {
+    super.init()
+
     initConnectivity()
     
     setupSettingsSynchronization()
@@ -77,6 +77,14 @@ class CurrentStateInterfaceController: WKInterfaceController {
     
     updateUI()
   }
+  
+  // MARK: Destructor
+  
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+  
+  // MARK: Methods
   
   override func didAppear() {
     super.didAppear()
