@@ -24,7 +24,8 @@
 #import "AppodealNativeAdViewAttributes.h"
 #import "AppodealNativeAdView.h"
 #import "UIView+AppodealNativeAd.h"
-#import "AppodealNativeAdService.h"
+#import "AppodealAdChoicesView.h"
+#import "AppodealNativeMediaView.h"
 
 typedef NS_OPTIONS(NSInteger, AppodealAdType) {
     AppodealAdTypeInterstitial      = 1 << 0,
@@ -33,6 +34,7 @@ typedef NS_OPTIONS(NSInteger, AppodealAdType) {
     AppodealAdTypeBanner            = 1 << 2,
     AppodealAdTypeNativeAd          = 1 << 3,
     AppodealAdTypeRewardedVideo     = 1 << 4,
+    AppodealAdTypeMREC              = 1 << 5,
     AppodealAdTypeNonSkippableVideo = AppodealAdTypeRewardedVideo,
     AppodealAdTypeAll               = AppodealAdTypeInterstitial | AppodealAdTypeSkippableVideo | AppodealAdTypeBanner | AppodealAdTypeNativeAd | AppodealAdTypeRewardedVideo
 };
@@ -75,14 +77,19 @@ typedef NS_ENUM(NSInteger, AppodealShowStyle) {
 + (UIView *)banner;
 
 + (BOOL)showAd:(AppodealShowStyle)style rootViewController:(UIViewController *)rootViewController;
++ (BOOL)showAdWithPriceFloor:(AppodealShowStyle)style rootViewController:(UIViewController *)rootViewController;
+
 + (void)cacheAd:(AppodealAdType)type;
 
 + (void)hideBanner;
 
-+ (void)setDebugEnabled:(BOOL)debugEnabled;
++ (void)setDebugEnabled:(BOOL)debugEnabled __attribute__((deprecated));;
++ (void)setTestingEnabled:(BOOL)testingEnabled;
+
 + (NSString *)getVersion;
 
 + (BOOL)isReadyForShowWithStyle:(AppodealShowStyle)showStyle;
++ (BOOL)isReadyWithPriceFloorForShowWithStyle:(AppodealShowStyle)showStyle;
 
 + (void)confirmUsage:(AppodealAdType)adTypes;
 

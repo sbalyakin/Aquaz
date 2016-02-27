@@ -33,3 +33,10 @@
 - (void)loadAd;
 
 @end
+
+
+@interface AppodealMRECView : AppodealBannerView
+
+- (instancetype) initWithRootViewController: (UIViewController *) rootViewController;
+
+@end

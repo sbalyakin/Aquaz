@@ -1,1 +1,0 @@
-../../../../FacebookAdsSDK/FacebookAdsSDK.framework/Headers/FacebookAdsSDK.h

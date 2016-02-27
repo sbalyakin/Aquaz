@@ -1,1 +1,1 @@
-../../../YandexMobileAds/YandexMobileAdsSDK/YandexMobileAds/YMAInterstitialController.h
+../../../YandexMobileAds/SDK/YandexMobileAds/YMAInterstitialController.h

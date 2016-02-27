@@ -1,7 +1,7 @@
 AdColony iOS SDK
 ==================================
-Modified: 2015/09/17  
-SDK Version: 2.6.0  
+Modified: 2016/01/14  
+SDK Version: 2.6.1  
 
 iOS 9 
 ----------------------------------
@@ -23,6 +23,13 @@ Contains:
 Getting Started with AdColony:
 ----------------------------------
 New and returning users should review the [quick start guide](https://github.com/AdColony/AdColony-iOS-SDK/wiki), which contains detailed integration instructions.
+
+2.6.1 Change Log:
+----------------------------------
+* Logic to prevent gradual thread buildup in airplane mode
+* Decreased time to initial ad playback
+* Improved logging
+* Miscellaneous bug fixes
 
 2.6.0 Change Log:
 ----------------------------------

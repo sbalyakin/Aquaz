@@ -1,1 +1,1 @@
-../../../YandexMobileAds/YandexMobileAdsSDK/YandexMobileAds/YMANativeAppInstallAdView.h
+../../../YandexMobileAds/SDK/YandexMobileAds/YMANativeAppInstallAdView.h

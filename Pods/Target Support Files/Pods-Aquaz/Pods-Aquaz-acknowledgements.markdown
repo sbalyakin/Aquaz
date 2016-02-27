@@ -382,55 +382,6 @@ with or without modification, are permitted provided that the following conditio
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-## ColorArt
-
-Copyright (C) 2012 Panic Inc. Code by Wade Cosgrove. All rights reserved.
-
-Redistribution and use, with or without modification, are permitted
-provided that the following conditions are met:
-
-- Redistributions must reproduce the above copyright notice, this list of
-  conditions and the following disclaimer in the documentation and/or
-  other materials provided with the distribution.
-
-- Neither the name of Panic Inc nor the names of its contributors may be
-  used to endorse or promote works derived from this software without
-  specific prior written permission from Panic Inc.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
-IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL PANIC INC BE LIABLE FOR ANY
-DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
-
-
-Portions copyright (c) 2012 Fred Leitz
-
-Permission is hereby granted, free of charge, to any person obtaining a 
-copy of this software and associated documentation files (the "Software"), 
-to deal in the Software without restriction, including without limitation 
-the rights to use, copy, modify, merge, publish, distribute, sublicense, 
-and/or sell copies of the Software, and to permit persons to whom the 
-Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in 
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
-OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
-DEALINGS IN THE SOFTWARE.
-
-
 ## Crashlytics
 
 Fabric: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. Crashlytics Kit: Copyright 2015 Crashlytics, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Crashlytics Terms of Service located at http://try.crashlytics.com/terms/terms-of-service.pdf and the Crashlytics Privacy Policy located at http://try.crashlytics.com/terms/privacy-policy.pdf. OSS: http://get.fabric.io/terms/opensource.txt
@@ -490,27 +441,6 @@ THE SOFTWARE.
 ## Fabric
 
 Fabric: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. OSS: http://get.fabric.io/terms/opensource.txt
-
-## FacebookAdsSDK
-
-Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
-
-You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
-copy, modify, and distribute this software in source code or binary form for use
-in connection with the web services and APIs provided by Facebook.
-
-As with any software that integrates with the Facebook platform, your use of
-this software is subject to the Facebook Developer Principles and Policies
-[http://developers.facebook.com/policy/]. This copyright notice shall be
-included in all copies or substantial portions of the software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 
 ## Flurry-iOS-SDK
 
@@ -774,7 +704,55 @@ Apache License
 
 ## InMobiSDK
 
-Copyright (C) InMobi. All Right Reserved.
+End-User License Agreement for InMobi Software Product
+
+This End-User License Agreement (“EULA”) is a legal agreement between you (either an individual or a single entity) (“the End User”) and InMobi Pte Limited for the software product identified above, which includes computer software and may include associated media, printed materials, and “online” or electronic documentation (“Software Product”).
+
+By download, installing, copying or otherwise using the Software Product, you agree to be bound by the terms of this EULA.
+
+Software Product License
+
+InMobi is providing the Software Product solely for the purpose of allowing the End User to avail of or enjoy the benefits of the services provided by InMobi. Except as expressly set forth herein, the End User is NOT allowed to distribute this Software (either for profit or merely to recover your media and distribution costs) whether as a stand-alone product, or as part of a compilation or anthology, nor to use it for supporting your business or customers. It may be distributed freely on any website or through any other distribution mechanism, as long as no part of it is modified in any manner whatsoever.
+
+1. Grant of License
+
+This EULA grants you the following rights: 
+
+a. Installation and Use. You may install and use an unlimited number of copies of the Software Product.
+
+b. Reproduction and Distribution. You may reproduce and distribute an unlimited number of copies of the Software Product; provided that each copy shall be a true and complete copy, including all copyright and trademark notices, and shall be accompanied by a copy of this EULA.
+
+c. Copies of the Software Product may be distributed as a standalone product or included with your own product as long as the Software Product is not sold or included in a product or package that intends to receive benefits through the inclusion of the Software Product.
+
+2. Description Of Other Rights And Limitations
+
+a. Limitations. You may not reverse engineer, decompile, or disassemble the Software Product.
+
+b. Update and Maintenance. InMobi SDK upgrades shall be free of charge. However, the End User shall be responsible to ensure that the InMobi SDK is updated as and when InMobi releases new updates or upgrades.
+
+c. Separation of Components. The Software Product is licensed as a single product. Its component parts may not be separated for use on more than one computer.
+
+d. Assignment. You may assign all of your rights under this EULA, provided the recipient agrees to the terms of this EULA and subject to the prior written consent of InMobi.
+
+e. Termination. Without prejudice to any other rights, InMobi may terminate this EULA if you fail to comply with the terms and conditions of this EULA. In such event, you shall destroy all copies of the Software Product and all of its component parts.
+
+3. Copyright
+
+Except as expressly provided herein, all title and copyrights in and to the Software Product (including but not limited to any images, photographs, clipart, libraries, and examples incorporated into the Software Product), the accompanying printed materials, and any copies of the Software Product are owned by InMobi. The Software Product is protected by copyright laws and international treaty provisions. 
+
+4. Limited Warranty
+
+a. No Warranties. InMobi expressly disclaims any and all warranties for the Software Product. The Software Product and any related documentation is provided “as is” without warranty of any kind, either express or implied, including, without limitation, the implied warranties or merchantability, fitness for a particular purpose, or non-infringement. The entire risk arising out of use or performance of the Software Product shall remain with the End User.
+
+b. No Liability For Damages. In no event shall InMobi be liable for any direct, special, consequential, incidental or indirect damages whatsoever (including, without limitation, damages for loss of business profits, business interruption, loss of business information, or any other pecuniary loss) arising out of the use of or inability to use this product, even if InMobi is aware of the possibility of such damages and known defects.
+
+5. Third Party License
+
+The Software Product may contain third party software which shall be separately licensed as applicable. This license will be included within the Software Product.
+
+6. Governing Law
+
+This EULA and all disputes arising thereof shall be subject to the laws of Singapore, where the courts at Singapore shall exclusive jurisdiction.
 
 
 ## KSCrash
@@ -890,18 +868,6 @@ Neither the name of Nexage nor the names of its contributors may be used to endo
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-## NexageSourceKitVAST
-
-Copyright (c) 2013, Nexage, Inc.
-All rights reserved.
-Provided under BSD-3 license as follows:
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-Neither the name of Nexage nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-
 ## PubNative
 
 The MIT License (MIT)
@@ -926,11 +892,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-
-
-## RevvForMobile
-
-License text here
 
 
 ## SVProgressHUD
@@ -988,44 +949,6 @@ SOFTWARE.
 
 
 
-## SpotX-SDK
-
-THE SOFTWARE - Terms and conditions
-	.	Preamble: This Agreement, signed on Mar 26, 2015 [hereinafter: Effective Date] governs the relationship between Anyone, a Business Entity, (hereinafter: Licensee) and LICENSOR, a LICENSOR AFFILIATION whose principal place of business is (Hereinafter: Licensor). This Agreement sets the terms, rights, restrictions and obligations on using [{software}] (hereinafter: The Software) created and owned by Licensor, as detailed herein
-	.	License Grant: Licensor hereby grants Licensee a Personal, Non-assignable & non-transferable, Commercial, Royalty free, Without the rights to create derivative works, Non-exclusive license, all with accordance with the terms set forth and other legal restrictions set forth in 3rd party software used while running Software.
-	.	Limited: Licensee may use Software for the purpose of:
-	.	Running Software on Licensee’s Website[s] and Server[s];
-	.	Allowing 3rd Parties to run Software on Licensee’s Website[s] and Server[s];
-	.	Publishing Software’s output to Licensee and 3rd Parties;
-	.	Distribute verbatim copies of Software’s output (including compiled binaries);
-	.	Modify Software to suit Licensee’s needs and specifications.
-	.	Binary Restricted: Licensee may sublicense Software as a part of a larger work containing more than Software, distributed solely in Object or Binary form under a personal, non-sublicensable, limited license. Such redistribution shall be limited to unlimited codebases.
-	.	Non Assignable & Non-Transferable: Licensee may not assign or transfer his rights and duties under this license.
-	.	Commercial, Royalty Free: Licensee may use Software for any purpose, including paid-services, without any royalties
-	.	Term & Termination: The Term of this license shall be until terminated. Licensor may terminate this Agreement, including Licensee’s license in the case where Licensee :
-	.	became insolvent or otherwise entered into any liquidation process; or
-	.	exported The Software to any jurisdiction where licensor may not enforce his rights under this agreements in; or
-	.	Licensee was in breach of any of this license's terms and conditions and such breach was not cured, immediately upon notification; or
-	.	Licensee in breach of any of the terms of clause 2 to this license; or
-	.	Licensee otherwise entered into any arrangement which caused Licensor to be unable to enforce his rights under this License.
-	.	Payment: In consideration of the License granted under clause 2, Licensee shall pay Licensor a FEE, via Credit-Card, PayPal or any other mean which Licensor may deem adequate. Failure to perform payment shall construe as material breach of this Agreement.
-	.	Upgrades, Updates and Fixes: Licensor may provide Licensee, from time to time, with Upgrades, Updates or Fixes, as detailed herein and according to his sole discretion. Licensee hereby warrants to keep The Software up-to-date and install all relevant updates and fixes, and may, at his sole discretion, purchase upgrades, according to the rates set by Licensor. Licensor shall provide any update or Fix free of charge; however, nothing in this Agreement shall require Licensor to provide Updates or Fixes.
-	.	Upgrades: for the purpose of this license, an Upgrade shall be a material amendment in The Software, which contains new features and or major performance improvements and shall be marked as a new version number. For example, should Licensee purchase The Software under version 1.X.X, an upgrade shall commence under number 2.0.0.
-	.	Updates: for the purpose of this license, an update shall be a minor amendment in The Software, which may contain new features or minor improvements and shall be marked as a new sub-version number. For example, should Licensee purchase The Software under version 1.1.X, an upgrade shall commence under number 1.2.0.
-	.	Fix: for the purpose of this license, a fix shall be a minor amendment in The Software, intended to remove bugs or alter minor features which impair the The Software's functionality. A fix shall be marked as a new sub-sub-version number. For example, should Licensee purchase Software under version 1.1.1, an upgrade shall commence under number 1.1.2.
-	.	Support: Software is provided under an AS-IS basis and without any support, updates or maintenance. Nothing in this Agreement shall require Licensor to provide Licensee with support or fixes to any bug, failure, mis-performance or other defect in The Software.
-	.	Bug Notification: Licensee may provide Licensor of details regarding any bug, defect or failure in The Software promptly and with no delay from such event; Licensee shall comply with Licensor's request for information regarding bugs, defects or failures and furnish him with information, screenshots and try to reproduce such bugs, defects or failures.
-	.	Feature Request: Licensee may request additional features in Software, provided, however, that (i) Licensee shall waive any claim or right in such feature should feature be developed by Licensor; (ii) Licensee shall be prohibited from developing the feature, or disclose such feature request, or feature, to any 3rd party directly competing with Licensor or any 3rd party which may be, following the development of such feature, in direct competition with Licensor; (iii) Licensee warrants that feature does not infringe any 3rd party patent, trademark, trade-secret or any other intellectual property right; and (iv) Licensee developed, envisioned or created the feature solely by himself.
-	.	Liability:  To the extent permitted under Law, The Software is provided under an AS-IS basis. Licensor shall never, and without any limit, be liable for any damage, cost, expense or any other payment incurred by Licensee as a result of Software’s actions, failure, bugs and/or any other interaction between The Software  and Licensee’s end-equipment, computers, other software or any 3rd party, end-equipment, computer or services.  Moreover, Licensor shall never be liable for any defect in source code written by Licensee when relying on The Software or using The Software’s source code.
-	.	Warranty:  
-	.	Intellectual Property: Licensor hereby warrants that The Software does not violate or infringe any 3rd party claims in regards to intellectual property, patents and/or trademarks and that to the best of its knowledge no legal action has been taken against it for any infringement or violation of any 3rd party intellectual property rights.
-	.	No-Warranty: The Software is provided without any warranty; Licensor hereby disclaims any warranty that The Software shall be error free, without defects or code which may cause damage to Licensee’s computers or to Licensee, and that Software shall be functional. Licensee shall be solely liable to any damage, defect or loss incurred as a result of operating software and undertake the risks contained in running The Software on License’s Server[s] and Website[s].
-	.	Prior Inspection: Licensee hereby states that he inspected The Software thoroughly and found it satisfactory and adequate to his needs, that it does not interfere with his regular operation and that it does meet the standards and scope of his computer systems and architecture. Licensee found that The Software interacts with his development, website and server environment and that it does not infringe any of End User License Agreement of any software Licensee may use in performing his services. Licensee hereby waives any claims regarding The Software's incompatibility, performance, results and features, and warrants that he inspected the The Software.
-	.	No Refunds: Licensee warrants that he inspected The Software according to clause 7(c) and that it is adequate to his needs. Accordingly, as The Software is intangible goods, Licensee shall not be, ever, entitled to any refund, rebate, compensation or restitution for any reason whatsoever, even if The Software contains material flaws.
-	.	Indemnification: Licensee hereby warrants to hold Licensor harmless and indemnify Licensor for any lawsuit brought against it in regards to Licensee’s use of The Software in means that violate, breach or otherwise circumvent this license, Licensor's intellectual property rights or Licensor's title in The Software. Licensor shall promptly notify Licensee in case of such legal action and request Licensee’s consent prior to any settlement in relation to such lawsuit or claim.
-	.	Governing Law, Jurisdiction: Licensee hereby agrees not to initiate class-action lawsuits against Licensor in relation to this license and to compensate Licensor for any legal fees, cost or attorney fees should any claim brought by Licensee against Licensor be denied, in part or in full.
-
-
 ## StartApp
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -1043,21 +966,37 @@ limitations under the License.
 
 ## TOWebViewController
 
-Copyright 2014 Timothy Oliver. All rights reserved.
+The MIT License (MIT)
 
-Features logic designed by Satoshi Asano (ninjinkun) for NJKWebViewProgress (https://github.com/ninjinkun/NJKWebViewProgress), also licensed under the MIT License. Re-implemented by Timothy Oliver.
+Copyright (c) 2013-2015 Tim Oliver
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Features logic designed by Satoshi Asano (ninjinkun) for NJKWebViewProgress, 
+also licensed under the MIT License. Re-implemented by Timothy Oliver.
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 
 ## UnityAds
 
 See http://www.apache.org/licenses/LICENSE-2.0.html
 
-## VungleAdvertiserSDK
+## VungleSDK-iOS
 
    	Vungle SDK License and Publisher Terms
  The Vungle SDK is made available by Vungle, Inc. ("Vungle"). 
@@ -1133,66 +1072,8 @@ Payment Terms. Vungle agrees to pay all amounts due hereunder within 60 days aft
 
 ## YandexMobileAds
 
-Terms of Use of Yandex.Metrica service
-This document is a translation of Terms of use of Yandex.Metrica service in English. In case of conflict between the Russian version of Terms of use of Yandex.Metrica service and this translation - only the Russian version of Terms of use of Yandex.Metrica service is legally binding. The Russian version of Terms of use of Yandex.Metrica service can be found here: http://www.legal.yandex.ru/metrica_termsofuse/?lang=ru.
-
-This document, Terms of Use of Yandex.Metrica Service (hereinafter - Agreement) is an offer of YANDEX, LLC (hereinafter - Yandex) to an Internet user (hereinafter - User) to conclude an agreement on the use of the service Yandex.Metrica (hereinafter - Service) on the conditions stated below.
-
-1. The use of the Service by the User is regulated by this Agreement, as well as:
-
-the User Agreement for Yandex services, available at: http://legal.yandex.com/rules/,
-
-Privacy Policy, available at: http://legal.yandex.com/confidential/,
-
-(Hereinafter collectively referred to as - Regulatory Documents).
-
-The User undertakes to acquaint himself with all Regulatory Documents, and shall bear the risk of failure of such acquaintance.
-
-2. This Agreement and the relations between Yandex and the User arisen in connection to use of the Service, are subject to the applicable laws of the Russian Federation. Throughout the text of this Agreement, unless directly stated otherwise, the term legislation means legislation of the Russian Federation as well as legislation of the User?s place of residence.
-
-3. Having registered at the Service, received a counter code, placed the counter code on the User's site or used any other function of the Service, the User expresses its unconditional consent with all terms of this Agreement and undertakes to comply with them or stop using the Service, by removing the related code from the User's site.
-
-4. When using the Service, the User must comply with the following conditions and limitations:
-
-to have a login on Yandex and place the counter code on his website. Yandex has a right to deny access to the Service without explanation;
-
-not to remove or alter hyperlinks to the resources of Yandex contained in the counter code;
-
-not to install the counter code on sites that do not meet the requirements of paragraph 5 of the User Agreement for Yandex services;
-
-not to alter or in any way modify the program counter code, obtained through the Service, except for the change of the User's website settings;
-
-not to use any automatic programs or devices to register on Yandex and/or to receive a counter code, except for programs working with the API Yandex.Metrica;
-
-comply with all requirements of this Agreement and the current legislation on the protection of personal data and correspondence of the User?s website visitors, as well as other information, access to which is limited according to the legislation, and that can be recorded while using the Service.
-
-5. The User shall be responsible for safekeeping of his login and password and may not transfer or disclose it to third parties. All the actions taken by the Service under the User?s login and password, are considered as accomplished by the User.
-
-6. The Service (including the information obtained with its help) is provided by Yandex ?as is?. Yandex does not warrant the fitness of the Service for the purposes and expectations of Users, uninterruptable and error-free operation of the Service in general and the counter installed on the User?s website, in particular, and does not warrant the accuracy of the information obtained through the Service. Yandex shall not be liable for any damage, direct or indirect, caused to the User or any third party by use or inability to use the Service and/or counters installed on the User's website, as well as by use or inability to use the information obtained through the Service. Yandex shall not reimburse the User or any third party for such damages.
-
-7. The User is solely responsible before third parties for his actions when using the Service, including the fact that they meet the requirements of the legislation and do not violate the rights and legitimate interests of third parties. The User shall settle all claims of third parties associated with the actions of the User when using the Service at his own expense.
-
-8. The User is hereby notified and agrees that once the function WebVisor is switched on since the installation of the counter to the pages of the User, the Service provides the User with functional ability to automatically record sessions of visits by the visitors of the pages on the User?s website (hereinafter ?Visit Sessions). Yandex does not place such records of Visit Sessions on open access and does not provide such records of Visit Sessions to third parties, except for those records the access to which were provided by the User himself.
-
-9. The User shall at his own risk and discretion switch on the function of the Service WebVisor, define the amount of information on the User?s website, being recorded by the counter. The User can mark specific fields of pages of the User?s web site with a special CSS-class http://help.yandex.com/metrica/qanda/webvisor-qanda.xml#skip-fields (in the HTML-code of pages of the website) for the input of data in such fields by third parties (visitors of the User?s website) not to be recorded during recording of Visit Sessions by the counter and at his own discretion and risk make a decision on the choice of fields for such marks and is solely responsible for recording data in the fields which do not have such a mark.
-
-10. The User acknowledges and agrees that the counter installed on the User?s website collects anonymous (without binding to the personal data of visitors of the web site) data on visits of the User?s web site and automatically forwards them to Yandex for generalized statistical information available for the further use of the Service by the User and by Yandex as well. If the User did not include a restriction to send pages of the web site for indexing (http://help.yandex.com/metrica/code/stop-indexing.xml), the addresses (URL) of pages with the installed counter can be forwarded for indexing by Yandex. Nevertheless, Yandex does not ensure that pages, information of which is obtained in this manner, will be necessarily indexed and included in search results.
-
-11. The User is hereby notified and agrees that Yandex does not know or can not know what information is contained in the data recorded by the counter on the site pages of the User, as well as what information is recorded while recording Visit Sessions and saved in a temporary record of such Visit Sessions, and can not determine whether there is any personal data, correspondence and other limited to receiving, processing and distribution information of third parties in such records (hereafter - Secured information) or not. The Service operates in fully automatic mode, and does not analyse the content and meaning of information published on the pages or entered by visitors in the fields on the page, and records it completely, regardless of its content. Yandex does not make any modifications to the data recorded by the counter, including the recordings of Visit Sessions, and does not perform any actions focused on the collection, receipt, processing and distribution of personal data, correspondence and other Secured information of visitors of the User's website as a result of the User's use of the Service. With this in mind, the User understands that by using the Service, he might gain access to Secured information, and therefore the User undertakes not to take focused actions to obtain such Secured information, and shall to the maximum extent comply with all requirements of applicable law for collection, processing and protection of personal data and other Secured information obtained during using the Service, and shall bear all risks associated with obtaining such Secured information, and the liability for failure to comply with the legislation.
-
-12. All data collected and stored by the Service shall be treated by Yandex as a confidential information of the User, and to the extent permitted by applicable law ? as a trade secret of the User. Yandex shall keep that data in secret and shall not transfer that data to any third parties (except for the affiliate entities that are in the same group with Yandex), except where the User has authorized such transfer or has given an access to that data for third parties at his own discretion.
-
-13. Yandex does not guarantee that the installation of the counter, collection, processing and transmission of this information to Yandex does not violate the legislation of the User?s place of residence. The User performs the installation of the counter and uses the Service at his own risk and is solely responsible for all actions related to the use of the Service, including the installation of a counter, the collection and use of information specified by the User.
-
-14. Yandex has the right without notice and at its sole discretion terminate or suspend the User's access to the Service without explanation, in particular, in case of violation of requirements of this Agreement by such the User.
-
-15. All claims arising from the use / inability to use the Service should be directed using the feedback form at http://feedback.yandex.com/?from=metrica.
-
-16. Yandex may at any time without notice to the User amend the text of this Agreement and/or any other conditions of use of Service. The actual text of this Agreement is located at: http://legal.yandex.com/metrica_termsofuse/.
-
-Date: 04.06.2013
-
-Previous version of the document: http://legal.yandex.com/metrica_termsofuse/20092011/
+EULA could be found at:
+https://legal.yandex.com/partner_ch/
 
 
 ## YandexMobileMetrica

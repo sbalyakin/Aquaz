@@ -1,1 +1,1 @@
-../../../mopub-ios-sdk/MoPubSDK/FABKitProtocol.h
+../../../mopub-ios-sdk/MoPubSDK/Internal/Fabric/FABKitProtocol.h

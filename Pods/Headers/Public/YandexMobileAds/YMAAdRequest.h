@@ -1,1 +1,1 @@
-../../../YandexMobileAds/YandexMobileAdsSDK/YandexMobileAds/YMAAdRequest.h
+../../../YandexMobileAds/SDK/YandexMobileAds/YMAAdRequest.h

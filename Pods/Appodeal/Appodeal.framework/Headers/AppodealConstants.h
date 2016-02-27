@@ -44,3 +44,17 @@ typedef NS_ENUM(NSUInteger, AppodealUserAlcoholAttitude) {
     AppodealUserAlcoholAttitudeNeutral,
     AppodealUserAlcoholAttitudePositive
 };
+
+#pragma mark - NativeVideo
+
+typedef NS_ENUM(NSInteger, AppodealVideoEvent) {
+    AppodealVideoEventStart = 0,
+    AppodealVideoEventFinish,
+    AppodealVideoEventSkip,
+    AppodealVideoEventFirstQurtile,
+    AppodealVideoEventMidpoint,
+    AppodealVideoEventThirdQurtile,
+    AppodealVideoEventClick,
+    AppodealVideoEventReady,
+    AppodealVideoEventError,
+};

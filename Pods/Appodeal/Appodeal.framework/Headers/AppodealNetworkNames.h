@@ -34,5 +34,7 @@ FOUNDATION_EXPORT NSString *const kAppodealLiveRailNetworkName;
 FOUNDATION_EXPORT NSString *const kAppodealSpotXNetworkName;
 FOUNDATION_EXPORT NSString *const kAppodealVASTNetworkName;
 FOUNDATION_EXPORT NSString *const kAppodealInnerActiveNetworkName;
+FOUNDATION_EXPORT NSString *const kAppodealMillenialMediaNetworkName;
+FOUNDATION_EXPORT NSString *const kAppodealNativeTestNetworkName;
 
 FOUNDATION_EXPORT NSString * AppodealPrettyNetworkName(NSString *networkName);

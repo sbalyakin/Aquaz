@@ -1,1 +1,1 @@
-../../../YandexMobileAds/YandexMobileAdsSDK/YandexMobileAds/YMABlocksInfo.h
+../../../YandexMobileAds/SDK/YandexMobileAds/YMABlocksInfo.h

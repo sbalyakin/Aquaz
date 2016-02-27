@@ -33,6 +33,7 @@
 #import "KSSafeCollections.h"
 #import "NSDictionary+Merge.h"
 #import "NSError+SimpleConstructor.h"
+#import "NSString+Demangle.h"
 #import "RFC3339DateTool.h"
 #import "KSCrashDoctor.h"
 
@@ -270,6 +271,67 @@
 
 #pragma mark Utility
 
+- (void) performOnFields:(NSArray*) fieldPath inReport:(NSMutableDictionary*) report operation:(void (^)(id parent, id field)) operation okIfNotFound:(BOOL) isOkIfNotFound
+{
+    if(fieldPath.count == 0)
+    {
+        KSLOG_ERROR(@"Unexpected end of field path");
+        return;
+    }
+
+    NSString* currentField = fieldPath[0];
+    if(fieldPath.count > 1)
+    {
+        fieldPath = [fieldPath subarrayWithRange:NSMakeRange(1, fieldPath.count - 1)];
+    }
+    else
+    {
+        fieldPath = @[];
+    }
+
+    id field = report[currentField];
+    if(field == nil)
+    {
+        if(!isOkIfNotFound)
+        {
+            KSLOG_ERROR(@"%@: No such field in report. Candidates are: %@", currentField, report.allKeys);
+        }
+        return;
+    }
+
+    if([field isKindOfClass:NSMutableDictionary.class])
+    {
+        [self performOnFields:fieldPath inReport:field operation:operation okIfNotFound:isOkIfNotFound];
+    }
+    else if([field isKindOfClass:[NSMutableArray class]])
+    {
+        for(id subfield in field)
+        {
+            if([subfield isKindOfClass:NSMutableDictionary.class])
+            {
+                [self performOnFields:fieldPath inReport:subfield operation:operation okIfNotFound:isOkIfNotFound];
+            }
+            else
+            {
+                operation(field, subfield);
+            }
+        }
+    }
+    else
+    {
+        operation(report, field);
+    }
+}
+
+- (void) symbolicateField:(NSArray*) fieldPath inReport:(NSMutableDictionary*) report okIfNotFound:(BOOL) isOkIfNotFound
+{
+    NSString* lastPath = fieldPath[fieldPath.count - 1];
+    [self performOnFields:fieldPath inReport:report operation:^(NSMutableDictionary* parent, NSString* field)
+    {
+        parent[lastPath] = [field demangledSymbol];
+    } okIfNotFound:isOkIfNotFound];
+}
+
 - (NSMutableDictionary*) fixupCrashReport:(NSDictionary*) report
 {
     if(![report isKindOfClass:[NSDictionary class]])
@@ -297,6 +359,9 @@
     [mutableReport setObjectIfNotNil:crashReport forKey:@KSCrashField_Crash];
     KSCrashDoctor* doctor = [KSCrashDoctor doctor];
     [crashReport setObjectIfNotNil:[doctor diagnoseCrash:report] forKey:@KSCrashField_Diagnosis];
+
+    [self symbolicateField:@[@"threads", @"backtrace", @"contents", @"symbol_name"] inReport:crashReport okIfNotFound:YES];
+    [self symbolicateField:@[@"error", @"cpp_exception", @"name"] inReport:crashReport okIfNotFound:YES];
 
     return mutableReport;
 }

@@ -1,1 +1,1 @@
-../../../YandexMobileAds/YandexMobileAdsSDK/YandexMobileAds/YMAVASTAd.h
+../../../YandexMobileAds/SDK/YandexMobileAds/YMAVASTAd.h

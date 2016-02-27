@@ -15,7 +15,8 @@
 
 @optional
 
-- (void)nativeAdServiceDidLoad;
+- (void)nativeAdServiceDidLoad: (AppodealNativeAd*) nativeAd; // Use this method to get native ad instance
+- (void)nativeAdServiceDidLoadSeveralAds __attribute__((deprecated));
 - (void)nativeAdServiceDidFailedToLoad;
 
 @end
@@ -24,8 +25,6 @@
 
 @property (weak, nonatomic) id<AppodealNativeAdServiceDelegate> delegate;
 @property (assign, nonatomic, readonly, getter=isReady) BOOL ready;
-
-- (instancetype) initWithCapacity: (NSUInteger) capacity;
 
 - (void) loadAd;
 

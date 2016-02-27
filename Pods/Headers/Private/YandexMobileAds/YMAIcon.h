@@ -1,1 +1,1 @@
-../../../YandexMobileAds/YandexMobileAdsSDK/YandexMobileAds/YMAIcon.h
+../../../YandexMobileAds/SDK/YandexMobileAds/YMAIcon.h

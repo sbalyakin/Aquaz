@@ -1,1 +1,1 @@
-../../../YandexMobileAds/YandexMobileAdsSDK/YandexMobileAds/YMAVASTTracker.h
+../../../YandexMobileAds/SDK/YandexMobileAds/YMAVASTTracker.h

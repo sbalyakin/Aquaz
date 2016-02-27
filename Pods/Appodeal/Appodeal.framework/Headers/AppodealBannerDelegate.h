@@ -18,4 +18,6 @@
 
 - (void)bannerDidClick;
 
+- (void)bannerDidShow;
+
 @end

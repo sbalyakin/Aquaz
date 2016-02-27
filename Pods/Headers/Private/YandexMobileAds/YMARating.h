@@ -1,1 +1,1 @@
-../../../YandexMobileAds/YandexMobileAdsSDK/YandexMobileAds/YMARating.h
+../../../YandexMobileAds/SDK/YandexMobileAds/YMARating.h

@@ -1,1 +1,1 @@
-../../../YandexMobileAds/YandexMobileAdsSDK/YandexMobileAds/YMANativeAdDelegate.h
+../../../YandexMobileAds/SDK/YandexMobileAds/YMANativeAdDelegate.h

@@ -1,1 +1,1 @@
-../../../YandexMobileAds/YandexMobileAdsSDK/YandexMobileAds/YMACreative.h
+../../../YandexMobileAds/SDK/YandexMobileAds/YMACreative.h

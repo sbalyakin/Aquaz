@@ -1,6 +1,6 @@
 //
 //  MyTargetSDK.h
-//  myTargetSDK 4.2.4
+//  myTargetSDK 4.3.0
 //
 //  Created by Anton Bulankin on 24.09.15.
 //  Copyright © 2015 Mail.ru. All rights reserved.

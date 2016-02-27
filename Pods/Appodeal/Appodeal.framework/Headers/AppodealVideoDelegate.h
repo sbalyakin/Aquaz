@@ -22,5 +22,7 @@
 
 - (void)videoDidFinish;
 
+- (void)videoDidClick;
+
 @end
 

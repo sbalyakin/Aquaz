@@ -16,8 +16,6 @@
 
 @property (assign, nonatomic) CGFloat width;
 @property (assign, nonatomic) CGFloat heigth;
-@property (assign, nonatomic) CGFloat iconWidth;
-@property (assign, nonatomic) CGFloat iconHeigtht;
 
 @property (copy, nonatomic) UIFont *titleFont;
 @property (copy, nonatomic) UIFont *descriptionFont;

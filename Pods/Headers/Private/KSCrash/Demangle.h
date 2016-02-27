@@ -1,1 +1,1 @@
-../../../KSCrash/Source/KSCrash/Recording/Tools/Demangle.h
+../../../KSCrash/Source/KSCrash/swift/Basic/Demangle.h

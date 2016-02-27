@@ -1,1 +1,0 @@
-../../../NexageSourceKitVAST/src/VAST/SKVASTMediaFilePicker.h

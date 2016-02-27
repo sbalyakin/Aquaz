@@ -22,4 +22,6 @@
 
 - (void)rewardedVideoDidFinish:(NSUInteger)rewardAmount name:(NSString *)rewardName;
 
+- (void) rewardedVideoDidClick;
+
 @end

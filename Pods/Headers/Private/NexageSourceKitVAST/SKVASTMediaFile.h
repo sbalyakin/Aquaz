@@ -1,1 +1,0 @@
-../../../NexageSourceKitVAST/src/VAST/model/SKVASTMediaFile.h
