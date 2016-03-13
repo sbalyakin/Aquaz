@@ -43,8 +43,6 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
   
   @IBOutlet weak var descriptionLabel: UILabel!
   
-  private var privateManagedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
-  
   private var genderCell: RightDetailTableCell<Settings.Gender>!
   private var heightCell: TableCellWithValue<Double>!
   private var weightCell: TableCellWithValue<Double>!
@@ -333,13 +331,13 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
   }
   
   private func saveWaterGoalToCoreData() {
-    privateManagedObjectContext.performBlock {
+    CoreDataStack.inPrivateContext { privateContext in
       WaterGoal.addEntity(
         date: NSDate(),
         baseAmount: self.dailyWaterIntakeCell.value,
         isHotDay: false,
         isHighActivity: false,
-        managedObjectContext: self.privateManagedObjectContext)
+        managedObjectContext: privateContext)
     }
   }
   

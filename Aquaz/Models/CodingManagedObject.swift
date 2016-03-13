@@ -31,19 +31,24 @@ class CodingManagedObject: NSManagedObject, NSCoding {
   }
   
   private class func getExistingManagedObject(aDecoder: NSCoder) -> NSManagedObject? {
-    if let url = aDecoder.decodeObjectForKey(encodeKey) as? NSURL,
-       let managedObjectID = CoreDataStack.persistentStoreCoordinator.managedObjectIDForURIRepresentation(url)
-    {
-      var managedObject: NSManagedObject?
+    let dispatchGroup = dispatch_group_create()
+    dispatch_group_enter(dispatchGroup)
 
-      CoreDataStack.privateContext.performBlockAndWaitUsingGroup {
-        managedObject = try? CoreDataStack.privateContext.existingObjectWithID(managedObjectID)
+    var managedObject: NSManagedObject?
+    
+    CoreDataStack.inPrivateContextEx { privateContext, coordinator in
+      if let url = aDecoder.decodeObjectForKey(encodeKey) as? NSURL,
+         let managedObjectID = coordinator.managedObjectIDForURIRepresentation(url)
+      {
+        managedObject = try? privateContext.existingObjectWithID(managedObjectID)
       }
       
-      return managedObject
-    } else {
-      return nil
+      dispatch_group_leave(dispatchGroup)
     }
+    
+    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
+    
+    return managedObject
   }
   
   func encodeWithCoder(aCoder: NSCoder) {

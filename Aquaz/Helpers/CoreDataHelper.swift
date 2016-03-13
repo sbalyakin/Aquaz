@@ -59,7 +59,7 @@ extension NSManagedObjectContext {
         dispatch_group_leave(dispatchGroup)
       }
       
-      dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER);
+      dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
     }
   }
   

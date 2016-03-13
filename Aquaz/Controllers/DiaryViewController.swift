@@ -16,7 +16,6 @@ class DiaryViewController: UIViewController {
   var date: NSDate! { didSet { dateWasChanged() } }
 
   private var fetchedResultsController: NSFetchedResultsController?
-  private var mainManagedObjectContext: NSManagedObjectContext { return CoreDataStack.mainContext }
   private var sizingCell: DiaryTableViewCell!
   private var volumeObserver: SettingsObserver?
   private let isIOS8AndLater = UIDevice.currentDevice().systemVersion.compare("8.0.0", options: NSStringCompareOptions.NumericSearch) != .OrderedAscending
@@ -77,13 +76,15 @@ class DiaryViewController: UIViewController {
   }
 
   private func initFetchedResultsController() {
-    createFetchedResultsController()
-    tableView.reloadData()
+    createFetchedResultsController {
+      self.tableView.reloadData()
+    }
   }
 
   private func updateFetchedResultsController() {
-    createFetchedResultsController()
-    tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
+    createFetchedResultsController {
+      self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
+    }
   }
 
   // This function is like the fetchedResultsController.objectAtIndexPath but with bounds checks.
@@ -107,21 +108,24 @@ class DiaryViewController: UIViewController {
     }
   }
   
-  private func createFetchedResultsController() {
-    let fetchRequest = getFetchRequestForDate(date)
-    
-    fetchedResultsController = NSFetchedResultsController(
-      fetchRequest: fetchRequest,
-      managedObjectContext: mainManagedObjectContext,
-      sectionNameKeyPath: nil,
-      cacheName: nil)
-    
-    fetchedResultsController!.delegate = self
-    
-    do {
-      try fetchedResultsController!.performFetch()
-    } catch let error as NSError {
-      Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
+  private func createFetchedResultsController(completion completion: (() -> ())?) {
+    CoreDataStack.inMainContext { mainContext in
+      let fetchRequest = self.getFetchRequestForDate(self.date)
+      
+      self.fetchedResultsController = NSFetchedResultsController(
+        fetchRequest: fetchRequest,
+        managedObjectContext: mainContext,
+        sectionNameKeyPath: nil,
+        cacheName: nil)
+      
+      self.fetchedResultsController!.delegate = self
+      
+      do {
+        try self.fetchedResultsController!.performFetch()
+        completion?()
+      } catch let error as NSError {
+        Logger.logError(Logger.Messages.failedToSaveManagedObjectContext, error: error)
+      }
     }
   }
 
@@ -209,7 +213,7 @@ extension DiaryViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if editingStyle == .Delete, let intake = getIntakeAtIndexPath(indexPath) {
-      mainManagedObjectContext.performBlock {
+      CoreDataStack.inMainContext { _ in
         intake.deleteEntity(saveImmediately: true)
       }
     }
@@ -229,11 +233,9 @@ extension DiaryViewController: UITableViewDelegate {
   }
 
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    mainManagedObjectContext.performBlock {
+    CoreDataStack.inMainContext { _ in
       if let intake = self.getIntakeAtIndexPath(indexPath) {
-        dispatch_async(dispatch_get_main_queue()) {
-          self.performSegueWithIdentifier(Constants.editIntakeSegue, sender: intake)
-        }
+        self.performSegueWithIdentifier(Constants.editIntakeSegue, sender: intake)
       } else {
         Logger.logError("Failed to get an intake related to selected cell of tableview")
       }

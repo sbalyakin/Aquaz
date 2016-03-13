@@ -54,14 +54,14 @@ final class ConnectivityProvider: NSObject {
   }
   
   private func composeCurrentStateInfo(sendHandler: ([String : AnyObject]) -> Void) {
-    CoreDataStack.privateContext.performBlock {
+    CoreDataStack.inPrivateContext { privateContext in
       let date = NSDate()
 
       let waterGoalAmount: Double
       let highPhysicalActivityModeEnabled: Bool
       let hotWeatherModeEnabled: Bool
 
-      if let waterGoal = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: CoreDataStack.privateContext) {
+      if let waterGoal = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: privateContext) {
         waterGoalAmount = waterGoal.amount
         highPhysicalActivityModeEnabled = waterGoal.isHighActivity
         hotWeatherModeEnabled = waterGoal.isHotDay
@@ -71,8 +71,8 @@ final class ConnectivityProvider: NSObject {
         hotWeatherModeEnabled = false
       }
 
-      let totalHydrationAmount = Intake.fetchTotalHydrationAmountForDay(date, dayOffsetInHours: 0, managedObjectContext: CoreDataStack.privateContext)
-      let totalDehydrationAmount = Intake.fetchTotalDehydrationAmountForDay(date, dayOffsetInHours: 0, managedObjectContext: CoreDataStack.privateContext)
+      let totalHydrationAmount = Intake.fetchTotalHydrationAmountForDay(date, dayOffsetInHours: 0, managedObjectContext: privateContext)
+      let totalDehydrationAmount = Intake.fetchTotalDehydrationAmountForDay(date, dayOffsetInHours: 0, managedObjectContext: privateContext)
 
       let message = ConnectivityMessageCurrentState(
         messageDate: date,
@@ -144,37 +144,36 @@ extension ConnectivityProvider: WCSessionDelegate {
   }
   
   private func addIntakeInfoWasReceived(message: ConnectivityMessageAddIntake) {
-    let context = CoreDataStack.privateContext
-    
-    if drinks.isEmpty {
-      context.performBlockAndWait {
-        self.drinks = Drink.fetchAllDrinksTyped(managedObjectContext: context)
+    CoreDataStack.inPrivateContext { privateContext in
+      if self.drinks.isEmpty {
+        self.drinks = Drink.fetchAllDrinksTyped(managedObjectContext: privateContext)
       }
+
+      guard let drink = self.drinks[message.drinkType] else {
+        Logger.logError(false, "The drink of intake from paired App Watch is not found in Aquaz")
+        return
+      }
+      
+      guard let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate,
+            let viewController = appDelegate.window?.rootViewController else
+      {
+        Logger.logError(false, "The root view controller is not found")
+        return
+      }
+      
+      IntakeHelper.addIntakeWithHealthKitChecks(
+        amount: message.amount,
+        drink: drink,
+        intakeDate: message.date,
+        viewController: viewController,
+        managedObjectContext: privateContext,
+        actionBeforeAddingIntakeToCoreData: {
+          self.ignoreManagedObjectContextSavingsCounter++
+        },
+        actionAfterAddingIntakeToCoreData: {
+          self.ignoreManagedObjectContextSavingsCounter--
+        })
     }
-    
-    guard let drink = drinks[message.drinkType] else {
-      Logger.logError(false, "The drink of intake from paired App Watch is not found in Aquaz")
-      return
-    }
-    
-    guard let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate,
-          let viewController = appDelegate.window?.rootViewController else
-    {
-      Logger.logError(false, "The root view controller is not found")
-      return
-    }
-    
-    IntakeHelper.addIntakeWithHealthKitChecks(
-      amount: message.amount,
-      drink: drink,
-      intakeDate: message.date,
-      viewController: viewController,
-      managedObjectContext: context,
-      actionBeforeAddingIntakeToCoreData: {
-        self.ignoreManagedObjectContextSavingsCounter++
-      },
-      actionAfterAddingIntakeToCoreData: {
-        self.ignoreManagedObjectContextSavingsCounter--
-      })
   }
+  
 }

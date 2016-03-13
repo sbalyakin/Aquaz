@@ -16,8 +16,6 @@ class MonthStatisticsViewController: UIViewController {
   
   private var date: NSDate = DateHelper.startDateFromDate(NSDate(), calendarUnit: .Month)
 
-  private var privateManagedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
-
   private struct Constants {
     static let dayViewController = "DayViewController"
   }
@@ -72,16 +70,18 @@ class MonthStatisticsViewController: UIViewController {
       name: UIContentSizeCategoryDidChangeNotification, object: nil)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "managedObjectContextDidChange:",
-      name: NSManagedObjectContextDidSaveNotification, object: privateManagedObjectContext)
-    
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "managedObjectContextDidChange:",
-      name: GlobalConstants.notificationManagedObjectContextWasMerged, object: privateManagedObjectContext)
-    
-    NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "fullVersionIsPurchased:",
       name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
+    
+    CoreDataStack.inPrivateContext { privateContext in
+      NSNotificationCenter.defaultCenter().addObserver(self,
+        selector: "managedObjectContextDidChange:",
+        name: NSManagedObjectContextDidSaveNotification, object: privateContext)
+      
+      NSNotificationCenter.defaultCenter().addObserver(self,
+        selector: "managedObjectContextDidChange:",
+        name: GlobalConstants.notificationManagedObjectContextWasMerged, object: privateContext)
+    }
   }
 
   func managedObjectContextDidChange(notification: NSNotification) {
@@ -195,9 +195,9 @@ extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
   
   func monthStatisticsGetValuesForDateInterval(beginDate beginDate: NSDate, endDate: NSDate, calendarContentView: CalendarContentView) -> [Double] {
     if Settings.sharedInstance.generalFullVersion.value {
-      privateManagedObjectContext.performBlock {
+      CoreDataStack.inPrivateContext { privateContext in
         weak var requestingMonthStatisticsContentView = (calendarContentView as! MonthStatisticsContentView)
-        let hydrationFractions = self.fetchHydrationFractions(beginDate: beginDate, endDate: endDate)
+        let hydrationFractions = self.fetchHydrationFractions(beginDate: beginDate, endDate: endDate, privateContext: privateContext)
         dispatch_async(dispatch_get_main_queue()) {
           if let contentView = requestingMonthStatisticsContentView {
             contentView.updateValues(hydrationFractions)
@@ -222,18 +222,18 @@ extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
     }
   }
   
-  private func fetchHydrationFractions(beginDate beginDate: NSDate, endDate: NSDate) -> [Double] {
+  private func fetchHydrationFractions(beginDate beginDate: NSDate, endDate: NSDate, privateContext: NSManagedObjectContext) -> [Double] {
     let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
       beginDate: beginDate,
       endDate: endDate,
       dayOffsetInHours: 0,
       aggregateFunction: .Average,
-      managedObjectContext: privateManagedObjectContext)
+      managedObjectContext: privateContext)
     
     let waterGoals = WaterGoal.fetchWaterGoalAmounts(
       beginDate: beginDate,
       endDate: endDate,
-      managedObjectContext: privateManagedObjectContext)
+      managedObjectContext: privateContext)
     
     Logger.logSevere(amountPartsList.count == waterGoals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     

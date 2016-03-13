@@ -24,7 +24,6 @@ class YearStatisticsViewController: UIViewController {
   private var statisticsEndDate: NSDate!
   private var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
-  private var privateManagedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   private var volumeObserver: SettingsObserver?
 
   private let shortMonthSymbols = NSCalendar.currentCalendar().shortMonthSymbols 
@@ -67,16 +66,18 @@ class YearStatisticsViewController: UIViewController {
       name: UIContentSizeCategoryDidChangeNotification, object: nil)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "managedObjectContextDidChange:",
-      name: NSManagedObjectContextDidSaveNotification, object: privateManagedObjectContext)
-    
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "managedObjectContextDidChange:",
-      name: GlobalConstants.notificationManagedObjectContextWasMerged, object: privateManagedObjectContext)
-    
-    NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "fullVersionIsPurchased:",
       name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
+
+    CoreDataStack.inPrivateContext { privateContext in
+      NSNotificationCenter.defaultCenter().addObserver(self,
+        selector: "managedObjectContextDidChange:",
+        name: NSManagedObjectContextDidSaveNotification, object: privateContext)
+      
+      NSNotificationCenter.defaultCenter().addObserver(self,
+        selector: "managedObjectContextDidChange:",
+        name: GlobalConstants.notificationManagedObjectContextWasMerged, object: privateContext)
+    }
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
@@ -172,18 +173,18 @@ class YearStatisticsViewController: UIViewController {
     }
   }
   
-  private func fetchStatisticsItems(beginDate beginDate: NSDate, endDate: NSDate) -> [YearStatisticsView.ItemType] {
+  private func fetchStatisticsItems(beginDate beginDate: NSDate, endDate: NSDate, privateContext: NSManagedObjectContext) -> [YearStatisticsView.ItemType] {
     let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Month,
       beginDate: beginDate,
       endDate: endDate,
       dayOffsetInHours: 0,
       aggregateFunction: .Average,
-      managedObjectContext: privateManagedObjectContext)
+      managedObjectContext: privateContext)
     
     let waterGoals = WaterGoal.fetchWaterGoalAmountsGroupedByMonths(
       beginDate: beginDate,
       endDate: endDate,
-      managedObjectContext: privateManagedObjectContext)
+      managedObjectContext: privateContext)
     
     Logger.logSevere(amountPartsList.count == waterGoals.count, Logger.Messages.inconsistentWaterIntakesAndGoals)
     
@@ -204,9 +205,10 @@ class YearStatisticsViewController: UIViewController {
   
   private func updateYearStatisticsView() {
     if Settings.sharedInstance.generalFullVersion.value {
-      privateManagedObjectContext.performBlock {
+      CoreDataStack.inPrivateContext { privateContext in
         let date = self.date
-        let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
+        let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate, privateContext: privateContext)
+        
         dispatch_async(dispatch_get_main_queue()) {
           if self.date === date {
             self.yearStatisticsView.setItems(statisticsItems)

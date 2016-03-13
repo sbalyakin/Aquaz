@@ -20,8 +20,6 @@ class SelectDrinkViewController: UIViewController {
   
   private lazy var popupViewManager: SelectDrinkPopupViewManager = SelectDrinkPopupViewManager(selectDrinkViewController: self)
 
-  private var mainManagedObjectContext: NSManagedObjectContext { return CoreDataStack.mainContext }
-
   private var displayedDrinkTypes: [DrinkType] = [
     .Water, .Tea,    .Coffee,
     .Milk,  .Juice,  .Sport,
@@ -51,8 +49,8 @@ class SelectDrinkViewController: UIViewController {
   }
 
   private func loadDrinks() {
-    mainManagedObjectContext.performBlock {
-      self.drinks = Drink.fetchAllDrinksTyped(managedObjectContext: self.mainManagedObjectContext)
+    CoreDataStack.inMainContext { mainContext in
+      self.drinks = Drink.fetchAllDrinksTyped(managedObjectContext: mainContext)
     }
   }
   
@@ -242,7 +240,6 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
   
   private let popupDrinkTypes: [DrinkType] = [ .Beer, .Wine, .HardLiquor ]
   private weak var selectDrinkViewController: SelectDrinkViewController!
-  private var mainManagedObjectContext: NSManagedObjectContext { return CoreDataStack.mainContext }
 
   private let columnsCount = 1
   private var rowsCount = 3

@@ -94,7 +94,7 @@ class Intake: CodingManagedObject, NamedEntity {
   }
 
   /// Fetches overall hydration amounts of intakes grouped by drinks for passed date
-  class func fetchHydrationAmountsGroupedByDrinksForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> [Drink: Double] {
+  class func fetchHydrationAmountsGroupedByDrinksForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> [DrinkType: Double] {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
     let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
@@ -113,16 +113,15 @@ class Intake: CodingManagedObject, NamedEntity {
     fetchRequest.propertiesToGroupBy = ["drink.index"]
     fetchRequest.resultType = .DictionaryResultType
     
-    let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
-    
     do {
       let fetchResults = try managedObjectContext.executeFetchRequest(fetchRequest)
-      var result = [Drink: Double]()
+      var result = [DrinkType: Double]()
+      
       for record in fetchResults as! [NSDictionary] {
         let drinkIndex = record["drink.index"] as! NSNumber
-        let drink = drinks[drinkIndex.integerValue]!
-        let amount = (record[overallWaterAmount.name] as! Double) * drink.hydrationFactor
-        result[drink] = amount
+        let drinkType = DrinkType(rawValue: drinkIndex.integerValue)!
+        let amount = (record[overallWaterAmount.name] as! Double) * drinkType.hydrationFactor
+        result[drinkType] = amount
       }
       return result
     } catch let error as NSError {
@@ -151,16 +150,14 @@ class Intake: CodingManagedObject, NamedEntity {
     fetchRequest.propertiesToGroupBy = ["drink.index"]
     fetchRequest.resultType = .DictionaryResultType
     
-    let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
-
     do {
       let fetchResults = try managedObjectContext.executeFetchRequest(fetchRequest)
       var totalDehydration: Double = 0
       
       for record in fetchResults as! [NSDictionary] {
         let drinkIndex = record["drink.index"] as! NSNumber
-        let drink = drinks[drinkIndex.integerValue]!
-        let dehydration = (record[overallWaterAmount.name] as! Double) * drink.dehydrationFactor
+        let drinkType = DrinkType(rawValue: drinkIndex.integerValue)!
+        let dehydration = (record[overallWaterAmount.name] as! Double) * drinkType.dehydrationFactor
         totalDehydration += dehydration
       }
       
@@ -191,16 +188,14 @@ class Intake: CodingManagedObject, NamedEntity {
     fetchRequest.propertiesToGroupBy = ["drink.index"]
     fetchRequest.resultType = .DictionaryResultType
     
-    let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
-    
     do {
       let fetchResults = try managedObjectContext.executeFetchRequest(fetchRequest)
       var totalHydration: Double = 0
       
       for record in fetchResults as! [NSDictionary] {
         let drinkIndex = record["drink.index"] as! NSNumber
-        let drink = drinks[drinkIndex.integerValue]!
-        let hydration = (record[overallWaterAmount.name] as! Double) * drink.hydrationFactor
+        let drinkType = DrinkType(rawValue: drinkIndex.integerValue)!
+        let hydration = (record[overallWaterAmount.name] as! Double) * drinkType.hydrationFactor
         totalHydration += hydration
       }
       

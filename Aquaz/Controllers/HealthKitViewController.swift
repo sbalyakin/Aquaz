@@ -72,12 +72,12 @@ final class HealthKitViewController: UIViewController {
   }
   
   private func updateNumberOfIntakesInAquaz() {
-    CoreDataStack.privateContext.performBlock {
+    CoreDataStack.inPrivateContext { privateContext in
       let request = NSFetchRequest(entityName: Intake.entityName)
       request.includesSubentities = false
       
       var error: NSError?
-      var count = CoreDataStack.privateContext.countForFetchRequest(request, error: &error)
+      var count = privateContext.countForFetchRequest(request, error: &error)
       if count == NSNotFound {
         count = 0
       }

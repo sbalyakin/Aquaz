@@ -21,6 +21,8 @@ final class HealthKitProvider: NSObject {
   
   private let waterQuantityType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater)!
   
+  private var managedObjectContext: NSManagedObjectContext?
+  
   private struct LocalizedStrings {
     
     lazy var metadataDrinkKeyTitle: String = NSLocalizedString("HKP:Drink", value: "Drink",
@@ -38,9 +40,11 @@ final class HealthKitProvider: NSObject {
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }
 
-  /// Setups synchronization with passed managed object context. On saving the context HealthKitProvider
+  /// Sets up synchronization with passed managed object context. On saving the context HealthKitProvider
   /// will add/remove or change corresponding samples in HealthKit.
-  func initSynchronizationForManagedObjectContenxt(managedObjectContext: NSManagedObjectContext) {
+  func initSynchronizationForManagedObjectContext(managedObjectContext: NSManagedObjectContext) {
+    self.managedObjectContext = managedObjectContext
+    
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "contextDidSaveContext:",
       name: NSManagedObjectContextDidSaveNotification,
@@ -97,8 +101,8 @@ final class HealthKitProvider: NSObject {
       }
       
       // Add intakes into HealthKit
-      CoreDataStack.privateContext.performBlock {
-        let intakes = Intake.fetchIntakes(beginDate: nil, endDate: nil, managedObjectContext: CoreDataStack.privateContext)
+      self.managedObjectContext?.performBlock {
+        let intakes = Intake.fetchIntakes(beginDate: nil, endDate: nil, managedObjectContext: self.managedObjectContext!)
         
         progress(current: 0, maximum: intakes.count)
         
@@ -292,24 +296,26 @@ final class HealthKitProvider: NSObject {
   }
   
   private func synchronizeWithHealthKit(notification: NSNotification) {
-    // Delete intakes from HealthKit
-    if let deletedObjects = notification.userInfo?[NSDeletedObjectsKey] as? Set<NSManagedObject> {
-      for deletedObject in deletedObjects where deletedObject is Intake {
-        removeWaterIntake(deletedObject as! Intake, completion: nil)
+    managedObjectContext?.performBlock {
+      // Delete intakes from HealthKit
+      if let deletedObjects = notification.userInfo?[NSDeletedObjectsKey] as? Set<NSManagedObject> {
+        for deletedObject in deletedObjects where deletedObject is Intake {
+          self.removeWaterIntake(deletedObject as! Intake, completion: nil)
+        }
       }
-    }
-    
-    // Insert intakes to HealthKit
-    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
-      for insertedObject in insertedObjects where insertedObject is Intake {
-        saveWaterIntake(insertedObject as! Intake)
+      
+      // Insert intakes to HealthKit
+      if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+        for insertedObject in insertedObjects where insertedObject is Intake {
+          self.saveWaterIntake(insertedObject as! Intake)
+        }
       }
-    }
-    
-    // Update intakes in HealthKit
-    if let updatedObjects = notification.userInfo?[NSUpdatedObjectsKey] as? Set<NSManagedObject> {
-      for updatedObject in updatedObjects where updatedObject is Intake {
-        updateWaterIntake(updatedObject as! Intake)
+      
+      // Update intakes in HealthKit
+      if let updatedObjects = notification.userInfo?[NSUpdatedObjectsKey] as? Set<NSManagedObject> {
+        for updatedObject in updatedObjects where updatedObject is Intake {
+          self.updateWaterIntake(updatedObject as! Intake)
+        }
       }
     }
   }

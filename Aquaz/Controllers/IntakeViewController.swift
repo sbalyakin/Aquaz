@@ -64,8 +64,6 @@ class IntakeViewController: UIViewController {
 
   private var timeIsChoosen = false
   
-  private var mainManagedObjectContext: NSManagedObjectContext { return CoreDataStack.mainContext }
-  
   private struct Constants {
     static let pickTimeSegue = "PickTime"
   }
@@ -255,24 +253,28 @@ class IntakeViewController: UIViewController {
   }
   
   private func addIntake(amount amount: Double) {
-    IntakeHelper.addIntakeWithHealthKitChecks(
-      amount: amount,
-      drink: drink,
-      intakeDate: computeIntakeDate(),
-      viewController: self,
-      managedObjectContext: mainManagedObjectContext,
-      actionBeforeAddingIntakeToCoreData: {
-        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
-      },
-      actionAfterAddingIntakeToCoreData: nil)
+    CoreDataStack.inPrivateContext { privateContext in
+      let drink = try! privateContext.existingObjectWithID(self.drink.objectID) as! Drink
+      
+      IntakeHelper.addIntakeWithHealthKitChecks(
+        amount: amount,
+        drink: drink,
+        intakeDate: self.computeIntakeDate(),
+        viewController: self,
+        managedObjectContext: privateContext,
+        actionBeforeAddingIntakeToCoreData: {
+          self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        },
+        actionAfterAddingIntakeToCoreData: nil)
+    }
   }
   
   private func updateIntake(amount amount: Double) {
     if let intake = intake {
-      mainManagedObjectContext.performBlock {
+      CoreDataStack.inMainContext { mainContext in
         intake.amount = amount
         intake.date = self.date
-        CoreDataStack.saveContext(self.mainManagedObjectContext)
+        CoreDataStack.saveContext(mainContext)
       }
     }
     

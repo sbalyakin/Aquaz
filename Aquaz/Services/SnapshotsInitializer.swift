@@ -12,10 +12,6 @@ import CoreData
 @available(iOS 9.0, *)
 final class SnapshotsInitializer {
 
-  private class var managedObjectContext: NSManagedObjectContext {
-    return CoreDataStack.privateContext
-  }
-  
   class func prepareUserData() {
     setupGeneralSettings()
     setupUserPersonalInfo()
@@ -83,72 +79,74 @@ final class SnapshotsInitializer {
   }
   
   private class func generateUserContent() {
-    managedObjectContext.performBlockAndWaitUsingGroup {
-      removeAllExistingUserData()
+    CoreDataStack.inPrivateContext { privateContext in
+      removeAllExistingUserData(privateContext: privateContext)
       
-      coreDataPrepopulation()
+      coreDataPrepopulation(privateContext: privateContext)
       
-      generateHistoricalUserData()
-      generateWaterGoalForToday()
-      generateTodayIntakes()
+      generateHistoricalUserData(privateContext: privateContext)
+      generateWaterGoalForToday(privateContext: privateContext)
+      generateTodayIntakes(privateContext: privateContext)
       
-      CoreDataStack.saveContext(managedObjectContext)
+      CoreDataStack.saveContext(privateContext)
     }
   }
-  
-  private class func coreDataPrepopulation() {
-    CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: managedObjectContext, saveContext: false)
-  }
-  
-  private class func generateHistoricalUserData() {
-    #if DEBUG
-      // Historical data is already generatd in CoreDataPrePopulation.prePopulateCoreData()
-    #else
-      CoreDataPrePopulation.generateIntakes(managedObjectContext: managedObjectContext)
-      CoreDataPrePopulation.generateWaterGoals(managedObjectContext: managedObjectContext)
-    #endif
-  }
-  
-  private class func removeAllExistingUserData() {
+
+  private class func removeAllExistingUserData(privateContext privateContext: NSManagedObjectContext) {
     do {
       let deleteIntakesRequest = NSBatchDeleteRequest(fetchRequest: NSFetchRequest(entityName: Intake.entityName))
-      try managedObjectContext.executeRequest(deleteIntakesRequest)
+      try privateContext.executeRequest(deleteIntakesRequest)
       
       let deleteWaterGoalsRequest = NSBatchDeleteRequest(fetchRequest: NSFetchRequest(entityName: WaterGoal.entityName))
-      try managedObjectContext.executeRequest(deleteWaterGoalsRequest)
+      try privateContext.executeRequest(deleteWaterGoalsRequest)
     } catch {
       // Do nothing
     }
   }
   
-  private class func generateWaterGoalForToday() {
-    WaterGoal.addEntity(date: NSDate(), baseAmount: Settings.sharedInstance.userDailyWaterIntake.value, isHotDay: true, isHighActivity: true, managedObjectContext: managedObjectContext, saveImmediately: false)
+  private class func coreDataPrepopulation(privateContext privateContext: NSManagedObjectContext) {
+    if !CoreDataPrePopulation.isCoreDataPrePopulated(managedObjectContext: privateContext) {
+      CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: privateContext, saveContext: false)
+    }
   }
   
-  private class func generateTodayIntakes() {
-    guard let water = Drink.fetchDrinkByType(.Water, managedObjectContext: managedObjectContext) else {
+  private class func generateHistoricalUserData(privateContext privateContext: NSManagedObjectContext) {
+    #if DEBUG
+      // Historical data is already generated in CoreDataPrePopulation.prePopulateCoreData()
+    #else
+      CoreDataPrePopulation.generateIntakes(managedObjectContext: privateContext)
+      CoreDataPrePopulation.generateWaterGoals(managedObjectContext: privateContext)
+    #endif
+  }
+  
+  private class func generateWaterGoalForToday(privateContext privateContext: NSManagedObjectContext) {
+    WaterGoal.addEntity(date: NSDate(), baseAmount: Settings.sharedInstance.userDailyWaterIntake.value, isHotDay: true, isHighActivity: true, managedObjectContext: privateContext, saveImmediately: false)
+  }
+  
+  private class func generateTodayIntakes(privateContext privateContext: NSManagedObjectContext) {
+    guard let water = Drink.fetchDrinkByType(.Water, managedObjectContext: privateContext) else {
       return
     }
 
-    guard let coffee = Drink.fetchDrinkByType(.Coffee, managedObjectContext: managedObjectContext) else {
+    guard let coffee = Drink.fetchDrinkByType(.Coffee, managedObjectContext: privateContext) else {
       return
     }
 
-    guard let soda = Drink.fetchDrinkByType(.Soda, managedObjectContext: managedObjectContext) else {
+    guard let soda = Drink.fetchDrinkByType(.Soda, managedObjectContext: privateContext) else {
       return
     }
     
     let date1 = DateHelper.dateBySettingHour(6, minute: 0, second: 0, ofDate: NSDate())
-    Intake.addEntity(drink: water, amount: 250, date: date1, managedObjectContext: managedObjectContext, saveImmediately: false)
+    Intake.addEntity(drink: water, amount: 250, date: date1, managedObjectContext: privateContext, saveImmediately: false)
 
     let date2 = DateHelper.dateBySettingHour(7, minute: 10, second: 0, ofDate: NSDate())
-    Intake.addEntity(drink: coffee, amount: 210, date: date2, managedObjectContext: managedObjectContext, saveImmediately: false)
+    Intake.addEntity(drink: coffee, amount: 210, date: date2, managedObjectContext: privateContext, saveImmediately: false)
     
     let date3 = DateHelper.dateBySettingHour(8, minute: 0, second: 0, ofDate: NSDate())
-    Intake.addEntity(drink: water, amount: 210, date: date3, managedObjectContext: managedObjectContext, saveImmediately: false)
+    Intake.addEntity(drink: water, amount: 210, date: date3, managedObjectContext: privateContext, saveImmediately: false)
     
     let date4 = DateHelper.dateBySettingHour(9, minute: 30, second: 0, ofDate: NSDate())
-    Intake.addEntity(drink: soda, amount: 330, date: date4, managedObjectContext: managedObjectContext, saveImmediately: false)
+    Intake.addEntity(drink: soda, amount: 330, date: date4, managedObjectContext: privateContext, saveImmediately: false)
   }
  
 }

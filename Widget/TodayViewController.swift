@@ -42,10 +42,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   // in order to exclude synchronization problems for managed object contexts.
   private var coreDataStack = CoreDataStack()
   
-  private var mainManagedObjectContext: NSManagedObjectContext {
-    return coreDataStack.mainContext
-  }
-
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
 
@@ -78,7 +74,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
     // It's necessary to reset the managed object context in order to finalize background tasks correctly.
-    mainManagedObjectContext.reset()
+    coreDataStack.inMainContext { mainContext in
+      mainContext.reset()
+    }
   }
 
   private func setupCoreDataSynchronization() {
@@ -102,15 +100,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
 
   private func setupNotificationsObservation() {
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "managedObjectContextDidSave:",
-      name: NSManagedObjectContextDidSaveNotification,
-      object: mainManagedObjectContext)
+    coreDataStack.inMainContext { mainContext in
+      NSNotificationCenter.defaultCenter().addObserver(self,
+        selector: "managedObjectContextDidSave:",
+        name: NSManagedObjectContextDidSaveNotification,
+        object: mainContext)
+    }
   }
   
   @available(iOSApplicationExtension 9.0, *)
   private func setupHeathKitSynchronization() {
-    HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContenxt(mainManagedObjectContext)
+    coreDataStack.inMainContext { mainContext in
+      HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContext(mainContext)
+    }
   }
 
   func managedObjectContextDidSave(notification: NSNotification) {
@@ -118,79 +120,83 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   private func fetchDrinks() {
-    var drinkIndexesToDisplay = [Int]()
-    var drinkIndexes = Array(0..<Drink.getDrinksCount())
-    
-    let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
-    if let intake1: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: mainManagedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor]) {
-      let drinkIndex1 = intake1.drink.index.integerValue
-      drinkIndexesToDisplay += [drinkIndex1]
-      if let index = drinkIndexes.indexOf(drinkIndex1) {
-        drinkIndexes.removeAtIndex(index)
-      } else {
-        assert(false)
-      }
+    coreDataStack.inMainContext { mainContext in
+      var drinkIndexesToDisplay = [Int]()
+      var drinkIndexes = Array(0..<Drink.getDrinksCount())
       
-      let predicate2 = NSPredicate(format: "%K != %d", "drink.index", drinkIndex1)
-      
-      if let intake2: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: mainManagedObjectContext, predicate: predicate2, sortDescriptors: [sortDescriptor]) {
-        let drinkIndex2 = intake2.drink.index.integerValue
-        drinkIndexesToDisplay += [drinkIndex2]
-        if let index = drinkIndexes.indexOf(drinkIndex2) {
+      let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+      if let intake1: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: mainContext, predicate: nil, sortDescriptors: [sortDescriptor]) {
+        let drinkIndex1 = intake1.drink.index.integerValue
+        drinkIndexesToDisplay += [drinkIndex1]
+        if let index = drinkIndexes.indexOf(drinkIndex1) {
           drinkIndexes.removeAtIndex(index)
         } else {
           assert(false)
         }
         
-        let predicate3 = NSPredicate(format: "%K != %d AND %K != %d", "drink.index", drinkIndex1, "drink.index", drinkIndex2)
+        let predicate2 = NSPredicate(format: "%K != %d", "drink.index", drinkIndex1)
         
-        if let intake3: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: mainManagedObjectContext, predicate: predicate3, sortDescriptors: [sortDescriptor]) {
-          drinkIndexesToDisplay += [intake3.drink.index.integerValue]
+        if let intake2: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: mainContext, predicate: predicate2, sortDescriptors: [sortDescriptor]) {
+          let drinkIndex2 = intake2.drink.index.integerValue
+          drinkIndexesToDisplay += [drinkIndex2]
+          if let index = drinkIndexes.indexOf(drinkIndex2) {
+            drinkIndexes.removeAtIndex(index)
+          } else {
+            assert(false)
+          }
+          
+          let predicate3 = NSPredicate(format: "%K != %d AND %K != %d", "drink.index", drinkIndex1, "drink.index", drinkIndex2)
+          
+          if let intake3: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: mainContext, predicate: predicate3, sortDescriptors: [sortDescriptor]) {
+            drinkIndexesToDisplay += [intake3.drink.index.integerValue]
+          }
         }
       }
+      
+      if drinkIndexesToDisplay.count < 1 {
+        drinkIndexesToDisplay += [drinkIndexes.removeAtIndex(0)]
+      }
+      
+      if drinkIndexesToDisplay.count < 2 {
+        drinkIndexesToDisplay += [drinkIndexes.removeAtIndex(0)]
+      }
+      
+      if drinkIndexesToDisplay.count < 3 {
+        drinkIndexesToDisplay += [drinkIndexes.removeAtIndex(0)]
+      }
+      
+      drinkIndexesToDisplay.sortInPlace(<)
+      
+      let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: mainContext)
+      
+      self.drink1 = drinks[drinkIndexesToDisplay[0]]
+      self.drink2 = drinks[drinkIndexesToDisplay[1]]
+      self.drink3 = drinks[drinkIndexesToDisplay[2]]
     }
-    
-    if drinkIndexesToDisplay.count < 1 {
-      drinkIndexesToDisplay += [drinkIndexes.removeAtIndex(0)]
-    }
-    
-    if drinkIndexesToDisplay.count < 2 {
-      drinkIndexesToDisplay += [drinkIndexes.removeAtIndex(0)]
-    }
-    
-    if drinkIndexesToDisplay.count < 3 {
-      drinkIndexesToDisplay += [drinkIndexes.removeAtIndex(0)]
-    }
-    
-    drinkIndexesToDisplay.sortInPlace(<)
-    
-    let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: mainManagedObjectContext)
-    
-    drink1 = drinks[drinkIndexesToDisplay[0]]
-    drink2 = drinks[drinkIndexesToDisplay[1]]
-    drink3 = drinks[drinkIndexesToDisplay[2]]
   }
   
   private func fetchWaterIntake() {
-    let date = NSDate()
-    
-    waterGoal = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: mainManagedObjectContext)?.amount
-    
-    let amount = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
-      beginDate: date,
-      endDate: DateHelper.addToDate(date, years: 0, months: 0, days: 1),
-      dayOffsetInHours: 0,
-      aggregateFunction: .Summary,
-      managedObjectContext: mainManagedObjectContext).first!
-    
-    hydration = amount.hydration
-    dehydration = amount.dehydration
+    coreDataStack.inMainContext { mainContext in
+      let date = NSDate()
+      
+      self.waterGoal = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: mainContext)?.amount
+      
+      let amount = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
+        beginDate: date,
+        endDate: DateHelper.addToDate(date, years: 0, months: 0, days: 1),
+        dayOffsetInHours: 0,
+        aggregateFunction: .Summary,
+        managedObjectContext: mainContext).first!
+      
+      self.hydration = amount.hydration
+      self.dehydration = amount.dehydration
+    }
   }
   
   private func fetchData(completion: () -> ()) {
-    mainManagedObjectContext.performBlock {
+    coreDataStack.inMainContext { mainContext in
       if !Settings.sharedInstance.generalHasLaunchedOnce.value {
-        CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: self.mainManagedObjectContext, saveContext: true)
+        CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: mainContext, saveContext: true)
       }
     
       self.fetchDrinks()
@@ -307,12 +313,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       return
     }
     
-    mainManagedObjectContext.performBlock {
+    coreDataStack.inMainContext { mainContext in
       Intake.addEntity(
         drink: drink,
         amount: drink.recentAmount.amount,
         date: NSDate(),
-        managedObjectContext: self.mainManagedObjectContext,
+        managedObjectContext: mainContext,
         saveImmediately: true)
 
       self.fetchData {

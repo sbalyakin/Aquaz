@@ -144,8 +144,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   private var volumeObserver: SettingsObserver?
   
-  private var mainManagedObjectContext: NSManagedObjectContext { return CoreDataStack.mainContext }
-  
   // MARK: Page setup -
   
   override func viewDidLoad() {
@@ -209,15 +207,17 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   private func setupNotificationsObservation() {
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "managedObjectContextDidChange:",
-      name: GlobalConstants.notificationManagedObjectContextWasMerged,
-      object: mainManagedObjectContext)
-    
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "managedObjectContextDidChange:",
-      name: NSManagedObjectContextDidSaveNotification,
-      object: mainManagedObjectContext)
+    CoreDataStack.inMainContext { mainContext in
+      NSNotificationCenter.defaultCenter().addObserver(self,
+        selector: "managedObjectContextDidChange:",
+        name: GlobalConstants.notificationManagedObjectContextWasMerged,
+        object: mainContext)
+      
+      NSNotificationCenter.defaultCenter().addObserver(self,
+        selector: "managedObjectContextDidChange:",
+        name: NSManagedObjectContextDidSaveNotification,
+        object: mainContext)
+    }
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
@@ -398,14 +398,18 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   private func updateSummaryBar(animated animated: Bool, completion: (() -> ())?) {
-    mainManagedObjectContext.performBlock {
-      self.waterGoal = WaterGoal.fetchWaterGoalForDate(self.date, managedObjectContext: self.mainManagedObjectContext)
+    CoreDataStack.inPrivateContext { privateContext in
+      if let waterGoal = WaterGoal.fetchWaterGoalForDate(self.date, managedObjectContext: privateContext) {
+        CoreDataStack.inMainContext { mainContext in
+          self.waterGoal = try! mainContext.existingObjectWithID(waterGoal.objectID) as! WaterGoal
+        }
+      }
       
       self.totalDehydrationAmount = Intake.fetchTotalDehydrationAmountForDay(self.date,
-        dayOffsetInHours: 0, managedObjectContext: self.mainManagedObjectContext)
+        dayOffsetInHours: 0, managedObjectContext: privateContext)
       
       let intakeHydrationAmounts = Intake.fetchHydrationAmountsGroupedByDrinksForDay(self.date,
-        dayOffsetInHours: 0, managedObjectContext: self.mainManagedObjectContext)
+        dayOffsetInHours: 0, managedObjectContext: privateContext)
       
       dispatch_async(dispatch_get_main_queue()) {
         if animated {
@@ -485,7 +489,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   // MARK: Intakes management -
   
-  private func updateIntakeHydrationAmounts(intakeHydrationAmounts: [Drink: Double]) {
+  private func updateIntakeHydrationAmounts(intakeHydrationAmounts: [DrinkType: Double]) {
     // Clear all drink sections
     for (_, section) in multiProgressSections {
       section.factor = 0.0
@@ -493,9 +497,9 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     
     // Fill sections with fetched intakes and compute daily water intake
     var totalHydrationAmount: Double = 0
-    for (drink, hydrationAmount) in intakeHydrationAmounts {
+    for (drinkType, hydrationAmount) in intakeHydrationAmounts {
       totalHydrationAmount += hydrationAmount
-      if let section = multiProgressSections[drink.index.integerValue] {
+      if let section = multiProgressSections[drinkType.rawValue] {
         section.factor = CGFloat(hydrationAmount)
       }
     }
@@ -697,13 +701,13 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   private func saveWaterGoalForCurrentDate(baseAmount baseAmount: Double, isHotDay: Bool, isHighActivity: Bool) {
-    mainManagedObjectContext.performBlock {
+    CoreDataStack.inMainContext { mainContext in
       self.waterGoal = WaterGoal.addEntity(
         date: self.date,
         baseAmount: baseAmount,
         isHotDay: isHotDay,
         isHighActivity: isHighActivity,
-        managedObjectContext: self.mainManagedObjectContext)
+        managedObjectContext: mainContext)
     }
   }
   

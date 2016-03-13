@@ -25,7 +25,6 @@ class WeekStatisticsViewController: UIViewController {
   private var isShowingDay = false
   private var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
   private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
-  private var privateManagedObjectContext: NSManagedObjectContext { return CoreDataStack.privateContext }
   private var volumeObserver: SettingsObserver?
   
   private var helpTip: JDFTooltipView?
@@ -112,16 +111,18 @@ class WeekStatisticsViewController: UIViewController {
       name: UIContentSizeCategoryDidChangeNotification, object: nil)
     
     NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "managedObjectContextDidChange:",
-      name: NSManagedObjectContextDidSaveNotification, object: privateManagedObjectContext)
-
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "managedObjectContextDidChange:",
-      name: GlobalConstants.notificationManagedObjectContextWasMerged, object: privateManagedObjectContext)
-    
-    NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "fullVersionIsPurchased:",
       name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
+    
+    CoreDataStack.inPrivateContext { privateContext in
+      NSNotificationCenter.defaultCenter().addObserver(self,
+        selector: "managedObjectContextDidChange:",
+        name: NSManagedObjectContextDidSaveNotification, object: privateContext)
+      
+      NSNotificationCenter.defaultCenter().addObserver(self,
+        selector: "managedObjectContextDidChange:",
+        name: GlobalConstants.notificationManagedObjectContextWasMerged, object: privateContext)
+    }
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
@@ -194,25 +195,25 @@ class WeekStatisticsViewController: UIViewController {
     }
   }
 
-  private func fetchStatisticsItems(beginDate beginDate: NSDate, endDate: NSDate) -> [WeekStatisticsView.ItemType] {
+  private func fetchStatisticsItems(beginDate beginDate: NSDate, endDate: NSDate, privateContext: NSManagedObjectContext) -> [WeekStatisticsView.ItemType] {
     let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
       beginDate: beginDate,
       endDate: endDate,
       dayOffsetInHours: 0,
       aggregateFunction: .Average,
-      managedObjectContext: privateManagedObjectContext)
+      managedObjectContext: privateContext)
     
     Logger.logSevere(amountPartsList.count == 7, "Unexpected count of grouped water intakes", logDetails: [Logger.Attributes.count: "\(amountPartsList.count)"])
     
     let waterGoals = WaterGoal.fetchWaterGoalAmounts(
       beginDate: beginDate,
       endDate: endDate,
-      managedObjectContext: privateManagedObjectContext)
+      managedObjectContext: privateContext)
     
     Logger.logSevere(waterGoals.count == 7, "Unexpected count of water goals", logDetails: [Logger.Attributes.count: "\(waterGoals.count)"])
-    
+
     var statisticsItems: [WeekStatisticsView.ItemType] = []
-    
+
     for (index, amountPart) in amountPartsList.enumerate() {
       let waterGoal = waterGoals[index] + amountPart.dehydration
       
@@ -222,15 +223,15 @@ class WeekStatisticsViewController: UIViewController {
       let item: WeekStatisticsView.ItemType = (value: CGFloat(displayedWaterHydration), goal: CGFloat(displayedWaterGoal))
       statisticsItems.append(item)
     }
-    
+
     return statisticsItems
   }
   
   private func updateWeekStatisticsView(animated animated: Bool) {
     if Settings.sharedInstance.generalFullVersion.value {
-      privateManagedObjectContext.performBlock {
+      CoreDataStack.inPrivateContext { privateContext in
         let date = self.date
-        let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate)
+        let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate, privateContext: privateContext)
         dispatch_async(dispatch_get_main_queue()) {
           if self.date === date {
             self.weekStatisticsView.setItems(statisticsItems, animate: animated)

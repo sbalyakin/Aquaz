@@ -36,35 +36,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UIHelper.applyStylization()
     NotificationsHelper.setApplicationIconBadgeNumber(0)
     
-    let isSnapshotMode = NSProcessInfo.processInfo().arguments.contains("-SNAPSHOT")
-
-    if isSnapshotMode {
-      if #available(iOS 9.0, *) {
-        SnapshotsInitializer.prepareUserData()
-      }
-    } else {
-      // General case
-      if !Settings.sharedInstance.generalFullVersion.value {
-        Appodeal.initializeWithApiKey(GlobalConstants.appodealApiKey, types: AppodealAdType.Interstitial)
-        
-        // Just for creating shared instance of in-app purchase manager and to start observing transaction states
-        InAppPurchaseManager.sharedInstance
-      }
+    // Initialize the core data stack
+    CoreDataStack.sharedInstance
+    
+    #if DEBUG
+      let isSnapshotMode = NSProcessInfo.processInfo().arguments.contains("-SNAPSHOT")
       
-      if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
-        prePopulateCoreData()
-        removeDisabledNotifications()
-        showWelcomeWizard()
-        Settings.sharedInstance.generalHasLaunchedOnce.value = true
-      } else {
-        if let options = launchOptions {
-          if let _ = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
-            showDayViewControllerForToday()
-          }
+      if isSnapshotMode {
+        if #available(iOS 9.0, *) {
+          SnapshotsInitializer.prepareUserData()
         }
+      } else {
+        initialSetup(launchOptions: launchOptions)
       }
-    }
-
+    #else
+      initialSetup(launchOptions: launchOptions)
+    #endif
+    
     wormholeDataProvider = WormholeDataProvider()
     
     setupSynchronizationWithCoreData()
@@ -78,7 +66,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     return true
   }
-  
+
+  private func initialSetup(launchOptions launchOptions: [NSObject: AnyObject]?) {
+    // General case
+    if !Settings.sharedInstance.generalFullVersion.value {
+      Appodeal.initializeWithApiKey(GlobalConstants.appodealApiKey, types: AppodealAdType.Interstitial)
+      
+      // Just for creating shared instance of in-app purchase manager and to start observing transaction states
+      InAppPurchaseManager.sharedInstance
+    }
+    
+    if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
+      prePopulateCoreData()
+      removeDisabledNotifications()
+      showWelcomeWizard()
+      Settings.sharedInstance.generalHasLaunchedOnce.value = true
+    } else {
+      if let options = launchOptions {
+        if let _ = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
+          showDayViewControllerForToday()
+        }
+      }
+    }
+  }
+    
   private func setupSynchronizationWithCoreData() {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "updateNotifications:",
@@ -88,7 +99,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   @available(iOS 9.0, *)
   private func setupHealthKitSynchronization() {
-    HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContenxt(CoreDataStack.mainContext)
+    CoreDataStack.inPrivateContext { privateContext in
+      HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContext(privateContext)
+    }
   }
 
   func updateNotifications(notification: NSNotification) {
@@ -114,13 +127,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
       if let lastIntakeDate = lastIntakeDate where DateHelper.areDatesEqualByDays(lastIntakeDate, NSDate()) {
         if Settings.sharedInstance.notificationsLimit.value {
-          CoreDataStack.privateContext.performBlock {
+          CoreDataStack.inPrivateContext { privateContext in
             let beginDate = NSDate()
             let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
             
-            let todayAmountParts = Intake.fetchIntakeAmountPartsGroupedBy(.Day, beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0,  aggregateFunction: .Summary, managedObjectContext: CoreDataStack.privateContext).first!
+            let todayAmountParts = Intake.fetchIntakeAmountPartsGroupedBy(.Day, beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0,  aggregateFunction: .Summary, managedObjectContext: privateContext).first!
             
-            let todayWaterGoal = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: CoreDataStack.privateContext).first!
+            let todayWaterGoal = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: privateContext).first!
             
             if todayAmountParts.hydration >= (todayWaterGoal + todayAmountParts.dehydration) {
               dispatch_async(dispatch_get_main_queue()) {
@@ -167,9 +180,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func prePopulateCoreData() {
-    CoreDataStack.privateContext.performBlockAndWaitUsingGroup {
-      if !CoreDataPrePopulation.isCoreDataPrePopulated(managedObjectContext: CoreDataStack.privateContext) {
-        CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: CoreDataStack.privateContext, saveContext: true)
+    CoreDataStack.inPrivateContext { privateContext in
+      if !CoreDataPrePopulation.isCoreDataPrePopulated(managedObjectContext: privateContext) {
+        CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: privateContext, saveContext: true)
       }
     }
   }
