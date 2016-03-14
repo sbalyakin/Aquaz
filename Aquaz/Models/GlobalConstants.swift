@@ -17,8 +17,6 @@ class GlobalConstants {
   static let appStoreLink = "http://itunes.apple.com/app/id\(GlobalConstants.applicationIdentifier)"
   static let appReviewLink = "itms-apps://itunes.apple.com/app/id\(GlobalConstants.applicationIdentifier)"
 
-  static let inAppPurchaseFullVersion = "com.devmanifest.Aquaz.fullversion"
-
   static let developerMail = "devmanifest@gmail.com"
   
   static let wormholeOptionalDirectory = "wormhole"
@@ -26,8 +24,6 @@ class GlobalConstants {
   static let wormholeMessageFromWidget = "From Widget"
   
   static let notificationManagedObjectContextWasMerged = "AquazManagedObjectContextWasMerged"
-  static let notificationFullVersionIsPurchased = "AquazFullVersionIsPurchased"
-  static let notificationFullVersionPurchaseStateDidChange = "AquazFullVersionPurchaseStateDidChange"
   static let notificationWatchAddIntake = "AquazWatchAddIntake"
 
   static let numberOfIntakesToShowAd = 5

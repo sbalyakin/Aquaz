@@ -110,10 +110,6 @@ class WeekStatisticsViewController: UIViewController {
       selector: "preferredContentSizeChanged",
       name: UIContentSizeCategoryDidChangeNotification, object: nil)
     
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "fullVersionIsPurchased:",
-      name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
-    
     CoreDataStack.inPrivateContext { privateContext in
       NSNotificationCenter.defaultCenter().addObserver(self,
         selector: "managedObjectContextDidChange:",
@@ -126,13 +122,7 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
-    if Settings.sharedInstance.generalFullVersion.value {
-      updateWeekStatisticsView(animated: true)
-    }
-  }
-
-  func fullVersionIsPurchased(notification: NSNotification) {
-    updateWeekStatisticsView(animated: false)
+  updateWeekStatisticsView(animated: true)
   }
 
   func preferredContentSizeChanged() {
@@ -228,24 +218,14 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   private func updateWeekStatisticsView(animated animated: Bool) {
-    if Settings.sharedInstance.generalFullVersion.value {
-      CoreDataStack.inPrivateContext { privateContext in
-        let date = self.date
-        let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate, privateContext: privateContext)
-        dispatch_async(dispatch_get_main_queue()) {
-          if self.date === date {
-            self.weekStatisticsView.setItems(statisticsItems, animate: animated)
-          }
+    CoreDataStack.inPrivateContext { privateContext in
+      let date = self.date
+      let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate, privateContext: privateContext)
+      dispatch_async(dispatch_get_main_queue()) {
+        if self.date === date {
+          self.weekStatisticsView.setItems(statisticsItems, animate: animated)
         }
       }
-    } else {
-      // Demo mode
-      var items: [WeekStatisticsView.ItemType] = []
-      for index in 0..<weekStatisticsView.daysPerWeek {
-        let item: WeekStatisticsView.ItemType = (value: CGFloat(200 + index * 300), goal: 1800)
-        items.append(item)
-      }
-      weekStatisticsView.setItems(items, animate: animated)
     }
   }
 
@@ -266,7 +246,7 @@ class WeekStatisticsViewController: UIViewController {
   // MARK: Help tips
   
   private func checkHelpTip() {
-    if helpTip != nil || !Settings.sharedInstance.generalFullVersion.value {
+    if helpTip != nil {
       return
     }
     

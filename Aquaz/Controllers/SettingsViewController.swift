@@ -32,14 +32,6 @@ class SettingsViewController: OmegaSettingsViewController {
       value: "Support",
       comment: "SettingsViewController: Table cell title for [Support] settings block")
     
-    lazy var fullVersionTitle: String = NSLocalizedString("SVC:Full Version",
-      value: "Full Version",
-      comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is not purchased yet")
-    
-    lazy var fullVersionIsPurchasedTitle: String = NSLocalizedString("SVC:Full Version Is Purchased",
-      value: "Full Version Is Purchased",
-      comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is purchased")
-
     @available(iOS 9.0, *)
     lazy var exportToHealthAppTitle: String = NSLocalizedString("SVC:Export to Apple Health",
       value: "Export to Apple Health",
@@ -52,16 +44,12 @@ class SettingsViewController: OmegaSettingsViewController {
   
   private var localizedStrings = LocalyzedStrings()
   
-  var fullVersionCell: BasicTableCell!
-
-  
   private struct Constants {
     static let calculateWaterIntakeSegue = "Calculate Water Intake"
     static let showNotificationsSegue = "Show Notifications"
     static let showExtraFactorsSegue = "Show Extra Factors"
     static let showUnitsSegue = "Show Units"
     static let showSupportSegue = "Show Support"
-    static let manageFullVersionSegue = "Manage Full Version"
     static let exportToHealthKit = "Export To HealthKit"
   }
   
@@ -71,10 +59,6 @@ class SettingsViewController: OmegaSettingsViewController {
     UIHelper.applyStyleToViewController(self)
     rightDetailValueColor = StyleKit.settingsTablesValueColor
     rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
-    
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "fullVersionIsPurchased:",
-      name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
   }
 
   deinit {
@@ -151,26 +135,8 @@ class SettingsViewController: OmegaSettingsViewController {
     let supportSection = TableCellsSection()
     supportSection.tableCells = [supportCell]
     
-    // Full Version section
-    if Settings.sharedInstance.generalFullVersion.value {
-      fullVersionCell = createBasicTableCell(title: localizedStrings.fullVersionIsPurchasedTitle)
-    } else {
-      fullVersionCell = createBasicTableCell(
-        title: localizedStrings.fullVersionTitle,
-        accessoryType: .DisclosureIndicator) { [weak self] tableCell, active in
-          if active {
-            self?.performSegueWithIdentifier(Constants.manageFullVersionSegue, sender: tableCell)
-          }
-        }
-    }
-    
-    fullVersionCell.image = ImageHelper.loadImage(.SettingsFullVersion)
-
-    let fullVersionSection = TableCellsSection()
-    fullVersionSection.tableCells = [fullVersionCell]
-
     // Adding sections
-    var sections = [recommendationsSection, unitsSection, notificationsSection, supportSection, fullVersionSection]
+    var sections = [recommendationsSection, unitsSection, notificationsSection, supportSection]
 
     // Export to the Health App section
     if #available(iOS 9.0, *) {
@@ -194,12 +160,6 @@ class SettingsViewController: OmegaSettingsViewController {
     return sections
   }
   
-  func fullVersionIsPurchased(notification: NSNotification) {
-    fullVersionCell.title = localizedStrings.fullVersionIsPurchasedTitle
-    fullVersionCell.accessoryType = nil
-    fullVersionCell.tableCellDidActivateFunction = nil
-  }
-
   private func stringFromWaterGoal(waterGoal: Double) -> String {
     let volumeUnit = Settings.sharedInstance.generalVolumeUnits.value
     let text = Units.sharedInstance.formatMetricAmountToText(metricAmount: waterGoal, unitType: .Volume, roundPrecision: volumeUnit.precision, decimals: volumeUnit.decimals, displayUnits: true)

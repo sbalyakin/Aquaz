@@ -1,1 +1,0 @@
-../../../YandexMobileAds/SDK/YandexMobileAds/YMANativeAdDelegate.h

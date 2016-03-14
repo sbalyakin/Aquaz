@@ -65,10 +65,6 @@ class YearStatisticsViewController: UIViewController {
       selector: "preferredContentSizeChanged",
       name: UIContentSizeCategoryDidChangeNotification, object: nil)
     
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "fullVersionIsPurchased:",
-      name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
-
     CoreDataStack.inPrivateContext { privateContext in
       NSNotificationCenter.defaultCenter().addObserver(self,
         selector: "managedObjectContextDidChange:",
@@ -81,12 +77,6 @@ class YearStatisticsViewController: UIViewController {
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
-    if Settings.sharedInstance.generalFullVersion.value {
-      updateYearStatisticsView()
-    }
-  }
-
-  func fullVersionIsPurchased(notification: NSNotification) {
     updateYearStatisticsView()
   }
 
@@ -204,27 +194,15 @@ class YearStatisticsViewController: UIViewController {
   }
   
   private func updateYearStatisticsView() {
-    if Settings.sharedInstance.generalFullVersion.value {
-      CoreDataStack.inPrivateContext { privateContext in
-        let date = self.date
-        let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate, privateContext: privateContext)
-        
-        dispatch_async(dispatch_get_main_queue()) {
-          if self.date === date {
-            self.yearStatisticsView.setItems(statisticsItems)
-          }
+    CoreDataStack.inPrivateContext { privateContext in
+      let date = self.date
+      let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate, privateContext: privateContext)
+      
+      dispatch_async(dispatch_get_main_queue()) {
+        if self.date === date {
+          self.yearStatisticsView.setItems(statisticsItems)
         }
       }
-    } else {
-      // Demo mode
-      var items: [YearStatisticsView.ItemType] = []
-      
-      for i in 0..<yearStatisticsView.monthsPerYear {
-        let value = 1200 + cos(CGFloat(i + 4) / 2) * 700
-        items.append((value: CGFloat(value), goal: 2000))
-      }
-      
-      yearStatisticsView.setItems(items)
     }
   }
   
@@ -239,7 +217,7 @@ class YearStatisticsViewController: UIViewController {
   }
 
   private func checkHelpTip() {
-    if !Settings.sharedInstance.generalFullVersion.value || Settings.sharedInstance.uiYearStatisticsPageHelpTipIsShown.value {
+    if Settings.sharedInstance.uiYearStatisticsPageHelpTipIsShown.value {
       return
     }
     

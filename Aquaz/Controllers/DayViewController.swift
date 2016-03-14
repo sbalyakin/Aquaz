@@ -222,8 +222,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   func managedObjectContextDidChange(notification: NSNotification) {
     updateSummaryBar(animated: true) {
-      self.checkCounterForInterstitialAds(notification)
-
       if !self.checkForCongratulationsAboutWaterGoalReaching(notification) {
         self.checkForHelpTip(notification)
       }
@@ -711,23 +709,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  // MARK: Ads -
-  
-  private func checkCounterForInterstitialAds(notification: NSNotification) {
-    if Settings.sharedInstance.generalFullVersion.value || Settings.sharedInstance.generalAdCounter.value <= 0 {
-      return
-    }
-
-    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
-      for insertedObject in insertedObjects {
-        if insertedObject is Intake {
-          Settings.sharedInstance.generalAdCounter.value -= 1
-          break
-        }
-      }
-    }
-  }
-
   // MARK: Help tips -
 
   private func checkForHelpTip(notification: NSNotification) {

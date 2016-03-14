@@ -1,1 +1,0 @@
-../../../YandexMobileMetrica/YandexMobileMetrica/YMMYandexMetricaConfiguration.h

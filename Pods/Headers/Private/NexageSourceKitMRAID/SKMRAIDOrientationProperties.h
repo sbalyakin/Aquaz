@@ -1,1 +1,0 @@
-../../../NexageSourceKitMRAID/src/MRAID/properties/SKMRAIDOrientationProperties.h

@@ -1,1 +1,0 @@
-../../../../Avocarrot/Avocarrot-iOS-sdk/AvocarrotSDK.framework/Versions/A/Headers/AvocarrotInterstitial.h

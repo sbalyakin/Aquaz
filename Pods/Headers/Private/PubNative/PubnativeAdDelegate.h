@@ -1,1 +1,0 @@
-../../../PubNative/PubNativeLibrary/PubNativeLibrary/PubnativeAdDelegate.h

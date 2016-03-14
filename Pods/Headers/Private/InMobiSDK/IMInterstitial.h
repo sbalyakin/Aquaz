@@ -1,1 +1,0 @@
-../../../InMobiSDK/Libs/Headers/IMInterstitial.h

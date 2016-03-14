@@ -1,1 +1,0 @@
-../../../PubNative/PubNativeLibrary/PubNativeLibrary/Components/Native/Interstitial/PNInterstitialAdViewController.h

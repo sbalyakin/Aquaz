@@ -4,12 +4,8 @@ platform :ios, '7.1'
 inhibit_all_warnings!
 
 source 'https://github.com/CocoaPods/Specs.git'
-source 'https://github.com/appodeal/CocoaPods.git'
 
 target 'Aquaz' do
-  pod 'TOWebViewController'
-  pod 'Appodeal', '~> 0.5'
-  pod 'AppLovin', '~> 3.1.6'
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'MMWormhole', '~> 2.0.0'

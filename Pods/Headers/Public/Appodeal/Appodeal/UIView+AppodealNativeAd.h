@@ -1,1 +1,0 @@
-../../../../Appodeal/Appodeal.framework/Headers/UIView+AppodealNativeAd.h

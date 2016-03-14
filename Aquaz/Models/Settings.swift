@@ -110,14 +110,6 @@ final class Settings {
     key: "General - High activity extra factor", initialValue: 0.5,
     userDefaults: userDefaults)
 
-  lazy var generalFullVersion: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "General - Full version", initialValue: false,
-    userDefaults: userDefaults)
-
-  lazy var generalAdCounter: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
-    key: "General - Ad counter", initialValue: GlobalConstants.numberOfIntakesToShowAd,
-    userDefaults: userDefaults)
-
   // MARK: HealthKit
   
   lazy var healthKitWaterIntakesIntegrationIsRequested: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(

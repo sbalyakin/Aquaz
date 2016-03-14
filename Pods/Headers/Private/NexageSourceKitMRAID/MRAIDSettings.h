@@ -1,1 +1,0 @@
-../../../NexageSourceKitMRAID/src/MRAID/MRAIDSettings.h

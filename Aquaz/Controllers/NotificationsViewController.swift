@@ -17,11 +17,9 @@ extension String: CustomStringConvertible {
 class NotificationsViewController: OmegaSettingsViewController {
   
   private var notificationSoundObserver: SettingsObserver?
-  private var fullVersionBannerView: InfoBannerView?
   
   private struct Constants {
     static let chooseSoundSegue = "Choose Sound"
-    static let fullVersionViewControllerIdentifier = "FullVersionViewController"
   }
   
   private struct LocalizedStrings {
@@ -80,10 +78,6 @@ class NotificationsViewController: OmegaSettingsViewController {
     UIHelper.applyStyleToViewController(self)
     rightDetailValueColor = StyleKit.settingsTablesValueColor
     rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
-
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "fullVersionIsPurchased:",
-      name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
   }
   
   deinit {
@@ -165,8 +159,6 @@ class NotificationsViewController: OmegaSettingsViewController {
       title: localizedStrings.smartNotificationsTitle,
       settingsItem: Settings.sharedInstance.notificationsSmart)
     
-    smartNotificationsCell.valueChangedFunction = { [weak self] in self?.smartNotificationsValueChanged($0) }
-
     let smartNotificationsSection = TableCellsSection()
     smartNotificationsSection.footerTitle = localizedStrings.smartNotificationsSectionFooter
     smartNotificationsSection.tableCells = [smartNotificationsCell]
@@ -176,8 +168,6 @@ class NotificationsViewController: OmegaSettingsViewController {
     let limitNotificationsCell = createSwitchTableCell(
       title: localizedStrings.limitNotificationsTitle,
       settingsItem: Settings.sharedInstance.notificationsLimit)
-
-    limitNotificationsCell.valueChangedFunction = { [weak self] in self?.limitNotificationsValueChanged($0) }
 
     let limitNotificationsSection = TableCellsSection()
     limitNotificationsSection.footerTitle = localizedStrings.limitNotificationsSectionFooter
@@ -201,50 +191,6 @@ class NotificationsViewController: OmegaSettingsViewController {
     return dateFormatter.stringFromDate(date)
   }
   
-  private func smartNotificationsValueChanged(tableCell: TableCell) {
-    if let valueCell = tableCell as? TableCellWithValue<Bool> where !Settings.sharedInstance.generalFullVersion.value && valueCell.value {
-      showFullVersionBanner(text: localizedStrings.smartNotificationsBannerText)
-      valueCell.value = false
-    }
-  }
-
-  private func limitNotificationsValueChanged(tableCell: TableCell) {
-    if let valueCell = tableCell as? TableCellWithValue<Bool> where !Settings.sharedInstance.generalFullVersion.value && valueCell.value {
-      showFullVersionBanner(text: localizedStrings.limitNotificationsBannerText)
-      valueCell.value = false
-    }
-  }
-
-  private func showFullVersionBanner(text text: String) {
-    if fullVersionBannerView != nil {
-      return
-    }
-    
-    fullVersionBannerView = InfoBannerView.create()
-    fullVersionBannerView!.infoLabel.text = text
-    fullVersionBannerView!.infoImageView.image = ImageHelper.loadImage(.BannerFullVersion)
-    fullVersionBannerView!.bannerWasTappedFunction = { [weak self] _ in self?.fullVersionBannerWasTapped() }
-    fullVersionBannerView!.showAndHide(animated: true, displayTime: 3, parentView: view) { _ in
-      self.fullVersionBannerView = nil
-    }
-  }
-  
-  func fullVersionIsPurchased(notification: NSNotification) {
-    hideFullVersionBanner()
-  }
-
-  private func hideFullVersionBanner() {
-    fullVersionBannerView?.hide(animated: true) { _ in
-      self.fullVersionBannerView = nil
-    }
-  }
-  
-  func fullVersionBannerWasTapped() {
-    if let fullVersionViewController: FullVersionViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.fullVersionViewControllerIdentifier) {
-      navigationController!.pushViewController(fullVersionViewController, animated: true)
-    }
-  }
-
   private class func stringFromSoundFileName(filename: String) -> String {
     for sound in NotificationSounds.soundList {
       if sound.fileName == filename {

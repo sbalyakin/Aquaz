@@ -26,7 +26,6 @@ final class SnapshotsInitializer {
   }
   
   private class func setupGeneralSettings() {
-    Settings.sharedInstance.generalFullVersion.value = true
     Settings.sharedInstance.generalVolumeUnits.value = .Millilitres
     Settings.sharedInstance.generalWeightUnits.value = .Kilograms
     Settings.sharedInstance.generalHeightUnits.value = .Centimeters

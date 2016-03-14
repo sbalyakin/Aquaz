@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 import Fabric
 import Crashlytics
-import Appodeal
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -68,14 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   private func initialSetup(launchOptions launchOptions: [NSObject: AnyObject]?) {
-    // General case
-    if !Settings.sharedInstance.generalFullVersion.value {
-      Appodeal.initializeWithApiKey(GlobalConstants.appodealApiKey, types: AppodealAdType.Interstitial)
-      
-      // Just for creating shared instance of in-app purchase manager and to start observing transaction states
-      InAppPurchaseManager.sharedInstance
-    }
-    
     if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
       prePopulateCoreData()
       removeDisabledNotifications()

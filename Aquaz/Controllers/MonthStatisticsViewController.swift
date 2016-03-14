@@ -69,10 +69,6 @@ class MonthStatisticsViewController: UIViewController {
       selector: "preferredContentSizeChanged",
       name: UIContentSizeCategoryDidChangeNotification, object: nil)
     
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "fullVersionIsPurchased:",
-      name: GlobalConstants.notificationFullVersionIsPurchased, object: nil)
-    
     CoreDataStack.inPrivateContext { privateContext in
       NSNotificationCenter.defaultCenter().addObserver(self,
         selector: "managedObjectContextDidChange:",
@@ -85,10 +81,8 @@ class MonthStatisticsViewController: UIViewController {
   }
 
   func managedObjectContextDidChange(notification: NSNotification) {
-    if Settings.sharedInstance.generalFullVersion.value {
-      dispatch_async(dispatch_get_main_queue()) {
-        self.monthStatisticsView.refresh()
-      }
+    dispatch_async(dispatch_get_main_queue()) {
+      self.monthStatisticsView.refresh()
     }
   }
   
@@ -98,10 +92,6 @@ class MonthStatisticsViewController: UIViewController {
     monthStatisticsView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     monthStatisticsView.refresh()
     view.invalidateIntrinsicContentSize()
-  }
-
-  func fullVersionIsPurchased(notification: NSNotification) {
-    monthStatisticsView.refresh()
   }
 
   private func updateUI(animated animated: Bool) {
@@ -127,7 +117,7 @@ class MonthStatisticsViewController: UIViewController {
   }
   
   private func checkHelpTip() {
-    if !Settings.sharedInstance.generalFullVersion.value || Settings.sharedInstance.uiMonthStatisticsPageHelpTipIsShown.value  {
+    if Settings.sharedInstance.uiMonthStatisticsPageHelpTipIsShown.value  {
       return
     }
     
@@ -194,32 +184,19 @@ extension MonthStatisticsViewController: CalendarViewDelegate {
 extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
   
   func monthStatisticsGetValuesForDateInterval(beginDate beginDate: NSDate, endDate: NSDate, calendarContentView: CalendarContentView) -> [Double] {
-    if Settings.sharedInstance.generalFullVersion.value {
-      CoreDataStack.inPrivateContext { privateContext in
-        weak var requestingMonthStatisticsContentView = (calendarContentView as! MonthStatisticsContentView)
-        let hydrationFractions = self.fetchHydrationFractions(beginDate: beginDate, endDate: endDate, privateContext: privateContext)
-        dispatch_async(dispatch_get_main_queue()) {
-          if let contentView = requestingMonthStatisticsContentView {
-            contentView.updateValues(hydrationFractions)
-          } else {
-            assert(false, "Calendar content view is null now")
-          }
+    CoreDataStack.inPrivateContext { privateContext in
+      weak var requestingMonthStatisticsContentView = (calendarContentView as! MonthStatisticsContentView)
+      let hydrationFractions = self.fetchHydrationFractions(beginDate: beginDate, endDate: endDate, privateContext: privateContext)
+      dispatch_async(dispatch_get_main_queue()) {
+        if let contentView = requestingMonthStatisticsContentView {
+          contentView.updateValues(hydrationFractions)
+        } else {
+          assert(false, "Calendar content view is null now")
         }
       }
-
-      return []
-    } else {
-      // Demo mode
-      var index = 0
-      var values = [Double]()
-      for var date = beginDate; date.isEarlierThan(endDate); date = date.getNextDay() {
-        let value = sin(Double(index % 28) / 28 * M_PI)
-        values.append(value)
-        index++
-      }
-      
-      return values
     }
+
+    return []
   }
   
   private func fetchHydrationFractions(beginDate beginDate: NSDate, endDate: NSDate, privateContext: NSManagedObjectContext) -> [Double] {

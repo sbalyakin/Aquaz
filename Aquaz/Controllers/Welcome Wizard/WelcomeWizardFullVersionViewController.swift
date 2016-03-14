@@ -12,10 +12,6 @@ class WelcomeWizardLastPageViewController: UIViewController {
 
   @IBOutlet weak var getStartedButton: RoundedButton!
   
-  struct Constants {
-    static let fullVersionViewControllerIdentifier = "FullVersionViewController"
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     getStartedButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)

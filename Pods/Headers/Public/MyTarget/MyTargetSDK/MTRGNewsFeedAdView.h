@@ -1,1 +1,0 @@
-../../../../MyTarget/MyTargetSDK.framework/Headers/MTRGNewsFeedAdView.h
