@@ -156,7 +156,6 @@
 		A59CE8F41A8FC3CA00FDD2B2 /* WaterGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CE8F31A8FC3CA00FDD2B2 /* WaterGoalTests.swift */; };
 		A59CE8F61A9119A300FDD2B2 /* WaterGoalCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CE8F51A9119A300FDD2B2 /* WaterGoalCalculatorTests.swift */; };
 		A5A1681D1A6EA1330027711B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A1681C1A6EA1330027711B /* BannerView.swift */; };
-		A5A3358B1B0218CE004579A4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A3358A1B0218CE004579A4 /* StoreKit.framework */; };
 		A5A639BE1B2B219800E2DB60 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A639BD1B2B219800E2DB60 /* ImageHelper.swift */; };
 		A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */; };
 		A5AAA1D91A77A9CF008C3C56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5AAA1D71A77A9CF008C3C56 /* LaunchScreen.xib */; };
@@ -444,7 +443,6 @@
 		A59CE8F31A8FC3CA00FDD2B2 /* WaterGoalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoalTests.swift; sourceTree = "<group>"; };
 		A59CE8F51A9119A300FDD2B2 /* WaterGoalCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoalCalculatorTests.swift; sourceTree = "<group>"; };
 		A5A1681C1A6EA1330027711B /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BannerView.swift; path = Controls/BannerView.swift; sourceTree = "<group>"; };
-		A5A3358A1B0218CE004579A4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A5A639BD1B2B219800E2DB60 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekStatisticsViewController.swift; sourceTree = "<group>"; };
 		A5AAA1D81A77A9CF008C3C56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -530,7 +528,6 @@
 				A5E898C01BC094D900B9E4D6 /* QuartzCore.framework in Frameworks */,
 				A5E898BE1BC094CB00B9E4D6 /* MessageUI.framework in Frameworks */,
 				A5E898BC1BC094C500B9E4D6 /* Twitter.framework in Frameworks */,
-				A5A3358B1B0218CE004579A4 /* StoreKit.framework in Frameworks */,
 				A5DEB0611BA75B4B00ABD3C8 /* HealthKit.framework in Frameworks */,
 				A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */,
 				9A54E555167A63994B0A796E /* libPods-Aquaz.a in Frameworks */,
@@ -784,7 +781,6 @@
 				A5E898BD1BC094CB00B9E4D6 /* MessageUI.framework */,
 				8401C2801BBFC7D700874AF7 /* Twitter.framework */,
 				A5DEB0601BA75B4B00ABD3C8 /* HealthKit.framework */,
-				A5A3358A1B0218CE004579A4 /* StoreKit.framework */,
 				A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */,
 				84D251961AD2511E001E6644 /* NotificationCenter.framework */,
 				7A0BEC8391ED7192FCF9D8D2 /* libPods-Aquaz.a */,
@@ -1194,7 +1190,7 @@
 								enabled = 1;
 							};
 							com.apple.InAppPurchase = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
