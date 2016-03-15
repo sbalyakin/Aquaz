@@ -4,6 +4,9 @@
 /* Class = "UILabel"; text = "Updating..."; ObjectID = "9e7-xk-npV"; */
 "9e7-xk-npV.text" = "Обновление...";
 
+/* Class = "UILabel"; text = "Recent Intakes"; ObjectID = "sJk-Gn-h2O"; */
+"sJk-Gn-h2O.text" = "Последние выпитые напитки";
+
 /* Class = "UILabel"; text = "{Drink}"; ObjectID = "Omk-iq-t3r"; */
 "Omk-iq-t3r.text" = "{Drink}";
 
