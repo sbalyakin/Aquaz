@@ -213,7 +213,7 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 "NVC:Enable Notifications" = "Включить Оповещения";
 
 /* NotificationsViewController: Footer text for [Smart Notifications] section */
-"NVC:Enable snooze notifications taking into account time of drink intake." = "Включите этот режим, чтобы откладывать оповещения, учитывая время употребления напитков.";
+"NVC:Enable to snooze notifications taking into account time of drink intake." = "Включите этот режим, чтобы откладывать оповещения, учитывая время употребления напитков.";
 
 /* NotificationsViewController: Title for [From] setting */
 "NVC:From" = "С";
