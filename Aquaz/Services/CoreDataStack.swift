@@ -11,60 +11,61 @@ import CoreData
 import Crashlytics
 
 final class CoreDataStack: NSObject {
-
+  
   static let sharedInstance = CoreDataStack()
-
-  private let containerURL: NSURL
-  private let managedObjectModel: NSManagedObjectModel
-  private let persistentStoreCoordinator: NSPersistentStoreCoordinator
-  private let mainContext: NSManagedObjectContext
-  private let privateContext: NSManagedObjectContext
+  
+  private var containerURL: NSURL!
+  private var managedObjectModel: NSManagedObjectModel!
+  private var persistentStoreCoordinator: NSPersistentStoreCoordinator!
+  private var mainContext: NSManagedObjectContext!
+  private var privateContext: NSManagedObjectContext!
   private let queue: dispatch_queue_t
   
   override init() {
-    if let containerURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(GlobalConstants.appGroupName) {
-      self.containerURL = containerURL
-    } else {
-      CLSLogv("Core Data Stack initialization error: Failed to obtain the container URL", getVaList([]))
-      fatalError()
-    }
+    self.queue = dispatch_queue_create("CoreDataStackSerialQueue", DISPATCH_QUEUE_SERIAL)
     
-    guard let modelURL = NSBundle.mainBundle().URLForResource("Aquaz", withExtension: "momd") else {
-      CLSLogv("Core Data Stack initialization error: Failed to obtain the model URL", getVaList([]))
-      fatalError()
-    }
-    
-    if let managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL) {
-      self.managedObjectModel = managedObjectModel
-    } else {
-      CLSLogv("Core Data Stack initialization error: Failed to initialize the managed object model", getVaList([]))
-      fatalError()
-    }
-    
-    self.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-    
-    self.mainContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-    self.mainContext.persistentStoreCoordinator = self.persistentStoreCoordinator
-    
-    self.privateContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
-    self.privateContext.persistentStoreCoordinator = self.persistentStoreCoordinator
-    
-    let url = containerURL.URLByAppendingPathComponent("Aquaz.sqlite")
-    
-    self.queue = dispatch_queue_create("CoreDataStachSerialQueue", DISPATCH_QUEUE_SERIAL)
-
     super.init()
-
-    // Add persistent store in a serial queue in order to not freeze the main UI queue
+    
+    // Use a serial queue in order to not freeze the main UI queue
     dispatch_async(queue) {
+      if let containerURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(GlobalConstants.appGroupName) {
+        self.containerURL = containerURL
+      } else {
+        CLSLogv("Core Data Stack initialization error: Failed to obtain the container URL", getVaList([]))
+        fatalError()
+      }
+      
+      guard let modelURL = NSBundle.mainBundle().URLForResource("Aquaz", withExtension: "momd") else {
+        CLSLogv("Core Data Stack initialization error: Failed to obtain the model URL", getVaList([]))
+        fatalError()
+      }
+      
+      if let managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL) {
+        self.managedObjectModel = managedObjectModel
+      } else {
+        CLSLogv("Core Data Stack initialization error: Failed to initialize the managed object model", getVaList([]))
+        fatalError()
+      }
+      
+      self.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+      
+      self.mainContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+      self.mainContext.persistentStoreCoordinator = self.persistentStoreCoordinator
+      
+      self.privateContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+      self.privateContext.persistentStoreCoordinator = self.persistentStoreCoordinator
+      
       do {
+        let url = self.containerURL.URLByAppendingPathComponent("Aquaz.sqlite")
+        
         try self.persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
       } catch {
-        CLSLogv("Core Data Stack initialization error: Failed to add the persistent store", getVaList([]))
+        let nserror = error as NSError
+        CLSLogv("Core Data Stack initialization error: Failed to add the persistent store. Error: \(nserror.description)", getVaList([]))
         fatalError()
       }
     }
-
+    
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "contextDidSaveContext:",
       name: NSManagedObjectContextDidSaveNotification,
@@ -95,9 +96,9 @@ final class CoreDataStack: NSObject {
     }
   }
   
-
+  
   // MARK: - Functions
-
+  
   private func printStack(stack: [String], depth: Int = -1) {
     if depth == -1 {
       for line in stack {
@@ -120,7 +121,7 @@ final class CoreDataStack: NSObject {
       }
     }
   }
-
+  
   func inMainContextEx(callback: (NSManagedObjectContext, NSPersistentStoreCoordinator) -> Void) {
     // Dispatch the request to our serial queue first and then back to the context queue.
     // Since we set up the stack on this queue it will have succeeded or failed before
@@ -131,7 +132,7 @@ final class CoreDataStack: NSObject {
       }
     }
   }
-
+  
   func inPrivateContext(callback: NSManagedObjectContext -> Void) {
     // Dispatch the request to our serial queue first and then back to the context queue.
     // Since we set up the stack on this queue it will have succeeded or failed before
@@ -142,7 +143,7 @@ final class CoreDataStack: NSObject {
       }
     }
   }
-
+  
   func inPrivateContextEx(callback: (NSManagedObjectContext, NSPersistentStoreCoordinator) -> Void) {
     // Dispatch the request to our serial queue first and then back to the context queue.
     // Since we set up the stack on this queue it will have succeeded or failed before
@@ -202,7 +203,7 @@ final class CoreDataStack: NSObject {
   class func mergeAllContextsWithNotification(notification: NSNotification) {
     sharedInstance.mergeAllContextsWithNotification(notification)
   }
-
+  
   // MARK: - Convenient methods
   
   class func inMainContext(callback: NSManagedObjectContext -> Void) {
@@ -220,5 +221,5 @@ final class CoreDataStack: NSObject {
   class func inPrivateContextEx(callback: (NSManagedObjectContext, NSPersistentStoreCoordinator) -> Void) {
     sharedInstance.inPrivateContextEx(callback)
   }
-
+  
 }

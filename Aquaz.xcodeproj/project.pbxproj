@@ -391,7 +391,7 @@
 		A52E0CDC1B3854E500599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A52E0CE11B3854E500599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A52E0CE61B3854E600599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A5301BA21BD6D0C400136813 /* Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Watch.entitlements; path = Watch/Watch.entitlements; sourceTree = "<group>"; };
+		A5301BA21BD6D0C400136813 /* Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Watch.entitlements; sourceTree = "<group>"; };
 		A5340CCE1C15858300B01C30 /* IncreaseBuildNumber.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = IncreaseBuildNumber.sh; sourceTree = "<group>"; };
 		A5340CCF1C1589F200B01C30 /* UpdateRepository.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = UpdateRepository.sh; sourceTree = "<group>"; };
 		A5340CD01C158A4F00B01C30 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
@@ -659,7 +659,6 @@
 		84669A6019DAD78D003C2263 = {
 			isa = PBXGroup;
 			children = (
-				A5301BA21BD6D0C400136813 /* Watch.entitlements */,
 				84669A6B19DAD78D003C2263 /* Aquaz */,
 				84669A8419DAD78D003C2263 /* AquazTests */,
 				84D251981AD2511E001E6644 /* Today Extension */,
@@ -862,6 +861,7 @@
 		A587AAA01BD65224000B48E9 /* Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				A5301BA21BD6D0C400136813 /* Watch.entitlements */,
 				A53E39601C15C82600628103 /* InfoPlist.strings */,
 				A587AAA11BD65224000B48E9 /* Interface.storyboard */,
 				A587AAA61BD65224000B48E9 /* Info.plist */,
