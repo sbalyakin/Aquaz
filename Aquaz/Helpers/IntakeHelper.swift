@@ -38,32 +38,38 @@ final class IntakeHelper {
       {
         Settings.sharedInstance.healthKitWaterIntakesIntegrationIsRequested2.value = true
 
-        let alertTitle = NSLocalizedString("IH:Integration with Apple Health", value: "Integration with Apple Health",
-          comment: "IntakeHelper: Title for alert asking for integration with Apple Health")
-        
-        let alertMessage = NSLocalizedString("IH:Aquaz will save your intakes to Apple Health", value: "Aquaz will save your intakes to Apple Health",
-          comment: "IntakeHelper: Message for alert asking for integration with Apple Health")
-        
-        let alertOK = NSLocalizedString("IH:OK", value: "OK",
-          comment: "IntakeHelper: OK choice for alert asking for integration with Apple Health")
-        
-        let alertCancel = NSLocalizedString("IH:Cancel", value: "Cancel",
-          comment: "IntakeHelper: Cancel choice for alert asking for integration with Apple Health")
+        dispatch_async(dispatch_get_main_queue()) {
+          let alertTitle = NSLocalizedString("IH:Integration with Apple Health", value: "Integration with Apple Health",
+            comment: "IntakeHelper: Title for alert asking for integration with Apple Health")
+          
+          let alertMessage = NSLocalizedString("IH:Aquaz will save your intakes to Apple Health", value: "Aquaz will save your intakes to Apple Health",
+            comment: "IntakeHelper: Message for alert asking for integration with Apple Health")
+          
+          let alertOK = NSLocalizedString("IH:OK", value: "OK",
+            comment: "IntakeHelper: OK choice for alert asking for integration with Apple Health")
+          
+          let alertCancel = NSLocalizedString("IH:Cancel", value: "Cancel",
+            comment: "IntakeHelper: Cancel choice for alert asking for integration with Apple Health")
 
-        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
-        
-        alert.addAction(UIAlertAction(title: alertOK, style: UIAlertActionStyle.Cancel, handler: { _ in
-          HealthKitProvider.sharedInstance.authorizeHealthKit { authorized, _ in
-            addIntakeInternal()
-          }
-        }))
-        
-        alert.addAction(UIAlertAction(title: alertCancel, style: UIAlertActionStyle.Default, handler: { _ in
-          Settings.sharedInstance.healthKitWaterIntakesIntegrationIsAllowed2.value = false
-          addIntakeInternal()
-        }))
-        
-        viewController.presentViewController(alert, animated: true, completion: nil)
+          let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+          
+          alert.addAction(UIAlertAction(title: alertOK, style: UIAlertActionStyle.Cancel, handler: { _ in
+            HealthKitProvider.sharedInstance.authorizeHealthKit { authorized, _ in
+              managedObjectContext.performBlock {
+                addIntakeInternal()
+              }
+            }
+          }))
+          
+          alert.addAction(UIAlertAction(title: alertCancel, style: UIAlertActionStyle.Default, handler: { _ in
+            Settings.sharedInstance.healthKitWaterIntakesIntegrationIsAllowed2.value = false
+            managedObjectContext.performBlock {
+              addIntakeInternal()
+            }
+          }))
+          
+          viewController.presentViewController(alert, animated: true, completion: nil)
+        }
       } else {
         addIntakeInternal()
       }
@@ -80,20 +86,18 @@ final class IntakeHelper {
     actionBeforeAddingIntakeToCoreData: (() -> ())?,
     actionAfterAddingIntakeToCoreData: (() -> ())?)
   {
-    managedObjectContext.performBlock {
-      actionBeforeAddingIntakeToCoreData?()
+    actionBeforeAddingIntakeToCoreData?()
 
-      drink.recentAmount.amount = amount
-      
-      Intake.addEntity(
-        drink: drink,
-        amount: amount,
-        date: intakeDate,
-        managedObjectContext: managedObjectContext,
-        saveImmediately: true)
-      
-      actionAfterAddingIntakeToCoreData?()
-    }
+    drink.recentAmount.amount = amount
+    
+    Intake.addEntity(
+      drink: drink,
+      amount: amount,
+      date: intakeDate,
+      managedObjectContext: managedObjectContext,
+      saveImmediately: true)
+    
+    actionAfterAddingIntakeToCoreData?()
   }
   
 }

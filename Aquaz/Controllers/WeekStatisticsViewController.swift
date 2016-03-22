@@ -122,7 +122,7 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   func managedObjectContextDidChange(notification: NSNotification) {
-  updateWeekStatisticsView(animated: true)
+    updateWeekStatisticsView(animated: true)
   }
 
   func preferredContentSizeChanged() {
@@ -221,6 +221,7 @@ class WeekStatisticsViewController: UIViewController {
     CoreDataStack.inPrivateContext { privateContext in
       let date = self.date
       let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate, privateContext: privateContext)
+      
       dispatch_async(dispatch_get_main_queue()) {
         if self.date === date {
           self.weekStatisticsView.setItems(statisticsItems, animate: animated)

@@ -250,7 +250,9 @@ class IntakeViewController: UIViewController {
         viewController: self,
         managedObjectContext: privateContext,
         actionBeforeAddingIntakeToCoreData: {
-          self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+          dispatch_async(dispatch_get_main_queue()) {
+            self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+          }
         },
         actionAfterAddingIntakeToCoreData: nil)
     }
