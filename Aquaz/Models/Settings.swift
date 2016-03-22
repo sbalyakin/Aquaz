@@ -112,14 +112,15 @@ final class Settings {
 
   // MARK: HealthKit
   
-  lazy var healthKitWaterIntakesIntegrationIsRequested: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "HealthKit - Water intakes integration is requested", initialValue: false,
+  lazy var healthKitWaterIntakesIntegrationIsRequested2: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
+    key: "HealthKit - Water intakes integration is requested 2", initialValue: false,
     userDefaults: userDefaults)
 
-  lazy var healthKitWaterIntakesIntegrationIsAllowed: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "HealthKit - Water intakes integration is requested", initialValue: false,
+  lazy var healthKitWaterIntakesIntegrationIsAllowed2: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
+    key: "HealthKit - Water intakes integration is requested 2", initialValue: false,
     userDefaults: userDefaults)
 
+  
   // MARK: User
   
   lazy var userHeight: SettingsOrdinalItem<Double> = SettingsOrdinalItem(

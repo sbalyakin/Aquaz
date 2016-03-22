@@ -34,8 +34,9 @@ final class IntakeHelper {
     }
     
     if #available(iOS 9.0, *) {
-      if !Settings.sharedInstance.healthKitWaterIntakesIntegrationIsRequested.value {
-        Settings.sharedInstance.healthKitWaterIntakesIntegrationIsRequested.value = true
+      if !Settings.sharedInstance.healthKitWaterIntakesIntegrationIsRequested2.value
+      {
+        Settings.sharedInstance.healthKitWaterIntakesIntegrationIsRequested2.value = true
 
         let alertTitle = NSLocalizedString("IH:Integration with Apple Health", value: "Integration with Apple Health",
           comment: "IntakeHelper: Title for alert asking for integration with Apple Health")
@@ -58,7 +59,7 @@ final class IntakeHelper {
         }))
         
         alert.addAction(UIAlertAction(title: alertCancel, style: UIAlertActionStyle.Default, handler: { _ in
-          Settings.sharedInstance.healthKitWaterIntakesIntegrationIsAllowed.value = false
+          Settings.sharedInstance.healthKitWaterIntakesIntegrationIsAllowed2.value = false
           addIntakeInternal()
         }))
         

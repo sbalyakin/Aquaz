@@ -124,4 +124,20 @@ enum DrinkType: Int {
     }
   }
   
+  var caffeineGramPerLiter: Double {
+    switch self {
+    case Water:      return 0
+    case Coffee:     return 0.632
+    case Tea:        return 0.177
+    case Soda:       return 0
+    case Juice:      return 0
+    case Milk:       return 0
+    case Sport:      return 0
+    case Energy:     return 0
+    case Beer:       return 0
+    case Wine:       return 0
+    case HardLiquor: return 0
+    }
+  }
+  
 }

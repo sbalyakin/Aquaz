@@ -25,19 +25,24 @@ class Intake: CodingManagedObject, NamedEntity {
   
   /// Water balance of the intake based on hydration and dehydration factors of the corresponding drink
   var waterBalance: Double {
-    return amount * (drink.hydrationFactor - drink.dehydrationFactor)
+    return amount * (drink.drinkType.hydrationFactor - drink.drinkType.dehydrationFactor)
   }
 
   /// Hydration amount of the intake based on a hydration factor of the corresponding drink
   var hydrationAmount: Double {
-    return amount * drink.hydrationFactor
+    return amount * drink.drinkType.hydrationFactor
   }
 
   /// Dehydration amount of the intake based on a dehydration factor of the corresponding drink
   var dehydrationAmount: Double {
-    return amount * drink.dehydrationFactor
+    return amount * drink.drinkType.dehydrationFactor
   }
 
+  /// Caffeine amount in milligrams of the intake based on a caffeine factor of the corresponding drink
+  var caffeineAmount: Double {
+    return amount * drink.drinkType.caffeineGramPerLiter
+  }
+  
   /// Adds a new intake's entity into Core Data
   class func addEntity(drink drink: Drink, amount: Double, date: NSDate, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Intake? {
     if let intake = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext) {
