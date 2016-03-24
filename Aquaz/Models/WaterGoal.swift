@@ -113,7 +113,9 @@ class WaterGoal: CodingManagedObject, NamedEntity {
     var waterGoalAmounts: [Double] = []
     var waterGoalIndex = 0
     
-    for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = currentDay.getNextDay() {
+    var currentDay = beginDate
+    
+    while currentDay.isEarlierThan(endDate) {
       let waterGoalAmount = findWaterGoalForDate(currentDay,
         waterGoals: waterGoals,
         managedObjectContext: managedObjectContext,
@@ -122,6 +124,8 @@ class WaterGoal: CodingManagedObject, NamedEntity {
         laterWaterGoal: &laterWaterGoal)
       
       waterGoalAmounts.append(waterGoalAmount)
+      
+      currentDay = currentDay.getNextDay()
     }
     
     return waterGoalAmounts
@@ -151,7 +155,9 @@ class WaterGoal: CodingManagedObject, NamedEntity {
     let beginDayComponents = calendar.components(.Day, fromDate: beginDate)
     var currentDayIndex = beginDayComponents.day
 
-    for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = currentDay.getNextDay() {
+    var currentDay = beginDate
+    
+    while currentDay.isEarlierThan(endDate) {
       if daysInMonth == nil {
         daysInMonth = calendar.rangeOfUnit(.Day, inUnit: .Month, forDate: currentDay).length
       }
@@ -164,8 +170,8 @@ class WaterGoal: CodingManagedObject, NamedEntity {
         laterWaterGoal: &laterWaterGoal)
 
       overallWaterGoal += waterGoalAmount
-      processedDaysCount++
-      currentDayIndex++
+      processedDaysCount += 1
+      currentDayIndex += 1
       
       if currentDayIndex > daysInMonth {
         let averageWaterGoal = overallWaterGoal / Double(processedDaysCount)
@@ -176,6 +182,8 @@ class WaterGoal: CodingManagedObject, NamedEntity {
         processedDaysCount = 0
         daysInMonth = nil
       }
+      
+      currentDay = currentDay.getNextDay()
     }
     
     if processedDaysCount > 0 {
@@ -207,7 +215,7 @@ class WaterGoal: CodingManagedObject, NamedEntity {
         // only for a water goal's entity strictly related to the current day
         amount = waterGoal.amount
         earlierWaterGoal = waterGoal
-        waterGoalIndex++
+        waterGoalIndex += 1
         
       case .OrderedAscending: // date of current water goal is later than current day
         laterWaterGoal = waterGoal

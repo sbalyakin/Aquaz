@@ -53,8 +53,9 @@ class CalendarViewDataSource {
           weekdayOfDate = 1
         }
       }
+      
       let isWeekend = (weekdayOfDate == weekdayRange.location) || (weekdayOfDate == weekdayRange.length)
-      weekdayOfDate++
+      weekdayOfDate += 1
       
       let isToday = checkForToday ? DateHelper.areDatesEqualByDays(date, today) : false
       let isCurrentMonth = i >= daysInMonth.location && i <= daysInMonth.length

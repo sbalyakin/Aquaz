@@ -109,12 +109,12 @@ class DiaryViewController: UIViewController {
   }
   
   private func createFetchedResultsController(completion completion: (() -> ())?) {
-    CoreDataStack.inMainContext { mainContext in
+    CoreDataStack.inPrivateContext { privateContext in
       let fetchRequest = self.getFetchRequestForDate(self.date)
       
       self.fetchedResultsController = NSFetchedResultsController(
         fetchRequest: fetchRequest,
-        managedObjectContext: mainContext,
+        managedObjectContext: privateContext,
         sectionNameKeyPath: nil,
         cacheName: nil)
       
@@ -212,8 +212,12 @@ extension DiaryViewController: UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle == .Delete, let intake = getIntakeAtIndexPath(indexPath) {
-      CoreDataStack.inMainContext { _ in
+    if editingStyle != .Delete {
+      return
+    }
+    
+    CoreDataStack.inPrivateContext { _ in
+      if let intake = self.getIntakeAtIndexPath(indexPath) {
         intake.deleteEntity(saveImmediately: true)
       }
     }
@@ -225,17 +229,23 @@ extension DiaryViewController: UITableViewDataSource {
 extension DiaryViewController: UITableViewDelegate {
 
   func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-    if let diaryCell = cell as? DiaryTableViewCell,
-       let intake = getIntakeAtIndexPath(indexPath)
-    {
-      diaryCell.intake = intake
+    guard let diaryCell = cell as? DiaryTableViewCell else { return }
+
+    diaryCell.prepareCell()
+    
+    CoreDataStack.inPrivateContext { _ in
+      if let intake = self.getIntakeAtIndexPath(indexPath) {
+        diaryCell.intake = intake
+      }
     }
   }
 
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    CoreDataStack.inMainContext { _ in
+    CoreDataStack.inPrivateContext { _ in
       if let intake = self.getIntakeAtIndexPath(indexPath) {
-        self.performSegueWithIdentifier(Constants.editIntakeSegue, sender: intake)
+        dispatch_async(dispatch_get_main_queue()) {
+          self.performSegueWithIdentifier(Constants.editIntakeSegue, sender: intake)
+        }
       } else {
         Logger.logError("Failed to get an intake related to selected cell of tableview")
       }
@@ -273,51 +283,59 @@ extension DiaryViewController: UITableViewDelegate {
 extension DiaryViewController: NSFetchedResultsControllerDelegate {
   
   func controllerWillChangeContent(controller: NSFetchedResultsController) {
-    tableView?.beginUpdates()
+    dispatch_async(dispatch_get_main_queue()) {
+      self.tableView?.beginUpdates()
+    }
   }
 
   func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-    switch type {
-    case .Insert:
-      tableView?.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-      
-    case .Delete:
-      tableView?.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-      
-    default:
-      break
+    dispatch_async(dispatch_get_main_queue()) {
+      switch type {
+      case .Insert:
+        self.tableView?.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        
+      case .Delete:
+        self.tableView?.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        
+      default:
+        break
+      }
     }
   }
   
   func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-    switch type {
-    case .Insert:
-      if let newIndexPath = newIndexPath {
-        tableView?.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
-      }
-      
-    case .Delete:
-      if let indexPath = indexPath {
-        tableView?.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-      }
-      
-    case .Update:
-      if let indexPath = indexPath {
-        tableView?.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-      }
+    dispatch_async(dispatch_get_main_queue()) {
+      switch type {
+      case .Insert:
+        if let newIndexPath = newIndexPath {
+          self.tableView?.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+        }
+        
+      case .Delete:
+        if let indexPath = indexPath {
+          self.tableView?.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+        
+      case .Update:
+        if let indexPath = indexPath {
+          self.tableView?.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
 
-    case .Move:
-      if let indexPath = indexPath {
-        tableView?.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-      }
-      
-      if let newIndexPath = newIndexPath {
-        tableView?.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+      case .Move:
+        if let indexPath = indexPath {
+          self.tableView?.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+        
+        if let newIndexPath = newIndexPath {
+          self.tableView?.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+        }
       }
     }
   }
 
   func controllerDidChangeContent(controller: NSFetchedResultsController) {
-    tableView?.endUpdates()
+    dispatch_async(dispatch_get_main_queue()) {
+      self.tableView?.endUpdates()
+    }
   }
 }

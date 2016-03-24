@@ -61,18 +61,24 @@ class YearStatisticsViewController: UIViewController {
   }
   
   private func setupNotificationsObservation() {
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "preferredContentSizeChanged",
-      name: UIContentSizeCategoryDidChangeNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: #selector(self.preferredContentSizeChanged),
+      name: UIContentSizeCategoryDidChangeNotification,
+      object: nil)
     
     CoreDataStack.inPrivateContext { privateContext in
-      NSNotificationCenter.defaultCenter().addObserver(self,
-        selector: "managedObjectContextDidChange:",
-        name: NSManagedObjectContextDidSaveNotification, object: privateContext)
+      NSNotificationCenter.defaultCenter().addObserver(
+        self,
+        selector: #selector(self.managedObjectContextDidChange(_:)),
+        name: NSManagedObjectContextDidSaveNotification,
+        object: privateContext)
       
-      NSNotificationCenter.defaultCenter().addObserver(self,
-        selector: "managedObjectContextDidChange:",
-        name: GlobalConstants.notificationManagedObjectContextWasMerged, object: privateContext)
+      NSNotificationCenter.defaultCenter().addObserver(
+        self,
+        selector: #selector(self.managedObjectContextDidChange(_:)),
+        name: GlobalConstants.notificationManagedObjectContextWasMerged,
+        object: privateContext)
     }
   }
   
@@ -83,11 +89,11 @@ class YearStatisticsViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
-    leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "leftSwipeGestureIsRecognized:")
+    leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.leftSwipeGestureIsRecognized(_:)))
     leftSwipeGestureRecognizer.direction = .Left
     yearStatisticsView.addGestureRecognizer(leftSwipeGestureRecognizer)
     
-    rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "rightSwipeGestureIsRecognized:")
+    rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.rightSwipeGestureIsRecognized(_:)))
     rightSwipeGestureRecognizer.direction = .Right
     yearStatisticsView.addGestureRecognizer(rightSwipeGestureRecognizer)
   }

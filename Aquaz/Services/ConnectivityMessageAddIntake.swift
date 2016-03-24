@@ -20,7 +20,7 @@ final class ConnectivityMessageAddIntake {
   
   private struct Constants {
     static let messageKey   = "message"
-    static let messagevalue = "ConnectivityMessageAddIntake"
+    static let messageValue = "ConnectivityMessageAddIntake"
   }
 
   // MARK: Properties
@@ -39,7 +39,7 @@ final class ConnectivityMessageAddIntake {
   
   init?(metadata: [String : AnyObject]) {
     guard
-      let messageValue   = metadata[Constants.messageKey] as? String where messageValue == Constants.messagevalue,
+      let messageValue   = metadata[Constants.messageKey] as? String where messageValue == Constants.messageValue,
       let drinkTypeIndex = metadata[Keys.drinkType] as? Int,
       let drinkType      = DrinkType(rawValue: drinkTypeIndex),
       let amount         = metadata[Keys.amount] as? Double,
@@ -60,7 +60,7 @@ final class ConnectivityMessageAddIntake {
   func composeMetadata() -> [String : AnyObject] {
     var metadata = [String : AnyObject]()
     
-    metadata[Constants.messageKey] = Constants.messagevalue
+    metadata[Constants.messageKey] = Constants.messageValue
     metadata[Keys.drinkType]       = drinkType.rawValue
     metadata[Keys.amount]          = amount
     metadata[Keys.date]            = date

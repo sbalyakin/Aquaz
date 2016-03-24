@@ -41,7 +41,7 @@ class UISegmentedTableViewCell: UITableViewCell {
   private func baseInit(segmentTitles: [String]) {
     if self.segmentedControl == nil {
       let segmentedControl = UISegmentedControl(items: segmentTitles)
-      segmentedControl.addTarget(self, action: "segmentedControlValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+      segmentedControl.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
       self.accessoryView = segmentedControl
       self.segmentedControl = segmentedControl
     }

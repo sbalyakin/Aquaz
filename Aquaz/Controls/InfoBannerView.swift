@@ -100,7 +100,7 @@ class InfoBannerView: BannerView {
     hidden = true
     parentView.addSubview(self)
     
-    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "bannerWasTapped:")
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.bannerWasTapped(_:)))
     self.addGestureRecognizer(tapGestureRecognizer)
     
     // Setup constraints

@@ -23,7 +23,7 @@ final class ConnectivityMessageCurrentState {
   
   private struct Constants {
     static let messageKey   = "message"
-    static let messagevalue = "ConnectivityMessageCurrentState"
+    static let messageValue = "ConnectivityMessageCurrentState"
   }
 
   // MARK: Properties
@@ -48,7 +48,7 @@ final class ConnectivityMessageCurrentState {
   
   init?(metadata: [String : AnyObject]) {
     guard
-      let messageValue          = metadata[Constants.messageKey]       as? String where messageValue == Constants.messagevalue,
+      let messageValue          = metadata[Constants.messageKey]       as? String where messageValue == Constants.messageValue,
       let messageDate           = metadata[Keys.messageDate]           as? NSDate,
       let hydrationAmount       = metadata[Keys.hydrationAmount]       as? Double,
       let dehydrationAmount     = metadata[Keys.dehydrationAmount]     as? Double,
@@ -77,7 +77,7 @@ final class ConnectivityMessageCurrentState {
   func composeMetadata() -> [String : AnyObject] {
     var metadata = [String : AnyObject]()
     
-    metadata[Constants.messageKey]       = Constants.messagevalue
+    metadata[Constants.messageKey]       = Constants.messageValue
     metadata[Keys.messageDate]           = messageDate
     metadata[Keys.hydrationAmount]       = hydrationAmount
     metadata[Keys.dehydrationAmount]     = dehydrationAmount

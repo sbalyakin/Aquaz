@@ -65,18 +65,24 @@ class MonthStatisticsViewController: UIViewController {
   }
   
   private func setupNotificationsObservation() {
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "preferredContentSizeChanged",
-      name: UIContentSizeCategoryDidChangeNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: #selector(self.preferredContentSizeChanged),
+      name: UIContentSizeCategoryDidChangeNotification,
+      object: nil)
     
     CoreDataStack.inPrivateContext { privateContext in
-      NSNotificationCenter.defaultCenter().addObserver(self,
-        selector: "managedObjectContextDidChange:",
-        name: NSManagedObjectContextDidSaveNotification, object: privateContext)
+      NSNotificationCenter.defaultCenter().addObserver(
+        self,
+        selector: #selector(self.managedObjectContextDidChange(_:)),
+        name: NSManagedObjectContextDidSaveNotification,
+        object: privateContext)
       
-      NSNotificationCenter.defaultCenter().addObserver(self,
-        selector: "managedObjectContextDidChange:",
-        name: GlobalConstants.notificationManagedObjectContextWasMerged, object: privateContext)
+      NSNotificationCenter.defaultCenter().addObserver(
+        self,
+        selector: #selector(self.managedObjectContextDidChange(_:)),
+        name: GlobalConstants.notificationManagedObjectContextWasMerged,
+        object: privateContext)
     }
   }
 

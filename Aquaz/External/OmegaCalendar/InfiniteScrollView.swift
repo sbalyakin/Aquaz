@@ -207,7 +207,7 @@ extension InfiniteScrollView: UIScrollViewDelegate {
     
     let velocity = scrollView.panGestureRecognizer.velocityInView(scrollView).x
     if velocity < 0 {
-      pageIndex++
+      pageIndex += 1
     }
     
     if pages[pageIndex] == nil {

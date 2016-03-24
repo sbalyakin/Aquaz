@@ -37,7 +37,12 @@ class UIDatePickerTableViewCell: UITableViewCell {
     if self.datePicker == nil {
       let datePicker = UIDatePicker()
       datePicker.backgroundColor = UIColor.clearColor()
-      datePicker.addTarget(self, action: "datePickerValueDidChange:", forControlEvents: UIControlEvents.ValueChanged)
+      
+      datePicker.addTarget(
+        self,
+        action: #selector(self.datePickerValueDidChange(_:)),
+        forControlEvents: UIControlEvents.ValueChanged)
+      
       contentView.addSubview(datePicker)
       contentView.sendSubviewToBack(datePicker)
       self.datePicker = datePicker

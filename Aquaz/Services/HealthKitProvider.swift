@@ -47,8 +47,9 @@ final class HealthKitProvider: NSObject {
   func initSynchronizationForManagedObjectContext(managedObjectContext: NSManagedObjectContext) {
     self.managedObjectContext = managedObjectContext
     
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "contextDidSaveContext:",
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: #selector(self.contextDidSaveContext(_:)),
       name: NSManagedObjectContextDidSaveNotification,
       object: managedObjectContext)
   }
@@ -111,7 +112,7 @@ final class HealthKitProvider: NSObject {
         
         var samplesToSave = [HKQuantitySample]()
         
-        let saveToHealthKit = { (currentProgress currentProgress: Int) -> Void in
+        let saveToHealthKit = { (currentProgress: Int) -> Void in
           dispatch_group_enter(dispatchGroup)
           
           let objects = samplesToSave
@@ -135,13 +136,13 @@ final class HealthKitProvider: NSObject {
 
           // Save samples to HealthKit
           if samplesToSave.count >= 100 {
-            saveToHealthKit(currentProgress: index + 1)
+            saveToHealthKit(index + 1)
           }
         }
         
         // Save the rest of samples to HealthKit
         if !samplesToSave.isEmpty {
-          saveToHealthKit(currentProgress: intakes.count)
+          saveToHealthKit(intakes.count)
         } else {
           progress(current: intakes.count, maximum: intakes.count)
         }
@@ -240,18 +241,22 @@ final class HealthKitProvider: NSObject {
   
   /// Saves water sample of intake to HealthKit
   private func saveWaterSampleOfIntake(intake: Intake, completion: ((success: Bool) -> Void)? = nil) {
-    if let waterSample = createWaterQuantitySampleFromIntake(intake) {
-      healthKitStore.saveObject(waterSample) { success, error in
-        completion?(success: success)
+    managedObjectContext?.performBlock { _ in
+      if let waterSample = self.createWaterQuantitySampleFromIntake(intake) {
+        self.healthKitStore.saveObject(waterSample) { success, error in
+          completion?(success: success)
+        }
       }
     }
   }
 
   /// Saves caffeine sample of intake to HealthKit
   private func saveCaffeineSampleOfIntake(intake: Intake, completion: ((success: Bool) -> Void)? = nil) {
-    if let caffeineSample = createCaffeineQuantitySampleFromIntake(intake) {
-      healthKitStore.saveObject(caffeineSample) { success, error in
-        completion?(success: success)
+    managedObjectContext?.performBlock { _ in
+      if let caffeineSample = self.createCaffeineQuantitySampleFromIntake(intake) {
+        self.healthKitStore.saveObject(caffeineSample) { success, error in
+          completion?(success: success)
+        }
       }
     }
   }

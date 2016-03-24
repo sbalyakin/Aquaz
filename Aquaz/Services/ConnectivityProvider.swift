@@ -17,8 +17,10 @@ final class ConnectivityProvider: NSObject {
   
   static let sharedInstance = ConnectivityProvider()
   
-  private var session: WCSession!
+  private var session: WCSession?
   
+  private let queue = dispatch_queue_create("com.devmanifest.Aquaz.ConnectivityProvider", DISPATCH_QUEUE_SERIAL)
+
   private var needToUpdateWatchState: Bool = false
   
   private var settingObserverGeneralVolumeUnits: SettingsObserver?
@@ -48,8 +50,8 @@ final class ConnectivityProvider: NSObject {
   private func setupConnectivity() {
     if WCSession.isSupported() {
       session = WCSession.defaultSession()
-      session.delegate = self
-      session.activateSession()
+      session?.delegate = self
+      session?.activateSession()
     }
   }
   
@@ -89,23 +91,32 @@ final class ConnectivityProvider: NSObject {
   }
 
   private func setupCoreDataSynchronization() {
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "managedObjectContextDidSave",
-      name: NSManagedObjectContextDidSaveNotification,
-      object: nil)
+    CoreDataStack.inPrivateContext { privateContext in
+      NSNotificationCenter.defaultCenter().addObserver(
+        self,
+        selector: #selector(self.managedObjectContextDidSave),
+        name: NSManagedObjectContextDidSaveNotification,
+        object: privateContext)
+      
+      NSNotificationCenter.defaultCenter().addObserver(
+        self,
+        selector: #selector(self.managedObjectContextDidSave),
+        name: GlobalConstants.notificationManagedObjectContextWasMerged,
+        object: privateContext)
+    }
   }
   
   func managedObjectContextDidSave() {
-    if ignoreManagedObjectContextSavingsCounter > 0 {
+    if !WCSession.isSupported() || !(session?.watchAppInstalled ?? false) {
       return
     }
     
-    if !WCSession.isSupported() || !session.watchAppInstalled {
+    if isManagedObjectContextSavingIgnored() {
       return
     }
     
     composeCurrentStateInfo { info in
-      self.session.transferUserInfo(info)
+      self.session?.transferUserInfo(info)
     }
   }
   
@@ -116,20 +127,30 @@ final class ConnectivityProvider: NSObject {
   }
   
   private func settingsWasChanged() {
-    if !WCSession.isSupported() || !session.watchAppInstalled {
+    if !WCSession.isSupported() || !(session?.watchAppInstalled ?? false) {
       return
     }
     
     let message = ConnectivityMessageUpdatedSettings(settings: Settings.sharedInstance.getExportedSettingsForWatchApp())
     
-    session.transferUserInfo(message.composeMetadata())
+    session?.transferUserInfo(message.composeMetadata())
   }
-  
+
 }
 
 @available(iOS 9.0, *)
 extension ConnectivityProvider: WCSessionDelegate {
 
+  func sessionWatchStateDidChange(session: WCSession) {
+    if session.paired && session.watchAppInstalled {
+      composeCurrentStateInfo { info in
+        self.session?.transferUserInfo(info)
+      }
+      
+      settingsWasChanged()
+    }
+  }
+  
   func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
     if let messageAddIntake = ConnectivityMessageAddIntake(metadata: userInfo) {
       addIntakeInfoWasReceived(messageAddIntake)
@@ -145,6 +166,12 @@ extension ConnectivityProvider: WCSessionDelegate {
   
   private func addIntakeInfoWasReceived(message: ConnectivityMessageAddIntake) {
     CoreDataStack.inPrivateContext { privateContext in
+      // Check for duplicates
+      if let _ = Intake.fetchParticularIntake(date: message.date, drinkType: message.drinkType, amount: message.amount, managedObjectContext: privateContext) {
+        Logger.logWarning("Duplicate intake from Apple Watch has been observed. The intake is ignored.")
+        return
+      }
+      
       if self.drinks.isEmpty {
         self.drinks = Drink.fetchAllDrinksTyped(managedObjectContext: privateContext)
       }
@@ -168,11 +195,33 @@ extension ConnectivityProvider: WCSessionDelegate {
         viewController: viewController,
         managedObjectContext: privateContext,
         actionBeforeAddingIntakeToCoreData: {
-          self.ignoreManagedObjectContextSavingsCounter++
+          self.increaseIgnoreManagedObjectContextSavingsCounter()
         },
         actionAfterAddingIntakeToCoreData: {
-          self.ignoreManagedObjectContextSavingsCounter--
+          self.decreaseIgnoreManagedObjectContextSavingsCounter()
         })
+    }
+  }
+  
+  private func isManagedObjectContextSavingIgnored() -> Bool {
+    var ignore = false
+    
+    dispatch_sync(queue) {
+      ignore = self.ignoreManagedObjectContextSavingsCounter > 0
+    }
+    
+    return ignore
+  }
+  
+  private func increaseIgnoreManagedObjectContextSavingsCounter() {
+    dispatch_sync(queue) {
+      self.ignoreManagedObjectContextSavingsCounter += 1
+    }
+  }
+  
+  private func decreaseIgnoreManagedObjectContextSavingsCounter() {
+    dispatch_sync(queue) {
+      self.ignoreManagedObjectContextSavingsCounter -= 1
     }
   }
   

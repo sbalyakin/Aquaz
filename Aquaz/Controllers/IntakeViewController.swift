@@ -46,18 +46,29 @@ class IntakeViewController: UIViewController {
     }
   }
   
-  var drink: Drink!
+  var drinkType: DrinkType!
+  
+  private var drink: Drink!
   
   // Should be nil for add intake mode, and not nil for edit intake mode
   var intake: Intake? {
     didSet {
-      if let intake = intake {
-        drink = intake.drink
-        date = intake.date
-        timeIsChoosen = true
-      } else {
-        timeIsChoosen = false
+      let dispatchGroup = dispatch_group_create()
+      dispatch_group_enter(dispatchGroup)
+      
+      CoreDataStack.inPrivateContext { _ in
+        if let intake = self.intake {
+          self.drinkType = intake.drink.drinkType
+          self.drink = intake.drink
+          self.date = intake.date
+          self.timeIsChoosen = true
+        } else {
+          self.timeIsChoosen = false
+        }
+        dispatch_group_leave(dispatchGroup)
       }
+      
+      dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
     }
   }
 
@@ -77,14 +88,33 @@ class IntakeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    fetchDrink()
+    
     setupUI()
     
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "preferredContentSizeChanged",
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: #selector(self.preferredContentSizeChanged),
       name: UIContentSizeCategoryDidChangeNotification,
       object: nil)
   }
-  
+
+  private func fetchDrink() {
+    if let _ = drink {
+      return
+    }
+    
+    let dispatchGroup = dispatch_group_create()
+    dispatch_group_enter(dispatchGroup)
+    
+    CoreDataStack.inPrivateContext { privateContext in
+      self.drink = Drink.fetchDrinkByType(self.drinkType, managedObjectContext: privateContext)
+      dispatch_group_leave(dispatchGroup)
+    }
+    
+    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
+  }
+
   private func setupUI() {
     setupPredefinedAmountButtons()
     setupAmountRelatedControlsWithInitialAmount()
@@ -134,7 +164,19 @@ class IntakeViewController: UIViewController {
   }
   
   private func getInitialAmount() -> Double {
-    return intake?.amount ?? drink.recentAmount.amount
+    var amount: Double!
+    
+    let dispatchGroup = dispatch_group_create()
+    dispatch_group_enter(dispatchGroup)
+
+    CoreDataStack.inPrivateContext { _ in
+      amount = self.intake?.amount ?? self.drink.recentAmount.amount
+      dispatch_group_leave(dispatchGroup)
+    }
+    
+    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
+    
+    return amount
   }
   
   private func setupApplyButton() {
@@ -143,11 +185,11 @@ class IntakeViewController: UIViewController {
   }
 
   private func applyColorScheme() {
-    applyButton.backgroundColor = drink.darkColor
-    smallAmountButton.backgroundColor = drink.darkColor
-    mediumAmountButton.backgroundColor = drink.darkColor
-    largeAmountButton.backgroundColor = drink.darkColor
-    navigationController?.navigationBar.barTintColor = drink.mainColor
+    applyButton.backgroundColor = drinkType.darkColor
+    smallAmountButton.backgroundColor = drinkType.darkColor
+    mediumAmountButton.backgroundColor = drinkType.darkColor
+    largeAmountButton.backgroundColor = drinkType.darkColor
+    navigationController?.navigationBar.barTintColor = drinkType.mainColor
     navigationTitleLabel.textColor = StyleKit.barTextColor
     navigationDateLabel.textColor = StyleKit.barTextColor
   }
@@ -161,21 +203,21 @@ class IntakeViewController: UIViewController {
       dateText = localizedStrings.nowNavigationSubtitle
     }
 
-    navigationTitleLabel.text = drink.localizedName
+    navigationTitleLabel.text = drinkType.localizedName
     navigationDateLabel.text = dateText
   }
   
   private func setupDrinkView() {
-    drinkView.drinkType = drink.drinkType
+    drinkView.drinkType = drinkType
   }
   
   private func setupSlider() {
-    amountSlider.tintColor = drink.mainColor
+    amountSlider.tintColor = drinkType.mainColor
     amountSlider.maximumTrackTintColor = UIColor(white: 0.8, alpha: 1)
   }
   
   private func setupDrinkInformation() {
-    if drink.dehydrationFactor > 0 {
+    if drinkType.dehydrationFactor > 0 {
       drinkInformationLabel.text = localizedStrings.alcoholicDrinkInformation
       drinkInformationLabel.hidden = false
     } else {
@@ -260,10 +302,10 @@ class IntakeViewController: UIViewController {
   
   private func updateIntake(amount amount: Double) {
     if let intake = intake {
-      CoreDataStack.inMainContext { mainContext in
+      CoreDataStack.inPrivateContext { privateContext in
         intake.amount = amount
         intake.date = self.date
-        CoreDataStack.saveContext(mainContext)
+        CoreDataStack.saveContext(privateContext)
       }
     }
     

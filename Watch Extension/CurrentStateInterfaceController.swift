@@ -22,11 +22,11 @@ class CurrentStateInterfaceController: WKInterfaceController {
     return CGSize(width: 100, height: 100)
   }
   
-  var titleFontSize: CGFloat { return 34 }
-  var subTitleFontSize: CGFloat { return 14 }
-  var upTitleFontSize: CGFloat { return 14 }
+  var fontSizes: (title: CGFloat, upTitle: CGFloat, subTitle: CGFloat) {
+    return (title: 34, upTitle: 14, subTitle: 14)
+  }
 
-  private var session: WCSession!
+  private var session: WCSession?
   
   private var settingsObserverVolumeUnits: SettingsObserver?
   
@@ -65,9 +65,9 @@ class CurrentStateInterfaceController: WKInterfaceController {
   override init() {
     super.init()
 
-    initConnectivity()
-    
     setupSettingsSynchronization()
+    
+    initConnectivity()
     
     setupNotificationsObservation()
     
@@ -94,8 +94,8 @@ class CurrentStateInterfaceController: WKInterfaceController {
   private func initConnectivity() {
     if WCSession.isSupported() {
       session = WCSession.defaultSession()
-      session.delegate = self
-      session.activateSession()
+      session?.delegate = self
+      session?.activateSession()
     }
   }
   
@@ -110,7 +110,11 @@ class CurrentStateInterfaceController: WKInterfaceController {
   }
   
   private func setupNotificationsObservation() {
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "addIntakeNotificationIsReceived:", name: GlobalConstants.notificationWatchAddIntake, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: #selector(self.addIntakeNotificationIsReceived(_:)),
+      name: GlobalConstants.notificationWatchAddIntake,
+      object: nil)
   }
   
   func addIntakeNotificationIsReceived(notification: NSNotification) {
@@ -118,7 +122,7 @@ class CurrentStateInterfaceController: WKInterfaceController {
       return
     }
     
-    session.transferUserInfo(addIntakeInfo.composeMetadata())
+    session?.transferUserInfo(addIntakeInfo.composeMetadata())
   }
   
   private func setupTomorrowTimer() {
@@ -126,7 +130,12 @@ class CurrentStateInterfaceController: WKInterfaceController {
     let startOfTomorrow = DateHelper.addToDate(startOfToday, years: 0, months: 0, days: 1)
     let timeInterval = startOfTomorrow.timeIntervalSinceDate(NSDate())
     
-    tomorrowTimer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self, selector: "tomorrowTimerIsFired:", userInfo: nil, repeats: false)
+    tomorrowTimer = NSTimer.scheduledTimerWithTimeInterval(
+      timeInterval,
+      target: self,
+      selector: #selector(self.tomorrowTimerIsFired(_:)),
+      userInfo: nil,
+      repeats: false)
   }
   
   func tomorrowTimerIsFired(timer: NSTimer) {
@@ -188,10 +197,11 @@ class CurrentStateInterfaceController: WKInterfaceController {
     
     let subTitleTemplate = NSLocalizedString("WIC:of %1$@", value: "of %1$@", comment: "WatchKit Interface Controller: The part of title about current consumption")
     let subTitle = String.localizedStringWithFormat(subTitleTemplate, newWaterGoalText)
+    let fontSizes = self.fontSizes // it can be overriden in descendants and probably transformed to complex computed property
     
-    let titleItem    = ProgressHelper.TextProgressItem(text: newHydrationAmountText, color: UIColor.whiteColor(), font: UIFont.systemFontOfSize(titleFontSize, weight: UIFontWeightMedium))
-    let subTitleItem = ProgressHelper.TextProgressItem(text: subTitle, color: StyleKit.waterColor, font: UIFont.systemFontOfSize(subTitleFontSize))
-    let upTitleItem  = ProgressHelper.TextProgressItem(text: upTitle, color: UIColor.grayColor(), font: UIFont.systemFontOfSize(upTitleFontSize))
+    let titleItem    = ProgressHelper.TextProgressItem(text: newHydrationAmountText, color: UIColor.whiteColor(), font: UIFont.systemFontOfSize(fontSizes.title, weight: UIFontWeightMedium))
+    let subTitleItem = ProgressHelper.TextProgressItem(text: subTitle, color: StyleKit.waterColor, font: UIFont.systemFontOfSize(fontSizes.subTitle))
+    let upTitleItem  = ProgressHelper.TextProgressItem(text: upTitle, color: UIColor.grayColor(), font: UIFont.systemFontOfSize(fontSizes.upTitle))
     
     let imageSize = progressImageSize
     
@@ -211,6 +221,13 @@ extension CurrentStateInterfaceController: WCSessionDelegate {
       updatedSettingsMesageWasReceived(updatedSettingsMesage)
     } else if let currentStateMesage = ConnectivityMessageCurrentState(metadata: userInfo) {
       currentStateMesageWasReceived(currentStateMesage)
+    }
+  }
+  
+  func session(session: WCSession, didFinishUserInfoTransfer userInfoTransfer: WCSessionUserInfoTransfer, error: NSError?) {
+    if let _ = error {
+      // Trying to transfer the user info again
+      session.transferUserInfo(userInfoTransfer.userInfo)
     }
   }
   

@@ -25,12 +25,6 @@ class SelectDrinkViewController: UIViewController {
     .Milk,  .Juice,  .Sport,
     .Soda,  .Energy, Settings.sharedInstance.uiSelectedAlcoholicDrink.value]
   
-  private var drinks: [DrinkType: Drink] = [:]
-  
-  private var areDrinksLoaded: Bool {
-    return !drinks.isEmpty
-  }
-  
   private struct Constants {
     static let addIntakeSegue = "Add Intake"
   }
@@ -38,7 +32,6 @@ class SelectDrinkViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    loadDrinks()
     setupUI()
     setupGestureRecognizers()
     setupNotificationsObservation()
@@ -48,12 +41,6 @@ class SelectDrinkViewController: UIViewController {
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }
 
-  private func loadDrinks() {
-    CoreDataStack.inMainContext { mainContext in
-      self.drinks = Drink.fetchAllDrinksTyped(managedObjectContext: mainContext)
-    }
-  }
-  
   private func setupUI() {
     UIHelper.applyStyleToViewController(self)
     
@@ -64,19 +51,20 @@ class SelectDrinkViewController: UIViewController {
   }
   
   private func setupGestureRecognizers() {
-    let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "handleDrinkCellLongPress:")
+    let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleDrinkCellLongPress(_:)))
     longPressGestureRecognizer.minimumPressDuration = 0.5
     longPressGestureRecognizer.cancelsTouchesInView = false
     collectionView.addGestureRecognizer(longPressGestureRecognizer)
     
-    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleDrinkCellTap:")
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleDrinkCellTap(_:)))
     tapGestureRecognizer.numberOfTapsRequired = 1
     collectionView.addGestureRecognizer(tapGestureRecognizer)
   }
 
   private func setupNotificationsObservation() {
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "preferredContentSizeChanged",
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: #selector(self.preferredContentSizeChanged),
       name: UIContentSizeCategoryDidChangeNotification,
       object: nil)
   }
@@ -92,12 +80,12 @@ class SelectDrinkViewController: UIViewController {
     collectionView.performBatchUpdates( {
       self.collectionView.reloadSections(NSIndexSet(index: 0))
       },
-    completion: { _ in
-      if self.areDrinksLoaded {
-        let drink = self.drinks[drinkType]
-        self.performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
-      }
-    })
+      completion: { _ in
+        let indexPath = NSIndexPath(index: drinkType.rawValue)
+        if let cell = self.collectionView.cellForItemAtIndexPath(indexPath) {
+          self.performSegueWithIdentifier(Constants.addIntakeSegue, sender: cell)
+        }
+      })
   }
   
   func handleDrinkCellLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
@@ -150,31 +138,20 @@ class SelectDrinkViewController: UIViewController {
     }
 
     let pointInCollectionView = gestureRecognizer.locationInView(collectionView)
-    if let indexPath = collectionView.indexPathForItemAtPoint(pointInCollectionView) {
-      collectionViewCellIsSelected(indexPath: indexPath)
+    
+    if let indexPath = collectionView.indexPathForItemAtPoint(pointInCollectionView),
+       let cell = collectionView.cellForItemAtIndexPath(indexPath)
+    {
+      performSegueWithIdentifier(Constants.addIntakeSegue, sender: cell)
     }
-  }
-
-  private func collectionViewCellIsSelected(indexPath indexPath: NSIndexPath) {
-    if !areDrinksLoaded {
-      return
-    }
-    
-    let drinkIndex = indexPath.row
-    assert(drinkIndex < displayedDrinkTypes.count)
-    
-    let drinkType = displayedDrinkTypes[drinkIndex]
-    let drink = drinks[drinkType]
-    
-    performSegueWithIdentifier(Constants.addIntakeSegue, sender: drink)
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == Constants.addIntakeSegue,
       let intakeViewController = segue.destinationViewController.contentViewController as? IntakeViewController,
-      let drink = sender as? Drink
+      let cell = sender as? DrinkCollectionViewCell
     {
-      intakeViewController.drink = drink
+      intakeViewController.drinkType = cell.drinkView.drinkType
       intakeViewController.date = DateHelper.dateByJoiningDateTime(datePart: date, timePart: NSDate())
     } else {
       Logger.logError("An error occured on preparing segue for showing Intake scene from Select Drink scene")
@@ -255,8 +232,9 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
   }
   
   func showPopupView(frame frame: CGRect) {
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "preferredContentSizeChanged",
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: #selector(self.preferredContentSizeChanged),
       name: UIContentSizeCategoryDidChangeNotification,
       object: nil)
 
@@ -293,11 +271,11 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     popupView.addSubview(backgroundView)
     popupView.alpha = 0
     
-    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handlePopupViewTap:")
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handlePopupViewTap(_:)))
     tapGestureRecognizer.numberOfTapsRequired = 1
     popupView.addGestureRecognizer(tapGestureRecognizer)
     
-    let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePopupViewPan:")
+    let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.handlePopupViewPan(_:)))
     panGestureRecognizer.maximumNumberOfTouches = 1
     popupView.addGestureRecognizer(panGestureRecognizer)
     

@@ -93,7 +93,7 @@ class Logger {
   }
 
   // MARK: logMessage
-  func logMessage(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], logLevel: LogLevel, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__, forceAssert: Bool = false) {
+  func logMessage(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], logLevel: LogLevel, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line, forceAssert: Bool = false) {
     if forceAssert || isAssertsEnabledForLogLevel(logLevel) {
       let message = logDetails.isEmpty ? logMessage : "\(logMessage) \r\n \(logDetails.description)"
       assert(condition(), message)
@@ -141,123 +141,123 @@ class Logger {
     #endif
   }
 
-  func logMessage(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", logLevel: LogLevel, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__, forceAssert: Bool = false) {
+  func logMessage(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", logLevel: LogLevel, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line, forceAssert: Bool = false) {
     let detailsMap = logDetails.isEmpty ? [:] : [Attributes.details: logDetails]
     self.logMessage(condition, logMessage, logDetails: detailsMap, logLevel: logLevel, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: forceAssert)
   }
   
-  func logMessage(logMessage: String, logDetails: [String: String], logLevel: LogLevel, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__, forceAssert: Bool = false) {
+  func logMessage(logMessage: String, logDetails: [String: String], logLevel: LogLevel, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line, forceAssert: Bool = false) {
     self.logMessage(false, logMessage, logDetails: logDetails, logLevel: logLevel, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: forceAssert)
   }
 
-  func logMessage(logMessage: String, logDetails: String = "", logLevel: LogLevel, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__, forceAssert: Bool = false) {
+  func logMessage(logMessage: String, logDetails: String = "", logLevel: LogLevel, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line, forceAssert: Bool = false) {
     let detailsMap = logDetails.isEmpty ? [:] : [Attributes.details: logDetails]
     self.logMessage(false, logMessage, logDetails: detailsMap, logLevel: logLevel, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: forceAssert)
   }
   
   // MARK: logVerbose
-  func logVerbose(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logVerbose(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(condition, logMessage, logDetails: logDetails, logLevel: .Verbose, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: false)
   }
 
-  func logVerbose(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logVerbose(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(condition, logMessage, logDetails: logDetails, logLevel: .Verbose, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: false)
   }
 
-  func logVerbose(logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logVerbose(logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(logMessage, logDetails: logDetails, logLevel: .Verbose, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  func logVerbose(logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logVerbose(logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(logMessage, logDetails: logDetails, logLevel: .Verbose, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
   // MARK: logDebug
-  func logDebug(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logDebug(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(condition, logMessage, logDetails: logDetails, logLevel: .Debug, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: false)
   }
   
-  func logDebug(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logDebug(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(condition, logMessage, logDetails: logDetails, logLevel: .Debug, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: false)
   }
   
-  func logDebug(logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logDebug(logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(logMessage, logDetails: logDetails, logLevel: .Debug, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  func logDebug(logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logDebug(logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(logMessage, logDetails: logDetails, logLevel: .Debug, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
   // MARK: logInfo
-  func logInfo(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logInfo(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(condition, logMessage, logDetails: logDetails, logLevel: .Info, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: false)
   }
   
-  func logInfo(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logInfo(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(condition, logMessage, logDetails: logDetails, logLevel: .Info, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: false)
   }
   
-  func logInfo(logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logInfo(logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(logMessage, logDetails: logDetails, logLevel: .Info, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  func logInfo(logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logInfo(logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(logMessage, logDetails: logDetails, logLevel: .Info, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
 
   // MARK: logWarning
-  func logWarning(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logWarning(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(condition, logMessage, logDetails: logDetails, logLevel: .Warning, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: false)
   }
   
-  func logWarning(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logWarning(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(condition, logMessage, logDetails: logDetails, logLevel: .Warning, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: false)
   }
   
-  func logWarning(logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logWarning(logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(logMessage, logDetails: logDetails, logLevel: .Warning, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  func logWarning(logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logWarning(logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(logMessage, logDetails: logDetails, logLevel: .Warning, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
   // MARK: logError
-  func logError(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logError(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(condition, logMessage, logDetails: logDetails, logLevel: .Error, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: false)
   }
   
-  func logError(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logError(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(condition, logMessage, logDetails: logDetails, logLevel: .Error, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: false)
   }
   
-  func logError(logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logError(logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(logMessage, logDetails: logDetails, logLevel: .Error, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  func logError(logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logError(logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(logMessage, logDetails: logDetails, logLevel: .Error, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  func logError(logMessage: String, error: NSError?, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logError(logMessage: String, error: NSError?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(logMessage, logDetails: error?.description ?? "", logLevel: .Error, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
   // MARK: logSevere
-  func logSevere(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logSevere(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(condition, logMessage, logDetails: logDetails, logLevel: .Severe, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: false)
   }
   
-  func logSevere(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logSevere(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(condition, logMessage, logDetails: logDetails, logLevel: .Severe, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: false)
   }
   
-  func logSevere(logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logSevere(logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(logMessage, logDetails: logDetails, logLevel: .Severe, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  func logSevere(logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  func logSevere(logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     self.logMessage(logMessage, logDetails: logDetails, logLevel: .Severe, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
@@ -268,125 +268,125 @@ class Logger {
   }
 
   // MARK: logMessage
-  class func logMessage(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String, logLevel: LogLevel, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__, forceAssert: Bool = false) {
+  class func logMessage(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String, logLevel: LogLevel, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line, forceAssert: Bool = false) {
     sharedInstance.logMessage(condition, logMessage, logDetails: logDetails, logLevel: logLevel, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: forceAssert)
   }
   
-  class func logMessage(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], logLevel: LogLevel, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__, forceAssert: Bool = false) {
+  class func logMessage(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], logLevel: LogLevel, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line, forceAssert: Bool = false) {
     sharedInstance.logMessage(condition, logMessage, logDetails: logDetails, logLevel: logLevel, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: forceAssert)
   }
   
-  class func logMessage(logMessage: String, logDetails: String, logLevel: LogLevel, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__, forceAssert: Bool = false) {
+  class func logMessage(logMessage: String, logDetails: String, logLevel: LogLevel, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line, forceAssert: Bool = false) {
     sharedInstance.logMessage(logMessage, logDetails: logDetails, logLevel: logLevel, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: forceAssert)
   }
 
-  class func logMessage(logMessage: String, logDetails: [String: String], logLevel: LogLevel, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__, forceAssert: Bool = false) {
+  class func logMessage(logMessage: String, logDetails: [String: String], logLevel: LogLevel, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line, forceAssert: Bool = false) {
     sharedInstance.logMessage(logMessage, logDetails: logDetails, logLevel: logLevel, functionName: functionName, fileName: fileName, lineNumber: lineNumber, forceAssert: forceAssert)
   }
 
   // MARK: logVerbose
-  class func logVerbose(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logVerbose(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logVerbose(condition, logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logVerbose(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logVerbose(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logVerbose(condition, logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logVerbose(logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logVerbose(logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logVerbose(logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logVerbose(logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logVerbose(logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logVerbose(logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
   // MARK: logDebug
-  class func logDebug(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logDebug(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logDebug(condition, logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logDebug(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logDebug(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logDebug(condition, logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logDebug(logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logDebug(logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logDebug(logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logDebug(logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logDebug(logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logDebug(logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
   // MARK: logInfo
-  class func logInfo(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logInfo(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logInfo(condition, logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logInfo(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logInfo(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logInfo(condition, logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logInfo(logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logInfo(logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logInfo(logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
 
-  class func logInfo(logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logInfo(logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logInfo(logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
   // MARK: logWarning
-  class func logWarning(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logWarning(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logWarning(condition, logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logWarning(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logWarning(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logWarning(condition, logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logWarning(logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logWarning(logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logWarning(logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logWarning(logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logWarning(logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logWarning(logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
   // MARK: logError
-  class func logError(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logError(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logError(condition, logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logError(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logError(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logError(condition, logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logError(logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logError(logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logError(logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logError(logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logError(logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logError(logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logError(logMessage: String, error: NSError?, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logError(logMessage: String, error: NSError?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logError(logMessage, error: error, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
   // MARK: logSevere
-  class func logSevere(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logSevere(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logSevere(condition, logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  class func logSevere(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logSevere(@autoclosure condition: () -> Bool, _ logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logSevere(condition, logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
 
-  class func logSevere(logMessage: String, logDetails: [String: String], functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logSevere(logMessage: String, logDetails: [String: String], functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logSevere(logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
 
-  class func logSevere(logMessage: String, logDetails: String = "", functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+  class func logSevere(logMessage: String, logDetails: String = "", functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.logSevere(logMessage, logDetails: logDetails, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
@@ -399,7 +399,7 @@ class Logger {
 // MARK: Popular checks and logs
 extension Logger {
   class func checkViewController(@autoclosure condition: () -> Bool, storyboardID: String) {
-    logMessage(condition, Messages.failedToInstantiateViewController, logDetails: [Attributes.storyboardID: storyboardID], logLevel: .Severe, functionName: __FUNCTION__, fileName: __FILE__, lineNumber: __LINE__, forceAssert: false)
+    logMessage(condition, Messages.failedToInstantiateViewController, logDetails: [Attributes.storyboardID: storyboardID], logLevel: .Severe, functionName: #function, fileName: #file, lineNumber: #line, forceAssert: false)
   }
   
   class func logDrinkIsNotFound(drinkIndex drinkIndex: Int, logLevel: LogLevel = .Error) {

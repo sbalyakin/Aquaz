@@ -13,6 +13,10 @@ class ObservableSettingsItem<ValueType>: ObservationRemover {
 
   typealias ObserverFunction = (ValueType) -> ()
   
+  private var observerIdentifier = 0
+  private var observerFunctions: [Int: ObserverFunction] = [:]
+  private let identifierQueue = dispatch_queue_create("com.devmanifest.Aquaz.ObservableSettingsItem.identifierQueue", DISPATCH_QUEUE_SERIAL)
+  
   /// Adds an observer and returns its smart wrapper which removes the observation on deinitialization.
   /// It is preferrable way to use observation.
   func addObserver(observerFunction: ObserverFunction) -> SettingsObserver {
@@ -22,15 +26,24 @@ class ObservableSettingsItem<ValueType>: ObservationRemover {
   
   /// Adds an observer and returns its unique identifier (in a scope of class instance)
   /// Should not be used directly in the most of cases.
-  func internalAddObserver(observerFunction: ObserverFunction) -> Int {
-    observerFunctions[observerIdentifier] = observerFunction
-    return observerIdentifier++
+  private func internalAddObserver(observerFunction: ObserverFunction) -> Int {
+    var addedObserverIdentifier: Int!
+    
+    dispatch_sync(identifierQueue) {
+      addedObserverIdentifier = self.observerIdentifier
+      self.observerIdentifier += 1
+      self.observerFunctions[addedObserverIdentifier] = observerFunction
+    }
+    
+    return addedObserverIdentifier
   }
   
   /// Removes an observer using its identifier. Should not be used directly in the most of cases.
-  func internalRemoveObserver(observerIdentifier: Int) {
-    assert(observerFunctions.indexForKey(observerIdentifier) != nil, "Passed observer's identifier is not found")
-    observerFunctions.removeValueForKey(observerIdentifier)
+  internal func internalRemoveObserver(removedObserverIdentifier: Int) {
+    dispatch_sync(identifierQueue) {
+      assert(self.observerFunctions.indexForKey(removedObserverIdentifier) != nil, "Passed observer's identifier is not found")
+      self.observerFunctions.removeValueForKey(removedObserverIdentifier)
+    }
   }
 
   /// Notifies all observers
@@ -43,9 +56,6 @@ class ObservableSettingsItem<ValueType>: ObservationRemover {
   deinit {
     assert(observerFunctions.isEmpty, "There are \(observerFunctions.count) unremoved observers for observable settings item")
   }
-  
-  private var observerIdentifier = 0
-  private var observerFunctions: [Int: ObserverFunction] = [:]
   
 }
 
@@ -67,7 +77,7 @@ class SettingsObserver {
 
 protocol ObservationRemover : class {
   
-  func internalRemoveObserver(observerIdentifier: Int)
+  func internalRemoveObserver(removedObserverIdentifier: Int)
   
 }
 
@@ -79,20 +89,30 @@ class SettingsItemBase<ValueType: Equatable>: ObservableSettingsItem<ValueType> 
   
   let key: String
   
+  private let valueQueue = dispatch_queue_create("com.devmanifest.Aquaz.SettingsItemBase.valueQueue", DISPATCH_QUEUE_SERIAL)
+  
   var value: ValueType {
     get {
-      return rawValue
-    }
-    set {
-      if (newValue == value) {
-        return
+      var outputValue: ValueType!
+      
+      dispatch_sync(valueQueue) {
+        outputValue = self.rawValue
       }
       
-      rawValue = newValue
+      return outputValue
+    }
+    set {
+      dispatch_sync(valueQueue) {
+        if (newValue == self.rawValue) {
+          return
+        }
+        
+        self.rawValue = newValue
+      }
       
-      writeValue(rawValue)
+      writeValue(newValue)
       userDefaults.synchronize()
-      notify(rawValue)
+      notify(newValue)
     }
   }
 
@@ -130,12 +150,18 @@ class SettingsItemBase<ValueType: Equatable>: ObservableSettingsItem<ValueType> 
   
   /// Reads the value from user defaults
   func readFromUserDefaults(sendNotification sendNotification: Bool) -> Bool {
-    let oldValue = rawValue
+    var success: Bool!
+    var oldValue: ValueType!
+    var newValue: ValueType!
     
-    let success = readValue(&rawValue)
-    
-    if rawValue != oldValue && sendNotification {
-      notify(rawValue)
+    dispatch_sync(valueQueue) {
+      oldValue = self.rawValue
+      success = self.readValue(&self.rawValue)
+      newValue = self.rawValue
+    }
+
+    if newValue != oldValue && sendNotification {
+      notify(newValue)
     }
     
     return success
@@ -148,8 +174,10 @@ class SettingsItemBase<ValueType: Equatable>: ObservableSettingsItem<ValueType> 
   
   /// Removes the value from user defaults
   func removeFromUserDefaults() {
-    userDefaults.removeObjectForKey(key)
-    rawValue = initialValue
+    dispatch_sync(valueQueue) {
+      self.userDefaults.removeObjectForKey(self.key)
+      self.rawValue = self.initialValue
+    }
   }
   
   private func readValue(inout outValue: ValueType) -> Bool {

@@ -89,6 +89,14 @@ class Intake: CodingManagedObject, NamedEntity {
     return CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: [descriptor])
   }
 
+  /// Fetches an intake for specified date, drinkType and amount.
+  /// Used in ConnectivityProvider to prevent double intakes coming from Apple Watch by unknown reason.
+  class func fetchParticularIntake(date date: NSDate, drinkType: DrinkType, amount: Double, managedObjectContext: NSManagedObjectContext) -> Intake? {
+    let predicate = NSPredicate(format: "(date == %@) AND (drink.index == %@) AND (amount == %@)", argumentArray: [date, drinkType.rawValue, amount])
+    
+    return CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate)
+  }
+
   /// Fetches all intakes for a day taken from the specified date.
   /// Start of the day is inclusively started from 0:00 + specified offset in hours.
   /// End of the day is exclusive ended with 0:00 of the next day + specified offset in hours.
@@ -286,7 +294,7 @@ class Intake: CodingManagedObject, NamedEntity {
       var hydrationAmountForUnit: Double = 0
       var dehydrationAmountForUnit: Double = 0
 
-      for ; intakeIndex < intakes.count; intakeIndex++ {
+      while intakeIndex < intakes.count {
         let intake = intakes[intakeIndex]
         
         if !intake.date.isEarlierThan(nextDate) {
@@ -295,6 +303,8 @@ class Intake: CodingManagedObject, NamedEntity {
 
         hydrationAmountForUnit += intake.hydrationAmount
         dehydrationAmountForUnit += intake.dehydrationAmount
+        
+        intakeIndex += 1
       }
       
       if aggregateFunction == .Average {

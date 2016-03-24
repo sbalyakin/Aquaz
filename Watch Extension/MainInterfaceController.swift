@@ -18,6 +18,10 @@ final class MainInterfaceController: CurrentStateInterfaceController {
     return WKInterfaceDevice.currentResolution().progressImageSize
   }
   
+  override var fontSizes: (title: CGFloat, upTitle: CGFloat, subTitle: CGFloat) {
+    return WKInterfaceDevice.currentResolution().fontSizes
+  }
+
   override func handleActionWithIdentifier(identifier: String?, forLocalNotification localNotification: UILocalNotification) {
     if identifier == "addIntakeAction" {
       pushControllerWithName("DrinksInterfaceController", context: nil)
@@ -40,6 +44,14 @@ private extension WatchResolution {
     case .Watch38mm: return CGSize(width: 109, height: 109)
     case .Watch42mm: return CGSize(width: 132, height: 132)
     case .Unknown:   return CGSize(width: 132, height: 132)
+    }
+  }
+  
+  var fontSizes: (title: CGFloat, upTitle: CGFloat, subTitle: CGFloat) {
+    switch self {
+    case .Watch38mm: return (title: 28, upTitle: 13, subTitle: 13)
+    case .Watch42mm: return (title: 34, upTitle: 16, subTitle: 16)
+    case .Unknown:   return (title: 34, upTitle: 16, subTitle: 16)
     }
   }
   

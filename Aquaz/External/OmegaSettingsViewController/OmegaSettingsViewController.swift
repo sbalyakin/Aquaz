@@ -209,9 +209,17 @@ class OmegaSettingsViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
-    let notificationCenter = NSNotificationCenter.defaultCenter()
-    notificationCenter.addObserver(self, selector: "handleKeyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
-    notificationCenter.addObserver(self, selector: "handleKeyboardWillHideNotification:", name: UIKeyboardWillHideNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: #selector(self.handleKeyboardWillShowNotification(_:)),
+      name: UIKeyboardWillShowNotification,
+      object: nil)
+    
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: #selector(self.handleKeyboardWillHideNotification(_:)),
+      name: UIKeyboardWillHideNotification,
+      object: nil)
   }
   
   override func viewWillDisappear(animated: Bool) {
@@ -388,6 +396,7 @@ class EnumCollection<T: RawRepresentable where T.RawValue == Int>: CollectionTyp
     startIndex = startValue?.rawValue ?? 0
     
     var endIndex: Int?
+    
     if let endValue = endValue {
       if endValue.rawValue >= startIndex {
         endIndex = endValue.rawValue
@@ -395,7 +404,9 @@ class EnumCollection<T: RawRepresentable where T.RawValue == Int>: CollectionTyp
     }
     
     if endIndex == nil {
-      for endIndex = startIndex; T(rawValue: endIndex!) != nil; endIndex!++ {
+      endIndex = startIndex
+      while T(rawValue: endIndex!) != nil {
+        endIndex! += 1
       }
     }
     
@@ -404,8 +415,9 @@ class EnumCollection<T: RawRepresentable where T.RawValue == Int>: CollectionTyp
   
   func generate() -> AnyGenerator<T> {
     var index = startIndex
-    return anyGenerator {
-      return index <= self.endIndex ? T(rawValue: index++) : nil
+    return AnyGenerator {
+      index += 1
+      return index <= self.endIndex ? T(rawValue: index) : nil
     }
   }
   
@@ -435,10 +447,10 @@ class IntCollection: CollectionType {
   
   func generate() -> AnyGenerator<Int> {
     var index = startIndex
-    return anyGenerator {
+    return AnyGenerator {
       if index <= self.endIndex {
         let value = self.minimumValue + index * self.step
-        index++
+        index += 1
         return value
       } else {
         return nil
@@ -472,10 +484,10 @@ class DoubleCollection: CollectionType {
   
   func generate() -> AnyGenerator<Double> {
     var index = startIndex
-    return anyGenerator {
+    return AnyGenerator {
       if index <= self.endIndex {
         let value = self.minimumValue + Double(index) * self.step
-        index++
+        index += 1
         return value
       } else {
         return nil

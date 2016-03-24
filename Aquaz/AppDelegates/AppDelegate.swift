@@ -82,10 +82,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
     
   private func setupSynchronizationWithCoreData() {
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "updateNotifications:",
-      name: NSManagedObjectContextDidSaveNotification,
-      object: nil)
+    CoreDataStack.inPrivateContext { privateContext in
+      NSNotificationCenter.defaultCenter().addObserver(
+        self,
+        selector: #selector(self.updateNotifications(_:)),
+        name: NSManagedObjectContextDidSaveNotification,
+        object: privateContext)
+      }
   }
 
   @available(iOS 9.0, *)

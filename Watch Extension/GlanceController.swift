@@ -15,9 +15,9 @@ final class GlanceController: CurrentStateInterfaceController {
     return WKInterfaceDevice.currentResolution().progressImageSize
   }
 
-  override var titleFontSize: CGFloat { return 28 }
-  override var subTitleFontSize: CGFloat { return 12 }
-  override var upTitleFontSize: CGFloat { return 12 }
+  override var fontSizes: (title: CGFloat, upTitle: CGFloat, subTitle: CGFloat) {
+    return WKInterfaceDevice.currentResolution().fontSizes
+  }
 
 }
 
@@ -33,4 +33,12 @@ private extension WatchResolution {
     }
   }
   
+  var fontSizes: (title: CGFloat, upTitle: CGFloat, subTitle: CGFloat) {
+    switch self {
+    case .Watch38mm: return (title: 26, upTitle: 12, subTitle: 12)
+    case .Watch42mm: return (title: 30, upTitle: 14, subTitle: 14)
+    case .Unknown:   return (title: 30, upTitle: 14, subTitle: 14)
+    }
+  }
+
 }

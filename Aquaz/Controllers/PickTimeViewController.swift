@@ -17,8 +17,8 @@ class PickTimeViewController: UIViewController {
   
   weak var intakeViewController: IntakeViewController!
   
-  var drink: Drink! {
-    return intakeViewController?.drink
+  var drinkType: DrinkType? {
+    return intakeViewController?.drinkType
   }
   
   override func viewDidLoad() {
@@ -40,8 +40,8 @@ class PickTimeViewController: UIViewController {
   
   private func applyStyle() {
     UIHelper.applyStyleToViewController(self)
-    chooseButton.backgroundColor = drink?.darkColor
-    navigationController?.navigationBar.barTintColor = drink?.mainColor
+    chooseButton.backgroundColor = drinkType?.darkColor
+    navigationController?.navigationBar.barTintColor = drinkType?.mainColor
   }
 
   @IBAction func chooseButtonWasTapped(sender: AnyObject) {

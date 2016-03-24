@@ -207,16 +207,18 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   private func setupNotificationsObservation() {
-    CoreDataStack.inMainContext { mainContext in
-      NSNotificationCenter.defaultCenter().addObserver(self,
-        selector: "managedObjectContextDidChange:",
-        name: GlobalConstants.notificationManagedObjectContextWasMerged,
-        object: mainContext)
-      
-      NSNotificationCenter.defaultCenter().addObserver(self,
-        selector: "managedObjectContextDidChange:",
+    CoreDataStack.inPrivateContext { privateContext in
+      NSNotificationCenter.defaultCenter().addObserver(
+        self,
+        selector: #selector(self.managedObjectContextDidChange(_:)),
         name: NSManagedObjectContextDidSaveNotification,
-        object: mainContext)
+        object: privateContext)
+      
+      NSNotificationCenter.defaultCenter().addObserver(
+        self,
+        selector: #selector(self.managedObjectContextDidChange(_:)),
+        name: GlobalConstants.notificationManagedObjectContextWasMerged,
+        object: privateContext)
     }
   }
   
@@ -286,11 +288,17 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   private func setupGestureRecognizers() {
     if let navigationBar = navigationController?.navigationBar {
-      let leftSwipe = UISwipeGestureRecognizer(target: self, action: "leftSwipeGestureIsRecognized:")
+      let leftSwipe = UISwipeGestureRecognizer(
+        target: self,
+        action: #selector(self.leftSwipeGestureIsRecognized(_:)))
+      
       leftSwipe.direction = .Left
       navigationBar.addGestureRecognizer(leftSwipe)
       
-      let rightSwipe = UISwipeGestureRecognizer(target: self, action: "rightSwipeGestureIsRecognized:")
+      let rightSwipe = UISwipeGestureRecognizer(
+        target: self,
+        action: #selector(self.rightSwipeGestureIsRecognized(_:)))
+      
       rightSwipe.direction = .Right
       navigationBar.addGestureRecognizer(rightSwipe)
     }
@@ -397,11 +405,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   private func updateSummaryBar(animated animated: Bool, completion: (() -> ())?) {
     CoreDataStack.inPrivateContext { privateContext in
-      if let waterGoal = WaterGoal.fetchWaterGoalForDate(self.date, managedObjectContext: privateContext) {
-        CoreDataStack.inMainContext { mainContext in
-          self.waterGoal = try! mainContext.existingObjectWithID(waterGoal.objectID) as! WaterGoal
-        }
-      }
+      self.waterGoal = WaterGoal.fetchWaterGoalForDate(self.date, managedObjectContext: privateContext)
       
       self.totalDehydrationAmount = Intake.fetchTotalDehydrationAmountForDay(self.date,
         dayOffsetInHours: 0, managedObjectContext: privateContext)
@@ -699,24 +703,26 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   private func saveWaterGoalForCurrentDate(baseAmount baseAmount: Double, isHotDay: Bool, isHighActivity: Bool) {
-    CoreDataStack.inMainContext { mainContext in
+    CoreDataStack.inPrivateContext { privateContext in
       self.waterGoal = WaterGoal.addEntity(
         date: self.date,
         baseAmount: baseAmount,
         isHotDay: isHotDay,
         isHighActivity: isHighActivity,
-        managedObjectContext: mainContext)
+        managedObjectContext: privateContext)
     }
   }
   
   // MARK: Help tips -
 
   private func checkForHelpTip(notification: NSNotification) {
-    if checkForHighPriorityHelpTips(notification) {
-      return
+    CoreDataStack.inPrivateContext { _ in
+      if self.checkForHighPriorityHelpTips(notification) {
+        return
+      }
+      
+      self.checkForRegularHelpTips(notification)
     }
-    
-    checkForRegularHelpTips(notification)
   }
   
   private func checkForHighPriorityHelpTips(notification: NSNotification) -> Bool {
@@ -727,7 +733,9 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
       for insertedObject in insertedObjects {
         if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, date) && intake.dehydrationAmount > 0 {
-          showAlcoholicDehydrationHelpTip()
+          dispatch_async(dispatch_get_main_queue()) {
+            self.showAlcoholicDehydrationHelpTip()
+          }
           return true
         }
       }
@@ -746,7 +754,9 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
         if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, date) {
           Settings.sharedInstance.uiDayPageIntakesCountTillHelpTip.value = Settings.sharedInstance.uiDayPageIntakesCountTillHelpTip.value - 1
           if Settings.sharedInstance.uiDayPageIntakesCountTillHelpTip.value <= 0 {
-            showNextHelpTip()
+            dispatch_async(dispatch_get_main_queue()) {
+              self.showNextHelpTip()
+            }
           }
           break
         }
@@ -951,7 +961,19 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   private var isHotDay: Bool {
     get {
-      return isWaterGoalForCurrentDay ? (waterGoal?.isHotDay ?? false) : false
+      var result: Bool!
+      
+      let dispatchGroup = dispatch_group_create()
+      dispatch_group_enter(dispatchGroup)
+
+      CoreDataStack.inPrivateContext { _ in
+        result = self.isWaterGoalForCurrentDay ? (self.waterGoal?.isHotDay ?? false) : false
+        dispatch_group_leave(dispatchGroup)
+      }
+      
+      dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
+      
+      return result
     }
     set {
       saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: newValue, isHighActivity: isHighActivity)
@@ -960,7 +982,19 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
 
   private var isHighActivity: Bool {
     get {
-      return isWaterGoalForCurrentDay ? (waterGoal?.isHighActivity ?? false) : false
+      var result: Bool!
+      
+      let dispatchGroup = dispatch_group_create()
+      dispatch_group_enter(dispatchGroup)
+      
+      CoreDataStack.inPrivateContext { _ in
+        result = self.isWaterGoalForCurrentDay ? (self.waterGoal?.isHighActivity ?? false) : false
+        dispatch_group_leave(dispatchGroup)
+      }
+      
+      dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
+      
+      return result
     }
     set {
       saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: isHotDay, isHighActivity: newValue)
@@ -968,7 +1002,19 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   private var waterGoalBaseAmount: Double {
-    return waterGoal?.baseAmount ?? Settings.sharedInstance.userDailyWaterIntake.value
+    var result: Double!
+    
+    let dispatchGroup = dispatch_group_create()
+    dispatch_group_enter(dispatchGroup)
+    
+    CoreDataStack.inPrivateContext { _ in
+      result = self.waterGoal?.baseAmount ?? Settings.sharedInstance.userDailyWaterIntake.value
+      dispatch_group_leave(dispatchGroup)
+    }
+    
+    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
+    
+    return result
   }
   
   private var waterGoalAmount: Double {
@@ -976,19 +1022,35 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   private var hotDayExtraFactor: Double {
-    if isWaterGoalForCurrentDay {
-      return waterGoal?.hotDayFactor ?? 0
-    } else {
-      return 0
+    var result: Double!
+    
+    let dispatchGroup = dispatch_group_create()
+    dispatch_group_enter(dispatchGroup)
+    
+    CoreDataStack.inPrivateContext { _ in
+      result = self.isWaterGoalForCurrentDay ? (self.waterGoal?.hotDayFactor ?? 0) : 0
+      dispatch_group_leave(dispatchGroup)
     }
+    
+    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
+    
+    return result
   }
 
   private var highActivityExtraFactor: Double {
-    if isWaterGoalForCurrentDay {
-      return waterGoal?.highActivityFactor ?? 0
-    } else {
-      return 0
+    var result: Double!
+    
+    let dispatchGroup = dispatch_group_create()
+    dispatch_group_enter(dispatchGroup)
+    
+    CoreDataStack.inPrivateContext { _ in
+      result = self.isWaterGoalForCurrentDay ? (self.waterGoal?.highActivityFactor ?? 0) : 0
+      dispatch_group_leave(dispatchGroup)
     }
+    
+    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
+    
+    return result
   }
   
   private var multiProgressSections: [Int: MultiProgressView.Section] = [:]

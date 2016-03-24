@@ -42,23 +42,42 @@ class DiaryTableViewCell: UITableViewCell {
     }
   }
   
+  func prepareCell() {
+    timeLabel.text = ""
+    drinkLabel.text = ""
+    amountLabel.text = ""
+    waterBalanceLabel.text = ""
+  }
+  
   private func applyIntake() {
-    let drinkTitle = intake.drink.localizedName
-    let amountTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intake.amount, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: true)
-    let waterBalanceTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intake.waterBalance, unitType: .Volume, roundPrecision: amountPrecision, decimals: amountDecimals, displayUnits: true)
+    let intakeInfo = getIntakeInfo()
     
-    let formatter = NSDateFormatter()
-    formatter.dateStyle = .NoStyle
-    formatter.timeStyle = .ShortStyle
-    let timeTitle = formatter.stringFromDate(intake.date)
+    dispatch_async(dispatch_get_main_queue()) {
+      let drinkTitle = intakeInfo.drinkName
+      let amountTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intakeInfo.amount, unitType: .Volume, roundPrecision: self.amountPrecision, decimals: self.amountDecimals, displayUnits: true)
+      let waterBalanceTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intakeInfo.waterBalance, unitType: .Volume, roundPrecision: self.amountPrecision, decimals: self.amountDecimals, displayUnits: true)
+      
+      let formatter = NSDateFormatter()
+      formatter.dateStyle = .NoStyle
+      formatter.timeStyle = .ShortStyle
+      let timeTitle = formatter.stringFromDate(intakeInfo.date)
 
-    timeLabel.text = timeTitle
-    drinkLabel.text = drinkTitle
-    drinkLabel.textColor = intake.drink.darkColor
-    amountLabel.text = amountTitle
-    waterBalanceLabel.text = waterBalanceTitle
-    
-    updateFonts()
+      self.timeLabel.text = timeTitle
+      self.drinkLabel.text = drinkTitle
+      self.drinkLabel.textColor = intakeInfo.color
+      self.amountLabel.text = amountTitle
+      self.waterBalanceLabel.text = waterBalanceTitle
+      
+      self.updateFonts()
+    }
+  }
+  
+  private func getIntakeInfo() -> (drinkName: String, amount: Double, waterBalance: Double, date: NSDate, color: UIColor) {
+    return (drinkName: self.intake.drink.localizedName,
+            amount: self.intake.amount,
+            waterBalance: self.intake.waterBalance,
+            date: self.intake.date,
+            color: self.intake.drink.darkColor)
   }
   
   func updateFonts() {

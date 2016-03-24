@@ -74,8 +74,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
     // It's necessary to reset the managed object context in order to finalize background tasks correctly.
-    coreDataStack.inMainContext { mainContext in
-      mainContext.reset()
+    coreDataStack.inPrivateContext { privateContext in
+      privateContext.reset()
     }
   }
 
@@ -100,18 +100,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
 
   private func setupNotificationsObservation() {
-    coreDataStack.inMainContext { mainContext in
-      NSNotificationCenter.defaultCenter().addObserver(self,
-        selector: "managedObjectContextDidSave:",
+    coreDataStack.inPrivateContext { privateContext in
+      NSNotificationCenter.defaultCenter().addObserver(
+        self,
+        selector: #selector(self.managedObjectContextDidSave(_:)),
         name: NSManagedObjectContextDidSaveNotification,
-        object: mainContext)
+        object: privateContext)
     }
   }
   
   @available(iOSApplicationExtension 9.0, *)
   private func setupHeathKitSynchronization() {
-    coreDataStack.inMainContext { mainContext in
-      HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContext(mainContext)
+    coreDataStack.inPrivateContext { privateContext in
+      HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContext(privateContext)
     }
   }
 
@@ -190,13 +191,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   private func fetchData(completion: () -> ()) {
-    coreDataStack.inMainContext { mainContext in
+    coreDataStack.inPrivateContext { privateContext in
       if !Settings.sharedInstance.generalHasLaunchedOnce.value {
-        CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: mainContext, saveContext: true)
+        CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: privateContext, saveContext: true)
       }
     
-      self.fetchDrinks(managedObjectContext: mainContext)
-      self.fetchWaterIntake(managedObjectContext: mainContext)
+      self.fetchDrinks(managedObjectContext: privateContext)
+      self.fetchWaterIntake(managedObjectContext: privateContext)
       completion()
     }
   }
@@ -207,17 +208,39 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   private func updateDrinks() {
-    drink1AmountLabel.text = formatWaterVolume(drink1.recentAmount.amount)
-    drink1TitleLabel.text = drink1.localizedName
-    drink1View.drinkType = drink1.drinkType
+    let drinksInfo = getDrinksInfo()
     
-    drink2AmountLabel.text = formatWaterVolume(drink2.recentAmount.amount)
-    drink2TitleLabel.text = drink2.localizedName
-    drink2View.drinkType = drink2.drinkType
+    drink1AmountLabel.text = formatWaterVolume(drinksInfo[0].amount)
+    drink1TitleLabel.text = drinksInfo[0].name
+    drink1View.drinkType = drinksInfo[0].drinkType
     
-    drink3AmountLabel.text = formatWaterVolume(drink3.recentAmount.amount)
-    drink3TitleLabel.text = drink3.localizedName
-    drink3View.drinkType = drink3.drinkType
+    drink2AmountLabel.text = formatWaterVolume(drinksInfo[1].amount)
+    drink2TitleLabel.text = drinksInfo[1].name
+    drink2View.drinkType = drinksInfo[1].drinkType
+    
+    drink3AmountLabel.text = formatWaterVolume(drinksInfo[2].amount)
+    drink3TitleLabel.text = drinksInfo[2].name
+    drink3View.drinkType = drinksInfo[2].drinkType
+  }
+  
+  private func getDrinksInfo() -> [(amount: Double, name: String, drinkType: DrinkType)] {
+    let dispatchGroup = dispatch_group_create()
+    dispatch_group_enter(dispatchGroup)
+
+    var drinksInfo: [(amount: Double, name: String, drinkType: DrinkType)]!
+    
+    coreDataStack.inPrivateContext { _ in
+      drinksInfo = [
+        (amount: self.drink1.recentAmount.amount, name: self.drink1.localizedName, drinkType: self.drink1.drinkType),
+        (amount: self.drink2.recentAmount.amount, name: self.drink2.localizedName, drinkType: self.drink2.drinkType),
+        (amount: self.drink3.recentAmount.amount, name: self.drink3.localizedName, drinkType: self.drink3.drinkType)]
+      
+      dispatch_group_leave(dispatchGroup)
+    }
+    
+    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
+    
+    return drinksInfo
   }
 
   private func updateWaterIntakes(animated animated: Bool) {
@@ -309,12 +332,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       return
     }
     
-    coreDataStack.inMainContext { mainContext in
+    coreDataStack.inPrivateContext { privateContext in
       Intake.addEntity(
         drink: drink,
         amount: drink.recentAmount.amount,
         date: NSDate(),
-        managedObjectContext: mainContext,
+        managedObjectContext: privateContext,
         saveImmediately: true)
 
       self.fetchData {

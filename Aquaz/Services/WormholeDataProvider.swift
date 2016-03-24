@@ -36,10 +36,13 @@ final class WormholeDataProvider: NSObject {
   }
   
   private func setupCoreDataSynchronization() {
-    NSNotificationCenter.defaultCenter().addObserver(self,
-      selector: "managedObjectContextDidSave:",
-      name: NSManagedObjectContextDidSaveNotification,
-      object: nil)
+    CoreDataStack.inPrivateContext { privateContext in
+      NSNotificationCenter.defaultCenter().addObserver(
+        self,
+        selector: #selector(self.managedObjectContextDidSave(_:)),
+        name: NSManagedObjectContextDidSaveNotification,
+        object: privateContext)
+    }
   }
   
   func managedObjectContextDidSave(notification: NSNotification) {

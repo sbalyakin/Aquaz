@@ -144,7 +144,9 @@ class CoreDataPrePopulation {
     
     let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
     
-    for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = currentDay.getNextDay() {
+    var currentDay = beginDate
+    
+    while currentDay.isEarlierThan(endDate) {
       let intakesCount = random() % maxIntakesPerDay
       for _ in 0..<intakesCount {
         let drinkIndex = random() % Drink.getDrinksCount()
@@ -156,6 +158,8 @@ class CoreDataPrePopulation {
           Intake.addEntity(drink: drink, amount: amount, date: intakeDate, managedObjectContext: managedObjectContext, saveImmediately: false)
         }
       }
+      
+      currentDay = currentDay.getNextDay()
     }
   }
   
@@ -169,8 +173,10 @@ class CoreDataPrePopulation {
     let hotDayChanceInPercents = 20
     
     var currentWaterGoal = Double(minWaterGoal + random() % (maxWaterGoal - minWaterGoal))
+    
+    var currentDay = beginDate
 
-    for var currentDay = beginDate; currentDay.isEarlierThan(endDate); currentDay = currentDay.getNextDay() {
+    while currentDay.isEarlierThan(endDate) {
       let needToComputeWaterGoal = (random() % 100) < computeWaterGoalChanceInPercents
       let enableHighActivity = (random() % 100) < highActivityChanceInPercents
       let enableHotDay = (random() % 100) < hotDayChanceInPercents
@@ -189,6 +195,8 @@ class CoreDataPrePopulation {
           managedObjectContext: managedObjectContext,
           saveImmediately: false)
       }
+      
+      currentDay = currentDay.getNextDay()
     }
   }
 }

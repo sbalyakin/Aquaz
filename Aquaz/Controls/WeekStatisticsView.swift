@@ -144,7 +144,7 @@ protocol WeekStatisticsViewDelegate: class {
       dayButton.tag = dayIndex
       dayButton.titleLabel?.font = daysFont
       dayButton.setTitle(title, forState: .Normal)
-      dayButton.addTarget(self, action: "dayButtonTapped:", forControlEvents: .TouchUpInside)
+      dayButton.addTarget(self, action: #selector(self.dayButtonTapped(_:)), forControlEvents: .TouchUpInside)
       dayButton.backgroundColor = UIColor.clearColor()
       dayButton.userInteractionEnabled = false // will be enabled later
 

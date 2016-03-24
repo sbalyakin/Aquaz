@@ -90,10 +90,11 @@ final class AmountInterfaceController: WKInterfaceController {
     let title = stringFromMetricAmount(currentAmount)
     let subTitle = drinkType.localizedName
     let upTitle = WatchSettings.sharedInstance.generalVolumeUnits.value.description
+    let fontSizes = WKInterfaceDevice.currentResolution().fontSizes
     
-    let titleItem    = ProgressHelper.TextProgressItem(text: title, color: UIColor.whiteColor(), font: UIFont.systemFontOfSize(34, weight: UIFontWeightMedium))
-    let subTitleItem = ProgressHelper.TextProgressItem(text: subTitle, color: drinkType.darkColor, font: UIFont.systemFontOfSize(14))
-    let upTitleItem  = ProgressHelper.TextProgressItem(text: upTitle, color: UIColor.grayColor(), font: UIFont.systemFontOfSize(14))
+    let titleItem    = ProgressHelper.TextProgressItem(text: title, color: UIColor.whiteColor(), font: UIFont.systemFontOfSize(fontSizes.title, weight: UIFontWeightMedium))
+    let subTitleItem = ProgressHelper.TextProgressItem(text: subTitle, color: drinkType.darkColor, font: UIFont.systemFontOfSize(fontSizes.subTitle))
+    let upTitleItem  = ProgressHelper.TextProgressItem(text: upTitle, color: UIColor.grayColor(), font: UIFont.systemFontOfSize(fontSizes.upTitle))
 
     let imageSize = WKInterfaceDevice.currentResolution().progressImageSize
 
@@ -132,7 +133,15 @@ private extension WatchResolution {
     case .Unknown:   return CGSize(width: 132, height: 132)
     }
   }
-  
+
+  var fontSizes: (title: CGFloat, upTitle: CGFloat, subTitle: CGFloat) {
+    switch self {
+    case .Watch38mm: return (title: 28, upTitle: 13, subTitle: 13)
+    case .Watch42mm: return (title: 34, upTitle: 16, subTitle: 16)
+    case .Unknown:   return (title: 34, upTitle: 16, subTitle: 16)
+    }
+  }
+
 }
 
 // MARK: Units.Volume extension

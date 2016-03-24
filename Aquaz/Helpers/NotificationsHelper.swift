@@ -61,8 +61,11 @@ class NotificationsHelper {
     let fromDate = DateHelper.dateByJoiningDateTime(datePart: date, timePart: fromTime)
     let toDate = DateHelper.dateByJoiningDateTime(datePart: date, timePart: toTime)
     
-    for var fireDate = fromDate; !fireDate.isLaterThan(toDate); fireDate = fireDate.dateByAddingTimeInterval(interval) {
+    var fireDate = fromDate
+    
+    while !fireDate.isLaterThan(toDate) {
       scheduleNotification(fireDate: fireDate, repeatInterval: .Day)
+      fireDate = fireDate.dateByAddingTimeInterval(interval)
     }
   }
   
@@ -78,8 +81,11 @@ class NotificationsHelper {
     let toDate = DateHelper.dateByJoiningDateTime(datePart: intakeDate, timePart: toTime)
     let interval = Settings.sharedInstance.notificationsInterval.value
     
-    for var fireDate = intakeDate.dateByAddingTimeInterval(interval); !fireDate.isLaterThan(toDate); fireDate = fireDate.dateByAddingTimeInterval(interval) {
+    var fireDate = intakeDate.dateByAddingTimeInterval(interval)
+    
+    while !fireDate.isLaterThan(toDate) {
       scheduleNotification(fireDate: fireDate, repeatInterval: nil)
+      fireDate = fireDate.dateByAddingTimeInterval(interval)
     }
   }
 

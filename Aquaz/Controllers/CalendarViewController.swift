@@ -29,7 +29,11 @@ class CalendarViewController: UIViewController {
     
     setupUI()
     
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredContentSizeChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(
+      self,
+      selector: #selector(self.preferredContentSizeChanged),
+      name: UIContentSizeCategoryDidChangeNotification,
+      object: nil)
   }
   
   deinit {

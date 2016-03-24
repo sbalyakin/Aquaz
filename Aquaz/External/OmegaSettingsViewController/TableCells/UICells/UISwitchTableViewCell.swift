@@ -33,7 +33,12 @@ class UISwitchTableViewCell: UITableViewCell {
   private func baseInit() {
     if self.switchControl == nil {
       let switchControl = UISwitch()
-      switchControl.addTarget(self, action: "switchControlValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+      
+      switchControl.addTarget(
+        self,
+        action: #selector(self.switchControlValueChanged(_:)),
+        forControlEvents: UIControlEvents.ValueChanged)
+      
       self.accessoryView = switchControl
       self.switchControl = switchControl
     }
