@@ -228,12 +228,24 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
         self.checkForHelpTip(notification)
       }
       
-      SystemHelper.executeBlockWithDelay(0.5) {
-        self.checkForRateApplicationAlert(notification)
-      }
+      self.checkForRateApplicationAlert(notification)
     }
   }
 
+  private func updateWaterGoalRelatedValues() {
+    isWaterGoalForCurrentDay = waterGoal != nil ? DateHelper.areDatesEqualByDays(waterGoal!.date, date) : false
+    
+    isHotDay = isWaterGoalForCurrentDay ? (waterGoal?.isHotDay ?? false) : false
+    
+    isHighActivity = isWaterGoalForCurrentDay ? (waterGoal?.isHighActivity ?? false) : false
+    
+    waterGoalBaseAmount = waterGoal?.baseAmount ?? Settings.sharedInstance.userDailyWaterIntake.value
+
+    hotDayExtraFactor = isWaterGoalForCurrentDay ? (self.waterGoal?.hotDayFactor ?? 0) : 0
+    
+    highActivityExtraFactor = isWaterGoalForCurrentDay ? (self.waterGoal?.highActivityFactor ?? 0) : 0
+  }
+  
   private func setupCurrentDate() {
     if mode == .General && Settings.sharedInstance.uiUseCustomDateForDayView.value {
       date = Settings.sharedInstance.uiCustomDateForDayView.value
@@ -405,10 +417,10 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   private func updateSummaryBar(animated animated: Bool, completion: (() -> ())?) {
     CoreDataStack.inPrivateContext { privateContext in
-      self.waterGoal = WaterGoal.fetchWaterGoalForDate(self.date, managedObjectContext: privateContext)
-      
       self.totalDehydrationAmount = Intake.fetchTotalDehydrationAmountForDay(self.date,
         dayOffsetInHours: 0, managedObjectContext: privateContext)
+
+      self.waterGoal = WaterGoal.fetchWaterGoalForDate(self.date, managedObjectContext: privateContext)
       
       let intakeHydrationAmounts = Intake.fetchHydrationAmountsGroupedByDrinksForDay(self.date,
         dayOffsetInHours: 0, managedObjectContext: privateContext)
@@ -425,9 +437,9 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
             self.waterGoalWasChanged(animated: animated)
           }
         }
-        
-        completion?()
       }
+      
+      completion?()
     }
   }
   
@@ -435,10 +447,12 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   @IBAction func toggleHighActivityMode(sender: AnyObject) {
     isHighActivity = !isHighActivity
+    saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: isHotDay, isHighActivity: isHighActivity)
   }
   
   @IBAction func toggleHotDayMode(sender: AnyObject) {
     isHotDay = !isHotDay
+    saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: isHotDay, isHighActivity: isHighActivity)
   }
   
   // MARK: Change current screen -
@@ -545,32 +559,37 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
       return
     }
     
-    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
-      for insertedObject in insertedObjects {
-        if insertedObject is Intake {
-          Settings.sharedInstance.uiIntakesCountTillShowWritingReviewAlert.value -= 1
-          
-          if Settings.sharedInstance.uiIntakesCountTillShowWritingReviewAlert.value > 0 {
+    SystemHelper.executeBlockWithDelay(0.5) {
+      if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+        for insertedObject in insertedObjects {
+          if insertedObject is Intake {
+            Settings.sharedInstance.uiIntakesCountTillShowWritingReviewAlert.value -= 1
+            
+            if Settings.sharedInstance.uiIntakesCountTillShowWritingReviewAlert.value > 0 {
+              return
+            }
+
+            self.showRateApplicationAlert()
+            Settings.sharedInstance.uiIntakesCountTillShowWritingReviewAlert.value = GlobalConstants.numberOfIntakesToShowReviewAlert * 2
             return
           }
-
-          showRateApplicationAlert()
-          Settings.sharedInstance.uiIntakesCountTillShowWritingReviewAlert.value = GlobalConstants.numberOfIntakesToShowReviewAlert * 2
-          return
         }
       }
     }
   }
   
   private func showRateApplicationAlert() {
-    let alert = UIAlertView(
-      title: localizedStrings.rateApplicationAlertTitle,
-      message: localizedStrings.rateApplicationAlertMessage,
-      delegate: self,
-      cancelButtonTitle: localizedStrings.rateApplicationAlertNoText,
-      otherButtonTitles: localizedStrings.rateApplicationAlertRateText, localizedStrings.rateApplicationAlertRemindLaterText)
+    dispatch_async(dispatch_get_main_queue()) {
+      let alert = UIAlertView(
+        title: self.localizedStrings.rateApplicationAlertTitle,
+        message: self.localizedStrings.rateApplicationAlertMessage,
+        delegate: self,
+        cancelButtonTitle: self.localizedStrings.rateApplicationAlertNoText,
+        otherButtonTitles: self.localizedStrings.rateApplicationAlertRateText,
+        self.localizedStrings.rateApplicationAlertRemindLaterText)
 
-    alert.show()
+      alert.show()
+    }
   }
   
   func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
@@ -592,14 +611,16 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
 
   private func showCongratulationsAboutWaterGoalReaching() {
-    let banner = InfoBannerView.create()
-    banner.infoLabel.text = localizedStrings.congratulationsBannerText
-    banner.infoImageView.image = ImageHelper.loadImage(.BannerReward)
-    banner.bannerWasTappedFunction = { _ in banner.hide(animated: true) }
-    banner.accessoryImageView.hidden = true
+    dispatch_async(dispatch_get_main_queue()) {
+      let banner = InfoBannerView.create()
+      banner.infoLabel.text = self.localizedStrings.congratulationsBannerText
+      banner.infoImageView.image = ImageHelper.loadImage(.BannerReward)
+      banner.bannerWasTappedFunction = { _ in banner.hide(animated: true) }
+      banner.accessoryImageView.hidden = true
 
-    let frame = summaryView.convertRect(summaryView.frame, toView: navigationController!.view)
-    banner.showAndHide(animated: true, displayTime: 4, parentView: navigationController!.view, height: frame.height, minY: frame.minY)
+      let frame = self.summaryView.convertRect(self.summaryView.frame, toView: self.navigationController!.view)
+      banner.showAndHide(animated: true, displayTime: 4, parentView: self.navigationController!.view, height: frame.height, minY: frame.minY)
+    }
   }
 
   @IBAction func intakeButtonWasTapped(sender: AnyObject) {
@@ -716,13 +737,11 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   // MARK: Help tips -
 
   private func checkForHelpTip(notification: NSNotification) {
-    CoreDataStack.inPrivateContext { _ in
-      if self.checkForHighPriorityHelpTips(notification) {
-        return
-      }
-      
-      self.checkForRegularHelpTips(notification)
+    if checkForHighPriorityHelpTips(notification) {
+      return
     }
+    
+    checkForRegularHelpTips(notification)
   }
   
   private func checkForHighPriorityHelpTips(notification: NSNotification) -> Bool {
@@ -733,9 +752,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
       for insertedObject in insertedObjects {
         if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, date) && intake.dehydrationAmount > 0 {
-          dispatch_async(dispatch_get_main_queue()) {
-            self.showAlcoholicDehydrationHelpTip()
-          }
+          showAlcoholicDehydrationHelpTip()
           return true
         }
       }
@@ -765,21 +782,23 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   private func showAlcoholicDehydrationHelpTip() {
-    SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
-        return
+    dispatch_async(dispatch_get_main_queue()) {
+      SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
+        if self.view.window == nil || self.helpTip != nil {
+          return
+        }
+        
+        let helpTip = JDFTooltipView(
+          targetView: self.intakeButton,
+          hostView: self.view,
+          tooltipText: self.localizedStrings.helpTipAlcoholicDehydration,
+          arrowDirection: .Up,
+          width: self.view.frame.width / 2)
+        
+        self.showHelpTip(helpTip)
+        
+        Settings.sharedInstance.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value = true
       }
-      
-      let helpTip = JDFTooltipView(
-        targetView: self.intakeButton,
-        hostView: self.view,
-        tooltipText: self.localizedStrings.helpTipAlcoholicDehydration,
-        arrowDirection: .Up,
-        width: self.view.frame.width / 2)
-      
-      self.showHelpTip(helpTip)
-      
-      Settings.sharedInstance.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value = true
     }
   }
   
@@ -947,112 +966,24 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   // MARK: Private properties -
   
-  private var waterGoal: WaterGoal?
+  private var waterGoal: WaterGoal? {
+    didSet {
+      updateWaterGoalRelatedValues()
+    }
+  }
   
   private var totalDehydrationAmount: Double = 0
-  
-  private var isWaterGoalForCurrentDay: Bool {
-    if let waterGoal = waterGoal {
-      return DateHelper.areDatesEqualByDays(waterGoal.date, date)
-    } else {
-      return false
-    }
-  }
-  
-  private var isHotDay: Bool {
-    get {
-      var result: Bool!
-      
-      let dispatchGroup = dispatch_group_create()
-      dispatch_group_enter(dispatchGroup)
+  private var isWaterGoalForCurrentDay = false
+  private var isHotDay = false
+  private var isHighActivity = false
+  private var waterGoalBaseAmount: Double = 0
+  private var hotDayExtraFactor: Double = 0
+  private var highActivityExtraFactor: Double = 0
 
-      CoreDataStack.inPrivateContext { _ in
-        result = self.isWaterGoalForCurrentDay ? (self.waterGoal?.isHotDay ?? false) : false
-        dispatch_group_leave(dispatchGroup)
-      }
-      
-      dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-      
-      return result
-    }
-    set {
-      saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: newValue, isHighActivity: isHighActivity)
-    }
-  }
-
-  private var isHighActivity: Bool {
-    get {
-      var result: Bool!
-      
-      let dispatchGroup = dispatch_group_create()
-      dispatch_group_enter(dispatchGroup)
-      
-      CoreDataStack.inPrivateContext { _ in
-        result = self.isWaterGoalForCurrentDay ? (self.waterGoal?.isHighActivity ?? false) : false
-        dispatch_group_leave(dispatchGroup)
-      }
-      
-      dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-      
-      return result
-    }
-    set {
-      saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: isHotDay, isHighActivity: newValue)
-    }
-  }
-  
-  private var waterGoalBaseAmount: Double {
-    var result: Double!
-    
-    let dispatchGroup = dispatch_group_create()
-    dispatch_group_enter(dispatchGroup)
-    
-    CoreDataStack.inPrivateContext { _ in
-      result = self.waterGoal?.baseAmount ?? Settings.sharedInstance.userDailyWaterIntake.value
-      dispatch_group_leave(dispatchGroup)
-    }
-    
-    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-    
-    return result
-  }
-  
   private var waterGoalAmount: Double {
     return waterGoalBaseAmount * (1 + hotDayExtraFactor + highActivityExtraFactor) + totalDehydrationAmount
   }
-  
-  private var hotDayExtraFactor: Double {
-    var result: Double!
-    
-    let dispatchGroup = dispatch_group_create()
-    dispatch_group_enter(dispatchGroup)
-    
-    CoreDataStack.inPrivateContext { _ in
-      result = self.isWaterGoalForCurrentDay ? (self.waterGoal?.hotDayFactor ?? 0) : 0
-      dispatch_group_leave(dispatchGroup)
-    }
-    
-    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-    
-    return result
-  }
 
-  private var highActivityExtraFactor: Double {
-    var result: Double!
-    
-    let dispatchGroup = dispatch_group_create()
-    dispatch_group_enter(dispatchGroup)
-    
-    CoreDataStack.inPrivateContext { _ in
-      result = self.isWaterGoalForCurrentDay ? (self.waterGoal?.highActivityFactor ?? 0) : 0
-      dispatch_group_leave(dispatchGroup)
-    }
-    
-    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-    
-    return result
-  }
-  
   private var multiProgressSections: [Int: MultiProgressView.Section] = [:]
   
   private var pages: [UIViewController] = []
