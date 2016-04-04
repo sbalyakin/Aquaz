@@ -303,8 +303,12 @@ class IntakeViewController: UIViewController {
   private func updateIntake(amount amount: Double) {
     if let intake = intake {
       CoreDataStack.inPrivateContext { privateContext in
+        let drink = try! privateContext.existingObjectWithID(self.drink.objectID) as! Drink
+        drink.recentAmount.amount = amount
+
         intake.amount = amount
         intake.date = self.date
+        
         CoreDataStack.saveContext(privateContext)
       }
     }
