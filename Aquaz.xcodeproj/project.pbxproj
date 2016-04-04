@@ -1102,9 +1102,9 @@
 				84D251911AD2511E001E6644 /* Frameworks */,
 				84D251921AD2511E001E6644 /* Resources */,
 				8443DF271B29658100FDD294 /* ShellScript */,
-				A53E395B1C15B56600628103 /* ShellScript */,
 				B36B454A7B159779C505ABB9 /* Embed Pods Frameworks */,
 				3F50991207DF638567A81106 /* Copy Pods Resources */,
+				A53E395B1C15B56600628103 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2086,6 +2086,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2124,6 +2125,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
