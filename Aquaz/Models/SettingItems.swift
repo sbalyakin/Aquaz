@@ -13,9 +13,17 @@ class ObservableSettingsItem<ValueType>: ObservationRemover {
 
   typealias ObserverFunction = (ValueType) -> ()
   
-  private var observerIdentifier = 0
-  private var observerFunctions: [Int: ObserverFunction] = [:]
-  private let identifierQueue = dispatch_queue_create("com.devmanifest.Aquaz.ObservableSettingsItem.identifierQueue", DISPATCH_QUEUE_SERIAL)
+  private var observerIdentifier: Int
+  private var observerFunctions: [Int: ObserverFunction]
+  private let identifierQueue: dispatch_queue_t
+  
+  // Value initialization was moved to init() in order to solve Swift 2.2 bug on iOS7
+  // More details here https://bugs.swift.org/browse/SR-815
+  init() {
+    observerIdentifier = 0
+    observerFunctions = [:]
+    identifierQueue = dispatch_queue_create("com.devmanifest.Aquaz.ObservableSettingsItem.identifierQueue", DISPATCH_QUEUE_SERIAL)
+  }
   
   /// Adds an observer and returns its smart wrapper which removes the observation on deinitialization.
   /// It is preferrable way to use observation.
@@ -89,7 +97,9 @@ class SettingsItemBase<ValueType: Equatable>: ObservableSettingsItem<ValueType> 
   
   let key: String
   
-  private let valueQueue = dispatch_queue_create("com.devmanifest.Aquaz.SettingsItemBase.valueQueue", DISPATCH_QUEUE_SERIAL)
+  // Value initialization was moved to init() in order to solve Swift 2.2 bug on iOS7
+  // More details here https://bugs.swift.org/browse/SR-815
+  private let valueQueue: dispatch_queue_t
   
   var value: ValueType {
     get {
@@ -135,7 +145,9 @@ class SettingsItemBase<ValueType: Equatable>: ObservableSettingsItem<ValueType> 
   }
   
   init(key: String, initialValue: ValueType, userDefaults: NSUserDefaults) {
-    self.rawValue = initialValue
+    valueQueue = dispatch_queue_create("com.devmanifest.Aquaz.SettingsItemBase.valueQueue", DISPATCH_QUEUE_SERIAL)
+    rawValue = initialValue
+    
     self.key = key
     self.initialValue = initialValue
     self.userDefaults = userDefaults

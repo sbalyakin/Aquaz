@@ -12,6 +12,7 @@ class PickerTableCell<Value: CustomStringConvertible, Collection: CollectionType
   
   let collection: Collection
   let height: UIPickerViewHeight
+  
   var font: UIFont? {
     didSet {
       if let font = font {

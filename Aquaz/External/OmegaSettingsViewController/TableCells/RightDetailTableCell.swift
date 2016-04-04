@@ -21,13 +21,18 @@ class RightDetailTableCell<Value: CustomStringConvertible>: TableCellWithValue<V
     }
   }
   
-  var supportingCellIsShown: Bool = false { didSet { setHighlightForValue(supportingCellIsShown) } }
+  // Value initialization was moved to init() in order to solve Swift 2.2 bug on iOS7
+  // More details here https://bugs.swift.org/browse/SR-815
+  var supportingCellIsShown: Bool { didSet { setHighlightForValue(supportingCellIsShown) } }
+  
   override var supportsPermanentActivation: Bool { return supportingTableCell != nil }
 
   
   init(title: String, value: Value, container: TableCellsContainer, accessoryType: UITableViewCellAccessoryType? = nil) {
     self.title = title
     self.accessoryType = accessoryType
+    supportingCellIsShown = false
+    
     super.init(value: value, container: container)
   }
   

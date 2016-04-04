@@ -514,11 +514,17 @@ class SettingsItemConnector<Value: Equatable>: ValueExternalStorage<Value> {
   
   let settingsItem: SettingsItemBase<Value>
   var saveToSettingsOnValueUpdate: Bool
-  private var isInternalValueUpdate = false
+
+  // Value initialization was moved to init() in order to solve Swift 2.2 bug on iOS7
+  // More details here https://bugs.swift.org/browse/SR-815
+  private var isInternalValueUpdate: Bool
   
   init(settingsItem: SettingsItemBase<Value>, saveToSettingsOnValueUpdate: Bool) {
     self.settingsItem = settingsItem
     self.saveToSettingsOnValueUpdate = saveToSettingsOnValueUpdate
+    
+    isInternalValueUpdate = false
+    
     super.init(value: settingsItem.value)
   }
   

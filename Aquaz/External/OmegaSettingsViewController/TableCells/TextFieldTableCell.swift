@@ -13,17 +13,23 @@ class TextFieldTableCell<Value: CustomStringConvertible>: TableCellWithValue<Val
   var title: String { didSet { uiCell?.textLabel?.text = title } }
   var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
   var uiCell: UITextFieldTableViewCell?
+  
   var textFieldBorderStyle: UITextBorderStyle {
     didSet {
       uiCell?.textField.borderStyle = textFieldBorderStyle
     }
   }
+  
   var keyboardType: UIKeyboardType {
     didSet {
       uiCell?.textField.keyboardType = keyboardType
     }
   }
-  private var selectionIsProcessing = false
+  
+  // Value initialization was moved to init() in order to solve Swift 2.2 bug on iOS7
+  // More details here https://bugs.swift.org/browse/SR-815
+  private var selectionIsProcessing: Bool
+
   let valueFromStringFunction: ValueFromStringFunction
   
   override var supportsPermanentActivation: Bool { return true }
@@ -35,6 +41,9 @@ class TextFieldTableCell<Value: CustomStringConvertible>: TableCellWithValue<Val
     self.textFieldBorderStyle = textFieldBorderStyle
     self.keyboardType = keyboardType
     self.valueFromStringFunction = valueFromStringFunction
+    
+    selectionIsProcessing = false
+    
     super.init(value: value, container: container)
   }
   

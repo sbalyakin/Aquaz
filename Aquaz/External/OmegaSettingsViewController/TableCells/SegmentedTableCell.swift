@@ -14,6 +14,7 @@ class SegmentedTableCell<Value: CustomStringConvertible, Collection: CollectionT
   var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
   var collection: Collection
   var uiCell: UISegmentedTableViewCell?
+  
   var segmentsWidth: CGFloat {
     didSet {
       uiCell?.segmentsWidth = segmentsWidth
