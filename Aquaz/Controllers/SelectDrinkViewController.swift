@@ -81,7 +81,8 @@ class SelectDrinkViewController: UIViewController {
       self.collectionView.reloadSections(NSIndexSet(index: 0))
       },
       completion: { _ in
-        let indexPath = NSIndexPath(index: drinkType.rawValue)
+        let indexPath = NSIndexPath(forRow: self.displayedDrinkTypes.count - 1, inSection: 0)
+        
         if let cell = self.collectionView.cellForItemAtIndexPath(indexPath) {
           self.performSegueWithIdentifier(Constants.addIntakeSegue, sender: cell)
         }

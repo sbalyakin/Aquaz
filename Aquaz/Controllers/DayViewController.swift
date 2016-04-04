@@ -915,7 +915,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
       }
       
       let lastCellIndex = self.selectDrinkViewController!.collectionView.numberOfItemsInSection(0) - 1
-      let cell = self.selectDrinkViewController!.collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: lastCellIndex, inSection: 0))
+      let cell = self.selectDrinkViewController!.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: lastCellIndex, inSection: 0))
       
       let tooltip = JDFTooltipView(
         targetView: cell,
