@@ -77,13 +77,17 @@ class DiaryViewController: UIViewController {
 
   private func initFetchedResultsController() {
     createFetchedResultsController {
-      self.tableView.reloadData()
+      dispatch_async(dispatch_get_main_queue()) {
+        self.tableView.reloadData()
+      }
     }
   }
 
   private func updateFetchedResultsController() {
     createFetchedResultsController {
-      self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
+      dispatch_async(dispatch_get_main_queue()) {
+        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
+      }
     }
   }
 
