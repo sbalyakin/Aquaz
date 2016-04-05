@@ -71,7 +71,7 @@ class MonthStatisticsViewController: UIViewController {
       name: UIContentSizeCategoryDidChangeNotification,
       object: nil)
     
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       NSNotificationCenter.defaultCenter().addObserver(
         self,
         selector: #selector(self.managedObjectContextDidChange(_:)),
@@ -190,7 +190,7 @@ extension MonthStatisticsViewController: CalendarViewDelegate {
 extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
   
   func monthStatisticsGetValuesForDateInterval(beginDate beginDate: NSDate, endDate: NSDate, calendarContentView: CalendarContentView) -> [Double] {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       weak var requestingMonthStatisticsContentView = (calendarContentView as! MonthStatisticsContentView)
       let hydrationFractions = self.fetchHydrationFractions(beginDate: beginDate, endDate: endDate, privateContext: privateContext)
       dispatch_async(dispatch_get_main_queue()) {

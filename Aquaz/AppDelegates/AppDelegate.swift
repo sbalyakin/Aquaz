@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
     
   private func setupSynchronizationWithCoreData() {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       NSNotificationCenter.defaultCenter().addObserver(
         self,
         selector: #selector(self.updateNotifications(_:)),
@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   @available(iOS 9.0, *)
   private func setupHealthKitSynchronization() {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContext(privateContext)
     }
   }
@@ -121,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
       if let lastIntakeDate = lastIntakeDate where DateHelper.areDatesEqualByDays(lastIntakeDate, NSDate()) {
         if Settings.sharedInstance.notificationsLimit.value {
-          CoreDataStack.inPrivateContext { privateContext in
+          CoreDataStack.performOnPrivateContext { privateContext in
             let beginDate = NSDate()
             let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
             
@@ -174,7 +174,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func prePopulateCoreData() {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       if !CoreDataPrePopulation.isCoreDataPrePopulated(managedObjectContext: privateContext) {
         CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: privateContext, saveContext: true)
       }

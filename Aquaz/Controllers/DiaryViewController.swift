@@ -43,9 +43,9 @@ class DiaryViewController: UIViewController {
 
   deinit {
     // It prevents EXC_BAD_ACCESS on deferred reloading the table view
+    fetchedResultsController?.delegate = nil
     tableView?.dataSource = nil
     tableView?.delegate = nil
-    fetchedResultsController?.delegate = nil
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -113,16 +113,18 @@ class DiaryViewController: UIViewController {
   }
   
   private func createFetchedResultsController(completion completion: (() -> ())?) {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       let fetchRequest = self.getFetchRequestForDate(self.date)
       
-      self.fetchedResultsController = NSFetchedResultsController(
+      let fetchedResultsController = NSFetchedResultsController(
         fetchRequest: fetchRequest,
         managedObjectContext: privateContext,
         sectionNameKeyPath: nil,
         cacheName: nil)
       
-      self.fetchedResultsController!.delegate = self
+      fetchedResultsController.delegate = self
+      
+      self.fetchedResultsController = fetchedResultsController
       
       do {
         try self.fetchedResultsController!.performFetch()
@@ -220,7 +222,7 @@ extension DiaryViewController: UITableViewDataSource {
       return
     }
     
-    CoreDataStack.inPrivateContext { _ in
+    CoreDataStack.performOnPrivateContext { _ in
       if let intake = self.getIntakeAtIndexPath(indexPath) {
         intake.deleteEntity(saveImmediately: true)
       }
@@ -237,7 +239,7 @@ extension DiaryViewController: UITableViewDelegate {
 
     diaryCell.prepareCell()
     
-    CoreDataStack.inPrivateContext { _ in
+    CoreDataStack.performOnPrivateContext { _ in
       if let intake = self.getIntakeAtIndexPath(indexPath) {
         diaryCell.intake = intake
       }
@@ -245,7 +247,7 @@ extension DiaryViewController: UITableViewDelegate {
   }
 
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    CoreDataStack.inPrivateContext { _ in
+    CoreDataStack.performOnPrivateContext { _ in
       if let intake = self.getIntakeAtIndexPath(indexPath) {
         dispatch_async(dispatch_get_main_queue()) {
           self.performSegueWithIdentifier(Constants.editIntakeSegue, sender: intake)
@@ -287,13 +289,13 @@ extension DiaryViewController: UITableViewDelegate {
 extension DiaryViewController: NSFetchedResultsControllerDelegate {
   
   func controllerWillChangeContent(controller: NSFetchedResultsController) {
-    dispatch_async(dispatch_get_main_queue()) {
+    SystemHelper.performBlockAsyncOnMainQueueAndWait {
       self.tableView?.beginUpdates()
     }
   }
 
   func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-    dispatch_async(dispatch_get_main_queue()) {
+    SystemHelper.performBlockAsyncOnMainQueueAndWait {
       switch type {
       case .Insert:
         self.tableView?.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
@@ -308,7 +310,7 @@ extension DiaryViewController: NSFetchedResultsControllerDelegate {
   }
   
   func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-    dispatch_async(dispatch_get_main_queue()) {
+    SystemHelper.performBlockAsyncOnMainQueueAndWait {
       switch type {
       case .Insert:
         if let newIndexPath = newIndexPath {
@@ -338,7 +340,7 @@ extension DiaryViewController: NSFetchedResultsControllerDelegate {
   }
 
   func controllerDidChangeContent(controller: NSFetchedResultsController) {
-    dispatch_async(dispatch_get_main_queue()) {
+    SystemHelper.performBlockAsyncOnMainQueueAndWait {
       self.tableView?.endUpdates()
     }
   }

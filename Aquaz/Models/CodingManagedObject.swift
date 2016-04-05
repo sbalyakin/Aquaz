@@ -31,22 +31,16 @@ class CodingManagedObject: NSManagedObject, NSCoding {
   }
   
   private class func getExistingManagedObject(aDecoder: NSCoder) -> NSManagedObject? {
-    let dispatchGroup = dispatch_group_create()
-    dispatch_group_enter(dispatchGroup)
-
     var managedObject: NSManagedObject?
     
-    CoreDataStack.inPrivateContextEx { privateContext, coordinator in
-      if let url = aDecoder.decodeObjectForKey(encodeKey) as? NSURL,
+    CoreDataStack.performOnPrivateContextAndWait { privateContext in
+      if let coordinator = privateContext.persistentStoreCoordinator,
+         let url = aDecoder.decodeObjectForKey(encodeKey) as? NSURL,
          let managedObjectID = coordinator.managedObjectIDForURIRepresentation(url)
       {
         managedObject = try? privateContext.existingObjectWithID(managedObjectID)
       }
-      
-      dispatch_group_leave(dispatchGroup)
     }
-    
-    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
     
     return managedObject
   }

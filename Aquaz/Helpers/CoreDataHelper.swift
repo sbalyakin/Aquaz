@@ -43,24 +43,3 @@ class CoreDataHelper {
   }
   
 }
-
-extension NSManagedObjectContext {
-  
-  func performBlockAndWaitUsingGroup(block: () -> Void) {
-    if concurrencyType == .MainQueueConcurrencyType {
-      assert(false, "performBlockAndWaitUsingGroup() must not be used on main queue, performBlockAndWait() will be used instead of.")
-      performBlockAndWait(block)
-    } else {
-      let dispatchGroup = dispatch_group_create()
-      dispatch_group_enter(dispatchGroup)
-      
-      performBlock {
-        block()
-        dispatch_group_leave(dispatchGroup)
-      }
-      
-      dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-    }
-  }
-  
-}

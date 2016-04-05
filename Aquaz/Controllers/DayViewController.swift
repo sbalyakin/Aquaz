@@ -207,7 +207,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   private func setupNotificationsObservation() {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       NSNotificationCenter.defaultCenter().addObserver(
         self,
         selector: #selector(self.managedObjectContextDidChange(_:)),
@@ -416,7 +416,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   private func updateSummaryBar(animated animated: Bool, completion: (() -> ())?) {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       self.totalDehydrationAmount = Intake.fetchTotalDehydrationAmountForDay(self.date,
         dayOffsetInHours: 0, managedObjectContext: privateContext)
 
@@ -724,7 +724,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   private func saveWaterGoalForCurrentDate(baseAmount baseAmount: Double, isHotDay: Bool, isHighActivity: Bool) {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       self.waterGoal = WaterGoal.addEntity(
         date: self.date,
         baseAmount: baseAmount,

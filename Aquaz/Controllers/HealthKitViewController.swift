@@ -72,7 +72,7 @@ final class HealthKitViewController: UIViewController {
   }
   
   private func updateNumberOfIntakesInAquaz() {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       let request = NSFetchRequest(entityName: Intake.entityName)
       request.includesSubentities = false
       

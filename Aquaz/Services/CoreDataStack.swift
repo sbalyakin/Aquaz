@@ -127,18 +127,7 @@ final class CoreDataStack: NSObject {
 //    }
 //  }
 //  
-//  func inMainContextEx(callback: (NSManagedObjectContext, NSPersistentStoreCoordinator) -> Void) {
-//    // Dispatch the request to our serial queue first and then back to the context queue.
-//    // Since we set up the stack on this queue it will have succeeded or failed before
-//    // this block is executed.
-//    dispatch_async(queue) {
-//      self.mainContext.performBlock {
-//        callback(self.mainContext, self.persistentStoreCoordinator)
-//      }
-//    }
-//  }
-  
-  func inPrivateContext(callback: NSManagedObjectContext -> Void) {
+  func performOnPrivateContext(callback: NSManagedObjectContext -> Void) {
     // Dispatch the request to our serial queue first and then back to the context queue.
     // Since we set up the stack on this queue it will have succeeded or failed before
     // this block is executed.
@@ -148,18 +137,24 @@ final class CoreDataStack: NSObject {
       }
     }
   }
-  
-  func inPrivateContextEx(callback: (NSManagedObjectContext, NSPersistentStoreCoordinator) -> Void) {
+
+  func performOnPrivateContextAndWait(callback: NSManagedObjectContext -> Void) {
+    let dispatchGroup = dispatch_group_create()
+    dispatch_group_enter(dispatchGroup)
+
     // Dispatch the request to our serial queue first and then back to the context queue.
     // Since we set up the stack on this queue it will have succeeded or failed before
     // this block is executed.
     dispatch_async(queue) {
       self.privateContext.performBlock {
-        callback(self.privateContext, self.persistentStoreCoordinator)
+        callback(self.privateContext)
+        dispatch_group_leave(dispatchGroup)
       }
     }
+    
+    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
   }
-  
+
   func saveAllContexts() {
     dispatch_async(queue) {
 //      CoreDataStack.saveContext(self.mainContext)
@@ -217,16 +212,12 @@ final class CoreDataStack: NSObject {
 //    sharedInstance.inMainContext(callback)
 //  }
 //  
-//  class func inMainContextEx(callback: (NSManagedObjectContext, NSPersistentStoreCoordinator) -> Void) {
-//    sharedInstance.inMainContextEx(callback)
-//  }
-//  
-  class func inPrivateContext(callback: NSManagedObjectContext -> Void) {
-    sharedInstance.inPrivateContext(callback)
+  class func performOnPrivateContext(callback: NSManagedObjectContext -> Void) {
+    sharedInstance.performOnPrivateContext(callback)
   }
-  
-  class func inPrivateContextEx(callback: (NSManagedObjectContext, NSPersistentStoreCoordinator) -> Void) {
-    sharedInstance.inPrivateContextEx(callback)
+
+  class func performOnPrivateContextAndWait(callback: NSManagedObjectContext -> Void) {
+    sharedInstance.performOnPrivateContextAndWait(callback)
   }
-  
+
 }

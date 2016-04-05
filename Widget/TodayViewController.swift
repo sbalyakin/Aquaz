@@ -74,7 +74,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
     // It's necessary to reset the managed object context in order to finalize background tasks correctly.
-    coreDataStack.inPrivateContext { privateContext in
+    coreDataStack.performOnPrivateContext { privateContext in
       privateContext.reset()
     }
   }
@@ -100,7 +100,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
 
   private func setupNotificationsObservation() {
-    coreDataStack.inPrivateContext { privateContext in
+    coreDataStack.performOnPrivateContext { privateContext in
       NSNotificationCenter.defaultCenter().addObserver(
         self,
         selector: #selector(self.managedObjectContextDidSave(_:)),
@@ -111,7 +111,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   
   @available(iOSApplicationExtension 9.0, *)
   private func setupHeathKitSynchronization() {
-    coreDataStack.inPrivateContext { privateContext in
+    coreDataStack.performOnPrivateContext { privateContext in
       HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContext(privateContext)
     }
   }
@@ -191,7 +191,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   private func fetchData(completion: () -> ()) {
-    coreDataStack.inPrivateContext { privateContext in
+    coreDataStack.performOnPrivateContext { privateContext in
       if !Settings.sharedInstance.generalHasLaunchedOnce.value {
         CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: privateContext, saveContext: true)
       }
@@ -224,21 +224,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   private func getDrinksInfo() -> [(amount: Double, name: String, drinkType: DrinkType)] {
-    let dispatchGroup = dispatch_group_create()
-    dispatch_group_enter(dispatchGroup)
-
     var drinksInfo: [(amount: Double, name: String, drinkType: DrinkType)]!
     
-    coreDataStack.inPrivateContext { _ in
+    coreDataStack.performOnPrivateContextAndWait { _ in
       drinksInfo = [
         (amount: self.drink1.recentAmount.amount, name: self.drink1.localizedName, drinkType: self.drink1.drinkType),
         (amount: self.drink2.recentAmount.amount, name: self.drink2.localizedName, drinkType: self.drink2.drinkType),
         (amount: self.drink3.recentAmount.amount, name: self.drink3.localizedName, drinkType: self.drink3.drinkType)]
-      
-      dispatch_group_leave(dispatchGroup)
     }
-    
-    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
     
     return drinksInfo
   }
@@ -332,7 +325,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       return
     }
     
-    coreDataStack.inPrivateContext { privateContext in
+    coreDataStack.performOnPrivateContext { privateContext in
       Intake.addEntity(
         drink: drink,
         amount: drink.recentAmount.amount,

@@ -17,4 +17,16 @@ class SystemHelper {
       block()
     }
   }
+  
+  class func performBlockAsyncOnMainQueueAndWait(block: () -> ()) {
+    let dispatchGroup = dispatch_group_create()
+    dispatch_group_enter(dispatchGroup)
+    
+    dispatch_async(dispatch_get_main_queue()) {
+      block()
+      dispatch_group_leave(dispatchGroup)
+    }
+    
+    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
+  }
 }

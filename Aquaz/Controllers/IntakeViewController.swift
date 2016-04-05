@@ -53,10 +53,7 @@ class IntakeViewController: UIViewController {
   // Should be nil for add intake mode, and not nil for edit intake mode
   var intake: Intake? {
     didSet {
-      let dispatchGroup = dispatch_group_create()
-      dispatch_group_enter(dispatchGroup)
-      
-      CoreDataStack.inPrivateContext { _ in
+      CoreDataStack.performOnPrivateContextAndWait { _ in
         if let intake = self.intake {
           self.drinkType = intake.drink.drinkType
           self.drink = intake.drink
@@ -65,10 +62,7 @@ class IntakeViewController: UIViewController {
         } else {
           self.timeIsChoosen = false
         }
-        dispatch_group_leave(dispatchGroup)
       }
-      
-      dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
     }
   }
 
@@ -104,15 +98,9 @@ class IntakeViewController: UIViewController {
       return
     }
     
-    let dispatchGroup = dispatch_group_create()
-    dispatch_group_enter(dispatchGroup)
-    
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContextAndWait { privateContext in
       self.drink = Drink.fetchDrinkByType(self.drinkType, managedObjectContext: privateContext)
-      dispatch_group_leave(dispatchGroup)
     }
-    
-    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
   }
 
   private func setupUI() {
@@ -166,15 +154,9 @@ class IntakeViewController: UIViewController {
   private func getInitialAmount() -> Double {
     var amount: Double!
     
-    let dispatchGroup = dispatch_group_create()
-    dispatch_group_enter(dispatchGroup)
-
-    CoreDataStack.inPrivateContext { _ in
+    CoreDataStack.performOnPrivateContextAndWait { _ in
       amount = self.intake?.amount ?? self.drink.recentAmount.amount
-      dispatch_group_leave(dispatchGroup)
     }
-    
-    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
     
     return amount
   }
@@ -282,7 +264,7 @@ class IntakeViewController: UIViewController {
   }
   
   private func addIntake(amount amount: Double) {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       let drink = try! privateContext.existingObjectWithID(self.drink.objectID) as! Drink
       
       IntakeHelper.addIntakeWithHealthKitChecks(
@@ -302,7 +284,7 @@ class IntakeViewController: UIViewController {
   
   private func updateIntake(amount amount: Double) {
     if let intake = intake {
-      CoreDataStack.inPrivateContext { privateContext in
+      CoreDataStack.performOnPrivateContext { privateContext in
         let drink = try! privateContext.existingObjectWithID(self.drink.objectID) as! Drink
         drink.recentAmount.amount = amount
 

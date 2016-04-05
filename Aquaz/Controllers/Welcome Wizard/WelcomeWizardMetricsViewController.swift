@@ -331,7 +331,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
   }
   
   private func saveWaterGoalToCoreData() {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       WaterGoal.addEntity(
         date: NSDate(),
         baseAmount: self.dailyWaterIntakeCell.value,

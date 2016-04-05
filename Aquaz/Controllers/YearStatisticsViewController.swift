@@ -67,7 +67,7 @@ class YearStatisticsViewController: UIViewController {
       name: UIContentSizeCategoryDidChangeNotification,
       object: nil)
     
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       NSNotificationCenter.defaultCenter().addObserver(
         self,
         selector: #selector(self.managedObjectContextDidChange(_:)),
@@ -200,7 +200,7 @@ class YearStatisticsViewController: UIViewController {
   }
   
   private func updateYearStatisticsView() {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       let date = self.date
       let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate, privateContext: privateContext)
       

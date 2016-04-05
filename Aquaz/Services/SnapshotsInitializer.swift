@@ -78,7 +78,7 @@ final class SnapshotsInitializer {
   }
   
   private class func generateUserContent() {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       removeAllExistingUserData(privateContext: privateContext)
       
       coreDataPrepopulation(privateContext: privateContext)

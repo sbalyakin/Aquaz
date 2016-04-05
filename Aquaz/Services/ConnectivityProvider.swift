@@ -56,7 +56,7 @@ final class ConnectivityProvider: NSObject {
   }
   
   private func composeCurrentStateInfo(sendHandler: ([String : AnyObject]) -> Void) {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       let date = NSDate()
 
       let waterGoalAmount: Double
@@ -91,7 +91,7 @@ final class ConnectivityProvider: NSObject {
   }
 
   private func setupCoreDataSynchronization() {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       NSNotificationCenter.defaultCenter().addObserver(
         self,
         selector: #selector(self.managedObjectContextDidSave),
@@ -165,7 +165,7 @@ extension ConnectivityProvider: WCSessionDelegate {
   }
   
   private func addIntakeInfoWasReceived(message: ConnectivityMessageAddIntake) {
-    CoreDataStack.inPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       // Check for duplicates
       if let _ = Intake.fetchParticularIntake(date: message.date, drinkType: message.drinkType, amount: message.amount, managedObjectContext: privateContext) {
         Logger.logWarning("Duplicate intake from Apple Watch has been observed. The intake is ignored.")
