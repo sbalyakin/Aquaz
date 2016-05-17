@@ -1102,9 +1102,9 @@
 				84D251911AD2511E001E6644 /* Frameworks */,
 				84D251921AD2511E001E6644 /* Resources */,
 				8443DF271B29658100FDD294 /* ShellScript */,
-				A53E395B1C15B56600628103 /* ShellScript */,
 				1FA64A0ADC6EED7A863BFC8C /* 📦 Embed Pods Frameworks */,
 				94F9387BAB2F4298DFABC77F /* 📦 Copy Pods Resources */,
+				A53E395B1C15B56600628103 /* ShellScript */,
 			);
 			buildRules = (
 			);
