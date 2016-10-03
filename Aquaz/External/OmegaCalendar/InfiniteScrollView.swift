@@ -12,15 +12,15 @@ import UIKit
 
 protocol InfiniteScrollViewDataSource: class {
   
-  func infiniteScrollViewNeedsPage(index index: Int) -> UIView
+  func infiniteScrollViewNeedsPage(index: Int) -> UIView
   
 }
 
 protocol InfiniteScrollViewDelegate: class {
   
-  func infiniteScrollViewPageCanBeRemoved(index index: Int, view: UIView?)
+  func infiniteScrollViewPageCanBeRemoved(index: Int, view: UIView?)
   
-  func infiniteScrollViewPageWasSwitched(pageIndex pageIndex: Int)
+  func infiniteScrollViewPageWasSwitched(pageIndex: Int)
   
 }
 
@@ -55,9 +55,9 @@ class InfiniteScrollView: UIView {
     return 1 + sidePagesCount * 2
   }
 
-  private var scrollView: UIScrollView!
-  private var pages = [Int: UIView]()
-  private var currentIndex: Int = 0 {
+  fileprivate var scrollView: UIScrollView!
+  fileprivate var pages = [Int: UIView]()
+  fileprivate var currentIndex: Int = 0 {
     didSet {
       delegate?.infiniteScrollViewPageWasSwitched(pageIndex: currentIndex)
     }
@@ -73,11 +73,11 @@ class InfiniteScrollView: UIView {
     baseInit()
   }
   
-  private func baseInit() {
+  fileprivate func baseInit() {
     scrollView = UIScrollView()
-    scrollView.backgroundColor = UIColor.clearColor()
+    scrollView.backgroundColor = UIColor.clear
     scrollView.scrollsToTop = false
-    scrollView.pagingEnabled = true
+    scrollView.isPagingEnabled = true
     scrollView.showsHorizontalScrollIndicator = false
     scrollView.showsVerticalScrollIndicator = false
     scrollView.bounces = false
@@ -96,7 +96,7 @@ class InfiniteScrollView: UIView {
     layoutPages()
   }
   
-  func switchToIndex(index: Int, animated: Bool) {
+  func switchToIndex(_ index: Int, animated: Bool) {
     if index == currentIndex {
       return
     }
@@ -111,15 +111,15 @@ class InfiniteScrollView: UIView {
     }
   }
   
-  func switchForward(pageNumbers pageNumbers: Int, animated: Bool) {
+  func switchForward(pageNumbers: Int, animated: Bool) {
     switchToIndex(currentIndex + pageNumbers, animated: animated)
   }
   
-  func switchToNextPage(animated animated: Bool) {
+  func switchToNextPage(animated: Bool) {
     switchToIndex(currentIndex + 1, animated: animated)
   }
   
-  func switchToPreviousPage(animated animated: Bool) {
+  func switchToPreviousPage(animated: Bool) {
     switchToIndex(currentIndex - 1, animated: animated)
   }
   
@@ -133,7 +133,7 @@ class InfiniteScrollView: UIView {
     adjustContentOffsetToCurrentIndex()
   }
   
-  private func layoutPages() {
+  fileprivate func layoutPages() {
     for (index, view) in pages {
       layoutPageWithIndex(index, view: view)
     }
@@ -141,38 +141,38 @@ class InfiniteScrollView: UIView {
     adjustContentOffsetToCurrentIndex()
   }
   
-  private func layoutPageWithIndex(index: Int, view: UIView) {
+  fileprivate func layoutPageWithIndex(_ index: Int, view: UIView) {
     let origin = calcContentOffsetByIndex(index)
     let rect = CGRect(origin: origin, size: scrollView.frame.size)
     view.frame = rect
   }
 
-  private func calcContentOffsetByIndex(index: Int) -> CGPoint {
+  fileprivate func calcContentOffsetByIndex(_ index: Int) -> CGPoint {
     let offsetIndex = index - currentIndex + sidePagesCount
     return CGPoint(x: CGFloat(offsetIndex) * scrollView.frame.width, y: 0)
   }
   
-  private func adjustContentOffsetToCurrentIndex() {
+  fileprivate func adjustContentOffsetToCurrentIndex() {
     // Setting contentOffset affects calling scrollViewDidScroll, so reset scroll view's delegate temporarily to avoid that
     scrollView.delegate = nil
     scrollView.contentOffset = CGPoint(x: scrollView.frame.width * CGFloat(sidePagesCount), y: 0)
     scrollView.delegate = self
   }
   
-  private func obtainPageByIndex(index: Int) -> UIView? {
+  fileprivate func obtainPageByIndex(_ index: Int) -> UIView? {
     return dataSource?.infiniteScrollViewNeedsPage(index: index)
   }
   
-  private func calcPageIndexFromContentOffset(contentOffset: CGPoint) -> Int {
+  fileprivate func calcPageIndexFromContentOffset(_ contentOffset: CGPoint) -> Int {
     let orderIndex = Int(contentOffset.x / scrollView.frame.width)
     return orderIndex - sidePagesCount + currentIndex
   }
   
-  private func initPages() {
+  fileprivate func initPages() {
     var newPages = [Int: UIView]()
     
     for index in currentIndex - loadedSidePagesCount ... currentIndex + loadedSidePagesCount {
-      var page = pages.removeValueForKey(index)
+      var page = pages.removeValue(forKey: index)
       if page == nil {
         page = obtainPageByIndex(index)
       }
@@ -189,23 +189,23 @@ class InfiniteScrollView: UIView {
     pages = newPages
   }
   
-  private func removePages() {
+  fileprivate func removePages() {
     for (index, page) in pages {
       delegate?.infiniteScrollViewPageCanBeRemoved(index: index, view: page)
       page.removeFromSuperview()
     }
     
-    pages.removeAll(keepCapacity: false)
+    pages.removeAll(keepingCapacity: false)
   }
   
 }
 
 extension InfiniteScrollView: UIScrollViewDelegate {
 
-  func scrollViewDidScroll(scrollView: UIScrollView) {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
     var pageIndex = calcPageIndexFromContentOffset(scrollView.contentOffset)
     
-    let velocity = scrollView.panGestureRecognizer.velocityInView(scrollView).x
+    let velocity = scrollView.panGestureRecognizer.velocity(in: scrollView).x
     if velocity < 0 {
       pageIndex += 1
     }
@@ -219,7 +219,7 @@ extension InfiniteScrollView: UIScrollViewDelegate {
     }
   }
   
-  func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     let deltaIndex = Int(scrollView.contentOffset.x / scrollView.frame.width) - sidePagesCount
     
     if deltaIndex == 0 {
@@ -233,7 +233,7 @@ extension InfiniteScrollView: UIScrollViewDelegate {
     layoutPages()
   }
   
-  func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+  func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
     let deltaIndex = Int(scrollView.contentOffset.x / scrollView.frame.width) - sidePagesCount
     
     if deltaIndex == 0 {

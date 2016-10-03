@@ -9,12 +9,12 @@
 import UIKit
 
 protocol MonthStatisticsViewDataSource: class {
-  func monthStatisticsGetValuesForDateInterval(beginDate beginDate: NSDate, endDate: NSDate, calendarContentView: CalendarContentView) -> [Double]
+  func monthStatisticsGetValuesForDateInterval(beginDate: Date, endDate: Date, calendarContentView: CalendarContentView) -> [Double]
 }
 
 @IBDesignable class MonthStatisticsView: CalendarView {
   
-  @IBInspectable var dayIntakeColor: UIColor = UIColor.orangeColor()
+  @IBInspectable var dayIntakeColor: UIColor = UIColor.orange
   @IBInspectable var dayIntakeFullColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
   @IBInspectable var dayIntakeBackgroundColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 0.1)
   @IBInspectable var dayIntakeLineWidth: CGFloat = 4
@@ -32,7 +32,7 @@ protocol MonthStatisticsViewDataSource: class {
     return contentView
   }
   
-  override func createCalendarViewDaysInfoForMonth(calendarContentView calendarContentView: CalendarContentView, monthDate: NSDate) -> [CalendarViewDayInfo] {
+  override func createCalendarViewDaysInfoForMonth(calendarContentView: CalendarContentView, monthDate: Date) -> [CalendarViewDayInfo] {
     let daysInfo = CalendarViewDataSource.createCalendarViewDaysInfoForMonth(monthDate)
     
     #if TARGET_INTERFACE_BUILDER
@@ -42,10 +42,10 @@ protocol MonthStatisticsViewDataSource: class {
         }
       }
     #else
-      let startOfMonth = DateHelper.startDateFromDate(monthDate, calendarUnit: .Month)
-      let startOfNextMonth = DateHelper.addToDate(startOfMonth, years: 0, months: 1, days: 0)
+      let startOfMonth = DateHelper.startOfMonth(monthDate)
+      let startOfNextMonth = DateHelper.nextMonthFrom(startOfMonth)
       
-      if let values = dataSource?.monthStatisticsGetValuesForDateInterval(beginDate: startOfMonth, endDate: startOfNextMonth, calendarContentView: calendarContentView) where !values.isEmpty {
+      if let values = dataSource?.monthStatisticsGetValuesForDateInterval(beginDate: startOfMonth, endDate: startOfNextMonth, calendarContentView: calendarContentView) , !values.isEmpty {
         for dayInfo in daysInfo {
           if dayInfo.isCurrentMonth {
             let dayIndex = dayInfo.dayOfCurrentMonth - 1

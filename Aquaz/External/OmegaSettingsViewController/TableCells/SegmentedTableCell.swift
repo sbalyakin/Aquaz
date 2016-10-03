@@ -8,11 +8,12 @@
 
 import UIKit
 
-class SegmentedTableCell<Value: CustomStringConvertible, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>: TableCellWithValue<Value>, UISegmentedTableViewCellDelegate {
+class SegmentedTableCell<TValue: CustomStringConvertible, TCollection: Collection>: TableCellWithValue<TValue>, UISegmentedTableViewCellDelegate
+where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int {
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
   var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
-  var collection: Collection
+  var collection: TCollection
   var uiCell: UISegmentedTableViewCell?
   
   var segmentsWidth: CGFloat {
@@ -21,14 +22,14 @@ class SegmentedTableCell<Value: CustomStringConvertible, Collection: CollectionT
     }
   }
   
-  init(title: String, value: Value, collection: Collection, container: TableCellsContainer, segmentsWidth: CGFloat = 0) {
+  init(title: String, value: TValue, collection: TCollection, container: TableCellsContainer, segmentsWidth: CGFloat = 0) {
     self.title = title
     self.collection = collection
     self.segmentsWidth = segmentsWidth
     super.init(value: value, container: container)
   }
   
-  override func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  override func createUICell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     if uiCell == nil {
       let segmentTitles = collection.map { return self.stringFromValueFunction?($0) ?? $0.description }
       uiCell = UISegmentedTableViewCell(segmentTitles: segmentTitles)
@@ -47,13 +48,13 @@ class SegmentedTableCell<Value: CustomStringConvertible, Collection: CollectionT
     updateUICell()
   }
   
-  private func updateUICell() {
-    if let uiCell = uiCell, let row = collection.indexOf(value) {
+  fileprivate func updateUICell() {
+    if let uiCell = uiCell, let row = collection.index(of: value) {
       uiCell.segmentedControl.selectedSegmentIndex = row
     }
   }
   
-  func segmentedControlValueChanged(segmentedControl: UISegmentedControl, segmentIndex: Int) {
+  func segmentedControlValueChanged(_ segmentedControl: UISegmentedControl, segmentIndex: Int) {
     value = collection[segmentIndex]
     
     if !active {

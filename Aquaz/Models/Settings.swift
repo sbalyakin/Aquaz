@@ -12,76 +12,76 @@ final class Settings {
 
   static let sharedInstance = Settings()
   
-  static let userDefaults = NSUserDefaults(suiteName: GlobalConstants.appGroupName)!
+  static let userDefaults = UserDefaults(suiteName: GlobalConstants.appGroupName)!
 
   // MARK: Initializer
   
-  private init() {
+  fileprivate init() {
     // Hide initizalizer, sharedInstance should be used instead.
   }
   
   // MARK: Types
   
   enum Gender: Int, CustomStringConvertible {
-    case Man = 0
-    case Woman
-    case PregnantFemale
-    case BreastfeedingFemale
+    case man = 0
+    case woman
+    case pregnantFemale
+    case breastfeedingFemale
     
     var description: String {
       switch self {
-      case .Man: return "Man"
-      case .Woman: return "Woman"
-      case .PregnantFemale: return "Pregnant Female"
-      case .BreastfeedingFemale: return "Breastfeeding Female"
+      case .man: return "Man"
+      case .woman: return "Woman"
+      case .pregnantFemale: return "Pregnant Female"
+      case .breastfeedingFemale: return "Breastfeeding Female"
       }
     }
   }
 
   enum PhysicalActivity: Int, CustomStringConvertible {
-    case Rare = 0
-    case Occasional
-    case Weekly
-    case Daily
+    case rare = 0
+    case occasional
+    case weekly
+    case daily
     
     var description: String {
       switch self {
-      case .Rare: return "Rare"
-      case .Occasional: return "Occasional"
-      case .Weekly: return "Weekly"
-      case .Daily: return "Daily"
+      case .rare: return "Rare"
+      case .occasional: return "Occasional"
+      case .weekly: return "Weekly"
+      case .daily: return "Daily"
       }
     }
   }
   
   enum StatisticsViewPage: Int {
-    case Week = 0
-    case Month
-    case Year
+    case week = 0
+    case month
+    case year
   }
   
   enum DayPageHelpTip: Int {
-    case SwipeToChangeDay = 0
-    case SwipeToSeeDiary
-    case HighActivityMode
-    case HotWeatherMode
-    case SwitchToPercentsAndViceVersa
-    case LongPressToChooseAlcohol
+    case swipeToChangeDay = 0
+    case swipeToSeeDiary
+    case highActivityMode
+    case hotWeatherMode
+    case switchToPercentsAndViceVersa
+    case longPressToChooseAlcohol
     // It should be the last case indicating that all help tips are already shown to user
-    case None
+    case none
   }
 
   enum WeekStatisticsPageHelpTip: Int {
-    case TapToSeeDayDetails = 0
-    case SwipeToChangeWeek
+    case tapToSeeDayDetails = 0
+    case swipeToChangeWeek
     // It should be the last case indicating that all help tips are already shown to user
-    case None
+    case none
   }
 
   enum RateApplicationAlertSelection: Int {
-    case RateApplication
-    case RemindLater
-    case No
+    case rateApplication
+    case remindLater
+    case no
   }
 
   // MARK: General
@@ -91,15 +91,15 @@ final class Settings {
     userDefaults: userDefaults)
   
   lazy var generalWeightUnits: SettingsEnumItem<Units.Weight> = SettingsEnumItem(
-    key: "General - Weight units", initialValue: isMetric ? .Kilograms : .Pounds,
+    key: "General - Weight units", initialValue: isMetric ? .kilograms : .pounds,
     userDefaults: userDefaults)
   
   lazy var generalHeightUnits: SettingsEnumItem<Units.Length> = SettingsEnumItem(
-    key: "General - Height units", initialValue: isMetric ? .Centimeters : .Feet,
+    key: "General - Height units", initialValue: isMetric ? .centimeters : .feet,
     userDefaults: userDefaults)
   
   lazy var generalVolumeUnits: SettingsEnumItem<Units.Volume> = SettingsEnumItem(
-    key: "General - Volume units", initialValue: isMetric ? .Millilitres : .FluidOunces,
+    key: "General - Volume units", initialValue: isMetric ? .millilitres : .fluidOunces,
     userDefaults: userDefaults)
   
   lazy var generalHotDayExtraFactor: SettingsOrdinalItem<Double> = SettingsOrdinalItem(
@@ -132,11 +132,11 @@ final class Settings {
     userDefaults: userDefaults)
   
   lazy var userPhysicalActivity: SettingsEnumItem<PhysicalActivity> = SettingsEnumItem(
-    key: "User - Physical activity", initialValue: .Occasional,
+    key: "User - Physical activity", initialValue: .occasional,
     userDefaults: userDefaults)
   
   lazy var userGender: SettingsEnumItem<Gender> = SettingsEnumItem(
-    key: "User - Gender", initialValue: .Man,
+    key: "User - Gender", initialValue: .man,
     userDefaults: userDefaults)
   
   lazy var userAge: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
@@ -153,8 +153,8 @@ final class Settings {
     key: "UI - Use custom day page date", initialValue: false,
     userDefaults: userDefaults)
   
-  lazy var uiCustomDateForDayView: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
-    key: "UI - Day page date", initialValue: NSDate(),
+  lazy var uiCustomDateForDayView: SettingsOrdinalItem<Date> = SettingsOrdinalItem(
+    key: "UI - Day page date", initialValue: Date(),
     userDefaults: userDefaults)
 
   lazy var uiDisplayDailyWaterIntakeInPercents: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
@@ -162,16 +162,16 @@ final class Settings {
     userDefaults: userDefaults)
 
   lazy var uiSelectedStatisticsPage: SettingsEnumItem<StatisticsViewPage> = SettingsEnumItem(
-    key: "UI - Selected statistics page", initialValue: .Week,
+    key: "UI - Selected statistics page", initialValue: .week,
     userDefaults: userDefaults)
 
   lazy var uiSelectedAlcoholicDrink: SettingsEnumItem<DrinkType> = SettingsEnumItem(
-    key: "UI - Selected alcoholic drink", initialValue: .Wine,
+    key: "UI - Selected alcoholic drink", initialValue: .wine,
     userDefaults: userDefaults)
 
-  lazy var uiWaterGoalReachingIsShownForDate: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
+  lazy var uiWaterGoalReachingIsShownForDate: SettingsOrdinalItem<Date> = SettingsOrdinalItem(
     key: "UI - Water goal reaching is shown for date",
-    initialValue: DateHelper.addToDate(NSDate(), years: -1, months: 0, days: 0), // It should be any not today date
+    initialValue: DateHelper.previousYearBefore(Date()), // It should be any not today date
     userDefaults: userDefaults)
 
   lazy var uiDayPageHelpTipToShow: SettingsEnumItem<DayPageHelpTip> = SettingsEnumItem(
@@ -187,7 +187,7 @@ final class Settings {
     userDefaults: userDefaults)
 
   lazy var uiWritingReviewAlertSelection: SettingsEnumItem<RateApplicationAlertSelection> = SettingsEnumItem(
-    key: "UI - Writing review alert selection", initialValue: .RemindLater,
+    key: "UI - Writing review alert selection", initialValue: .remindLater,
     userDefaults: userDefaults)
 
   lazy var uiIntakesCountTillShowWritingReviewAlert: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
@@ -216,15 +216,15 @@ final class Settings {
     key: "Notifications - Enabled", initialValue: false,
     userDefaults: userDefaults)
   
-  lazy var notificationsFrom: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
-    key: "Notifications - From", initialValue: DateHelper.dateBySettingHour(9, minute: 0, second: 0, ofDate: NSDate()),
+  lazy var notificationsFrom: SettingsOrdinalItem<Date> = SettingsOrdinalItem(
+    key: "Notifications - From", initialValue: DateHelper.dateBySettingHour(9, minute: 0, second: 0, ofDate: Date()),
     userDefaults: userDefaults)
   
-  lazy var notificationsTo: SettingsOrdinalItem<NSDate> = SettingsOrdinalItem(
-    key: "Notifications - To", initialValue: DateHelper.dateBySettingHour(21, minute: 0, second: 0, ofDate: NSDate()),
+  lazy var notificationsTo: SettingsOrdinalItem<Date> = SettingsOrdinalItem(
+    key: "Notifications - To", initialValue: DateHelper.dateBySettingHour(21, minute: 0, second: 0, ofDate: Date()),
     userDefaults: userDefaults)
 
-  lazy var notificationsInterval: SettingsOrdinalItem<NSTimeInterval> = SettingsOrdinalItem(
+  lazy var notificationsInterval: SettingsOrdinalItem<TimeInterval> = SettingsOrdinalItem(
     key: "Notifications - Interval", initialValue: 60 * 60 * 1.5,
     userDefaults: userDefaults)
   
@@ -242,15 +242,15 @@ final class Settings {
 
   // MARK: Setting items for Apple Watch
   
-  func getExportedSettingsForWatchApp() -> [String: AnyObject] {
-    var exportedSettings = [String: AnyObject]()
+  func getExportedSettingsForWatchApp() -> [String: Any] {
+    var exportedSettings = [String: Any]()
     
     addSettingItemToDictionary(dictionary: &exportedSettings, settingItem: generalVolumeUnits)
     
     return exportedSettings
   }
   
-  private func addSettingItemToDictionary<T>(inout dictionary dictionary: [String: AnyObject], settingItem: SettingsItemBase<T>) {
+  fileprivate func addSettingItemToDictionary<T>(dictionary: inout [String: Any], settingItem: SettingsItemBase<T>) {
     if let pair = settingItem.keyValuePair {
       dictionary[pair.key] = pair.value
     }
@@ -258,8 +258,8 @@ final class Settings {
   
   // MARK: Helpers
   
-  private class var isMetric: Bool {
-    return NSLocale.currentLocale().objectForKey(NSLocaleUsesMetricSystem)! as! Bool
+  fileprivate class var isMetric: Bool {
+    return (Locale.current as NSLocale).object(forKey: NSLocale.Key.usesMetricSystem)! as! Bool
   }
 
   class func calcUserDailyWaterIntakeSetting() -> Double {

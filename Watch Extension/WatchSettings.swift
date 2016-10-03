@@ -12,7 +12,7 @@ final class WatchSettings {
   
   static let sharedInstance = WatchSettings()
   
-  static let userDefaults = NSUserDefaults(suiteName: GlobalConstants.appGroupName)!
+  static let userDefaults = UserDefaults(suiteName: GlobalConstants.appGroupName)!
   
   // MARK: Types
   
@@ -20,9 +20,9 @@ final class WatchSettings {
     
     typealias SettingsType = SettingsOrdinalItem<Double>
     
-    private var settingsItems = [SettingsType]()
+    fileprivate var settingsItems = [SettingsType]()
     
-    private init() {
+    fileprivate init() {
       for index in 0..<DrinkType.count {
         let key = "Recent amount - Drink \(index)"
         let settingsItem = SettingsType(key: key, initialValue: 250, userDefaults: WatchSettings.userDefaults)
@@ -38,15 +38,15 @@ final class WatchSettings {
   // MARK: General
   
   lazy var generalWeightUnits: SettingsEnumItem<Units.Weight> = SettingsEnumItem(
-    key: "General - Weight units", initialValue: isMetric ? .Kilograms : .Pounds,
+    key: "General - Weight units", initialValue: isMetric ? .kilograms : .pounds,
     userDefaults: userDefaults)
   
   lazy var generalHeightUnits: SettingsEnumItem<Units.Length> = SettingsEnumItem(
-    key: "General - Height units", initialValue: isMetric ? .Centimeters : .Feet,
+    key: "General - Height units", initialValue: isMetric ? .centimeters : .feet,
     userDefaults: userDefaults)
   
   lazy var generalVolumeUnits: SettingsEnumItem<Units.Volume> = SettingsEnumItem(
-    key: "General - Volume units", initialValue: isMetric ? .Millilitres : .FluidOunces,
+    key: "General - Volume units", initialValue: isMetric ? .millilitres : .fluidOunces,
     userDefaults: userDefaults)
 
   // MARK: Current state
@@ -59,28 +59,28 @@ final class WatchSettings {
     key: "State - Hydration", initialValue: 0,
     userDefaults: userDefaults)
   
-  lazy var stateCurrentDate = SettingsOrdinalItem<NSDate>(
-    key: "State - Current Date", initialValue: DateHelper.dateByClearingTime(ofDate: NSDate()),
+  lazy var stateCurrentDate = SettingsOrdinalItem<Date>(
+    key: "State - Current Date", initialValue: DateHelper.startOfDay(Date()),
     userDefaults: userDefaults)
   
   // MARK: Intake parameters
   
   lazy var recentDrinkType = SettingsEnumItem<DrinkType>(
-    key: "State - Recent Drink Type", initialValue: .Water,
+    key: "State - Recent Drink Type", initialValue: .water,
     userDefaults: userDefaults)
   
   lazy var recentAmounts = RecentDrinkAmounts()
 
   // MARK: Initializer
   
-  private init() {
+  fileprivate init() {
     // Hide initizalizer, sharedInstance should be used instead.
   }
   
   // MARK: Helpers
   
-  private class var isMetric: Bool {
-    return NSLocale.currentLocale().objectForKey(NSLocaleUsesMetricSystem)! as! Bool
+  fileprivate class var isMetric: Bool {
+    return (Locale.current as NSLocale).object(forKey: NSLocale.Key.usesMetricSystem)! as! Bool
   }
   
 }

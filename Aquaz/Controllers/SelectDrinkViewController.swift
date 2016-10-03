@@ -13,19 +13,19 @@ class SelectDrinkViewController: UIViewController {
   
   @IBOutlet weak var collectionView: UICollectionView!
 
-  var date: NSDate!
+  var date: Date!
   
-  private let columnsCount = 3
-  private var rowsCount = 0
+  fileprivate let columnsCount = 3
+  fileprivate var rowsCount = 0
   
-  private lazy var popupViewManager: SelectDrinkPopupViewManager = SelectDrinkPopupViewManager(selectDrinkViewController: self)
+  fileprivate lazy var popupViewManager: SelectDrinkPopupViewManager = SelectDrinkPopupViewManager(selectDrinkViewController: self)
 
-  private var displayedDrinkTypes: [DrinkType] = [
-    .Water, .Tea,    .Coffee,
-    .Milk,  .Juice,  .Sport,
-    .Soda,  .Energy, Settings.sharedInstance.uiSelectedAlcoholicDrink.value]
+  fileprivate var displayedDrinkTypes: [DrinkType] = [
+    .water, .tea,    .coffee,
+    .milk,  .juice,  .sport,
+    .soda,  .energy, Settings.sharedInstance.uiSelectedAlcoholicDrink.value]
   
-  private struct Constants {
+  fileprivate struct Constants {
     static let addIntakeSegue = "Add Intake"
   }
   
@@ -38,19 +38,19 @@ class SelectDrinkViewController: UIViewController {
   }
   
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
 
-  private func setupUI() {
+  fileprivate func setupUI() {
     UIHelper.applyStyleToViewController(self)
     
     let nib = UINib(nibName: drinkCellNibName, bundle: nil)
-    collectionView.registerNib(nib, forCellWithReuseIdentifier: drinkCellReuseIdentifier)
+    collectionView.register(nib, forCellWithReuseIdentifier: drinkCellReuseIdentifier)
     
     rowsCount = Int(ceil(Float(displayedDrinkTypes.count) / Float(columnsCount)))
   }
   
-  private func setupGestureRecognizers() {
+  fileprivate func setupGestureRecognizers() {
     let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleDrinkCellLongPress(_:)))
     longPressGestureRecognizer.minimumPressDuration = 0.5
     longPressGestureRecognizer.cancelsTouchesInView = false
@@ -61,11 +61,11 @@ class SelectDrinkViewController: UIViewController {
     collectionView.addGestureRecognizer(tapGestureRecognizer)
   }
 
-  private func setupNotificationsObservation() {
-    NSNotificationCenter.defaultCenter().addObserver(
+  fileprivate func setupNotificationsObservation() {
+    NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: UIContentSizeCategoryDidChangeNotification,
+      name: NSNotification.Name.UIContentSizeCategoryDidChange,
       object: nil)
   }
   
@@ -73,51 +73,51 @@ class SelectDrinkViewController: UIViewController {
     collectionView.reloadData()
   }
   
-  private func changeAlcoholicDrinkTo(drinkType drinkType: DrinkType) {
+  fileprivate func changeAlcoholicDrinkTo(drinkType: DrinkType) {
     displayedDrinkTypes[displayedDrinkTypes.count - 1] = drinkType
     Settings.sharedInstance.uiSelectedAlcoholicDrink.value = drinkType
     
     collectionView.performBatchUpdates( {
-      self.collectionView.reloadSections(NSIndexSet(index: 0))
+      self.collectionView.reloadSections(IndexSet(integer: 0))
       },
       completion: { _ in
-        let indexPath = NSIndexPath(forRow: self.displayedDrinkTypes.count - 1, inSection: 0)
+        let indexPath = IndexPath(row: self.displayedDrinkTypes.count - 1, section: 0)
         
-        if let cell = self.collectionView.cellForItemAtIndexPath(indexPath) {
-          self.performSegueWithIdentifier(Constants.addIntakeSegue, sender: cell)
+        if let cell = self.collectionView.cellForItem(at: indexPath) {
+          self.performSegue(withIdentifier: Constants.addIntakeSegue, sender: cell)
         }
       })
   }
   
-  func handleDrinkCellLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
+  func handleDrinkCellLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
     switch gestureRecognizer.state {
-    case .Began:
+    case .began:
       handleLongPressBegin(gestureRecognizer)
       
-    case .Changed:
+    case .changed:
       popupViewManager.handleLongPressChanged(gestureRecognizer)
       
-    case .Ended:
+    case .ended:
       popupViewManager.handleLongPressEnded(gestureRecognizer)
       
     default: break
     }
   }
   
-  private func handleLongPressBegin(gestureRecognizer: UIGestureRecognizer) {
-    let pointInCollectionView = gestureRecognizer.locationInView(collectionView)
-    let pointInScreen = gestureRecognizer.locationInView(navigationController!.view)
+  fileprivate func handleLongPressBegin(_ gestureRecognizer: UIGestureRecognizer) {
+    let pointInCollectionView = gestureRecognizer.location(in: collectionView)
+    let pointInScreen = gestureRecognizer.location(in: navigationController!.view)
     
-    if let indexPath = collectionView.indexPathForItemAtPoint(pointInCollectionView) {
-      let drinkIndex = indexPath.row
+    if let indexPath = collectionView.indexPathForItem(at: pointInCollectionView) {
+      let drinkIndex = (indexPath as NSIndexPath).row
       if drinkIndex != displayedDrinkTypes.count - 1 {
         return
       }
       
-      if let cell = collectionView.cellForItemAtIndexPath(indexPath) {
+      if let cell = collectionView.cellForItem(at: indexPath) {
         var rect = CGRect(x: cell.frame.minX, y: 0, width: cell.frame.width, height: collectionView.bounds.height)
-        rect.insetInPlace(dx: -popupViewManager.padding, dy: -popupViewManager.padding)
-        rect = collectionView.convertRect(rect, toView: navigationController!.view)
+        rect = rect.insetBy(dx: -popupViewManager.padding, dy: -popupViewManager.padding)
+        rect = collectionView.convert(rect, to: navigationController!.view)
         let dy = rect.height / 3
         rect.size.height -= dy
         rect.origin.y += dy - cell.frame.height
@@ -129,31 +129,31 @@ class SelectDrinkViewController: UIViewController {
     }
   }
   
-  func handleDrinkCellTap(gestureRecognizer: UIGestureRecognizer) {
+  func handleDrinkCellTap(_ gestureRecognizer: UIGestureRecognizer) {
     if popupViewManager.popupIsShown {
       return
     }
     
-    if gestureRecognizer.state != .Ended {
+    if gestureRecognizer.state != .ended {
       return
     }
 
-    let pointInCollectionView = gestureRecognizer.locationInView(collectionView)
+    let pointInCollectionView = gestureRecognizer.location(in: collectionView)
     
-    if let indexPath = collectionView.indexPathForItemAtPoint(pointInCollectionView),
-       let cell = collectionView.cellForItemAtIndexPath(indexPath)
+    if let indexPath = collectionView.indexPathForItem(at: pointInCollectionView),
+       let cell = collectionView.cellForItem(at: indexPath)
     {
-      performSegueWithIdentifier(Constants.addIntakeSegue, sender: cell)
+      performSegue(withIdentifier: Constants.addIntakeSegue, sender: cell)
     }
   }
 
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Constants.addIntakeSegue,
-      let intakeViewController = segue.destinationViewController.contentViewController as? IntakeViewController,
+      let intakeViewController = segue.destination.contentViewController as? IntakeViewController,
       let cell = sender as? DrinkCollectionViewCell
     {
       intakeViewController.drinkType = cell.drinkView.drinkType
-      intakeViewController.date = DateHelper.dateByJoiningDateTime(datePart: date, timePart: NSDate())
+      intakeViewController.date = DateHelper.dateByJoiningDateTime(datePart: date, timePart: Date())
     } else {
       Logger.logError("An error occured on preparing segue for showing Intake scene from Select Drink scene")
     }
@@ -168,25 +168,25 @@ class SelectDrinkViewController: UIViewController {
 
 extension SelectDrinkViewController: UICollectionViewDataSource {
   
-  func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
   }
   
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return displayedDrinkTypes.count
   }
   
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(drinkCellReuseIdentifier, forIndexPath: indexPath) as! DrinkCollectionViewCell
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: drinkCellReuseIdentifier, for: indexPath) as! DrinkCollectionViewCell
     
-    let drinkIndex = indexPath.row
+    let drinkIndex = (indexPath as NSIndexPath).row
     assert(drinkIndex < displayedDrinkTypes.count)
     
     let drinkType = displayedDrinkTypes[drinkIndex]
     
     cell.backgroundColor = StyleKit.pageBackgroundColor
     cell.drinkLabel.text = drinkType.localizedName
-    cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
+    cell.drinkLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)
     cell.drinkView.drinkType = drinkType
     cell.drinkView.isGroup = drinkIndex == displayedDrinkTypes.count - 1
     cell.invalidateIntrinsicContentSize()
@@ -198,7 +198,7 @@ extension SelectDrinkViewController: UICollectionViewDataSource {
 
 extension SelectDrinkViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
   
-  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let layout = collectionViewLayout as! UICollectionViewFlowLayout
     let contentWidth = collectionView.bounds.width - layout.minimumInteritemSpacing * CGFloat(columnsCount - 1)
     let contentHeight = collectionView.bounds.height - layout.minimumLineSpacing * CGFloat(rowsCount - 1)
@@ -212,16 +212,16 @@ extension SelectDrinkViewController: UICollectionViewDelegate, UICollectionViewD
 
 class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
   
-  private var window: UIWindow!
-  private var popupView: UIView!
-  private var popupCollectionView: UICollectionView!
+  fileprivate var window: UIWindow!
+  fileprivate var popupView: UIView!
+  fileprivate var popupCollectionView: UICollectionView!
   
-  private let popupDrinkTypes: [DrinkType] = [ .Beer, .Wine, .HardLiquor ]
-  private weak var selectDrinkViewController: SelectDrinkViewController!
+  fileprivate let popupDrinkTypes: [DrinkType] = [ .beer, .wine, .hardLiquor ]
+  fileprivate weak var selectDrinkViewController: SelectDrinkViewController!
 
-  private let columnsCount = 1
-  private var rowsCount = 3
-  private let padding: CGFloat = 10
+  fileprivate let columnsCount = 1
+  fileprivate var rowsCount = 3
+  fileprivate let padding: CGFloat = 10
 
   var popupIsShown: Bool {
     return popupView != nil
@@ -232,11 +232,11 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     super.init()
   }
   
-  func showPopupView(frame frame: CGRect) {
-    NSNotificationCenter.defaultCenter().addObserver(
+  func showPopupView(frame: CGRect) {
+    NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: UIContentSizeCategoryDidChangeNotification,
+      name: NSNotification.Name.UIContentSizeCategoryDidChange,
       object: nil)
 
     cleanPopupView()
@@ -258,16 +258,16 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
 
     popupCollectionView = UICollectionView(frame: collectionViewRect, collectionViewLayout: layout)
-    popupCollectionView.backgroundColor = UIColor.clearColor()
+    popupCollectionView.backgroundColor = UIColor.clear
     popupCollectionView.delegate = self
     popupCollectionView.dataSource = self
     
     let nib = UINib(nibName: drinkCellNibName, bundle: nil)
-    popupCollectionView.registerNib(nib, forCellWithReuseIdentifier: drinkCellReuseIdentifier)
+    popupCollectionView.register(nib, forCellWithReuseIdentifier: drinkCellReuseIdentifier)
     
     backgroundView.addSubview(popupCollectionView)
     
-    popupView = UIView(frame: UIScreen.mainScreen().bounds)
+    popupView = UIView(frame: UIScreen.main.bounds)
     popupView.backgroundColor = UIColor(white: 0, alpha: 0.3)
     popupView.addSubview(backgroundView)
     popupView.alpha = 0
@@ -280,22 +280,22 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     panGestureRecognizer.maximumNumberOfTouches = 1
     popupView.addGestureRecognizer(panGestureRecognizer)
     
-    window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    window = UIWindow(frame: UIScreen.main.bounds)
     window.windowLevel = UIWindowLevelAlert
-    window.opaque = false
+    window.isOpaque = false
     window.addSubview(popupView)
     window.makeKeyAndVisible()
     
-    UIView.animateWithDuration(0.3, animations: {
+    UIView.animate(withDuration: 0.3, animations: {
       self.popupView.alpha = 1.0
     })
   }
   
-  private func hidePopupView() {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+  fileprivate func hidePopupView() {
+    NotificationCenter.default.removeObserver(self)
 
     if window != nil {
-      UIView.animateWithDuration(0.3,
+      UIView.animate(withDuration: 0.3,
         animations: {
         self.popupView.alpha = 0
         },
@@ -306,7 +306,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     }
   }
   
-  private func cleanPopupView() {
+  fileprivate func cleanPopupView() {
     window = nil
     popupCollectionView = nil
     popupView = nil
@@ -316,25 +316,25 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     popupCollectionView.reloadData()
   }
 
-  func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
   }
   
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return popupDrinkTypes.count
   }
   
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(drinkCellReuseIdentifier, forIndexPath: indexPath) as! DrinkCollectionViewCell
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: drinkCellReuseIdentifier, for: indexPath) as! DrinkCollectionViewCell
     
-    let drinkIndex = indexPath.row
+    let drinkIndex = (indexPath as NSIndexPath).row
     assert(drinkIndex < popupDrinkTypes.count)
     
     let drinkType = popupDrinkTypes[drinkIndex]
     
     cell.backgroundColor = StyleKit.pageBackgroundColor
     cell.drinkLabel.text = drinkType.localizedName
-    cell.drinkLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
+    cell.drinkLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)
     cell.drinkView.drinkType = drinkType
     cell.drinkView.isGroup = false
     cell.invalidateIntrinsicContentSize()
@@ -342,75 +342,75 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     return cell
   }
   
-  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     popupCellIsSelected(indexPath: indexPath)
   }
   
-  private func popupCellIsSelected(indexPath indexPath: NSIndexPath) {
+  fileprivate func popupCellIsSelected(indexPath: IndexPath) {
     hidePopupView()
     
-    let drinkIndex = indexPath.row
+    let drinkIndex = (indexPath as NSIndexPath).row
     assert(drinkIndex < popupDrinkTypes.count)
     let drinkType = popupDrinkTypes[drinkIndex]
     
     selectDrinkViewController.changeAlcoholicDrinkTo(drinkType: drinkType)
   }
   
-  func handlePopupViewTap(gestureRecognizer: UIGestureRecognizer) {
+  func handlePopupViewTap(_ gestureRecognizer: UIGestureRecognizer) {
     if popupCollectionView == nil {
       return
     }
     
-    let pointInCollectionView = gestureRecognizer.locationInView(popupCollectionView)
-    if let indexPath = popupCollectionView.indexPathForItemAtPoint(pointInCollectionView) {
+    let pointInCollectionView = gestureRecognizer.location(in: popupCollectionView)
+    if let indexPath = popupCollectionView.indexPathForItem(at: pointInCollectionView) {
       popupCellIsSelected(indexPath: indexPath)
     } else {
       hidePopupView()
     }
   }
   
-  func handlePopupViewPan(gestureRecognizer: UIGestureRecognizer) {
+  func handlePopupViewPan(_ gestureRecognizer: UIGestureRecognizer) {
     switch gestureRecognizer.state {
-    case .Changed:
+    case .changed:
       handleLongPressChanged(gestureRecognizer)
       
-    case .Ended:
+    case .ended:
       handleLongPressEnded(gestureRecognizer)
       
     default: break
     }
   }
   
-  func handleLongPressChanged(gestureRecognizer: UIGestureRecognizer) {
+  func handleLongPressChanged(_ gestureRecognizer: UIGestureRecognizer) {
     if popupCollectionView == nil {
       return
     }
 
-    for visibleCell in popupCollectionView.visibleCells() {
-      visibleCell.highlighted = false
+    for visibleCell in popupCollectionView.visibleCells {
+      visibleCell.isHighlighted = false
       visibleCell.setNeedsDisplay()
     }
 
-    let pointInCollectionView = gestureRecognizer.locationInView(popupCollectionView)
-    if let indexPath = popupCollectionView.indexPathForItemAtPoint(pointInCollectionView) {
-      if let cell = popupCollectionView.cellForItemAtIndexPath(indexPath) {
-        cell.highlighted = true
+    let pointInCollectionView = gestureRecognizer.location(in: popupCollectionView)
+    if let indexPath = popupCollectionView.indexPathForItem(at: pointInCollectionView) {
+      if let cell = popupCollectionView.cellForItem(at: indexPath) {
+        cell.isHighlighted = true
         cell.setNeedsDisplay()
       }
       
-      if gestureRecognizer.state == .Ended {
+      if gestureRecognizer.state == .ended {
         popupCellIsSelected(indexPath: indexPath)
       }
     }
   }
   
-  func handleLongPressEnded(gestureRecognizer: UIGestureRecognizer) {
+  func handleLongPressEnded(_ gestureRecognizer: UIGestureRecognizer) {
     if popupCollectionView == nil {
       return
     }
     
-    let pointInCollectionView = gestureRecognizer.locationInView(popupCollectionView)
-    if let indexPath = popupCollectionView.indexPathForItemAtPoint(pointInCollectionView) {
+    let pointInCollectionView = gestureRecognizer.location(in: popupCollectionView)
+    if let indexPath = popupCollectionView.indexPathForItem(at: pointInCollectionView) {
       popupCellIsSelected(indexPath: indexPath)
     }
   }

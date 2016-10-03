@@ -22,15 +22,15 @@ final class MainInterfaceController: CurrentStateInterfaceController {
     return WKInterfaceDevice.currentResolution().fontSizes
   }
 
-  override func handleActionWithIdentifier(identifier: String?, forLocalNotification localNotification: UILocalNotification) {
+  override func handleAction(withIdentifier identifier: String?, for localNotification: UILocalNotification) {
     if identifier == "addIntakeAction" {
-      pushControllerWithName("DrinksInterfaceController", context: nil)
+      pushController(withName: "DrinksInterfaceController", context: nil)
     }
   }
   
-  override func handleActionWithIdentifier(identifier: String?, forRemoteNotification remoteNotification: [NSObject : AnyObject]) {
+  override func handleAction(withIdentifier identifier: String?, forRemoteNotification remoteNotification: [AnyHashable: Any]) {
     if identifier == "addIntakeAction" {
-      pushControllerWithName("DrinksInterfaceController", context: nil)
+      pushController(withName: "DrinksInterfaceController", context: nil)
     }
   }
 }
@@ -41,17 +41,17 @@ private extension WatchResolution {
   
   var progressImageSize: CGSize {
     switch self {
-    case .Watch38mm: return CGSize(width: 109, height: 109)
-    case .Watch42mm: return CGSize(width: 132, height: 132)
-    case .Unknown:   return CGSize(width: 132, height: 132)
+    case .watch38mm: return CGSize(width: 109, height: 109)
+    case .watch42mm: return CGSize(width: 132, height: 132)
+    case .unknown:   return CGSize(width: 132, height: 132)
     }
   }
   
   var fontSizes: (title: CGFloat, upTitle: CGFloat, subTitle: CGFloat) {
     switch self {
-    case .Watch38mm: return (title: 28, upTitle: 13, subTitle: 13)
-    case .Watch42mm: return (title: 34, upTitle: 16, subTitle: 16)
-    case .Unknown:   return (title: 34, upTitle: 16, subTitle: 16)
+    case .watch38mm: return (title: 28, upTitle: 13, subTitle: 13)
+    case .watch42mm: return (title: 34, upTitle: 16, subTitle: 16)
+    case .unknown:   return (title: 34, upTitle: 16, subTitle: 16)
     }
   }
   

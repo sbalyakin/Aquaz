@@ -12,9 +12,9 @@ import XCTest
 
 class SettingsTests: XCTestCase {
   
-  lazy var userDefaults: NSUserDefaults = NSUserDefaults(suiteName: "SettingsTests")!
+  lazy var userDefaults: UserDefaults = UserDefaults(suiteName: "SettingsTests")!
   
-  func testOrdinalItem<T: Equatable>(key key: String, initialValue: T, testValue: T) {
+  func testOrdinalItem<T: Equatable>(key: String, initialValue: T, testValue: T) {
     let settingItem = SettingsOrdinalItem<T>(key: key, initialValue: initialValue, userDefaults: userDefaults)
     settingItem.removeFromUserDefaults()
     XCTAssert(settingItem.value == initialValue, "\(key) setting item is unproperly initialized with value \(initialValue)")
@@ -59,24 +59,24 @@ class SettingsTests: XCTestCase {
   
   func testNSDate() {
     for _ in 0..<100 {
-      testOrdinalItem(key: "NSDate", initialValue: NSDate(), testValue: NSDate(timeIntervalSinceNow: 60 * 60 * 24))
+      testOrdinalItem(key: "NSDate", initialValue: Date(), testValue: Date(timeIntervalSinceNow: 60 * 60 * 24))
     }
   }
   
   func testEnumSettings() {
     enum TestEnum: Int {
-      case One = 0
-      case Two
-      case Three
+      case one = 0
+      case two
+      case three
     }
     
     let key = "TestEnum"
-    let initialValue: TestEnum = .Two
+    let initialValue: TestEnum = .two
     let settingItem = SettingsEnumItem<TestEnum>(key: key, initialValue: initialValue, userDefaults: userDefaults)
     settingItem.removeFromUserDefaults()
     XCTAssert(settingItem.value == initialValue, "\(key) setting item is unproperly initialized with value \(initialValue)")
     
-    let testValue: TestEnum = .Three
+    let testValue: TestEnum = .three
     settingItem.value = testValue
     XCTAssert(settingItem.value == testValue, "\(key) setting item has an error with setting a value (\(testValue))")
     

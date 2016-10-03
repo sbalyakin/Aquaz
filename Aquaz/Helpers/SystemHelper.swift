@@ -10,23 +10,23 @@ import Foundation
 
 class SystemHelper {
   
-  class func executeBlockWithDelay(delay: NSTimeInterval, block: () -> ()) {
-    let executeTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * NSTimeInterval(NSEC_PER_SEC)));
+  class func executeBlockWithDelay(_ delay: TimeInterval, block: @escaping () -> ()) {
+    let executeTime = DispatchTime.now() + Double(Int64(delay * TimeInterval(NSEC_PER_SEC))) / Double(NSEC_PER_SEC);
     
-    dispatch_after(executeTime, dispatch_get_main_queue()) {
+    DispatchQueue.main.asyncAfter(deadline: executeTime) {
       block()
     }
   }
   
-  class func performBlockAsyncOnMainQueueAndWait(block: () -> ()) {
-    let dispatchGroup = dispatch_group_create()
-    dispatch_group_enter(dispatchGroup)
+  class func performBlockAsyncOnMainQueueAndWait(_ block: @escaping () -> ()) {
+    let dispatchGroup = DispatchGroup()
+    dispatchGroup.enter()
     
-    dispatch_async(dispatch_get_main_queue()) {
+    DispatchQueue.main.async {
       block()
-      dispatch_group_leave(dispatchGroup)
+      dispatchGroup.leave()
     }
     
-    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
+    _ = dispatchGroup.wait(timeout: DispatchTime.distantFuture)
   }
 }

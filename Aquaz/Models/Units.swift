@@ -11,15 +11,15 @@ import Foundation
 class Units {
   
   enum Volume: Int, CustomStringConvertible {
-    case Millilitres = 0
-    case FluidOunces
+    case millilitres = 0
+    case fluidOunces
     
-    static let metric = Millilitres
+    static let metric = millilitres
     
     var unit: Unit {
       switch self {
-      case Millilitres: return MilliliterUnit()
-      case FluidOunces: return FluidOunceUnit()
+      case .millilitres: return MilliliterUnit()
+      case .fluidOunces: return FluidOunceUnit()
       }
     }
     
@@ -29,15 +29,15 @@ class Units {
   }
   
   enum Weight: Int, CustomStringConvertible {
-    case Kilograms = 0
-    case Pounds
+    case kilograms = 0
+    case pounds
 
-    static let metric = Kilograms
+    static let metric = kilograms
 
     var unit: Unit {
       switch self {
-      case Kilograms: return KilogramUnit()
-      case Pounds: return PoundUnit()
+      case .kilograms: return KilogramUnit()
+      case .pounds: return PoundUnit()
       }
     }
     
@@ -47,15 +47,15 @@ class Units {
   }
   
   enum Length: Int, CustomStringConvertible {
-    case Centimeters = 0
-    case Feet
+    case centimeters = 0
+    case feet
     
-    static let metric = Centimeters
+    static let metric = centimeters
     
     var unit: Unit {
       switch self {
-      case Centimeters: return CentimeterUnit()
-      case Feet: return FootUnit()
+      case .centimeters: return CentimeterUnit()
+      case .feet: return FootUnit()
       }
     }
     
@@ -69,7 +69,7 @@ class Units {
   /// Prepares specified amount for storing into Core Data. It converts metric units of amount to current units from settings.
   /// Then it rounds converted amount and makes reverse conversion to metric units.
   /// This methods allows getting amount equals to formatted amount (formatAmountToText) but represented in metric units.
-  func adjustMetricAmountForStoring(metricAmount metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1) -> Double {
+  func adjustMetricAmountForStoring(metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1) -> Double {
     if roundPrecision <= 0 {
       assert(false, "Round precision should be positive number")
       return 0
@@ -82,7 +82,7 @@ class Units {
     return metricQuantity.amount
   }
   
-  func convertMetricAmountToDisplayed(metricAmount metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1) -> Double {
+  func convertMetricAmountToDisplayed(metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1) -> Double {
     if roundPrecision <= 0 {
       assert(false, "Round precision should be positive number")
       return 0
@@ -97,7 +97,7 @@ class Units {
   /// Returns specified amount as formatted string taking into account current units settings.
   /// Amount should be specified in metric units.
   /// It's possible to specify final precision and numbers of decimals of formatted text.
-  func formatMetricAmountToText(metricAmount metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1, decimals: Int = 0, displayUnits: Bool = true) -> String {
+  func formatMetricAmountToText(metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1, decimals: Int = 0, displayUnits: Bool = true) -> String {
     if roundPrecision <= 0 {
       assert(false, "Round precision should be positive number")
       return ""
@@ -109,15 +109,15 @@ class Units {
     return quantity.getDescription(decimals, displayUnits: displayUnits)
   }
   
-  private func getUnits(unitType: UnitType) -> (metricUnit: Unit, displayedUnit: Unit) {
+  fileprivate func getUnits(_ unitType: UnitType) -> (metricUnit: Unit, displayedUnit: Unit) {
     switch unitType {
-    case .Length:
+    case .length:
       return (metricUnit: Length.metric.unit, displayedUnit: Length.settings.unit)
       
-    case .Volume:
+    case .volume:
       return (metricUnit: Volume.metric.unit, displayedUnit: Volume.settings.unit)
       
-    case .Weight:
+    case .weight:
       return (metricUnit: Weight.metric.unit, displayedUnit: Weight.settings.unit)
     }
   }

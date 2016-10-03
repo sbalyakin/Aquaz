@@ -10,15 +10,15 @@ import UIKit
 
 protocol WeekStatisticsViewDataSource: class {
   
-  func weekStatisticsViewIsFutureDay(dayIndex: Int) -> Bool
-  func weekStatisticsViewIsToday(dayIndex: Int) -> Bool
-  func weekStatisticsViewGetTitleForValue(value: CGFloat) -> String
+  func weekStatisticsViewIsFutureDay(_ dayIndex: Int) -> Bool
+  func weekStatisticsViewIsToday(_ dayIndex: Int) -> Bool
+  func weekStatisticsViewGetTitleForValue(_ value: CGFloat) -> String
   
 }
 
 protocol WeekStatisticsViewDelegate: class {
   
-  func weekStatisticsViewDaySelected(dayIndex: Int)
+  func weekStatisticsViewDaySelected(_ dayIndex: Int)
   
 }
 
@@ -28,25 +28,25 @@ protocol WeekStatisticsViewDelegate: class {
   @IBInspectable var barsColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
   @IBInspectable var goalLineColor: UIColor = UIColor(red: 239/255, green: 64/255, blue: 79/255, alpha: 0.5)
   @IBInspectable var scaleColor: UIColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
-  @IBInspectable var daysColor: UIColor = UIColor.darkGrayColor()
-  @IBInspectable var daysBackground: UIColor = UIColor.whiteColor()
-  @IBInspectable var daysFont: UIFont = UIFont.systemFontOfSize(12) {
+  @IBInspectable var daysColor: UIColor = UIColor.darkGray
+  @IBInspectable var daysBackground: UIColor = UIColor.white
+  @IBInspectable var daysFont: UIFont = UIFont.systemFont(ofSize: 12) {
     didSet {
       createButtons()
       setNeedsLayout()
     }
   }
-  @IBInspectable var todayColor: UIColor = UIColor.darkGrayColor()
-  @IBInspectable var todayBackground: UIColor = UIColor.whiteColor()
-  @IBInspectable var futureDaysColor: UIColor = UIColor.darkGrayColor().colorWithAlphaComponent(0.7)
-  @IBInspectable var futureDaysBackground: UIColor = UIColor.clearColor()
+  @IBInspectable var todayColor: UIColor = UIColor.darkGray
+  @IBInspectable var todayBackground: UIColor = UIColor.white
+  @IBInspectable var futureDaysColor: UIColor = UIColor.darkGray.withAlphaComponent(0.7)
+  @IBInspectable var futureDaysBackground: UIColor = UIColor.clear
   @IBInspectable var barCornerRadius: CGFloat = 2
   @IBInspectable var barWidthFraction: CGFloat = 0.4
   @IBInspectable var scaleLabelsCount: Int = 2
   @IBInspectable var scaleMargin: CGFloat = 6
   @IBInspectable var dayButtonsTopMargin: CGFloat = 10
   @IBInspectable var horizontalMargin: CGFloat = 0
-  @IBInspectable var titleFont: UIFont = UIFont.systemFontOfSize(12) {
+  @IBInspectable var titleFont: UIFont = UIFont.systemFont(ofSize: 12) {
     didSet {
       titleLabel?.font = titleFont
       setNeedsLayout()
@@ -56,33 +56,33 @@ protocol WeekStatisticsViewDelegate: class {
   
   override var backgroundColor: UIColor? {
     didSet {
-      if let backgroundColor = backgroundColor where !backgroundColor.isClearColor() {
-        titleLabel?.backgroundColor = backgroundColor.colorWithAlphaComponent(0.7)
+      if let backgroundColor = backgroundColor , !backgroundColor.isClearColor() {
+        titleLabel?.backgroundColor = backgroundColor.withAlphaComponent(0.7)
       }
     }
   }
 
   var animationDuration = 0.4
-  let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.Weekday).length
+  let daysPerWeek: Int = DateHelper.daysPerWeek()
   
   weak var delegate: WeekStatisticsViewDelegate?
   weak var dataSource: WeekStatisticsViewDataSource?
 
   typealias ItemType = (value: CGFloat, goal: CGFloat)
   typealias TitleForStepFunction = (CGFloat) -> String
-  private typealias UIAreas = (scale: CGRect, bars: CGRect, days: CGRect, background: CGRect)
+  fileprivate typealias UIAreas = (scale: CGRect, bars: CGRect, days: CGRect, background: CGRect)
 
-  private var items: [ItemType] = []
-  private var dayButtons: [UIButton] = []
+  fileprivate var items: [ItemType] = []
+  fileprivate var dayButtons: [UIButton] = []
 
-  private var uiAreas: UIAreas = (scale: CGRectZero, bars: CGRectZero, days: CGRectZero, background: CGRectZero)
+  fileprivate var uiAreas: UIAreas = (scale: CGRect.zero, bars: CGRect.zero, days: CGRect.zero, background: CGRect.zero)
   
-  private var goalsLayer: CAShapeLayer!
-  private var barsLayer: CALayer!
-  private var backgroundLayer: CAGradientLayer!
-  private var titleLabel: UILabel!
+  fileprivate var goalsLayer: CAShapeLayer!
+  fileprivate var barsLayer: CALayer!
+  fileprivate var backgroundLayer: CAGradientLayer!
+  fileprivate var titleLabel: UILabel!
   
-  private var maximumValue: CGFloat = 0
+  fileprivate var maximumValue: CGFloat = 0
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -94,8 +94,8 @@ protocol WeekStatisticsViewDelegate: class {
     baseInit()
   }
 
-  override func intrinsicContentSize() -> CGSize {
-    return CGSizeMake(300, 300)
+  override var intrinsicContentSize : CGSize {
+    return CGSize(width: 300, height: 300)
   }
   
   @available(iOS 8.0, *)
@@ -113,14 +113,14 @@ protocol WeekStatisticsViewDelegate: class {
 
   // MARK: Creation -
 
-  private func baseInit() {
+  fileprivate func baseInit() {
     createButtons()
     createLayers()
     createTitleLabel()
     initItems()
   }
 
-  private func initItems() {
+  fileprivate func initItems() {
     var items = [ItemType]()
     for _ in 0..<daysPerWeek {
       let item: ItemType = (value: 0, goal: 0)
@@ -130,10 +130,10 @@ protocol WeekStatisticsViewDelegate: class {
     setItems(items, animate: false)
   }
   
-  private func createButtons() {
+  fileprivate func createButtons() {
     deleteButtons()
     
-    let calendar = NSCalendar.currentCalendar()
+    let calendar = Calendar.current
     
     for dayIndex in 0..<daysPerWeek {
       let weekDayIndex = (dayIndex + calendar.firstWeekday - 1) % daysPerWeek
@@ -143,10 +143,10 @@ protocol WeekStatisticsViewDelegate: class {
       let dayButton = UIButton()
       dayButton.tag = dayIndex
       dayButton.titleLabel?.font = daysFont
-      dayButton.setTitle(title, forState: .Normal)
-      dayButton.addTarget(self, action: #selector(self.dayButtonTapped(_:)), forControlEvents: .TouchUpInside)
-      dayButton.backgroundColor = UIColor.clearColor()
-      dayButton.userInteractionEnabled = false // will be enabled later
+      dayButton.setTitle(title, for: UIControlState())
+      dayButton.addTarget(self, action: #selector(self.dayButtonTapped(_:)), for: .touchUpInside)
+      dayButton.backgroundColor = UIColor.clear
+      dayButton.isUserInteractionEnabled = false // will be enabled later
 
       addSubview(dayButton)
       dayButtons.append(dayButton)
@@ -155,14 +155,14 @@ protocol WeekStatisticsViewDelegate: class {
     updateButtons()
   }
   
-  private func deleteButtons() {
+  fileprivate func deleteButtons() {
     for dayButton in dayButtons {
       dayButton.removeFromSuperview()
     }
-    dayButtons.removeAll(keepCapacity: true)
+    dayButtons.removeAll(keepingCapacity: true)
   }
 
-  private func updateButtons() {
+  fileprivate func updateButtons() {
     for dayButton in dayButtons {
       let titleColor: UIColor
       let backgroundColor: UIColor
@@ -172,34 +172,34 @@ protocol WeekStatisticsViewDelegate: class {
       if dataSource?.weekStatisticsViewIsToday(dayButton.tag) ?? false {
         titleColor = todayColor
         backgroundColor = todayBackground
-        let fontDescriptor = daysFont.fontDescriptor().fontDescriptorWithSymbolicTraits(.TraitBold)
-        font = UIFont(descriptor: fontDescriptor, size: daysFont.pointSize)
+        let fontDescriptor = daysFont.fontDescriptor.withSymbolicTraits(.traitBold)
+        font = UIFont(descriptor: fontDescriptor!, size: daysFont.pointSize)
       } else {
         titleColor = isFutureDay ? futureDaysColor : daysColor
-        backgroundColor = isFutureDay ? UIColor.clearColor() : daysBackground
+        backgroundColor = isFutureDay ? UIColor.clear : daysBackground
         font = daysFont
       }
       
-      UIView.animateWithDuration(0.4) {
-        dayButton.setTitleColor(titleColor, forState: .Normal)
+      UIView.animate(withDuration: 0.4, animations: {
+        dayButton.setTitleColor(titleColor, for: UIControlState())
         dayButton.backgroundColor = backgroundColor
         dayButton.titleLabel?.font = font
-      }
-      dayButton.userInteractionEnabled = !isFutureDay
+      }) 
+      dayButton.isUserInteractionEnabled = !isFutureDay
     }
   }
   
-  func getDayButtonWithIndex(index: Int) -> UIButton {
+  func getDayButtonWithIndex(_ index: Int) -> UIButton {
     return dayButtons[index]
   }
   
-  private func createLayers() {
+  fileprivate func createLayers() {
     createBackgroundLayer()
     createBarsLayer()
     createGoalsLayer()
   }
   
-  private func createBackgroundLayer() {
+  fileprivate func createBackgroundLayer() {
     if backgroundColor?.isClearColor() ?? true {
       return
     }
@@ -209,11 +209,11 @@ protocol WeekStatisticsViewDelegate: class {
     }
     
     backgroundLayer = CAGradientLayer()
-    backgroundLayer.colors = [backgroundDarkColor.CGColor, backgroundColor!.CGColor]
-    layer.insertSublayer(backgroundLayer, atIndex: 0)
+    backgroundLayer.colors = [backgroundDarkColor.cgColor, backgroundColor!.cgColor]
+    layer.insertSublayer(backgroundLayer, at: 0)
   }
 
-  private func createBarsLayer() {
+  fileprivate func createBarsLayer() {
     // Create layer containing bar shape sub-layers
     barsLayer = CALayer()
     barsLayer.frame = uiAreas.bars
@@ -225,16 +225,16 @@ protocol WeekStatisticsViewDelegate: class {
     for _ in 0..<daysPerWeek {
       let barLayer = CAShapeLayer()
       barLayer.strokeColor = nil
-      barLayer.fillColor = barsColor.CGColor
+      barLayer.fillColor = barsColor.cgColor
       barsLayer.addSublayer(barLayer)
     }
   }
   
-  private func createGoalsLayer() {
+  fileprivate func createGoalsLayer() {
     goalsLayer = CAShapeLayer()
     goalsLayer.frame = uiAreas.bars
     goalsLayer.bounds = uiAreas.bars
-    goalsLayer.strokeColor = goalLineColor.CGColor
+    goalsLayer.strokeColor = goalLineColor.cgColor
     goalsLayer.fillColor = nil
     goalsLayer.lineWidth = 1
     goalsLayer.lineJoin = kCALineJoinRound
@@ -242,14 +242,14 @@ protocol WeekStatisticsViewDelegate: class {
     layer.addSublayer(goalsLayer)
   }
   
-  private func createTitleLabel() {
+  fileprivate func createTitleLabel() {
     titleLabel?.removeFromSuperview()
     
     titleLabel = UILabel()
     titleLabel.font = titleFont
     titleLabel.textColor = scaleColor
-    if let backgroundColor = backgroundColor where !backgroundColor.isClearColor() {
-      titleLabel.backgroundColor = backgroundColor.colorWithAlphaComponent(0.7)
+    if let backgroundColor = backgroundColor , !backgroundColor.isClearColor() {
+      titleLabel.backgroundColor = backgroundColor.withAlphaComponent(0.7)
     }
     addSubview(titleLabel)
   }
@@ -270,9 +270,9 @@ protocol WeekStatisticsViewDelegate: class {
     layoutButtons()
   }
 
-  private func calcUIAreasFromRect(rect: CGRect) {
+  fileprivate func calcUIAreasFromRect(_ rect: CGRect) {
     let barWidth = round(rect.width / CGFloat(daysPerWeek))
-    let verticalRectangles = rect.divide(barWidth, fromEdge: .MaxYEdge)
+    let verticalRectangles = rect.divided(atDistance: barWidth, from: .maxYEdge)
     
     uiAreas.scale = verticalRectangles.remainder.insetBy(dx: horizontalMargin, dy: 0).integral
     uiAreas.bars = uiAreas.scale
@@ -280,33 +280,33 @@ protocol WeekStatisticsViewDelegate: class {
     uiAreas.background = verticalRectangles.remainder.integral
   }
 
-  private func layoutBackground() {
+  fileprivate func layoutBackground() {
     if backgroundLayer != nil {
       var rect = uiAreas.background
-      rect = rect.divide(rect.height / 2, fromEdge: .MinYEdge).slice
+      rect = rect.divided(atDistance: rect.height / 2, from: .minYEdge).slice
       backgroundLayer.frame = rect
     }
   }
   
-  private func layoutBars() {
+  fileprivate func layoutBars() {
     barsLayer.frame = uiAreas.bars
     updateBars(animate: false)
   }
   
-  private func layoutGoals() {
+  fileprivate func layoutGoals() {
     goalsLayer.frame = uiAreas.bars
     updateGoals(animate: false)
   }
 
-  private func updateBars(animate animate: Bool) {
+  fileprivate func updateBars(animate: Bool) {
     barsLayer.frame = uiAreas.bars
     
     let paths = calcBarsPathsForRect(barsLayer.bounds)
     updateBarsPaths(paths, useAnimation: animate)
   }
   
-  private func updateBarsPaths(paths: [(rect: CGRect, path: CGPath)], useAnimation: Bool) {
-    for (index, path) in paths.enumerate() {
+  fileprivate func updateBarsPaths(_ paths: [(rect: CGRect, path: CGPath)], useAnimation: Bool) {
+    for (index, path) in paths.enumerated() {
       if barsLayer.sublayers == nil || index >= barsLayer.sublayers!.count {
         assert(false, "Cannot find necessary shape sub-layers for bars")
         break
@@ -318,42 +318,42 @@ protocol WeekStatisticsViewDelegate: class {
     }
   }
 
-  private func updateGoals(animate animate: Bool) {
+  fileprivate func updateGoals(animate: Bool) {
     goalsLayer.frame = uiAreas.bars
     
     let path = calcGoalsPathForRect(goalsLayer.bounds)
     transformShape(goalsLayer, path: path, useAnimation: animate)
   }
 
-  private func layoutButtons() {
-    for (index, dayButton) in dayButtons.enumerate() {
+  fileprivate func layoutButtons() {
+    for (index, dayButton) in dayButtons.enumerated() {
       let dayButtonRect = calcRectangleForDayButtonWithIndex(index, containerRect: uiAreas.days)
       dayButton.frame = dayButtonRect
       dayButton.layer.cornerRadius = round(dayButtonRect.width / 2)
     }
   }
   
-  private func layoutTitleLabel() {
+  fileprivate func layoutTitleLabel() {
     titleLabel.sizeToFit()
     titleLabel.frame.origin = CGPoint(x: uiAreas.scale.minX, y: uiAreas.scale.minY + scaleMargin)
   }
   
-  private func calcSizeForText(text: String, font: UIFont) -> CGSize {
-    let textStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+  fileprivate func calcSizeForText(_ text: String, font: UIFont) -> CGSize {
+    let textStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
     let fontAttributes = [NSFontAttributeName: font, NSParagraphStyleAttributeName: textStyle]
     let infiniteSize = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
-    let rect = text.boundingRectWithSize(infiniteSize, options: .UsesLineFragmentOrigin, attributes: fontAttributes, context: nil)
+    let rect = text.boundingRect(with: infiniteSize, options: .usesLineFragmentOrigin, attributes: fontAttributes, context: nil)
     return rect.size
   }
   
-  private func calcGoalsPathForRect(rect: CGRect) -> CGPath {
+  fileprivate func calcGoalsPathForRect(_ rect: CGRect) -> CGPath {
     let goalsCount = items.count
     let barWidth = rect.width / CGFloat(goalsCount)
     var xFrom = rect.minX
     
     let path = UIBezierPath()
     
-    for (index, item) in items.enumerate() {
+    for (index, item) in items.enumerated() {
       let goalHeight = maximumValue > 0 ? CGFloat(item.goal) / maximumValue * rect.height : 0
       let y = round(rect.maxY - goalHeight)
       let xTo = xFrom + barWidth
@@ -361,21 +361,21 @@ protocol WeekStatisticsViewDelegate: class {
       let fromPoint = CGPoint(x: round(xFrom), y: y)
       
       if index == 0 {
-        path.moveToPoint(fromPoint)
+        path.move(to: fromPoint)
       } else {
-        path.addLineToPoint(fromPoint)
+        path.addLine(to: fromPoint)
       }
       
       let toPoint = CGPoint(x: round(xTo), y: y)
-      path.addLineToPoint(toPoint)
+      path.addLine(to: toPoint)
       
       xFrom = xTo
     }
     
-    return path.CGPath
+    return path.cgPath
   }
   
-  private func calcBarsPathsForRect(rect: CGRect) -> [(rect: CGRect, path: CGPath)] {
+  fileprivate func calcBarsPathsForRect(_ rect: CGRect) -> [(rect: CGRect, path: CGPath)] {
     let valuesCount = items.count
     let fullBarWidth = rect.width / CGFloat(valuesCount)
     let barWidthInset = (fullBarWidth * (1 - barWidthFraction)) / 2
@@ -383,13 +383,12 @@ protocol WeekStatisticsViewDelegate: class {
     
     var paths: [(rect: CGRect, path: CGPath)] = []
     
-    for (index, item) in items.enumerate() {
+    for (index, item) in items.enumerated() {
       let barHeight = maximumValue > 0 ? (CGFloat(item.value) / maximumValue * rect.height) : 0
       let x = rect.minX + CGFloat(index) * fullBarWidth
       
       var barRect = CGRect(x: x, y: rect.maxY - barHeight, width: fullBarWidth, height: barHeight)
-      barRect.insetInPlace(dx: barWidthInset, dy: 0)
-      barRect.makeIntegralInPlace()
+      barRect = barRect.insetBy(dx: barWidthInset, dy: 0).integral
       barRect.size.width = visibleBarWidth // to ensure for same width for all bars
       
       // If height of a bar is less than double corner radius there will be issues during its animation, so fix the height
@@ -403,19 +402,19 @@ protocol WeekStatisticsViewDelegate: class {
       
       barRect.origin.x = 0
       
-      let path = UIBezierPath(roundedRect: barRect, byRoundingCorners: [.TopLeft, .TopRight], cornerRadii: CGSize(width: barCornerRadius, height: barCornerRadius))
-      let pathItem = (rect: fullBarRect, path: path.CGPath)
+      let path = UIBezierPath(roundedRect: barRect, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: barCornerRadius, height: barCornerRadius))
+      let pathItem = (rect: fullBarRect, path: path.cgPath)
       paths.append(pathItem)
     }
     
     return paths
   }
   
-  private func transformShape(shape: CAShapeLayer, path: CGPath, useAnimation: Bool) {
+  fileprivate func transformShape(_ shape: CAShapeLayer, path: CGPath, useAnimation: Bool) {
     if useAnimation {
       let startPath: CGPath
       
-      if let presentation = shape.presentationLayer() as? CAShapeLayer {
+      if let presentation = shape.presentation() {
         startPath = presentation.path!
       } else {
         startPath = shape.path!
@@ -427,14 +426,14 @@ protocol WeekStatisticsViewDelegate: class {
       animation.fromValue = startPath
       shape.path = path
       animation.toValue = path
-      shape.addAnimation(animation, forKey: "path")
+      shape.add(animation, forKey: "path")
 
     } else {
       shape.path = path
     }
   }
   
-  private func calcRectangleForDayButtonWithIndex(index: Int, containerRect: CGRect) -> CGRect {
+  fileprivate func calcRectangleForDayButtonWithIndex(_ index: Int, containerRect: CGRect) -> CGRect {
     assert(index >= 0 && index < daysPerWeek, "Day index is out of bounds")
     
     let rect = CGRect(x: containerRect.minX, y: containerRect.minY + dayButtonsTopMargin, width: containerRect.width, height: containerRect.height - dayButtonsTopMargin)
@@ -447,13 +446,13 @@ protocol WeekStatisticsViewDelegate: class {
     let minSize = min(buttonWidth, buttonHeight)
     let dx = (buttonWidth - minSize) / 2
     let dy = (buttonHeight - minSize) / 2
-    buttonRect.insetInPlace(dx: dx, dy: dy)
+    buttonRect = buttonRect.insetBy(dx: dx, dy: dy)
     return CGRect(x: trunc(buttonRect.minX), y: trunc(buttonRect.minY), width: ceil(buttonRect.width), height: trunc(buttonRect.height))
   }
 
   // MARK: Other -
   
-  func setItems(items: [ItemType], animate: Bool = true) {
+  func setItems(_ items: [ItemType], animate: Bool = true) {
     if items.count != daysPerWeek {
       assert(false, "Count of specified items should equal to days per week")
       return
@@ -477,15 +476,15 @@ protocol WeekStatisticsViewDelegate: class {
     updateBars(animate: animate)
   }
   
-  func dayButtonTapped(sender: UIButton) {
+  func dayButtonTapped(_ sender: UIButton) {
     delegate?.weekStatisticsViewDaySelected(sender.tag)
   }
 
-  private func getTitleForScaleValue(value: CGFloat) -> String {
+  fileprivate func getTitleForScaleValue(_ value: CGFloat) -> String {
     return dataSource?.weekStatisticsViewGetTitleForValue(value) ?? "\(Int(value))"
   }
   
-  private func calcMaximumValue() -> CGFloat {
+  fileprivate func calcMaximumValue() -> CGFloat {
     var maximum: CGFloat = 0
     
     for (value, goal) in items {

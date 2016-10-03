@@ -12,7 +12,7 @@ final class ConnectivityMessageCurrentState {
 
   // MARK: Types
   
-  private struct Keys {
+  fileprivate struct Keys {
     static let messageDate           = "messageDate"
     static let hydrationAmount       = "hydrationAmount"
     static let dehydrationAmount     = "dehydrationAmount"
@@ -21,14 +21,14 @@ final class ConnectivityMessageCurrentState {
     static let isHotWeatherEnabled   = "isHotWeatherEnabled"
   }
   
-  private struct Constants {
+  fileprivate struct Constants {
     static let messageKey   = "message"
     static let messageValue = "ConnectivityMessageCurrentState"
   }
 
   // MARK: Properties
 
-  var messageDate: NSDate
+  var messageDate: Date
   var hydrationAmount: Double
   var dehydrationAmount: Double
   var dailyWaterGoal: Double
@@ -37,7 +37,7 @@ final class ConnectivityMessageCurrentState {
   
   // MARK: Methods
   
-  init(messageDate: NSDate, hydrationAmount: Double, dehydrationAmount: Double, dailyWaterGoal: Double, highPhysicalActivityModeEnabled: Bool, hotWeatherModeEnabled: Bool) {
+  init(messageDate: Date, hydrationAmount: Double, dehydrationAmount: Double, dailyWaterGoal: Double, highPhysicalActivityModeEnabled: Bool, hotWeatherModeEnabled: Bool) {
     self.messageDate           = messageDate
     self.hydrationAmount       = hydrationAmount
     self.dehydrationAmount     = dehydrationAmount
@@ -46,17 +46,17 @@ final class ConnectivityMessageCurrentState {
     self.isHotWeatherEnabled   = hotWeatherModeEnabled
   }
   
-  init?(metadata: [String : AnyObject]) {
+  init?(metadata: [String : Any]) {
     guard
-      let messageValue          = metadata[Constants.messageKey]       as? String where messageValue == Constants.messageValue,
-      let messageDate           = metadata[Keys.messageDate]           as? NSDate,
+      let messageValue          = metadata[Constants.messageKey]       as? String , messageValue == Constants.messageValue,
+      let messageDate           = metadata[Keys.messageDate]           as? Date,
       let hydrationAmount       = metadata[Keys.hydrationAmount]       as? Double,
       let dehydrationAmount     = metadata[Keys.dehydrationAmount]     as? Double,
       let dailyWaterGoal        = metadata[Keys.dailyWaterGoal]        as? Double,
       let isHighActivityEnabled = metadata[Keys.isHighActivityEnabled] as? Bool,
       let isHotWeatherEnabled   = metadata[Keys.isHotWeatherEnabled]   as? Bool else
     {
-      self.messageDate = NSDate()
+      self.messageDate = Date()
       self.hydrationAmount = 0
       self.dehydrationAmount = 0
       self.dailyWaterGoal = 0
@@ -74,8 +74,8 @@ final class ConnectivityMessageCurrentState {
     self.isHotWeatherEnabled   = isHotWeatherEnabled
   }
   
-  func composeMetadata() -> [String : AnyObject] {
-    var metadata = [String : AnyObject]()
+  func composeMetadata() -> [String : Any] {
+    var metadata = [String : Any]()
     
     metadata[Constants.messageKey]       = Constants.messageValue
     metadata[Keys.messageDate]           = messageDate

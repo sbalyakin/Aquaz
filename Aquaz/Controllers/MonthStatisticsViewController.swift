@@ -14,9 +14,9 @@ class MonthStatisticsViewController: UIViewController {
   @IBOutlet weak var monthStatisticsView: MonthStatisticsView!
   @IBOutlet weak var monthLabel: UILabel!
   
-  private var date: NSDate = DateHelper.startDateFromDate(NSDate(), calendarUnit: .Month)
+  fileprivate var date: Date = DateHelper.startOfMonth(Date())
 
-  private struct Constants {
+  fileprivate struct Constants {
     static let dayViewController = "DayViewController"
   }
   
@@ -27,28 +27,28 @@ class MonthStatisticsViewController: UIViewController {
     setupNotificationsObservation()
   }
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     checkHelpTip()
   }
   
   
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
 
-  private func setupUI() {
+  fileprivate func setupUI() {
     monthStatisticsView.backgroundColor = StyleKit.pageBackgroundColor
-    monthStatisticsView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-    monthStatisticsView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    monthStatisticsView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+    monthStatisticsView.weekDayFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
     monthStatisticsView.workDayTextColor = StyleKit.calendarWorkDayTextColor
-    monthStatisticsView.workDayBackgroundColor = UIColor.whiteColor()
-    monthStatisticsView.weekendBackgroundColor = UIColor.whiteColor()
+    monthStatisticsView.workDayBackgroundColor = UIColor.white
+    monthStatisticsView.weekendBackgroundColor = UIColor.white
     monthStatisticsView.weekendTextColor = StyleKit.calendarWeekendTextColor
     monthStatisticsView.weekDayTitleTextColor = StyleKit.calendarWeekDayTitleTextColor
     monthStatisticsView.selectedDayTextColor = StyleKit.calendarSelectedDayTextColor
     monthStatisticsView.selectedDayBackgroundColor = StyleKit.calendarSelectedDayBackgroundColor
-    monthStatisticsView.todayBackgroundColor = UIColor.whiteColor()
+    monthStatisticsView.todayBackgroundColor = UIColor.white
     monthStatisticsView.todayTextColor = StyleKit.calendarTodayTextColor
     monthStatisticsView.dayIntakeFullColor = StyleKit.monthStatisticsChartStrokeColor
     monthStatisticsView.dayIntakeColor = StyleKit.monthStatisticsChartStrokeColor
@@ -64,44 +64,44 @@ class MonthStatisticsViewController: UIViewController {
     updateUI(animated: false)
   }
   
-  private func setupNotificationsObservation() {
-    NSNotificationCenter.defaultCenter().addObserver(
+  fileprivate func setupNotificationsObservation() {
+    NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: UIContentSizeCategoryDidChangeNotification,
+      name: NSNotification.Name.UIContentSizeCategoryDidChange,
       object: nil)
     
     CoreDataStack.performOnPrivateContext { privateContext in
-      NSNotificationCenter.defaultCenter().addObserver(
+      NotificationCenter.default.addObserver(
         self,
         selector: #selector(self.managedObjectContextDidChange(_:)),
-        name: NSManagedObjectContextDidSaveNotification,
+        name: NSNotification.Name.NSManagedObjectContextDidSave,
         object: privateContext)
       
-      NSNotificationCenter.defaultCenter().addObserver(
+      NotificationCenter.default.addObserver(
         self,
         selector: #selector(self.managedObjectContextDidChange(_:)),
-        name: GlobalConstants.notificationManagedObjectContextWasMerged,
+        name: NSNotification.Name(rawValue: GlobalConstants.notificationManagedObjectContextWasMerged),
         object: privateContext)
     }
   }
 
-  func managedObjectContextDidChange(notification: NSNotification) {
-    dispatch_async(dispatch_get_main_queue()) {
+  func managedObjectContextDidChange(_ notification: Notification) {
+    DispatchQueue.main.async {
       self.monthStatisticsView.refresh()
     }
   }
   
   func preferredContentSizeChanged() {
-    monthLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    monthStatisticsView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-    monthStatisticsView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    monthLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    monthStatisticsView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+    monthStatisticsView.weekDayFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
     monthStatisticsView.refresh()
     view.invalidateIntrinsicContentSize()
   }
 
-  private func updateUI(animated animated: Bool) {
-    let title = dateFormatter.stringFromDate(date)
+  fileprivate func updateUI(animated: Bool) {
+    let title = dateFormatter.string(from: date)
     
     if animated {
       monthLabel.setTextWithAnimation(title)
@@ -110,19 +110,19 @@ class MonthStatisticsViewController: UIViewController {
     }
   }
 
-  @IBAction func switchToPreviousMonth(sender: AnyObject) {
+  @IBAction func switchToPreviousMonth(_ sender: AnyObject) {
     monthStatisticsView.switchToPreviousMonth()
-    date = monthStatisticsView.getDisplayedMonthDate()
+    date = monthStatisticsView.getDisplayedMonthDate() as Date
     updateUI(animated: true) // Updating month label before scroll view animation is finished
   }
   
-  @IBAction func switchToNextMonth(sender: AnyObject) {
+  @IBAction func switchToNextMonth(_ sender: AnyObject) {
     monthStatisticsView.switchToNextMonth()
-    date = monthStatisticsView.getDisplayedMonthDate()
+    date = monthStatisticsView.getDisplayedMonthDate() as Date
     updateUI(animated: true) // Updating month label before scroll view animation is finished
   }
   
-  private func checkHelpTip() {
+  fileprivate func checkHelpTip() {
     if Settings.sharedInstance.uiMonthStatisticsPageHelpTipIsShown.value  {
       return
     }
@@ -130,7 +130,7 @@ class MonthStatisticsViewController: UIViewController {
     showHelpTip()
   }
   
-  private func showHelpTip() {
+  fileprivate func showHelpTip() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
       if self.view.window == nil {
         return
@@ -142,17 +142,17 @@ class MonthStatisticsViewController: UIViewController {
       
       let dayRectWidth = self.monthStatisticsView.frame.width / CGFloat(self.monthStatisticsView.daysPerWeek)
       let point = CGPoint(x: self.monthStatisticsView.frame.width / 2, y: dayRectWidth * 2 + 5)
-      let helpTip = JDFTooltipView(targetPoint: point, hostView: self.monthStatisticsView, tooltipText: text, arrowDirection: .Up, width: self.view.frame.width / 2)
       
-      UIHelper.showHelpTip(helpTip)
-      
-      Settings.sharedInstance.uiMonthStatisticsPageHelpTipIsShown.value = true
+      if let helpTip = JDFTooltipView(targetPoint: point, hostView: self.monthStatisticsView, tooltipText: text, arrowDirection: .up, width: self.view.frame.width / 2) {
+        UIHelper.showHelpTip(helpTip)
+        Settings.sharedInstance.uiMonthStatisticsPageHelpTipIsShown.value = true
+      }
     }
   }
 
-  private lazy var dateFormatter: NSDateFormatter = {
-    let formatter = NSDateFormatter()
-    let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMyyyy", options: 0, locale: NSLocale.currentLocale())
+  fileprivate lazy var dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    let dateFormat = DateFormatter.dateFormat(fromTemplate: "MMMMyyyy", options: 0, locale: Locale.current)
     formatter.dateFormat = dateFormat
     return formatter
     }()
@@ -163,7 +163,7 @@ class MonthStatisticsViewController: UIViewController {
 
 extension MonthStatisticsViewController: CalendarViewDelegate {
 
-  func calendarViewDaySelected(dayInfo: CalendarViewDayInfo) {
+  func calendarViewDaySelected(_ dayInfo: CalendarViewDayInfo) {
     if !dayInfo.isCurrentMonth {
       return
     }
@@ -171,14 +171,14 @@ extension MonthStatisticsViewController: CalendarViewDelegate {
     // Unfortunately Show seque does not work properly in iOS 7, so straight pushViewController() method is used instead.
 
     if let dayViewController: DayViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "DayViewController") {
-      dayViewController.mode = .Statistics
+      dayViewController.mode = .statistics
       dayViewController.setCurrentDate(dayInfo.date)
       
       navigationController?.pushViewController(dayViewController, animated: true)
     }
   }
 
-  func calendarViewDayWasSwitched(date: NSDate) {
+  func calendarViewDayWasSwitched(_ date: Date) {
     self.date = date
     updateUI(animated: true)
   }
@@ -189,11 +189,11 @@ extension MonthStatisticsViewController: CalendarViewDelegate {
 
 extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
   
-  func monthStatisticsGetValuesForDateInterval(beginDate beginDate: NSDate, endDate: NSDate, calendarContentView: CalendarContentView) -> [Double] {
+  func monthStatisticsGetValuesForDateInterval(beginDate: Date, endDate: Date, calendarContentView: CalendarContentView) -> [Double] {
     CoreDataStack.performOnPrivateContext { privateContext in
       weak var requestingMonthStatisticsContentView = (calendarContentView as! MonthStatisticsContentView)
       let hydrationFractions = self.fetchHydrationFractions(beginDate: beginDate, endDate: endDate, privateContext: privateContext)
-      dispatch_async(dispatch_get_main_queue()) {
+      DispatchQueue.main.async {
         if let contentView = requestingMonthStatisticsContentView {
           contentView.updateValues(hydrationFractions)
         } else {
@@ -205,12 +205,12 @@ extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
     return []
   }
   
-  private func fetchHydrationFractions(beginDate beginDate: NSDate, endDate: NSDate, privateContext: NSManagedObjectContext) -> [Double] {
-    let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
+  fileprivate func fetchHydrationFractions(beginDate: Date, endDate: Date, privateContext: NSManagedObjectContext) -> [Double] {
+    let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.day,
       beginDate: beginDate,
       endDate: endDate,
       dayOffsetInHours: 0,
-      aggregateFunction: .Average,
+      aggregateFunction: .average,
       managedObjectContext: privateContext)
     
     let waterGoals = WaterGoal.fetchWaterGoalAmounts(
@@ -222,7 +222,7 @@ extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
     
     var hydrationFractions = [Double]()
     
-    for (index, amountParts) in amountPartsList.enumerate() {
+    for (index, amountParts) in amountPartsList.enumerated() {
       let waterGoal = waterGoals[index] + amountParts.dehydration
       let hydrationFraction: Double
       if waterGoal > 0 {

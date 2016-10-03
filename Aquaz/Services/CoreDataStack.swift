@@ -14,31 +14,31 @@ final class CoreDataStack: NSObject {
   
   static let sharedInstance = CoreDataStack()
   
-  private var containerURL: NSURL!
-  private var managedObjectModel: NSManagedObjectModel!
-  private var persistentStoreCoordinator: NSPersistentStoreCoordinator!
+  fileprivate var containerURL: URL!
+  fileprivate var managedObjectModel: NSManagedObjectModel!
+  fileprivate var persistentStoreCoordinator: NSPersistentStoreCoordinator!
 //  private var mainContext: NSManagedObjectContext!
-  private var privateContext: NSManagedObjectContext!
-  private let queue = dispatch_queue_create("com.devmanifest.Aquaz.CoreDataStack", DISPATCH_QUEUE_SERIAL)
+  fileprivate var privateContext: NSManagedObjectContext!
+  fileprivate let queue = DispatchQueue(label: "com.devmanifest.Aquaz.CoreDataStack", attributes: [])
   
   override init() {
     super.init()
     
     // Use a serial queue in order to not freeze the main UI queue
-    dispatch_async(queue) {
-      if let containerURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(GlobalConstants.appGroupName) {
+    queue.async {
+      if let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: GlobalConstants.appGroupName) {
         self.containerURL = containerURL
       } else {
         CLSLogv("Core Data Stack initialization error: Failed to obtain the container URL", getVaList([]))
         fatalError()
       }
       
-      guard let modelURL = NSBundle.mainBundle().URLForResource("Aquaz", withExtension: "momd") else {
+      guard let modelURL = Bundle.main.url(forResource: "Aquaz", withExtension: "momd") else {
         CLSLogv("Core Data Stack initialization error: Failed to obtain the model URL", getVaList([]))
         fatalError()
       }
       
-      if let managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL) {
+      if let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL) {
         self.managedObjectModel = managedObjectModel
       } else {
         CLSLogv("Core Data Stack initialization error: Failed to initialize the managed object model", getVaList([]))
@@ -50,13 +50,13 @@ final class CoreDataStack: NSObject {
 //      self.mainContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
 //      self.mainContext.persistentStoreCoordinator = self.persistentStoreCoordinator
       
-      self.privateContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+      self.privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
       self.privateContext.persistentStoreCoordinator = self.persistentStoreCoordinator
       
       do {
-        let url = self.containerURL.URLByAppendingPathComponent("Aquaz.sqlite")
+        let url = self.containerURL.appendingPathComponent("Aquaz.sqlite")
         
-        try self.persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+        try self.persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
       } catch {
         let nserror = error as NSError
         CLSLogv("Core Data Stack initialization error: Failed to add the persistent store. Error: \(nserror.description)", getVaList([]))
@@ -64,38 +64,30 @@ final class CoreDataStack: NSObject {
       }
     }
     
-    NSNotificationCenter.defaultCenter().addObserver(
+    NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.contextDidSaveContext(_:)),
-      name: NSManagedObjectContextDidSaveNotification,
+      name: NSNotification.Name.NSManagedObjectContextDidSave,
       object: nil)
   }
   
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
   
   // MARK: - Notifications
   
-  func contextDidSaveContext(notification: NSNotification) {
-    dispatch_async(queue) {
-//      if notification.object !== self.mainContext {
-//        self.mainContext.performBlock {
-//          self.mainContext.mergeChangesFromContextDidSaveNotification(notification)
-//          NSNotificationCenter.defaultCenter().postNotificationName(
-//            GlobalConstants.notificationManagedObjectContextWasMerged,
-//            object: self.mainContext,
-//            userInfo: notification.userInfo)
-//        }
-//      }
-      
-      if notification.object !== self.privateContext {
-        self.privateContext.performBlock {
-          self.privateContext.mergeChangesFromContextDidSaveNotification(notification)
-          NSNotificationCenter.defaultCenter().postNotificationName(
-            GlobalConstants.notificationManagedObjectContextWasMerged,
+  func contextDidSaveContext(_ notification: Notification) {
+    if let context = notification.object as? NSManagedObjectContext,
+       context !== privateContext
+    {
+      queue.async {
+        self.privateContext.perform {
+          self.privateContext.mergeChanges(fromContextDidSave: notification)
+          NotificationCenter.default.post(
+            name: Notification.Name(rawValue: GlobalConstants.notificationManagedObjectContextWasMerged),
             object: self.privateContext,
-            userInfo: notification.userInfo)
+            userInfo: (notification as NSNotification).userInfo)
         }
       }
     }
@@ -104,7 +96,7 @@ final class CoreDataStack: NSObject {
   
   // MARK: - Functions
   
-  private func printStack(stack: [String], depth: Int = -1) {
+  fileprivate func printStack(_ stack: [String], depth: Int = -1) {
     if depth == -1 {
       for line in stack {
         print(line)
@@ -127,43 +119,43 @@ final class CoreDataStack: NSObject {
 //    }
 //  }
 //  
-  func performOnPrivateContext(callback: NSManagedObjectContext -> Void) {
+  func performOnPrivateContext(_ callback: @escaping (NSManagedObjectContext) -> Void) {
     // Dispatch the request to our serial queue first and then back to the context queue.
     // Since we set up the stack on this queue it will have succeeded or failed before
     // this block is executed.
-    dispatch_async(queue) {
-      self.privateContext.performBlock {
+    queue.async {
+      self.privateContext.perform {
         callback(self.privateContext)
       }
     }
   }
 
-  func performOnPrivateContextAndWait(callback: NSManagedObjectContext -> Void) {
-    let dispatchGroup = dispatch_group_create()
-    dispatch_group_enter(dispatchGroup)
+  func performOnPrivateContextAndWait(_ callback: @escaping (NSManagedObjectContext) -> Void) {
+    let dispatchGroup = DispatchGroup()
+    dispatchGroup.enter()
 
     // Dispatch the request to our serial queue first and then back to the context queue.
     // Since we set up the stack on this queue it will have succeeded or failed before
     // this block is executed.
-    dispatch_async(queue) {
-      self.privateContext.performBlock {
+    queue.async {
+      self.privateContext.perform {
         callback(self.privateContext)
-        dispatch_group_leave(dispatchGroup)
+        dispatchGroup.leave()
       }
     }
     
-    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
+    _ = dispatchGroup.wait(timeout: DispatchTime.distantFuture)
   }
 
   func saveAllContexts() {
-    dispatch_async(queue) {
+    queue.async {
 //      CoreDataStack.saveContext(self.mainContext)
       CoreDataStack.saveContext(self.privateContext)
     }
   }
   
-  func mergeAllContextsWithNotification(notification: NSNotification) {
-    dispatch_async(queue) {
+  func mergeAllContextsWithNotification(_ notification: Notification) {
+    queue.async {
 //      self.mainContext.performBlock {
 //        self.mainContext.mergeChangesFromContextDidSaveNotification(notification)
 //        NSNotificationCenter.defaultCenter().postNotificationName(
@@ -172,19 +164,19 @@ final class CoreDataStack: NSObject {
 //          userInfo: notification.userInfo)
 //      }
     
-      self.privateContext.performBlock {
-        self.privateContext.mergeChangesFromContextDidSaveNotification(notification)
-        NSNotificationCenter.defaultCenter().postNotificationName(
-          GlobalConstants.notificationManagedObjectContextWasMerged,
+      self.privateContext.perform {
+        self.privateContext.mergeChanges(fromContextDidSave: notification)
+        NotificationCenter.default.post(
+          name: Notification.Name(rawValue: GlobalConstants.notificationManagedObjectContextWasMerged),
           object: self.privateContext,
-          userInfo: notification.userInfo)
+          userInfo: (notification as NSNotification).userInfo)
       }
     }
   }
   
   // MARK: - Core Data Saving support
   
-  class func saveContext(managedObjectContext: NSManagedObjectContext) {
+  class func saveContext(_ managedObjectContext: NSManagedObjectContext) {
     if !managedObjectContext.hasChanges {
       return
     }
@@ -202,7 +194,7 @@ final class CoreDataStack: NSObject {
     sharedInstance.saveAllContexts()
   }
   
-  class func mergeAllContextsWithNotification(notification: NSNotification) {
+  class func mergeAllContextsWithNotification(_ notification: Notification) {
     sharedInstance.mergeAllContextsWithNotification(notification)
   }
   
@@ -212,11 +204,11 @@ final class CoreDataStack: NSObject {
 //    sharedInstance.inMainContext(callback)
 //  }
 //  
-  class func performOnPrivateContext(callback: NSManagedObjectContext -> Void) {
+  class func performOnPrivateContext(_ callback: @escaping (NSManagedObjectContext) -> Void) {
     sharedInstance.performOnPrivateContext(callback)
   }
 
-  class func performOnPrivateContextAndWait(callback: NSManagedObjectContext -> Void) {
+  class func performOnPrivateContextAndWait(_ callback: @escaping (NSManagedObjectContext) -> Void) {
     sharedInstance.performOnPrivateContextAndWait(callback)
   }
 

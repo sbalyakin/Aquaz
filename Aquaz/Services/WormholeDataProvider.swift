@@ -8,10 +8,11 @@
 
 import Foundation
 import CoreData
+import MMWormhole
 
 final class WormholeDataProvider: NSObject {
 
-  private var wormhole: MMWormhole!
+  fileprivate var wormhole: MMWormhole!
 
   override init() {
     super.init()
@@ -21,32 +22,36 @@ final class WormholeDataProvider: NSObject {
   }
   
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
   
-  private func initWormhole() {
+  fileprivate func initWormhole() {
     wormhole = MMWormhole(applicationGroupIdentifier: GlobalConstants.appGroupName, optionalDirectory: GlobalConstants.wormholeOptionalDirectory)
 
-    wormhole.listenForMessageWithIdentifier(GlobalConstants.wormholeMessageFromWidget) { [weak self] messageObject in
-      if let notification = messageObject as? NSNotification {
+    wormhole.listenForMessage(withIdentifier: GlobalConstants.wormholeMessageFromWidget) { [weak self] messageObject in
+      if let notification = messageObject as? Notification {
         CoreDataStack.mergeAllContextsWithNotification(notification)
-        self?.wormhole.clearMessageContentsForIdentifier(GlobalConstants.wormholeMessageFromWidget)
+        self?.wormhole.clearMessageContents(forIdentifier: GlobalConstants.wormholeMessageFromWidget)
       }
     }
   }
   
-  private func setupCoreDataSynchronization() {
+  fileprivate func setupCoreDataSynchronization() {
     CoreDataStack.performOnPrivateContext { privateContext in
-      NSNotificationCenter.defaultCenter().addObserver(
+      NotificationCenter.default.addObserver(
         self,
         selector: #selector(self.managedObjectContextDidSave(_:)),
-        name: NSManagedObjectContextDidSaveNotification,
+        name: NSNotification.Name.NSManagedObjectContextDidSave,
         object: privateContext)
     }
   }
   
-  func managedObjectContextDidSave(notification: NSNotification) {
-    wormhole.passMessageObject(notification, identifier: GlobalConstants.wormholeMessageFromAquaz)
+  func managedObjectContextDidSave(_ notification: Notification) {
+    // By unknown reason existance of "managedObjectContext" key produces an exception during passing massage object through wormhole
+    var clearedNotification = notification
+    _ = clearedNotification.userInfo?.removeValue(forKey: "managedObjectContext")
+    
+    wormhole.passMessageObject(clearedNotification as NSCoding?, identifier: GlobalConstants.wormholeMessageFromAquaz)
   }
   
 }

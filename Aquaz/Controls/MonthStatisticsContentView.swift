@@ -11,12 +11,12 @@ import UIKit
 
 class MonthStatisticsContentView: CalendarContentView {
   
-  var dayIntakeColor: UIColor = UIColor.orangeColor()
+  var dayIntakeColor: UIColor = UIColor.orange
   var dayIntakeFullColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 1.0)
   var dayIntakeBackgroundColor: UIColor = UIColor(red: 80/255, green: 184/255, blue: 187/255, alpha: 0.1)
   var dayIntakeLineWidth: CGFloat = 4
 
-  private struct Constants {
+  fileprivate struct Constants {
     static let statisticsCellIdentifier = "Statistics Cell"
   }
   
@@ -30,25 +30,25 @@ class MonthStatisticsContentView: CalendarContentView {
     baseInit()
   }
 
-  private func baseInit() {
-    collectionView.registerClass(MonthStatisticsContentViewCell.self, forCellWithReuseIdentifier: Constants.statisticsCellIdentifier)
+  fileprivate func baseInit() {
+    collectionView.register(MonthStatisticsContentViewCell.self, forCellWithReuseIdentifier: Constants.statisticsCellIdentifier)
   }
   
-  override func getCell(collectionView collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.statisticsCellIdentifier, forIndexPath: indexPath) as! MonthStatisticsContentViewCell
+  override func getCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.statisticsCellIdentifier, for: indexPath) as! MonthStatisticsContentViewCell
 
     cell.backgroundColor = backgroundColor // remove blending
-    cell.setDayInfo(daysInfo[indexPath.row], calendarContentView: self)
+    cell.setDayInfo(daysInfo[(indexPath as NSIndexPath).row], calendarContentView: self)
     
     return cell
   }
   
-  func updateValues(values: [Double]) {
+  func updateValues(_ values: [Double]) {
     for dayInfo in daysInfo {
       if dayInfo.isCurrentMonth {
         let dayIndex = dayInfo.dayOfCurrentMonth - 1
         if dayIndex < values.count {
-          dayInfo.userData = values[dayIndex]
+          dayInfo.userData = values[dayIndex] as AnyObject?
         } else {
           assert(false)
         }

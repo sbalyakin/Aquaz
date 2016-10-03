@@ -23,7 +23,7 @@ class IntakeViewController: UIViewController {
   @IBOutlet weak var navigationTitleLabel: UILabel!
   @IBOutlet weak var navigationDateLabel: UILabel!
   
-  private struct LocalizedStrings {
+  fileprivate struct LocalizedStrings {
     
     lazy var addButtonTitle: String = NSLocalizedString("IVC:Add", value: "Add", comment: "IntakeViewController: Title for Add button")
     
@@ -38,17 +38,17 @@ class IntakeViewController: UIViewController {
     
   }
   
-  private var localizedStrings = LocalizedStrings()
+  fileprivate var localizedStrings = LocalizedStrings()
   
-  var date: NSDate! {
+  var date: Date! {
     didSet {
-      isCurrentDayToday = DateHelper.areDatesEqualByDays(NSDate(), date)
+      isCurrentDayToday = DateHelper.areEqualDays(Date(), date)
     }
   }
   
   var drinkType: DrinkType!
   
-  private var drink: Drink!
+  fileprivate var drink: Drink!
   
   // Should be nil for add intake mode, and not nil for edit intake mode
   var intake: Intake? {
@@ -57,7 +57,7 @@ class IntakeViewController: UIViewController {
         if let intake = self.intake {
           self.drinkType = intake.drink.drinkType
           self.drink = intake.drink
-          self.date = intake.date
+          self.date = intake.date as Date!
           self.timeIsChoosen = true
         } else {
           self.timeIsChoosen = false
@@ -66,13 +66,13 @@ class IntakeViewController: UIViewController {
     }
   }
 
-  private var timeIsChoosen = false
+  fileprivate var timeIsChoosen = false
   
-  private struct Constants {
+  fileprivate struct Constants {
     static let pickTimeSegue = "PickTime"
   }
   
-  func changeTimeForCurrentDate(time: NSDate) {
+  func changeTimeForCurrentDate(_ time: Date) {
     timeIsChoosen = true
     date = DateHelper.dateByJoiningDateTime(datePart: date, timePart: time)
     navigationDateLabel?.text = DateHelper.stringFromDateTime(date, shortDateStyle: true)
@@ -86,14 +86,14 @@ class IntakeViewController: UIViewController {
     
     setupUI()
     
-    NSNotificationCenter.defaultCenter().addObserver(
+    NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: UIContentSizeCategoryDidChangeNotification,
+      name: NSNotification.Name.UIContentSizeCategoryDidChange,
       object: nil)
   }
 
-  private func fetchDrink() {
+  fileprivate func fetchDrink() {
     if let _ = drink {
       return
     }
@@ -103,7 +103,7 @@ class IntakeViewController: UIViewController {
     }
   }
 
-  private func setupUI() {
+  fileprivate func setupUI() {
     setupPredefinedAmountButtons()
     setupAmountRelatedControlsWithInitialAmount()
     setupApplyButton()
@@ -117,7 +117,7 @@ class IntakeViewController: UIViewController {
   }
   
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
   
   override func viewWillLayoutSubviews() {
@@ -134,24 +134,24 @@ class IntakeViewController: UIViewController {
   }
 
   func preferredContentSizeChanged() {
-    amountLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    amountLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
     view.invalidateIntrinsicContentSize()
   }
 
-  private func setupPredefinedAmountButtons() {
+  fileprivate func setupPredefinedAmountButtons() {
     // Predefined amount is always non-fractional values, so we will format amount skipping fraction part
-    smallAmountButton.setTitle(formatAmount(predefinedAmounts.small, precision: 1.0, decimals: 0), forState: .Normal)
-    mediumAmountButton.setTitle(formatAmount(predefinedAmounts.medium, precision: 1.0, decimals: 0), forState: .Normal)
-    largeAmountButton.setTitle(formatAmount(predefinedAmounts.large, precision: 1.0, decimals: 0), forState: .Normal)
+    smallAmountButton.setTitle(formatAmount(predefinedAmounts.small, precision: 1.0, decimals: 0), for: UIControlState())
+    mediumAmountButton.setTitle(formatAmount(predefinedAmounts.medium, precision: 1.0, decimals: 0), for: UIControlState())
+    largeAmountButton.setTitle(formatAmount(predefinedAmounts.large, precision: 1.0, decimals: 0), for: UIControlState())
   }
   
-  private func setupAmountRelatedControlsWithInitialAmount() {
+  fileprivate func setupAmountRelatedControlsWithInitialAmount() {
     let amount = getInitialAmount()
     setAmountLabel(amount)
     amountSlider.value = Float(amount)
   }
   
-  private func getInitialAmount() -> Double {
+  fileprivate func getInitialAmount() -> Double {
     var amount: Double!
     
     CoreDataStack.performOnPrivateContextAndWait { _ in
@@ -161,12 +161,12 @@ class IntakeViewController: UIViewController {
     return amount
   }
   
-  private func setupApplyButton() {
-    let title = (viewMode == .Add) ? localizedStrings.addButtonTitle : localizedStrings.applyButtonTitle
-    applyButton.setTitle(title, forState: .Normal)
+  fileprivate func setupApplyButton() {
+    let title = (viewMode == .add) ? localizedStrings.addButtonTitle : localizedStrings.applyButtonTitle
+    applyButton.setTitle(title, for: UIControlState())
   }
 
-  private func applyColorScheme() {
+  fileprivate func applyColorScheme() {
     applyButton.backgroundColor = drinkType.darkColor
     smallAmountButton.backgroundColor = drinkType.darkColor
     mediumAmountButton.backgroundColor = drinkType.darkColor
@@ -176,7 +176,7 @@ class IntakeViewController: UIViewController {
     navigationDateLabel.textColor = StyleKit.barTextColor
   }
   
-  private func setupNavigationTitle() {
+  fileprivate func setupNavigationTitle() {
     let dateText: String
     
     if timeIsChoosen || !isCurrentDayToday {
@@ -189,83 +189,83 @@ class IntakeViewController: UIViewController {
     navigationDateLabel.text = dateText
   }
   
-  private func setupDrinkView() {
+  fileprivate func setupDrinkView() {
     drinkView.drinkType = drinkType
   }
   
-  private func setupSlider() {
+  fileprivate func setupSlider() {
     amountSlider.tintColor = drinkType.mainColor
     amountSlider.maximumTrackTintColor = UIColor(white: 0.8, alpha: 1)
   }
   
-  private func setupDrinkInformation() {
+  fileprivate func setupDrinkInformation() {
     if drinkType.dehydrationFactor > 0 {
       drinkInformationLabel.text = localizedStrings.alcoholicDrinkInformation
-      drinkInformationLabel.hidden = false
+      drinkInformationLabel.isHidden = false
     } else {
-      drinkInformationLabel.hidden = true
+      drinkInformationLabel.isHidden = true
       drinkInformationLabel.text = ""
     }
   }
   
-  @IBAction func cancelIntake(sender: UIBarButtonItem) {
-    navigationController?.dismissViewControllerAnimated(true, completion: nil)
+  @IBAction func cancelIntake(_ sender: UIBarButtonItem) {
+    navigationController?.dismiss(animated: true, completion: nil)
   }
   
-  @IBAction func amountSliderValueChanged(sender: AnyObject) {
+  @IBAction func amountSliderValueChanged(_ sender: AnyObject) {
     setAmountLabel(Double(amountSlider.value))
   }
   
-  @IBAction func applyCustomIntake(sender: AnyObject) {
+  @IBAction func applyCustomIntake(_ sender: AnyObject) {
     applyIntake(Double(amountSlider.value))
   }
   
-  @IBAction func applySmallIntake(sender: AnyObject) {
+  @IBAction func applySmallIntake(_ sender: AnyObject) {
     applyIntake(predefinedAmounts.small)
   }
   
-  @IBAction func applyMediumIntake(sender: AnyObject) {
+  @IBAction func applyMediumIntake(_ sender: AnyObject) {
     applyIntake(predefinedAmounts.medium)
   }
   
-  @IBAction func applyLargeIntake(sender: AnyObject) {
+  @IBAction func applyLargeIntake(_ sender: AnyObject) {
     applyIntake(predefinedAmounts.large)
   }
   
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Constants.pickTimeSegue {
-      if let pickTimeViewController = segue.destinationViewController.contentViewController as? PickTimeViewController {
+      if let pickTimeViewController = segue.destination.contentViewController as? PickTimeViewController {
         pickTimeViewController.intakeViewController = self
         pickTimeViewController.time = date
       }
     }
   }
   
-  private func applyIntake(amount: Double) {
+  fileprivate func applyIntake(_ amount: Double) {
     let adjustedAmount = self.prepareAmountForStoring(amount)
     
     switch self.viewMode {
-    case .Add: self.addIntake(amount: adjustedAmount)
-    case .Edit: self.updateIntake(amount: adjustedAmount)
+    case .add: self.addIntake(amount: adjustedAmount)
+    case .edit: self.updateIntake(amount: adjustedAmount)
     }
   }
   
-  private func prepareAmountForStoring(amount: Double) -> Double {
+  fileprivate func prepareAmountForStoring(_ amount: Double) -> Double {
     let precision = Settings.sharedInstance.generalVolumeUnits.value.precision
-    return Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: amount, unitType: .Volume, roundPrecision: precision)
+    return Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: amount, unitType: .volume, roundPrecision: precision)
   }
   
-  private func computeIntakeDate() -> NSDate {
+  fileprivate func computeIntakeDate() -> Date {
     if timeIsChoosen || !isCurrentDayToday {
       return date
     } else {
-      return isCurrentDayToday ? NSDate() : DateHelper.dateByJoiningDateTime(datePart: date, timePart: NSDate())
+      return isCurrentDayToday ? Date() : DateHelper.dateByJoiningDateTime(datePart: date, timePart: Date())
     }
   }
   
-  private func addIntake(amount amount: Double) {
+  fileprivate func addIntake(amount: Double) {
     CoreDataStack.performOnPrivateContext { privateContext in
-      let drink = try! privateContext.existingObjectWithID(self.drink.objectID) as! Drink
+      let drink = try! privateContext.existingObject(with: self.drink.objectID) as! Drink
       
       IntakeHelper.addIntakeWithHealthKitChecks(
         amount: amount,
@@ -274,18 +274,18 @@ class IntakeViewController: UIViewController {
         viewController: self,
         managedObjectContext: privateContext,
         actionBeforeAddingIntakeToCoreData: {
-          dispatch_async(dispatch_get_main_queue()) {
-            self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+          DispatchQueue.main.async {
+            self.navigationController?.dismiss(animated: true, completion: nil)
           }
         },
         actionAfterAddingIntakeToCoreData: nil)
     }
   }
   
-  private func updateIntake(amount amount: Double) {
+  fileprivate func updateIntake(amount: Double) {
     if let intake = intake {
       CoreDataStack.performOnPrivateContext { privateContext in
-        let drink = try! privateContext.existingObjectWithID(self.drink.objectID) as! Drink
+        let drink = try! privateContext.existingObject(with: self.drink.objectID) as! Drink
         drink.recentAmount.amount = amount
 
         intake.amount = amount
@@ -295,54 +295,54 @@ class IntakeViewController: UIViewController {
       }
     }
     
-    navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    navigationController?.dismiss(animated: true, completion: nil)
   }
 
-  private func formatAmount(amount: Double, precision: Double? = nil, decimals: Int? = nil) -> String {
+  fileprivate func formatAmount(_ amount: Double, precision: Double? = nil, decimals: Int? = nil) -> String {
     let finalPrecision = precision ?? amountPrecision
     let finalDecimals = decimals ?? amountDecimals
-    return Units.sharedInstance.formatMetricAmountToText(metricAmount: amount, unitType: .Volume, roundPrecision: finalPrecision, decimals: finalDecimals)
+    return Units.sharedInstance.formatMetricAmountToText(metricAmount: amount, unitType: .volume, roundPrecision: finalPrecision, decimals: finalDecimals)
   }
   
-  private func setAmountLabel(amount: Double) {
+  fileprivate func setAmountLabel(_ amount: Double) {
     amountLabel.text = formatAmount(amount)
   }
 
-  private enum Mode {
-    case Add, Edit
+  fileprivate enum Mode {
+    case add, edit
   }
   
-  private var viewMode: Mode {
-    return intake == nil ? .Add : .Edit
+  fileprivate var viewMode: Mode {
+    return intake == nil ? .add : .edit
   }
   
-  private var predefinedAmounts: (small: Double, medium: Double, large: Double) { return Settings.sharedInstance.generalVolumeUnits.value.predefinedAmounts }
-  private var amountPrecision: Double { return Settings.sharedInstance.generalVolumeUnits.value.precision }
-  private var amountDecimals: Int { return Settings.sharedInstance.generalVolumeUnits.value.decimals }
+  fileprivate var predefinedAmounts: (small: Double, medium: Double, large: Double) { return Settings.sharedInstance.generalVolumeUnits.value.predefinedAmounts }
+  fileprivate var amountPrecision: Double { return Settings.sharedInstance.generalVolumeUnits.value.precision }
+  fileprivate var amountDecimals: Int { return Settings.sharedInstance.generalVolumeUnits.value.decimals }
   
-  private var isCurrentDayToday: Bool = false
+  fileprivate var isCurrentDayToday: Bool = false
 
 }
 
 private extension Units.Volume {
   var precision: Double {
     switch self {
-    case Millilitres: return 10.0
-    case FluidOunces: return 0.5
+    case .millilitres: return 10.0
+    case .fluidOunces: return 0.5
     }
   }
   
   var decimals: Int {
     switch self {
-    case Millilitres: return 0
-    case FluidOunces: return 1
+    case .millilitres: return 0
+    case .fluidOunces: return 1
     }
   }
   
   var predefinedAmounts: (small: Double, medium: Double, large: Double) {
     switch self {
-    case Millilitres: return (small: 200.0, medium: 330.0, large: 500.0)
-    case FluidOunces: return (small: 236.5882365, medium: 354.8821875 , large: 502.7500025625) // 8, 12 and 17 fl oz
+    case .millilitres: return (small: 200.0, medium: 330.0, large: 500.0)
+    case .fluidOunces: return (small: 236.5882365, medium: 354.8821875 , large: 502.7500025625) // 8, 12 and 17 fl oz
     }
   }
 }

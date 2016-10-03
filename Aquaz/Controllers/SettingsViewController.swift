@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsViewController: OmegaSettingsViewController {
 
-  private struct LocalyzedStrings {
+  fileprivate struct LocalyzedStrings {
     
     lazy var dailyWaterIntakeTitle: String = NSLocalizedString("SVC:Daily Water Intake",
       value: "Daily Water Intake",
@@ -39,12 +39,12 @@ class SettingsViewController: OmegaSettingsViewController {
 
   }
   
-  private var volumeObserver: SettingsObserver?
-  private var waterGoalObserver: SettingsObserver?
+  fileprivate var volumeObserver: SettingsObserver?
+  fileprivate var waterGoalObserver: SettingsObserver?
   
-  private var localizedStrings = LocalyzedStrings()
+  fileprivate var localizedStrings = LocalyzedStrings()
   
-  private struct Constants {
+  fileprivate struct Constants {
     static let calculateWaterIntakeSegue = "Calculate Water Intake"
     static let showNotificationsSegue = "Show Notifications"
     static let showExtraFactorsSegue = "Show Extra Factors"
@@ -62,7 +62,7 @@ class SettingsViewController: OmegaSettingsViewController {
   }
 
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
 
   override func createTableCellsSections() -> [TableCellsSection] {
@@ -70,10 +70,10 @@ class SettingsViewController: OmegaSettingsViewController {
     let dailyWaterIntakeCell = createRightDetailTableCell(
       title: localizedStrings.dailyWaterIntakeTitle,
       settingsItem: Settings.sharedInstance.userDailyWaterIntake,
-      accessoryType: .DisclosureIndicator,
-      activationChangedFunction: { [weak self] in self?.waterGoalCellWasSelected($0, active: $1) },
-      stringFromValueFunction: { [weak self] in self?.stringFromWaterGoal($0) ?? "\($0)" })
+      stringFromValueFunction: { [weak self] in self?.stringFromWaterGoal($0) ?? "\($0)" },
+      accessoryType: .disclosureIndicator)
     
+    dailyWaterIntakeCell.activationChangedFunction = { [weak self] in self?.waterGoalCellWasSelected($0, active: $1) }
     dailyWaterIntakeCell.image = ImageHelper.loadImage(.SettingsWater)
     
     volumeObserver = Settings.sharedInstance.generalVolumeUnits.addObserver { _ in
@@ -84,10 +84,11 @@ class SettingsViewController: OmegaSettingsViewController {
       dailyWaterIntakeCell.readFromExternalStorage()
     }
     
-    let extraFactorsCell = createBasicTableCell(title: localizedStrings.specialModesTitle, accessoryType: .DisclosureIndicator) { [weak self]
-      (tableCell, active) -> () in
+    let extraFactorsCell = createBasicTableCell(title: localizedStrings.specialModesTitle, accessoryType: .disclosureIndicator)
+    
+    extraFactorsCell.activationChangedFunction = { [weak self] (tableCell, active) -> () in
       if active {
-        self?.performSegueWithIdentifier(Constants.showExtraFactorsSegue, sender: tableCell)
+        self?.performSegue(withIdentifier: Constants.showExtraFactorsSegue, sender: tableCell)
       }
     }
     
@@ -97,10 +98,11 @@ class SettingsViewController: OmegaSettingsViewController {
     recommendationsSection.tableCells = [dailyWaterIntakeCell, extraFactorsCell]
     
     // Units section
-    let unitsCell = createBasicTableCell(title: localizedStrings.unitsTitle, accessoryType: .DisclosureIndicator) { [weak self]
-      (tableCell, active) -> () in
+    let unitsCell = createBasicTableCell(title: localizedStrings.unitsTitle, accessoryType: .disclosureIndicator)
+    
+    unitsCell.activationChangedFunction = { [weak self] (tableCell, active) -> () in
       if active {
-        self?.performSegueWithIdentifier(Constants.showUnitsSegue, sender: tableCell)
+        self?.performSegue(withIdentifier: Constants.showUnitsSegue, sender: tableCell)
       }
     }
 
@@ -110,10 +112,11 @@ class SettingsViewController: OmegaSettingsViewController {
     unitsSection.tableCells = [unitsCell]
 
     // Notifications section
-    let notificationsCell = createBasicTableCell(title: localizedStrings.notificationsTitle, accessoryType: .DisclosureIndicator) { [weak self]
-      (tableCell, active) -> () in
+    let notificationsCell = createBasicTableCell(title: localizedStrings.notificationsTitle, accessoryType: .disclosureIndicator)
+    
+    notificationsCell.activationChangedFunction = { [weak self] (tableCell, active) -> () in
       if active {
-        self?.performSegueWithIdentifier(Constants.showNotificationsSegue, sender: tableCell)
+        self?.performSegue(withIdentifier: Constants.showNotificationsSegue, sender: tableCell)
       }
     }
     
@@ -123,10 +126,11 @@ class SettingsViewController: OmegaSettingsViewController {
     notificationsSection.tableCells = [notificationsCell]
     
     // Support section
-    let supportCell = createBasicTableCell(title: localizedStrings.supportTitle, accessoryType: .DisclosureIndicator) { [weak self]
-        (tableCell, active) -> () in
+    let supportCell = createBasicTableCell(title: localizedStrings.supportTitle, accessoryType: .disclosureIndicator)
+    
+    supportCell.activationChangedFunction = { [weak self] (tableCell, active) -> () in
         if active {
-          self?.performSegueWithIdentifier(Constants.showSupportSegue, sender: tableCell)
+          self?.performSegue(withIdentifier: Constants.showSupportSegue, sender: tableCell)
         }
     }
     
@@ -140,14 +144,13 @@ class SettingsViewController: OmegaSettingsViewController {
 
     // Export to the Health App section
     if #available(iOS 9.0, *) {
-      let healthCell = createBasicTableCell(
-        title: localizedStrings.exportToHealthAppTitle,
-        accessoryType: .DisclosureIndicator,
-        activationChangedFunction: { [weak self] tableCell, active in
-          if active {
-            self?.performSegueWithIdentifier(Constants.exportToHealthKit, sender: tableCell)
-          }
-      })
+      let healthCell = createBasicTableCell(title: localizedStrings.exportToHealthAppTitle, accessoryType: .disclosureIndicator)
+      
+      healthCell.activationChangedFunction = { [weak self] tableCell, active in
+        if active {
+          self?.performSegue(withIdentifier: Constants.exportToHealthKit, sender: tableCell)
+        }
+      }
       
       healthCell.image = ImageHelper.loadImage(.SettingsHealthKit)
       
@@ -160,15 +163,15 @@ class SettingsViewController: OmegaSettingsViewController {
     return sections
   }
   
-  private func stringFromWaterGoal(waterGoal: Double) -> String {
+  fileprivate func stringFromWaterGoal(_ waterGoal: Double) -> String {
     let volumeUnit = Settings.sharedInstance.generalVolumeUnits.value
-    let text = Units.sharedInstance.formatMetricAmountToText(metricAmount: waterGoal, unitType: .Volume, roundPrecision: volumeUnit.precision, decimals: volumeUnit.decimals, displayUnits: true)
+    let text = Units.sharedInstance.formatMetricAmountToText(metricAmount: waterGoal, unitType: .volume, roundPrecision: volumeUnit.precision, decimals: volumeUnit.decimals, displayUnits: true)
     return text
   }
   
-  private func waterGoalCellWasSelected(tableCell: TableCell, active: Bool) {
+  fileprivate func waterGoalCellWasSelected(_ tableCell: TableCell, active: Bool) {
     if active {
-      performSegueWithIdentifier(Constants.calculateWaterIntakeSegue, sender: tableCell)
+      performSegue(withIdentifier: Constants.calculateWaterIntakeSegue, sender: tableCell)
     }
   }
   
@@ -177,15 +180,15 @@ class SettingsViewController: OmegaSettingsViewController {
 private extension Units.Volume {
   var precision: Double {
     switch self {
-    case Millilitres: return 1
-    case FluidOunces: return 0.1
+    case .millilitres: return 1
+    case .fluidOunces: return 0.1
     }
   }
   
   var decimals: Int {
     switch self {
-    case Millilitres: return 0
-    case FluidOunces: return 1
+    case .millilitres: return 0
+    case .fluidOunces: return 1
     }
   }
 }

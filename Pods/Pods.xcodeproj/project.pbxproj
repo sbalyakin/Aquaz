@@ -7,217 +7,215 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0585674361DE979CF8172D91937BDBCC /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E4A35718C329AC7854970842749A7A /* WatchConnectivity.framework */; };
-		0AFF8D2CBC1A5022AD321F14EC78A8D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */; };
-		198A4DDEDC1811E5B7A36FB7500A29B4 /* MMWormholeSessionMessageTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = D375F9C0B55456B282A63CCED7A9AE47 /* MMWormholeSessionMessageTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		19A5ADF0E1F4A6C5E5C062C8575BF989 /* MMWormholeSessionContextTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FBB00EE907558BABC2605BAEAB029D8 /* MMWormholeSessionContextTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		1A0FBBD996312517BA57B91A1CEBE5B0 /* MMWormholeSessionContextTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FBB00EE907558BABC2605BAEAB029D8 /* MMWormholeSessionContextTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		247F4F3DDCB2E1A5ECB1942B307A66D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3561B9B2C830EFF934076F2A28D36940 /* UIKit.framework */; };
-		2B70584BE57EEA55EE4A7C169661CE2A /* SDStatusBarOverriderPost9_0.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B2825FCE5D0E6E3B760DDF51D06A209 /* SDStatusBarOverriderPost9_0.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2E68DBE0A51CE87E1EA26F2BB34818E4 /* SDStatusBarManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E981627F35E984BFCB82701B67151CE7 /* SDStatusBarManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A5A260C8E31AD302483DA182BBC4BE2 /* MMWormholeSessionFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = CED744081B4A7769775D7C404DF2F7FD /* MMWormholeSessionFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		3B0ACBB31B0EE29AF513665F3EE1AB37 /* MMWormholeFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE15D2D96107CCFA2DCC51CCD385D8 /* MMWormholeFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		42E54CC85CAAE55D3A554A5FB556F835 /* MMWormhole-iOS7.1-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B11B104F12FBC173FBC21ED3882B1AD /* MMWormhole-iOS7.1-dummy.m */; };
-		4523BFEAFF432627414C9F8F6FB304D6 /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B602D87CC1A7B28D37AC5E4C366E54 /* MMWormhole.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46638A54E6F0CE869413BF10BC58A08E /* MMWormholeSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 308032F013DC5E6EE5C51BBDA926517B /* MMWormholeSession.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		4FFB0CA777A0EE8AFC4DE89E49F72A50 /* Pods-Widget-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2CB4885CB4620D9F93B5A6A8B09C32 /* Pods-Widget-dummy.m */; };
-		5F94A1109A11ED829CA6BA2BBCDF3F82 /* SimulatorStatusMagic-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2314B9169F317E9B5EA282F91116A007 /* SimulatorStatusMagic-dummy.m */; };
-		609D34E6455CDF532F1B42E034472B99 /* MMWormholeSessionMessageTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF5A2A927DAC9455585FB168B3B5A5C /* MMWormholeSessionMessageTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		62B09B2086257A3CFC5C323BF93E4969 /* Pods-AquazTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FE63EB4874905B111EE2D12F7F5F6B2A /* Pods-AquazTests-dummy.m */; };
-		64B6ABF47091BC80CF75B649CEB2A002 /* MMWormholeSessionFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 508D12E25BC05F13405DE4B240B8E9BF /* MMWormholeSessionFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		66F84E1C7D2CDBB5D491648A08B6E2D4 /* MMWormholeCoordinatedFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D5EA52CF365F775A771BC856297D6 /* MMWormholeCoordinatedFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		671048B11F6F856280A83E49C5828EEE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */; };
-		6A95BDDB20414108438B8C350BB5079E /* MMWormholeCoordinatedFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 1580CE43CCAF1DD8890A5BD3CC2D8014 /* MMWormholeCoordinatedFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BD95E33A5A8313C0F51A7E5A5A253EF /* MMWormholeSessionFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 508D12E25BC05F13405DE4B240B8E9BF /* MMWormholeSessionFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		701921FA1A9460F310A8A9B60B8920C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */; };
-		790ECDE7E81DAB6C9477623B8DB5473B /* MMWormholeFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE15D2D96107CCFA2DCC51CCD385D8 /* MMWormholeFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		86689725841A891CA80415D4FAC00AE8 /* MMWormholeFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CFF3100DC33DAC6C91BF93721F444EC /* MMWormholeFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8BEC90895671D7307193681028899133 /* MMWormholeTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = DE78FF5FEC3DC4C6DAC2F1E0025EE351 /* MMWormholeTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8D6CD3B5C36EB5D85011AF3C98E520B3 /* MMWormhole.h in Headers */ = {isa = PBXBuildFile; fileRef = 6262E385E2AE1E1E6F2336C2E905F394 /* MMWormhole.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DBC802E976D04716AD1FA31481C9FF9 /* SDStatusBarOverrider.h in Headers */ = {isa = PBXBuildFile; fileRef = CAF5083AD64F87CFE4F7B192B96D37DC /* SDStatusBarOverrider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9D8CC6F3321085545537C03FE82138EF /* SDStatusBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 929A61FDECF9A1F7EB1B781100CCA635 /* SDStatusBarManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		A1DCC104039C6B455005C13EF33DE110 /* SDStatusBarOverriderPost8_3.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B7BE3DD24641ACE67D960FCDF242086 /* SDStatusBarOverriderPost8_3.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A1FE8F7E5C51895E0F9E82C88AF18141 /* MMWormholeFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CFF3100DC33DAC6C91BF93721F444EC /* MMWormholeFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A25F1DEA7282F1F6E9B4611E78433DBB /* MMWormholeCoordinatedFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 1580CE43CCAF1DD8890A5BD3CC2D8014 /* MMWormholeCoordinatedFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A528EC32ED9A398180E77431EE23570A /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E4A35718C329AC7854970842749A7A /* WatchConnectivity.framework */; };
-		AA04E4CF8DC233874E395518AB4D4DCA /* SDStatusBarOverriderPre8_3.h in Headers */ = {isa = PBXBuildFile; fileRef = E3E59CC46CF9B5BD5C81C86F5639420B /* SDStatusBarOverriderPre8_3.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B16AB70FCB0E6016E3645537576F9615 /* MMWormholeSessionMessageTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF5A2A927DAC9455585FB168B3B5A5C /* MMWormholeSessionMessageTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		BA891B2EEB22E2A58804AE93C4409861 /* Pods-Aquaz-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 56DC6F9A55179B1D48485DFC0CAF55E3 /* Pods-Aquaz-dummy.m */; };
-		BB31921CD9E4F08A5C6C78FD95521DC2 /* SDStatusBarOverriderPost8_3.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F968FBC2E7C6C1F1DB5526BA7A81CF /* SDStatusBarOverriderPost8_3.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		C16985B687FE03757C171F58B6458013 /* SDStatusBarOverriderPre8_3.m in Sources */ = {isa = PBXBuildFile; fileRef = 8291B63729000F5824D8A2D859641128 /* SDStatusBarOverriderPre8_3.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		C8A87C2DFF6C9E7C0B57F1A86E8F34F8 /* MMWormholeCoordinatedFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D5EA52CF365F775A771BC856297D6 /* MMWormholeCoordinatedFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		D2B30EDCEB8CE7F881EF64A75AB6469A /* MMWormholeSessionContextTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 4130D5080ABD25D7C14AE2F529BE0BD1 /* MMWormholeSessionContextTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D708C15C6030AF772A0AC524A8A5DCB0 /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B602D87CC1A7B28D37AC5E4C366E54 /* MMWormhole.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		DAFCE439596268915D8E4C4370D0EC78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */; };
-		DB39673919254228F931956F01ED219C /* MMWormholeTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = DE78FF5FEC3DC4C6DAC2F1E0025EE351 /* MMWormholeTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DE048C8E77915A672C3C51F1E208DD4B /* MMWormholeSessionMessageTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = D375F9C0B55456B282A63CCED7A9AE47 /* MMWormholeSessionMessageTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DF72671DC04A880A8DC31BA2F42DF0F0 /* SDStatusBarOverriderPost9_0.m in Sources */ = {isa = PBXBuildFile; fileRef = CA47E0F766693CC1BC89833F2206D9B2 /* SDStatusBarOverriderPost9_0.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		DFE86D9A67DA6B5250712B3DD37338EF /* MMWormholeSessionFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = CED744081B4A7769775D7C404DF2F7FD /* MMWormholeSessionFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		E265C9470F8DABBF97C6A2D939D6F2DF /* MMWormholeSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 827B65870BC94E2373A8174A055A70A8 /* MMWormholeSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ED9DF1754FF7E082348EB4021312BCF2 /* MMWormholeSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 308032F013DC5E6EE5C51BBDA926517B /* MMWormholeSession.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		EEF752177066659027704ED532C75F7F /* MMWormholeSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 827B65870BC94E2373A8174A055A70A8 /* MMWormholeSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EF58A111F7516C2619762187B63A0A8B /* MMWormholeSessionContextTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 4130D5080ABD25D7C14AE2F529BE0BD1 /* MMWormholeSessionContextTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F06C2263F7805762475BD345B1A4A42C /* MMWormhole.h in Headers */ = {isa = PBXBuildFile; fileRef = 6262E385E2AE1E1E6F2336C2E905F394 /* MMWormhole.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F4EAAB609C752CBD69058316E3894116 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */; };
-		F9B79D47991E7DD94D57541E1441CCB7 /* MMWormhole-iOS8.0-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A86EDA8AEF8A829A0F5EC75C1404ECF2 /* MMWormhole-iOS8.0-dummy.m */; };
-		FDC456034AB89ADEBD0A4B247E51D2E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */; };
+		190C803A3415DF86BE4A3146981FC7F0 /* SDStatusBarManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CD9353D716421E39DC1AE7D4E9E23B1 /* SDStatusBarManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		192D32892487D4AD3412DC61694A6735 /* SDStatusBarOverriderPre8_3.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B447486715615B8E514A9BE673CC58 /* SDStatusBarOverriderPre8_3.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		33618BBEB40ED0B04402BD45D0A12D96 /* MMWormholeSessionMessageTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 0424B6247327523FE0498BFDF70C2307 /* MMWormholeSessionMessageTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D3D42BE1707485179802A0B17DAE38 /* SDStatusBarOverriderPost8_3.h in Headers */ = {isa = PBXBuildFile; fileRef = 717AE8808554DEB4747114B6075C3538 /* SDStatusBarOverriderPost8_3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E475FB226EB9BCF0D4A312CBE5C3A94 /* SDStatusBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7814F10CDCD840BFE9088F863516DDED /* SDStatusBarManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		44CF589A9B620562CC754C6FC0E81B69 /* Pods-Aquaz-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE8E83ACE18DF90BE13F19BE94F55AC /* Pods-Aquaz-dummy.m */; };
+		45D865CB1822646EFC53BFA48FC4A0B4 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E4A35718C329AC7854970842749A7A /* WatchConnectivity.framework */; };
+		53F90BE826C4C0364CD94B6757B1C4D9 /* SDStatusBarOverriderPost8_3.m in Sources */ = {isa = PBXBuildFile; fileRef = C80DF62F18882173E9EDDE8BC0978721 /* SDStatusBarOverriderPost8_3.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		698451D903454F42B2351C915A02B6A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3561B9B2C830EFF934076F2A28D36940 /* UIKit.framework */; };
+		6DCB12C6DEDB86E74D46178DCF02349E /* MMWormholeSessionMessageTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C9D300D40D1146BD61CBB2B22EBB79 /* MMWormholeSessionMessageTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		762F18A4394FA15213070BDF993A2B48 /* MMWormholeFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B91C9179A1A0D915DA8A28D9566D129 /* MMWormholeFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		77A87A401B9D4B23AAF3005E7DD55C87 /* MMWormholeFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 11706A950E20E69469B678DEAB1D65D9 /* MMWormholeFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		7DC91AE18E358AA0C8DF1B722AA4D94E /* SDStatusBarOverriderPost10_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 0812F84BE7D24B919C464718C60F3259 /* SDStatusBarOverriderPost10_0.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		823143A99A4E5658A80816E3649534B5 /* SDStatusBarOverriderPost9_0.h in Headers */ = {isa = PBXBuildFile; fileRef = 68F8FFD6C6202C9460620A2878707907 /* SDStatusBarOverriderPost9_0.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84B37CAEC1716055BEA3DA3795BC8A3C /* MMWormholeCoordinatedFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = E908CF17D035E7A42E3B4A69C6107327 /* MMWormholeCoordinatedFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8CA202DE2B82A4FA9F6433D0034EA12E /* MMWormholeSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B32061EFFA6CFD955914B05F8AD68B7 /* MMWormholeSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D0DE603FA10B9245B1C04D3CCE8013D /* SDStatusBarOverriderPost9_3.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F001DE2AFAEAAAA407C7F9FF495F961 /* SDStatusBarOverriderPost9_3.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8D7A5AECA1F3061D719D40CD4F5FF35C /* MMWormholeSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E747561E40EA012CDBD1784A9D47700 /* MMWormholeSession.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		934A883F737BDBC8A8B3E75E35AF4D50 /* SDStatusBarOverriderPost10_0.h in Headers */ = {isa = PBXBuildFile; fileRef = 4163B40B5622705E412E0222942F1101 /* SDStatusBarOverriderPost10_0.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9D6AFCD74FCC1EC6C2D968ABF8EC0D56 /* MMWormholeSessionContextTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = D01BE2E7CC6924FA44EBA7BCC3FD2EA0 /* MMWormholeSessionContextTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		AC715ED246C7D933C76E77EF50A694B4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */; };
+		B38941C0811BF0F9FD2DAD180EC12CD2 /* SDStatusBarOverriderPost9_3.h in Headers */ = {isa = PBXBuildFile; fileRef = 077B21BBE49B6859995A501661F90F8E /* SDStatusBarOverriderPost9_3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B594D9ABE3D364625535906A3F05A802 /* SDStatusBarOverrider.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1FB7C6BEE1784A1411438BA0240AB /* SDStatusBarOverrider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BD7CB717DA844692A2E615DDBEA25A11 /* MMWormholeCoordinatedFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 2115DC021270A29B4A668978BDBF1207 /* MMWormholeCoordinatedFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		C8D147D6C88AEA702D3DBC74B4768097 /* Pods-Widget-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E64F8F293626CC333E3FE28F75EC73E3 /* Pods-Widget-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9CB55EBCE3C55EA3AFD14F5278A33B6 /* SimulatorStatusMagic-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE08585171DF887BDFC769AF5A9DB591 /* SimulatorStatusMagic-dummy.m */; };
+		CC31FA025B3936FEC27592CC01AC4A5F /* MMWormholeSessionFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 27458252155EFF708548AA852594770E /* MMWormholeSessionFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D06E287165536614B66FA045D8A5D99A /* MMWormholeTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 14CF6733CB5273EB8CAD951C1F5AF3E9 /* MMWormholeTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0CA56D62E126D8687EF499FAB88DFC3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */; };
+		D53C965381E8D2BDAEEEACA0451D6E2E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */; };
+		DE9D89BFECB559F825F1BC2506FB1695 /* MMWormhole.h in Headers */ = {isa = PBXBuildFile; fileRef = 9059B5FD2DBB518464956E06031CFE38 /* MMWormhole.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DFEEABC8C678127F23965CE3AE4B9F67 /* MMWormholeSessionContextTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = EB984FAB12CE083802FEFAF971A5A57F /* MMWormholeSessionContextTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E04121AD5D0C3CBA35D028A7154C62A2 /* MMWormholeSessionFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = E043E35C4211D0125496B01687D16635 /* MMWormholeSessionFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		E10A933A0449C764A4AA4A2610665898 /* SDStatusBarOverriderPre8_3.h in Headers */ = {isa = PBXBuildFile; fileRef = 28DA605C3DB95C29916D075DECFA8C17 /* SDStatusBarOverriderPre8_3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2DE3D61D86DEFA0174928C8BE04F919 /* SimulatorStatusMagic-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DBA9BA5CA630D70E6186E663E985E636 /* SimulatorStatusMagic-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E363E0EE419CF84D467724E3D9961DFF /* Pods-Widget-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0DCF625CF5293D6326A3EBA87AF9C1 /* Pods-Widget-dummy.m */; };
+		E4258B26D1911DC625C26AEDC7CA5A6A /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E5F2160A6351C8D8A25E2E3971E76 /* MMWormhole.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		E65281839DDC0C9EE91458CEA8161E8C /* Pods-Aquaz-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BB47F148F23BC48B17720F3AF03CC673 /* Pods-Aquaz-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F282E18AB7B7C15A6720E35FEB5B8502 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */; };
+		F5BE0FF56BA325ADB192D96FEE6CFAC3 /* SDStatusBarOverriderPost9_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B9330F03C2042221076501D3FB6318 /* SDStatusBarOverriderPost9_0.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		FC0CF3F2978060186204610D8D21DB9C /* MMWormhole-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 840C63DC46EEE7B7DAD668D0C98069B2 /* MMWormhole-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FD8C3A12053BBFE6526E99CF6FD0B9C0 /* MMWormhole-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF04D9653AA53E67BAD592B0CC7633D /* MMWormhole-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		09F80FEDD1B90A4257EE38A130EC96D9 /* PBXContainerItemProxy */ = {
+		1CADABB7C7E2E024DADCE72EF37F9C5B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 45B3B4D2D8B90EB110B9C258F3D565E4;
-			remoteInfo = "MMWormhole-iOS7.1";
+			remoteGlobalIDString = DA2550D7D94491C4B4EA8F3435FEEC4B;
+			remoteInfo = MMWormhole;
 		};
-		5F81C54CD4BF4EE5221168D1A62A25F1 /* PBXContainerItemProxy */ = {
+		2D8F4F431F262A4220729E2F92869F2A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 45B3B4D2D8B90EB110B9C258F3D565E4;
-			remoteInfo = "MMWormhole-iOS7.1";
-		};
-		A96235863A9511CE5254B9474EE5F7B9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7AFB97499FBC2E42854793A01F3CF236;
-			remoteInfo = "MMWormhole-iOS8.0";
-		};
-		D8A3C02EAE892FBEAAB0ABE56A106DA0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EF96DA6CBF6F4E2C852C5EA0A615DC3D;
+			remoteGlobalIDString = 37848BCD21A7C619BFE9D523391C269B;
 			remoteInfo = SimulatorStatusMagic;
+		};
+		842E4EEA03CEF633D8414C3C4736C436 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA2550D7D94491C4B4EA8F3435FEEC4B;
+			remoteInfo = MMWormhole;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0092E259C72E94DA26EC2FC5569FBBFD /* libMMWormhole-iOS8.0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMMWormhole-iOS8.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		01375587697A94D0EC75FE6CB9AC763A /* Pods-AquazTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AquazTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		0229BCBA5ADF834EABA1E997A4230925 /* Pods-Aquaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.release.xcconfig"; sourceTree = "<group>"; };
-		0242C43214D2852DB136D0554ECAD9DD /* MMWormhole-iOS8.0-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MMWormhole-iOS8.0-prefix.pch"; path = "../MMWormhole-iOS8.0/MMWormhole-iOS8.0-prefix.pch"; sourceTree = "<group>"; };
-		0B1D5EA52CF365F775A771BC856297D6 /* MMWormholeCoordinatedFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeCoordinatedFileTransiting.m; path = Source/MMWormholeCoordinatedFileTransiting.m; sourceTree = "<group>"; };
-		1580CE43CCAF1DD8890A5BD3CC2D8014 /* MMWormholeCoordinatedFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeCoordinatedFileTransiting.h; path = Source/MMWormholeCoordinatedFileTransiting.h; sourceTree = "<group>"; };
-		168A0443BA9D4E9E0BF36B7FEE319BCA /* Pods-Widget-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Widget-acknowledgements.markdown"; sourceTree = "<group>"; };
-		1B11B104F12FBC173FBC21ED3882B1AD /* MMWormhole-iOS7.1-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MMWormhole-iOS7.1-dummy.m"; sourceTree = "<group>"; };
-		1EDE15D2D96107CCFA2DCC51CCD385D8 /* MMWormholeFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeFileTransiting.m; path = Source/MMWormholeFileTransiting.m; sourceTree = "<group>"; };
-		2314B9169F317E9B5EA282F91116A007 /* SimulatorStatusMagic-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SimulatorStatusMagic-dummy.m"; sourceTree = "<group>"; };
-		24D0827A14CF7410192C645C6F36EF70 /* Pods-Aquaz-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz-frameworks.sh"; sourceTree = "<group>"; };
-		24FB34F422812A28A8E461027AF0953E /* SimulatorStatusMagic.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SimulatorStatusMagic.xcconfig; sourceTree = "<group>"; };
-		2D4397748711FDEEFA49BD5030EFCB7C /* MMWormhole-iOS8.0.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "MMWormhole-iOS8.0.xcconfig"; path = "../MMWormhole-iOS8.0/MMWormhole-iOS8.0.xcconfig"; sourceTree = "<group>"; };
-		2E8770B6F2867F96355DF990FEDFBC19 /* Pods-Widget-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Widget-resources.sh"; sourceTree = "<group>"; };
-		308032F013DC5E6EE5C51BBDA926517B /* MMWormholeSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSession.m; path = Source/MMWormholeSession.m; sourceTree = "<group>"; };
+		0424B6247327523FE0498BFDF70C2307 /* MMWormholeSessionMessageTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionMessageTransiting.h; path = Source/MMWormholeSessionMessageTransiting.h; sourceTree = "<group>"; };
+		06459E7ED109CB81C29641F1EBE45350 /* Pods-Aquaz-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Aquaz-acknowledgements.markdown"; sourceTree = "<group>"; };
+		077B21BBE49B6859995A501661F90F8E /* SDStatusBarOverriderPost9_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost9_3.h; path = SDStatusBarManager/SDStatusBarOverriderPost9_3.h; sourceTree = "<group>"; };
+		0812F84BE7D24B919C464718C60F3259 /* SDStatusBarOverriderPost10_0.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost10_0.m; path = SDStatusBarManager/SDStatusBarOverriderPost10_0.m; sourceTree = "<group>"; };
+		114A63AECFD06822A02174911078F7AD /* MMWormhole.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MMWormhole.modulemap; sourceTree = "<group>"; };
+		11706A950E20E69469B678DEAB1D65D9 /* MMWormholeFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeFileTransiting.m; path = Source/MMWormholeFileTransiting.m; sourceTree = "<group>"; };
+		14CF6733CB5273EB8CAD951C1F5AF3E9 /* MMWormholeTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeTransiting.h; path = Source/MMWormholeTransiting.h; sourceTree = "<group>"; };
+		15C397F5EA1B1DE29DEF0C8B6D53FDAF /* CLSAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSAttributes.h; path = iOS/Crashlytics.framework/Headers/CLSAttributes.h; sourceTree = "<group>"; };
+		1F70CF4C100F5B6A28710F2252FB4A60 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2115DC021270A29B4A668978BDBF1207 /* MMWormholeCoordinatedFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeCoordinatedFileTransiting.m; path = Source/MMWormholeCoordinatedFileTransiting.m; sourceTree = "<group>"; };
+		218C7F2AD44318AE5B02F10CB3EA9836 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27458252155EFF708548AA852594770E /* MMWormholeSessionFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionFileTransiting.h; path = Source/MMWormholeSessionFileTransiting.h; sourceTree = "<group>"; };
+		28DA605C3DB95C29916D075DECFA8C17 /* SDStatusBarOverriderPre8_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPre8_3.h; path = SDStatusBarManager/SDStatusBarOverriderPre8_3.h; sourceTree = "<group>"; };
+		29DCD2983590173F8EE38410C6241112 /* MMWormhole.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MMWormhole.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B32061EFFA6CFD955914B05F8AD68B7 /* MMWormholeSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSession.h; path = Source/MMWormholeSession.h; sourceTree = "<group>"; };
+		33B9330F03C2042221076501D3FB6318 /* SDStatusBarOverriderPost9_0.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost9_0.m; path = SDStatusBarManager/SDStatusBarOverriderPost9_0.m; sourceTree = "<group>"; };
 		3561B9B2C830EFF934076F2A28D36940 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		35EA97508C2168044991025550D37D3A /* Pods-Widget-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Widget-acknowledgements.plist"; sourceTree = "<group>"; };
-		36E73CF4E2686CE9808AAC1EA6EBC161 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = iOS/Crashlytics.framework; sourceTree = "<group>"; };
-		372F73C3FE7BAFD19FCC4EFBA8B62770 /* Pods-Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Widget.debug.xcconfig"; sourceTree = "<group>"; };
-		4130D5080ABD25D7C14AE2F529BE0BD1 /* MMWormholeSessionContextTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionContextTransiting.h; path = Source/MMWormholeSessionContextTransiting.h; sourceTree = "<group>"; };
-		471A3A765EBBE96D55A65BEA25E987D9 /* MMWormhole-iOS7.1.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MMWormhole-iOS7.1.xcconfig"; sourceTree = "<group>"; };
+		3E747561E40EA012CDBD1784A9D47700 /* MMWormholeSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSession.m; path = Source/MMWormholeSession.m; sourceTree = "<group>"; };
+		3F001DE2AFAEAAAA407C7F9FF495F961 /* SDStatusBarOverriderPost9_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost9_3.m; path = SDStatusBarManager/SDStatusBarOverriderPost9_3.m; sourceTree = "<group>"; };
+		3FE8E83ACE18DF90BE13F19BE94F55AC /* Pods-Aquaz-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Aquaz-dummy.m"; sourceTree = "<group>"; };
+		4163B40B5622705E412E0222942F1101 /* SDStatusBarOverriderPost10_0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost10_0.h; path = SDStatusBarManager/SDStatusBarOverriderPost10_0.h; sourceTree = "<group>"; };
+		45C75DBAEE2BD69C5ECD048224E8CBA1 /* SimulatorStatusMagic.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SimulatorStatusMagic.modulemap; sourceTree = "<group>"; };
+		484A6938EDFA441DDBD6D0D2A27E9EBF /* SimulatorStatusMagic.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SimulatorStatusMagic.xcconfig; sourceTree = "<group>"; };
 		48E4A35718C329AC7854970842749A7A /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
-		4BF5A2A927DAC9455585FB168B3B5A5C /* MMWormholeSessionMessageTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionMessageTransiting.m; path = Source/MMWormholeSessionMessageTransiting.m; sourceTree = "<group>"; };
-		508D12E25BC05F13405DE4B240B8E9BF /* MMWormholeSessionFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionFileTransiting.h; path = Source/MMWormholeSessionFileTransiting.h; sourceTree = "<group>"; };
-		5409E3305C0AC1B31A3CE72963E5088B /* libPods-Aquaz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Aquaz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		56DC6F9A55179B1D48485DFC0CAF55E3 /* Pods-Aquaz-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Aquaz-dummy.m"; sourceTree = "<group>"; };
-		59B602D87CC1A7B28D37AC5E4C366E54 /* MMWormhole.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormhole.m; path = Source/MMWormhole.m; sourceTree = "<group>"; };
-		5C5B07A8BE01FDB84453363F7A721A18 /* Pods-AquazTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AquazTests.release.xcconfig"; sourceTree = "<group>"; };
-		6262E385E2AE1E1E6F2336C2E905F394 /* MMWormhole.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormhole.h; path = Source/MMWormhole.h; sourceTree = "<group>"; };
-		6CFF3100DC33DAC6C91BF93721F444EC /* MMWormholeFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeFileTransiting.h; path = Source/MMWormholeFileTransiting.h; sourceTree = "<group>"; };
-		6E067E38EB73AC805DE0E6A745C6B367 /* Pods-AquazTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AquazTests-resources.sh"; sourceTree = "<group>"; };
-		7215B79949F3314CB78DDE0CB66314A0 /* Pods-Aquaz-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Aquaz-acknowledgements.plist"; sourceTree = "<group>"; };
-		7B2825FCE5D0E6E3B760DDF51D06A209 /* SDStatusBarOverriderPost9_0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost9_0.h; path = SDStatusBarManager/SDStatusBarOverriderPost9_0.h; sourceTree = "<group>"; };
-		7B2CB4885CB4620D9F93B5A6A8B09C32 /* Pods-Widget-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Widget-dummy.m"; sourceTree = "<group>"; };
-		7E8D97C7B835CDF99CF6677C396E0CE5 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
-		812DBBF770B4F60DFB973A0608687EA4 /* Pods-Aquaz-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Aquaz-acknowledgements.markdown"; sourceTree = "<group>"; };
+		4A733D24A35AA65CBA23503A00F783FA /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B0DCF625CF5293D6326A3EBA87AF9C1 /* Pods-Widget-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Widget-dummy.m"; sourceTree = "<group>"; };
+		50FE5AECFCDAD48F82EBB24385AF2EE1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		550D384D97FC0B0EDE04A5C008FC92C7 /* ANSCompatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ANSCompatibility.h; path = iOS/Crashlytics.framework/Headers/ANSCompatibility.h; sourceTree = "<group>"; };
+		56B7EB61EE6519C6D661C3610F244CD5 /* MMWormhole-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMWormhole-prefix.pch"; sourceTree = "<group>"; };
+		56FB0F45032A72352889E7CB177978F5 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
+		58C944A0239C714695F34E5531424C30 /* SimulatorStatusMagic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SimulatorStatusMagic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AF04D9653AA53E67BAD592B0CC7633D /* MMWormhole-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MMWormhole-dummy.m"; sourceTree = "<group>"; };
+		68F8FFD6C6202C9460620A2878707907 /* SDStatusBarOverriderPost9_0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost9_0.h; path = SDStatusBarManager/SDStatusBarOverriderPost9_0.h; sourceTree = "<group>"; };
+		6B91C9179A1A0D915DA8A28D9566D129 /* MMWormholeFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeFileTransiting.h; path = Source/MMWormholeFileTransiting.h; sourceTree = "<group>"; };
+		717AE8808554DEB4747114B6075C3538 /* SDStatusBarOverriderPost8_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost8_3.h; path = SDStatusBarManager/SDStatusBarOverriderPost8_3.h; sourceTree = "<group>"; };
+		729905FECD9526A846761D43D9B57C4A /* Pods-Aquaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.debug.xcconfig"; sourceTree = "<group>"; };
+		7697BFA08AE8C5CB0F0408B60630D579 /* Pods-Aquaz-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz-frameworks.sh"; sourceTree = "<group>"; };
+		7814F10CDCD840BFE9088F863516DDED /* SDStatusBarManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarManager.m; path = SDStatusBarManager/SDStatusBarManager.m; sourceTree = "<group>"; };
+		7C964262EFDA5704FB35F4098B84C9C1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CD9353D716421E39DC1AE7D4E9E23B1 /* SDStatusBarManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarManager.h; path = SDStatusBarManager/SDStatusBarManager.h; sourceTree = "<group>"; };
+		80A31828FF4A9C55A58CA22CF628F174 /* Crashlytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Crashlytics.h; path = iOS/Crashlytics.framework/Headers/Crashlytics.h; sourceTree = "<group>"; };
 		827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		827B65870BC94E2373A8174A055A70A8 /* MMWormholeSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSession.h; path = Source/MMWormholeSession.h; sourceTree = "<group>"; };
-		8291B63729000F5824D8A2D859641128 /* SDStatusBarOverriderPre8_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPre8_3.m; path = SDStatusBarManager/SDStatusBarOverriderPre8_3.m; sourceTree = "<group>"; };
-		8FBB00EE907558BABC2605BAEAB029D8 /* MMWormholeSessionContextTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionContextTransiting.m; path = Source/MMWormholeSessionContextTransiting.m; sourceTree = "<group>"; };
-		929A61FDECF9A1F7EB1B781100CCA635 /* SDStatusBarManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarManager.m; path = SDStatusBarManager/SDStatusBarManager.m; sourceTree = "<group>"; };
+		840C63DC46EEE7B7DAD668D0C98069B2 /* MMWormhole-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMWormhole-umbrella.h"; sourceTree = "<group>"; };
+		896E5F2160A6351C8D8A25E2E3971E76 /* MMWormhole.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormhole.m; path = Source/MMWormhole.m; sourceTree = "<group>"; };
+		8AF191B5C42BA2E5FE1B480384FCDFE3 /* Answers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Answers.h; path = iOS/Crashlytics.framework/Headers/Answers.h; sourceTree = "<group>"; };
+		8EFECBEE1F11341AF085320ED0574206 /* Pods-Aquaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.release.xcconfig"; sourceTree = "<group>"; };
+		8F15A35A91721C508596FA74F97D97A4 /* SimulatorStatusMagic-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SimulatorStatusMagic-prefix.pch"; sourceTree = "<group>"; };
+		9059B5FD2DBB518464956E06031CFE38 /* MMWormhole.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormhole.h; path = Source/MMWormhole.h; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9B7BE3DD24641ACE67D960FCDF242086 /* SDStatusBarOverriderPost8_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost8_3.h; path = SDStatusBarManager/SDStatusBarOverriderPost8_3.h; sourceTree = "<group>"; };
-		A6F968FBC2E7C6C1F1DB5526BA7A81CF /* SDStatusBarOverriderPost8_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost8_3.m; path = SDStatusBarManager/SDStatusBarOverriderPost8_3.m; sourceTree = "<group>"; };
-		A86EDA8AEF8A829A0F5EC75C1404ECF2 /* MMWormhole-iOS8.0-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "MMWormhole-iOS8.0-dummy.m"; path = "../MMWormhole-iOS8.0/MMWormhole-iOS8.0-dummy.m"; sourceTree = "<group>"; };
-		AA16F32D6C90F92E7BF9676DA4640432 /* Pods-AquazTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AquazTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		AA4DDD2B8688FFB97C54A88150A3EC9A /* libPods-AquazTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AquazTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		ABC51911A7A8B520C5AEF17943CE7341 /* Pods-AquazTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AquazTests-frameworks.sh"; sourceTree = "<group>"; };
-		AE853A5D97948B008020A8DE953DFFAC /* Pods-Aquaz-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz-resources.sh"; sourceTree = "<group>"; };
-		B081D99C43B72975727A751BF7F21E7F /* MMWormhole-iOS7.1-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMWormhole-iOS7.1-prefix.pch"; sourceTree = "<group>"; };
-		B9B9552D5C8EF2732647A7E9D75ABDC6 /* Pods-AquazTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AquazTests.debug.xcconfig"; sourceTree = "<group>"; };
-		BA277A870689019CE877802C8B98E1B2 /* Pods-Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Widget.release.xcconfig"; sourceTree = "<group>"; };
-		C9F83146946398E7E92DB9B01A3D8E97 /* Pods-Aquaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.debug.xcconfig"; sourceTree = "<group>"; };
-		CA47E0F766693CC1BC89833F2206D9B2 /* SDStatusBarOverriderPost9_0.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost9_0.m; path = SDStatusBarManager/SDStatusBarOverriderPost9_0.m; sourceTree = "<group>"; };
-		CAF5083AD64F87CFE4F7B192B96D37DC /* SDStatusBarOverrider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverrider.h; path = SDStatusBarManager/SDStatusBarOverrider.h; sourceTree = "<group>"; };
-		CBF435653D58C8AE663416596E8615AC /* SimulatorStatusMagic-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SimulatorStatusMagic-prefix.pch"; sourceTree = "<group>"; };
-		CD111C0F42289B08C3342AB17844E7D8 /* libMMWormhole-iOS7.1.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMMWormhole-iOS7.1.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CED744081B4A7769775D7C404DF2F7FD /* MMWormholeSessionFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionFileTransiting.m; path = Source/MMWormholeSessionFileTransiting.m; sourceTree = "<group>"; };
-		D375F9C0B55456B282A63CCED7A9AE47 /* MMWormholeSessionMessageTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionMessageTransiting.h; path = Source/MMWormholeSessionMessageTransiting.h; sourceTree = "<group>"; };
-		D6EF5073EE478A5CF3799ADEB505A09E /* libPods-Widget.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Widget.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DE78FF5FEC3DC4C6DAC2F1E0025EE351 /* MMWormholeTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeTransiting.h; path = Source/MMWormholeTransiting.h; sourceTree = "<group>"; };
-		E3E59CC46CF9B5BD5C81C86F5639420B /* SDStatusBarOverriderPre8_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPre8_3.h; path = SDStatusBarManager/SDStatusBarOverriderPre8_3.h; sourceTree = "<group>"; };
-		E981627F35E984BFCB82701B67151CE7 /* SDStatusBarManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarManager.h; path = SDStatusBarManager/SDStatusBarManager.h; sourceTree = "<group>"; };
-		E9E6A28992F545AC2FA4955D6F8E99D3 /* libSimulatorStatusMagic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSimulatorStatusMagic.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA90E2304FCDE18FEAF484612563B5F7 /* Pods-Widget-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Widget-frameworks.sh"; sourceTree = "<group>"; };
-		FE63EB4874905B111EE2D12F7F5F6B2A /* Pods-AquazTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AquazTests-dummy.m"; sourceTree = "<group>"; };
+		974D197408B1E233A34D0F7FC7BD4301 /* Fabric.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Fabric.h; path = iOS/Fabric.framework/Headers/Fabric.h; sourceTree = "<group>"; };
+		AAB2E93ACE89A058C217D69DC2667465 /* CLSReport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSReport.h; path = iOS/Crashlytics.framework/Headers/CLSReport.h; sourceTree = "<group>"; };
+		AD6B6A9C2805FEFD476723006C9D36DB /* Pods-Aquaz-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Aquaz-acknowledgements.plist"; sourceTree = "<group>"; };
+		ADA573A10C1B69DA739A950CB9A6A1FB /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = iOS/Crashlytics.framework; sourceTree = "<group>"; };
+		B4684F078930547CC8E2CA8951380BF0 /* Pods-Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Widget.release.xcconfig"; sourceTree = "<group>"; };
+		B6A957534ADBCB1646176260C9FF0E91 /* FABAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FABAttributes.h; path = iOS/Fabric.framework/Headers/FABAttributes.h; sourceTree = "<group>"; };
+		B8330969BAE720409688CA6B11198453 /* CLSLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSLogging.h; path = iOS/Crashlytics.framework/Headers/CLSLogging.h; sourceTree = "<group>"; };
+		BB47F148F23BC48B17720F3AF03CC673 /* Pods-Aquaz-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Aquaz-umbrella.h"; sourceTree = "<group>"; };
+		BE08585171DF887BDFC769AF5A9DB591 /* SimulatorStatusMagic-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SimulatorStatusMagic-dummy.m"; sourceTree = "<group>"; };
+		C1A574BDA52EC4ED082E68A3C978C585 /* Pods-Widget-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Widget-acknowledgements.plist"; sourceTree = "<group>"; };
+		C70BFE7544CA6F1F6B15104B55F9C585 /* Pods-Aquaz-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz-resources.sh"; sourceTree = "<group>"; };
+		C80DF62F18882173E9EDDE8BC0978721 /* SDStatusBarOverriderPost8_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost8_3.m; path = SDStatusBarManager/SDStatusBarOverriderPost8_3.m; sourceTree = "<group>"; };
+		C8891934F2525598D117608EA55792D2 /* Pods-Widget.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Widget.modulemap"; sourceTree = "<group>"; };
+		CC58C7233466E203C01787D659C73BE6 /* Pods-Widget-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Widget-frameworks.sh"; sourceTree = "<group>"; };
+		CFE3E20C94B053E325EE64DEB3FE423D /* MMWormhole.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MMWormhole.xcconfig; sourceTree = "<group>"; };
+		D01BE2E7CC6924FA44EBA7BCC3FD2EA0 /* MMWormholeSessionContextTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionContextTransiting.m; path = Source/MMWormholeSessionContextTransiting.m; sourceTree = "<group>"; };
+		D0A04FB2E4A6D77640A93137D87636CF /* Pods-Aquaz.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Aquaz.modulemap"; sourceTree = "<group>"; };
+		D6B447486715615B8E514A9BE673CC58 /* SDStatusBarOverriderPre8_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPre8_3.m; path = SDStatusBarManager/SDStatusBarOverriderPre8_3.m; sourceTree = "<group>"; };
+		DBA9BA5CA630D70E6186E663E985E636 /* SimulatorStatusMagic-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SimulatorStatusMagic-umbrella.h"; sourceTree = "<group>"; };
+		E043E35C4211D0125496B01687D16635 /* MMWormholeSessionFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionFileTransiting.m; path = Source/MMWormholeSessionFileTransiting.m; sourceTree = "<group>"; };
+		E64F8F293626CC333E3FE28F75EC73E3 /* Pods-Widget-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Widget-umbrella.h"; sourceTree = "<group>"; };
+		E8ED5F5799BFB12417CBA4B893A23BA4 /* Pods_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E908CF17D035E7A42E3B4A69C6107327 /* MMWormholeCoordinatedFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeCoordinatedFileTransiting.h; path = Source/MMWormholeCoordinatedFileTransiting.h; sourceTree = "<group>"; };
+		EB984FAB12CE083802FEFAF971A5A57F /* MMWormholeSessionContextTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionContextTransiting.h; path = Source/MMWormholeSessionContextTransiting.h; sourceTree = "<group>"; };
+		EEDA831062ADB6D22D0ABB4316402751 /* Pods-Widget-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Widget-acknowledgements.markdown"; sourceTree = "<group>"; };
+		F3998374849451E2A4A58345757DF560 /* Pods-Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Widget.debug.xcconfig"; sourceTree = "<group>"; };
+		F5C9D300D40D1146BD61CBB2B22EBB79 /* MMWormholeSessionMessageTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionMessageTransiting.m; path = Source/MMWormholeSessionMessageTransiting.m; sourceTree = "<group>"; };
+		F6B3037A1B3149ACA92542D593FB2CE6 /* CLSStackFrame.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSStackFrame.h; path = iOS/Crashlytics.framework/Headers/CLSStackFrame.h; sourceTree = "<group>"; };
+		F96A3906B72EDD0855A0D0B13F1B4F53 /* Pods-Widget-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Widget-resources.sh"; sourceTree = "<group>"; };
+		FAB1FB7C6BEE1784A1411438BA0240AB /* SDStatusBarOverrider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverrider.h; path = SDStatusBarManager/SDStatusBarOverrider.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4A2835ECA687C41D8C83515EA773BF39 /* Frameworks */ = {
+		1F95150333D024602EDC33E340A536D8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDC456034AB89ADEBD0A4B247E51D2E2 /* Foundation.framework in Frameworks */,
+				F282E18AB7B7C15A6720E35FEB5B8502 /* Foundation.framework in Frameworks */,
+				45D865CB1822646EFC53BFA48FC4A0B4 /* WatchConnectivity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		53AE925670FB29C9F5C9F70562885B6E /* Frameworks */ = {
+		83BB18344B18845DA73D7A8F51D46164 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				671048B11F6F856280A83E49C5828EEE /* Foundation.framework in Frameworks */,
-				0585674361DE979CF8172D91937BDBCC /* WatchConnectivity.framework in Frameworks */,
+				AC715ED246C7D933C76E77EF50A694B4 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9A5E90F7766C56E918723340D96CA3C4 /* Frameworks */ = {
+		EFC5C23BBD8C3738C1E7962B4242ABA1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AFF8D2CBC1A5022AD321F14EC78A8D7 /* Foundation.framework in Frameworks */,
+				D0CA56D62E126D8687EF499FAB88DFC3 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B28B30B4DEE20DFC3BEA7A5EB866E998 /* Frameworks */ = {
+		F85E5886A1FACE0510338995CB4B8355 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4EAAB609C752CBD69058316E3894116 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D890522DCCCCDB87BE261626934D2491 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				701921FA1A9460F310A8A9B60B8920C8 /* Foundation.framework in Frameworks */,
-				A528EC32ED9A398180E77431EE23570A /* WatchConnectivity.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F955CC1DA15809255742502926ED0BCD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DAFCE439596268915D8E4C4370D0EC78 /* Foundation.framework in Frameworks */,
-				247F4F3DDCB2E1A5ECB1942B307A66D7 /* UIKit.framework in Frameworks */,
+				D53C965381E8D2BDAEEEACA0451D6E2E /* Foundation.framework in Frameworks */,
+				698451D903454F42B2351C915A02B6A0 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		108624F280033595E8D815D0F908E4EB /* SimulatorStatusMagic */ = {
+			isa = PBXGroup;
+			children = (
+				7CD9353D716421E39DC1AE7D4E9E23B1 /* SDStatusBarManager.h */,
+				7814F10CDCD840BFE9088F863516DDED /* SDStatusBarManager.m */,
+				FAB1FB7C6BEE1784A1411438BA0240AB /* SDStatusBarOverrider.h */,
+				4163B40B5622705E412E0222942F1101 /* SDStatusBarOverriderPost10_0.h */,
+				0812F84BE7D24B919C464718C60F3259 /* SDStatusBarOverriderPost10_0.m */,
+				717AE8808554DEB4747114B6075C3538 /* SDStatusBarOverriderPost8_3.h */,
+				C80DF62F18882173E9EDDE8BC0978721 /* SDStatusBarOverriderPost8_3.m */,
+				68F8FFD6C6202C9460620A2878707907 /* SDStatusBarOverriderPost9_0.h */,
+				33B9330F03C2042221076501D3FB6318 /* SDStatusBarOverriderPost9_0.m */,
+				077B21BBE49B6859995A501661F90F8E /* SDStatusBarOverriderPost9_3.h */,
+				3F001DE2AFAEAAAA407C7F9FF495F961 /* SDStatusBarOverriderPost9_3.m */,
+				28DA605C3DB95C29916D075DECFA8C17 /* SDStatusBarOverriderPre8_3.h */,
+				D6B447486715615B8E514A9BE673CC58 /* SDStatusBarOverriderPre8_3.m */,
+				4AA8F117020CC2722085948F0E85FE6B /* Support Files */,
+			);
+			path = SimulatorStatusMagic;
+			sourceTree = "<group>";
+		};
 		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,76 +224,56 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1386685DFF2A3F444008D8A029830223 /* MMWormhole */ = {
+		17DCAF717EE850346A88317AB3D775DD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				44F51CC0BA0FE66C66FF2F635788E8AF /* Core */,
-				B4ACDF32CFCD20B21D8880FD37A280A9 /* Support Files */,
+				ADA573A10C1B69DA739A950CB9A6A1FB /* Crashlytics.framework */,
 			);
-			path = MMWormhole;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1BB945206AB035536936086B4C9B1EFB /* SimulatorStatusMagic */ = {
+		3A73F5312E7F36B4E3EA1F565691A94B /* Fabric */ = {
 			isa = PBXGroup;
 			children = (
-				E981627F35E984BFCB82701B67151CE7 /* SDStatusBarManager.h */,
-				929A61FDECF9A1F7EB1B781100CCA635 /* SDStatusBarManager.m */,
-				CAF5083AD64F87CFE4F7B192B96D37DC /* SDStatusBarOverrider.h */,
-				9B7BE3DD24641ACE67D960FCDF242086 /* SDStatusBarOverriderPost8_3.h */,
-				A6F968FBC2E7C6C1F1DB5526BA7A81CF /* SDStatusBarOverriderPost8_3.m */,
-				7B2825FCE5D0E6E3B760DDF51D06A209 /* SDStatusBarOverriderPost9_0.h */,
-				CA47E0F766693CC1BC89833F2206D9B2 /* SDStatusBarOverriderPost9_0.m */,
-				E3E59CC46CF9B5BD5C81C86F5639420B /* SDStatusBarOverriderPre8_3.h */,
-				8291B63729000F5824D8A2D859641128 /* SDStatusBarOverriderPre8_3.m */,
-				AA3DD3437AA9C879CD6C78604EE702CD /* Support Files */,
+				B6A957534ADBCB1646176260C9FF0E91 /* FABAttributes.h */,
+				974D197408B1E233A34D0F7FC7BD4301 /* Fabric.h */,
+				D2F8D7C4BFCF496DA4A9853E3B06A3CF /* Frameworks */,
 			);
-			path = SimulatorStatusMagic;
+			path = Fabric;
 			sourceTree = "<group>";
 		};
-		29BF917FA01AB3D53BCEB07363ADBAF7 /* Pods */ = {
+		4AA8F117020CC2722085948F0E85FE6B /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				D89D30FA1D4A9A29C3CF51E508B6E96C /* Crashlytics */,
-				AB672B3B77615D913BFC2BA7E9680655 /* Fabric */,
-				1386685DFF2A3F444008D8A029830223 /* MMWormhole */,
-				1BB945206AB035536936086B4C9B1EFB /* SimulatorStatusMagic */,
+				218C7F2AD44318AE5B02F10CB3EA9836 /* Info.plist */,
+				45C75DBAEE2BD69C5ECD048224E8CBA1 /* SimulatorStatusMagic.modulemap */,
+				484A6938EDFA441DDBD6D0D2A27E9EBF /* SimulatorStatusMagic.xcconfig */,
+				BE08585171DF887BDFC769AF5A9DB591 /* SimulatorStatusMagic-dummy.m */,
+				8F15A35A91721C508596FA74F97D97A4 /* SimulatorStatusMagic-prefix.pch */,
+				DBA9BA5CA630D70E6186E663E985E636 /* SimulatorStatusMagic-umbrella.h */,
 			);
-			name = Pods;
+			name = "Support Files";
+			path = "../Target Support Files/SimulatorStatusMagic";
 			sourceTree = "<group>";
 		};
-		3889156E2C08A3ED6477CB8CB3B7CE3C /* Products */ = {
+		4C8073F1EF80F38D2828DFA0023608F0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CD111C0F42289B08C3342AB17844E7D8 /* libMMWormhole-iOS7.1.a */,
-				0092E259C72E94DA26EC2FC5569FBBFD /* libMMWormhole-iOS8.0.a */,
-				5409E3305C0AC1B31A3CE72963E5088B /* libPods-Aquaz.a */,
-				AA4DDD2B8688FFB97C54A88150A3EC9A /* libPods-AquazTests.a */,
-				D6EF5073EE478A5CF3799ADEB505A09E /* libPods-Widget.a */,
-				E9E6A28992F545AC2FA4955D6F8E99D3 /* libSimulatorStatusMagic.a */,
+				29DCD2983590173F8EE38410C6241112 /* MMWormhole.framework */,
+				4A733D24A35AA65CBA23503A00F783FA /* Pods_Aquaz.framework */,
+				E8ED5F5799BFB12417CBA4B893A23BA4 /* Pods_Widget.framework */,
+				58C944A0239C714695F34E5531424C30 /* SimulatorStatusMagic.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		44F51CC0BA0FE66C66FF2F635788E8AF /* Core */ = {
+		6764CC83C5BCDB2E81DD22C2BEB98AC3 /* MMWormhole */ = {
 			isa = PBXGroup;
 			children = (
-				6262E385E2AE1E1E6F2336C2E905F394 /* MMWormhole.h */,
-				59B602D87CC1A7B28D37AC5E4C366E54 /* MMWormhole.m */,
-				1580CE43CCAF1DD8890A5BD3CC2D8014 /* MMWormholeCoordinatedFileTransiting.h */,
-				0B1D5EA52CF365F775A771BC856297D6 /* MMWormholeCoordinatedFileTransiting.m */,
-				6CFF3100DC33DAC6C91BF93721F444EC /* MMWormholeFileTransiting.h */,
-				1EDE15D2D96107CCFA2DCC51CCD385D8 /* MMWormholeFileTransiting.m */,
-				827B65870BC94E2373A8174A055A70A8 /* MMWormholeSession.h */,
-				308032F013DC5E6EE5C51BBDA926517B /* MMWormholeSession.m */,
-				4130D5080ABD25D7C14AE2F529BE0BD1 /* MMWormholeSessionContextTransiting.h */,
-				8FBB00EE907558BABC2605BAEAB029D8 /* MMWormholeSessionContextTransiting.m */,
-				508D12E25BC05F13405DE4B240B8E9BF /* MMWormholeSessionFileTransiting.h */,
-				CED744081B4A7769775D7C404DF2F7FD /* MMWormholeSessionFileTransiting.m */,
-				D375F9C0B55456B282A63CCED7A9AE47 /* MMWormholeSessionMessageTransiting.h */,
-				4BF5A2A927DAC9455585FB168B3B5A5C /* MMWormholeSessionMessageTransiting.m */,
-				DE78FF5FEC3DC4C6DAC2F1E0025EE351 /* MMWormholeTransiting.h */,
+				8360BA5B88285289FCBD8F621B6E9398 /* Core */,
+				B950513FE8A0A7B00760BF3AD8331465 /* Support Files */,
 			);
-			name = Core;
+			path = MMWormhole;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -303,97 +281,92 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
-				29BF917FA01AB3D53BCEB07363ADBAF7 /* Pods */,
-				3889156E2C08A3ED6477CB8CB3B7CE3C /* Products */,
-				DC5E61351BE478B3654ACD1D0CAD7FDA /* Targets Support Files */,
+				CB3F1F1BC308AF5546DCFFE159E04613 /* Pods */,
+				4C8073F1EF80F38D2828DFA0023608F0 /* Products */,
+				A90AA22467FAA90CA355F4969729ED7E /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		80E50FDD5026BFAD17202BA011A51D5F /* Pods-AquazTests */ = {
+		8360BA5B88285289FCBD8F621B6E9398 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				AA16F32D6C90F92E7BF9676DA4640432 /* Pods-AquazTests-acknowledgements.markdown */,
-				01375587697A94D0EC75FE6CB9AC763A /* Pods-AquazTests-acknowledgements.plist */,
-				FE63EB4874905B111EE2D12F7F5F6B2A /* Pods-AquazTests-dummy.m */,
-				ABC51911A7A8B520C5AEF17943CE7341 /* Pods-AquazTests-frameworks.sh */,
-				6E067E38EB73AC805DE0E6A745C6B367 /* Pods-AquazTests-resources.sh */,
-				B9B9552D5C8EF2732647A7E9D75ABDC6 /* Pods-AquazTests.debug.xcconfig */,
-				5C5B07A8BE01FDB84453363F7A721A18 /* Pods-AquazTests.release.xcconfig */,
+				9059B5FD2DBB518464956E06031CFE38 /* MMWormhole.h */,
+				896E5F2160A6351C8D8A25E2E3971E76 /* MMWormhole.m */,
+				E908CF17D035E7A42E3B4A69C6107327 /* MMWormholeCoordinatedFileTransiting.h */,
+				2115DC021270A29B4A668978BDBF1207 /* MMWormholeCoordinatedFileTransiting.m */,
+				6B91C9179A1A0D915DA8A28D9566D129 /* MMWormholeFileTransiting.h */,
+				11706A950E20E69469B678DEAB1D65D9 /* MMWormholeFileTransiting.m */,
+				2B32061EFFA6CFD955914B05F8AD68B7 /* MMWormholeSession.h */,
+				3E747561E40EA012CDBD1784A9D47700 /* MMWormholeSession.m */,
+				EB984FAB12CE083802FEFAF971A5A57F /* MMWormholeSessionContextTransiting.h */,
+				D01BE2E7CC6924FA44EBA7BCC3FD2EA0 /* MMWormholeSessionContextTransiting.m */,
+				27458252155EFF708548AA852594770E /* MMWormholeSessionFileTransiting.h */,
+				E043E35C4211D0125496B01687D16635 /* MMWormholeSessionFileTransiting.m */,
+				0424B6247327523FE0498BFDF70C2307 /* MMWormholeSessionMessageTransiting.h */,
+				F5C9D300D40D1146BD61CBB2B22EBB79 /* MMWormholeSessionMessageTransiting.m */,
+				14CF6733CB5273EB8CAD951C1F5AF3E9 /* MMWormholeTransiting.h */,
 			);
-			name = "Pods-AquazTests";
-			path = "Target Support Files/Pods-AquazTests";
+			name = Core;
 			sourceTree = "<group>";
 		};
-		A83DE3E2CFFEEEDE47EFEFD31FDDFB55 /* Frameworks */ = {
+		A90AA22467FAA90CA355F4969729ED7E /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				7E8D97C7B835CDF99CF6677C396E0CE5 /* Fabric.framework */,
+				D2A80D132C6B130981FFBBC9114B1882 /* Pods-Aquaz */,
+				DC509ABBFAE7CFC71AF97E58032A4856 /* Pods-Widget */,
 			);
-			name = Frameworks;
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		AA3DD3437AA9C879CD6C78604EE702CD /* Support Files */ = {
+		B950513FE8A0A7B00760BF3AD8331465 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				24FB34F422812A28A8E461027AF0953E /* SimulatorStatusMagic.xcconfig */,
-				2314B9169F317E9B5EA282F91116A007 /* SimulatorStatusMagic-dummy.m */,
-				CBF435653D58C8AE663416596E8615AC /* SimulatorStatusMagic-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/SimulatorStatusMagic";
-			sourceTree = "<group>";
-		};
-		AB672B3B77615D913BFC2BA7E9680655 /* Fabric */ = {
-			isa = PBXGroup;
-			children = (
-				A83DE3E2CFFEEEDE47EFEFD31FDDFB55 /* Frameworks */,
-			);
-			path = Fabric;
-			sourceTree = "<group>";
-		};
-		B4ACDF32CFCD20B21D8880FD37A280A9 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				471A3A765EBBE96D55A65BEA25E987D9 /* MMWormhole-iOS7.1.xcconfig */,
-				1B11B104F12FBC173FBC21ED3882B1AD /* MMWormhole-iOS7.1-dummy.m */,
-				B081D99C43B72975727A751BF7F21E7F /* MMWormhole-iOS7.1-prefix.pch */,
-				2D4397748711FDEEFA49BD5030EFCB7C /* MMWormhole-iOS8.0.xcconfig */,
-				A86EDA8AEF8A829A0F5EC75C1404ECF2 /* MMWormhole-iOS8.0-dummy.m */,
-				0242C43214D2852DB136D0554ECAD9DD /* MMWormhole-iOS8.0-prefix.pch */,
+				1F70CF4C100F5B6A28710F2252FB4A60 /* Info.plist */,
+				114A63AECFD06822A02174911078F7AD /* MMWormhole.modulemap */,
+				CFE3E20C94B053E325EE64DEB3FE423D /* MMWormhole.xcconfig */,
+				5AF04D9653AA53E67BAD592B0CC7633D /* MMWormhole-dummy.m */,
+				56B7EB61EE6519C6D661C3610F244CD5 /* MMWormhole-prefix.pch */,
+				840C63DC46EEE7B7DAD668D0C98069B2 /* MMWormhole-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/MMWormhole-iOS7.1";
+			path = "../Target Support Files/MMWormhole";
 			sourceTree = "<group>";
 		};
-		C318C91E24F6141DC476E16EA22F8B74 /* Frameworks */ = {
+		CB3F1F1BC308AF5546DCFFE159E04613 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				36E73CF4E2686CE9808AAC1EA6EBC161 /* Crashlytics.framework */,
+				FBA217A630EA48F4301FB282B6F7930C /* Crashlytics */,
+				3A73F5312E7F36B4E3EA1F565691A94B /* Fabric */,
+				6764CC83C5BCDB2E81DD22C2BEB98AC3 /* MMWormhole */,
+				108624F280033595E8D815D0F908E4EB /* SimulatorStatusMagic */,
 			);
-			name = Frameworks;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		C9EBE61090C2272E9404A058E2D40741 /* Pods-Aquaz */ = {
+		D2A80D132C6B130981FFBBC9114B1882 /* Pods-Aquaz */ = {
 			isa = PBXGroup;
 			children = (
-				812DBBF770B4F60DFB973A0608687EA4 /* Pods-Aquaz-acknowledgements.markdown */,
-				7215B79949F3314CB78DDE0CB66314A0 /* Pods-Aquaz-acknowledgements.plist */,
-				56DC6F9A55179B1D48485DFC0CAF55E3 /* Pods-Aquaz-dummy.m */,
-				24D0827A14CF7410192C645C6F36EF70 /* Pods-Aquaz-frameworks.sh */,
-				AE853A5D97948B008020A8DE953DFFAC /* Pods-Aquaz-resources.sh */,
-				C9F83146946398E7E92DB9B01A3D8E97 /* Pods-Aquaz.debug.xcconfig */,
-				0229BCBA5ADF834EABA1E997A4230925 /* Pods-Aquaz.release.xcconfig */,
+				50FE5AECFCDAD48F82EBB24385AF2EE1 /* Info.plist */,
+				D0A04FB2E4A6D77640A93137D87636CF /* Pods-Aquaz.modulemap */,
+				06459E7ED109CB81C29641F1EBE45350 /* Pods-Aquaz-acknowledgements.markdown */,
+				AD6B6A9C2805FEFD476723006C9D36DB /* Pods-Aquaz-acknowledgements.plist */,
+				3FE8E83ACE18DF90BE13F19BE94F55AC /* Pods-Aquaz-dummy.m */,
+				7697BFA08AE8C5CB0F0408B60630D579 /* Pods-Aquaz-frameworks.sh */,
+				C70BFE7544CA6F1F6B15104B55F9C585 /* Pods-Aquaz-resources.sh */,
+				BB47F148F23BC48B17720F3AF03CC673 /* Pods-Aquaz-umbrella.h */,
+				729905FECD9526A846761D43D9B57C4A /* Pods-Aquaz.debug.xcconfig */,
+				8EFECBEE1F11341AF085320ED0574206 /* Pods-Aquaz.release.xcconfig */,
 			);
 			name = "Pods-Aquaz";
 			path = "Target Support Files/Pods-Aquaz";
 			sourceTree = "<group>";
 		};
-		D89D30FA1D4A9A29C3CF51E508B6E96C /* Crashlytics */ = {
+		D2F8D7C4BFCF496DA4A9853E3B06A3CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C318C91E24F6141DC476E16EA22F8B74 /* Frameworks */,
+				56FB0F45032A72352889E7CB177978F5 /* Fabric.framework */,
 			);
-			path = Crashlytics;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		DC0C096CAD646C0EED6A336AF9D45893 /* iOS */ = {
@@ -406,172 +379,118 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		DC5E61351BE478B3654ACD1D0CAD7FDA /* Targets Support Files */ = {
+		DC509ABBFAE7CFC71AF97E58032A4856 /* Pods-Widget */ = {
 			isa = PBXGroup;
 			children = (
-				C9EBE61090C2272E9404A058E2D40741 /* Pods-Aquaz */,
-				80E50FDD5026BFAD17202BA011A51D5F /* Pods-AquazTests */,
-				E461E028618AC4BE10D0CA84A0977C8C /* Pods-Widget */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		E461E028618AC4BE10D0CA84A0977C8C /* Pods-Widget */ = {
-			isa = PBXGroup;
-			children = (
-				168A0443BA9D4E9E0BF36B7FEE319BCA /* Pods-Widget-acknowledgements.markdown */,
-				35EA97508C2168044991025550D37D3A /* Pods-Widget-acknowledgements.plist */,
-				7B2CB4885CB4620D9F93B5A6A8B09C32 /* Pods-Widget-dummy.m */,
-				FA90E2304FCDE18FEAF484612563B5F7 /* Pods-Widget-frameworks.sh */,
-				2E8770B6F2867F96355DF990FEDFBC19 /* Pods-Widget-resources.sh */,
-				372F73C3FE7BAFD19FCC4EFBA8B62770 /* Pods-Widget.debug.xcconfig */,
-				BA277A870689019CE877802C8B98E1B2 /* Pods-Widget.release.xcconfig */,
+				7C964262EFDA5704FB35F4098B84C9C1 /* Info.plist */,
+				C8891934F2525598D117608EA55792D2 /* Pods-Widget.modulemap */,
+				EEDA831062ADB6D22D0ABB4316402751 /* Pods-Widget-acknowledgements.markdown */,
+				C1A574BDA52EC4ED082E68A3C978C585 /* Pods-Widget-acknowledgements.plist */,
+				4B0DCF625CF5293D6326A3EBA87AF9C1 /* Pods-Widget-dummy.m */,
+				CC58C7233466E203C01787D659C73BE6 /* Pods-Widget-frameworks.sh */,
+				F96A3906B72EDD0855A0D0B13F1B4F53 /* Pods-Widget-resources.sh */,
+				E64F8F293626CC333E3FE28F75EC73E3 /* Pods-Widget-umbrella.h */,
+				F3998374849451E2A4A58345757DF560 /* Pods-Widget.debug.xcconfig */,
+				B4684F078930547CC8E2CA8951380BF0 /* Pods-Widget.release.xcconfig */,
 			);
 			name = "Pods-Widget";
 			path = "Target Support Files/Pods-Widget";
 			sourceTree = "<group>";
 		};
+		FBA217A630EA48F4301FB282B6F7930C /* Crashlytics */ = {
+			isa = PBXGroup;
+			children = (
+				550D384D97FC0B0EDE04A5C008FC92C7 /* ANSCompatibility.h */,
+				8AF191B5C42BA2E5FE1B480384FCDFE3 /* Answers.h */,
+				15C397F5EA1B1DE29DEF0C8B6D53FDAF /* CLSAttributes.h */,
+				B8330969BAE720409688CA6B11198453 /* CLSLogging.h */,
+				AAB2E93ACE89A058C217D69DC2667465 /* CLSReport.h */,
+				F6B3037A1B3149ACA92542D593FB2CE6 /* CLSStackFrame.h */,
+				80A31828FF4A9C55A58CA22CF628F174 /* Crashlytics.h */,
+				17DCAF717EE850346A88317AB3D775DD /* Frameworks */,
+			);
+			path = Crashlytics;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		0AEE5418F83F80B159F6B54AED9CAD4E /* Headers */ = {
+		2CBB806F3581703951A6C9C0676D5E6C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F06C2263F7805762475BD345B1A4A42C /* MMWormhole.h in Headers */,
-				A25F1DEA7282F1F6E9B4611E78433DBB /* MMWormholeCoordinatedFileTransiting.h in Headers */,
-				A1FE8F7E5C51895E0F9E82C88AF18141 /* MMWormholeFileTransiting.h in Headers */,
-				E265C9470F8DABBF97C6A2D939D6F2DF /* MMWormholeSession.h in Headers */,
-				EF58A111F7516C2619762187B63A0A8B /* MMWormholeSessionContextTransiting.h in Headers */,
-				64B6ABF47091BC80CF75B649CEB2A002 /* MMWormholeSessionFileTransiting.h in Headers */,
-				DE048C8E77915A672C3C51F1E208DD4B /* MMWormholeSessionMessageTransiting.h in Headers */,
-				8BEC90895671D7307193681028899133 /* MMWormholeTransiting.h in Headers */,
+				190C803A3415DF86BE4A3146981FC7F0 /* SDStatusBarManager.h in Headers */,
+				B594D9ABE3D364625535906A3F05A802 /* SDStatusBarOverrider.h in Headers */,
+				934A883F737BDBC8A8B3E75E35AF4D50 /* SDStatusBarOverriderPost10_0.h in Headers */,
+				37D3D42BE1707485179802A0B17DAE38 /* SDStatusBarOverriderPost8_3.h in Headers */,
+				823143A99A4E5658A80816E3649534B5 /* SDStatusBarOverriderPost9_0.h in Headers */,
+				B38941C0811BF0F9FD2DAD180EC12CD2 /* SDStatusBarOverriderPost9_3.h in Headers */,
+				E10A933A0449C764A4AA4A2610665898 /* SDStatusBarOverriderPre8_3.h in Headers */,
+				E2DE3D61D86DEFA0174928C8BE04F919 /* SimulatorStatusMagic-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0E2B5CB1590EC74164C16358C1FEB019 /* Headers */ = {
+		74C18C5A607BD1F09D91D200A4C3EDA4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E68DBE0A51CE87E1EA26F2BB34818E4 /* SDStatusBarManager.h in Headers */,
-				8DBC802E976D04716AD1FA31481C9FF9 /* SDStatusBarOverrider.h in Headers */,
-				A1DCC104039C6B455005C13EF33DE110 /* SDStatusBarOverriderPost8_3.h in Headers */,
-				2B70584BE57EEA55EE4A7C169661CE2A /* SDStatusBarOverriderPost9_0.h in Headers */,
-				AA04E4CF8DC233874E395518AB4D4DCA /* SDStatusBarOverriderPre8_3.h in Headers */,
+				C8D147D6C88AEA702D3DBC74B4768097 /* Pods-Widget-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A249A30EB0D5844029B0BF43415EAF45 /* Headers */ = {
+		80B738F7C5F9625D914E0030122A93DB /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D6CD3B5C36EB5D85011AF3C98E520B3 /* MMWormhole.h in Headers */,
-				6A95BDDB20414108438B8C350BB5079E /* MMWormholeCoordinatedFileTransiting.h in Headers */,
-				86689725841A891CA80415D4FAC00AE8 /* MMWormholeFileTransiting.h in Headers */,
-				EEF752177066659027704ED532C75F7F /* MMWormholeSession.h in Headers */,
-				D2B30EDCEB8CE7F881EF64A75AB6469A /* MMWormholeSessionContextTransiting.h in Headers */,
-				6BD95E33A5A8313C0F51A7E5A5A253EF /* MMWormholeSessionFileTransiting.h in Headers */,
-				198A4DDEDC1811E5B7A36FB7500A29B4 /* MMWormholeSessionMessageTransiting.h in Headers */,
-				DB39673919254228F931956F01ED219C /* MMWormholeTransiting.h in Headers */,
+				FC0CF3F2978060186204610D8D21DB9C /* MMWormhole-umbrella.h in Headers */,
+				DE9D89BFECB559F825F1BC2506FB1695 /* MMWormhole.h in Headers */,
+				84B37CAEC1716055BEA3DA3795BC8A3C /* MMWormholeCoordinatedFileTransiting.h in Headers */,
+				762F18A4394FA15213070BDF993A2B48 /* MMWormholeFileTransiting.h in Headers */,
+				8CA202DE2B82A4FA9F6433D0034EA12E /* MMWormholeSession.h in Headers */,
+				DFEEABC8C678127F23965CE3AE4B9F67 /* MMWormholeSessionContextTransiting.h in Headers */,
+				CC31FA025B3936FEC27592CC01AC4A5F /* MMWormholeSessionFileTransiting.h in Headers */,
+				33618BBEB40ED0B04402BD45D0A12D96 /* MMWormholeSessionMessageTransiting.h in Headers */,
+				D06E287165536614B66FA045D8A5D99A /* MMWormholeTransiting.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7EA460BE69424DF28D936667D2E2A03 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E65281839DDC0C9EE91458CEA8161E8C /* Pods-Aquaz-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		25EDF34F73B5C6C7319F9BD8EBD69B20 /* Pods-Widget */ = {
+		168454C1196C6E92E767E211423B043A /* Pods-Aquaz */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F933B9F9D5ACCB690F70695A33E8E67C /* Build configuration list for PBXNativeTarget "Pods-Widget" */;
+			buildConfigurationList = F7EF8C479D309E479D71B468BF0FA4E6 /* Build configuration list for PBXNativeTarget "Pods-Aquaz" */;
 			buildPhases = (
-				4E10F2E820BF3909362A9DCF09863A4F /* Sources */,
-				4A2835ECA687C41D8C83515EA773BF39 /* Frameworks */,
+				EC5071D140DEAE4F32BEAF15BBCE19A1 /* Sources */,
+				83BB18344B18845DA73D7A8F51D46164 /* Frameworks */,
+				F7EA460BE69424DF28D936667D2E2A03 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4C6B9BA73E41E71210BFF0CF36D5E6FA /* PBXTargetDependency */,
-			);
-			name = "Pods-Widget";
-			productName = "Pods-Widget";
-			productReference = D6EF5073EE478A5CF3799ADEB505A09E /* libPods-Widget.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		45B3B4D2D8B90EB110B9C258F3D565E4 /* MMWormhole-iOS7.1 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DA4AC176FB1DBE54D638884C7D673C71 /* Build configuration list for PBXNativeTarget "MMWormhole-iOS7.1" */;
-			buildPhases = (
-				A14006B2C38F62D68A95A3BFC0F06FC4 /* Sources */,
-				53AE925670FB29C9F5C9F70562885B6E /* Frameworks */,
-				A249A30EB0D5844029B0BF43415EAF45 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "MMWormhole-iOS7.1";
-			productName = "MMWormhole-iOS7.1";
-			productReference = CD111C0F42289B08C3342AB17844E7D8 /* libMMWormhole-iOS7.1.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		7AFB97499FBC2E42854793A01F3CF236 /* MMWormhole-iOS8.0 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9396BA88F04C5EC36D0624455711B213 /* Build configuration list for PBXNativeTarget "MMWormhole-iOS8.0" */;
-			buildPhases = (
-				9FB087DA19387879C631D1FBE6A3CD51 /* Sources */,
-				D890522DCCCCDB87BE261626934D2491 /* Frameworks */,
-				0AEE5418F83F80B159F6B54AED9CAD4E /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "MMWormhole-iOS8.0";
-			productName = "MMWormhole-iOS8.0";
-			productReference = 0092E259C72E94DA26EC2FC5569FBBFD /* libMMWormhole-iOS8.0.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		885811D7D745B1E33A4F3C8539255C41 /* Pods-AquazTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D62145B6119FB5FD6D988F486E91E8D6 /* Build configuration list for PBXNativeTarget "Pods-AquazTests" */;
-			buildPhases = (
-				FAE95D22B39F201137AE200A437D6C13 /* Sources */,
-				B28B30B4DEE20DFC3BEA7A5EB866E998 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5023A18EDB991239C28DD090C7401B36 /* PBXTargetDependency */,
-			);
-			name = "Pods-AquazTests";
-			productName = "Pods-AquazTests";
-			productReference = AA4DDD2B8688FFB97C54A88150A3EC9A /* libPods-AquazTests.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		C839901D133E4189B0CB6BF69E3D03F9 /* Pods-Aquaz */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8E70746F682A920586C260070D62759E /* Build configuration list for PBXNativeTarget "Pods-Aquaz" */;
-			buildPhases = (
-				F08E7E42BD6CE562DA7C48E0194AB7E2 /* Sources */,
-				9A5E90F7766C56E918723340D96CA3C4 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				29CF1F82CD2797CF8D13A4B0E0FD1949 /* PBXTargetDependency */,
-				9295E35D0F4A5C33238680F6D08DCF24 /* PBXTargetDependency */,
+				894D371EA8EBF18330CC60177CBFA707 /* PBXTargetDependency */,
+				41A87EC01A0EC271B0587ECD286B3441 /* PBXTargetDependency */,
 			);
 			name = "Pods-Aquaz";
 			productName = "Pods-Aquaz";
-			productReference = 5409E3305C0AC1B31A3CE72963E5088B /* libPods-Aquaz.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = 4A733D24A35AA65CBA23503A00F783FA /* Pods_Aquaz.framework */;
+			productType = "com.apple.product-type.framework";
 		};
-		EF96DA6CBF6F4E2C852C5EA0A615DC3D /* SimulatorStatusMagic */ = {
+		37848BCD21A7C619BFE9D523391C269B /* SimulatorStatusMagic */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A59CDBB05AF45D2EED2D04EFBE6AA572 /* Build configuration list for PBXNativeTarget "SimulatorStatusMagic" */;
+			buildConfigurationList = ECB03DCF4FFD4E6EFBC934BA5A1E3DDB /* Build configuration list for PBXNativeTarget "SimulatorStatusMagic" */;
 			buildPhases = (
-				8CCA08F90E5B6BE39421CDE7D04FE452 /* Sources */,
-				F955CC1DA15809255742502926ED0BCD /* Frameworks */,
-				0E2B5CB1590EC74164C16358C1FEB019 /* Headers */,
+				64C0D624C4AA790219EBC8FF6F59309D /* Sources */,
+				F85E5886A1FACE0510338995CB4B8355 /* Frameworks */,
+				2CBB806F3581703951A6C9C0676D5E6C /* Headers */,
 			);
 			buildRules = (
 			);
@@ -579,8 +498,43 @@
 			);
 			name = SimulatorStatusMagic;
 			productName = SimulatorStatusMagic;
-			productReference = E9E6A28992F545AC2FA4955D6F8E99D3 /* libSimulatorStatusMagic.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = 58C944A0239C714695F34E5531424C30 /* SimulatorStatusMagic.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D71BF667A3A8A4D4806A88A10C5345A3 /* Pods-Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3921AB24A7D4ED10B8B25C5CAA094D0F /* Build configuration list for PBXNativeTarget "Pods-Widget" */;
+			buildPhases = (
+				4B64A67264A5C57652000BE4EE9D20E4 /* Sources */,
+				EFC5C23BBD8C3738C1E7962B4242ABA1 /* Frameworks */,
+				74C18C5A607BD1F09D91D200A4C3EDA4 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45082D5659FE949DA4A57771D6199339 /* PBXTargetDependency */,
+			);
+			name = "Pods-Widget";
+			productName = "Pods-Widget";
+			productReference = E8ED5F5799BFB12417CBA4B893A23BA4 /* Pods_Widget.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		DA2550D7D94491C4B4EA8F3435FEEC4B /* MMWormhole */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 703F6B8D4921C558E0F0342E84DCD4C4 /* Build configuration list for PBXNativeTarget "MMWormhole" */;
+			buildPhases = (
+				8FC514A28A2A84DA72870553E560BCF7 /* Sources */,
+				1F95150333D024602EDC33E340A536D8 /* Frameworks */,
+				80B738F7C5F9625D914E0030122A93DB /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MMWormhole;
+			productName = MMWormhole;
+			productReference = 29DCD2983590173F8EE38410C6241112 /* MMWormhole.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -599,240 +553,119 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 3889156E2C08A3ED6477CB8CB3B7CE3C /* Products */;
+			productRefGroup = 4C8073F1EF80F38D2828DFA0023608F0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				45B3B4D2D8B90EB110B9C258F3D565E4 /* MMWormhole-iOS7.1 */,
-				7AFB97499FBC2E42854793A01F3CF236 /* MMWormhole-iOS8.0 */,
-				C839901D133E4189B0CB6BF69E3D03F9 /* Pods-Aquaz */,
-				885811D7D745B1E33A4F3C8539255C41 /* Pods-AquazTests */,
-				25EDF34F73B5C6C7319F9BD8EBD69B20 /* Pods-Widget */,
-				EF96DA6CBF6F4E2C852C5EA0A615DC3D /* SimulatorStatusMagic */,
+				DA2550D7D94491C4B4EA8F3435FEEC4B /* MMWormhole */,
+				168454C1196C6E92E767E211423B043A /* Pods-Aquaz */,
+				D71BF667A3A8A4D4806A88A10C5345A3 /* Pods-Widget */,
+				37848BCD21A7C619BFE9D523391C269B /* SimulatorStatusMagic */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4E10F2E820BF3909362A9DCF09863A4F /* Sources */ = {
+		4B64A67264A5C57652000BE4EE9D20E4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FFB0CA777A0EE8AFC4DE89E49F72A50 /* Pods-Widget-dummy.m in Sources */,
+				E363E0EE419CF84D467724E3D9961DFF /* Pods-Widget-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8CCA08F90E5B6BE39421CDE7D04FE452 /* Sources */ = {
+		64C0D624C4AA790219EBC8FF6F59309D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D8CC6F3321085545537C03FE82138EF /* SDStatusBarManager.m in Sources */,
-				BB31921CD9E4F08A5C6C78FD95521DC2 /* SDStatusBarOverriderPost8_3.m in Sources */,
-				DF72671DC04A880A8DC31BA2F42DF0F0 /* SDStatusBarOverriderPost9_0.m in Sources */,
-				C16985B687FE03757C171F58B6458013 /* SDStatusBarOverriderPre8_3.m in Sources */,
-				5F94A1109A11ED829CA6BA2BBCDF3F82 /* SimulatorStatusMagic-dummy.m in Sources */,
+				3E475FB226EB9BCF0D4A312CBE5C3A94 /* SDStatusBarManager.m in Sources */,
+				7DC91AE18E358AA0C8DF1B722AA4D94E /* SDStatusBarOverriderPost10_0.m in Sources */,
+				53F90BE826C4C0364CD94B6757B1C4D9 /* SDStatusBarOverriderPost8_3.m in Sources */,
+				F5BE0FF56BA325ADB192D96FEE6CFAC3 /* SDStatusBarOverriderPost9_0.m in Sources */,
+				8D0DE603FA10B9245B1C04D3CCE8013D /* SDStatusBarOverriderPost9_3.m in Sources */,
+				192D32892487D4AD3412DC61694A6735 /* SDStatusBarOverriderPre8_3.m in Sources */,
+				C9CB55EBCE3C55EA3AFD14F5278A33B6 /* SimulatorStatusMagic-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9FB087DA19387879C631D1FBE6A3CD51 /* Sources */ = {
+		8FC514A28A2A84DA72870553E560BCF7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9B79D47991E7DD94D57541E1441CCB7 /* MMWormhole-iOS8.0-dummy.m in Sources */,
-				D708C15C6030AF772A0AC524A8A5DCB0 /* MMWormhole.m in Sources */,
-				66F84E1C7D2CDBB5D491648A08B6E2D4 /* MMWormholeCoordinatedFileTransiting.m in Sources */,
-				3B0ACBB31B0EE29AF513665F3EE1AB37 /* MMWormholeFileTransiting.m in Sources */,
-				ED9DF1754FF7E082348EB4021312BCF2 /* MMWormholeSession.m in Sources */,
-				1A0FBBD996312517BA57B91A1CEBE5B0 /* MMWormholeSessionContextTransiting.m in Sources */,
-				3A5A260C8E31AD302483DA182BBC4BE2 /* MMWormholeSessionFileTransiting.m in Sources */,
-				B16AB70FCB0E6016E3645537576F9615 /* MMWormholeSessionMessageTransiting.m in Sources */,
+				FD8C3A12053BBFE6526E99CF6FD0B9C0 /* MMWormhole-dummy.m in Sources */,
+				E4258B26D1911DC625C26AEDC7CA5A6A /* MMWormhole.m in Sources */,
+				BD7CB717DA844692A2E615DDBEA25A11 /* MMWormholeCoordinatedFileTransiting.m in Sources */,
+				77A87A401B9D4B23AAF3005E7DD55C87 /* MMWormholeFileTransiting.m in Sources */,
+				8D7A5AECA1F3061D719D40CD4F5FF35C /* MMWormholeSession.m in Sources */,
+				9D6AFCD74FCC1EC6C2D968ABF8EC0D56 /* MMWormholeSessionContextTransiting.m in Sources */,
+				E04121AD5D0C3CBA35D028A7154C62A2 /* MMWormholeSessionFileTransiting.m in Sources */,
+				6DCB12C6DEDB86E74D46178DCF02349E /* MMWormholeSessionMessageTransiting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A14006B2C38F62D68A95A3BFC0F06FC4 /* Sources */ = {
+		EC5071D140DEAE4F32BEAF15BBCE19A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42E54CC85CAAE55D3A554A5FB556F835 /* MMWormhole-iOS7.1-dummy.m in Sources */,
-				4523BFEAFF432627414C9F8F6FB304D6 /* MMWormhole.m in Sources */,
-				C8A87C2DFF6C9E7C0B57F1A86E8F34F8 /* MMWormholeCoordinatedFileTransiting.m in Sources */,
-				790ECDE7E81DAB6C9477623B8DB5473B /* MMWormholeFileTransiting.m in Sources */,
-				46638A54E6F0CE869413BF10BC58A08E /* MMWormholeSession.m in Sources */,
-				19A5ADF0E1F4A6C5E5C062C8575BF989 /* MMWormholeSessionContextTransiting.m in Sources */,
-				DFE86D9A67DA6B5250712B3DD37338EF /* MMWormholeSessionFileTransiting.m in Sources */,
-				609D34E6455CDF532F1B42E034472B99 /* MMWormholeSessionMessageTransiting.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F08E7E42BD6CE562DA7C48E0194AB7E2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BA891B2EEB22E2A58804AE93C4409861 /* Pods-Aquaz-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FAE95D22B39F201137AE200A437D6C13 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				62B09B2086257A3CFC5C323BF93E4969 /* Pods-AquazTests-dummy.m in Sources */,
+				44CF589A9B620562CC754C6FC0E81B69 /* Pods-Aquaz-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		29CF1F82CD2797CF8D13A4B0E0FD1949 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "MMWormhole-iOS7.1";
-			target = 45B3B4D2D8B90EB110B9C258F3D565E4 /* MMWormhole-iOS7.1 */;
-			targetProxy = 5F81C54CD4BF4EE5221168D1A62A25F1 /* PBXContainerItemProxy */;
-		};
-		4C6B9BA73E41E71210BFF0CF36D5E6FA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "MMWormhole-iOS8.0";
-			target = 7AFB97499FBC2E42854793A01F3CF236 /* MMWormhole-iOS8.0 */;
-			targetProxy = A96235863A9511CE5254B9474EE5F7B9 /* PBXContainerItemProxy */;
-		};
-		5023A18EDB991239C28DD090C7401B36 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "MMWormhole-iOS7.1";
-			target = 45B3B4D2D8B90EB110B9C258F3D565E4 /* MMWormhole-iOS7.1 */;
-			targetProxy = 09F80FEDD1B90A4257EE38A130EC96D9 /* PBXContainerItemProxy */;
-		};
-		9295E35D0F4A5C33238680F6D08DCF24 /* PBXTargetDependency */ = {
+		41A87EC01A0EC271B0587ECD286B3441 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SimulatorStatusMagic;
-			target = EF96DA6CBF6F4E2C852C5EA0A615DC3D /* SimulatorStatusMagic */;
-			targetProxy = D8A3C02EAE892FBEAAB0ABE56A106DA0 /* PBXContainerItemProxy */;
+			target = 37848BCD21A7C619BFE9D523391C269B /* SimulatorStatusMagic */;
+			targetProxy = 2D8F4F431F262A4220729E2F92869F2A /* PBXContainerItemProxy */;
+		};
+		45082D5659FE949DA4A57771D6199339 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MMWormhole;
+			target = DA2550D7D94491C4B4EA8F3435FEEC4B /* MMWormhole */;
+			targetProxy = 1CADABB7C7E2E024DADCE72EF37F9C5B /* PBXContainerItemProxy */;
+		};
+		894D371EA8EBF18330CC60177CBFA707 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MMWormhole;
+			target = DA2550D7D94491C4B4EA8F3435FEEC4B /* MMWormhole */;
+			targetProxy = 842E4EEA03CEF633D8414C3C4736C436 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		05020F891FF194D65D2CAA9B196D2313 /* Release */ = {
+		3B2CE083EF2B5D39878AB3B1E4C2975D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D4397748711FDEEFA49BD5030EFCB7C /* MMWormhole-iOS8.0.xcconfig */;
+			baseConfigurationReference = CFE3E20C94B053E325EE64DEB3FE423D /* MMWormhole.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = NO;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/MMWormhole-iOS8.0/MMWormhole-iOS8.0-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		0504406A30A5673DC763C59C58C02681 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0229BCBA5ADF834EABA1E997A4230925 /* Pods-Aquaz.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		16E3A60DB2B773B379A6BFAF430C045E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B9B9552D5C8EF2732647A7E9D75ABDC6 /* Pods-AquazTests.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_BITCODE = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		33D03FFA0C3E6DF13C3450C22CD37827 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA277A870689019CE877802C8B98E1B2 /* Pods-Widget.release.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/MMWormhole/MMWormhole-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MMWormhole/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACH_O_TYPE = staticlib;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MMWormhole/MMWormhole.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MMWormhole;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		3F3EBA4E9989A94B6EDFCE8035CE4AA5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24FB34F422812A28A8E461027AF0953E /* SimulatorStatusMagic.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_BITCODE = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		53B24DC53567B863A4EC939BA8C91EFC /* Debug */ = {
+		47BEF9D903506B003EA5C2B249729489 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -867,14 +700,173 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		6E8650B586063F4B0A6C383981C0C203 /* Release */ = {
+		62202177A3ACE8EE75AB7E8AE1E14978 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CFE3E20C94B053E325EE64DEB3FE423D /* MMWormhole.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MMWormhole/MMWormhole-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MMWormhole/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MMWormhole/MMWormhole.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = MMWormhole;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7AD4710707B16B6DF5DB05304FD1B416 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 729905FECD9526A846761D43D9B57C4A /* Pods-Aquaz.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Aquaz/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Aquaz/Pods-Aquaz.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Aquaz;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8D8B5623A4A3A2FC96B9B104EA9C54C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3998374849451E2A4A58345757DF560 /* Pods-Widget.debug.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Widget/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Widget/Pods-Widget.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Widget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		95BB4E4066003543994B877AEFA482B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8EFECBEE1F11341AF085320ED0574206 /* Pods-Aquaz.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Aquaz/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Aquaz/Pods-Aquaz.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Aquaz;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9A5AEBAFC9693525E3FA646FA20557D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 484A6938EDFA441DDBD6D0D2A27E9EBF /* SimulatorStatusMagic.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SimulatorStatusMagic/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SimulatorStatusMagic;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		AAF678CED40D3499169D10F63CA0719E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -905,182 +897,75 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		7B97B1FF97B7402507EAE5B4FC7DD8D1 /* Debug */ = {
+		E35B647CA346A9B129671B925AEB510D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 372F73C3FE7BAFD19FCC4EFBA8B62770 /* Pods-Widget.debug.xcconfig */;
+			baseConfigurationReference = 484A6938EDFA441DDBD6D0D2A27E9EBF /* SimulatorStatusMagic.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_BITCODE = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		8F3FCA6FFD481B7DBB484DCDC0B22BA1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24FB34F422812A28A8E461027AF0953E /* SimulatorStatusMagic.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = NO;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				INFOPLIST_FILE = "Target Support Files/SimulatorStatusMagic/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = SimulatorStatusMagic;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		B446B08612A171C810F2BF00B0AB9FB1 /* Release */ = {
+		E7587251C013C03E16A6A5F01C950ECC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 471A3A765EBBE96D55A65BEA25E987D9 /* MMWormhole-iOS7.1.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/MMWormhole-iOS7.1/MMWormhole-iOS7.1-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		D183101E942FB6B8841A6B94FA8CDEA5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D4397748711FDEEFA49BD5030EFCB7C /* MMWormhole-iOS8.0.xcconfig */;
+			baseConfigurationReference = B4684F078930547CC8E2CA8951380BF0 /* Pods-Widget.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_BITCODE = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/MMWormhole-iOS8.0/MMWormhole-iOS8.0-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		E09E2433A4D5AC3A0F0648E053BABC06 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C5B07A8BE01FDB84453363F7A721A18 /* Pods-AquazTests.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = NO;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				INFOPLIST_FILE = "Target Support Files/Pods-Widget/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Widget/Pods-Widget.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Pods_Widget;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		EF8D8DB66C96499D50E4E97983D71E9C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 471A3A765EBBE96D55A65BEA25E987D9 /* MMWormhole-iOS7.1.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_BITCODE = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/MMWormhole-iOS7.1/MMWormhole-iOS7.1-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		FD432F1461E466B7B02037B56239644E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9F83146946398E7E92DB9B01A3D8E97 /* Pods-Aquaz.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_BITCODE = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1088,62 +973,44 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				53B24DC53567B863A4EC939BA8C91EFC /* Debug */,
-				6E8650B586063F4B0A6C383981C0C203 /* Release */,
+				47BEF9D903506B003EA5C2B249729489 /* Debug */,
+				AAF678CED40D3499169D10F63CA0719E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E70746F682A920586C260070D62759E /* Build configuration list for PBXNativeTarget "Pods-Aquaz" */ = {
+		3921AB24A7D4ED10B8B25C5CAA094D0F /* Build configuration list for PBXNativeTarget "Pods-Widget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FD432F1461E466B7B02037B56239644E /* Debug */,
-				0504406A30A5673DC763C59C58C02681 /* Release */,
+				8D8B5623A4A3A2FC96B9B104EA9C54C3 /* Debug */,
+				E7587251C013C03E16A6A5F01C950ECC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9396BA88F04C5EC36D0624455711B213 /* Build configuration list for PBXNativeTarget "MMWormhole-iOS8.0" */ = {
+		703F6B8D4921C558E0F0342E84DCD4C4 /* Build configuration list for PBXNativeTarget "MMWormhole" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D183101E942FB6B8841A6B94FA8CDEA5 /* Debug */,
-				05020F891FF194D65D2CAA9B196D2313 /* Release */,
+				62202177A3ACE8EE75AB7E8AE1E14978 /* Debug */,
+				3B2CE083EF2B5D39878AB3B1E4C2975D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A59CDBB05AF45D2EED2D04EFBE6AA572 /* Build configuration list for PBXNativeTarget "SimulatorStatusMagic" */ = {
+		ECB03DCF4FFD4E6EFBC934BA5A1E3DDB /* Build configuration list for PBXNativeTarget "SimulatorStatusMagic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3F3EBA4E9989A94B6EDFCE8035CE4AA5 /* Debug */,
-				8F3FCA6FFD481B7DBB484DCDC0B22BA1 /* Release */,
+				9A5AEBAFC9693525E3FA646FA20557D8 /* Debug */,
+				E35B647CA346A9B129671B925AEB510D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D62145B6119FB5FD6D988F486E91E8D6 /* Build configuration list for PBXNativeTarget "Pods-AquazTests" */ = {
+		F7EF8C479D309E479D71B468BF0FA4E6 /* Build configuration list for PBXNativeTarget "Pods-Aquaz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				16E3A60DB2B773B379A6BFAF430C045E /* Debug */,
-				E09E2433A4D5AC3A0F0648E053BABC06 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DA4AC176FB1DBE54D638884C7D673C71 /* Build configuration list for PBXNativeTarget "MMWormhole-iOS7.1" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EF8D8DB66C96499D50E4E97983D71E9C /* Debug */,
-				B446B08612A171C810F2BF00B0AB9FB1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F933B9F9D5ACCB690F70695A33E8E67C /* Build configuration list for PBXNativeTarget "Pods-Widget" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7B97B1FF97B7402507EAE5B4FC7DD8D1 /* Debug */,
-				33D03FFA0C3E6DF13C3450C22CD37827 /* Release */,
+				7AD4710707B16B6DF5DB05304FD1B416 /* Debug */,
+				95BB4E4066003543994B877AEFA482B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

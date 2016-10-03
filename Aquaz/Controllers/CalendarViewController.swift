@@ -10,16 +10,16 @@ import UIKit
 
 class CalendarViewController: UIViewController {
 
-  var date: NSDate!
+  var date: Date!
   
   weak var dayViewController: DayViewController!
   
   @IBOutlet weak var calendarView: CalendarView!
   @IBOutlet weak var currentMonthLabel: UILabel!
 
-  private lazy var dateFormatter: NSDateFormatter = {
-    let formatter = NSDateFormatter()
-    let dateFormat = NSDateFormatter.dateFormatFromTemplate("MMMMyyyy", options: 0, locale: NSLocale.currentLocale())
+  fileprivate lazy var dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    let dateFormat = DateFormatter.dateFormat(fromTemplate: "MMMMyyyy", options: 0, locale: Locale.current)
     formatter.dateFormat = dateFormat
     return formatter
   }()
@@ -29,18 +29,18 @@ class CalendarViewController: UIViewController {
     
     setupUI()
     
-    NSNotificationCenter.defaultCenter().addObserver(
+    NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: UIContentSizeCategoryDidChangeNotification,
+      name: NSNotification.Name.UIContentSizeCategoryDidChange,
       object: nil)
   }
   
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
 
-  private func setupUI() {
+  fileprivate func setupUI() {
     UIHelper.applyStyleToViewController(self)
 
     calendarView.backgroundColor = StyleKit.pageBackgroundColor
@@ -52,8 +52,8 @@ class CalendarViewController: UIViewController {
     calendarView.selectedDayBackgroundColor = StyleKit.calendarSelectedDayBackgroundColor
     calendarView.todayBackgroundColor = StyleKit.calendarTodayBackgroundColor
     calendarView.todayTextColor = StyleKit.calendarTodayTextColor
-    calendarView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-    calendarView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    calendarView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+    calendarView.weekDayFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
     calendarView.futureDaysTransparency = 0.1
     calendarView.resetToDisplayMonthDate(date)
     calendarView.selectedDate = date
@@ -65,15 +65,15 @@ class CalendarViewController: UIViewController {
   }
   
   func preferredContentSizeChanged() {
-    currentMonthLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    calendarView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-    calendarView.weekDayFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    currentMonthLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    calendarView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+    calendarView.weekDayFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
     calendarView.refresh()
     view.invalidateIntrinsicContentSize()
   }
   
-  private func updateUI(initial initial: Bool) {
-    let title = dateFormatter.stringFromDate(date)
+  fileprivate func updateUI(initial: Bool) {
+    let title = dateFormatter.string(from: date)
     
     if initial {
       currentMonthLabel.text = title
@@ -82,37 +82,37 @@ class CalendarViewController: UIViewController {
     }
   }
 
-  @IBAction func switchToNextMonth(sender: AnyObject) {
-    date = DateHelper.addToDate(date, years: 0, months: 1, days: 0)
+  @IBAction func switchToNextMonth(_ sender: AnyObject) {
+    date = DateHelper.nextMonthFrom(date)
     calendarView.switchToNextMonth()
     updateUI(initial: false) // Updating month label before scroll view animation is finished
   }
   
-  @IBAction func switchToPreviousMonth(sender: AnyObject) {
-    date = DateHelper.addToDate(date, years: 0, months: -1, days: 0)
+  @IBAction func switchToPreviousMonth(_ sender: AnyObject) {
+    date = DateHelper.previousMonthBefore(date)
     calendarView.switchToPreviousMonth()
     updateUI(initial: false) // Updating month label before scroll view animation is finished
   }
   
-  @IBAction func todayDidSelected(sender: AnyObject) {
-    let date = DateHelper.dateByJoiningDateTime(datePart: NSDate(), timePart: dayViewController.getCurrentDate())
+  @IBAction func todayDidSelected(_ sender: AnyObject) {
+    let date = DateHelper.dateByJoiningDateTime(datePart: Date(), timePart: dayViewController.getCurrentDate())
     dayViewController.setCurrentDate(date)
-    navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    navigationController?.dismiss(animated: true, completion: nil)
   }
   
-  @IBAction func cancelWasTapped(sender: UIBarButtonItem) {
-    navigationController?.dismissViewControllerAnimated(true, completion: nil)
+  @IBAction func cancelWasTapped(_ sender: UIBarButtonItem) {
+    navigationController?.dismiss(animated: true, completion: nil)
   }
 }
 
 extension CalendarViewController: CalendarViewDelegate {
 
-  func calendarViewDaySelected(dayInfo: CalendarViewDayInfo) {
+  func calendarViewDaySelected(_ dayInfo: CalendarViewDayInfo) {
     dayViewController.setCurrentDate(dayInfo.date)
-    navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    navigationController?.dismiss(animated: true, completion: nil)
   }
 
-  func calendarViewDayWasSwitched(date: NSDate) {
+  func calendarViewDayWasSwitched(_ date: Date) {
     self.date = date
     updateUI(initial: false)
   }

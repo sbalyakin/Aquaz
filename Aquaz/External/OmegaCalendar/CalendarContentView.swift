@@ -10,32 +10,32 @@ import Foundation
 import UIKit
 
 protocol CalendarViewContentDataSource: class {
-  func createCalendarViewDaysInfoForMonth(calendarContentView calendarContentView: CalendarContentView, monthDate: NSDate) -> [CalendarViewDayInfo]
+  func createCalendarViewDaysInfoForMonth(calendarContentView: CalendarContentView, monthDate: Date) -> [CalendarViewDayInfo]
 }
 
 class CalendarContentView: UIView {
   
-  var font: UIFont = UIFont.systemFontOfSize(16)
-  var weekDayTitleTextColor: UIColor = UIColor.blackColor()
+  var font: UIFont = UIFont.systemFont(ofSize: 16)
+  var weekDayTitleTextColor: UIColor = UIColor.black
   var weekDayTitlesHeightScale: CGFloat = 1
-  var weekDayFont: UIFont = UIFont.systemFontOfSize(14)
-  var workDayTextColor: UIColor = UIColor.blackColor()
-  var workDayBackgroundColor: UIColor = UIColor.clearColor()
-  var weekendTextColor: UIColor = UIColor.redColor()
-  var weekendBackgroundColor: UIColor = UIColor.clearColor()
-  var todayTextColor: UIColor = UIColor.whiteColor()
-  var todayBackgroundColor: UIColor = UIColor.redColor()
-  var selectedDayTextColor: UIColor = UIColor.blueColor()
-  var selectedDayBackgroundColor: UIColor = UIColor.clearColor()
+  var weekDayFont: UIFont = UIFont.systemFont(ofSize: 14)
+  var workDayTextColor: UIColor = UIColor.black
+  var workDayBackgroundColor: UIColor = UIColor.clear
+  var weekendTextColor: UIColor = UIColor.red
+  var weekendBackgroundColor: UIColor = UIColor.clear
+  var todayTextColor: UIColor = UIColor.white
+  var todayBackgroundColor: UIColor = UIColor.red
+  var selectedDayTextColor: UIColor = UIColor.blue
+  var selectedDayBackgroundColor: UIColor = UIColor.clear
   var anotherMonthTransparency: CGFloat = 0.4
   var futureDaysTransparency: CGFloat = 0.4
   var futureDaysEnabled: Bool = false
   var dayRowHeightScale: CGFloat = 1
   var markSelectedDay: Bool = true
 
-  var selectedDate: NSDate? { didSet { collectionView?.reloadData() } }
+  var selectedDate: Date? { didSet { collectionView?.reloadData() } }
   
-  var date: NSDate = NSDate() {
+  var date: Date = Date() {
     didSet {
       daysInfo = dataSource?.createCalendarViewDaysInfoForMonth(calendarContentView: self, monthDate: date) ?? []
       collectionView?.reloadData()
@@ -48,11 +48,11 @@ class CalendarContentView: UIView {
   var collectionView: UICollectionView!
   var daysInfo = [CalendarViewDayInfo]()
   
-  private let calendar = NSCalendar.currentCalendar()
-  private let daysPerWeek = NSCalendar.currentCalendar().maximumRangeOfUnit(.Weekday).length
-  private let dayTitles = NSCalendar.currentCalendar().veryShortWeekdaySymbols
+  fileprivate let calendar = Calendar.current
+  fileprivate let daysPerWeek = DateHelper.daysPerWeek()
+  fileprivate let dayTitles = Calendar.current.veryShortWeekdaySymbols
   
-  private struct Constants {
+  fileprivate struct Constants {
     static let cellIdentifier = "Cell"
     static let titleCellIdentifier = "Title Cell"
   }
@@ -67,7 +67,7 @@ class CalendarContentView: UIView {
     baseInit()
   }
   
-  private func baseInit() {
+  fileprivate func baseInit() {
     let layout = UICollectionViewFlowLayout()
     layout.minimumLineSpacing = 0
     layout.minimumInteritemSpacing = 0
@@ -75,9 +75,9 @@ class CalendarContentView: UIView {
     collectionView = UICollectionView(frame: bounds, collectionViewLayout: layout)
     collectionView.dataSource = self
     collectionView.delegate = self
-    collectionView.backgroundColor = UIColor.clearColor()
-    collectionView.registerClass(CalendarContentViewCell.self, forCellWithReuseIdentifier: Constants.cellIdentifier)
-    collectionView.registerClass(CalendarContentViewTitleCell.self, forCellWithReuseIdentifier: Constants.titleCellIdentifier)
+    collectionView.backgroundColor = UIColor.clear
+    collectionView.register(CalendarContentViewCell.self, forCellWithReuseIdentifier: Constants.cellIdentifier)
+    collectionView.register(CalendarContentViewTitleCell.self, forCellWithReuseIdentifier: Constants.titleCellIdentifier)
     
     addSubview(collectionView)
   }
@@ -97,11 +97,11 @@ class CalendarContentView: UIView {
 
 extension CalendarContentView: UICollectionViewDataSource {
   
-  func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 2
   }
 
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     switch section {
     case 0: return dayTitles.count
     case 1: return daysInfo.count
@@ -111,8 +111,8 @@ extension CalendarContentView: UICollectionViewDataSource {
     }
   }
   
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    switch indexPath.section {
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    switch (indexPath as NSIndexPath).section {
     case 0: return getTitleCell(collectionView: collectionView, indexPath: indexPath)
     case 1: return getCell(collectionView: collectionView, indexPath: indexPath)
     default:
@@ -121,19 +121,19 @@ extension CalendarContentView: UICollectionViewDataSource {
     }
   }
   
-  func getCell(collectionView collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.cellIdentifier, forIndexPath: indexPath) as! CalendarContentViewCell
+  func getCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellIdentifier, for: indexPath) as! CalendarContentViewCell
 
     cell.backgroundColor = backgroundColor // remove blending
-    cell.setDayInfo(daysInfo[indexPath.row], calendarContentView: self)
+    cell.setDayInfo(daysInfo[(indexPath as NSIndexPath).row], calendarContentView: self)
 
     return cell
   }
 
-  func getTitleCell(collectionView collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.titleCellIdentifier, forIndexPath: indexPath) as! CalendarContentViewTitleCell
+  func getTitleCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.titleCellIdentifier, for: indexPath) as! CalendarContentViewTitleCell
     
-    let weekDayIndex = (indexPath.row + calendar.firstWeekday - 1) % daysPerWeek
+    let weekDayIndex = ((indexPath as NSIndexPath).row + calendar.firstWeekday - 1) % daysPerWeek
 
     cell.backgroundColor = backgroundColor // remove blending
     cell.setText(dayTitles[weekDayIndex], calendarContentView: self)
@@ -145,11 +145,11 @@ extension CalendarContentView: UICollectionViewDataSource {
 
 extension CalendarContentView: UICollectionViewDelegateFlowLayout {
   
-  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let layout = collectionViewLayout as! UICollectionViewFlowLayout
     let contentWidth = collectionView.bounds.width - layout.minimumInteritemSpacing * CGFloat(daysPerWeek - 1)
     let cellWidth = trunc(contentWidth / CGFloat(daysPerWeek))
-    let cellHeight = cellWidth * (indexPath.section == 0 ? weekDayTitlesHeightScale : dayRowHeightScale)
+    let cellHeight = cellWidth * ((indexPath as NSIndexPath).section == 0 ? weekDayTitlesHeightScale : dayRowHeightScale)
     let size = CGSize(width: cellWidth, height: cellHeight)
     return size
   }
@@ -158,8 +158,8 @@ extension CalendarContentView: UICollectionViewDelegateFlowLayout {
 
 extension CalendarContentView: UICollectionViewDelegate {
   
-  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? CalendarContentViewCell {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    if let cell = collectionView.cellForItem(at: indexPath) as? CalendarContentViewCell {
       let dayInfo = cell.getDayInfo()
       
       if !futureDaysEnabled && dayInfo.isFuture {

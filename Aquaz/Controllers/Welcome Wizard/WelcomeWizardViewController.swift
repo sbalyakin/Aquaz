@@ -14,23 +14,23 @@ class WelcomeWizardViewController: UIViewController {
   @IBOutlet weak var skipButton: UIButton!
   weak var pageViewController: WelcomeWizardPageViewController!
   
-  private struct Constants {
+  fileprivate struct Constants {
     static let pageEmbedSegue = "Page Embed"
   }
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: false)
+    UIApplication.shared.setStatusBarStyle(.default, animated: false)
   }
   
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
+    UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
   }
   
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Constants.pageEmbedSegue {
-      if let pageViewController = segue.destinationViewController.contentViewController as? WelcomeWizardPageViewController {
+      if let pageViewController = segue.destination.contentViewController as? WelcomeWizardPageViewController {
         pageViewController.pageControl = pageControl
         pageViewController.skipButton = skipButton
         self.pageViewController = pageViewController
@@ -39,7 +39,7 @@ class WelcomeWizardViewController: UIViewController {
   }
   
   @IBAction func skipButtonWasTapped() {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
       appDelegate.showDefaultRootViewControllerWithAnimation()
     }
   }

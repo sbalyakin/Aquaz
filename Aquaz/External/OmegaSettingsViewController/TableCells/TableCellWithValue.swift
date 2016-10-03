@@ -34,9 +34,7 @@ class TableCellWithValue<Value>: TableCell {
     }
   }
   
-  // Value initialization was moved to init() in order to solve Swift 2.2 bug on iOS7
-  // More details here https://bugs.swift.org/browse/SR-815
-  private var isInternalValueUpdate: Bool
+  fileprivate var isInternalValueUpdate = false
   
   var valueExternalStorage: ValueExternalStorage<Value>? {
     didSet {
@@ -61,8 +59,6 @@ class TableCellWithValue<Value>: TableCell {
   
   init(value: Value, container: TableCellsContainer){
     self.value = value
-    isInternalValueUpdate = false
-    
     super.init(container: container)
   }
   

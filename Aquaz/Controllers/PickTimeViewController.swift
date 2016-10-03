@@ -13,7 +13,7 @@ class PickTimeViewController: UIViewController {
   @IBOutlet weak var timePicker: UIDatePicker!
   @IBOutlet weak var chooseButton: RoundedButton!
   
-  var time: NSDate!
+  var time: Date!
   
   weak var intakeViewController: IntakeViewController!
   
@@ -28,30 +28,30 @@ class PickTimeViewController: UIViewController {
     applyStyle()
   }
   
-  private func setupTimePicker() {
+  fileprivate func setupTimePicker() {
     timePicker.setDate(time, animated: false)
 
-    let today = NSDate()
-    let isTodayTime = DateHelper.areDatesEqualByDays(today, time)
+    let today = Date()
+    let isTodayTime = DateHelper.areEqualDays(today, time)
     if isTodayTime {
       timePicker.maximumDate = today
     }
   }
   
-  private func applyStyle() {
+  fileprivate func applyStyle() {
     UIHelper.applyStyleToViewController(self)
     chooseButton.backgroundColor = drinkType?.darkColor
     navigationController?.navigationBar.barTintColor = drinkType?.mainColor
   }
 
-  @IBAction func chooseButtonWasTapped(sender: AnyObject) {
+  @IBAction func chooseButtonWasTapped(_ sender: AnyObject) {
     time = timePicker.date
     intakeViewController.changeTimeForCurrentDate(time)
-    navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    navigationController?.dismiss(animated: true, completion: nil)
   }
   
-  @IBAction func cancelButtonWasTapped(sender: AnyObject) {
-    navigationController?.dismissViewControllerAnimated(true, completion: nil)
+  @IBAction func cancelButtonWasTapped(_ sender: AnyObject) {
+    navigationController?.dismiss(animated: true, completion: nil)
   }
 
 }

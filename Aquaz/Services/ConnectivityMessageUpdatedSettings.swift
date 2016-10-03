@@ -12,43 +12,42 @@ final class ConnectivityMessageUpdatedSettings {
   
   // MARK: Types
   
-  private struct Keys {
+  fileprivate struct Keys {
     static let settings = "settings"
   }
   
-  private struct Constants {
+  fileprivate struct Constants {
     static let messageKey   = "message"
     static let messageValue = "ConnectivityMessageUpdatedSettings"
   }
   
   // MARK: Properties
   
-  var settings: [String: AnyObject]
+  var settings: [String: Any]
   
   // MARK: Methods
   
-  init(settings: [String: AnyObject]) {
-    self.settings    = settings
+  init(settings: [String: Any]) {
+    self.settings = settings
   }
   
-  init?(metadata: [String : AnyObject]) {
+  init?(metadata: [String : Any]) {
     guard
-      let messageValue = metadata[Constants.messageKey] as? String where messageValue == Constants.messageValue,
-      let settings     = metadata[Keys.settings]        as? [String: AnyObject] else
+      let messageValue = metadata[Constants.messageKey] as? String , messageValue == Constants.messageValue,
+      let settings = metadata[Keys.settings] as? [String: Any] else
     {
       self.settings = [:]
-      
       return nil
     }
     
     self.settings = settings
   }
   
-  func composeMetadata() -> [String : AnyObject] {
-    var metadata = [String : AnyObject]()
+  func composeMetadata() -> [String : Any] {
+    var metadata = [String : Any]()
     
     metadata[Constants.messageKey] = Constants.messageValue
-    metadata[Keys.settings]        = settings
+    metadata[Keys.settings] = settings
     
     return metadata
   }

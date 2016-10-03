@@ -14,19 +14,19 @@ class YearStatisticsViewController: UIViewController {
   @IBOutlet weak var yearStatisticsView: YearStatisticsView!
   @IBOutlet weak var yearLabel: UILabel!
 
-  var date: NSDate = NSDate() {
+  var date: Date = Date() {
     didSet {
       updateUI(animated: true)
     }
   }
   
-  private var statisticsBeginDate: NSDate!
-  private var statisticsEndDate: NSDate!
-  private var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
-  private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
-  private var volumeObserver: SettingsObserver?
+  fileprivate var statisticsBeginDate: Date!
+  fileprivate var statisticsEndDate: Date!
+  fileprivate var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
+  fileprivate var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
+  fileprivate var volumeObserver: SettingsObserver?
 
-  private let shortMonthSymbols = NSCalendar.currentCalendar().shortMonthSymbols 
+  fileprivate let shortMonthSymbols = Calendar.current.shortMonthSymbols 
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -40,19 +40,19 @@ class YearStatisticsViewController: UIViewController {
   }
 
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
 
-  private func setupUI() {
+  fileprivate func setupUI() {
     yearStatisticsView.backgroundColor = StyleKit.pageBackgroundColor
-    yearStatisticsView.backgroundDarkColor = UIColor.clearColor()
+    yearStatisticsView.backgroundDarkColor = UIColor.clear
     yearStatisticsView.valuesChartLineColor = StyleKit.yearStatisticsChartStrokeColor
     yearStatisticsView.valuesChartFillColor = StyleKit.yearStatisticsChartFillColor
     yearStatisticsView.goalsChartColor = StyleKit.yearStatisticsGoalColor
-    yearStatisticsView.scaleTextColor = UIColor.darkGrayColor()
+    yearStatisticsView.scaleTextColor = UIColor.darkGray
     yearStatisticsView.gridColor = UIColor(red: 230/255, green: 231/255, blue: 232/255, alpha: 1.0)
-    yearStatisticsView.pinsColor = UIColor.whiteColor()
-    yearStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    yearStatisticsView.pinsColor = UIColor.white
+    yearStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
     yearStatisticsView.dataSource = self
     
     yearLabel.backgroundColor = StyleKit.pageBackgroundColor // remove blending
@@ -60,50 +60,50 @@ class YearStatisticsViewController: UIViewController {
     updateUI(animated: false)
   }
   
-  private func setupNotificationsObservation() {
-    NSNotificationCenter.defaultCenter().addObserver(
+  fileprivate func setupNotificationsObservation() {
+    NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: UIContentSizeCategoryDidChangeNotification,
+      name: NSNotification.Name.UIContentSizeCategoryDidChange,
       object: nil)
     
     CoreDataStack.performOnPrivateContext { privateContext in
-      NSNotificationCenter.defaultCenter().addObserver(
+      NotificationCenter.default.addObserver(
         self,
         selector: #selector(self.managedObjectContextDidChange(_:)),
-        name: NSManagedObjectContextDidSaveNotification,
+        name: NSNotification.Name.NSManagedObjectContextDidSave,
         object: privateContext)
       
-      NSNotificationCenter.defaultCenter().addObserver(
+      NotificationCenter.default.addObserver(
         self,
         selector: #selector(self.managedObjectContextDidChange(_:)),
-        name: GlobalConstants.notificationManagedObjectContextWasMerged,
+        name: NSNotification.Name(rawValue: GlobalConstants.notificationManagedObjectContextWasMerged),
         object: privateContext)
     }
   }
   
-  func managedObjectContextDidChange(notification: NSNotification) {
+  func managedObjectContextDidChange(_ notification: Notification) {
     updateYearStatisticsView()
   }
 
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
     leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.leftSwipeGestureIsRecognized(_:)))
-    leftSwipeGestureRecognizer.direction = .Left
+    leftSwipeGestureRecognizer.direction = .left
     yearStatisticsView.addGestureRecognizer(leftSwipeGestureRecognizer)
     
     rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.rightSwipeGestureIsRecognized(_:)))
-    rightSwipeGestureRecognizer.direction = .Right
+    rightSwipeGestureRecognizer.direction = .right
     yearStatisticsView.addGestureRecognizer(rightSwipeGestureRecognizer)
   }
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     checkHelpTip()
   }
   
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
     yearStatisticsView.removeGestureRecognizer(leftSwipeGestureRecognizer)
@@ -113,54 +113,54 @@ class YearStatisticsViewController: UIViewController {
   }
 
   func preferredContentSizeChanged() {
-    yearLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    yearStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    yearLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    yearStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
     view.invalidateIntrinsicContentSize()
   }
   
-  private func updateUI(animated animated: Bool) {
+  fileprivate func updateUI(animated: Bool) {
     computeStatisticsDateRange()
     updateYearLabel(animated: animated)
     updateYearStatisticsView()
   }
   
-  @IBAction func switchToPreviousYear(sender: AnyObject) {
+  @IBAction func switchToPreviousYear(_ sender: AnyObject) {
     switchToPreviousYear()
   }
   
-  @IBAction func switchToNextYear(sender: AnyObject) {
+  @IBAction func switchToNextYear(_ sender: AnyObject) {
     switchToNextYear()
   }
 
-  func leftSwipeGestureIsRecognized(gestureRecognizer: UISwipeGestureRecognizer) {
-    if gestureRecognizer.state == .Ended {
+  func leftSwipeGestureIsRecognized(_ gestureRecognizer: UISwipeGestureRecognizer) {
+    if gestureRecognizer.state == .ended {
       switchToNextYear()
     }
   }
   
-  func rightSwipeGestureIsRecognized(gestureRecognizer: UISwipeGestureRecognizer) {
-    if gestureRecognizer.state == .Ended {
+  func rightSwipeGestureIsRecognized(_ gestureRecognizer: UISwipeGestureRecognizer) {
+    if gestureRecognizer.state == .ended {
       switchToPreviousYear()
     }
   }
   
-  private func switchToPreviousYear() {
-    date = DateHelper.addToDate(date, years: -1, months: 0, days: 0)
+  fileprivate func switchToPreviousYear() {
+    date = DateHelper.previousYearBefore(date)
   }
   
-  private func switchToNextYear() {
-    date = DateHelper.addToDate(date, years: 1, months: 0, days: 0)
+  fileprivate func switchToNextYear() {
+    date = DateHelper.nextYearFrom(date)
   }
 
-  private lazy var dateFormatter: NSDateFormatter = {
-    let formatter = NSDateFormatter()
-    let dateFormat = NSDateFormatter.dateFormatFromTemplate("yyyy", options: 0, locale: NSLocale.currentLocale())
+  fileprivate lazy var dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    let dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy", options: 0, locale: Locale.current)
     formatter.dateFormat = dateFormat
     return formatter
     }()
 
-  private func updateYearLabel(animated animated: Bool) {
-    let title = dateFormatter.stringFromDate(date)
+  fileprivate func updateYearLabel(animated: Bool) {
+    let title = dateFormatter.string(from: date)
     
     if animated {
       yearLabel.setTextWithAnimation(title)
@@ -169,12 +169,12 @@ class YearStatisticsViewController: UIViewController {
     }
   }
   
-  private func fetchStatisticsItems(beginDate beginDate: NSDate, endDate: NSDate, privateContext: NSManagedObjectContext) -> [YearStatisticsView.ItemType] {
-    let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Month,
+  fileprivate func fetchStatisticsItems(beginDate: Date, endDate: Date, privateContext: NSManagedObjectContext) -> [YearStatisticsView.ItemType] {
+    let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.month,
       beginDate: beginDate,
       endDate: endDate,
       dayOffsetInHours: 0,
-      aggregateFunction: .Average,
+      aggregateFunction: .average,
       managedObjectContext: privateContext)
     
     let waterGoals = WaterGoal.fetchWaterGoalAmountsGroupedByMonths(
@@ -186,11 +186,11 @@ class YearStatisticsViewController: UIViewController {
     
     var statisticsItems: [YearStatisticsView.ItemType] = []
     
-    for (index, amountParts) in amountPartsList.enumerate() {
+    for (index, amountParts) in amountPartsList.enumerated() {
       let waterGoal = waterGoals[index] + amountParts.dehydration
       
-      let displayedHydrationAmount = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: amountParts.hydration, unitType: .Volume)
-      let displayedGoal = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: waterGoal, unitType: .Volume)
+      let displayedHydrationAmount = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: amountParts.hydration, unitType: .volume)
+      let displayedGoal = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: waterGoal, unitType: .volume)
       
       let item: YearStatisticsView.ItemType = (value: CGFloat(displayedHydrationAmount), goal: CGFloat(displayedGoal))
       statisticsItems.append(item)
@@ -199,30 +199,25 @@ class YearStatisticsViewController: UIViewController {
     return statisticsItems
   }
   
-  private func updateYearStatisticsView() {
+  fileprivate func updateYearStatisticsView() {
     CoreDataStack.performOnPrivateContext { privateContext in
       let date = self.date
       let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate, privateContext: privateContext)
       
-      dispatch_async(dispatch_get_main_queue()) {
-        if self.date === date {
+      DispatchQueue.main.async {
+        if self.date == date {
           self.yearStatisticsView.setItems(statisticsItems)
         }
       }
     }
   }
   
-  private func computeStatisticsDateRange() {
-    let calendar = NSCalendar.currentCalendar()
-    let dateComponents = calendar.components([.Year, .Month, .Day, .TimeZone, .Calendar], fromDate: date)
-    
-    dateComponents.day = 1
-    dateComponents.month = 1
-    statisticsBeginDate = calendar.dateFromComponents(dateComponents)
-    statisticsEndDate = DateHelper.addToDate(statisticsBeginDate, years: 1, months: 0, days: 0)
+  fileprivate func computeStatisticsDateRange() {
+    statisticsBeginDate = DateHelper.startOfYear(date)
+    statisticsEndDate = DateHelper.nextYearFrom(statisticsBeginDate)
   }
 
-  private func checkHelpTip() {
+  fileprivate func checkHelpTip() {
     if Settings.sharedInstance.uiYearStatisticsPageHelpTipIsShown.value {
       return
     }
@@ -230,7 +225,7 @@ class YearStatisticsViewController: UIViewController {
     showHelpTip()
   }
   
-  private func showHelpTip() {
+  fileprivate func showHelpTip() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
       if self.view.window == nil {
         return
@@ -241,11 +236,11 @@ class YearStatisticsViewController: UIViewController {
         comment: "YearStatisticsViewController: Text for help tip about switching current year by swipe gesture")
       
       let point = CGPoint(x: self.yearStatisticsView.bounds.midX, y: self.yearStatisticsView.bounds.midY)
-      let helpTip = JDFTooltipView(targetPoint: point, hostView: self.yearStatisticsView, tooltipText: text, arrowDirection: .Down, width: self.view.frame.width / 2)
       
-      UIHelper.showHelpTip(helpTip)
-      
-      Settings.sharedInstance.uiYearStatisticsPageHelpTipIsShown.value = true
+      if let helpTip = JDFTooltipView(targetPoint: point, hostView: self.yearStatisticsView, tooltipText: text, arrowDirection: .down, width: self.view.frame.width / 2) {
+        UIHelper.showHelpTip(helpTip)
+        Settings.sharedInstance.uiYearStatisticsPageHelpTipIsShown.value = true
+      }
     }
   }
 
@@ -255,7 +250,7 @@ class YearStatisticsViewController: UIViewController {
 
 extension YearStatisticsViewController: YearStatisticsViewDataSource {
   
-  func yearStatisticsViewGetTitleForHorizontalValue(value: CGFloat) -> String {
+  func yearStatisticsViewGetTitleForHorizontalValue(_ value: CGFloat) -> String {
     let index = Int(value)
     
     if index < 0 || index >= shortMonthSymbols.count {
@@ -266,7 +261,7 @@ extension YearStatisticsViewController: YearStatisticsViewDataSource {
     return shortMonthSymbols[index]
   }
   
-  func yearStatisticsViewGetTitleForVerticalValue(value: CGFloat) -> String {
+  func yearStatisticsViewGetTitleForVerticalValue(_ value: CGFloat) -> String {
     let quantity = Quantity(unit: Settings.sharedInstance.generalVolumeUnits.value.unit, amount: Double(value))
     let title = quantity.getDescription(Settings.sharedInstance.generalVolumeUnits.value.decimals, displayUnits: true)
 
@@ -278,8 +273,8 @@ extension YearStatisticsViewController: YearStatisticsViewDataSource {
 private extension Units.Volume {
   var decimals: Int {
     switch self {
-    case Millilitres: return 0
-    case FluidOunces: return 1
+    case .millilitres: return 0
+    case .fluidOunces: return 1
     }
   }
 }

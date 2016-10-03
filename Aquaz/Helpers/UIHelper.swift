@@ -12,7 +12,7 @@ import UIKit
 class UIHelper {
   
   class func applyStylization() {
-    UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
+    UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
     
     UISegmentedControl.appearance().tintColor = StyleKit.controlTintColor
     
@@ -23,7 +23,7 @@ class UIHelper {
     UITabBar.appearance().tintColor = StyleKit.controlTintColor
   }
   
-  class func applyStyleToViewController(viewController: UIViewController) {
+  class func applyStyleToViewController(_ viewController: UIViewController) {
     viewController.view.backgroundColor = StyleKit.pageBackgroundColor
 
     if let tableViewController = viewController as? UITableViewController {
@@ -39,32 +39,32 @@ class UIHelper {
     }
   }
 
-  class func applyStyleToNavigationBar(navigationBar: UINavigationBar) {
+  class func applyStyleToNavigationBar(_ navigationBar: UINavigationBar) {
     navigationBar.barTintColor = StyleKit.barBackgroundColor
-    navigationBar.barStyle = .Black
+    navigationBar.barStyle = .black
     navigationBar.tintColor = StyleKit.barTextColor
     navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: StyleKit.barTextColor]
-    navigationBar.translucent = false
-    navigationBar.tintAdjustmentMode = .Normal
+    navigationBar.isTranslucent = false
+    navigationBar.tintAdjustmentMode = .normal
   }
   
-  class func adjustNavigationTitleViewSize(navigationItem: UINavigationItem) {
+  class func adjustNavigationTitleViewSize(_ navigationItem: UINavigationItem) {
     if let titleView = navigationItem.titleView {
       navigationItem.titleView = nil
       titleView.setNeedsLayout()
       titleView.layoutIfNeeded()
-      titleView.frame.size = titleView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+      titleView.frame.size = titleView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
       navigationItem.titleView = titleView
     }
   }
   
-  class func showHelpTip(helpTip: JDFTooltipView, hideCompletionHandler: (() -> ())? = nil) {
+  class func showHelpTip(_ helpTip: JDFTooltipView, hideCompletionHandler: (() -> ())? = nil) {
     helpTip.tooltipBackgroundColour = StyleKit.helpTipsColor
-    helpTip.textColour = UIColor.blackColor()
+    helpTip.textColour = UIColor.black
     
     helpTip.showCompletionBlock = {
       SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDisplayTime) {
-        helpTip.hideAnimated(true)
+        helpTip.hide(animated: true)
       }
     }
     

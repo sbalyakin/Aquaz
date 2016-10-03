@@ -10,9 +10,9 @@ import UIKit
 
 // MARK: TableCellsContainer -
 protocol TableCellsContainer: class {
-  func addSupportingTableCell(baseTableCell baseTableCell: TableCell, supportingTableCell: TableCell)
+  func addSupportingTableCell(baseTableCell: TableCell, supportingTableCell: TableCell)
   func deleteSupportingTableCell()
-  func activateTableCell(tableCell: TableCell?)
+  func activateTableCell(_ tableCell: TableCell?)
   
   var rightDetailValueColor: UIColor { get }
   var rightDetailSelectedValueColor: UIColor { get }
@@ -25,17 +25,17 @@ class OmegaSettingsViewController: UIViewController {
   
   var tableCellsSections: [TableCellsSection] = []
 
-  var rightDetailValueColor = UIColor.darkGrayColor()
-  var rightDetailSelectedValueColor = UIColor.redColor()
+  var rightDetailValueColor = UIColor.darkGray
+  var rightDetailSelectedValueColor = UIColor.red
   
   /// If true all settings item will be saved to user defaults automatically on value update
   var saveToSettingsOnValueUpdate = true
   
-  private var activeTableCell: TableCell?
+  fileprivate var activeTableCell: TableCell?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    tableView.keyboardDismissMode = .OnDrag
+    tableView.keyboardDismissMode = .onDrag
     tableCellsSections = createTableCellsSections()
   }
   
@@ -55,65 +55,122 @@ class OmegaSettingsViewController: UIViewController {
     tableView.reloadData()
   }
   
-  func createBasicTableCell(title title: String, accessoryType: UITableViewCellAccessoryType? = nil, activationChangedFunction: TableCell.TableCellActivatedFunction? = nil) -> BasicTableCell {
-    let cell = BasicTableCell(title: title, container: self, accessoryType: accessoryType)
-    cell.tableCellDidActivateFunction = activationChangedFunction
-    return cell
+  func createBasicTableCell(
+    title: String,
+    accessoryType: UITableViewCellAccessoryType? = nil) -> BasicTableCell
+  {
+    return BasicTableCell(title: title, container: self, accessoryType: accessoryType)
   }
   
-  func createSwitchTableCell<T>(title title: String, settingsItem: SettingsItemBase<T>) -> SwitchTableCell<T> {
+  func createSwitchTableCell(
+    title: String,
+    settingsItem: SettingsItemBase<Bool>) -> SwitchTableCell
+  {
     let cell = SwitchTableCell(title: title, value: settingsItem.value, container: self)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     return cell
   }
   
-  func createSwitchTableCell(title title: String, value: Bool) -> SwitchTableCell<Bool> {
+  func createSwitchTableCell(title: String, value: Bool) -> SwitchTableCell {
     return SwitchTableCell(title: title, value: value, container: self)
   }
   
-  func createRangedSegmentedTableCell<Value: CustomStringConvertible, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(title title: String, value: Value, collection: Collection, stringFromValueFunction: ((Value) -> String)? = nil) -> SegmentedTableCell<Value, Collection> {
+  func createRangedSegmentedTableCell<TValue: CustomStringConvertible, TCollection: Collection>(
+    title: String,
+    value: TValue,
+    collection: TCollection,
+    stringFromValueFunction: @escaping ((TValue) -> String)) -> SegmentedTableCell<TValue, TCollection>
+    where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int
+  {
     let cell = SegmentedTableCell(title: title, value: value, collection: collection, container: self)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createRangedSegmentedTableCell<Value: CustomStringConvertible, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(title title: String, settingsItem: SettingsItemBase<Value>, collection: Collection, stringFromValueFunction: ((Value) -> String)? = nil) -> SegmentedTableCell<Value, Collection> {
+  func createRangedSegmentedTableCell<TValue: CustomStringConvertible, TCollection: Collection>(
+    title: String,
+    settingsItem: SettingsItemBase<TValue>,
+    collection: TCollection,
+    stringFromValueFunction: @escaping ((TValue) -> String)) -> SegmentedTableCell<TValue, TCollection>
+    where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int
+  {
     let cell = SegmentedTableCell(title: title, value: settingsItem.value, collection: collection, container: self)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createEnumSegmentedTableCell<Value>(title title: String, value: Value, segmentsWidth: CGFloat = 0, stringFromValueFunction: (((Value) -> String)?) = nil) -> SegmentedTableCell<Value, EnumCollection<Value>> {
-    let cell = SegmentedTableCell(title: title, value: value, collection: EnumCollection<Value>(), container: self, segmentsWidth: segmentsWidth)
+  func createEnumSegmentedTableCell<TValue>(
+    title: String,
+    value: TValue,
+    stringFromValueFunction: @escaping ((TValue) -> String),
+    segmentsWidth: CGFloat = 0) -> SegmentedTableCell<TValue, EnumCollection<TValue>>
+  {
+    let cell = SegmentedTableCell(title: title, value: value, collection: EnumCollection<TValue>(), container: self, segmentsWidth: segmentsWidth)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createEnumSegmentedTableCell<Value>(title title: String, settingsItem: SettingsItemBase<Value>, segmentsWidth: CGFloat = 0, stringFromValueFunction: (((Value) -> String)?) = nil) -> SegmentedTableCell<Value, EnumCollection<Value>> {
-    let cell = SegmentedTableCell(title: title, value: settingsItem.value, collection: EnumCollection<Value>(), container: self, segmentsWidth: segmentsWidth)
+  func createEnumSegmentedTableCell<TValue>(
+    title: String,
+    settingsItem: SettingsItemBase<TValue>,
+    stringFromValueFunction: @escaping ((TValue) -> String),
+    segmentsWidth: CGFloat = 0) -> SegmentedTableCell<TValue, EnumCollection<TValue>>
+  {
+    let cell = SegmentedTableCell(title: title, value: settingsItem.value, collection: EnumCollection<TValue>(), container: self, segmentsWidth: segmentsWidth)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createRightDetailTableCell<Value: CustomStringConvertible>(title title: String, value: Value, accessoryType: UITableViewCellAccessoryType = .None, activationChangedFunction: TableCell.TableCellActivatedFunction? = nil, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
-    let cell = RightDetailTableCell(title: title, value: value, container: self, accessoryType: accessoryType)
-    cell.tableCellDidActivateFunction = activationChangedFunction
-    cell.stringFromValueFunction = stringFromValueFunction
+  func createEnumSegmentedTableCell<TValue>(
+    title: String,
+    value: TValue,
+    segmentsWidth: CGFloat = 0) -> SegmentedTableCell<TValue, EnumCollection<TValue>>
+  {
+    return SegmentedTableCell(title: title, value: value, collection: EnumCollection<TValue>(), container: self, segmentsWidth: segmentsWidth)
+  }
+  
+  func createEnumSegmentedTableCell<TValue>(
+    title: String,
+    settingsItem: SettingsItemBase<TValue>,
+    segmentsWidth: CGFloat = 0) -> SegmentedTableCell<TValue, EnumCollection<TValue>>
+  {
+    let cell = SegmentedTableCell(title: title, value: settingsItem.value, collection: EnumCollection<TValue>(), container: self, segmentsWidth: segmentsWidth)
+    cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     return cell
   }
   
-  func createRightDetailTableCell<Value: CustomStringConvertible>(title title: String, settingsItem: SettingsItemBase<Value>, accessoryType: UITableViewCellAccessoryType = .None, activationChangedFunction: TableCell.TableCellActivatedFunction? = nil, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
+  func createRightDetailTableCell<TValue: CustomStringConvertible>(
+    title: String,
+    value: TValue,
+    stringFromValueFunction: @escaping ((TValue) -> String),
+    accessoryType: UITableViewCellAccessoryType = .none) -> RightDetailTableCell<TValue>
+  {
+    return RightDetailTableCell(title: title, value: value, container: self, accessoryType: accessoryType)
+  }
+  
+  func createRightDetailTableCell<TValue: CustomStringConvertible>(
+    title: String,
+    settingsItem: SettingsItemBase<TValue>,
+    stringFromValueFunction: (@escaping ((TValue) -> String)),
+    accessoryType: UITableViewCellAccessoryType = .none) -> RightDetailTableCell<TValue>
+  {
     let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: accessoryType)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
-    cell.tableCellDidActivateFunction = activationChangedFunction
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createRangedRightDetailTableCell<Value: CustomStringConvertible, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(title title: String, settingsItem: SettingsItemBase<Value>, collection: Collection, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
-    let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: .None)
+  func createRangedRightDetailTableCell<TValue: CustomStringConvertible, TCollection: Collection>(
+    title: String,
+    settingsItem: SettingsItemBase<TValue>,
+    collection: TCollection,
+    stringFromValueFunction: @escaping ((TValue) -> String),
+    pickerTableCellHeight: UIPickerViewHeight = .medium) -> RightDetailTableCell<TValue>
+    where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int, TCollection.IndexDistance == Int
+  {
+    let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: .none)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     cell.supportingTableCell = PickerTableCell(value: settingsItem.value, collection: collection, container: self, height: pickerTableCellHeight)
     
@@ -123,8 +180,15 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createRangedRightDetailTableCell<Value: CustomStringConvertible, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>(title title: String, value: Value, collection: Collection, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
-    let cell = RightDetailTableCell(title: title, value: value, container: self, accessoryType: .None)
+  func createRangedRightDetailTableCell<TValue: CustomStringConvertible, TCollection: Collection>(
+    title: String,
+    value: TValue,
+    collection: TCollection,
+    stringFromValueFunction: @escaping ((TValue) -> String),
+    pickerTableCellHeight: UIPickerViewHeight = .medium) -> RightDetailTableCell<TValue>
+    where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int, TCollection.IndexDistance == Int
+  {
+    let cell = RightDetailTableCell(title: title, value: value, container: self, accessoryType: .none)
     cell.supportingTableCell = PickerTableCell(value: value, collection: collection, container: self, height: pickerTableCellHeight)
     
     cell.stringFromValueFunction = stringFromValueFunction
@@ -133,128 +197,170 @@ class OmegaSettingsViewController: UIViewController {
     return cell
   }
   
-  func createEnumRightDetailTableCell<Value: RawRepresentable where Value: CustomStringConvertible, Value: Equatable, Value.RawValue == Int>(title title: String, settingsItem: SettingsItemBase<Value>, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
-    let cell = createRangedRightDetailTableCell(
+  func createEnumRightDetailTableCell<TValue: RawRepresentable>(
+    title: String,
+    settingsItem: SettingsItemBase<TValue>,
+    stringFromValueFunction: @escaping ((TValue) -> String),
+    pickerTableCellHeight: UIPickerViewHeight = .medium) -> RightDetailTableCell<TValue>
+    where TValue: CustomStringConvertible, TValue: Equatable, TValue.RawValue == Int
+  {
+    return createRangedRightDetailTableCell(
       title: title,
       settingsItem: settingsItem,
-      collection: EnumCollection<Value>(),
-      pickerTableCellHeight: pickerTableCellHeight,
-      stringFromValueFunction: stringFromValueFunction)
-    
-    return cell
+      collection: EnumCollection<TValue>(),
+      stringFromValueFunction: stringFromValueFunction,
+      pickerTableCellHeight: pickerTableCellHeight)
   }
   
-  func createEnumRightDetailTableCell<Value: RawRepresentable where Value: CustomStringConvertible, Value: Equatable, Value.RawValue == Int>(title title: String, value: Value, pickerTableCellHeight: UIPickerViewHeight = .Medium, stringFromValueFunction: ((Value) -> String)? = nil) -> RightDetailTableCell<Value> {
-    let cell = createRangedRightDetailTableCell(
+  func createEnumRightDetailTableCell<TValue: RawRepresentable>(
+    title: String,
+    value: TValue,
+    stringFromValueFunction: @escaping ((TValue) -> String),
+    pickerTableCellHeight: UIPickerViewHeight = .medium) -> RightDetailTableCell<TValue>
+    where TValue: CustomStringConvertible, TValue: Equatable, TValue.RawValue == Int
+  {
+    return createRangedRightDetailTableCell(
       title: title,
       value: value,
-      collection: EnumCollection<Value>(),
-      pickerTableCellHeight: pickerTableCellHeight,
-      stringFromValueFunction: stringFromValueFunction)
-    
-    return cell
+      collection: EnumCollection<TValue>(),
+      stringFromValueFunction: stringFromValueFunction,
+      pickerTableCellHeight: pickerTableCellHeight)
   }
   
-  func createTimeIntervalRightDetailTableCell(title title: String, value: NSTimeInterval, timeComponents: [TimeIntervalPickerTableCellComponent], height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSTimeInterval) -> String)? = nil) -> RightDetailTableCell<NSTimeInterval> {
-    let pickerCell = TimeIntervalPickerTableCell(value: value, timeComponents: timeComponents, container: self, height: height)
-    
+  func createTimeIntervalRightDetailTableCell(
+    title: String,
+    value: TimeInterval,
+    timeComponents: [TimeIntervalPickerTableCellComponent],
+    stringFromValueFunction: @escaping ((TimeInterval) -> String),
+    height: UIPickerViewHeight = .medium) -> RightDetailTableCell<TimeInterval>
+  {
     let cell = RightDetailTableCell(title: title, value: value, container: self)
-    cell.supportingTableCell = pickerCell
+    cell.supportingTableCell = TimeIntervalPickerTableCell(value: value, timeComponents: timeComponents, container: self, height: height)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createTimeIntervalRightDetailTableCell(title title: String, settingsItem: SettingsItemBase<NSTimeInterval>, timeComponents: [TimeIntervalPickerTableCellComponent], height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSTimeInterval) -> String)? = nil) -> RightDetailTableCell<NSTimeInterval> {
-    let pickerCell = TimeIntervalPickerTableCell(value: settingsItem.value, timeComponents: timeComponents, container: self, height: height)
-
+  func createTimeIntervalRightDetailTableCell(
+    title: String,
+    settingsItem: SettingsItemBase<TimeInterval>,
+    timeComponents: [TimeIntervalPickerTableCellComponent],
+    stringFromValueFunction: @escaping ((TimeInterval) -> String),
+    height: UIPickerViewHeight = .medium) -> RightDetailTableCell<TimeInterval>
+  {
     let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self)
-    cell.supportingTableCell = pickerCell
+    cell.supportingTableCell = TimeIntervalPickerTableCell(value: settingsItem.value, timeComponents: timeComponents, container: self, height: height)
     cell.stringFromValueFunction = stringFromValueFunction
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     return cell
   }
   
-  func createDateRightDetailTableCell(title title: String, value: NSDate, datePickerMode: DatePickerTableCellMode, minimumDate: NSDate? = nil, maximumDate: NSDate? = nil, height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSDate) -> String)? = nil) -> RightDetailTableCell<NSDate> {
-    let pickerCell = DatePickerTableCell(value: value, container: self, datePickerMode: datePickerMode, minimumDate: minimumDate, maximumDate: maximumDate, height: height)
-    
+  func createDateRightDetailTableCell(
+    title: String,
+    value: Date,
+    datePickerMode: DatePickerTableCellMode,
+    stringFromValueFunction: @escaping ((Date) -> String),
+    minimumDate: Date? = nil,
+    maximumDate: Date? = nil,
+    height: UIPickerViewHeight = .medium) -> RightDetailTableCell<Date>
+  {
     let cell = RightDetailTableCell(title: title, value: value, container: self)
-    cell.supportingTableCell = pickerCell
+    cell.supportingTableCell = DatePickerTableCell(value: value, container: self, datePickerMode: datePickerMode, minimumDate: minimumDate, maximumDate: maximumDate, height: height)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createDateRightDetailTableCell(title title: String, settingsItem: SettingsItemBase<NSDate>, datePickerMode: DatePickerTableCellMode, minimumDate: NSDate? = nil, maximumDate: NSDate? = nil, height: UIPickerViewHeight = .Medium, stringFromValueFunction: ((NSDate) -> String)? = nil) -> RightDetailTableCell<NSDate> {
-    let pickerCell = DatePickerTableCell(value: settingsItem.value, container: self, datePickerMode: datePickerMode, minimumDate: minimumDate, maximumDate: maximumDate, height: height)
-    
+  func createDateRightDetailTableCell(
+    title: String,
+    settingsItem: SettingsItemBase<Date>,
+    datePickerMode: DatePickerTableCellMode,
+    stringFromValueFunction: @escaping ((Date) -> String),
+    minimumDate: Date? = nil,
+    maximumDate: Date? = nil,
+    height: UIPickerViewHeight = .medium) -> RightDetailTableCell<Date>
+  {
     let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self)
-    cell.supportingTableCell = pickerCell
+    cell.supportingTableCell = DatePickerTableCell(value: settingsItem.value, container: self, datePickerMode: datePickerMode, minimumDate: minimumDate, maximumDate: maximumDate, height: height)
     cell.stringFromValueFunction = stringFromValueFunction
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     return cell
   }
   
-  func createTextFieldTableCell<Value: CustomStringConvertible>(title title: String, value: Value, valueFromStringFunction: ((String) -> Value?), stringFromValueFunction: (((Value) -> String)?) = nil, keyboardType: UIKeyboardType = .Default, borderStyle: UITextBorderStyle = .None) -> TextFieldTableCell<Value> {
+  func createTextFieldTableCell<TValue: CustomStringConvertible>(
+    title: String,
+    value: TValue,
+    valueFromStringFunction: @escaping ((String) -> TValue?),
+    stringFromValueFunction: @escaping ((TValue) -> String),
+    keyboardType: UIKeyboardType = .default,
+    borderStyle: UITextBorderStyle = .none) -> TextFieldTableCell<TValue>
+  {
     let cell = TextFieldTableCell(title: title, value: value, valueFromStringFunction: valueFromStringFunction, container: self, keyboardType: keyboardType, textFieldBorderStyle: borderStyle)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  func createTextFieldTableCell<Value: CustomStringConvertible>(title title: String, settingsItem: SettingsItemBase<Value>, valueFromStringFunction: ((String) -> Value?), stringFromValueFunction: (((Value) -> String)?) = nil, keyboardType: UIKeyboardType = .Default, borderStyle: UITextBorderStyle = .None) -> TextFieldTableCell<Value> {
+  func createTextFieldTableCell<TValue: CustomStringConvertible>(
+    title: String,
+    settingsItem: SettingsItemBase<TValue>,
+    valueFromStringFunction: @escaping ((String) -> TValue?),
+    stringFromValueFunction: @escaping ((TValue) -> String),
+    keyboardType: UIKeyboardType = .default,
+    borderStyle: UITextBorderStyle = .none) -> TextFieldTableCell<TValue>
+  {
     let cell = TextFieldTableCell(title: title, value: settingsItem.value, valueFromStringFunction: valueFromStringFunction, container: self, keyboardType: keyboardType, textFieldBorderStyle: borderStyle)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     cell.stringFromValueFunction = stringFromValueFunction
     return cell
   }
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    NSNotificationCenter.defaultCenter().addObserver(
+    NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.handleKeyboardWillShowNotification(_:)),
-      name: UIKeyboardWillShowNotification,
+      name: NSNotification.Name.UIKeyboardWillShow,
       object: nil)
     
-    NSNotificationCenter.defaultCenter().addObserver(
+    NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.handleKeyboardWillHideNotification(_:)),
-      name: UIKeyboardWillHideNotification,
+      name: NSNotification.Name.UIKeyboardWillHide,
       object: nil)
   }
   
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
 
     activateTableCell(nil)
 
-    let notificationCenter = NSNotificationCenter.defaultCenter()
-    notificationCenter.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-    notificationCenter.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    let notificationCenter = NotificationCenter.default
+    notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
   }
   
-  func handleKeyboardWillShowNotification(notification: NSNotification) {
-    let userInfo = notification.userInfo!
+  func handleKeyboardWillShowNotification(_ notification: Notification) {
+    let userInfo = (notification as NSNotification).userInfo!
     
-    let infoRect = userInfo[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue
+    let infoRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue
     let size = infoRect!.size
     
     let contentInsets: UIEdgeInsets
-    if UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication().statusBarOrientation) {
+    if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
       contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: size.height, right: 0)
     } else {
       contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: size.width, right: 0)
     }
     
-    let animationDuration: NSTimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
-    UIView.animateWithDuration(animationDuration, animations: {
+    let animationDuration: TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+    UIView.animate(withDuration: animationDuration, animations: {
       self.tableView.contentInset = contentInsets
       self.tableView.scrollIndicatorInsets = contentInsets
     })
   }
   
-  func handleKeyboardWillHideNotification(notification: NSNotification) {
-    tableView.contentInset = UIEdgeInsetsZero
-    tableView.scrollIndicatorInsets = UIEdgeInsetsZero
+  func handleKeyboardWillHideNotification(_ notification: Notification) {
+    tableView.contentInset = UIEdgeInsets.zero
+    tableView.scrollIndicatorInsets = UIEdgeInsets.zero
   }
   
   func writeTableCellValuesToExternalStorage() {
@@ -277,17 +383,17 @@ class OmegaSettingsViewController: UIViewController {
 
 // MARK: TableCellsContainer
 extension OmegaSettingsViewController: TableCellsContainer {
-  func addSupportingTableCell(baseTableCell baseTableCell: TableCell, supportingTableCell: TableCell) {
-    var insertedIndexPath: NSIndexPath!
+  func addSupportingTableCell(baseTableCell: TableCell, supportingTableCell: TableCell) {
+    var insertedIndexPath: IndexPath!
     tableView.beginUpdates()
     
-    section: for (sectionIndex, section) in tableCellsSections.enumerate() {
-      for (cellIndex, tableCell) in section.tableCells.enumerate() {
+    section: for (sectionIndex, section) in tableCellsSections.enumerated() {
+      for (cellIndex, tableCell) in section.tableCells.enumerated() {
         if tableCell === baseTableCell {
           let insertIndex = cellIndex + 1
-          insertedIndexPath = NSIndexPath(forRow: insertIndex, inSection: sectionIndex)
-          tableView.insertRowsAtIndexPaths([insertedIndexPath], withRowAnimation: .Fade)
-          section.tableCells.insert(supportingTableCell, atIndex: insertIndex)
+          insertedIndexPath = IndexPath(row: insertIndex, section: sectionIndex)
+          tableView.insertRows(at: [insertedIndexPath], with: .fade)
+          section.tableCells.insert(supportingTableCell, at: insertIndex)
           break section
         }
       }
@@ -296,11 +402,11 @@ extension OmegaSettingsViewController: TableCellsContainer {
     tableView.endUpdates()
     
     if insertedIndexPath != nil {
-      tableView.scrollToRowAtIndexPath(insertedIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+      tableView.scrollToRow(at: insertedIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
     }
   }
   
-  func activateTableCell(tableCell: TableCell?) {
+  func activateTableCell(_ tableCell: TableCell?) {
     if tableCell === activeTableCell {
       tableCell?.setActive(false)
       activeTableCell = nil
@@ -316,12 +422,12 @@ extension OmegaSettingsViewController: TableCellsContainer {
   func deleteSupportingTableCell() {
     tableView.beginUpdates()
     
-    section: for (sectionIndex, section) in tableCellsSections.enumerate() {
-      for (cellIndex, tableCell) in section.tableCells.enumerate() {
+    section: for (sectionIndex, section) in tableCellsSections.enumerated() {
+      for (cellIndex, tableCell) in section.tableCells.enumerated() {
         if tableCell.isSupportingCell {
-          let indexPath = NSIndexPath(forRow: cellIndex, inSection: sectionIndex)
-          tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-          section.tableCells.removeAtIndex(cellIndex)
+          let indexPath = IndexPath(row: cellIndex, section: sectionIndex)
+          tableView.deleteRows(at: [indexPath], with: .fade)
+          section.tableCells.remove(at: cellIndex)
           break section
         }
       }
@@ -335,46 +441,46 @@ extension OmegaSettingsViewController: TableCellsContainer {
 // MARK: UITableView data source and delegate
 extension OmegaSettingsViewController: UITableViewDataSource, UITableViewDelegate {
   
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return tableCellsSections[section].tableCells.count
   }
   
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let tableCell = getTableCellForRowAtIndexPath(indexPath)
     let cell = tableCell.createUICell(tableView: tableView, indexPath: indexPath)
     return cell
   }
   
-  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  func numberOfSections(in tableView: UITableView) -> Int {
     return tableCellsSections.count
   }
   
-  private func getTableCellForRowAtIndexPath(indexPath: NSIndexPath) -> TableCell {
-    let section = tableCellsSections[indexPath.section]
-    let cell = section.tableCells[indexPath.row]
+  fileprivate func getTableCellForRowAtIndexPath(_ indexPath: IndexPath) -> TableCell {
+    let section = tableCellsSections[(indexPath as NSIndexPath).section]
+    let cell = section.tableCells[(indexPath as NSIndexPath).row]
     return cell
   }
   
-  func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let tableCell = getTableCellForRowAtIndexPath(indexPath)
     return tableCell.getRowHeight() ?? tableView.rowHeight
   }
   
-  func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     let section = tableCellsSections[section]
     return section.headerTitle
   }
   
-  func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+  func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
     let section = tableCellsSections[section]
     return section.footerTitle
   }
   
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let tableCell = getTableCellForRowAtIndexPath(indexPath)
     activateTableCell(tableCell)
     // A selected cell should be deselected because iOS does not paint a separator for selected cells.
-    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    tableView.deselectRow(at: indexPath, animated: true)
   }
 }
 
@@ -386,7 +492,7 @@ class TableCellsSection {
 }
 
 // MARK: EnumCollection -
-class EnumCollection<T: RawRepresentable where T.RawValue == Int>: CollectionType {
+class EnumCollection<T: RawRepresentable>: Collection where T.RawValue == Int {
   
   let startIndex: Int
   let endIndex: Int
@@ -413,9 +519,9 @@ class EnumCollection<T: RawRepresentable where T.RawValue == Int>: CollectionTyp
     self.endIndex = endIndex!
   }
   
-  func generate() -> AnyGenerator<T> {
+  func makeIterator() -> AnyIterator<T> {
     var index = startIndex
-    return AnyGenerator {
+    return AnyIterator {
       index += 1
       return index <= self.endIndex ? T(rawValue: index) : nil
     }
@@ -425,10 +531,19 @@ class EnumCollection<T: RawRepresentable where T.RawValue == Int>: CollectionTyp
     return T(rawValue: startIndex + i)!
   }
   
+  /// Returns the position immediately after the given index.
+  ///
+  /// - Parameter i: A valid index of the collection. `i` must be less than
+  ///   `endIndex`.
+  /// - Returns: The index value immediately after `i`.
+  public func index(after i: Int) -> Int {
+    return i + 1
+  }
+  
 }
 
 // MARK: IntCollection -
-class IntCollection: CollectionType {
+class IntCollection: Collection {
   
   let startIndex: Int
   let endIndex: Int
@@ -442,12 +557,12 @@ class IntCollection: CollectionType {
     self.maximumValue = maximumValue
     self.step = step
     startIndex = 0
-    endIndex = (maximumValue - minimumValue) / step
+    endIndex = (maximumValue - minimumValue) / step + 1
   }
   
-  func generate() -> AnyGenerator<Int> {
+  func makeIterator() -> AnyIterator<Int> {
     var index = startIndex
-    return AnyGenerator {
+    return AnyIterator {
       if index <= self.endIndex {
         let value = self.minimumValue + index * self.step
         index += 1
@@ -462,10 +577,19 @@ class IntCollection: CollectionType {
     return minimumValue + index * step
   }
   
+  /// Returns the position immediately after the given index.
+  ///
+  /// - Parameter i: A valid index of the collection. `i` must be less than
+  ///   `endIndex`.
+  /// - Returns: The index value immediately after `i`.
+  public func index(after i: Int) -> Int {
+    return i + 1
+  }
+
 }
 
 // MARK: DoubleCollection -
-class DoubleCollection: CollectionType {
+class DoubleCollection: Collection {
   
   let startIndex: Int
   let endIndex: Int
@@ -479,12 +603,12 @@ class DoubleCollection: CollectionType {
     self.maximumValue = maximumValue
     self.step = step
     startIndex = 0
-    endIndex = Int((maximumValue - minimumValue) / step)
+    endIndex = Int((maximumValue - minimumValue) / step) + 1
   }
   
-  func generate() -> AnyGenerator<Double> {
+  func makeIterator() -> AnyIterator<Double> {
     var index = startIndex
-    return AnyGenerator {
+    return AnyIterator {
       if index <= self.endIndex {
         let value = self.minimumValue + Double(index) * self.step
         index += 1
@@ -499,6 +623,15 @@ class DoubleCollection: CollectionType {
     return minimumValue + Double(index) * step
   }
   
+  /// Returns the position immediately after the given index.
+  ///
+  /// - Parameter i: A valid index of the collection. `i` must be less than
+  ///   `endIndex`.
+  /// - Returns: The index value immediately after `i`.
+  public func index(after i: Int) -> Int {
+    return i + 1
+  }
+
 }
 
 // MARK: SettingsItemConnector -
@@ -512,30 +645,28 @@ class SettingsItemConnector<Value: Equatable>: ValueExternalStorage<Value> {
     }
   }
   
-  let settingsItem: SettingsItemBase<Value>
-  var saveToSettingsOnValueUpdate: Bool
+  weak var settingsItem: SettingsItemBase<Value>?
+  let saveToSettingsOnValueUpdate: Bool
 
-  // Value initialization was moved to init() in order to solve Swift 2.2 bug on iOS7
-  // More details here https://bugs.swift.org/browse/SR-815
-  private var isInternalValueUpdate: Bool
+  fileprivate var isInternalValueUpdate = false
   
   init(settingsItem: SettingsItemBase<Value>, saveToSettingsOnValueUpdate: Bool) {
     self.settingsItem = settingsItem
     self.saveToSettingsOnValueUpdate = saveToSettingsOnValueUpdate
     
-    isInternalValueUpdate = false
-    
     super.init(value: settingsItem.value)
   }
   
   override func writeValueToExternalStorage() {
-    settingsItem.value = value
+    settingsItem?.value = value
   }
   
   override func readValueFromExternalStorage() {
-    isInternalValueUpdate = true
-    value = settingsItem.value
-    isInternalValueUpdate = false
+    if let settingsItem = settingsItem {
+      isInternalValueUpdate = true
+      value = settingsItem.value
+      isInternalValueUpdate = false
+    }
   }
   
 }

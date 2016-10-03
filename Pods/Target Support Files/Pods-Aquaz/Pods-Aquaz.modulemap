@@ -1,0 +1,6 @@
+framework module Pods_Aquaz {
+  umbrella header "Pods-Aquaz-umbrella.h"
+
+  export *
+  module * { export * }
+}

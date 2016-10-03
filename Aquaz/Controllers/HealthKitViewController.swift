@@ -18,7 +18,7 @@ final class HealthKitViewController: UIViewController {
   @IBOutlet weak var labelIntakesInHealthApp: UILabel!
   @IBOutlet weak var exportButton: UIButton!
   
-  private struct LocalizedStrings {
+  fileprivate struct LocalizedStrings {
 
     lazy var intakesInAquazTitle: String = NSLocalizedString("HKVC:Intakes in Aquaz: %@", value: "Intakes in Aquaz: %@",
       comment: "HealthKitViewController: Label title displaying number of intakes in Aquaz")
@@ -43,7 +43,7 @@ final class HealthKitViewController: UIViewController {
     
   }
   
-  private var localizedStrings = LocalizedStrings()
+  fileprivate var localizedStrings = LocalizedStrings()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -64,39 +64,35 @@ final class HealthKitViewController: UIViewController {
   }
   
   @available(iOS 9.0, *)
-  private func updateUI() {
+  fileprivate func updateUI() {
     updateNumberOfIntakesInAquaz()
     HealthKitProvider.sharedInstance.authorizeHealthKit { authorized, error in
       self.updateNumberOfIntakesInHealthApp()
     }
   }
   
-  private func updateNumberOfIntakesInAquaz() {
+  fileprivate func updateNumberOfIntakesInAquaz() {
     CoreDataStack.performOnPrivateContext { privateContext in
-      let request = NSFetchRequest(entityName: Intake.entityName)
-      request.includesSubentities = false
+      let fetchRequest = Intake.createFetchRequest()
+      fetchRequest.includesSubentities = false
+
+      let count = (try? privateContext.count(for: fetchRequest)) ?? 0
       
-      var error: NSError?
-      var count = privateContext.countForFetchRequest(request, error: &error)
-      if count == NSNotFound {
-        count = 0
-      }
-      
-      dispatch_async(dispatch_get_main_queue()) {
-        self.labelIntakesInAquaz.text = String.localizedStringWithFormat(self.localizedStrings.intakesInAquazTitle, NSNumber(integer: count))
+      DispatchQueue.main.async {
+        self.labelIntakesInAquaz.text = String.localizedStringWithFormat(self.localizedStrings.intakesInAquazTitle, NSNumber(value: count))
       }
     }
   }
   
   @available(iOS 9.0, *)
-  private func updateNumberOfIntakesInHealthApp() {
+  fileprivate func updateNumberOfIntakesInHealthApp() {
     if !HealthKitProvider.sharedInstance.isAllowedToWriteWaterSamples() {
       return
     }
 
     HealthKitProvider.sharedInstance.requestNumberOfIntakesInHealthApp { count in
-      dispatch_async(dispatch_get_main_queue()) {
-        self.labelIntakesInHealthApp.text = String.localizedStringWithFormat(self.localizedStrings.intakesInHealthAppTitle, NSNumber(integer: count))
+      DispatchQueue.main.async {
+        self.labelIntakesInHealthApp.text = String.localizedStringWithFormat(self.localizedStrings.intakesInHealthAppTitle, NSNumber(value: count))
       }
     }
   }
@@ -115,11 +111,11 @@ final class HealthKitViewController: UIViewController {
       progressLabel.text = ""
       progressLabel.alpha = 1
       
-      exportButton.enabled = false
+      exportButton.isEnabled = false
     
       HealthKitProvider.sharedInstance.exportAllIntakesToHealthKit(
         progress: { current, maximum in
-          dispatch_async(dispatch_get_main_queue()) {
+          DispatchQueue.main.async {
             self.progressView.progress = maximum > 0 ? Float(current) / Float(maximum) : 0
             self.progressLabel.text = String.localizedStringWithFormat(self.localizedStrings.progressTitle, current, maximum)
           }
@@ -127,7 +123,7 @@ final class HealthKitViewController: UIViewController {
         completion: {
           self.progressView.alpha = 0
           self.progressLabel.text = self.localizedStrings.doneTitle
-          self.exportButton.enabled = true
+          self.exportButton.isEnabled = true
           self.updateUI()
         }
       )

@@ -26,7 +26,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
 
   // MARK: Localization -
   
-  private struct LocalizedStrings {
+  fileprivate struct LocalizedStrings {
     
     lazy var welcomeToNextDayMessage: String = NSLocalizedString("DVC:Welcome to the next day",
       value: "Welcome to the next day",
@@ -102,17 +102,17 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
 
   }
   
-  private var localizedStrings = LocalizedStrings()
+  fileprivate var localizedStrings = LocalizedStrings()
 
   // MARK: Properties -
   
   /// Current date for managing water intake
-  private var date: NSDate! {
+  fileprivate var date: Date! {
     didSet {
       Logger.logError(date != nil, "Nil date for DayViewController is passed")
       
-      if mode == .General {
-        if DateHelper.areDatesEqualByDays(date, NSDate()) {
+      if mode == .general {
+        if DateHelper.areEqualDays(date, Date()) {
           Settings.sharedInstance.uiUseCustomDateForDayView.value = false
         } else {
           Settings.sharedInstance.uiUseCustomDateForDayView.value = true
@@ -125,24 +125,24 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  private var totalHydrationAmount: Double = 0.0
+  fileprivate var totalHydrationAmount: Double = 0.0
   
   enum Mode {
-    case General, Statistics
+    case general, statistics
   }
   
-  var mode: Mode = .General
+  var mode: Mode = .general
   
-  private var helpTip: JDFTooltipView?
+  fileprivate var helpTip: JDFTooltipView?
   
-  private struct Constants {
+  fileprivate struct Constants {
     static let selectDrinkViewControllerStoryboardID = "SelectDrinkViewController"
     static let diaryViewControllerStoryboardID = "DiaryViewController"
     static let showCalendarSegue = "ShowCalendar"
     static let pageViewEmbedSegue = "PageViewEmbed"
   }
   
-  private var volumeObserver: SettingsObserver?
+  fileprivate var volumeObserver: SettingsObserver?
   
   // MARK: Page setup -
   
@@ -162,7 +162,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     pageViewController?.dataSource = nil
     pageViewController?.delegate = nil
 
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
   
   override func viewWillLayoutSubviews() {
@@ -170,32 +170,32 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     UIHelper.adjustNavigationTitleViewSize(navigationItem)
   }
 
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
     refreshCurrentDay(showAlert: false)
   }
   
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
-    helpTip?.hideAnimated(true)
+    helpTip?.hide(animated: true)
   }
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
-    if mode == .General && Settings.sharedInstance.uiDayPageHelpTipToShow.value == Settings.DayPageHelpTip(rawValue: 0)! {
+    if mode == .general && Settings.sharedInstance.uiDayPageHelpTipToShow.value == Settings.DayPageHelpTip(rawValue: 0)! {
       showNextHelpTip()
     }
   }
   
-  private func setupUI() {
+  fileprivate func setupUI() {
     applyStyle()
     
     setupMultiprogressControl()
     
-    intakeButton.setTitle("", forState: .Normal)
+    intakeButton.setTitle("", for: UIControlState())
     
     updateUIRelatedToCurrentDate(animated: false)
     
@@ -206,23 +206,23 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  private func setupNotificationsObservation() {
+  fileprivate func setupNotificationsObservation() {
     CoreDataStack.performOnPrivateContext { privateContext in
-      NSNotificationCenter.defaultCenter().addObserver(
+      NotificationCenter.default.addObserver(
         self,
         selector: #selector(self.managedObjectContextDidChange(_:)),
-        name: NSManagedObjectContextDidSaveNotification,
+        name: NSNotification.Name.NSManagedObjectContextDidSave,
         object: privateContext)
       
-      NSNotificationCenter.defaultCenter().addObserver(
+      NotificationCenter.default.addObserver(
         self,
         selector: #selector(self.managedObjectContextDidChange(_:)),
-        name: GlobalConstants.notificationManagedObjectContextWasMerged,
+        name: NSNotification.Name(rawValue: GlobalConstants.notificationManagedObjectContextWasMerged),
         object: privateContext)
     }
   }
   
-  func managedObjectContextDidChange(notification: NSNotification) {
+  func managedObjectContextDidChange(_ notification: Notification) {
     updateSummaryBar(animated: true) {
       if !self.checkForCongratulationsAboutWaterGoalReaching(notification) {
         self.checkForHelpTip(notification)
@@ -232,8 +232,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
 
-  private func updateWaterGoalRelatedValues() {
-    isWaterGoalForCurrentDay = waterGoal != nil ? DateHelper.areDatesEqualByDays(waterGoal!.date, date) : false
+  fileprivate func updateWaterGoalRelatedValues() {
+    isWaterGoalForCurrentDay = waterGoal != nil ? DateHelper.areEqualDays(waterGoal!.date, date) : false
     
     isHotDay = isWaterGoalForCurrentDay ? (waterGoal?.isHotDay ?? false) : false
     
@@ -246,77 +246,77 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     highActivityExtraFactor = isWaterGoalForCurrentDay ? (self.waterGoal?.highActivityFactor ?? 0) : 0
   }
   
-  private func setupCurrentDate() {
-    if mode == .General && Settings.sharedInstance.uiUseCustomDateForDayView.value {
-      date = Settings.sharedInstance.uiCustomDateForDayView.value
+  fileprivate func setupCurrentDate() {
+    if mode == .general && Settings.sharedInstance.uiUseCustomDateForDayView.value {
+      date = Settings.sharedInstance.uiCustomDateForDayView.value as Date!
     } else {
       if date == nil {
-        date = NSDate()
+        date = Date()
       }
     }
   }
   
-  private func applyStyle() {
+  fileprivate func applyStyle() {
     UIHelper.applyStyleToViewController(self)
     navigationTitleLabel.textColor = StyleKit.barTextColor
     navigationDateLabel.textColor = StyleKit.barTextColor
     leftArrowForDateImage.tintColor = StyleKit.barTextColor
     rightArrowForDateImage.tintColor = StyleKit.barTextColor
     // Just for sure in iOS 7
-    leftArrowForDateImage.image = leftArrowForDateImage.image?.imageWithRenderingMode(.AlwaysTemplate)
-    rightArrowForDateImage.image = rightArrowForDateImage.image?.imageWithRenderingMode(.AlwaysTemplate)
+    leftArrowForDateImage.image = leftArrowForDateImage.image?.withRenderingMode(.alwaysTemplate)
+    rightArrowForDateImage.image = rightArrowForDateImage.image?.withRenderingMode(.alwaysTemplate)
   }
   
-  func refreshCurrentDay(showAlert showAlert: Bool) {
+  func refreshCurrentDay(showAlert: Bool) {
     if date == nil {
       // It's useless to refresh current date if it's not specified yet. So just go away.
       return
     }
     
-    let dayIsSwitched = !DateHelper.areDatesEqualByDays(date, NSDate())
+    let dayIsSwitched = !DateHelper.areEqualDays(date, Date())
     
-    if mode == .General && isCurrentDayToday && dayIsSwitched {
+    if mode == .general && isCurrentDayToday && dayIsSwitched {
       if showAlert {
         let alert = UIAlertView(title: nil, message: localizedStrings.welcomeToNextDayMessage, delegate: nil, cancelButtonTitle: localizedStrings.okButtonTitle)
         alert.show()
       }
 
-      setCurrentDate(NSDate())
+      setCurrentDate(Date())
     }
   }
   
-  func setCurrentDate(date: NSDate) {
+  func setCurrentDate(_ date: Date) {
     self.date = date
 
-    if isViewLoaded() {
+    if isViewLoaded {
       updateUIRelatedToCurrentDate(animated: true)
       updateSummaryBar(animated: true, completion: nil)
     }
   }
   
-  func getCurrentDate() -> NSDate {
-    return date ?? NSDate()
+  func getCurrentDate() -> Date {
+    return date ?? Date()
   }
   
-  private func setupGestureRecognizers() {
+  fileprivate func setupGestureRecognizers() {
     if let navigationBar = navigationController?.navigationBar {
       let leftSwipe = UISwipeGestureRecognizer(
         target: self,
         action: #selector(self.leftSwipeGestureIsRecognized(_:)))
       
-      leftSwipe.direction = .Left
+      leftSwipe.direction = .left
       navigationBar.addGestureRecognizer(leftSwipe)
       
       let rightSwipe = UISwipeGestureRecognizer(
         target: self,
         action: #selector(self.rightSwipeGestureIsRecognized(_:)))
       
-      rightSwipe.direction = .Right
+      rightSwipe.direction = .right
       navigationBar.addGestureRecognizer(rightSwipe)
     }
   }
   
-  private func setupMultiprogressControl() {
+  fileprivate func setupMultiprogressControl() {
     intakesMultiProgressView.animationDuration = 0.7
     intakesMultiProgressView.borderColor = UIColor(red: 167/255, green: 169/255, blue: 171/255, alpha: 0.8)
     intakesMultiProgressView.emptySectionColor = UIColor(red: 241/255, green: 241/255, blue: 242/255, alpha: 1)
@@ -331,7 +331,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  private func setupPageViewController(pageViewController: UIPageViewController) {
+  fileprivate func setupPageViewController(_ pageViewController: UIPageViewController) {
     pages = []
     
     // Add view controller for drink selection
@@ -348,61 +348,63 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     
     pageViewController.dataSource = self
     pageViewController.delegate = self
-    pageViewController.setViewControllers([selectDrinkViewController], direction: .Forward, animated: false, completion: nil)
+    pageViewController.setViewControllers([selectDrinkViewController], direction: .forward, animated: false, completion: nil)
     
     updateUIAccordingToCurrentPage(selectDrinkViewController, initial: true)
   }
   
   // MARK: Day selection -
   
-  func leftSwipeGestureIsRecognized(gestureRecognizer: UISwipeGestureRecognizer) {
-    if gestureRecognizer.state == .Ended {
-      let daysTillToday = DateHelper.computeUnitsFrom(date, toDate: NSDate(), unit: .Day)
+  func leftSwipeGestureIsRecognized(_ gestureRecognizer: UISwipeGestureRecognizer) {
+    if gestureRecognizer.state == .ended {
+      let daysTillToday = DateHelper.calendarDays(fromDate: date, toDate: Date())
+        
       if daysTillToday > 0 {
         switchToNextDay()
       }
     }
   }
   
-  func rightSwipeGestureIsRecognized(gestureRecognizer: UISwipeGestureRecognizer) {
-    if gestureRecognizer.state == .Ended {
+  func rightSwipeGestureIsRecognized(_ gestureRecognizer: UISwipeGestureRecognizer) {
+    if gestureRecognizer.state == .ended {
       switchToPreviousDay()
     }
   }
   
-  private func switchToNextDay() {
-    setCurrentDate(DateHelper.addToDate(date, years: 0, months: 0, days: 1))
+  fileprivate func switchToNextDay() {
+    setCurrentDate(DateHelper.nextDayFrom(date))
   }
 
-  private func switchToPreviousDay() {
-    setCurrentDate(DateHelper.addToDate(date, years: 0, months: 0, days: -1))
+  fileprivate func switchToPreviousDay() {
+    setCurrentDate(DateHelper.previousDayBefore(date))
   }
 
-  private func updateUIRelatedToCurrentDate(animated animated: Bool) {
+  fileprivate func updateUIRelatedToCurrentDate(animated: Bool) {
     updateDateArrows(animated: animated)
     updateDateLabel(animated: animated)
   }
   
-  private func updateDateArrows(animated animated: Bool) {
-    let rightArrowIsVisible = DateHelper.computeUnitsFrom(date, toDate: NSDate(), unit: .Day) > 0
+  fileprivate func updateDateArrows(animated: Bool) {
+    let daysTillToday = DateHelper.calendarDays(fromDate: date, toDate: Date())
+    let rightArrowIsVisible = daysTillToday > 0
     let newAlphaForRightImage: CGFloat = rightArrowIsVisible ? 1 : 0
     
     if animated {
-      UIView.animateWithDuration(0.15, animations: {
+      UIView.animate(withDuration: 0.15, animations: {
         self.leftArrowForDateImage.alpha = 0
         self.rightArrowForDateImage.alpha = 0
         }, completion: { _ in
-          UIView.animateWithDuration(0.15) {
+          UIView.animate(withDuration: 0.15, animations: {
             self.leftArrowForDateImage.alpha = 1
             self.rightArrowForDateImage.alpha = newAlphaForRightImage
-          }
+          }) 
       })
     } else {
       rightArrowForDateImage.alpha = newAlphaForRightImage
     }
   }
   
-  private func updateDateLabel(animated animated: Bool) {
+  fileprivate func updateDateLabel(animated: Bool) {
     let formattedDate = DateHelper.stringFromDate(date)
     
     if animated {
@@ -415,7 +417,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  private func updateSummaryBar(animated animated: Bool, completion: (() -> ())?) {
+  fileprivate func updateSummaryBar(animated: Bool, completion: (() -> ())?) {
     CoreDataStack.performOnPrivateContext { privateContext in
       self.totalDehydrationAmount = Intake.fetchTotalDehydrationAmountForDay(self.date,
         dayOffsetInHours: 0, managedObjectContext: privateContext)
@@ -425,7 +427,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
       let intakeHydrationAmounts = Intake.fetchHydrationAmountsGroupedByDrinksForDay(self.date,
         dayOffsetInHours: 0, managedObjectContext: privateContext)
       
-      dispatch_async(dispatch_get_main_queue()) {
+      DispatchQueue.main.async {
         if animated {
           self.intakesMultiProgressView.updateWithAnimation {
             self.updateIntakeHydrationAmounts(intakeHydrationAmounts)
@@ -445,12 +447,12 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   // MARK: Summary bar actions -
   
-  @IBAction func toggleHighActivityMode(sender: AnyObject) {
+  @IBAction func toggleHighActivityMode(_ sender: AnyObject) {
     isHighActivity = !isHighActivity
     saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: isHotDay, isHighActivity: isHighActivity)
   }
   
-  @IBAction func toggleHotDayMode(sender: AnyObject) {
+  @IBAction func toggleHotDayMode(_ sender: AnyObject) {
     isHotDay = !isHotDay
     saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: isHotDay, isHighActivity: isHighActivity)
   }
@@ -459,14 +461,14 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   func switchToSelectDrinkPage() {
     if let currentPage = pageViewController?.viewControllers?.last
-      where selectDrinkViewController != nil && currentPage != selectDrinkViewController
+      , selectDrinkViewController != nil && currentPage != selectDrinkViewController
     {
       updateUIAccordingToCurrentPage(currentPage, initial: false)
-      pageViewController.setViewControllers([selectDrinkViewController], direction: .Reverse, animated: true, completion: nil)
+      pageViewController.setViewControllers([selectDrinkViewController], direction: .reverse, animated: true, completion: nil)
     }
   }
 
-  private func updateUIAccordingToCurrentPage(page: UIViewController, initial: Bool) {
+  fileprivate func updateUIAccordingToCurrentPage(_ page: UIViewController, initial: Bool) {
     if navigationTitleLabel == nil {
       return
     }
@@ -481,20 +483,20 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
         UIHelper.adjustNavigationTitleViewSize(self.navigationItem)
       }
       
-      helpTip?.hideAnimated(false)
+      helpTip?.hide(animated: false)
     }
   }
   
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let identifier = segue.identifier {
       switch identifier {
       case Constants.showCalendarSegue:
-        if let calendarViewController = segue.destinationViewController.contentViewController as? CalendarViewController {
+        if let calendarViewController = segue.destination.contentViewController as? CalendarViewController {
           calendarViewController.date = date
           calendarViewController.dayViewController = self
         }
       case Constants.pageViewEmbedSegue:
-        if let pageViewController = segue.destinationViewController as? UIPageViewController {
+        if let pageViewController = segue.destination as? UIPageViewController {
           self.pageViewController = pageViewController
           setupPageViewController(pageViewController)
         }
@@ -505,7 +507,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   // MARK: Intakes management -
   
-  private func updateIntakeHydrationAmounts(intakeHydrationAmounts: [DrinkType: Double]) {
+  fileprivate func updateIntakeHydrationAmounts(_ intakeHydrationAmounts: [DrinkType: Double]) {
     // Clear all drink sections
     for (_, section) in multiProgressSections {
       section.factor = 0.0
@@ -523,15 +525,15 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     self.totalHydrationAmount = totalHydrationAmount
   }
   
-  private func checkForCongratulationsAboutWaterGoalReaching(notification: NSNotification) -> Bool {
-    let currentDate = NSDate()
+  fileprivate func checkForCongratulationsAboutWaterGoalReaching(_ notification: Notification) -> Bool {
+    let currentDate = Date()
     
-    let isToday = DateHelper.areDatesEqualByDays(currentDate, date)
+    let isToday = DateHelper.areEqualDays(currentDate, date)
     if !isToday {
       return false
     }
     
-    let waterGoalReachingIsShownForToday = DateHelper.areDatesEqualByDays(currentDate, Settings.sharedInstance.uiWaterGoalReachingIsShownForDate.value)
+    let waterGoalReachingIsShownForToday = DateHelper.areEqualDays(currentDate, Settings.sharedInstance.uiWaterGoalReachingIsShownForDate.value)
     if waterGoalReachingIsShownForToday {
       return false
     }
@@ -540,9 +542,9 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
       return false
     }
     
-    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+    if let insertedObjects = (notification as NSNotification).userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
       for insertedObject in insertedObjects {
-        if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, currentDate) {
+        if let intake = insertedObject as? Intake , DateHelper.areEqualDays(intake.date, currentDate) {
           Settings.sharedInstance.uiWaterGoalReachingIsShownForDate.value = currentDate
           showCongratulationsAboutWaterGoalReaching()
           
@@ -554,13 +556,13 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     return false
   }
 
-  private func checkForRateApplicationAlert(notification: NSNotification) {
-    if Settings.sharedInstance.uiWritingReviewAlertSelection.value != .RemindLater {
+  fileprivate func checkForRateApplicationAlert(_ notification: Notification) {
+    if Settings.sharedInstance.uiWritingReviewAlertSelection.value != .remindLater {
       return
     }
     
     SystemHelper.executeBlockWithDelay(0.5) {
-      if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+      if let insertedObjects = (notification as NSNotification).userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
         for insertedObject in insertedObjects {
           if insertedObject is Intake {
             Settings.sharedInstance.uiIntakesCountTillShowWritingReviewAlert.value -= 1
@@ -578,8 +580,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  private func showRateApplicationAlert() {
-    dispatch_async(dispatch_get_main_queue()) {
+  fileprivate func showRateApplicationAlert() {
+    DispatchQueue.main.async {
       let alert = UIAlertView(
         title: self.localizedStrings.rateApplicationAlertTitle,
         message: self.localizedStrings.rateApplicationAlertMessage,
@@ -592,56 +594,56 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+  func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
     switch buttonIndex {
     case 0: // No, Thanks
-      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .No
+      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .no
       
     case 1: // Rate It Now
-      if let url = NSURL(string: GlobalConstants.appReviewLink) {
-        UIApplication.sharedApplication().openURL(url)
+      if let url = URL(string: GlobalConstants.appReviewLink) {
+        UIApplication.shared.openURL(url)
       }
-      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .RateApplication
+      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .rateApplication
       
     case 2: // Remind Me Later
-      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .RemindLater
+      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .remindLater
       
     default: break
     }
   }
 
-  private func showCongratulationsAboutWaterGoalReaching() {
-    dispatch_async(dispatch_get_main_queue()) {
+  fileprivate func showCongratulationsAboutWaterGoalReaching() {
+    DispatchQueue.main.async {
       let banner = InfoBannerView.create()
       banner.infoLabel.text = self.localizedStrings.congratulationsBannerText
       banner.infoImageView.image = ImageHelper.loadImage(.BannerReward)
       banner.bannerWasTappedFunction = { _ in banner.hide(animated: true) }
-      banner.accessoryImageView.hidden = true
+      banner.accessoryImageView.isHidden = true
 
-      let frame = self.summaryView.convertRect(self.summaryView.frame, toView: self.navigationController!.view)
+      let frame = self.summaryView.convert(self.summaryView.frame, to: self.navigationController!.view)
       banner.showAndHide(animated: true, displayTime: 4, parentView: self.navigationController!.view, height: frame.height, minY: frame.minY)
     }
   }
 
-  @IBAction func intakeButtonWasTapped(sender: AnyObject) {
+  @IBAction func intakeButtonWasTapped(_ sender: AnyObject) {
     Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value = !Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value
     updateIntakeButton(animated: true)
   }
   
-  private func updateIntakeButton(animated animated: Bool) {
+  fileprivate func updateIntakeButton(animated: Bool) {
     let intakeText: String
     
     if Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value {
-      let formatter = NSNumberFormatter()
-      formatter.numberStyle = .PercentStyle
+      let formatter = NumberFormatter()
+      formatter.numberStyle = .percent
       formatter.maximumFractionDigits = 0
       formatter.multiplier = 100
       let hydrationFactor = totalHydrationAmount / waterGoalAmount
-      intakeText = formatter.stringFromNumber(hydrationFactor)!
+      intakeText = formatter.string(for: hydrationFactor)!
     } else {
       intakeText = Units.sharedInstance.formatMetricAmountToText(
         metricAmount: totalHydrationAmount,
-        unitType: .Volume,
+        unitType: .volume,
         roundPrecision: amountPrecision,
         decimals: amountDecimals,
         displayUnits: false)
@@ -649,47 +651,47 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     
     let waterGoalText = Units.sharedInstance.formatMetricAmountToText(
       metricAmount: waterGoalAmount,
-      unitType: .Volume,
+      unitType: .volume,
       roundPrecision: amountPrecision,
       decimals: amountDecimals)
     
     let text = String.localizedStringWithFormat(localizedStrings.intakeButtonTextTemplate, intakeText, waterGoalText)
     
     if totalDehydrationAmount == 0 {
-      intakeButton.setAttributedTitle(nil, forState: .Normal)
+      intakeButton.setAttributedTitle(nil, for: UIControlState())
 
       if animated {
-        intakeButton.setTitle(text, forState: .Normal)
+        intakeButton.setTitle(text, for: UIControlState())
         intakeButton.layoutIfNeeded()
       } else {
         UIView.performWithoutAnimation {
-          self.intakeButton.setTitle(text, forState: .Normal)
+          self.intakeButton.setTitle(text, for: UIControlState())
           self.intakeButton.layoutIfNeeded()
         }
       }
     } else {
       // If user does intake of an alcoholic drink, water goal is increased.
       // In order to make it noticeable paint water goal part of title with different color.
-      let coloredText = makeColoredText(text, mainColor: UIColor.darkGrayColor(), coloredParts: [(text: waterGoalText, color: StyleKit.wineColor)])
+      let coloredText = makeColoredText(text as NSString, mainColor: UIColor.darkGray, coloredParts: [(text: waterGoalText, color: StyleKit.wineColor)])
       if animated {
-        intakeButton.setAttributedTitle(coloredText, forState: .Normal)
+        intakeButton.setAttributedTitle(coloredText, for: UIControlState())
         intakeButton.layoutIfNeeded()
       } else {
         UIView.performWithoutAnimation {
-          self.intakeButton.setAttributedTitle(coloredText, forState: .Normal)
+          self.intakeButton.setAttributedTitle(coloredText, for: UIControlState())
           self.intakeButton.layoutIfNeeded()
         }
       }
     }
   }
   
-  private func makeColoredText(text: NSString, mainColor: UIColor, coloredParts: [(text: String, color: UIColor)]) -> NSAttributedString {
+  fileprivate func makeColoredText(_ text: NSString, mainColor: UIColor, coloredParts: [(text: String, color: UIColor)]) -> NSAttributedString {
     let attributes = [NSForegroundColorAttributeName: mainColor]
     let coloredText = NSMutableAttributedString(string: text as String, attributes: attributes)
     coloredText.beginEditing()
     
     for (textPart, color) in coloredParts {
-      let range = text.rangeOfString(textPart)
+      let range = text.range(of: textPart)
       if range.length > 0 {
         coloredText.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
       }
@@ -700,7 +702,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     return coloredText
   }
   
-  private func waterGoalWasChanged(animated animated: Bool) {
+  fileprivate func waterGoalWasChanged(animated: Bool) {
     updateIntakeButton(animated: animated)
 
     if animated {
@@ -719,11 +721,11 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
       }
     }
 
-    highActivityButton.selected = isHighActivity
-    hotDayButton.selected = isHotDay
+    highActivityButton.isSelected = isHighActivity
+    hotDayButton.isSelected = isHotDay
   }
   
-  private func saveWaterGoalForCurrentDate(baseAmount baseAmount: Double, isHotDay: Bool, isHighActivity: Bool) {
+  fileprivate func saveWaterGoalForCurrentDate(baseAmount: Double, isHotDay: Bool, isHighActivity: Bool) {
     CoreDataStack.performOnPrivateContext { privateContext in
       self.waterGoal = WaterGoal.addEntity(
         date: self.date,
@@ -736,7 +738,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   // MARK: Help tips -
 
-  private func checkForHelpTip(notification: NSNotification) {
+  fileprivate func checkForHelpTip(_ notification: Notification) {
     if checkForHighPriorityHelpTips(notification) {
       return
     }
@@ -744,14 +746,14 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     checkForRegularHelpTips(notification)
   }
   
-  private func checkForHighPriorityHelpTips(notification: NSNotification) -> Bool {
+  fileprivate func checkForHighPriorityHelpTips(_ notification: Notification) -> Bool {
     if Settings.sharedInstance.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value == true {
       return false
     }
     
-    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+    if let insertedObjects = (notification as NSNotification).userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
       for insertedObject in insertedObjects {
-        if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, date) && intake.dehydrationAmount > 0 {
+        if let intake = insertedObject as? Intake , DateHelper.areEqualDays(intake.date, date) && intake.dehydrationAmount > 0 {
           showAlcoholicDehydrationHelpTip()
           return true
         }
@@ -761,17 +763,17 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     return false
   }
   
-  private func checkForRegularHelpTips(notification: NSNotification) {
-    if Settings.sharedInstance.uiDayPageHelpTipToShow.value == .None {
+  fileprivate func checkForRegularHelpTips(_ notification: Notification) {
+    if Settings.sharedInstance.uiDayPageHelpTipToShow.value == .none {
       return
     }
     
-    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+    if let insertedObjects = (notification as NSNotification).userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
       for insertedObject in insertedObjects {
-        if let intake = insertedObject as? Intake where DateHelper.areDatesEqualByDays(intake.date, date) {
+        if let intake = insertedObject as? Intake , DateHelper.areEqualDays(intake.date, date) {
           Settings.sharedInstance.uiDayPageIntakesCountTillHelpTip.value = Settings.sharedInstance.uiDayPageIntakesCountTillHelpTip.value - 1
           if Settings.sharedInstance.uiDayPageIntakesCountTillHelpTip.value <= 0 {
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
               self.showNextHelpTip()
             }
           }
@@ -781,56 +783,56 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  private func showAlcoholicDehydrationHelpTip() {
-    dispatch_async(dispatch_get_main_queue()) {
+  fileprivate func showAlcoholicDehydrationHelpTip() {
+    DispatchQueue.main.async {
       SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
         if self.view.window == nil || self.helpTip != nil {
           return
         }
         
-        let helpTip = JDFTooltipView(
+        if let helpTip = JDFTooltipView(
           targetView: self.intakeButton,
           hostView: self.view,
           tooltipText: self.localizedStrings.helpTipAlcoholicDehydration,
-          arrowDirection: .Up,
+          arrowDirection: .up,
           width: self.view.frame.width / 2)
-        
-        self.showHelpTip(helpTip)
-        
-        Settings.sharedInstance.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value = true
+        {
+          self.showHelpTip(helpTip)
+          Settings.sharedInstance.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value = true
+        }
       }
     }
   }
   
-  private func showNextHelpTip() {
+  fileprivate func showNextHelpTip() {
     if helpTip != nil {
       return
     }
 
     switch Settings.sharedInstance.uiDayPageHelpTipToShow.value {
-    case .SwipeToSeeDiary:
+    case .swipeToSeeDiary:
       showHelpTipForSwipeToSeeDiary()
       
-    case .SwipeToChangeDay:
+    case .swipeToChangeDay:
       showHelpTipForSwipeToChangeDay()
       
-    case .HighActivityMode:
+    case .highActivityMode:
       showHelpTipForHighActivityMode()
       
-    case .HotWeatherMode:
+    case .hotWeatherMode:
       showHelpTipForHotWeatherMode()
       
-    case .SwitchToPercentsAndViceVersa:
+    case .switchToPercentsAndViceVersa:
       showHelpTipForSwitchToPercentAndViceVersa()
       
-    case .LongPressToChooseAlcohol:
+    case .longPressToChooseAlcohol:
       showHelpTipForLongPressToChooseAlcohol()
       
-    case .None: break
+    case .none: break
     }
   }
   
-  private func showHelpTipForSwipeToSeeDiary() {
+  fileprivate func showHelpTipForSwipeToSeeDiary() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
       if self.view.window == nil || self.helpTip != nil {
         return
@@ -838,118 +840,118 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
       
       let bounds = self.selectDrinkViewController!.collectionView.bounds
       
-      let helpTip = JDFTooltipView(
+      if let helpTip = JDFTooltipView(
         targetPoint: CGPoint(x: bounds.midX, y: bounds.height * 0.65),
         hostView: self.selectDrinkViewController!.collectionView,
         tooltipText: self.localizedStrings.helpTipSwipeToSeeDiary,
-        arrowDirection: .Up,
+        arrowDirection: .up,
         width: self.view.frame.width / 2)
-      
-      self.showHelpTip(helpTip)
-
-      self.switchToNextHelpTip()
+      {
+        self.showHelpTip(helpTip)
+        self.switchToNextHelpTip()
+      }
     }
   }
   
-  private func showHelpTipForSwipeToChangeDay() {
+  fileprivate func showHelpTipForSwipeToChangeDay() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
       if self.view.window == nil || self.helpTip != nil {
         return
       }
       
-      let helpTip = JDFTooltipView(
+      if let helpTip = JDFTooltipView(
         targetView: self.navigationDateLabel,
         hostView: self.navigationController?.view,
         tooltipText: self.localizedStrings.helpTipSwipeToChangeDay,
-        arrowDirection: .Up,
+        arrowDirection: .up,
         width: self.view.frame.width / 2)
-      
-      self.showHelpTip(helpTip)
-
-      self.switchToNextHelpTip()
+      {
+        self.showHelpTip(helpTip)
+        self.switchToNextHelpTip()
+      }
     }
   }
   
-  private func showHelpTipForHighActivityMode() {
+  fileprivate func showHelpTipForHighActivityMode() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
       if self.view.window == nil || self.helpTip != nil {
         return
       }
       
-      let helpTip = JDFTooltipView(
+      if let helpTip = JDFTooltipView(
         targetView: self.highActivityButton,
         hostView: self.view,
         tooltipText: self.localizedStrings.helpTipHighActivityMode,
-        arrowDirection: .Up,
+        arrowDirection: .up,
         width: self.view.frame.width / 2)
-      
-      self.showHelpTip(helpTip)
-
-      self.switchToNextHelpTip()
+      {
+        self.showHelpTip(helpTip)
+        self.switchToNextHelpTip()
+      }
     }
   }
   
-  private func showHelpTipForHotWeatherMode() {
+  fileprivate func showHelpTipForHotWeatherMode() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
       if self.view.window == nil || self.helpTip != nil {
         return
       }
       
-      let helpTip = JDFTooltipView(
+      if let helpTip = JDFTooltipView(
         targetView: self.hotDayButton,
         hostView: self.view,
         tooltipText: self.localizedStrings.helpTipHotWeatherMode,
-        arrowDirection: .Up,
+        arrowDirection: .up,
         width: self.view.frame.width / 2)
-      
-      self.showHelpTip(helpTip)
-
-      self.switchToNextHelpTip()
+      {
+        self.showHelpTip(helpTip)
+        self.switchToNextHelpTip()
+      }
     }
   }
   
-  private func showHelpTipForSwitchToPercentAndViceVersa() {
+  fileprivate func showHelpTipForSwitchToPercentAndViceVersa() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
       if self.view.window == nil || self.helpTip != nil {
         return
       }
       
-      let helpTip = JDFTooltipView(
+      if let helpTip = JDFTooltipView(
         targetView: self.intakeButton,
         hostView: self.view,
         tooltipText: self.localizedStrings.helpTipSwitchToPercentAndViceVersa,
-        arrowDirection: .Up,
+        arrowDirection: .up,
         width: self.view.frame.width / 2)
-      
-      self.showHelpTip(helpTip)
-
-      self.switchToNextHelpTip()
+      {
+        self.showHelpTip(helpTip)
+        self.switchToNextHelpTip()
+      }
     }
   }
   
-  private func showHelpTipForLongPressToChooseAlcohol() {
+  fileprivate func showHelpTipForLongPressToChooseAlcohol() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
       if self.view.window == nil || self.helpTip != nil {
         return
       }
       
-      let lastCellIndex = self.selectDrinkViewController!.collectionView.numberOfItemsInSection(0) - 1
-      let cell = self.selectDrinkViewController!.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: lastCellIndex, inSection: 0))
+      let lastCellIndex = self.selectDrinkViewController!.collectionView.numberOfItems(inSection: 0) - 1
+      let cell = self.selectDrinkViewController!.collectionView.cellForItem(at: IndexPath(row: lastCellIndex, section: 0))
       
-      let tooltip = JDFTooltipView(
+      if let tooltip = JDFTooltipView(
         targetView: cell,
         hostView: self.selectDrinkViewController!.collectionView,
         tooltipText: self.localizedStrings.helpTipLongPressToChooseAlcohol,
-        arrowDirection: .Down,
+        arrowDirection: .down,
         width: self.view.frame.width / 2)
-      
-      self.showHelpTip(tooltip)
-      
-      self.switchToNextHelpTip()
+      {
+        self.showHelpTip(tooltip)
+        self.switchToNextHelpTip()
+      }
     }
   }
   
-  private func showHelpTip(helpTip: JDFTooltipView) {
+  fileprivate func showHelpTip(_ helpTip: JDFTooltipView) {
     self.helpTip = helpTip
 
     UIHelper.showHelpTip(helpTip) {
@@ -957,8 +959,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
 
-  private func switchToNextHelpTip() {
-    Settings.sharedInstance.uiDayPageHelpTipToShow.value = Settings.DayPageHelpTip(rawValue: Settings.sharedInstance.uiDayPageHelpTipToShow.value.rawValue + 1) ?? .None
+  fileprivate func switchToNextHelpTip() {
+    Settings.sharedInstance.uiDayPageHelpTipToShow.value = (Settings.DayPageHelpTip(rawValue: Settings.sharedInstance.uiDayPageHelpTipToShow.value.rawValue + 1) ?? .none)!
     
     // Reset help tips counter. Help tips should be shown after every 2 intakes.
     Settings.sharedInstance.uiDayPageIntakesCountTillHelpTip.value = 2
@@ -966,35 +968,35 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   // MARK: Private properties -
   
-  private var waterGoal: WaterGoal? {
+  fileprivate var waterGoal: WaterGoal? {
     didSet {
       updateWaterGoalRelatedValues()
     }
   }
   
-  private var totalDehydrationAmount: Double = 0
-  private var isWaterGoalForCurrentDay = false
-  private var isHotDay = false
-  private var isHighActivity = false
-  private var waterGoalBaseAmount: Double = 0
-  private var hotDayExtraFactor: Double = 0
-  private var highActivityExtraFactor: Double = 0
+  fileprivate var totalDehydrationAmount: Double = 0
+  fileprivate var isWaterGoalForCurrentDay = false
+  fileprivate var isHotDay = false
+  fileprivate var isHighActivity = false
+  fileprivate var waterGoalBaseAmount: Double = 0
+  fileprivate var hotDayExtraFactor: Double = 0
+  fileprivate var highActivityExtraFactor: Double = 0
 
-  private var waterGoalAmount: Double {
+  fileprivate var waterGoalAmount: Double {
     return waterGoalBaseAmount * (1 + hotDayExtraFactor + highActivityExtraFactor) + totalDehydrationAmount
   }
 
-  private var multiProgressSections: [Int: MultiProgressView.Section] = [:]
+  fileprivate var multiProgressSections: [Int: MultiProgressView.Section] = [:]
   
-  private var pages: [UIViewController] = []
-  private weak var pageViewController: UIPageViewController!
-  private var diaryViewController: DiaryViewController!
-  private var selectDrinkViewController: SelectDrinkViewController!
+  fileprivate var pages: [UIViewController] = []
+  fileprivate weak var pageViewController: UIPageViewController!
+  fileprivate var diaryViewController: DiaryViewController!
+  fileprivate var selectDrinkViewController: SelectDrinkViewController!
 
-  private var amountPrecision: Double { return Settings.sharedInstance.generalVolumeUnits.value.precision }
-  private var amountDecimals: Int { return Settings.sharedInstance.generalVolumeUnits.value.decimals }
+  fileprivate var amountPrecision: Double { return Settings.sharedInstance.generalVolumeUnits.value.precision }
+  fileprivate var amountDecimals: Int { return Settings.sharedInstance.generalVolumeUnits.value.decimals }
 
-  private var isCurrentDayToday: Bool {
+  fileprivate var isCurrentDayToday: Bool {
     return !Settings.sharedInstance.uiUseCustomDateForDayView.value
   }
   
@@ -1004,8 +1006,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
 
 extension DayViewController: UIPageViewControllerDataSource {
   
-  func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-    if let index = pages.indexOf(viewController) {
+  func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    if let index = pages.index(of: viewController) {
       if index > 0 {
         return pages[index - 1]
       }
@@ -1014,8 +1016,8 @@ extension DayViewController: UIPageViewControllerDataSource {
     return nil
   }
   
-  func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-    if let index = pages.indexOf(viewController) {
+  func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    if let index = pages.index(of: viewController) {
       if index < pages.count - 1 {
         return pages[index + 1]
       }
@@ -1030,7 +1032,7 @@ extension DayViewController: UIPageViewControllerDataSource {
 
 extension DayViewController: UIPageViewControllerDelegate {
 
-  func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+  func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
     if let currentPage = pageViewController.viewControllers?.last {
       updateUIAccordingToCurrentPage(currentPage, initial: false)
     }
@@ -1042,15 +1044,15 @@ extension DayViewController: UIPageViewControllerDelegate {
 private extension Units.Volume {
   var precision: Double {
     switch self {
-    case Millilitres: return 1.0
-    case FluidOunces: return 0.1
+    case .millilitres: return 1.0
+    case .fluidOunces: return 0.1
     }
   }
   
   var decimals: Int {
     switch self {
-    case Millilitres: return 0
-    case FluidOunces: return 1
+    case .millilitres: return 0
+    case .fluidOunces: return 1
     }
   }
 }

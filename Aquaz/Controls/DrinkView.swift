@@ -30,7 +30,7 @@ class DrinkView: UIView {
     }
   }
   
-  override func drawRect(rect: CGRect) {
+  override func draw(_ rect: CGRect) {
     #if TARGET_INTERFACE_BUILDER
       drawDrink(rect, drawFunction: StyleKit.drawWaterDrink, drinkColor: StyleKit.waterColor)
     #else
@@ -40,14 +40,14 @@ class DrinkView: UIView {
     #endif
   }
 
-  private func drawDrink(rect: CGRect, drawFunction: StyleKit.DrawDrinkFunction, drinkColor: UIColor) {
+  fileprivate func drawDrink(_ rect: CGRect, drawFunction: StyleKit.DrawDrinkFunction, drinkColor: UIColor) {
     let minDimension = trunc(min(rect.width, rect.height))
     let drawRect = CGRect(x: trunc(rect.minX + (rect.width - minDimension) / 2), y: trunc(rect.minY + (rect.height - minDimension) / 2), width: minDimension, height: minDimension)
     
-    drawFunction(frame: drawRect)
+    drawFunction(drawRect)
     
     if highlighted {
-      let path = UIBezierPath(ovalInRect: drawRect)
+      let path = UIBezierPath(ovalIn: drawRect)
       UIColor(white: 0, alpha: 0.2).setFill()
       path.fill()
     }
@@ -62,7 +62,7 @@ class DrinkView: UIView {
         let x = drawRect.maxX - CGFloat(i) * dx - dotRadius * 2
         
         let dotsRect = CGRect(x: x, y: y, width: dotRadius * 2, height: dotRadius * 2)
-        let path = UIBezierPath(ovalInRect: dotsRect)
+        let path = UIBezierPath(ovalIn: dotsRect)
         drinkColor.setFill()
         path.fill()
       }

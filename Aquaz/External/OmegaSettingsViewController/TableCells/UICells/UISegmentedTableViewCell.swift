@@ -10,7 +10,7 @@ import UIKit
 
 protocol UISegmentedTableViewCellDelegate: class {
   
-  func segmentedControlValueChanged(segmentedControl: UISegmentedControl, segmentIndex: Int)
+  func segmentedControlValueChanged(_ segmentedControl: UISegmentedControl, segmentIndex: Int)
   
 }
 
@@ -23,13 +23,13 @@ class UISegmentedTableViewCell: UITableViewCell {
   var segmentsWidth: CGFloat = 0 {
     didSet {
       for segment in 0..<segmentedControl.numberOfSegments {
-        segmentedControl.setWidth(segmentsWidth, forSegmentAtIndex: segment)
+        segmentedControl.setWidth(segmentsWidth, forSegmentAt: segment)
       }
     }
   }
   
   init(segmentTitles: [String]) {
-    super.init(style: .Default, reuseIdentifier: nil)
+    super.init(style: .default, reuseIdentifier: nil)
     baseInit(segmentTitles)
   }
   
@@ -38,16 +38,16 @@ class UISegmentedTableViewCell: UITableViewCell {
     baseInit([])
   }
   
-  private func baseInit(segmentTitles: [String]) {
+  fileprivate func baseInit(_ segmentTitles: [String]) {
     if self.segmentedControl == nil {
       let segmentedControl = UISegmentedControl(items: segmentTitles)
-      segmentedControl.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
+      segmentedControl.addTarget(self, action: #selector(self.segmentedControlValueChanged(_:)), for: UIControlEvents.valueChanged)
       self.accessoryView = segmentedControl
       self.segmentedControl = segmentedControl
     }
   }
   
-  func segmentedControlValueChanged(segmentedControl: UISegmentedControl) {
+  func segmentedControlValueChanged(_ segmentedControl: UISegmentedControl) {
     delegate?.segmentedControlValueChanged(segmentedControl, segmentIndex: segmentedControl.selectedSegmentIndex)
   }
 }

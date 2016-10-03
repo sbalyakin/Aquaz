@@ -13,18 +13,18 @@ import XCTest
 class WaterGoalCalculatorTests: XCTestCase {
   
   func testCalcDailyWaterIntake() {
-    test(18, .Man, 130, 35, .Rare, dailyWaterIntake: 1800, lostWater: 2500, supplyWater: 700)
-    test(18, .Woman, 130, 35, .Rare, dailyWaterIntake: 1800, lostWater: 2500, supplyWater: 700)
-    test(18, .PregnantFemale, 130, 35, .Rare, dailyWaterIntake: 2100, lostWater: 2800, supplyWater: 700)
-    test(18, .BreastfeedingFemale, 130, 35, .Rare, dailyWaterIntake: 2500, lostWater: 3200, supplyWater: 700)
+    test(18, .man, 130, 35, .rare, dailyWaterIntake: 1800, lostWater: 2500, supplyWater: 700)
+    test(18, .woman, 130, 35, .rare, dailyWaterIntake: 1800, lostWater: 2500, supplyWater: 700)
+    test(18, .pregnantFemale, 130, 35, .rare, dailyWaterIntake: 2100, lostWater: 2800, supplyWater: 700)
+    test(18, .breastfeedingFemale, 130, 35, .rare, dailyWaterIntake: 2500, lostWater: 3200, supplyWater: 700)
     
-    test(30, .Man, 170, 60, .Occasional, dailyWaterIntake: 2100, lostWater: 2800, supplyWater: 700)
-    test(40, .Woman, 160, 55, .Daily, dailyWaterIntake: 3200, lostWater: 3900, supplyWater: 700)
-    test(50, .PregnantFemale, 180, 80, .Weekly, dailyWaterIntake: 2900, lostWater: 3600, supplyWater: 700)
-    test(25, .BreastfeedingFemale, 190, 90, .Occasional, dailyWaterIntake: 2900, lostWater: 3600, supplyWater: 700)
+    test(30, .man, 170, 60, .occasional, dailyWaterIntake: 2100, lostWater: 2800, supplyWater: 700)
+    test(40, .woman, 160, 55, .daily, dailyWaterIntake: 3200, lostWater: 3900, supplyWater: 700)
+    test(50, .pregnantFemale, 180, 80, .weekly, dailyWaterIntake: 2900, lostWater: 3600, supplyWater: 700)
+    test(25, .breastfeedingFemale, 190, 90, .occasional, dailyWaterIntake: 2900, lostWater: 3600, supplyWater: 700)
   }
   
-  private func test(age: Int, _ gender: Settings.Gender, _ height: Double, _ weight: Double, _ physicalActivity: Settings.PhysicalActivity, dailyWaterIntake: Double, lostWater: Double, supplyWater: Double) {
+  fileprivate func test(_ age: Int, _ gender: Settings.Gender, _ height: Double, _ weight: Double, _ physicalActivity: Settings.PhysicalActivity, dailyWaterIntake: Double, lostWater: Double, supplyWater: Double) {
     let data = WaterGoalCalculator.Data(physicalActivity: physicalActivity, gender: gender, age: age, height: height, weight: weight, country: .UnitedKingdom)
     
     let calculatedDailyWaterIntake = WaterGoalCalculator.calcDailyWaterIntake(data: data)

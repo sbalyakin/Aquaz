@@ -13,31 +13,31 @@ class ObservableSettingsItem<ValueType>: ObservationRemover {
 
   typealias ObserverFunction = (ValueType) -> ()
   
-  private var observerIdentifier: Int
-  private var observerFunctions: [Int: ObserverFunction]
-  private let identifierQueue: dispatch_queue_t
+  fileprivate var observerIdentifier: Int
+  fileprivate var observerFunctions: [Int: ObserverFunction]
+  fileprivate let identifierQueue: DispatchQueue
   
   // Value initialization was moved to init() in order to solve Swift 2.2 bug on iOS7
   // More details here https://bugs.swift.org/browse/SR-815
   init() {
     observerIdentifier = 0
     observerFunctions = [:]
-    identifierQueue = dispatch_queue_create("com.devmanifest.Aquaz.ObservableSettingsItem.identifierQueue", DISPATCH_QUEUE_SERIAL)
+    identifierQueue = DispatchQueue(label: "com.devmanifest.Aquaz.ObservableSettingsItem.identifierQueue", attributes: [])
   }
   
   /// Adds an observer and returns its smart wrapper which removes the observation on deinitialization.
   /// It is preferrable way to use observation.
-  func addObserver(observerFunction: ObserverFunction) -> SettingsObserver {
+  func addObserver(_ observerFunction: @escaping ObserverFunction) -> SettingsObserver {
     let observerIdentifier = internalAddObserver(observerFunction)
     return SettingsObserver(observerIdentifier: observerIdentifier, observationRemover: self)
   }
   
   /// Adds an observer and returns its unique identifier (in a scope of class instance)
   /// Should not be used directly in the most of cases.
-  private func internalAddObserver(observerFunction: ObserverFunction) -> Int {
+  fileprivate func internalAddObserver(_ observerFunction: @escaping ObserverFunction) -> Int {
     var addedObserverIdentifier: Int!
     
-    dispatch_sync(identifierQueue) {
+    identifierQueue.sync {
       addedObserverIdentifier = self.observerIdentifier
       self.observerIdentifier += 1
       self.observerFunctions[addedObserverIdentifier] = observerFunction
@@ -47,15 +47,15 @@ class ObservableSettingsItem<ValueType>: ObservationRemover {
   }
   
   /// Removes an observer using its identifier. Should not be used directly in the most of cases.
-  internal func internalRemoveObserver(removedObserverIdentifier: Int) {
-    dispatch_sync(identifierQueue) {
-      assert(self.observerFunctions.indexForKey(removedObserverIdentifier) != nil, "Passed observer's identifier is not found")
-      self.observerFunctions.removeValueForKey(removedObserverIdentifier)
+  internal func internalRemoveObserver(_ removedObserverIdentifier: Int) {
+    identifierQueue.sync {
+      assert(self.observerFunctions.index(forKey: removedObserverIdentifier) != nil, "Passed observer's identifier is not found")
+      self.observerFunctions.removeValue(forKey: removedObserverIdentifier)
     }
   }
 
   /// Notifies all observers
-  private func notify(value: ValueType) {
+  fileprivate func notify(_ value: ValueType) {
     for (_, observerFunction) in observerFunctions {
       observerFunction(value)
     }
@@ -70,7 +70,7 @@ class ObservableSettingsItem<ValueType>: ObservationRemover {
 class SettingsObserver {
   
   let observerIdentifier: Int
-  private let observationRemover: ObservationRemover
+  fileprivate let observationRemover: ObservationRemover
   
   init(observerIdentifier: Int, observationRemover: ObservationRemover) {
     self.observerIdentifier = observerIdentifier
@@ -85,7 +85,7 @@ class SettingsObserver {
 
 protocol ObservationRemover : class {
   
-  func internalRemoveObserver(removedObserverIdentifier: Int)
+  func internalRemoveObserver(_ removedObserverIdentifier: Int)
   
 }
 
@@ -99,20 +99,20 @@ class SettingsItemBase<ValueType: Equatable>: ObservableSettingsItem<ValueType> 
   
   // Value initialization was moved to init() in order to solve Swift 2.2 bug on iOS7
   // More details here https://bugs.swift.org/browse/SR-815
-  private let valueQueue: dispatch_queue_t
+  fileprivate let valueQueue: DispatchQueue
   
   var value: ValueType {
     get {
       var outputValue: ValueType!
       
-      dispatch_sync(valueQueue) {
+      valueQueue.sync {
         outputValue = self.rawValue
       }
       
       return outputValue
     }
     set {
-      dispatch_sync(valueQueue) {
+      valueQueue.sync {
         if (newValue == self.rawValue) {
           return
         }
@@ -126,26 +126,26 @@ class SettingsItemBase<ValueType: Equatable>: ObservableSettingsItem<ValueType> 
     }
   }
 
-  var keyValuePair: (key: String, value: AnyObject)? {
-    if let value = userDefaults.objectForKey(key) {
+  var keyValuePair: (key: String, value: Any)? {
+    if let value = userDefaults.object(forKey: key) {
       return (key: key, value: value)
     }
     
     return nil
   }
   
-  private let userDefaults: NSUserDefaults
-  private let initialValue: ValueType
-  private var rawValue: ValueType
+  fileprivate let userDefaults: UserDefaults
+  fileprivate let initialValue: ValueType
+  fileprivate var rawValue: ValueType
 
   // MARK: Methods
   
   convenience init(key: String, initialValue: ValueType) {
-    self.init(key: key, initialValue: initialValue, userDefaults: NSUserDefaults.standardUserDefaults())
+    self.init(key: key, initialValue: initialValue, userDefaults: UserDefaults.standard)
   }
   
-  init(key: String, initialValue: ValueType, userDefaults: NSUserDefaults) {
-    valueQueue = dispatch_queue_create("com.devmanifest.Aquaz.SettingsItemBase.valueQueue", DISPATCH_QUEUE_SERIAL)
+  init(key: String, initialValue: ValueType, userDefaults: UserDefaults) {
+    valueQueue = DispatchQueue(label: "com.devmanifest.Aquaz.SettingsItemBase.valueQueue", attributes: [])
     rawValue = initialValue
     
     self.key = key
@@ -161,12 +161,12 @@ class SettingsItemBase<ValueType: Equatable>: ObservableSettingsItem<ValueType> 
   }
   
   /// Reads the value from user defaults
-  func readFromUserDefaults(sendNotification sendNotification: Bool) -> Bool {
+  func readFromUserDefaults(sendNotification: Bool) -> Bool {
     var success: Bool!
     var oldValue: ValueType!
     var newValue: ValueType!
     
-    dispatch_sync(valueQueue) {
+    valueQueue.sync {
       oldValue = self.rawValue
       success = self.readValue(&self.rawValue)
       newValue = self.rawValue
@@ -186,36 +186,36 @@ class SettingsItemBase<ValueType: Equatable>: ObservableSettingsItem<ValueType> 
   
   /// Removes the value from user defaults
   func removeFromUserDefaults() {
-    dispatch_sync(valueQueue) {
-      self.userDefaults.removeObjectForKey(self.key)
+    valueQueue.sync {
+      self.userDefaults.removeObject(forKey: self.key)
       self.rawValue = self.initialValue
     }
   }
   
-  private func readValue(inout outValue: ValueType) -> Bool {
+  fileprivate func readValue(_ outValue: inout ValueType) -> Bool {
     assert(false, "readValue function must be overriden")
     return false
   }
   
-  private func writeValue(value: ValueType) {
+  fileprivate func writeValue(_ value: ValueType) {
     assert(false, "writeValue function must be overriden")
   }
   
 }
 
 /// Settings item class for enumerations
-class SettingsEnumItem<T: RawRepresentable where T: Equatable, T.RawValue == Int>: SettingsItemBase<T> {
+class SettingsEnumItem<T: RawRepresentable>: SettingsItemBase<T> where T: Equatable, T.RawValue == Int {
   
   convenience init(key: String, initialValue: T) {
-    self.init(key: key, initialValue: initialValue, userDefaults: NSUserDefaults.standardUserDefaults())
+    self.init(key: key, initialValue: initialValue, userDefaults: UserDefaults.standard)
   }
   
-  override init(key: String, initialValue: T, userDefaults: NSUserDefaults) {
+  override init(key: String, initialValue: T, userDefaults: UserDefaults) {
     super.init(key: key, initialValue: initialValue, userDefaults: userDefaults)
   }
   
-  private override func readValue(inout outValue: T) -> Bool {
-    if let rawValue = userDefaults.objectForKey(key) as? T.RawValue {
+  fileprivate override func readValue(_ outValue: inout T) -> Bool {
+    if let rawValue = userDefaults.object(forKey: key) as? T.RawValue {
       if let value = T(rawValue: rawValue) {
         outValue = value
         return true
@@ -225,8 +225,8 @@ class SettingsEnumItem<T: RawRepresentable where T: Equatable, T.RawValue == Int
     return false
   }
   
-  private override func writeValue(value: T) {
-    userDefaults.setInteger(value.rawValue, forKey: key)
+  fileprivate override func writeValue(_ value: T) {
+    userDefaults.set(value.rawValue, forKey: key)
   }
   
 }
@@ -235,15 +235,15 @@ class SettingsEnumItem<T: RawRepresentable where T: Equatable, T.RawValue == Int
 class SettingsOrdinalItem<T: Equatable>: SettingsItemBase<T> {
   
   convenience init(key: String, initialValue: T) {
-    self.init(key: key, initialValue: initialValue, userDefaults: NSUserDefaults.standardUserDefaults())
+    self.init(key: key, initialValue: initialValue, userDefaults: UserDefaults.standard)
   }
   
-  override init(key: String, initialValue: T, userDefaults: NSUserDefaults) {
+  override init(key: String, initialValue: T, userDefaults: UserDefaults) {
     super.init(key: key, initialValue: initialValue, userDefaults: userDefaults)
   }
   
-  private override func readValue(inout outValue: T) -> Bool {
-    if let value = userDefaults.objectForKey(key) as? T {
+  fileprivate override func readValue(_ outValue: inout T) -> Bool {
+    if let value = userDefaults.object(forKey: key) as? T {
       outValue = value
       return true
     }
@@ -251,14 +251,14 @@ class SettingsOrdinalItem<T: Equatable>: SettingsItemBase<T> {
     return false
   }
   
-  private override func writeValue(value: T) {
+  fileprivate override func writeValue(_ value: T) {
     switch value {
-    case let value as Float:  userDefaults.setFloat  (value, forKey: key)
-    case let value as Double: userDefaults.setDouble (value, forKey: key)
-    case let value as Int:    userDefaults.setInteger(value, forKey: key)
-    case let value as Bool:   userDefaults.setBool   (value, forKey: key)
+    case let value as Float:  userDefaults.set  (value, forKey: key)
+    case let value as Double: userDefaults.set (value, forKey: key)
+    case let value as Int:    userDefaults.set(value, forKey: key)
+    case let value as Bool:   userDefaults.set   (value, forKey: key)
     case let value as String: userDefaults.setValue  (value, forKey: key)
-    case let value as NSDate: userDefaults.setObject (value, forKey: key)
+    case let value as Date: userDefaults.set (value, forKey: key)
     default: super.writeValue(value)
     }
   }

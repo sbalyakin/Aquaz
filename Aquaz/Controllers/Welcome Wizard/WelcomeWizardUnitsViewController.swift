@@ -29,7 +29,7 @@ class WelcomeWizardUnitsViewController: OmegaSettingsViewController {
 
       // It's ugly way to update header, but unfortunately I've not found any better way.
       let originalHeight = descriptionLabel.frame.height
-      let newHeight = descriptionLabel.sizeThatFits(CGSize(width: descriptionLabel.frame.width, height: CGFloat.max)).height
+      let newHeight = descriptionLabel.sizeThatFits(CGSize(width: descriptionLabel.frame.width, height: CGFloat.greatestFiniteMagnitude)).height
       descriptionLabel.frame.size.height = newHeight
       
       let deltaHeight = newHeight - originalHeight

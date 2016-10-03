@@ -10,12 +10,12 @@ import UIKit
 
 class ExtraFactorsViewController: OmegaSettingsViewController {
   
-  private let numberFormatter = NSNumberFormatter()
+  fileprivate let numberFormatter = NumberFormatter()
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    numberFormatter.numberStyle = .PercentStyle
+    numberFormatter.numberStyle = .percent
     numberFormatter.maximumFractionDigits = 0
     numberFormatter.multiplier = 100
     
@@ -51,8 +51,8 @@ class ExtraFactorsViewController: OmegaSettingsViewController {
       title: highActivityTitle,
       settingsItem: Settings.sharedInstance.generalHighActivityExtraFactor,
       collection: factorsCollection,
-      pickerTableCellHeight: .Large,
-      stringFromValueFunction: { [weak self] in self?.stringFromFactor($0) ?? "\($0)" })
+      stringFromValueFunction: { [weak self] in self?.stringFromFactor($0) ?? "\($0)" },
+      pickerTableCellHeight: .large)
     
     highActivityCell.image = ImageHelper.loadImage(.IconHighActivityActive)
     
@@ -65,8 +65,8 @@ class ExtraFactorsViewController: OmegaSettingsViewController {
       title: hotWeatherTitle,
       settingsItem: Settings.sharedInstance.generalHotDayExtraFactor,
       collection: factorsCollection,
-      pickerTableCellHeight: .Large,
-      stringFromValueFunction: { [weak self] in self?.stringFromFactor($0) ?? "\($0)" })
+      stringFromValueFunction: { [weak self] in self?.stringFromFactor($0) ?? "\($0)" },
+      pickerTableCellHeight: .large)
     
     hotWeatherCell.image = ImageHelper.loadImage(.IconHotWeatherActive)
     
@@ -78,8 +78,8 @@ class ExtraFactorsViewController: OmegaSettingsViewController {
     return [highActivitySection, hotWeatherSection]
   }
 
-  private func stringFromFactor(value: Double) -> String {
-    return numberFormatter.stringFromNumber(value)!
+  fileprivate func stringFromFactor(_ value: Double) -> String {
+    return numberFormatter.string(for: value)!
   }
 
 }

@@ -14,9 +14,9 @@ class MultiProgressView: UIView {
   
   @IBInspectable var maximum: CGFloat = 1.0 { didSet { layoutSections() } }
 
-  @IBInspectable var emptySectionColor: UIColor = UIColor.lightGrayColor() { didSet { emptySectionLayer?.backgroundColor = emptySectionColor.CGColor } }
+  @IBInspectable var emptySectionColor: UIColor = UIColor.lightGray { didSet { emptySectionLayer?.backgroundColor = emptySectionColor.cgColor } }
   
-  @IBInspectable var borderColor: UIColor = UIColor.lightGrayColor() { didSet { layer.borderColor = borderColor.CGColor } }
+  @IBInspectable var borderColor: UIColor = UIColor.lightGray { didSet { layer.borderColor = borderColor.cgColor } }
   
   @IBInspectable var borderWidth: CGFloat = 0.5 {
     didSet {
@@ -43,8 +43,8 @@ class MultiProgressView: UIView {
       }
     }
 
-    private weak var multiProgressView: MultiProgressView!
-    private var view: UIView
+    fileprivate weak var multiProgressView: MultiProgressView!
+    fileprivate var view: UIView
 
     init(color: UIColor, multiProgressView: MultiProgressView) {
       self.color = color
@@ -59,13 +59,13 @@ class MultiProgressView: UIView {
       view.removeFromSuperview()
     }
 
-    func setFactorWithAnimation(factor: CGFloat) {
+    func setFactorWithAnimation(_ factor: CGFloat) {
       multiProgressView?.updateWithAnimation {
         self.factor = factor
       }
     }
 
-    func setFrame(rect: CGRect) {
+    func setFrame(_ rect: CGRect) {
       view.frame = rect
     }
 
@@ -81,17 +81,17 @@ class MultiProgressView: UIView {
     baseInit()
   }
 
-  private func baseInit() {
+  fileprivate func baseInit() {
     clipsToBounds = true
     translatesAutoresizingMaskIntoConstraints = false
-    layer.borderColor = borderColor.CGColor
+    layer.borderColor = borderColor.cgColor
     layer.borderWidth = borderWidth
     setupEmptySection()
   }
   
-  private func setupEmptySection() {
+  fileprivate func setupEmptySection() {
     emptySectionLayer = CALayer()
-    emptySectionLayer.backgroundColor = emptySectionColor.CGColor
+    emptySectionLayer.backgroundColor = emptySectionColor.cgColor
     layer.addSublayer(emptySectionLayer)
   }
   
@@ -101,13 +101,13 @@ class MultiProgressView: UIView {
     layoutSections()
   }
 
-  private func layoutEmptySection() {
+  fileprivate func layoutEmptySection() {
     let sectionsRect = calcSectionsRect(bounds)
     emptySectionLayer.frame = sectionsRect
     emptySectionLayer.bounds = sectionsRect
   }
   
-  private func layoutSections() {
+  fileprivate func layoutSections() {
     if isBulkUpdating {
       return
     }
@@ -153,29 +153,29 @@ class MultiProgressView: UIView {
 
     // Initialize values with some predefined values in order to show in Interface Builder
     update {
-      self.addSection(color: UIColor.redColor()).factor = 0.2
-      self.addSection(color: UIColor.greenColor()).factor = 0.3
-      self.addSection(color: UIColor.blueColor()).factor = 0.4
+      self.addSection(color: UIColor.red).factor = 0.2
+      self.addSection(color: UIColor.green).factor = 0.3
+      self.addSection(color: UIColor.blue).factor = 0.4
     }
   }
 
-  func addSection(color color: UIColor) -> Section {
+  func addSection(color: UIColor) -> Section {
     let section = Section(color: color, multiProgressView: self)
     sections.append(section)
     setNeedsLayout()
     return section
   }
   
-  func removeSection(index index: Int) {
-    sections.removeAtIndex(index)
+  func removeSection(index: Int) {
+    sections.remove(at: index)
     setNeedsLayout()
   }
   
-  func getSection(index index: Int) -> Section {
+  func getSection(index: Int) -> Section {
     return sections[index]
   }
 
-  func update(updateFunction: () -> Void) {
+  func update(_ updateFunction: () -> Void) {
     if isBulkUpdating {
       updateFunction()
       return
@@ -187,7 +187,7 @@ class MultiProgressView: UIView {
     layoutSections()
   }
 
-  func updateWithAnimation(updateFunction: () -> Void) {
+  func updateWithAnimation(_ updateFunction: () -> Void) {
     if isBulkUpdating {
       updateFunction()
       return
@@ -197,7 +197,7 @@ class MultiProgressView: UIView {
     updateFunction()
     isBulkUpdating = false
     
-    UIView.animateWithDuration(NSTimeInterval(animationDuration),
+    UIView.animate(withDuration: TimeInterval(animationDuration),
       delay: 0,
       usingSpringWithDamping: 0.5,
       initialSpringVelocity: 0,
@@ -208,11 +208,11 @@ class MultiProgressView: UIView {
 
   }
   
-  private func calcSectionsRect(rect: CGRect) -> CGRect {
+  fileprivate func calcSectionsRect(_ rect: CGRect) -> CGRect {
     return rect.insetBy(dx: borderWidth + sectionsPadding, dy: borderWidth + sectionsPadding)
   }
   
-  private var isBulkUpdating = false
-  private var sections: [Section] = []
-  private var emptySectionLayer: CALayer!
+  fileprivate var isBulkUpdating = false
+  fileprivate var sections: [Section] = []
+  fileprivate var emptySectionLayer: CALayer!
 }

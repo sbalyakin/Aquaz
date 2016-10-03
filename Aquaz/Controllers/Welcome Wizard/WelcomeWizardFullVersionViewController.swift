@@ -14,11 +14,11 @@ class WelcomeWizardLastPageViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    getStartedButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+    getStartedButton.setTitleColor(UIColor.white, for: UIControlState())
   }
   
   @IBAction func getStartedButtonWasTapped() {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
       appDelegate.showDefaultRootViewControllerWithAnimation()
     }
   }

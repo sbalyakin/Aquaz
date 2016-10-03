@@ -10,16 +10,16 @@ import UIKit
 
 class StatisticsPageViewController: UIPageViewController {
 
-  var currentPage: Settings.StatisticsViewPage = .Week {
+  var currentPage: Settings.StatisticsViewPage = .week {
     didSet {
       let controller = getViewControllerByStatisticsPage(currentPage)
-      setViewControllers([controller], direction: .Forward, animated: false, completion: nil)
+      setViewControllers([controller!], direction: .forward, animated: false, completion: nil)
     }
   }
   
-  private var ownViewControllers: [UIViewController!] = [nil, nil, nil]
+  fileprivate var ownViewControllers: [UIViewController?] = [nil, nil, nil]
 
-  private func getViewControllerByStatisticsPage(page: Settings.StatisticsViewPage) -> UIViewController! {
+  fileprivate func getViewControllerByStatisticsPage(_ page: Settings.StatisticsViewPage) -> UIViewController! {
     if let controller = ownViewControllers[page.rawValue] {
       return controller
     }
@@ -27,9 +27,9 @@ class StatisticsPageViewController: UIPageViewController {
     let controller: UIViewController!
     
     switch page {
-    case .Week:  controller = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Week Statistics View Controller")
-    case .Month: controller = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Month Statistics View Controller")
-    case .Year:  controller = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Year Statistics View Controller")
+    case .week:  controller = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Week Statistics View Controller")
+    case .month: controller = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Month Statistics View Controller")
+    case .year:  controller = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Year Statistics View Controller")
     }
     
     ownViewControllers[page.rawValue] = controller

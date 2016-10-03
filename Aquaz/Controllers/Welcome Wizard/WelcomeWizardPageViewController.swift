@@ -10,7 +10,7 @@ import UIKit
 
 class WelcomeWizardPageViewController: UIPageViewController {
 
-  private var ownViewControllers = [UIViewController]()
+  fileprivate var ownViewControllers = [UIViewController]()
   weak var pageControl: UIPageControl!
   weak var skipButton: UIButton!
   
@@ -19,7 +19,7 @@ class WelcomeWizardPageViewController: UIPageViewController {
     baseSetup()
   }
   
-  private func baseSetup() {
+  fileprivate func baseSetup() {
     let welcomePage: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Welcome Page")!
     let unitsPage: UIViewController   = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Units Page")!
     let metricsPage: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Metrics Page")!
@@ -33,14 +33,14 @@ class WelcomeWizardPageViewController: UIPageViewController {
     
     dataSource = self
     delegate = self
-    setViewControllers([ownViewControllers[0]], direction: .Forward, animated: false, completion: nil)
+    setViewControllers([ownViewControllers[0]], direction: .forward, animated: false, completion: nil)
     
     pageControl.numberOfPages = ownViewControllers.count
     pageControl.currentPage = 0
   }
   
-  private func getPageIndexForViewController(viewController: UIViewController) -> Int {
-    for (index, ownViewController) in ownViewControllers.enumerate() {
+  fileprivate func getPageIndexForViewController(_ viewController: UIViewController) -> Int {
+    for (index, ownViewController) in ownViewControllers.enumerated() {
       if ownViewController === viewController {
         return index
       }
@@ -53,7 +53,7 @@ class WelcomeWizardPageViewController: UIPageViewController {
 // MARK: UIPageViewControllerDataSource
 extension WelcomeWizardPageViewController: UIPageViewControllerDataSource {
  
-  func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+  func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
     let pageIndex = getPageIndexForViewController(viewController)
     if pageIndex > 0 {
       return ownViewControllers[pageIndex - 1]
@@ -62,7 +62,7 @@ extension WelcomeWizardPageViewController: UIPageViewControllerDataSource {
     }
   }
   
-  func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+  func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
     let pageIndex = getPageIndexForViewController(viewController)
     if pageIndex < ownViewControllers.count - 1 {
       return ownViewControllers[pageIndex + 1]
@@ -76,24 +76,24 @@ extension WelcomeWizardPageViewController: UIPageViewControllerDataSource {
 // MARK: UIPageViewControllerDelegate
 extension WelcomeWizardPageViewController: UIPageViewControllerDelegate {
 
-  func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+  func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
     if let currentViewController = pageViewController.viewControllers?[0] {
       let pageIndex = getPageIndexForViewController(currentViewController)
       pageControl.currentPage = pageIndex
       
       if pageIndex == ownViewControllers.count - 1 {
-        UIView.animateWithDuration(0.4, animations: {
+        UIView.animate(withDuration: 0.4, animations: {
           self.skipButton.alpha = 0
         }, completion: { _ in
-          self.skipButton.hidden = true
+          self.skipButton.isHidden = true
         })
-      } else if skipButton.hidden {
+      } else if skipButton.isHidden {
         skipButton.alpha = 0
-        skipButton.hidden = false
+        skipButton.isHidden = false
         
-        UIView.animateWithDuration(0.4) {
+        UIView.animate(withDuration: 0.4, animations: {
           self.skipButton.alpha = 1
-        }
+        }) 
       }
     }
   }

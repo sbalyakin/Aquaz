@@ -10,45 +10,45 @@ import UIKit
 
 protocol CalendarViewDelegate: class {
   
-  func calendarViewDaySelected(dayInfo: CalendarViewDayInfo)
+  func calendarViewDaySelected(_ dayInfo: CalendarViewDayInfo)
   
-  func calendarViewDayWasSwitched(date: NSDate)
+  func calendarViewDayWasSwitched(_ date: Date)
   
 }
 
 @IBDesignable class CalendarView: UIView, CalendarViewContentDataSource {
   
-  @IBInspectable var font: UIFont = UIFont.systemFontOfSize(16)
-  @IBInspectable var weekDayTitleTextColor: UIColor = UIColor.blackColor()
+  @IBInspectable var font: UIFont = UIFont.systemFont(ofSize: 16)
+  @IBInspectable var weekDayTitleTextColor: UIColor = UIColor.black
   @IBInspectable var weekDayTitlesHeightScale: CGFloat = 1
-  @IBInspectable var weekDayFont: UIFont = UIFont.systemFontOfSize(14)
-  @IBInspectable var workDayTextColor: UIColor = UIColor.blackColor()
-  @IBInspectable var workDayBackgroundColor: UIColor = UIColor.clearColor()
-  @IBInspectable var weekendTextColor: UIColor = UIColor.redColor()
-  @IBInspectable var weekendBackgroundColor: UIColor = UIColor.clearColor()
-  @IBInspectable var todayTextColor: UIColor = UIColor.whiteColor()
-  @IBInspectable var todayBackgroundColor: UIColor = UIColor.redColor()
-  @IBInspectable var selectedDayTextColor: UIColor = UIColor.blueColor()
-  @IBInspectable var selectedDayBackgroundColor: UIColor = UIColor.clearColor()
+  @IBInspectable var weekDayFont: UIFont = UIFont.systemFont(ofSize: 14)
+  @IBInspectable var workDayTextColor: UIColor = UIColor.black
+  @IBInspectable var workDayBackgroundColor: UIColor = UIColor.clear
+  @IBInspectable var weekendTextColor: UIColor = UIColor.red
+  @IBInspectable var weekendBackgroundColor: UIColor = UIColor.clear
+  @IBInspectable var todayTextColor: UIColor = UIColor.white
+  @IBInspectable var todayBackgroundColor: UIColor = UIColor.red
+  @IBInspectable var selectedDayTextColor: UIColor = UIColor.blue
+  @IBInspectable var selectedDayBackgroundColor: UIColor = UIColor.clear
   @IBInspectable var anotherMonthTransparency: CGFloat = 0.4
   @IBInspectable var futureDaysTransparency: CGFloat = 0.4
   @IBInspectable var futureDaysEnabled: Bool = false
   @IBInspectable var dayRowHeightScale: CGFloat = 1
   @IBInspectable var markSelectedDay: Bool = true
   
-  private var displayedMonthDate: NSDate
+  fileprivate var displayedMonthDate: Date
   
-  var selectedDate: NSDate?
+  var selectedDate: Date?
   
-  let daysPerWeek: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.Weekday).length
+  let daysPerWeek = DateHelper.daysPerWeek()
 
   weak var delegate: CalendarViewDelegate?
 
-  private var initialDisplayedMonthDate: NSDate
-  private var scrollView: InfiniteScrollView!
+  fileprivate var initialDisplayedMonthDate: Date
+  fileprivate var scrollView: InfiniteScrollView!
   
   override init(frame: CGRect) {
-    let startOfMonth = DateHelper.startDateFromDate(NSDate(), calendarUnit: .Month)
+    let startOfMonth = DateHelper.startOfMonth(Date())
     initialDisplayedMonthDate = startOfMonth
     displayedMonthDate = startOfMonth
     
@@ -57,7 +57,7 @@ protocol CalendarViewDelegate: class {
   }
   
   required init?(coder aDecoder: NSCoder) {
-    let startOfMonth = DateHelper.startDateFromDate(NSDate(), calendarUnit: .Month)
+    let startOfMonth = DateHelper.startOfMonth(Date())
     initialDisplayedMonthDate = startOfMonth
     displayedMonthDate = startOfMonth
 
@@ -65,31 +65,31 @@ protocol CalendarViewDelegate: class {
     baseInit()
   }
   
-  func setDisplayedMonthDate(date: NSDate) {
+  func setDisplayedMonthDate(_ date: Date) {
     displayedMonthDate = date
     let monthIndex = calcDeltaMonthsBetweenDates(fromDate: initialDisplayedMonthDate, toDate: displayedMonthDate)
     scrollView.switchToIndex(monthIndex, animated: true)
   }
   
-  func getDisplayedMonthDate() -> NSDate {
+  func getDisplayedMonthDate() -> Date {
     return displayedMonthDate
   }
   
-  func resetToDisplayMonthDate(date: NSDate) {
-    let startOfMonth = DateHelper.startDateFromDate(date, calendarUnit: .Month)
+  func resetToDisplayMonthDate(_ date: Date) {
+    let startOfMonth = DateHelper.startOfMonth(date)
     initialDisplayedMonthDate = startOfMonth
     displayedMonthDate = startOfMonth
     refresh()
   }
   
-  private func baseInit() {
+  fileprivate func baseInit() {
     scrollView = InfiniteScrollView(frame: bounds)
     scrollView.delegate = self
     addSubview(scrollView)
   }
   
-  override func intrinsicContentSize() -> CGSize {
-    return CGSizeMake(300, 300)
+  override var intrinsicContentSize : CGSize {
+    return CGSize(width: 300, height: 300)
   }
 
   override func layoutSubviews() {
@@ -106,23 +106,23 @@ protocol CalendarViewDelegate: class {
     scrollView.refresh()
   }
   
-  func switchToMonth(date: NSDate) {
-    setDisplayedMonthDate(DateHelper.startDateFromDate(date, calendarUnit: .Month))
+  func switchToMonth(_ date: Date) {
+    setDisplayedMonthDate(DateHelper.startOfMonth(date))
   }
   
   func switchToNextMonth() {
-    setDisplayedMonthDate(DateHelper.addToDate(displayedMonthDate, years:0, months: 1, days: 0))
+    setDisplayedMonthDate(DateHelper.nextMonthFrom(displayedMonthDate))
   }
   
   func switchToPreviousMonth() {
-    setDisplayedMonthDate(DateHelper.addToDate(displayedMonthDate, years:0, months: -1, days: 0))
+    setDisplayedMonthDate(DateHelper.previousMonthBefore(displayedMonthDate))
   }
   
-  func calcDeltaMonthsBetweenDates(fromDate fromDate: NSDate, toDate: NSDate) -> Int {
-    return DateHelper.calcDistanceBetweenDates(fromDate: fromDate, toDate: toDate, calendarUnit: .Month)
+  func calcDeltaMonthsBetweenDates(fromDate: Date, toDate: Date) -> Int {
+    return DateHelper.calendarMonths(fromDate: fromDate, toDate: toDate)
   }
 
-  func createCalendarViewDaysInfoForMonth(calendarContentView calendarContentView: CalendarContentView, monthDate: NSDate) -> [CalendarViewDayInfo] {
+  func createCalendarViewDaysInfoForMonth(calendarContentView: CalendarContentView, monthDate: Date) -> [CalendarViewDayInfo] {
     return CalendarViewDataSource.createCalendarViewDaysInfoForMonth(monthDate)
   }
 
@@ -130,7 +130,7 @@ protocol CalendarViewDelegate: class {
 
 extension CalendarView: InfiniteScrollViewDataSource {
 
-  func infiniteScrollViewNeedsPage(index index: Int) -> UIView {
+  func infiniteScrollViewNeedsPage(index: Int) -> UIView {
     let viewContent = createCalendarViewContent()
     
     viewContent.selectedDate = selectedDate
@@ -167,11 +167,11 @@ extension CalendarView: InfiniteScrollViewDataSource {
 
 extension CalendarView: InfiniteScrollViewDelegate {
 
-  func infiniteScrollViewPageCanBeRemoved(index index: Int, view: UIView?) {
+  func infiniteScrollViewPageCanBeRemoved(index: Int, view: UIView?) {
     // Do nothing, because a calendar view does not manage its content views
   }
   
-  func infiniteScrollViewPageWasSwitched(pageIndex pageIndex: Int) {
+  func infiniteScrollViewPageWasSwitched(pageIndex: Int) {
     displayedMonthDate = DateHelper.addToDate(initialDisplayedMonthDate, years: 0, months: pageIndex, days: 0)
     delegate?.calendarViewDayWasSwitched(displayedMonthDate)
   }

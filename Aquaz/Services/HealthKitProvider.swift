@@ -15,47 +15,47 @@ final class HealthKitProvider: NSObject {
   
   static let sharedInstance = HealthKitProvider()
   
-  private let healthKitStore = HKHealthStore()
+  fileprivate let healthKitStore = HKHealthStore()
   
-  private var localizedStrings = LocalizedStrings()
+  fileprivate var localizedStrings = LocalizedStrings()
   
-  private let waterQuantityType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater)!
+  fileprivate let waterQuantityType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryWater)!
 
-  private let caffeineQuantityType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCaffeine)!
+  fileprivate let caffeineQuantityType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryCaffeine)!
 
-  private var managedObjectContext: NSManagedObjectContext?
+  fileprivate var managedObjectContext: NSManagedObjectContext?
   
-  private struct LocalizedStrings {
+  fileprivate struct LocalizedStrings {
     
     lazy var metadataDrinkKeyTitle: String = NSLocalizedString("HKP:Drink", value: "Drink",
       comment: "HealthKitProvider: Title for metadata key (Drink) used in Health app")
 
   }
   
-  private struct Constants {
+  fileprivate struct Constants {
     
     static let metadataIdentifierKey = "Intake Identifier"
     
   }
   
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
 
   /// Sets up synchronization with passed managed object context. On saving the context HealthKitProvider
   /// will add/remove or change corresponding samples in HealthKit.
-  func initSynchronizationForManagedObjectContext(managedObjectContext: NSManagedObjectContext) {
+  func initSynchronizationForManagedObjectContext(_ managedObjectContext: NSManagedObjectContext) {
     self.managedObjectContext = managedObjectContext
     
-    NSNotificationCenter.defaultCenter().addObserver(
+    NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.contextDidSaveContext(_:)),
-      name: NSManagedObjectContextDidSaveNotification,
+      name: NSNotification.Name.NSManagedObjectContextDidSave,
       object: managedObjectContext)
   }
   
   /// Asks HealthKit for authorization, executes completion closure as a result
-  func authorizeHealthKit(completion: (authorized: Bool, error: NSError?) -> Void) {
+  func authorizeHealthKit(_ completion: @escaping (_ authorized: Bool, _ error: NSError?) -> Void) {
     // It's just an internal flag, it does not takes into account real settings in the Health app
     Settings.sharedInstance.healthKitWaterIntakesIntegrationIsAllowed2.value = true
 
@@ -64,67 +64,67 @@ final class HealthKitProvider: NSObject {
     {
       let error = NSError(domain: GlobalConstants.appGroupName, code: 2, userInfo:
         [NSLocalizedDescriptionKey: "HealthKit is not available in this device"])
-      completion(authorized: false, error: error)
+      completion(false, error)
       return
     }
 
     // Set the types for reading from HealthKitK Store
     let typesToRead: Set<HKObjectType> = [
-      HKObjectType.characteristicTypeForIdentifier(HKCharacteristicTypeIdentifierDateOfBirth)!,
-      HKObjectType.characteristicTypeForIdentifier(HKCharacteristicTypeIdentifierBiologicalSex)!,
-      HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)!,
-      HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)!]
+      HKObjectType.characteristicType(forIdentifier: HKCharacteristicTypeIdentifier.dateOfBirth)!,
+      HKObjectType.characteristicType(forIdentifier: HKCharacteristicTypeIdentifier.biologicalSex)!,
+      HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!,
+      HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!]
     
     // Set the types for sharing with HealthKit Store
     let typesToShare: Set<HKSampleType> = [
-      HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater)!,
-      HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCaffeine)!]
+      HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryWater)!,
+      HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryCaffeine)!]
     
-    healthKitStore.requestAuthorizationToShareTypes(typesToShare, readTypes: typesToRead) {
+    healthKitStore.requestAuthorization(toShare: typesToShare, read: typesToRead) {
       authorized, error in
-      completion(authorized: authorized, error: error)
+      completion(authorized, error as NSError?)
     }
   }
   
   /// Exports all intakes into HealthKit, all old samples in HealthKit will be deleted.
-  func exportAllIntakesToHealthKit(progress progress: (current: Int, maximum: Int) -> Void, completion: () -> Void) {
+  func exportAllIntakesToHealthKit(progress: @escaping (_ current: Int, _ maximum: Int) -> Void, completion: @escaping () -> Void) {
     // Remove all old sample objects from HealthKit
-    guard let sampleType = HKSampleType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater) else {
+    guard let sampleType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryWater) else {
       return
     }
 
-    let dispatchGroup = dispatch_group_create()
-    dispatch_group_enter(dispatchGroup)
+    let dispatchGroup = DispatchGroup()
+    dispatchGroup.enter()
 
-    let predicate = HKQuery.predicateForSamplesWithStartDate(nil, endDate: nil, options: .None)
+    let predicate = HKQuery.predicateForSamples(withStart: nil, end: nil, options: HKQueryOptions())
 
-    healthKitStore.deleteObjectsOfType(sampleType, predicate: predicate) { success, deletedObjectCount, error in
+    healthKitStore.deleteObjects(of: sampleType, predicate: predicate) { success, deletedObjectCount, error in
       if !success {
-        dispatch_group_leave(dispatchGroup)
+        dispatchGroup.leave()
         return
       }
       
       // Add intakes into HealthKit
-      self.managedObjectContext?.performBlock {
+      self.managedObjectContext?.perform {
         let intakes = Intake.fetchIntakes(beginDate: nil, endDate: nil, managedObjectContext: self.managedObjectContext!)
         
-        progress(current: 0, maximum: intakes.count)
+        progress(0, intakes.count)
         
         var samplesToSave = [HKQuantitySample]()
         
         let saveToHealthKit = { (currentProgress: Int) -> Void in
-          dispatch_group_enter(dispatchGroup)
+          dispatchGroup.enter()
           
           let objects = samplesToSave
           samplesToSave.removeAll()
           
-          self.healthKitStore.saveObjects(objects) { success, error in
-            progress(current: currentProgress, maximum: intakes.count)
-            dispatch_group_leave(dispatchGroup)
-          }
+          self.healthKitStore.save(objects, withCompletion: { success, error in
+            progress(currentProgress, intakes.count)
+            dispatchGroup.leave()
+          }) 
         }
         
-        for (index, intake) in intakes.enumerate() {
+        for (index, intake) in intakes.enumerated() {
           // Collect samples
           if let waterSample = self.createWaterQuantitySampleFromIntake(intake) {
             samplesToSave.append(waterSample)
@@ -144,60 +144,60 @@ final class HealthKitProvider: NSObject {
         if !samplesToSave.isEmpty {
           saveToHealthKit(intakes.count)
         } else {
-          progress(current: intakes.count, maximum: intakes.count)
+          progress(intakes.count, intakes.count)
         }
         
-        dispatch_group_leave(dispatchGroup)
+        dispatchGroup.leave()
       }
     }
     
-    dispatch_group_notify(dispatchGroup, dispatch_get_main_queue()) {
+    dispatchGroup.notify(queue: DispatchQueue.main) {
       completion()
     }
   }
   
   /// Reads user profile and executes completion closure as a result
-  func readUserProfile(completion: (age: Int?, biologicalSex: HKBiologicalSex?, bodyMass: HKQuantitySample?, height: HKQuantitySample?) -> Void) {
+  func readUserProfile(_ completion: @escaping (_ age: Int?, _ biologicalSex: HKBiologicalSex?, _ bodyMass: HKQuantitySample?, _ height: HKQuantitySample?) -> Void) {
     let age = readAge()
     let biologicalSex = readBiologicalSex()
 
-    let dispatchGroup = dispatch_group_create()
+    let dispatchGroup = DispatchGroup()
     
     // Read body mass
-    dispatch_group_enter(dispatchGroup)
+    dispatchGroup.enter()
     var bodyMass: HKQuantitySample?
-    readMostRecentSample(quantityTypeIdentifier: HKQuantityTypeIdentifierBodyMass) { quantitySample, _ in
+    readMostRecentSample(quantityTypeIdentifier: HKQuantityTypeIdentifier.bodyMass.rawValue) { quantitySample, _ in
       bodyMass = quantitySample
-      dispatch_group_leave(dispatchGroup)
+      dispatchGroup.leave()
     }
 
     // Read height
-    dispatch_group_enter(dispatchGroup)
+    dispatchGroup.enter()
     var height: HKQuantitySample?
-    readMostRecentSample(quantityTypeIdentifier: HKQuantityTypeIdentifierHeight) { quantitySample, _ in
+    readMostRecentSample(quantityTypeIdentifier: HKQuantityTypeIdentifier.height.rawValue) { quantitySample, _ in
       height = quantitySample
-      dispatch_group_leave(dispatchGroup)
+      dispatchGroup.leave()
     }
 
-    dispatch_group_notify(dispatchGroup, dispatch_get_main_queue()) {
-      completion(age: age, biologicalSex: biologicalSex, bodyMass: bodyMass, height: height)
+    dispatchGroup.notify(queue: DispatchQueue.main) {
+      completion(age, biologicalSex, bodyMass, height)
     }
   }
   
-  private func readAge() -> Int? {
+  fileprivate func readAge() -> Int? {
     if let birthDay = try? healthKitStore.dateOfBirth() {
-      return DateHelper.calcDistanceBetweenCalendarDates(fromDate: birthDay, toDate: NSDate(), calendarUnit: .Year)
+      return DateHelper.years(fromDate: birthDay, toDate: Date())
     }
     
     return nil
   }
   
-  private func readBiologicalSex() -> HKBiologicalSex? {
+  fileprivate func readBiologicalSex() -> HKBiologicalSex? {
     return try? healthKitStore.biologicalSex().biologicalSex
   }
   
-  private func readMostRecentSample(quantityTypeIdentifier quantityTypeIdentifier: String, completion: (HKQuantitySample?, NSError?) -> Void) {
-    guard let sampleType = HKSampleType.quantityTypeForIdentifier(quantityTypeIdentifier) else {
+  fileprivate func readMostRecentSample(quantityTypeIdentifier: String, completion: @escaping (HKQuantitySample?, NSError?) -> Void) {
+    guard let sampleType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier(rawValue: quantityTypeIdentifier)) else {
       let error = NSError(domain: GlobalConstants.appGroupName, code: 2, userInfo:
         [NSLocalizedDescriptionKey: "Passed quantity type is not supported"])
       completion(nil, error)
@@ -208,7 +208,7 @@ final class HealthKitProvider: NSObject {
     
     let sampleQuery = HKSampleQuery(sampleType: sampleType, predicate: nil, limit: 1, sortDescriptors: [sortDesciptor]) { sampleQuery, samples, error in
       if let error = error {
-        completion(nil, error)
+        completion(nil, error as NSError?)
         return
       }
       
@@ -217,65 +217,65 @@ final class HealthKitProvider: NSObject {
       completion(mostRecentSample, nil)
     }
     
-    healthKitStore.executeQuery(sampleQuery)
+    healthKitStore.execute(sampleQuery)
   }
   
-  func requestNumberOfIntakesInHealthApp(completion: (count: Int) -> Void) {
-    guard let sampleType = HKSampleType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryWater) else {
-      completion(count: 0)
+  func requestNumberOfIntakesInHealthApp(_ completion: @escaping (_ count: Int) -> Void) {
+    guard let sampleType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryWater) else {
+      completion(0)
       return
     }
 
     let sampleQuery = HKSampleQuery(sampleType: sampleType, predicate: nil, limit: Int(HKObjectQueryNoLimit), sortDescriptors: nil) { sampleQuery, samples, error in
       let count = samples?.count ?? 0
-      completion(count: count)
+      completion(count)
     }
     
-    healthKitStore.executeQuery(sampleQuery)
+    healthKitStore.execute(sampleQuery)
   }
 
   func isAllowedToWriteWaterSamples() -> Bool {
-    return healthKitStore.authorizationStatusForType(waterQuantityType) == .SharingAuthorized ||
-           healthKitStore.authorizationStatusForType(caffeineQuantityType) == .SharingAuthorized
+    return healthKitStore.authorizationStatus(for: waterQuantityType) == .sharingAuthorized ||
+           healthKitStore.authorizationStatus(for: caffeineQuantityType) == .sharingAuthorized
   }
   
   /// Saves water sample of intake to HealthKit
-  private func saveWaterSampleOfIntake(intake: Intake, completion: ((success: Bool) -> Void)? = nil) {
-    managedObjectContext?.performBlock { _ in
+  fileprivate func saveWaterSampleOfIntake(_ intake: Intake, completion: ((_ success: Bool) -> Void)? = nil) {
+    managedObjectContext?.perform { _ in
       if let waterSample = self.createWaterQuantitySampleFromIntake(intake) {
-        self.healthKitStore.saveObject(waterSample) { success, error in
-          completion?(success: success)
-        }
+        self.healthKitStore.save(waterSample, withCompletion: { success, error in
+          completion?(success)
+        }) 
       }
     }
   }
 
   /// Saves caffeine sample of intake to HealthKit
-  private func saveCaffeineSampleOfIntake(intake: Intake, completion: ((success: Bool) -> Void)? = nil) {
-    managedObjectContext?.performBlock { _ in
+  fileprivate func saveCaffeineSampleOfIntake(_ intake: Intake, completion: ((_ success: Bool) -> Void)? = nil) {
+    managedObjectContext?.perform { _ in
       if let caffeineSample = self.createCaffeineQuantitySampleFromIntake(intake) {
-        self.healthKitStore.saveObject(caffeineSample) { success, error in
-          completion?(success: success)
-        }
+        self.healthKitStore.save(caffeineSample, withCompletion: { success, error in
+          completion?(success)
+        }) 
       }
     }
   }
   
-  private func createWaterQuantitySampleFromIntake(intake: Intake) -> HKQuantitySample? {
+  fileprivate func createWaterQuantitySampleFromIntake(_ intake: Intake) -> HKQuantitySample? {
     guard let intakeId = getIntakeId(intake) else {
       return nil
     }
     
-    let quantity = HKQuantity(unit: HKUnit.literUnitWithMetricPrefix(.Milli), doubleValue: intake.hydrationAmount)
+    let quantity = HKQuantity(unit: HKUnit.literUnit(with: .milli), doubleValue: intake.hydrationAmount)
     
     let metadata = [
       localizedStrings.metadataDrinkKeyTitle: intake.drink.localizedName,
       Constants.metadataIdentifierKey: intakeId]
     
-    return HKQuantitySample(type: waterQuantityType, quantity: quantity, startDate: intake.date, endDate: intake.date, metadata: metadata)
+    return HKQuantitySample(type: waterQuantityType, quantity: quantity, start: intake.date as Date, end: intake.date as Date, metadata: metadata)
   }
 
-  private func createCaffeineQuantitySampleFromIntake(intake: Intake) -> HKQuantitySample? {
+  fileprivate func createCaffeineQuantitySampleFromIntake(_ intake: Intake) -> HKQuantitySample? {
     if intake.caffeineAmount == 0 {
       return nil
     }
@@ -284,18 +284,18 @@ final class HealthKitProvider: NSObject {
       return nil
     }
     
-    let quantity = HKQuantity(unit: HKUnit.gramUnitWithMetricPrefix(.Milli), doubleValue: intake.caffeineAmount)
+    let quantity = HKQuantity(unit: HKUnit.gramUnit(with: .milli), doubleValue: intake.caffeineAmount)
     
     let metadata = [
       localizedStrings.metadataDrinkKeyTitle: intake.drink.localizedName,
       Constants.metadataIdentifierKey: intakeId]
     
-    return HKQuantitySample(type: caffeineQuantityType, quantity: quantity, startDate: intake.date, endDate: intake.date, metadata: metadata)
+    return HKQuantitySample(type: caffeineQuantityType, quantity: quantity, start: intake.date as Date, end: intake.date as Date, metadata: metadata)
   }
   
   /// Removes sample of intake from HealthKit
-  private func removeSampleOfIntake(intake: Intake, sample: String, completion: (() -> Void)?) {
-    guard let sampleType = HKSampleType.quantityTypeForIdentifier(sample) else {
+  fileprivate func removeSampleOfIntake(_ intake: Intake, sample: String, completion: (() -> Void)?) {
+    guard let sampleType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier(rawValue: sample)) else {
       return
     }
     
@@ -303,31 +303,31 @@ final class HealthKitProvider: NSObject {
       return
     }
     
-    let predicate = HKQuery.predicateForObjectsWithMetadataKey(Constants.metadataIdentifierKey, allowedValues: [intakeId])
+    let predicate = HKQuery.predicateForObjects(withMetadataKey: Constants.metadataIdentifierKey, allowedValues: [intakeId])
     
-    healthKitStore.deleteObjectsOfType(sampleType, predicate: predicate) { success, deletedObjectCount, error in
+    healthKitStore.deleteObjects(of: sampleType, predicate: predicate) { success, deletedObjectCount, error in
       completion?()
     }
   }
   
   /// Updates water intake in HealthKit, actually removes an old sample object related to the intake and saves a new one.
-  private func updateWaterIntake(intake: Intake) {
-    removeSampleOfIntake(intake, sample: HKQuantityTypeIdentifierDietaryWater) {
+  fileprivate func updateWaterIntake(_ intake: Intake) {
+    removeSampleOfIntake(intake, sample: HKQuantityTypeIdentifier.dietaryWater.rawValue) {
       self.saveWaterSampleOfIntake(intake)
     }
     
-    removeSampleOfIntake(intake, sample: HKQuantityTypeIdentifierDietaryCaffeine) {
+    removeSampleOfIntake(intake, sample: HKQuantityTypeIdentifier.dietaryCaffeine.rawValue) {
       self.saveCaffeineSampleOfIntake(intake)
     }
   }
 
-  private func getIntakeId(intake: Intake) -> String? {
-    return intake.objectID.URIRepresentation().lastPathComponent
+  fileprivate func getIntakeId(_ intake: Intake) -> String? {
+    return intake.objectID.uriRepresentation().lastPathComponent
   }
   
   // MARK: Synchronization with CoreData
   
-  func contextDidSaveContext(notification: NSNotification) {
+  func contextDidSaveContext(_ notification: Notification) {
     if !Settings.sharedInstance.healthKitWaterIntakesIntegrationIsAllowed2.value {
       return
     }
@@ -339,18 +339,18 @@ final class HealthKitProvider: NSObject {
     }
   }
   
-  private func synchronizeWithHealthKit(notification: NSNotification) {
-    managedObjectContext?.performBlock {
+  fileprivate func synchronizeWithHealthKit(_ notification: Notification) {
+    managedObjectContext?.perform {
       // Delete intakes from HealthKit
-      if let deletedObjects = notification.userInfo?[NSDeletedObjectsKey] as? Set<NSManagedObject> {
+      if let deletedObjects = (notification as NSNotification).userInfo?[NSDeletedObjectsKey] as? Set<NSManagedObject> {
         for deletedObject in deletedObjects where deletedObject is Intake {
-          self.removeSampleOfIntake(deletedObject as! Intake, sample: HKQuantityTypeIdentifierDietaryWater, completion: nil)
-          self.removeSampleOfIntake(deletedObject as! Intake, sample: HKQuantityTypeIdentifierDietaryCaffeine, completion: nil)
+          self.removeSampleOfIntake(deletedObject as! Intake, sample: HKQuantityTypeIdentifier.dietaryWater.rawValue, completion: nil)
+          self.removeSampleOfIntake(deletedObject as! Intake, sample: HKQuantityTypeIdentifier.dietaryCaffeine.rawValue, completion: nil)
         }
       }
       
       // Insert intakes to HealthKit
-      if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+      if let insertedObjects = (notification as NSNotification).userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
         for insertedObject in insertedObjects where insertedObject is Intake {
           self.saveWaterSampleOfIntake(insertedObject as! Intake)
           self.saveCaffeineSampleOfIntake(insertedObject as! Intake)
@@ -358,7 +358,7 @@ final class HealthKitProvider: NSObject {
       }
       
       // Update intakes in HealthKit
-      if let updatedObjects = notification.userInfo?[NSUpdatedObjectsKey] as? Set<NSManagedObject> {
+      if let updatedObjects = (notification as NSNotification).userInfo?[NSUpdatedObjectsKey] as? Set<NSManagedObject> {
         for updatedObject in updatedObjects where updatedObject is Intake {
           self.updateWaterIntake(updatedObject as! Intake)
         }

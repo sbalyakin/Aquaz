@@ -13,6 +13,8 @@ import UIKit
 @objc(Drink)
 class Drink: CodingManagedObject, NamedEntity {
 
+  typealias EntityType = Drink
+
   // MARK: Properties
   
   static var entityName = "Drink"
@@ -32,7 +34,7 @@ class Drink: CodingManagedObject, NamedEntity {
     return _drinkType
   }
 
-  private var _drinkType: DrinkType!
+  fileprivate var _drinkType: DrinkType!
 
   var localizedName: String {
     return drinkType.localizedName
@@ -53,51 +55,51 @@ class Drink: CodingManagedObject, NamedEntity {
   
   // MARK: Methods
   
-  override func didChangeValueForKey(key: String) {
-    super.didChangeValueForKey(key)
+  override func didChangeValue(forKey key: String) {
+    super.didChangeValue(forKey: key)
     if key == "index" {
       _drinkType = nil
     }
   }
 
-  private func initDrinkType() {
-    if let drinkType = DrinkType(rawValue: index.integerValue) {
+  fileprivate func initDrinkType() {
+    if let drinkType = DrinkType(rawValue: index.intValue) {
       _drinkType = drinkType
     } else {
-      _drinkType = .Water // Just for exclude uncertainty
-      Logger.logDrinkIsNotFound(drinkIndex: index.integerValue)
+      _drinkType = .water // Just for exclude uncertainty
+      Logger.logDrinkIsNotFound(drinkIndex: index.intValue)
     }
   }
   
-  func drawDrink(frame frame: CGRect) {
-    drawDrinkFunction(frame: frame)
+  func drawDrink(frame: CGRect) {
+    drawDrinkFunction(frame)
   }
 
   class func getDrinksCount() -> Int {
     return DrinkType.count
   }
   
-  class func fetchDrinkByType(drinkType: DrinkType, managedObjectContext: NSManagedObjectContext) -> Drink? {
+  class func fetchDrinkByType(_ drinkType: DrinkType, managedObjectContext: NSManagedObjectContext) -> Drink? {
     return fetchDrinkByIndex(drinkType.rawValue, managedObjectContext: managedObjectContext)
   }
   
-  class func fetchDrinkByIndex(index: Int, managedObjectContext: NSManagedObjectContext) -> Drink? {
+  class func fetchDrinkByIndex(_ index: Int, managedObjectContext: NSManagedObjectContext) -> Drink? {
     let predicate = NSPredicate(format: "%K = %@", argumentArray: ["index", index])
-    return CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate)
+    return fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate)
   }
 
-  class func fetchAllDrinksIndexed(managedObjectContext managedObjectContext: NSManagedObjectContext) -> [Int: Drink] {
-    let drinks: [Drink] = CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: nil, fetchLimit: nil)
+  class func fetchAllDrinksIndexed(managedObjectContext: NSManagedObjectContext) -> [Int: Drink] {
+    let drinks: [Drink] = fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: nil, fetchLimit: nil)
     
     var drinksMap = [Int: Drink]()
     for drink in drinks {
-      drinksMap[drink.index.integerValue] = drink
+      drinksMap[drink.index.intValue] = drink
     }
     
     return drinksMap
   }
 
-  class func fetchAllDrinksTyped(managedObjectContext managedObjectContext: NSManagedObjectContext) -> [DrinkType: Drink] {
+  class func fetchAllDrinksTyped(managedObjectContext: NSManagedObjectContext) -> [DrinkType: Drink] {
     let drinksIndexed = fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
 
     var drinksMap = [DrinkType: Drink]()
@@ -113,14 +115,14 @@ class Drink: CodingManagedObject, NamedEntity {
     return drinksMap
   }
   
-  class func addEntity(index index: Int, name: String, hydrationFactor: Double, dehydrationFactor: Double, recentAmount amount: Double, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Drink {
-    let drink = LoggedActions.insertNewObjectForEntity(Drink.self, inManagedObjectContext: managedObjectContext)!
-    drink.index = index
+  class func addEntity(index: Int, name: String, hydrationFactor: Double, dehydrationFactor: Double, recentAmount amount: Double, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Drink {
+    let drink = Drink.insertNewObject(inManagedObjectContext: managedObjectContext)!
+    drink.index = NSNumber(value: index)
     drink.name = name
     drink.hydrationFactor = hydrationFactor
     drink.dehydrationFactor = dehydrationFactor
 
-    let recentAmount = LoggedActions.insertNewObjectForEntity(RecentAmount.self, inManagedObjectContext: managedObjectContext)!
+    let recentAmount = RecentAmount.insertNewObject(inManagedObjectContext: managedObjectContext)!
     recentAmount.drink = drink
     recentAmount.amount = amount
     

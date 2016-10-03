@@ -27,17 +27,17 @@ private extension WatchResolution {
   
   var progressImageSize: CGSize {
     switch self {
-    case .Watch38mm: return CGSize(width: 102, height: 102)
-    case .Watch42mm: return CGSize(width: 114, height: 114)
-    case .Unknown:   return CGSize(width: 114, height: 114)
+    case .watch38mm: return CGSize(width: 102, height: 102)
+    case .watch42mm: return CGSize(width: 114, height: 114)
+    case .unknown:   return CGSize(width: 114, height: 114)
     }
   }
   
   var fontSizes: (title: CGFloat, upTitle: CGFloat, subTitle: CGFloat) {
     switch self {
-    case .Watch38mm: return (title: 26, upTitle: 12, subTitle: 12)
-    case .Watch42mm: return (title: 30, upTitle: 14, subTitle: 14)
-    case .Unknown:   return (title: 30, upTitle: 14, subTitle: 14)
+    case .watch38mm: return (title: 26, upTitle: 12, subTitle: 12)
+    case .watch42mm: return (title: 30, upTitle: 14, subTitle: 14)
+    case .unknown:   return (title: 30, upTitle: 14, subTitle: 14)
     }
   }
 

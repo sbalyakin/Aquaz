@@ -10,16 +10,16 @@ import Foundation
 import UIKit
 
 class CalendarViewDayInfo {
-  let date: NSDate
+  let date: Date
   let dayOfCurrentMonth: Int
   let title: String
   let isWeekend: Bool
   let isToday: Bool
   let isCurrentMonth: Bool
   let isFuture: Bool
-  var userData: AnyObject?
+  var userData: Any?
   
-  init(date: NSDate, dayOfCurrentMonth: Int, title: String, isWeekend: Bool, isToday: Bool, isCurrentMonth: Bool, isFuture: Bool) {
+  init(date: Date, dayOfCurrentMonth: Int, title: String, isWeekend: Bool, isToday: Bool, isCurrentMonth: Bool, isFuture: Bool) {
     self.date = date
     self.dayOfCurrentMonth = dayOfCurrentMonth
     self.title = title

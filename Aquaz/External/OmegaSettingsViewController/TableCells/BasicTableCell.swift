@@ -11,9 +11,9 @@ import UIKit
 class BasicTableCell: TableCell {
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
-  var textColor: UIColor? { didSet { uiCell?.textLabel?.textColor = textColor ?? UIColor.blackColor() } }
+  var textColor: UIColor? { didSet { uiCell?.textLabel?.textColor = textColor ?? UIColor.black } }
   var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
-  var accessoryType: UITableViewCellAccessoryType? { didSet { uiCell?.accessoryType = accessoryType ?? .None } }
+  var accessoryType: UITableViewCellAccessoryType? { didSet { uiCell?.accessoryType = accessoryType ?? .none } }
   var uiCell: UITableViewCell?
   
   init(title: String, container: TableCellsContainer, accessoryType: UITableViewCellAccessoryType? = nil) {
@@ -22,9 +22,9 @@ class BasicTableCell: TableCell {
     super.init(container: container)
   }
   
-  override func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  override func createUICell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     if uiCell == nil {
-      uiCell = UITableViewCell(style: .Default, reuseIdentifier: nil)
+      uiCell = UITableViewCell(style: .default, reuseIdentifier: nil)
     }
     
     uiCell!.textLabel?.text = title

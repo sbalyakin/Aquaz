@@ -11,6 +11,7 @@ import CoreData
 import NotificationCenter
 import Fabric
 import Crashlytics
+import MMWormhole
 
 class TodayViewController: UIViewController, NCWidgetProviding {
   
@@ -28,19 +29,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   @IBOutlet weak var drink3View: DrinkView!
   @IBOutlet weak var drink3TitleLabel: UILabel!
   
-  private var drink1: Drink!
-  private var drink2: Drink!
-  private var drink3: Drink!
+  fileprivate var drink1: Drink!
+  fileprivate var drink2: Drink!
+  fileprivate var drink3: Drink!
   
-  private var progressViewSection: MultiProgressView.Section!
-  private var wormhole: MMWormhole!
-  private var waterGoal: Double?
-  private var hydration: Double?
-  private var dehydration: Double?
+  fileprivate var progressViewSection: MultiProgressView.Section!
+  fileprivate var wormhole: MMWormhole!
+  fileprivate var waterGoal: Double?
+  fileprivate var hydration: Double?
+  fileprivate var dehydration: Double?
 
   // Use a separate CoreDataStack instance for the today extension
   // in order to exclude synchronization problems for managed object contexts.
-  private var coreDataStack = CoreDataStack()
+  fileprivate var coreDataStack = CoreDataStack()
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -61,34 +62,41 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
   }
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
     fetchData {
-      dispatch_async(dispatch_get_main_queue()) {
+      DispatchQueue.main.async {
         self.updateUI(animated: false)
       }
     }
   }
   
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
     // It's necessary to reset the managed object context in order to finalize background tasks correctly.
     coreDataStack.performOnPrivateContext { privateContext in
       privateContext.reset()
     }
   }
 
-  private func setupCoreDataSynchronization() {
+  fileprivate func setupCoreDataSynchronization() {
     wormhole = MMWormhole(applicationGroupIdentifier: GlobalConstants.appGroupName, optionalDirectory: GlobalConstants.wormholeOptionalDirectory)
+    
+    wormhole.listenForMessage(withIdentifier: GlobalConstants.wormholeMessageFromAquaz) { [weak self] messageObject in
+      if let notification = messageObject as? Notification {
+        CoreDataStack.mergeAllContextsWithNotification(notification)
+        self?.wormhole.clearMessageContents(forIdentifier: GlobalConstants.wormholeMessageFromWidget)
+      }
+    }
   }
 
-  private func setupProgressView() {
+  fileprivate func setupProgressView() {
     progressView.animationDuration = 0.7
     progressViewSection = progressView.addSection(color: StyleKit.waterColor)
   }
   
-  private func setupDrinksUI() {
+  fileprivate func setupDrinksUI() {
     drink1TitleLabel.text = " "
     drink1AmountLabel.text = " "
     
@@ -99,73 +107,77 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     drink3AmountLabel.text = " "
   }
 
-  private func setupNotificationsObservation() {
+  fileprivate func setupNotificationsObservation() {
     coreDataStack.performOnPrivateContext { privateContext in
-      NSNotificationCenter.defaultCenter().addObserver(
+      NotificationCenter.default.addObserver(
         self,
         selector: #selector(self.managedObjectContextDidSave(_:)),
-        name: NSManagedObjectContextDidSaveNotification,
+        name: NSNotification.Name.NSManagedObjectContextDidSave,
         object: privateContext)
     }
   }
   
   @available(iOSApplicationExtension 9.0, *)
-  private func setupHeathKitSynchronization() {
+  fileprivate func setupHeathKitSynchronization() {
     coreDataStack.performOnPrivateContext { privateContext in
       HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContext(privateContext)
     }
   }
 
-  func managedObjectContextDidSave(notification: NSNotification) {
-    wormhole.passMessageObject(notification, identifier: GlobalConstants.wormholeMessageFromWidget)
+  func managedObjectContextDidSave(_ notification: Notification) {
+    // By unknown reason existance of "managedObjectContext" key produces an exception during passing massage object through wormhole
+    var clearedNotification = notification
+    _ = clearedNotification.userInfo?.removeValue(forKey: "managedObjectContext")
+
+    wormhole.passMessageObject(clearedNotification as NSCoding?, identifier: GlobalConstants.wormholeMessageFromWidget)
   }
   
-  private func fetchDrinks(managedObjectContext managedObjectContext: NSManagedObjectContext) {
+  fileprivate func fetchDrinks(managedObjectContext: NSManagedObjectContext) {
     var drinkIndexesToDisplay = [Int]()
     var drinkIndexes = Array(0..<Drink.getDrinksCount())
     
     let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
-    if let intake1: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor]) {
-      let drinkIndex1 = intake1.drink.index.integerValue
+    if let intake1 = Intake.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor]) {
+      let drinkIndex1 = intake1.drink.index.intValue
       drinkIndexesToDisplay += [drinkIndex1]
-      if let index = drinkIndexes.indexOf(drinkIndex1) {
-        drinkIndexes.removeAtIndex(index)
+      if let index = drinkIndexes.index(of: drinkIndex1) {
+        drinkIndexes.remove(at: index)
       } else {
         assert(false)
       }
       
       let predicate2 = NSPredicate(format: "%K != %d", "drink.index", drinkIndex1)
       
-      if let intake2: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate2, sortDescriptors: [sortDescriptor]) {
-        let drinkIndex2 = intake2.drink.index.integerValue
+      if let intake2 = Intake.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate2, sortDescriptors: [sortDescriptor]) {
+        let drinkIndex2 = intake2.drink.index.intValue
         drinkIndexesToDisplay += [drinkIndex2]
-        if let index = drinkIndexes.indexOf(drinkIndex2) {
-          drinkIndexes.removeAtIndex(index)
+        if let index = drinkIndexes.index(of: drinkIndex2) {
+          drinkIndexes.remove(at: index)
         } else {
           assert(false)
         }
         
         let predicate3 = NSPredicate(format: "%K != %d AND %K != %d", "drink.index", drinkIndex1, "drink.index", drinkIndex2)
         
-        if let intake3: Intake = CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate3, sortDescriptors: [sortDescriptor]) {
-          drinkIndexesToDisplay += [intake3.drink.index.integerValue]
+        if let intake3 = Intake.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate3, sortDescriptors: [sortDescriptor]) {
+          drinkIndexesToDisplay += [intake3.drink.index.intValue]
         }
       }
     }
     
     if drinkIndexesToDisplay.count < 1 {
-      drinkIndexesToDisplay += [drinkIndexes.removeAtIndex(0)]
+      drinkIndexesToDisplay += [drinkIndexes.remove(at: 0)]
     }
     
     if drinkIndexesToDisplay.count < 2 {
-      drinkIndexesToDisplay += [drinkIndexes.removeAtIndex(0)]
+      drinkIndexesToDisplay += [drinkIndexes.remove(at: 0)]
     }
     
     if drinkIndexesToDisplay.count < 3 {
-      drinkIndexesToDisplay += [drinkIndexes.removeAtIndex(0)]
+      drinkIndexesToDisplay += [drinkIndexes.remove(at: 0)]
     }
     
-    drinkIndexesToDisplay.sortInPlace(<)
+    drinkIndexesToDisplay.sort(by: <)
     
     let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
     
@@ -174,23 +186,23 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     self.drink3 = drinks[drinkIndexesToDisplay[2]]
   }
   
-  private func fetchWaterIntake(managedObjectContext managedObjectContext: NSManagedObjectContext) {
-    let date = NSDate()
+  fileprivate func fetchWaterIntake(managedObjectContext: NSManagedObjectContext) {
+    let date = Date()
     
     self.waterGoal = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: managedObjectContext)?.amount
     
-    let amount = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
+    let amount = Intake.fetchIntakeAmountPartsGroupedBy(.day,
       beginDate: date,
-      endDate: DateHelper.addToDate(date, years: 0, months: 0, days: 1),
+      endDate: DateHelper.nextDayFrom(date),
       dayOffsetInHours: 0,
-      aggregateFunction: .Summary,
+      aggregateFunction: .summary,
       managedObjectContext: managedObjectContext).first!
     
     self.hydration = amount.hydration
     self.dehydration = amount.dehydration
   }
   
-  private func fetchData(completion: () -> ()) {
+  fileprivate func fetchData(_ completion: @escaping () -> ()) {
     coreDataStack.performOnPrivateContext { privateContext in
       if !Settings.sharedInstance.generalHasLaunchedOnce.value {
         CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: privateContext, saveContext: true)
@@ -202,12 +214,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
   }
   
-  private func updateUI(animated animated: Bool) {
+  fileprivate func updateUI(animated: Bool) {
     updateDrinks()
     updateWaterIntakes(animated: animated)
   }
   
-  private func updateDrinks() {
+  fileprivate func updateDrinks() {
     let drinksInfo = getDrinksInfo()
     
     drink1AmountLabel.text = formatWaterVolume(drinksInfo[0].amount)
@@ -223,7 +235,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     drink3View.drinkType = drinksInfo[2].drinkType
   }
   
-  private func getDrinksInfo() -> [(amount: Double, name: String, drinkType: DrinkType)] {
+  fileprivate func getDrinksInfo() -> [(amount: Double, name: String, drinkType: DrinkType)] {
     var drinksInfo: [(amount: Double, name: String, drinkType: DrinkType)]!
     
     coreDataStack.performOnPrivateContextAndWait { _ in
@@ -236,7 +248,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     return drinksInfo
   }
 
-  private func updateWaterIntakes(animated animated: Bool) {
+  fileprivate func updateWaterIntakes(animated: Bool) {
     if let waterGoal = waterGoal,
        let hydration = hydration,
        let dehydration = dehydration
@@ -249,7 +261,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
   }
   
-  private func updateProgressView(waterGoal waterGoal: Double, overallWaterIntake: Double, animated: Bool) {
+  fileprivate func updateProgressView(waterGoal: Double, overallWaterIntake: Double, animated: Bool) {
     let newFactor = CGFloat(overallWaterIntake / waterGoal)
     if progressViewSection.factor != newFactor {
       if animated {
@@ -260,16 +272,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
   }
   
-  private func updateProgressLabel(waterGoal waterGoal: Double, overallWaterIntake: Double, animated: Bool) {
+  fileprivate func updateProgressLabel(waterGoal: Double, overallWaterIntake: Double, animated: Bool) {
     let intakeText: String
     
     if Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value {
-      let formatter = NSNumberFormatter()
-      formatter.numberStyle = .PercentStyle
+      let formatter = NumberFormatter()
+      formatter.numberStyle = .percent
       formatter.maximumFractionDigits = 0
       formatter.multiplier = 100
       let drinkedPart = overallWaterIntake / waterGoal
-      intakeText = formatter.stringFromNumber(drinkedPart)!
+      intakeText = formatter.string(for: drinkedPart)!
     } else {
       intakeText = formatWaterVolume(overallWaterIntake, displayUnits: false)
     }
@@ -287,54 +299,54 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
   }
   
-  private func formatWaterVolume(value: Double, displayUnits: Bool = true) -> String {
+  fileprivate func formatWaterVolume(_ value: Double, displayUnits: Bool = true) -> String {
     return Units.sharedInstance.formatMetricAmountToText(
       metricAmount: value,
-      unitType: .Volume,
+      unitType: .volume,
       roundPrecision: Settings.sharedInstance.generalVolumeUnits.value.precision,
       decimals: Settings.sharedInstance.generalVolumeUnits.value.decimals)
   }
   
-  func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
+  func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
     fetchData {
-      dispatch_async(dispatch_get_main_queue()) {
+      DispatchQueue.main.async {
         self.updateUI(animated: false)
-        completionHandler(.NewData)
+        completionHandler(.newData)
       }
     }
   }
   
-  func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
-    return UIEdgeInsetsZero
+  func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+    return UIEdgeInsets.zero
   }
 
-  @IBAction func drink1WasTapped(sender: UITapGestureRecognizer) {
+  @IBAction func drink1WasTapped(_ sender: UITapGestureRecognizer) {
     addIntakeForDrink(drink1)
   }
   
-  @IBAction func drink2WasTapped(sender: UITapGestureRecognizer) {
+  @IBAction func drink2WasTapped(_ sender: UITapGestureRecognizer) {
     addIntakeForDrink(drink2)
   }
   
-  @IBAction func drink3WasTapped(sender: UITapGestureRecognizer) {
+  @IBAction func drink3WasTapped(_ sender: UITapGestureRecognizer) {
     addIntakeForDrink(drink3)
   }
   
-  private func addIntakeForDrink(drink: Drink!) {
+  fileprivate func addIntakeForDrink(_ drink: Drink!) {
     if drink == nil {
       return
     }
     
     coreDataStack.performOnPrivateContext { privateContext in
-      Intake.addEntity(
+      _ = Intake.addEntity(
         drink: drink,
         amount: drink.recentAmount.amount,
-        date: NSDate(),
+        date: Date(),
         managedObjectContext: privateContext,
         saveImmediately: true)
 
       self.fetchData {
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
           self.updateUI(animated: true)
         }
       }
@@ -342,23 +354,23 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   @IBAction func openApplicationWasTapped() {
-    let url = NSURL(string: GlobalConstants.applicationSchemeURL)
-    extensionContext?.openURL(url!, completionHandler: nil)
+    let url = URL(string: GlobalConstants.applicationSchemeURL)
+    extensionContext?.open(url!, completionHandler: nil)
   }
 }
 
 private extension Units.Volume {
   var precision: Double {
     switch self {
-    case Millilitres: return 1.0
-    case FluidOunces: return 0.1
+    case .millilitres: return 1.0
+    case .fluidOunces: return 0.1
     }
   }
   
   var decimals: Int {
     switch self {
-    case Millilitres: return 0
-    case FluidOunces: return 1
+    case .millilitres: return 0
+    case .fluidOunces: return 1
     }
   }
 }

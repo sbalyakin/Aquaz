@@ -9,6 +9,10 @@
 import Foundation
 import CoreData
 
+#if DEBUG
+  import SimulatorStatusMagic
+#endif
+
 @available(iOS 9.0, *)
 final class SnapshotsInitializer {
 
@@ -25,59 +29,59 @@ final class SnapshotsInitializer {
     generateUserContent()
   }
   
-  private class func setupGeneralSettings() {
-    Settings.sharedInstance.generalVolumeUnits.value = .Millilitres
-    Settings.sharedInstance.generalWeightUnits.value = .Kilograms
-    Settings.sharedInstance.generalHeightUnits.value = .Centimeters
+  fileprivate class func setupGeneralSettings() {
+    Settings.sharedInstance.generalVolumeUnits.value = .millilitres
+    Settings.sharedInstance.generalWeightUnits.value = .kilograms
+    Settings.sharedInstance.generalHeightUnits.value = .centimeters
   }
   
-  private class func setupUserPersonalInfo() {
+  fileprivate class func setupUserPersonalInfo() {
     Settings.sharedInstance.userAge.value = 30
-    Settings.sharedInstance.userGender.value = .Man
+    Settings.sharedInstance.userGender.value = .man
     Settings.sharedInstance.userHeight.value = 175
     Settings.sharedInstance.userWeight.value = 75
-    Settings.sharedInstance.userPhysicalActivity.value = .Occasional
+    Settings.sharedInstance.userPhysicalActivity.value = .occasional
     Settings.sharedInstance.userDailyWaterIntake.value = Settings.calcUserDailyWaterIntakeSetting()
   }
   
-  private class func setupExtraFactorsForWaterGoal() {
+  fileprivate class func setupExtraFactorsForWaterGoal() {
     Settings.sharedInstance.generalHighActivityExtraFactor.value = 0.1
     Settings.sharedInstance.generalHotDayExtraFactor.value = 0.1
   }
   
-  private class func setupUI() {
+  fileprivate class func setupUI() {
     Settings.sharedInstance.uiUseCustomDateForDayView.value = false
     Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value = false
-    Settings.sharedInstance.uiWritingReviewAlertSelection.value = .No
-    Settings.sharedInstance.uiSelectedAlcoholicDrink.value = .Wine
-    Settings.sharedInstance.uiSelectedStatisticsPage.value = .Month
+    Settings.sharedInstance.uiWritingReviewAlertSelection.value = .no
+    Settings.sharedInstance.uiSelectedAlcoholicDrink.value = .wine
+    Settings.sharedInstance.uiSelectedStatisticsPage.value = .month
   }
   
-  private class func setupNotifications() {
+  fileprivate class func setupNotifications() {
     Settings.sharedInstance.notificationsEnabled.value = true
-    Settings.sharedInstance.notificationsFrom.value = DateHelper.dateBySettingHour(9, minute: 0, second: 0, ofDate: NSDate())
-    Settings.sharedInstance.notificationsTo.value = DateHelper.dateBySettingHour(18, minute: 0, second: 0, ofDate: NSDate())
+    Settings.sharedInstance.notificationsFrom.value = DateHelper.dateBySettingHour(9, minute: 0, second: 0, ofDate: Date())
+    Settings.sharedInstance.notificationsTo.value = DateHelper.dateBySettingHour(18, minute: 0, second: 0, ofDate: Date())
     Settings.sharedInstance.notificationsInterval.value = 60 * 60 * 2
     Settings.sharedInstance.notificationsSmart.value = true
     Settings.sharedInstance.notificationsLimit.value = true
   }
   
-  private class func setupStatusBar() {
+  fileprivate class func setupStatusBar() {
     #if DEBUG
     SDStatusBarManager.sharedInstance().enableOverrides()
     #endif
   }
 
-  private class func deactivateHelpTips() {
+  fileprivate class func deactivateHelpTips() {
     Settings.sharedInstance.uiYearStatisticsPageHelpTipIsShown.value = true
     Settings.sharedInstance.uiMonthStatisticsPageHelpTipIsShown.value = true
-    Settings.sharedInstance.uiWeekStatisticsPageHelpTipToShow.value = .None
+    Settings.sharedInstance.uiWeekStatisticsPageHelpTipToShow.value = .none
     Settings.sharedInstance.uiDiaryPageHelpTipIsShown.value = true
     Settings.sharedInstance.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value = true
-    Settings.sharedInstance.uiDayPageHelpTipToShow.value = .None
+    Settings.sharedInstance.uiDayPageHelpTipToShow.value = .none
   }
   
-  private class func generateUserContent() {
+  fileprivate class func generateUserContent() {
     CoreDataStack.performOnPrivateContext { privateContext in
       removeAllExistingUserData(privateContext: privateContext)
       
@@ -91,25 +95,25 @@ final class SnapshotsInitializer {
     }
   }
 
-  private class func removeAllExistingUserData(privateContext privateContext: NSManagedObjectContext) {
+  fileprivate class func removeAllExistingUserData(privateContext: NSManagedObjectContext) {
     do {
       let deleteIntakesRequest = NSBatchDeleteRequest(fetchRequest: NSFetchRequest(entityName: Intake.entityName))
-      try privateContext.executeRequest(deleteIntakesRequest)
+      try privateContext.execute(deleteIntakesRequest)
       
       let deleteWaterGoalsRequest = NSBatchDeleteRequest(fetchRequest: NSFetchRequest(entityName: WaterGoal.entityName))
-      try privateContext.executeRequest(deleteWaterGoalsRequest)
+      try privateContext.execute(deleteWaterGoalsRequest)
     } catch {
       // Do nothing
     }
   }
   
-  private class func coreDataPrepopulation(privateContext privateContext: NSManagedObjectContext) {
+  fileprivate class func coreDataPrepopulation(privateContext: NSManagedObjectContext) {
     if !CoreDataPrePopulation.isCoreDataPrePopulated(managedObjectContext: privateContext) {
       CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: privateContext, saveContext: false)
     }
   }
   
-  private class func generateHistoricalUserData(privateContext privateContext: NSManagedObjectContext) {
+  fileprivate class func generateHistoricalUserData(privateContext: NSManagedObjectContext) {
     #if DEBUG
       // Historical data is already generated in CoreDataPrePopulation.prePopulateCoreData()
     #else
@@ -118,34 +122,34 @@ final class SnapshotsInitializer {
     #endif
   }
   
-  private class func generateWaterGoalForToday(privateContext privateContext: NSManagedObjectContext) {
-    WaterGoal.addEntity(date: NSDate(), baseAmount: Settings.sharedInstance.userDailyWaterIntake.value, isHotDay: true, isHighActivity: true, managedObjectContext: privateContext, saveImmediately: false)
+  fileprivate class func generateWaterGoalForToday(privateContext: NSManagedObjectContext) {
+    _ = WaterGoal.addEntity(date: Date(), baseAmount: Settings.sharedInstance.userDailyWaterIntake.value, isHotDay: true, isHighActivity: true, managedObjectContext: privateContext, saveImmediately: false)
   }
   
-  private class func generateTodayIntakes(privateContext privateContext: NSManagedObjectContext) {
-    guard let water = Drink.fetchDrinkByType(.Water, managedObjectContext: privateContext) else {
+  fileprivate class func generateTodayIntakes(privateContext: NSManagedObjectContext) {
+    guard let water = Drink.fetchDrinkByType(.water, managedObjectContext: privateContext) else {
       return
     }
 
-    guard let coffee = Drink.fetchDrinkByType(.Coffee, managedObjectContext: privateContext) else {
+    guard let coffee = Drink.fetchDrinkByType(.coffee, managedObjectContext: privateContext) else {
       return
     }
 
-    guard let soda = Drink.fetchDrinkByType(.Soda, managedObjectContext: privateContext) else {
+    guard let soda = Drink.fetchDrinkByType(.soda, managedObjectContext: privateContext) else {
       return
     }
     
-    let date1 = DateHelper.dateBySettingHour(6, minute: 0, second: 0, ofDate: NSDate())
-    Intake.addEntity(drink: water, amount: 250, date: date1, managedObjectContext: privateContext, saveImmediately: false)
+    let date1 = DateHelper.dateBySettingHour(6, minute: 0, second: 0, ofDate: Date())
+    _ = Intake.addEntity(drink: water, amount: 250, date: date1, managedObjectContext: privateContext, saveImmediately: false)
 
-    let date2 = DateHelper.dateBySettingHour(7, minute: 10, second: 0, ofDate: NSDate())
-    Intake.addEntity(drink: coffee, amount: 210, date: date2, managedObjectContext: privateContext, saveImmediately: false)
+    let date2 = DateHelper.dateBySettingHour(7, minute: 10, second: 0, ofDate: Date())
+    _ = Intake.addEntity(drink: coffee, amount: 210, date: date2, managedObjectContext: privateContext, saveImmediately: false)
     
-    let date3 = DateHelper.dateBySettingHour(8, minute: 0, second: 0, ofDate: NSDate())
-    Intake.addEntity(drink: water, amount: 210, date: date3, managedObjectContext: privateContext, saveImmediately: false)
+    let date3 = DateHelper.dateBySettingHour(8, minute: 0, second: 0, ofDate: Date())
+    _ = Intake.addEntity(drink: water, amount: 210, date: date3, managedObjectContext: privateContext, saveImmediately: false)
     
-    let date4 = DateHelper.dateBySettingHour(9, minute: 30, second: 0, ofDate: NSDate())
-    Intake.addEntity(drink: soda, amount: 330, date: date4, managedObjectContext: privateContext, saveImmediately: false)
+    let date4 = DateHelper.dateBySettingHour(9, minute: 30, second: 0, ofDate: Date())
+    _ = Intake.addEntity(drink: soda, amount: 330, date: date4, managedObjectContext: privateContext, saveImmediately: false)
   }
  
 }

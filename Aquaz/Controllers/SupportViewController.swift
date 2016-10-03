@@ -16,7 +16,7 @@ class SupportViewController: UIViewController {
   @IBOutlet weak var tellToFriendTextView: UITextView!
   @IBOutlet weak var reviewTextView: UITextView!
   
-  private struct LocalizedStrings {
+  fileprivate struct LocalizedStrings {
     
     lazy var applicationTitleTemplate: String = NSLocalizedString(
       "SVC:Aquaz %@",
@@ -86,7 +86,7 @@ class SupportViewController: UIViewController {
       comment: "SupportViewController: Body of an alert shown if the device is not set up to send e-mails")
   }
   
-  private var localizedStrings = LocalizedStrings()
+  fileprivate var localizedStrings = LocalizedStrings()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -94,25 +94,25 @@ class SupportViewController: UIViewController {
     UIHelper.applyStyleToViewController(self)
     setupApplicationTitle()
     
-    NSNotificationCenter.defaultCenter().addObserver(
+    NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: UIContentSizeCategoryDidChangeNotification,
+      name: NSNotification.Name.UIContentSizeCategoryDidChange,
       object: nil)
   }
 
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
   
   func preferredContentSizeChanged() {
-    applicationTitle.font = UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
-    tellToFriendTextView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-    reviewTextView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    applicationTitle.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1)
+    tellToFriendTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+    reviewTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
     view.invalidateIntrinsicContentSize()
   }
 
-  private func setupApplicationTitle() {
+  fileprivate func setupApplicationTitle() {
     applicationTitle.text = String.localizedStringWithFormat(localizedStrings.applicationTitleTemplate, applicationVersion)
   }
   
@@ -128,11 +128,11 @@ class SupportViewController: UIViewController {
   }
   
   @IBAction func tellToFriendsByTwitter() {
-    if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
+    if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) {
       let controller = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
       let text = "\(localizedStrings.twitterText) \(GlobalConstants.appStoreLink)"
-      controller.setInitialText(text)
-      presentViewController(controller, animated:true, completion:nil)
+      controller?.setInitialText(text)
+      present(controller!, animated:true, completion:nil)
     } else {
       let alert = UIAlertView(title: nil, message: localizedStrings.twitterNotFound, delegate: nil, cancelButtonTitle: localizedStrings.ok)
       alert.show()
@@ -140,11 +140,11 @@ class SupportViewController: UIViewController {
   }
   
   @IBAction func tellToFriendsByFacebook() {
-    if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
+    if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
       let controller = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
       let text = "\(localizedStrings.twitterText) \(GlobalConstants.appStoreLink)"
-      controller.setInitialText(text)
-      presentViewController(controller, animated:true, completion:nil)
+      controller?.setInitialText(text)
+      present(controller!, animated:true, completion:nil)
     } else {
       let alert = UIAlertView(title: nil, message: localizedStrings.facebookNotFound, delegate: nil, cancelButtonTitle: localizedStrings.ok)
       alert.show()
@@ -160,10 +160,10 @@ class SupportViewController: UIViewController {
       cancelButtonTitle: localizedStrings.cancel,
       destructiveButtonTitle: nil,
       otherButtonTitles: localizedStrings.feedbackOfferAction, localizedStrings.feedbackBugAction, localizedStrings.feedbackHelpAction)
-    actionSheet.showInView(view)
+    actionSheet.show(in: view)
   }
   
-  private func checkSendingEmailAvailability() -> Bool {
+  fileprivate func checkSendingEmailAvailability() -> Bool {
     if MFMailComposeViewController.canSendMail() {
       return true
     }
@@ -174,7 +174,7 @@ class SupportViewController: UIViewController {
     return false
   }
   
-  private func showEmailComposer(subject subject: String, body: String, recipients: [String]?) {
+  fileprivate func showEmailComposer(subject: String, body: String, recipients: [String]?) {
     let mailComposer = MFMailComposeViewController()
     mailComposer.setSubject(subject)
     mailComposer.setMessageBody(body, isHTML: true)
@@ -185,35 +185,35 @@ class SupportViewController: UIViewController {
     
     mailComposer.mailComposeDelegate = self
 
-    presentViewController(mailComposer, animated: true, completion: nil)
+    present(mailComposer, animated: true, completion: nil)
   }
   
   @IBAction func reviewAppInAppstore() {
-    if let url = NSURL(string: GlobalConstants.appStoreLink) {
-      UIApplication.sharedApplication().openURL(url)
+    if let url = URL(string: GlobalConstants.appStoreLink) {
+      UIApplication.shared.openURL(url)
     }
   }
   
-  private var applicationVersion: String {
-    return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+  fileprivate var applicationVersion: String {
+    return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
   }
 
-  private var applicationBuild: String {
-    return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion") as! String
+  fileprivate var applicationBuild: String {
+    return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
   }
   
-  private var deviceInfo: String {
-    return UIDevice.currentDevice().model
+  fileprivate var deviceInfo: String {
+    return UIDevice.current.model
   }
   
-  private var systemInfo: String {
-    return "\(UIDevice.currentDevice().systemName) \(UIDevice.currentDevice().systemVersion)"
+  fileprivate var systemInfo: String {
+    return "\(UIDevice.current.systemName) \(UIDevice.current.systemVersion)"
   }
 }
 
 extension SupportViewController: UIActionSheetDelegate {
   
-  func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+  func actionSheet(_ actionSheet: UIActionSheet, clickedButtonAt buttonIndex: Int) {
     let subject: String
 
     switch buttonIndex {
@@ -229,7 +229,7 @@ extension SupportViewController: UIActionSheetDelegate {
     showEmailComposer(subject: subject, body: body, recipients: [GlobalConstants.developerMail])
   }
 
-  private func composeAboutInfo() -> String {
+  fileprivate func composeAboutInfo() -> String {
     let applicationInfo = "Aquaz \(applicationVersion) (\(applicationBuild))"
     return "\(applicationInfo), \(systemInfo)"
   }
@@ -238,8 +238,8 @@ extension SupportViewController: UIActionSheetDelegate {
 
 extension SupportViewController: MFMailComposeViewControllerDelegate {
   
-  func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-    dismissViewControllerAnimated(true, completion: nil)
+  func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    dismiss(animated: true, completion: nil)
   }
 
 }

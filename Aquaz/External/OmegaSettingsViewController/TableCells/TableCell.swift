@@ -12,7 +12,7 @@ class TableCell {
   
   weak var container: TableCellsContainer!
   var active = false
-  var tableCellDidActivateFunction: TableCellActivatedFunction?
+  var activationChangedFunction: TableCellActivatedFunction?
   var isSupportingCell: Bool { return false }
   var supportsPermanentActivation: Bool { return false }
   
@@ -22,7 +22,7 @@ class TableCell {
     self.container = container
   }
   
-  func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  func createUICell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     assert(false, "createUICell function must be overriden by descendants")
     return UITableViewCell()
   }
@@ -31,9 +31,9 @@ class TableCell {
     return nil
   }
   
-  func setActive(active: Bool) {
+  func setActive(_ active: Bool) {
     self.active = active
-    tableCellDidActivateFunction?(self, active)
+    activationChangedFunction?(self, active)
     if !supportsPermanentActivation {
       self.active = false
     }

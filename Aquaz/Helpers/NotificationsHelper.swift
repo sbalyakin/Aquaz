@@ -11,7 +11,7 @@ import UIKit
 
 class NotificationsHelper {
   
-  private struct Strings {
+  fileprivate struct Strings {
     // TODO: Rewrite texts
     static let notificationAlertBody = NSLocalizedString("NH:It's time to drink water!", value: "It's time to drink water!", comment: "NotificationsHelper: Text for alert body of notifications")
     static let notificationAlertAction = NSLocalizedString("NH:Drink", value: "Drink", comment: "NotificationsHelper: Text for alert action of notifications")
@@ -19,10 +19,10 @@ class NotificationsHelper {
   
   class func areLocalNotificationsRegistered() -> Bool {
     if #available(iOS 8.0, *) {
-      if let notificationPermissions = UIApplication.sharedApplication().currentUserNotificationSettings() {
-        return notificationPermissions.types.contains(.Sound) ||
-               notificationPermissions.types.contains(.Alert) ||
-               notificationPermissions.types.contains(.Badge)
+      if let notificationPermissions = UIApplication.shared.currentUserNotificationSettings {
+        return notificationPermissions.types.contains(.sound) ||
+               notificationPermissions.types.contains(.alert) ||
+               notificationPermissions.types.contains(.badge)
       }
     }
     
@@ -31,29 +31,29 @@ class NotificationsHelper {
   
   class func registerApplicationForLocalNotifications() {
     if #available(iOS 8.0, *) {
-      let notificationTypes: UIUserNotificationType = [.Sound, .Alert, .Badge]
-      let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
-      UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+      let notificationTypes: UIUserNotificationType = [.sound, .alert, .badge]
+      let notificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
+      UIApplication.shared.registerUserNotificationSettings(notificationSettings)
     }
   }
   
-  class func setApplicationIconBadgeNumber(number: Int) {
+  class func setApplicationIconBadgeNumber(_ number: Int) {
     if #available(iOS 8.0, *) {
-      if let notificationPermissions = UIApplication.sharedApplication().currentUserNotificationSettings()
-        where notificationPermissions.types.contains(.Badge)
+      if let notificationPermissions = UIApplication.shared.currentUserNotificationSettings
+        , notificationPermissions.types.contains(.badge)
       {
-        UIApplication.sharedApplication().applicationIconBadgeNumber = number
+        UIApplication.shared.applicationIconBadgeNumber = number
       }
     } else {
-      UIApplication.sharedApplication().applicationIconBadgeNumber = number
+      UIApplication.shared.applicationIconBadgeNumber = number
     }
   }
   
   class func removeAllNotifications() {
-    UIApplication.sharedApplication().cancelAllLocalNotifications()
+    UIApplication.shared.cancelAllLocalNotifications()
   }
 
-  class func scheduleNotificationsFromSettingsForDate(date: NSDate) {
+  class func scheduleNotificationsFromSettingsForDate(_ date: Date) {
     let fromTime = Settings.sharedInstance.notificationsFrom.value
     let toTime = Settings.sharedInstance.notificationsTo.value
     let interval = Settings.sharedInstance.notificationsInterval.value
@@ -64,16 +64,16 @@ class NotificationsHelper {
     var fireDate = fromDate
     
     while !fireDate.isLaterThan(toDate) {
-      scheduleNotification(fireDate: fireDate, repeatInterval: .Day)
-      fireDate = fireDate.dateByAddingTimeInterval(interval)
+      scheduleNotification(fireDate: fireDate, repeatInterval: .day)
+      fireDate = fireDate.addingTimeInterval(interval)
     }
   }
   
-  class func rescheduleNotificationsBecauseOfIntake(intakeDate intakeDate: NSDate) {
+  class func rescheduleNotificationsBecauseOfIntake(intakeDate: Date) {
     removeAllNotifications()
     
     // Schedule all notifications from the next day
-    let nextDayDate = DateHelper.addToDate(intakeDate, years: 0, months: 0, days: 1)
+    let nextDayDate = DateHelper.nextDayFrom(intakeDate)
     scheduleNotificationsFromSettingsForDate(nextDayDate)
     
     // Schedule one-time notifications from time of the intake
@@ -81,21 +81,21 @@ class NotificationsHelper {
     let toDate = DateHelper.dateByJoiningDateTime(datePart: intakeDate, timePart: toTime)
     let interval = Settings.sharedInstance.notificationsInterval.value
     
-    var fireDate = intakeDate.dateByAddingTimeInterval(interval)
+    var fireDate = intakeDate.addingTimeInterval(interval)
     
     while !fireDate.isLaterThan(toDate) {
       scheduleNotification(fireDate: fireDate, repeatInterval: nil)
-      fireDate = fireDate.dateByAddingTimeInterval(interval)
+      fireDate = fireDate.addingTimeInterval(interval)
     }
   }
 
-  class func scheduleNotification(fireDate fireDate: NSDate, repeatInterval: NSCalendarUnit?) {
+  class func scheduleNotification(fireDate: Date, repeatInterval: NSCalendar.Unit?) {
     let notification = UILocalNotification()
     notification.fireDate = fireDate
     notification.alertBody = Strings.notificationAlertBody
     notification.hasAction = true
     notification.alertAction = Strings.notificationAlertAction
-    notification.timeZone = NSTimeZone.defaultTimeZone()
+    notification.timeZone = TimeZone.current
     notification.soundName = Settings.sharedInstance.notificationsSound.value
     notification.applicationIconBadgeNumber = 1
 
@@ -103,7 +103,7 @@ class NotificationsHelper {
       notification.repeatInterval = repeatInterval
     }
     
-    UIApplication.sharedApplication().scheduleLocalNotification(notification)
+    UIApplication.shared.scheduleLocalNotification(notification)
   }
 
 }

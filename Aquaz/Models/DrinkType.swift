@@ -9,19 +9,19 @@
 import UIKit
 
 enum DrinkType: Int {
-  case Water = 0
-  case Coffee
-  case Tea
-  case Soda
-  case Juice
-  case Milk
-  case Sport
-  case Energy
-  case Beer
-  case Wine
-  case HardLiquor
+  case water = 0
+  case coffee
+  case tea
+  case soda
+  case juice
+  case milk
+  case sport
+  case energy
+  case beer
+  case wine
+  case hardLiquor
   
-  private struct LocalizedStrings {
+  fileprivate struct LocalizedStrings {
     static let waterTitle      = NSLocalizedString("D:Water",       value: "Water",       comment: "Drink: Title for water")
     static let coffeeTitle     = NSLocalizedString("D:Coffee",      value: "Coffee",      comment: "Drink: Title for coffee")
     static let teaTitle        = NSLocalizedString("D:Tea",         value: "Tea",         comment: "Drink: Title for tea")
@@ -37,38 +37,38 @@ enum DrinkType: Int {
 
   // Must be updated if new drink is added
   static var count: Int {
-    return HardLiquor.rawValue + 1
+    return hardLiquor.rawValue + 1
   }
   
   var localizedName: String {
     switch self {
-    case Water:      return LocalizedStrings.waterTitle
-    case Coffee:     return LocalizedStrings.coffeeTitle
-    case Tea:        return LocalizedStrings.teaTitle
-    case Soda:       return LocalizedStrings.sodaTitle
-    case Juice:      return LocalizedStrings.juiceTitle
-    case Milk:       return LocalizedStrings.milkTitle
-    case Sport:      return LocalizedStrings.sportTitle
-    case Energy:     return LocalizedStrings.energyTitle
-    case Beer:       return LocalizedStrings.beerTitle
-    case Wine:       return LocalizedStrings.wineTitle
-    case HardLiquor: return LocalizedStrings.hardLiquorTitle
+    case .water:      return LocalizedStrings.waterTitle
+    case .coffee:     return LocalizedStrings.coffeeTitle
+    case .tea:        return LocalizedStrings.teaTitle
+    case .soda:       return LocalizedStrings.sodaTitle
+    case .juice:      return LocalizedStrings.juiceTitle
+    case .milk:       return LocalizedStrings.milkTitle
+    case .sport:      return LocalizedStrings.sportTitle
+    case .energy:     return LocalizedStrings.energyTitle
+    case .beer:       return LocalizedStrings.beerTitle
+    case .wine:       return LocalizedStrings.wineTitle
+    case .hardLiquor: return LocalizedStrings.hardLiquorTitle
     }
   }
   
   var mainColor: UIColor {
     switch self {
-    case Water:      return StyleKit.waterColor
-    case Coffee:     return StyleKit.coffeeColor
-    case Tea:        return StyleKit.teaColor
-    case Soda:       return StyleKit.sodaColor
-    case Juice:      return StyleKit.juiceColor
-    case Milk:       return StyleKit.milkColor
-    case Sport:      return StyleKit.sportColor
-    case Energy:     return StyleKit.energyColor
-    case Beer:       return StyleKit.beerColor
-    case Wine:       return StyleKit.wineColor
-    case HardLiquor: return StyleKit.hardLiquorColor
+    case .water:      return StyleKit.waterColor
+    case .coffee:     return StyleKit.coffeeColor
+    case .tea:        return StyleKit.teaColor
+    case .soda:       return StyleKit.sodaColor
+    case .juice:      return StyleKit.juiceColor
+    case .milk:       return StyleKit.milkColor
+    case .sport:      return StyleKit.sportColor
+    case .energy:     return StyleKit.energyColor
+    case .beer:       return StyleKit.beerColor
+    case .wine:       return StyleKit.wineColor
+    case .hardLiquor: return StyleKit.hardLiquorColor
     }
   }
   
@@ -78,65 +78,65 @@ enum DrinkType: Int {
   
   var drawFunction: StyleKit.DrawDrinkFunction {
     switch self {
-    case Water:      return StyleKit.drawWaterDrink
-    case Coffee:     return StyleKit.drawCoffeeDrink
-    case Tea:        return StyleKit.drawTeaDrink
-    case Soda:       return StyleKit.drawSodaDrink
-    case Juice:      return StyleKit.drawJuiceDrink
-    case Milk:       return StyleKit.drawMilkDrink
-    case Sport:      return StyleKit.drawSportDrink
-    case Energy:     return StyleKit.drawEnergyDrink
-    case Beer:       return StyleKit.drawBeerDrink
-    case Wine:       return StyleKit.drawWineDrink
-    case HardLiquor: return StyleKit.drawHardLiquorDrink
+    case .water:      return StyleKit.drawWaterDrink
+    case .coffee:     return StyleKit.drawCoffeeDrink
+    case .tea:        return StyleKit.drawTeaDrink
+    case .soda:       return StyleKit.drawSodaDrink
+    case .juice:      return StyleKit.drawJuiceDrink
+    case .milk:       return StyleKit.drawMilkDrink
+    case .sport:      return StyleKit.drawSportDrink
+    case .energy:     return StyleKit.drawEnergyDrink
+    case .beer:       return StyleKit.drawBeerDrink
+    case .wine:       return StyleKit.drawWineDrink
+    case .hardLiquor: return StyleKit.drawHardLiquorDrink
     }
   }
   
   var hydrationFactor: Double {
     switch self {
-    case Water:      return 1.00
-    case Coffee:     return 0.98
-    case Tea:        return 0.99
-    case Soda:       return 0.89
-    case Juice:      return 0.85
-    case Milk:       return 0.87
-    case Sport:      return 0.95
-    case Energy:     return 0.90
-    case Beer:       return 0.95
-    case Wine:       return 0.85
-    case HardLiquor: return 0.60
+    case .water:      return 1.00
+    case .coffee:     return 0.98
+    case .tea:        return 0.99
+    case .soda:       return 0.89
+    case .juice:      return 0.85
+    case .milk:       return 0.87
+    case .sport:      return 0.95
+    case .energy:     return 0.90
+    case .beer:       return 0.95
+    case .wine:       return 0.85
+    case .hardLiquor: return 0.60
     }
   }
 
   var dehydrationFactor: Double {
     switch self {
-    case Water:      return 0
-    case Coffee:     return 0
-    case Tea:        return 0
-    case Soda:       return 0
-    case Juice:      return 0
-    case Milk:       return 0
-    case Sport:      return 0
-    case Energy:     return 0
-    case Beer:       return 0.5
-    case Wine:       return 1.5
-    case HardLiquor: return 4
+    case .water:      return 0
+    case .coffee:     return 0
+    case .tea:        return 0
+    case .soda:       return 0
+    case .juice:      return 0
+    case .milk:       return 0
+    case .sport:      return 0
+    case .energy:     return 0
+    case .beer:       return 0.5
+    case .wine:       return 1.5
+    case .hardLiquor: return 4
     }
   }
   
   var caffeineGramPerLiter: Double {
     switch self {
-    case Water:      return 0
-    case Coffee:     return 0.632
-    case Tea:        return 0.177
-    case Soda:       return 0
-    case Juice:      return 0
-    case Milk:       return 0
-    case Sport:      return 0
-    case Energy:     return 0
-    case Beer:       return 0
-    case Wine:       return 0
-    case HardLiquor: return 0
+    case .water:      return 0
+    case .coffee:     return 0.632
+    case .tea:        return 0.177
+    case .soda:       return 0
+    case .juice:      return 0
+    case .milk:       return 0
+    case .sport:      return 0
+    case .energy:     return 0
+    case .beer:       return 0
+    case .wine:       return 0
+    case .hardLiquor: return 0
     }
   }
   

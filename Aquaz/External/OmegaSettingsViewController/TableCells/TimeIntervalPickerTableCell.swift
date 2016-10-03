@@ -13,7 +13,7 @@ class TimeIntervalPickerTableCellHelper {
 }
 
 struct TimeIntervalPickerTableCellComponent {
-  let calendarUnit: NSCalendarUnit
+  let calendarComponents: Calendar.Component
   let minValue: Int
   let maxValue: Int
   let step: Int
@@ -21,11 +21,11 @@ struct TimeIntervalPickerTableCellComponent {
   let width: CGFloat?
 }
 
-class TimeIntervalPickerTableCell<T: TimeIntervalPickerTableCellHelper>: MultiPickerTableCell<NSTimeInterval, IntCollection> {
+class TimeIntervalPickerTableCell: MultiPickerTableCell<TimeInterval, IntCollection> {
   
   let timeComponents: [TimeIntervalPickerTableCellComponent]
   
-  init(value: NSTimeInterval, timeComponents: [TimeIntervalPickerTableCellComponent], container: TableCellsContainer, height: UIPickerViewHeight = .Medium) {
+  init(value: TimeInterval, timeComponents: [TimeIntervalPickerTableCellComponent], container: TableCellsContainer, height: UIPickerViewHeight = .medium) {
     self.timeComponents = timeComponents
     let components = TimeIntervalPickerTableCell.generateComponentsFromTimeComponents(timeComponents)
     super.init(value: value, components: components, container: container, height: height)
@@ -33,7 +33,7 @@ class TimeIntervalPickerTableCell<T: TimeIntervalPickerTableCellHelper>: MultiPi
     valueToSelectionFunction = { [weak self] in return self?.convertTimeIntervalToSelectedRows($0) ?? [] }
   }
   
-  private class func generateComponentsFromTimeComponents(timeComponents: [TimeIntervalPickerTableCellComponent]) -> [Component] {
+  fileprivate class func generateComponentsFromTimeComponents(_ timeComponents: [TimeIntervalPickerTableCellComponent]) -> [Component] {
     var components = [Component]()
     for timeComponent in timeComponents {
       let collection = IntCollection(minimumValue: timeComponent.minValue, maximumValue: timeComponent.maxValue + 1, step: timeComponent.step)
@@ -43,25 +43,25 @@ class TimeIntervalPickerTableCell<T: TimeIntervalPickerTableCellHelper>: MultiPi
     return components
   }
   
-  private func convertSelectedRowsToTimeInterval(selectedRows: [Int]) -> NSTimeInterval {
+  fileprivate func convertSelectedRowsToTimeInterval(_ selectedRows: [Int]) -> TimeInterval {
     assert(selectedRows.count == timeComponents.count)
     
-    var timeInterval: NSTimeInterval = 0
-    for (index, timeComponent) in timeComponents.enumerate() {
-      let duration = getDurationForCalendarUnit(timeComponent.calendarUnit)
+    var timeInterval: TimeInterval = 0
+    for (index, timeComponent) in timeComponents.enumerated() {
+      let duration = getDurationForCalendarComponent(timeComponent.calendarComponents)
       let row = selectedRows[index]
-      timeInterval += duration * NSTimeInterval(timeComponent.minValue + timeComponent.step * row)
+      timeInterval += duration * TimeInterval(timeComponent.minValue + timeComponent.step * row)
     }
     
     return timeInterval
   }
   
-  private func convertTimeIntervalToSelectedRows(timeInterval: NSTimeInterval) -> [Int] {
+  fileprivate func convertTimeIntervalToSelectedRows(_ timeInterval: TimeInterval) -> [Int] {
     var selectedRows = [Int]()
     
     for timeComponent in timeComponents {
-      let duration = getDurationForCalendarUnit(timeComponent.calendarUnit)
-      let unitMaximum = getMaximumForCalendarUnit(timeComponent.calendarUnit)
+      let duration = getDurationForCalendarComponent(timeComponent.calendarComponents)
+      let unitMaximum = getMaximumForCalendarComponent(timeComponent.calendarComponents)
       var value = Int(timeInterval / duration) % unitMaximum
       value = min(timeComponent.maxValue, value)
       value = max(timeComponent.minValue, value)
@@ -72,22 +72,22 @@ class TimeIntervalPickerTableCell<T: TimeIntervalPickerTableCellHelper>: MultiPi
     return selectedRows
   }
   
-  private func getDurationForCalendarUnit(calendarUnit: NSCalendarUnit) -> NSTimeInterval {
-    switch calendarUnit {
-    case NSCalendarUnit.Second: return 1
-    case NSCalendarUnit.Minute: return 60
-    case NSCalendarUnit.Hour  : return 60 * 60
-    case NSCalendarUnit.Day   : return 24 * 60 * 60
+  fileprivate func getDurationForCalendarComponent(_ component: Calendar.Component) -> TimeInterval {
+    switch component {
+    case .second: return 1
+    case .minute: return 60
+    case .hour  : return 60 * 60
+    case .day   : return 24 * 60 * 60
     default: return 0
     }
   }
   
-  private func getMaximumForCalendarUnit(calendarUnit: NSCalendarUnit) -> Int {
-    switch calendarUnit {
-    case NSCalendarUnit.Second: return 60
-    case NSCalendarUnit.Minute: return 60
-    case NSCalendarUnit.Hour  : return 24
-    case NSCalendarUnit.Day   : return Int.max - 1
+  fileprivate func getMaximumForCalendarComponent(_ component: Calendar.Component) -> Int {
+    switch component {
+    case .second: return 60
+    case .minute: return 60
+    case .hour  : return 24
+    case .day   : return Int.max - 1
     default: return 0
     }
   }

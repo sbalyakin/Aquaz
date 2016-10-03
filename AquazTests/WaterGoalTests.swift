@@ -16,7 +16,7 @@ class WaterGoalTests: XCTestCase {
   func testFetchWaterGoalForDate() {
     deleteAllWaterGoals()
     
-    func testForExistance(textDate: String, _ expectedWaterGoal: WaterGoal) {
+    func testForExistance(_ textDate: String, _ expectedWaterGoal: WaterGoal) {
       let fcr = self.fetchWaterGoalForDate(textDate)
 
       XCTAssert(fcr != nil, "Water goal fitting for a date (\(textDate)) should exist")
@@ -42,7 +42,7 @@ class WaterGoalTests: XCTestCase {
   func testFetchWaterGoalStrictlyForDate() {
     deleteAllWaterGoals()
     
-    func testForExistance(textDate: String, _ expectedWaterGoal: WaterGoal) {
+    func testForExistance(_ textDate: String, _ expectedWaterGoal: WaterGoal) {
       let fcr = self.fetchWaterGoalStrictlyForDate(textDate)
       
       XCTAssert(fcr != nil, "Water goal strictly matching for a date (\(textDate)) should exist")
@@ -52,7 +52,7 @@ class WaterGoalTests: XCTestCase {
       }
     }
 
-    func testForNil(textDate: String) {
+    func testForNil(_ textDate: String) {
       let fcr = self.fetchWaterGoalStrictlyForDate(textDate)
       XCTAssert(fcr == nil, "Water goal fetched strictly for a date (\(textDate)) should be nil")
     }
@@ -133,42 +133,42 @@ class WaterGoalTests: XCTestCase {
     XCTAssert(areArraysOfDoublesAreEqual(expectedAmounts, fetchedAmounts), "Fetched water goal amounts are not match to expected ones.\nExpected:\n\(expectedAmounts)\nFetched:\n\(fetchedAmounts)")
   }
   
-  private func fetchWaterGoalForDate(textDate: String) -> WaterGoal? {
+  fileprivate func fetchWaterGoalForDate(_ textDate: String) -> WaterGoal? {
     let date = dateFromString(textDate)
     return WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: managedObjectContext)
   }
   
-  private func fetchWaterGoalStrictlyForDate(textDate: String) -> WaterGoal? {
+  fileprivate func fetchWaterGoalStrictlyForDate(_ textDate: String) -> WaterGoal? {
     let date = dateFromString(textDate)
     return WaterGoal.fetchWaterGoalStrictlyForDate(date, managedObjectContext: managedObjectContext)
   }
   
-  private func addWaterGoal(textDate: String, _ baseAmount: Double, _ isHotDay: Bool = false, _ isHighActivity: Bool = false) -> WaterGoal {
+  fileprivate func addWaterGoal(_ textDate: String, _ baseAmount: Double, _ isHotDay: Bool = false, _ isHighActivity: Bool = false) -> WaterGoal {
     let date = dateFromString(textDate)
     let waterGoal = WaterGoal.addEntity(date: date, baseAmount: baseAmount, isHotDay: isHotDay, isHighActivity: isHighActivity, managedObjectContext: managedObjectContext, saveImmediately: true)
     return waterGoal
   }
 
-  private func dateFromString(textDate: String) -> NSDate {
-    let dateFormatter = NSDateFormatter()
-    let range = textDate.rangeOfString(":", options: .CaseInsensitiveSearch, range: nil, locale: nil)
+  fileprivate func dateFromString(_ textDate: String) -> Date {
+    let dateFormatter = DateFormatter()
+    let range = textDate.range(of: ":", options: .caseInsensitive, range: nil, locale: nil)
     dateFormatter.dateFormat = range == nil ? "dd.MM.yyyy" : "dd.MM.yyyy HH:mm:ss"
-    let date = dateFormatter.dateFromString(textDate)!
+    let date = dateFormatter.date(from: textDate)!
     return date
   }
   
-  private func stringFromDate(date: NSDate) -> String {
-    let dateFormatter = NSDateFormatter()
+  fileprivate func stringFromDate(_ date: Date) -> String {
+    let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "dd.MM.yyyy HH:mm:ss"
-    let textDate = dateFormatter.stringFromDate(date)
+    let textDate = dateFormatter.string(from: date)
     return textDate
   }
   
-  private func deleteAllWaterGoals() {
-    let waterGoals: [WaterGoal] = CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext)
+  fileprivate func deleteAllWaterGoals() {
+    let waterGoals = WaterGoal.fetchManagedObjects(managedObjectContext: managedObjectContext)
     
     for waterGoal in waterGoals {
-      managedObjectContext.deleteObject(waterGoal)
+      managedObjectContext.delete(waterGoal)
     }
     
     do {
@@ -178,12 +178,12 @@ class WaterGoalTests: XCTestCase {
     }
   }
   
-  private func areArraysOfDoublesAreEqual(array1: [Double], _ array2: [Double]) -> Bool {
+  fileprivate func areArraysOfDoublesAreEqual(_ array1: [Double], _ array2: [Double]) -> Bool {
     if array1.count != array2.count {
       return false
     }
     
-    for (index, item) in array1.enumerate() {
+    for (index, item) in array1.enumerated() {
       if !areDoublesEqual(item, array2[index]) {
         return false
       }
@@ -192,10 +192,10 @@ class WaterGoalTests: XCTestCase {
     return true
   }
   
-  private func areDoublesEqual(value1: Double, _ value2: Double) -> Bool {
+  fileprivate func areDoublesEqual(_ value1: Double, _ value2: Double) -> Bool {
     return abs(value1 - value2) < DBL_MIN || abs(value1 - value2) < 10 * DBL_EPSILON * abs(value1 + value2)
   }
   
-  private var managedObjectContext: NSManagedObjectContext { return CoreDataSupport.sharedInstance.managedObjectContext }
+  fileprivate var managedObjectContext: NSManagedObjectContext { return CoreDataSupport.sharedInstance.managedObjectContext }
 
 }

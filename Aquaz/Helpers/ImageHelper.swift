@@ -22,12 +22,12 @@ struct ImageHelper {
     case SettingsHealthKit = "SettingsHealthKit"
   }
   
-  static func loadImage(image: Image) -> UIImage? {
+  static func loadImage(_ image: Image) -> UIImage? {
     return UIImage(named: image.rawValue)
   }
   
   // Hide initializer
-  private init() {
+  fileprivate init() {
   }
   
 }

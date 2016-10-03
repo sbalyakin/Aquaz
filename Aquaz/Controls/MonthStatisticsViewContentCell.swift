@@ -15,10 +15,10 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
     return getDayInfo().userData as? CGFloat
   }
   
-  private var circleLayer: CAShapeLayer!
-  private var arcLayer: CAShapeLayer!
+  fileprivate var circleLayer: CAShapeLayer!
+  fileprivate var arcLayer: CAShapeLayer!
   
-  override func setDayInfo(dayInfo: CalendarViewDayInfo, calendarContentView: CalendarContentView) {
+  override func setDayInfo(_ dayInfo: CalendarViewDayInfo, calendarContentView: CalendarContentView) {
     super.setDayInfo(dayInfo, calendarContentView: calendarContentView)
 
     if let monthStatisticsContentView = calendarContentView as? MonthStatisticsContentView {
@@ -32,7 +32,7 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
         circleLayer.lineWidth = monthStatisticsContentView.dayIntakeLineWidth
         circleLayer.lineCap = kCALineCapRound
         circleLayer.fillColor = nil
-        circleLayer.strokeColor = monthStatisticsContentView.dayIntakeBackgroundColor.CGColor
+        circleLayer.strokeColor = monthStatisticsContentView.dayIntakeBackgroundColor.cgColor
         contentView.layer.addSublayer(circleLayer)
 
         if let value = value {
@@ -42,15 +42,15 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
           arcLayer.fillColor = nil
           arcLayer.strokeStart = 0
           if value < 1 {
-            arcLayer.strokeColor = monthStatisticsContentView.dayIntakeColor.CGColor
+            arcLayer.strokeColor = monthStatisticsContentView.dayIntakeColor.cgColor
           } else {
-            arcLayer.strokeColor = monthStatisticsContentView.dayIntakeFullColor.CGColor
+            arcLayer.strokeColor = monthStatisticsContentView.dayIntakeFullColor.cgColor
           }
 
           contentView.layer.addSublayer(arcLayer)
 
-          let centerOnScreenPoint = convertPoint(bounds.origin, toView: nil)
-          let isVisible = UIScreen.mainScreen().bounds.contains(centerOnScreenPoint)
+          let centerOnScreenPoint = convert(bounds.origin, to: nil)
+          let isVisible = UIScreen.main.bounds.contains(centerOnScreenPoint)
           
           if isVisible {
             arcLayer.strokeEnd = 0
@@ -61,9 +61,9 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
             animation.toValue = value
             animation.fillMode = kCAFillModeForwards
             animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            animation.removedOnCompletion = false
+            animation.isRemovedOnCompletion = false
             arcLayer.strokeEnd = value
-            arcLayer.addAnimation(animation, forKey: "animateStrokeEnd")
+            arcLayer.add(animation, forKey: "animateStrokeEnd")
           } else {
             // If cell is invisible we skip animation
             arcLayer.strokeEnd = value
@@ -89,15 +89,15 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
     layoutArcLayer(rect)
   }
 
-  private func layoutCircleLayer(rect: CGRect) {
+  fileprivate func layoutCircleLayer(_ rect: CGRect) {
     if let circleLayer = circleLayer {
-      let circlePath = UIBezierPath(ovalInRect: rect.insetBy(dx: circleLayer.lineWidth / 2, dy: circleLayer.lineWidth / 2))
+      let circlePath = UIBezierPath(ovalIn: rect.insetBy(dx: circleLayer.lineWidth / 2, dy: circleLayer.lineWidth / 2))
       
-      circleLayer.path = circlePath.CGPath
+      circleLayer.path = circlePath.cgPath
     }
   }
   
-  private func layoutArcLayer(rect: CGRect) {
+  fileprivate func layoutArcLayer(_ rect: CGRect) {
     if let arcLayer = arcLayer {
       let centerPoint = CGPoint(x: rect.midX, y: rect.midY)
       let startAngle = CGFloat(-M_PI_2)
@@ -106,7 +106,7 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
       
       let arcPath = UIBezierPath(arcCenter: centerPoint, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
       
-      arcLayer.path = arcPath.CGPath
+      arcLayer.path = arcPath.cgPath
     }
   }
 

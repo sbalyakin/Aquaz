@@ -11,19 +11,19 @@ import UIKit
 @IBDesignable class RoundedButton: UIButton {
   
   enum RoundMode: Int {
-    case Custom
-    case Height
-    case Width
-    case Auto
+    case custom
+    case height
+    case width
+    case auto
   }
   
   @IBInspectable var cornerRadius: CGFloat = 0
   @IBInspectable var roundMode: Int = 0 {
     didSet {
-      _roundMode = RoundMode(rawValue: roundMode) ?? .Custom
+      _roundMode = RoundMode(rawValue: roundMode) ?? .custom
     }
   }
-  var _roundMode: RoundMode = .Custom
+  var _roundMode: RoundMode = .custom
   
   override func layoutSubviews() {
     super.layoutSubviews()
@@ -37,12 +37,12 @@ import UIKit
     applyCornerRadius()
   }
 
-  private func applyCornerRadius() {
+  fileprivate func applyCornerRadius() {
     switch _roundMode {
-    case .Custom: layer.cornerRadius = cornerRadius
-    case .Height: layer.cornerRadius = bounds.height / 2
-    case .Width:  layer.cornerRadius = bounds.width / 2
-    case .Auto:   layer.cornerRadius = min(bounds.width, bounds.height) / 2
+    case .custom: layer.cornerRadius = cornerRadius
+    case .height: layer.cornerRadius = bounds.height / 2
+    case .width:  layer.cornerRadius = bounds.width / 2
+    case .auto:   layer.cornerRadius = min(bounds.width, bounds.height) / 2
     }
   }
 }

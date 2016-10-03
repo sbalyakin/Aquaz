@@ -16,22 +16,22 @@ class CoreDataSupport {
   
   let managedObjectContext: NSManagedObjectContext
   
-  private init() {
-    Logger.setup(logLevel: .None, assertLevel: .None, consoleLevel: .Warning, showLogLevel: true, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
+  fileprivate init() {
+    Logger.setup(logLevel: .none, assertLevel: .none, consoleLevel: .warning, showLogLevel: true, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
     
     // Create managed object context
-    let model = NSManagedObjectModel.mergedModelFromBundles([NSBundle.mainBundle()])
+    let model = NSManagedObjectModel.mergedModel(from: [Bundle.main])
     XCTAssert(model != nil, "Failed to create managed object model")
     
     let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model!)
-    let store = try? coordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
+    let store = try? coordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
     XCTAssert(store != nil, "Failed to create persistent store")
     
-    managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+    managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     managedObjectContext.persistentStoreCoordinator = coordinator
 
     // Pre-populate core data
-    managedObjectContext.performBlockAndWait {
+    managedObjectContext.performAndWait {
       CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: self.managedObjectContext, saveContext: true)
     }
   }

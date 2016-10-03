@@ -10,7 +10,7 @@ import UIKit
 
 class BannerView: UIView {
   
-  override func drawRect(rect: CGRect) {
+  override func draw(_ rect: CGRect) {
     let color = UIColor(red: 167/255, green: 169/255, blue: 171/255, alpha: 0.6)
     color.setStroke()
     
@@ -18,8 +18,8 @@ class BannerView: UIView {
 
     let path = UIBezierPath()
     path.lineWidth = 1 / contentScaleFactor
-    path.moveToPoint(CGPoint(x: rect.minX, y: rect.maxY - scaleOffset))
-    path.addLineToPoint(CGPoint(x: rect.maxX, y: rect.maxY - scaleOffset))
+    path.move(to: CGPoint(x: rect.minX, y: rect.maxY - scaleOffset))
+    path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY - scaleOffset))
     path.stroke()
   }
   

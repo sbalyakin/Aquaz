@@ -12,13 +12,13 @@ final class ConnectivityMessageAddIntake {
   
   // MARK: Types
   
-  private struct Keys {
+  fileprivate struct Keys {
     static let drinkType = "drinkType"
     static let amount    = "amount"
     static let date      = "date"
   }
   
-  private struct Constants {
+  fileprivate struct Constants {
     static let messageKey   = "message"
     static let messageValue = "ConnectivityMessageAddIntake"
   }
@@ -27,11 +27,11 @@ final class ConnectivityMessageAddIntake {
 
   var drinkType: DrinkType
   var amount: Double
-  var date: NSDate
+  var date: Date
   
   // MARK: Methods
   
-  init(drinkType: DrinkType, amount: Double, date: NSDate) {
+  init(drinkType: DrinkType, amount: Double, date: Date) {
     self.drinkType = drinkType
     self.amount    = amount
     self.date      = date
@@ -39,15 +39,15 @@ final class ConnectivityMessageAddIntake {
   
   init?(metadata: [String : AnyObject]) {
     guard
-      let messageValue   = metadata[Constants.messageKey] as? String where messageValue == Constants.messageValue,
+      let messageValue   = metadata[Constants.messageKey] as? String , messageValue == Constants.messageValue,
       let drinkTypeIndex = metadata[Keys.drinkType] as? Int,
       let drinkType      = DrinkType(rawValue: drinkTypeIndex),
       let amount         = metadata[Keys.amount] as? Double,
-      let date           = metadata[Keys.date] as? NSDate else
+      let date           = metadata[Keys.date] as? Date else
     {
-      self.drinkType = .Water
+      self.drinkType = .water
       self.amount = 0
-      self.date = NSDate()
+      self.date = Date()
 
       return nil
     }
@@ -60,10 +60,10 @@ final class ConnectivityMessageAddIntake {
   func composeMetadata() -> [String : AnyObject] {
     var metadata = [String : AnyObject]()
     
-    metadata[Constants.messageKey] = Constants.messageValue
-    metadata[Keys.drinkType]       = drinkType.rawValue
-    metadata[Keys.amount]          = amount
-    metadata[Keys.date]            = date
+    metadata[Constants.messageKey] = Constants.messageValue as AnyObject?
+    metadata[Keys.drinkType]       = drinkType.rawValue as AnyObject?
+    metadata[Keys.amount]          = amount as AnyObject?
+    metadata[Keys.date]            = date as AnyObject?
     
     return metadata
   }

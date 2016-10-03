@@ -10,14 +10,14 @@ import Foundation
 
 class DateHelper {
 
-  class func dateBySettingHour(hour: Int, minute: Int, second: Int, ofDate: NSDate) -> NSDate {
-    let calendar = NSCalendar.currentCalendar()
-    let components = calendar.components([.Year, .Month, .Day, .TimeZone, .Calendar], fromDate: ofDate)
+  class func dateBySettingHour(_ hour: Int, minute: Int, second: Int, ofDate: Date) -> Date {
+    let calendar = Calendar.current
+    var components = calendar.dateComponents([.year, .month, .day], from: ofDate)
     components.hour = hour
     components.minute = minute
     components.second = second
-
-    if let date = calendar.dateFromComponents(components) {
+    
+    if let date = calendar.date(from: components) {
       return date
     } else {
       assert(false)
@@ -25,14 +25,10 @@ class DateHelper {
     }
   }
 
-  class func addToDate(date: NSDate, years: Int, months: Int, days: Int) -> NSDate {
-    let components = NSDateComponents()
-    components.year = years
-    components.month = months
-    components.day = days
+  class func addToDate(_ date: Date, years: Int, months: Int, days: Int) -> Date {
+    let components = DateComponents(calendar: nil, timeZone: nil, era: nil, year: years, month: months, day: days)
     
-    let calendar = NSCalendar.currentCalendar()
-    if let newDate = calendar.dateByAddingComponents(components, toDate: date, options: NSCalendarOptions.MatchStrictly) {
+    if let newDate = Calendar.current.date(byAdding: components, to: date) {
       return newDate
     } else {
       assert(false)
@@ -40,108 +36,159 @@ class DateHelper {
     }
   }
 
-  class func dateByClearingTime(ofDate date: NSDate) -> NSDate {
-    return dateBySettingHour(0, minute: 0, second: 0, ofDate: date)
+  class func dateByJoiningDateTime(datePart: Date, timePart: Date) -> Date {
+    let components = Calendar.current.dateComponents([.hour, .minute, .second], from: timePart)
+    return dateBySettingHour(components.hour!, minute: components.minute!, second: components.second!, ofDate: datePart)
   }
   
-  class func dateByJoiningDateTime(datePart datePart: NSDate, timePart: NSDate) -> NSDate {
-    let calendar = NSCalendar.currentCalendar()
-    let components = calendar.components([.Hour, .Minute, .Second], fromDate: timePart)
-    return dateBySettingHour(components.hour, minute: components.minute, second: components.second, ofDate: datePart)
-  }
-  
-  class func startDateFromDate(date: NSDate, calendarUnit: NSCalendarUnit) -> NSDate {
-    var startDate: NSDate?
-    NSCalendar.currentCalendar().rangeOfUnit(calendarUnit, startDate: &startDate, interval: nil, forDate: date)
-    if let startDate = startDate {
-      return startDate
+  class func startOfDay(_ date: Date) -> Date {
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.year, .month ,.day], from: date)
+    
+    if let newDate = calendar.date(from: components) {
+      return newDate
+    } else {
+      assert(false)
+      return date
     }
-    
-    assert(false)
-    return date
-  }
-
-  class func computeUnitsFrom(date: NSDate, toDate: NSDate, unit: NSCalendarUnit) -> Int {
-    let calendar = NSCalendar.currentCalendar()
-    let valueFrom = calendar.ordinalityOfUnit(unit, inUnit: .Era, forDate: dateByClearingTime(ofDate: date))
-    let valueTo = calendar.ordinalityOfUnit(unit, inUnit: .Era, forDate: dateByClearingTime(ofDate: toDate))
-    return valueTo - valueFrom
   }
   
-  class func calcDistanceBetweenCalendarDates(fromDate fromDate: NSDate, toDate: NSDate, calendarUnit: NSCalendarUnit) -> Int {
-    let calendar = NSCalendar.currentCalendar()
+  class func startOfMonth(_ date: Date) -> Date {
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.year, .month], from: date)
     
-    var fromDay: NSDate?
-    var toDay: NSDate?
-    calendar.rangeOfUnit(calendarUnit, startDate: &fromDay, interval: nil, forDate: fromDate)
-    calendar.rangeOfUnit(calendarUnit, startDate: &toDay, interval: nil, forDate: toDate)
-    
-    let difference = calendar.components(calendarUnit, fromDate: fromDay!, toDate: toDay!, options: .MatchStrictly)
-    
-    switch calendarUnit {
-    case NSCalendarUnit.Day:   return difference.day
-    case NSCalendarUnit.Month: return difference.month
-    case NSCalendarUnit.Year:  return difference.year
-    default: return 0
+    if let newDate = calendar.date(from: components) {
+      return newDate
+    } else {
+      assert(false)
+      return date
     }
   }
 
-  class func calcDistanceBetweenDates(fromDate fromDate: NSDate, toDate: NSDate, calendarUnit: NSCalendarUnit) -> Int {
-    let calendar = NSCalendar.currentCalendar()
+  class func startOfYear(_ date: Date) -> Date {
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.year], from: date)
     
-    let difference = calendar.components(calendarUnit, fromDate: fromDate, toDate: toDate, options: .MatchStrictly)
-    
-    switch calendarUnit {
-    case NSCalendarUnit.Day:   return difference.day
-    case NSCalendarUnit.Month: return difference.month
-    case NSCalendarUnit.Year:  return difference.year
-    default: return 0
+    if let newDate = calendar.date(from: components) {
+      return newDate
+    } else {
+      assert(false)
+      return date
     }
   }
   
-  class func areDatesEqualByDays(date1: NSDate, _ date2: NSDate) -> Bool {
-    return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .Day) == 0
+  class func nextDayFrom(_ date: Date) -> Date {
+    return Calendar.current.date(byAdding: .day, value: 1, to: date)!
+  }
+
+  class func previousDayBefore(_ date: Date) -> Date {
+    return Calendar.current.date(byAdding: .day, value: -1, to: date)!
+  }
+
+  class func nextMonthFrom(_ date: Date) -> Date {
+    return Calendar.current.date(byAdding: .month, value: 1, to: date)!
   }
   
-  class func areDatesEqualByMonths(date1: NSDate, _ date2: NSDate) -> Bool {
-    return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .Month) == 0
+  class func previousMonthBefore(_ date: Date) -> Date {
+    return Calendar.current.date(byAdding: .month, value: -1, to: date)!
   }
   
-  class func areDatesEqualByYears(date1: NSDate, _ date2: NSDate) -> Bool {
-    return calcDistanceBetweenCalendarDates(fromDate: date1, toDate: date2, calendarUnit: .Year) == 0
+  class func nextYearFrom(_ date: Date) -> Date {
+    return Calendar.current.date(byAdding: .year, value: 1, to: date)!
+  }
+  
+  class func previousYearBefore(_ date: Date) -> Date {
+    return Calendar.current.date(byAdding: .year, value: -1, to: date)!
+  }
+  
+  class func calendarDays(fromDate: Date, toDate: Date) -> Int {
+    let calendar = Calendar.current
+    let fromComponents = calendar.dateComponents([.year, .month, .day], from: fromDate)
+    let toComponents = calendar.dateComponents([.year, .month, .day], from: toDate)
+    return calendar.dateComponents([.day], from: fromComponents, to: toComponents).day!
+  }
+  
+  class func calendarMonths(fromDate: Date, toDate: Date) -> Int {
+    let calendar = Calendar.current
+    let fromComponents = calendar.dateComponents([.year, .month], from: fromDate)
+    let toComponents = calendar.dateComponents([.year, .month], from: toDate)
+    return calendar.dateComponents([.month], from: fromComponents, to: toComponents).month!
+  }
+  
+  class func calendarYears(fromDate: Date, toDate: Date) -> Int {
+    let calendar = Calendar.current
+    let fromComponents = calendar.dateComponents([.year], from: fromDate)
+    let toComponents = calendar.dateComponents([.year], from: toDate)
+    return calendar.dateComponents([.year], from: fromComponents, to: toComponents).year!
+  }
+
+  class func days(fromDate: Date, toDate: Date) -> Int {
+    return Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day!
+  }
+  
+  class func months(fromDate: Date, toDate: Date) -> Int {
+    return Calendar.current.dateComponents([.month], from: fromDate, to: toDate).month!
+  }
+  
+  class func years(fromDate: Date, toDate: Date) -> Int {
+    return Calendar.current.dateComponents([.year], from: fromDate, to: toDate).year!
+  }
+  
+  class func areEqualDays(_ date1: Date, _ date2: Date) -> Bool {
+    return calendarDays(fromDate: date1, toDate: date2) == 0
+  }
+
+  class func areEqualMonths(_ date1: Date, _ date2: Date) -> Bool {
+    return calendarMonths(fromDate: date1, toDate: date2) == 0
+  }
+  
+  class func areEqualYears(_ date1: Date, _ date2: Date) -> Bool {
+    return calendarYears(fromDate: date1, toDate: date2) == 0
+  }
+
+  class func daysPerWeek() -> Int {
+    return Calendar.current.maximumRange(of: .weekday)!.count
+  }
+
+  class func monthsPerYear() -> Int {
+    return Calendar.current.maximumRange(of: .month)!.count
+  }
+
+  class func daysInMonth(date: Date) -> Int {
+    return Calendar.current.range(of: .day, in: .month, for: date)!.count
   }
   
   /// Generates string for the specified date. If year of a current date is year of today, the function hides it.
-  class func stringFromDate(date: NSDate, shortDateStyle: Bool = false) -> String {
-    let today = NSDate()
-    let daysTillToday = calcDistanceBetweenDates(fromDate: today, toDate: date, calendarUnit: .Day)
-    let dateFormatter = NSDateFormatter()
+  class func stringFromDate(_ date: Date, shortDateStyle: Bool = false) -> String {
+    let today = Date()
+    let daysTillToday = calendarDays(fromDate: today, toDate: date)
+    let dateFormatter = DateFormatter()
     
     if abs(daysTillToday) <= 1 {
       // Use standard date formatting for yesterday, today and tomorrow
       // in order to obtain "Yesterday", "Today" and "Tomorrow" localized date strings
-      dateFormatter.dateStyle = shortDateStyle ? .ShortStyle : .MediumStyle
-      dateFormatter.timeStyle = .NoStyle
+      dateFormatter.dateStyle = shortDateStyle ? .short : .medium
+      dateFormatter.timeStyle = .none
       dateFormatter.doesRelativeDateFormatting = true
     } else {
       // Use custom formatting. If year of a current date is year of today, hide it.
-      let yearsTillToday = calcDistanceBetweenDates(fromDate: today, toDate: date, calendarUnit: .Year)
+      let yearsTillToday = calendarYears(fromDate: today, toDate: date)
       let monthFormat = shortDateStyle ? "MMM" : "MMMM"
       let template = yearsTillToday == 0 ? "d\(monthFormat)" : "d\(monthFormat)yyyy"
-      let formatString = NSDateFormatter.dateFormatFromTemplate(template, options: 0, locale: NSLocale.currentLocale())
+      let formatString = DateFormatter.dateFormat(fromTemplate: template, options: 0, locale: Locale.current)
       dateFormatter.dateFormat = formatString
     }
-    return dateFormatter.stringFromDate(date)
+    return dateFormatter.string(from: date)
   }
   
-  class func stringFromTime(time: NSDate) -> String {
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.dateStyle = .NoStyle
-    dateFormatter.timeStyle = .ShortStyle
-    return dateFormatter.stringFromDate(time)
+  class func stringFromTime(_ time: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .none
+    dateFormatter.timeStyle = .short
+    return dateFormatter.string(from: time)
   }
   
-  class func stringFromDateTime(dateTime: NSDate, shortDateStyle: Bool = false) -> String {
+  class func stringFromDateTime(_ dateTime: Date, shortDateStyle: Bool = false) -> String {
     let datePart = stringFromDate(dateTime, shortDateStyle: shortDateStyle)
     let timePart = stringFromTime(dateTime)
     return "\(datePart), \(timePart)"
@@ -149,17 +196,13 @@ class DateHelper {
   
 }
 
-extension NSDate {
-  func isLaterThan(date: NSDate) -> Bool {
-    return date.compare(self) == .OrderedAscending
+extension Date {
+  func isLaterThan(_ date: Date) -> Bool {
+    return date.compare(self) == .orderedAscending
   }
   
-  func isEarlierThan(date: NSDate) -> Bool {
-    return date.compare(self) == .OrderedDescending
-  }
-  
-  func getNextDay() -> NSDate {
-    return DateHelper.addToDate(self, years: 0, months: 0, days: 1)
+  func isEarlierThan(_ date: Date) -> Bool {
+    return date.compare(self) == .orderedDescending
   }
 }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0800"
    version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -60,7 +60,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A5B422F61C0B0EE600319D51"
+               BlueprintIdentifier = "A5AC5A501C0B149D0010898E"
                BuildableName = "AquazUITests.xctest"
                BlueprintName = "AquazUITests"
                ReferencedContainer = "container:Aquaz.xcodeproj">

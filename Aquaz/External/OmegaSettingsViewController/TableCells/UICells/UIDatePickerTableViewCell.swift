@@ -10,7 +10,7 @@ import UIKit
 
 protocol UIDatePickerTableViewCellDelegate: class {
   
-  func datePickerValueDidChange(datePicker: UIDatePicker)
+  func datePickerValueDidChange(_ datePicker: UIDatePicker)
   
 }
 
@@ -21,7 +21,7 @@ class UIDatePickerTableViewCell: UITableViewCell {
   weak var delegate: UIDatePickerTableViewCellDelegate?
   
   init(reuseIdentifier: String? = nil) {
-    super.init(style: .Default, reuseIdentifier: reuseIdentifier)
+    super.init(style: .default, reuseIdentifier: reuseIdentifier)
     baseInit()
   }
   
@@ -30,26 +30,26 @@ class UIDatePickerTableViewCell: UITableViewCell {
     baseInit()
   }
   
-  private func baseInit() {
-    selectionStyle = .None
+  fileprivate func baseInit() {
+    selectionStyle = .none
     layer.zPosition = -1
     
     if self.datePicker == nil {
       let datePicker = UIDatePicker()
-      datePicker.backgroundColor = UIColor.clearColor()
+      datePicker.backgroundColor = UIColor.clear
       
       datePicker.addTarget(
         self,
         action: #selector(self.datePickerValueDidChange(_:)),
-        forControlEvents: UIControlEvents.ValueChanged)
+        for: UIControlEvents.valueChanged)
       
       contentView.addSubview(datePicker)
-      contentView.sendSubviewToBack(datePicker)
+      contentView.sendSubview(toBack: datePicker)
       self.datePicker = datePicker
     }
   }
   
-  func datePickerValueDidChange(datePicker: UIDatePicker) {
+  func datePickerValueDidChange(_ datePicker: UIDatePicker) {
     delegate?.datePickerValueDidChange(datePicker)
   }
   
@@ -58,7 +58,7 @@ class UIDatePickerTableViewCell: UITableViewCell {
     layoutDatePicker()
   }
   
-  private func layoutDatePicker() {
+  fileprivate func layoutDatePicker() {
     datePicker.frame = bounds
     datePicker.setNeedsLayout()
   }

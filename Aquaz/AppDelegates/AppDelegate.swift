@@ -16,30 +16,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
   
-  private var wormholeDataProvider: WormholeDataProvider!
+  fileprivate var wormholeDataProvider: WormholeDataProvider!
   
-  private struct Constants {
+  fileprivate struct Constants {
     static let defaultRootViewController = "Root View Controller"
     static let welcomeViewController = "Welcome Wizard"
   }
   
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     Fabric.with([Crashlytics()])
     
     #if DEBUG
-      Logger.setup(logLevel: .Warning, assertLevel: .Error, consoleLevel: .Debug, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
+      Logger.setup(logLevel: .warning, assertLevel: .error, consoleLevel: .debug, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
     #else
-      Logger.setup(logLevel: .Warning, assertLevel: .None, consoleLevel: .None, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
+      Logger.setup(logLevel: .warning, assertLevel: .none, consoleLevel: .none, showLogLevel: false, showFileNames: true, showLineNumbers: true, showFunctionNames: true)
     #endif
 
     UIHelper.applyStylization()
     NotificationsHelper.setApplicationIconBadgeNumber(0)
     
     // Initialize the core data stack
-    CoreDataStack.sharedInstance
+    _ = CoreDataStack.sharedInstance
     
     #if DEBUG
-      let isSnapshotMode = NSProcessInfo.processInfo().arguments.contains("-SNAPSHOT")
+      let isSnapshotMode = ProcessInfo.processInfo.arguments.contains("-SNAPSHOT")
       
       if isSnapshotMode {
         if #available(iOS 9.0, *) {
@@ -60,13 +60,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       setupHealthKitSynchronization()
       
       // Just for creating an instance of the connectivity provider
-      ConnectivityProvider.sharedInstance
+      _ = ConnectivityProvider.sharedInstance
     }
 
     return true
   }
 
-  private func initialSetup(launchOptions launchOptions: [NSObject: AnyObject]?) {
+  fileprivate func initialSetup(launchOptions: [AnyHashable: Any]?) {
     if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
       prePopulateCoreData()
       removeDisabledNotifications()
@@ -74,31 +74,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       Settings.sharedInstance.generalHasLaunchedOnce.value = true
     } else {
       if let options = launchOptions {
-        if let _ = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
+        if let _ = options[UIApplicationLaunchOptionsKey.localNotification] as? UILocalNotification {
           showDayViewControllerForToday()
         }
       }
     }
   }
     
-  private func setupSynchronizationWithCoreData() {
+  fileprivate func setupSynchronizationWithCoreData() {
     CoreDataStack.performOnPrivateContext { privateContext in
-      NSNotificationCenter.defaultCenter().addObserver(
+      NotificationCenter.default.addObserver(
         self,
         selector: #selector(self.updateNotifications(_:)),
-        name: NSManagedObjectContextDidSaveNotification,
+        name: NSNotification.Name.NSManagedObjectContextDidSave,
         object: privateContext)
       }
   }
 
   @available(iOS 9.0, *)
-  private func setupHealthKitSynchronization() {
+  fileprivate func setupHealthKitSynchronization() {
     CoreDataStack.performOnPrivateContext { privateContext in
       HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContext(privateContext)
     }
   }
 
-  func updateNotifications(notification: NSNotification) {
+  func updateNotifications(_ notification: Notification) {
     if !Settings.sharedInstance.notificationsEnabled.value {
       return
     }
@@ -107,36 +107,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       return
     }
 
-    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
+    if let insertedObjects = (notification as NSNotification).userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
       // Searching for the last inserted intake by date
-      var lastIntakeDate: NSDate?
+      var lastIntakeDate: Date?
       
       for insertedObject in insertedObjects {
         if let intake = insertedObject as? Intake {
           if lastIntakeDate == nil || intake.date.isLaterThan(lastIntakeDate!) {
-            lastIntakeDate = intake.date
+            lastIntakeDate = intake.date as Date
           }
         }
       }
       
-      if let lastIntakeDate = lastIntakeDate where DateHelper.areDatesEqualByDays(lastIntakeDate, NSDate()) {
+      if let lastIntakeDate = lastIntakeDate , DateHelper.areEqualDays(lastIntakeDate, Date()) {
         if Settings.sharedInstance.notificationsLimit.value {
           CoreDataStack.performOnPrivateContext { privateContext in
-            let beginDate = NSDate()
-            let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
+            let beginDate = Date()
+            let endDate = DateHelper.nextDayFrom(beginDate)
             
-            let todayAmountParts = Intake.fetchIntakeAmountPartsGroupedBy(.Day, beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0,  aggregateFunction: .Summary, managedObjectContext: privateContext).first!
+            let todayAmountParts = Intake.fetchIntakeAmountPartsGroupedBy(.day, beginDate: beginDate, endDate: endDate, dayOffsetInHours: 0,  aggregateFunction: .summary, managedObjectContext: privateContext).first!
             
             let todayWaterGoal = WaterGoal.fetchWaterGoalAmounts(beginDate: beginDate, endDate: endDate, managedObjectContext: privateContext).first!
             
             if todayAmountParts.hydration >= (todayWaterGoal + todayAmountParts.dehydration) {
-              dispatch_async(dispatch_get_main_queue()) {
+              DispatchQueue.main.async {
                 NotificationsHelper.removeAllNotifications()
-                let nextDayDate = DateHelper.addToDate(lastIntakeDate, years: 0, months: 0, days: 1)
+                let nextDayDate = DateHelper.nextDayFrom(lastIntakeDate)
                 NotificationsHelper.scheduleNotificationsFromSettingsForDate(nextDayDate)
               }
             } else if Settings.sharedInstance.notificationsSmart.value {
-              dispatch_async(dispatch_get_main_queue()) {
+              DispatchQueue.main.async {
                 NotificationsHelper.rescheduleNotificationsBecauseOfIntake(intakeDate: lastIntakeDate)
               }
             }
@@ -152,28 +152,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let storyboard = UIStoryboard(name: GlobalConstants.storyboardMain, bundle: nil)
     let rootViewController: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.defaultRootViewController)!
 
-    let snapShot = window!.snapshotViewAfterScreenUpdates(true)
+    let snapShot = window!.snapshotView(afterScreenUpdates: true)
     
-    rootViewController.view.addSubview(snapShot)
+    rootViewController.view.addSubview(snapShot!)
     
     window!.rootViewController = rootViewController;
     
-    UIView.animateWithDuration(0.65, animations: {
-      snapShot.layer.opacity = 0
-      snapShot.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
+    UIView.animate(withDuration: 0.65, animations: {
+      snapShot?.layer.opacity = 0
+      snapShot?.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
     }, completion: { _ in
-        snapShot.removeFromSuperview()
+        snapShot?.removeFromSuperview()
     })
   }
   
-  private func showWelcomeWizard() {
+  fileprivate func showWelcomeWizard() {
     let storyboard = UIStoryboard(name: GlobalConstants.storyboardWelcome, bundle: nil)
     if let welcomeWizard: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.welcomeViewController) {
       window?.rootViewController = welcomeWizard
     }
   }
   
-  private func prePopulateCoreData() {
+  fileprivate func prePopulateCoreData() {
     CoreDataStack.performOnPrivateContext { privateContext in
       if !CoreDataPrePopulation.isCoreDataPrePopulated(managedObjectContext: privateContext) {
         CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: privateContext, saveContext: true)
@@ -181,39 +181,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
   }
   
-  private func removeDisabledNotifications() {
+  fileprivate func removeDisabledNotifications() {
     if !Settings.sharedInstance.notificationsEnabled.value {
       NotificationsHelper.removeAllNotifications()
     }
   }
   
-  func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+  func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
     NotificationsHelper.setApplicationIconBadgeNumber(0)
     
-    if application.applicationState == .Active {
+    if application.applicationState == .active {
       return
     }
 
     showDayViewControllerForToday()
   }
   
-  func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+  func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
     NotificationsHelper.setApplicationIconBadgeNumber(0)
     showDayViewControllerForToday()
   }
   
   @available(iOS 8.0, *)
-  func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+  func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
     NotificationsHelper.removeAllNotifications()
-    NotificationsHelper.scheduleNotificationsFromSettingsForDate(NSDate())
+    NotificationsHelper.scheduleNotificationsFromSettingsForDate(Date())
   }
   
-  private func showDayViewControllerForToday() {
+  fileprivate func showDayViewControllerForToday() {
     if let tabBarController = window?.rootViewController as? UITabBarController,
        let viewControllers = tabBarController.viewControllers
     {
-      for (index, viewController) in viewControllers.enumerate() {
-        if let dayViewController = viewController.contentViewController as? DayViewController where dayViewController.mode == .General {
+      for (index, viewController) in viewControllers.enumerated() {
+        if let dayViewController = viewController.contentViewController as? DayViewController , dayViewController.mode == .general {
           dayViewController.refreshCurrentDay(showAlert: false)
           dayViewController.switchToSelectDrinkPage()
           tabBarController.selectedIndex = index
@@ -222,12 +222,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
   }
   
-  func applicationWillEnterForeground(application: UIApplication) {
+  func applicationWillEnterForeground(_ application: UIApplication) {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     NotificationsHelper.setApplicationIconBadgeNumber(0)
   }
   
-  func applicationDidBecomeActive(application: UIApplication) {
+  func applicationDidBecomeActive(_ application: UIApplication) {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
     // Just for getting sqlite DB folder
@@ -239,12 +239,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     refreshCurrentDayForDayViewController(showAlert: false)
   }
   
-  func applicationSignificantTimeChange(application: UIApplication) {
-    let showAlert = application.applicationState == .Active
+  func applicationSignificantTimeChange(_ application: UIApplication) {
+    let showAlert = application.applicationState == .active
     refreshCurrentDayForDayViewController(showAlert: showAlert)
   }
   
-  private func refreshCurrentDayForDayViewController(showAlert showAlert: Bool) {
+  fileprivate func refreshCurrentDayForDayViewController(showAlert: Bool) {
     if let tabBarController = window?.rootViewController as? UITabBarController,
        let viewControllers = tabBarController.viewControllers
     {
@@ -256,12 +256,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
   }
   
-  func applicationWillTerminate(application: UIApplication) {
+  func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     CoreDataStack.saveAllContexts()
     
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
   
 }

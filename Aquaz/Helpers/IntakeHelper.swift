@@ -15,9 +15,9 @@ final class IntakeHelper {
   // MARK: Functions -
   
   static func addIntakeWithHealthKitChecks(
-    amount amount: Double,
+    amount: Double,
     drink: Drink,
-    intakeDate: NSDate,
+    intakeDate: Date,
     viewController: UIViewController,
     managedObjectContext: NSManagedObjectContext,
     actionBeforeAddingIntakeToCoreData: (() -> ())?,
@@ -38,7 +38,7 @@ final class IntakeHelper {
       {
         Settings.sharedInstance.healthKitWaterIntakesIntegrationIsRequested2.value = true
 
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
           let alertTitle = NSLocalizedString("IH:Integration with Apple Health", value: "Integration with Apple Health",
             comment: "IntakeHelper: Title for alert asking for integration with Apple Health")
           
@@ -51,24 +51,24 @@ final class IntakeHelper {
           let alertCancel = NSLocalizedString("IH:Cancel", value: "Cancel",
             comment: "IntakeHelper: Cancel choice for alert asking for integration with Apple Health")
 
-          let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+          let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
           
-          alert.addAction(UIAlertAction(title: alertOK, style: UIAlertActionStyle.Cancel, handler: { _ in
+          alert.addAction(UIAlertAction(title: alertOK, style: UIAlertActionStyle.cancel, handler: { _ in
             HealthKitProvider.sharedInstance.authorizeHealthKit { authorized, _ in
-              managedObjectContext.performBlock {
+              managedObjectContext.perform {
                 addIntakeInternal()
               }
             }
           }))
           
-          alert.addAction(UIAlertAction(title: alertCancel, style: UIAlertActionStyle.Default, handler: { _ in
+          alert.addAction(UIAlertAction(title: alertCancel, style: UIAlertActionStyle.default, handler: { _ in
             Settings.sharedInstance.healthKitWaterIntakesIntegrationIsAllowed2.value = false
-            managedObjectContext.performBlock {
+            managedObjectContext.perform {
               addIntakeInternal()
             }
           }))
           
-          viewController.presentViewController(alert, animated: true, completion: nil)
+          viewController.present(alert, animated: true, completion: nil)
         }
       } else {
         addIntakeInternal()
@@ -78,10 +78,10 @@ final class IntakeHelper {
     }
   }
   
-  private static func addIntake(
-    amount amount: Double,
+  fileprivate static func addIntake(
+    amount: Double,
     drink: Drink,
-    intakeDate: NSDate,
+    intakeDate: Date,
     managedObjectContext: NSManagedObjectContext,
     actionBeforeAddingIntakeToCoreData: (() -> ())?,
     actionAfterAddingIntakeToCoreData: (() -> ())?)
@@ -90,7 +90,7 @@ final class IntakeHelper {
 
     drink.recentAmount.amount = amount
     
-    Intake.addEntity(
+    _ = Intake.addEntity(
       drink: drink,
       amount: amount,
       date: intakeDate,

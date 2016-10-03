@@ -26,19 +26,19 @@ class CurrentStateInterfaceController: WKInterfaceController {
     return (title: 34, upTitle: 14, subTitle: 14)
   }
 
-  private var session: WCSession?
+  fileprivate var session: WCSession?
   
-  private var settingsObserverVolumeUnits: SettingsObserver?
+  fileprivate var settingsObserverVolumeUnits: SettingsObserver?
   
-  private var currentWaterGoal: Double = WatchSettings.sharedInstance.stateWaterGoal.value
+  fileprivate var currentWaterGoal: Double = WatchSettings.sharedInstance.stateWaterGoal.value
   
-  private var currentHydrationAmount: Double = 0
+  fileprivate var currentHydrationAmount: Double = 0
 
-  private var tomorrowTimer: NSTimer!
+  fileprivate var tomorrowTimer: Timer!
 
   // MARK: Computed properties
   
-  private var settingsWaterGoal: Double {
+  fileprivate var settingsWaterGoal: Double {
     get {
       return WatchSettings.sharedInstance.stateWaterGoal.value
     }
@@ -47,7 +47,7 @@ class CurrentStateInterfaceController: WKInterfaceController {
     }
   }
   
-  private var settingsHydrationAmount: Double {
+  fileprivate var settingsHydrationAmount: Double {
     get {
       return WatchSettings.sharedInstance.stateHydration.value
     }
@@ -56,9 +56,9 @@ class CurrentStateInterfaceController: WKInterfaceController {
     }
   }
   
-  private var amountPrecision: Double { return WatchSettings.sharedInstance.generalVolumeUnits.value.precision }
+  fileprivate var amountPrecision: Double { return WatchSettings.sharedInstance.generalVolumeUnits.value.precision }
   
-  private var amountDecimals: Int { return WatchSettings.sharedInstance.generalVolumeUnits.value.decimals }
+  fileprivate var amountDecimals: Int { return WatchSettings.sharedInstance.generalVolumeUnits.value.decimals }
   
   // MARK: Constructor
   
@@ -81,7 +81,7 @@ class CurrentStateInterfaceController: WKInterfaceController {
   // MARK: Destructor
   
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
   
   // MARK: Methods
@@ -91,15 +91,15 @@ class CurrentStateInterfaceController: WKInterfaceController {
     updateUI()
   }
   
-  private func initConnectivity() {
+  fileprivate func initConnectivity() {
     if WCSession.isSupported() {
-      session = WCSession.defaultSession()
+      session = WCSession.default()
       session?.delegate = self
-      session?.activateSession()
+      session?.activate()
     }
   }
   
-  private func setupSettingsSynchronization() {
+  fileprivate func setupSettingsSynchronization() {
     settingsObserverVolumeUnits = WatchSettings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
       if let existingSelf = self {
         existingSelf.updateProgressText(
@@ -109,15 +109,15 @@ class CurrentStateInterfaceController: WKInterfaceController {
     }
   }
   
-  private func setupNotificationsObservation() {
-    NSNotificationCenter.defaultCenter().addObserver(
+  fileprivate func setupNotificationsObservation() {
+    NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.addIntakeNotificationIsReceived(_:)),
-      name: GlobalConstants.notificationWatchAddIntake,
+      name: NSNotification.Name(rawValue: GlobalConstants.notificationWatchAddIntake),
       object: nil)
   }
   
-  func addIntakeNotificationIsReceived(notification: NSNotification) {
+  func addIntakeNotificationIsReceived(_ notification: Notification) {
     guard let addIntakeInfo = notification.object as? ConnectivityMessageAddIntake else {
       return
     }
@@ -125,55 +125,55 @@ class CurrentStateInterfaceController: WKInterfaceController {
     session?.transferUserInfo(addIntakeInfo.composeMetadata())
   }
   
-  private func setupTomorrowTimer() {
-    let startOfToday = DateHelper.dateByClearingTime(ofDate: NSDate())
-    let startOfTomorrow = DateHelper.addToDate(startOfToday, years: 0, months: 0, days: 1)
-    let timeInterval = startOfTomorrow.timeIntervalSinceDate(NSDate())
+  fileprivate func setupTomorrowTimer() {
+    let startOfToday = DateHelper.startOfDay(Date())
+    let startOfTomorrow = DateHelper.nextDayFrom(startOfToday)
+    let timeInterval = startOfTomorrow.timeIntervalSince(Date())
     
-    tomorrowTimer = NSTimer.scheduledTimerWithTimeInterval(
-      timeInterval,
+    tomorrowTimer = Timer.scheduledTimer(
+      timeInterval: timeInterval,
       target: self,
       selector: #selector(self.tomorrowTimerIsFired(_:)),
       userInfo: nil,
       repeats: false)
   }
   
-  func tomorrowTimerIsFired(timer: NSTimer) {
+  func tomorrowTimerIsFired(_ timer: Timer) {
     if timer == tomorrowTimer {
       updateUI()
       setupTomorrowTimer()
     }
   }
 
-  private func stringFromMetricAmount(amount: Double) -> String {
+  fileprivate func stringFromMetricAmount(_ amount: Double) -> String {
     return Units.sharedInstance.formatMetricAmountToText(
       metricAmount: amount,
-      unitType: .Volume,
+      unitType: .volume,
       roundPrecision: amountPrecision,
       decimals: amountDecimals,
       displayUnits: false)
   }
   
-  private func setupUI() {
+  fileprivate func setupUI() {
     progressImage.setImageNamed("Progress-")
   }
   
-  private func updateUI() {
+  fileprivate func updateUI() {
     checkForTomorrowHasCome()
     
     updateUI(waterGoal: self.settingsWaterGoal, hydrationAmount: self.settingsHydrationAmount)
   }
   
-  private func checkForTomorrowHasCome() {
-    let currentDate = NSDate()
+  fileprivate func checkForTomorrowHasCome() {
+    let currentDate = Date()
     
-    if !DateHelper.areDatesEqualByDays(currentDate, WatchSettings.sharedInstance.stateCurrentDate.value) {
+    if !DateHelper.areEqualDays(currentDate, WatchSettings.sharedInstance.stateCurrentDate.value) {
       WatchSettings.sharedInstance.stateHydration.value = 0
-      WatchSettings.sharedInstance.stateCurrentDate.value = DateHelper.dateByClearingTime(ofDate: currentDate)
+      WatchSettings.sharedInstance.stateCurrentDate.value = DateHelper.startOfDay(currentDate)
     }
   }
   
-  private func updateUI(waterGoal waterGoal: Double, hydrationAmount: Double) {
+  fileprivate func updateUI(waterGoal: Double, hydrationAmount: Double) {
     updateProgressText(waterGoal: waterGoal, hydrationAmount: hydrationAmount)
     
     let animationParameters = ProgressHelper.calcAnimationParameters(
@@ -183,13 +183,13 @@ class CurrentStateInterfaceController: WKInterfaceController {
       toCurrentAmount: hydrationAmount,
       toTotalAmount: waterGoal)
     
-    progressImage.startAnimatingWithImagesInRange(animationParameters.imageRange, duration: animationParameters.animationDuration, repeatCount: 1)
+    progressImage.startAnimatingWithImages(in: animationParameters.imageRange, duration: animationParameters.animationDuration, repeatCount: 1)
     
     currentWaterGoal = waterGoal
     currentHydrationAmount = hydrationAmount
   }
   
-  private func updateProgressText(waterGoal waterGoal: Double, hydrationAmount: Double) {
+  fileprivate func updateProgressText(waterGoal: Double, hydrationAmount: Double) {
     let newHydrationAmountText = stringFromMetricAmount(hydrationAmount)
     let newWaterGoalText = stringFromMetricAmount(waterGoal)
     
@@ -199,9 +199,9 @@ class CurrentStateInterfaceController: WKInterfaceController {
     let subTitle = String.localizedStringWithFormat(subTitleTemplate, newWaterGoalText)
     let fontSizes = self.fontSizes // it can be overriden in descendants and probably transformed to complex computed property
     
-    let titleItem    = ProgressHelper.TextProgressItem(text: newHydrationAmountText, color: UIColor.whiteColor(), font: UIFont.systemFontOfSize(fontSizes.title, weight: UIFontWeightMedium))
-    let subTitleItem = ProgressHelper.TextProgressItem(text: subTitle, color: StyleKit.waterColor, font: UIFont.systemFontOfSize(fontSizes.subTitle))
-    let upTitleItem  = ProgressHelper.TextProgressItem(text: upTitle, color: UIColor.grayColor(), font: UIFont.systemFontOfSize(fontSizes.upTitle))
+    let titleItem    = ProgressHelper.TextProgressItem(text: newHydrationAmountText, color: UIColor.white, font: UIFont.systemFont(ofSize: fontSizes.title, weight: UIFontWeightMedium))
+    let subTitleItem = ProgressHelper.TextProgressItem(text: subTitle, color: StyleKit.waterColor, font: UIFont.systemFont(ofSize: fontSizes.subTitle))
+    let upTitleItem  = ProgressHelper.TextProgressItem(text: upTitle, color: UIColor.gray, font: UIFont.systemFont(ofSize: fontSizes.upTitle))
     
     let imageSize = progressImageSize
     
@@ -216,7 +216,13 @@ class CurrentStateInterfaceController: WKInterfaceController {
 
 extension CurrentStateInterfaceController: WCSessionDelegate {
   
-  func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
+  // Called when the session has completed activation. If session state is WCSessionActivationStateNotActivated there will be an error with more details.
+  @available(watchOS 2.2, *)
+  public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    // TODO: Need implementation here
+  }
+  
+  func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
     if let updatedSettingsMesage = ConnectivityMessageUpdatedSettings(metadata: userInfo) {
       updatedSettingsMesageWasReceived(updatedSettingsMesage)
     } else if let currentStateMesage = ConnectivityMessageCurrentState(metadata: userInfo) {
@@ -224,27 +230,27 @@ extension CurrentStateInterfaceController: WCSessionDelegate {
     }
   }
   
-  func session(session: WCSession, didFinishUserInfoTransfer userInfoTransfer: WCSessionUserInfoTransfer, error: NSError?) {
+  func session(_ session: WCSession, didFinish userInfoTransfer: WCSessionUserInfoTransfer, error: Error?) {
     if let _ = error {
       // Trying to transfer the user info again
       session.transferUserInfo(userInfoTransfer.userInfo)
     }
   }
   
-  private func updatedSettingsMesageWasReceived(message: ConnectivityMessageUpdatedSettings) {
+  fileprivate func updatedSettingsMesageWasReceived(_ message: ConnectivityMessageUpdatedSettings) {
     for (key, value) in message.settings {
-      WatchSettings.userDefaults.setObject(value, forKey: key)
-      WatchSettings.sharedInstance.generalVolumeUnits.readFromUserDefaults(sendNotification: true)
+      WatchSettings.userDefaults.set(value, forKey: key)
+      _ = WatchSettings.sharedInstance.generalVolumeUnits.readFromUserDefaults(sendNotification: true)
     }
   }
   
-  private func currentStateMesageWasReceived(message: ConnectivityMessageCurrentState) {
-    if !DateHelper.areDatesEqualByDays(NSDate(), message.messageDate) {
+  fileprivate func currentStateMesageWasReceived(_ message: ConnectivityMessageCurrentState) {
+    if !DateHelper.areEqualDays(Date(), message.messageDate) {
       // Skip outdated events
       return
     }
     
-    dispatch_async(dispatch_get_main_queue()) {
+    DispatchQueue.main.async {
       self.settingsWaterGoal = message.dailyWaterGoal + message.dehydrationAmount
       self.settingsHydrationAmount = message.hydrationAmount
       self.updateUI(waterGoal: self.settingsWaterGoal, hydrationAmount: self.settingsHydrationAmount)
@@ -258,15 +264,15 @@ extension CurrentStateInterfaceController: WCSessionDelegate {
 private extension Units.Volume {
   var precision: Double {
     switch self {
-    case Millilitres: return 1.0
-    case FluidOunces: return 0.1
+    case .millilitres: return 1.0
+    case .fluidOunces: return 0.1
     }
   }
   
   var decimals: Int {
     switch self {
-    case Millilitres: return 0
-    case FluidOunces: return 1
+    case .millilitres: return 0
+    case .fluidOunces: return 1
     }
   }
 }

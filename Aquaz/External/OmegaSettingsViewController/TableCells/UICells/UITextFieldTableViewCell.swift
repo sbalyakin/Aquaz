@@ -9,8 +9,8 @@
 import UIKit
 
 protocol UITextFieldTableViewCellDelegate: class {
-  func textFieldDidBeginEditing(textField: UITextField)
-  func textFieldDidEndEditing(textField: UITextField)
+  func textFieldDidBeginEditing(_ textField: UITextField)
+  func textFieldDidEndEditing(_ textField: UITextField)
 }
 
 class UITextFieldTableViewCell: UITableViewCell {
@@ -19,7 +19,7 @@ class UITextFieldTableViewCell: UITableViewCell {
   weak var delegate: UITextFieldTableViewCellDelegate?
   
   init(reuseIdentifier: String? = nil) {
-    super.init(style: .Default, reuseIdentifier: reuseIdentifier)
+    super.init(style: .default, reuseIdentifier: reuseIdentifier)
     baseInit()
   }
   
@@ -28,7 +28,7 @@ class UITextFieldTableViewCell: UITableViewCell {
     baseInit()
   }
   
-  private func baseInit() {
+  fileprivate func baseInit() {
     if self.textField == nil {
       let textField = UITextField()
       textField.frame = CGRect(x: 0, y: 0, width: 80, height: 30)
@@ -40,11 +40,11 @@ class UITextFieldTableViewCell: UITableViewCell {
 }
 
 extension UITextFieldTableViewCell: UITextFieldDelegate {
-  func textFieldDidBeginEditing(textField: UITextField) {
+  func textFieldDidBeginEditing(_ textField: UITextField) {
     delegate?.textFieldDidBeginEditing(textField)
   }
   
-  func textFieldDidEndEditing(textField: UITextField) {
+  func textFieldDidEndEditing(_ textField: UITextField) {
     delegate?.textFieldDidEndEditing(textField)
   }
 }

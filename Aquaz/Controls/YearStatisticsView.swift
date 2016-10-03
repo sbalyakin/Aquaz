@@ -10,8 +10,8 @@ import UIKit
 
 protocol YearStatisticsViewDataSource: class {
   
-  func yearStatisticsViewGetTitleForHorizontalValue(value: CGFloat) -> String
-  func yearStatisticsViewGetTitleForVerticalValue(value: CGFloat) -> String
+  func yearStatisticsViewGetTitleForHorizontalValue(_ value: CGFloat) -> String
+  func yearStatisticsViewGetTitleForVerticalValue(_ value: CGFloat) -> String
 
 }
 
@@ -24,14 +24,14 @@ protocol YearStatisticsViewDataSource: class {
   @IBInspectable var goalsChartColor: UIColor = UIColor(red: 239/255, green: 64/255, blue: 79/255, alpha: 0.5)
   @IBInspectable var scaleTextColor: UIColor = UIColor(red: 147/255, green: 149/255, blue: 152/255, alpha: 1.0)
   @IBInspectable var gridColor: UIColor = UIColor(red: 230/255, green: 231/255, blue: 232/255, alpha: 1.0)
-  @IBInspectable var pinsColor: UIColor = UIColor.whiteColor()
+  @IBInspectable var pinsColor: UIColor = UIColor.white
   @IBInspectable var pinDiameter: CGFloat = 9
   @IBInspectable var chartFillEnabled: Bool = true
   @IBInspectable var verticalMaximumAdjustingEnabled: Bool = true
   @IBInspectable var horizontalScaleMargin: CGFloat = 4
   @IBInspectable var verticalScaleMargin: CGFloat = 6
   @IBInspectable var horizontalMargin: CGFloat = 10
-  @IBInspectable var titleFont: UIFont = UIFont.systemFontOfSize(12) {
+  @IBInspectable var titleFont: UIFont = UIFont.systemFont(ofSize: 12) {
     didSet {
       verticalMaximumLabel.font = titleFont
       horizontalMinimumLabel.font = titleFont
@@ -42,15 +42,15 @@ protocol YearStatisticsViewDataSource: class {
   
   override var backgroundColor: UIColor? {
     didSet {
-      if let backgroundColor = backgroundColor where !backgroundColor.isClearColor() {
-        verticalMaximumLabel.backgroundColor = backgroundColor.colorWithAlphaComponent(0.7)
+      if let backgroundColor = backgroundColor , !backgroundColor.isClearColor() {
+        verticalMaximumLabel.backgroundColor = backgroundColor.withAlphaComponent(0.7)
       }
     }
   }
   
   var animationDuration = 0.4
   
-  let monthsPerYear: Int = NSCalendar.currentCalendar().maximumRangeOfUnit(.Month).length
+  let monthsPerYear = DateHelper.monthsPerYear()
   
   let pinShadowOffsetByX: CGFloat = 0
   let pinShadowOffsetByY: CGFloat = 1
@@ -60,11 +60,11 @@ protocol YearStatisticsViewDataSource: class {
   var verticalGridStep = 2
   
   typealias ItemType = (value: CGFloat, goal: CGFloat)
-  private typealias UIAreas = (chart: CGRect, verticalScale: CGRect, horizontalScale: CGRect, background: CGRect)
+  fileprivate typealias UIAreas = (chart: CGRect, verticalScale: CGRect, horizontalScale: CGRect, background: CGRect)
 
   weak var dataSource: YearStatisticsViewDataSource?
   
-  private var isFirstSettingItems = true
+  fileprivate var isFirstSettingItems = true
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -76,12 +76,12 @@ protocol YearStatisticsViewDataSource: class {
     baseInit()
   }
   
-  private func baseInit() {
+  fileprivate func baseInit() {
     createLayers()
     createLabels()
   }
   
-  private func createLabels() {
+  fileprivate func createLabels() {
     verticalMaximumLabel?.removeFromSuperview()
     horizontalMinimumLabel?.removeFromSuperview()
     horizontalMaximumLabel?.removeFromSuperview()
@@ -89,8 +89,8 @@ protocol YearStatisticsViewDataSource: class {
     verticalMaximumLabel = UILabel()
     verticalMaximumLabel.font = titleFont
     verticalMaximumLabel.textColor = scaleTextColor
-    if let backgroundColor = backgroundColor where !backgroundColor.isClearColor() {
-      verticalMaximumLabel.backgroundColor = backgroundColor.colorWithAlphaComponent(0.7)
+    if let backgroundColor = backgroundColor , !backgroundColor.isClearColor() {
+      verticalMaximumLabel.backgroundColor = backgroundColor.withAlphaComponent(0.7)
     }
     addSubview(verticalMaximumLabel)
     
@@ -107,7 +107,7 @@ protocol YearStatisticsViewDataSource: class {
     updateLabels(initial: true)
   }
   
-  private func updateLabels(initial initial: Bool) {
+  fileprivate func updateLabels(initial: Bool) {
     let verticalMaximumTitle = getVerticalTitleForValue(verticalMaximum)
     if initial {
       verticalMaximumLabel.text = verticalMaximumTitle
@@ -131,7 +131,7 @@ protocol YearStatisticsViewDataSource: class {
     }
   }
   
-  private func createLayers() {
+  fileprivate func createLayers() {
     createValuesLineLayer()
     createValuesFillLayer()
     createGoalsShapeLayer()
@@ -139,39 +139,39 @@ protocol YearStatisticsViewDataSource: class {
     createGridLayer()
   }
 
-  private func createValuesLineLayer() {
+  fileprivate func createValuesLineLayer() {
     valuesLineLayer?.removeFromSuperlayer()
     
     valuesLineLayer = CAShapeLayer()
     valuesLineLayer.frame = uiAreas.chart
     valuesLineLayer.bounds = uiAreas.chart
-    valuesLineLayer.strokeColor = valuesChartLineColor.CGColor
+    valuesLineLayer.strokeColor = valuesChartLineColor.cgColor
     valuesLineLayer.fillColor = nil
     valuesLineLayer.lineWidth = valuesChartLineWidth
     valuesLineLayer.lineJoin = kCALineJoinRound
     layer.addSublayer(valuesLineLayer)
   }
   
-  private func createValuesFillLayer() {
+  fileprivate func createValuesFillLayer() {
     valuesFillLayer?.removeFromSuperlayer()
 
     valuesFillLayer = CAShapeLayer()
     valuesFillLayer.frame = uiAreas.chart
     valuesFillLayer.bounds = uiAreas.chart
     valuesFillLayer.strokeColor = nil
-    valuesFillLayer.fillColor = valuesChartFillColor.CGColor
+    valuesFillLayer.fillColor = valuesChartFillColor.cgColor
     valuesFillLayer.lineWidth = 0
     valuesFillLayer.lineJoin = kCALineJoinRound
     layer.addSublayer(valuesFillLayer)
   }
   
-  private func createGoalsShapeLayer() {
+  fileprivate func createGoalsShapeLayer() {
     goalsLayer?.removeFromSuperlayer()
 
     goalsLayer = CAShapeLayer()
     goalsLayer.frame = uiAreas.chart
     goalsLayer.bounds = uiAreas.chart
-    goalsLayer.strokeColor = goalsChartColor.CGColor
+    goalsLayer.strokeColor = goalsChartColor.cgColor
     goalsLayer.fillColor = nil
     goalsLayer.lineWidth = 1
     goalsLayer.lineJoin = kCALineJoinRound
@@ -179,14 +179,14 @@ protocol YearStatisticsViewDataSource: class {
     layer.addSublayer(goalsLayer)
   }
   
-  private func createPinsLayer() {
+  fileprivate func createPinsLayer() {
     pinsLayer?.removeFromSuperlayer()
     
     // Create main layer with shadow
     pinsLayer = CALayer()
     pinsLayer.shadowOffset = CGSize(width: pinShadowOffsetByX, height: pinShadowOffsetByY)
     pinsLayer.shadowRadius = pinShadowBlurRadius
-    pinsLayer.shadowColor = UIColor.blackColor().CGColor
+    pinsLayer.shadowColor = UIColor.black.cgColor
     pinsLayer.shadowOpacity = 0.2
     pinsLayer.frame = uiAreas.chart
     pinsLayer.bounds = uiAreas.chart
@@ -196,18 +196,18 @@ protocol YearStatisticsViewDataSource: class {
     for _ in 0..<items.count {
       let pinLayer = CAShapeLayer()
       pinLayer.strokeColor = nil
-      pinLayer.fillColor = pinsColor.CGColor
+      pinLayer.fillColor = pinsColor.cgColor
       pinsLayer.addSublayer(pinLayer)
     }
   }
   
-  private func createGridLayer() {
+  fileprivate func createGridLayer() {
     gridLayer?.removeFromSuperlayer()
 
     gridLayer = CAShapeLayer()
     gridLayer.frame = uiAreas.background
     gridLayer.bounds = uiAreas.background
-    gridLayer.strokeColor = gridColor.CGColor
+    gridLayer.strokeColor = gridColor.cgColor
     gridLayer.lineWidth = 1
     gridLayer.lineCap = kCALineCapButt
     layer.addSublayer(gridLayer)
@@ -227,7 +227,7 @@ protocol YearStatisticsViewDataSource: class {
     setItems(items)
   }
   
-  func setItems(items: [ItemType]) {
+  func setItems(_ items: [ItemType]) {
     let needToRecreatePins = items.count != self.items.count
     
     self.items = items
@@ -244,7 +244,7 @@ protocol YearStatisticsViewDataSource: class {
     isFirstSettingItems = false
   }
   
-  private func computeVerticalMaximum() -> CGFloat {
+  fileprivate func computeVerticalMaximum() -> CGFloat {
     if items.isEmpty {
       return 0
     }
@@ -263,7 +263,7 @@ protocol YearStatisticsViewDataSource: class {
     return maximum
   }
   
-  private func adjustValue(value: CGFloat) -> CGFloat {
+  fileprivate func adjustValue(_ value: CGFloat) -> CGFloat {
     if value > 1000 {
       return ceil(value / 100) * 100
     } else if value > 100 {
@@ -273,11 +273,11 @@ protocol YearStatisticsViewDataSource: class {
     }
   }
   
-  private func getHorizontalTitleForValue(value: CGFloat) -> String {
+  fileprivate func getHorizontalTitleForValue(_ value: CGFloat) -> String {
     return dataSource?.yearStatisticsViewGetTitleForHorizontalValue(value) ?? "\(Int(value))"
   }
   
-  private func getVerticalTitleForValue(value: CGFloat) -> String {
+  fileprivate func getVerticalTitleForValue(_ value: CGFloat) -> String {
     return dataSource?.yearStatisticsViewGetTitleForVerticalValue(value) ?? "\(Int(value))"
   }
   
@@ -288,12 +288,12 @@ protocol YearStatisticsViewDataSource: class {
     layoutLayers()
   }
   
-  private func computeAreasFromRect(rect: CGRect) -> UIAreas {
+  fileprivate func computeAreasFromRect(_ rect: CGRect) -> UIAreas {
     horizontalMinimumLabel.sizeToFit()
     horizontalMaximumLabel.sizeToFit()
 
     let bottomRectangleHeight = max(horizontalMinimumLabel.frame.height, horizontalMaximumLabel.frame.height) + horizontalScaleMargin
-    let verticalRectangles = rect.divide(bottomRectangleHeight, fromEdge: .MaxYEdge)
+    let verticalRectangles = rect.divided(atDistance: bottomRectangleHeight, from: .maxYEdge)
     var result: UIAreas
     result.chart = verticalRectangles.remainder.insetBy(dx: horizontalMargin + pinDiameter / 2, dy: pinDiameter / 2).integral
     result.verticalScale = result.chart
@@ -302,7 +302,7 @@ protocol YearStatisticsViewDataSource: class {
     return result
   }
 
-  private func layoutLabels() {
+  fileprivate func layoutLabels() {
     verticalMaximumLabel.sizeToFit()
     horizontalMinimumLabel.sizeToFit()
     horizontalMaximumLabel.sizeToFit()
@@ -314,12 +314,12 @@ protocol YearStatisticsViewDataSource: class {
     horizontalMaximumLabel.frame.origin = CGPoint(x: uiAreas.horizontalScale.maxX - horizontalMaximumLabel.frame.width, y: uiAreas.horizontalScale.maxY - horizontalMaximumLabel.frame.height)
   }
   
-  private func layoutLayers() {
+  fileprivate func layoutLayers() {
     layoutItemsLayers()
     layoutGridLayer()
   }
   
-  private func layoutItemsLayers() {
+  fileprivate func layoutItemsLayers() {
     if isFirstSettingItems {
       let zeroRect = CGRect(x: uiAreas.chart.minX, y: uiAreas.chart.maxY, width: uiAreas.chart.width, height: 0)
       let zeroPaths = computePathsForRect(zeroRect)
@@ -336,9 +336,9 @@ protocol YearStatisticsViewDataSource: class {
     layoutPins(paths.pinsPoints, useAnimation: true)
   }
   
-  private func computePathsForRect(rect: CGRect) -> (valuesStroke: CGPath, valuesFill: CGPath, goals: CGPath, pinsPoints: [CGPoint]) {
+  fileprivate func computePathsForRect(_ rect: CGRect) -> (valuesStroke: CGPath, valuesFill: CGPath, goals: CGPath, pinsPoints: [CGPoint]) {
     if items.isEmpty {
-      return (valuesStroke: UIBezierPath().CGPath, valuesFill: UIBezierPath().CGPath, goals: UIBezierPath().CGPath, pinsPoints: [])
+      return (valuesStroke: UIBezierPath().cgPath, valuesFill: UIBezierPath().cgPath, goals: UIBezierPath().cgPath, pinsPoints: [])
     }
     
     let maxIndex = CGFloat(items.count) - 1
@@ -346,20 +346,20 @@ protocol YearStatisticsViewDataSource: class {
     // Fill goals path
     let halfSectionWidth = round(rect.width / maxIndex / 2)
     let goalsPath = UIBezierPath()
-    var previousGoal: CGPoint = CGPointZero
+    var previousGoal: CGPoint = CGPoint.zero
 
-    for (index, item) in items.enumerate() {
+    for (index, item) in items.enumerated() {
       let x = rect.minX + CGFloat(index) / maxIndex * rect.width
       let y = verticalMaximum > 0 ? rect.maxY - item.goal / verticalMaximum * rect.height : 0
       let point = CGPoint(x: round(x), y: round(y))
 
       if index == 0 {
-        goalsPath.moveToPoint(point)
-        goalsPath.addLineToPoint(CGPoint(x: point.x + halfSectionWidth, y: point.y))
+        goalsPath.move(to: point)
+        goalsPath.addLine(to: CGPoint(x: point.x + halfSectionWidth, y: point.y))
       } else {
-        goalsPath.addLineToPoint(CGPoint(x: previousGoal.x + halfSectionWidth, y: point.y))
+        goalsPath.addLine(to: CGPoint(x: previousGoal.x + halfSectionWidth, y: point.y))
         let nextGoalX = min(point.x + halfSectionWidth, rect.maxX)
-        goalsPath.addLineToPoint(CGPoint(x: nextGoalX, y: point.y))
+        goalsPath.addLine(to: CGPoint(x: nextGoalX, y: point.y))
       }
       
       previousGoal = point
@@ -370,44 +370,44 @@ protocol YearStatisticsViewDataSource: class {
     let valuesFillPath = UIBezierPath()
     var valuesPoints: [CGPoint] = []
     
-    for (index, item) in items.enumerate() {
+    for (index, item) in items.enumerated() {
       let x = rect.minX + CGFloat(index) / maxIndex * rect.width
       let y = verticalMaximum > 0 ? rect.maxY - item.value / verticalMaximum * rect.height : 0
       let point = CGPoint(x: round(x), y: round(y))
       valuesPoints.append(point)
       if index == 0 {
-        valuesStrokePath.moveToPoint(point)
-        valuesFillPath.moveToPoint(point)
+        valuesStrokePath.move(to: point)
+        valuesFillPath.move(to: point)
       } else {
-        valuesStrokePath.addLineToPoint(point)
-        valuesFillPath.addLineToPoint(point)
+        valuesStrokePath.addLine(to: point)
+        valuesFillPath.addLine(to: point)
       }
     }
 
     // Close fill path
-    valuesFillPath.addLineToPoint(CGPoint(x: valuesPoints.last!.x, y: rect.maxY))
-    valuesFillPath.addLineToPoint(CGPoint(x: rect.minX, y: rect.maxY))
-    valuesFillPath.addLineToPoint(CGPoint(x: rect.minX, y: valuesPoints.first!.y))
+    valuesFillPath.addLine(to: CGPoint(x: valuesPoints.last!.x, y: rect.maxY))
+    valuesFillPath.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+    valuesFillPath.addLine(to: CGPoint(x: rect.minX, y: valuesPoints.first!.y))
     
-    return (valuesStroke: valuesStrokePath.CGPath, valuesFill: valuesFillPath.CGPath, goals: goalsPath.CGPath, pinsPoints: valuesPoints)
+    return (valuesStroke: valuesStrokePath.cgPath, valuesFill: valuesFillPath.cgPath, goals: goalsPath.cgPath, pinsPoints: valuesPoints)
   }
   
-  private func layoutValuesLine(path: CGPath, useAnimation: Bool) {
+  fileprivate func layoutValuesLine(_ path: CGPath, useAnimation: Bool) {
     transformShape(valuesLineLayer, path: path, useAnimation: useAnimation)
   }
   
-  private func layoutValuesFill(path: CGPath, useAnimation: Bool) {
+  fileprivate func layoutValuesFill(_ path: CGPath, useAnimation: Bool) {
     if chartFillEnabled {
       transformShape(valuesFillLayer, path: path, useAnimation: useAnimation)
     }
   }
 
-  private func layoutGoalsLine(path: CGPath, useAnimation: Bool) {
+  fileprivate func layoutGoalsLine(_ path: CGPath, useAnimation: Bool) {
     transformShape(goalsLayer, path: path, useAnimation: useAnimation)
   }
   
-  private func layoutPins(coords: [CGPoint], useAnimation: Bool) {
-    for (index, coord) in coords.enumerate() {
+  fileprivate func layoutPins(_ coords: [CGPoint], useAnimation: Bool) {
+    for (index, coord) in coords.enumerated() {
       if pinsLayer.sublayers == nil || index >= pinsLayer.sublayers!.count {
         break
       }
@@ -415,18 +415,18 @@ protocol YearStatisticsViewDataSource: class {
       let pinLayer = pinsLayer.sublayers![index] as! CAShapeLayer
       
       let rect = CGRect(x: coord.x - pinDiameter / 2, y: coord.y - pinDiameter / 2, width: pinDiameter, height: pinDiameter)
-      let path = UIBezierPath(ovalInRect: rect).CGPath
+      let path = UIBezierPath(ovalIn: rect).cgPath
       transformShape(pinLayer, path: path, useAnimation: useAnimation)
     }
   }
   
-  private func transformShape(shape: CAShapeLayer, path: CGPath, useAnimation: Bool) {
+  fileprivate func transformShape(_ shape: CAShapeLayer, path: CGPath, useAnimation: Bool) {
     if useAnimation {
       CATransaction.begin()
       
       let startPath: CGPath
       
-      if let presentation = shape.presentationLayer() as? CAShapeLayer {
+      if let presentation = shape.presentation() {
         startPath = presentation.path ?? path
       } else {
         startPath = shape.path ?? path
@@ -438,7 +438,7 @@ protocol YearStatisticsViewDataSource: class {
       animation.fromValue = startPath
       shape.path = path
       animation.toValue = shape.path
-      shape.addAnimation(animation, forKey: "path")
+      shape.add(animation, forKey: "path")
       
       CATransaction.commit()
     } else {
@@ -446,13 +446,13 @@ protocol YearStatisticsViewDataSource: class {
     }
   }
 
-  private func transformShapeFrame(shape: CAShapeLayer, frame: CGRect, useAnimation: Bool) {
+  fileprivate func transformShapeFrame(_ shape: CAShapeLayer, frame: CGRect, useAnimation: Bool) {
     if useAnimation {
       CATransaction.begin()
       
       let startRect: CGRect
       
-      if let presentation = shape.presentationLayer() as? CAShapeLayer {
+      if let presentation = shape.presentation() {
         startRect = presentation.frame
       } else {
         startRect = shape.frame
@@ -461,10 +461,10 @@ protocol YearStatisticsViewDataSource: class {
       let animation = CABasicAnimation(keyPath: "position")
       animation.duration = animationDuration
       animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-      animation.fromValue = NSValue(CGPoint: startRect.origin)
+      animation.fromValue = NSValue(cgPoint: startRect.origin)
       shape.position = frame.origin
-      animation.fromValue = NSValue(CGPoint: frame.origin)
-      shape.addAnimation(animation, forKey: "position")
+      animation.fromValue = NSValue(cgPoint: frame.origin)
+      shape.add(animation, forKey: "position")
       
       CATransaction.commit()
     } else {
@@ -472,7 +472,7 @@ protocol YearStatisticsViewDataSource: class {
     }
   }
 
-  private func layoutGridLayer() {
+  fileprivate func layoutGridLayer() {
     let rect = uiAreas.chart
     let maxIndex = CGFloat(items.count) - 1
     
@@ -480,26 +480,26 @@ protocol YearStatisticsViewDataSource: class {
     
     for i in 0..<items.count {
       let x = round(rect.minX + CGFloat(i) / maxIndex * rect.width)
-      gridPath.moveToPoint(CGPoint(x: x, y: rect.minY))
-      gridPath.addLineToPoint(CGPoint(x: x, y: rect.maxY))
+      gridPath.move(to: CGPoint(x: x, y: rect.minY))
+      gridPath.addLine(to: CGPoint(x: x, y: rect.maxY))
     }
     
-    gridLayer.path = gridPath.CGPath
+    gridLayer.path = gridPath.cgPath
   }
 
-  private var items: [ItemType] = []
+  fileprivate var items: [ItemType] = []
   
-  private var verticalMaximumLabel: UILabel!
-  private var horizontalMinimumLabel: UILabel!
-  private var horizontalMaximumLabel: UILabel!
-  private var valuesLineLayer: CAShapeLayer!
-  private var valuesFillLayer: CAShapeLayer!
-  private var goalsLayer: CAShapeLayer!
-  private var gridLayer: CAShapeLayer!
-  private var pinsLayer: CALayer!
+  fileprivate var verticalMaximumLabel: UILabel!
+  fileprivate var horizontalMinimumLabel: UILabel!
+  fileprivate var horizontalMaximumLabel: UILabel!
+  fileprivate var valuesLineLayer: CAShapeLayer!
+  fileprivate var valuesFillLayer: CAShapeLayer!
+  fileprivate var goalsLayer: CAShapeLayer!
+  fileprivate var gridLayer: CAShapeLayer!
+  fileprivate var pinsLayer: CALayer!
 
-  private var uiAreas: UIAreas = (chart: CGRectZero, verticalScale: CGRectZero, horizontalScale: CGRectZero, background: CGRectZero)
+  fileprivate var uiAreas: UIAreas = (chart: CGRect.zero, verticalScale: CGRect.zero, horizontalScale: CGRect.zero, background: CGRect.zero)
   
-  private var verticalMaximum: CGFloat = 0
+  fileprivate var verticalMaximum: CGFloat = 0
   
 }

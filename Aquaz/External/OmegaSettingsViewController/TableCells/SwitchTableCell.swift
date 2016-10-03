@@ -8,36 +8,36 @@
 
 import UIKit
 
-class SwitchTableCell<Value: BooleanType where Value: BooleanLiteralConvertible, Value.BooleanLiteralType == Bool>: TableCellWithValue<Value>, UISwitchTableViewCellDelegate {
+class SwitchTableCell: TableCellWithValue<Bool>, UISwitchTableViewCellDelegate {
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
   var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
   var uiCell: UISwitchTableViewCell?
   
-  init(title: String, value: Value, container: TableCellsContainer) {
+  init(title: String, value: Bool, container: TableCellsContainer) {
     self.title = title
     super.init(value: value, container: container)
   }
   
-  override func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  override func createUICell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     if uiCell == nil {
       uiCell = UISwitchTableViewCell()
     }
     
     uiCell!.textLabel?.text = title
     uiCell!.imageView?.image = image
-    uiCell!.switchControl.setOn(value.boolValue, animated: false)
+    uiCell!.switchControl.setOn(value, animated: false)
     uiCell!.delegate = self
     return uiCell!
   }
 
   override func valueDidChange() {
     super.valueDidChange()
-    uiCell?.switchControl.setOn(value.boolValue, animated: true)
+    uiCell?.switchControl.setOn(value, animated: true)
   }
   
-  func switchControlValueChanged(switchControl: UISwitch, on: Bool) {
-    value = Value(booleanLiteral: on)
+  func switchControlValueChanged(_ switchControl: UISwitch, on: Bool) {
+    value = on
 
     if !active {
       container.activateTableCell(self)

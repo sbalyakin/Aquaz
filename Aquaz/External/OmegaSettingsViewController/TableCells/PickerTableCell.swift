@@ -8,9 +8,10 @@
 
 import UIKit
 
-class PickerTableCell<Value: CustomStringConvertible, Collection: CollectionType where Value: Equatable, Collection.Generator.Element == Value, Collection.Index == Int>: TableCellWithValue<Value>, UIPickerTableViewCellDataSource, UIPickerTableViewCellDelegate {
+class PickerTableCell<TValue: CustomStringConvertible, TCollection: Collection>: TableCellWithValue<TValue>, UIPickerTableViewCellDataSource, UIPickerTableViewCellDelegate
+where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int, TCollection.IndexDistance == Int {
   
-  let collection: Collection
+  let collection: TCollection
   let height: UIPickerViewHeight
   
   var font: UIFont? {
@@ -24,13 +25,13 @@ class PickerTableCell<Value: CustomStringConvertible, Collection: CollectionType
 
   var uiCell: UIPickerTableViewCell?
   
-  init(value: Value, collection: Collection, container: TableCellsContainer, height: UIPickerViewHeight = .Medium) {
+  init(value: TValue, collection: TCollection, container: TableCellsContainer, height: UIPickerViewHeight = .medium) {
     self.collection = collection
     self.height = height
     super.init(value: value, container: container)
   }
   
-  override func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  override func createUICell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     if uiCell == nil {
       uiCell = UIPickerTableViewCell()
     }
@@ -49,13 +50,13 @@ class PickerTableCell<Value: CustomStringConvertible, Collection: CollectionType
     updateUICell()
   }
   
-  private func updateUICell() {
+  fileprivate func updateUICell() {
     if let uiCell = uiCell {
       var row: Int?
       if let numberValue = value as? NSNumber {
         row = findRowWithNearestValue(numberValue)
       } else {
-        row = collection.indexOf(value)
+        row = collection.index(of: value)
       }
       
       if let row = row {
@@ -64,10 +65,10 @@ class PickerTableCell<Value: CustomStringConvertible, Collection: CollectionType
     }
   }
   
-  private func findRowWithNearestValue(value: NSNumber) -> Int? {
+  fileprivate func findRowWithNearestValue(_ value: NSNumber) -> Int? {
     var minimumDelta: Double!
     var row: Int?
-    for (index, item) in collection.enumerate() {
+    for (index, item) in collection.enumerated() {
       let numberItem = item as! NSNumber
       let delta = abs(value.doubleValue - numberItem.doubleValue)
       if minimumDelta == nil || delta < minimumDelta {
@@ -84,33 +85,34 @@ class PickerTableCell<Value: CustomStringConvertible, Collection: CollectionType
   
   // MARK: PickerTableViewCellDataSource
   
-  func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+  func numberOfComponentsInPickerView(_ pickerView: UIPickerView) -> Int {
     return 1
   }
   
-  func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return collection.count
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    let count = collection.count
+    return count
   }
   
-  func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
     let value = collection[row]
     let title = stringFromValueFunction?(value) ?? value.description
     return title
   }
   
-  func pickerView(pickerView: UIPickerView, titleForComponent: Int) -> String? {
+  func pickerView(_ pickerView: UIPickerView, titleForComponent: Int) -> String? {
     return nil
   }
 
   // MARK: PickerTableViewCellDelegate
   
-  func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     let value = collection[row]
     self.value = value
     baseTableCell?.value = value
   }
   
-  func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat? {
+  func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat? {
     return nil
   }
 

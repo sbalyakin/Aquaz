@@ -39,16 +39,16 @@ import UIKit
     baseInit()
   }
   
-  private func baseInit() {
+  fileprivate func baseInit() {
     if thumbRadius > 0 {
       let imageSize = calcThumbImageSize()
       let thumbRect = CGRect(origin: CGPoint.zero, size: imageSize)
       let thumbImage = StyleImages.imageOfThumb(frame: thumbRect)
-      setThumbImage(thumbImage, forState: .Normal)
+      setThumbImage(thumbImage, for: UIControlState())
     }
   }
   
-  private func calcThumbImageSize() -> CGSize {
+  fileprivate func calcThumbImageSize() -> CGSize {
     let originalWidth: CGFloat = 40
     let originalHeight: CGFloat = 40
     let frameWidth: CGFloat = 43
@@ -59,8 +59,8 @@ import UIKit
     return CGSize(width: imageWidth, height: imageHeight)
   }
   
-  override func trackRectForBounds(bounds: CGRect) -> CGRect {
-    let standardRect = super.trackRectForBounds(bounds)
+  override func trackRect(forBounds bounds: CGRect) -> CGRect {
+    let standardRect = super.trackRect(forBounds: bounds)
     let rect = CGRect(x: standardRect.minX, y: round(standardRect.midY - trackHeight / 2), width: standardRect.width, height: trackHeight)
     return rect
   }
@@ -78,7 +78,7 @@ class StyleImages : NSObject {
   
   //// Drawing Methods
   
-  class func drawThumb(frame frame: CGRect) {
+  class func drawThumb(frame: CGRect) {
     //// General Declarations
     let context = UIGraphicsGetCurrentContext()
     
@@ -89,23 +89,23 @@ class StyleImages : NSObject {
     let shadowColor2 = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
     
     //// Shadow Declarations
-    let shadow = shadowColor2.colorWithAlphaComponent(0.18)
-    let shadowOffset = CGSizeMake(0.1, 3.1)
+    let shadow = shadowColor2.withAlphaComponent(0.18)
+    let shadowOffset = CGSize(width: 0.1, height: 3.1)
     let shadowBlurRadius: CGFloat = 3
     
     
     //// Subframes
-    let group4: CGRect = CGRectMake(frame.minX + floor(frame.width * 0.03488) + 0.5, frame.minY + floor(frame.height * 0.09184) + 0.5, floor(frame.width * 0.96512) - floor(frame.width * 0.03488), floor(frame.height * 0.90816) - floor(frame.height * 0.09184))
+    let group4: CGRect = CGRect(x: frame.minX + floor(frame.width * 0.03488) + 0.5, y: frame.minY + floor(frame.height * 0.09184) + 0.5, width: floor(frame.width * 0.96512) - floor(frame.width * 0.03488), height: floor(frame.height * 0.90816) - floor(frame.height * 0.09184))
     
     
     //// Group 4
     //// Oval 5 Drawing
-    let oval5Path = UIBezierPath(ovalInRect: CGRectMake(group4.minX + floor(group4.width * 0.00000 + 0.5), group4.minY + floor(group4.height * 0.00000 + 0.5), floor(group4.width * 1.00000 + 0.5) - floor(group4.width * 0.00000 + 0.5), floor(group4.height * 1.00000 + 0.5) - floor(group4.height * 0.00000 + 0.5)))
-    CGContextSaveGState(context)
-    CGContextSetShadowWithColor(context, shadowOffset, shadowBlurRadius, (shadow as UIColor).CGColor)
+    let oval5Path = UIBezierPath(ovalIn: CGRect(x: group4.minX + floor(group4.width * 0.00000 + 0.5), y: group4.minY + floor(group4.height * 0.00000 + 0.5), width: floor(group4.width * 1.00000 + 0.5) - floor(group4.width * 0.00000 + 0.5), height: floor(group4.height * 1.00000 + 0.5) - floor(group4.height * 0.00000 + 0.5)))
+    context?.saveGState()
+    context?.setShadow(offset: shadowOffset, blur: shadowBlurRadius, color: (shadow as UIColor).cgColor)
     backgroundColor.setFill()
     oval5Path.fill()
-    CGContextRestoreGState(context)
+    context?.restoreGState()
     
     strokeColor.setStroke()
     oval5Path.lineWidth = 0.5
@@ -114,11 +114,11 @@ class StyleImages : NSObject {
     
     //// Polygon Drawing
     let polygonPath = UIBezierPath()
-    polygonPath.moveToPoint(CGPointMake(group4.minX + 0.19375 * group4.width, group4.minY + 0.50625 * group4.height))
-    polygonPath.addLineToPoint(CGPointMake(group4.minX + 0.44219 * group4.width, group4.minY + 0.25727 * group4.height))
-    polygonPath.addLineToPoint(CGPointMake(group4.minX + 0.44219 * group4.width, group4.minY + 0.75523 * group4.height))
-    polygonPath.addLineToPoint(CGPointMake(group4.minX + 0.19375 * group4.width, group4.minY + 0.50625 * group4.height))
-    polygonPath.closePath()
+    polygonPath.move(to: CGPoint(x: group4.minX + 0.19375 * group4.width, y: group4.minY + 0.50625 * group4.height))
+    polygonPath.addLine(to: CGPoint(x: group4.minX + 0.44219 * group4.width, y: group4.minY + 0.25727 * group4.height))
+    polygonPath.addLine(to: CGPoint(x: group4.minX + 0.44219 * group4.width, y: group4.minY + 0.75523 * group4.height))
+    polygonPath.addLine(to: CGPoint(x: group4.minX + 0.19375 * group4.width, y: group4.minY + 0.50625 * group4.height))
+    polygonPath.close()
     fillColor.setFill()
     polygonPath.fill()
     strokeColor.setStroke()
@@ -128,11 +128,11 @@ class StyleImages : NSObject {
     
     //// Polygon 2 Drawing
     let polygon2Path = UIBezierPath()
-    polygon2Path.moveToPoint(CGPointMake(group4.minX + 0.80625 * group4.width, group4.minY + 0.50625 * group4.height))
-    polygon2Path.addLineToPoint(CGPointMake(group4.minX + 0.55781 * group4.width, group4.minY + 0.25727 * group4.height))
-    polygon2Path.addLineToPoint(CGPointMake(group4.minX + 0.55781 * group4.width, group4.minY + 0.75523 * group4.height))
-    polygon2Path.addLineToPoint(CGPointMake(group4.minX + 0.80625 * group4.width, group4.minY + 0.50625 * group4.height))
-    polygon2Path.closePath()
+    polygon2Path.move(to: CGPoint(x: group4.minX + 0.80625 * group4.width, y: group4.minY + 0.50625 * group4.height))
+    polygon2Path.addLine(to: CGPoint(x: group4.minX + 0.55781 * group4.width, y: group4.minY + 0.25727 * group4.height))
+    polygon2Path.addLine(to: CGPoint(x: group4.minX + 0.55781 * group4.width, y: group4.minY + 0.75523 * group4.height))
+    polygon2Path.addLine(to: CGPoint(x: group4.minX + 0.80625 * group4.width, y: group4.minY + 0.50625 * group4.height))
+    polygon2Path.close()
     fillColor.setFill()
     polygon2Path.fill()
     strokeColor.setStroke()
@@ -142,7 +142,7 @@ class StyleImages : NSObject {
   
   //// Generated Images
   
-  class func imageOfThumb(frame frame: CGRect) -> UIImage {
+  class func imageOfThumb(frame: CGRect) -> UIImage {
     UIGraphicsBeginImageContextWithOptions(frame.size, false, 0)
     StyleImages.drawThumb(frame: frame)
     

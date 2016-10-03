@@ -13,14 +13,14 @@ class DiaryViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
   
-  var date: NSDate! { didSet { dateWasChanged() } }
+  var date: Date! { didSet { dateWasChanged() } }
 
-  private var fetchedResultsController: NSFetchedResultsController?
-  private var sizingCell: DiaryTableViewCell!
-  private var volumeObserver: SettingsObserver?
-  private let isIOS8AndLater = UIDevice.currentDevice().systemVersion.compare("8.0.0", options: NSStringCompareOptions.NumericSearch) != .OrderedAscending
+  fileprivate var fetchedResultsController: NSFetchedResultsController<Intake>?
+  fileprivate var sizingCell: DiaryTableViewCell!
+  fileprivate var volumeObserver: SettingsObserver?
+  fileprivate let isIOS8AndLater = UIDevice.current.systemVersion.compare("8.0.0", options: NSString.CompareOptions.numeric) != .orderedAscending
 
-  private struct Constants {
+  fileprivate struct Constants {
     static let diaryCellIdentifier = "DiaryTableViewCell"
     static let editIntakeSegue = "Edit Intake"
   }
@@ -48,26 +48,26 @@ class DiaryViewController: UIViewController {
     tableView?.delegate = nil
   }
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
     if let selectedIndexPath = tableView.indexPathForSelectedRow {
-      tableView.deselectRowAtIndexPath(selectedIndexPath, animated: false)
+      tableView.deselectRow(at: selectedIndexPath, animated: false)
     }
   }
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     checkHelpTip()
   }
 
-  private func applyStyle() {
+  fileprivate func applyStyle() {
     UIHelper.applyStyleToViewController(self)
     tableView.backgroundView = nil
     tableView.backgroundColor = StyleKit.pageBackgroundColor
   }
   
-  private func dateWasChanged() {
+  fileprivate func dateWasChanged() {
     if date == nil || fetchedResultsController == nil {
       return
     }
@@ -75,44 +75,44 @@ class DiaryViewController: UIViewController {
     updateFetchedResultsController()
   }
 
-  private func initFetchedResultsController() {
+  fileprivate func initFetchedResultsController() {
     createFetchedResultsController {
-      dispatch_async(dispatch_get_main_queue()) {
+      DispatchQueue.main.async {
         self.tableView.reloadData()
       }
     }
   }
 
-  private func updateFetchedResultsController() {
+  fileprivate func updateFetchedResultsController() {
     createFetchedResultsController {
-      dispatch_async(dispatch_get_main_queue()) {
-        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
+      DispatchQueue.main.async {
+        self.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
       }
     }
   }
 
   // This function is like the fetchedResultsController.objectAtIndexPath but with bounds checks.
-  private func getIntakeAtIndexPath(indexPath: NSIndexPath) -> Intake? {
+  fileprivate func getIntakeAtIndexPath(_ indexPath: IndexPath) -> Intake? {
     if let fetchedResultsController = fetchedResultsController,
        let sections = fetchedResultsController.sections
     {
-      if indexPath.section >= sections.count {
+      if (indexPath as NSIndexPath).section >= sections.count {
         return nil
       }
       
-      let section = sections[indexPath.section]
+      let section = sections[(indexPath as NSIndexPath).section]
 
-      if indexPath.row >= section.numberOfObjects {
+      if (indexPath as NSIndexPath).row >= section.numberOfObjects {
         return nil
       }
       
-      return section.objects?[indexPath.row] as? Intake
+      return section.objects?[(indexPath as NSIndexPath).row] as? Intake
     } else {
       return nil
     }
   }
   
-  private func createFetchedResultsController(completion completion: (() -> ())?) {
+  fileprivate func createFetchedResultsController(completion: (() -> ())?) {
     CoreDataStack.performOnPrivateContext { privateContext in
       let fetchRequest = self.getFetchRequestForDate(self.date)
       
@@ -135,10 +135,10 @@ class DiaryViewController: UIViewController {
     }
   }
 
-  private func getFetchRequestForDate(date: NSDate) -> NSFetchRequest {
+  fileprivate func getFetchRequestForDate(_ date: Date) -> NSFetchRequest<Intake> {
     let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
     
-    let fetchRequest = NSFetchRequest(entityName: Intake.entityName)
+    let fetchRequest = Intake.createFetchRequest()
     fetchRequest.sortDescriptors = [sortDescriptor]
     fetchRequest.predicate = getFetchRequestPredicateForDate(date)
     fetchRequest.fetchBatchSize = 15 // it's maximum number of visible rows in diary
@@ -146,16 +146,16 @@ class DiaryViewController: UIViewController {
     return fetchRequest
   }
   
-  private func getFetchRequestPredicateForDate(date: NSDate) -> NSPredicate {
-    let beginDate = DateHelper.dateByClearingTime(ofDate: date)
-    let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
+  fileprivate func getFetchRequestPredicateForDate(_ date: Date) -> NSPredicate {
+    let beginDate = DateHelper.startOfDay(date)
+    let endDate = DateHelper.nextDayFrom(beginDate)
     
     return NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
   }
   
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == Constants.editIntakeSegue,
-      let intakeViewController = segue.destinationViewController.contentViewController as? IntakeViewController,
+      let intakeViewController = segue.destination.contentViewController as? IntakeViewController,
       let intake = sender as? Intake
     {
       intakeViewController.intake = intake
@@ -169,11 +169,11 @@ class DiaryViewController: UIViewController {
 // MARK: UITableViewDataSource
 extension DiaryViewController: UITableViewDataSource {
   
-  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  func numberOfSections(in tableView: UITableView) -> Int {
     return fetchedResultsController?.sections?.count ?? 1
   }
   
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let actualSectionsCount = fetchedResultsController?.sections?.count ?? 0
     if section >= actualSectionsCount {
       return 0
@@ -183,21 +183,21 @@ extension DiaryViewController: UITableViewDataSource {
     return sectionInfo?.numberOfObjects ?? 0
   }
   
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    return tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier, forIndexPath: indexPath) 
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    return tableView.dequeueReusableCell(withIdentifier: Constants.diaryCellIdentifier, for: indexPath) 
   }
   
-  private func checkHelpTip() {
+  fileprivate func checkHelpTip() {
     if Settings.sharedInstance.uiDiaryPageHelpTipIsShown.value || view.window == nil {
       return
     }
 
-    if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as? DiaryTableViewCell {
+    if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? DiaryTableViewCell {
       showHelpTipForCell(cell)
     }
   }
   
-  private func showHelpTipForCell(cell: DiaryTableViewCell) {
+  fileprivate func showHelpTipForCell(_ cell: DiaryTableViewCell) {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
       if self.view.window == nil {
         return
@@ -205,20 +205,19 @@ extension DiaryViewController: UITableViewDataSource {
       
       let text = NSLocalizedString("DVC:Hydration effect of the intake", value: "Hydration effect of the intake", comment: "DiaryViewController: Text for help tip about hydration effect of an intake of a diary cell")
       
-      let helpTip = JDFTooltipView(targetView: cell.waterBalanceLabel, hostView: self.tableView, tooltipText: text, arrowDirection: .Up, width: self.view.frame.width / 2)
-      
-      UIHelper.showHelpTip(helpTip)
-
-      Settings.sharedInstance.uiDiaryPageHelpTipIsShown.value = true
+      if let helpTip = JDFTooltipView(targetView: cell.waterBalanceLabel, hostView: self.tableView, tooltipText: text, arrowDirection: .up, width: self.view.frame.width / 2) {
+        UIHelper.showHelpTip(helpTip)
+        Settings.sharedInstance.uiDiaryPageHelpTipIsShown.value = true
+      }
     }
   }
 
-  func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
     return true
   }
   
-  func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle != .Delete {
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle != .delete {
       return
     }
     
@@ -234,7 +233,7 @@ extension DiaryViewController: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension DiaryViewController: UITableViewDelegate {
 
-  func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     guard let diaryCell = cell as? DiaryTableViewCell else { return }
 
     diaryCell.prepareCell()
@@ -246,11 +245,11 @@ extension DiaryViewController: UITableViewDelegate {
     }
   }
 
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     CoreDataStack.performOnPrivateContext { _ in
       if let intake = self.getIntakeAtIndexPath(indexPath) {
-        dispatch_async(dispatch_get_main_queue()) {
-          self.performSegueWithIdentifier(Constants.editIntakeSegue, sender: intake)
+        DispatchQueue.main.async {
+          self.performSegue(withIdentifier: Constants.editIntakeSegue, sender: intake)
         }
       } else {
         Logger.logError("Failed to get an intake related to selected cell of tableview")
@@ -258,12 +257,12 @@ extension DiaryViewController: UITableViewDelegate {
     }
   }
 
-  func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if isIOS8AndLater {
       return UITableViewAutomaticDimension
     } else {
       if sizingCell == nil {
-        sizingCell = tableView.dequeueReusableCellWithIdentifier(Constants.diaryCellIdentifier) as! DiaryTableViewCell
+        sizingCell = tableView.dequeueReusableCell(withIdentifier: Constants.diaryCellIdentifier) as! DiaryTableViewCell
       }
 
       sizingCell.updateFonts()
@@ -273,13 +272,13 @@ extension DiaryViewController: UITableViewDelegate {
       sizingCell.setNeedsLayout()
       sizingCell.layoutIfNeeded()
       
-      let height = sizingCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+      let height = sizingCell.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
       
       return height
     }
   }
   
-  func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
     return 54 // Estimated height is taken from storyboard
   }
   
@@ -288,20 +287,20 @@ extension DiaryViewController: UITableViewDelegate {
 // MARK: NSFetchedResultsControllerDelegate
 extension DiaryViewController: NSFetchedResultsControllerDelegate {
   
-  func controllerWillChangeContent(controller: NSFetchedResultsController) {
+  func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     SystemHelper.performBlockAsyncOnMainQueueAndWait {
       self.tableView?.beginUpdates()
     }
   }
 
-  func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
     SystemHelper.performBlockAsyncOnMainQueueAndWait {
       switch type {
-      case .Insert:
-        self.tableView?.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+      case .insert:
+        self.tableView?.insertSections(IndexSet(integer: sectionIndex), with: .fade)
         
-      case .Delete:
-        self.tableView?.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+      case .delete:
+        self.tableView?.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
         
       default:
         break
@@ -309,37 +308,37 @@ extension DiaryViewController: NSFetchedResultsControllerDelegate {
     }
   }
   
-  func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
     SystemHelper.performBlockAsyncOnMainQueueAndWait {
       switch type {
-      case .Insert:
+      case .insert:
         if let newIndexPath = newIndexPath {
-          self.tableView?.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+          self.tableView?.insertRows(at: [newIndexPath], with: .fade)
         }
         
-      case .Delete:
+      case .delete:
         if let indexPath = indexPath {
-          self.tableView?.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+          self.tableView?.deleteRows(at: [indexPath], with: .fade)
         }
         
-      case .Update:
+      case .update:
         if let indexPath = indexPath {
-          self.tableView?.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+          self.tableView?.reloadRows(at: [indexPath], with: .fade)
         }
 
-      case .Move:
+      case .move:
         if let indexPath = indexPath {
-          self.tableView?.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+          self.tableView?.deleteRows(at: [indexPath], with: .fade)
         }
         
         if let newIndexPath = newIndexPath {
-          self.tableView?.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+          self.tableView?.insertRows(at: [newIndexPath], with: .fade)
         }
       }
     }
   }
 
-  func controllerDidChangeContent(controller: NSFetchedResultsController) {
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     SystemHelper.performBlockAsyncOnMainQueueAndWait {
       self.tableView?.endUpdates()
     }

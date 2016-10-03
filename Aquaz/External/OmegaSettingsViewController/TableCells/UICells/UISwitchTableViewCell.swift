@@ -10,7 +10,7 @@ import UIKit
 
 protocol UISwitchTableViewCellDelegate: class {
   
-  func switchControlValueChanged(switchControl: UISwitch, on: Bool)
+  func switchControlValueChanged(_ switchControl: UISwitch, on: Bool)
   
 }
 
@@ -21,7 +21,7 @@ class UISwitchTableViewCell: UITableViewCell {
   weak var delegate: UISwitchTableViewCellDelegate?
 
   init(reuseIdentifier: String? = nil) {
-    super.init(style: .Default, reuseIdentifier: reuseIdentifier)
+    super.init(style: .default, reuseIdentifier: reuseIdentifier)
     baseInit()
   }
 
@@ -30,21 +30,21 @@ class UISwitchTableViewCell: UITableViewCell {
     baseInit()
   }
   
-  private func baseInit() {
+  fileprivate func baseInit() {
     if self.switchControl == nil {
       let switchControl = UISwitch()
       
       switchControl.addTarget(
         self,
         action: #selector(self.switchControlValueChanged(_:)),
-        forControlEvents: UIControlEvents.ValueChanged)
+        for: UIControlEvents.valueChanged)
       
       self.accessoryView = switchControl
       self.switchControl = switchControl
     }
   }
   
-  func switchControlValueChanged(switchControl: UISwitch) {
-    delegate?.switchControlValueChanged(switchControl, on: switchControl.on)
+  func switchControlValueChanged(_ switchControl: UISwitch) {
+    delegate?.switchControlValueChanged(switchControl, on: switchControl.isOn)
   }
 }

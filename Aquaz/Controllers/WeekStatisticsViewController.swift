@@ -14,26 +14,26 @@ class WeekStatisticsViewController: UIViewController {
   @IBOutlet weak var weekStatisticsView: WeekStatisticsView!
   @IBOutlet weak var datePeriodLabel: UILabel!
 
-  var date: NSDate = NSDate() {
+  var date: Date = Date() {
     didSet {
       updateUI(animated: true)
     }
   }
   
-  private var statisticsBeginDate: NSDate!
-  private var statisticsEndDate: NSDate!
-  private var isShowingDay = false
-  private var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
-  private var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
-  private var volumeObserver: SettingsObserver?
+  fileprivate var statisticsBeginDate: Date!
+  fileprivate var statisticsEndDate: Date!
+  fileprivate var isShowingDay = false
+  fileprivate var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
+  fileprivate var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
+  fileprivate var volumeObserver: SettingsObserver?
   
-  private var helpTip: JDFTooltipView?
+  fileprivate var helpTip: JDFTooltipView?
 
-  private struct Constants {
+  fileprivate struct Constants {
     static let dayViewController = "DayViewController"
   }
   
-  private struct LocalizedStrings {
+  fileprivate struct LocalizedStrings {
     
     lazy var helpTipForTapSeeDayDetails: String = NSLocalizedString("WSVC:Tap a day to see details",
       value: "Tap a day to see details",
@@ -45,7 +45,7 @@ class WeekStatisticsViewController: UIViewController {
 
   }
   
-  private var localizedStrings = LocalizedStrings()
+  fileprivate var localizedStrings = LocalizedStrings()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -59,27 +59,27 @@ class WeekStatisticsViewController: UIViewController {
   }
 
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
 
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
     leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.leftSwipeGestureIsRecognized(_:)))
-    leftSwipeGestureRecognizer.direction = .Left
+    leftSwipeGestureRecognizer.direction = .left
     weekStatisticsView.addGestureRecognizer(leftSwipeGestureRecognizer)
     
     rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.rightSwipeGestureIsRecognized(_:)))
-    rightSwipeGestureRecognizer.direction = .Right
+    rightSwipeGestureRecognizer.direction = .right
     weekStatisticsView.addGestureRecognizer(rightSwipeGestureRecognizer)
   }
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     checkHelpTip()
   }
 
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
     weekStatisticsView.removeGestureRecognizer(leftSwipeGestureRecognizer)
@@ -88,13 +88,13 @@ class WeekStatisticsViewController: UIViewController {
     rightSwipeGestureRecognizer = nil
   }
   
-  private func setupUI() {
+  fileprivate func setupUI() {
     weekStatisticsView.backgroundColor = StyleKit.pageBackgroundColor
     weekStatisticsView.barsColor = StyleKit.weekStatisticsChartColor
     weekStatisticsView.goalLineColor = StyleKit.weekStatisticsGoalColor
-    weekStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    weekStatisticsView.daysFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    weekStatisticsView.daysColor = UIColor.darkGrayColor()
+    weekStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    weekStatisticsView.daysFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    weekStatisticsView.daysColor = UIColor.darkGray
     weekStatisticsView.todayColor = StyleKit.weekStatisticsTodayTextColor
     weekStatisticsView.scaleMargin = 10
     weekStatisticsView.dataSource = self
@@ -105,84 +105,84 @@ class WeekStatisticsViewController: UIViewController {
     updateUI(animated: false)
   }
   
-  private func setupNotificationsObservation() {
-    NSNotificationCenter.defaultCenter().addObserver(
+  fileprivate func setupNotificationsObservation() {
+    NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: UIContentSizeCategoryDidChangeNotification,
+      name: NSNotification.Name.UIContentSizeCategoryDidChange,
       object: nil)
     
     CoreDataStack.performOnPrivateContext { privateContext in
-      NSNotificationCenter.defaultCenter().addObserver(
+      NotificationCenter.default.addObserver(
         self,
         selector: #selector(self.managedObjectContextDidChange(_:)),
-        name: NSManagedObjectContextDidSaveNotification,
+        name: NSNotification.Name.NSManagedObjectContextDidSave,
         object: privateContext)
       
-      NSNotificationCenter.defaultCenter().addObserver(
+      NotificationCenter.default.addObserver(
         self,
         selector: #selector(self.managedObjectContextDidChange(_:)),
-        name: GlobalConstants.notificationManagedObjectContextWasMerged,
+        name: NSNotification.Name(rawValue: GlobalConstants.notificationManagedObjectContextWasMerged),
         object: privateContext)
     }
   }
   
-  func managedObjectContextDidChange(notification: NSNotification) {
+  func managedObjectContextDidChange(_ notification: Notification) {
     updateWeekStatisticsView(animated: true)
   }
 
   func preferredContentSizeChanged() {
-    datePeriodLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    weekStatisticsView.titleFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-    weekStatisticsView.daysFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+    datePeriodLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    weekStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    weekStatisticsView.daysFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
     view.invalidateIntrinsicContentSize()
   }
 
-  private func updateUI(animated animated: Bool) {
+  fileprivate func updateUI(animated: Bool) {
     computeStatisticsDateRange()
     updateDatePeriodLabel(animated: animated)
     updateWeekStatisticsView(animated: animated)
   }
 
-  @IBAction func switchToPreviousWeek(sender: AnyObject) {
+  @IBAction func switchToPreviousWeek(_ sender: AnyObject) {
     switchToPreviousWeek()
   }
   
-  @IBAction func switchToNextWeek(sender: AnyObject) {
+  @IBAction func switchToNextWeek(_ sender: AnyObject) {
     switchToNextWeek()
   }
   
-  func leftSwipeGestureIsRecognized(gestureRecognizer: UISwipeGestureRecognizer) {
-    if gestureRecognizer.state == .Ended {
+  func leftSwipeGestureIsRecognized(_ gestureRecognizer: UISwipeGestureRecognizer) {
+    if gestureRecognizer.state == .ended {
       switchToNextWeek()
     }
   }
   
-  func rightSwipeGestureIsRecognized(gestureRecognizer: UISwipeGestureRecognizer) {
-    if gestureRecognizer.state == .Ended {
+  func rightSwipeGestureIsRecognized(_ gestureRecognizer: UISwipeGestureRecognizer) {
+    if gestureRecognizer.state == .ended {
       switchToPreviousWeek()
     }
   }
   
-  private func switchToPreviousWeek() {
+  fileprivate func switchToPreviousWeek() {
     date = DateHelper.addToDate(date, years: 0, months: 0, days: -7)
   }
   
-  private func switchToNextWeek() {
+  fileprivate func switchToNextWeek() {
     date = DateHelper.addToDate(date, years: 0, months: 0, days: 7)
   }
   
-  private lazy var dateFormatter: NSDateFormatter = {
-    let formatter = NSDateFormatter()
-    let dateFormat = NSDateFormatter.dateFormatFromTemplate("ddMMMyy", options: 0, locale: NSLocale.currentLocale())
+  fileprivate lazy var dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    let dateFormat = DateFormatter.dateFormat(fromTemplate: "ddMMMyy", options: 0, locale: Locale.current)
     formatter.dateFormat = dateFormat
     return formatter
     }()
 
-  private func updateDatePeriodLabel(animated animated: Bool) {
-    let maxDate = DateHelper.addToDate(statisticsEndDate, years: 0, months: 0, days: -1)
-    let fromDateTitle = dateFormatter.stringFromDate(statisticsBeginDate)
-    let toDateTitle = dateFormatter.stringFromDate(maxDate)
+  fileprivate func updateDatePeriodLabel(animated: Bool) {
+    let maxDate = DateHelper.previousDayBefore(statisticsEndDate)
+    let fromDateTitle = dateFormatter.string(from: statisticsBeginDate)
+    let toDateTitle = dateFormatter.string(from: maxDate)
     let title = "\(fromDateTitle) - \(toDateTitle)"
     if animated {
       datePeriodLabel.setTextWithAnimation(title)
@@ -191,12 +191,12 @@ class WeekStatisticsViewController: UIViewController {
     }
   }
 
-  private func fetchStatisticsItems(beginDate beginDate: NSDate, endDate: NSDate, privateContext: NSManagedObjectContext) -> [WeekStatisticsView.ItemType] {
-    let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.Day,
+  fileprivate func fetchStatisticsItems(beginDate: Date, endDate: Date, privateContext: NSManagedObjectContext) -> [WeekStatisticsView.ItemType] {
+    let amountPartsList = Intake.fetchIntakeAmountPartsGroupedBy(.day,
       beginDate: beginDate,
       endDate: endDate,
       dayOffsetInHours: 0,
-      aggregateFunction: .Average,
+      aggregateFunction: .average,
       managedObjectContext: privateContext)
     
     Logger.logSevere(amountPartsList.count == 7, "Unexpected count of grouped water intakes", logDetails: [Logger.Attributes.count: "\(amountPartsList.count)"])
@@ -210,11 +210,11 @@ class WeekStatisticsViewController: UIViewController {
 
     var statisticsItems: [WeekStatisticsView.ItemType] = []
 
-    for (index, amountPart) in amountPartsList.enumerate() {
+    for (index, amountPart) in amountPartsList.enumerated() {
       let waterGoal = waterGoals[index] + amountPart.dehydration
       
-      let displayedWaterHydration = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: amountPart.hydration, unitType: .Volume)
-      let displayedWaterGoal = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: waterGoal, unitType: .Volume)
+      let displayedWaterHydration = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: amountPart.hydration, unitType: .volume)
+      let displayedWaterGoal = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: waterGoal, unitType: .volume)
       
       let item: WeekStatisticsView.ItemType = (value: CGFloat(displayedWaterHydration), goal: CGFloat(displayedWaterGoal))
       statisticsItems.append(item)
@@ -223,48 +223,46 @@ class WeekStatisticsViewController: UIViewController {
     return statisticsItems
   }
   
-  private func updateWeekStatisticsView(animated animated: Bool) {
+  fileprivate func updateWeekStatisticsView(animated: Bool) {
     CoreDataStack.performOnPrivateContext { privateContext in
       let date = self.date
       let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate, privateContext: privateContext)
       
-      dispatch_async(dispatch_get_main_queue()) {
-        if self.date === date {
+      DispatchQueue.main.async {
+        if self.date == date {
           self.weekStatisticsView.setItems(statisticsItems, animate: animated)
         }
       }
     }
   }
 
-  private func computeStatisticsDateRange() {
-    let calendar = NSCalendar.currentCalendar()
-    let weekdayOfDate = calendar.ordinalityOfUnit(.Weekday, inUnit: .WeekOfMonth, forDate: date)
-    let daysPerWeek = calendar.maximumRangeOfUnit(.Weekday).length
+  fileprivate func computeStatisticsDateRange() {
+    let weekdayOfDate = Calendar.current.ordinality(of: .weekday, in: .weekOfMonth, for: date)!
+    let daysPerWeek = DateHelper.daysPerWeek()
     statisticsBeginDate = DateHelper.addToDate(date, years: 0, months: 0, days: -weekdayOfDate + 1)
     statisticsEndDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: daysPerWeek)
   }
   
-  private func isFutureDate(dayIndex: Int) -> Bool {
+  fileprivate func isFutureDate(_ dayIndex: Int) -> Bool {
     let date = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
-    let daysBetween = DateHelper.calcDistanceBetweenCalendarDates(fromDate: NSDate(), toDate: date, calendarUnit: .Day)
-    return daysBetween > 0
+    return DateHelper.calendarDays(fromDate: Date(), toDate: date) > 0
   }
   
   // MARK: Help tips
   
-  private func checkHelpTip() {
+  fileprivate func checkHelpTip() {
     if helpTip != nil {
       return
     }
     
     switch Settings.sharedInstance.uiWeekStatisticsPageHelpTipToShow.value {
-    case .TapToSeeDayDetails: showHelpTipForTapSeeDayDetails()
-    case .SwipeToChangeWeek: showHelpTipForSwipeToChangeWeek()
-    case .None: return
+    case .tapToSeeDayDetails: showHelpTipForTapSeeDayDetails()
+    case .swipeToChangeWeek: showHelpTipForSwipeToChangeWeek()
+    case .none: return
     }
   }
   
-  private func showHelpTipForTapSeeDayDetails() {
+  fileprivate func showHelpTipForTapSeeDayDetails() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
       if self.view.window == nil || self.helpTip != nil {
         return
@@ -276,7 +274,7 @@ class WeekStatisticsViewController: UIViewController {
         targetView: dayButton,
         hostView: self.weekStatisticsView,
         tooltipText: self.localizedStrings.helpTipForTapSeeDayDetails,
-        arrowDirection: .Down,
+        arrowDirection: .down,
         width: self.view.frame.width / 2)
       
       UIHelper.showHelpTip(self.helpTip!) {
@@ -289,7 +287,7 @@ class WeekStatisticsViewController: UIViewController {
     }
   }
   
-  private func showHelpTipForSwipeToChangeWeek() {
+  fileprivate func showHelpTipForSwipeToChangeWeek() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
       if self.view.window == nil || self.helpTip != nil {
         return
@@ -301,7 +299,7 @@ class WeekStatisticsViewController: UIViewController {
         targetPoint: point,
         hostView: self.weekStatisticsView,
         tooltipText: self.localizedStrings.helpTipForSwipeToChangeWeek,
-        arrowDirection: .Down,
+        arrowDirection: .down,
         width: self.view.frame.width / 2)
       
       UIHelper.showHelpTip(self.helpTip!) {
@@ -320,20 +318,20 @@ class WeekStatisticsViewController: UIViewController {
 
 extension WeekStatisticsViewController: WeekStatisticsViewDataSource {
   
-  func weekStatisticsViewIsFutureDay(dayIndex: Int) -> Bool {
+  func weekStatisticsViewIsFutureDay(_ dayIndex: Int) -> Bool {
     return isFutureDate(dayIndex)
   }
   
-  func weekStatisticsViewGetTitleForValue(value: CGFloat) -> String {
+  func weekStatisticsViewGetTitleForValue(_ value: CGFloat) -> String {
     let quantity = Quantity(unit: Settings.sharedInstance.generalVolumeUnits.value.unit, amount: Double(value))
     let title = quantity.getDescription(Settings.sharedInstance.generalVolumeUnits.value.decimals, displayUnits: true)
 
     return title
   }
 
-  func weekStatisticsViewIsToday(dayIndex: Int) -> Bool {
+  func weekStatisticsViewIsToday(_ dayIndex: Int) -> Bool {
     let date = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
-    return DateHelper.areDatesEqualByDays(NSDate(), date)
+    return DateHelper.areEqualDays(Date(), date)
   }
   
 }
@@ -341,8 +339,8 @@ extension WeekStatisticsViewController: WeekStatisticsViewDataSource {
 private extension Units.Volume {
   var decimals: Int {
     switch self {
-    case Millilitres: return 0
-    case FluidOunces: return 1
+    case .millilitres: return 0
+    case .fluidOunces: return 1
     }
   }
 }
@@ -351,7 +349,7 @@ private extension Units.Volume {
 
 extension WeekStatisticsViewController: WeekStatisticsViewDelegate {
   
-  func weekStatisticsViewDaySelected(dayIndex: Int) {
+  func weekStatisticsViewDaySelected(_ dayIndex: Int) {
     if isFutureDate(dayIndex) {
       return
     }
@@ -360,7 +358,7 @@ extension WeekStatisticsViewController: WeekStatisticsViewDelegate {
 
     if let dayViewController: DayViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "DayViewController") {
       let selectedDate = DateHelper.addToDate(statisticsBeginDate, years: 0, months: 0, days: dayIndex)
-      dayViewController.mode = .Statistics
+      dayViewController.mode = .statistics
       dayViewController.setCurrentDate(selectedDate)
       
       navigationController?.pushViewController(dayViewController, animated: true)

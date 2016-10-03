@@ -22,9 +22,9 @@ class DrinkCollectionViewCell: UICollectionViewCell {
     }
   }
   
-  override func drawRect(rect: CGRect) {
-    drinkView.highlighted = highlighted
-    super.drawRect(rect)
+  override func draw(_ rect: CGRect) {
+    drinkView.highlighted = isHighlighted
+    super.draw(rect)
   }
   
 }

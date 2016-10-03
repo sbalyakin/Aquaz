@@ -9,15 +9,15 @@
 import Foundation
 
 enum UnitType: Int, CustomStringConvertible {
-  case Volume = 0
-  case Weight
-  case Length
+  case volume = 0
+  case weight
+  case length
   
   var description: String {
     switch self {
-    case Volume: return "Volume"
-    case Weight: return "Weight"
-    case Length: return "Length"
+    case .volume: return "Volume"
+    case .weight: return "Weight"
+    case .length: return "Length"
     }
   }
 }
@@ -56,17 +56,18 @@ class Quantity: CustomStringConvertible {
     return getDescription(0)
   }
   
-  func getDescription(decimals: Int, displayUnits: Bool = true) -> String {
+  func getDescription(_ decimals: Int, displayUnits: Bool = true) -> String {
     struct Static {
-      static let numberFormatter = NSNumberFormatter()
+      static let numberFormatter = NumberFormatter()
     }
     
     Static.numberFormatter.minimumFractionDigits = decimals
     Static.numberFormatter.maximumFractionDigits = decimals
     Static.numberFormatter.minimumIntegerDigits = 1
-    Static.numberFormatter.numberStyle = .DecimalStyle
+    Static.numberFormatter.numberStyle = .decimal
     
-    var description = Static.numberFormatter.stringFromNumber(amount) ?? "0"
+    var description = Static.numberFormatter.string(for: amount) ?? "0"
+    
     if displayUnits {
       description += " \(unit.contraction)"
     }
@@ -74,7 +75,7 @@ class Quantity: CustomStringConvertible {
     return description
   }
   
-  func convertFrom(amount amount: Double, unit: Unit) {
+  func convertFrom(amount: Double, unit: Unit) {
     if unit.type != self.unit.type {
       assert(false, "Incompatible unit is specified")
       return
@@ -82,7 +83,7 @@ class Quantity: CustomStringConvertible {
     self.amount = amount * unit.factor / self.unit.factor
   }
   
-  func convertFrom(quantity quantity: Quantity) {
+  func convertFrom(quantity: Quantity) {
     convertFrom(amount: quantity.amount, unit: quantity.unit)
   }
   
@@ -90,13 +91,13 @@ class Quantity: CustomStringConvertible {
   var amount: Double = 0.0
 }
 
-func +=(inout left: Quantity, right: Quantity) {
+func +=(left: inout Quantity, right: Quantity) {
   let amount = left.amount
   left.convertFrom(quantity: right)
   left.amount += amount
 }
 
-func -=(inout left: Quantity, right: Quantity) {
+func -=(left: inout Quantity, right: Quantity) {
   let amount = left.amount
   left.convertFrom(quantity: right)
   left.amount = amount - left.amount
@@ -111,42 +112,42 @@ private let footUnitContraction       = NSLocalizedString("U:ft",    value: "ft"
 
 class MilliliterUnit: Unit {
   init() {}
-  let type: UnitType = .Volume
+  let type: UnitType = .volume
   let factor: Double = 0.001
   let contraction: String = milliliterUnitContraction
 }
 
 class FluidOunceUnit: Unit {
   init() {}
-  let type: UnitType = .Volume
+  let type: UnitType = .volume
   let factor: Double = 0.0295735295625
   let contraction: String = fluidOunceUnitContraction
 }
 
 class KilogramUnit: Unit {
   init() {}
-  let type: UnitType = .Weight
+  let type: UnitType = .weight
   let factor: Double = 1
   let contraction: String = kilogramUnitContraction
 }
 
 class PoundUnit: Unit {
   init() {}
-  let type: UnitType = .Weight
+  let type: UnitType = .weight
   let factor: Double = 0.45359237
   let contraction: String = poundUnitContraction
 }
 
 class CentimeterUnit: Unit {
   init() {}
-  let type: UnitType = .Length
+  let type: UnitType = .length
   let factor: Double = 0.01
   let contraction: String = centimiterUnitContraction
 }
 
 class FootUnit: Unit {
   init() {}
-  let type: UnitType = .Length
+  let type: UnitType = .length
   let factor: Double = 0.3048
   let contraction: String = footUnitContraction
 }

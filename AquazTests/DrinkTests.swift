@@ -16,7 +16,7 @@ class DrinkTests: XCTestCase {
   func testFetchDrinkByIndex() {
     for drinkIndex in 0..<Drink.getDrinksCount() {
       if let drink = Drink.fetchDrinkByIndex(drinkIndex, managedObjectContext: managedObjectContext) {
-        XCTAssert(drink.index == drinkIndex, "Wrong drink is get for index \(drinkIndex)")
+        XCTAssert(drink.index.intValue == drinkIndex, "Wrong drink is get for index \(drinkIndex)")
       } else {
         XCTFail("Failed to get drink by index \(drinkIndex)")
       }
@@ -42,11 +42,11 @@ class DrinkTests: XCTestCase {
     XCTAssert(drinks.count == Drink.getDrinksCount(), "Number of fetched drinks (\(drinks.count)) is incorrect (expected \(Drink.getDrinksCount()))")
   }
 
-  private func drawDrinkWithType(drinkType: DrinkType, frame: CGRect) {
+  fileprivate func drawDrinkWithType(_ drinkType: DrinkType, frame: CGRect) {
     let drink = Drink.fetchDrinkByType(drinkType, managedObjectContext: managedObjectContext)
     drink?.drawDrink(frame: frame)
   }
 
-  private var managedObjectContext: NSManagedObjectContext { return CoreDataSupport.sharedInstance.managedObjectContext }
+  fileprivate var managedObjectContext: NSManagedObjectContext { return CoreDataSupport.sharedInstance.managedObjectContext }
 
 }

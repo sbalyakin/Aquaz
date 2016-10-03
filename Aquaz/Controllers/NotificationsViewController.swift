@@ -8,21 +8,15 @@
 
 import UIKit
 
-extension String: CustomStringConvertible {
-  public var description: String {
-    return self
-  }
-}
-
 class NotificationsViewController: OmegaSettingsViewController {
   
-  private var notificationSoundObserver: SettingsObserver?
+  fileprivate var notificationSoundObserver: SettingsObserver?
   
-  private struct Constants {
+  fileprivate struct Constants {
     static let chooseSoundSegue = "Choose Sound"
   }
   
-  private struct LocalizedStrings {
+  fileprivate struct LocalizedStrings {
     
     lazy var smartNotificationsBannerText: String = NSLocalizedString("SVC:Smart Notifications mode is available in the full version only.",
       value: "Smart Notifications mode are available in the full version only.",
@@ -70,7 +64,7 @@ class NotificationsViewController: OmegaSettingsViewController {
 
   }
   
-  private var localizedStrings = LocalizedStrings()
+  fileprivate var localizedStrings = LocalizedStrings()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -81,7 +75,7 @@ class NotificationsViewController: OmegaSettingsViewController {
   }
   
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
 
   override func createTableCellsSections() -> [TableCellsSection] {
@@ -96,49 +90,49 @@ class NotificationsViewController: OmegaSettingsViewController {
     let fromCell = createDateRightDetailTableCell(
       title: localizedStrings.fromTitle,
       settingsItem: Settings.sharedInstance.notificationsFrom,
-      datePickerMode: .Time,
+      datePickerMode: .time,
+      stringFromValueFunction: NotificationsViewController.timeStringFromDate,
       minimumDate: nil,
       maximumDate: nil,
-      height: .Large,
-      stringFromValueFunction: NotificationsViewController.timeStringFromDate)
+      height: .large)
     
     fromCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
 
     let toCell = createDateRightDetailTableCell(
       title: localizedStrings.toTitle,
       settingsItem: Settings.sharedInstance.notificationsTo,
-      datePickerMode: .Time,
+      datePickerMode: .time,
+      stringFromValueFunction: NotificationsViewController.timeStringFromDate,
       minimumDate: nil,
       maximumDate: nil,
-      height: .Large,
-      stringFromValueFunction: NotificationsViewController.timeStringFromDate)
+      height: .large)
     
     toCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
     
     let timeComponents = [
       TimeIntervalPickerTableCellComponent(
-        calendarUnit: NSCalendarUnit.Hour,
+        calendarComponents: .hour,
         minValue: 1, maxValue: 6, step: 1, title: localizedStrings.intervalHourTitle, width: 100),
       TimeIntervalPickerTableCellComponent(
-        calendarUnit: NSCalendarUnit.Minute,
+        calendarComponents: .minute,
         minValue: 0, maxValue: 59, step: 5, title: localizedStrings.intervalMinuteTitle, width: 100)]
     
     let intervalCell = createTimeIntervalRightDetailTableCell(
       title: localizedStrings.intervalTitle,
       settingsItem: Settings.sharedInstance.notificationsInterval,
       timeComponents: timeComponents,
-      height: .Large,
-      stringFromValueFunction: NotificationsViewController.stringFromTimeInterval)
+      stringFromValueFunction: NotificationsViewController.stringFromTimeInterval,
+      height: .large)
     
     intervalCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
   
     let soundCell = createRightDetailTableCell(
       title: localizedStrings.soundTitle,
       settingsItem: Settings.sharedInstance.notificationsSound,
-      accessoryType: UITableViewCellAccessoryType.DisclosureIndicator,
-      activationChangedFunction: { [weak self] in self?.soundTableCellDidActivate($0, active: $1) },
-      stringFromValueFunction: NotificationsViewController.stringFromSoundFileName)
+      stringFromValueFunction: NotificationsViewController.stringFromSoundFileName,
+      accessoryType: UITableViewCellAccessoryType.disclosureIndicator)
     
+    soundCell.activationChangedFunction = { [weak self] in self?.soundTableCellDidActivate($0, active: $1) }
     soundCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange
     
     notificationSoundObserver = Settings.sharedInstance.notificationsSound.addObserver { _ in
@@ -176,7 +170,7 @@ class NotificationsViewController: OmegaSettingsViewController {
     return [mainSection, smartNotificationsSection, limitNotificationsSection]
   }
   
-  private class func stringFromTimeInterval(timeInterval: NSTimeInterval) -> String {
+  fileprivate class func stringFromTimeInterval(_ timeInterval: TimeInterval) -> String {
     let overallSeconds = Int(timeInterval)
     let minutes = (overallSeconds / 60) % 60
     let hours = (overallSeconds / 3600)
@@ -184,31 +178,31 @@ class NotificationsViewController: OmegaSettingsViewController {
     return String.localizedStringWithFormat(template, hours, minutes)
   }
   
-  private class func timeStringFromDate(date: NSDate) -> String {
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.timeStyle = .ShortStyle
-    dateFormatter.dateStyle = .NoStyle
-    return dateFormatter.stringFromDate(date)
+  fileprivate class func timeStringFromDate(_ date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.timeStyle = .short
+    dateFormatter.dateStyle = .none
+    return dateFormatter.string(from: date)
   }
   
-  private class func stringFromSoundFileName(filename: String) -> String {
+  fileprivate class func stringFromSoundFileName(_ filename: String) -> String {
     for sound in NotificationSounds.soundList {
       if sound.fileName == filename {
         return sound.title
       }
     }
     
-    let url = NSURL(fileURLWithPath: filename)
-    return url.URLByDeletingPathExtension?.lastPathComponent?.capitalizedString ?? filename.capitalizedString
+    let url = URL(fileURLWithPath: filename)
+    return url.deletingPathExtension().lastPathComponent.capitalized 
   }
   
-  private func soundTableCellDidActivate(tableCell: TableCell, active: Bool) {
+  fileprivate func soundTableCellDidActivate(_ tableCell: TableCell, active: Bool) {
     if active {
-      performSegueWithIdentifier(Constants.chooseSoundSegue, sender: tableCell)
+      performSegue(withIdentifier: Constants.chooseSoundSegue, sender: tableCell)
     }
   }
 
-  private class func tableCellValueAffectNotificationsDidChange(tableCell: TableCell) {
+  fileprivate class func tableCellValueAffectNotificationsDidChange(_ tableCell: TableCell) {
     recreateNotifications()
   }
 
@@ -217,7 +211,7 @@ class NotificationsViewController: OmegaSettingsViewController {
 
     if Settings.sharedInstance.notificationsEnabled.value {
       if NotificationsHelper.areLocalNotificationsRegistered() {
-        NotificationsHelper.scheduleNotificationsFromSettingsForDate(NSDate())
+        NotificationsHelper.scheduleNotificationsFromSettingsForDate(Date())
       } else {
         NotificationsHelper.registerApplicationForLocalNotifications()
       }

@@ -11,8 +11,8 @@ import UIKit
 
 extension LoggedActions {
   
-  class func instantiateViewController<ViewControllerType>(storyboard storyboard: UIStoryboard?, storyboardID: String) -> ViewControllerType? {
-    let viewController = storyboard?.instantiateViewControllerWithIdentifier(storyboardID) as? ViewControllerType
+  class func instantiateViewController<ViewControllerType>(storyboard: UIStoryboard?, storyboardID: String) -> ViewControllerType? {
+    let viewController = storyboard?.instantiateViewController(withIdentifier: storyboardID) as? ViewControllerType
     Logger.checkViewController(viewController != nil, storyboardID: storyboardID)
     return viewController
   }

@@ -22,21 +22,21 @@ class WelcomeWizardWelcomeViewController: UIViewController {
     swipeLabel.alpha = 0
   }
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
     SystemHelper.executeBlockWithDelay(0.5) {
       self.verticalSpaceMultiplierConstraint.constant = 0
       self.logo.setNeedsUpdateConstraints()
       
-      UIView.animateWithDuration(1, delay: 0, options: .CurveEaseInOut, animations: {
+      UIView.animate(withDuration: 1, delay: 0, options: UIViewAnimationOptions(), animations: {
         self.logo.layoutIfNeeded()
       }, completion: { _ in
-        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
           self.welcomeLabel.alpha = 1
           }, completion: nil)
         
-        UIView.animateWithDuration(0.5, delay: 0.25, options: .CurveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.25, options: UIViewAnimationOptions(), animations: {
           self.swipeLabel.alpha = 1
         }, completion: nil)
       })

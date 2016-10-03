@@ -12,7 +12,7 @@ import HealthKit
 
 class WaterGoalViewController: OmegaSettingsViewController {
 
-  private struct LocalizedStrings {
+  fileprivate struct LocalizedStrings {
 
     lazy var informationSectionHeader: String = NSLocalizedString("WGVC:Information About You", value: "Information About You",
       comment: "WaterGoalViewController: Header for section with personal information about user")
@@ -48,19 +48,19 @@ class WaterGoalViewController: OmegaSettingsViewController {
     
   }
   
-  private var genderCell: RightDetailTableCell<Settings.Gender>!
-  private var heightCell: TableCellWithValue<Double>!
-  private var weightCell: TableCellWithValue<Double>!
-  private var ageCell: TableCellWithValue<Int>!
-  private var physicalActivityCell: TableCellWithValue<Settings.PhysicalActivity>!
-  private var dailyWaterIntakeCell: TableCellWithValue<Double>!
+  fileprivate var genderCell: RightDetailTableCell<Settings.Gender>!
+  fileprivate var heightCell: TableCellWithValue<Double>!
+  fileprivate var weightCell: TableCellWithValue<Double>!
+  fileprivate var ageCell: TableCellWithValue<Int>!
+  fileprivate var physicalActivityCell: TableCellWithValue<Settings.PhysicalActivity>!
+  fileprivate var dailyWaterIntakeCell: TableCellWithValue<Double>!
   
-  private let minimumAge = 10
-  private let maximumAge = 100
+  fileprivate let minimumAge = 10
+  fileprivate let maximumAge = 100
   
-  private var originalTableViewContentInset: UIEdgeInsets = UIEdgeInsetsZero
+  fileprivate var originalTableViewContentInset: UIEdgeInsets = UIEdgeInsets.zero
   
-  private var localizedStrings = LocalizedStrings()
+  fileprivate var localizedStrings = LocalizedStrings()
 
   
   override func viewDidLoad() {
@@ -81,11 +81,11 @@ class WaterGoalViewController: OmegaSettingsViewController {
     genderCell = createEnumRightDetailTableCell(
       title: localizedStrings.genderTitle,
       settingsItem: Settings.sharedInstance.userGender,
-      pickerTableCellHeight: .Small,
-      stringFromValueFunction: WaterGoalViewController.stringFromGender)
+      stringFromValueFunction: WaterGoalViewController.stringFromGender,
+      pickerTableCellHeight: .small)
     
     if let pickerTableCell = genderCell.supportingTableCell as? PickerTableCell<Settings.Gender, EnumCollection<Settings.Gender>> {
-      pickerTableCell.font = UIFont.systemFontOfSize(18)
+      pickerTableCell.font = UIFont.systemFont(ofSize: 18)
     }
 
     genderCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
@@ -101,8 +101,8 @@ class WaterGoalViewController: OmegaSettingsViewController {
       title: localizedStrings.heightTitle,
       settingsItem: Settings.sharedInstance.userHeight,
       collection: heightCollection,
-      pickerTableCellHeight: .Large,
-      stringFromValueFunction: WaterGoalViewController.stringFromHeight)
+      stringFromValueFunction: WaterGoalViewController.stringFromHeight,
+      pickerTableCellHeight: .large)
     
     heightCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
@@ -117,8 +117,8 @@ class WaterGoalViewController: OmegaSettingsViewController {
       title: localizedStrings.weightTitle,
       settingsItem: Settings.sharedInstance.userWeight,
       collection: weightCollection,
-      pickerTableCellHeight: .Large,
-      stringFromValueFunction: WaterGoalViewController.stringFromWeight)
+      stringFromValueFunction: WaterGoalViewController.stringFromWeight,
+      pickerTableCellHeight: .large)
     
     weightCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
@@ -132,8 +132,8 @@ class WaterGoalViewController: OmegaSettingsViewController {
       title: localizedStrings.ageTitle,
       settingsItem: Settings.sharedInstance.userAge,
       collection: ageCollection,
-      pickerTableCellHeight: .Large,
-      stringFromValueFunction: WaterGoalViewController.stringFromAge)
+      stringFromValueFunction: WaterGoalViewController.stringFromAge,
+      pickerTableCellHeight: .large)
     
     ageCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
@@ -141,8 +141,8 @@ class WaterGoalViewController: OmegaSettingsViewController {
     physicalActivityCell = createEnumRightDetailTableCell(
       title: localizedStrings.physicalActivityTitle,
       settingsItem: Settings.sharedInstance.userPhysicalActivity,
-      pickerTableCellHeight: .Small,
-      stringFromValueFunction: WaterGoalViewController.stringFromPhysicalActivity)
+      stringFromValueFunction: WaterGoalViewController.stringFromPhysicalActivity,
+      pickerTableCellHeight: .small)
     
     physicalActivityCell.valueChangedFunction = { [weak self] in self?.sourceCellValueChanged($0) }
     
@@ -166,7 +166,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
       settingsItem: Settings.sharedInstance.userDailyWaterIntake,
       valueFromStringFunction: WaterGoalViewController.metricWaterGoalFromString,
       stringFromValueFunction: WaterGoalViewController.stringFromWaterGoal,
-      keyboardType: .DecimalPad)
+      keyboardType: .decimalPad)
     
     let dailyWaterIntakeSection = TableCellsSection()
     dailyWaterIntakeSection.headerTitle = localizedStrings.dailyWaterIntakeSectionHeader
@@ -179,12 +179,13 @@ class WaterGoalViewController: OmegaSettingsViewController {
     if #available(iOS 9.0, *) {
       let readFromHealthCell = createBasicTableCell(
         title: localizedStrings.readFromHealthTitle,
-        accessoryType: nil,
-        activationChangedFunction: { [weak self] _, active in
-          if active {
-            self?.checkHealthAuthorizationAndRead()
-          }
-        })
+        accessoryType: nil)
+      
+      readFromHealthCell.activationChangedFunction = { [weak self] _, active in
+        if active {
+          self?.checkHealthAuthorizationAndRead()
+        }
+      }
       
       readFromHealthCell.textColor = StyleKit.controlTintColor
       
@@ -199,78 +200,78 @@ class WaterGoalViewController: OmegaSettingsViewController {
     return sections
   }
   
-  private class func stringFromHeight(value: Double) -> String {
+  fileprivate class func stringFromHeight(_ value: Double) -> String {
     let unit = Settings.sharedInstance.generalHeightUnits.value
     return Units.sharedInstance.formatMetricAmountToText(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision, decimals: unit.decimals, displayUnits: true)
   }
   
-  private class func stringFromWeight(value: Double) -> String {
+  fileprivate class func stringFromWeight(_ value: Double) -> String {
     let unit = Settings.sharedInstance.generalWeightUnits.value
     return Units.sharedInstance.formatMetricAmountToText(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision, decimals: unit.decimals, displayUnits: true)
   }
   
-  private class func stringFromAge(value: Int) -> String {
-    let formatter = NSNumberFormatter()
-    formatter.numberStyle = .DecimalStyle
+  fileprivate class func stringFromAge(_ value: Int) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
     formatter.maximumFractionDigits = 0
-    let title = formatter.stringFromNumber(value)!
+    let title = formatter.string(for: value)!
     return title
   }
   
-  private class func stringFromGender(gender: Settings.Gender) -> String {
+  fileprivate class func stringFromGender(_ gender: Settings.Gender) -> String {
     switch gender {
-    case .Man:
+    case .man:
       return NSLocalizedString("WGVC:Man", value: "Man",
         comment: "WaterGoalViewController: [Man] option for gender")
       
-    case .Woman:
+    case .woman:
       return NSLocalizedString("WGVC:Woman", value: "Woman",
         comment: "WaterGoalViewController: [Woman] option for gender")
       
-    case .PregnantFemale:
+    case .pregnantFemale:
       return NSLocalizedString("WGVC:Woman: pregnant", value: "Woman: pregnant",
         comment: "WaterGoalViewController: [Woman: pregnant] option for gender")
       
-    case .BreastfeedingFemale:
+    case .breastfeedingFemale:
       return NSLocalizedString("WGVC:Woman: breastfeeding", value: "Woman: breastfeeding",
         comment: "WaterGoalViewController: [Woman: breastfeeding] option for gender")
     }
   }
 
-  private class func stringFromPhysicalActivity(physicalActivity: Settings.PhysicalActivity) -> String {
+  fileprivate class func stringFromPhysicalActivity(_ physicalActivity: Settings.PhysicalActivity) -> String {
     switch physicalActivity {
-    case .Rare:
+    case .rare:
       return NSLocalizedString("WGVC:Rare", value: "Rare",
         comment: "WaterGoalViewController: [Rare] option for physical activity")
       
-    case .Occasional:
+    case .occasional:
       return NSLocalizedString("WGVC:Occasional", value: "Occasional",
         comment: "WaterGoalViewController: [Occasional] option for physical activity")
       
-    case .Weekly:
+    case .weekly:
       return NSLocalizedString("WGVC:Weekly", value: "Weekly",
         comment: "WaterGoalViewController: [Weekly] option for physical activity")
       
-    case .Daily:
+    case .daily:
       return NSLocalizedString("WGVC:Daily", value: "Daily",
         comment: "WaterGoalViewController: [Daily] option for physical activity")
     }
   }
   
-  private class func stringFromWaterGoal(value: Double) -> String {
+  fileprivate class func stringFromWaterGoal(_ value: Double) -> String {
     let unit = Settings.sharedInstance.generalVolumeUnits.value
     let displayedAmount = Units.sharedInstance.convertMetricAmountToDisplayed(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision)
-    let formatter = NSNumberFormatter()
+    let formatter = NumberFormatter()
     formatter.minimumFractionDigits = unit.decimals
     formatter.maximumFractionDigits = unit.decimals
     formatter.minimumIntegerDigits = 1
-    formatter.numberStyle = .NoStyle
-    let title = formatter.stringFromNumber(displayedAmount) ?? "0"
+    formatter.numberStyle = .none
+    let title = formatter.string(for: displayedAmount) ?? "0"
     return title
   }
   
-  private class func metricWaterGoalFromString(value: String) -> Double? {
-    if let displayedValue = NSNumberFormatter().numberFromString(value)?.doubleValue {
+  fileprivate class func metricWaterGoalFromString(_ value: String) -> Double? {
+    if let displayedValue = NumberFormatter().number(from: value)?.doubleValue {
       if displayedValue <= 0 {
         return nil
       }
@@ -278,33 +279,33 @@ class WaterGoalViewController: OmegaSettingsViewController {
       let displayedUnit = Settings.sharedInstance.generalVolumeUnits.value
       let quantity = Quantity(ownUnit: Units.Volume.metric.unit, fromUnit: displayedUnit.unit, fromAmount: displayedValue)
       let metricValue = quantity.amount
-      let adjustedMetricValue = Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: metricValue, unitType: .Volume, roundPrecision: displayedUnit.precision)
+      let adjustedMetricValue = Units.sharedInstance.adjustMetricAmountForStoring(metricAmount: metricValue, unitType: .volume, roundPrecision: displayedUnit.precision)
       return adjustedMetricValue
     } else {
       return nil
     }
   }
   
-  @IBAction func cancelButtonWasTapped(sender: AnyObject) {
+  @IBAction func cancelButtonWasTapped(_ sender: AnyObject) {
     activateTableCell(nil)
-    navigationController?.popViewControllerAnimated(true)
+    _ = navigationController?.popViewController(animated: true)
   }
   
-  @IBAction func doneButtonWasTapped(sender: AnyObject) {
+  @IBAction func doneButtonWasTapped(_ sender: AnyObject) {
     activateTableCell(nil)
     saveToSettings()
-    navigationController?.popViewControllerAnimated(true)
+    _ = navigationController?.popViewController(animated: true)
   }
   
-  private func saveToSettings() {
+  fileprivate func saveToSettings() {
     writeTableCellValuesToExternalStorage()
     saveWaterGoalToCoreData()
   }
 
-  private func saveWaterGoalToCoreData() {
+  fileprivate func saveWaterGoalToCoreData() {
     CoreDataStack.performOnPrivateContext { privateContext in
-      WaterGoal.addEntity(
-        date: NSDate(),
+      _ = WaterGoal.addEntity(
+        date: Date(),
         baseAmount: self.dailyWaterIntakeCell.value,
         isHotDay: false,
         isHighActivity: false,
@@ -312,7 +313,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
     }
   }
 
-  private func sourceCellValueChanged(tableCell: TableCell) {
+  fileprivate func sourceCellValueChanged(_ tableCell: TableCell) {
     // Just for sure that cell are still alive
     if let physicalActivityCell = physicalActivityCell,
        let genderCell = genderCell,
@@ -337,7 +338,7 @@ class WaterGoalViewController: OmegaSettingsViewController {
   
   // MARK: HealthKit
   @available(iOS 9.0, *)
-  private func checkHealthAuthorizationAndRead() {
+  fileprivate func checkHealthAuthorizationAndRead() {
     HealthKitProvider.sharedInstance.authorizeHealthKit { authorized, _ in
       if authorized {
         self.readFromHealthKit()
@@ -346,9 +347,9 @@ class WaterGoalViewController: OmegaSettingsViewController {
   }
   
   @available(iOS 9.0, *)
-  private func readFromHealthKit() {
+  fileprivate func readFromHealthKit() {
     HealthKitProvider.sharedInstance.readUserProfile { age, biologicalSex, bodyMass, height in
-      dispatch_async(dispatch_get_main_queue()) {
+      DispatchQueue.main.async {
         if let age = age {
           Settings.sharedInstance.userAge.value = age
         }
@@ -358,12 +359,12 @@ class WaterGoalViewController: OmegaSettingsViewController {
         }
         
         if let bodyMass = bodyMass {
-          let bodyMassInKilograms = bodyMass.quantity.doubleValueForUnit(HKUnit.gramUnitWithMetricPrefix(.Kilo))
+          let bodyMassInKilograms = bodyMass.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
           Settings.sharedInstance.userWeight.value = bodyMassInKilograms
         }
         
         if let height = height {
-          let heightInCentimeter = height.quantity.doubleValueForUnit(HKUnit.meterUnitWithMetricPrefix(.Centi))
+          let heightInCentimeter = height.quantity.doubleValue(for: HKUnit.meterUnit(with: .centi))
           Settings.sharedInstance.userHeight.value = heightInCentimeter
         }
         
@@ -377,36 +378,36 @@ class WaterGoalViewController: OmegaSettingsViewController {
 private extension Units.Weight {
   var minimumValue: Double {
     switch self {
-    case Kilograms: return 30
-    case Pounds:    return 29.93709642
+    case .kilograms: return 30
+    case .pounds:    return 29.93709642
     }
   }
   
   var maximumValue: Double {
     switch self {
-    case Kilograms: return 300
-    case Pounds:    return 299.3709642
+    case .kilograms: return 300
+    case .pounds:    return 299.3709642
     }
   }
   
   var step: Double {
     switch self {
-    case Kilograms: return 1
-    case Pounds:    return 1
+    case .kilograms: return 1
+    case .pounds:    return 1
     }
   }
   
   var precision: Double {
     switch self {
-    case Kilograms: return 1
-    case Pounds:    return 1
+    case .kilograms: return 1
+    case .pounds:    return 1
     }
   }
   
   var decimals: Int {
     switch self {
-    case Kilograms: return 0
-    case Pounds:    return 0
+    case .kilograms: return 0
+    case .pounds:    return 0
     }
   }
 }
@@ -414,36 +415,36 @@ private extension Units.Weight {
 private extension Units.Length {
   var minimumValue: Double {
     switch self {
-    case Centimeters: return 30
-    case Feet:        return 30.48 // 1 foot
+    case .centimeters: return 30
+    case .feet:        return 30.48 // 1 foot
     }
   }
   
   var maximumValue: Double {
     switch self {
-    case Centimeters: return 300
-    case Feet:        return 304.8 // 10 feet
+    case .centimeters: return 300
+    case .feet:        return 304.8 // 10 feet
     }
   }
   
   var step: Double {
     switch self {
-    case Centimeters: return 1
-    case Feet:        return 3.048 // 0.1 feet
+    case .centimeters: return 1
+    case .feet:        return 3.048 // 0.1 feet
     }
   }
   
   var precision: Double {
     switch self {
-    case Centimeters: return 1
-    case Feet:        return 0.1
+    case .centimeters: return 1
+    case .feet:        return 0.1
     }
   }
   
   var decimals: Int {
     switch self {
-    case Centimeters: return 0
-    case Feet:        return 1
+    case .centimeters: return 0
+    case .feet:        return 1
     }
   }
 }
@@ -451,27 +452,27 @@ private extension Units.Length {
 private extension Units.Volume {
   var precision: Double {
     switch self {
-    case Millilitres: return 1
-    case FluidOunces: return 0.1
+    case .millilitres: return 1
+    case .fluidOunces: return 0.1
     }
   }
   
   var decimals: Int {
     switch self {
-    case Millilitres: return 0
-    case FluidOunces: return 1
+    case .millilitres: return 0
+    case .fluidOunces: return 1
     }
   }
 }
 
 @available(iOS 9.0, *)
 private extension Settings.Gender {
-  mutating func applyBiologicalSex(biologicalSex: HKBiologicalSex) {
+  mutating func applyBiologicalSex(_ biologicalSex: HKBiologicalSex) {
     switch biologicalSex {
-    case .Male:   self = .Man
-    case .Female: self = .Woman
-    case .NotSet: return
-    case .Other:  return
+    case .male:   self = .man
+    case .female: self = .woman
+    case .notSet: return
+    case .other:  return
     }
   }
 }

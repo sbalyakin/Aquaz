@@ -12,112 +12,112 @@ import UIKit
 
 class CoreDataPrePopulation {
   
-  class func isCoreDataPrePopulated(managedObjectContext managedObjectContext: NSManagedObjectContext) -> Bool {
+  class func isCoreDataPrePopulated(managedObjectContext: NSManagedObjectContext) -> Bool {
     return Drink.fetchDrinkByIndex(0, managedObjectContext: managedObjectContext) != nil
   }
   
-  class func prePopulateCoreData(managedObjectContext managedObjectContext: NSManagedObjectContext, saveContext: Bool) {
-    Drink.addEntity(
-      index: DrinkType.Water.rawValue,
+  class func prePopulateCoreData(managedObjectContext: NSManagedObjectContext, saveContext: Bool) {
+    _ = Drink.addEntity(
+      index: DrinkType.water.rawValue,
       name: "Water",
-      hydrationFactor: DrinkType.Water.hydrationFactor,
-      dehydrationFactor: DrinkType.Water.dehydrationFactor,
+      hydrationFactor: DrinkType.water.hydrationFactor,
+      dehydrationFactor: DrinkType.water.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
     
-    Drink.addEntity(
-      index: DrinkType.Coffee.rawValue,
+    _ = Drink.addEntity(
+      index: DrinkType.coffee.rawValue,
       name: "Coffee",
-      hydrationFactor: DrinkType.Coffee.hydrationFactor,
-      dehydrationFactor: DrinkType.Coffee.dehydrationFactor,
+      hydrationFactor: DrinkType.coffee.hydrationFactor,
+      dehydrationFactor: DrinkType.coffee.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
     
-    Drink.addEntity(
-      index: DrinkType.Tea.rawValue,
+    _ = Drink.addEntity(
+      index: DrinkType.tea.rawValue,
       name: "Tea",
-      hydrationFactor: DrinkType.Tea.hydrationFactor,
-      dehydrationFactor: DrinkType.Tea.dehydrationFactor,
+      hydrationFactor: DrinkType.tea.hydrationFactor,
+      dehydrationFactor: DrinkType.tea.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
 
-    Drink.addEntity(
-      index: DrinkType.Soda.rawValue,
+    _ = Drink.addEntity(
+      index: DrinkType.soda.rawValue,
       name: "Soda",
-      hydrationFactor: DrinkType.Soda.hydrationFactor,
-      dehydrationFactor: DrinkType.Soda.dehydrationFactor,
+      hydrationFactor: DrinkType.soda.hydrationFactor,
+      dehydrationFactor: DrinkType.soda.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
     
-    Drink.addEntity(
-      index: DrinkType.Juice.rawValue,
+    _ = Drink.addEntity(
+      index: DrinkType.juice.rawValue,
       name: "Juice",
-      hydrationFactor: DrinkType.Juice.hydrationFactor,
-      dehydrationFactor: DrinkType.Juice.dehydrationFactor,
+      hydrationFactor: DrinkType.juice.hydrationFactor,
+      dehydrationFactor: DrinkType.juice.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
     
-    Drink.addEntity(
-      index: DrinkType.Milk.rawValue,
+    _ = Drink.addEntity(
+      index: DrinkType.milk.rawValue,
       name: "Milk",
-      hydrationFactor: DrinkType.Milk.hydrationFactor,
-      dehydrationFactor: DrinkType.Milk.dehydrationFactor,
+      hydrationFactor: DrinkType.milk.hydrationFactor,
+      dehydrationFactor: DrinkType.milk.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
 
-    Drink.addEntity(
-      index: DrinkType.Sport.rawValue,
+    _ = Drink.addEntity(
+      index: DrinkType.sport.rawValue,
       name: "Sport",
-      hydrationFactor: DrinkType.Sport.hydrationFactor,
-      dehydrationFactor: DrinkType.Sport.dehydrationFactor,
+      hydrationFactor: DrinkType.sport.hydrationFactor,
+      dehydrationFactor: DrinkType.sport.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
     
-    Drink.addEntity(
-      index: DrinkType.Energy.rawValue,
+    _ = Drink.addEntity(
+      index: DrinkType.energy.rawValue,
       name: "Energy",
-      hydrationFactor: DrinkType.Energy.hydrationFactor,
-      dehydrationFactor: DrinkType.Energy.dehydrationFactor,
+      hydrationFactor: DrinkType.energy.hydrationFactor,
+      dehydrationFactor: DrinkType.energy.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
 
-    Drink.addEntity(
-      index: DrinkType.Beer.rawValue,
+    _ = Drink.addEntity(
+      index: DrinkType.beer.rawValue,
       name: "Beer",
-      hydrationFactor: DrinkType.Beer.hydrationFactor,
-      dehydrationFactor: DrinkType.Beer.dehydrationFactor,
+      hydrationFactor: DrinkType.beer.hydrationFactor,
+      dehydrationFactor: DrinkType.beer.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
     
-    Drink.addEntity(
-      index: DrinkType.Wine.rawValue,
+    _ = Drink.addEntity(
+      index: DrinkType.wine.rawValue,
       name: "Wine",
-      hydrationFactor: DrinkType.Wine.hydrationFactor,
-      dehydrationFactor: DrinkType.Wine.dehydrationFactor,
+      hydrationFactor: DrinkType.wine.hydrationFactor,
+      dehydrationFactor: DrinkType.wine.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
     
-    Drink.addEntity(
-      index: DrinkType.HardLiquor.rawValue,
+    _ = Drink.addEntity(
+      index: DrinkType.hardLiquor.rawValue,
       name: "HardLiquor",
-      hydrationFactor: DrinkType.HardLiquor.hydrationFactor,
-      dehydrationFactor: DrinkType.HardLiquor.dehydrationFactor,
+      hydrationFactor: DrinkType.hardLiquor.hydrationFactor,
+      dehydrationFactor: DrinkType.hardLiquor.dehydrationFactor,
       recentAmount: 250,
       managedObjectContext: managedObjectContext,
       saveImmediately: false)
 
-    WaterGoal.addEntity(
-      date: NSDate(),
+    _ = WaterGoal.addEntity(
+      date: Date(),
       baseAmount: Settings.sharedInstance.userDailyWaterIntake.value,
       isHotDay: false,
       isHighActivity: false,
@@ -134,9 +134,9 @@ class CoreDataPrePopulation {
     }
   }
   
-  class func generateIntakes(managedObjectContext managedObjectContext: NSManagedObjectContext) {
+  class func generateIntakes(managedObjectContext: NSManagedObjectContext) {
     let secondsPerDay = 60 * 60 * 24
-    let endDate = DateHelper.dateBySettingHour(0, minute: 0, second: 0, ofDate: NSDate())
+    let endDate = DateHelper.startOfDay(Date())
     let beginDate = DateHelper.addToDate(endDate, years: -2, months: 0, days: 0)
     let minAmount = 50
     let maxAmount = 500
@@ -147,24 +147,24 @@ class CoreDataPrePopulation {
     var currentDay = beginDate
     
     while currentDay.isEarlierThan(endDate) {
-      let intakesCount = random() % maxIntakesPerDay
+      let intakesCount = Int(arc4random_uniform(UInt32(maxIntakesPerDay)))
       for _ in 0..<intakesCount {
-        let drinkIndex = random() % Drink.getDrinksCount()
+        let drinkIndex = Int(arc4random_uniform(UInt32(Drink.getDrinksCount())))
         
         if let drink = drinks[drinkIndex] {
-          let amount = Double(minAmount + random() % (maxAmount - minAmount))
-          let timeInterval = NSTimeInterval(random() % secondsPerDay)
-          let intakeDate = NSDate(timeInterval: timeInterval, sinceDate: currentDay)
-          Intake.addEntity(drink: drink, amount: amount, date: intakeDate, managedObjectContext: managedObjectContext, saveImmediately: false)
+          let amount = Double(minAmount + Int(arc4random_uniform(UInt32(maxAmount - minAmount))))
+          let timeInterval = TimeInterval(Int(arc4random_uniform(UInt32(secondsPerDay))))
+          let intakeDate = Date(timeInterval: timeInterval, since: currentDay)
+          _ = Intake.addEntity(drink: drink, amount: amount, date: intakeDate, managedObjectContext: managedObjectContext, saveImmediately: false)
         }
       }
       
-      currentDay = currentDay.getNextDay()
+      currentDay = DateHelper.nextDayFrom(currentDay)
     }
   }
   
-  class func generateWaterGoals(managedObjectContext managedObjectContext: NSManagedObjectContext) {
-    let endDate = DateHelper.dateBySettingHour(0, minute: 0, second: 0, ofDate: NSDate())
+  class func generateWaterGoals(managedObjectContext: NSManagedObjectContext) {
+    let endDate = DateHelper.startOfDay(Date())
     let beginDate = DateHelper.addToDate(endDate, years: -2, months: 0, days: 0)
     let minWaterGoal = 1500
     let maxWaterGoal = 2500
@@ -172,22 +172,22 @@ class CoreDataPrePopulation {
     let highActivityChanceInPercents = 10
     let hotDayChanceInPercents = 20
     
-    var currentWaterGoal = Double(minWaterGoal + random() % (maxWaterGoal - minWaterGoal))
+    var currentWaterGoal = Double(minWaterGoal + Int(arc4random_uniform(UInt32(maxWaterGoal - minWaterGoal))))
     
     var currentDay = beginDate
 
     while currentDay.isEarlierThan(endDate) {
-      let needToComputeWaterGoal = (random() % 100) < computeWaterGoalChanceInPercents
-      let enableHighActivity = (random() % 100) < highActivityChanceInPercents
-      let enableHotDay = (random() % 100) < hotDayChanceInPercents
+      let needToComputeWaterGoal = Int(arc4random_uniform(100)) < computeWaterGoalChanceInPercents
+      let enableHighActivity = Int(arc4random_uniform(100)) < highActivityChanceInPercents
+      let enableHotDay = Int(arc4random_uniform(100)) < hotDayChanceInPercents
       
       if needToComputeWaterGoal || enableHighActivity || enableHotDay {
         
         if needToComputeWaterGoal {
-          currentWaterGoal = Double(minWaterGoal + random() % (maxWaterGoal - minWaterGoal))
+          currentWaterGoal = Double(minWaterGoal + Int(arc4random_uniform(UInt32(maxWaterGoal - minWaterGoal))))
         }
         
-        WaterGoal.rawAddEntity(
+        _ = WaterGoal.rawAddEntity(
           date: currentDay,
           baseAmount: currentWaterGoal,
           isHotDay: enableHotDay,
@@ -196,7 +196,7 @@ class CoreDataPrePopulation {
           saveImmediately: false)
       }
       
-      currentDay = currentDay.getNextDay()
+      currentDay = DateHelper.nextDayFrom(currentDay)
     }
   }
 }

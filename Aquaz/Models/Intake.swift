@@ -11,14 +11,16 @@ import CoreData
 
 @objc(Intake)
 class Intake: CodingManagedObject, NamedEntity {
-  
+
   static var entityName = "Intake"
+
+  typealias EntityType = Intake
 
   /// Amount of intake in millilitres
   @NSManaged var amount: Double
   
   /// Date of intake
-  @NSManaged var date: NSDate
+  @NSManaged var date: Date
   
   /// What drink was consumed
   @NSManaged var drink: Drink
@@ -44,8 +46,8 @@ class Intake: CodingManagedObject, NamedEntity {
   }
   
   /// Adds a new intake's entity into Core Data
-  class func addEntity(drink drink: Drink, amount: Double, date: NSDate, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Intake? {
-    if let intake = LoggedActions.insertNewObjectForEntity(self, inManagedObjectContext: managedObjectContext) {
+  class func addEntity(drink: Drink, amount: Double, date: Date, managedObjectContext: NSManagedObjectContext, saveImmediately: Bool = true) -> Intake? {
+    if let intake = insertNewObject(inManagedObjectContext: managedObjectContext) {
       intake.amount = amount
       intake.drink = drink
       intake.date = date
@@ -61,9 +63,9 @@ class Intake: CodingManagedObject, NamedEntity {
   }
 
   /// Deletes the intake from Core Data
-  func deleteEntity(saveImmediately saveImmediately: Bool = true) {
+  func deleteEntity(saveImmediately: Bool = true) {
     if let managedObjectContext = managedObjectContext {
-      managedObjectContext.deleteObject(self)
+      managedObjectContext.delete(self)
       
       if saveImmediately {
         CoreDataStack.saveContext(managedObjectContext)
@@ -74,7 +76,7 @@ class Intake: CodingManagedObject, NamedEntity {
   }
   
   /// Fetches all intakes for the specified date interval (beginDate..<endDate)
-  class func fetchIntakes(beginDate beginDate: NSDate?, endDate: NSDate?, managedObjectContext: NSManagedObjectContext) -> [Intake] {
+  class func fetchIntakes(beginDate: Date?, endDate: Date?, managedObjectContext: NSManagedObjectContext) -> [Intake] {
     var predicate: NSPredicate?
     
     if let beginDate = beginDate, let endDate = endDate {
@@ -86,53 +88,53 @@ class Intake: CodingManagedObject, NamedEntity {
     }
     
     let descriptor = NSSortDescriptor(key: "date", ascending: true)
-    return CoreDataHelper.fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: [descriptor])
+    return fetchManagedObjects(managedObjectContext: managedObjectContext, predicate: predicate, sortDescriptors: [descriptor])
   }
 
   /// Fetches an intake for specified date, drinkType and amount.
   /// Used in ConnectivityProvider to prevent double intakes coming from Apple Watch by unknown reason.
-  class func fetchParticularIntake(date date: NSDate, drinkType: DrinkType, amount: Double, managedObjectContext: NSManagedObjectContext) -> Intake? {
+  class func fetchParticularIntake(date: Date, drinkType: DrinkType, amount: Double, managedObjectContext: NSManagedObjectContext) -> Intake? {
     let predicate = NSPredicate(format: "(date == %@) AND (drink.index == %@) AND (amount == %@)", argumentArray: [date, drinkType.rawValue, amount])
     
-    return CoreDataHelper.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate)
+    return fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate)
   }
 
   /// Fetches all intakes for a day taken from the specified date.
   /// Start of the day is inclusively started from 0:00 + specified offset in hours.
   /// End of the day is exclusive ended with 0:00 of the next day + specified offset in hours.
-  class func fetchIntakesForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> [Intake] {
+  class func fetchIntakesForDay(_ date: Date, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> [Intake] {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
-    let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
+    let endDate = DateHelper.nextDayFrom(beginDate)
     return fetchIntakes(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
   }
 
   /// Fetches overall hydration amounts of intakes grouped by drinks for passed date
-  class func fetchHydrationAmountsGroupedByDrinksForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> [DrinkType: Double] {
+  class func fetchHydrationAmountsGroupedByDrinksForDay(_ date: Date, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> [DrinkType: Double] {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
-    let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
+    let endDate = DateHelper.nextDayFrom(beginDate)
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@)", argumentArray: [beginDate, endDate])
     
     let expression = NSExpression(forFunction: "sum:", arguments: [NSExpression(forKeyPath: "amount")])
     
     let overallWaterAmount = NSExpressionDescription()
     overallWaterAmount.expression = expression
-    overallWaterAmount.expressionResultType = .DoubleAttributeType
+    overallWaterAmount.expressionResultType = .doubleAttributeType
     overallWaterAmount.name = "overallWaterAmount"
     
-    let fetchRequest = NSFetchRequest()
-    fetchRequest.entity = LoggedActions.entityDescriptionForEntity(Intake.self, inManagedObjectContext: managedObjectContext)
+    let fetchRequest = NSFetchRequest<NSDictionary>()
+    fetchRequest.entity = Intake.entityDescription(inManagedObjectContext: managedObjectContext)
     fetchRequest.predicate = predicate
     fetchRequest.propertiesToFetch = ["drink.index", overallWaterAmount]
     fetchRequest.propertiesToGroupBy = ["drink.index"]
-    fetchRequest.resultType = .DictionaryResultType
+    fetchRequest.resultType = .dictionaryResultType
     
     do {
-      let fetchResults = try managedObjectContext.executeFetchRequest(fetchRequest)
+      let fetchResults = try managedObjectContext.fetch(fetchRequest)
       var result = [DrinkType: Double]()
       
-      for record in fetchResults as! [NSDictionary] {
+      for record in fetchResults {
         let drinkIndex = record["drink.index"] as! NSNumber
-        let drinkType = DrinkType(rawValue: drinkIndex.integerValue)!
+        let drinkType = DrinkType(rawValue: drinkIndex.intValue)!
         let amount = (record[overallWaterAmount.name] as! Double) * drinkType.hydrationFactor
         result[drinkType] = amount
       }
@@ -144,32 +146,32 @@ class Intake: CodingManagedObject, NamedEntity {
   }
 
   /// Fetches total dehydration amount based on intakes of a passed day
-  class func fetchTotalDehydrationAmountForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> Double {
+  class func fetchTotalDehydrationAmountForDay(_ date: Date, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> Double {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
-    let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
+    let endDate = DateHelper.nextDayFrom(beginDate)
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@) AND (drink.dehydrationFactor != 0)", argumentArray: [beginDate, endDate])
     
     let expression = NSExpression(forFunction: "sum:", arguments: [NSExpression(forKeyPath: "amount")])
     
     let overallWaterAmount = NSExpressionDescription()
     overallWaterAmount.expression = expression
-    overallWaterAmount.expressionResultType = .DoubleAttributeType
+    overallWaterAmount.expressionResultType = .doubleAttributeType
     overallWaterAmount.name = "overallWaterAmount"
     
-    let fetchRequest = NSFetchRequest()
-    fetchRequest.entity = LoggedActions.entityDescriptionForEntity(Intake.self, inManagedObjectContext: managedObjectContext)
+    let fetchRequest = NSFetchRequest<NSDictionary>()
+    fetchRequest.entity = Intake.entityDescription(inManagedObjectContext: managedObjectContext)
     fetchRequest.predicate = predicate
     fetchRequest.propertiesToFetch = ["drink.index", overallWaterAmount]
     fetchRequest.propertiesToGroupBy = ["drink.index"]
-    fetchRequest.resultType = .DictionaryResultType
+    fetchRequest.resultType = .dictionaryResultType
     
     do {
-      let fetchResults = try managedObjectContext.executeFetchRequest(fetchRequest)
+      let fetchResults = try managedObjectContext.fetch(fetchRequest)
       var totalDehydration: Double = 0
       
-      for record in fetchResults as! [NSDictionary] {
+      for record in fetchResults {
         let drinkIndex = record["drink.index"] as! NSNumber
-        let drinkType = DrinkType(rawValue: drinkIndex.integerValue)!
+        let drinkType = DrinkType(rawValue: drinkIndex.intValue)!
         let dehydration = (record[overallWaterAmount.name] as! Double) * drinkType.dehydrationFactor
         totalDehydration += dehydration
       }
@@ -182,32 +184,32 @@ class Intake: CodingManagedObject, NamedEntity {
   }
   
   /// Fetches total hydration amount based on intakes of a passed day
-  class func fetchTotalHydrationAmountForDay(date: NSDate, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> Double {
+  class func fetchTotalHydrationAmountForDay(_ date: Date, dayOffsetInHours: Int, managedObjectContext: NSManagedObjectContext) -> Double {
     let beginDate = DateHelper.dateBySettingHour(dayOffsetInHours, minute: 0, second: 0, ofDate: date)
-    let endDate = DateHelper.addToDate(beginDate, years: 0, months: 0, days: 1)
+    let endDate = DateHelper.nextDayFrom(beginDate)
     let predicate = NSPredicate(format: "(date >= %@) AND (date < %@) AND (drink.hydrationFactor != 0)", argumentArray: [beginDate, endDate])
     
     let expression = NSExpression(forFunction: "sum:", arguments: [NSExpression(forKeyPath: "amount")])
     
     let overallWaterAmount = NSExpressionDescription()
     overallWaterAmount.expression = expression
-    overallWaterAmount.expressionResultType = .DoubleAttributeType
+    overallWaterAmount.expressionResultType = .doubleAttributeType
     overallWaterAmount.name = "overallWaterAmount"
     
-    let fetchRequest = NSFetchRequest()
-    fetchRequest.entity = LoggedActions.entityDescriptionForEntity(Intake.self, inManagedObjectContext: managedObjectContext)
+    let fetchRequest = NSFetchRequest<NSDictionary>()
+    fetchRequest.entity = Intake.entityDescription(inManagedObjectContext: managedObjectContext)
     fetchRequest.predicate = predicate
     fetchRequest.propertiesToFetch = ["drink.index", overallWaterAmount]
     fetchRequest.propertiesToGroupBy = ["drink.index"]
-    fetchRequest.resultType = .DictionaryResultType
+    fetchRequest.resultType = .dictionaryResultType
     
     do {
-      let fetchResults = try managedObjectContext.executeFetchRequest(fetchRequest)
+      let fetchResults = try managedObjectContext.fetch(fetchRequest)
       var totalHydration: Double = 0
       
-      for record in fetchResults as! [NSDictionary] {
+      for record in fetchResults {
         let drinkIndex = record["drink.index"] as! NSNumber
-        let drinkType = DrinkType(rawValue: drinkIndex.integerValue)!
+        let drinkType = DrinkType(rawValue: drinkIndex.intValue)!
         let hydration = (record[overallWaterAmount.name] as! Double) * drinkType.hydrationFactor
         totalHydration += hydration
       }
@@ -220,20 +222,20 @@ class Intake: CodingManagedObject, NamedEntity {
   }
   
   enum GroupingCalendarUnit {
-    case Day
-    case Month
+    case day
+    case month
     
-    func getCalendarUnit() -> NSCalendarUnit {
+    func getCalendarComponent() -> Calendar.Component {
       switch self {
-      case .Day  : return .Day
-      case .Month: return .Month
+      case .day  : return .day
+      case .month: return .month
       }
     }
   }
   
   enum AggregateFunction {
-    case Average
-    case Summary
+    case average
+    case summary
   }
   
   /// Fetches amounts of intakes (return both hydration and dehydration amounts)
@@ -242,9 +244,9 @@ class Intake: CodingManagedObject, NamedEntity {
   /// Note: Average function calculates an average value taking into account ALL days in a specified calendar unit,
   /// not only days with intakes.
   class func fetchIntakeAmountPartsGroupedBy(
-    groupingUnit: GroupingCalendarUnit,
-    beginDate beginDateRaw: NSDate,
-    endDate endDateRaw: NSDate,
+    _ groupingUnit: GroupingCalendarUnit,
+    beginDate beginDateRaw: Date,
+    endDate endDateRaw: Date,
     dayOffsetInHours: Int,
     aggregateFunction aggregateFunctionRaw: AggregateFunction,
     managedObjectContext: NSManagedObjectContext) -> [(hydration: Double, dehydration: Double)]
@@ -259,33 +261,30 @@ class Intake: CodingManagedObject, NamedEntity {
     let intakes = fetchIntakes(beginDate: beginDate, endDate: endDate, managedObjectContext: managedObjectContext)
 
     // It's just an optimization. An algorithm below already groups intakes by days, so calculating the average is useless
-    let aggregateFunction: AggregateFunction = (groupingUnit == .Day) ? .Summary : aggregateFunctionRaw
+    let aggregateFunction: AggregateFunction = (groupingUnit == .day) ? .summary : aggregateFunctionRaw
     
-    let deltaMonths = groupingUnit == .Month ? 1 : 0
-    let deltaDays   = groupingUnit == .Day   ? 1 : 0
+    let deltaMonths = groupingUnit == .month ? 1 : 0
+    let deltaDays   = groupingUnit == .day   ? 1 : 0
     
-    let calendarUnit = groupingUnit.getCalendarUnit()
-    let calendar = NSCalendar.currentCalendar()
+    let calendarComponent = groupingUnit.getCalendarComponent()
+    let calendar = Calendar.current
     
     var groupedAmountParts: [(hydration: Double, dehydration: Double)] = []
-    var nextDate: NSDate!
+    var nextDate: Date!
     var intakeIndex = 0
     var daysInCalendarUnit = 0
     
-    let nextDateComponents = calendar.components([.Year, .Month, .Day, .TimeZone, .Calendar], fromDate: beginDate)
-    nextDateComponents.hour = 0
-    nextDateComponents.minute = 0
-    nextDateComponents.second = 0
+    var nextDateComponents = calendar.dateComponents([.year, .month, .day], from: beginDate)
     
     while true {
-      if aggregateFunction == .Average {
+      if aggregateFunction == .average {
         let currentDate = nextDate ?? beginDate
-        daysInCalendarUnit = calendar.rangeOfUnit(.Day, inUnit: calendarUnit, forDate: currentDate).length
+        daysInCalendarUnit = Calendar.current.range(of: .day, in: calendarComponent, for: currentDate)!.count
       }
 
-      nextDateComponents.month += deltaMonths
-      nextDateComponents.day += deltaDays
-      nextDate = calendar.dateFromComponents(nextDateComponents)
+      nextDateComponents.month = nextDateComponents.month! + deltaMonths
+      nextDateComponents.day = nextDateComponents.day! + deltaDays
+      nextDate = calendar.date(from: nextDateComponents)
       
       if nextDate.isLaterThan(endDate) {
         break
@@ -307,7 +306,7 @@ class Intake: CodingManagedObject, NamedEntity {
         intakeIndex += 1
       }
       
-      if aggregateFunction == .Average {
+      if aggregateFunction == .average {
         hydrationAmountForUnit /= Double(daysInCalendarUnit)
         dehydrationAmountForUnit /= Double(daysInCalendarUnit)
       }

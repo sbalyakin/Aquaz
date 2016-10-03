@@ -12,7 +12,7 @@ class RightDetailTableCell<Value: CustomStringConvertible>: TableCellWithValue<V
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
   var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
-  var accessoryType: UITableViewCellAccessoryType? { didSet { uiCell?.accessoryType = accessoryType ?? .None } }
+  var accessoryType: UITableViewCellAccessoryType? { didSet { uiCell?.accessoryType = accessoryType ?? .none } }
   var uiCell: UITableViewCell?
   
   var supportingTableCell: TableCellWithValue<Value>? {
@@ -21,9 +21,7 @@ class RightDetailTableCell<Value: CustomStringConvertible>: TableCellWithValue<V
     }
   }
   
-  // Value initialization was moved to init() in order to solve Swift 2.2 bug on iOS7
-  // More details here https://bugs.swift.org/browse/SR-815
-  var supportingCellIsShown: Bool { didSet { setHighlightForValue(supportingCellIsShown) } }
+  var supportingCellIsShown = false { didSet { setHighlightForValue(supportingCellIsShown) } }
   
   override var supportsPermanentActivation: Bool { return supportingTableCell != nil }
 
@@ -31,20 +29,19 @@ class RightDetailTableCell<Value: CustomStringConvertible>: TableCellWithValue<V
   init(title: String, value: Value, container: TableCellsContainer, accessoryType: UITableViewCellAccessoryType? = nil) {
     self.title = title
     self.accessoryType = accessoryType
-    supportingCellIsShown = false
-    
     super.init(value: value, container: container)
   }
   
-  override func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  override func createUICell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     if uiCell == nil {
-      uiCell = UITableViewCell(style: .Value1, reuseIdentifier: nil)
+      uiCell = UITableViewCell(style: .value1, reuseIdentifier: nil)
     }
     
     uiCell!.textLabel?.text = title
     uiCell!.imageView?.image = image
     uiCell!.detailTextLabel?.text = stringFromValueFunction?(value) ?? value.description
     uiCell!.detailTextLabel?.textColor = container.rightDetailValueColor
+    
     if let accessoryType = accessoryType {
       uiCell!.accessoryType = accessoryType
     }
@@ -56,7 +53,7 @@ class RightDetailTableCell<Value: CustomStringConvertible>: TableCellWithValue<V
     uiCell?.detailTextLabel?.text = stringFromValueFunction?(value) ?? value.description
   }
   
-  override func setActive(active: Bool) {
+  override func setActive(_ active: Bool) {
     if isSupportingCell {
       return
     }
@@ -75,8 +72,8 @@ class RightDetailTableCell<Value: CustomStringConvertible>: TableCellWithValue<V
     super.setActive(active)
   }
   
-  private func setHighlightForValue(enable: Bool) {
-    uiCell!.detailTextLabel?.textColor = enable ? container.rightDetailSelectedValueColor : container.rightDetailValueColor
+  fileprivate func setHighlightForValue(_ enable: Bool) {
+    uiCell?.detailTextLabel?.textColor = enable ? container.rightDetailSelectedValueColor : container.rightDetailValueColor
   }
   
 }

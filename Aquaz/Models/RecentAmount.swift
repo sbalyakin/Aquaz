@@ -11,6 +11,8 @@ import CoreData
 
 @objc(RecentAmount)
 class RecentAmount: CodingManagedObject, NamedEntity {
+
+  typealias EntityType = RecentAmount
   
   static var entityName = "RecentAmount"
   

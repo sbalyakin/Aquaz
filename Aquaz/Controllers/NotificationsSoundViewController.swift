@@ -9,7 +9,7 @@
 import UIKit
 import AudioToolbox
 
-class NotificationsSoundViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NotificationsSoundViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
 
@@ -27,17 +27,17 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
     tableView?.delegate = nil
   }
 
-  @IBAction func saveWasTapped(sender: AnyObject) {
+  @IBAction func saveWasTapped(_ sender: AnyObject) {
     let soundInfo = soundList[checkedIndex]
     Settings.sharedInstance.notificationsSound.value = soundInfo.fileName
     
-    navigationController?.popViewControllerAnimated(true)
+    _ = navigationController?.popViewController(animated: true)
   }
 
-  private func playSound(fileName: String) {
-    if let soundURL = NSBundle.mainBundle().URLForResource(fileName, withExtension: nil) {
+  fileprivate func playSound(_ fileName: String) {
+    if let soundURL = Bundle.main.url(forResource: fileName, withExtension: nil) {
       var mySound: SystemSoundID = 0
-      let status = AudioServicesCreateSystemSoundID(soundURL, &mySound)
+      let status = AudioServicesCreateSystemSoundID(soundURL as CFURL, &mySound)
       if status == OSStatus(kAudioServicesNoError) {
         AudioServicesPlaySystemSound(mySound)
       } else {
@@ -48,9 +48,9 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
     }
   }
 
-  private func fillSoundsList() {
-    if let bundlePath = NSBundle.mainBundle().resourcePath {
-      if let allFiles = (try? NSFileManager().contentsOfDirectoryAtPath(bundlePath)) {
+  fileprivate func fillSoundsList() {
+    if let bundlePath = Bundle.main.resourcePath {
+      if let allFiles = (try? FileManager().contentsOfDirectory(atPath: bundlePath)) {
         for soundInfo in NotificationSounds.soundList {
           if allFiles.contains((soundInfo.fileName)) {
             soundList.append(soundInfo)
@@ -66,10 +66,10 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
     }
   }
   
-  private func findCheckedIndex() {
+  fileprivate func findCheckedIndex() {
     let fileName = Settings.sharedInstance.notificationsSound.value
     
-    for (index, sound) in soundList.enumerate() {
+    for (index, sound) in soundList.enumerated() {
       if sound.fileName == fileName {
         checkedIndex = index
         return
@@ -77,42 +77,47 @@ class NotificationsSoundViewController: UIViewController, UITableViewDataSource,
     }
     
     Logger.logWarning("Sound file stored in settings is not found", logDetails: [Logger.Attributes.fileName: fileName])
-    checkedIndex == 0
+    checkedIndex = 0
   }
   
-  private var soundList: [NotificationSounds.SoundInfo] = []
+  fileprivate var soundList: [NotificationSounds.SoundInfo] = []
 
-  private var checkedIndex: Int = 0
+  fileprivate var checkedIndex: Int = 0
 }
 
-// MARK: UITableViewDataSource and UITableViewDelegate -
-extension NotificationsSoundViewController {
+// MARK: UITableViewDataSource -
+extension NotificationsSoundViewController: UITableViewDataSource {
   
-  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
   
-  func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     return NSLocalizedString("NSVC:Notification sounds", value: "Notification sounds", comment: "NotificationsSoundViewController: header title for [NSVC:Notification sounds] section")
   }
   
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return soundList.count
   }
   
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("SoundCell")!
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "SoundCell")!
     
-    let index = indexPath.row
+    let index = (indexPath as NSIndexPath).row
     let sound = soundList[index]
-    cell.textLabel?.text = sound.title.capitalizedString
-    cell.accessoryType = (index == checkedIndex) ? .Checkmark : .None
+    cell.textLabel?.text = sound.title.capitalized
+    cell.accessoryType = (index == checkedIndex) ? .checkmark : .none
     
     return cell
   }
   
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    checkedIndex = indexPath.row
+}
+
+// MARK: UITableViewDelegate -
+extension NotificationsSoundViewController: UITableViewDelegate {
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    checkedIndex = (indexPath as NSIndexPath).row
     tableView.reloadData()
     let sound = soundList[checkedIndex]
     playSound(sound.fileName)

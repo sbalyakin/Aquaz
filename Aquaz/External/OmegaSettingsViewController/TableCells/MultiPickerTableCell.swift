@@ -8,7 +8,8 @@
 
 import UIKit
 
-class MultiPickerTableCell<Value: Equatable, ComponentCollection: CollectionType where ComponentCollection.Generator.Element: CustomStringConvertible, ComponentCollection.Index == Int>: TableCellWithValue<Value>, UIPickerTableViewCellDataSource, UIPickerTableViewCellDelegate {
+class MultiPickerTableCell<TValue: Equatable, TComponentCollection: Collection>: TableCellWithValue<TValue>, UIPickerTableViewCellDataSource, UIPickerTableViewCellDelegate
+where TComponentCollection.Iterator.Element: CustomStringConvertible, TComponentCollection.Index == Int, TComponentCollection.IndexDistance == Int {
   
   let components: [Component]
   let height: UIPickerViewHeight
@@ -18,18 +19,18 @@ class MultiPickerTableCell<Value: Equatable, ComponentCollection: CollectionType
 
   var uiCell: UIPickerTableViewCell?
 
-  typealias Component = (title: String?, width: CGFloat?, collection: ComponentCollection)
-  typealias SelectionToValueFunction = ([Int]) -> Value
-  typealias ValueToSelectionFunction = (Value) -> [Int]
-  typealias CollectionElementToStringFunction = (ComponentCollection.Generator.Element) -> String
+  typealias Component = (title: String?, width: CGFloat?, collection: TComponentCollection)
+  typealias SelectionToValueFunction = ([Int]) -> TValue
+  typealias ValueToSelectionFunction = (TValue) -> [Int]
+  typealias CollectionElementToStringFunction = (TComponentCollection.Iterator.Element) -> String
 
-  init(value: Value, components: [Component], container: TableCellsContainer, height: UIPickerViewHeight = .Medium) {
+  init(value: TValue, components: [Component], container: TableCellsContainer, height: UIPickerViewHeight = .medium) {
     self.components = components
     self.height = height
     super.init(value: value, container: container)
   }
   
-  override func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  override func createUICell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     if uiCell == nil {
       uiCell = UIPickerTableViewCell()
     }
@@ -45,10 +46,10 @@ class MultiPickerTableCell<Value: Equatable, ComponentCollection: CollectionType
     updateUICell()
   }
   
-  private func updateUICell() {
+  fileprivate func updateUICell() {
     if let uiCell = uiCell, let selectedRows = valueToSelectionFunction?(value) {
       assert(selectedRows.count == uiCell.pickerView.numberOfComponents)
-      for (component, row) in selectedRows.enumerate() {
+      for (component, row) in selectedRows.enumerated() {
         uiCell.pickerView.selectRow(row, inComponent: component, animated: true)
       }
     }
@@ -58,33 +59,33 @@ class MultiPickerTableCell<Value: Equatable, ComponentCollection: CollectionType
     return height.rawValue
   }
   
-  // MARK: PickerTableViewCellDataSource
+  // MARK: protocol UIPickerTableViewCellDataSource
   
-  func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+  func numberOfComponentsInPickerView(_ pickerView: UIPickerView) -> Int {
     let count = components.count
     return count
   }
   
-  func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return (components[component].collection).count
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return components[component].collection.count
   }
   
-  func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
     let value = components[component].collection[row]
     let title = collectionElementToStringFunction?(value) ?? value.description
     return title
   }
   
-  func pickerView(pickerView: UIPickerView, titleForComponent component: Int) -> String? {
+  func pickerView(_ pickerView: UIPickerView, titleForComponent component: Int) -> String? {
     return components[component].title
   }
   
-  // MARK: PickerTableViewCellDelegate
+  // MARK: protocol UIPickerTableViewCellDelegate
   
-  func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     var selectedRows = [Int]()
     for component in 0..<pickerView.numberOfComponents {
-      selectedRows += [pickerView.selectedRowInComponent(component)]
+      selectedRows += [pickerView.selectedRow(inComponent: component)]
     }
 
     assert(selectedRows.count == components.count)
@@ -95,7 +96,7 @@ class MultiPickerTableCell<Value: Equatable, ComponentCollection: CollectionType
     }
   }
   
-  func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat? {
+  func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat? {
     return components[component].width
   }
   

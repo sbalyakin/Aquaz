@@ -33,7 +33,7 @@ class SnapshotUITests: XCTestCase {
     let app = XCUIApplication()
     snapshot("1-Drinks")
     
-    app.collectionViews.cells.otherElements.containingType(.StaticText, identifier:"Water").childrenMatchingType(.Other).elementBoundByIndex(1).tap()
+    app.collectionViews.cells.otherElements.containing(.staticText, identifier:"Water").children(matching: .other).element(boundBy: 1).tap()
     snapshot("4-Intake")
     
     app.navigationBars["Aquaz.IntakeView"].buttons["Cancel"].tap()

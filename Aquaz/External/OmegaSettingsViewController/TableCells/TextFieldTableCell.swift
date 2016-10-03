@@ -28,7 +28,7 @@ class TextFieldTableCell<Value: CustomStringConvertible>: TableCellWithValue<Val
   
   // Value initialization was moved to init() in order to solve Swift 2.2 bug on iOS7
   // More details here https://bugs.swift.org/browse/SR-815
-  private var selectionIsProcessing: Bool
+  fileprivate var selectionIsProcessing: Bool
 
   let valueFromStringFunction: ValueFromStringFunction
   
@@ -36,7 +36,7 @@ class TextFieldTableCell<Value: CustomStringConvertible>: TableCellWithValue<Val
 
   typealias ValueFromStringFunction = (String) -> Value?
   
-  init(title: String, value: Value, valueFromStringFunction: ValueFromStringFunction, container: TableCellsContainer, keyboardType: UIKeyboardType = .Default, textFieldBorderStyle: UITextBorderStyle = .None) {
+  init(title: String, value: Value, valueFromStringFunction: @escaping ValueFromStringFunction, container: TableCellsContainer, keyboardType: UIKeyboardType = .default, textFieldBorderStyle: UITextBorderStyle = .none) {
     self.title = title
     self.textFieldBorderStyle = textFieldBorderStyle
     self.keyboardType = keyboardType
@@ -47,7 +47,7 @@ class TextFieldTableCell<Value: CustomStringConvertible>: TableCellWithValue<Val
     super.init(value: value, container: container)
   }
   
-  override func createUICell(tableView tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+  override func createUICell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
     if uiCell == nil {
       uiCell = UITextFieldTableViewCell()
     }
@@ -59,7 +59,7 @@ class TextFieldTableCell<Value: CustomStringConvertible>: TableCellWithValue<Val
     uiCell!.textField.font = uiCell!.textLabel!.font
     uiCell!.textField.keyboardType = keyboardType
     uiCell!.textField.borderStyle = textFieldBorderStyle
-    uiCell!.textField.textAlignment = .Right
+    uiCell!.textField.textAlignment = .right
     uiCell!.delegate = self
     return uiCell!
   }
@@ -69,7 +69,7 @@ class TextFieldTableCell<Value: CustomStringConvertible>: TableCellWithValue<Val
     uiCell?.textField.text = stringFromValueFunction?(value) ?? value.description
   }
   
-  override func setActive(active: Bool) {
+  override func setActive(_ active: Bool) {
     if selectionIsProcessing {
       return
     }
@@ -86,12 +86,12 @@ class TextFieldTableCell<Value: CustomStringConvertible>: TableCellWithValue<Val
     selectionIsProcessing = false
   }
   
-  func textFieldDidBeginEditing(textField: UITextField) {
+  func textFieldDidBeginEditing(_ textField: UITextField) {
     container.activateTableCell(self)
     uiCell?.textField?.textColor = container.rightDetailSelectedValueColor
   }
   
-  func textFieldDidEndEditing(textField: UITextField) {
+  func textFieldDidEndEditing(_ textField: UITextField) {
     if let value = valueFromStringFunction(textField.text ?? "") {
       self.value = value
     }

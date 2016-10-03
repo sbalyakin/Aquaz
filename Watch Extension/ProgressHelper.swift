@@ -11,7 +11,7 @@ import WatchKit
 
 final class ProgressHelper {
   
-  static func calcAnimationParameters(imagesCount imagesCount: Int, fromCurrentAmount: Double, fromTotalAmount: Double, toCurrentAmount: Double, toTotalAmount: Double, maximumAnimationDuration: Double = 1) -> (imageRange: NSRange, animationDuration: Double) {
+  static func calcAnimationParameters(imagesCount: Int, fromCurrentAmount: Double, fromTotalAmount: Double, toCurrentAmount: Double, toTotalAmount: Double, maximumAnimationDuration: Double = 1) -> (imageRange: NSRange, animationDuration: Double) {
     let progressFrom = max(0, min(1, fromCurrentAmount / fromTotalAmount))
     let progressTo = max(0, min(1, toCurrentAmount / toTotalAmount))
     let rangeStart = Int(progressFrom * Double(imagesCount))
@@ -34,12 +34,12 @@ final class ProgressHelper {
     }
     
     var size: CGSize {
-      return text.sizeWithAttributes(attributes)
+      return text.size(attributes: attributes)
     }
   }
   
-  static func generateTextProgressImage(imageSize imageSize: CGSize, title: TextProgressItem, subTitle: TextProgressItem, upTitle: TextProgressItem) -> UIImage {
-    let scale = WKInterfaceDevice.currentDevice().screenScale
+  static func generateTextProgressImage(imageSize: CGSize, title: TextProgressItem, subTitle: TextProgressItem, upTitle: TextProgressItem) -> UIImage {
+    let scale = WKInterfaceDevice.current().screenScale
     UIGraphicsBeginImageContextWithOptions(imageSize, false, scale)
     
     drawBadgeImageInCurrentContext(imageSize: imageSize, title: title, subTitle: subTitle, upTitle: upTitle)
@@ -48,10 +48,10 @@ final class ProgressHelper {
     
     UIGraphicsEndImageContext()
     
-    return image
+    return image!
   }
   
-  private static func drawBadgeImageInCurrentContext(imageSize imageSize: CGSize, title: TextProgressItem, subTitle: TextProgressItem, upTitle: TextProgressItem) {
+  fileprivate static func drawBadgeImageInCurrentContext(imageSize: CGSize, title: TextProgressItem, subTitle: TextProgressItem, upTitle: TextProgressItem) {
     let center = CGPoint(x: imageSize.width / 2, y: imageSize.height / 2)
 
     let titleSize    = title.size
@@ -76,8 +76,8 @@ final class ProgressHelper {
       width: subTitleSize.width,
       height: subTitleSize.height)
     
-    upTitle.text.drawInRect(upTitleRect.integral, withAttributes: upTitle.attributes)
-    subTitle.text.drawInRect(subTitleRect.integral, withAttributes: subTitle.attributes)
-    title.text.drawInRect(titleRect.integral, withAttributes: title.attributes)
+    upTitle.text.draw(in: upTitleRect.integral, withAttributes: upTitle.attributes)
+    subTitle.text.draw(in: subTitleRect.integral, withAttributes: subTitle.attributes)
+    title.text.draw(in: titleRect.integral, withAttributes: title.attributes)
   }
 }
