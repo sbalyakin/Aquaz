@@ -339,9 +339,9 @@ class OmegaSettingsViewController: UIViewController {
   }
   
   func handleKeyboardWillShowNotification(_ notification: Notification) {
-    let userInfo = (notification as NSNotification).userInfo!
+    let userInfo = notification.userInfo!
     
-    let infoRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue
+    let infoRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
     let size = infoRect!.size
     
     let contentInsets: UIEdgeInsets
