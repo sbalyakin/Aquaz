@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11521.1" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11517.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Today View Controller-->
@@ -17,18 +18,16 @@
                         <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="213"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Updating..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9e7-xk-npV" userLabel="Overall Intake">
-                                <rect key="frame" x="16" y="8" width="288" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Updating..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9e7-xk-npV" userLabel="Overall Intake">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GD9-6t-B34" userLabel="Progress View" customClass="MultiProgressView">
-                                <rect key="frame" x="20" y="37" width="280" height="4"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="GD9-6t-B34" userLabel="Progress View" customClass="MultiProgressView">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="5ld-t6-L2B"/>
                                 </constraints>
@@ -37,103 +36,88 @@
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="emptySectionColor">
-                                        <color key="value" red="0.94509803920000002" green="0.94509803920000002" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" red="0.94509803920000002" green="0.94509803920000002" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent Intakes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJk-Gn-h2O">
-                                <rect key="frame" x="16" y="49" width="284" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="Recent Intakes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJk-Gn-h2O">
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iEn-FC-8wI" userLabel="Gap 1">
-                                <rect key="frame" x="0.0" y="75" width="32" height="64"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="iEn-FC-8wI" userLabel="Gap 1">
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wee-Cb-r64" userLabel="Drink 1 - Image" customClass="DrinkView">
-                                <rect key="frame" x="32" y="75" width="64" height="64"/>
+                            <view contentMode="scaleAspectFit" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="Wee-Cb-r64" userLabel="Drink 1 - Image" customClass="DrinkView">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="e35-GQ-ArS" appends="YES" id="hFs-pc-pZh"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Drink}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omk-iq-t3r" userLabel="Drink 1 - Title">
-                                <rect key="frame" x="41" y="147" width="46" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="{Drink}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omk-iq-t3r" userLabel="Drink 1 - Title">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Amount}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNh-iL-tK7" userLabel="Drink 1 - Amount">
-                                <rect key="frame" x="33" y="164" width="62" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="{Amount}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNh-iL-tK7" userLabel="Drink 1 - Amount">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="da6-s4-EEI" userLabel="Gap 2">
-                                <rect key="frame" x="96" y="75" width="32" height="64"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="da6-s4-EEI" userLabel="Gap 2">
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vJU-a4-h8C" userLabel="Drink 2 - Image" customClass="DrinkView">
-                                <rect key="frame" x="128" y="75" width="64" height="64"/>
+                            <view contentMode="scaleAspectFit" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="vJU-a4-h8C" userLabel="Drink 2 - Image" customClass="DrinkView">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="vJU-a4-h8C" secondAttribute="height" multiplier="1:1" id="6Kw-V6-IEs"/>
+                                    <constraint firstAttribute="width" secondItem="vJU-a4-h8C" secondAttribute="height" multiplier="1:1" priority="250" id="6Kw-V6-IEs"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="zzN-Hc-xay" appends="YES" id="mvg-6P-MA9"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Drink}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNy-lo-PmP" userLabel="Drink 2 - Title">
-                                <rect key="frame" x="137" y="147" width="46" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="{Drink}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNy-lo-PmP" userLabel="Drink 2 - Title">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Amount}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spF-wi-ff1" userLabel="Drink 2 - Amount">
-                                <rect key="frame" x="129" y="164" width="62" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="{Amount}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spF-wi-ff1" userLabel="Drink 2 - Amount">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4kR-rT-yJj" userLabel="Gap 3">
-                                <rect key="frame" x="192" y="75" width="32" height="64"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="4kR-rT-yJj" userLabel="Gap 3">
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPd-GL-K5j" userLabel="Drink 3 - Image" customClass="DrinkView">
-                                <rect key="frame" x="224" y="75" width="64" height="64"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleAspectFit" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="vPd-GL-K5j" userLabel="Drink 3 - Image" customClass="DrinkView">
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="7W0-VZ-LL4" appends="YES" id="Fxg-KP-aSm"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Drink}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wh-Vx-QHv" userLabel="Drink 3 - Title">
-                                <rect key="frame" x="233" y="147" width="46" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="{Drink}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wh-Vx-QHv" userLabel="Drink 3 - Title">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Amount}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agh-hU-OBc" userLabel="Drink 3 - Amount">
-                                <rect key="frame" x="225" y="164" width="62" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="{Amount}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agh-hU-OBc" userLabel="Drink 3 - Amount">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vX0-OV-jjo" userLabel="Gap 4">
-                                <rect key="frame" x="288" y="75" width="32" height="64"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="vX0-OV-jjo" userLabel="Gap 4">
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ze7-qb-OsM">
-                                <rect key="frame" x="101" y="189" width="118" height="14"/>
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ze7-qb-OsM">
                                 <state key="normal" title="Open Application">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="openApplicationWasTapped" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="p6q-pG-Kva"/>
@@ -149,43 +133,47 @@
                             <constraint firstItem="dNy-lo-PmP" firstAttribute="top" secondItem="vJU-a4-h8C" secondAttribute="bottom" constant="8" symbolic="YES" id="3YI-QB-QEy"/>
                             <constraint firstItem="vJU-a4-h8C" firstAttribute="height" secondItem="vPd-GL-K5j" secondAttribute="height" id="5lP-ao-BxL"/>
                             <constraint firstItem="spF-wi-ff1" firstAttribute="centerX" secondItem="dNy-lo-PmP" secondAttribute="centerX" id="5og-i7-gud"/>
-                            <constraint firstItem="ze7-qb-OsM" firstAttribute="top" secondItem="spF-wi-ff1" secondAttribute="bottom" constant="8" symbolic="YES" id="8Kk-nO-9wx"/>
+                            <constraint firstItem="ze7-qb-OsM" firstAttribute="top" secondItem="spF-wi-ff1" secondAttribute="bottom" constant="12" id="8Kk-nO-9wx"/>
                             <constraint firstItem="Wee-Cb-r64" firstAttribute="centerY" secondItem="vJU-a4-h8C" secondAttribute="centerY" id="9Zw-zc-5H7"/>
                             <constraint firstItem="vJU-a4-h8C" firstAttribute="centerY" secondItem="vX0-OV-jjo" secondAttribute="centerY" id="BoR-uh-DJM"/>
                             <constraint firstItem="iEn-FC-8wI" firstAttribute="width" secondItem="vX0-OV-jjo" secondAttribute="width" id="C04-7T-hcE"/>
                             <constraint firstItem="vJU-a4-h8C" firstAttribute="width" secondItem="vPd-GL-K5j" secondAttribute="width" id="DGX-IF-pvo"/>
                             <constraint firstItem="9e7-xk-npV" firstAttribute="trailing" secondItem="S3S-Oj-5AN" secondAttribute="trailingMargin" id="DbL-LN-cZs"/>
+                            <constraint firstItem="spF-wi-ff1" firstAttribute="height" secondItem="agh-hU-OBc" secondAttribute="height" id="E4Q-Yq-5y5"/>
                             <constraint firstItem="vPd-GL-K5j" firstAttribute="leading" secondItem="4kR-rT-yJj" secondAttribute="trailing" id="FIq-b6-CJt"/>
                             <constraint firstItem="da6-s4-EEI" firstAttribute="leading" secondItem="Wee-Cb-r64" secondAttribute="trailing" id="FRO-iv-5Bf"/>
-                            <constraint firstItem="bNh-iL-tK7" firstAttribute="top" secondItem="Omk-iq-t3r" secondAttribute="bottom" id="IF4-bB-pSs"/>
+                            <constraint firstItem="bNh-iL-tK7" firstAttribute="top" secondItem="Omk-iq-t3r" secondAttribute="bottom" priority="750" id="IF4-bB-pSs"/>
                             <constraint firstItem="iEn-FC-8wI" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="IxF-ph-x7q"/>
                             <constraint firstItem="vJU-a4-h8C" firstAttribute="centerY" secondItem="da6-s4-EEI" secondAttribute="centerY" id="JGz-vG-v8W"/>
                             <constraint firstItem="iEn-FC-8wI" firstAttribute="width" secondItem="da6-s4-EEI" secondAttribute="width" id="KDz-V8-JUy"/>
                             <constraint firstItem="vJU-a4-h8C" firstAttribute="height" secondItem="4kR-rT-yJj" secondAttribute="height" id="KpU-Wk-bvx"/>
                             <constraint firstItem="9e7-xk-npV" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="L4i-Fq-JD3"/>
-                            <constraint firstItem="sJk-Gn-h2O" firstAttribute="top" secondItem="GD9-6t-B34" secondAttribute="bottom" constant="8" symbolic="YES" id="WDm-oW-2LH"/>
+                            <constraint firstItem="sJk-Gn-h2O" firstAttribute="top" secondItem="GD9-6t-B34" secondAttribute="bottom" priority="749" constant="8" symbolic="YES" id="WDm-oW-2LH"/>
                             <constraint firstItem="5Wh-Vx-QHv" firstAttribute="centerX" secondItem="agh-hU-OBc" secondAttribute="centerX" id="Wg1-qH-xLj"/>
-                            <constraint firstItem="9e7-xk-npV" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" symbolic="YES" id="Xgc-Wc-xL7"/>
+                            <constraint firstItem="9e7-xk-npV" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="12" id="Xgc-Wc-xL7"/>
                             <constraint firstItem="vJU-a4-h8C" firstAttribute="leading" secondItem="da6-s4-EEI" secondAttribute="trailing" id="Y33-1R-i6B"/>
                             <constraint firstAttribute="trailing" secondItem="GD9-6t-B34" secondAttribute="trailing" constant="20" symbolic="YES" id="ZP3-uj-fKK"/>
                             <constraint firstItem="vJU-a4-h8C" firstAttribute="centerY" secondItem="vPd-GL-K5j" secondAttribute="centerY" id="ZRI-0u-kkk"/>
                             <constraint firstItem="vJU-a4-h8C" firstAttribute="centerX" secondItem="dNy-lo-PmP" secondAttribute="centerX" id="cG1-qu-Ygq"/>
                             <constraint firstItem="Wee-Cb-r64" firstAttribute="height" secondItem="vJU-a4-h8C" secondAttribute="height" id="d6o-x7-NBH"/>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="ze7-qb-OsM" secondAttribute="bottom" priority="750" constant="10" id="dTe-J4-zAg"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="ze7-qb-OsM" secondAttribute="bottom" constant="10" id="dTe-J4-zAg"/>
                             <constraint firstItem="Wee-Cb-r64" firstAttribute="leading" secondItem="iEn-FC-8wI" secondAttribute="trailing" id="dvj-tZ-7Or"/>
                             <constraint firstItem="spF-wi-ff1" firstAttribute="top" secondItem="dNy-lo-PmP" secondAttribute="bottom" id="dyW-M8-Gan"/>
                             <constraint firstItem="iEn-FC-8wI" firstAttribute="width" secondItem="4kR-rT-yJj" secondAttribute="width" id="e2w-Dd-3f0"/>
                             <constraint firstItem="iEn-FC-8wI" firstAttribute="centerY" secondItem="vJU-a4-h8C" secondAttribute="centerY" id="gAb-2w-mda"/>
                             <constraint firstItem="iEn-FC-8wI" firstAttribute="height" secondItem="vJU-a4-h8C" secondAttribute="height" id="gnh-B5-jAH"/>
                             <constraint firstItem="GD9-6t-B34" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" constant="20" symbolic="YES" id="i8I-h2-T23"/>
+                            <constraint firstItem="Omk-iq-t3r" firstAttribute="height" secondItem="dNy-lo-PmP" secondAttribute="height" id="n8k-E0-7gb"/>
                             <constraint firstItem="GD9-6t-B34" firstAttribute="top" secondItem="9e7-xk-npV" secondAttribute="bottom" constant="8" symbolic="YES" id="n8p-NM-TfB"/>
-                            <constraint firstItem="vJU-a4-h8C" firstAttribute="top" secondItem="sJk-Gn-h2O" secondAttribute="bottom" constant="8" symbolic="YES" id="qDD-tR-Z78"/>
+                            <constraint firstItem="vJU-a4-h8C" firstAttribute="top" secondItem="sJk-Gn-h2O" secondAttribute="bottom" priority="750" constant="8" symbolic="YES" id="qDD-tR-Z78"/>
                             <constraint firstItem="ze7-qb-OsM" firstAttribute="centerX" secondItem="spF-wi-ff1" secondAttribute="centerX" id="qaK-tG-5Ub"/>
+                            <constraint firstItem="dNy-lo-PmP" firstAttribute="height" secondItem="5Wh-Vx-QHv" secondAttribute="height" id="rM0-0X-qem"/>
                             <constraint firstItem="5Wh-Vx-QHv" firstAttribute="centerX" secondItem="vPd-GL-K5j" secondAttribute="centerX" id="rdC-qk-Amu"/>
-                            <constraint firstItem="agh-hU-OBc" firstAttribute="top" secondItem="5Wh-Vx-QHv" secondAttribute="bottom" id="riJ-qe-o9W"/>
+                            <constraint firstItem="agh-hU-OBc" firstAttribute="top" secondItem="5Wh-Vx-QHv" secondAttribute="bottom" priority="750" id="riJ-qe-o9W"/>
                             <constraint firstItem="sJk-Gn-h2O" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" constant="16" id="saM-A0-Anc"/>
                             <constraint firstItem="vJU-a4-h8C" firstAttribute="height" secondItem="vX0-OV-jjo" secondAttribute="height" id="sze-JX-cSa"/>
                             <constraint firstItem="vX0-OV-jjo" firstAttribute="leading" secondItem="vPd-GL-K5j" secondAttribute="trailing" id="tC4-sc-yzR"/>
+                            <constraint firstItem="bNh-iL-tK7" firstAttribute="height" secondItem="spF-wi-ff1" secondAttribute="height" id="tHD-qi-2nU"/>
                             <constraint firstAttribute="trailing" secondItem="vX0-OV-jjo" secondAttribute="trailing" id="tef-Pp-pli"/>
                             <constraint firstItem="Wee-Cb-r64" firstAttribute="width" secondItem="vJU-a4-h8C" secondAttribute="width" id="uu6-wY-TAw"/>
                             <constraint firstItem="Wee-Cb-r64" firstAttribute="centerX" secondItem="Omk-iq-t3r" secondAttribute="centerX" id="v83-6t-j23"/>
@@ -199,7 +187,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="213"/>
+                    <size key="freeformSize" width="320" height="240"/>
                     <connections>
                         <outlet property="drink1AmountLabel" destination="bNh-iL-tK7" id="WiO-PP-VFE"/>
                         <outlet property="drink1TitleLabel" destination="Omk-iq-t3r" id="DNz-2G-Ltq"/>
@@ -231,7 +219,12 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="516" y="284.5"/>
+            <point key="canvasLocation" x="-644" y="92"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>

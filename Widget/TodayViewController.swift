@@ -13,7 +13,7 @@ import Fabric
 import Crashlytics
 import MMWormhole
 
-class TodayViewController: UIViewController, NCWidgetProviding {
+class TodayViewController: UIViewController {
   
   // MARK: Properties
   
@@ -51,6 +51,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    if #available(iOSApplicationExtension 10.0, *) {
+      extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+    }
     
     setupDrinksUI()
     setupProgressView()
@@ -307,19 +311,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       decimals: Settings.sharedInstance.generalVolumeUnits.value.decimals)
   }
   
-  func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-    fetchData {
-      DispatchQueue.main.async {
-        self.updateUI(animated: false)
-        completionHandler(.newData)
-      }
-    }
-  }
-  
-  func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
-    return UIEdgeInsets.zero
-  }
-
   @IBAction func drink1WasTapped(_ sender: UITapGestureRecognizer) {
     addIntakeForDrink(drink1)
   }
@@ -356,6 +347,31 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   @IBAction func openApplicationWasTapped() {
     let url = URL(string: GlobalConstants.applicationSchemeURL)
     extensionContext?.open(url!, completionHandler: nil)
+  }
+}
+
+extension TodayViewController : NCWidgetProviding {
+  
+  func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
+    fetchData {
+      DispatchQueue.main.async {
+        self.updateUI(animated: false)
+        completionHandler(.newData)
+      }
+    }
+  }
+  
+  func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+    return UIEdgeInsets.zero
+  }
+
+  @available(iOSApplicationExtension 10.0, *)
+  func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+    if activeDisplayMode == .compact {
+      preferredContentSize = maxSize
+    } else {
+      preferredContentSize = CGSize(width: maxSize.width, height: 240)
+    }
   }
 }
 
