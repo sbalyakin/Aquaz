@@ -61,7 +61,7 @@ final class SnapshotsInitializer {
     Settings.sharedInstance.notificationsEnabled.value = true
     Settings.sharedInstance.notificationsFrom.value = DateHelper.dateBySettingHour(9, minute: 0, second: 0, ofDate: Date())
     Settings.sharedInstance.notificationsTo.value = DateHelper.dateBySettingHour(18, minute: 0, second: 0, ofDate: Date())
-    Settings.sharedInstance.notificationsInterval.value = 60 * 60 * 2
+    Settings.sharedInstance.notificationsInterval.value = Double(60 * 60 * 2)
     Settings.sharedInstance.notificationsSmart.value = true
     Settings.sharedInstance.notificationsLimit.value = true
   }

@@ -66,12 +66,12 @@ where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Ind
   }
   
   fileprivate func findRowWithNearestValue(_ value: NSNumber) -> Int? {
-    var minimumDelta: Double!
+    var minimumDelta: Double?
     var row: Int?
     for (index, item) in collection.enumerated() {
       let numberItem = item as! NSNumber
       let delta = abs(value.doubleValue - numberItem.doubleValue)
-      if minimumDelta == nil || delta < minimumDelta {
+      if minimumDelta == nil || delta < minimumDelta! {
         minimumDelta = delta
         row = index
       }
