@@ -19,6 +19,7 @@ class TodayViewController: UIViewController {
   
   @IBOutlet weak var progressLabel: UILabel!
   @IBOutlet weak var progressView: MultiProgressView!
+  @IBOutlet weak var recentIntakesLabel: UILabel!
   @IBOutlet weak var drink1AmountLabel: UILabel!
   @IBOutlet weak var drink1View: DrinkView!
   @IBOutlet weak var drink1TitleLabel: UILabel!
@@ -28,6 +29,7 @@ class TodayViewController: UIViewController {
   @IBOutlet weak var drink3AmountLabel: UILabel!
   @IBOutlet weak var drink3View: DrinkView!
   @IBOutlet weak var drink3TitleLabel: UILabel!
+  @IBOutlet weak var openApplicationButton: UIButton!
   
   fileprivate var drink1: Drink!
   fileprivate var drink2: Drink!
@@ -101,6 +103,19 @@ class TodayViewController: UIViewController {
   }
   
   fileprivate func setupDrinksUI() {
+    if #available(iOS 10, *) {
+    } else {
+      progressLabel.textColor = UIColor.lightGray
+      recentIntakesLabel.textColor = UIColor.lightGray
+      drink1AmountLabel.textColor = UIColor.white
+      drink1TitleLabel.textColor = UIColor.white
+      drink2AmountLabel.textColor = UIColor.white
+      drink2TitleLabel.textColor = UIColor.white
+      drink3AmountLabel.textColor = UIColor.white
+      drink3TitleLabel.textColor = UIColor.white
+      openApplicationButton.setTitleColor(UIColor.white, for: .normal)
+    }
+    
     drink1TitleLabel.text = " "
     drink1AmountLabel.text = " "
     
