@@ -1,1021 +1,3072 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		190C803A3415DF86BE4A3146981FC7F0 /* SDStatusBarManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CD9353D716421E39DC1AE7D4E9E23B1 /* SDStatusBarManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		192D32892487D4AD3412DC61694A6735 /* SDStatusBarOverriderPre8_3.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B447486715615B8E514A9BE673CC58 /* SDStatusBarOverriderPre8_3.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		33618BBEB40ED0B04402BD45D0A12D96 /* MMWormholeSessionMessageTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 0424B6247327523FE0498BFDF70C2307 /* MMWormholeSessionMessageTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		37D3D42BE1707485179802A0B17DAE38 /* SDStatusBarOverriderPost8_3.h in Headers */ = {isa = PBXBuildFile; fileRef = 717AE8808554DEB4747114B6075C3538 /* SDStatusBarOverriderPost8_3.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E475FB226EB9BCF0D4A312CBE5C3A94 /* SDStatusBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7814F10CDCD840BFE9088F863516DDED /* SDStatusBarManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		44CF589A9B620562CC754C6FC0E81B69 /* Pods-Aquaz-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE8E83ACE18DF90BE13F19BE94F55AC /* Pods-Aquaz-dummy.m */; };
-		45D865CB1822646EFC53BFA48FC4A0B4 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48E4A35718C329AC7854970842749A7A /* WatchConnectivity.framework */; };
-		53F90BE826C4C0364CD94B6757B1C4D9 /* SDStatusBarOverriderPost8_3.m in Sources */ = {isa = PBXBuildFile; fileRef = C80DF62F18882173E9EDDE8BC0978721 /* SDStatusBarOverriderPost8_3.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		698451D903454F42B2351C915A02B6A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3561B9B2C830EFF934076F2A28D36940 /* UIKit.framework */; };
-		6DCB12C6DEDB86E74D46178DCF02349E /* MMWormholeSessionMessageTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C9D300D40D1146BD61CBB2B22EBB79 /* MMWormholeSessionMessageTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		762F18A4394FA15213070BDF993A2B48 /* MMWormholeFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B91C9179A1A0D915DA8A28D9566D129 /* MMWormholeFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		77A87A401B9D4B23AAF3005E7DD55C87 /* MMWormholeFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 11706A950E20E69469B678DEAB1D65D9 /* MMWormholeFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		7DC91AE18E358AA0C8DF1B722AA4D94E /* SDStatusBarOverriderPost10_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 0812F84BE7D24B919C464718C60F3259 /* SDStatusBarOverriderPost10_0.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		823143A99A4E5658A80816E3649534B5 /* SDStatusBarOverriderPost9_0.h in Headers */ = {isa = PBXBuildFile; fileRef = 68F8FFD6C6202C9460620A2878707907 /* SDStatusBarOverriderPost9_0.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84B37CAEC1716055BEA3DA3795BC8A3C /* MMWormholeCoordinatedFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = E908CF17D035E7A42E3B4A69C6107327 /* MMWormholeCoordinatedFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8CA202DE2B82A4FA9F6433D0034EA12E /* MMWormholeSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B32061EFFA6CFD955914B05F8AD68B7 /* MMWormholeSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8D0DE603FA10B9245B1C04D3CCE8013D /* SDStatusBarOverriderPost9_3.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F001DE2AFAEAAAA407C7F9FF495F961 /* SDStatusBarOverriderPost9_3.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8D7A5AECA1F3061D719D40CD4F5FF35C /* MMWormholeSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E747561E40EA012CDBD1784A9D47700 /* MMWormholeSession.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		934A883F737BDBC8A8B3E75E35AF4D50 /* SDStatusBarOverriderPost10_0.h in Headers */ = {isa = PBXBuildFile; fileRef = 4163B40B5622705E412E0222942F1101 /* SDStatusBarOverriderPost10_0.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9D6AFCD74FCC1EC6C2D968ABF8EC0D56 /* MMWormholeSessionContextTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = D01BE2E7CC6924FA44EBA7BCC3FD2EA0 /* MMWormholeSessionContextTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		AC715ED246C7D933C76E77EF50A694B4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */; };
-		B38941C0811BF0F9FD2DAD180EC12CD2 /* SDStatusBarOverriderPost9_3.h in Headers */ = {isa = PBXBuildFile; fileRef = 077B21BBE49B6859995A501661F90F8E /* SDStatusBarOverriderPost9_3.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B594D9ABE3D364625535906A3F05A802 /* SDStatusBarOverrider.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1FB7C6BEE1784A1411438BA0240AB /* SDStatusBarOverrider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BD7CB717DA844692A2E615DDBEA25A11 /* MMWormholeCoordinatedFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 2115DC021270A29B4A668978BDBF1207 /* MMWormholeCoordinatedFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		C8D147D6C88AEA702D3DBC74B4768097 /* Pods-Widget-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E64F8F293626CC333E3FE28F75EC73E3 /* Pods-Widget-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9CB55EBCE3C55EA3AFD14F5278A33B6 /* SimulatorStatusMagic-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE08585171DF887BDFC769AF5A9DB591 /* SimulatorStatusMagic-dummy.m */; };
-		CC31FA025B3936FEC27592CC01AC4A5F /* MMWormholeSessionFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 27458252155EFF708548AA852594770E /* MMWormholeSessionFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D06E287165536614B66FA045D8A5D99A /* MMWormholeTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 14CF6733CB5273EB8CAD951C1F5AF3E9 /* MMWormholeTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0CA56D62E126D8687EF499FAB88DFC3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */; };
-		D53C965381E8D2BDAEEEACA0451D6E2E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */; };
-		DE9D89BFECB559F825F1BC2506FB1695 /* MMWormhole.h in Headers */ = {isa = PBXBuildFile; fileRef = 9059B5FD2DBB518464956E06031CFE38 /* MMWormhole.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DFEEABC8C678127F23965CE3AE4B9F67 /* MMWormholeSessionContextTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = EB984FAB12CE083802FEFAF971A5A57F /* MMWormholeSessionContextTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E04121AD5D0C3CBA35D028A7154C62A2 /* MMWormholeSessionFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = E043E35C4211D0125496B01687D16635 /* MMWormholeSessionFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		E10A933A0449C764A4AA4A2610665898 /* SDStatusBarOverriderPre8_3.h in Headers */ = {isa = PBXBuildFile; fileRef = 28DA605C3DB95C29916D075DECFA8C17 /* SDStatusBarOverriderPre8_3.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E2DE3D61D86DEFA0174928C8BE04F919 /* SimulatorStatusMagic-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DBA9BA5CA630D70E6186E663E985E636 /* SimulatorStatusMagic-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E363E0EE419CF84D467724E3D9961DFF /* Pods-Widget-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0DCF625CF5293D6326A3EBA87AF9C1 /* Pods-Widget-dummy.m */; };
-		E4258B26D1911DC625C26AEDC7CA5A6A /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E5F2160A6351C8D8A25E2E3971E76 /* MMWormhole.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		E65281839DDC0C9EE91458CEA8161E8C /* Pods-Aquaz-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BB47F148F23BC48B17720F3AF03CC673 /* Pods-Aquaz-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F282E18AB7B7C15A6720E35FEB5B8502 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */; };
-		F5BE0FF56BA325ADB192D96FEE6CFAC3 /* SDStatusBarOverriderPost9_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B9330F03C2042221076501D3FB6318 /* SDStatusBarOverriderPost9_0.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		FC0CF3F2978060186204610D8D21DB9C /* MMWormhole-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 840C63DC46EEE7B7DAD668D0C98069B2 /* MMWormhole-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FD8C3A12053BBFE6526E99CF6FD0B9C0 /* MMWormhole-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF04D9653AA53E67BAD592B0CC7633D /* MMWormhole-dummy.m */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		1CADABB7C7E2E024DADCE72EF37F9C5B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DA2550D7D94491C4B4EA8F3435FEEC4B;
-			remoteInfo = MMWormhole;
-		};
-		2D8F4F431F262A4220729E2F92869F2A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 37848BCD21A7C619BFE9D523391C269B;
-			remoteInfo = SimulatorStatusMagic;
-		};
-		842E4EEA03CEF633D8414C3C4736C436 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DA2550D7D94491C4B4EA8F3435FEEC4B;
-			remoteInfo = MMWormhole;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		0424B6247327523FE0498BFDF70C2307 /* MMWormholeSessionMessageTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionMessageTransiting.h; path = Source/MMWormholeSessionMessageTransiting.h; sourceTree = "<group>"; };
-		06459E7ED109CB81C29641F1EBE45350 /* Pods-Aquaz-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Aquaz-acknowledgements.markdown"; sourceTree = "<group>"; };
-		077B21BBE49B6859995A501661F90F8E /* SDStatusBarOverriderPost9_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost9_3.h; path = SDStatusBarManager/SDStatusBarOverriderPost9_3.h; sourceTree = "<group>"; };
-		0812F84BE7D24B919C464718C60F3259 /* SDStatusBarOverriderPost10_0.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost10_0.m; path = SDStatusBarManager/SDStatusBarOverriderPost10_0.m; sourceTree = "<group>"; };
-		114A63AECFD06822A02174911078F7AD /* MMWormhole.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MMWormhole.modulemap; sourceTree = "<group>"; };
-		11706A950E20E69469B678DEAB1D65D9 /* MMWormholeFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeFileTransiting.m; path = Source/MMWormholeFileTransiting.m; sourceTree = "<group>"; };
-		14CF6733CB5273EB8CAD951C1F5AF3E9 /* MMWormholeTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeTransiting.h; path = Source/MMWormholeTransiting.h; sourceTree = "<group>"; };
-		15C397F5EA1B1DE29DEF0C8B6D53FDAF /* CLSAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSAttributes.h; path = iOS/Crashlytics.framework/Headers/CLSAttributes.h; sourceTree = "<group>"; };
-		1F70CF4C100F5B6A28710F2252FB4A60 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2115DC021270A29B4A668978BDBF1207 /* MMWormholeCoordinatedFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeCoordinatedFileTransiting.m; path = Source/MMWormholeCoordinatedFileTransiting.m; sourceTree = "<group>"; };
-		218C7F2AD44318AE5B02F10CB3EA9836 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		27458252155EFF708548AA852594770E /* MMWormholeSessionFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionFileTransiting.h; path = Source/MMWormholeSessionFileTransiting.h; sourceTree = "<group>"; };
-		28DA605C3DB95C29916D075DECFA8C17 /* SDStatusBarOverriderPre8_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPre8_3.h; path = SDStatusBarManager/SDStatusBarOverriderPre8_3.h; sourceTree = "<group>"; };
-		29DCD2983590173F8EE38410C6241112 /* MMWormhole.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MMWormhole.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2B32061EFFA6CFD955914B05F8AD68B7 /* MMWormholeSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSession.h; path = Source/MMWormholeSession.h; sourceTree = "<group>"; };
-		33B9330F03C2042221076501D3FB6318 /* SDStatusBarOverriderPost9_0.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost9_0.m; path = SDStatusBarManager/SDStatusBarOverriderPost9_0.m; sourceTree = "<group>"; };
-		3561B9B2C830EFF934076F2A28D36940 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		3E747561E40EA012CDBD1784A9D47700 /* MMWormholeSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSession.m; path = Source/MMWormholeSession.m; sourceTree = "<group>"; };
-		3F001DE2AFAEAAAA407C7F9FF495F961 /* SDStatusBarOverriderPost9_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost9_3.m; path = SDStatusBarManager/SDStatusBarOverriderPost9_3.m; sourceTree = "<group>"; };
-		3FE8E83ACE18DF90BE13F19BE94F55AC /* Pods-Aquaz-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Aquaz-dummy.m"; sourceTree = "<group>"; };
-		4163B40B5622705E412E0222942F1101 /* SDStatusBarOverriderPost10_0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost10_0.h; path = SDStatusBarManager/SDStatusBarOverriderPost10_0.h; sourceTree = "<group>"; };
-		45C75DBAEE2BD69C5ECD048224E8CBA1 /* SimulatorStatusMagic.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SimulatorStatusMagic.modulemap; sourceTree = "<group>"; };
-		484A6938EDFA441DDBD6D0D2A27E9EBF /* SimulatorStatusMagic.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SimulatorStatusMagic.xcconfig; sourceTree = "<group>"; };
-		48E4A35718C329AC7854970842749A7A /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
-		4A733D24A35AA65CBA23503A00F783FA /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B0DCF625CF5293D6326A3EBA87AF9C1 /* Pods-Widget-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Widget-dummy.m"; sourceTree = "<group>"; };
-		50FE5AECFCDAD48F82EBB24385AF2EE1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		550D384D97FC0B0EDE04A5C008FC92C7 /* ANSCompatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ANSCompatibility.h; path = iOS/Crashlytics.framework/Headers/ANSCompatibility.h; sourceTree = "<group>"; };
-		56B7EB61EE6519C6D661C3610F244CD5 /* MMWormhole-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMWormhole-prefix.pch"; sourceTree = "<group>"; };
-		56FB0F45032A72352889E7CB177978F5 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
-		58C944A0239C714695F34E5531424C30 /* SimulatorStatusMagic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SimulatorStatusMagic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5AF04D9653AA53E67BAD592B0CC7633D /* MMWormhole-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MMWormhole-dummy.m"; sourceTree = "<group>"; };
-		68F8FFD6C6202C9460620A2878707907 /* SDStatusBarOverriderPost9_0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost9_0.h; path = SDStatusBarManager/SDStatusBarOverriderPost9_0.h; sourceTree = "<group>"; };
-		6B91C9179A1A0D915DA8A28D9566D129 /* MMWormholeFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeFileTransiting.h; path = Source/MMWormholeFileTransiting.h; sourceTree = "<group>"; };
-		717AE8808554DEB4747114B6075C3538 /* SDStatusBarOverriderPost8_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost8_3.h; path = SDStatusBarManager/SDStatusBarOverriderPost8_3.h; sourceTree = "<group>"; };
-		729905FECD9526A846761D43D9B57C4A /* Pods-Aquaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.debug.xcconfig"; sourceTree = "<group>"; };
-		7697BFA08AE8C5CB0F0408B60630D579 /* Pods-Aquaz-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz-frameworks.sh"; sourceTree = "<group>"; };
-		7814F10CDCD840BFE9088F863516DDED /* SDStatusBarManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarManager.m; path = SDStatusBarManager/SDStatusBarManager.m; sourceTree = "<group>"; };
-		7C964262EFDA5704FB35F4098B84C9C1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7CD9353D716421E39DC1AE7D4E9E23B1 /* SDStatusBarManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarManager.h; path = SDStatusBarManager/SDStatusBarManager.h; sourceTree = "<group>"; };
-		80A31828FF4A9C55A58CA22CF628F174 /* Crashlytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Crashlytics.h; path = iOS/Crashlytics.framework/Headers/Crashlytics.h; sourceTree = "<group>"; };
-		827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		840C63DC46EEE7B7DAD668D0C98069B2 /* MMWormhole-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMWormhole-umbrella.h"; sourceTree = "<group>"; };
-		896E5F2160A6351C8D8A25E2E3971E76 /* MMWormhole.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormhole.m; path = Source/MMWormhole.m; sourceTree = "<group>"; };
-		8AF191B5C42BA2E5FE1B480384FCDFE3 /* Answers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Answers.h; path = iOS/Crashlytics.framework/Headers/Answers.h; sourceTree = "<group>"; };
-		8EFECBEE1F11341AF085320ED0574206 /* Pods-Aquaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.release.xcconfig"; sourceTree = "<group>"; };
-		8F15A35A91721C508596FA74F97D97A4 /* SimulatorStatusMagic-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SimulatorStatusMagic-prefix.pch"; sourceTree = "<group>"; };
-		9059B5FD2DBB518464956E06031CFE38 /* MMWormhole.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormhole.h; path = Source/MMWormhole.h; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		974D197408B1E233A34D0F7FC7BD4301 /* Fabric.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Fabric.h; path = iOS/Fabric.framework/Headers/Fabric.h; sourceTree = "<group>"; };
-		AAB2E93ACE89A058C217D69DC2667465 /* CLSReport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSReport.h; path = iOS/Crashlytics.framework/Headers/CLSReport.h; sourceTree = "<group>"; };
-		AD6B6A9C2805FEFD476723006C9D36DB /* Pods-Aquaz-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Aquaz-acknowledgements.plist"; sourceTree = "<group>"; };
-		ADA573A10C1B69DA739A950CB9A6A1FB /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = iOS/Crashlytics.framework; sourceTree = "<group>"; };
-		B4684F078930547CC8E2CA8951380BF0 /* Pods-Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Widget.release.xcconfig"; sourceTree = "<group>"; };
-		B6A957534ADBCB1646176260C9FF0E91 /* FABAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FABAttributes.h; path = iOS/Fabric.framework/Headers/FABAttributes.h; sourceTree = "<group>"; };
-		B8330969BAE720409688CA6B11198453 /* CLSLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSLogging.h; path = iOS/Crashlytics.framework/Headers/CLSLogging.h; sourceTree = "<group>"; };
-		BB47F148F23BC48B17720F3AF03CC673 /* Pods-Aquaz-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Aquaz-umbrella.h"; sourceTree = "<group>"; };
-		BE08585171DF887BDFC769AF5A9DB591 /* SimulatorStatusMagic-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SimulatorStatusMagic-dummy.m"; sourceTree = "<group>"; };
-		C1A574BDA52EC4ED082E68A3C978C585 /* Pods-Widget-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Widget-acknowledgements.plist"; sourceTree = "<group>"; };
-		C70BFE7544CA6F1F6B15104B55F9C585 /* Pods-Aquaz-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz-resources.sh"; sourceTree = "<group>"; };
-		C80DF62F18882173E9EDDE8BC0978721 /* SDStatusBarOverriderPost8_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost8_3.m; path = SDStatusBarManager/SDStatusBarOverriderPost8_3.m; sourceTree = "<group>"; };
-		C8891934F2525598D117608EA55792D2 /* Pods-Widget.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Widget.modulemap"; sourceTree = "<group>"; };
-		CC58C7233466E203C01787D659C73BE6 /* Pods-Widget-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Widget-frameworks.sh"; sourceTree = "<group>"; };
-		CFE3E20C94B053E325EE64DEB3FE423D /* MMWormhole.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MMWormhole.xcconfig; sourceTree = "<group>"; };
-		D01BE2E7CC6924FA44EBA7BCC3FD2EA0 /* MMWormholeSessionContextTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionContextTransiting.m; path = Source/MMWormholeSessionContextTransiting.m; sourceTree = "<group>"; };
-		D0A04FB2E4A6D77640A93137D87636CF /* Pods-Aquaz.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Aquaz.modulemap"; sourceTree = "<group>"; };
-		D6B447486715615B8E514A9BE673CC58 /* SDStatusBarOverriderPre8_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPre8_3.m; path = SDStatusBarManager/SDStatusBarOverriderPre8_3.m; sourceTree = "<group>"; };
-		DBA9BA5CA630D70E6186E663E985E636 /* SimulatorStatusMagic-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SimulatorStatusMagic-umbrella.h"; sourceTree = "<group>"; };
-		E043E35C4211D0125496B01687D16635 /* MMWormholeSessionFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionFileTransiting.m; path = Source/MMWormholeSessionFileTransiting.m; sourceTree = "<group>"; };
-		E64F8F293626CC333E3FE28F75EC73E3 /* Pods-Widget-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Widget-umbrella.h"; sourceTree = "<group>"; };
-		E8ED5F5799BFB12417CBA4B893A23BA4 /* Pods_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E908CF17D035E7A42E3B4A69C6107327 /* MMWormholeCoordinatedFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeCoordinatedFileTransiting.h; path = Source/MMWormholeCoordinatedFileTransiting.h; sourceTree = "<group>"; };
-		EB984FAB12CE083802FEFAF971A5A57F /* MMWormholeSessionContextTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionContextTransiting.h; path = Source/MMWormholeSessionContextTransiting.h; sourceTree = "<group>"; };
-		EEDA831062ADB6D22D0ABB4316402751 /* Pods-Widget-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Widget-acknowledgements.markdown"; sourceTree = "<group>"; };
-		F3998374849451E2A4A58345757DF560 /* Pods-Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Widget.debug.xcconfig"; sourceTree = "<group>"; };
-		F5C9D300D40D1146BD61CBB2B22EBB79 /* MMWormholeSessionMessageTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionMessageTransiting.m; path = Source/MMWormholeSessionMessageTransiting.m; sourceTree = "<group>"; };
-		F6B3037A1B3149ACA92542D593FB2CE6 /* CLSStackFrame.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSStackFrame.h; path = iOS/Crashlytics.framework/Headers/CLSStackFrame.h; sourceTree = "<group>"; };
-		F96A3906B72EDD0855A0D0B13F1B4F53 /* Pods-Widget-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Widget-resources.sh"; sourceTree = "<group>"; };
-		FAB1FB7C6BEE1784A1411438BA0240AB /* SDStatusBarOverrider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverrider.h; path = SDStatusBarManager/SDStatusBarOverrider.h; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		1F95150333D024602EDC33E340A536D8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F282E18AB7B7C15A6720E35FEB5B8502 /* Foundation.framework in Frameworks */,
-				45D865CB1822646EFC53BFA48FC4A0B4 /* WatchConnectivity.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		83BB18344B18845DA73D7A8F51D46164 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AC715ED246C7D933C76E77EF50A694B4 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EFC5C23BBD8C3738C1E7962B4242ABA1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D0CA56D62E126D8687EF499FAB88DFC3 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F85E5886A1FACE0510338995CB4B8355 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D53C965381E8D2BDAEEEACA0451D6E2E /* Foundation.framework in Frameworks */,
-				698451D903454F42B2351C915A02B6A0 /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		108624F280033595E8D815D0F908E4EB /* SimulatorStatusMagic */ = {
-			isa = PBXGroup;
-			children = (
-				7CD9353D716421E39DC1AE7D4E9E23B1 /* SDStatusBarManager.h */,
-				7814F10CDCD840BFE9088F863516DDED /* SDStatusBarManager.m */,
-				FAB1FB7C6BEE1784A1411438BA0240AB /* SDStatusBarOverrider.h */,
-				4163B40B5622705E412E0222942F1101 /* SDStatusBarOverriderPost10_0.h */,
-				0812F84BE7D24B919C464718C60F3259 /* SDStatusBarOverriderPost10_0.m */,
-				717AE8808554DEB4747114B6075C3538 /* SDStatusBarOverriderPost8_3.h */,
-				C80DF62F18882173E9EDDE8BC0978721 /* SDStatusBarOverriderPost8_3.m */,
-				68F8FFD6C6202C9460620A2878707907 /* SDStatusBarOverriderPost9_0.h */,
-				33B9330F03C2042221076501D3FB6318 /* SDStatusBarOverriderPost9_0.m */,
-				077B21BBE49B6859995A501661F90F8E /* SDStatusBarOverriderPost9_3.h */,
-				3F001DE2AFAEAAAA407C7F9FF495F961 /* SDStatusBarOverriderPost9_3.m */,
-				28DA605C3DB95C29916D075DECFA8C17 /* SDStatusBarOverriderPre8_3.h */,
-				D6B447486715615B8E514A9BE673CC58 /* SDStatusBarOverriderPre8_3.m */,
-				4AA8F117020CC2722085948F0E85FE6B /* Support Files */,
-			);
-			path = SimulatorStatusMagic;
-			sourceTree = "<group>";
-		};
-		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				DC0C096CAD646C0EED6A336AF9D45893 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		17DCAF717EE850346A88317AB3D775DD /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				ADA573A10C1B69DA739A950CB9A6A1FB /* Crashlytics.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		3A73F5312E7F36B4E3EA1F565691A94B /* Fabric */ = {
-			isa = PBXGroup;
-			children = (
-				B6A957534ADBCB1646176260C9FF0E91 /* FABAttributes.h */,
-				974D197408B1E233A34D0F7FC7BD4301 /* Fabric.h */,
-				D2F8D7C4BFCF496DA4A9853E3B06A3CF /* Frameworks */,
-			);
-			path = Fabric;
-			sourceTree = "<group>";
-		};
-		4AA8F117020CC2722085948F0E85FE6B /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				218C7F2AD44318AE5B02F10CB3EA9836 /* Info.plist */,
-				45C75DBAEE2BD69C5ECD048224E8CBA1 /* SimulatorStatusMagic.modulemap */,
-				484A6938EDFA441DDBD6D0D2A27E9EBF /* SimulatorStatusMagic.xcconfig */,
-				BE08585171DF887BDFC769AF5A9DB591 /* SimulatorStatusMagic-dummy.m */,
-				8F15A35A91721C508596FA74F97D97A4 /* SimulatorStatusMagic-prefix.pch */,
-				DBA9BA5CA630D70E6186E663E985E636 /* SimulatorStatusMagic-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/SimulatorStatusMagic";
-			sourceTree = "<group>";
-		};
-		4C8073F1EF80F38D2828DFA0023608F0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				29DCD2983590173F8EE38410C6241112 /* MMWormhole.framework */,
-				4A733D24A35AA65CBA23503A00F783FA /* Pods_Aquaz.framework */,
-				E8ED5F5799BFB12417CBA4B893A23BA4 /* Pods_Widget.framework */,
-				58C944A0239C714695F34E5531424C30 /* SimulatorStatusMagic.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		6764CC83C5BCDB2E81DD22C2BEB98AC3 /* MMWormhole */ = {
-			isa = PBXGroup;
-			children = (
-				8360BA5B88285289FCBD8F621B6E9398 /* Core */,
-				B950513FE8A0A7B00760BF3AD8331465 /* Support Files */,
-			);
-			path = MMWormhole;
-			sourceTree = "<group>";
-		};
-		7DB346D0F39D3F0E887471402A8071AB = {
-			isa = PBXGroup;
-			children = (
-				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
-				CB3F1F1BC308AF5546DCFFE159E04613 /* Pods */,
-				4C8073F1EF80F38D2828DFA0023608F0 /* Products */,
-				A90AA22467FAA90CA355F4969729ED7E /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		8360BA5B88285289FCBD8F621B6E9398 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				9059B5FD2DBB518464956E06031CFE38 /* MMWormhole.h */,
-				896E5F2160A6351C8D8A25E2E3971E76 /* MMWormhole.m */,
-				E908CF17D035E7A42E3B4A69C6107327 /* MMWormholeCoordinatedFileTransiting.h */,
-				2115DC021270A29B4A668978BDBF1207 /* MMWormholeCoordinatedFileTransiting.m */,
-				6B91C9179A1A0D915DA8A28D9566D129 /* MMWormholeFileTransiting.h */,
-				11706A950E20E69469B678DEAB1D65D9 /* MMWormholeFileTransiting.m */,
-				2B32061EFFA6CFD955914B05F8AD68B7 /* MMWormholeSession.h */,
-				3E747561E40EA012CDBD1784A9D47700 /* MMWormholeSession.m */,
-				EB984FAB12CE083802FEFAF971A5A57F /* MMWormholeSessionContextTransiting.h */,
-				D01BE2E7CC6924FA44EBA7BCC3FD2EA0 /* MMWormholeSessionContextTransiting.m */,
-				27458252155EFF708548AA852594770E /* MMWormholeSessionFileTransiting.h */,
-				E043E35C4211D0125496B01687D16635 /* MMWormholeSessionFileTransiting.m */,
-				0424B6247327523FE0498BFDF70C2307 /* MMWormholeSessionMessageTransiting.h */,
-				F5C9D300D40D1146BD61CBB2B22EBB79 /* MMWormholeSessionMessageTransiting.m */,
-				14CF6733CB5273EB8CAD951C1F5AF3E9 /* MMWormholeTransiting.h */,
-			);
-			name = Core;
-			sourceTree = "<group>";
-		};
-		A90AA22467FAA90CA355F4969729ED7E /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				D2A80D132C6B130981FFBBC9114B1882 /* Pods-Aquaz */,
-				DC509ABBFAE7CFC71AF97E58032A4856 /* Pods-Widget */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		B950513FE8A0A7B00760BF3AD8331465 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				1F70CF4C100F5B6A28710F2252FB4A60 /* Info.plist */,
-				114A63AECFD06822A02174911078F7AD /* MMWormhole.modulemap */,
-				CFE3E20C94B053E325EE64DEB3FE423D /* MMWormhole.xcconfig */,
-				5AF04D9653AA53E67BAD592B0CC7633D /* MMWormhole-dummy.m */,
-				56B7EB61EE6519C6D661C3610F244CD5 /* MMWormhole-prefix.pch */,
-				840C63DC46EEE7B7DAD668D0C98069B2 /* MMWormhole-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/MMWormhole";
-			sourceTree = "<group>";
-		};
-		CB3F1F1BC308AF5546DCFFE159E04613 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				FBA217A630EA48F4301FB282B6F7930C /* Crashlytics */,
-				3A73F5312E7F36B4E3EA1F565691A94B /* Fabric */,
-				6764CC83C5BCDB2E81DD22C2BEB98AC3 /* MMWormhole */,
-				108624F280033595E8D815D0F908E4EB /* SimulatorStatusMagic */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		D2A80D132C6B130981FFBBC9114B1882 /* Pods-Aquaz */ = {
-			isa = PBXGroup;
-			children = (
-				50FE5AECFCDAD48F82EBB24385AF2EE1 /* Info.plist */,
-				D0A04FB2E4A6D77640A93137D87636CF /* Pods-Aquaz.modulemap */,
-				06459E7ED109CB81C29641F1EBE45350 /* Pods-Aquaz-acknowledgements.markdown */,
-				AD6B6A9C2805FEFD476723006C9D36DB /* Pods-Aquaz-acknowledgements.plist */,
-				3FE8E83ACE18DF90BE13F19BE94F55AC /* Pods-Aquaz-dummy.m */,
-				7697BFA08AE8C5CB0F0408B60630D579 /* Pods-Aquaz-frameworks.sh */,
-				C70BFE7544CA6F1F6B15104B55F9C585 /* Pods-Aquaz-resources.sh */,
-				BB47F148F23BC48B17720F3AF03CC673 /* Pods-Aquaz-umbrella.h */,
-				729905FECD9526A846761D43D9B57C4A /* Pods-Aquaz.debug.xcconfig */,
-				8EFECBEE1F11341AF085320ED0574206 /* Pods-Aquaz.release.xcconfig */,
-			);
-			name = "Pods-Aquaz";
-			path = "Target Support Files/Pods-Aquaz";
-			sourceTree = "<group>";
-		};
-		D2F8D7C4BFCF496DA4A9853E3B06A3CF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				56FB0F45032A72352889E7CB177978F5 /* Fabric.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DC0C096CAD646C0EED6A336AF9D45893 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				827A4EBC76B0439506CEB35804BB98C3 /* Foundation.framework */,
-				3561B9B2C830EFF934076F2A28D36940 /* UIKit.framework */,
-				48E4A35718C329AC7854970842749A7A /* WatchConnectivity.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		DC509ABBFAE7CFC71AF97E58032A4856 /* Pods-Widget */ = {
-			isa = PBXGroup;
-			children = (
-				7C964262EFDA5704FB35F4098B84C9C1 /* Info.plist */,
-				C8891934F2525598D117608EA55792D2 /* Pods-Widget.modulemap */,
-				EEDA831062ADB6D22D0ABB4316402751 /* Pods-Widget-acknowledgements.markdown */,
-				C1A574BDA52EC4ED082E68A3C978C585 /* Pods-Widget-acknowledgements.plist */,
-				4B0DCF625CF5293D6326A3EBA87AF9C1 /* Pods-Widget-dummy.m */,
-				CC58C7233466E203C01787D659C73BE6 /* Pods-Widget-frameworks.sh */,
-				F96A3906B72EDD0855A0D0B13F1B4F53 /* Pods-Widget-resources.sh */,
-				E64F8F293626CC333E3FE28F75EC73E3 /* Pods-Widget-umbrella.h */,
-				F3998374849451E2A4A58345757DF560 /* Pods-Widget.debug.xcconfig */,
-				B4684F078930547CC8E2CA8951380BF0 /* Pods-Widget.release.xcconfig */,
-			);
-			name = "Pods-Widget";
-			path = "Target Support Files/Pods-Widget";
-			sourceTree = "<group>";
-		};
-		FBA217A630EA48F4301FB282B6F7930C /* Crashlytics */ = {
-			isa = PBXGroup;
-			children = (
-				550D384D97FC0B0EDE04A5C008FC92C7 /* ANSCompatibility.h */,
-				8AF191B5C42BA2E5FE1B480384FCDFE3 /* Answers.h */,
-				15C397F5EA1B1DE29DEF0C8B6D53FDAF /* CLSAttributes.h */,
-				B8330969BAE720409688CA6B11198453 /* CLSLogging.h */,
-				AAB2E93ACE89A058C217D69DC2667465 /* CLSReport.h */,
-				F6B3037A1B3149ACA92542D593FB2CE6 /* CLSStackFrame.h */,
-				80A31828FF4A9C55A58CA22CF628F174 /* Crashlytics.h */,
-				17DCAF717EE850346A88317AB3D775DD /* Frameworks */,
-			);
-			path = Crashlytics;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		2CBB806F3581703951A6C9C0676D5E6C /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				190C803A3415DF86BE4A3146981FC7F0 /* SDStatusBarManager.h in Headers */,
-				B594D9ABE3D364625535906A3F05A802 /* SDStatusBarOverrider.h in Headers */,
-				934A883F737BDBC8A8B3E75E35AF4D50 /* SDStatusBarOverriderPost10_0.h in Headers */,
-				37D3D42BE1707485179802A0B17DAE38 /* SDStatusBarOverriderPost8_3.h in Headers */,
-				823143A99A4E5658A80816E3649534B5 /* SDStatusBarOverriderPost9_0.h in Headers */,
-				B38941C0811BF0F9FD2DAD180EC12CD2 /* SDStatusBarOverriderPost9_3.h in Headers */,
-				E10A933A0449C764A4AA4A2610665898 /* SDStatusBarOverriderPre8_3.h in Headers */,
-				E2DE3D61D86DEFA0174928C8BE04F919 /* SimulatorStatusMagic-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		74C18C5A607BD1F09D91D200A4C3EDA4 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C8D147D6C88AEA702D3DBC74B4768097 /* Pods-Widget-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		80B738F7C5F9625D914E0030122A93DB /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FC0CF3F2978060186204610D8D21DB9C /* MMWormhole-umbrella.h in Headers */,
-				DE9D89BFECB559F825F1BC2506FB1695 /* MMWormhole.h in Headers */,
-				84B37CAEC1716055BEA3DA3795BC8A3C /* MMWormholeCoordinatedFileTransiting.h in Headers */,
-				762F18A4394FA15213070BDF993A2B48 /* MMWormholeFileTransiting.h in Headers */,
-				8CA202DE2B82A4FA9F6433D0034EA12E /* MMWormholeSession.h in Headers */,
-				DFEEABC8C678127F23965CE3AE4B9F67 /* MMWormholeSessionContextTransiting.h in Headers */,
-				CC31FA025B3936FEC27592CC01AC4A5F /* MMWormholeSessionFileTransiting.h in Headers */,
-				33618BBEB40ED0B04402BD45D0A12D96 /* MMWormholeSessionMessageTransiting.h in Headers */,
-				D06E287165536614B66FA045D8A5D99A /* MMWormholeTransiting.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F7EA460BE69424DF28D936667D2E2A03 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E65281839DDC0C9EE91458CEA8161E8C /* Pods-Aquaz-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
-/* Begin PBXNativeTarget section */
-		168454C1196C6E92E767E211423B043A /* Pods-Aquaz */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F7EF8C479D309E479D71B468BF0FA4E6 /* Build configuration list for PBXNativeTarget "Pods-Aquaz" */;
-			buildPhases = (
-				EC5071D140DEAE4F32BEAF15BBCE19A1 /* Sources */,
-				83BB18344B18845DA73D7A8F51D46164 /* Frameworks */,
-				F7EA460BE69424DF28D936667D2E2A03 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				894D371EA8EBF18330CC60177CBFA707 /* PBXTargetDependency */,
-				41A87EC01A0EC271B0587ECD286B3441 /* PBXTargetDependency */,
-			);
-			name = "Pods-Aquaz";
-			productName = "Pods-Aquaz";
-			productReference = 4A733D24A35AA65CBA23503A00F783FA /* Pods_Aquaz.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		37848BCD21A7C619BFE9D523391C269B /* SimulatorStatusMagic */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = ECB03DCF4FFD4E6EFBC934BA5A1E3DDB /* Build configuration list for PBXNativeTarget "SimulatorStatusMagic" */;
-			buildPhases = (
-				64C0D624C4AA790219EBC8FF6F59309D /* Sources */,
-				F85E5886A1FACE0510338995CB4B8355 /* Frameworks */,
-				2CBB806F3581703951A6C9C0676D5E6C /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SimulatorStatusMagic;
-			productName = SimulatorStatusMagic;
-			productReference = 58C944A0239C714695F34E5531424C30 /* SimulatorStatusMagic.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		D71BF667A3A8A4D4806A88A10C5345A3 /* Pods-Widget */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3921AB24A7D4ED10B8B25C5CAA094D0F /* Build configuration list for PBXNativeTarget "Pods-Widget" */;
-			buildPhases = (
-				4B64A67264A5C57652000BE4EE9D20E4 /* Sources */,
-				EFC5C23BBD8C3738C1E7962B4242ABA1 /* Frameworks */,
-				74C18C5A607BD1F09D91D200A4C3EDA4 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				45082D5659FE949DA4A57771D6199339 /* PBXTargetDependency */,
-			);
-			name = "Pods-Widget";
-			productName = "Pods-Widget";
-			productReference = E8ED5F5799BFB12417CBA4B893A23BA4 /* Pods_Widget.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		DA2550D7D94491C4B4EA8F3435FEEC4B /* MMWormhole */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 703F6B8D4921C558E0F0342E84DCD4C4 /* Build configuration list for PBXNativeTarget "MMWormhole" */;
-			buildPhases = (
-				8FC514A28A2A84DA72870553E560BCF7 /* Sources */,
-				1F95150333D024602EDC33E340A536D8 /* Frameworks */,
-				80B738F7C5F9625D914E0030122A93DB /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MMWormhole;
-			productName = MMWormhole;
-			productReference = 29DCD2983590173F8EE38410C6241112 /* MMWormhole.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0700;
-			};
-			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 4C8073F1EF80F38D2828DFA0023608F0 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				DA2550D7D94491C4B4EA8F3435FEEC4B /* MMWormhole */,
-				168454C1196C6E92E767E211423B043A /* Pods-Aquaz */,
-				D71BF667A3A8A4D4806A88A10C5345A3 /* Pods-Widget */,
-				37848BCD21A7C619BFE9D523391C269B /* SimulatorStatusMagic */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXSourcesBuildPhase section */
-		4B64A67264A5C57652000BE4EE9D20E4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E363E0EE419CF84D467724E3D9961DFF /* Pods-Widget-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		64C0D624C4AA790219EBC8FF6F59309D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3E475FB226EB9BCF0D4A312CBE5C3A94 /* SDStatusBarManager.m in Sources */,
-				7DC91AE18E358AA0C8DF1B722AA4D94E /* SDStatusBarOverriderPost10_0.m in Sources */,
-				53F90BE826C4C0364CD94B6757B1C4D9 /* SDStatusBarOverriderPost8_3.m in Sources */,
-				F5BE0FF56BA325ADB192D96FEE6CFAC3 /* SDStatusBarOverriderPost9_0.m in Sources */,
-				8D0DE603FA10B9245B1C04D3CCE8013D /* SDStatusBarOverriderPost9_3.m in Sources */,
-				192D32892487D4AD3412DC61694A6735 /* SDStatusBarOverriderPre8_3.m in Sources */,
-				C9CB55EBCE3C55EA3AFD14F5278A33B6 /* SimulatorStatusMagic-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8FC514A28A2A84DA72870553E560BCF7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FD8C3A12053BBFE6526E99CF6FD0B9C0 /* MMWormhole-dummy.m in Sources */,
-				E4258B26D1911DC625C26AEDC7CA5A6A /* MMWormhole.m in Sources */,
-				BD7CB717DA844692A2E615DDBEA25A11 /* MMWormholeCoordinatedFileTransiting.m in Sources */,
-				77A87A401B9D4B23AAF3005E7DD55C87 /* MMWormholeFileTransiting.m in Sources */,
-				8D7A5AECA1F3061D719D40CD4F5FF35C /* MMWormholeSession.m in Sources */,
-				9D6AFCD74FCC1EC6C2D968ABF8EC0D56 /* MMWormholeSessionContextTransiting.m in Sources */,
-				E04121AD5D0C3CBA35D028A7154C62A2 /* MMWormholeSessionFileTransiting.m in Sources */,
-				6DCB12C6DEDB86E74D46178DCF02349E /* MMWormholeSessionMessageTransiting.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EC5071D140DEAE4F32BEAF15BBCE19A1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				44CF589A9B620562CC754C6FC0E81B69 /* Pods-Aquaz-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		41A87EC01A0EC271B0587ECD286B3441 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SimulatorStatusMagic;
-			target = 37848BCD21A7C619BFE9D523391C269B /* SimulatorStatusMagic */;
-			targetProxy = 2D8F4F431F262A4220729E2F92869F2A /* PBXContainerItemProxy */;
-		};
-		45082D5659FE949DA4A57771D6199339 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MMWormhole;
-			target = DA2550D7D94491C4B4EA8F3435FEEC4B /* MMWormhole */;
-			targetProxy = 1CADABB7C7E2E024DADCE72EF37F9C5B /* PBXContainerItemProxy */;
-		};
-		894D371EA8EBF18330CC60177CBFA707 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MMWormhole;
-			target = DA2550D7D94491C4B4EA8F3435FEEC4B /* MMWormhole */;
-			targetProxy = 842E4EEA03CEF633D8414C3C4736C436 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin XCBuildConfiguration section */
-		3B2CE083EF2B5D39878AB3B1E4C2975D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CFE3E20C94B053E325EE64DEB3FE423D /* MMWormhole.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MMWormhole/MMWormhole-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MMWormhole/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MMWormhole/MMWormhole.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = MMWormhole;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		47BEF9D903506B003EA5C2B249729489 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_DEBUG=1",
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				ONLY_ACTIVE_ARCH = YES;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Debug;
-		};
-		62202177A3ACE8EE75AB7E8AE1E14978 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CFE3E20C94B053E325EE64DEB3FE423D /* MMWormhole.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MMWormhole/MMWormhole-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MMWormhole/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MMWormhole/MMWormhole.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = MMWormhole;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		7AD4710707B16B6DF5DB05304FD1B416 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 729905FECD9526A846761D43D9B57C4A /* Pods-Aquaz.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Aquaz/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Aquaz/Pods-Aquaz.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Aquaz;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		8D8B5623A4A3A2FC96B9B104EA9C54C3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3998374849451E2A4A58345757DF560 /* Pods-Widget.debug.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Widget/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Widget/Pods-Widget.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Widget;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		95BB4E4066003543994B877AEFA482B0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8EFECBEE1F11341AF085320ED0574206 /* Pods-Aquaz.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Aquaz/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Aquaz/Pods-Aquaz.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Aquaz;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		9A5AEBAFC9693525E3FA646FA20557D8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 484A6938EDFA441DDBD6D0D2A27E9EBF /* SimulatorStatusMagic.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SimulatorStatusMagic/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = SimulatorStatusMagic;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		AAF678CED40D3499169D10F63CA0719E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		E35B647CA346A9B129671B925AEB510D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 484A6938EDFA441DDBD6D0D2A27E9EBF /* SimulatorStatusMagic.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SimulatorStatusMagic/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SimulatorStatusMagic;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		E7587251C013C03E16A6A5F01C950ECC /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B4684F078930547CC8E2CA8951380BF0 /* Pods-Widget.release.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Widget/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Widget/Pods-Widget.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Widget;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				47BEF9D903506B003EA5C2B249729489 /* Debug */,
-				AAF678CED40D3499169D10F63CA0719E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3921AB24A7D4ED10B8B25C5CAA094D0F /* Build configuration list for PBXNativeTarget "Pods-Widget" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8D8B5623A4A3A2FC96B9B104EA9C54C3 /* Debug */,
-				E7587251C013C03E16A6A5F01C950ECC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		703F6B8D4921C558E0F0342E84DCD4C4 /* Build configuration list for PBXNativeTarget "MMWormhole" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				62202177A3ACE8EE75AB7E8AE1E14978 /* Debug */,
-				3B2CE083EF2B5D39878AB3B1E4C2975D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		ECB03DCF4FFD4E6EFBC934BA5A1E3DDB /* Build configuration list for PBXNativeTarget "SimulatorStatusMagic" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9A5AEBAFC9693525E3FA646FA20557D8 /* Debug */,
-				E35B647CA346A9B129671B925AEB510D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F7EF8C479D309E479D71B468BF0FA4E6 /* Build configuration list for PBXNativeTarget "Pods-Aquaz" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7AD4710707B16B6DF5DB05304FD1B416 /* Debug */,
-				95BB4E4066003543994B877AEFA482B0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>0424B6247327523FE0498BFDF70C2307</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MMWormholeSessionMessageTransiting.h</string>
+			<key>path</key>
+			<string>Source/MMWormholeSessionMessageTransiting.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>06459E7ED109CB81C29641F1EBE45350</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>Pods-Aquaz-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>077B21BBE49B6859995A501661F90F8E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDStatusBarOverriderPost9_3.h</string>
+			<key>path</key>
+			<string>SDStatusBarManager/SDStatusBarOverriderPost9_3.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0812F84BE7D24B919C464718C60F3259</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SDStatusBarOverriderPost10_0.m</string>
+			<key>path</key>
+			<string>SDStatusBarManager/SDStatusBarOverriderPost10_0.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>108624F280033595E8D815D0F908E4EB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>7CD9353D716421E39DC1AE7D4E9E23B1</string>
+				<string>7814F10CDCD840BFE9088F863516DDED</string>
+				<string>FAB1FB7C6BEE1784A1411438BA0240AB</string>
+				<string>4163B40B5622705E412E0222942F1101</string>
+				<string>0812F84BE7D24B919C464718C60F3259</string>
+				<string>717AE8808554DEB4747114B6075C3538</string>
+				<string>C80DF62F18882173E9EDDE8BC0978721</string>
+				<string>68F8FFD6C6202C9460620A2878707907</string>
+				<string>33B9330F03C2042221076501D3FB6318</string>
+				<string>077B21BBE49B6859995A501661F90F8E</string>
+				<string>3F001DE2AFAEAAAA407C7F9FF495F961</string>
+				<string>28DA605C3DB95C29916D075DECFA8C17</string>
+				<string>D6B447486715615B8E514A9BE673CC58</string>
+				<string>4AA8F117020CC2722085948F0E85FE6B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>SimulatorStatusMagic</string>
+			<key>path</key>
+			<string>SimulatorStatusMagic</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>114A63AECFD06822A02174911078F7AD</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>MMWormhole.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>11706A950E20E69469B678DEAB1D65D9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MMWormholeFileTransiting.m</string>
+			<key>path</key>
+			<string>Source/MMWormholeFileTransiting.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>122DA2E5084A4393C29BE363C764795C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DC0C096CAD646C0EED6A336AF9D45893</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>14CF6733CB5273EB8CAD951C1F5AF3E9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MMWormholeTransiting.h</string>
+			<key>path</key>
+			<string>Source/MMWormholeTransiting.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>15C397F5EA1B1DE29DEF0C8B6D53FDAF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>CLSAttributes.h</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework/Headers/CLSAttributes.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>168454C1196C6E92E767E211423B043A</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>F7EF8C479D309E479D71B468BF0FA4E6</string>
+			<key>buildPhases</key>
+			<array>
+				<string>EC5071D140DEAE4F32BEAF15BBCE19A1</string>
+				<string>83BB18344B18845DA73D7A8F51D46164</string>
+				<string>F7EA460BE69424DF28D936667D2E2A03</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>894D371EA8EBF18330CC60177CBFA707</string>
+				<string>41A87EC01A0EC271B0587ECD286B3441</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-Aquaz</string>
+			<key>productName</key>
+			<string>Pods-Aquaz</string>
+			<key>productReference</key>
+			<string>4A733D24A35AA65CBA23503A00F783FA</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>17DCAF717EE850346A88317AB3D775DD</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>ADA573A10C1B69DA739A950CB9A6A1FB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>190C803A3415DF86BE4A3146981FC7F0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7CD9353D716421E39DC1AE7D4E9E23B1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>192D32892487D4AD3412DC61694A6735</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D6B447486715615B8E514A9BE673CC58</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-w -Xanalyzer -analyzer-disable-all-checks</string>
+			</dict>
+		</dict>
+		<key>1CADABB7C7E2E024DADCE72EF37F9C5B</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>DA2550D7D94491C4B4EA8F3435FEEC4B</string>
+			<key>remoteInfo</key>
+			<string>MMWormhole</string>
+		</dict>
+		<key>1F70CF4C100F5B6A28710F2252FB4A60</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1F95150333D024602EDC33E340A536D8</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>F282E18AB7B7C15A6720E35FEB5B8502</string>
+				<string>45D865CB1822646EFC53BFA48FC4A0B4</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>2115DC021270A29B4A668978BDBF1207</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MMWormholeCoordinatedFileTransiting.m</string>
+			<key>path</key>
+			<string>Source/MMWormholeCoordinatedFileTransiting.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>218C7F2AD44318AE5B02F10CB3EA9836</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>27458252155EFF708548AA852594770E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MMWormholeSessionFileTransiting.h</string>
+			<key>path</key>
+			<string>Source/MMWormholeSessionFileTransiting.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>28DA605C3DB95C29916D075DECFA8C17</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDStatusBarOverriderPre8_3.h</string>
+			<key>path</key>
+			<string>SDStatusBarManager/SDStatusBarOverriderPre8_3.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>29DCD2983590173F8EE38410C6241112</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>MMWormhole.framework</string>
+			<key>path</key>
+			<string>MMWormhole.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>2B32061EFFA6CFD955914B05F8AD68B7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MMWormholeSession.h</string>
+			<key>path</key>
+			<string>Source/MMWormholeSession.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2CBB806F3581703951A6C9C0676D5E6C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>190C803A3415DF86BE4A3146981FC7F0</string>
+				<string>B594D9ABE3D364625535906A3F05A802</string>
+				<string>934A883F737BDBC8A8B3E75E35AF4D50</string>
+				<string>37D3D42BE1707485179802A0B17DAE38</string>
+				<string>823143A99A4E5658A80816E3649534B5</string>
+				<string>B38941C0811BF0F9FD2DAD180EC12CD2</string>
+				<string>E10A933A0449C764A4AA4A2610665898</string>
+				<string>E2DE3D61D86DEFA0174928C8BE04F919</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>2D8E8EC45A3A1A1D94AE762CB5028504</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>47BEF9D903506B003EA5C2B249729489</string>
+				<string>AAF678CED40D3499169D10F63CA0719E</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>2D8F4F431F262A4220729E2F92869F2A</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>37848BCD21A7C619BFE9D523391C269B</string>
+			<key>remoteInfo</key>
+			<string>SimulatorStatusMagic</string>
+		</dict>
+		<key>33618BBEB40ED0B04402BD45D0A12D96</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0424B6247327523FE0498BFDF70C2307</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>33B9330F03C2042221076501D3FB6318</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SDStatusBarOverriderPost9_0.m</string>
+			<key>path</key>
+			<string>SDStatusBarManager/SDStatusBarOverriderPost9_0.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3561B9B2C830EFF934076F2A28D36940</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>UIKit.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>37848BCD21A7C619BFE9D523391C269B</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>ECB03DCF4FFD4E6EFBC934BA5A1E3DDB</string>
+			<key>buildPhases</key>
+			<array>
+				<string>64C0D624C4AA790219EBC8FF6F59309D</string>
+				<string>F85E5886A1FACE0510338995CB4B8355</string>
+				<string>2CBB806F3581703951A6C9C0676D5E6C</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>SimulatorStatusMagic</string>
+			<key>productName</key>
+			<string>SimulatorStatusMagic</string>
+			<key>productReference</key>
+			<string>58C944A0239C714695F34E5531424C30</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>37D3D42BE1707485179802A0B17DAE38</key>
+		<dict>
+			<key>fileRef</key>
+			<string>717AE8808554DEB4747114B6075C3538</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>3921AB24A7D4ED10B8B25C5CAA094D0F</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>8D8B5623A4A3A2FC96B9B104EA9C54C3</string>
+				<string>E7587251C013C03E16A6A5F01C950ECC</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>3A73F5312E7F36B4E3EA1F565691A94B</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>B6A957534ADBCB1646176260C9FF0E91</string>
+				<string>974D197408B1E233A34D0F7FC7BD4301</string>
+				<string>D2F8D7C4BFCF496DA4A9853E3B06A3CF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Fabric</string>
+			<key>path</key>
+			<string>Fabric</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3B2CE083EF2B5D39878AB3B1E4C2975D</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>CFE3E20C94B053E325EE64DEB3FE423D</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>APPLICATION_EXTENSION_API_ONLY</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/MMWormhole/MMWormhole-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/MMWormhole/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/MMWormhole/MMWormhole.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>PRODUCT_NAME</key>
+				<string>MMWormhole</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>3E475FB226EB9BCF0D4A312CBE5C3A94</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7814F10CDCD840BFE9088F863516DDED</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-w -Xanalyzer -analyzer-disable-all-checks</string>
+			</dict>
+		</dict>
+		<key>3E747561E40EA012CDBD1784A9D47700</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MMWormholeSession.m</string>
+			<key>path</key>
+			<string>Source/MMWormholeSession.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3F001DE2AFAEAAAA407C7F9FF495F961</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SDStatusBarOverriderPost9_3.m</string>
+			<key>path</key>
+			<string>SDStatusBarManager/SDStatusBarOverriderPost9_3.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3FE8E83ACE18DF90BE13F19BE94F55AC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Pods-Aquaz-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4163B40B5622705E412E0222942F1101</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDStatusBarOverriderPost10_0.h</string>
+			<key>path</key>
+			<string>SDStatusBarManager/SDStatusBarOverriderPost10_0.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>41A87EC01A0EC271B0587ECD286B3441</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>SimulatorStatusMagic</string>
+			<key>target</key>
+			<string>37848BCD21A7C619BFE9D523391C269B</string>
+			<key>targetProxy</key>
+			<string>2D8F4F431F262A4220729E2F92869F2A</string>
+		</dict>
+		<key>44CF589A9B620562CC754C6FC0E81B69</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3FE8E83ACE18DF90BE13F19BE94F55AC</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>45082D5659FE949DA4A57771D6199339</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>MMWormhole</string>
+			<key>target</key>
+			<string>DA2550D7D94491C4B4EA8F3435FEEC4B</string>
+			<key>targetProxy</key>
+			<string>1CADABB7C7E2E024DADCE72EF37F9C5B</string>
+		</dict>
+		<key>45C75DBAEE2BD69C5ECD048224E8CBA1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>SimulatorStatusMagic.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>45D865CB1822646EFC53BFA48FC4A0B4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>48E4A35718C329AC7854970842749A7A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>47BEF9D903506B003EA5C2B249729489</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_ANALYZER_NONNULL</key>
+				<string>YES</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>ENABLE_TESTABILITY</key>
+				<string>YES</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>POD_CONFIGURATION_DEBUG=1</string>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>STRIP_INSTALLED_PRODUCT</key>
+				<string>NO</string>
+				<key>SYMROOT</key>
+				<string>${SRCROOT}/../build</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>484A6938EDFA441DDBD6D0D2A27E9EBF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>SimulatorStatusMagic.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>48E4A35718C329AC7854970842749A7A</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>WatchConnectivity.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/WatchConnectivity.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>4A733D24A35AA65CBA23503A00F783FA</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods_Aquaz.framework</string>
+			<key>path</key>
+			<string>Pods-Aquaz.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>4AA8F117020CC2722085948F0E85FE6B</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>218C7F2AD44318AE5B02F10CB3EA9836</string>
+				<string>45C75DBAEE2BD69C5ECD048224E8CBA1</string>
+				<string>484A6938EDFA441DDBD6D0D2A27E9EBF</string>
+				<string>BE08585171DF887BDFC769AF5A9DB591</string>
+				<string>8F15A35A91721C508596FA74F97D97A4</string>
+				<string>DBA9BA5CA630D70E6186E663E985E636</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/SimulatorStatusMagic</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4B0DCF625CF5293D6326A3EBA87AF9C1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Pods-Widget-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4B64A67264A5C57652000BE4EE9D20E4</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>E363E0EE419CF84D467724E3D9961DFF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>4C8073F1EF80F38D2828DFA0023608F0</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>29DCD2983590173F8EE38410C6241112</string>
+				<string>4A733D24A35AA65CBA23503A00F783FA</string>
+				<string>E8ED5F5799BFB12417CBA4B893A23BA4</string>
+				<string>58C944A0239C714695F34E5531424C30</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>50FE5AECFCDAD48F82EBB24385AF2EE1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>53F90BE826C4C0364CD94B6757B1C4D9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C80DF62F18882173E9EDDE8BC0978721</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-w -Xanalyzer -analyzer-disable-all-checks</string>
+			</dict>
+		</dict>
+		<key>550D384D97FC0B0EDE04A5C008FC92C7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>ANSCompatibility.h</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework/Headers/ANSCompatibility.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>56B7EB61EE6519C6D661C3610F244CD5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MMWormhole-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>56FB0F45032A72352889E7CB177978F5</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Fabric.framework</string>
+			<key>path</key>
+			<string>iOS/Fabric.framework</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>58C944A0239C714695F34E5531424C30</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>SimulatorStatusMagic.framework</string>
+			<key>path</key>
+			<string>SimulatorStatusMagic.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>5AF04D9653AA53E67BAD592B0CC7633D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>MMWormhole-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>62202177A3ACE8EE75AB7E8AE1E14978</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>CFE3E20C94B053E325EE64DEB3FE423D</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>APPLICATION_EXTENSION_API_ONLY</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/MMWormhole/MMWormhole-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/MMWormhole/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/MMWormhole/MMWormhole.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>PRODUCT_NAME</key>
+				<string>MMWormhole</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>64C0D624C4AA790219EBC8FF6F59309D</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>3E475FB226EB9BCF0D4A312CBE5C3A94</string>
+				<string>7DC91AE18E358AA0C8DF1B722AA4D94E</string>
+				<string>53F90BE826C4C0364CD94B6757B1C4D9</string>
+				<string>F5BE0FF56BA325ADB192D96FEE6CFAC3</string>
+				<string>8D0DE603FA10B9245B1C04D3CCE8013D</string>
+				<string>192D32892487D4AD3412DC61694A6735</string>
+				<string>C9CB55EBCE3C55EA3AFD14F5278A33B6</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>6764CC83C5BCDB2E81DD22C2BEB98AC3</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>8360BA5B88285289FCBD8F621B6E9398</string>
+				<string>B950513FE8A0A7B00760BF3AD8331465</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MMWormhole</string>
+			<key>path</key>
+			<string>MMWormhole</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>68F8FFD6C6202C9460620A2878707907</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDStatusBarOverriderPost9_0.h</string>
+			<key>path</key>
+			<string>SDStatusBarManager/SDStatusBarOverriderPost9_0.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>698451D903454F42B2351C915A02B6A0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3561B9B2C830EFF934076F2A28D36940</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>6B91C9179A1A0D915DA8A28D9566D129</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MMWormholeFileTransiting.h</string>
+			<key>path</key>
+			<string>Source/MMWormholeFileTransiting.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6DCB12C6DEDB86E74D46178DCF02349E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F5C9D300D40D1146BD61CBB2B22EBB79</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks</string>
+			</dict>
+		</dict>
+		<key>703F6B8D4921C558E0F0342E84DCD4C4</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>62202177A3ACE8EE75AB7E8AE1E14978</string>
+				<string>3B2CE083EF2B5D39878AB3B1E4C2975D</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>717AE8808554DEB4747114B6075C3538</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDStatusBarOverriderPost8_3.h</string>
+			<key>path</key>
+			<string>SDStatusBarManager/SDStatusBarOverriderPost8_3.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>729905FECD9526A846761D43D9B57C4A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Aquaz.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>74C18C5A607BD1F09D91D200A4C3EDA4</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>C8D147D6C88AEA702D3DBC74B4768097</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>762F18A4394FA15213070BDF993A2B48</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6B91C9179A1A0D915DA8A28D9566D129</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>7697BFA08AE8C5CB0F0408B60630D579</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-Aquaz-frameworks.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>77A87A401B9D4B23AAF3005E7DD55C87</key>
+		<dict>
+			<key>fileRef</key>
+			<string>11706A950E20E69469B678DEAB1D65D9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks</string>
+			</dict>
+		</dict>
+		<key>7814F10CDCD840BFE9088F863516DDED</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SDStatusBarManager.m</string>
+			<key>path</key>
+			<string>SDStatusBarManager/SDStatusBarManager.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7AD4710707B16B6DF5DB05304FD1B416</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>729905FECD9526A846761D43D9B57C4A</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-Aquaz/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-Aquaz/Pods-Aquaz.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_Aquaz</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>7C964262EFDA5704FB35F4098B84C9C1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7CD9353D716421E39DC1AE7D4E9E23B1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDStatusBarManager.h</string>
+			<key>path</key>
+			<string>SDStatusBarManager/SDStatusBarManager.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7DB346D0F39D3F0E887471402A8071AB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>93A4A3777CF96A4AAC1D13BA6DCCEA73</string>
+				<string>122DA2E5084A4393C29BE363C764795C</string>
+				<string>CB3F1F1BC308AF5546DCFFE159E04613</string>
+				<string>4C8073F1EF80F38D2828DFA0023608F0</string>
+				<string>A90AA22467FAA90CA355F4969729ED7E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7DC91AE18E358AA0C8DF1B722AA4D94E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0812F84BE7D24B919C464718C60F3259</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-w -Xanalyzer -analyzer-disable-all-checks</string>
+			</dict>
+		</dict>
+		<key>80A31828FF4A9C55A58CA22CF628F174</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>Crashlytics.h</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework/Headers/Crashlytics.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>80B738F7C5F9625D914E0030122A93DB</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>FC0CF3F2978060186204610D8D21DB9C</string>
+				<string>DE9D89BFECB559F825F1BC2506FB1695</string>
+				<string>84B37CAEC1716055BEA3DA3795BC8A3C</string>
+				<string>762F18A4394FA15213070BDF993A2B48</string>
+				<string>8CA202DE2B82A4FA9F6433D0034EA12E</string>
+				<string>DFEEABC8C678127F23965CE3AE4B9F67</string>
+				<string>CC31FA025B3936FEC27592CC01AC4A5F</string>
+				<string>33618BBEB40ED0B04402BD45D0A12D96</string>
+				<string>D06E287165536614B66FA045D8A5D99A</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>823143A99A4E5658A80816E3649534B5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>68F8FFD6C6202C9460620A2878707907</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>827A4EBC76B0439506CEB35804BB98C3</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>8360BA5B88285289FCBD8F621B6E9398</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9059B5FD2DBB518464956E06031CFE38</string>
+				<string>896E5F2160A6351C8D8A25E2E3971E76</string>
+				<string>E908CF17D035E7A42E3B4A69C6107327</string>
+				<string>2115DC021270A29B4A668978BDBF1207</string>
+				<string>6B91C9179A1A0D915DA8A28D9566D129</string>
+				<string>11706A950E20E69469B678DEAB1D65D9</string>
+				<string>2B32061EFFA6CFD955914B05F8AD68B7</string>
+				<string>3E747561E40EA012CDBD1784A9D47700</string>
+				<string>EB984FAB12CE083802FEFAF971A5A57F</string>
+				<string>D01BE2E7CC6924FA44EBA7BCC3FD2EA0</string>
+				<string>27458252155EFF708548AA852594770E</string>
+				<string>E043E35C4211D0125496B01687D16635</string>
+				<string>0424B6247327523FE0498BFDF70C2307</string>
+				<string>F5C9D300D40D1146BD61CBB2B22EBB79</string>
+				<string>14CF6733CB5273EB8CAD951C1F5AF3E9</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Core</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>83BB18344B18845DA73D7A8F51D46164</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>AC715ED246C7D933C76E77EF50A694B4</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>840C63DC46EEE7B7DAD668D0C98069B2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>MMWormhole-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>842E4EEA03CEF633D8414C3C4736C436</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>DA2550D7D94491C4B4EA8F3435FEEC4B</string>
+			<key>remoteInfo</key>
+			<string>MMWormhole</string>
+		</dict>
+		<key>84B37CAEC1716055BEA3DA3795BC8A3C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E908CF17D035E7A42E3B4A69C6107327</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>894D371EA8EBF18330CC60177CBFA707</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>MMWormhole</string>
+			<key>target</key>
+			<string>DA2550D7D94491C4B4EA8F3435FEEC4B</string>
+			<key>targetProxy</key>
+			<string>842E4EEA03CEF633D8414C3C4736C436</string>
+		</dict>
+		<key>896E5F2160A6351C8D8A25E2E3971E76</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MMWormhole.m</string>
+			<key>path</key>
+			<string>Source/MMWormhole.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8AF191B5C42BA2E5FE1B480384FCDFE3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>Answers.h</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework/Headers/Answers.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8CA202DE2B82A4FA9F6433D0034EA12E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2B32061EFFA6CFD955914B05F8AD68B7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>8D0DE603FA10B9245B1C04D3CCE8013D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3F001DE2AFAEAAAA407C7F9FF495F961</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-w -Xanalyzer -analyzer-disable-all-checks</string>
+			</dict>
+		</dict>
+		<key>8D7A5AECA1F3061D719D40CD4F5FF35C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3E747561E40EA012CDBD1784A9D47700</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks</string>
+			</dict>
+		</dict>
+		<key>8D8B5623A4A3A2FC96B9B104EA9C54C3</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>F3998374849451E2A4A58345757DF560</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>APPLICATION_EXTENSION_API_ONLY</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-Widget/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-Widget/Pods-Widget.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_Widget</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>8EFECBEE1F11341AF085320ED0574206</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Aquaz.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8F15A35A91721C508596FA74F97D97A4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>SimulatorStatusMagic-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8FC514A28A2A84DA72870553E560BCF7</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>FD8C3A12053BBFE6526E99CF6FD0B9C0</string>
+				<string>E4258B26D1911DC625C26AEDC7CA5A6A</string>
+				<string>BD7CB717DA844692A2E615DDBEA25A11</string>
+				<string>77A87A401B9D4B23AAF3005E7DD55C87</string>
+				<string>8D7A5AECA1F3061D719D40CD4F5FF35C</string>
+				<string>9D6AFCD74FCC1EC6C2D968ABF8EC0D56</string>
+				<string>E04121AD5D0C3CBA35D028A7154C62A2</string>
+				<string>6DCB12C6DEDB86E74D46178DCF02349E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>9059B5FD2DBB518464956E06031CFE38</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MMWormhole.h</string>
+			<key>path</key>
+			<string>Source/MMWormhole.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>934A883F737BDBC8A8B3E75E35AF4D50</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4163B40B5622705E412E0222942F1101</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>93A4A3777CF96A4AAC1D13BA6DCCEA73</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>text.script.ruby</string>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>name</key>
+			<string>Podfile</string>
+			<key>path</key>
+			<string>../Podfile</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+			<key>xcLanguageSpecificationIdentifier</key>
+			<string>xcode.lang.ruby</string>
+		</dict>
+		<key>95BB4E4066003543994B877AEFA482B0</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>8EFECBEE1F11341AF085320ED0574206</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-Aquaz/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-Aquaz/Pods-Aquaz.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_Aquaz</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>974D197408B1E233A34D0F7FC7BD4301</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>Fabric.h</string>
+			<key>path</key>
+			<string>iOS/Fabric.framework/Headers/Fabric.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9A5AEBAFC9693525E3FA646FA20557D8</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>484A6938EDFA441DDBD6D0D2A27E9EBF</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/SimulatorStatusMagic/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>PRODUCT_NAME</key>
+				<string>SimulatorStatusMagic</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>9D6AFCD74FCC1EC6C2D968ABF8EC0D56</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D01BE2E7CC6924FA44EBA7BCC3FD2EA0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks</string>
+			</dict>
+		</dict>
+		<key>A90AA22467FAA90CA355F4969729ED7E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>D2A80D132C6B130981FFBBC9114B1882</string>
+				<string>DC509ABBFAE7CFC71AF97E58032A4856</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Targets Support Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AAB2E93ACE89A058C217D69DC2667465</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>CLSReport.h</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework/Headers/CLSReport.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AAF678CED40D3499169D10F63CA0719E</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_ANALYZER_NONNULL</key>
+				<string>YES</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>POD_CONFIGURATION_RELEASE=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>STRIP_INSTALLED_PRODUCT</key>
+				<string>NO</string>
+				<key>SYMROOT</key>
+				<string>${SRCROOT}/../build</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>AC715ED246C7D933C76E77EF50A694B4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>827A4EBC76B0439506CEB35804BB98C3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>AD6B6A9C2805FEFD476723006C9D36DB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-Aquaz-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>ADA573A10C1B69DA739A950CB9A6A1FB</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Crashlytics.framework</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B38941C0811BF0F9FD2DAD180EC12CD2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>077B21BBE49B6859995A501661F90F8E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>B4684F078930547CC8E2CA8951380BF0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Widget.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B594D9ABE3D364625535906A3F05A802</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FAB1FB7C6BEE1784A1411438BA0240AB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>B6A957534ADBCB1646176260C9FF0E91</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>FABAttributes.h</string>
+			<key>path</key>
+			<string>iOS/Fabric.framework/Headers/FABAttributes.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B8330969BAE720409688CA6B11198453</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>CLSLogging.h</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework/Headers/CLSLogging.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B950513FE8A0A7B00760BF3AD8331465</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1F70CF4C100F5B6A28710F2252FB4A60</string>
+				<string>114A63AECFD06822A02174911078F7AD</string>
+				<string>CFE3E20C94B053E325EE64DEB3FE423D</string>
+				<string>5AF04D9653AA53E67BAD592B0CC7633D</string>
+				<string>56B7EB61EE6519C6D661C3610F244CD5</string>
+				<string>840C63DC46EEE7B7DAD668D0C98069B2</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/MMWormhole</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BB47F148F23BC48B17720F3AF03CC673</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>Pods-Aquaz-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BD7CB717DA844692A2E615DDBEA25A11</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2115DC021270A29B4A668978BDBF1207</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks</string>
+			</dict>
+		</dict>
+		<key>BE08585171DF887BDFC769AF5A9DB591</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>SimulatorStatusMagic-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C1A574BDA52EC4ED082E68A3C978C585</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-Widget-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C70BFE7544CA6F1F6B15104B55F9C585</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-Aquaz-resources.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C80DF62F18882173E9EDDE8BC0978721</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SDStatusBarOverriderPost8_3.m</string>
+			<key>path</key>
+			<string>SDStatusBarManager/SDStatusBarOverriderPost8_3.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C8891934F2525598D117608EA55792D2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods-Widget.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C8D147D6C88AEA702D3DBC74B4768097</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E64F8F293626CC333E3FE28F75EC73E3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>C9CB55EBCE3C55EA3AFD14F5278A33B6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>BE08585171DF887BDFC769AF5A9DB591</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CB3F1F1BC308AF5546DCFFE159E04613</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FBA217A630EA48F4301FB282B6F7930C</string>
+				<string>3A73F5312E7F36B4E3EA1F565691A94B</string>
+				<string>6764CC83C5BCDB2E81DD22C2BEB98AC3</string>
+				<string>108624F280033595E8D815D0F908E4EB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CC31FA025B3936FEC27592CC01AC4A5F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>27458252155EFF708548AA852594770E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>CC58C7233466E203C01787D659C73BE6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-Widget-frameworks.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CFE3E20C94B053E325EE64DEB3FE423D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>MMWormhole.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D01BE2E7CC6924FA44EBA7BCC3FD2EA0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MMWormholeSessionContextTransiting.m</string>
+			<key>path</key>
+			<string>Source/MMWormholeSessionContextTransiting.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D06E287165536614B66FA045D8A5D99A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>14CF6733CB5273EB8CAD951C1F5AF3E9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>D0A04FB2E4A6D77640A93137D87636CF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods-Aquaz.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D0CA56D62E126D8687EF499FAB88DFC3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>827A4EBC76B0439506CEB35804BB98C3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>D2A80D132C6B130981FFBBC9114B1882</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>50FE5AECFCDAD48F82EBB24385AF2EE1</string>
+				<string>D0A04FB2E4A6D77640A93137D87636CF</string>
+				<string>06459E7ED109CB81C29641F1EBE45350</string>
+				<string>AD6B6A9C2805FEFD476723006C9D36DB</string>
+				<string>3FE8E83ACE18DF90BE13F19BE94F55AC</string>
+				<string>7697BFA08AE8C5CB0F0408B60630D579</string>
+				<string>C70BFE7544CA6F1F6B15104B55F9C585</string>
+				<string>BB47F148F23BC48B17720F3AF03CC673</string>
+				<string>729905FECD9526A846761D43D9B57C4A</string>
+				<string>8EFECBEE1F11341AF085320ED0574206</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods-Aquaz</string>
+			<key>path</key>
+			<string>Target Support Files/Pods-Aquaz</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D2F8D7C4BFCF496DA4A9853E3B06A3CF</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>56FB0F45032A72352889E7CB177978F5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D41D8CD98F00B204E9800998ECF8427E</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastSwiftUpdateCheck</key>
+				<string>0730</string>
+				<key>LastUpgradeCheck</key>
+				<string>0700</string>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>2D8E8EC45A3A1A1D94AE762CB5028504</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+			</array>
+			<key>mainGroup</key>
+			<string>7DB346D0F39D3F0E887471402A8071AB</string>
+			<key>productRefGroup</key>
+			<string>4C8073F1EF80F38D2828DFA0023608F0</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>DA2550D7D94491C4B4EA8F3435FEEC4B</string>
+				<string>168454C1196C6E92E767E211423B043A</string>
+				<string>D71BF667A3A8A4D4806A88A10C5345A3</string>
+				<string>37848BCD21A7C619BFE9D523391C269B</string>
+			</array>
+		</dict>
+		<key>D53C965381E8D2BDAEEEACA0451D6E2E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>827A4EBC76B0439506CEB35804BB98C3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>D6B447486715615B8E514A9BE673CC58</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SDStatusBarOverriderPre8_3.m</string>
+			<key>path</key>
+			<string>SDStatusBarManager/SDStatusBarOverriderPre8_3.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D71BF667A3A8A4D4806A88A10C5345A3</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>3921AB24A7D4ED10B8B25C5CAA094D0F</string>
+			<key>buildPhases</key>
+			<array>
+				<string>4B64A67264A5C57652000BE4EE9D20E4</string>
+				<string>EFC5C23BBD8C3738C1E7962B4242ABA1</string>
+				<string>74C18C5A607BD1F09D91D200A4C3EDA4</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>45082D5659FE949DA4A57771D6199339</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-Widget</string>
+			<key>productName</key>
+			<string>Pods-Widget</string>
+			<key>productReference</key>
+			<string>E8ED5F5799BFB12417CBA4B893A23BA4</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>DA2550D7D94491C4B4EA8F3435FEEC4B</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>703F6B8D4921C558E0F0342E84DCD4C4</string>
+			<key>buildPhases</key>
+			<array>
+				<string>8FC514A28A2A84DA72870553E560BCF7</string>
+				<string>1F95150333D024602EDC33E340A536D8</string>
+				<string>80B738F7C5F9625D914E0030122A93DB</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>MMWormhole</string>
+			<key>productName</key>
+			<string>MMWormhole</string>
+			<key>productReference</key>
+			<string>29DCD2983590173F8EE38410C6241112</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>DBA9BA5CA630D70E6186E663E985E636</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>SimulatorStatusMagic-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DC0C096CAD646C0EED6A336AF9D45893</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>827A4EBC76B0439506CEB35804BB98C3</string>
+				<string>3561B9B2C830EFF934076F2A28D36940</string>
+				<string>48E4A35718C329AC7854970842749A7A</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>iOS</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DC509ABBFAE7CFC71AF97E58032A4856</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>7C964262EFDA5704FB35F4098B84C9C1</string>
+				<string>C8891934F2525598D117608EA55792D2</string>
+				<string>EEDA831062ADB6D22D0ABB4316402751</string>
+				<string>C1A574BDA52EC4ED082E68A3C978C585</string>
+				<string>4B0DCF625CF5293D6326A3EBA87AF9C1</string>
+				<string>CC58C7233466E203C01787D659C73BE6</string>
+				<string>F96A3906B72EDD0855A0D0B13F1B4F53</string>
+				<string>E64F8F293626CC333E3FE28F75EC73E3</string>
+				<string>F3998374849451E2A4A58345757DF560</string>
+				<string>B4684F078930547CC8E2CA8951380BF0</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods-Widget</string>
+			<key>path</key>
+			<string>Target Support Files/Pods-Widget</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DE9D89BFECB559F825F1BC2506FB1695</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9059B5FD2DBB518464956E06031CFE38</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>DFEEABC8C678127F23965CE3AE4B9F67</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EB984FAB12CE083802FEFAF971A5A57F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>E04121AD5D0C3CBA35D028A7154C62A2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E043E35C4211D0125496B01687D16635</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks</string>
+			</dict>
+		</dict>
+		<key>E043E35C4211D0125496B01687D16635</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MMWormholeSessionFileTransiting.m</string>
+			<key>path</key>
+			<string>Source/MMWormholeSessionFileTransiting.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E10A933A0449C764A4AA4A2610665898</key>
+		<dict>
+			<key>fileRef</key>
+			<string>28DA605C3DB95C29916D075DECFA8C17</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>E2DE3D61D86DEFA0174928C8BE04F919</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DBA9BA5CA630D70E6186E663E985E636</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>E35B647CA346A9B129671B925AEB510D</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>484A6938EDFA441DDBD6D0D2A27E9EBF</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/SimulatorStatusMagic/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>PRODUCT_NAME</key>
+				<string>SimulatorStatusMagic</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>E363E0EE419CF84D467724E3D9961DFF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4B0DCF625CF5293D6326A3EBA87AF9C1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>E4258B26D1911DC625C26AEDC7CA5A6A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>896E5F2160A6351C8D8A25E2E3971E76</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks</string>
+			</dict>
+		</dict>
+		<key>E64F8F293626CC333E3FE28F75EC73E3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>Pods-Widget-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E65281839DDC0C9EE91458CEA8161E8C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>BB47F148F23BC48B17720F3AF03CC673</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>E7587251C013C03E16A6A5F01C950ECC</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>B4684F078930547CC8E2CA8951380BF0</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>APPLICATION_EXTENSION_API_ONLY</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-Widget/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-Widget/Pods-Widget.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_Widget</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>E8ED5F5799BFB12417CBA4B893A23BA4</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods_Widget.framework</string>
+			<key>path</key>
+			<string>Pods-Widget.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>E908CF17D035E7A42E3B4A69C6107327</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MMWormholeCoordinatedFileTransiting.h</string>
+			<key>path</key>
+			<string>Source/MMWormholeCoordinatedFileTransiting.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EB984FAB12CE083802FEFAF971A5A57F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>MMWormholeSessionContextTransiting.h</string>
+			<key>path</key>
+			<string>Source/MMWormholeSessionContextTransiting.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EC5071D140DEAE4F32BEAF15BBCE19A1</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>44CF589A9B620562CC754C6FC0E81B69</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>ECB03DCF4FFD4E6EFBC934BA5A1E3DDB</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>9A5AEBAFC9693525E3FA646FA20557D8</string>
+				<string>E35B647CA346A9B129671B925AEB510D</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>EEDA831062ADB6D22D0ABB4316402751</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>Pods-Widget-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EFC5C23BBD8C3738C1E7962B4242ABA1</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>D0CA56D62E126D8687EF499FAB88DFC3</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>F282E18AB7B7C15A6720E35FEB5B8502</key>
+		<dict>
+			<key>fileRef</key>
+			<string>827A4EBC76B0439506CEB35804BB98C3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>F3998374849451E2A4A58345757DF560</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Widget.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F5BE0FF56BA325ADB192D96FEE6CFAC3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>33B9330F03C2042221076501D3FB6318</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-w -Xanalyzer -analyzer-disable-all-checks</string>
+			</dict>
+		</dict>
+		<key>F5C9D300D40D1146BD61CBB2B22EBB79</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>MMWormholeSessionMessageTransiting.m</string>
+			<key>path</key>
+			<string>Source/MMWormholeSessionMessageTransiting.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F6B3037A1B3149ACA92542D593FB2CE6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>CLSStackFrame.h</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework/Headers/CLSStackFrame.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F7EA460BE69424DF28D936667D2E2A03</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>E65281839DDC0C9EE91458CEA8161E8C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>F7EF8C479D309E479D71B468BF0FA4E6</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>7AD4710707B16B6DF5DB05304FD1B416</string>
+				<string>95BB4E4066003543994B877AEFA482B0</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>F85E5886A1FACE0510338995CB4B8355</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>D53C965381E8D2BDAEEEACA0451D6E2E</string>
+				<string>698451D903454F42B2351C915A02B6A0</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>F96A3906B72EDD0855A0D0B13F1B4F53</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-Widget-resources.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FAB1FB7C6BEE1784A1411438BA0240AB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDStatusBarOverrider.h</string>
+			<key>path</key>
+			<string>SDStatusBarManager/SDStatusBarOverrider.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FBA217A630EA48F4301FB282B6F7930C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>550D384D97FC0B0EDE04A5C008FC92C7</string>
+				<string>8AF191B5C42BA2E5FE1B480384FCDFE3</string>
+				<string>15C397F5EA1B1DE29DEF0C8B6D53FDAF</string>
+				<string>B8330969BAE720409688CA6B11198453</string>
+				<string>AAB2E93ACE89A058C217D69DC2667465</string>
+				<string>F6B3037A1B3149ACA92542D593FB2CE6</string>
+				<string>80A31828FF4A9C55A58CA22CF628F174</string>
+				<string>17DCAF717EE850346A88317AB3D775DD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Crashlytics</string>
+			<key>path</key>
+			<string>Crashlytics</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FC0CF3F2978060186204610D8D21DB9C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>840C63DC46EEE7B7DAD668D0C98069B2</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>FD8C3A12053BBFE6526E99CF6FD0B9C0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5AF04D9653AA53E67BAD592B0CC7633D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>D41D8CD98F00B204E9800998ECF8427E</string>
+</dict>
+</plist>
