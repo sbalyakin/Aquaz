@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Aquaz Pro</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -21,11 +23,13 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLName</key>
 			<string>com.devmanifest.Aquaz</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>aquaz</string>
+				<string>aquazpro</string>
 			</array>
 		</dict>
 	</array>
@@ -53,9 +57,9 @@
 		<true/>
 	</dict>
 	<key>NSHealthShareUsageDescription</key>
-	<string>″Aquaz″ will import your metrics for calculating recommended daily water intake.</string>
+	<string>″Aquaz Pro″ will import your metrics for calculating recommended daily water intake.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>″Aquaz″ will export your intakes into Apple Health.</string>
+	<string>″Aquaz Pro″ will export your intakes into Apple Health.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

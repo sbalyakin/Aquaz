@@ -11,7 +11,7 @@ import Foundation
 class GlobalConstants {
 
   static let applicationIdentifier = "963482552"
-  static let applicationSchemeURL = "aquaz://"
+  static let applicationSchemeURL = "aquazpro://"
  
   static let appGroupName = "group.com.devmanifest.Aquaz"
   static let appStoreLink = "http://itunes.apple.com/app/id\(GlobalConstants.applicationIdentifier)"
@@ -19,9 +19,9 @@ class GlobalConstants {
 
   static let developerMail = "devmanifest@gmail.com"
   
-  static let wormholeOptionalDirectory = "wormhole"
-  static let wormholeMessageFromAquaz = "From Aquaz"
-  static let wormholeMessageFromWidget = "From Widget"
+  static let wormholeOptionalDirectory = "AquazPro-Wormhole"
+  static let wormholeMessageFromAquaz = "AquazPro-From App"
+  static let wormholeMessageFromWidget = "AquazPro-From Widget"
   
   static let notificationManagedObjectContextWasMerged = "AquazManagedObjectContextWasMerged"
   static let notificationWatchAddIntake = "AquazWatchAddIntake"
