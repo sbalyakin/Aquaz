@@ -1035,6 +1035,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84669A8B19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "Aquaz" */;
 			buildPhases = (
+				A52170EB1DD125DB0041135F /* Show Environment Variables */,
 				1289518697D60FEEEB3998D7 /* [CP] Check Pods Manifest.lock */,
 				84669A6519DAD78D003C2263 /* Sources */,
 				84669A6619DAD78D003C2263 /* Frameworks */,
@@ -1078,6 +1079,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84D251A41AD2511E001E6644 /* Build configuration list for PBXNativeTarget "Widget" */;
 			buildPhases = (
+				A52170EC1DD1269A0041135F /* Show Environment Variables */,
 				23231C98AA14951CB77AF210 /* [CP] Check Pods Manifest.lock */,
 				84D251901AD2511E001E6644 /* Sources */,
 				84D251911AD2511E001E6644 /* Frameworks */,
@@ -1098,6 +1100,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A587AAC61BD65224000B48E9 /* Build configuration list for PBXNativeTarget "Watch" */;
 			buildPhases = (
+				A52170ED1DD126B00041135F /* Show Environment Variables */,
 				A587AA9D1BD65224000B48E9 /* Resources */,
 				A587AAC51BD65224000B48E9 /* Embed App Extensions */,
 				539F02D774323AF2B027C12D /* Frameworks */,
@@ -1116,6 +1119,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A587AAC41BD65224000B48E9 /* Build configuration list for PBXNativeTarget "Watch Extension" */;
 			buildPhases = (
+				A52170EE1DD126C30041135F /* Show Environment Variables */,
 				A587AAA71BD65224000B48E9 /* Sources */,
 				A587AAA81BD65224000B48E9 /* Frameworks */,
 				A587AAA91BD65224000B48E9 /* Resources */,
@@ -1379,6 +1383,62 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		A52170EB1DD125DB0041135F /* Show Environment Variables */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Show Environment Variables";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = export;
+		};
+		A52170EC1DD1269A0041135F /* Show Environment Variables */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Show Environment Variables";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = export;
+		};
+		A52170ED1DD126B00041135F /* Show Environment Variables */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Show Environment Variables";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = export;
+		};
+		A52170EE1DD126C30041135F /* Show Environment Variables */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Show Environment Variables";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = export;
 		};
 		A571D50D1AB180B1006265C7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
