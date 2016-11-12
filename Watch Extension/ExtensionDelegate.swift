@@ -10,6 +10,13 @@ import WatchKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
   
+  override init() {
+    super.init()
+    
+    // Initialize the connectivity provider
+    ConnectivityProvider.sharedInstance.startSession()
+  }
+  
   func applicationDidFinishLaunching() {
     // Perform any final initialization of your application.
   }

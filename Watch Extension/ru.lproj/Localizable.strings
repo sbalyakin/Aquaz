@@ -1,55 +1,53 @@
-// Turn off translations, because Apple Watch simulator works strange with localization.
+/* Drink: Title for beer */
+"D:Beer" = "Пиво";
 
-///* Drink: Title for beer */
-//"D:Beer" = "Пиво";
-//
-///* Drink: Title for coffee */
-//"D:Coffee" = "Кофе";
-//
-///* Drink: Title for energetic drink */
-//"D:Energy" = "Энергетик";
-//
-///* Drink: Title for hard liquor */
-//"D:Hard Liquor" = "Алкоголь 40°";
-//
-///* Drink: Title for juice */
-//"D:Juice" = "Сок";
-//
-///* Drink: Title for milk */
-//"D:Milk" = "Молоко";
-//
-///* Drink: Title for soda */
-//"D:Soda" = "Газировка";
-//
-///* Drink: Title for sport drink */
-//"D:Sport" = "Спортивный";
-//
-///* Drink: Title for tea */
-//"D:Tea" = "Чай";
-//
-///* Drink: Title for water */
-//"D:Water" = "Вода";
-//
-///* Drink: Title for wine */
-//"D:Wine" = "Вино";
-//
-///* Units: contraction for centimeters */
-//"U:cm" = "см";
-//
-///* Units: contraction for fluid ounces */
-//"U:fl oz" = "унц";
-//
-///* Units: contraction for feet */
-//"U:ft" = "фут";
-//
-///* Units: contraction for kilogrames */
-//"U:kg" = "кг";
-//
-///* Units: contraction for pounds */
-//"U:lb" = "фнт";
-//
-///* Units: contraction for milliliters */
-//"U:mL" = "мл";
-//
-///* WatchKit Interface Controller: The part of title about current consumption */
-//"WIC:of %1$@" = "из %1$@";
+/* Drink: Title for coffee */
+"D:Coffee" = "Кофе";
+
+/* Drink: Title for energetic drink */
+"D:Energy" = "Энергетик";
+
+/* Drink: Title for hard liquor */
+"D:Alc. 40°" = "Алк. 40°";
+
+/* Drink: Title for juice */
+"D:Juice" = "Сок";
+
+/* Drink: Title for milk */
+"D:Milk" = "Молоко";
+
+/* Drink: Title for soda */
+"D:Soda" = "Газ. вода";
+
+/* Drink: Title for sport drink */
+"D:Sport" = "Спорт";
+
+/* Drink: Title for tea */
+"D:Tea" = "Чай";
+
+/* Drink: Title for water */
+"D:Water" = "Вода";
+
+/* Drink: Title for wine */
+"D:Wine" = "Вино";
+
+/* Units: contraction for centimeters */
+"U:cm" = "см";
+
+/* Units: contraction for fluid ounces */
+"U:fl oz" = "унц";
+
+/* Units: contraction for feet */
+"U:ft" = "фут";
+
+/* Units: contraction for kilogrames */
+"U:kg" = "кг";
+
+/* Units: contraction for pounds */
+"U:lb" = "фнт";
+
+/* Units: contraction for milliliters */
+"U:mL" = "мл";
+
+/* WatchKit Interface Controller: The part of title about current consumption */
+"WIC:of %1$@" = "из %1$@";

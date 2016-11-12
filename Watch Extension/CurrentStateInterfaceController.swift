@@ -25,8 +25,6 @@ class CurrentStateInterfaceController: WKInterfaceController {
   var fontSizes: (title: CGFloat, upTitle: CGFloat, subTitle: CGFloat) {
     return (title: 34, upTitle: 14, subTitle: 14)
   }
-
-  fileprivate var session: WCSession?
   
   fileprivate var settingsObserverVolumeUnits: SettingsObserver?
   
@@ -67,8 +65,6 @@ class CurrentStateInterfaceController: WKInterfaceController {
 
     setupSettingsSynchronization()
     
-    initConnectivity()
-    
     setupNotificationsObservation()
     
     setupTomorrowTimer()
@@ -91,14 +87,6 @@ class CurrentStateInterfaceController: WKInterfaceController {
     updateUI()
   }
   
-  fileprivate func initConnectivity() {
-    if WCSession.isSupported() {
-      session = WCSession.default()
-      session?.delegate = self
-      session?.activate()
-    }
-  }
-  
   fileprivate func setupSettingsSynchronization() {
     settingsObserverVolumeUnits = WatchSettings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
       if let existingSelf = self {
@@ -112,17 +100,9 @@ class CurrentStateInterfaceController: WKInterfaceController {
   fileprivate func setupNotificationsObservation() {
     NotificationCenter.default.addObserver(
       self,
-      selector: #selector(self.addIntakeNotificationIsReceived(_:)),
-      name: NSNotification.Name(rawValue: GlobalConstants.notificationWatchAddIntake),
+      selector: #selector(self.currentStateNotificationIsReceived(_:)),
+      name: NSNotification.Name(rawValue: GlobalConstants.notificationWatchCurrentState),
       object: nil)
-  }
-  
-  func addIntakeNotificationIsReceived(_ notification: Notification) {
-    guard let addIntakeInfo = notification.object as? ConnectivityMessageAddIntake else {
-      return
-    }
-    
-    session?.transferUserInfo(addIntakeInfo.composeMetadata())
   }
   
   fileprivate func setupTomorrowTimer() {
@@ -210,53 +190,19 @@ class CurrentStateInterfaceController: WKInterfaceController {
     progressGroup.setBackgroundImage(backgroundImage)
   }
   
-}
-
-// MARK: WCSessionDelegate
-
-extension CurrentStateInterfaceController: WCSessionDelegate {
-  
-  // Called when the session has completed activation. If session state is WCSessionActivationStateNotActivated there will be an error with more details.
-  @available(watchOS 2.2, *)
-  public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-    // TODO: Need implementation here
-  }
-  
-  func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
-    if let updatedSettingsMesage = ConnectivityMessageUpdatedSettings(metadata: userInfo) {
-      updatedSettingsMesageWasReceived(updatedSettingsMesage)
-    } else if let currentStateMesage = ConnectivityMessageCurrentState(metadata: userInfo) {
-      currentStateMesageWasReceived(currentStateMesage)
-    }
-  }
-  
-  func session(_ session: WCSession, didFinish userInfoTransfer: WCSessionUserInfoTransfer, error: Error?) {
-    if let _ = error {
-      // Trying to transfer the user info again
-      session.transferUserInfo(userInfoTransfer.userInfo)
-    }
-  }
-  
-  fileprivate func updatedSettingsMesageWasReceived(_ message: ConnectivityMessageUpdatedSettings) {
-    for (key, value) in message.settings {
-      WatchSettings.userDefaults.set(value, forKey: key)
-      _ = WatchSettings.sharedInstance.generalVolumeUnits.readFromUserDefaults(sendNotification: true)
-    }
-  }
-  
-  fileprivate func currentStateMesageWasReceived(_ message: ConnectivityMessageCurrentState) {
-    if !DateHelper.areEqualDays(Date(), message.messageDate) {
-      // Skip outdated events
+  func currentStateNotificationIsReceived(_ notification: Notification) {
+    guard let message = notification.object as? ConnectivityMessageCurrentState else {
       return
     }
-    
+
     DispatchQueue.main.async {
+      WatchSettings.sharedInstance.generalVolumeUnits.value = message.volumeUnits
       self.settingsWaterGoal = message.dailyWaterGoal + message.dehydrationAmount
       self.settingsHydrationAmount = message.hydrationAmount
       self.updateUI(waterGoal: self.settingsWaterGoal, hydrationAmount: self.settingsHydrationAmount)
     }
   }
-  
+
 }
 
 // MARK: Units.Volume extension

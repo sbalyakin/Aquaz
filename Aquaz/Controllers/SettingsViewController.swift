@@ -32,7 +32,7 @@ class SettingsViewController: OmegaSettingsViewController {
       value: "Support",
       comment: "SettingsViewController: Table cell title for [Support] settings block")
     
-    @available(iOS 9.0, *)
+    @available(iOS 9.3, *)
     lazy var exportToHealthAppTitle: String = NSLocalizedString("SVC:Export to Apple Health",
       value: "Export to Apple Health",
       comment: "SettingsViewController: Table title for [Export to Apple Health] cell")
@@ -143,7 +143,7 @@ class SettingsViewController: OmegaSettingsViewController {
     var sections = [recommendationsSection, unitsSection, notificationsSection, supportSection]
 
     // Export to the Health App section
-    if #available(iOS 9.0, *) {
+    if #available(iOS 9.3, *) {
       let healthCell = createBasicTableCell(title: localizedStrings.exportToHealthAppTitle, accessoryType: .disclosureIndicator)
       
       healthCell.activationChangedFunction = { [weak self] tableCell, active in

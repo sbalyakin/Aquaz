@@ -97,6 +97,7 @@
 		A52E0CDB1B3854E500599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CDD1B3854E500599D81 /* InfoPlist.strings */; };
 		A52E0CE01B3854E500599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CE21B3854E500599D81 /* InfoPlist.strings */; };
 		A52E0CE51B3854E600599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CE71B3854E600599D81 /* InfoPlist.strings */; };
+		A52FD0791DD3AC90007AF546 /* ConnectivityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FD0781DD3AC90007AF546 /* ConnectivityProvider.swift */; };
 		A5340CD11C158A4F00B01C30 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5340CD01C158A4F00B01C30 /* readme.txt */; };
 		A53E395E1C15C82600628103 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A53E39601C15C82600628103 /* InfoPlist.strings */; };
 		A53E39631C15C82700628103 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A53E39651C15C82700628103 /* Localizable.strings */; };
@@ -199,6 +200,8 @@
 		A5D3D42B1AA5D29700E3C989 /* UISegmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D41E1AA5D29700E3C989 /* UISegmentedTableViewCell.swift */; };
 		A5D3D42C1AA5D29700E3C989 /* UISwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D41F1AA5D29700E3C989 /* UISwitchTableViewCell.swift */; };
 		A5D3D42D1AA5D29700E3C989 /* UITextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4201AA5D29700E3C989 /* UITextFieldTableViewCell.swift */; };
+		A5D67D461DD25625001FB7D0 /* ConnectivityMessagePendingIntakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D67D451DD25625001FB7D0 /* ConnectivityMessagePendingIntakes.swift */; };
+		A5D67D471DD25E92001FB7D0 /* ConnectivityMessagePendingIntakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D67D451DD25625001FB7D0 /* ConnectivityMessagePendingIntakes.swift */; };
 		A5D740761B301CA100FC2BAF /* WelcomeWizardWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D740751B301CA100FC2BAF /* WelcomeWizardWelcomeViewController.swift */; };
 		A5DEB05F1BA75B1300ABD3C8 /* HealthKitProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DEB05E1BA75B1300ABD3C8 /* HealthKitProvider.swift */; };
 		A5DEB0611BA75B4B00ABD3C8 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DEB0601BA75B4B00ABD3C8 /* HealthKit.framework */; };
@@ -378,11 +381,13 @@
 		84F9DD971A16574E003D6444 /* PickTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTimeViewController.swift; sourceTree = "<group>"; };
 		A3EF57C5DB81A174768654DB /* Pods_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A516B1161BEBF76F00EC553A /* DrinksInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinksInterfaceController.swift; sourceTree = "<group>"; };
+		A51A65F91DD7C2D300B1A83F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A52A7D861B245C88007A71ED /* NotificationSounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSounds.swift; sourceTree = "<group>"; };
 		A52E0CDC1B3854E500599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A52E0CE11B3854E500599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A52E0CE61B3854E600599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A52FD0781DD3AC90007AF546 /* ConnectivityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivityProvider.swift; sourceTree = "<group>"; };
 		A5301BA21BD6D0C400136813 /* Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Watch.entitlements; sourceTree = "<group>"; };
 		A5340CCE1C15858300B01C30 /* IncreaseBuildNumber.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = IncreaseBuildNumber.sh; sourceTree = "<group>"; };
 		A5340CCF1C1589F200B01C30 /* UpdateRepository.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = UpdateRepository.sh; sourceTree = "<group>"; };
@@ -486,6 +491,7 @@
 		A5D3D41E1AA5D29700E3C989 /* UISegmentedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISegmentedTableViewCell.swift; sourceTree = "<group>"; };
 		A5D3D41F1AA5D29700E3C989 /* UISwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISwitchTableViewCell.swift; sourceTree = "<group>"; };
 		A5D3D4201AA5D29700E3C989 /* UITextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		A5D67D451DD25625001FB7D0 /* ConnectivityMessagePendingIntakes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivityMessagePendingIntakes.swift; sourceTree = "<group>"; };
 		A5D740751B301CA100FC2BAF /* WelcomeWizardWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWizardWelcomeViewController.swift; sourceTree = "<group>"; };
 		A5DEB05E1BA75B1300ABD3C8 /* HealthKitProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitProvider.swift; sourceTree = "<group>"; };
 		A5DEB0601BA75B4B00ABD3C8 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -801,6 +807,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A52FD07A1DD3C9A6007AF546 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A587AAB41BD65224000B48E9 /* ExtensionDelegate.swift */,
+				A5B255DA1BF877F4009AD8DA /* WatchSettings.swift */,
+				A52FD0781DD3AC90007AF546 /* ConnectivityProvider.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		A5340CCD1C1584E800B01C30 /* Distribution */ = {
 			isa = PBXGroup;
 			children = (
@@ -849,13 +865,10 @@
 		A587AAAF1BD65224000B48E9 /* Watch Extension */ = {
 			isa = PBXGroup;
 			children = (
-				A53E396F1C15C82800628103 /* InfoPlist.strings */,
-				A53E39651C15C82700628103 /* Localizable.strings */,
-				A587ACFE1BD67AEA000B48E9 /* Watch Extension.entitlements */,
+				A52FD07A1DD3C9A6007AF546 /* Services */,
 				A587ABF91BD65D45000B48E9 /* Helpers */,
 				A587ABF81BD65D37000B48E9 /* Controllers */,
 				A587AABA1BD65224000B48E9 /* Assets.xcassets */,
-				A587AABC1BD65224000B48E9 /* Info.plist */,
 				A587AAB01BD65224000B48E9 /* Supporting Files */,
 			);
 			path = "Watch Extension";
@@ -864,6 +877,10 @@
 		A587AAB01BD65224000B48E9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A53E396F1C15C82800628103 /* InfoPlist.strings */,
+				A53E39651C15C82700628103 /* Localizable.strings */,
+				A587ACFE1BD67AEA000B48E9 /* Watch Extension.entitlements */,
+				A587AABC1BD65224000B48E9 /* Info.plist */,
 				A587AAB11BD65224000B48E9 /* PushNotificationPayload.apns */,
 			);
 			name = "Supporting Files";
@@ -872,13 +889,12 @@
 		A587ABF81BD65D37000B48E9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A5B255E81BFCF998009AD8DA /* CurrentStateInterfaceController.swift */,
 				A587AAB21BD65224000B48E9 /* MainInterfaceController.swift */,
 				A587AAB81BD65224000B48E9 /* GlanceController.swift */,
-				A587AAB41BD65224000B48E9 /* ExtensionDelegate.swift */,
-				A587AAB61BD65224000B48E9 /* NotificationController.swift */,
+				A5B255E81BFCF998009AD8DA /* CurrentStateInterfaceController.swift */,
 				A516B1161BEBF76F00EC553A /* DrinksInterfaceController.swift */,
 				A58139D61BEE0D3C00B5D6A0 /* AmountInterfaceController.swift */,
+				A587AAB61BD65224000B48E9 /* NotificationController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -888,7 +904,6 @@
 			children = (
 				A587ABFA1BD65D6C000B48E9 /* ProgressHelper.swift */,
 				A5F582F11BF217BC0049AD3A /* UIControlsExtensions.swift */,
-				A5B255DA1BF877F4009AD8DA /* WatchSettings.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -910,6 +925,7 @@
 				A554B4F91BE504360095593B /* ConnectivityMessageCurrentState.swift */,
 				A554B4FA1BE504360095593B /* ConnectivityMessageAddIntake.swift */,
 				A5B255E51BFB469A009AD8DA /* ConnectivityMessageUpdatedSettings.swift */,
+				A5D67D451DD25625001FB7D0 /* ConnectivityMessagePendingIntakes.swift */,
 			);
 			name = Connectivity;
 			sourceTree = "<group>";
@@ -1508,6 +1524,7 @@
 				A5D3D42C1AA5D29700E3C989 /* UISwitchTableViewCell.swift in Sources */,
 				840476591A35FE82004F0FEF /* NotificationsViewController.swift in Sources */,
 				84CD97671ABB2C7E0011623B /* MonthStatisticsViewContentCell.swift in Sources */,
+				A5D67D461DD25625001FB7D0 /* ConnectivityMessagePendingIntakes.swift in Sources */,
 				843B055E19E2D7800097A833 /* AppDelegate.swift in Sources */,
 				84B0F12B19E406CB00E21AA9 /* CoreDataPrePopulation.swift in Sources */,
 				A57D2BF61AD02C5C00619D62 /* WelcomeWizardFullVersionViewController.swift in Sources */,
@@ -1667,9 +1684,11 @@
 				A587AAB91BD65224000B48E9 /* GlanceController.swift in Sources */,
 				A549A8571BF273E300340486 /* SettingItems.swift in Sources */,
 				A549A8551BF273B800340486 /* Units.swift in Sources */,
+				A5D67D471DD25E92001FB7D0 /* ConnectivityMessagePendingIntakes.swift in Sources */,
 				A5B255E71BFB469A009AD8DA /* ConnectivityMessageUpdatedSettings.swift in Sources */,
 				A587AD251BD6C1B2000B48E9 /* DrinkType.swift in Sources */,
 				A5B255EA1BFCF998009AD8DA /* CurrentStateInterfaceController.swift in Sources */,
+				A52FD0791DD3AC90007AF546 /* ConnectivityProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1789,6 +1808,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A53E39641C15C82700628103 /* ru */,
+				A51A65F91DD7C2D300B1A83F /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2144,7 +2164,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Debug;
 		};
@@ -2170,7 +2190,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Release;
 		};
@@ -2195,7 +2215,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Debug;
 		};
@@ -2220,7 +2240,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Release;
 		};

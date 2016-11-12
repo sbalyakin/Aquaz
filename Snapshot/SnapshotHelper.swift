@@ -11,19 +11,19 @@ import XCTest
 
 var deviceLanguage = ""
 
-@available(iOS 9.0, *)
+@available(iOS 9.3, *)
 func setLanguage(_ app: XCUIApplication)
 {
   Snapshot.setLanguage(app)
 }
 
-@available(iOS 9.0, *)
+@available(iOS 9.3, *)
 func snapshot(_ name: String, waitForLoadingIndicator: Bool = false)
 {
   Snapshot.snapshot(name, waitForLoadingIndicator: waitForLoadingIndicator)
 }
 
-@available(iOS 9.0, *)
+@available(iOS 9.3, *)
 @objc class Snapshot: NSObject
 {
   class func setLanguage(_ app: XCUIApplication)

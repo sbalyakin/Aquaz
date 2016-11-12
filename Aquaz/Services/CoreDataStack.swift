@@ -19,7 +19,7 @@ final class CoreDataStack: NSObject {
   fileprivate var persistentStoreCoordinator: NSPersistentStoreCoordinator!
 //  private var mainContext: NSManagedObjectContext!
   fileprivate var privateContext: NSManagedObjectContext!
-  fileprivate let queue = DispatchQueue(label: "com.devmanifest.Aquaz.CoreDataStack", attributes: [])
+  fileprivate let queue = DispatchQueue(label: "\(GlobalConstants.bundleId).CoreDataStack", attributes: [])
   
   override init() {
     super.init()

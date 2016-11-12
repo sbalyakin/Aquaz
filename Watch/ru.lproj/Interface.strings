@@ -1,20 +1,18 @@
-// Turn off translations, because Apple Watch simulator works strange with localization.
+/* Class = "WKInterfaceLabel"; text = "Aquaz"; ObjectID = "08b-v5-9vn"; */
+"08b-v5-9vn.text" = "Aquaz";
 
-///* Class = "WKInterfaceLabel"; text = "Aquaz"; ObjectID = "08b-v5-9vn"; */
-//"08b-v5-9vn.text" = "Aquaz";
-//
-///* Class = "WKInterfaceButton"; title = "Choose"; ObjectID = "Rga-XY-7I4"; */
-//"Rga-XY-7I4.title" = "Выбрать";
-//
-///* Class = "WKInterfaceLabel"; text = "Drink water"; ObjectID = "XkS-y5-khE"; */
-//"XkS-y5-khE.text" = "Выпейте воды";
-//
-///* Class = "WKInterfaceButton"; title = "Add Intake"; ObjectID = "juT-2H-hl6"; */
-//"juT-2H-hl6.title" = "Добавить";
-//
-///* Class = "WKInterfaceLabel"; text = "{Drink}"; ObjectID = "lOU-9h-lSi"; */
-//"lOU-9h-lSi.text" = "{Drink}";
-//
-///* Class = "WKInterfaceButton"; title = "Save"; ObjectID = "vsy-5i-44g"; */
-//"vsy-5i-44g.title" = "Сохранить";
-//
+/* Class = "WKInterfaceButton"; title = "Choose"; ObjectID = "Rga-XY-7I4"; */
+"Rga-XY-7I4.title" = "Выбрать";
+
+/* Class = "WKInterfaceLabel"; text = "Drink water"; ObjectID = "XkS-y5-khE"; */
+"XkS-y5-khE.text" = "Выпейте воды";
+
+/* Class = "WKInterfaceButton"; title = "Add Intake"; ObjectID = "juT-2H-hl6"; */
+"juT-2H-hl6.title" = "Добавить";
+
+/* Class = "WKInterfaceLabel"; text = "{Drink}"; ObjectID = "lOU-9h-lSi"; */
+"lOU-9h-lSi.text" = "{Drink}";
+
+/* Class = "WKInterfaceButton"; title = "Save"; ObjectID = "vsy-5i-44g"; */
+"vsy-5i-44g.title" = "Сохранить";
+

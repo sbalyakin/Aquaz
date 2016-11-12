@@ -22,17 +22,17 @@ enum DrinkType: Int {
   case hardLiquor
   
   fileprivate struct LocalizedStrings {
-    static let waterTitle      = NSLocalizedString("D:Water",       value: "Water",       comment: "Drink: Title for water")
-    static let coffeeTitle     = NSLocalizedString("D:Coffee",      value: "Coffee",      comment: "Drink: Title for coffee")
-    static let teaTitle        = NSLocalizedString("D:Tea",         value: "Tea",         comment: "Drink: Title for tea")
-    static let sodaTitle       = NSLocalizedString("D:Soda",        value: "Soda",        comment: "Drink: Title for soda")
-    static let juiceTitle      = NSLocalizedString("D:Juice",       value: "Juice",       comment: "Drink: Title for juice")
-    static let milkTitle       = NSLocalizedString("D:Milk",        value: "Milk",        comment: "Drink: Title for milk")
-    static let sportTitle      = NSLocalizedString("D:Sport",       value: "Sport",       comment: "Drink: Title for sport drink")
-    static let energyTitle     = NSLocalizedString("D:Energy",      value: "Energy",      comment: "Drink: Title for energetic drink")
-    static let beerTitle       = NSLocalizedString("D:Beer",        value: "Beer",        comment: "Drink: Title for beer")
-    static let wineTitle       = NSLocalizedString("D:Wine",        value: "Wine",        comment: "Drink: Title for wine")
-    static let hardLiquorTitle = NSLocalizedString("D:Hard Liquor", value: "Hard Liquor", comment: "Drink: Title for hard liquor")
+    static let waterTitle      = NSLocalizedString("D:Water",    value: "Water",    comment: "Drink: Title for water")
+    static let coffeeTitle     = NSLocalizedString("D:Coffee",   value: "Coffee",   comment: "Drink: Title for coffee")
+    static let teaTitle        = NSLocalizedString("D:Tea",      value: "Tea",      comment: "Drink: Title for tea")
+    static let sodaTitle       = NSLocalizedString("D:Soda",     value: "Soda",     comment: "Drink: Title for soda")
+    static let juiceTitle      = NSLocalizedString("D:Juice",    value: "Juice",    comment: "Drink: Title for juice")
+    static let milkTitle       = NSLocalizedString("D:Milk",     value: "Milk",     comment: "Drink: Title for milk")
+    static let sportTitle      = NSLocalizedString("D:Sport",    value: "Sport",    comment: "Drink: Title for sport drink")
+    static let energyTitle     = NSLocalizedString("D:Energy",   value: "Energy",   comment: "Drink: Title for energetic drink")
+    static let beerTitle       = NSLocalizedString("D:Beer",     value: "Beer",     comment: "Drink: Title for beer")
+    static let wineTitle       = NSLocalizedString("D:Wine",     value: "Wine",     comment: "Drink: Title for wine")
+    static let hardLiquorTitle = NSLocalizedString("D:Alc. 40°", value: "Alc. 40°", comment: "Drink: Title for hard liquor")
   }
 
   // Must be updated if new drink is added

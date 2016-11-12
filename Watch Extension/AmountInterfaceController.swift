@@ -54,7 +54,7 @@ final class AmountInterfaceController: WKInterfaceController {
     
     setupPicker()
   }
-
+  
   fileprivate func setupPicker() {
     let pickerItems = [WKPickerItem](repeating: WKPickerItem(), count: Constants.imageEndIndex - Constants.imageStartIndex)
     
@@ -62,6 +62,7 @@ final class AmountInterfaceController: WKInterfaceController {
     
     let pickerValue = pickerValueFromAmount(WatchSettings.sharedInstance.recentAmounts[drinkType].value)
     picker.setSelectedItemIndex(pickerValue)
+    pickerValueWasChanged(pickerValue)
   }
   
   fileprivate func amountFromPickerValue(_ value: Int) -> Double {
@@ -114,8 +115,7 @@ final class AmountInterfaceController: WKInterfaceController {
     WatchSettings.sharedInstance.stateHydration.value += hydrationEffect
     WatchSettings.sharedInstance.stateWaterGoal.value += dehydrationEffect
     
-    let addIntakeInfo = ConnectivityMessageAddIntake(drinkType: drinkType, amount: adjustedCurrentAmount, date: Date())
-    NotificationCenter.default.post(name: Notification.Name(rawValue: GlobalConstants.notificationWatchAddIntake), object: addIntakeInfo)
+    ConnectivityProvider.sharedInstance.addIntake(drinkType: drinkType, amount: adjustedCurrentAmount, date: Date())
     
     popToRootController()
   }
@@ -136,9 +136,9 @@ private extension WatchResolution {
 
   var fontSizes: (title: CGFloat, upTitle: CGFloat, subTitle: CGFloat) {
     switch self {
-    case .watch38mm: return (title: 28, upTitle: 13, subTitle: 13)
-    case .watch42mm: return (title: 34, upTitle: 16, subTitle: 16)
-    case .unknown:   return (title: 34, upTitle: 16, subTitle: 16)
+    case .watch38mm: return (title: 28, upTitle: 12, subTitle: 12)
+    case .watch42mm: return (title: 34, upTitle: 15, subTitle: 15)
+    case .unknown:   return (title: 34, upTitle: 15, subTitle: 15)
     }
   }
 

@@ -13,7 +13,7 @@ import CoreData
   import SimulatorStatusMagic
 #endif
 
-@available(iOS 9.0, *)
+@available(iOS 9.3, *)
 final class SnapshotsInitializer {
 
   class func prepareUserData() {

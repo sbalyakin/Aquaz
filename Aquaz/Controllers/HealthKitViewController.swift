@@ -58,12 +58,12 @@ final class HealthKitViewController: UIViewController {
     labelIntakesInAquaz.text = String.localizedStringWithFormat(localizedStrings.intakesInAquazTitle, "--")
     labelIntakesInHealthApp.text = String.localizedStringWithFormat(localizedStrings.intakesInHealthAppTitle, "--")
 
-    if #available(iOS 9.0, *) {
+    if #available(iOS 9.3, *) {
       updateUI()
     }
   }
   
-  @available(iOS 9.0, *)
+  @available(iOS 9.3, *)
   fileprivate func updateUI() {
     updateNumberOfIntakesInAquaz()
     HealthKitProvider.sharedInstance.authorizeHealthKit { authorized, error in
@@ -84,7 +84,7 @@ final class HealthKitViewController: UIViewController {
     }
   }
   
-  @available(iOS 9.0, *)
+  @available(iOS 9.3, *)
   fileprivate func updateNumberOfIntakesInHealthApp() {
     if !HealthKitProvider.sharedInstance.isAllowedToWriteWaterSamples() {
       return
@@ -98,7 +98,7 @@ final class HealthKitViewController: UIViewController {
   }
   
   @IBAction func exportToHealthKit() {
-    if #available(iOS 9.0, *) {
+    if #available(iOS 9.3, *) {
       if !HealthKitProvider.sharedInstance.isAllowedToWriteWaterSamples() {
         let alert = UIAlertView(title: localizedStrings.checkAppleHealthTitle, message: localizedStrings.checkAppleHealthMessage, delegate: nil, cancelButtonTitle: localizedStrings.okTitle)
         alert.show()

@@ -35,6 +35,59 @@ final class WatchSettings {
     }
   }
   
+  class PendingIntakes {
+
+    public var isEmpty: Bool {
+      return message.pendingIntakes.isEmpty
+    }
+    
+    private enum Constants {
+      static let pendingIntakesKey = "Pending Intakes"
+    }
+    
+    private var message: ConnectivityMessagePendingIntakes!
+    
+    fileprivate init() {
+      if let messageMetadata = WatchSettings.userDefaults.dictionary(forKey: Constants.pendingIntakesKey) {
+        message = ConnectivityMessagePendingIntakes(metadata: messageMetadata)
+      }
+      
+      if message == nil {
+        message = ConnectivityMessagePendingIntakes()
+      }
+    }
+
+    private func saveMessage() {
+      if let metadata = message.composeMetadata() {
+        WatchSettings.userDefaults.setValue(metadata, forKey: Constants.pendingIntakesKey)
+      } else {
+        WatchSettings.userDefaults.removeObject(forKey: Constants.pendingIntakesKey)
+      }
+      
+      WatchSettings.userDefaults.synchronize()
+    }
+
+    public func setMessage(_ message: ConnectivityMessagePendingIntakes){
+      self.message = message
+      saveMessage()
+    }
+    
+    public func getMessage() -> ConnectivityMessagePendingIntakes {
+      return message
+    }
+    
+    public func clear() {
+      message.clear()
+      saveMessage()
+    }
+    
+    public func addIntake(drinkType: DrinkType, amount: Double, date: Date) {
+      message.addIntake(drinkType: drinkType, amount: amount, date: date)
+      saveMessage()
+    }
+        
+  }
+  
   // MARK: General
   
   lazy var generalWeightUnits: SettingsEnumItem<Units.Weight> = SettingsEnumItem(
@@ -70,6 +123,8 @@ final class WatchSettings {
     userDefaults: userDefaults)
   
   lazy var recentAmounts = RecentDrinkAmounts()
+  
+  lazy var pendingIntakes = PendingIntakes()
 
   // MARK: Initializer
   

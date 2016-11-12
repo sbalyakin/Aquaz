@@ -18,6 +18,7 @@ final class IntakeHelper {
     amount: Double,
     drink: Drink,
     intakeDate: Date,
+    saveImmediately: Bool,
     viewController: UIViewController,
     managedObjectContext: NSManagedObjectContext,
     actionBeforeAddingIntakeToCoreData: (() -> ())?,
@@ -28,12 +29,13 @@ final class IntakeHelper {
         amount: amount,
         drink: drink,
         intakeDate: intakeDate,
+        saveImmediately: saveImmediately,
         managedObjectContext: managedObjectContext,
         actionBeforeAddingIntakeToCoreData: actionBeforeAddingIntakeToCoreData,
         actionAfterAddingIntakeToCoreData: actionAfterAddingIntakeToCoreData)
     }
     
-    if #available(iOS 9.0, *) {
+    if #available(iOS 9.3, *) {
       if !Settings.sharedInstance.healthKitWaterIntakesIntegrationIsRequested2.value
       {
         Settings.sharedInstance.healthKitWaterIntakesIntegrationIsRequested2.value = true
@@ -82,6 +84,7 @@ final class IntakeHelper {
     amount: Double,
     drink: Drink,
     intakeDate: Date,
+    saveImmediately: Bool,
     managedObjectContext: NSManagedObjectContext,
     actionBeforeAddingIntakeToCoreData: (() -> ())?,
     actionAfterAddingIntakeToCoreData: (() -> ())?)
@@ -95,7 +98,7 @@ final class IntakeHelper {
       amount: amount,
       date: intakeDate,
       managedObjectContext: managedObjectContext,
-      saveImmediately: true)
+      saveImmediately: saveImmediately)
     
     actionAfterAddingIntakeToCoreData?()
   }

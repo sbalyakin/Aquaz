@@ -37,7 +37,7 @@ final class ConnectivityMessageAddIntake {
     self.date      = date
   }
   
-  init?(metadata: [String : AnyObject]) {
+  init?(metadata: [String : Any]) {
     guard
       let messageValue   = metadata[Constants.messageKey] as? String , messageValue == Constants.messageValue,
       let drinkTypeIndex = metadata[Keys.drinkType] as? Int,
@@ -57,13 +57,13 @@ final class ConnectivityMessageAddIntake {
     self.date      = date
   }
   
-  func composeMetadata() -> [String : AnyObject] {
-    var metadata = [String : AnyObject]()
+  func composeMetadata() -> [String : Any] {
+    var metadata = [String : Any]()
     
-    metadata[Constants.messageKey] = Constants.messageValue as AnyObject?
-    metadata[Keys.drinkType]       = drinkType.rawValue as AnyObject?
-    metadata[Keys.amount]          = amount as AnyObject?
-    metadata[Keys.date]            = date as AnyObject?
+    metadata[Constants.messageKey] = Constants.messageValue
+    metadata[Keys.drinkType]       = drinkType.rawValue
+    metadata[Keys.amount]          = amount
+    metadata[Keys.date]            = date
     
     return metadata
   }

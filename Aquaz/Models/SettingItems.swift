@@ -22,7 +22,7 @@ class ObservableSettingsItem<ValueType>: ObservationRemover {
   init() {
     observerIdentifier = 0
     observerFunctions = [:]
-    identifierQueue = DispatchQueue(label: "com.devmanifest.Aquaz.ObservableSettingsItem.identifierQueue", attributes: [])
+    identifierQueue = DispatchQueue(label: "\(GlobalConstants.bundleId).ObservableSettingsItem.identifierQueue", attributes: [])
   }
   
   /// Adds an observer and returns its smart wrapper which removes the observation on deinitialization.
@@ -97,9 +97,7 @@ class SettingsItemBase<ValueType: Equatable>: ObservableSettingsItem<ValueType> 
   
   let key: String
   
-  // Value initialization was moved to init() in order to solve Swift 2.2 bug on iOS7
-  // More details here https://bugs.swift.org/browse/SR-815
-  fileprivate let valueQueue: DispatchQueue
+  fileprivate let valueQueue = DispatchQueue(label: "\(GlobalConstants.bundleId).SettingsItemBase.valueQueue", attributes: [])
   
   var value: ValueType {
     get {
@@ -145,7 +143,6 @@ class SettingsItemBase<ValueType: Equatable>: ObservableSettingsItem<ValueType> 
   }
   
   init(key: String, initialValue: ValueType, userDefaults: UserDefaults) {
-    valueQueue = DispatchQueue(label: "com.devmanifest.Aquaz.SettingsItemBase.valueQueue", attributes: [])
     rawValue = initialValue
     
     self.key = key

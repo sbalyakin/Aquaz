@@ -271,6 +271,7 @@ class IntakeViewController: UIViewController {
         amount: amount,
         drink: drink,
         intakeDate: self.computeIntakeDate(),
+        saveImmediately: true,
         viewController: self,
         managedObjectContext: privateContext,
         actionBeforeAddingIntakeToCoreData: {

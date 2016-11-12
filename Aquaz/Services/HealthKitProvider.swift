@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import HealthKit
 
-@available(iOS 9.0, *)
+@available(iOS 9.3, *)
 final class HealthKitProvider: NSObject {
   
   static let sharedInstance = HealthKitProvider()

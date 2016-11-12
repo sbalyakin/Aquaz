@@ -36,7 +36,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
       value: "The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
       comment: "Footer for section with calculated daily water intake")
     
-    @available(iOS 9.0, *)
+    @available(iOS 9.3, *)
     lazy var readFromHealthTitle: String = NSLocalizedString("WGVC:Read Data from Apple Health", value: "Read Data from Apple Health",
       comment: "WaterGoalViewController: Table cell title for [Read Data from Apple Health] cell")
   }
@@ -221,7 +221,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     let sections: [TableCellsSection]
     
     // Read From Health section
-    if #available(iOS 9.0, *) {
+    if #available(iOS 9.3, *) {
       let readFromHealthCell = createBasicTableCell(
         title: localizedStrings.readFromHealthTitle,
         accessoryType: nil)
@@ -351,7 +351,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
   }
 
   // MARK: HealthKit
-  @available(iOS 9.0, *)
+  @available(iOS 9.3, *)
   fileprivate func checkHealthAuthorizationAndRead() {
     HealthKitProvider.sharedInstance.authorizeHealthKit { authorized, _ in
       if authorized {
@@ -360,7 +360,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     }
   }
   
-  @available(iOS 9.0, *)
+  @available(iOS 9.3, *)
   fileprivate func readFromHealthKit() {
     HealthKitProvider.sharedInstance.readUserProfile { age, biologicalSex, bodyMass, height in
       DispatchQueue.main.async {
@@ -479,7 +479,7 @@ private extension Units.Volume {
   }
 }
 
-@available(iOS 9.0, *)
+@available(iOS 9.3, *)
 private extension Settings.Gender {
   mutating func applyBiologicalSex(_ biologicalSex: HKBiologicalSex) {
     switch biologicalSex {

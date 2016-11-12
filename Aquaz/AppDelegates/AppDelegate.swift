@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       let isSnapshotMode = ProcessInfo.processInfo.arguments.contains("-SNAPSHOT")
       
       if isSnapshotMode {
-        if #available(iOS 9.0, *) {
+        if #available(iOS 9.3, *) {
           SnapshotsInitializer.prepareUserData()
         }
       } else {
@@ -56,11 +56,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     setupSynchronizationWithCoreData()
 
-    if #available(iOS 9.0, *) {
+    if #available(iOS 9.3, *) {
       setupHealthKitSynchronization()
       
       // Just for creating an instance of the connectivity provider
-      _ = ConnectivityProvider.sharedInstance
+      ConnectivityProvider.sharedInstance.startSession()
     }
 
     return true
@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
   }
 
-  @available(iOS 9.0, *)
+  @available(iOS 9.3, *)
   fileprivate func setupHealthKitSynchronization() {
     CoreDataStack.performOnPrivateContext { privateContext in
       HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContext(privateContext)

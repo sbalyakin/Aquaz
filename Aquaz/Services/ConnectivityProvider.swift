@@ -10,16 +10,30 @@ import Foundation
 import WatchConnectivity
 import CoreData
 
-@available(iOS 9.0, *)
+@available(iOS 9.3, *)
 final class ConnectivityProvider: NSObject {
   
   // MARK: Properties
   
   static let sharedInstance = ConnectivityProvider()
   
-  fileprivate var session: WCSession?
+  fileprivate let session: WCSession? = WCSession.isSupported() ? WCSession.default() : nil
   
-  fileprivate let queue = DispatchQueue(label: "com.devmanifest.Aquaz.ConnectivityProvider", attributes: [])
+  fileprivate var validSession: WCSession? {
+    if let session = session, session.isPaired && session.isWatchAppInstalled {
+      return session
+    }
+    return nil
+  }
+  
+  fileprivate var validReachableSession: WCSession? {
+    if let session = validSession, session.isReachable {
+      return session
+    }
+    return nil
+  }
+  
+  fileprivate let queue = DispatchQueue(label: "\(GlobalConstants.bundleId).ConnectivityProvider", attributes: [])
 
   fileprivate var needToUpdateWatchState: Bool = false
   
@@ -35,8 +49,6 @@ final class ConnectivityProvider: NSObject {
   
   fileprivate override init() {
     super.init()
-
-    setupConnectivity()
     
     setupCoreDataSynchronization()
     
@@ -47,16 +59,15 @@ final class ConnectivityProvider: NSObject {
     NotificationCenter.default.removeObserver(self)
   }
   
-  fileprivate func setupConnectivity() {
-    if WCSession.isSupported() {
-      session = WCSession.default()
-      session?.delegate = self
-      session?.activate()
-    }
+  public func startSession() {
+    session?.delegate = self
+    session?.activate()
   }
   
-  fileprivate func composeCurrentStateInfo(_ sendHandler: @escaping ([String : Any]) -> Void) {
-    CoreDataStack.performOnPrivateContext { privateContext in
+  fileprivate func composeCurrentStateMessage() -> ConnectivityMessageCurrentState {
+    var message: ConnectivityMessageCurrentState!
+    
+    CoreDataStack.performOnPrivateContextAndWait { privateContext in
       let date = Date()
 
       let waterGoalAmount: Double
@@ -76,18 +87,17 @@ final class ConnectivityProvider: NSObject {
       let totalHydrationAmount = Intake.fetchTotalHydrationAmountForDay(date, dayOffsetInHours: 0, managedObjectContext: privateContext)
       let totalDehydrationAmount = Intake.fetchTotalDehydrationAmountForDay(date, dayOffsetInHours: 0, managedObjectContext: privateContext)
 
-      let message = ConnectivityMessageCurrentState(
+      message = ConnectivityMessageCurrentState(
         messageDate: date,
         hydrationAmount: totalHydrationAmount,
         dehydrationAmount: totalDehydrationAmount,
         dailyWaterGoal: waterGoalAmount,
         highPhysicalActivityModeEnabled: highPhysicalActivityModeEnabled,
-        hotWeatherModeEnabled: hotWeatherModeEnabled)
-
-      let metadata = message.composeMetadata()
-      
-      sendHandler(metadata)
+        hotWeatherModeEnabled: hotWeatherModeEnabled,
+        volumeUnits: Settings.sharedInstance.generalVolumeUnits.value)
     }
+
+    return message
   }
 
   fileprivate func setupCoreDataSynchronization() {
@@ -107,165 +117,189 @@ final class ConnectivityProvider: NSObject {
   }
   
   func managedObjectContextDidSave() {
-    if !WCSession.isSupported() || !(session?.isWatchAppInstalled ?? false) {
+    if isManagedObjectContextSavingIgnored() {
       return
     }
     
-//    if isManagedObjectContextSavingIgnored() {
-//      return
-//    }
+    sendCurrentState()
+  }
+  
+  fileprivate func sendCurrentState() {
+    guard session != nil && session!.isWatchAppInstalled && session!.activationState == .activated else {
+      return
+    }
     
-    composeCurrentStateInfo { info in
-      self.session?.transferUserInfo(info)
+    DispatchQueue.main.async {
+      let message = self.composeCurrentStateMessage()
+
+      do {
+        try self.session?.updateApplicationContext(message.composeMetadata())
+      } catch {
+        print("Error occured on updating application context. Error: \(error)")
+      }
     }
   }
   
   fileprivate func setupSettingsSynchronization() {
     settingObserverGeneralVolumeUnits = Settings.sharedInstance.generalVolumeUnits.addObserver { [weak self] _ in
-      self?.settingsWasChanged()
+      self?.sendCurrentState()
+    }
+  }
+
+}
+
+
+@available(iOS 9.3, *)
+extension ConnectivityProvider: WCSessionDelegate {
+  
+  // Called when the session can no longer be used to modify or add any new transfers and, all interactive messages will be cancelled,
+  // but delegate callbacks for background transfers can still occur. This will happen when the selected watch is being changed.
+  func sessionDidBecomeInactive(_ session: WCSession) {
+    // The session calls this method when it detects that the user has
+    // switched to a different Apple Watch. While in the inactive state,
+    // the session delivers any pending data to your delegate object and
+    // prevents you from initiating any new data transfers. After the last
+    // transfer finishes, the session moves to the deactivated state.
+    //
+    // Use this method to update any private data structures that might be
+    // affected by the impending change to the active Apple Watch. For example,
+    // you might clean up data structures and close files related to
+    // outgoing content.
+    
+    // In Aquaz there is nothing to do here.
+  }
+
+  // Called when all delegate callbacks for the previously selected watch has occurred. 
+  // The session can be re-activated for the now selected watch using activateSession.
+  func sessionDidDeactivate(_ session: WCSession) {
+    // The session calls this method when there is no more pending data
+    // to deliver to your app and the previous session can be formally closed.
+    //  
+    // iOS apps that process content delivered from their Watch Extension
+    // should finish processing that content, then call activateSession()
+    // to initiate a session with the new Apple Watch.
+    
+    // Begin the activation process for the new Apple Watch
+    session.activate()
+  }
+
+  // Called when the session has completed activation. If session state is WCSessionActivationStateNotActivated there will be an error with more details.
+  func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    if activationState == .activated {
+      sendCurrentState()
+    }
+  }
+
+  func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+    if let message = ConnectivityMessageAddIntake(metadata: message) {
+      processAddIntakeMessage(message)
+    } else if let message = ConnectivityMessagePendingIntakes(metadata: message) {
+      processPendingIntakesMessage(message)
     }
   }
   
-  fileprivate func settingsWasChanged() {
-    if !WCSession.isSupported() || !(session?.isWatchAppInstalled ?? false) {
+  func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+    if let message = ConnectivityMessageAddIntake(metadata: message) {
+      processAddIntakeMessage(message)
+      let currentStateMessage = composeCurrentStateMessage()
+      replyHandler(currentStateMessage.composeMetadata())
+    } else if let message = ConnectivityMessagePendingIntakes(metadata: message) {
+      processPendingIntakesMessage(message)
+      let currentStateMessage = composeCurrentStateMessage()
+      replyHandler(currentStateMessage.composeMetadata())
+    }
+    
+    replyHandler([:])
+  }
+  
+  fileprivate func processAddIntakeMessage(_ message: ConnectivityMessageAddIntake) {
+    CoreDataStack.performOnPrivateContext { privateContext in
+      self.addIntake(drinkType: message.drinkType,
+                     amount: message.amount,
+                     date: message.date,
+                     saveImmediately: true,
+                     managedObjectContext: privateContext)
+    }
+  }
+  
+  fileprivate func processPendingIntakesMessage(_ message: ConnectivityMessagePendingIntakes) {
+    CoreDataStack.performOnPrivateContext { privateContext in
+      for intake in message.pendingIntakes {
+        self.addIntake(drinkType: intake.drinkType,
+                       amount: intake.amount,
+                       date: intake.date,
+                       saveImmediately: false,
+                       managedObjectContext: privateContext)
+        
+        CoreDataStack.saveContext(privateContext)
+      }
+    }
+  }
+  
+  fileprivate func addIntake(drinkType: DrinkType,
+                             amount: Double,
+                             date: Date,
+                             saveImmediately: Bool,
+                             managedObjectContext: NSManagedObjectContext)
+  {
+    // Check for duplicates
+    if let _ = Intake.fetchParticularIntake(date: date, drinkType: drinkType, amount: amount, managedObjectContext: managedObjectContext) {
+      Logger.logWarning("Duplicate intake from Apple Watch has been observed. The intake is ignored.")
       return
     }
     
-    let message = ConnectivityMessageUpdatedSettings(settings: Settings.sharedInstance.getExportedSettingsForWatchApp())
+    if drinks.isEmpty {
+      drinks = Drink.fetchAllDrinksTyped(managedObjectContext: managedObjectContext)
+    }
     
-    session?.transferUserInfo(message.composeMetadata())
-  }
-
-}
-
-@available(iOS 9.0, *)
-extension ConnectivityProvider: WCSessionDelegate {
-  /** Called when the session has completed activation. If session state is WCSessionActivationStateNotActivated there will be an error with more details. */
-  @available(iOS 9.3, *)
-  public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-  }
-  
-  
-  /** ------------------------- iOS App State For Watch ------------------------ */
-  
-  /** Called when the session can no longer be used to modify or add any new transfers and, all interactive messages will be cancelled, but delegate callbacks for background transfers can still occur. This will happen when the selected watch is being changed. */
-  @available(iOS 9.3, *)
-  public func sessionDidBecomeInactive(_ session: WCSession) {
+    guard let drink = drinks[drinkType] else {
+      Logger.logError(false, "The drink of intake from paired App Watch is not found in Aquaz")
+      return
+    }
     
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+      let viewController = appDelegate.window?.rootViewController else
+    {
+      Logger.logError(false, "The root view controller is not found")
+      return
+    }
+    
+    IntakeHelper.addIntakeWithHealthKitChecks(
+      amount: amount,
+      drink: drink,
+      intakeDate: date,
+      saveImmediately: saveImmediately,
+      viewController: viewController,
+      managedObjectContext: managedObjectContext,
+      actionBeforeAddingIntakeToCoreData: {
+        self.increaseIgnoreManagedObjectContextSavingsCounter()
+      },
+      actionAfterAddingIntakeToCoreData: {
+        self.decreaseIgnoreManagedObjectContextSavingsCounter()
+      }
+    )
   }
-
   
-  
-  /** Called when all delegate callbacks for the previously selected watch has occurred. The session can be re-activated for the now selected watch using activateSession. */
-  @available(iOS 9.3, *)
-  public func sessionDidDeactivate(_ session: WCSession) {
+  fileprivate func isManagedObjectContextSavingIgnored() -> Bool {
+    var ignore = false
+    
+    queue.sync {
+      ignore = self.ignoreManagedObjectContextSavingsCounter > 0
+    }
+    
+    return ignore
   }
+  
+  fileprivate func increaseIgnoreManagedObjectContextSavingsCounter() {
+    queue.sync {
+      self.ignoreManagedObjectContextSavingsCounter += 1
+    }
+  }
+  
+  fileprivate func decreaseIgnoreManagedObjectContextSavingsCounter() {
+    queue.sync {
+      self.ignoreManagedObjectContextSavingsCounter -= 1
+    }
+  }
+  
 }
-
-//@available(iOS 9.0, *)
-//extension ConnectivityProvider: WCSessionDelegate {
-//  
-//  // Called when all delegate callbacks for the previously selected watch has occurred. The session can be re-activated for the now selected watch using activateSession.
-//  @available(iOS 9.3, *)
-//  public func sessionDidDeactivate(_ session: WCSession) {
-//    // TODO: Need implementation here
-//  }
-//
-//  // Called when the session can no longer be used to modify or add any new transfers and, all interactive messages will be cancelled, 
-//  // but delegate callbacks for background transfers can still occur. This will happen when the selected watch is being changed.
-//  @available(iOS 9.3, *)
-//  public func sessionDidBecomeInactive(_ session: WCSession) {
-//    // TODO: Need implementation here
-//  }
-//
-//  // Called when the session has completed activation. If session state is WCSessionActivationStateNotActivated there will be an error with more details.
-//  @available(iOS 9.3, *)
-//  public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-//    // TODO: Need implementation here
-//  }
-//
-//  public func sessionWatchStateDidChange(_ session: WCSession) {
-//    if session.isPaired && session.isWatchAppInstalled {
-//      composeCurrentStateInfo { info in
-//        self.session?.transferUserInfo(info)
-//      }
-//      
-//      settingsWasChanged()
-//    }
-//  }
-//  
-//  public func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
-//    if let messageAddIntake = ConnectivityMessageAddIntake(metadata: userInfo as [String : AnyObject]) {
-//      addIntakeInfoWasReceived(messageAddIntake)
-//    }
-//  }
-//  
-//  public func session(_ session: WCSession, didFinish userInfoTransfer: WCSessionUserInfoTransfer, error: Error?) {
-//    if let _ = error {
-//      // Trying to transfer the user info again
-//      session.transferUserInfo(userInfoTransfer.userInfo)
-//    }
-//  }
-//  
-//  fileprivate func addIntakeInfoWasReceived(_ message: ConnectivityMessageAddIntake) {
-//    CoreDataStack.performOnPrivateContext { privateContext in
-//      // Check for duplicates
-//      if let _ = Intake.fetchParticularIntake(date: message.date, drinkType: message.drinkType, amount: message.amount, managedObjectContext: privateContext) {
-//        Logger.logWarning("Duplicate intake from Apple Watch has been observed. The intake is ignored.")
-//        return
-//      }
-//      
-//      if self.drinks.isEmpty {
-//        self.drinks = Drink.fetchAllDrinksTyped(managedObjectContext: privateContext)
-//      }
-//
-//      guard let drink = self.drinks[message.drinkType] else {
-//        Logger.logError(false, "The drink of intake from paired App Watch is not found in Aquaz")
-//        return
-//      }
-//      
-//      guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-//            let viewController = appDelegate.window?.rootViewController else
-//      {
-//        Logger.logError(false, "The root view controller is not found")
-//        return
-//      }
-//      
-//      IntakeHelper.addIntakeWithHealthKitChecks(
-//        amount: message.amount,
-//        drink: drink,
-//        intakeDate: message.date,
-//        viewController: viewController,
-//        managedObjectContext: privateContext,
-//        actionBeforeAddingIntakeToCoreData: {
-//          self.increaseIgnoreManagedObjectContextSavingsCounter()
-//        },
-//        actionAfterAddingIntakeToCoreData: {
-//          self.decreaseIgnoreManagedObjectContextSavingsCounter()
-//        })
-//    }
-//  }
-//  
-//  fileprivate func isManagedObjectContextSavingIgnored() -> Bool {
-//    var ignore = false
-//    
-//    queue.sync {
-//      ignore = self.ignoreManagedObjectContextSavingsCounter > 0
-//    }
-//    
-//    return ignore
-//  }
-//  
-//  fileprivate func increaseIgnoreManagedObjectContextSavingsCounter() {
-//    queue.sync {
-//      self.ignoreManagedObjectContextSavingsCounter += 1
-//    }
-//  }
-//  
-//  fileprivate func decreaseIgnoreManagedObjectContextSavingsCounter() {
-//    queue.sync {
-//      self.ignoreManagedObjectContextSavingsCounter -= 1
-//    }
-//  }
-//  
-//}

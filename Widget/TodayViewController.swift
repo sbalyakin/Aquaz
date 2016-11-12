@@ -63,7 +63,7 @@ class TodayViewController: UIViewController {
     setupCoreDataSynchronization()
     setupNotificationsObservation()
     
-    if #available(iOSApplicationExtension 9.0, *) {
+    if #available(iOSApplicationExtension 9.3, *) {
       setupHeathKitSynchronization()
     }
   }
@@ -136,7 +136,7 @@ class TodayViewController: UIViewController {
     }
   }
   
-  @available(iOSApplicationExtension 9.0, *)
+  @available(iOSApplicationExtension 9.3, *)
   fileprivate func setupHeathKitSynchronization() {
     coreDataStack.performOnPrivateContext { privateContext in
       HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContext(privateContext)

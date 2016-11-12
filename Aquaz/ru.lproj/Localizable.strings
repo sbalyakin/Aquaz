@@ -8,7 +8,7 @@
 "D:Energy" = "Энергетик";
 
 /* Drink: Title for hard liquor */
-"D:Hard Liquor" = "Алкоголь 40°";
+"D:Alc. 40°" = "Алк. 40°";
 
 /* Drink: Title for juice */
 "D:Juice" = "Сок";

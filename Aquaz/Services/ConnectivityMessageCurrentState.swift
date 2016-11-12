@@ -12,38 +12,47 @@ final class ConnectivityMessageCurrentState {
 
   // MARK: Types
   
-  fileprivate struct Keys {
+  private struct Keys {
     static let messageDate           = "messageDate"
     static let hydrationAmount       = "hydrationAmount"
     static let dehydrationAmount     = "dehydrationAmount"
     static let dailyWaterGoal        = "dailyWaterGoal"
     static let isHighActivityEnabled = "isHighActivityEnabled"
     static let isHotWeatherEnabled   = "isHotWeatherEnabled"
+    static let volumeUnits           = "volumeUnits"
   }
   
-  fileprivate struct Constants {
+  private struct Constants {
     static let messageKey   = "message"
     static let messageValue = "ConnectivityMessageCurrentState"
   }
 
   // MARK: Properties
 
-  var messageDate: Date
-  var hydrationAmount: Double
-  var dehydrationAmount: Double
-  var dailyWaterGoal: Double
-  var isHighActivityEnabled: Bool
-  var isHotWeatherEnabled: Bool
+  let messageDate: Date
+  let hydrationAmount: Double
+  let dehydrationAmount: Double
+  let dailyWaterGoal: Double
+  let isHighActivityEnabled: Bool
+  let isHotWeatherEnabled: Bool
+  let volumeUnits: Units.Volume
   
   // MARK: Methods
   
-  init(messageDate: Date, hydrationAmount: Double, dehydrationAmount: Double, dailyWaterGoal: Double, highPhysicalActivityModeEnabled: Bool, hotWeatherModeEnabled: Bool) {
+  init(messageDate: Date,
+       hydrationAmount: Double,
+       dehydrationAmount: Double,
+       dailyWaterGoal: Double,
+       highPhysicalActivityModeEnabled: Bool,
+       hotWeatherModeEnabled: Bool,
+       volumeUnits: Units.Volume) {
     self.messageDate           = messageDate
     self.hydrationAmount       = hydrationAmount
     self.dehydrationAmount     = dehydrationAmount
     self.dailyWaterGoal        = dailyWaterGoal
     self.isHighActivityEnabled = highPhysicalActivityModeEnabled
     self.isHotWeatherEnabled   = hotWeatherModeEnabled
+    self.volumeUnits           = volumeUnits
   }
   
   init?(metadata: [String : Any]) {
@@ -54,15 +63,10 @@ final class ConnectivityMessageCurrentState {
       let dehydrationAmount     = metadata[Keys.dehydrationAmount]     as? Double,
       let dailyWaterGoal        = metadata[Keys.dailyWaterGoal]        as? Double,
       let isHighActivityEnabled = metadata[Keys.isHighActivityEnabled] as? Bool,
-      let isHotWeatherEnabled   = metadata[Keys.isHotWeatherEnabled]   as? Bool else
+      let isHotWeatherEnabled   = metadata[Keys.isHotWeatherEnabled]   as? Bool,
+      let volumeUnitsRawValue   = metadata[Keys.volumeUnits]           as? Int,
+      let volumeUnits           = Units.Volume(rawValue: volumeUnitsRawValue) else
     {
-      self.messageDate = Date()
-      self.hydrationAmount = 0
-      self.dehydrationAmount = 0
-      self.dailyWaterGoal = 0
-      self.isHighActivityEnabled = false
-      self.isHotWeatherEnabled = false
-      
       return nil
     }
     
@@ -72,18 +76,19 @@ final class ConnectivityMessageCurrentState {
     self.dailyWaterGoal        = dailyWaterGoal
     self.isHighActivityEnabled = isHighActivityEnabled
     self.isHotWeatherEnabled   = isHotWeatherEnabled
+    self.volumeUnits           = volumeUnits
   }
   
   func composeMetadata() -> [String : Any] {
-    var metadata = [String : Any]()
-    
-    metadata[Constants.messageKey]       = Constants.messageValue
-    metadata[Keys.messageDate]           = messageDate
-    metadata[Keys.hydrationAmount]       = hydrationAmount
-    metadata[Keys.dehydrationAmount]     = dehydrationAmount
-    metadata[Keys.dailyWaterGoal]        = dailyWaterGoal
-    metadata[Keys.isHighActivityEnabled] = isHighActivityEnabled
-    metadata[Keys.isHotWeatherEnabled]   = isHotWeatherEnabled
+    let metadata: [String : Any] = [
+      Constants.messageKey      : Constants.messageValue,
+      Keys.messageDate          : messageDate,
+      Keys.hydrationAmount      : hydrationAmount,
+      Keys.dehydrationAmount    : dehydrationAmount,
+      Keys.dailyWaterGoal       : dailyWaterGoal,
+      Keys.isHighActivityEnabled: isHighActivityEnabled,
+      Keys.isHotWeatherEnabled  : isHotWeatherEnabled,
+      Keys.volumeUnits          : volumeUnits.rawValue]
     
     return metadata
   }
