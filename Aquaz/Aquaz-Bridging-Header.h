@@ -7,6 +7,6 @@
 
 #import "External/JDFTooltips/JDFTooltips.h"
 
-#ifdef DEBUG
+#if defined(DEBUG) && defined(AQUAZPRO)
 #import <SimulatorStatusMagic/SDStatusBarManager.h>
 #endif

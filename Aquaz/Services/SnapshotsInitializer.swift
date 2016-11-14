@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-#if DEBUG
+#if DEBUG && AQUAZPRO
   import SimulatorStatusMagic
 #endif
 
@@ -67,7 +67,7 @@ final class SnapshotsInitializer {
   }
   
   fileprivate class func setupStatusBar() {
-    #if DEBUG
+    #if DEBUG && AQUAZPRO
     SDStatusBarManager.sharedInstance().enableOverrides()
     #endif
   }

@@ -967,7 +967,7 @@
 				84669A6A19DAD78D003C2263 /* Products */,
 				A566BF011BC19C6C0067CDFA /* Snapshot */,
 				A5340CCD1C1584E800B01C30 /* Distribution */,
-				A58DE7A41DD9123000F65990 /* AquazLite Specific */,
+				A58DE7A41DD9123000F65990 /* AquazLiteSpecific */,
 				89EBE0BB99D133F27B8323DD /* Pods */,
 			);
 			sourceTree = "<group>";
@@ -1233,7 +1233,7 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
-		A58DE7A41DD9123000F65990 /* AquazLite Specific */ = {
+		A58DE7A41DD9123000F65990 /* AquazLiteSpecific */ = {
 			isa = PBXGroup;
 			children = (
 				A58DE73B1DD90F3900F65990 /* Aquaz-Info.plist */,
@@ -1241,7 +1241,6 @@
 				A58DE7781DD90F9400F65990 /* Aquaz Watch-Info.plist */,
 				A58DE79D1DD90FA100F65990 /* Aquaz Watch Extension-Info.plist */,
 			);
-			name = "AquazLite Specific";
 			path = AquazLiteSpecific;
 			sourceTree = "<group>";
 		};
@@ -1988,7 +1987,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#export";
+			shellScript = export;
 		};
 		A52170EC1DD1269A0041135F /* Show Environment Variables */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3102,7 +3101,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
-				INFOPLIST_FILE = "Aquaz-Info.plist";
+				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -3140,7 +3139,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
-				INFOPLIST_FILE = "Aquaz-Info.plist";
+				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -3175,7 +3174,7 @@
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "Aquaz Widget-Info.plist";
+				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz Widget-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -3212,7 +3211,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Aquaz Widget-Info.plist";
+				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz Widget-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -3241,7 +3240,7 @@
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = Watch_Extension;
-				INFOPLIST_FILE = "Aquaz Watch-Info.plist";
+				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz Watch-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.AquazLite.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3268,7 +3267,7 @@
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = Watch_Extension;
-				INFOPLIST_FILE = "Aquaz Watch-Info.plist";
+				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz Watch-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.AquazLite.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3291,7 +3290,7 @@
 				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Aquaz Watch Extension-Info.plist";
+				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz Watch Extension-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.AquazLite.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3319,7 +3318,7 @@
 				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Aquaz Watch Extension-Info.plist";
+				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz Watch Extension-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.AquazLite.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
