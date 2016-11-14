@@ -7,153 +7,194 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		096497A142BB7A2FFD6434B7FF7B13F1 /* Pods-Aquaz Pro Widget-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DA2DD042B8BED9691932FA8581F78 /* Pods-Aquaz Pro Widget-dummy.m */; };
+		0E8F320F11BC91F68D2ABA95F56C2069 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A755465BE2947DD1538D7DD0ADA3F83 /* Foundation.framework */; };
 		1ABF658BD9C4C5D3EAFF705C8F82D46B /* MMWormholeSessionContextTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = D01BE2E7CC6924FA44EBA7BCC3FD2EA0 /* MMWormholeSessionContextTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		1EE2BBE7659D8F1E79C13E88EC868175 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A755465BE2947DD1538D7DD0ADA3F83 /* Foundation.framework */; };
-		29ACFBC14693B9F1AAC5304F1A156A94 /* SDStatusBarOverriderPost9_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B9330F03C2042221076501D3FB6318 /* SDStatusBarOverriderPost9_0.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		2BD10B1FFF4551EA0000C11ECF3CC0FE /* SDStatusBarOverriderPost10_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 0812F84BE7D24B919C464718C60F3259 /* SDStatusBarOverriderPost10_0.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		2FEC7EBF222369428E57EEB9D392C77F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8720EC1B7BBBAC6E2034A6FF0202E5 /* UIKit.framework */; };
+		1FDB9AA4D61FE72E4ECA995EFD13B399 /* SDStatusBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7814F10CDCD840BFE9088F863516DDED /* SDStatusBarManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		24510341133A098D58EDF433134D2E69 /* SDStatusBarOverriderPost9_0.h in Headers */ = {isa = PBXBuildFile; fileRef = 68F8FFD6C6202C9460620A2878707907 /* SDStatusBarOverriderPost9_0.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		25566554EBB41A86FED09ABEBA675530 /* Pods-Aquaz-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B79AE899AEF8F3B558A583E0D287D2E /* Pods-Aquaz-dummy.m */; };
 		3137432D0F83E0E15C2585B32D48EDFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A755465BE2947DD1538D7DD0ADA3F83 /* Foundation.framework */; };
-		363DC138ECF450ABA76663D76160093D /* SimulatorStatusMagic-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DBA9BA5CA630D70E6186E663E985E636 /* SimulatorStatusMagic-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33827ADEF2CAAB6B1F60555019EDD7F8 /* SDStatusBarOverriderPost10_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 0812F84BE7D24B919C464718C60F3259 /* SDStatusBarOverriderPost10_0.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		3AFB1BB2E6F9F7C956ECAD335347C34A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A755465BE2947DD1538D7DD0ADA3F83 /* Foundation.framework */; };
+		3B0556051ABDF44FDC341C625B9288C1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8720EC1B7BBBAC6E2034A6FF0202E5 /* UIKit.framework */; };
+		41683B15D003EC957ECA60FDAEC7CBA2 /* SDStatusBarOverriderPost8_3.m in Sources */ = {isa = PBXBuildFile; fileRef = C80DF62F18882173E9EDDE8BC0978721 /* SDStatusBarOverriderPost8_3.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		41BEDA5EE20DAB103834E417D98EF302 /* MMWormholeCoordinatedFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = E908CF17D035E7A42E3B4A69C6107327 /* MMWormholeCoordinatedFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4C4C206A3FAE3C8A9E2C345B9A1401FE /* MMWormholeCoordinatedFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 2115DC021270A29B4A668978BDBF1207 /* MMWormholeCoordinatedFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		50AC460956BD7E31F9D655240B230A41 /* MMWormhole-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 840C63DC46EEE7B7DAD668D0C98069B2 /* MMWormhole-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		51FB49143F00BE48B9527C1E486475E3 /* SDStatusBarOverriderPost9_3.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F001DE2AFAEAAAA407C7F9FF495F961 /* SDStatusBarOverriderPost9_3.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		52F6A770E5A55A96D124D65AA7D83CBF /* SDStatusBarOverriderPre8_3.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B447486715615B8E514A9BE673CC58 /* SDStatusBarOverriderPre8_3.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		57045C28E15499C96707862FD6CCC429 /* MMWormholeSessionMessageTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 0424B6247327523FE0498BFDF70C2307 /* MMWormholeSessionMessageTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		57187DF816AD1C0AA97E0A60370BF147 /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E5F2160A6351C8D8A25E2E3971E76 /* MMWormhole.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		601542BD7CFB95D96A57D2351F7603DF /* SDStatusBarOverrider.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1FB7C6BEE1784A1411438BA0240AB /* SDStatusBarOverrider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		58137565CB83424C6F916196483CF190 /* SDStatusBarOverriderPost9_3.h in Headers */ = {isa = PBXBuildFile; fileRef = 077B21BBE49B6859995A501661F90F8E /* SDStatusBarOverriderPost9_3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5DBE035E5C69048084EF24629B991D1A /* SDStatusBarOverriderPost9_3.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F001DE2AFAEAAAA407C7F9FF495F961 /* SDStatusBarOverriderPost9_3.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		60AD5B8DC40C672E82860BBE6C419940 /* MMWormholeTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 14CF6733CB5273EB8CAD951C1F5AF3E9 /* MMWormholeTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63796B7C8FC452D6CE22FA6B1E294E03 /* MMWormholeSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B32061EFFA6CFD955914B05F8AD68B7 /* MMWormholeSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		67173FD4D7B77564A960EBD1BE453212 /* Pods-Aquaz-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F99A7D55B6F67B441F8515CFC3A642E4 /* Pods-Aquaz-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6A76A386504EF4E8158463A5E3DBA1D4 /* SDStatusBarOverriderPost9_3.h in Headers */ = {isa = PBXBuildFile; fileRef = 077B21BBE49B6859995A501661F90F8E /* SDStatusBarOverriderPost9_3.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6DD5571745C23824462828A47816B502 /* SDStatusBarOverriderPre8_3.h in Headers */ = {isa = PBXBuildFile; fileRef = 28DA605C3DB95C29916D075DECFA8C17 /* SDStatusBarOverriderPre8_3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		65F961CE0AB0C82438A052E44152C35C /* SDStatusBarOverriderPost8_3.h in Headers */ = {isa = PBXBuildFile; fileRef = 717AE8808554DEB4747114B6075C3538 /* SDStatusBarOverriderPost8_3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		67127D38A75C78CEEE9DFC38FF3871CE /* Pods-Aquaz Pro-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E95D2A2AAB837A62A1FFBCA2D27FE7 /* Pods-Aquaz Pro-dummy.m */; };
+		6A510E0EB9E64D7802B4C3E1C3D1C41E /* Pods-Aquaz-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCF5CBA4E91E9616785728E3011B6FD /* Pods-Aquaz-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		72EA900FF62B9CFAA81004B2F09856A2 /* MMWormholeSessionContextTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = EB984FAB12CE083802FEFAF971A5A57F /* MMWormholeSessionContextTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		730FB243581F46E71D4D52FF5E35A15D /* SDStatusBarOverriderPost10_0.h in Headers */ = {isa = PBXBuildFile; fileRef = 4163B40B5622705E412E0222942F1101 /* SDStatusBarOverriderPost10_0.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		73B2447628860A58D125E574ED407453 /* MMWormholeSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E747561E40EA012CDBD1784A9D47700 /* MMWormholeSession.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		80344119DA103A095DE52A3753AA0A4D /* SDStatusBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7814F10CDCD840BFE9088F863516DDED /* SDStatusBarManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		839282BAA133DF7EAB519B86C9538EC8 /* MMWormholeSessionFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 27458252155EFF708548AA852594770E /* MMWormholeSessionFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8A3204D54072D1042E6FA191ED99F4A0 /* SDStatusBarOverriderPost8_3.h in Headers */ = {isa = PBXBuildFile; fileRef = 717AE8808554DEB4747114B6075C3538 /* SDStatusBarOverriderPost8_3.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8D5A65CB6FE2A91CAF00462843C3F785 /* SDStatusBarOverriderPost8_3.m in Sources */ = {isa = PBXBuildFile; fileRef = C80DF62F18882173E9EDDE8BC0978721 /* SDStatusBarOverriderPost8_3.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		96FA282EFD44B79B5DFE1CB32A8FF90C /* MMWormholeFileTransiting.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B91C9179A1A0D915DA8A28D9566D129 /* MMWormholeFileTransiting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B5C3DB8F8F9326FF977F13FDB9CFB73 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBA19796EBE6E42233125FAED2F9B1A /* WatchConnectivity.framework */; };
+		9BD45A2E3EE9FDD1C05732CE08F245E4 /* SDStatusBarOverriderPost9_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B9330F03C2042221076501D3FB6318 /* SDStatusBarOverriderPost9_0.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		9EC088E66AD01D0523DCB7F68183A3EC /* MMWormhole.h in Headers */ = {isa = PBXBuildFile; fileRef = 9059B5FD2DBB518464956E06031CFE38 /* MMWormhole.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A7B99B41227C28E9E5738955064A4249 /* SDStatusBarManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CD9353D716421E39DC1AE7D4E9E23B1 /* SDStatusBarManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9ECF9424686B3862528E6D0673F5AEB6 /* SimulatorStatusMagic-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DBA9BA5CA630D70E6186E663E985E636 /* SimulatorStatusMagic-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A83F0FE14533B9B55928B59B8443A957 /* Pods-Aquaz Pro Widget-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D23B780E61257D9DC16438F0A77FD20C /* Pods-Aquaz Pro Widget-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A86D2D323C5E4CA85CB5FF30BB3D5D19 /* SimulatorStatusMagic-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE08585171DF887BDFC769AF5A9DB591 /* SimulatorStatusMagic-dummy.m */; };
 		AA05B2918C02B9F15E39798A7CFFDBBE /* MMWormhole-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF04D9653AA53E67BAD592B0CC7633D /* MMWormhole-dummy.m */; };
+		ABB27275D0ECC39E57539946C43C9D67 /* Pods-Aquaz Pro-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85D6F2A354E4547FCF0B52FE39EEF7 /* Pods-Aquaz Pro-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2086914AD3E2752471583FA7CF638A2 /* MMWormholeSessionFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = E043E35C4211D0125496B01687D16635 /* MMWormholeSessionFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		B51F833A5920B0BE21B8F6842856E582 /* Pods-Widget-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4542B04F6583123AC013073252FF2109 /* Pods-Widget-dummy.m */; };
-		B5811E2649EDD9D4C97C5CDF15723CC1 /* SDStatusBarOverriderPost9_0.h in Headers */ = {isa = PBXBuildFile; fileRef = 68F8FFD6C6202C9460620A2878707907 /* SDStatusBarOverriderPost9_0.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BB95789861EFDB88BA72D83DA46C019F /* SDStatusBarOverriderPost10_0.h in Headers */ = {isa = PBXBuildFile; fileRef = 4163B40B5622705E412E0222942F1101 /* SDStatusBarOverriderPost10_0.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C8CC87F0A2B77463AEA1E76FB3B500AE /* Pods-Widget-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BA6DF42517C511AB04414734B265D48F /* Pods-Widget-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E19FA4A73EAE24CC0FDB2070E22309B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A755465BE2947DD1538D7DD0ADA3F83 /* Foundation.framework */; };
-		E2436FB941E1E0595C1ABAC0260E8FCC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A755465BE2947DD1538D7DD0ADA3F83 /* Foundation.framework */; };
-		E65FC0A55FEE95884A71FEB4088E7EDF /* Pods-Aquaz-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4CEFAD3D44B345696273833F9E98AB /* Pods-Aquaz-dummy.m */; };
-		E78A2EF023175401651A8DA035EEB1CC /* SimulatorStatusMagic-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE08585171DF887BDFC769AF5A9DB591 /* SimulatorStatusMagic-dummy.m */; };
+		B71AD0DA2081171CFCA3450C07490E66 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A755465BE2947DD1538D7DD0ADA3F83 /* Foundation.framework */; };
+		B8A2E5F1740FB68BF8CFF6A5B0970F5F /* Pods-Aquaz Widget-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 835A3F2B64769DFC56E2780F33151F4C /* Pods-Aquaz Widget-dummy.m */; };
+		BA8061D565E675345B3090135939E5C2 /* SDStatusBarOverrider.h in Headers */ = {isa = PBXBuildFile; fileRef = FAB1FB7C6BEE1784A1411438BA0240AB /* SDStatusBarOverrider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE493C9194769C8144058F9742A6C8AF /* Pods-Aquaz Widget-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FF4EED1F4551FBCC3231FC9F7E7458C1 /* Pods-Aquaz Widget-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D72C85C284C813DD1024C49684C68B0C /* SDStatusBarManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CD9353D716421E39DC1AE7D4E9E23B1 /* SDStatusBarManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E0162137DEDE804CF42DC40DBF3AD719 /* SDStatusBarOverriderPre8_3.h in Headers */ = {isa = PBXBuildFile; fileRef = 28DA605C3DB95C29916D075DECFA8C17 /* SDStatusBarOverriderPre8_3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3203E01703505BA349E9C11F2EB7CE9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A755465BE2947DD1538D7DD0ADA3F83 /* Foundation.framework */; };
+		EE7A0030552AE353C740DCFE7A5178BD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A755465BE2947DD1538D7DD0ADA3F83 /* Foundation.framework */; };
 		F682FAF399F5979E84C7063940F5D3A9 /* MMWormholeFileTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 11706A950E20E69469B678DEAB1D65D9 /* MMWormholeFileTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		FCDBB5C9DBFEFFC7216F0C44957E792B /* SDStatusBarOverriderPre8_3.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B447486715615B8E514A9BE673CC58 /* SDStatusBarOverriderPre8_3.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		FEA3CF4847F0002BF5AC3CE375C91D72 /* MMWormholeSessionMessageTransiting.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C9D300D40D1146BD61CBB2B22EBB79 /* MMWormholeSessionMessageTransiting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7F704AE5A291A335DA21C3F4B42196C3 /* PBXContainerItemProxy */ = {
+		39E993D55ABE49F7DC21EABD0A4D85AA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 5C8B0A5762D4572F2D507F7315F54FFA;
 			remoteInfo = MMWormhole;
 		};
-		BB3EB364A036567585A99AA250B572E8 /* PBXContainerItemProxy */ = {
+		6344EFB68230FC5F2D92F94912F1D4A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = FCC66BC808FD7BE7E779962480291C81;
+			remoteGlobalIDString = 5C8B0A5762D4572F2D507F7315F54FFA;
+			remoteInfo = MMWormhole;
+		};
+		731EF4972AA7A71F66DAEC3829005205 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C8B0A5762D4572F2D507F7315F54FFA;
+			remoteInfo = MMWormhole;
+		};
+		AD28DAB1DDE2467299F3376D99E5A971 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C8B0A5762D4572F2D507F7315F54FFA;
+			remoteInfo = MMWormhole;
+		};
+		F86B4E9FEB0308D296DF88627F9A0342 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FD5E819529D5F528BFDB7F7F5168AFE5;
 			remoteInfo = SimulatorStatusMagic;
-		};
-		CB7BC148AB3957ED4A078CB7F71FC94B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5C8B0A5762D4572F2D507F7315F54FFA;
-			remoteInfo = MMWormhole;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0424B6247327523FE0498BFDF70C2307 /* MMWormholeSessionMessageTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionMessageTransiting.h; path = Source/MMWormholeSessionMessageTransiting.h; sourceTree = "<group>"; };
+		05A27F2889414996DAAF497CFEB8DEDD /* Pods_Aquaz_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Aquaz_Widget.framework; path = "Pods-Aquaz Widget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		077B21BBE49B6859995A501661F90F8E /* SDStatusBarOverriderPost9_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost9_3.h; path = SDStatusBarManager/SDStatusBarOverriderPost9_3.h; sourceTree = "<group>"; };
 		0812F84BE7D24B919C464718C60F3259 /* SDStatusBarOverriderPost10_0.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost10_0.m; path = SDStatusBarManager/SDStatusBarOverriderPost10_0.m; sourceTree = "<group>"; };
-		0C4CEFAD3D44B345696273833F9E98AB /* Pods-Aquaz-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Aquaz-dummy.m"; sourceTree = "<group>"; };
+		0B79AE899AEF8F3B558A583E0D287D2E /* Pods-Aquaz-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Aquaz-dummy.m"; sourceTree = "<group>"; };
+		0BBF1B0696A12C141A7A706D25811849 /* Pods-Aquaz Pro Widget.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Aquaz Pro Widget.modulemap"; sourceTree = "<group>"; };
 		0CBA19796EBE6E42233125FAED2F9B1A /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
 		114A63AECFD06822A02174911078F7AD /* MMWormhole.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = MMWormhole.modulemap; sourceTree = "<group>"; };
 		11706A950E20E69469B678DEAB1D65D9 /* MMWormholeFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeFileTransiting.m; path = Source/MMWormholeFileTransiting.m; sourceTree = "<group>"; };
+		121B20817BCB7BAF0CB6828FDDB27555 /* Pods-Aquaz.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Aquaz.modulemap"; sourceTree = "<group>"; };
 		14CF6733CB5273EB8CAD951C1F5AF3E9 /* MMWormholeTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeTransiting.h; path = Source/MMWormholeTransiting.h; sourceTree = "<group>"; };
 		15C397F5EA1B1DE29DEF0C8B6D53FDAF /* CLSAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSAttributes.h; path = iOS/Crashlytics.framework/Headers/CLSAttributes.h; sourceTree = "<group>"; };
-		18F5FDD17DF48D47A16A0EB0F61AAC90 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1E77798109FC763B9B41BE57F2385576 /* Pods-Aquaz.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Aquaz.modulemap"; sourceTree = "<group>"; };
+		1AC8EF040E531919BC50BC05CFAA0F14 /* Pods-Aquaz Pro Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz Pro Widget.release.xcconfig"; sourceTree = "<group>"; };
 		1F70CF4C100F5B6A28710F2252FB4A60 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2115DC021270A29B4A668978BDBF1207 /* MMWormholeCoordinatedFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeCoordinatedFileTransiting.m; path = Source/MMWormholeCoordinatedFileTransiting.m; sourceTree = "<group>"; };
 		218C7F2AD44318AE5B02F10CB3EA9836 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		222297DD95704EC6CCB3E604BE7CE744 /* Pods-Aquaz Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz Pro.release.xcconfig"; sourceTree = "<group>"; };
 		27458252155EFF708548AA852594770E /* MMWormholeSessionFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionFileTransiting.h; path = Source/MMWormholeSessionFileTransiting.h; sourceTree = "<group>"; };
-		28C6BE8ACFF5D979B8896452268DC8E9 /* Pods-Aquaz-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz-frameworks.sh"; sourceTree = "<group>"; };
 		28DA605C3DB95C29916D075DECFA8C17 /* SDStatusBarOverriderPre8_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPre8_3.h; path = SDStatusBarManager/SDStatusBarOverriderPre8_3.h; sourceTree = "<group>"; };
-		29DCD2983590173F8EE38410C6241112 /* MMWormhole.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MMWormhole.framework; path = MMWormhole.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B32061EFFA6CFD955914B05F8AD68B7 /* MMWormholeSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSession.h; path = Source/MMWormholeSession.h; sourceTree = "<group>"; };
-		3094963E87BBDD48F6706B2888D172ED /* Pods-Widget-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Widget-acknowledgements.markdown"; sourceTree = "<group>"; };
+		2B5EB73D474E2B3EBE8431230FC1734B /* Pods-Aquaz Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		33B9330F03C2042221076501D3FB6318 /* SDStatusBarOverriderPost9_0.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost9_0.m; path = SDStatusBarManager/SDStatusBarOverriderPost9_0.m; sourceTree = "<group>"; };
+		35067BF14095DE2922447E05289CA80B /* Pods-Aquaz Pro-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Aquaz Pro-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3C3787AAD16E7FB6A589F15E170600D7 /* Pods-Aquaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.release.xcconfig"; sourceTree = "<group>"; };
 		3E747561E40EA012CDBD1784A9D47700 /* MMWormholeSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSession.m; path = Source/MMWormholeSession.m; sourceTree = "<group>"; };
 		3F001DE2AFAEAAAA407C7F9FF495F961 /* SDStatusBarOverriderPost9_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost9_3.m; path = SDStatusBarManager/SDStatusBarOverriderPost9_3.m; sourceTree = "<group>"; };
-		3F787848E8E6CEFE8DCEAA8B20518EEE /* Pods-Widget.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Widget.modulemap"; sourceTree = "<group>"; };
+		4003C5FA2BA4787046C0412BD5934D0D /* Pods-Aquaz Widget-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Aquaz Widget-acknowledgements.plist"; sourceTree = "<group>"; };
 		4163B40B5622705E412E0222942F1101 /* SDStatusBarOverriderPost10_0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost10_0.h; path = SDStatusBarManager/SDStatusBarOverriderPost10_0.h; sourceTree = "<group>"; };
-		4542B04F6583123AC013073252FF2109 /* Pods-Widget-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Widget-dummy.m"; sourceTree = "<group>"; };
 		45C75DBAEE2BD69C5ECD048224E8CBA1 /* SimulatorStatusMagic.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SimulatorStatusMagic.modulemap; sourceTree = "<group>"; };
+		47B889938E956BD5B0B9E179EAD1D7AA /* Pods-Aquaz Widget.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Aquaz Widget.modulemap"; sourceTree = "<group>"; };
+		47FEE94B89A5FE57764446116E1115C8 /* Pods-Aquaz Widget-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Aquaz Widget-acknowledgements.markdown"; sourceTree = "<group>"; };
+		4814861FD1DEF371DBF79D28819B05D7 /* Pods-Aquaz Pro Widget-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz Pro Widget-resources.sh"; sourceTree = "<group>"; };
 		484A6938EDFA441DDBD6D0D2A27E9EBF /* SimulatorStatusMagic.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SimulatorStatusMagic.xcconfig; sourceTree = "<group>"; };
-		49E221B74E672776D5FA25B67A950716 /* Pods-Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Widget.release.xcconfig"; sourceTree = "<group>"; };
-		4A733D24A35AA65CBA23503A00F783FA /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Aquaz.framework; path = "Pods-Aquaz.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A8DA2DD042B8BED9691932FA8581F78 /* Pods-Aquaz Pro Widget-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Aquaz Pro Widget-dummy.m"; sourceTree = "<group>"; };
+		4C85D6F2A354E4547FCF0B52FE39EEF7 /* Pods-Aquaz Pro-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Aquaz Pro-umbrella.h"; sourceTree = "<group>"; };
+		5460743EE05C077E9280032A2595B0D0 /* Pods-Aquaz-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Aquaz-acknowledgements.plist"; sourceTree = "<group>"; };
 		550D384D97FC0B0EDE04A5C008FC92C7 /* ANSCompatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ANSCompatibility.h; path = iOS/Crashlytics.framework/Headers/ANSCompatibility.h; sourceTree = "<group>"; };
 		56B7EB61EE6519C6D661C3610F244CD5 /* MMWormhole-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMWormhole-prefix.pch"; sourceTree = "<group>"; };
 		56FB0F45032A72352889E7CB177978F5 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
-		58C944A0239C714695F34E5531424C30 /* SimulatorStatusMagic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SimulatorStatusMagic.framework; path = SimulatorStatusMagic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A755465BE2947DD1538D7DD0ADA3F83 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		5AC6AB770380CB6108DA62ADD9ABC3E1 /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Aquaz.framework; path = "Pods-Aquaz.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AF04D9653AA53E67BAD592B0CC7633D /* MMWormhole-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MMWormhole-dummy.m"; sourceTree = "<group>"; };
-		5C52D57E98193C26BD3AA0BF05F7CDCF /* Pods-Aquaz-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz-resources.sh"; sourceTree = "<group>"; };
-		6451B7F8FE822B5C86634926BB87FBAD /* Pods-Widget-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Widget-acknowledgements.plist"; sourceTree = "<group>"; };
+		63E3AD56B790B5015DC05246230A8037 /* Pods-Aquaz-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Aquaz-acknowledgements.markdown"; sourceTree = "<group>"; };
+		64FC7BD8BD44CD1FC0D561919F48CF7E /* Pods-Aquaz Widget-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz Widget-resources.sh"; sourceTree = "<group>"; };
+		66DBA90A7E71C539056F36BB8B856EEC /* Pods-Aquaz Pro.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Aquaz Pro.modulemap"; sourceTree = "<group>"; };
 		68F8FFD6C6202C9460620A2878707907 /* SDStatusBarOverriderPost9_0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost9_0.h; path = SDStatusBarManager/SDStatusBarOverriderPost9_0.h; sourceTree = "<group>"; };
 		6B91C9179A1A0D915DA8A28D9566D129 /* MMWormholeFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeFileTransiting.h; path = Source/MMWormholeFileTransiting.h; sourceTree = "<group>"; };
 		717AE8808554DEB4747114B6075C3538 /* SDStatusBarOverriderPost8_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost8_3.h; path = SDStatusBarManager/SDStatusBarOverriderPost8_3.h; sourceTree = "<group>"; };
 		7814F10CDCD840BFE9088F863516DDED /* SDStatusBarManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarManager.m; path = SDStatusBarManager/SDStatusBarManager.m; sourceTree = "<group>"; };
 		7CD9353D716421E39DC1AE7D4E9E23B1 /* SDStatusBarManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarManager.h; path = SDStatusBarManager/SDStatusBarManager.h; sourceTree = "<group>"; };
+		7DA5D4AEC736371677E9F52F004E70D3 /* Pods-Aquaz-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz-frameworks.sh"; sourceTree = "<group>"; };
 		80A31828FF4A9C55A58CA22CF628F174 /* Crashlytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Crashlytics.h; path = iOS/Crashlytics.framework/Headers/Crashlytics.h; sourceTree = "<group>"; };
+		835A3F2B64769DFC56E2780F33151F4C /* Pods-Aquaz Widget-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Aquaz Widget-dummy.m"; sourceTree = "<group>"; };
 		840C63DC46EEE7B7DAD668D0C98069B2 /* MMWormhole-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMWormhole-umbrella.h"; sourceTree = "<group>"; };
+		88AD6CD03832C080D1170594C464AAD8 /* Pods-Aquaz Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz Widget.debug.xcconfig"; sourceTree = "<group>"; };
 		896E5F2160A6351C8D8A25E2E3971E76 /* MMWormhole.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormhole.m; path = Source/MMWormhole.m; sourceTree = "<group>"; };
-		899B94100908FAABD0F949191FD18D16 /* Pods-Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Widget.debug.xcconfig"; sourceTree = "<group>"; };
 		8AF191B5C42BA2E5FE1B480384FCDFE3 /* Answers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Answers.h; path = iOS/Crashlytics.framework/Headers/Answers.h; sourceTree = "<group>"; };
 		8F15A35A91721C508596FA74F97D97A4 /* SimulatorStatusMagic-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SimulatorStatusMagic-prefix.pch"; sourceTree = "<group>"; };
-		8FA3D0C5612DE8C10CB79A0E1F637958 /* Pods-Aquaz-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Aquaz-acknowledgements.markdown"; sourceTree = "<group>"; };
+		8FCF5CBA4E91E9616785728E3011B6FD /* Pods-Aquaz-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Aquaz-umbrella.h"; sourceTree = "<group>"; };
 		9059B5FD2DBB518464956E06031CFE38 /* MMWormhole.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormhole.h; path = Source/MMWormhole.h; sourceTree = "<group>"; };
+		90C4ACF936DBB12BB3610E3FB0B10022 /* Pods_Aquaz_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Aquaz_Pro.framework; path = "Pods-Aquaz Pro.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		95727F435C5C833A7D0E580BA4C575A5 /* Pods-Aquaz Pro Widget-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Aquaz Pro Widget-acknowledgements.plist"; sourceTree = "<group>"; };
 		974D197408B1E233A34D0F7FC7BD4301 /* Fabric.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Fabric.h; path = iOS/Fabric.framework/Headers/Fabric.h; sourceTree = "<group>"; };
-		9A5AE5DEAB59D01BEC93BBF5FB2142E0 /* Pods-Aquaz-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Aquaz-acknowledgements.plist"; sourceTree = "<group>"; };
-		9FF6432D20A2E59AF342AAF86F3E046C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9DD980CBED7266D522F96DED1B9AC49E /* Pods-Aquaz Pro Widget-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Aquaz Pro Widget-acknowledgements.markdown"; sourceTree = "<group>"; };
+		A5A73FA0C16B96637D6E97704A2AF1B3 /* MMWormhole.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MMWormhole.framework; path = MMWormhole.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAB2E93ACE89A058C217D69DC2667465 /* CLSReport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSReport.h; path = iOS/Crashlytics.framework/Headers/CLSReport.h; sourceTree = "<group>"; };
-		ABA054B9928A761C4253C15E2E191C9E /* Pods-Widget-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Widget-resources.sh"; sourceTree = "<group>"; };
+		AAF98A382D96085C5B8D193FF3E07C37 /* Pods-Aquaz Pro-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz Pro-resources.sh"; sourceTree = "<group>"; };
+		ACBFCFA3F9E67705AD06D1A24C44EF66 /* Pods-Aquaz Pro-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Aquaz Pro-acknowledgements.plist"; sourceTree = "<group>"; };
 		ADA573A10C1B69DA739A950CB9A6A1FB /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = iOS/Crashlytics.framework; sourceTree = "<group>"; };
 		AE8720EC1B7BBBAC6E2034A6FF0202E5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		AF3F1F967C7FF1189C01D35456FDB41E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B15556EBE7B78313AF60938E2D99569D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6A957534ADBCB1646176260C9FF0E91 /* FABAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FABAttributes.h; path = iOS/Fabric.framework/Headers/FABAttributes.h; sourceTree = "<group>"; };
 		B8330969BAE720409688CA6B11198453 /* CLSLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSLogging.h; path = iOS/Crashlytics.framework/Headers/CLSLogging.h; sourceTree = "<group>"; };
-		BA6DF42517C511AB04414734B265D48F /* Pods-Widget-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Widget-umbrella.h"; sourceTree = "<group>"; };
+		BCA7F5583FFC3DE2AE7E032D4F6F55B1 /* Pods-Aquaz Pro Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz Pro Widget.debug.xcconfig"; sourceTree = "<group>"; };
 		BE08585171DF887BDFC769AF5A9DB591 /* SimulatorStatusMagic-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SimulatorStatusMagic-dummy.m"; sourceTree = "<group>"; };
-		BFD29FCDEFC8728BAF6D9F0C4674856D /* Pods-Aquaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.debug.xcconfig"; sourceTree = "<group>"; };
 		C80DF62F18882173E9EDDE8BC0978721 /* SDStatusBarOverriderPost8_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost8_3.m; path = SDStatusBarManager/SDStatusBarOverriderPost8_3.m; sourceTree = "<group>"; };
+		CA33D398BB9D830687921C0B2AADB510 /* Pods-Aquaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.debug.xcconfig"; sourceTree = "<group>"; };
 		CFE3E20C94B053E325EE64DEB3FE423D /* MMWormhole.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MMWormhole.xcconfig; sourceTree = "<group>"; };
 		D01BE2E7CC6924FA44EBA7BCC3FD2EA0 /* MMWormholeSessionContextTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionContextTransiting.m; path = Source/MMWormholeSessionContextTransiting.m; sourceTree = "<group>"; };
+		D23B780E61257D9DC16438F0A77FD20C /* Pods-Aquaz Pro Widget-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Aquaz Pro Widget-umbrella.h"; sourceTree = "<group>"; };
+		D4663A3B1FE0A6F7F4FF25A22FB80329 /* Pods-Aquaz Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz Widget.release.xcconfig"; sourceTree = "<group>"; };
 		D6B447486715615B8E514A9BE673CC58 /* SDStatusBarOverriderPre8_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPre8_3.m; path = SDStatusBarManager/SDStatusBarOverriderPre8_3.m; sourceTree = "<group>"; };
 		DBA9BA5CA630D70E6186E663E985E636 /* SimulatorStatusMagic-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SimulatorStatusMagic-umbrella.h"; sourceTree = "<group>"; };
-		DD53867E0022F4A1ED206343E79AF6F5 /* Pods-Aquaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.release.xcconfig"; sourceTree = "<group>"; };
+		DE9A8B6F73FFFE604867E9EB0179EBCC /* SimulatorStatusMagic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SimulatorStatusMagic.framework; path = SimulatorStatusMagic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E043E35C4211D0125496B01687D16635 /* MMWormholeSessionFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionFileTransiting.m; path = Source/MMWormholeSessionFileTransiting.m; sourceTree = "<group>"; };
-		E8ED5F5799BFB12417CBA4B893A23BA4 /* Pods_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Widget.framework; path = "Pods-Widget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5E95D2A2AAB837A62A1FFBCA2D27FE7 /* Pods-Aquaz Pro-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Aquaz Pro-dummy.m"; sourceTree = "<group>"; };
+		E7B2703DCF16F502389901B1961C9E38 /* Pods-Aquaz-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz-resources.sh"; sourceTree = "<group>"; };
+		E893611583A767468680CB50765597AA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E908CF17D035E7A42E3B4A69C6107327 /* MMWormholeCoordinatedFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeCoordinatedFileTransiting.h; path = Source/MMWormholeCoordinatedFileTransiting.h; sourceTree = "<group>"; };
+		E9E6D2BF104A38812600523D96ED3F83 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB984FAB12CE083802FEFAF971A5A57F /* MMWormholeSessionContextTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionContextTransiting.h; path = Source/MMWormholeSessionContextTransiting.h; sourceTree = "<group>"; };
+		F30AD110D493DB5235B6BBFB954007CB /* Pods-Aquaz Pro-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz Pro-frameworks.sh"; sourceTree = "<group>"; };
+		F388AC67F93C69C21F665E7AACC010EA /* Pods_Aquaz_Pro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Aquaz_Pro_Widget.framework; path = "Pods-Aquaz Pro Widget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5C9D300D40D1146BD61CBB2B22EBB79 /* MMWormholeSessionMessageTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionMessageTransiting.m; path = Source/MMWormholeSessionMessageTransiting.m; sourceTree = "<group>"; };
 		F6B3037A1B3149ACA92542D593FB2CE6 /* CLSStackFrame.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSStackFrame.h; path = iOS/Crashlytics.framework/Headers/CLSStackFrame.h; sourceTree = "<group>"; };
-		F99A7D55B6F67B441F8515CFC3A642E4 /* Pods-Aquaz-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Aquaz-umbrella.h"; sourceTree = "<group>"; };
 		FAB1FB7C6BEE1784A1411438BA0240AB /* SDStatusBarOverrider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverrider.h; path = SDStatusBarManager/SDStatusBarOverrider.h; sourceTree = "<group>"; };
+		FF4EED1F4551FBCC3231FC9F7E7458C1 /* Pods-Aquaz Widget-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Aquaz Widget-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,52 +207,50 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		113238540559B84E62967E128E5AD6FB /* Frameworks */ = {
+		07EB1EF2D31B30EA7B1CC0105CB56B13 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EE2BBE7659D8F1E79C13E88EC868175 /* Foundation.framework in Frameworks */,
-				2FEC7EBF222369428E57EEB9D392C77F /* UIKit.framework in Frameworks */,
+				0E8F320F11BC91F68D2ABA95F56C2069 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		34A0E738D5B5A69BD276C821FF14AFB1 /* Frameworks */ = {
+		0870098778B392F56BB0ED8835648663 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E19FA4A73EAE24CC0FDB2070E22309B5 /* Foundation.framework in Frameworks */,
+				EE7A0030552AE353C740DCFE7A5178BD /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8743244B8755948B029E19E6B9F4F38A /* Frameworks */ = {
+		0D06FE51F68F414E19647B0EC494BFE3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2436FB941E1E0595C1ABAC0260E8FCC /* Foundation.framework in Frameworks */,
+				3AFB1BB2E6F9F7C956ECAD335347C34A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4A43101363911E8BF7BCF59622837882 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B71AD0DA2081171CFCA3450C07490E66 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4D08E6E228F5A1FC7710D412577861C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3203E01703505BA349E9C11F2EB7CE9 /* Foundation.framework in Frameworks */,
+				3B0556051ABDF44FDC341C625B9288C1 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		006EDA43B73B56040946C46390EC7705 /* Pods-Aquaz */ = {
-			isa = PBXGroup;
-			children = (
-				9FF6432D20A2E59AF342AAF86F3E046C /* Info.plist */,
-				1E77798109FC763B9B41BE57F2385576 /* Pods-Aquaz.modulemap */,
-				8FA3D0C5612DE8C10CB79A0E1F637958 /* Pods-Aquaz-acknowledgements.markdown */,
-				9A5AE5DEAB59D01BEC93BBF5FB2142E0 /* Pods-Aquaz-acknowledgements.plist */,
-				0C4CEFAD3D44B345696273833F9E98AB /* Pods-Aquaz-dummy.m */,
-				28C6BE8ACFF5D979B8896452268DC8E9 /* Pods-Aquaz-frameworks.sh */,
-				5C52D57E98193C26BD3AA0BF05F7CDCF /* Pods-Aquaz-resources.sh */,
-				F99A7D55B6F67B441F8515CFC3A642E4 /* Pods-Aquaz-umbrella.h */,
-				BFD29FCDEFC8728BAF6D9F0C4674856D /* Pods-Aquaz.debug.xcconfig */,
-				DD53867E0022F4A1ED206343E79AF6F5 /* Pods-Aquaz.release.xcconfig */,
-			);
-			name = "Pods-Aquaz";
-			path = "Target Support Files/Pods-Aquaz";
-			sourceTree = "<group>";
-		};
 		108624F280033595E8D815D0F908E4EB /* SimulatorStatusMagic */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,21 +289,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2F74808175EA5EE9D4864AFF0F99CDAB /* Pods-Widget */ = {
+		24A1C522AF7C9E3190059BF4107E7EF2 /* Pods-Aquaz Pro */ = {
 			isa = PBXGroup;
 			children = (
-				18F5FDD17DF48D47A16A0EB0F61AAC90 /* Info.plist */,
-				3F787848E8E6CEFE8DCEAA8B20518EEE /* Pods-Widget.modulemap */,
-				3094963E87BBDD48F6706B2888D172ED /* Pods-Widget-acknowledgements.markdown */,
-				6451B7F8FE822B5C86634926BB87FBAD /* Pods-Widget-acknowledgements.plist */,
-				4542B04F6583123AC013073252FF2109 /* Pods-Widget-dummy.m */,
-				ABA054B9928A761C4253C15E2E191C9E /* Pods-Widget-resources.sh */,
-				BA6DF42517C511AB04414734B265D48F /* Pods-Widget-umbrella.h */,
-				899B94100908FAABD0F949191FD18D16 /* Pods-Widget.debug.xcconfig */,
-				49E221B74E672776D5FA25B67A950716 /* Pods-Widget.release.xcconfig */,
+				E9E6D2BF104A38812600523D96ED3F83 /* Info.plist */,
+				66DBA90A7E71C539056F36BB8B856EEC /* Pods-Aquaz Pro.modulemap */,
+				35067BF14095DE2922447E05289CA80B /* Pods-Aquaz Pro-acknowledgements.markdown */,
+				ACBFCFA3F9E67705AD06D1A24C44EF66 /* Pods-Aquaz Pro-acknowledgements.plist */,
+				E5E95D2A2AAB837A62A1FFBCA2D27FE7 /* Pods-Aquaz Pro-dummy.m */,
+				F30AD110D493DB5235B6BBFB954007CB /* Pods-Aquaz Pro-frameworks.sh */,
+				AAF98A382D96085C5B8D193FF3E07C37 /* Pods-Aquaz Pro-resources.sh */,
+				4C85D6F2A354E4547FCF0B52FE39EEF7 /* Pods-Aquaz Pro-umbrella.h */,
+				2B5EB73D474E2B3EBE8431230FC1734B /* Pods-Aquaz Pro.debug.xcconfig */,
+				222297DD95704EC6CCB3E604BE7CE744 /* Pods-Aquaz Pro.release.xcconfig */,
 			);
-			name = "Pods-Widget";
-			path = "Target Support Files/Pods-Widget";
+			name = "Pods-Aquaz Pro";
+			path = "Target Support Files/Pods-Aquaz Pro";
+			sourceTree = "<group>";
+		};
+		374948B163D5465C36122C378B196418 /* Pods-Aquaz Pro Widget */ = {
+			isa = PBXGroup;
+			children = (
+				B15556EBE7B78313AF60938E2D99569D /* Info.plist */,
+				0BBF1B0696A12C141A7A706D25811849 /* Pods-Aquaz Pro Widget.modulemap */,
+				9DD980CBED7266D522F96DED1B9AC49E /* Pods-Aquaz Pro Widget-acknowledgements.markdown */,
+				95727F435C5C833A7D0E580BA4C575A5 /* Pods-Aquaz Pro Widget-acknowledgements.plist */,
+				4A8DA2DD042B8BED9691932FA8581F78 /* Pods-Aquaz Pro Widget-dummy.m */,
+				4814861FD1DEF371DBF79D28819B05D7 /* Pods-Aquaz Pro Widget-resources.sh */,
+				D23B780E61257D9DC16438F0A77FD20C /* Pods-Aquaz Pro Widget-umbrella.h */,
+				BCA7F5583FFC3DE2AE7E032D4F6F55B1 /* Pods-Aquaz Pro Widget.debug.xcconfig */,
+				1AC8EF040E531919BC50BC05CFAA0F14 /* Pods-Aquaz Pro Widget.release.xcconfig */,
+			);
+			name = "Pods-Aquaz Pro Widget";
+			path = "Target Support Files/Pods-Aquaz Pro Widget";
 			sourceTree = "<group>";
 		};
 		3A73F5312E7F36B4E3EA1F565691A94B /* Fabric */ = {
@@ -276,6 +333,30 @@
 			);
 			name = Fabric;
 			path = Fabric;
+			sourceTree = "<group>";
+		};
+		3D1372E71726CB919CE6ACD01A830CC7 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				66F0746148293F4EE12D4045279C143E /* Pods-Aquaz */,
+				24A1C522AF7C9E3190059BF4107E7EF2 /* Pods-Aquaz Pro */,
+				374948B163D5465C36122C378B196418 /* Pods-Aquaz Pro Widget */,
+				EEB0B858D9508543FAF2F045E442BF1B /* Pods-Aquaz Widget */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		41580A480B4DC1FE0E71B438AF0FC751 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A5A73FA0C16B96637D6E97704A2AF1B3 /* MMWormhole.framework */,
+				5AC6AB770380CB6108DA62ADD9ABC3E1 /* Pods_Aquaz.framework */,
+				90C4ACF936DBB12BB3610E3FB0B10022 /* Pods_Aquaz_Pro.framework */,
+				F388AC67F93C69C21F665E7AACC010EA /* Pods_Aquaz_Pro_Widget.framework */,
+				05A27F2889414996DAAF497CFEB8DEDD /* Pods_Aquaz_Widget.framework */,
+				DE9A8B6F73FFFE604867E9EB0179EBCC /* SimulatorStatusMagic.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		4AA8F117020CC2722085948F0E85FE6B /* Support Files */ = {
@@ -292,15 +373,22 @@
 			path = "../Target Support Files/SimulatorStatusMagic";
 			sourceTree = "<group>";
 		};
-		4C8073F1EF80F38D2828DFA0023608F0 /* Products */ = {
+		66F0746148293F4EE12D4045279C143E /* Pods-Aquaz */ = {
 			isa = PBXGroup;
 			children = (
-				29DCD2983590173F8EE38410C6241112 /* MMWormhole.framework */,
-				4A733D24A35AA65CBA23503A00F783FA /* Pods_Aquaz.framework */,
-				E8ED5F5799BFB12417CBA4B893A23BA4 /* Pods_Widget.framework */,
-				58C944A0239C714695F34E5531424C30 /* SimulatorStatusMagic.framework */,
+				AF3F1F967C7FF1189C01D35456FDB41E /* Info.plist */,
+				121B20817BCB7BAF0CB6828FDDB27555 /* Pods-Aquaz.modulemap */,
+				63E3AD56B790B5015DC05246230A8037 /* Pods-Aquaz-acknowledgements.markdown */,
+				5460743EE05C077E9280032A2595B0D0 /* Pods-Aquaz-acknowledgements.plist */,
+				0B79AE899AEF8F3B558A583E0D287D2E /* Pods-Aquaz-dummy.m */,
+				7DA5D4AEC736371677E9F52F004E70D3 /* Pods-Aquaz-frameworks.sh */,
+				E7B2703DCF16F502389901B1961C9E38 /* Pods-Aquaz-resources.sh */,
+				8FCF5CBA4E91E9616785728E3011B6FD /* Pods-Aquaz-umbrella.h */,
+				CA33D398BB9D830687921C0B2AADB510 /* Pods-Aquaz.debug.xcconfig */,
+				3C3787AAD16E7FB6A589F15E170600D7 /* Pods-Aquaz.release.xcconfig */,
 			);
-			name = Products;
+			name = "Pods-Aquaz";
+			path = "Target Support Files/Pods-Aquaz";
 			sourceTree = "<group>";
 		};
 		6764CC83C5BCDB2E81DD22C2BEB98AC3 /* MMWormhole */ = {
@@ -319,8 +407,8 @@
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
 				CB3F1F1BC308AF5546DCFFE159E04613 /* Pods */,
-				4C8073F1EF80F38D2828DFA0023608F0 /* Products */,
-				BDD766CFF9A2F545A772140CD431D329 /* Targets Support Files */,
+				41580A480B4DC1FE0E71B438AF0FC751 /* Products */,
+				3D1372E71726CB919CE6ACD01A830CC7 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -370,15 +458,6 @@
 			path = "../Target Support Files/MMWormhole";
 			sourceTree = "<group>";
 		};
-		BDD766CFF9A2F545A772140CD431D329 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				006EDA43B73B56040946C46390EC7705 /* Pods-Aquaz */,
-				2F74808175EA5EE9D4864AFF0F99CDAB /* Pods-Widget */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
 		CB3F1F1BC308AF5546DCFFE159E04613 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,6 +475,23 @@
 				56FB0F45032A72352889E7CB177978F5 /* Fabric.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EEB0B858D9508543FAF2F045E442BF1B /* Pods-Aquaz Widget */ = {
+			isa = PBXGroup;
+			children = (
+				E893611583A767468680CB50765597AA /* Info.plist */,
+				47B889938E956BD5B0B9E179EAD1D7AA /* Pods-Aquaz Widget.modulemap */,
+				47FEE94B89A5FE57764446116E1115C8 /* Pods-Aquaz Widget-acknowledgements.markdown */,
+				4003C5FA2BA4787046C0412BD5934D0D /* Pods-Aquaz Widget-acknowledgements.plist */,
+				835A3F2B64769DFC56E2780F33151F4C /* Pods-Aquaz Widget-dummy.m */,
+				64FC7BD8BD44CD1FC0D561919F48CF7E /* Pods-Aquaz Widget-resources.sh */,
+				FF4EED1F4551FBCC3231FC9F7E7458C1 /* Pods-Aquaz Widget-umbrella.h */,
+				88AD6CD03832C080D1170594C464AAD8 /* Pods-Aquaz Widget.debug.xcconfig */,
+				D4663A3B1FE0A6F7F4FF25A22FB80329 /* Pods-Aquaz Widget.release.xcconfig */,
+			);
+			name = "Pods-Aquaz Widget";
+			path = "Target Support Files/Pods-Aquaz Widget";
 			sourceTree = "<group>";
 		};
 		FBA217A630EA48F4301FB282B6F7930C /* Crashlytics */ = {
@@ -417,6 +513,37 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		02EEE3C757C9EF666E281DFFB14898AA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A83F0FE14533B9B55928B59B8443A957 /* Pods-Aquaz Pro Widget-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		372E726A0A14DB54EC90D0BA687FFEED /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D72C85C284C813DD1024C49684C68B0C /* SDStatusBarManager.h in Headers */,
+				BA8061D565E675345B3090135939E5C2 /* SDStatusBarOverrider.h in Headers */,
+				730FB243581F46E71D4D52FF5E35A15D /* SDStatusBarOverriderPost10_0.h in Headers */,
+				65F961CE0AB0C82438A052E44152C35C /* SDStatusBarOverriderPost8_3.h in Headers */,
+				24510341133A098D58EDF433134D2E69 /* SDStatusBarOverriderPost9_0.h in Headers */,
+				58137565CB83424C6F916196483CF190 /* SDStatusBarOverriderPost9_3.h in Headers */,
+				E0162137DEDE804CF42DC40DBF3AD719 /* SDStatusBarOverriderPre8_3.h in Headers */,
+				9ECF9424686B3862528E6D0673F5AEB6 /* SimulatorStatusMagic-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45D837A07F14613F223304E1FF0FA8BF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABB27275D0ECC39E57539946C43C9D67 /* Pods-Aquaz Pro-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		48BB80A9E0DA199BC9CB2D208FA04552 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -433,57 +560,78 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6D2865DE7979B3BA1614F6805822537E /* Headers */ = {
+		7561DDB2E5FD0231E6CFDBF955CB0325 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8CC87F0A2B77463AEA1E76FB3B500AE /* Pods-Widget-umbrella.h in Headers */,
+				6A510E0EB9E64D7802B4C3E1C3D1C41E /* Pods-Aquaz-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		90D3EE69F89C7C4915DD5F9D8995496E /* Headers */ = {
+		D0AC514A0433A2A1C22E3A62F742E5D4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67173FD4D7B77564A960EBD1BE453212 /* Pods-Aquaz-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A9BA3AEA8766AEA99C7AFD3383129B9B /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A7B99B41227C28E9E5738955064A4249 /* SDStatusBarManager.h in Headers */,
-				601542BD7CFB95D96A57D2351F7603DF /* SDStatusBarOverrider.h in Headers */,
-				BB95789861EFDB88BA72D83DA46C019F /* SDStatusBarOverriderPost10_0.h in Headers */,
-				8A3204D54072D1042E6FA191ED99F4A0 /* SDStatusBarOverriderPost8_3.h in Headers */,
-				B5811E2649EDD9D4C97C5CDF15723CC1 /* SDStatusBarOverriderPost9_0.h in Headers */,
-				6A76A386504EF4E8158463A5E3DBA1D4 /* SDStatusBarOverriderPost9_3.h in Headers */,
-				6DD5571745C23824462828A47816B502 /* SDStatusBarOverriderPre8_3.h in Headers */,
-				363DC138ECF450ABA76663D76160093D /* SimulatorStatusMagic-umbrella.h in Headers */,
+				BE493C9194769C8144058F9742A6C8AF /* Pods-Aquaz Widget-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		23EE87EF1DD35DC848AE61A008C701E7 /* Pods-Aquaz */ = {
+		246FF7E8961D731F811ED675147510AD /* Pods-Aquaz Pro */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8F0AE1B8D36A138FB20627671FD14722 /* Build configuration list for PBXNativeTarget "Pods-Aquaz" */;
+			buildConfigurationList = 3417FA8D3C5F23DC49ACAF796536F005 /* Build configuration list for PBXNativeTarget "Pods-Aquaz Pro" */;
 			buildPhases = (
-				E4FE882859E042E3D431A2BCB64D281D /* Sources */,
-				34A0E738D5B5A69BD276C821FF14AFB1 /* Frameworks */,
-				90D3EE69F89C7C4915DD5F9D8995496E /* Headers */,
+				44D636D740A9C50671E63EF2EA7C36CC /* Sources */,
+				0D06FE51F68F414E19647B0EC494BFE3 /* Frameworks */,
+				45D837A07F14613F223304E1FF0FA8BF /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5C5062D4007F039B07D81E5DEC174EE5 /* PBXTargetDependency */,
-				2CA8366C9EDD4178D449FD9943E7A625 /* PBXTargetDependency */,
+				F73718BF4919D75A882349C869C8CEF3 /* PBXTargetDependency */,
+				0DB3620BB4344C1BBE42620A8B3B340E /* PBXTargetDependency */,
 			);
-			name = "Pods-Aquaz";
-			productName = "Pods-Aquaz";
-			productReference = 4A733D24A35AA65CBA23503A00F783FA /* Pods_Aquaz.framework */;
+			name = "Pods-Aquaz Pro";
+			productName = "Pods-Aquaz Pro";
+			productReference = 90C4ACF936DBB12BB3610E3FB0B10022 /* Pods_Aquaz_Pro.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		529594D267FC9572CFC7635ECDF64F19 /* Pods-Aquaz Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F86C79EF23EEA32E7B7781904AA9752 /* Build configuration list for PBXNativeTarget "Pods-Aquaz Widget" */;
+			buildPhases = (
+				8F6AD2C67B93B75C88E2AAEA15147A25 /* Sources */,
+				0870098778B392F56BB0ED8835648663 /* Frameworks */,
+				D0AC514A0433A2A1C22E3A62F742E5D4 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8BEA8874BF3193F62D3C1E7A40321223 /* PBXTargetDependency */,
+			);
+			name = "Pods-Aquaz Widget";
+			productName = "Pods-Aquaz Widget";
+			productReference = 05A27F2889414996DAAF497CFEB8DEDD /* Pods_Aquaz_Widget.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5A917BC680E02470B68FE5822F1DBEC8 /* Pods-Aquaz Pro Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEF7447371C450AA03EB261ECC73D405 /* Build configuration list for PBXNativeTarget "Pods-Aquaz Pro Widget" */;
+			buildPhases = (
+				529458E5EC1AFA5C9E90346FF3F0B25E /* Sources */,
+				4A43101363911E8BF7BCF59622837882 /* Frameworks */,
+				02EEE3C757C9EF666E281DFFB14898AA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				42A43CA05E764EDCB54F60908534744E /* PBXTargetDependency */,
+			);
+			name = "Pods-Aquaz Pro Widget";
+			productName = "Pods-Aquaz Pro Widget";
+			productReference = F388AC67F93C69C21F665E7AACC010EA /* Pods_Aquaz_Pro_Widget.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		5C8B0A5762D4572F2D507F7315F54FFA /* MMWormhole */ = {
@@ -500,34 +648,34 @@
 			);
 			name = MMWormhole;
 			productName = MMWormhole;
-			productReference = 29DCD2983590173F8EE38410C6241112 /* MMWormhole.framework */;
+			productReference = A5A73FA0C16B96637D6E97704A2AF1B3 /* MMWormhole.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D4C7F7BBD093D416DDE961D2C8167578 /* Pods-Widget */ = {
+		96CEE26FAD2C541453DD7B463C567C33 /* Pods-Aquaz */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7807963027716594CAA5D99CB07EC40E /* Build configuration list for PBXNativeTarget "Pods-Widget" */;
+			buildConfigurationList = 3BD402423F5226DEDF18D6562CB6EDA3 /* Build configuration list for PBXNativeTarget "Pods-Aquaz" */;
 			buildPhases = (
-				23A14C0C3EC42BF728259F5FBE493CFE /* Sources */,
-				8743244B8755948B029E19E6B9F4F38A /* Frameworks */,
-				6D2865DE7979B3BA1614F6805822537E /* Headers */,
+				40D8421CBDAE3C2B00116C30034425A0 /* Sources */,
+				07EB1EF2D31B30EA7B1CC0105CB56B13 /* Frameworks */,
+				7561DDB2E5FD0231E6CFDBF955CB0325 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9DBAE300C6D90B9D29A257F33A611142 /* PBXTargetDependency */,
+				49B5FCE3299C61C8B8B70FA73F7F145C /* PBXTargetDependency */,
 			);
-			name = "Pods-Widget";
-			productName = "Pods-Widget";
-			productReference = E8ED5F5799BFB12417CBA4B893A23BA4 /* Pods_Widget.framework */;
+			name = "Pods-Aquaz";
+			productName = "Pods-Aquaz";
+			productReference = 5AC6AB770380CB6108DA62ADD9ABC3E1 /* Pods_Aquaz.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		FCC66BC808FD7BE7E779962480291C81 /* SimulatorStatusMagic */ = {
+		FD5E819529D5F528BFDB7F7F5168AFE5 /* SimulatorStatusMagic */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 48AF7FF9F08B22F83EFAE0EB274C5FEA /* Build configuration list for PBXNativeTarget "SimulatorStatusMagic" */;
+			buildConfigurationList = D3B449A1AFC83954FE8474EC593BA661 /* Build configuration list for PBXNativeTarget "SimulatorStatusMagic" */;
 			buildPhases = (
-				4696F0A88D03BF71F1077F31459F5369 /* Sources */,
-				113238540559B84E62967E128E5AD6FB /* Frameworks */,
-				A9BA3AEA8766AEA99C7AFD3383129B9B /* Headers */,
+				640CB43920889C895C108975DF4279DE /* Sources */,
+				C4D08E6E228F5A1FC7710D412577861C /* Frameworks */,
+				372E726A0A14DB54EC90D0BA687FFEED /* Headers */,
 			);
 			buildRules = (
 			);
@@ -535,7 +683,7 @@
 			);
 			name = SimulatorStatusMagic;
 			productName = SimulatorStatusMagic;
-			productReference = 58C944A0239C714695F34E5531424C30 /* SimulatorStatusMagic.framework */;
+			productReference = DE9A8B6F73FFFE604867E9EB0179EBCC /* SimulatorStatusMagic.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -555,38 +703,64 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 4C8073F1EF80F38D2828DFA0023608F0 /* Products */;
+			productRefGroup = 41580A480B4DC1FE0E71B438AF0FC751 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				5C8B0A5762D4572F2D507F7315F54FFA /* MMWormhole */,
-				23EE87EF1DD35DC848AE61A008C701E7 /* Pods-Aquaz */,
-				D4C7F7BBD093D416DDE961D2C8167578 /* Pods-Widget */,
-				FCC66BC808FD7BE7E779962480291C81 /* SimulatorStatusMagic */,
+				96CEE26FAD2C541453DD7B463C567C33 /* Pods-Aquaz */,
+				246FF7E8961D731F811ED675147510AD /* Pods-Aquaz Pro */,
+				5A917BC680E02470B68FE5822F1DBEC8 /* Pods-Aquaz Pro Widget */,
+				529594D267FC9572CFC7635ECDF64F19 /* Pods-Aquaz Widget */,
+				FD5E819529D5F528BFDB7F7F5168AFE5 /* SimulatorStatusMagic */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		23A14C0C3EC42BF728259F5FBE493CFE /* Sources */ = {
+		40D8421CBDAE3C2B00116C30034425A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B51F833A5920B0BE21B8F6842856E582 /* Pods-Widget-dummy.m in Sources */,
+				25566554EBB41A86FED09ABEBA675530 /* Pods-Aquaz-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4696F0A88D03BF71F1077F31459F5369 /* Sources */ = {
+		44D636D740A9C50671E63EF2EA7C36CC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80344119DA103A095DE52A3753AA0A4D /* SDStatusBarManager.m in Sources */,
-				2BD10B1FFF4551EA0000C11ECF3CC0FE /* SDStatusBarOverriderPost10_0.m in Sources */,
-				8D5A65CB6FE2A91CAF00462843C3F785 /* SDStatusBarOverriderPost8_3.m in Sources */,
-				29ACFBC14693B9F1AAC5304F1A156A94 /* SDStatusBarOverriderPost9_0.m in Sources */,
-				51FB49143F00BE48B9527C1E486475E3 /* SDStatusBarOverriderPost9_3.m in Sources */,
-				52F6A770E5A55A96D124D65AA7D83CBF /* SDStatusBarOverriderPre8_3.m in Sources */,
-				E78A2EF023175401651A8DA035EEB1CC /* SimulatorStatusMagic-dummy.m in Sources */,
+				67127D38A75C78CEEE9DFC38FF3871CE /* Pods-Aquaz Pro-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		529458E5EC1AFA5C9E90346FF3F0B25E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				096497A142BB7A2FFD6434B7FF7B13F1 /* Pods-Aquaz Pro Widget-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		640CB43920889C895C108975DF4279DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1FDB9AA4D61FE72E4ECA995EFD13B399 /* SDStatusBarManager.m in Sources */,
+				33827ADEF2CAAB6B1F60555019EDD7F8 /* SDStatusBarOverriderPost10_0.m in Sources */,
+				41683B15D003EC957ECA60FDAEC7CBA2 /* SDStatusBarOverriderPost8_3.m in Sources */,
+				9BD45A2E3EE9FDD1C05732CE08F245E4 /* SDStatusBarOverriderPost9_0.m in Sources */,
+				5DBE035E5C69048084EF24629B991D1A /* SDStatusBarOverriderPost9_3.m in Sources */,
+				FCDBB5C9DBFEFFC7216F0C44957E792B /* SDStatusBarOverriderPre8_3.m in Sources */,
+				A86D2D323C5E4CA85CB5FF30BB3D5D19 /* SimulatorStatusMagic-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F6AD2C67B93B75C88E2AAEA15147A25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8A2E5F1740FB68BF8CFF6A5B0970F5F /* Pods-Aquaz Widget-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,34 +779,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E4FE882859E042E3D431A2BCB64D281D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E65FC0A55FEE95884A71FEB4088E7EDF /* Pods-Aquaz-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2CA8366C9EDD4178D449FD9943E7A625 /* PBXTargetDependency */ = {
+		0DB3620BB4344C1BBE42620A8B3B340E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SimulatorStatusMagic;
-			target = FCC66BC808FD7BE7E779962480291C81 /* SimulatorStatusMagic */;
-			targetProxy = BB3EB364A036567585A99AA250B572E8 /* PBXContainerItemProxy */;
+			target = FD5E819529D5F528BFDB7F7F5168AFE5 /* SimulatorStatusMagic */;
+			targetProxy = F86B4E9FEB0308D296DF88627F9A0342 /* PBXContainerItemProxy */;
 		};
-		5C5062D4007F039B07D81E5DEC174EE5 /* PBXTargetDependency */ = {
+		42A43CA05E764EDCB54F60908534744E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MMWormhole;
 			target = 5C8B0A5762D4572F2D507F7315F54FFA /* MMWormhole */;
-			targetProxy = CB7BC148AB3957ED4A078CB7F71FC94B /* PBXContainerItemProxy */;
+			targetProxy = AD28DAB1DDE2467299F3376D99E5A971 /* PBXContainerItemProxy */;
 		};
-		9DBAE300C6D90B9D29A257F33A611142 /* PBXTargetDependency */ = {
+		49B5FCE3299C61C8B8B70FA73F7F145C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MMWormhole;
 			target = 5C8B0A5762D4572F2D507F7315F54FFA /* MMWormhole */;
-			targetProxy = 7F704AE5A291A335DA21C3F4B42196C3 /* PBXContainerItemProxy */;
+			targetProxy = 731EF4972AA7A71F66DAEC3829005205 /* PBXContainerItemProxy */;
+		};
+		8BEA8874BF3193F62D3C1E7A40321223 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MMWormhole;
+			target = 5C8B0A5762D4572F2D507F7315F54FFA /* MMWormhole */;
+			targetProxy = 6344EFB68230FC5F2D92F94912F1D4A1 /* PBXContainerItemProxy */;
+		};
+		F73718BF4919D75A882349C869C8CEF3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MMWormhole;
+			target = 5C8B0A5762D4572F2D507F7315F54FFA /* MMWormhole */;
+			targetProxy = 39E993D55ABE49F7DC21EABD0A4D85AA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -681,9 +859,45 @@
 			};
 			name = Debug;
 		};
-		0D19DA0C2D961B4909685DF3CA718383 /* Debug */ = {
+		1FF61C1C0F2E0DCF231F099910BF9370 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 899B94100908FAABD0F949191FD18D16 /* Pods-Widget.debug.xcconfig */;
+			baseConfigurationReference = 1AC8EF040E531919BC50BC05CFAA0F14 /* Pods-Aquaz Pro Widget.release.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Aquaz Pro Widget/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Aquaz Pro Widget/Pods-Aquaz Pro Widget.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Aquaz_Pro_Widget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		2021F8F697D84E78E7528ECC603B4701 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BCA7F5583FFC3DE2AE7E032D4F6F55B1 /* Pods-Aquaz Pro Widget.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -697,18 +911,18 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Widget/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-Aquaz Pro Widget/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Widget/Pods-Widget.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-Aquaz Pro Widget/Pods-Aquaz Pro Widget.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Widget;
+				PRODUCT_NAME = Pods_Aquaz_Pro_Widget;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -717,9 +931,9 @@
 			};
 			name = Debug;
 		};
-		271937ED02CDF4C974BA2F8C0D09D5F8 /* Release */ = {
+		281BA12DC4BE4DC65C900F10742421EB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD53867E0022F4A1ED206343E79AF6F5 /* Pods-Aquaz.release.xcconfig */;
+			baseConfigurationReference = 222297DD95704EC6CCB3E604BE7CE744 /* Pods-Aquaz Pro.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -732,18 +946,18 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Aquaz/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-Aquaz Pro/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Aquaz/Pods-Aquaz.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-Aquaz Pro/Pods-Aquaz Pro.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Aquaz;
+				PRODUCT_NAME = Pods_Aquaz_Pro;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -751,41 +965,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		30F85C21B5FC122CF370928385EE3573 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BFD29FCDEFC8728BAF6D9F0C4674856D /* Pods-Aquaz.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Aquaz/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Aquaz/Pods-Aquaz.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Aquaz;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		44CDBB6D11DE06DB64D6268622BDC47E /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -860,43 +1039,77 @@
 			};
 			name = Debug;
 		};
-		76DDBCF466727883A0B046384CC73D7F /* Release */ = {
+		62083D94AC33B4129D4B0315B43D706F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49E221B74E672776D5FA25B67A950716 /* Pods-Widget.release.xcconfig */;
+			baseConfigurationReference = 2B5EB73D474E2B3EBE8431230FC1734B /* Pods-Aquaz Pro.debug.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Widget/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-Aquaz Pro/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Widget/Pods-Widget.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MODULEMAP_FILE = "Target Support Files/Pods-Aquaz Pro/Pods-Aquaz Pro.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Widget;
+				PRODUCT_NAME = Pods_Aquaz_Pro;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
-		80C5C0DC37C8ED5FCFAB3D0FD4FA3180 /* Debug */ = {
+		6F6466408A8055CD5305B0980DCCEF23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA33D398BB9D830687921C0B2AADB510 /* Pods-Aquaz.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Aquaz/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Aquaz/Pods-Aquaz.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Aquaz;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7FFF56BC285CF34B8D4B5E88B5E07407 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 484A6938EDFA441DDBD6D0D2A27E9EBF /* SimulatorStatusMagic.xcconfig */;
 			buildSettings = {
@@ -927,6 +1140,38 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		8FCD066A1E0CFB52E62B85A08832147A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 484A6938EDFA441DDBD6D0D2A27E9EBF /* SimulatorStatusMagic.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SimulatorStatusMagic/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SimulatorStatusMagic;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		95B48DCB6B51C792BC1A3431ED50931E /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -961,9 +1206,9 @@
 			};
 			name = Release;
 		};
-		C66923BDE64FCFB3391CEDEDB4A6FCDC /* Release */ = {
+		968F1C9294816BD5CA0053214163303D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 484A6938EDFA441DDBD6D0D2A27E9EBF /* SimulatorStatusMagic.xcconfig */;
+			baseConfigurationReference = 3C3787AAD16E7FB6A589F15E170600D7 /* Pods-Aquaz.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -976,17 +1221,92 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SimulatorStatusMagic/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-Aquaz/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic.modulemap";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Aquaz/Pods-Aquaz.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SimulatorStatusMagic;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Aquaz;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		BB55C9C55DA84D07876998D737A56455 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88AD6CD03832C080D1170594C464AAD8 /* Pods-Aquaz Widget.debug.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Aquaz Widget/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Aquaz Widget/Pods-Aquaz Widget.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Aquaz_Widget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E81AF73CC52DCCFDF10C4D94A89307B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4663A3B1FE0A6F7F4FF25A22FB80329 /* Pods-Aquaz Widget.release.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Aquaz Widget/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Aquaz Widget/Pods-Aquaz Widget.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Aquaz_Widget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1005,29 +1325,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		48AF7FF9F08B22F83EFAE0EB274C5FEA /* Build configuration list for PBXNativeTarget "SimulatorStatusMagic" */ = {
+		3417FA8D3C5F23DC49ACAF796536F005 /* Build configuration list for PBXNativeTarget "Pods-Aquaz Pro" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				80C5C0DC37C8ED5FCFAB3D0FD4FA3180 /* Debug */,
-				C66923BDE64FCFB3391CEDEDB4A6FCDC /* Release */,
+				62083D94AC33B4129D4B0315B43D706F /* Debug */,
+				281BA12DC4BE4DC65C900F10742421EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7807963027716594CAA5D99CB07EC40E /* Build configuration list for PBXNativeTarget "Pods-Widget" */ = {
+		3BD402423F5226DEDF18D6562CB6EDA3 /* Build configuration list for PBXNativeTarget "Pods-Aquaz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0D19DA0C2D961B4909685DF3CA718383 /* Debug */,
-				76DDBCF466727883A0B046384CC73D7F /* Release */,
+				6F6466408A8055CD5305B0980DCCEF23 /* Debug */,
+				968F1C9294816BD5CA0053214163303D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8F0AE1B8D36A138FB20627671FD14722 /* Build configuration list for PBXNativeTarget "Pods-Aquaz" */ = {
+		9F86C79EF23EEA32E7B7781904AA9752 /* Build configuration list for PBXNativeTarget "Pods-Aquaz Widget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				30F85C21B5FC122CF370928385EE3573 /* Debug */,
-				271937ED02CDF4C974BA2F8C0D09D5F8 /* Release */,
+				BB55C9C55DA84D07876998D737A56455 /* Debug */,
+				E81AF73CC52DCCFDF10C4D94A89307B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D3B449A1AFC83954FE8474EC593BA661 /* Build configuration list for PBXNativeTarget "SimulatorStatusMagic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FFF56BC285CF34B8D4B5E88B5E07407 /* Debug */,
+				8FCD066A1E0CFB52E62B85A08832147A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1037,6 +1366,15 @@
 			buildConfigurations = (
 				4867DED2B4EDADCE80583AA97ED4D14F /* Debug */,
 				95B48DCB6B51C792BC1A3431ED50931E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FEF7447371C450AA03EB261ECC73D405 /* Build configuration list for PBXNativeTarget "Pods-Aquaz Pro Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2021F8F697D84E78E7528ECC603B4701 /* Debug */,
+				1FF61C1C0F2E0DCF231F099910BF9370 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

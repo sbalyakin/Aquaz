@@ -10,3 +10,7 @@
 #endif
 #endif
 
+
+FOUNDATION_EXPORT double Pods_Aquaz_Pro_WidgetVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_Aquaz_Pro_WidgetVersionString[];
+

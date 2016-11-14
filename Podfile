@@ -1,20 +1,32 @@
 platform :ios, '8.0'
 use_frameworks!
 
-# ignore all warnings from all pods
+# Ignore all warnings from all pods
 inhibit_all_warnings!
 
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'Aquaz' do
+def shared_pods
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'MMWormhole', '~> 2.0.0'
+end
+
+# Aquaz Pro
+target 'Aquaz Pro' do
+  shared_pods
   pod 'SimulatorStatusMagic', :configurations => ['Debug']
 end
 
-target 'Widget' do
-  pod 'Fabric'
-  pod 'Crashlytics'
-  pod 'MMWormhole', '~> 2.0.0'
+target 'Aquaz Pro Widget' do
+  shared_pods
+end
+
+#Aquaz
+target 'Aquaz' do
+  shared_pods
+end
+
+target 'Aquaz Widget' do
+  shared_pods
 end
