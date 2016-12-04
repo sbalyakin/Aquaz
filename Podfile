@@ -25,6 +25,7 @@ end
 #Aquaz
 target 'Aquaz' do
   shared_pods
+  pod 'Appodeal/Video', '1.3.3'
 end
 
 target 'Aquaz Widget' do

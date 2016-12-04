@@ -118,6 +118,9 @@ final class Settings {
   lazy var generalAdCounter: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
     key: "General - Ad counter", initialValue: GlobalConstants.numberOfIntakesToShowAd,
     userDefaults: userDefaults)
+  
+  lazy var generalAdUserId = SettingsOrdinalItem(
+    key: "General - Ad user id", initialValue: UUID().uuidString, userDefaults: userDefaults)
   #endif
 
   // MARK: HealthKit

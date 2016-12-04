@@ -9,6 +9,10 @@
 import UIKit
 import CoreData
 
+#if AQUAZLITE
+import Appodeal
+#endif
+
 class IntakeViewController: UIViewController {
 
   @IBOutlet weak var amountSlider: CustomSlider!
@@ -82,6 +86,10 @@ class IntakeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    #if AQUAZLITE
+    checkForShowAds()
+    #endif
+    
     fetchDrink()
     
     setupUI()
@@ -93,6 +101,18 @@ class IntakeViewController: UIViewController {
       object: nil)
   }
 
+  #if AQUAZLITE
+  private func checkForShowAds() {
+    if Settings.sharedInstance.generalFullVersion.value || Settings.sharedInstance.generalAdCounter.value > 0 {
+      return
+    }
+    
+    if Appodeal.isReadyForShow(with: .skippableVideo) {
+      Appodeal.showAd(.skippableVideo, rootViewController: self)
+    }
+  }
+  #endif
+  
   fileprivate func fetchDrink() {
     if let _ = drink {
       return
@@ -325,6 +345,18 @@ class IntakeViewController: UIViewController {
 
 }
 
+#if AQUAZLITE
+// MARK: AppodealSkippableVideoDelegate extension -
+extension IntakeViewController: AppodealSkippableVideoDelegate {
+  
+  func skippableVideoDidPresent() {
+    Settings.sharedInstance.generalAdCounter.value = GlobalConstants.numberOfIntakesToShowAd
+  }
+  
+}
+#endif
+
+// MARK: Units.Volume extension -
 private extension Units.Volume {
   var precision: Double {
     switch self {

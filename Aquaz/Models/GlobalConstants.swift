@@ -21,6 +21,7 @@ class GlobalConstants {
   static let inAppPurchaseFullVersion = "com.devmanifest.AquazLite.fullversion"
   static let inAppPurchaseFullVersionId = "1181032477"
   static let numberOfIntakesToShowAd = 6
+  static let appodealApiKey = "9baa45105850011492e93e279efd784e2200efe6ca861265"
   #endif
   
   static let appStoreLink = "http://itunes.apple.com/app/id\(GlobalConstants.applicationIdentifier)"

@@ -1,0 +1,1 @@
+../../../Appodeal/APDAppLovinAdapter.embeddedframework/Headers/ALPostbackService.h

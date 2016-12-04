@@ -56,6 +56,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+  <key>NSBluetoothPeripheralUsageDescription</key>
+  <string>Advertising</string>
+  <key>NSCalendarsUsageDescription</key>
+  <string>Advertising</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>Advertising</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>Advertising</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>″Aquaz″ will import your metrics for calculating recommended daily water intake.</string>
 	<key>NSHealthUpdateUsageDescription</key>

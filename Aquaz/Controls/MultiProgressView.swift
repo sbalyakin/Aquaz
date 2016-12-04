@@ -30,7 +30,7 @@ class MultiProgressView: UIView {
   /// If sections' factor total is more than maximum, auto scale will be used
   @IBInspectable var autoOverloadScale: Bool = true { didSet { setNeedsLayout() } }
   
-  // 0.25 seconds is default animation time for iOS transitions
+  // 0.25 seconds is default animation duration for iOS transitions
   @IBInspectable var animationDuration: Float = 0.25
 
   

@@ -34,7 +34,7 @@
         <!--Day View Controller-->
         <scene sceneID="30R-jg-ev2">
             <objects>
-                <viewController storyboardIdentifier="DayViewController" id="x3I-fN-BQH" customClass="DayViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DayViewController" id="x3I-fN-BQH" customClass="DayViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zfu-Wj-NHo"/>
                         <viewControllerLayoutGuide type="bottom" id="Z5E-Gz-oNX"/>
@@ -43,7 +43,7 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KHN-d8-Fus" userLabel="Summary View" customClass="BannerView" customModuleProvider="target">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KHN-d8-Fus" userLabel="Summary View" customClass="BannerView" customModule="Aquaz Pro" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Teo-xX-LXi" userLabel="Hot Button">
@@ -60,12 +60,17 @@
                                             <action selector="toggleHotDayMode:" destination="x3I-fN-BQH" eventType="touchUpInside" id="zh4-ul-GSE"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ulp-MK-urk" customClass="MultiProgressView" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ulp-MK-urk" customClass="MultiProgressView" customModule="Aquaz Pro" customModuleProvider="target">
                                         <rect key="frame" x="20" y="40" width="335" height="15"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="QGv-dn-EL6"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="animationDuration">
+                                                <real key="value" value="0.69999999999999996"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sw2-pb-ue3" userLabel="High Activity Button">
                                         <rect key="frame" x="20" y="8" width="32" height="32"/>
@@ -209,7 +214,7 @@
         <!--Intake View Controller-->
         <scene sceneID="FpT-nl-K1n">
             <objects>
-                <viewController id="JfU-Cw-4n3" customClass="IntakeViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JfU-Cw-4n3" customClass="IntakeViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Sjb-I3-Ntn"/>
                         <viewControllerLayoutGuide type="bottom" id="Rvc-MZ-Z2x"/>
@@ -225,7 +230,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="r7t-TT-se4"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vml-tJ-hK9" userLabel="Drink Image" customClass="DrinkView" customModuleProvider="target">
+                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vml-tJ-hK9" userLabel="Drink Image" customClass="DrinkView" customModule="Aquaz Pro" customModuleProvider="target">
                                 <rect key="frame" x="92.5" y="62" width="190" height="190"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -240,7 +245,7 @@
                                 <rect key="frame" x="0.0" y="338" width="37.5" height="75"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoF-aO-Mum" customClass="RoundedButton" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoF-aO-Mum" customClass="RoundedButton" customModule="Aquaz Pro" customModuleProvider="target">
                                 <rect key="frame" x="37.5" y="338" width="75" height="75"/>
                                 <color key="backgroundColor" red="0.48085978159452591" green="0.71272731469806072" blue="0.91973080842391308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -262,7 +267,7 @@
                                 <rect key="frame" x="112.5" y="338" width="37.5" height="75"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXw-gW-sSA" customClass="RoundedButton" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXw-gW-sSA" customClass="RoundedButton" customModule="Aquaz Pro" customModuleProvider="target">
                                 <rect key="frame" x="150" y="338" width="75" height="75"/>
                                 <color key="backgroundColor" red="0.48085978159452591" green="0.71272731469806072" blue="0.91973080842391308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -284,7 +289,7 @@
                                 <rect key="frame" x="225" y="338" width="37.5" height="75"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xm-eq-yWQ" customClass="RoundedButton" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xm-eq-yWQ" customClass="RoundedButton" customModule="Aquaz Pro" customModuleProvider="target">
                                 <rect key="frame" x="262.5" y="338" width="75" height="75"/>
                                 <color key="backgroundColor" red="0.48085978159452591" green="0.71272731469806072" blue="0.91973080842391308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -312,7 +317,7 @@
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="275" minValue="50" maxValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="Ajg-rM-Vkb" customClass="CustomSlider" customModuleProvider="target">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="275" minValue="50" maxValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="Ajg-rM-Vkb" customClass="CustomSlider" customModule="Aquaz Pro" customModuleProvider="target">
                                 <rect key="frame" x="18" y="479" width="339" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="Bot-P9-JFM"/>
@@ -321,7 +326,7 @@
                                     <action selector="amountSliderValueChanged:" destination="JfU-Cw-4n3" eventType="valueChanged" id="skc-CB-qEK"/>
                                 </connections>
                             </slider>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A5t-FE-O50" customClass="RoundedButton" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A5t-FE-O50" customClass="RoundedButton" customModule="Aquaz Pro" customModuleProvider="target">
                                 <rect key="frame" x="20" y="545" width="335" height="42"/>
                                 <color key="backgroundColor" red="0.4823529411764706" green="0.71372549019607845" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -470,7 +475,7 @@
         <!--Pick Time View Controller-->
         <scene sceneID="gmZ-vb-qAs">
             <objects>
-                <viewController id="EVr-Rr-PxB" userLabel="Pick Time View Controller" customClass="PickTimeViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="EVr-Rr-PxB" userLabel="Pick Time View Controller" customClass="PickTimeViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3Vz-s7-jhV"/>
                         <viewControllerLayoutGuide type="bottom" id="4yL-q2-ZQA"/>
@@ -479,7 +484,7 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsf-j2-xNS" customClass="RoundedButton" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsf-j2-xNS" customClass="RoundedButton" customModule="Aquaz Pro" customModuleProvider="target">
                                 <rect key="frame" x="20" y="545" width="335" height="42"/>
                                 <color key="backgroundColor" red="0.48085978159999998" green="0.71272731469999995" blue="0.91973080839999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -542,7 +547,7 @@
         <!--Diary View Controller-->
         <scene sceneID="lYd-x6-Lbn">
             <objects>
-                <viewController storyboardIdentifier="DiaryViewController" id="E4b-RW-vEp" customClass="DiaryViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DiaryViewController" id="E4b-RW-vEp" customClass="DiaryViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mps-M6-KVG"/>
                         <viewControllerLayoutGuide type="bottom" id="LGp-as-NGM"/>
@@ -555,7 +560,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DiaryTableViewCell" id="dgC-bt-SJH" customClass="DiaryTableViewCell" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DiaryTableViewCell" id="dgC-bt-SJH" customClass="DiaryTableViewCell" customModule="Aquaz Pro" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="22" width="375" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dgC-bt-SJH" id="Bhq-Ir-45T">
@@ -639,7 +644,7 @@
         <!--Select Drink View Controller-->
         <scene sceneID="sXd-xw-tDr">
             <objects>
-                <viewController storyboardIdentifier="SelectDrinkViewController" id="JQm-oQ-K4j" customClass="SelectDrinkViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectDrinkViewController" id="JQm-oQ-K4j" customClass="SelectDrinkViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LE8-YY-KaL"/>
                         <viewControllerLayoutGuide type="bottom" id="Jop-yk-pcl"/>
@@ -692,7 +697,7 @@
         <!--Calendar View Controller-->
         <scene sceneID="RHc-kA-ARu">
             <objects>
-                <viewController id="nY1-e6-BNo" userLabel="Calendar View Controller" customClass="CalendarViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="nY1-e6-BNo" userLabel="Calendar View Controller" customClass="CalendarViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CWY-nB-5a7"/>
                         <viewControllerLayoutGuide type="bottom" id="l3J-14-sGV"/>
@@ -729,7 +734,7 @@
                                     <action selector="switchToNextMonth:" destination="nY1-e6-BNo" eventType="touchUpInside" id="sJR-yG-M3X"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qj-Pw-bGE" customClass="CalendarView" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qj-Pw-bGE" customClass="CalendarView" customModule="Aquaz Pro" customModuleProvider="target">
                                 <rect key="frame" x="20" y="104" width="335" height="555"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <userDefinedRuntimeAttributes>
@@ -790,7 +795,7 @@
         <!--Statistics View Controller-->
         <scene sceneID="mzk-hW-1gf">
             <objects>
-                <viewController id="pyt-St-yCN" customClass="StatisticsViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pyt-St-yCN" customClass="StatisticsViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zau-tw-3eK"/>
                         <viewControllerLayoutGuide type="bottom" id="yh4-R1-AEG"/>
@@ -841,7 +846,7 @@
         <!--Statistics Page View Controller-->
         <scene sceneID="I4V-QK-vLg">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Xrf-rG-4US" customClass="StatisticsPageViewController" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Xrf-rG-4US" customClass="StatisticsPageViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w48-9N-gbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2694" y="751.5"/>
@@ -849,7 +854,7 @@
         <!--Week Statistics View Controller-->
         <scene sceneID="a7k-9S-ZFN">
             <objects>
-                <viewController storyboardIdentifier="Week Statistics View Controller" id="lYS-Av-FmY" customClass="WeekStatisticsViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Week Statistics View Controller" id="lYS-Av-FmY" customClass="WeekStatisticsViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Wcd-Fu-RrX"/>
                         <viewControllerLayoutGuide type="bottom" id="Ne1-Nq-iDL"/>
@@ -870,7 +875,7 @@
                                     <action selector="switchToPreviousWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="48x-ud-NiQ"/>
                                 </connections>
                             </button>
-                            <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ar0-25-CDE" customClass="WeekStatisticsView" customModuleProvider="target">
+                            <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ar0-25-CDE" customClass="WeekStatisticsView" customModule="Aquaz Pro" customModuleProvider="target">
                                 <rect key="frame" x="20" y="48" width="335" height="611"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -924,7 +929,7 @@
         <!--Month Statistics View Controller-->
         <scene sceneID="HKC-Gc-hIw">
             <objects>
-                <viewController storyboardIdentifier="Month Statistics View Controller" id="7ff-6R-UZu" customClass="MonthStatisticsViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Month Statistics View Controller" id="7ff-6R-UZu" customClass="MonthStatisticsViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ENN-7O-jIB"/>
                         <viewControllerLayoutGuide type="bottom" id="zjj-BE-xgl"/>
@@ -948,7 +953,7 @@
                                     <action selector="switchToNextWeek:" destination="lYS-Av-FmY" eventType="touchUpInside" id="lR3-hG-z7D"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HC1-Ha-eED" customClass="MonthStatisticsView" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HC1-Ha-eED" customClass="MonthStatisticsView" customModule="Aquaz Pro" customModuleProvider="target">
                                 <rect key="frame" x="20" y="40" width="335" height="619"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <userDefinedRuntimeAttributes>
@@ -1013,7 +1018,7 @@
         <!--Year Statistics View Controller-->
         <scene sceneID="5dw-fe-BzQ">
             <objects>
-                <viewController storyboardIdentifier="Year Statistics View Controller" id="gO9-qf-aJf" customClass="YearStatisticsViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Year Statistics View Controller" id="gO9-qf-aJf" customClass="YearStatisticsViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WD3-N8-n1O"/>
                         <viewControllerLayoutGuide type="bottom" id="f1w-H7-WfC"/>
@@ -1038,7 +1043,7 @@
                                     <action selector="switchToNextYear:" destination="gO9-qf-aJf" eventType="touchUpInside" id="Eq4-w2-mND"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wae-DX-wQD" customClass="YearStatisticsView" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wae-DX-wQD" customClass="YearStatisticsView" customModule="Aquaz Pro" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="48" width="375" height="611"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <userDefinedRuntimeAttributes>
@@ -1097,7 +1102,7 @@
         <!--Notification Sound-->
         <scene sceneID="1uz-4m-rIl">
             <objects>
-                <viewController id="6oZ-Db-dYh" customClass="NotificationsSoundViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6oZ-Db-dYh" customClass="NotificationsSoundViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="co4-9M-YyE"/>
                         <viewControllerLayoutGuide type="bottom" id="tVH-th-P4h"/>
@@ -1161,7 +1166,7 @@
         <!--Notifications-->
         <scene sceneID="n1c-rA-V0Z">
             <objects>
-                <viewController id="R0V-Ko-y83" customClass="NotificationsViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="R0V-Ko-y83" customClass="NotificationsViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mor-qT-jRm"/>
                         <viewControllerLayoutGuide type="bottom" id="b2x-Z5-637"/>
@@ -1224,7 +1229,7 @@
         <!--Settings-->
         <scene sceneID="7pQ-cY-mPs">
             <objects>
-                <viewController id="OX9-f6-CT0" customClass="SettingsViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OX9-f6-CT0" customClass="SettingsViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7Y-DR-vSX"/>
                         <viewControllerLayoutGuide type="bottom" id="iGo-8j-T8A"/>
@@ -1268,7 +1273,7 @@
         <!--Daily Water Intake-->
         <scene sceneID="JxF-rr-6gg">
             <objects>
-                <viewController id="B00-4Z-J9C" customClass="WaterGoalViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="B00-4Z-J9C" customClass="WaterGoalViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="l7q-av-yTT"/>
                         <viewControllerLayoutGuide type="bottom" id="FiT-nL-qD7"/>
@@ -1318,7 +1323,7 @@
         <!--Special Modes-->
         <scene sceneID="ky2-ab-OOE">
             <objects>
-                <viewController id="3WE-Cl-pAb" customClass="ExtraFactorsViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3WE-Cl-pAb" customClass="ExtraFactorsViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Dyf-uV-9K8"/>
                         <viewControllerLayoutGuide type="bottom" id="Eu3-qn-c1e"/>
@@ -1356,7 +1361,7 @@
         <!--Measurement Units-->
         <scene sceneID="Ky5-sM-c1O">
             <objects>
-                <viewController id="RqO-tR-Iry" customClass="UnitsViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="RqO-tR-Iry" customClass="UnitsViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8hQ-ms-9TS"/>
                         <viewControllerLayoutGuide type="bottom" id="hGI-0J-tLe"/>
@@ -1394,7 +1399,7 @@
         <!--Support-->
         <scene sceneID="rJx-h7-rwk">
             <objects>
-                <viewController id="270-J2-bu6" customClass="SupportViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="270-J2-bu6" customClass="SupportViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZvT-gm-6Bb"/>
                         <viewControllerLayoutGuide type="bottom" id="9py-Vh-GzY"/>
@@ -1567,7 +1572,7 @@
         <!--Full Version-->
         <scene sceneID="4an-JL-3bG">
             <objects>
-                <viewController storyboardIdentifier="FullVersionViewController" id="FHB-5E-W7x" userLabel="Full Version" customClass="FullVersionViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FullVersionViewController" id="FHB-5E-W7x" userLabel="Full Version" customClass="FullVersionViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EWN-6l-Jbh"/>
                         <viewControllerLayoutGuide type="bottom" id="tKX-Ww-197"/>
@@ -1585,7 +1590,7 @@
                                     <action selector="restorePurchases" destination="FHB-5E-W7x" eventType="touchUpInside" id="Lve-ZU-epy"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sQ3-dy-K2d" customClass="RoundedButton" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sQ3-dy-K2d" customClass="RoundedButton" customModule="Aquaz Pro" customModuleProvider="target">
                                 <rect key="frame" x="20" y="421.5" width="335" height="42"/>
                                 <color key="backgroundColor" red="0.0" green="0.58039215690000001" blue="0.72156862749999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1677,7 +1682,7 @@
         <!--Apple Health-->
         <scene sceneID="yCJ-7O-7AK">
             <objects>
-                <viewController id="KKk-H9-PmP" customClass="HealthKitViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KKk-H9-PmP" customClass="HealthKitViewController" customModule="Aquaz Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1IX-Ur-S81"/>
                         <viewControllerLayoutGuide type="bottom" id="86f-em-621"/>

@@ -382,6 +382,33 @@
 		A5C70BBB1DEDC409006F7BFC /* FullVersionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70BB91DEDC409006F7BFC /* FullVersionController.swift */; };
 		A5C70BBE1DEDC47A006F7BFC /* InAppPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70BBC1DEDC47A006F7BFC /* InAppPurchaseManager.swift */; };
 		A5C70BBF1DEDF288006F7BFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7519DAD78D003C2263 /* Main.storyboard */; };
+		A5C70BC31DF4447F006F7BFC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BC21DF4447F006F7BFC /* AdSupport.framework */; };
+		A5C70BC51DF44496006F7BFC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BC41DF44496006F7BFC /* AVFoundation.framework */; };
+		A5C70BC71DF444A3006F7BFC /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BC61DF444A3006F7BFC /* CFNetwork.framework */; };
+		A5C70BC91DF444B3006F7BFC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BC81DF444B3006F7BFC /* CoreFoundation.framework */; };
+		A5C70BCB1DF444C3006F7BFC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BCA1DF444C3006F7BFC /* CoreGraphics.framework */; };
+		A5C70BCD1DF444D0006F7BFC /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BCC1DF444D0006F7BFC /* CoreImage.framework */; };
+		A5C70BCF1DF444DC006F7BFC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BCE1DF444DC006F7BFC /* CoreLocation.framework */; };
+		A5C70BD21DF444EB006F7BFC /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BD01DF444EB006F7BFC /* CoreMedia.framework */; };
+		A5C70BD31DF444EB006F7BFC /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BD11DF444EB006F7BFC /* CoreMotion.framework */; };
+		A5C70BD51DF444F6006F7BFC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BD41DF444F6006F7BFC /* CoreTelephony.framework */; };
+		A5C70BD81DF44507006F7BFC /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BD61DF44507006F7BFC /* EventKit.framework */; };
+		A5C70BD91DF44507006F7BFC /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BD71DF44507006F7BFC /* EventKitUI.framework */; };
+		A5C70BDB1DF44529006F7BFC /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BDA1DF44529006F7BFC /* libc++.tbd */; };
+		A5C70BDD1DF44542006F7BFC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BDC1DF44542006F7BFC /* libsqlite3.tbd */; };
+		A5C70BDF1DF4454E006F7BFC /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BDE1DF4454E006F7BFC /* libxml2.2.tbd */; };
+		A5C70BE11DF44559006F7BFC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BE01DF44559006F7BFC /* libz.tbd */; };
+		A5C70BE31DF44565006F7BFC /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BE21DF44565006F7BFC /* MediaPlayer.framework */; };
+		A5C70BE51DF44579006F7BFC /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BE41DF44579006F7BFC /* MobileCoreServices.framework */; };
+		A5C70BE71DF44588006F7BFC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BE61DF44588006F7BFC /* Security.framework */; };
+		A5C70BE91DF44592006F7BFC /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BE81DF44592006F7BFC /* Social.framework */; };
+		A5C70BEB1DF445A0006F7BFC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BEA1DF445A0006F7BFC /* SystemConfiguration.framework */; };
+		A5C70BED1DF445AE006F7BFC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BEC1DF445AE006F7BFC /* UIKit.framework */; };
+		A5C70BEF1DF445BB006F7BFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BEE1DF445BB006F7BFC /* WebKit.framework */; };
+		A5C70BF11DF445C5006F7BFC /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BF01DF445C5006F7BFC /* JavaScriptCore.framework */; };
+		A5C70BF31DF445CF006F7BFC /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BF21DF445CF006F7BFC /* CoreBluetooth.framework */; };
+		A5C70BF51DF445DA006F7BFC /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BF41DF445DA006F7BFC /* GLKit.framework */; };
+		A5C70BF71DF445E4006F7BFC /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BF61DF445E4006F7BFC /* SafariServices.framework */; };
 		A5C894671AF4B75C0042B6DF /* JDFSequentialTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */; };
 		A5C894681AF4B75C0042B6DF /* JDFTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945F1AF4B75C0042B6DF /* JDFTooltipManager.m */; };
 		A5C894691AF4B75C0042B6DF /* JDFTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894621AF4B75C0042B6DF /* JDFTooltipView.m */; };
@@ -737,6 +764,33 @@
 		A5B8F98C1A87DF3D00145705 /* whistle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whistle.caf; sourceTree = "<group>"; };
 		A5C70BB91DEDC409006F7BFC /* FullVersionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullVersionController.swift; sourceTree = "<group>"; };
 		A5C70BBC1DEDC47A006F7BFC /* InAppPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppPurchaseManager.swift; sourceTree = "<group>"; };
+		A5C70BC21DF4447F006F7BFC /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		A5C70BC41DF44496006F7BFC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A5C70BC61DF444A3006F7BFC /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A5C70BC81DF444B3006F7BFC /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		A5C70BCA1DF444C3006F7BFC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A5C70BCC1DF444D0006F7BFC /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		A5C70BCE1DF444DC006F7BFC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A5C70BD01DF444EB006F7BFC /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		A5C70BD11DF444EB006F7BFC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		A5C70BD41DF444F6006F7BFC /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		A5C70BD61DF44507006F7BFC /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		A5C70BD71DF44507006F7BFC /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		A5C70BDA1DF44529006F7BFC /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		A5C70BDC1DF44542006F7BFC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		A5C70BDE1DF4454E006F7BFC /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		A5C70BE01DF44559006F7BFC /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		A5C70BE21DF44565006F7BFC /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		A5C70BE41DF44579006F7BFC /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		A5C70BE61DF44588006F7BFC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A5C70BE81DF44592006F7BFC /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		A5C70BEA1DF445A0006F7BFC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A5C70BEC1DF445AE006F7BFC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A5C70BEE1DF445BB006F7BFC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		A5C70BF01DF445C5006F7BFC /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		A5C70BF21DF445CF006F7BFC /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		A5C70BF41DF445DA006F7BFC /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		A5C70BF61DF445E4006F7BFC /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		A5C8945C1AF4B75C0042B6DF /* JDFSequentialTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFSequentialTooltipManager.h; sourceTree = "<group>"; };
 		A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFSequentialTooltipManager.m; sourceTree = "<group>"; };
 		A5C8945E1AF4B75C0042B6DF /* JDFTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFTooltipManager.h; sourceTree = "<group>"; };
@@ -829,12 +883,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5C70BF71DF445E4006F7BFC /* SafariServices.framework in Frameworks */,
+				A5C70BF51DF445DA006F7BFC /* GLKit.framework in Frameworks */,
+				A5C70BF31DF445CF006F7BFC /* CoreBluetooth.framework in Frameworks */,
+				A5C70BF11DF445C5006F7BFC /* JavaScriptCore.framework in Frameworks */,
+				A5C70BEF1DF445BB006F7BFC /* WebKit.framework in Frameworks */,
+				A5C70BED1DF445AE006F7BFC /* UIKit.framework in Frameworks */,
+				A5C70BEB1DF445A0006F7BFC /* SystemConfiguration.framework in Frameworks */,
+				A5C70BE91DF44592006F7BFC /* Social.framework in Frameworks */,
+				A5C70BE71DF44588006F7BFC /* Security.framework in Frameworks */,
+				A5C70BE51DF44579006F7BFC /* MobileCoreServices.framework in Frameworks */,
+				A5C70BE31DF44565006F7BFC /* MediaPlayer.framework in Frameworks */,
+				A5C70BE11DF44559006F7BFC /* libz.tbd in Frameworks */,
+				A5C70BDF1DF4454E006F7BFC /* libxml2.2.tbd in Frameworks */,
+				A5C70BDD1DF44542006F7BFC /* libsqlite3.tbd in Frameworks */,
+				A5C70BDB1DF44529006F7BFC /* libc++.tbd in Frameworks */,
+				A5C70BD81DF44507006F7BFC /* EventKit.framework in Frameworks */,
+				A5C70BD91DF44507006F7BFC /* EventKitUI.framework in Frameworks */,
+				A5C70BD51DF444F6006F7BFC /* CoreTelephony.framework in Frameworks */,
+				A5C70BD21DF444EB006F7BFC /* CoreMedia.framework in Frameworks */,
+				A5C70BD31DF444EB006F7BFC /* CoreMotion.framework in Frameworks */,
+				A5C70BCF1DF444DC006F7BFC /* CoreLocation.framework in Frameworks */,
+				A5C70BCD1DF444D0006F7BFC /* CoreImage.framework in Frameworks */,
+				A5C70BCB1DF444C3006F7BFC /* CoreGraphics.framework in Frameworks */,
+				A5C70BC91DF444B3006F7BFC /* CoreFoundation.framework in Frameworks */,
+				A5C70BC71DF444A3006F7BFC /* CFNetwork.framework in Frameworks */,
+				A5C70BC51DF44496006F7BFC /* AVFoundation.framework in Frameworks */,
+				A58DE7181DD90F3900F65990 /* AudioToolbox.framework in Frameworks */,
+				A5C70BC31DF4447F006F7BFC /* AdSupport.framework in Frameworks */,
 				A58DE7141DD90F3900F65990 /* QuartzCore.framework in Frameworks */,
 				A58F37651DDBBD5B009F25FB /* StoreKit.framework in Frameworks */,
 				A58DE7151DD90F3900F65990 /* MessageUI.framework in Frameworks */,
 				A58DE7161DD90F3900F65990 /* Twitter.framework in Frameworks */,
 				A58DE7171DD90F3900F65990 /* HealthKit.framework in Frameworks */,
-				A58DE7181DD90F3900F65990 /* AudioToolbox.framework in Frameworks */,
 				715F66BE66EC0283C8673BDA /* Pods_Aquaz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -906,21 +987,13 @@
 			children = (
 				A57D2BEC1ACFE9C600619D62 /* Welcome Wizard */,
 				A5C70BC01DEDF87B006F7BFC /* Statistics */,
+				A5C70BC11DF43D89006F7BFC /* Settings */,
 				843B055719E2D7800097A833 /* DayViewController.swift */,
 				843B055819E2D7800097A833 /* SelectDrinkViewController.swift */,
 				8424AA001A0A7009009C5C47 /* DiaryViewController.swift */,
 				8478253619EAC8C200588FE3 /* IntakeViewController.swift */,
-				A5275F861A1216090088AF47 /* CalendarViewController.swift */,
-				843B055519E2D7800097A833 /* SettingsViewController.swift */,
-				840476561A35FE4A004F0FEF /* WaterGoalViewController.swift */,
-				A5B013E21AE27C4900C372F8 /* ExtraFactorsViewController.swift */,
-				A5B013E41AE27C7D00C372F8 /* UnitsViewController.swift */,
-				840476581A35FE82004F0FEF /* NotificationsViewController.swift */,
-				8488A18D1A53FE6500258EC8 /* NotificationsSoundViewController.swift */,
-				8404765A1A360273004F0FEF /* SupportViewController.swift */,
 				84F9DD971A16574E003D6444 /* PickTimeViewController.swift */,
-				A5DEB0621BA86DCB00ABD3C8 /* HealthKitViewController.swift */,
-				A5C70BB91DEDC409006F7BFC /* FullVersionController.swift */,
+				A5275F861A1216090088AF47 /* CalendarViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1082,6 +1155,33 @@
 		84D251951AD2511E001E6644 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5C70BF61DF445E4006F7BFC /* SafariServices.framework */,
+				A5C70BF41DF445DA006F7BFC /* GLKit.framework */,
+				A5C70BF21DF445CF006F7BFC /* CoreBluetooth.framework */,
+				A5C70BF01DF445C5006F7BFC /* JavaScriptCore.framework */,
+				A5C70BEE1DF445BB006F7BFC /* WebKit.framework */,
+				A5C70BEC1DF445AE006F7BFC /* UIKit.framework */,
+				A5C70BEA1DF445A0006F7BFC /* SystemConfiguration.framework */,
+				A5C70BE81DF44592006F7BFC /* Social.framework */,
+				A5C70BE61DF44588006F7BFC /* Security.framework */,
+				A5C70BE41DF44579006F7BFC /* MobileCoreServices.framework */,
+				A5C70BE21DF44565006F7BFC /* MediaPlayer.framework */,
+				A5C70BE01DF44559006F7BFC /* libz.tbd */,
+				A5C70BDE1DF4454E006F7BFC /* libxml2.2.tbd */,
+				A5C70BDC1DF44542006F7BFC /* libsqlite3.tbd */,
+				A5C70BDA1DF44529006F7BFC /* libc++.tbd */,
+				A5C70BD61DF44507006F7BFC /* EventKit.framework */,
+				A5C70BD71DF44507006F7BFC /* EventKitUI.framework */,
+				A5C70BD41DF444F6006F7BFC /* CoreTelephony.framework */,
+				A5C70BD01DF444EB006F7BFC /* CoreMedia.framework */,
+				A5C70BD11DF444EB006F7BFC /* CoreMotion.framework */,
+				A5C70BCE1DF444DC006F7BFC /* CoreLocation.framework */,
+				A5C70BCC1DF444D0006F7BFC /* CoreImage.framework */,
+				A5C70BCA1DF444C3006F7BFC /* CoreGraphics.framework */,
+				A5C70BC81DF444B3006F7BFC /* CoreFoundation.framework */,
+				A5C70BC61DF444A3006F7BFC /* CFNetwork.framework */,
+				A5C70BC41DF44496006F7BFC /* AVFoundation.framework */,
+				A5C70BC21DF4447F006F7BFC /* AdSupport.framework */,
 				A58F37641DDBBD5B009F25FB /* StoreKit.framework */,
 				A5E898BF1BC094D900B9E4D6 /* QuartzCore.framework */,
 				A5E898BD1BC094CB00B9E4D6 /* MessageUI.framework */,
@@ -1309,6 +1409,22 @@
 				84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */,
 			);
 			name = Statistics;
+			sourceTree = "<group>";
+		};
+		A5C70BC11DF43D89006F7BFC /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				843B055519E2D7800097A833 /* SettingsViewController.swift */,
+				840476561A35FE4A004F0FEF /* WaterGoalViewController.swift */,
+				A5B013E21AE27C4900C372F8 /* ExtraFactorsViewController.swift */,
+				A5B013E41AE27C7D00C372F8 /* UnitsViewController.swift */,
+				840476581A35FE82004F0FEF /* NotificationsViewController.swift */,
+				8488A18D1A53FE6500258EC8 /* NotificationsSoundViewController.swift */,
+				8404765A1A360273004F0FEF /* SupportViewController.swift */,
+				A5DEB0621BA86DCB00ABD3C8 /* HealthKitViewController.swift */,
+				A5C70BB91DEDC409006F7BFC /* FullVersionController.swift */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		A5C8945B1AF4B75C0042B6DF /* JDFTooltips */ = {
