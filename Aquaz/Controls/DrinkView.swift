@@ -9,7 +9,6 @@
 import UIKit
 
 @IBDesignable
-@objc(DrinkView)
 class DrinkView: UIView {
 
   var drinkType: DrinkType! {

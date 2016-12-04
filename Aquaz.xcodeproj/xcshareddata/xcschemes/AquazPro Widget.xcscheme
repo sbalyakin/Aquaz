@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "0800"
-   version = "1.3">
+   wasCreatedForAppExtension = "YES"
+   version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -14,9 +15,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "84D251931AD2511E001E6644"
+               BuildableName = "AquazPro Widget.appex"
+               BlueprintName = "AquazPro Widget"
+               ReferencedContainer = "container:Aquaz.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "84669A6819DAD78D003C2263"
-               BuildableName = "Aquaz Pro.app"
-               BlueprintName = "Aquaz Pro"
+               BuildableName = "AquazPro.app"
+               BlueprintName = "AquazPro"
                ReferencedContainer = "container:Aquaz.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,13 +43,23 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A5AC5A501C0B149D0010898E"
+               BuildableName = "AquazProUITests.xctest"
+               BlueprintName = "AquazProUITests"
+               ReferencedContainer = "container:Aquaz.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "84669A6819DAD78D003C2263"
-            BuildableName = "Aquaz Pro.app"
-            BlueprintName = "Aquaz Pro"
+            BuildableName = "AquazPro.app"
+            BlueprintName = "AquazPro"
             ReferencedContainer = "container:Aquaz.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -43,27 +68,32 @@
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      allowLocationSimulation = "YES"
+      launchAutomaticallySubstyle = "2">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.springboard"
+         RemotePath = "/Today">
+      </RemoteRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "84669A6819DAD78D003C2263"
-            BuildableName = "Aquaz Pro.app"
-            BlueprintName = "Aquaz Pro"
+            BuildableName = "AquazPro.app"
+            BlueprintName = "AquazPro"
             ReferencedContainer = "container:Aquaz.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-SNAPSHOT"
+            argument = "-com.apple.CoreData.ConcurrencyDebug 1"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
@@ -82,14 +112,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      debugDocumentVersioning = "YES">
+      debugDocumentVersioning = "YES"
+      launchAutomaticallySubstyle = "2">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "84669A6819DAD78D003C2263"
-            BuildableName = "Aquaz Pro.app"
-            BlueprintName = "Aquaz Pro"
+            BuildableName = "AquazPro.app"
+            BlueprintName = "AquazPro"
             ReferencedContainer = "container:Aquaz.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

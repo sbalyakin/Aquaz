@@ -48,8 +48,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "84669A6819DAD78D003C2263"
-            BuildableName = "Aquaz Pro.app"
-            BlueprintName = "Aquaz Pro"
+            BuildableName = "AquazPro.app"
+            BlueprintName = "AquazPro"
             ReferencedContainer = "container:Aquaz.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -72,6 +72,15 @@
          BundleIdentifier = "com.apple.springboard"
          RemotePath = "/Today">
       </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "A58DE73C1DD90F8400F65990"
+            BuildableName = "Aquaz Widget.appex"
+            BlueprintName = "Aquaz Widget"
+            ReferencedContainer = "container:Aquaz.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-com.apple.CoreData.ConcurrencyDebug 1"

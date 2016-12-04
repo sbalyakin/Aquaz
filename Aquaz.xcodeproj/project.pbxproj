@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		316D9C0E38942E85C78CC2FD /* Pods_AquazPro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F835C0417F68BA6171F27E /* Pods_AquazPro.framework */; };
+		6004CAC8548F56911FD50C23 /* Pods_AquazPro_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53DA077AE2C4AE3E4EF01D53 /* Pods_AquazPro_Widget.framework */; };
 		715F66BE66EC0283C8673BDA /* Pods_Aquaz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2034D5FC234041B776E3B8F6 /* Pods_Aquaz.framework */; };
 		84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84039F171A4B103100C5391E /* NotificationsHelper.swift */; };
 		840476571A35FE4A004F0FEF /* WaterGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840476561A35FE4A004F0FEF /* WaterGoalViewController.swift */; };
@@ -69,7 +71,7 @@
 		84CD97671ABB2C7E0011623B /* MonthStatisticsViewContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD97661ABB2C7E0011623B /* MonthStatisticsViewContentCell.swift */; };
 		84D251971AD2511E001E6644 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D251961AD2511E001E6644 /* NotificationCenter.framework */; };
 		84D2519C1AD2511E001E6644 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2519B1AD2511E001E6644 /* TodayViewController.swift */; };
-		84D251A11AD2511E001E6644 /* Aquaz Pro Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 84D251941AD2511E001E6644 /* Aquaz Pro Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		84D251A11AD2511E001E6644 /* AquazPro Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 84D251941AD2511E001E6644 /* AquazPro Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		84D251A61AD25D9A001E6644 /* DrinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5091A6559FB00AA89CB /* DrinkView.swift */; };
 		84D251A71AD25DE2001E6644 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2B19E4195A0026398E /* Drink.swift */; };
 		84D251A81AD25FD9001E6644 /* NamedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1519E57D3500D0477B /* NamedEntity.swift */; };
@@ -129,13 +131,13 @@
 		A581FEF01A76D5F60025CDEF /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */; };
 		A583F5F51BEE5BC8000E3349 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A583F5F41BEE5BC8000E3349 /* Assets.xcassets */; };
 		A587AAA31BD65224000B48E9 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A587AAA11BD65224000B48E9 /* Interface.storyboard */; };
-		A587AAAC1BD65224000B48E9 /* Aquaz Pro Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A587AAAB1BD65224000B48E9 /* Aquaz Pro Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A587AAAC1BD65224000B48E9 /* AquazPro Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A587AAAB1BD65224000B48E9 /* AquazPro Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A587AAB31BD65224000B48E9 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB21BD65224000B48E9 /* MainInterfaceController.swift */; };
 		A587AAB51BD65224000B48E9 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB41BD65224000B48E9 /* ExtensionDelegate.swift */; };
 		A587AAB71BD65224000B48E9 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB61BD65224000B48E9 /* NotificationController.swift */; };
 		A587AAB91BD65224000B48E9 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB81BD65224000B48E9 /* GlanceController.swift */; };
 		A587AABB1BD65224000B48E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A587AABA1BD65224000B48E9 /* Assets.xcassets */; };
-		A587AABF1BD65224000B48E9 /* Aquaz Pro Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A587AA9F1BD65224000B48E9 /* Aquaz Pro Watch.app */; };
+		A587AABF1BD65224000B48E9 /* AquazPro Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A587AA9F1BD65224000B48E9 /* AquazPro Watch.app */; };
 		A587ABFB1BD65D6C000B48E9 /* ProgressHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587ABFA1BD65D6C000B48E9 /* ProgressHelper.swift */; };
 		A587ACFF1BD67C94000B48E9 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */; };
 		A587AD0F1BD686A3000B48E9 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5071A6558C100AA89CB /* StyleKit.swift */; };
@@ -511,7 +513,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				84D251A11AD2511E001E6644 /* Aquaz Pro Widget.appex in Embed App Extensions */,
+				84D251A11AD2511E001E6644 /* AquazPro Widget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -522,7 +524,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				A587AAAC1BD65224000B48E9 /* Aquaz Pro Watch Extension.appex in Embed App Extensions */,
+				A587AAAC1BD65224000B48E9 /* AquazPro Watch Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,7 +535,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				A587AABF1BD65224000B48E9 /* Aquaz Pro Watch.app in Embed Watch Content */,
+				A587AABF1BD65224000B48E9 /* AquazPro Watch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -577,8 +579,11 @@
 		137A7B705E29DAD5D0889DD3 /* Pods-Aquaz Pro Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Pro Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Pro Widget/Pods-Aquaz Pro Widget.release.xcconfig"; sourceTree = "<group>"; };
 		2034D5FC234041B776E3B8F6 /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		33FDBCA180D78CDEAF8909C5 /* Pods-Aquaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz.debug.xcconfig"; sourceTree = "<group>"; };
+		3F7FF8E5F10D1BE5AD761440 /* Pods-AquazPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro.debug.xcconfig"; sourceTree = "<group>"; };
 		46B71719174BFF7DAE86EAC3 /* Pods-Aquaz Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Pro/Pods-Aquaz Pro.release.xcconfig"; sourceTree = "<group>"; };
+		4B263E24FDEC76BEB1E30C90 /* Pods-AquazPro Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro Widget/Pods-AquazPro Widget.release.xcconfig"; sourceTree = "<group>"; };
 		4FF2FCA608968D33D587204F /* Pods_Aquaz_Pro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz_Pro_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53DA077AE2C4AE3E4EF01D53 /* Pods_AquazPro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B6E63CF2DF6D7CDCD2E99E7 /* Pods-Aquaz Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Pro/Pods-Aquaz Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		724562D01F0511D395997A53 /* Pods-Aquaz Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Widget/Pods-Aquaz Widget.release.xcconfig"; sourceTree = "<group>"; };
 		8401C2801BBFC7D700874AF7 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
@@ -622,7 +627,7 @@
 		844B248C1B21991B0059E28A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		844B24931B219A540059E28A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		8455DACE1A694487004245F9 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedButton.swift; path = Controls/RoundedButton.swift; sourceTree = "<group>"; };
-		84669A6919DAD78D003C2263 /* Aquaz Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aquaz Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84669A6919DAD78D003C2263 /* AquazPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AquazPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84669A6D19DAD78D003C2263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84669A7119DAD78D003C2263 /* Aquaz.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Aquaz.xcdatamodel; sourceTree = "<group>"; };
 		84669A7619DAD78D003C2263 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -654,7 +659,7 @@
 		84CD97601ABB2C3A0011623B /* MonthStatisticsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthStatisticsContentView.swift; path = Controls/MonthStatisticsContentView.swift; sourceTree = "<group>"; };
 		84CD97621ABB2C3A0011623B /* MonthStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthStatisticsView.swift; path = Controls/MonthStatisticsView.swift; sourceTree = "<group>"; };
 		84CD97661ABB2C7E0011623B /* MonthStatisticsViewContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthStatisticsViewContentCell.swift; path = Controls/MonthStatisticsViewContentCell.swift; sourceTree = "<group>"; };
-		84D251941AD2511E001E6644 /* Aquaz Pro Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Aquaz Pro Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84D251941AD2511E001E6644 /* AquazPro Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "AquazPro Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D251961AD2511E001E6644 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		84D2519A1AD2511E001E6644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D2519B1AD2511E001E6644 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -666,6 +671,7 @@
 		84F9DD971A16574E003D6444 /* PickTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTimeViewController.swift; sourceTree = "<group>"; };
 		91865B0EF413BD467D1DB6CA /* Pods_Aquaz_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FA18138F9821A46CF099502 /* Pods-Aquaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz.release.xcconfig"; sourceTree = "<group>"; };
+		A0F6E9A85C35CFE980BE0501 /* Pods-AquazPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro.release.xcconfig"; sourceTree = "<group>"; };
 		A516B1161BEBF76F00EC553A /* DrinksInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinksInterfaceController.swift; sourceTree = "<group>"; };
 		A51A65F91DD7C2D300B1A83F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -702,10 +708,10 @@
 		A58139D61BEE0D3C00B5D6A0 /* AmountInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmountInterfaceController.swift; sourceTree = "<group>"; };
 		A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomSlider.swift; path = Controls/CustomSlider.swift; sourceTree = "<group>"; };
 		A583F5F41BEE5BC8000E3349 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A587AA9F1BD65224000B48E9 /* Aquaz Pro Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aquaz Pro Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A587AA9F1BD65224000B48E9 /* AquazPro Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AquazPro Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A587AAA21BD65224000B48E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		A587AAA61BD65224000B48E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A587AAAB1BD65224000B48E9 /* Aquaz Pro Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Aquaz Pro Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A587AAAB1BD65224000B48E9 /* AquazPro Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "AquazPro Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A587AAB11BD65224000B48E9 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		A587AAB21BD65224000B48E9 /* MainInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInterfaceController.swift; sourceTree = "<group>"; };
 		A587AAB41BD65224000B48E9 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
@@ -830,8 +836,10 @@
 		A5F62E9A1B558D6F002F91BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A5F62E9B1B558D80002F91BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A8062ED2D20DA9657DCA6F45 /* Pods-Aquaz Pro Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Pro Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Pro Widget/Pods-Aquaz Pro Widget.debug.xcconfig"; sourceTree = "<group>"; };
+		A9F835C0417F68BA6171F27E /* Pods_AquazPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9CC3EE64FFA0AD6BA0B1112 /* Pods-Aquaz Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Widget/Pods-Aquaz Widget.debug.xcconfig"; sourceTree = "<group>"; };
 		BFEC3F003D4CC3DDC33637AF /* Pods_Aquaz_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBD5B44914593BBC06FC6186 /* Pods-AquazPro Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro Widget/Pods-AquazPro Widget.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -852,6 +860,7 @@
 				A5DEB0611BA75B4B00ABD3C8 /* HealthKit.framework in Frameworks */,
 				A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */,
 				B6D3F4FC4CC952A6C80B29BA /* Pods_Aquaz_Pro.framework in Frameworks */,
+				316D9C0E38942E85C78CC2FD /* Pods_AquazPro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -869,6 +878,7 @@
 				A52BFC611BAF293400B76345 /* HealthKit.framework in Frameworks */,
 				84D251971AD2511E001E6644 /* NotificationCenter.framework in Frameworks */,
 				FD177B51857EC3E179D98E1D /* Pods_Aquaz_Pro_Widget.framework in Frameworks */,
+				6004CAC8548F56911FD50C23 /* Pods_AquazPro_Widget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1051,11 +1061,11 @@
 		84669A6A19DAD78D003C2263 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84669A6919DAD78D003C2263 /* Aquaz Pro.app */,
+				84669A6919DAD78D003C2263 /* AquazPro.app */,
 				84669A8119DAD78D003C2263 /* AquazProTests.xctest */,
-				84D251941AD2511E001E6644 /* Aquaz Pro Widget.appex */,
-				A587AA9F1BD65224000B48E9 /* Aquaz Pro Watch.app */,
-				A587AAAB1BD65224000B48E9 /* Aquaz Pro Watch Extension.appex */,
+				84D251941AD2511E001E6644 /* AquazPro Widget.appex */,
+				A587AA9F1BD65224000B48E9 /* AquazPro Watch.app */,
+				A587AAAB1BD65224000B48E9 /* AquazPro Watch Extension.appex */,
 				A5AC5A511C0B149D0010898E /* AquazProUITests.xctest */,
 				A58DE73A1DD90F3900F65990 /* Aquaz.app */,
 				A58DE7671DD90F8400F65990 /* Aquaz Widget.appex */,
@@ -1193,6 +1203,8 @@
 				91865B0EF413BD467D1DB6CA /* Pods_Aquaz_Pro.framework */,
 				4FF2FCA608968D33D587204F /* Pods_Aquaz_Pro_Widget.framework */,
 				BFEC3F003D4CC3DDC33637AF /* Pods_Aquaz_Widget.framework */,
+				A9F835C0417F68BA6171F27E /* Pods_AquazPro.framework */,
+				53DA077AE2C4AE3E4EF01D53 /* Pods_AquazPro_Widget.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1232,6 +1244,10 @@
 				137A7B705E29DAD5D0889DD3 /* Pods-Aquaz Pro Widget.release.xcconfig */,
 				B9CC3EE64FFA0AD6BA0B1112 /* Pods-Aquaz Widget.debug.xcconfig */,
 				724562D01F0511D395997A53 /* Pods-Aquaz Widget.release.xcconfig */,
+				3F7FF8E5F10D1BE5AD761440 /* Pods-AquazPro.debug.xcconfig */,
+				A0F6E9A85C35CFE980BE0501 /* Pods-AquazPro.release.xcconfig */,
+				DBD5B44914593BBC06FC6186 /* Pods-AquazPro Widget.debug.xcconfig */,
+				4B263E24FDEC76BEB1E30C90 /* Pods-AquazPro Widget.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1505,9 +1521,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		84669A6819DAD78D003C2263 /* Aquaz Pro */ = {
+		84669A6819DAD78D003C2263 /* AquazPro */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84669A8B19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "Aquaz Pro" */;
+			buildConfigurationList = 84669A8B19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "AquazPro" */;
 			buildPhases = (
 				67C71C7D743946DC82254005 /* [CP] Check Pods Manifest.lock */,
 				A52170EB1DD125DB0041135F /* Show Environment Variables */,
@@ -1526,9 +1542,9 @@
 				84D251A01AD2511E001E6644 /* PBXTargetDependency */,
 				A587AABE1BD65224000B48E9 /* PBXTargetDependency */,
 			);
-			name = "Aquaz Pro";
+			name = AquazPro;
 			productName = Aquaz;
-			productReference = 84669A6919DAD78D003C2263 /* Aquaz Pro.app */;
+			productReference = 84669A6919DAD78D003C2263 /* AquazPro.app */;
 			productType = "com.apple.product-type.application";
 		};
 		84669A8019DAD78D003C2263 /* AquazProTests */ = {
@@ -1549,9 +1565,9 @@
 			productReference = 84669A8119DAD78D003C2263 /* AquazProTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		84D251931AD2511E001E6644 /* Aquaz Pro Widget */ = {
+		84D251931AD2511E001E6644 /* AquazPro Widget */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84D251A41AD2511E001E6644 /* Build configuration list for PBXNativeTarget "Aquaz Pro Widget" */;
+			buildConfigurationList = 84D251A41AD2511E001E6644 /* Build configuration list for PBXNativeTarget "AquazPro Widget" */;
 			buildPhases = (
 				A112595E04925A4491B71A6F /* [CP] Check Pods Manifest.lock */,
 				A52170EC1DD1269A0041135F /* Show Environment Variables */,
@@ -1565,14 +1581,14 @@
 			);
 			dependencies = (
 			);
-			name = "Aquaz Pro Widget";
+			name = "AquazPro Widget";
 			productName = Widget;
-			productReference = 84D251941AD2511E001E6644 /* Aquaz Pro Widget.appex */;
+			productReference = 84D251941AD2511E001E6644 /* AquazPro Widget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		A587AA9E1BD65224000B48E9 /* Aquaz Pro Watch */ = {
+		A587AA9E1BD65224000B48E9 /* AquazPro Watch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A587AAC61BD65224000B48E9 /* Build configuration list for PBXNativeTarget "Aquaz Pro Watch" */;
+			buildConfigurationList = A587AAC61BD65224000B48E9 /* Build configuration list for PBXNativeTarget "AquazPro Watch" */;
 			buildPhases = (
 				A52170ED1DD126B00041135F /* Show Environment Variables */,
 				A587AA9D1BD65224000B48E9 /* Resources */,
@@ -1584,14 +1600,14 @@
 			dependencies = (
 				A587AAAE1BD65224000B48E9 /* PBXTargetDependency */,
 			);
-			name = "Aquaz Pro Watch";
+			name = "AquazPro Watch";
 			productName = Watch;
-			productReference = A587AA9F1BD65224000B48E9 /* Aquaz Pro Watch.app */;
+			productReference = A587AA9F1BD65224000B48E9 /* AquazPro Watch.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
-		A587AAAA1BD65224000B48E9 /* Aquaz Pro Watch Extension */ = {
+		A587AAAA1BD65224000B48E9 /* AquazPro Watch Extension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A587AAC41BD65224000B48E9 /* Build configuration list for PBXNativeTarget "Aquaz Pro Watch Extension" */;
+			buildConfigurationList = A587AAC41BD65224000B48E9 /* Build configuration list for PBXNativeTarget "AquazPro Watch Extension" */;
 			buildPhases = (
 				A52170EE1DD126C30041135F /* Show Environment Variables */,
 				A587AAA71BD65224000B48E9 /* Sources */,
@@ -1602,9 +1618,9 @@
 			);
 			dependencies = (
 			);
-			name = "Aquaz Pro Watch Extension";
+			name = "AquazPro Watch Extension";
 			productName = "Watch Extension";
-			productReference = A587AAAB1BD65224000B48E9 /* Aquaz Pro Watch Extension.appex */;
+			productReference = A587AAAB1BD65224000B48E9 /* AquazPro Watch Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		A58DE6A11DD90F3900F65990 /* Aquaz */ = {
@@ -1812,10 +1828,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84669A6819DAD78D003C2263 /* Aquaz Pro */,
-				84D251931AD2511E001E6644 /* Aquaz Pro Widget */,
-				A587AA9E1BD65224000B48E9 /* Aquaz Pro Watch */,
-				A587AAAA1BD65224000B48E9 /* Aquaz Pro Watch Extension */,
+				84669A6819DAD78D003C2263 /* AquazPro */,
+				84D251931AD2511E001E6644 /* AquazPro Widget */,
+				A587AA9E1BD65224000B48E9 /* AquazPro Watch */,
+				A587AAAA1BD65224000B48E9 /* AquazPro Watch Extension */,
 				84669A8019DAD78D003C2263 /* AquazProTests */,
 				A5AC5A501C0B149D0010898E /* AquazProUITests */,
 				A58DE6A11DD90F3900F65990 /* Aquaz */,
@@ -1976,7 +1992,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		0D72BC2512C257882961584C /* [CP] Copy Pods Resources */ = {
@@ -2036,7 +2052,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz Pro/Pods-Aquaz Pro-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		67C71C7D743946DC82254005 /* [CP] Check Pods Manifest.lock */ = {
@@ -2051,7 +2067,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		776D72E109FA3A062468AF1E /* [CP] Copy Pods Resources */ = {
@@ -2066,7 +2082,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz Pro/Pods-Aquaz Pro-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8443DF271B29658100FDD294 /* Fabric */ = {
@@ -2095,7 +2111,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz Pro Widget/Pods-Aquaz Pro Widget-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AquazPro Widget/Pods-AquazPro Widget-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A112595E04925A4491B71A6F /* [CP] Check Pods Manifest.lock */ = {
@@ -2110,7 +2126,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		A52170EB1DD125DB0041135F /* Show Environment Variables */ = {
@@ -2279,7 +2295,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2666,22 +2682,22 @@
 /* Begin PBXTargetDependency section */
 		84669A8319DAD78D003C2263 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 84669A6819DAD78D003C2263 /* Aquaz Pro */;
+			target = 84669A6819DAD78D003C2263 /* AquazPro */;
 			targetProxy = 84669A8219DAD78D003C2263 /* PBXContainerItemProxy */;
 		};
 		84D251A01AD2511E001E6644 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 84D251931AD2511E001E6644 /* Aquaz Pro Widget */;
+			target = 84D251931AD2511E001E6644 /* AquazPro Widget */;
 			targetProxy = 84D2519F1AD2511E001E6644 /* PBXContainerItemProxy */;
 		};
 		A587AAAE1BD65224000B48E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A587AAAA1BD65224000B48E9 /* Aquaz Pro Watch Extension */;
+			target = A587AAAA1BD65224000B48E9 /* AquazPro Watch Extension */;
 			targetProxy = A587AAAD1BD65224000B48E9 /* PBXContainerItemProxy */;
 		};
 		A587AABE1BD65224000B48E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A587AA9E1BD65224000B48E9 /* Aquaz Pro Watch */;
+			target = A587AA9E1BD65224000B48E9 /* AquazPro Watch */;
 			targetProxy = A587AABD1BD65224000B48E9 /* PBXContainerItemProxy */;
 		};
 		A58DE7A01DD9100B00F65990 /* PBXTargetDependency */ = {
@@ -2696,7 +2712,7 @@
 		};
 		A5AC5A571C0B149D0010898E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 84669A6819DAD78D003C2263 /* Aquaz Pro */;
+			target = 84669A6819DAD78D003C2263 /* AquazPro */;
 			targetProxy = A5AC5A561C0B149D0010898E /* PBXContainerItemProxy */;
 		};
 		A5B4C5091DDA6D6200F8B104 /* PBXTargetDependency */ = {
@@ -2933,7 +2949,7 @@
 		};
 		84669A8C19DAD78D003C2263 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B6E63CF2DF6D7CDCD2E99E7 /* Pods-Aquaz Pro.debug.xcconfig */;
+			baseConfigurationReference = 3F7FF8E5F10D1BE5AD761440 /* Pods-AquazPro.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2969,7 +2985,7 @@
 		};
 		84669A8D19DAD78D003C2263 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46B71719174BFF7DAE86EAC3 /* Pods-Aquaz Pro.release.xcconfig */;
+			baseConfigurationReference = A0F6E9A85C35CFE980BE0501 /* Pods-AquazPro.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3049,7 +3065,7 @@
 		};
 		84D251A21AD2511E001E6644 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A8062ED2D20DA9657DCA6F45 /* Pods-Aquaz Pro Widget.debug.xcconfig */;
+			baseConfigurationReference = DBD5B44914593BBC06FC6186 /* Pods-AquazPro Widget.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = WidgetAppIcon;
@@ -3084,7 +3100,7 @@
 		};
 		84D251A31AD2511E001E6644 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 137A7B705E29DAD5D0889DD3 /* Pods-Aquaz Pro Widget.release.xcconfig */;
+			baseConfigurationReference = 4B263E24FDEC76BEB1E30C90 /* Pods-AquazPro Widget.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = WidgetAppIcon;
@@ -3518,7 +3534,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84669A8B19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "Aquaz Pro" */ = {
+		84669A8B19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "AquazPro" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84669A8C19DAD78D003C2263 /* Debug */,
@@ -3536,7 +3552,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84D251A41AD2511E001E6644 /* Build configuration list for PBXNativeTarget "Aquaz Pro Widget" */ = {
+		84D251A41AD2511E001E6644 /* Build configuration list for PBXNativeTarget "AquazPro Widget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84D251A21AD2511E001E6644 /* Debug */,
@@ -3545,7 +3561,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A587AAC41BD65224000B48E9 /* Build configuration list for PBXNativeTarget "Aquaz Pro Watch Extension" */ = {
+		A587AAC41BD65224000B48E9 /* Build configuration list for PBXNativeTarget "AquazPro Watch Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A587AAC21BD65224000B48E9 /* Debug */,
@@ -3554,7 +3570,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A587AAC61BD65224000B48E9 /* Build configuration list for PBXNativeTarget "Aquaz Pro Watch" */ = {
+		A587AAC61BD65224000B48E9 /* Build configuration list for PBXNativeTarget "AquazPro Watch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A587AAC01BD65224000B48E9 /* Debug */,

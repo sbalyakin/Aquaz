@@ -61,8 +61,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A587AA9E1BD65224000B48E9"
-            BuildableName = "Aquaz Pro Watch.app"
-            BlueprintName = "Aquaz Pro Watch"
+            BuildableName = "AquazPro Watch.app"
+            BlueprintName = "AquazPro Watch"
             ReferencedContainer = "container:Aquaz.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -87,8 +87,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A587AA9E1BD65224000B48E9"
-            BuildableName = "Aquaz Pro Watch.app"
-            BlueprintName = "Aquaz Pro Watch"
+            BuildableName = "AquazPro Watch.app"
+            BlueprintName = "AquazPro Watch"
             ReferencedContainer = "container:Aquaz.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
@@ -96,8 +96,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A587AA9E1BD65224000B48E9"
-            BuildableName = "Aquaz Pro Watch.app"
-            BlueprintName = "Aquaz Pro Watch"
+            BuildableName = "AquazPro Watch.app"
+            BlueprintName = "AquazPro Watch"
             ReferencedContainer = "container:Aquaz.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -129,8 +129,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A587AA9E1BD65224000B48E9"
-            BuildableName = "Aquaz Pro Watch.app"
-            BlueprintName = "Aquaz Pro Watch"
+            BuildableName = "AquazPro Watch.app"
+            BlueprintName = "AquazPro Watch"
             ReferencedContainer = "container:Aquaz.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
@@ -138,8 +138,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A587AA9E1BD65224000B48E9"
-            BuildableName = "Aquaz Pro Watch.app"
-            BlueprintName = "Aquaz Pro Watch"
+            BuildableName = "AquazPro Watch.app"
+            BlueprintName = "AquazPro Watch"
             ReferencedContainer = "container:Aquaz.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

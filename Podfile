@@ -12,17 +12,17 @@ def shared_pods
   pod 'MMWormhole', '~> 2.0.0'
 end
 
-# Aquaz Pro
-target 'Aquaz Pro' do
+# AquazPro
+target 'AquazPro' do
   shared_pods
   pod 'SimulatorStatusMagic', :configurations => ['Debug']
 end
 
-target 'Aquaz Pro Widget' do
+target 'AquazPro Widget' do
   shared_pods
 end
 
-#Aquaz
+# Aquaz
 target 'Aquaz' do
   shared_pods
   pod 'Appodeal/Video', '1.3.3'

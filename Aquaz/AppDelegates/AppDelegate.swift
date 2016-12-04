@@ -97,6 +97,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   #if AQUAZLITE
   fileprivate func setupAppodeal() {
+    #if DEBUG
+    Appodeal.setTestingEnabled(true)
+    #endif
     Appodeal.setAutocache(true, types: .skippableVideo)
     Appodeal.initialize(withApiKey: GlobalConstants.appodealApiKey, types: .skippableVideo)
     Appodeal.setUserId(Settings.sharedInstance.generalAdUserId.value)

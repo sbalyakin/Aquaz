@@ -108,7 +108,8 @@ class IntakeViewController: UIViewController {
     }
     
     if Appodeal.isReadyForShow(with: .skippableVideo) {
-      Appodeal.showAd(.skippableVideo, rootViewController: self)
+      Appodeal.showAd(.skippableVideo, rootViewController: self.navigationController)
+      Settings.sharedInstance.generalAdCounter.value = GlobalConstants.numberOfIntakesToShowAd
     }
   }
   #endif
@@ -344,17 +345,6 @@ class IntakeViewController: UIViewController {
   fileprivate var isCurrentDayToday: Bool = false
 
 }
-
-#if AQUAZLITE
-// MARK: AppodealSkippableVideoDelegate extension -
-extension IntakeViewController: AppodealSkippableVideoDelegate {
-  
-  func skippableVideoDidPresent() {
-    Settings.sharedInstance.generalAdCounter.value = GlobalConstants.numberOfIntakesToShowAd
-  }
-  
-}
-#endif
 
 // MARK: Units.Volume extension -
 private extension Units.Volume {

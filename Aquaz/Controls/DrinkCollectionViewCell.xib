@@ -27,7 +27,7 @@
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="5" id="VbF-g5-NiN"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="7g6-1f-VKo" userLabel="Drink Image" customClass="DrinkView">
+                    <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="7g6-1f-VKo" userLabel="Drink Image" customClass="DrinkView" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="15.5" width="268" height="268"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>

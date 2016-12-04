@@ -9,7 +9,6 @@
 import UIKit
 
 @IBDesignable
-@objc(MultiProgressView)
 class MultiProgressView: UIView {
   
   @IBInspectable var maximum: CGFloat = 1.0 { didSet { layoutSections() } }
