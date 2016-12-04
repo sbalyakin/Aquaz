@@ -67,9 +67,15 @@ class MonthStatisticsViewController: UIViewController {
   fileprivate func setupNotificationsObservation() {
     NotificationCenter.default.addObserver(
       self,
-      selector: #selector(self.preferredContentSizeChanged),
+      selector: #selector(preferredContentSizeChanged),
       name: NSNotification.Name.UIContentSizeCategoryDidChange,
       object: nil)
+    
+    #if AQUAZLITE
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(fullVersionIsPurchased(_:)),
+                                           name: NSNotification.Name(rawValue: GlobalConstants.notificationFullVersionIsPurchased), object: nil)
+    #endif
     
     CoreDataStack.performOnPrivateContext { privateContext in
       NotificationCenter.default.addObserver(
@@ -87,6 +93,12 @@ class MonthStatisticsViewController: UIViewController {
   }
 
   func managedObjectContextDidChange(_ notification: Notification) {
+    #if AQUAZLITE
+    if !Settings.sharedInstance.generalFullVersion.value {
+      return
+    }
+    #endif
+    
     DispatchQueue.main.async {
       self.monthStatisticsView.refresh()
     }
@@ -100,6 +112,12 @@ class MonthStatisticsViewController: UIViewController {
     view.invalidateIntrinsicContentSize()
   }
 
+  #if AQUAZLITE
+  func fullVersionIsPurchased(_ notification: NSNotification) {
+    monthStatisticsView.refresh()
+  }
+  #endif
+  
   fileprivate func updateUI(animated: Bool) {
     let title = dateFormatter.string(from: date)
     
@@ -123,6 +141,12 @@ class MonthStatisticsViewController: UIViewController {
   }
   
   fileprivate func checkHelpTip() {
+    #if AQUAZLITE
+    if !Settings.sharedInstance.generalFullVersion.value  {
+      return
+    }
+    #endif
+    
     if Settings.sharedInstance.uiMonthStatisticsPageHelpTipIsShown.value  {
       return
     }
@@ -190,6 +214,24 @@ extension MonthStatisticsViewController: CalendarViewDelegate {
 extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
   
   func monthStatisticsGetValuesForDateInterval(beginDate: Date, endDate: Date, calendarContentView: CalendarContentView) -> [Double] {
+    #if AQUAZLITE
+    if !Settings.sharedInstance.generalFullVersion.value {
+      // Demo mode
+      var index = 0
+      var values = [Double]()
+      var date = beginDate
+      
+      while date.isEarlierThan(endDate) {
+        let value = sin(Double(index % 28) / 28 * M_PI)
+        values.append(value)
+        index += 1
+        date = DateHelper.nextDayFrom(date)
+      }
+    
+      return values
+    }
+    #endif
+    
     CoreDataStack.performOnPrivateContext { privateContext in
       weak var requestingMonthStatisticsContentView = (calendarContentView as! MonthStatisticsContentView)
       let hydrationFractions = self.fetchHydrationFractions(beginDate: beginDate, endDate: endDate, privateContext: privateContext)

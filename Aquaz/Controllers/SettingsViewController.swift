@@ -12,38 +12,42 @@ class SettingsViewController: OmegaSettingsViewController {
 
   fileprivate struct LocalyzedStrings {
     
-    lazy var dailyWaterIntakeTitle: String = NSLocalizedString("SVC:Daily Water Intake",
+    lazy var dailyWaterIntakeTitle = NSLocalizedString("SVC:Daily Water Intake",
       value: "Daily Water Intake",
       comment: "SettingsViewController: Table cell title for [Daily Water Intake] settings bloсk")
     
-    lazy var specialModesTitle: String = NSLocalizedString("SVC:Special Modes",
+    lazy var specialModesTitle = NSLocalizedString("SVC:Special Modes",
       value: "Special Modes",
       comment: "SettingsViewController: Table cell title for [Special Modes] settings block")
     
-    lazy var unitsTitle: String = NSLocalizedString("SVC:Measurement Units",
+    lazy var unitsTitle = NSLocalizedString("SVC:Measurement Units",
       value: "Measurement Units",
       comment: "SettingsViewController: Table cell title for [Measurement Units] settings block")
     
-    lazy var notificationsTitle: String = NSLocalizedString("SVC:Notifications",
+    lazy var notificationsTitle = NSLocalizedString("SVC:Notifications",
       value: "Notifications",
       comment: "SettingsViewController: Table cell title for [Notifications] settings block")
     
-    lazy var supportTitle: String = NSLocalizedString("SVC:Support",
+    lazy var supportTitle = NSLocalizedString("SVC:Support",
       value: "Support",
       comment: "SettingsViewController: Table cell title for [Support] settings block")
     
+    #if AQUAZLITE
+    lazy var fullVersionTitle = NSLocalizedString("SVC:Full Version",
+      value: "Full Version",
+      comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is not purchased yet")
+    
+    lazy var fullVersionIsPurchasedTitle = NSLocalizedString("SVC:Full Version Is Purchased",
+      value: "Full Version Is Purchased",
+      comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is purchased")
+    #endif
+    
     @available(iOS 9.3, *)
-    lazy var exportToHealthAppTitle: String = NSLocalizedString("SVC:Export to Apple Health",
+    lazy var exportToHealthAppTitle = NSLocalizedString("SVC:Export to Apple Health",
       value: "Export to Apple Health",
       comment: "SettingsViewController: Table title for [Export to Apple Health] cell")
-
   }
-  
-  fileprivate var volumeObserver: SettingsObserver?
-  fileprivate var waterGoalObserver: SettingsObserver?
-  
-  fileprivate var localizedStrings = LocalyzedStrings()
-  
+
   fileprivate struct Constants {
     static let calculateWaterIntakeSegue = "Calculate Water Intake"
     static let showNotificationsSegue = "Show Notifications"
@@ -51,7 +55,20 @@ class SettingsViewController: OmegaSettingsViewController {
     static let showUnitsSegue = "Show Units"
     static let showSupportSegue = "Show Support"
     static let exportToHealthKit = "Export To HealthKit"
+    #if AQUAZLITE
+    static let manageFullVersionSegue = "Manage Full Version"
+    #endif
   }
+  
+
+  fileprivate var volumeObserver: SettingsObserver?
+  fileprivate var waterGoalObserver: SettingsObserver?
+  
+  fileprivate var localizedStrings = LocalyzedStrings()
+  
+  #if AQUAZLITE
+  var fullVersionCell: BasicTableCell!
+  #endif
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -59,6 +76,13 @@ class SettingsViewController: OmegaSettingsViewController {
     UIHelper.applyStyleToViewController(self)
     rightDetailValueColor = StyleKit.settingsTablesValueColor
     rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
+    
+    #if AQUAZLITE
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(fullVersionIsPurchased(_:)),
+                                           name: NSNotification.Name(rawValue: GlobalConstants.notificationFullVersionIsPurchased), object: nil)
+    #endif
+
   }
 
   deinit {
@@ -139,9 +163,35 @@ class SettingsViewController: OmegaSettingsViewController {
     let supportSection = TableCellsSection()
     supportSection.tableCells = [supportCell]
     
+    #if AQUAZLITE
+    // Full Version section
+    if Settings.sharedInstance.generalFullVersion.value {
+      fullVersionCell = createBasicTableCell(title: localizedStrings.fullVersionIsPurchasedTitle)
+    } else {
+      fullVersionCell = createBasicTableCell(
+        title: localizedStrings.fullVersionTitle,
+        accessoryType: .disclosureIndicator)
+      
+      fullVersionCell.activationChangedFunction = { [weak self] tableCell, active in
+        if active {
+          self?.performSegue(withIdentifier: Constants.manageFullVersionSegue, sender: tableCell)
+        }
+      }
+    }
+    
+    fullVersionCell.image = ImageHelper.loadImage(.SettingsFullVersion)
+    
+    let fullVersionSection = TableCellsSection()
+    fullVersionSection.tableCells = [fullVersionCell]
+    #endif
+    
     // Adding sections
     var sections = [recommendationsSection, unitsSection, notificationsSection, supportSection]
 
+    #if AQUAZLITE
+    sections += [fullVersionSection]
+    #endif
+    
     // Export to the Health App section
     if #available(iOS 9.3, *) {
       let healthCell = createBasicTableCell(title: localizedStrings.exportToHealthAppTitle, accessoryType: .disclosureIndicator)
@@ -162,6 +212,14 @@ class SettingsViewController: OmegaSettingsViewController {
     
     return sections
   }
+  
+  #if AQUAZLITE
+  func fullVersionIsPurchased(_ notification: NSNotification) {
+    fullVersionCell.title = localizedStrings.fullVersionIsPurchasedTitle
+    fullVersionCell.accessoryType = nil
+    fullVersionCell.activationChangedFunction = nil
+  }
+  #endif
   
   fileprivate func stringFromWaterGoal(_ waterGoal: Double) -> String {
     let volumeUnit = Settings.sharedInstance.generalVolumeUnits.value

@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-#if DEBUG && AQUAZPRO
+#if DEBUG
   import SimulatorStatusMagic
 #endif
 

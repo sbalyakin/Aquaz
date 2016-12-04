@@ -112,6 +112,13 @@ class WeekStatisticsViewController: UIViewController {
       name: NSNotification.Name.UIContentSizeCategoryDidChange,
       object: nil)
     
+    #if AQUAZLITE
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(fullVersionIsPurchased(_:)),
+      name: NSNotification.Name(rawValue: GlobalConstants.notificationFullVersionIsPurchased), object: nil)
+    #endif
+    
     CoreDataStack.performOnPrivateContext { privateContext in
       NotificationCenter.default.addObserver(
         self,
@@ -128,6 +135,12 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   func managedObjectContextDidChange(_ notification: Notification) {
+    #if AQUAZLITE
+      if !Settings.sharedInstance.generalFullVersion.value {
+        return
+      }
+    #endif
+    
     updateWeekStatisticsView(animated: true)
   }
 
@@ -138,6 +151,12 @@ class WeekStatisticsViewController: UIViewController {
     view.invalidateIntrinsicContentSize()
   }
 
+  #if AQUAZLITE
+  func fullVersionIsPurchased(_ notification: NSNotification) {
+    updateWeekStatisticsView(animated: false)
+  }
+  #endif
+  
   fileprivate func updateUI(animated: Bool) {
     computeStatisticsDateRange()
     updateDatePeriodLabel(animated: animated)
@@ -224,6 +243,21 @@ class WeekStatisticsViewController: UIViewController {
   }
   
   fileprivate func updateWeekStatisticsView(animated: Bool) {
+    #if AQUAZLITE
+      if !Settings.sharedInstance.generalFullVersion.value {
+        // Demo mode
+        var items: [WeekStatisticsView.ItemType] = []
+        
+        for index in 0..<weekStatisticsView.daysPerWeek {
+          let item: WeekStatisticsView.ItemType = (value: CGFloat(200 + index * 300), goal: 1800)
+          items.append(item)
+        }
+        
+        weekStatisticsView.setItems(items, animate: animated)
+        return
+      }
+    #endif
+    
     CoreDataStack.performOnPrivateContext { privateContext in
       let date = self.date
       let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate, privateContext: privateContext)
@@ -251,6 +285,12 @@ class WeekStatisticsViewController: UIViewController {
   // MARK: Help tips
   
   fileprivate func checkHelpTip() {
+    #if AQUAZLITE
+    if !Settings.sharedInstance.generalFullVersion.value {
+      return
+    }
+    #endif
+    
     if helpTip != nil {
       return
     }

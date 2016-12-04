@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Initialize the core data stack
     _ = CoreDataStack.sharedInstance
     
-    #if DEBUG
+    #if DEBUG && AQUAZPRO
       let isSnapshotMode = ProcessInfo.processInfo.arguments.contains("-SNAPSHOT")
       
       if isSnapshotMode {
@@ -67,6 +67,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   fileprivate func initialSetup(launchOptions: [AnyHashable: Any]?) {
+    #if AQUAZLITE
+    // General case
+    if !Settings.sharedInstance.generalFullVersion.value {
+      // TODO: Remove for a while
+      //Appodeal.initializeWithApiKey(GlobalConstants.appodealApiKey, types: AppodealAdType.Interstitial)
+      
+      // Just for creating shared instance of in-app purchase manager and to start observing transaction states
+      _ = InAppPurchaseManager.sharedInstance
+    }
+    #endif
+    
     if Settings.sharedInstance.generalHasLaunchedOnce.value == false {
       prePopulateCoreData()
       removeDisabledNotifications()

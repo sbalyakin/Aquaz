@@ -67,6 +67,13 @@ class YearStatisticsViewController: UIViewController {
       name: NSNotification.Name.UIContentSizeCategoryDidChange,
       object: nil)
     
+    #if AQUAZLITE
+      NotificationCenter.default.addObserver(
+        self,
+        selector: #selector(fullVersionIsPurchased(_:)),
+        name: NSNotification.Name(rawValue: GlobalConstants.notificationFullVersionIsPurchased), object: nil)
+    #endif
+    
     CoreDataStack.performOnPrivateContext { privateContext in
       NotificationCenter.default.addObserver(
         self,
@@ -83,6 +90,12 @@ class YearStatisticsViewController: UIViewController {
   }
   
   func managedObjectContextDidChange(_ notification: Notification) {
+    #if AQUAZLITE
+      if !Settings.sharedInstance.generalFullVersion.value {
+        return
+      }
+    #endif
+    
     updateYearStatisticsView()
   }
 
@@ -118,6 +131,12 @@ class YearStatisticsViewController: UIViewController {
     view.invalidateIntrinsicContentSize()
   }
   
+  #if AQUAZLITE
+  func fullVersionIsPurchased(_ notification: NSNotification) {
+    updateYearStatisticsView()
+  }
+  #endif
+
   fileprivate func updateUI(animated: Bool) {
     computeStatisticsDateRange()
     updateYearLabel(animated: animated)
@@ -200,6 +219,21 @@ class YearStatisticsViewController: UIViewController {
   }
   
   fileprivate func updateYearStatisticsView() {
+    #if AQUAZLITE
+    if !Settings.sharedInstance.generalFullVersion.value {
+      // Demo mode
+      var items: [YearStatisticsView.ItemType] = []
+      
+      for i in 0..<yearStatisticsView.monthsPerYear {
+        let value = 1200 + cos(CGFloat(i + 4) / 2) * 700
+        items.append((value: CGFloat(value), goal: 2000))
+      }
+      
+      yearStatisticsView.setItems(items)
+      return
+    }
+    #endif
+    
     CoreDataStack.performOnPrivateContext { privateContext in
       let date = self.date
       let statisticsItems = self.fetchStatisticsItems(beginDate: self.statisticsBeginDate, endDate: self.statisticsEndDate, privateContext: privateContext)
@@ -218,6 +252,13 @@ class YearStatisticsViewController: UIViewController {
   }
 
   fileprivate func checkHelpTip() {
+    #if AQUAZLITE
+    if !Settings.sharedInstance.generalFullVersion.value {
+      return
+    }
+    #endif
+    
+    
     if Settings.sharedInstance.uiYearStatisticsPageHelpTipIsShown.value {
       return
     }

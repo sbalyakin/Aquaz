@@ -236,7 +236,6 @@
 		A58DE6FE1DD90F3900F65990 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B055519E2D7800097A833 /* SettingsViewController.swift */; };
 		A58DE6FF1DD90F3900F65990 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8455DACE1A694487004245F9 /* RoundedButton.swift */; };
 		A58DE7001DD90F3900F65990 /* HealthKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DEB0621BA86DCB00ABD3C8 /* HealthKitViewController.swift */; };
-		A58DE7011DD90F3900F65990 /* SnapshotsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A566BEFF1BC139DB0067CDFA /* SnapshotsInitializer.swift */; };
 		A58DE7021DD90F3900F65990 /* DrinkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AD231BD6C1B2000B48E9 /* DrinkType.swift */; };
 		A58DE7031DD90F3900F65990 /* UnitItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E271A824D6700966538 /* UnitItems.swift */; };
 		A58DE7041DD90F3900F65990 /* YearStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B639821A25D9EF00889438 /* YearStatisticsView.swift */; };
@@ -266,7 +265,6 @@
 		A58DE71F1DD90F3900F65990 /* aqua.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9821A87DF3D00145705 /* aqua.caf */; };
 		A58DE7201DD90F3900F65990 /* chime.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9851A87DF3D00145705 /* chime.caf */; };
 		A58DE7211DD90F3900F65990 /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57D2BE91ACFDE0D00619D62 /* Welcome.storyboard */; };
-		A58DE7221DD90F3900F65990 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7519DAD78D003C2263 /* Main.storyboard */; };
 		A58DE7231DD90F3900F65990 /* DrinkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55F34A51A74D6AC00A529A5 /* DrinkCollectionViewCell.xib */; };
 		A58DE7241DD90F3900F65990 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CDD1B3854E500599D81 /* InfoPlist.strings */; };
 		A58DE7251DD90F3900F65990 /* chirp.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9861A87DF3D00145705 /* chirp.caf */; };
@@ -343,6 +341,7 @@
 		A58DE7981DD90FA100F65990 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A53E39651C15C82700628103 /* Localizable.strings */; };
 		A58DE79E1DD9100B00F65990 /* Aquaz Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A58DE79C1DD90FA100F65990 /* Aquaz Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A58DE7A11DD9102400F65990 /* Aquaz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A58DE7671DD90F8400F65990 /* Aquaz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A58F37651DDBBD5B009F25FB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58F37641DDBBD5B009F25FB /* StoreKit.framework */; };
 		A598D5081A6558C100AA89CB /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5071A6558C100AA89CB /* StyleKit.swift */; };
 		A598D50A1A6559FB00AA89CB /* DrinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5091A6559FB00AA89CB /* DrinkView.swift */; };
 		A59CDC911AD8587100E92EF2 /* CodingManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CDC901AD8587100E92EF2 /* CodingManagedObject.swift */; };
@@ -380,6 +379,9 @@
 		A5B8F9961A87DF3D00145705 /* magic.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98A1A87DF3D00145705 /* magic.caf */; };
 		A5B8F9971A87DF3D00145705 /* tiny-bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */; };
 		A5B8F9981A87DF3D00145705 /* whistle.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98C1A87DF3D00145705 /* whistle.caf */; };
+		A5C70BBB1DEDC409006F7BFC /* FullVersionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70BB91DEDC409006F7BFC /* FullVersionController.swift */; };
+		A5C70BBE1DEDC47A006F7BFC /* InAppPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70BBC1DEDC47A006F7BFC /* InAppPurchaseManager.swift */; };
+		A5C70BBF1DEDF288006F7BFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84669A7519DAD78D003C2263 /* Main.storyboard */; };
 		A5C894671AF4B75C0042B6DF /* JDFSequentialTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */; };
 		A5C894681AF4B75C0042B6DF /* JDFTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945F1AF4B75C0042B6DF /* JDFTooltipManager.m */; };
 		A5C894691AF4B75C0042B6DF /* JDFTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894621AF4B75C0042B6DF /* JDFTooltipView.m */; };
@@ -699,6 +701,7 @@
 		A58DE7781DD90F9400F65990 /* Aquaz Watch-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Aquaz Watch-Info.plist"; sourceTree = "<group>"; };
 		A58DE79C1DD90FA100F65990 /* Aquaz Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Aquaz Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A58DE79D1DD90FA100F65990 /* Aquaz Watch Extension-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Aquaz Watch Extension-Info.plist"; sourceTree = "<group>"; };
+		A58F37641DDBBD5B009F25FB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A598D5071A6558C100AA89CB /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		A598D5091A6559FB00AA89CB /* DrinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrinkView.swift; path = Controls/DrinkView.swift; sourceTree = "<group>"; };
 		A59CDC901AD8587100E92EF2 /* CodingManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodingManagedObject.swift; sourceTree = "<group>"; };
@@ -732,6 +735,8 @@
 		A5B8F98A1A87DF3D00145705 /* magic.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = magic.caf; sourceTree = "<group>"; };
 		A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiny-bell.caf"; sourceTree = "<group>"; };
 		A5B8F98C1A87DF3D00145705 /* whistle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whistle.caf; sourceTree = "<group>"; };
+		A5C70BB91DEDC409006F7BFC /* FullVersionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullVersionController.swift; sourceTree = "<group>"; };
+		A5C70BBC1DEDC47A006F7BFC /* InAppPurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppPurchaseManager.swift; sourceTree = "<group>"; };
 		A5C8945C1AF4B75C0042B6DF /* JDFSequentialTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFSequentialTooltipManager.h; sourceTree = "<group>"; };
 		A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFSequentialTooltipManager.m; sourceTree = "<group>"; };
 		A5C8945E1AF4B75C0042B6DF /* JDFTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFTooltipManager.h; sourceTree = "<group>"; };
@@ -825,6 +830,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A58DE7141DD90F3900F65990 /* QuartzCore.framework in Frameworks */,
+				A58F37651DDBBD5B009F25FB /* StoreKit.framework in Frameworks */,
 				A58DE7151DD90F3900F65990 /* MessageUI.framework in Frameworks */,
 				A58DE7161DD90F3900F65990 /* Twitter.framework in Frameworks */,
 				A58DE7171DD90F3900F65990 /* HealthKit.framework in Frameworks */,
@@ -899,6 +905,7 @@
 			isa = PBXGroup;
 			children = (
 				A57D2BEC1ACFE9C600619D62 /* Welcome Wizard */,
+				A5C70BC01DEDF87B006F7BFC /* Statistics */,
 				843B055719E2D7800097A833 /* DayViewController.swift */,
 				843B055819E2D7800097A833 /* SelectDrinkViewController.swift */,
 				8424AA001A0A7009009C5C47 /* DiaryViewController.swift */,
@@ -911,13 +918,9 @@
 				840476581A35FE82004F0FEF /* NotificationsViewController.swift */,
 				8488A18D1A53FE6500258EC8 /* NotificationsSoundViewController.swift */,
 				8404765A1A360273004F0FEF /* SupportViewController.swift */,
-				843B055619E2D7800097A833 /* StatisticsViewController.swift */,
-				8435FEAE1AC52FFC00702727 /* StatisticsPageViewController.swift */,
 				84F9DD971A16574E003D6444 /* PickTimeViewController.swift */,
-				A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */,
-				84C610B91A319DBC00433EF1 /* MonthStatisticsViewController.swift */,
-				84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */,
 				A5DEB0621BA86DCB00ABD3C8 /* HealthKitViewController.swift */,
+				A5C70BB91DEDC409006F7BFC /* FullVersionController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1079,6 +1082,7 @@
 		84D251951AD2511E001E6644 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A58F37641DDBBD5B009F25FB /* StoreKit.framework */,
 				A5E898BF1BC094D900B9E4D6 /* QuartzCore.framework */,
 				A5E898BD1BC094CB00B9E4D6 /* MessageUI.framework */,
 				8401C2801BBFC7D700874AF7 /* Twitter.framework */,
@@ -1295,6 +1299,18 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		A5C70BC01DEDF87B006F7BFC /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				843B055619E2D7800097A833 /* StatisticsViewController.swift */,
+				8435FEAE1AC52FFC00702727 /* StatisticsPageViewController.swift */,
+				A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */,
+				84C610B91A319DBC00433EF1 /* MonthStatisticsViewController.swift */,
+				84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */,
+			);
+			name = Statistics;
+			sourceTree = "<group>";
+		};
 		A5C8945B1AF4B75C0042B6DF /* JDFTooltips */ = {
 			isa = PBXGroup;
 			children = (
@@ -1365,6 +1381,7 @@
 				A5DEB05E1BA75B1300ABD3C8 /* HealthKitProvider.swift */,
 				A566BEFF1BC139DB0067CDFA /* SnapshotsInitializer.swift */,
 				A554B4F81BE504360095593B /* WormholeDataProvider.swift */,
+				A5C70BBC1DEDC47A006F7BFC /* InAppPurchaseManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1643,6 +1660,11 @@
 					};
 					A58DE6A11DD90F3900F65990 = {
 						DevelopmentTeam = BEWTR7XXXS;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					A58DE73C1DD90F8400F65990 = {
 						DevelopmentTeam = BEWTR7XXXS;
@@ -1760,6 +1782,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5C70BBF1DEDF288006F7BFC /* Main.storyboard in Resources */,
 				A58DE71B1DD90F3900F65990 /* Localizable.strings in Resources */,
 				A58DE71C1DD90F3900F65990 /* glass.caf in Resources */,
 				A58DE71D1DD90F3900F65990 /* InfoBannerView.xib in Resources */,
@@ -1767,7 +1790,6 @@
 				A58DE71F1DD90F3900F65990 /* aqua.caf in Resources */,
 				A58DE7201DD90F3900F65990 /* chime.caf in Resources */,
 				A58DE7211DD90F3900F65990 /* Welcome.storyboard in Resources */,
-				A58DE7221DD90F3900F65990 /* Main.storyboard in Resources */,
 				A58DE7231DD90F3900F65990 /* DrinkCollectionViewCell.xib in Resources */,
 				A58DE7241DD90F3900F65990 /* InfoPlist.strings in Resources */,
 				A58DE7251DD90F3900F65990 /* chirp.caf in Resources */,
@@ -2364,6 +2386,7 @@
 				A58DE6BD1DD90F3900F65990 /* CoreDataPrePopulation.swift in Sources */,
 				A58DE6BE1DD90F3900F65990 /* WelcomeWizardFullVersionViewController.swift in Sources */,
 				A58DE6BF1DD90F3900F65990 /* DateHelper.swift in Sources */,
+				A5C70BBE1DEDC47A006F7BFC /* InAppPurchaseManager.swift in Sources */,
 				A58DE6C01DD90F3900F65990 /* Units.swift in Sources */,
 				A58DE6C11DD90F3900F65990 /* BasicTableCell.swift in Sources */,
 				A58DE6C21DD90F3900F65990 /* CalendarViewDataSource.swift in Sources */,
@@ -2396,6 +2419,7 @@
 				A58DE6DD1DD90F3900F65990 /* WelcomeWizardWelcomeViewController.swift in Sources */,
 				A58DE6DE1DD90F3900F65990 /* InfoBannerView.swift in Sources */,
 				A58DE6DF1DD90F3900F65990 /* CalendarViewDayInfo.swift in Sources */,
+				A5C70BBB1DEDC409006F7BFC /* FullVersionController.swift in Sources */,
 				A58DE6E01DD90F3900F65990 /* MonthStatisticsViewController.swift in Sources */,
 				A58DE6E11DD90F3900F65990 /* UITextFieldTableViewCell.swift in Sources */,
 				A58DE6E21DD90F3900F65990 /* Intake.swift in Sources */,
@@ -2429,7 +2453,6 @@
 				A58DE6FE1DD90F3900F65990 /* SettingsViewController.swift in Sources */,
 				A58DE6FF1DD90F3900F65990 /* RoundedButton.swift in Sources */,
 				A58DE7001DD90F3900F65990 /* HealthKitViewController.swift in Sources */,
-				A58DE7011DD90F3900F65990 /* SnapshotsInitializer.swift in Sources */,
 				A58DE7021DD90F3900F65990 /* DrinkType.swift in Sources */,
 				A58DE7031DD90F3900F65990 /* UnitItems.swift in Sources */,
 				A58DE7041DD90F3900F65990 /* YearStatisticsView.swift in Sources */,

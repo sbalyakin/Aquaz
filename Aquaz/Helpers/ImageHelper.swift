@@ -12,6 +12,8 @@ struct ImageHelper {
   
   enum Image: String {
     case BannerReward = "BannerReward"
+    case BannerFullVersion = "BannerFullVersion"
+    case BannerParentalControl = "BannerParentalControl"
     case IconHighActivityActive = "IconHighActivityActive"
     case IconHotWeatherActive = "IconHotWeatherActive"
     case SettingsWater = "SettingsWater"
@@ -19,6 +21,7 @@ struct ImageHelper {
     case SettingsUnits = "SettingsUnits"
     case SettingsNotifications = "SettingsNotifications"
     case SettingsFeedback = "SettingsFeedback"
+    case SettingsFullVersion = "SettingsFullVersion"
     case SettingsHealthKit = "SettingsHealthKit"
   }
   

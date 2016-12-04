@@ -12,8 +12,15 @@ class NotificationsViewController: OmegaSettingsViewController {
   
   fileprivate var notificationSoundObserver: SettingsObserver?
   
+  #if AQUAZLITE
+  private var fullVersionBannerView: InfoBannerView?
+  #endif
+  
   fileprivate struct Constants {
     static let chooseSoundSegue = "Choose Sound"
+    #if AQUAZLITE
+    static let fullVersionViewControllerIdentifier = "FullVersionViewController"
+    #endif
   }
   
   fileprivate struct LocalizedStrings {
@@ -72,6 +79,12 @@ class NotificationsViewController: OmegaSettingsViewController {
     UIHelper.applyStyleToViewController(self)
     rightDetailValueColor = StyleKit.settingsTablesValueColor
     rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
+    
+    #if AQUAZLITE
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(fullVersionIsPurchased(_:)),
+                                           name: NSNotification.Name(rawValue: GlobalConstants.notificationFullVersionIsPurchased), object: nil)
+    #endif
   }
   
   deinit {
@@ -153,6 +166,10 @@ class NotificationsViewController: OmegaSettingsViewController {
       title: localizedStrings.smartNotificationsTitle,
       settingsItem: Settings.sharedInstance.notificationsSmart)
     
+    #if AQUAZLITE
+    smartNotificationsCell.valueChangedFunction = { [weak self] in self?.smartNotificationsValueChanged(tableCell: $0) }
+    #endif
+    
     let smartNotificationsSection = TableCellsSection()
     smartNotificationsSection.footerTitle = localizedStrings.smartNotificationsSectionFooter
     smartNotificationsSection.tableCells = [smartNotificationsCell]
@@ -163,6 +180,10 @@ class NotificationsViewController: OmegaSettingsViewController {
       title: localizedStrings.limitNotificationsTitle,
       settingsItem: Settings.sharedInstance.notificationsLimit)
 
+    #if AQUAZLITE
+    limitNotificationsCell.valueChangedFunction = { [weak self] in self?.limitNotificationsValueChanged(tableCell: $0) }
+    #endif
+    
     let limitNotificationsSection = TableCellsSection()
     limitNotificationsSection.footerTitle = localizedStrings.limitNotificationsSectionFooter
     limitNotificationsSection.tableCells = [limitNotificationsCell]
@@ -184,6 +205,54 @@ class NotificationsViewController: OmegaSettingsViewController {
     dateFormatter.dateStyle = .none
     return dateFormatter.string(from: date)
   }
+  
+  #if AQUAZLITE
+  private func smartNotificationsValueChanged(tableCell: TableCell) {
+    if let valueCell = tableCell as? TableCellWithValue<Bool>, !Settings.sharedInstance.generalFullVersion.value && valueCell.value {
+      showFullVersionBanner(text: localizedStrings.smartNotificationsBannerText)
+      valueCell.value = false
+    }
+  }
+  
+  private func limitNotificationsValueChanged(tableCell: TableCell) {
+    if let valueCell = tableCell as? TableCellWithValue<Bool>, !Settings.sharedInstance.generalFullVersion.value && valueCell.value {
+      showFullVersionBanner(text: localizedStrings.limitNotificationsBannerText)
+      valueCell.value = false
+    }
+  }
+  
+  private func showFullVersionBanner(text: String) {
+    if fullVersionBannerView != nil {
+      return
+    }
+    
+    fullVersionBannerView = InfoBannerView.create()
+    fullVersionBannerView!.infoLabel.text = text
+    fullVersionBannerView!.infoImageView.image = ImageHelper.loadImage(.BannerFullVersion)
+    fullVersionBannerView!.bannerWasTappedFunction = { [weak self] _ in self?.fullVersionBannerWasTapped() }
+    fullVersionBannerView!.showAndHide(animated: true, displayTime: 3, parentView: view) { _ in
+      self.fullVersionBannerView = nil
+    }
+  }
+  
+  #if AQUAZLITE
+  func fullVersionIsPurchased(_ notification: NSNotification) {
+    hideFullVersionBanner()
+  }
+  #endif
+  
+  private func hideFullVersionBanner() {
+    fullVersionBannerView?.hide(animated: true) { _ in
+      self.fullVersionBannerView = nil
+    }
+  }
+  
+  func fullVersionBannerWasTapped() {
+    if let fullVersionViewController: FullVersionViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: Constants.fullVersionViewControllerIdentifier) {
+      navigationController!.pushViewController(fullVersionViewController, animated: true)
+    }
+  }
+  #endif
   
   fileprivate class func stringFromSoundFileName(_ filename: String) -> String {
     for sound in NotificationSounds.soundList {
