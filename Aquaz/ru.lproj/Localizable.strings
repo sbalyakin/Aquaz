@@ -104,6 +104,21 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* ExtraFactorsViewController: Footer for hot weather section */
 "EFVC:Specify an increase in daily water intake when Hot Weather mode is turned on." = "Укажите повышение суточной нормы при включении режима Жаркой Погоды.";
 
+/* FullVersionViewController: Description about full version purchase */
+"FVVC:Description about full version purchase" = "Полная версия Aquaz это:
+• умные оповещения
+• доступ к статистике
+• отсутствие рекламы";
+
+/* FullVersionViewController: Text displayed as a value of price label if price fetching is failed */
+"FVVC:Error" = "Ошибка";
+
+/* FullVersionViewController: Template of price label for Full Version purchase */
+"FVVC:Price: %@" = "Цена: %@";
+
+/* FullVersionViewController: Text for a banner shown if full version purchase is deffered and waits for an approval from parents */
+"FVVC:Waiting for an approval from your family delegate..." = "Ожидание подтверждения покупки от родителей...";
+
 /* HealthKitProvider: Title for metadata key (Drink) used in Health app */
 "HKP:Drink" = "Напиток";
 
