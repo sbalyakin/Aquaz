@@ -6,6 +6,7 @@
 //  Copyright © 2014 Sergey Balyakin. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class CalendarViewController: UIViewController {

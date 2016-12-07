@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		316D9C0E38942E85C78CC2FD /* Pods_AquazPro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F835C0417F68BA6171F27E /* Pods_AquazPro.framework */; };
-		6004CAC8548F56911FD50C23 /* Pods_AquazPro_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53DA077AE2C4AE3E4EF01D53 /* Pods_AquazPro_Widget.framework */; };
-		715F66BE66EC0283C8673BDA /* Pods_Aquaz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2034D5FC234041B776E3B8F6 /* Pods_Aquaz.framework */; };
+		4B24ECA46920E196EE473015 /* Pods_Aquaz_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E56DE86546C846B16969B44 /* Pods_Aquaz_Widget.framework */; };
+		620343965FD08DA7E26115A6 /* Pods_AquazPro_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B305005A042FE000EAB938 /* Pods_AquazPro_Widget.framework */; };
 		84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84039F171A4B103100C5391E /* NotificationsHelper.swift */; };
 		840476571A35FE4A004F0FEF /* WaterGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840476561A35FE4A004F0FEF /* WaterGoalViewController.swift */; };
 		840476591A35FE82004F0FEF /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840476581A35FE82004F0FEF /* NotificationsViewController.swift */; };
@@ -91,7 +90,6 @@
 		84ED8A211A84C8660042BAF2 /* UnitsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED8A201A84C8660042BAF2 /* UnitsTests.swift */; };
 		84ED8A231A84ED9E0042BAF2 /* DrinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */; };
 		84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9DD971A16574E003D6444 /* PickTimeViewController.swift */; };
-		905BEE1DCE7BE1E9287B1CC7 /* Pods_Aquaz_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFEC3F003D4CC3DDC33637AF /* Pods_Aquaz_Widget.framework */; };
 		A50275E61BB1824500BD440A /* CoreDataPrePopulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B0F12A19E406CB00E21AA9 /* CoreDataPrePopulation.swift */; };
 		A516B1171BEBF76F00EC553A /* DrinksInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516B1161BEBF76F00EC553A /* DrinksInterfaceController.swift */; };
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
@@ -102,7 +100,6 @@
 		A52E0CE01B3854E500599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CE21B3854E500599D81 /* InfoPlist.strings */; };
 		A52E0CE51B3854E600599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CE71B3854E600599D81 /* InfoPlist.strings */; };
 		A52FD0791DD3AC90007AF546 /* ConnectivityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FD0781DD3AC90007AF546 /* ConnectivityProvider.swift */; };
-		A5340CD11C158A4F00B01C30 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5340CD01C158A4F00B01C30 /* readme.txt */; };
 		A53E395E1C15C82600628103 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A53E39601C15C82600628103 /* InfoPlist.strings */; };
 		A53E39631C15C82700628103 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A53E39651C15C82700628103 /* Localizable.strings */; };
 		A53E39681C15C82700628103 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A53E396A1C15C82700628103 /* InfoPlist.strings */; };
@@ -277,7 +274,6 @@
 		A58DE72A1DD90F3900F65990 /* bells.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9831A87DF3D00145705 /* bells.caf */; };
 		A58DE72B1DD90F3900F65990 /* alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9811A87DF3D00145705 /* alarm.caf */; };
 		A58DE72C1DD90F3900F65990 /* hand-bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9891A87DF3D00145705 /* hand-bell.caf */; };
-		A58DE72D1DD90F3900F65990 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5340CD01C158A4F00B01C30 /* readme.txt */; };
 		A58DE72E1DD90F3900F65990 /* bubbles.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9841A87DF3D00145705 /* bubbles.caf */; };
 		A58DE72F1DD90F3900F65990 /* chord.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F9871A87DF3D00145705 /* chord.caf */; };
 		A58DE7401DD90F8400F65990 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5071A6558C100AA89CB /* StyleKit.swift */; };
@@ -443,8 +439,8 @@
 		A5EE36261AAD9DAA0038C844 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EE36251AAD9DAA0038C844 /* Logger.swift */; };
 		A5EF375D1A81618F00854A8D /* WaterGoalCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF375C1A81618F00854A8D /* WaterGoalCalculator.swift */; };
 		A5F582F21BF217BC0049AD3A /* UIControlsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F582F11BF217BC0049AD3A /* UIControlsExtensions.swift */; };
-		B6D3F4FC4CC952A6C80B29BA /* Pods_Aquaz_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91865B0EF413BD467D1DB6CA /* Pods_Aquaz_Pro.framework */; };
-		FD177B51857EC3E179D98E1D /* Pods_Aquaz_Pro_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF2FCA608968D33D587204F /* Pods_Aquaz_Pro_Widget.framework */; };
+		B722A889811802AE6C9CC6A1 /* Pods_Aquaz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47E8A4061BC876BE8F73EE8F /* Pods_Aquaz.framework */; };
+		BB748F45B992D8871CDE452C /* Pods_AquazPro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398200AD38E923CC4155B19B /* Pods_AquazPro.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -576,16 +572,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		137A7B705E29DAD5D0889DD3 /* Pods-Aquaz Pro Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Pro Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Pro Widget/Pods-Aquaz Pro Widget.release.xcconfig"; sourceTree = "<group>"; };
-		2034D5FC234041B776E3B8F6 /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		33FDBCA180D78CDEAF8909C5 /* Pods-Aquaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz.debug.xcconfig"; sourceTree = "<group>"; };
-		3F7FF8E5F10D1BE5AD761440 /* Pods-AquazPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro.debug.xcconfig"; sourceTree = "<group>"; };
-		46B71719174BFF7DAE86EAC3 /* Pods-Aquaz Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Pro/Pods-Aquaz Pro.release.xcconfig"; sourceTree = "<group>"; };
-		4B263E24FDEC76BEB1E30C90 /* Pods-AquazPro Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro Widget/Pods-AquazPro Widget.release.xcconfig"; sourceTree = "<group>"; };
-		4FF2FCA608968D33D587204F /* Pods_Aquaz_Pro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz_Pro_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		53DA077AE2C4AE3E4EF01D53 /* Pods_AquazPro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B6E63CF2DF6D7CDCD2E99E7 /* Pods-Aquaz Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Pro/Pods-Aquaz Pro.debug.xcconfig"; sourceTree = "<group>"; };
-		724562D01F0511D395997A53 /* Pods-Aquaz Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Widget/Pods-Aquaz Widget.release.xcconfig"; sourceTree = "<group>"; };
+		33B305005A042FE000EAB938 /* Pods_AquazPro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		398200AD38E923CC4155B19B /* Pods_AquazPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		40228D8261E67ED4AD5756F6 /* Pods-Aquaz Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Widget/Pods-Aquaz Widget.debug.xcconfig"; sourceTree = "<group>"; };
+		47E8A4061BC876BE8F73EE8F /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48DD03B8F72BAD45E4F034DF /* Pods-Aquaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz.release.xcconfig"; sourceTree = "<group>"; };
+		58019E5D5B0FBB923C036736 /* Pods-AquazPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro.release.xcconfig"; sourceTree = "<group>"; };
+		8111C4F9BFA177C9BC3397A4 /* Pods-AquazPro Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro Widget/Pods-AquazPro Widget.debug.xcconfig"; sourceTree = "<group>"; };
 		8401C2801BBFC7D700874AF7 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		84039F171A4B103100C5391E /* NotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsHelper.swift; sourceTree = "<group>"; };
 		840476561A35FE4A004F0FEF /* WaterGoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterGoalViewController.swift; sourceTree = "<group>"; };
@@ -669,9 +662,8 @@
 		84ED8A201A84C8660042BAF2 /* UnitsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsTests.swift; sourceTree = "<group>"; };
 		84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkTests.swift; sourceTree = "<group>"; };
 		84F9DD971A16574E003D6444 /* PickTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTimeViewController.swift; sourceTree = "<group>"; };
-		91865B0EF413BD467D1DB6CA /* Pods_Aquaz_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9FA18138F9821A46CF099502 /* Pods-Aquaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz.release.xcconfig"; sourceTree = "<group>"; };
-		A0F6E9A85C35CFE980BE0501 /* Pods-AquazPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro.release.xcconfig"; sourceTree = "<group>"; };
+		8E56DE86546C846B16969B44 /* Pods_Aquaz_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F956C00FC6A32F4851C39B1 /* Pods-Aquaz Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Widget/Pods-Aquaz Widget.release.xcconfig"; sourceTree = "<group>"; };
 		A516B1161BEBF76F00EC553A /* DrinksInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinksInterfaceController.swift; sourceTree = "<group>"; };
 		A51A65F91DD7C2D300B1A83F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -835,11 +827,9 @@
 		A5F582F11BF217BC0049AD3A /* UIControlsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIControlsExtensions.swift; sourceTree = "<group>"; };
 		A5F62E9A1B558D6F002F91BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A5F62E9B1B558D80002F91BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A8062ED2D20DA9657DCA6F45 /* Pods-Aquaz Pro Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Pro Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Pro Widget/Pods-Aquaz Pro Widget.debug.xcconfig"; sourceTree = "<group>"; };
-		A9F835C0417F68BA6171F27E /* Pods_AquazPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9CC3EE64FFA0AD6BA0B1112 /* Pods-Aquaz Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Widget/Pods-Aquaz Widget.debug.xcconfig"; sourceTree = "<group>"; };
-		BFEC3F003D4CC3DDC33637AF /* Pods_Aquaz_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DBD5B44914593BBC06FC6186 /* Pods-AquazPro Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro Widget/Pods-AquazPro Widget.debug.xcconfig"; sourceTree = "<group>"; };
+		B09AEEBCB8E2BA5DD363DE1F /* Pods-AquazPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro.debug.xcconfig"; sourceTree = "<group>"; };
+		E195771F27452BBCA81B0EE5 /* Pods-Aquaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz.debug.xcconfig"; sourceTree = "<group>"; };
+		E29171CF1C152F5814D28249 /* Pods-AquazPro Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro Widget/Pods-AquazPro Widget.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -859,8 +849,7 @@
 				A5E898BC1BC094C500B9E4D6 /* Twitter.framework in Frameworks */,
 				A5DEB0611BA75B4B00ABD3C8 /* HealthKit.framework in Frameworks */,
 				A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */,
-				B6D3F4FC4CC952A6C80B29BA /* Pods_Aquaz_Pro.framework in Frameworks */,
-				316D9C0E38942E85C78CC2FD /* Pods_AquazPro.framework in Frameworks */,
+				BB748F45B992D8871CDE452C /* Pods_AquazPro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -877,8 +866,7 @@
 			files = (
 				A52BFC611BAF293400B76345 /* HealthKit.framework in Frameworks */,
 				84D251971AD2511E001E6644 /* NotificationCenter.framework in Frameworks */,
-				FD177B51857EC3E179D98E1D /* Pods_Aquaz_Pro_Widget.framework in Frameworks */,
-				6004CAC8548F56911FD50C23 /* Pods_AquazPro_Widget.framework in Frameworks */,
+				620343965FD08DA7E26115A6 /* Pods_AquazPro_Widget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -926,7 +914,7 @@
 				A58DE7151DD90F3900F65990 /* MessageUI.framework in Frameworks */,
 				A58DE7161DD90F3900F65990 /* Twitter.framework in Frameworks */,
 				A58DE7171DD90F3900F65990 /* HealthKit.framework in Frameworks */,
-				715F66BE66EC0283C8673BDA /* Pods_Aquaz.framework in Frameworks */,
+				B722A889811802AE6C9CC6A1 /* Pods_Aquaz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,7 +924,7 @@
 			files = (
 				A58DE75A1DD90F8400F65990 /* HealthKit.framework in Frameworks */,
 				A58DE75B1DD90F8400F65990 /* NotificationCenter.framework in Frameworks */,
-				905BEE1DCE7BE1E9287B1CC7 /* Pods_Aquaz_Widget.framework in Frameworks */,
+				4B24ECA46920E196EE473015 /* Pods_Aquaz_Widget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1054,7 +1042,7 @@
 				A566BF011BC19C6C0067CDFA /* Snapshot */,
 				A5340CCD1C1584E800B01C30 /* Distribution */,
 				A58DE7A41DD9123000F65990 /* AquazLiteSpecific */,
-				89EBE0BB99D133F27B8323DD /* Pods */,
+				E7DAC1C1C09D7AF66AD1E5E6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1199,12 +1187,10 @@
 				A5DEB0601BA75B4B00ABD3C8 /* HealthKit.framework */,
 				A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */,
 				84D251961AD2511E001E6644 /* NotificationCenter.framework */,
-				2034D5FC234041B776E3B8F6 /* Pods_Aquaz.framework */,
-				91865B0EF413BD467D1DB6CA /* Pods_Aquaz_Pro.framework */,
-				4FF2FCA608968D33D587204F /* Pods_Aquaz_Pro_Widget.framework */,
-				BFEC3F003D4CC3DDC33637AF /* Pods_Aquaz_Widget.framework */,
-				A9F835C0417F68BA6171F27E /* Pods_AquazPro.framework */,
-				53DA077AE2C4AE3E4EF01D53 /* Pods_AquazPro_Widget.framework */,
+				47E8A4061BC876BE8F73EE8F /* Pods_Aquaz.framework */,
+				8E56DE86546C846B16969B44 /* Pods_Aquaz_Widget.framework */,
+				398200AD38E923CC4155B19B /* Pods_AquazPro.framework */,
+				33B305005A042FE000EAB938 /* Pods_AquazPro_Widget.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1231,25 +1217,6 @@
 				84D2519A1AD2511E001E6644 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		89EBE0BB99D133F27B8323DD /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				33FDBCA180D78CDEAF8909C5 /* Pods-Aquaz.debug.xcconfig */,
-				9FA18138F9821A46CF099502 /* Pods-Aquaz.release.xcconfig */,
-				5B6E63CF2DF6D7CDCD2E99E7 /* Pods-Aquaz Pro.debug.xcconfig */,
-				46B71719174BFF7DAE86EAC3 /* Pods-Aquaz Pro.release.xcconfig */,
-				A8062ED2D20DA9657DCA6F45 /* Pods-Aquaz Pro Widget.debug.xcconfig */,
-				137A7B705E29DAD5D0889DD3 /* Pods-Aquaz Pro Widget.release.xcconfig */,
-				B9CC3EE64FFA0AD6BA0B1112 /* Pods-Aquaz Widget.debug.xcconfig */,
-				724562D01F0511D395997A53 /* Pods-Aquaz Widget.release.xcconfig */,
-				3F7FF8E5F10D1BE5AD761440 /* Pods-AquazPro.debug.xcconfig */,
-				A0F6E9A85C35CFE980BE0501 /* Pods-AquazPro.release.xcconfig */,
-				DBD5B44914593BBC06FC6186 /* Pods-AquazPro Widget.debug.xcconfig */,
-				4B263E24FDEC76BEB1E30C90 /* Pods-AquazPro Widget.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		A52FD07A1DD3C9A6007AF546 /* Services */ = {
@@ -1518,6 +1485,21 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		E7DAC1C1C09D7AF66AD1E5E6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E195771F27452BBCA81B0EE5 /* Pods-Aquaz.debug.xcconfig */,
+				48DD03B8F72BAD45E4F034DF /* Pods-Aquaz.release.xcconfig */,
+				40228D8261E67ED4AD5756F6 /* Pods-Aquaz Widget.debug.xcconfig */,
+				9F956C00FC6A32F4851C39B1 /* Pods-Aquaz Widget.release.xcconfig */,
+				B09AEEBCB8E2BA5DD363DE1F /* Pods-AquazPro.debug.xcconfig */,
+				58019E5D5B0FBB923C036736 /* Pods-AquazPro.release.xcconfig */,
+				8111C4F9BFA177C9BC3397A4 /* Pods-AquazPro Widget.debug.xcconfig */,
+				E29171CF1C152F5814D28249 /* Pods-AquazPro Widget.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1525,7 +1507,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84669A8B19DAD78D003C2263 /* Build configuration list for PBXNativeTarget "AquazPro" */;
 			buildPhases = (
-				67C71C7D743946DC82254005 /* [CP] Check Pods Manifest.lock */,
+				750965FA4A75620EE2CBD387 /* [CP] Check Pods Manifest.lock */,
 				A52170EB1DD125DB0041135F /* Show Environment Variables */,
 				84669A6519DAD78D003C2263 /* Sources */,
 				84669A6619DAD78D003C2263 /* Frameworks */,
@@ -1533,8 +1515,8 @@
 				84D251A51AD2511E001E6644 /* Embed App Extensions */,
 				A587AAC71BD65224000B48E9 /* Embed Watch Content */,
 				A571D50D1AB180B1006265C7 /* Fabric */,
-				3D65B898D8B82656BB47F1F7 /* [CP] Embed Pods Frameworks */,
-				776D72E109FA3A062468AF1E /* [CP] Copy Pods Resources */,
+				E151E424973EA859961A94FD /* [CP] Embed Pods Frameworks */,
+				17BCFD4861B6350F4A7AC03E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1569,13 +1551,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84D251A41AD2511E001E6644 /* Build configuration list for PBXNativeTarget "AquazPro Widget" */;
 			buildPhases = (
-				A112595E04925A4491B71A6F /* [CP] Check Pods Manifest.lock */,
+				A80467880927DD3741F8B05C /* [CP] Check Pods Manifest.lock */,
 				A52170EC1DD1269A0041135F /* Show Environment Variables */,
 				84D251901AD2511E001E6644 /* Sources */,
 				84D251911AD2511E001E6644 /* Frameworks */,
 				84D251921AD2511E001E6644 /* Resources */,
 				8443DF271B29658100FDD294 /* Fabric */,
-				8B274C3B2F913211BC580B7B /* [CP] Copy Pods Resources */,
+				A4BA9EC72D1995F1EFEABD5D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1627,7 +1609,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A58DE7371DD90F3900F65990 /* Build configuration list for PBXNativeTarget "Aquaz" */;
 			buildPhases = (
-				F73A7B5FA5BDB1E6E43597F8 /* [CP] Check Pods Manifest.lock */,
+				44B7D28156FC331C28E8CA22 /* [CP] Check Pods Manifest.lock */,
 				A58DE6A61DD90F3900F65990 /* Show Environment Variables */,
 				A58DE6A81DD90F3900F65990 /* Sources */,
 				A58DE7131DD90F3900F65990 /* Frameworks */,
@@ -1635,8 +1617,8 @@
 				A58DE7301DD90F3900F65990 /* Embed App Extensions */,
 				A58DE7321DD90F3900F65990 /* Embed Watch Content */,
 				A58DE7341DD90F3900F65990 /* Fabric */,
-				2343D996CA0C9B79847C4B55 /* [CP] Embed Pods Frameworks */,
-				29F6A6331A890B241B20A1C9 /* [CP] Copy Pods Resources */,
+				BCA32A028802A4DC32E8C755 /* [CP] Embed Pods Frameworks */,
+				92184A75C2BAAB78BB24C781 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1653,13 +1635,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A58DE7641DD90F8400F65990 /* Build configuration list for PBXNativeTarget "Aquaz Widget" */;
 			buildPhases = (
-				03976B64478E5D2E3EE015EB /* [CP] Check Pods Manifest.lock */,
+				A9E0F94FF3168295ED465A19 /* [CP] Check Pods Manifest.lock */,
 				A58DE73D1DD90F8400F65990 /* Show Environment Variables */,
 				A58DE73F1DD90F8400F65990 /* Sources */,
 				A58DE7591DD90F8400F65990 /* Frameworks */,
 				A58DE75D1DD90F8400F65990 /* Resources */,
 				A58DE7621DD90F8400F65990 /* Fabric */,
-				0D72BC2512C257882961584C /* [CP] Copy Pods Resources */,
+				83D76332198517E15EA08266 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1865,7 +1847,6 @@
 				A5B8F98F1A87DF3D00145705 /* bells.caf in Resources */,
 				A5B8F98D1A87DF3D00145705 /* alarm.caf in Resources */,
 				A5B8F9951A87DF3D00145705 /* hand-bell.caf in Resources */,
-				A5340CD11C158A4F00B01C30 /* readme.txt in Resources */,
 				A5B8F9901A87DF3D00145705 /* bubbles.caf in Resources */,
 				A5B8F9931A87DF3D00145705 /* chord.caf in Resources */,
 			);
@@ -1932,7 +1913,6 @@
 				A58DE72A1DD90F3900F65990 /* bells.caf in Resources */,
 				A58DE72B1DD90F3900F65990 /* alarm.caf in Resources */,
 				A58DE72C1DD90F3900F65990 /* hand-bell.caf in Resources */,
-				A58DE72D1DD90F3900F65990 /* readme.txt in Resources */,
 				A58DE72E1DD90F3900F65990 /* bubbles.caf in Resources */,
 				A58DE72F1DD90F3900F65990 /* chord.caf in Resources */,
 			);
@@ -1980,97 +1960,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		03976B64478E5D2E3EE015EB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		0D72BC2512C257882961584C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz Widget/Pods-Aquaz Widget-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2343D996CA0C9B79847C4B55 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		29F6A6331A890B241B20A1C9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3D65B898D8B82656BB47F1F7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		67C71C7D743946DC82254005 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		776D72E109FA3A062468AF1E /* [CP] Copy Pods Resources */ = {
+		17BCFD4861B6350F4A7AC03E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2083,6 +1973,51 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		44B7D28156FC331C28E8CA22 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		750965FA4A75620EE2CBD387 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		83D76332198517E15EA08266 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz Widget/Pods-Aquaz Widget-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8443DF271B29658100FDD294 /* Fabric */ = {
@@ -2099,7 +2034,22 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 05704a14be9c8590ae8ea81e57283c4e84ca67f3 55072d54e985e08a6262ca78f74607f2a5a5f546c18fb4b4623ed469a350539e";
 		};
-		8B274C3B2F913211BC580B7B /* [CP] Copy Pods Resources */ = {
+		92184A75C2BAAB78BB24C781 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A4BA9EC72D1995F1EFEABD5D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2112,21 +2062,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AquazPro Widget/Pods-AquazPro Widget-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A112595E04925A4491B71A6F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		A52170EB1DD125DB0041135F /* Show Environment Variables */ = {
@@ -2155,7 +2090,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#export";
+			shellScript = "# export";
+			showEnvVarsInLog = 0;
 		};
 		A52170ED1DD126B00041135F /* Show Environment Variables */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2169,7 +2105,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#export";
+			shellScript = "# export";
+			showEnvVarsInLog = 0;
 		};
 		A52170EE1DD126C30041135F /* Show Environment Variables */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2183,7 +2120,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#export";
+			shellScript = "# export";
+			showEnvVarsInLog = 0;
 		};
 		A571D50D1AB180B1006265C7 /* Fabric */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2211,7 +2149,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#export";
+			shellScript = "# export";
+			showEnvVarsInLog = 0;
 		};
 		A58DE7341DD90F3900F65990 /* Fabric */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2239,7 +2178,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#export";
+			shellScript = "# export";
+			showEnvVarsInLog = 0;
 		};
 		A58DE7621DD90F8400F65990 /* Fabric */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2267,7 +2207,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#export";
+			shellScript = "# export";
+			showEnvVarsInLog = 0;
 		};
 		A58DE77A1DD90FA100F65990 /* Show Environment Variables */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2281,9 +2222,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#export";
+			shellScript = "# export";
+			showEnvVarsInLog = 0;
 		};
-		F73A7B5FA5BDB1E6E43597F8 /* [CP] Check Pods Manifest.lock */ = {
+		A80467880927DD3741F8B05C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2295,7 +2237,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A9E0F94FF3168295ED465A19 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BCA32A028802A4DC32E8C755 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E151E424973EA859961A94FD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2949,7 +2936,7 @@
 		};
 		84669A8C19DAD78D003C2263 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F7FF8E5F10D1BE5AD761440 /* Pods-AquazPro.debug.xcconfig */;
+			baseConfigurationReference = B09AEEBCB8E2BA5DD363DE1F /* Pods-AquazPro.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2958,14 +2945,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Aquaz/Aquaz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Aquaz/External",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				INFOPLIST_FILE = Aquaz/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2979,13 +2961,13 @@
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Aquaz/Aquaz-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
 		84669A8D19DAD78D003C2263 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0F6E9A85C35CFE980BE0501 /* Pods-AquazPro.release.xcconfig */;
+			baseConfigurationReference = 58019E5D5B0FBB923C036736 /* Pods-AquazPro.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2994,15 +2976,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Aquaz/Aquaz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Aquaz/External",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				INFOPLIST_FILE = Aquaz/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3015,7 +2992,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Aquaz/Aquaz-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;
 		};
@@ -3038,7 +3015,7 @@
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aquaz.app/Aquaz";
 			};
 			name = Debug;
@@ -3058,14 +3035,14 @@
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aquaz.app/Aquaz";
 			};
 			name = Release;
 		};
 		84D251A21AD2511E001E6644 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DBD5B44914593BBC06FC6186 /* Pods-AquazPro Widget.debug.xcconfig */;
+			baseConfigurationReference = 8111C4F9BFA177C9BC3397A4 /* Pods-AquazPro Widget.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = WidgetAppIcon;
@@ -3076,10 +3053,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = Widget/Info.plist;
@@ -3094,13 +3068,13 @@
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Widget/Widget-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
 		84D251A31AD2511E001E6644 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4B263E24FDEC76BEB1E30C90 /* Pods-AquazPro Widget.release.xcconfig */;
+			baseConfigurationReference = E29171CF1C152F5814D28249 /* Pods-AquazPro Widget.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = WidgetAppIcon;
@@ -3113,10 +3087,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Widget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3129,7 +3100,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Widget/Widget-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;
 		};
@@ -3204,7 +3175,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -3229,7 +3200,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -3237,7 +3208,7 @@
 		};
 		A58DE7381DD90F3900F65990 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33FDBCA180D78CDEAF8909C5 /* Pods-Aquaz.debug.xcconfig */;
+			baseConfigurationReference = E195771F27452BBCA81B0EE5 /* Pods-Aquaz.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3250,11 +3221,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Aquaz/External",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3268,13 +3235,13 @@
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Aquaz/Aquaz-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
 		A58DE7391DD90F3900F65990 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9FA18138F9821A46CF099502 /* Pods-Aquaz.release.xcconfig */;
+			baseConfigurationReference = 48DD03B8F72BAD45E4F034DF /* Pods-Aquaz.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3288,11 +3255,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Aquaz/External",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3305,13 +3268,13 @@
 				SDKROOT = iphoneos;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Aquaz/Aquaz-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;
 		};
 		A58DE7651DD90F8400F65990 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B9CC3EE64FFA0AD6BA0B1112 /* Pods-Aquaz Widget.debug.xcconfig */;
+			baseConfigurationReference = 40228D8261E67ED4AD5756F6 /* Pods-Aquaz Widget.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = WidgetAppIcon;
@@ -3323,10 +3286,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz Widget-Info.plist";
@@ -3341,13 +3301,13 @@
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Widget/Widget-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
 		A58DE7661DD90F8400F65990 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 724562D01F0511D395997A53 /* Pods-Aquaz Widget.release.xcconfig */;
+			baseConfigurationReference = 9F956C00FC6A32F4851C39B1 /* Pods-Aquaz Widget.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = WidgetAppIcon;
@@ -3361,10 +3321,7 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz Widget-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3377,7 +3334,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Widget/Widget-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;
 		};
@@ -3454,7 +3411,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -3481,7 +3438,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -3499,7 +3456,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.Aquaz.AquazUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 				TEST_TARGET_NAME = Aquaz;
 				USES_XCTRUNNER = YES;
 			};
@@ -3516,7 +3473,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.Aquaz.AquazUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 				TEST_TARGET_NAME = Aquaz;
 				USES_XCTRUNNER = YES;
 			};

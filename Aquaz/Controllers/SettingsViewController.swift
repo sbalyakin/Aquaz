@@ -48,15 +48,15 @@ class SettingsViewController: OmegaSettingsViewController {
       comment: "SettingsViewController: Table title for [Export to Apple Health] cell")
   }
 
-  fileprivate struct Constants {
-    static let calculateWaterIntakeSegue = "Calculate Water Intake"
-    static let showNotificationsSegue = "Show Notifications"
-    static let showExtraFactorsSegue = "Show Extra Factors"
-    static let showUnitsSegue = "Show Units"
-    static let showSupportSegue = "Show Support"
+  fileprivate struct Segues {
+    static let calculateWaterIntake = "Calculate Water Intake"
+    static let showNotifications = "Show Notifications"
+    static let showExtraFactors = "Show Extra Factors"
+    static let showUnits = "Show Units"
+    static let showSupport = "Show Support"
     static let exportToHealthKit = "Export To HealthKit"
     #if AQUAZLITE
-    static let manageFullVersionSegue = "Manage Full Version"
+    static let manageFullVersion = "Manage Full Version"
     #endif
   }
   
@@ -112,7 +112,7 @@ class SettingsViewController: OmegaSettingsViewController {
     
     extraFactorsCell.activationChangedFunction = { [weak self] (tableCell, active) -> () in
       if active {
-        self?.performSegue(withIdentifier: Constants.showExtraFactorsSegue, sender: tableCell)
+        self?.performSegue(withIdentifier: Segues.showExtraFactors, sender: tableCell)
       }
     }
     
@@ -126,7 +126,7 @@ class SettingsViewController: OmegaSettingsViewController {
     
     unitsCell.activationChangedFunction = { [weak self] (tableCell, active) -> () in
       if active {
-        self?.performSegue(withIdentifier: Constants.showUnitsSegue, sender: tableCell)
+        self?.performSegue(withIdentifier: Segues.showUnits, sender: tableCell)
       }
     }
 
@@ -140,7 +140,7 @@ class SettingsViewController: OmegaSettingsViewController {
     
     notificationsCell.activationChangedFunction = { [weak self] (tableCell, active) -> () in
       if active {
-        self?.performSegue(withIdentifier: Constants.showNotificationsSegue, sender: tableCell)
+        self?.performSegue(withIdentifier: Segues.showNotifications, sender: tableCell)
       }
     }
     
@@ -154,7 +154,7 @@ class SettingsViewController: OmegaSettingsViewController {
     
     supportCell.activationChangedFunction = { [weak self] (tableCell, active) -> () in
         if active {
-          self?.performSegue(withIdentifier: Constants.showSupportSegue, sender: tableCell)
+          self?.performSegue(withIdentifier: Segues.showSupport, sender: tableCell)
         }
     }
     
@@ -174,7 +174,7 @@ class SettingsViewController: OmegaSettingsViewController {
       
       fullVersionCell.activationChangedFunction = { [weak self] tableCell, active in
         if active {
-          self?.performSegue(withIdentifier: Constants.manageFullVersionSegue, sender: tableCell)
+          self?.performSegue(withIdentifier: Segues.manageFullVersion, sender: tableCell)
         }
       }
     }
@@ -198,7 +198,7 @@ class SettingsViewController: OmegaSettingsViewController {
       
       healthCell.activationChangedFunction = { [weak self] tableCell, active in
         if active {
-          self?.performSegue(withIdentifier: Constants.exportToHealthKit, sender: tableCell)
+          self?.performSegue(withIdentifier: Segues.exportToHealthKit, sender: tableCell)
         }
       }
       
@@ -229,7 +229,7 @@ class SettingsViewController: OmegaSettingsViewController {
   
   fileprivate func waterGoalCellWasSelected(_ tableCell: TableCell, active: Bool) {
     if active {
-      performSegue(withIdentifier: Constants.calculateWaterIntakeSegue, sender: tableCell)
+      performSegue(withIdentifier: Segues.calculateWaterIntake, sender: tableCell)
     }
   }
   
