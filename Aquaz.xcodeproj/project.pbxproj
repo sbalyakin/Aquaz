@@ -3117,7 +3117,7 @@
 				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				IBSC_MODULE = Watch_Extension;
+				IBSC_MODULE = AquazPro_Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.Aquaz.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3144,7 +3144,7 @@
 				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				IBSC_MODULE = Watch_Extension;
+				IBSC_MODULE = AquazPro_Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.Aquaz.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3351,7 +3351,7 @@
 				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				IBSC_MODULE = Watch_Extension;
+				IBSC_MODULE = Aquaz_Watch_Extension;
 				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz Watch-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.AquazLite.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3378,7 +3378,7 @@
 				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				IBSC_MODULE = Watch_Extension;
+				IBSC_MODULE = Aquaz_Watch_Extension;
 				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz Watch-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.AquazLite.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
