@@ -15,6 +15,10 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
     // Initialize the connectivity provider
     ConnectivityProvider.sharedInstance.startSession()
+    
+    // SEB: Force russian to debug
+    //UserDefaults.standard.set(["ru", "en-US"], forKey: "AppleLanguages")
+    //UserDefaults.standard.synchronize()
   }
   
   func applicationDidFinishLaunching() {

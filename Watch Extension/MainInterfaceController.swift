@@ -49,9 +49,9 @@ private extension WatchResolution {
   
   var fontSizes: (title: CGFloat, upTitle: CGFloat, subTitle: CGFloat) {
     switch self {
-    case .watch38mm: return (title: 28, upTitle: 13, subTitle: 13)
-    case .watch42mm: return (title: 34, upTitle: 16, subTitle: 16)
-    case .unknown:   return (title: 34, upTitle: 16, subTitle: 16)
+    case .watch38mm: return (title: 28, upTitle: 12, subTitle: 12)
+    case .watch42mm: return (title: 34, upTitle: 15, subTitle: 15)
+    case .unknown:   return (title: 34, upTitle: 15, subTitle: 15)
     }
   }
   

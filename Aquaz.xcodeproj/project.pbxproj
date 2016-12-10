@@ -1283,8 +1283,8 @@
 				A52FD07A1DD3C9A6007AF546 /* Services */,
 				A587ABF91BD65D45000B48E9 /* Helpers */,
 				A587ABF81BD65D37000B48E9 /* Controllers */,
-				A587AABA1BD65224000B48E9 /* Assets.xcassets */,
 				A587AAB01BD65224000B48E9 /* Supporting Files */,
+				A587AABA1BD65224000B48E9 /* Assets.xcassets */,
 			);
 			path = "Watch Extension";
 			sourceTree = "<group>";

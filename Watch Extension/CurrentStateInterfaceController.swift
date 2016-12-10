@@ -19,11 +19,11 @@ class CurrentStateInterfaceController: WKInterfaceController {
   @IBOutlet var progressImage: WKInterfaceImage!
 
   var progressImageSize: CGSize {
-    return CGSize(width: 100, height: 100)
+    return CGSize(width: 132, height: 132)
   }
   
   var fontSizes: (title: CGFloat, upTitle: CGFloat, subTitle: CGFloat) {
-    return (title: 34, upTitle: 14, subTitle: 14)
+    return (title: 34, upTitle: 15, subTitle: 15)
   }
   
   fileprivate var settingsObserverVolumeUnits: SettingsObserver?
