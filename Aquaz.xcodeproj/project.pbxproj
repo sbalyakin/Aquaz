@@ -1069,10 +1069,10 @@
 		84669A6B19DAD78D003C2263 /* Aquaz */ = {
 			isa = PBXGroup;
 			children = (
+				843B055219E2D7800097A833 /* AppDelegates */,
 				843B055D19E2D7800097A833 /* Models */,
 				A5C374AE1AE6700900F91550 /* Views */,
 				843B055419E2D7800097A833 /* Controllers */,
-				843B055219E2D7800097A833 /* AppDelegates */,
 				8424AA041A0B57F9009C5C47 /* Controls */,
 				A5EE36241AAD9D820038C844 /* Services */,
 				A5B75A1219E55CBB00D0477B /* Helpers */,
@@ -1833,22 +1833,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84669A7919DAD78D003C2263 /* Images.xcassets in Resources */,
 				842DE2E11AB30D9400EEA137 /* Localizable.strings in Resources */,
-				A5B8F9941A87DF3D00145705 /* glass.caf in Resources */,
+				A5AAA1D91A77A9CF008C3C56 /* LaunchScreen.xib in Resources */,
 				840D5A821B29B7C500388920 /* InfoBannerView.xib in Resources */,
-				A5B8F9971A87DF3D00145705 /* tiny-bell.caf in Resources */,
-				A5B8F98E1A87DF3D00145705 /* aqua.caf in Resources */,
+				A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */,
 				A5C18C5D1DFA08D8003E9C7D /* Aquaz-Info.plist in Resources */,
-				A5B8F9911A87DF3D00145705 /* chime.caf in Resources */,
+				A52E0CDB1B3854E500599D81 /* InfoPlist.strings in Resources */,
 				A57D2BEB1ACFDE0D00619D62 /* Welcome.storyboard in Resources */,
 				84669A7719DAD78D003C2263 /* Main.storyboard in Resources */,
-				A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */,
-				A52E0CDB1B3854E500599D81 /* InfoPlist.strings in Resources */,
+				A5B8F9941A87DF3D00145705 /* glass.caf in Resources */,
+				A5B8F9971A87DF3D00145705 /* tiny-bell.caf in Resources */,
+				A5B8F98E1A87DF3D00145705 /* aqua.caf in Resources */,
+				A5B8F9911A87DF3D00145705 /* chime.caf in Resources */,
 				A5B8F9921A87DF3D00145705 /* chirp.caf in Resources */,
 				A5B8F9981A87DF3D00145705 /* whistle.caf in Resources */,
 				A5B8F9961A87DF3D00145705 /* magic.caf in Resources */,
-				A5AAA1D91A77A9CF008C3C56 /* LaunchScreen.xib in Resources */,
-				84669A7919DAD78D003C2263 /* Images.xcassets in Resources */,
 				A5B8F98F1A87DF3D00145705 /* bells.caf in Resources */,
 				A5B8F98D1A87DF3D00145705 /* alarm.caf in Resources */,
 				A5B8F9951A87DF3D00145705 /* hand-bell.caf in Resources */,
@@ -2297,6 +2297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8455DACF1A694487004245F9 /* RoundedButton.swift in Sources */,
 				84CD97591ABB2B960011623B /* InfiniteScrollView.swift in Sources */,
 				84CD97631ABB2C3A0011623B /* MonthStatisticsContentView.swift in Sources */,
 				A581FEF01A76D5F60025CDEF /* CustomSlider.swift in Sources */,
@@ -2383,7 +2384,6 @@
 				A5D3D42A1AA5D29700E3C989 /* UIPickerTableViewCell.swift in Sources */,
 				8435FEAF1AC52FFC00702727 /* StatisticsPageViewController.swift in Sources */,
 				843B055F19E2D7800097A833 /* SettingsViewController.swift in Sources */,
-				8455DACF1A694487004245F9 /* RoundedButton.swift in Sources */,
 				A5DEB0631BA86DCB00ABD3C8 /* HealthKitViewController.swift in Sources */,
 				A566BF001BC139DB0067CDFA /* SnapshotsInitializer.swift in Sources */,
 				A587AD241BD6C1B2000B48E9 /* DrinkType.swift in Sources */,
@@ -3074,7 +3074,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "-D DEBUG";
+				OTHER_SWIFT_FLAGS = "-D DEBUG -D AQUAZPRO";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.Aquaz.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3107,7 +3107,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "";
+				OTHER_SWIFT_FLAGS = "-D AQUAZPRO";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.Aquaz.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3307,7 +3307,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "-D DEBUG";
+				OTHER_SWIFT_FLAGS = "-D DEBUG -D AQUAZLITE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.AquazLite.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3341,7 +3341,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "";
+				OTHER_SWIFT_FLAGS = "-D AQUAZLITE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.AquazLite.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

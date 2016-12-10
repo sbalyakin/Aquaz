@@ -45,10 +45,10 @@ class TodayViewController: UIViewController {
   // in order to exclude synchronization problems for managed object contexts.
   fileprivate var coreDataStack = CoreDataStack()
   
+  private static var fabric = Fabric.with([Crashlytics()])
+  
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-
-    Fabric.with([Crashlytics()])
   }
   
   override func viewDidLoad() {

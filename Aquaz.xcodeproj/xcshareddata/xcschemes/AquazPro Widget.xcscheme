@@ -76,18 +76,25 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
+      language = "ru"
       launchAutomaticallySubstyle = "2">
       <RemoteRunnable
          runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.springboard"
-         RemotePath = "/Today">
+         BundleIdentifier = "com.apple.springboard">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "84D251931AD2511E001E6644"
+            BuildableName = "AquazPro Widget.appex"
+            BlueprintName = "AquazPro Widget"
+            ReferencedContainer = "container:Aquaz.xcodeproj">
+         </BuildableReference>
       </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "84669A6819DAD78D003C2263"
-            BuildableName = "AquazPro.app"
-            BlueprintName = "AquazPro"
+            BlueprintIdentifier = "84D251931AD2511E001E6644"
+            BuildableName = "AquazPro Widget.appex"
+            BlueprintName = "AquazPro Widget"
             ReferencedContainer = "container:Aquaz.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
