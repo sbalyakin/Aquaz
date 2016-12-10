@@ -163,11 +163,11 @@ class WeekStatisticsViewController: UIViewController {
     updateWeekStatisticsView(animated: animated)
   }
 
-  @IBAction func switchToPreviousWeek(_ sender: AnyObject) {
+  @IBAction func switchToPreviousWeek(_ sender: Any) {
     switchToPreviousWeek()
   }
   
-  @IBAction func switchToNextWeek(_ sender: AnyObject) {
+  @IBAction func switchToNextWeek(_ sender: Any) {
     switchToNextWeek()
   }
   

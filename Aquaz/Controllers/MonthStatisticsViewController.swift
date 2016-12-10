@@ -128,13 +128,13 @@ class MonthStatisticsViewController: UIViewController {
     }
   }
 
-  @IBAction func switchToPreviousMonth(_ sender: AnyObject) {
+  @IBAction func switchToPreviousMonth(_ sender: Any) {
     monthStatisticsView.switchToPreviousMonth()
     date = monthStatisticsView.getDisplayedMonthDate() as Date
     updateUI(animated: true) // Updating month label before scroll view animation is finished
   }
   
-  @IBAction func switchToNextMonth(_ sender: AnyObject) {
+  @IBAction func switchToNextMonth(_ sender: Any) {
     monthStatisticsView.switchToNextMonth()
     date = monthStatisticsView.getDisplayedMonthDate() as Date
     updateUI(animated: true) // Updating month label before scroll view animation is finished

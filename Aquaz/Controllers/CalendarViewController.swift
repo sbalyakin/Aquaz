@@ -83,19 +83,19 @@ class CalendarViewController: UIViewController {
     }
   }
 
-  @IBAction func switchToNextMonth(_ sender: AnyObject) {
+  @IBAction func switchToNextMonth(_ sender: Any) {
     date = DateHelper.nextMonthFrom(date)
     calendarView.switchToNextMonth()
     updateUI(initial: false) // Updating month label before scroll view animation is finished
   }
   
-  @IBAction func switchToPreviousMonth(_ sender: AnyObject) {
+  @IBAction func switchToPreviousMonth(_ sender: Any) {
     date = DateHelper.previousMonthBefore(date)
     calendarView.switchToPreviousMonth()
     updateUI(initial: false) // Updating month label before scroll view animation is finished
   }
   
-  @IBAction func todayDidSelected(_ sender: AnyObject) {
+  @IBAction func todayDidSelected(_ sender: Any) {
     let date = DateHelper.dateByJoiningDateTime(datePart: Date(), timePart: dayViewController.getCurrentDate())
     dayViewController.setCurrentDate(date)
     navigationController?.dismiss(animated: true, completion: nil)

@@ -468,12 +468,12 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   // MARK: Summary bar actions -
   
-  @IBAction func toggleHighActivityMode(_ sender: AnyObject) {
+  @IBAction func toggleHighActivityMode(_ sender: Any) {
     isHighActivity = !isHighActivity
     saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: isHotDay, isHighActivity: isHighActivity)
   }
   
-  @IBAction func toggleHotDayMode(_ sender: AnyObject) {
+  @IBAction func toggleHotDayMode(_ sender: Any) {
     isHotDay = !isHotDay
     saveWaterGoalForCurrentDate(baseAmount: waterGoalBaseAmount, isHotDay: isHotDay, isHighActivity: isHighActivity)
   }
@@ -646,7 +646,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
 
-  @IBAction func intakeButtonWasTapped(_ sender: AnyObject) {
+  @IBAction func intakeButtonWasTapped(_ sender: Any) {
     Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value = !Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value
     updateIntakeButton(animated: true)
   }

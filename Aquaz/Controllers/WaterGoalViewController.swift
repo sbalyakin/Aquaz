@@ -286,12 +286,12 @@ class WaterGoalViewController: OmegaSettingsViewController {
     }
   }
   
-  @IBAction func cancelButtonWasTapped(_ sender: AnyObject) {
+  @IBAction func cancelButtonWasTapped(_ sender: Any) {
     activateTableCell(nil)
     _ = navigationController?.popViewController(animated: true)
   }
   
-  @IBAction func doneButtonWasTapped(_ sender: AnyObject) {
+  @IBAction func doneButtonWasTapped(_ sender: Any) {
     activateTableCell(nil)
     saveToSettings()
     _ = navigationController?.popViewController(animated: true)

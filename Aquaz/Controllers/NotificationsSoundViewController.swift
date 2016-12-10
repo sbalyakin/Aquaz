@@ -27,7 +27,7 @@ class NotificationsSoundViewController: UIViewController {
     tableView?.delegate = nil
   }
 
-  @IBAction func saveWasTapped(_ sender: AnyObject) {
+  @IBAction func saveWasTapped(_ sender: Any) {
     let soundInfo = soundList[checkedIndex]
     Settings.sharedInstance.notificationsSound.value = soundInfo.fileName
     

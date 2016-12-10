@@ -143,11 +143,11 @@ class YearStatisticsViewController: UIViewController {
     updateYearStatisticsView()
   }
   
-  @IBAction func switchToPreviousYear(_ sender: AnyObject) {
+  @IBAction func switchToPreviousYear(_ sender: Any) {
     switchToPreviousYear()
   }
   
-  @IBAction func switchToNextYear(_ sender: AnyObject) {
+  @IBAction func switchToNextYear(_ sender: Any) {
     switchToNextYear()
   }
 

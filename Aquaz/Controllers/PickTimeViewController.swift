@@ -44,13 +44,13 @@ class PickTimeViewController: UIViewController {
     navigationController?.navigationBar.barTintColor = drinkType?.mainColor
   }
 
-  @IBAction func chooseButtonWasTapped(_ sender: AnyObject) {
+  @IBAction func chooseButtonWasTapped(_ sender: Any) {
     time = timePicker.date
     intakeViewController.changeTimeForCurrentDate(time)
     navigationController?.dismiss(animated: true, completion: nil)
   }
   
-  @IBAction func cancelButtonWasTapped(_ sender: AnyObject) {
+  @IBAction func cancelButtonWasTapped(_ sender: Any) {
     navigationController?.dismiss(animated: true, completion: nil)
   }
 

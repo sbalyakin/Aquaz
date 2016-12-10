@@ -233,23 +233,23 @@ class IntakeViewController: UIViewController {
     navigationController?.dismiss(animated: true, completion: nil)
   }
   
-  @IBAction func amountSliderValueChanged(_ sender: AnyObject) {
+  @IBAction func amountSliderValueChanged(_ sender: Any) {
     setAmountLabel(Double(amountSlider.value))
   }
   
-  @IBAction func applyCustomIntake(_ sender: AnyObject) {
+  @IBAction func applyCustomIntake(_ sender: Any) {
     applyIntake(Double(amountSlider.value))
   }
   
-  @IBAction func applySmallIntake(_ sender: AnyObject) {
+  @IBAction func applySmallIntake(_ sender: Any) {
     applyIntake(predefinedAmounts.small)
   }
   
-  @IBAction func applyMediumIntake(_ sender: AnyObject) {
+  @IBAction func applyMediumIntake(_ sender: Any) {
     applyIntake(predefinedAmounts.medium)
   }
   
-  @IBAction func applyLargeIntake(_ sender: AnyObject) {
+  @IBAction func applyLargeIntake(_ sender: Any) {
     applyIntake(predefinedAmounts.large)
   }
   

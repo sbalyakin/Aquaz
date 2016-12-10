@@ -21,7 +21,7 @@ extension UIView {
         
         let date = Date()
         let bundle = Bundle(for: type(of: self))
-        if let application: AnyObject = bundle.object(forInfoDictionaryKey: "CFBundleName") as AnyObject? {
+        if let application: Any = bundle.object(forInfoDictionaryKey: "CFBundleName") as Any? {
           if let data = "\(date) \(application) \(message)\n".data(using: String.Encoding.utf8, allowLossyConversion: true) {
             fileHandle.write(data)
           }
@@ -30,7 +30,7 @@ extension UIView {
     #endif
   }
   
-  func addConstraints(_ constraintsVisualFormat: String, views: [String: UIView], metrics: [String: AnyObject]? = nil, options: NSLayoutFormatOptions = NSLayoutFormatOptions()) {
+  func addConstraints(_ constraintsVisualFormat: String, views: [String: UIView], metrics: [String: Any]? = nil, options: NSLayoutFormatOptions = NSLayoutFormatOptions()) {
     let constraints = NSLayoutConstraint.constraints(withVisualFormat: constraintsVisualFormat, options: options, metrics: metrics, views: views)
     self.addConstraints(constraints)
   }

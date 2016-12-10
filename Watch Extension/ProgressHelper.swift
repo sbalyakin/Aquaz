@@ -26,7 +26,7 @@ final class ProgressHelper {
     let color: UIColor
     let font: UIFont
     
-    var attributes: [String: AnyObject] {
+    var attributes: [String: Any] {
       return [
         NSFontAttributeName: font,
         NSForegroundColorAttributeName: color
