@@ -68,16 +68,6 @@ class TodayViewController: UIViewController {
     }
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    
-    fetchData {
-      DispatchQueue.main.async {
-        self.updateUI(animated: false)
-      }
-    }
-  }
-  
   deinit {
     NotificationCenter.default.removeObserver(self)
     // It's necessary to reset the managed object context in order to finalize background tasks correctly.
@@ -386,6 +376,7 @@ extension TodayViewController : NCWidgetProviding {
       preferredContentSize = maxSize
     } else {
       preferredContentSize = CGSize(width: maxSize.width, height: 240)
+      drink1View.updateConstraints()
     }
   }
 }
