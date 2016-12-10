@@ -11,8 +11,8 @@ import UIKit
 
 class MonthStatisticsContentViewCell: CalendarContentViewCell {
 
-  var value: CGFloat? {
-    return getDayInfo().userData as? CGFloat
+  var value: Double? {
+    return getDayInfo().userData as? Double
   }
   
   fileprivate var circleLayer: CAShapeLayer!
@@ -62,11 +62,11 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
             animation.fillMode = kCAFillModeForwards
             animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
             animation.isRemovedOnCompletion = false
-            arcLayer.strokeEnd = value
+            arcLayer.strokeEnd = CGFloat(value)
             arcLayer.add(animation, forKey: "animateStrokeEnd")
           } else {
             // If cell is invisible we skip animation
-            arcLayer.strokeEnd = value
+            arcLayer.strokeEnd = CGFloat(value)
           }
         }
         

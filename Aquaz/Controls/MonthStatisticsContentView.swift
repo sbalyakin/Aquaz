@@ -48,7 +48,7 @@ class MonthStatisticsContentView: CalendarContentView {
       if dayInfo.isCurrentMonth {
         let dayIndex = dayInfo.dayOfCurrentMonth - 1
         if dayIndex < values.count {
-          dayInfo.userData = values[dayIndex] as AnyObject?
+          dayInfo.userData = values[dayIndex]
         } else {
           assert(false)
         }
