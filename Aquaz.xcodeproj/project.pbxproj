@@ -147,6 +147,7 @@
 		A587AD251BD6C1B2000B48E9 /* DrinkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AD231BD6C1B2000B48E9 /* DrinkType.swift */; };
 		A587AD261BD6C367000B48E9 /* DrinkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AD231BD6C1B2000B48E9 /* DrinkType.swift */; };
 		A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */; };
+		A58D16171DFC8CA80020B106 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5C18C621DFA0921003E9C7D /* InfoPlist.strings */; };
 		A58DE6A91DD90F3900F65990 /* InfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD97521ABB2B960011623B /* InfiniteScrollView.swift */; };
 		A58DE6AA1DD90F3900F65990 /* MonthStatisticsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD97601ABB2C3A0011623B /* MonthStatisticsContentView.swift */; };
 		A58DE6AB1DD90F3900F65990 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */; };
@@ -1932,6 +1933,7 @@
 				A58DE75F1DD90F8400F65990 /* InfoPlist.strings in Resources */,
 				A58DE7601DD90F8400F65990 /* MainInterface.storyboard in Resources */,
 				A58DE7611DD90F8400F65990 /* Localizable.strings in Resources */,
+				A58D16171DFC8CA80020B106 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

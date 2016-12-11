@@ -374,9 +374,18 @@ extension TodayViewController : NCWidgetProviding {
   func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
     if activeDisplayMode == .compact {
       preferredContentSize = maxSize
-    } else {
+    } else {      
       preferredContentSize = CGSize(width: maxSize.width, height: 240)
-      drink1View.updateConstraints()
+    }
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    
+    if preferredContentSize.height == 240 {
+      drink1View.setNeedsDisplay()
+      drink2View.setNeedsDisplay()
+      drink3View.setNeedsDisplay()
     }
   }
 }

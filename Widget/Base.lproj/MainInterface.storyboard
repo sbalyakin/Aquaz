@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,13 +24,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Updating..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9e7-xk-npV" userLabel="Overall Intake">
-                                <rect key="frame" x="16" y="12" width="288" height="20.5"/>
+                                <rect key="frame" x="16" y="8" width="288" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="GD9-6t-B34" userLabel="Progress View" customClass="MultiProgressView" customModule="AquazPro_Widget" customModuleProvider="target">
-                                <rect key="frame" x="20" y="40.5" width="280" height="4"/>
+                                <rect key="frame" x="20" y="36.5" width="280" height="4"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="5ld-t6-L2B"/>
@@ -48,93 +47,114 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="Recent Intakes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJk-Gn-h2O">
-                                <rect key="frame" x="16" y="52.5" width="284" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="200" text="Recent Intakes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJk-Gn-h2O">
+                                <rect key="frame" x="16" y="48.5" width="288" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="iEn-FC-8wI" userLabel="Gap 1">
-                                <rect key="frame" x="0.0" y="78.5" width="32" height="67.5"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="210" translatesAutoresizingMaskIntoConstraints="NO" id="iEn-FC-8wI" userLabel="Gap 1">
+                                <rect key="frame" x="0.0" y="74.5" width="32" height="74"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleAspectFit" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="Wee-Cb-r64" userLabel="Drink 1 - Image" customClass="DrinkView" customModule="AquazPro_Widget" customModuleProvider="target">
-                                <rect key="frame" x="32" y="78.5" width="64" height="67.5"/>
+                            <view contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="210" translatesAutoresizingMaskIntoConstraints="NO" id="Wee-Cb-r64" userLabel="Drink 1 - Image" customClass="DrinkView" customModule="AquazPro_Widget" customModuleProvider="target">
+                                <rect key="frame" x="32" y="74.5" width="64" height="74"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="e35-GQ-ArS" appends="YES" id="hFs-pc-pZh"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="{Drink}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omk-iq-t3r" userLabel="Drink 1 - Title">
-                                <rect key="frame" x="41.5" y="154" width="45.5" height="17"/>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="220" text="{Drink}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omk-iq-t3r" userLabel="Drink 1 - Title">
+                                <rect key="frame" x="41.5" y="156" width="45.5" height="17"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="aYz-Km-hxc" appends="YES" id="ZMK-RB-m3w"/>
+                                </connections>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="{Amount}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNh-iL-tK7" userLabel="Drink 1 - Amount">
-                                <rect key="frame" x="33.5" y="171" width="61.5" height="17"/>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="230" text="{Amount}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNh-iL-tK7" userLabel="Drink 1 - Amount">
+                                <rect key="frame" x="33.5" y="173" width="61.5" height="17"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="HTO-7Z-LGJ" appends="YES" id="UJk-l2-VJQ"/>
+                                </connections>
                             </label>
-                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="da6-s4-EEI" userLabel="Gap 2">
-                                <rect key="frame" x="96" y="78.5" width="32" height="67.5"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="210" translatesAutoresizingMaskIntoConstraints="NO" id="da6-s4-EEI" userLabel="Gap 2">
+                                <rect key="frame" x="96" y="74.5" width="32" height="74"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleAspectFit" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="vJU-a4-h8C" userLabel="Drink 2 - Image" customClass="DrinkView" customModule="AquazPro_Widget" customModuleProvider="target">
-                                <rect key="frame" x="128" y="78.5" width="64" height="67.5"/>
+                            <view contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="210" translatesAutoresizingMaskIntoConstraints="NO" id="vJU-a4-h8C" userLabel="Drink 2 - Image" customClass="DrinkView" customModule="AquazPro_Widget" customModuleProvider="target">
+                                <rect key="frame" x="128" y="74.5" width="64" height="74"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="vJU-a4-h8C" secondAttribute="height" multiplier="1:1" priority="250" id="6Kw-V6-IEs"/>
-                                </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="zzN-Hc-xay" appends="YES" id="mvg-6P-MA9"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="{Drink}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNy-lo-PmP" userLabel="Drink 2 - Title">
-                                <rect key="frame" x="137.5" y="154" width="45.5" height="17"/>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="220" text="{Drink}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNy-lo-PmP" userLabel="Drink 2 - Title">
+                                <rect key="frame" x="137.5" y="156" width="45.5" height="17"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Yqz-os-Fhs" appends="YES" id="cXc-tr-dFv"/>
+                                </connections>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="{Amount}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spF-wi-ff1" userLabel="Drink 2 - Amount">
-                                <rect key="frame" x="129.5" y="171" width="61.5" height="17"/>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="230" text="{Amount}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spF-wi-ff1" userLabel="Drink 2 - Amount">
+                                <rect key="frame" x="129.5" y="173" width="61.5" height="17"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="chC-mh-ipe" appends="YES" id="eQ4-gi-RT5"/>
+                                </connections>
                             </label>
-                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="4kR-rT-yJj" userLabel="Gap 3">
-                                <rect key="frame" x="192" y="78.5" width="32" height="67.5"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="210" translatesAutoresizingMaskIntoConstraints="NO" id="4kR-rT-yJj" userLabel="Gap 3">
+                                <rect key="frame" x="192" y="74.5" width="32" height="74"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleAspectFit" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="vPd-GL-K5j" userLabel="Drink 3 - Image" customClass="DrinkView" customModule="AquazPro_Widget" customModuleProvider="target">
-                                <rect key="frame" x="224" y="78.5" width="64" height="67.5"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="210" translatesAutoresizingMaskIntoConstraints="NO" id="vPd-GL-K5j" userLabel="Drink 3 - Image" customClass="DrinkView" customModule="AquazPro_Widget" customModuleProvider="target">
+                                <rect key="frame" x="224" y="74.5" width="64" height="74"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="7W0-VZ-LL4" appends="YES" id="Fxg-KP-aSm"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="{Drink}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wh-Vx-QHv" userLabel="Drink 3 - Title">
-                                <rect key="frame" x="233.5" y="154" width="45.5" height="17"/>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="220" text="{Drink}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wh-Vx-QHv" userLabel="Drink 3 - Title">
+                                <rect key="frame" x="233.5" y="156" width="45.5" height="17"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Ebf-YU-Vqz" appends="YES" id="5gY-dn-kM6"/>
+                                </connections>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="{Amount}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agh-hU-OBc" userLabel="Drink 3 - Amount">
-                                <rect key="frame" x="225.5" y="171" width="61.5" height="17"/>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="230" text="{Amount}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agh-hU-OBc" userLabel="Drink 3 - Amount">
+                                <rect key="frame" x="225.5" y="173" width="61.5" height="17"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="jzP-AJ-Yn4" appends="YES" id="1NT-ho-aFW"/>
+                                </connections>
                             </label>
-                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="vX0-OV-jjo" userLabel="Gap 4">
-                                <rect key="frame" x="288" y="78.5" width="32" height="67.5"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="210" translatesAutoresizingMaskIntoConstraints="NO" id="vX0-OV-jjo" userLabel="Gap 4">
+                                <rect key="frame" x="288" y="74.5" width="32" height="74"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ze7-qb-OsM">
-                                <rect key="frame" x="101" y="200" width="118" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ze7-qb-OsM">
+                                <rect key="frame" x="16" y="198" width="288" height="30"/>
                                 <state key="normal" title="Open Application">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -144,62 +164,60 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="vJU-a4-h8C" firstAttribute="height" secondItem="da6-s4-EEI" secondAttribute="height" id="09j-V1-oyS"/>
-                            <constraint firstItem="vJU-a4-h8C" firstAttribute="centerY" secondItem="4kR-rT-yJj" secondAttribute="centerY" id="0t2-3T-0mj"/>
-                            <constraint firstItem="dNy-lo-PmP" firstAttribute="centerY" secondItem="Omk-iq-t3r" secondAttribute="centerY" id="1DZ-hK-Zdr"/>
-                            <constraint firstItem="5Wh-Vx-QHv" firstAttribute="centerY" secondItem="dNy-lo-PmP" secondAttribute="centerY" id="34S-ik-k0d"/>
-                            <constraint firstItem="4kR-rT-yJj" firstAttribute="leading" secondItem="vJU-a4-h8C" secondAttribute="trailing" id="3Iv-ky-rsT"/>
-                            <constraint firstItem="dNy-lo-PmP" firstAttribute="top" secondItem="vJU-a4-h8C" secondAttribute="bottom" constant="8" symbolic="YES" id="3YI-QB-QEy"/>
-                            <constraint firstItem="vJU-a4-h8C" firstAttribute="height" secondItem="vPd-GL-K5j" secondAttribute="height" id="5lP-ao-BxL"/>
-                            <constraint firstItem="spF-wi-ff1" firstAttribute="centerX" secondItem="dNy-lo-PmP" secondAttribute="centerX" id="5og-i7-gud"/>
-                            <constraint firstItem="ze7-qb-OsM" firstAttribute="top" secondItem="spF-wi-ff1" secondAttribute="bottom" constant="12" id="8Kk-nO-9wx"/>
-                            <constraint firstItem="Wee-Cb-r64" firstAttribute="centerY" secondItem="vJU-a4-h8C" secondAttribute="centerY" id="9Zw-zc-5H7"/>
-                            <constraint firstItem="vJU-a4-h8C" firstAttribute="centerY" secondItem="vX0-OV-jjo" secondAttribute="centerY" id="BoR-uh-DJM"/>
-                            <constraint firstItem="iEn-FC-8wI" firstAttribute="width" secondItem="vX0-OV-jjo" secondAttribute="width" id="C04-7T-hcE"/>
-                            <constraint firstItem="vJU-a4-h8C" firstAttribute="width" secondItem="vPd-GL-K5j" secondAttribute="width" id="DGX-IF-pvo"/>
-                            <constraint firstItem="9e7-xk-npV" firstAttribute="trailing" secondItem="S3S-Oj-5AN" secondAttribute="trailingMargin" id="DbL-LN-cZs"/>
-                            <constraint firstItem="spF-wi-ff1" firstAttribute="height" secondItem="agh-hU-OBc" secondAttribute="height" id="E4Q-Yq-5y5"/>
-                            <constraint firstItem="vPd-GL-K5j" firstAttribute="leading" secondItem="4kR-rT-yJj" secondAttribute="trailing" id="FIq-b6-CJt"/>
-                            <constraint firstItem="da6-s4-EEI" firstAttribute="leading" secondItem="Wee-Cb-r64" secondAttribute="trailing" id="FRO-iv-5Bf"/>
-                            <constraint firstItem="bNh-iL-tK7" firstAttribute="top" secondItem="Omk-iq-t3r" secondAttribute="bottom" priority="750" id="IF4-bB-pSs"/>
-                            <constraint firstItem="iEn-FC-8wI" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="IxF-ph-x7q"/>
-                            <constraint firstItem="vJU-a4-h8C" firstAttribute="centerY" secondItem="da6-s4-EEI" secondAttribute="centerY" id="JGz-vG-v8W"/>
-                            <constraint firstItem="iEn-FC-8wI" firstAttribute="width" secondItem="da6-s4-EEI" secondAttribute="width" id="KDz-V8-JUy"/>
-                            <constraint firstItem="vJU-a4-h8C" firstAttribute="height" secondItem="4kR-rT-yJj" secondAttribute="height" id="KpU-Wk-bvx"/>
-                            <constraint firstItem="9e7-xk-npV" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="L4i-Fq-JD3"/>
-                            <constraint firstItem="sJk-Gn-h2O" firstAttribute="top" secondItem="GD9-6t-B34" secondAttribute="bottom" priority="749" constant="8" symbolic="YES" id="WDm-oW-2LH"/>
-                            <constraint firstItem="5Wh-Vx-QHv" firstAttribute="centerX" secondItem="agh-hU-OBc" secondAttribute="centerX" id="Wg1-qH-xLj"/>
-                            <constraint firstItem="9e7-xk-npV" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="12" id="Xgc-Wc-xL7"/>
-                            <constraint firstItem="vJU-a4-h8C" firstAttribute="leading" secondItem="da6-s4-EEI" secondAttribute="trailing" id="Y33-1R-i6B"/>
-                            <constraint firstAttribute="trailing" secondItem="GD9-6t-B34" secondAttribute="trailing" constant="20" symbolic="YES" id="ZP3-uj-fKK"/>
-                            <constraint firstItem="vJU-a4-h8C" firstAttribute="centerY" secondItem="vPd-GL-K5j" secondAttribute="centerY" id="ZRI-0u-kkk"/>
-                            <constraint firstItem="vJU-a4-h8C" firstAttribute="centerX" secondItem="dNy-lo-PmP" secondAttribute="centerX" id="cG1-qu-Ygq"/>
-                            <constraint firstItem="Wee-Cb-r64" firstAttribute="height" secondItem="vJU-a4-h8C" secondAttribute="height" id="d6o-x7-NBH"/>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="ze7-qb-OsM" secondAttribute="bottom" constant="10" id="dTe-J4-zAg"/>
-                            <constraint firstItem="Wee-Cb-r64" firstAttribute="leading" secondItem="iEn-FC-8wI" secondAttribute="trailing" id="dvj-tZ-7Or"/>
-                            <constraint firstItem="spF-wi-ff1" firstAttribute="top" secondItem="dNy-lo-PmP" secondAttribute="bottom" id="dyW-M8-Gan"/>
-                            <constraint firstItem="iEn-FC-8wI" firstAttribute="width" secondItem="4kR-rT-yJj" secondAttribute="width" id="e2w-Dd-3f0"/>
-                            <constraint firstItem="iEn-FC-8wI" firstAttribute="centerY" secondItem="vJU-a4-h8C" secondAttribute="centerY" id="gAb-2w-mda"/>
-                            <constraint firstItem="iEn-FC-8wI" firstAttribute="height" secondItem="vJU-a4-h8C" secondAttribute="height" id="gnh-B5-jAH"/>
-                            <constraint firstItem="GD9-6t-B34" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" constant="20" symbolic="YES" id="i8I-h2-T23"/>
-                            <constraint firstItem="Omk-iq-t3r" firstAttribute="height" secondItem="dNy-lo-PmP" secondAttribute="height" id="n8k-E0-7gb"/>
-                            <constraint firstItem="GD9-6t-B34" firstAttribute="top" secondItem="9e7-xk-npV" secondAttribute="bottom" constant="8" symbolic="YES" id="n8p-NM-TfB"/>
-                            <constraint firstItem="vJU-a4-h8C" firstAttribute="top" secondItem="sJk-Gn-h2O" secondAttribute="bottom" priority="750" constant="8" symbolic="YES" id="qDD-tR-Z78"/>
-                            <constraint firstItem="ze7-qb-OsM" firstAttribute="centerX" secondItem="spF-wi-ff1" secondAttribute="centerX" id="qaK-tG-5Ub"/>
-                            <constraint firstItem="dNy-lo-PmP" firstAttribute="height" secondItem="5Wh-Vx-QHv" secondAttribute="height" id="rM0-0X-qem"/>
-                            <constraint firstItem="5Wh-Vx-QHv" firstAttribute="centerX" secondItem="vPd-GL-K5j" secondAttribute="centerX" id="rdC-qk-Amu"/>
-                            <constraint firstItem="agh-hU-OBc" firstAttribute="top" secondItem="5Wh-Vx-QHv" secondAttribute="bottom" priority="750" id="riJ-qe-o9W"/>
-                            <constraint firstItem="sJk-Gn-h2O" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" constant="16" id="saM-A0-Anc"/>
-                            <constraint firstItem="vJU-a4-h8C" firstAttribute="height" secondItem="vX0-OV-jjo" secondAttribute="height" id="sze-JX-cSa"/>
-                            <constraint firstItem="vX0-OV-jjo" firstAttribute="leading" secondItem="vPd-GL-K5j" secondAttribute="trailing" id="tC4-sc-yzR"/>
-                            <constraint firstItem="bNh-iL-tK7" firstAttribute="height" secondItem="spF-wi-ff1" secondAttribute="height" id="tHD-qi-2nU"/>
-                            <constraint firstAttribute="trailing" secondItem="vX0-OV-jjo" secondAttribute="trailing" id="tef-Pp-pli"/>
-                            <constraint firstItem="Wee-Cb-r64" firstAttribute="width" secondItem="vJU-a4-h8C" secondAttribute="width" id="uu6-wY-TAw"/>
-                            <constraint firstItem="Wee-Cb-r64" firstAttribute="centerX" secondItem="Omk-iq-t3r" secondAttribute="centerX" id="v83-6t-j23"/>
-                            <constraint firstAttribute="trailing" secondItem="sJk-Gn-h2O" secondAttribute="trailing" constant="20" id="yAq-JV-2gr"/>
-                            <constraint firstItem="Omk-iq-t3r" firstAttribute="centerX" secondItem="bNh-iL-tK7" secondAttribute="centerX" id="yuU-qk-9fJ"/>
-                            <constraint firstItem="vJU-a4-h8C" firstAttribute="width" secondItem="S3S-Oj-5AN" secondAttribute="width" multiplier="0.2" id="zd4-Cf-8bP"/>
+                            <constraint firstItem="iEn-FC-8wI" firstAttribute="top" secondItem="sJk-Gn-h2O" secondAttribute="bottom" priority="740" constant="8" symbolic="YES" id="07s-oh-wNA"/>
+                            <constraint firstItem="Wee-Cb-r64" firstAttribute="centerX" secondItem="Omk-iq-t3r" secondAttribute="centerX" id="0RQ-M4-Mpl"/>
+                            <constraint firstItem="iEn-FC-8wI" firstAttribute="width" secondItem="vX0-OV-jjo" secondAttribute="width" id="3LE-NY-s7f"/>
+                            <constraint firstItem="vX0-OV-jjo" firstAttribute="leading" secondItem="vPd-GL-K5j" secondAttribute="trailing" id="4LK-tc-vPq"/>
+                            <constraint firstItem="sJk-Gn-h2O" firstAttribute="top" secondItem="GD9-6t-B34" secondAttribute="bottom" priority="740" constant="8" symbolic="YES" id="6bo-Sb-m4r"/>
+                            <constraint firstItem="iEn-FC-8wI" firstAttribute="height" secondItem="Wee-Cb-r64" secondAttribute="height" id="6eV-uG-Qxs"/>
+                            <constraint firstItem="ze7-qb-OsM" firstAttribute="top" secondItem="agh-hU-OBc" secondAttribute="bottom" priority="750" constant="8" symbolic="YES" id="7mq-2F-twy"/>
+                            <constraint firstItem="bNh-iL-tK7" firstAttribute="top" secondItem="Omk-iq-t3r" secondAttribute="bottom" id="89r-uU-VLM"/>
+                            <constraint firstItem="agh-hU-OBc" firstAttribute="top" secondItem="5Wh-Vx-QHv" secondAttribute="bottom" id="8Fy-GA-1LP"/>
+                            <constraint firstItem="vX0-OV-jjo" firstAttribute="top" secondItem="sJk-Gn-h2O" secondAttribute="bottom" priority="740" constant="8" symbolic="YES" id="BRD-Mj-oGy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sJk-Gn-h2O" secondAttribute="trailing" id="Bpi-Ay-Jsb"/>
+                            <constraint firstItem="iEn-FC-8wI" firstAttribute="width" secondItem="4kR-rT-yJj" secondAttribute="width" id="BwP-wA-ZGn"/>
+                            <constraint firstItem="5Wh-Vx-QHv" firstAttribute="top" secondItem="vPd-GL-K5j" secondAttribute="bottom" priority="251" constant="8" symbolic="YES" id="EO6-GP-FOk"/>
+                            <constraint firstItem="dNy-lo-PmP" firstAttribute="centerX" secondItem="spF-wi-ff1" secondAttribute="centerX" id="FRP-MD-7uT"/>
+                            <constraint firstItem="Wee-Cb-r64" firstAttribute="top" secondItem="sJk-Gn-h2O" secondAttribute="bottom" priority="740" constant="8" symbolic="YES" id="Fx9-yw-C7g"/>
+                            <constraint firstItem="4kR-rT-yJj" firstAttribute="leading" secondItem="vJU-a4-h8C" secondAttribute="trailing" id="GaM-IS-ZMe"/>
+                            <constraint firstItem="Omk-iq-t3r" firstAttribute="top" secondItem="Wee-Cb-r64" secondAttribute="bottom" priority="251" constant="8" symbolic="YES" id="J2L-1k-8uv"/>
+                            <constraint firstItem="spF-wi-ff1" firstAttribute="top" secondItem="dNy-lo-PmP" secondAttribute="bottom" id="KoQ-5E-mBt"/>
+                            <constraint firstItem="vX0-OV-jjo" firstAttribute="height" secondItem="iEn-FC-8wI" secondAttribute="height" id="MMV-gn-F2j"/>
+                            <constraint firstItem="vJU-a4-h8C" firstAttribute="centerX" secondItem="dNy-lo-PmP" secondAttribute="centerX" id="NEr-q1-zMf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ze7-qb-OsM" secondAttribute="trailing" id="NjF-xF-7Qq"/>
+                            <constraint firstItem="GD9-6t-B34" firstAttribute="top" secondItem="9e7-xk-npV" secondAttribute="bottom" constant="8" id="P5n-Hs-0Ux"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="sJk-Gn-h2O" secondAttribute="leading" id="P7w-2t-tRn"/>
+                            <constraint firstItem="5Wh-Vx-QHv" firstAttribute="centerX" secondItem="agh-hU-OBc" secondAttribute="centerX" id="QiN-fN-EdI"/>
+                            <constraint firstItem="iEn-FC-8wI" firstAttribute="width" secondItem="da6-s4-EEI" secondAttribute="width" id="S7X-YZ-Rra"/>
+                            <constraint firstItem="vJU-a4-h8C" firstAttribute="top" secondItem="sJk-Gn-h2O" secondAttribute="bottom" priority="740" constant="8" symbolic="YES" id="TkR-RT-Ozd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9e7-xk-npV" secondAttribute="trailing" id="U9j-FI-917"/>
+                            <constraint firstItem="vPd-GL-K5j" firstAttribute="centerX" secondItem="5Wh-Vx-QHv" secondAttribute="centerX" id="UMT-ud-Xni"/>
+                            <constraint firstItem="da6-s4-EEI" firstAttribute="top" secondItem="sJk-Gn-h2O" secondAttribute="bottom" priority="740" constant="8" symbolic="YES" id="W3A-3o-Aiw"/>
+                            <constraint firstItem="Wee-Cb-r64" firstAttribute="leading" secondItem="iEn-FC-8wI" secondAttribute="trailing" id="WKk-CL-yaK"/>
+                            <constraint firstItem="iEn-FC-8wI" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="Xdm-S2-rPY"/>
+                            <constraint firstItem="4kR-rT-yJj" firstAttribute="top" secondItem="sJk-Gn-h2O" secondAttribute="bottom" priority="740" constant="8" symbolic="YES" id="YtR-p2-Kc4"/>
+                            <constraint firstItem="GD9-6t-B34" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" constant="4" id="ZPr-m7-mbc"/>
+                            <constraint firstItem="vJU-a4-h8C" firstAttribute="width" secondItem="S3S-Oj-5AN" secondAttribute="width" multiplier="0.2" id="ZT6-CX-dhU"/>
+                            <constraint firstItem="vPd-GL-K5j" firstAttribute="width" secondItem="S3S-Oj-5AN" secondAttribute="width" multiplier="0.2" id="cQT-Th-Xss"/>
+                            <constraint firstItem="da6-s4-EEI" firstAttribute="leading" secondItem="Wee-Cb-r64" secondAttribute="trailing" id="eLw-pA-A2j"/>
+                            <constraint firstItem="vPd-GL-K5j" firstAttribute="top" secondItem="sJk-Gn-h2O" secondAttribute="bottom" priority="740" constant="8" symbolic="YES" id="hDe-yK-O2M"/>
+                            <constraint firstItem="Omk-iq-t3r" firstAttribute="centerX" secondItem="bNh-iL-tK7" secondAttribute="centerX" id="jDK-i6-kGM"/>
+                            <constraint firstItem="9e7-xk-npV" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" id="jZM-Ts-L9Z"/>
+                            <constraint firstItem="4kR-rT-yJj" firstAttribute="height" secondItem="iEn-FC-8wI" secondAttribute="height" id="jhb-U6-Er3"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="9e7-xk-npV" secondAttribute="leading" id="mZx-nP-zfR"/>
+                            <constraint firstAttribute="trailing" secondItem="vX0-OV-jjo" secondAttribute="trailing" id="nB8-OU-AMx"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="ze7-qb-OsM" secondAttribute="leading" id="nCv-yI-PIq"/>
+                            <constraint firstItem="Wee-Cb-r64" firstAttribute="width" secondItem="S3S-Oj-5AN" secondAttribute="width" multiplier="0.2" id="oaG-hh-bqF"/>
+                            <constraint firstItem="da6-s4-EEI" firstAttribute="height" secondItem="iEn-FC-8wI" secondAttribute="height" id="qEE-bQ-Hr1"/>
+                            <constraint firstItem="vPd-GL-K5j" firstAttribute="leading" secondItem="4kR-rT-yJj" secondAttribute="trailing" id="qNU-GK-LPP"/>
+                            <constraint firstItem="dNy-lo-PmP" firstAttribute="top" secondItem="vJU-a4-h8C" secondAttribute="bottom" priority="251" constant="8" symbolic="YES" id="rMk-GS-KXu"/>
+                            <constraint firstItem="ze7-qb-OsM" firstAttribute="top" secondItem="bNh-iL-tK7" secondAttribute="bottom" priority="750" constant="8" symbolic="YES" id="upw-5E-kY0"/>
+                            <constraint firstItem="vJU-a4-h8C" firstAttribute="leading" secondItem="da6-s4-EEI" secondAttribute="trailing" id="v9S-vj-75R"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="ze7-qb-OsM" secondAttribute="bottom" constant="12" id="vgH-pw-NgL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GD9-6t-B34" secondAttribute="trailing" constant="4" id="xy7-4a-gLj"/>
+                            <constraint firstItem="ze7-qb-OsM" firstAttribute="top" secondItem="spF-wi-ff1" secondAttribute="bottom" priority="750" constant="8" symbolic="YES" id="yHF-CB-Rfb"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -225,19 +243,49 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="e35-GQ-ArS" userLabel="Drink 1 Tap">
+                <tapGestureRecognizer id="e35-GQ-ArS" userLabel="Drink 1 Image Tap">
                     <connections>
-                        <action selector="drink1WasTapped:" destination="M4Y-Lb-cyx" id="UR1-1A-gY2"/>
+                        <action selector="drink1WasTapped:" destination="M4Y-Lb-cyx" id="luU-kg-bqx"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="zzN-Hc-xay" userLabel="Drink 2 Tap">
+                <tapGestureRecognizer id="zzN-Hc-xay" userLabel="Drink 2 Image Tap">
                     <connections>
-                        <action selector="drink2WasTapped:" destination="M4Y-Lb-cyx" id="dNr-5M-XBU"/>
+                        <action selector="drink2WasTapped:" destination="M4Y-Lb-cyx" id="7h2-Rw-gjG"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="7W0-VZ-LL4" userLabel="Drink 3 Tap">
+                <tapGestureRecognizer id="7W0-VZ-LL4" userLabel="Drink 3 Image Tap">
                     <connections>
-                        <action selector="drink3WasTapped:" destination="M4Y-Lb-cyx" id="J3O-pt-CVb"/>
+                        <action selector="drink3WasTapped:" destination="M4Y-Lb-cyx" id="y36-Jo-9Jp"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="HTO-7Z-LGJ" userLabel="Drink 1 Amount Tap">
+                    <connections>
+                        <action selector="drink1WasTapped:" destination="M4Y-Lb-cyx" id="3N9-nO-HZf"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="chC-mh-ipe" userLabel="Drink 2 Amount Tap">
+                    <connections>
+                        <action selector="drink2WasTapped:" destination="M4Y-Lb-cyx" id="Pfh-eN-1Ld"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="jzP-AJ-Yn4" userLabel="Drink 3 Amount Tap">
+                    <connections>
+                        <action selector="drink3WasTapped:" destination="M4Y-Lb-cyx" id="W5O-ZH-8rL"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="aYz-Km-hxc" userLabel="Drink 1 Title Tap">
+                    <connections>
+                        <action selector="drink1WasTapped:" destination="M4Y-Lb-cyx" id="5uU-kJ-krl"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Yqz-os-Fhs" userLabel="Drink 2 Title Tap">
+                    <connections>
+                        <action selector="drink2WasTapped:" destination="M4Y-Lb-cyx" id="oMX-nr-vEN"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Ebf-YU-Vqz" userLabel="Drink 3 Title Tap">
+                    <connections>
+                        <action selector="drink3WasTapped:" destination="M4Y-Lb-cyx" id="yES-JL-Mxq"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

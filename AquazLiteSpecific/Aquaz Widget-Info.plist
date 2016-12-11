@@ -47,5 +47,9 @@
 	<array>
 		<string>healthkit</string>
 	</array>
+	<key>NSHealthShareUsageDescription</key>
+	<string>″Aquaz″ will import your metrics for calculating recommended daily water intake.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>″Aquaz″ will export your intakes into Apple Health.</string>
 </dict>
 </plist>
