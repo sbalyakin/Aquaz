@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WelcomeWizardUnitsViewController: OmegaSettingsViewController {
+final class WelcomeWizardUnitsViewController: OmegaSettingsViewController {
 
   @IBOutlet weak var descriptionLabel: UILabel!
 

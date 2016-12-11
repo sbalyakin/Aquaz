@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WelcomeWizardViewController: UIViewController {
+final class WelcomeWizardViewController: UIViewController {
 
   @IBOutlet weak var pageControl: UIPageControl!
   @IBOutlet weak var skipButton: UIButton!

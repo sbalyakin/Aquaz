@@ -10,64 +10,61 @@ import UIKit
 import CoreData
 import HealthKit
 
+@available(iOS 9.0, *)
 final class HealthKitViewController: UIViewController {
 
-  @IBOutlet weak var progressView: UIProgressView!
-  @IBOutlet weak var progressLabel: UILabel!
-  @IBOutlet weak var labelIntakesInAquaz: UILabel!
-  @IBOutlet weak var labelIntakesInHealthApp: UILabel!
-  @IBOutlet weak var exportButton: UIButton!
-  
+  // MARK: Types
   fileprivate struct LocalizedStrings {
-
-    lazy var intakesInAquazTitle: String = NSLocalizedString("HKVC:Intakes in Aquaz: %@", value: "Intakes in Aquaz: %@",
-      comment: "HealthKitViewController: Label title displaying number of intakes in Aquaz")
     
-    lazy var intakesInHealthAppTitle: String = NSLocalizedString("HKVC:Intakes in Apple Health: %@", value: "Intakes in Apple Health: %@",
-      comment: "HealthKitViewController: Label title displaying number of intakes in Health app")
-
-    lazy var progressTitle: String = NSLocalizedString("HKVC:%1$d of %2$d", value: "%1$d of %2$d",
-      comment: "HealthKitViewController: Label title displaying progress of export")
+    lazy var intakesInAquazTitle = NSLocalizedString("HKVC:Intakes in Aquaz: %@", value: "Intakes in Aquaz: %@", comment: "HealthKitViewController: Label title displaying number of intakes in Aquaz")
     
-    lazy var doneTitle: String = NSLocalizedString("HKVC:Export is done.", value: "Export is done.",
-      comment: "HealthKitViewController: Label title displaying end of export")
-
-    lazy var checkAppleHealthTitle: String = NSLocalizedString("HKVC:Aquaz is not allowed to write Water data to Apple Health", value: "Aquaz is not allowed to write Water data to Apple Health",
-      comment: "HealthKitViewController: Title of alert displayed when Aquaz is not allowed to write data into Apple Health.")
-
-    lazy var checkAppleHealthMessage: String = NSLocalizedString("HKVC:Check Apple Health settings in the Health app under the Sources tab", value: "Check Apple Health settings in the Health app under the Sources tab",
-      comment: "HealthKitViewController: Message of alert displayed when Aquaz is not allowed to write data into Apple Health.")
-
-    lazy var okTitle: String = NSLocalizedString("HKVC:OK", value: "OK",
-      comment: "HealthKitViewController: Title for OK button")
+    lazy var waterSamplesInAppleHealthTitle = NSLocalizedString("HKVC:Water samples in Apple Health: %@", value: "Water samples in Apple Health: %@", comment: "HealthKitViewController: Label title displaying number of water samples in Health app")
+    
+    lazy var caffeineSamplesInAppleHealthTitle = NSLocalizedString("HKVC:Caffeine samples in Apple Health: %@", value: "Caffeine samples in Apple Health: %@", comment: "HealthKitViewController: Label title displaying number of caffeine samples in Health app")
+    
+    lazy var checkAppleHealthTitle = NSLocalizedString("HKVC:Aquaz is not allowed to write water and caffeine data to Apple Health", value: "Aquaz is not allowed to write water and caffeine data to Apple Health", comment: "HealthKitViewController: Title of alert displayed when Aquaz is not allowed to write data into Apple Health.")
+    
+    lazy var checkAppleHealthMessage = NSLocalizedString("HKVC:Check Apple Health settings in the Health app under the Sources tab", value: "Check Apple Health settings in the Health app under the Sources tab", comment: "HealthKitViewController: Message of alert displayed when Aquaz is not allowed to write data into Apple Health.")
+    
+    lazy var okTitle = NSLocalizedString("HKVC:OK", value: "OK", comment: "HealthKitViewController: Title for OK button")
     
   }
+
+  
+  // MARK: Properties
+  @IBOutlet weak var progressView: UIProgressView!
+  @IBOutlet weak var labelIntakesInAquaz: UILabel!
+  @IBOutlet weak var labelWaterSamplesInHealthApp: UILabel!
+  @IBOutlet weak var labelCaffeineSamplesInHealthApp: UILabel!
+  @IBOutlet weak var exportButton: UIButton!
   
   fileprivate var localizedStrings = LocalizedStrings()
 
+  
+  // MARK: Methods
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setupUI()
+    updateUI()
+  }
+
+  fileprivate func setupUI() {
     UIHelper.applyStyleToViewController(self)
     
     progressView.alpha = 0
     progressView.tintColor = StyleKit.controlTintColor
     
-    progressLabel.alpha = 0
-
     labelIntakesInAquaz.text = String.localizedStringWithFormat(localizedStrings.intakesInAquazTitle, "--")
-    labelIntakesInHealthApp.text = String.localizedStringWithFormat(localizedStrings.intakesInHealthAppTitle, "--")
-
-    if #available(iOS 9.3, *) {
-      updateUI()
-    }
+    labelWaterSamplesInHealthApp.text = String.localizedStringWithFormat(localizedStrings.waterSamplesInAppleHealthTitle, "--")
+    labelCaffeineSamplesInHealthApp.text = String.localizedStringWithFormat(localizedStrings.caffeineSamplesInAppleHealthTitle, "--")
   }
   
-  @available(iOS 9.3, *)
   fileprivate func updateUI() {
     updateNumberOfIntakesInAquaz()
+    
     HealthKitProvider.sharedInstance.authorizeHealthKit { authorized, error in
-      self.updateNumberOfIntakesInHealthApp()
+      self.updateInfoFromAppleHealth()
     }
   }
   
@@ -84,49 +81,43 @@ final class HealthKitViewController: UIViewController {
     }
   }
   
-  @available(iOS 9.3, *)
-  fileprivate func updateNumberOfIntakesInHealthApp() {
-    if !HealthKitProvider.sharedInstance.isAllowedToWriteWaterSamples() {
-      return
+  fileprivate func updateInfoFromAppleHealth() {
+    HealthKitProvider.sharedInstance.requestNumberOfWaterSamples { count in
+      DispatchQueue.main.async {
+        self.labelWaterSamplesInHealthApp.text = String.localizedStringWithFormat(self.localizedStrings.waterSamplesInAppleHealthTitle, NSNumber(value: count))
+      }
     }
 
-    HealthKitProvider.sharedInstance.requestNumberOfIntakesInHealthApp { count in
+    HealthKitProvider.sharedInstance.requestNumberOfCaffeineSamples { count in
       DispatchQueue.main.async {
-        self.labelIntakesInHealthApp.text = String.localizedStringWithFormat(self.localizedStrings.intakesInHealthAppTitle, NSNumber(value: count))
+        self.labelCaffeineSamplesInHealthApp.text = String.localizedStringWithFormat(self.localizedStrings.caffeineSamplesInAppleHealthTitle, NSNumber(value: count))
       }
     }
   }
   
   @IBAction func exportToHealthKit() {
-    if #available(iOS 9.3, *) {
-      if !HealthKitProvider.sharedInstance.isAllowedToWriteWaterSamples() {
-        let alert = UIAlertView(title: localizedStrings.checkAppleHealthTitle, message: localizedStrings.checkAppleHealthMessage, delegate: nil, cancelButtonTitle: localizedStrings.okTitle)
-        alert.show()
-        return
-      }
-      
-      progressView.progress = 0
-      progressView.alpha = 1
-      
-      progressLabel.text = ""
-      progressLabel.alpha = 1
-      
-      exportButton.isEnabled = false
-    
-      HealthKitProvider.sharedInstance.exportAllIntakesToHealthKit(
-        progress: { current, maximum in
-          DispatchQueue.main.async {
-            self.progressView.progress = maximum > 0 ? Float(current) / Float(maximum) : 0
-            self.progressLabel.text = String.localizedStringWithFormat(self.localizedStrings.progressTitle, current, maximum)
-          }
-        },
-        completion: {
-          self.progressView.alpha = 0
-          self.progressLabel.text = self.localizedStrings.doneTitle
-          self.exportButton.isEnabled = true
-          self.updateUI()
-        }
-      )
+    if !HealthKitProvider.sharedInstance.waterSharingIsAuthorized && !HealthKitProvider.sharedInstance.caffeineSharingIsAuthorized {
+      let alert = UIAlertView(title: localizedStrings.checkAppleHealthTitle, message: localizedStrings.checkAppleHealthMessage, delegate: nil, cancelButtonTitle: localizedStrings.okTitle)
+      alert.show()
+      return
     }
+    
+    progressView.progress = 0
+    progressView.alpha = 1
+    
+    exportButton.isEnabled = false
+  
+    HealthKitProvider.sharedInstance.exportAllIntakesToHealthKit(
+      progress: { current, maximum in
+        DispatchQueue.main.async {
+          self.progressView.progress = maximum > 0 ? Float(current) / Float(maximum) : 0
+        }
+      },
+      completion: {
+        self.progressView.alpha = 0
+        self.exportButton.isEnabled = true
+        self.updateUI()
+      }
+    )
   }
 }

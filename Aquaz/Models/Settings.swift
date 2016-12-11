@@ -123,17 +123,6 @@ final class Settings {
     key: "General - Ad user id", initialValue: UUID().uuidString, userDefaults: userDefaults)
   #endif
 
-  // MARK: HealthKit
-  
-  lazy var healthKitWaterIntakesIntegrationIsRequested2: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "HealthKit - Water intakes integration is requested 2", initialValue: false,
-    userDefaults: userDefaults)
-
-  lazy var healthKitWaterIntakesIntegrationIsAllowed2: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
-    key: "HealthKit - Water intakes integration is requested 2", initialValue: false,
-    userDefaults: userDefaults)
-
-  
   // MARK: User
   
   lazy var userHeight: SettingsOrdinalItem<Double> = SettingsOrdinalItem(

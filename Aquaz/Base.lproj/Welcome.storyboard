@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11761" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--Welcome Wizard View Controller-->
         <scene sceneID="Wh3-9o-HmB">
             <objects>
-                <viewController storyboardIdentifier="Welcome Wizard" id="5NG-qv-yLQ" customClass="WelcomeWizardViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Welcome Wizard" id="5NG-qv-yLQ" customClass="WelcomeWizardViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A8J-ja-91L"/>
                         <viewControllerLayoutGuide type="bottom" id="gKH-QX-2x2"/>
@@ -68,7 +68,7 @@
         <!--Welcome Wizard Page View Controller-->
         <scene sceneID="u0M-35-XKe">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="40" navigationOrientation="horizontal" spineLocation="none" id="P8j-bA-q4H" customClass="WelcomeWizardPageViewController" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="40" navigationOrientation="horizontal" spineLocation="none" id="P8j-bA-q4H" customClass="WelcomeWizardPageViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pwo-et-aG2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1231" y="318.5"/>
@@ -76,7 +76,7 @@
         <!--Welcome Page-->
         <scene sceneID="WlD-a9-Vdt">
             <objects>
-                <viewController storyboardIdentifier="Welcome Page" id="20G-MS-bhK" userLabel="Welcome Page" customClass="WelcomeWizardWelcomeViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Welcome Page" id="20G-MS-bhK" userLabel="Welcome Page" customClass="WelcomeWizardWelcomeViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Df6-SC-1xI"/>
                         <viewControllerLayoutGuide type="bottom" id="Hdp-zE-AyN"/>
@@ -98,7 +98,7 @@
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to set up Aquaz." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="mdo-Wx-K3f">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to set up Aquaz in few steps." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="mdo-Wx-K3f">
                                 <rect key="frame" x="20" y="465" width="335" height="19"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -152,10 +152,100 @@
             </objects>
             <point key="canvasLocation" x="1971" y="319"/>
         </scene>
+        <!--Apple Health Page-->
+        <scene sceneID="z5D-ib-0K2">
+            <objects>
+                <viewController storyboardIdentifier="Apple Health Page" id="8Iz-Fj-nS1" userLabel="Apple Health Page" customClass="WelcomeWizardAppleHealthViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kWU-5h-nay"/>
+                        <viewControllerLayoutGuide type="bottom" id="bZT-ZP-WDf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rXr-Gc-U3a">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m7J-n2-eCp" userLabel="Top Gap">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="236"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SettingsSceneHealth" translatesAutoresizingMaskIntoConstraints="NO" id="Hwz-gR-moy">
+                                <rect key="frame" x="137" y="236" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="8On-c3-meT"/>
+                                    <constraint firstAttribute="width" constant="100" id="bfX-hh-n0G"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect Aquaz to Apple Health to export your intakes to Apple Health automatically." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcQ-sJ-1jw">
+                                <rect key="frame" x="16" y="344" width="343" height="37.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLz-AO-3bs" userLabel="Bottom Gap">
+                                <rect key="frame" x="0.0" y="381.5" width="375" height="235.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sKP-vz-v48" customClass="RoundedButton" customModule="Aquaz" customModuleProvider="target">
+                                <rect key="frame" x="16" y="617" width="343" height="42"/>
+                                <color key="backgroundColor" red="0.0" green="0.58039215690000001" blue="0.72156862749999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="29O-Pk-Wpw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Connect to Apple Health">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="roundMode">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="connectToAppleHealth" destination="8Iz-Fj-nS1" eventType="touchUpInside" id="Nuy-a5-dY7"/>
+                                    <action selector="getStartedButtonWasTapped" destination="ZlN-Yh-fjp" eventType="touchUpInside" id="stI-3E-wTZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jLz-AO-3bs" firstAttribute="top" secondItem="XcQ-sJ-1jw" secondAttribute="bottom" id="5sR-Gm-CLC"/>
+                            <constraint firstItem="Hwz-gR-moy" firstAttribute="centerX" secondItem="rXr-Gc-U3a" secondAttribute="centerX" id="6Zo-VL-DkL"/>
+                            <constraint firstAttribute="trailing" secondItem="jLz-AO-3bs" secondAttribute="trailing" id="88V-0S-5Zf"/>
+                            <constraint firstItem="Hwz-gR-moy" firstAttribute="top" secondItem="m7J-n2-eCp" secondAttribute="bottom" id="R6U-rb-Qvu"/>
+                            <constraint firstItem="XcQ-sJ-1jw" firstAttribute="top" secondItem="Hwz-gR-moy" secondAttribute="bottom" constant="8" symbolic="YES" id="Sx2-GV-BjE"/>
+                            <constraint firstItem="XcQ-sJ-1jw" firstAttribute="leading" secondItem="rXr-Gc-U3a" secondAttribute="leadingMargin" id="Ts8-OU-ADq"/>
+                            <constraint firstItem="m7J-n2-eCp" firstAttribute="top" secondItem="kWU-5h-nay" secondAttribute="bottom" id="UNJ-GE-SCS"/>
+                            <constraint firstItem="m7J-n2-eCp" firstAttribute="leading" secondItem="rXr-Gc-U3a" secondAttribute="leading" id="aQG-ES-rrm"/>
+                            <constraint firstItem="jLz-AO-3bs" firstAttribute="leading" secondItem="rXr-Gc-U3a" secondAttribute="leading" id="cZy-Mq-o6k"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sKP-vz-v48" secondAttribute="trailing" id="el5-b0-anq"/>
+                            <constraint firstItem="sKP-vz-v48" firstAttribute="top" secondItem="jLz-AO-3bs" secondAttribute="bottom" id="hxR-6p-kvI"/>
+                            <constraint firstAttribute="trailing" secondItem="m7J-n2-eCp" secondAttribute="trailing" id="k0w-z0-Fci"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XcQ-sJ-1jw" secondAttribute="trailing" id="mNx-75-z2I"/>
+                            <constraint firstItem="bZT-ZP-WDf" firstAttribute="top" secondItem="sKP-vz-v48" secondAttribute="bottom" constant="8" id="sMv-gd-NfN"/>
+                            <constraint firstItem="sKP-vz-v48" firstAttribute="leading" secondItem="rXr-Gc-U3a" secondAttribute="leadingMargin" id="uKK-Ue-LXt"/>
+                            <constraint firstItem="m7J-n2-eCp" firstAttribute="height" secondItem="jLz-AO-3bs" secondAttribute="height" id="xMX-Du-flI"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="connectToAppleHealthButton" destination="sKP-vz-v48" id="Gs4-iu-8dB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Q9-EG-ySC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2862" y="319"/>
+        </scene>
         <!--Units Page-->
         <scene sceneID="eNw-b5-pHD">
             <objects>
-                <viewController storyboardIdentifier="Units Page" id="P9m-hw-h8K" userLabel="Units Page" customClass="WelcomeWizardUnitsViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Units Page" id="P9m-hw-h8K" userLabel="Units Page" customClass="WelcomeWizardUnitsViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6wC-Nw-toA"/>
                         <viewControllerLayoutGuide type="bottom" id="67F-cP-v7i"/>
@@ -204,10 +294,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="67F-cP-v7i" firstAttribute="top" secondItem="1EW-Bs-QMz" secondAttribute="bottom" id="Prj-sk-nvX"/>
+                            <constraint firstItem="1EW-Bs-QMz" firstAttribute="top" secondItem="6wC-Nw-toA" secondAttribute="bottom" id="8TO-uo-hgS"/>
                             <constraint firstItem="1EW-Bs-QMz" firstAttribute="leading" secondItem="jpe-ba-6hM" secondAttribute="leading" id="ZCJ-Fk-MQ4"/>
+                            <constraint firstItem="67F-cP-v7i" firstAttribute="top" secondItem="1EW-Bs-QMz" secondAttribute="bottom" id="eRG-q6-pMX"/>
                             <constraint firstAttribute="trailing" secondItem="1EW-Bs-QMz" secondAttribute="trailing" id="vpa-Fp-cgT"/>
-                            <constraint firstItem="1EW-Bs-QMz" firstAttribute="top" secondItem="6wC-Nw-toA" secondAttribute="bottom" id="yUG-nA-nTd"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -220,12 +310,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PZm-Zd-CEd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2675" y="319"/>
+            <point key="canvasLocation" x="3770" y="319"/>
         </scene>
         <!--Metrics Page-->
         <scene sceneID="N5t-tu-o6S">
             <objects>
-                <viewController storyboardIdentifier="Metrics Page" id="e53-yG-maw" userLabel="Metrics Page" customClass="WelcomeWizardMetricsViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Metrics Page" id="e53-yG-maw" userLabel="Metrics Page" customClass="WelcomeWizardMetricsViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="J3u-3e-LLq"/>
                         <viewControllerLayoutGuide type="bottom" id="v9v-a7-3nB"/>
@@ -290,12 +380,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Gv-HO-xvm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3411" y="319"/>
+            <point key="canvasLocation" x="4506" y="319"/>
         </scene>
         <!--Full Version Page-->
         <scene sceneID="SK2-rg-Sep">
             <objects>
-                <viewController storyboardIdentifier="Last Page" id="ZlN-Yh-fjp" userLabel="Full Version Page" customClass="WelcomeWizardLastPageViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Last Page" id="ZlN-Yh-fjp" userLabel="Full Version Page" customClass="WelcomeWizardLastPageViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="t2B-iV-jqM"/>
                         <viewControllerLayoutGuide type="bottom" id="9s4-Db-LRI"/>
@@ -311,7 +401,7 @@
                                     <constraint firstAttribute="height" constant="100" id="RRm-I7-aWr"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5j-Nk-rv9" customClass="RoundedButton" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5j-Nk-rv9" customClass="RoundedButton" customModule="Aquaz" customModuleProvider="target">
                                 <rect key="frame" x="20" y="617" width="335" height="42"/>
                                 <color key="backgroundColor" red="0.0" green="0.58039215690000001" blue="0.72156862749999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -320,6 +410,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Get Started">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -378,16 +469,14 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="getStartedButton" destination="J5j-Nk-rv9" id="AxK-VN-UN1"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hBA-aq-QEP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4129" y="319"/>
+            <point key="canvasLocation" x="5225" y="319"/>
         </scene>
     </scenes>
     <resources>
+        <image name="SettingsSceneHealth" width="100" height="100"/>
         <image name="WelcomeLogo" width="100" height="100"/>
         <image name="WelcomeMetrics" width="100" height="100"/>
         <image name="WelcomeUnits" width="100" height="100"/>

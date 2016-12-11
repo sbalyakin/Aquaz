@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WelcomeWizardPageViewController: UIPageViewController {
+final class WelcomeWizardPageViewController: UIPageViewController {
 
   fileprivate var ownViewControllers = [UIViewController]()
   weak var pageControl: UIPageControl!
@@ -24,12 +24,22 @@ class WelcomeWizardPageViewController: UIPageViewController {
     let unitsPage: UIViewController   = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Units Page")!
     let metricsPage: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Metrics Page")!
     let lastPage: UIViewController    = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Last Page")!
-    
-    ownViewControllers = [
-      welcomePage,
-      unitsPage,
-      metricsPage,
-      lastPage]
+
+    if #available(iOS 9.0, *) {
+      let appleHealthPage: UIViewController = LoggedActions.instantiateViewController(storyboard: storyboard, storyboardID: "Apple Health Page")!
+      ownViewControllers = [
+        welcomePage,
+        appleHealthPage,
+        unitsPage,
+        metricsPage,
+        lastPage]
+    } else {
+      ownViewControllers = [
+        welcomePage,
+        unitsPage,
+        metricsPage,
+        lastPage]
+    }
     
     dataSource = self
     delegate = self

@@ -4,13 +4,19 @@
 /* Class = "UILabel"; text = "Welcome!"; ObjectID = "LR1-R9-kgb"; */
 "LR1-R9-kgb.text" = "Добро пожаловать!";
 
+/* Class = "UILabel"; text = "Connect Aquaz to Apple Health to export your intakes to Apple Health automatically."; ObjectID = "XcQ-sJ-1jw"; */
+"XcQ-sJ-1jw.text" = "Интегрируйте Aquaz с Apple Health для автоматического экспорта выпитого в Apple Health.";
+
+/* Class = "UIButton"; normalTitle = "Connect to Apple Health"; ObjectID = "sKP-vz-v48"; */
+"sKP-vz-v48.normalTitle" = "Интегрировать с Apple Health";
+
 /* Class = "UILabel"; text = "Enter information to calculate daily water intake."; ObjectID = "OZc-wd-LVi"; */
 "OZc-wd-LVi.text" = "Укажите информацию для расчета суточной нормы воды.";
 
 /* Class = "UILabel"; text = "Easy water tracking starts here."; ObjectID = "UTf-EX-vft"; */
 "UTf-EX-vft.text" = "Учет воды - это проще, чем кажется.";
 
-/* Class = "UILabel"; text = "Swipe to set up Aquaz."; ObjectID = "mdo-Wx-K3f"; */
+/* Class = "UILabel"; text = "Swipe to set up Aquaz in few steps."; ObjectID = "mdo-Wx-K3f"; */
 "mdo-Wx-K3f.text" = "Пройдите несколько простых шагов для настройки Aquaz.";
 
 /* Class = "UILabel"; text = "Choose preferred measurement units."; ObjectID = "qtN-V8-hVa"; */
@@ -18,4 +24,3 @@
 
 /* Class = "UIButton"; normalTitle = "Skip This"; ObjectID = "tep-fO-IDh"; */
 "tep-fO-IDh.normalTitle" = "Пропустить";
-

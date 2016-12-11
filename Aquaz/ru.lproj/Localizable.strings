@@ -122,20 +122,17 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* HealthKitProvider: Title for metadata key (Drink) used in Health app */
 "HKP:Drink" = "Напиток";
 
-/* HealthKitViewController: Label title displaying progress of export */
-"HKVC:%1$d of %2$d" = "%1$d из %2$d";
-
 /* HealthKitViewController: Title of alert displayed when Aquaz is not allowed to write data into Apple Health. */
-"HKVC:Aquaz is not allowed to write Water data to Apple Health" = "У Aquaz нет доступа для записи данных по Воде в Apple Health";
+"HKVC:Aquaz is not allowed to write water and caffeine data to Apple Health" = "У Aquaz нет доступа для записи употреблений воды и кофе в Apple Health";
 
 /* HealthKitViewController: Message of alert displayed when Aquaz is not allowed to write data into Apple Health. */
 "HKVC:Check Apple Health settings in the Health app under the Sources tab" = "Проверьте настройки Apple Health в приложении Health во вкладке Источники";
 
-/* HealthKitViewController: Label title displaying end of export */
-"HKVC:Export is done." = "Экспорт завершен.";
+/* HealthKitViewController: Label title displaying number of water samples in Health app */
+"HKVC:Water samples in Apple Health: %@" = "Записей воды в Apple Health: %@";
 
-/* HealthKitViewController: Label title displaying number of intakes in Health app */
-"HKVC:Intakes in Apple Health: %@" = "Записей в Apple Health: %@";
+/* HealthKitViewController: Label title displaying number of caffeine samples in Health app */
+"HKVC:Caffeine samples in Apple Health: %@" = "Записей кофе в Apple Health: %@";
 
 /* HealthKitViewController: Label title displaying number of intakes in Aquaz */
 "HKVC:Intakes in Aquaz: %@" = "Записей в Aquaz: %@";
@@ -269,8 +266,8 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* SettingsViewController: Table cell title for [Daily Water Intake] settings bloсk */
 "SVC:Daily Water Intake" = "Суточная Норма";
 
-/* SettingsViewController: Table title for [Export to Apple Health] cell */
-"SVC:Export to Apple Health" = "Экспорт в Apple Health";
+/* SettingsViewController: Table title for [Apple Health] cell */
+"SVC:Apple Health" = "Apple Health";
 
 /* SupportViewController: Information message if no Facebook account found on device */
 "SVC:Facebook account is not found" = "Учетная запись Facebook не найдена";
@@ -370,6 +367,9 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 
 /* UnitsViewController: Table cell title for [Weight] setting */
 "UVC:Weight" = "Вес";
+
+/* elcomeWizardAppleHealthViewController: Done button title */
+"WWAHVC:Done" = "Готово";
 
 /* WaterGoalViewController: Table cell title for [Age] setting */
 "WGVC:Age" = "Возраст";

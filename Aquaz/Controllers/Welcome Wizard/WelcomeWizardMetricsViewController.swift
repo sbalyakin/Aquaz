@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import HealthKit
 
-class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
+final class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
 
   fileprivate struct LocalizedStrings {
     
@@ -36,7 +36,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
       value: "The calculated daily water intake is only an estimate. Always take into account your body\'s needs. Please consult your health care provider for advice about a specific medical condition.",
       comment: "Footer for section with calculated daily water intake")
     
-    @available(iOS 9.3, *)
+    @available(iOS 9.0, *)
     lazy var readFromHealthTitle: String = NSLocalizedString("WGVC:Read Data from Apple Health", value: "Read Data from Apple Health",
       comment: "WaterGoalViewController: Table cell title for [Read Data from Apple Health] cell")
   }
@@ -69,6 +69,10 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     rightDetailSelectedValueColor = StyleKit.settingsTablesSelectedValueColor
 
     initObserving()
+    
+    if #available(iOS 9.0, *) {
+      readFromHealthKit()
+    }
   }
 
   fileprivate func initObserving() {
@@ -221,14 +225,14 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
     let sections: [TableCellsSection]
     
     // Read From Health section
-    if #available(iOS 9.3, *) {
+    if #available(iOS 9.0, *) {
       let readFromHealthCell = createBasicTableCell(
         title: localizedStrings.readFromHealthTitle,
         accessoryType: nil)
       
       readFromHealthCell.activationChangedFunction = { [weak self] _, active in
         if active {
-          self?.checkHealthAuthorizationAndRead()
+          self?.readFromHealthKit()
         }
       }
       
@@ -351,16 +355,7 @@ class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
   }
 
   // MARK: HealthKit
-  @available(iOS 9.3, *)
-  fileprivate func checkHealthAuthorizationAndRead() {
-    HealthKitProvider.sharedInstance.authorizeHealthKit { authorized, _ in
-      if authorized {
-        self.readFromHealthKit()
-      }
-    }
-  }
-  
-  @available(iOS 9.3, *)
+  @available(iOS 9.0, *)
   fileprivate func readFromHealthKit() {
     HealthKitProvider.sharedInstance.readUserProfile { age, biologicalSex, bodyMass, height in
       DispatchQueue.main.async {
@@ -479,7 +474,7 @@ private extension Units.Volume {
   }
 }
 
-@available(iOS 9.3, *)
+@available(iOS 9.0, *)
 private extension Settings.Gender {
   mutating func applyBiologicalSex(_ biologicalSex: HKBiologicalSex) {
     switch biologicalSex {

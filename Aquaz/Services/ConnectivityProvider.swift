@@ -257,27 +257,11 @@ extension ConnectivityProvider: WCSessionDelegate {
       return
     }
     
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-      let viewController = appDelegate.window?.rootViewController else
-    {
-      Logger.logError(false, "The root view controller is not found")
-      return
-    }
+    increaseIgnoreManagedObjectContextSavingsCounter()
     
-    IntakeHelper.addIntakeWithHealthKitChecks(
-      amount: amount,
-      drink: drink,
-      intakeDate: date,
-      saveImmediately: saveImmediately,
-      viewController: viewController,
-      managedObjectContext: managedObjectContext,
-      actionBeforeAddingIntakeToCoreData: {
-        self.increaseIgnoreManagedObjectContextSavingsCounter()
-      },
-      actionAfterAddingIntakeToCoreData: {
-        self.decreaseIgnoreManagedObjectContextSavingsCounter()
-      }
-    )
+    _ = Intake.addEntity(drink: drink, amount: amount, date: date, managedObjectContext: managedObjectContext, saveImmediately: saveImmediately)
+    
+    decreaseIgnoreManagedObjectContextSavingsCounter()
   }
   
   fileprivate func isManagedObjectContextSavingIgnored() -> Bool {

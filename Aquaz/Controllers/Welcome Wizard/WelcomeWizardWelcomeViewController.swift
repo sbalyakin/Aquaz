@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WelcomeWizardWelcomeViewController: UIViewController {
+final class WelcomeWizardWelcomeViewController: UIViewController {
   
   @IBOutlet weak var logo: UIImageView!
   @IBOutlet weak var verticalSpaceMultiplierConstraint: NSLayoutConstraint!

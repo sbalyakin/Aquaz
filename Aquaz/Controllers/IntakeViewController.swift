@@ -287,21 +287,10 @@ class IntakeViewController: UIViewController {
   fileprivate func addIntake(amount: Double) {
     CoreDataStack.performOnPrivateContext { privateContext in
       let drink = try! privateContext.existingObject(with: self.drink.objectID) as! Drink
-      
-      IntakeHelper.addIntakeWithHealthKitChecks(
-        amount: amount,
-        drink: drink,
-        intakeDate: self.computeIntakeDate(),
-        saveImmediately: true,
-        viewController: self,
-        managedObjectContext: privateContext,
-        actionBeforeAddingIntakeToCoreData: {
-          DispatchQueue.main.async {
-            self.navigationController?.dismiss(animated: true, completion: nil)
-          }
-        },
-        actionAfterAddingIntakeToCoreData: nil)
+      _ = Intake.addEntity(drink: drink, amount: amount, date: self.computeIntakeDate(), managedObjectContext: privateContext)
     }
+    
+    navigationController?.dismiss(animated: true, completion: nil)
   }
   
   fileprivate func updateIntake(amount: Double) {

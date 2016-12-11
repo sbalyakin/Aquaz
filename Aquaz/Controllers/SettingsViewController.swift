@@ -42,10 +42,10 @@ class SettingsViewController: OmegaSettingsViewController {
       comment: "SettingsViewController: Table cell title for [Full Version] settings block when Full Version is purchased")
     #endif
     
-    @available(iOS 9.3, *)
-    lazy var exportToHealthAppTitle = NSLocalizedString("SVC:Export to Apple Health",
-      value: "Export to Apple Health",
-      comment: "SettingsViewController: Table title for [Export to Apple Health] cell")
+    @available(iOS 9.0, *)
+    lazy var appleHealthTitle = NSLocalizedString("SVC:Apple Health",
+      value: "Apple Health",
+      comment: "SettingsViewController: Table title for [Apple Health] cell")
   }
 
   fileprivate struct Segues {
@@ -54,7 +54,7 @@ class SettingsViewController: OmegaSettingsViewController {
     static let showExtraFactors = "Show Extra Factors"
     static let showUnits = "Show Units"
     static let showSupport = "Show Support"
-    static let exportToHealthKit = "Export To HealthKit"
+    static let showAppleHealth = "Show Apple Health"
     #if AQUAZLITE
     static let manageFullVersion = "Manage Full Version"
     #endif
@@ -192,13 +192,13 @@ class SettingsViewController: OmegaSettingsViewController {
     sections += [fullVersionSection]
     #endif
     
-    // Export to the Health App section
-    if #available(iOS 9.3, *) {
-      let healthCell = createBasicTableCell(title: localizedStrings.exportToHealthAppTitle, accessoryType: .disclosureIndicator)
+    // Apple Health section
+    if #available(iOS 9.0, *) {
+      let healthCell = createBasicTableCell(title: localizedStrings.appleHealthTitle, accessoryType: .disclosureIndicator)
       
       healthCell.activationChangedFunction = { [weak self] tableCell, active in
         if active {
-          self?.performSegue(withIdentifier: Segues.exportToHealthKit, sender: tableCell)
+          self?.performSegue(withIdentifier: Segues.showAppleHealth, sender: tableCell)
         }
       }
       

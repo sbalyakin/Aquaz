@@ -41,11 +41,7 @@ class TodayViewController: UIViewController {
   fileprivate var hydration: Double?
   fileprivate var dehydration: Double?
 
-  // Use a separate CoreDataStack instance for the today extension
-  // in order to exclude synchronization problems for managed object contexts.
-  fileprivate var coreDataStack = CoreDataStack()
-  
-  private static var fabric = Fabric.with([Crashlytics()])
+  private static let fabric = Fabric.with([Crashlytics()])
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -62,16 +58,12 @@ class TodayViewController: UIViewController {
     setupProgressView()
     setupCoreDataSynchronization()
     setupNotificationsObservation()
-    
-    if #available(iOSApplicationExtension 9.3, *) {
-      setupHeathKitSynchronization()
-    }
   }
   
   deinit {
     NotificationCenter.default.removeObserver(self)
     // It's necessary to reset the managed object context in order to finalize background tasks correctly.
-    coreDataStack.performOnPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       privateContext.reset()
     }
   }
@@ -117,7 +109,7 @@ class TodayViewController: UIViewController {
   }
 
   fileprivate func setupNotificationsObservation() {
-    coreDataStack.performOnPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       NotificationCenter.default.addObserver(
         self,
         selector: #selector(self.managedObjectContextDidSave(_:)),
@@ -126,13 +118,6 @@ class TodayViewController: UIViewController {
     }
   }
   
-  @available(iOSApplicationExtension 9.3, *)
-  fileprivate func setupHeathKitSynchronization() {
-    coreDataStack.performOnPrivateContext { privateContext in
-      HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContext(privateContext)
-    }
-  }
-
   func managedObjectContextDidSave(_ notification: Notification) {
     // By unknown reason existance of "managedObjectContext" key produces an exception during passing massage object through wormhole
     var clearedNotification = notification
@@ -190,9 +175,9 @@ class TodayViewController: UIViewController {
     
     let drinks = Drink.fetchAllDrinksIndexed(managedObjectContext: managedObjectContext)
     
-    self.drink1 = drinks[drinkIndexesToDisplay[0]]
-    self.drink2 = drinks[drinkIndexesToDisplay[1]]
-    self.drink3 = drinks[drinkIndexesToDisplay[2]]
+    drink1 = drinks[drinkIndexesToDisplay[0]]
+    drink2 = drinks[drinkIndexesToDisplay[1]]
+    drink3 = drinks[drinkIndexesToDisplay[2]]
   }
   
   fileprivate func fetchWaterIntake(managedObjectContext: NSManagedObjectContext) {
@@ -212,7 +197,7 @@ class TodayViewController: UIViewController {
   }
   
   fileprivate func fetchData(_ completion: @escaping () -> ()) {
-    coreDataStack.performOnPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       if !Settings.sharedInstance.generalHasLaunchedOnce.value {
         CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: privateContext, saveContext: true)
       }
@@ -247,7 +232,7 @@ class TodayViewController: UIViewController {
   fileprivate func getDrinksInfo() -> [(amount: Double, name: String, drinkType: DrinkType)] {
     var drinksInfo: [(amount: Double, name: String, drinkType: DrinkType)]!
     
-    coreDataStack.performOnPrivateContextAndWait { _ in
+    CoreDataStack.performOnPrivateContextAndWait { _ in
       drinksInfo = [
         (amount: self.drink1.recentAmount.amount, name: self.drink1.localizedName, drinkType: self.drink1.drinkType),
         (amount: self.drink2.recentAmount.amount, name: self.drink2.localizedName, drinkType: self.drink2.drinkType),
@@ -333,7 +318,7 @@ class TodayViewController: UIViewController {
       return
     }
     
-    coreDataStack.performOnPrivateContext { privateContext in
+    CoreDataStack.performOnPrivateContext { privateContext in
       _ = Intake.addEntity(
         drink: drink,
         amount: drink.recentAmount.amount,

@@ -94,7 +94,6 @@
 		A516B1171BEBF76F00EC553A /* DrinksInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516B1161BEBF76F00EC553A /* DrinksInterfaceController.swift */; };
 		A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
 		A52A7D871B245C88007A71ED /* NotificationSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52A7D861B245C88007A71ED /* NotificationSounds.swift */; };
-		A52BFC601BAF28AC00B76345 /* HealthKitProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DEB05E1BA75B1300ABD3C8 /* HealthKitProvider.swift */; };
 		A52BFC611BAF293400B76345 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DEB0601BA75B4B00ABD3C8 /* HealthKit.framework */; };
 		A52E0CDB1B3854E500599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CDD1B3854E500599D81 /* InfoPlist.strings */; };
 		A52E0CE01B3854E500599D81 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CE21B3854E500599D81 /* InfoPlist.strings */; };
@@ -148,6 +147,8 @@
 		A587AD261BD6C367000B48E9 /* DrinkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AD231BD6C1B2000B48E9 /* DrinkType.swift */; };
 		A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */; };
 		A58D16171DFC8CA80020B106 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5C18C621DFA0921003E9C7D /* InfoPlist.strings */; };
+		A58D16191DFD7F3D0020B106 /* WelcomeWizardAppleHealthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58D16181DFD7F3C0020B106 /* WelcomeWizardAppleHealthViewController.swift */; };
+		A58D161A1DFD7F3D0020B106 /* WelcomeWizardAppleHealthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58D16181DFD7F3C0020B106 /* WelcomeWizardAppleHealthViewController.swift */; };
 		A58DE6A91DD90F3900F65990 /* InfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD97521ABB2B960011623B /* InfiniteScrollView.swift */; };
 		A58DE6AA1DD90F3900F65990 /* MonthStatisticsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD97601ABB2C3A0011623B /* MonthStatisticsContentView.swift */; };
 		A58DE6AB1DD90F3900F65990 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581FEEF1A76D5F60025CDEF /* CustomSlider.swift */; };
@@ -224,7 +225,6 @@
 		A58DE6F21DD90F3900F65990 /* NotificationSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52A7D861B245C88007A71ED /* NotificationSounds.swift */; };
 		A58DE6F31DD90F3900F65990 /* TimeIntervalPickerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843A8C9B1AA8992B00ED9507 /* TimeIntervalPickerTableCell.swift */; };
 		A58DE6F41DD90F3900F65990 /* YearStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */; };
-		A58DE6F51DD90F3900F65990 /* IntakeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B255E21BFB2DD3009AD8DA /* IntakeHelper.swift */; };
 		A58DE6F61DD90F3900F65990 /* PickerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4151AA5D29700E3C989 /* PickerTableCell.swift */; };
 		A58DE6F71DD90F3900F65990 /* IntakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478253619EAC8C200588FE3 /* IntakeViewController.swift */; };
 		A58DE6F81DD90F3900F65990 /* JDFSequentialTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */; };
@@ -279,7 +279,6 @@
 		A58DE7401DD90F8400F65990 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5071A6558C100AA89CB /* StyleKit.swift */; };
 		A58DE7411DD90F8400F65990 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2519B1AD2511E001E6644 /* TodayViewController.swift */; };
 		A58DE7421DD90F8400F65990 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
-		A58DE7431DD90F8400F65990 /* HealthKitProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DEB05E1BA75B1300ABD3C8 /* HealthKitProvider.swift */; };
 		A58DE7441DD90F8400F65990 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */; };
 		A58DE7451DD90F8400F65990 /* Aquaz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Aquaz.xcdatamodeld */; };
 		A58DE7461DD90F8400F65990 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2B19E4195A0026398E /* Drink.swift */; };
@@ -359,7 +358,6 @@
 		A5B017BA1BEFBD6C00E3F8AB /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B017B71BEFBD6200E3F8AB /* UIExtensions.swift */; };
 		A5B255DB1BF877F4009AD8DA /* WatchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B255DA1BF877F4009AD8DA /* WatchSettings.swift */; };
 		A5B255E11BFB295F009AD8DA /* ConnectivityMessageAddIntake.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554B4FA1BE504360095593B /* ConnectivityMessageAddIntake.swift */; };
-		A5B255E31BFB2DD3009AD8DA /* IntakeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B255E21BFB2DD3009AD8DA /* IntakeHelper.swift */; };
 		A5B255E61BFB469A009AD8DA /* ConnectivityMessageUpdatedSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B255E51BFB469A009AD8DA /* ConnectivityMessageUpdatedSettings.swift */; };
 		A5B255E71BFB469A009AD8DA /* ConnectivityMessageUpdatedSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B255E51BFB469A009AD8DA /* ConnectivityMessageUpdatedSettings.swift */; };
 		A5B255EA1BFCF998009AD8DA /* CurrentStateInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B255E81BFCF998009AD8DA /* CurrentStateInterfaceController.swift */; };
@@ -720,6 +718,7 @@
 		A587AD171BD68881000B48E9 /* UILoggedActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILoggedActions.swift; sourceTree = "<group>"; };
 		A587AD231BD6C1B2000B48E9 /* DrinkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkType.swift; sourceTree = "<group>"; };
 		A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		A58D16181DFD7F3C0020B106 /* WelcomeWizardAppleHealthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeWizardAppleHealthViewController.swift; sourceTree = "<group>"; };
 		A58DE73A1DD90F3900F65990 /* Aquaz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aquaz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A58DE7671DD90F8400F65990 /* Aquaz Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Aquaz Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A58DE7681DD90F8400F65990 /* Aquaz Widget-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Aquaz Widget-Info.plist"; sourceTree = "<group>"; };
@@ -744,7 +743,6 @@
 		A5B013E41AE27C7D00C372F8 /* UnitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsViewController.swift; sourceTree = "<group>"; };
 		A5B017B71BEFBD6200E3F8AB /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		A5B255DA1BF877F4009AD8DA /* WatchSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSettings.swift; sourceTree = "<group>"; };
-		A5B255E21BFB2DD3009AD8DA /* IntakeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntakeHelper.swift; sourceTree = "<group>"; };
 		A5B255E51BFB469A009AD8DA /* ConnectivityMessageUpdatedSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivityMessageUpdatedSettings.swift; sourceTree = "<group>"; };
 		A5B255E81BFCF998009AD8DA /* CurrentStateInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentStateInterfaceController.swift; sourceTree = "<group>"; };
 		A5B423011C0B0F1D00319D51 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -1258,6 +1256,7 @@
 				A57D2BED1ACFEA0A00619D62 /* WelcomeWizardViewController.swift */,
 				A57D2BEF1ACFEA5A00619D62 /* WelcomeWizardPageViewController.swift */,
 				A5D740751B301CA100FC2BAF /* WelcomeWizardWelcomeViewController.swift */,
+				A58D16181DFD7F3C0020B106 /* WelcomeWizardAppleHealthViewController.swift */,
 				A57D2BF11ACFFB3900619D62 /* WelcomeWizardUnitsViewController.swift */,
 				A57D2BF31AD02A7100619D62 /* WelcomeWizardMetricsViewController.swift */,
 				A57D2BF51AD02C5C00619D62 /* WelcomeWizardFullVersionViewController.swift */,
@@ -1370,7 +1369,6 @@
 				84039F171A4B103100C5391E /* NotificationsHelper.swift */,
 				8444F1971B209250007577C8 /* SystemHelper.swift */,
 				A5A639BD1B2B219800E2DB60 /* ImageHelper.swift */,
-				A5B255E21BFB2DD3009AD8DA /* IntakeHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2313,6 +2311,7 @@
 				840476571A35FE4A004F0FEF /* WaterGoalViewController.swift in Sources */,
 				A5C894681AF4B75C0042B6DF /* JDFTooltipManager.m in Sources */,
 				A587AD181BD68881000B48E9 /* UILoggedActions.swift in Sources */,
+				A58D16191DFD7F3D0020B106 /* WelcomeWizardAppleHealthViewController.swift in Sources */,
 				A554B4FD1BE504360095593B /* ConnectivityMessageAddIntake.swift in Sources */,
 				847E75FA1AA9F508003B63E1 /* DatePickerTableCell.swift in Sources */,
 				8424AA061A0B5813009C5C47 /* MultiProgressView.swift in Sources */,
@@ -2377,7 +2376,6 @@
 				A52A7D871B245C88007A71ED /* NotificationSounds.swift in Sources */,
 				843A8C9C1AA8992B00ED9507 /* TimeIntervalPickerTableCell.swift in Sources */,
 				84C610BC1A31A98900433EF1 /* YearStatisticsViewController.swift in Sources */,
-				A5B255E31BFB2DD3009AD8DA /* IntakeHelper.swift in Sources */,
 				A5D3D4231AA5D29700E3C989 /* PickerTableCell.swift in Sources */,
 				8478253719EAC8C200588FE3 /* IntakeViewController.swift in Sources */,
 				A5C894671AF4B75C0042B6DF /* JDFSequentialTooltipManager.m in Sources */,
@@ -2430,7 +2428,6 @@
 				84D251AA1AD25FF3001E6644 /* StyleKit.swift in Sources */,
 				84D2519C1AD2511E001E6644 /* TodayViewController.swift in Sources */,
 				84D251B81AD2686F001E6644 /* Settings.swift in Sources */,
-				A52BFC601BAF28AC00B76345 /* HealthKitProvider.swift in Sources */,
 				84B17C8C1AD2C58000ABA3C9 /* GlobalConstants.swift in Sources */,
 				84B17C881AD293DF00ABA3C9 /* Aquaz.xcdatamodeld in Sources */,
 				84D251A71AD25DE2001E6644 /* Drink.swift in Sources */,
@@ -2568,7 +2565,6 @@
 				A58DE6F21DD90F3900F65990 /* NotificationSounds.swift in Sources */,
 				A58DE6F31DD90F3900F65990 /* TimeIntervalPickerTableCell.swift in Sources */,
 				A58DE6F41DD90F3900F65990 /* YearStatisticsViewController.swift in Sources */,
-				A58DE6F51DD90F3900F65990 /* IntakeHelper.swift in Sources */,
 				A58DE6F61DD90F3900F65990 /* PickerTableCell.swift in Sources */,
 				A58DE6F71DD90F3900F65990 /* IntakeViewController.swift in Sources */,
 				A58DE6F81DD90F3900F65990 /* JDFSequentialTooltipManager.m in Sources */,
@@ -2583,6 +2579,7 @@
 				A58DE7021DD90F3900F65990 /* DrinkType.swift in Sources */,
 				A58DE7031DD90F3900F65990 /* UnitItems.swift in Sources */,
 				A58DE7041DD90F3900F65990 /* YearStatisticsView.swift in Sources */,
+				A58D161A1DFD7F3D0020B106 /* WelcomeWizardAppleHealthViewController.swift in Sources */,
 				A58DE7051DD90F3900F65990 /* GlobalConstants.swift in Sources */,
 				A58DE7061DD90F3900F65990 /* UILabel+JDFTooltips.m in Sources */,
 				A58DE7071DD90F3900F65990 /* UIExtensions.swift in Sources */,
@@ -2607,7 +2604,6 @@
 				A58DE7401DD90F8400F65990 /* StyleKit.swift in Sources */,
 				A58DE7411DD90F8400F65990 /* TodayViewController.swift in Sources */,
 				A58DE7421DD90F8400F65990 /* Settings.swift in Sources */,
-				A58DE7431DD90F8400F65990 /* HealthKitProvider.swift in Sources */,
 				A58DE7441DD90F8400F65990 /* GlobalConstants.swift in Sources */,
 				A58DE7451DD90F8400F65990 /* Aquaz.xcdatamodeld in Sources */,
 				A58DE7461DD90F8400F65990 /* Drink.swift in Sources */,

@@ -60,9 +60,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     setupSynchronizationWithCoreData()
 
+    if #available(iOS 9.0, *) {
+      // Just for creating an instance of the HealthKit provider
+      _ = HealthKitProvider.sharedInstance
+    }
+    
     if #available(iOS 9.3, *) {
-      setupHealthKitSynchronization()
-      
       // Just for creating an instance of the connectivity provider
       ConnectivityProvider.sharedInstance.startSession()
     }
@@ -119,13 +122,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         name: NSNotification.Name.NSManagedObjectContextDidSave,
         object: privateContext)
       }
-  }
-
-  @available(iOS 9.3, *)
-  fileprivate func setupHealthKitSynchronization() {
-    CoreDataStack.performOnPrivateContext { privateContext in
-      HealthKitProvider.sharedInstance.initSynchronizationForManagedObjectContext(privateContext)
-    }
   }
 
   func updateNotifications(_ notification: Notification) {
@@ -292,6 +288,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     CoreDataStack.saveAllContexts()
     
     NotificationCenter.default.removeObserver(self)
+  }
+  
+  @available(iOS 9.0, *)
+  func applicationShouldRequestHealthAuthorization(_ application: UIApplication) {
+    // Currently Today Extension does not request for Apple Health authorization, so this method is never called. But who knows the future?
+    HealthKitProvider.sharedInstance.authorizeHealthKit { _, _ in
+    }
   }
   
 }
