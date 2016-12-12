@@ -141,7 +141,6 @@
 		A587AD141BD687AB000B48E9 /* UIControllersExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AD131BD687AB000B48E9 /* UIControllersExtensions.swift */; };
 		A587AD161BD687EC000B48E9 /* UIControlsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AD111BD6876A000B48E9 /* UIControlsExtensions.swift */; };
 		A587AD181BD68881000B48E9 /* UILoggedActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AD171BD68881000B48E9 /* UILoggedActions.swift */; };
-		A587AD1B1BD68AE6000B48E9 /* Aquaz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Aquaz.xcdatamodeld */; };
 		A587AD241BD6C1B2000B48E9 /* DrinkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AD231BD6C1B2000B48E9 /* DrinkType.swift */; };
 		A587AD251BD6C1B2000B48E9 /* DrinkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AD231BD6C1B2000B48E9 /* DrinkType.swift */; };
 		A587AD261BD6C367000B48E9 /* DrinkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AD231BD6C1B2000B48E9 /* DrinkType.swift */; };
@@ -316,7 +315,6 @@
 		A58DE7801DD90FA100F65990 /* DrinksInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516B1161BEBF76F00EC553A /* DrinksInterfaceController.swift */; };
 		A58DE7811DD90FA100F65990 /* UIControlsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F582F11BF217BC0049AD3A /* UIControlsExtensions.swift */; };
 		A58DE7821DD90FA100F65990 /* ConnectivityMessageAddIntake.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554B4FA1BE504360095593B /* ConnectivityMessageAddIntake.swift */; };
-		A58DE7831DD90FA100F65990 /* Aquaz.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84669A7019DAD78D003C2263 /* Aquaz.xcdatamodeld */; };
 		A58DE7841DD90FA100F65990 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB41BD65224000B48E9 /* ExtensionDelegate.swift */; };
 		A58DE7851DD90FA100F65990 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468D6411A0D1C240008D027 /* DateHelper.swift */; };
 		A58DE7861DD90FA100F65990 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598D5071A6558C100AA89CB /* StyleKit.swift */; };
@@ -2463,7 +2461,6 @@
 				A516B1171BEBF76F00EC553A /* DrinksInterfaceController.swift in Sources */,
 				A5F582F21BF217BC0049AD3A /* UIControlsExtensions.swift in Sources */,
 				A5B255E11BFB295F009AD8DA /* ConnectivityMessageAddIntake.swift in Sources */,
-				A587AD1B1BD68AE6000B48E9 /* Aquaz.xcdatamodeld in Sources */,
 				A587AAB51BD65224000B48E9 /* ExtensionDelegate.swift in Sources */,
 				A549A8591BF2740900340486 /* DateHelper.swift in Sources */,
 				A587AD0F1BD686A3000B48E9 /* StyleKit.swift in Sources */,
@@ -2639,7 +2636,6 @@
 				A58DE7801DD90FA100F65990 /* DrinksInterfaceController.swift in Sources */,
 				A58DE7811DD90FA100F65990 /* UIControlsExtensions.swift in Sources */,
 				A58DE7821DD90FA100F65990 /* ConnectivityMessageAddIntake.swift in Sources */,
-				A58DE7831DD90FA100F65990 /* Aquaz.xcdatamodeld in Sources */,
 				A58DE7841DD90FA100F65990 /* ExtensionDelegate.swift in Sources */,
 				A58DE7851DD90FA100F65990 /* DateHelper.swift in Sources */,
 				A58DE7861DD90FA100F65990 /* StyleKit.swift in Sources */,

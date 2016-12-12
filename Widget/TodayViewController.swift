@@ -35,11 +35,11 @@ class TodayViewController: UIViewController {
   fileprivate var drink2: Drink!
   fileprivate var drink3: Drink!
   
-  fileprivate var progressViewSection: MultiProgressView.Section!
+  fileprivate var multiProgressSections: [Int: MultiProgressView.Section] = [:]
   fileprivate var wormhole: MMWormhole!
-  fileprivate var waterGoal: Double?
-  fileprivate var hydration: Double?
-  fileprivate var dehydration: Double?
+  fileprivate var waterGoalAmount: Double = 0
+  fileprivate var totalHydrationAmount: Double = 0
+  fileprivate var hydrationAmounts = [DrinkType: Double]()
 
   private static let fabric = Fabric.with([Crashlytics()])
   
@@ -81,7 +81,15 @@ class TodayViewController: UIViewController {
 
   fileprivate func setupProgressView() {
     progressView.animationDuration = 0.7
-    progressViewSection = progressView.addSection(color: StyleKit.waterColor)
+    
+    for drinkIndex in 0..<Drink.getDrinksCount() {
+      if let drinkType = DrinkType(rawValue: drinkIndex) {
+        let section = progressView.addSection(color: drinkType.mainColor)
+        multiProgressSections[drinkIndex] = section
+      } else {
+        Logger.logError("Drink type with index(\(drinkIndex)) is not found.")
+      }
+    }
   }
   
   fileprivate func setupDrinksUI() {
@@ -126,35 +134,49 @@ class TodayViewController: UIViewController {
     wormhole.passMessageObject(clearedNotification as NSCoding?, identifier: GlobalConstants.wormholeMessageFromWidget)
   }
   
-  fileprivate func fetchDrinks(managedObjectContext: NSManagedObjectContext) {
-    var drinkIndexesToDisplay = [Int]()
-    var drinkIndexes = Array(0..<Drink.getDrinksCount())
-    
-    let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
-    if let intake1 = Intake.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: nil, sortDescriptors: [sortDescriptor]) {
-      let drinkIndex1 = intake1.drink.index.intValue
-      drinkIndexesToDisplay += [drinkIndex1]
-      if let index = drinkIndexes.index(of: drinkIndex1) {
-        drinkIndexes.remove(at: index)
-      } else {
-        assert(false)
+  fileprivate func fetchData(_ completion: @escaping () -> ()) {
+    CoreDataStack.performOnPrivateContext { privateContext in
+      if !Settings.sharedInstance.generalHasLaunchedOnce.value {
+        CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: privateContext, saveContext: true)
       }
-      
-      let predicate2 = NSPredicate(format: "%K != %d", "drink.index", drinkIndex1)
-      
-      if let intake2 = Intake.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate2, sortDescriptors: [sortDescriptor]) {
-        let drinkIndex2 = intake2.drink.index.intValue
-        drinkIndexesToDisplay += [drinkIndex2]
-        if let index = drinkIndexes.index(of: drinkIndex2) {
-          drinkIndexes.remove(at: index)
-        } else {
-          assert(false)
+    
+      self.fetchDrinks(managedObjectContext: privateContext)
+      self.fetchWaterIntakes(managedObjectContext: privateContext)
+      completion()
+    }
+  }
+  
+  fileprivate func fetchDrinks(managedObjectContext: NSManagedObjectContext) {
+    let entity = Intake.entityDescription(inManagedObjectContext: managedObjectContext)
+    let request = NSFetchRequest<NSDictionary>()
+    request.entity = entity
+    request.resultType = .dictionaryResultType
+    request.propertiesToFetch = ["drink.index"]
+    request.propertiesToGroupBy = ["drink.index"]
+    request.fetchLimit = 2
+    request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+    request.predicate = NSPredicate(format: "%K != %d", "drink.index", DrinkType.water.rawValue)
+
+    // The first drink should be always water
+    var drinkIndexesToDisplay = [DrinkType.water.rawValue]
+    var drinkIndexes = Array((DrinkType.water.rawValue + 1)..<Drink.getDrinksCount())
+    
+    if let fetch = try? managedObjectContext.fetch(request) {
+      for drinkIndex in 0..<2 {
+        if drinkIndex >= fetch.count {
+          break
         }
         
-        let predicate3 = NSPredicate(format: "%K != %d AND %K != %d", "drink.index", drinkIndex1, "drink.index", drinkIndex2)
+        let entry = fetch[drinkIndex]
         
-        if let intake3 = Intake.fetchManagedObject(managedObjectContext: managedObjectContext, predicate: predicate3, sortDescriptors: [sortDescriptor]) {
-          drinkIndexesToDisplay += [intake3.drink.index.intValue]
+        guard let index = entry["drink.index"] as? NSNumber else {
+          break
+        }
+        
+        drinkIndexesToDisplay += [index.intValue]
+        
+        if let indexToRemove = drinkIndexes.index(of: index.intValue) {
+          drinkIndexes.remove(at: indexToRemove)
         }
       }
     }
@@ -180,32 +202,19 @@ class TodayViewController: UIViewController {
     drink3 = drinks[drinkIndexesToDisplay[2]]
   }
   
-  fileprivate func fetchWaterIntake(managedObjectContext: NSManagedObjectContext) {
+  fileprivate func fetchWaterIntakes(managedObjectContext: NSManagedObjectContext) {
     let date = Date()
     
-    self.waterGoal = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: managedObjectContext)?.amount
+    waterGoalAmount = WaterGoal.fetchWaterGoalForDate(date, managedObjectContext: managedObjectContext)?.amount ?? 0
     
-    let amount = Intake.fetchIntakeAmountPartsGroupedBy(.day,
-      beginDate: date,
-      endDate: DateHelper.nextDayFrom(date),
-      dayOffsetInHours: 0,
-      aggregateFunction: .summary,
-      managedObjectContext: managedObjectContext).first!
+    let totalDehydrationAmount = Intake.fetchTotalDehydrationAmountForDay(date, dayOffsetInHours: 0, managedObjectContext: managedObjectContext)
+    waterGoalAmount += totalDehydrationAmount
     
-    self.hydration = amount.hydration
-    self.dehydration = amount.dehydration
-  }
-  
-  fileprivate func fetchData(_ completion: @escaping () -> ()) {
-    CoreDataStack.performOnPrivateContext { privateContext in
-      if !Settings.sharedInstance.generalHasLaunchedOnce.value {
-        CoreDataPrePopulation.prePopulateCoreData(managedObjectContext: privateContext, saveContext: true)
-      }
+    hydrationAmounts = Intake.fetchHydrationAmountsGroupedByDrinksForDay(date, dayOffsetInHours: 0, managedObjectContext: managedObjectContext)
     
-      self.fetchDrinks(managedObjectContext: privateContext)
-      self.fetchWaterIntake(managedObjectContext: privateContext)
-      completion()
-    }
+    totalHydrationAmount = hydrationAmounts.reduce(0, { (totalHydration, amount) -> Double in
+      return totalHydration + amount.value
+    })
   }
   
   fileprivate func updateUI(animated: Bool) {
@@ -242,31 +251,42 @@ class TodayViewController: UIViewController {
     return drinksInfo
   }
 
-  fileprivate func updateWaterIntakes(animated: Bool) {
-    if let waterGoal = waterGoal,
-       let hydration = hydration,
-       let dehydration = dehydration
-    {
-      updateProgressView(waterGoal: waterGoal + dehydration, overallWaterIntake: hydration, animated: animated)
-      updateProgressLabel(waterGoal: waterGoal + dehydration, overallWaterIntake: hydration, animated: animated)
-    } else {
-      progressViewSection.factor = 0
-      progressLabel.text = NSLocalizedString("TodayExtension:Updating...", value: "Updating...", comment: "TodayExtension: Temporary text for amount label")
+  fileprivate func updateIntakeHydrationAmounts(_ intakeHydrationAmounts: [DrinkType: Double]) {
+    // Clear all drink sections
+    for (_, section) in multiProgressSections {
+      section.factor = 0.0
     }
-  }
-  
-  fileprivate func updateProgressView(waterGoal: Double, overallWaterIntake: Double, animated: Bool) {
-    let newFactor = CGFloat(overallWaterIntake / waterGoal)
-    if progressViewSection.factor != newFactor {
-      if animated {
-        progressViewSection.setFactorWithAnimation(newFactor)
-      } else {
-        progressViewSection.factor = newFactor
+    
+    // Fill sections with fetched intakes and compute daily water intake
+    for (drinkType, hydrationAmount) in intakeHydrationAmounts {
+      if let section = multiProgressSections[drinkType.rawValue] {
+        section.factor = CGFloat(hydrationAmount)
       }
     }
   }
   
-  fileprivate func updateProgressLabel(waterGoal: Double, overallWaterIntake: Double, animated: Bool) {
+  fileprivate func updateWaterIntakes(animated: Bool) {
+    updateProgressView(animated: animated)
+    updateProgressLabel(animated: animated)
+  }
+  
+  fileprivate func updateProgressView(animated: Bool) {
+    DispatchQueue.main.async {
+      if animated {
+        self.progressView.updateWithAnimation {
+          self.updateIntakeHydrationAmounts(self.hydrationAmounts)
+          self.progressView.maximum = CGFloat(self.waterGoalAmount)
+        }
+      } else {
+        self.progressView.update {
+          self.updateIntakeHydrationAmounts(self.hydrationAmounts)
+          self.progressView.maximum = CGFloat(self.waterGoalAmount)
+        }
+      }
+    }
+  }
+  
+  fileprivate func updateProgressLabel(animated: Bool) {
     let intakeText: String
     
     if Settings.sharedInstance.uiDisplayDailyWaterIntakeInPercents.value {
@@ -274,13 +294,13 @@ class TodayViewController: UIViewController {
       formatter.numberStyle = .percent
       formatter.maximumFractionDigits = 0
       formatter.multiplier = 100
-      let drinkedPart = overallWaterIntake / waterGoal
+      let drinkedPart = totalHydrationAmount / waterGoalAmount
       intakeText = formatter.string(for: drinkedPart)!
     } else {
-      intakeText = formatWaterVolume(overallWaterIntake, displayUnits: false)
+      intakeText = formatWaterVolume(totalHydrationAmount, displayUnits: false)
     }
     
-    let waterGoalText = formatWaterVolume(waterGoal)
+    let waterGoalText = formatWaterVolume(waterGoalAmount)
     
     let template = NSLocalizedString("TodayExtension:%1$@ of %2$@", value: "%1$@ of %2$@",
       comment: "TodayExtension: Current daily water intake of water intake goal")
@@ -325,11 +345,11 @@ class TodayViewController: UIViewController {
         date: Date(),
         managedObjectContext: privateContext,
         saveImmediately: true)
+    }
 
-      self.fetchData {
-        DispatchQueue.main.async {
-          self.updateUI(animated: true)
-        }
+    fetchData {
+      DispatchQueue.main.async {
+        self.updateUI(animated: true)
       }
     }
   }

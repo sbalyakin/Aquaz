@@ -30,35 +30,38 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="GD9-6t-B34" userLabel="Progress View" customClass="MultiProgressView" customModule="AquazPro_Widget" customModuleProvider="target">
-                                <rect key="frame" x="20" y="36.5" width="280" height="4"/>
+                                <rect key="frame" x="20" y="36.5" width="280" height="6"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="4" id="5ld-t6-L2B"/>
+                                    <constraint firstAttribute="height" constant="6" id="5ld-t6-L2B"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="sectionsPadding">
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="emptySectionColor">
-                                        <color key="value" red="0.94509803920000002" green="0.94509803920000002" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="200" text="Recent Intakes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJk-Gn-h2O">
-                                <rect key="frame" x="16" y="48.5" width="288" height="18"/>
+                                <rect key="frame" x="16" y="50.5" width="288" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="210" translatesAutoresizingMaskIntoConstraints="NO" id="iEn-FC-8wI" userLabel="Gap 1">
-                                <rect key="frame" x="0.0" y="74.5" width="32" height="74"/>
+                                <rect key="frame" x="0.0" y="76.5" width="32" height="72"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="210" translatesAutoresizingMaskIntoConstraints="NO" id="Wee-Cb-r64" userLabel="Drink 1 - Image" customClass="DrinkView" customModule="AquazPro_Widget" customModuleProvider="target">
-                                <rect key="frame" x="32" y="74.5" width="64" height="74"/>
+                                <rect key="frame" x="32" y="76.5" width="64" height="72"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -86,11 +89,11 @@
                                 </connections>
                             </label>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="210" translatesAutoresizingMaskIntoConstraints="NO" id="da6-s4-EEI" userLabel="Gap 2">
-                                <rect key="frame" x="96" y="74.5" width="32" height="74"/>
+                                <rect key="frame" x="96" y="76.5" width="32" height="72"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="210" translatesAutoresizingMaskIntoConstraints="NO" id="vJU-a4-h8C" userLabel="Drink 2 - Image" customClass="DrinkView" customModule="AquazPro_Widget" customModuleProvider="target">
-                                <rect key="frame" x="128" y="74.5" width="64" height="74"/>
+                                <rect key="frame" x="128" y="76.5" width="64" height="72"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -118,11 +121,11 @@
                                 </connections>
                             </label>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="210" translatesAutoresizingMaskIntoConstraints="NO" id="4kR-rT-yJj" userLabel="Gap 3">
-                                <rect key="frame" x="192" y="74.5" width="32" height="74"/>
+                                <rect key="frame" x="192" y="76.5" width="32" height="72"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="210" translatesAutoresizingMaskIntoConstraints="NO" id="vPd-GL-K5j" userLabel="Drink 3 - Image" customClass="DrinkView" customModule="AquazPro_Widget" customModuleProvider="target">
-                                <rect key="frame" x="224" y="74.5" width="64" height="74"/>
+                                <rect key="frame" x="224" y="76.5" width="64" height="72"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -150,7 +153,7 @@
                                 </connections>
                             </label>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="210" translatesAutoresizingMaskIntoConstraints="NO" id="vX0-OV-jjo" userLabel="Gap 4">
-                                <rect key="frame" x="288" y="74.5" width="32" height="74"/>
+                                <rect key="frame" x="288" y="76.5" width="32" height="72"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ze7-qb-OsM">
