@@ -15,26 +15,10 @@
 #exit 1
 #fi
 
-# Increase build number for Aquaz target
-AQUAZ_INFOPLIST_FILE=../Aquaz/Info.plist
-buildNumber=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$AQUAZ_INFOPLIST_FILE")
-buildNumber=$(($buildNumber + 1))
-/usr/libexec/PlistBuddy -c "Set CFBundleVersion $buildNumber" "$AQUAZ_INFOPLIST_FILE"
-echo "### Build number for Aquaz target has been bumped to $buildNumber."
+# Increase build number based on 'AquazPro' target
+AQUAZPRO_INFOPLIST_FILE=../Aquaz/Info.plist
 
-# Increase build number for Widget target
-WIDGET_INFOPLIST_FILE=../Widget/Info.plist
-/usr/libexec/PlistBuddy -c "Set CFBundleVersion $buildNumber" "$WIDGET_INFOPLIST_FILE"
-echo "### Build number for Widget target has been bumped to $buildNumber."
+BUILD_NUMBER=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "${AQUAZPRO_INFOPLIST_FILE}")
+BUILD_NUMBER=$((${BUILD_NUMBER} + 1))
 
-# Increase build number for Watch target
-WATCH_INFOPLIST_FILE=../Watch/Info.plist
-/usr/libexec/PlistBuddy -c "Set CFBundleVersion $buildNumber" "$WATCH_INFOPLIST_FILE"
-echo "### Build number for Watch target has been bumped to $buildNumber."
-
-# Increase build number for Watch Extension target
-WATCH_EXTENSION_INFOPLIST_FILE=../Watch\ Extension/Info.plist
-/usr/libexec/PlistBuddy -c "Set CFBundleVersion $buildNumber" "$WATCH_EXTENSION_INFOPLIST_FILE"
-echo "### Build number for Watch Extension target has been bumped to $buildNumber."
-
-echo "### Done."
+sh SetForAllTargets.sh "BuildNumber" "${BUILD_NUMBER}"
