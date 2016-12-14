@@ -665,6 +665,7 @@
 		A516B1161BEBF76F00EC553A /* DrinksInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinksInterfaceController.swift; sourceTree = "<group>"; };
 		A51A65F91DD7C2D300B1A83F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A5275F861A1216090088AF47 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		A528049A1E00415900D83B20 /* SetForAllTargets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = SetForAllTargets.sh; sourceTree = "<group>"; };
 		A52A7D861B245C88007A71ED /* NotificationSounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSounds.swift; sourceTree = "<group>"; };
 		A52E0CDC1B3854E500599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A52E0CE11B3854E500599D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1234,6 +1235,7 @@
 			children = (
 				A5340CCE1C15858300B01C30 /* IncreaseBuildNumber.sh */,
 				A5340CCF1C1589F200B01C30 /* UpdateRepository.sh */,
+				A528049A1E00415900D83B20 /* SetForAllTargets.sh */,
 				A5340CD01C158A4F00B01C30 /* readme.txt */,
 			);
 			path = Distribution;
