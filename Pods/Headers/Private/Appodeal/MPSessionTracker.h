@@ -1,0 +1,1 @@
+../../../Appodeal/APDTwitterMoPubAdapter.embeddedframework/Headers/MPSessionTracker.h

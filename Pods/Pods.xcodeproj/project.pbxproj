@@ -96,181 +96,359 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0137C6BBDE81F8F141D69764438415BA /* MPAdBrowserController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = MPAdBrowserController.xib; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPAdBrowserController.xib; sourceTree = "<group>"; };
-		01687686DEC138F1288D7E1E5C68C1E5 /* libAppLovinSdk.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAppLovinSdk.a; path = APDAppLovinAdapter.embeddedframework/libAppLovinSdk.a; sourceTree = "<group>"; };
+		0176D952EE53B87ADB38FD9BE4E8FE77 /* MPVASTTracking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTTracking.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTTracking.h; sourceTree = "<group>"; };
 		02FD6FF0BC89702A7084A8388E518849 /* SimulatorStatusMagic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SimulatorStatusMagic.framework; path = SimulatorStatusMagic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		035684B489AB99607C39136826A40300 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdColony.framework; path = APDAdColonyAdapter.embeddedframework/AdColony.framework; sourceTree = "<group>"; };
+		0303FDEB421C8A2E68484304856D0416 /* MPPlayBtn@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPPlayBtn@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPPlayBtn@3x.png"; sourceTree = "<group>"; };
+		04C9D79FAD6C2031B17DC2732A338F91 /* ALAdView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdView.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdView.h; sourceTree = "<group>"; };
+		050F10EC0F08176B893B67D5EBCA33FE /* MPMRAIDInterstitialViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPMRAIDInterstitialViewController.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPMRAIDInterstitialViewController.h; sourceTree = "<group>"; };
 		071D7C09D0971FBDBF38776801E0134A /* Pods-Aquaz Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz Widget.release.xcconfig"; sourceTree = "<group>"; };
 		08BBAEA343D75B2F1B785148D5E8985C /* Answers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Answers.h; path = iOS/Crashlytics.framework/Headers/Answers.h; sourceTree = "<group>"; };
+		08D8F80DD082917E2B6FA15FC9E26AC3 /* MOPUBNativeVideoAdConfigValues.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBNativeVideoAdConfigValues.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBNativeVideoAdConfigValues.h; sourceTree = "<group>"; };
+		090E2D572FD2795C30582A00FF796057 /* libAPDAdColonyAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDAdColonyAdapter.a; path = APDAdColonyAdapter.embeddedframework/libAPDAdColonyAdapter.a; sourceTree = "<group>"; };
+		09311A7549235FEC49E7B2048793F9B9 /* MPHTMLInterstitialCustomEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPHTMLInterstitialCustomEvent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPHTMLInterstitialCustomEvent.h; sourceTree = "<group>"; };
+		0A11434EC90F156F9B30FF46EE57A12A /* MoPub-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MoPub-Bridging-Header.h"; path = "APDTwitterMoPubAdapter.embeddedframework/Headers/MoPub-Bridging-Header.h"; sourceTree = "<group>"; };
+		0A6F45400D7084CBA64FCEFC78ADA3DD /* MOPUBNativeVideoCustomEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBNativeVideoCustomEvent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBNativeVideoCustomEvent.h; sourceTree = "<group>"; };
+		0ADA4AF22E6B20B732FEE2B4B8B3871E /* Chartboost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chartboost.framework; path = APDChartboostAdapter.embeddedframework/Chartboost.framework; sourceTree = "<group>"; };
+		0B1F6273B2CBACB8E6F4DD0C2C3170D9 /* MPBannerCustomEventDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPBannerCustomEventDelegate.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPBannerCustomEventDelegate.h; sourceTree = "<group>"; };
+		0BA8AF84A66FA681246FA4B35F051B23 /* MPHTMLBannerCustomEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPHTMLBannerCustomEvent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPHTMLBannerCustomEvent.h; sourceTree = "<group>"; };
+		0BEB459165CC11424B9453272A91B2E6 /* MRVideoPlayerManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRVideoPlayerManager.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MRVideoPlayerManager.h; sourceTree = "<group>"; };
 		0C15A715A4E46AB4E9DF2921155A3BA1 /* Pods-AquazPro Widget.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-AquazPro Widget.modulemap"; sourceTree = "<group>"; };
 		0CBA19796EBE6E42233125FAED2F9B1A /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
 		0CC6909A475D08E7B2CD41AF904199C7 /* Pods-AquazPro-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AquazPro-frameworks.sh"; sourceTree = "<group>"; };
-		0D3941E792E4893350DA23D59287998F /* MPUnmutedBtn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPUnmutedBtn@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPUnmutedBtn@2x.png"; sourceTree = "<group>"; };
+		0F2FAA0C43DBC1FFCDFEED3FD895F980 /* MPUnmutedBtn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPUnmutedBtn@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPUnmutedBtn@2x.png"; sourceTree = "<group>"; };
+		0F40795BE33A4D85E7973194EC7AC2BE /* MPProgressOverlayView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPProgressOverlayView.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPProgressOverlayView.h; sourceTree = "<group>"; };
 		0FB717F529076518F61A87619FB1ACAB /* Pods-AquazPro Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AquazPro Widget.debug.xcconfig"; sourceTree = "<group>"; };
-		107411FD6ACB26D3D9A385F6058E5D60 /* ALSdk.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALSdk.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALSdk.h; sourceTree = "<group>"; };
-		113797AAD27B1C616BCED3C13D83652A /* ALAdSize.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdSize.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdSize.h; sourceTree = "<group>"; };
+		10ED6C34A1D6AF1DBF9C4EAFA4299A3F /* MPReachability.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPReachability.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPReachability.h; sourceTree = "<group>"; };
+		11B84F4B4C92FB11F71910B92AB179AA /* vg_close.png */ = {isa = PBXFileReference; includeInIndex = 1; name = vg_close.png; path = APDVungleAdapter.embeddedframework/Resources/vg_close.png; sourceTree = "<group>"; };
+		11EEE929B3AC7BAC33C1CE877A00C5C4 /* MPPlayBtn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPPlayBtn@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPPlayBtn@2x.png"; sourceTree = "<group>"; };
+		11F7E6D25B81CB0BF46A3C98B7F570FA /* MPLogEventRecorder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPLogEventRecorder.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPLogEventRecorder.h; sourceTree = "<group>"; };
 		12D2C17C840C7BF037F5FFC7632ADB66 /* Pods-AquazPro-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AquazPro-acknowledgements.plist"; sourceTree = "<group>"; };
-		145E605AC38CFFD17A4B5B951CD2934B /* libAPDStartAppAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDStartAppAdapter.a; path = APDStartAppAdapter.embeddedframework/libAPDStartAppAdapter.a; sourceTree = "<group>"; };
+		137867412AE70819CA0F94FE24548DA7 /* MPMutedBtn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPMutedBtn@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPMutedBtn@2x.png"; sourceTree = "<group>"; };
+		145B537036AB393A07BE76DEB55D1076 /* MPNativeAdAdapter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdAdapter.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdAdapter.h; sourceTree = "<group>"; };
+		14BDC0FF19F776EDA9FE21354AF3B586 /* MPStaticNativeAdRenderer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPStaticNativeAdRenderer.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPStaticNativeAdRenderer.h; sourceTree = "<group>"; };
+		15519456242661061144C0C42F26C057 /* MPTimer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPTimer.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPTimer.h; sourceTree = "<group>"; };
+		158B7AED41004C9AC6710193B500AF82 /* MPBannerCustomEventAdapter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPBannerCustomEventAdapter.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPBannerCustomEventAdapter.h; sourceTree = "<group>"; };
+		15982FB2746FBCFE00005B0EB18CA352 /* MPMoPubNativeAdAdapter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPMoPubNativeAdAdapter.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPMoPubNativeAdAdapter.h; sourceTree = "<group>"; };
+		16B80C4083FAE24FD91C86FD09EB0760 /* MPClosableView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPClosableView.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPClosableView.h; sourceTree = "<group>"; };
+		177A94F1922A55691F8D5246115167BA /* libAPDMyTargetAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDMyTargetAdapter.a; path = APDMyTargetAdapter.embeddedframework/libAPDMyTargetAdapter.a; sourceTree = "<group>"; };
+		18D98A97373608E8D8EC13B491EEB835 /* MOPUBAVPlayerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBAVPlayerView.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBAVPlayerView.h; sourceTree = "<group>"; };
+		196743A6CE1CFEF608371867A707E21F /* MPNativeAdSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdSource.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdSource.h; sourceTree = "<group>"; };
 		19D3E38A069539DC8ECB3D382073A7A6 /* Pods-AquazPro Widget-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AquazPro Widget-acknowledgements.markdown"; sourceTree = "<group>"; };
+		1A164B8BBF1EAA6F9CF2517947CB8EDE /* MPVASTResource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTResource.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTResource.h; sourceTree = "<group>"; };
 		1AD56D952F9E37D83464871D1C582383 /* MMWormhole-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMWormhole-umbrella.h"; sourceTree = "<group>"; };
-		1BF6FCBB962310AE2A74E51AE7E7987A /* TapjoyResources.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = TapjoyResources.bundle; path = APDTapjoyAdapter.embeddedframework/Resources/TapjoyResources.bundle; sourceTree = "<group>"; };
+		1B816D631337818906AE8E355B1E824A /* MPAdConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAdConfiguration.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAdConfiguration.h; sourceTree = "<group>"; };
+		1C90DE2A47F85451F1AF368C551024D5 /* MPVASTWrapper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTWrapper.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTWrapper.h; sourceTree = "<group>"; };
+		1E3CEC52123EA176E1C0BE9CCD043DD0 /* vg_privacy.png */ = {isa = PBXFileReference; includeInIndex = 1; name = vg_privacy.png; path = APDVungleAdapter.embeddedframework/Resources/vg_privacy.png; sourceTree = "<group>"; };
 		1EB350B5F48EE8B482E62D6CE3459875 /* MMWormholeFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeFileTransiting.h; path = Source/MMWormholeFileTransiting.h; sourceTree = "<group>"; };
-		1FC2BA785F18B9DD3B1948FA0B4D2215 /* ALAdVideoPlaybackDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdVideoPlaybackDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdVideoPlaybackDelegate.h; sourceTree = "<group>"; };
+		1F398411985C0E6ACA667F1BBABBEAE7 /* MPForceableOrientationProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPForceableOrientationProtocol.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPForceableOrientationProtocol.h; sourceTree = "<group>"; };
+		1FE92F7B057FCCE94A76C41AE6E690D3 /* NSURL+MPAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSURL+MPAdditions.h"; path = "APDTwitterMoPubAdapter.embeddedframework/Headers/NSURL+MPAdditions.h"; sourceTree = "<group>"; };
+		2079C7BD8197DABBB26A1C6FBEBE284E /* MPStaticNativeAdImpressionTimer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPStaticNativeAdImpressionTimer.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPStaticNativeAdImpressionTimer.h; sourceTree = "<group>"; };
+		21D175F2CD4B70205859BE82FF50718D /* UnityAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UnityAds.framework; path = APDUnityAdapter.embeddedframework/UnityAds.framework; sourceTree = "<group>"; };
+		21F9C2914E067C50740BCC86C08D5587 /* MPNativeAdSourceDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdSourceDelegate.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdSourceDelegate.h; sourceTree = "<group>"; };
 		22131D42734C9687DDC179ECC4922A6B /* SDStatusBarOverriderPost10_0.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost10_0.m; path = SDStatusBarManager/SDStatusBarOverriderPost10_0.m; sourceTree = "<group>"; };
+		225A044BF419EA5F56596552033B041C /* MPLogEvent+NativeVideo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MPLogEvent+NativeVideo.h"; path = "APDTwitterMoPubAdapter.embeddedframework/Headers/MPLogEvent+NativeVideo.h"; sourceTree = "<group>"; };
 		23365136D4AA2882E8BB6D1FB8224D29 /* Pods-Aquaz Widget-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Aquaz Widget-dummy.m"; sourceTree = "<group>"; };
 		233A2F1A4F6A3BB24D5F6264C5ACBAE3 /* Pods-AquazPro.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-AquazPro.modulemap"; sourceTree = "<group>"; };
+		235E61A8CA72EACF00813459CFE414BA /* MPRewardedVideoCustomEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPRewardedVideoCustomEvent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPRewardedVideoCustomEvent.h; sourceTree = "<group>"; };
+		236B0311CC702A2959FC56EF3B75D533 /* MPAdAlertManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAdAlertManager.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAdAlertManager.h; sourceTree = "<group>"; };
+		238A4C9F92C5E9694B4AE5AB5C44ED89 /* MPCloseBtn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPCloseBtn@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn@2x.png"; sourceTree = "<group>"; };
 		23C23360DDB5A3CEA23DDFBFE447099D /* SDStatusBarOverriderPost10_0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost10_0.h; path = SDStatusBarManager/SDStatusBarOverriderPost10_0.h; sourceTree = "<group>"; };
 		24E501F9FDD04F36F4B8A15ED459DD66 /* ANSCompatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ANSCompatibility.h; path = iOS/Crashlytics.framework/Headers/ANSCompatibility.h; sourceTree = "<group>"; };
-		25CA32C568013A9996F443E6F9E79C9B /* MyTargetSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MyTargetSDK.framework; path = APDMyTargetAdapter.embeddedframework/MyTargetSDK.framework; sourceTree = "<group>"; };
+		25F5D70FE778EDA3EA661FA4BDCEBF09 /* MPDAAIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPDAAIcon@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPDAAIcon@2x.png"; sourceTree = "<group>"; };
 		2672F628FFEF8B27845636D450C23A89 /* Pods_AquazPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AquazPro.framework; path = "Pods-AquazPro.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		26F72EAE24C93EC4BABBE88FC0D8D87E /* MPNativeAd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAd.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAd.h; sourceTree = "<group>"; };
+		2731B85A6679A72DE3B1CF9420D7989D /* MPInterstitialAdManagerDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPInterstitialAdManagerDelegate.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPInterstitialAdManagerDelegate.h; sourceTree = "<group>"; };
 		273CC202D8D3478B26B2AC06A4EBD482 /* Pods-Aquaz Widget-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz Widget-resources.sh"; sourceTree = "<group>"; };
 		2799AC03E641A3A7A353660409312A41 /* MMWormholeSessionFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionFileTransiting.m; path = Source/MMWormholeSessionFileTransiting.m; sourceTree = "<group>"; };
+		29AE2EFAF2557DCD98999AE47D1B030A /* ALTargetingData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALTargetingData.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALTargetingData.h; sourceTree = "<group>"; };
+		2BBD3304FD4FB59429CCBDAA61EF0746 /* MPNativeAdUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdUtils.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdUtils.h; sourceTree = "<group>"; };
+		2BBEDAFB43F1878D1CA3010766DC6B89 /* ALSdkSettings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALSdkSettings.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALSdkSettings.h; sourceTree = "<group>"; };
 		2C0507152C72A87327691F717A176555 /* SDStatusBarOverriderPre8_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPre8_3.m; path = SDStatusBarManager/SDStatusBarOverriderPre8_3.m; sourceTree = "<group>"; };
+		2CA549CCFDECE35EE8C2156E10C96800 /* MPAdBrowserController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAdBrowserController.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAdBrowserController.h; sourceTree = "<group>"; };
+		2D218D56A22A9723E9007E186A6B0C32 /* MPCloseBtn.png */ = {isa = PBXFileReference; includeInIndex = 1; name = MPCloseBtn.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn.png; sourceTree = "<group>"; };
+		2D525C46AF73DA959F1739D833160DFC /* MyTargetSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MyTargetSDK.framework; path = APDMyTargetAdapter.embeddedframework/MyTargetSDK.framework; sourceTree = "<group>"; };
+		2DBB5932694E68B0600747D6E369C3BF /* MRImageDownloader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRImageDownloader.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MRImageDownloader.h; sourceTree = "<group>"; };
+		2E5B5203B3A4693541EB2D5CCE92483A /* MPVASTResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTResponse.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTResponse.h; sourceTree = "<group>"; };
 		2EA9654226C30B858C026FD08D600E65 /* MMWormholeSessionMessageTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionMessageTransiting.m; path = Source/MMWormholeSessionMessageTransiting.m; sourceTree = "<group>"; };
-		317B142FE22A2A636A94754DC8121FED /* Chartboost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chartboost.framework; path = APDChartboostAdapter.embeddedframework/Chartboost.framework; sourceTree = "<group>"; };
+		2F7BCEFAA96D5A01174B82D4C1E32144 /* libAPDVungleAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDVungleAdapter.a; path = APDVungleAdapter.embeddedframework/libAPDVungleAdapter.a; sourceTree = "<group>"; };
+		313DC3A9AD6E59C54CC5BE7247398B30 /* UnityAds.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = UnityAds.bundle; path = APDUnityAdapter.embeddedframework/Resources/UnityAds.bundle; sourceTree = "<group>"; };
+		31AA7215F9922BDADAB27ADDB0FC4065 /* MPNativePositionResponseDeserializer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativePositionResponseDeserializer.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativePositionResponseDeserializer.h; sourceTree = "<group>"; };
 		32085A1F3CCCA86A3C9A1A987DC9E506 /* MMWormhole.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormhole.h; path = Source/MMWormhole.h; sourceTree = "<group>"; };
-		3635247D78A92E5A0FDA038386D5CD85 /* MPPlayBtn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPPlayBtn@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPPlayBtn@2x.png"; sourceTree = "<group>"; };
-		3A9A9CE7CF5D4701BD6ABD1C5CFFA7A8 /* ALAnnotations.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAnnotations.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAnnotations.h; sourceTree = "<group>"; };
+		348D0ED654BA78D0B55348F4D175AF08 /* MPCloseButtonX@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPCloseButtonX@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseButtonX@2x.png"; sourceTree = "<group>"; };
+		34F720BFE8DED0FCE09346839A020D04 /* MPURLResolver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPURLResolver.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPURLResolver.h; sourceTree = "<group>"; };
+		361683AE35781E03A0688041B3E4DA5D /* MPStaticNativeAdRendererSettings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPStaticNativeAdRendererSettings.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPStaticNativeAdRendererSettings.h; sourceTree = "<group>"; };
+		3621985AAFD9732577708E69B3E65A52 /* libAPDChartboostAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDChartboostAdapter.a; path = APDChartboostAdapter.embeddedframework/libAPDChartboostAdapter.a; sourceTree = "<group>"; };
+		3693D92817E263087AF21CFCB6BC1496 /* MPVASTMacroProcessor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTMacroProcessor.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTMacroProcessor.h; sourceTree = "<group>"; };
+		36F73B3AB45A5EC52B3074CD84E3F4A0 /* ALInterstitialAd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALInterstitialAd.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALInterstitialAd.h; sourceTree = "<group>"; };
+		37192A5D33A23041CB2EB3378A78179F /* MPAdPlacerInvocation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAdPlacerInvocation.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAdPlacerInvocation.h; sourceTree = "<group>"; };
 		3AE74CFCDB8CE03383782D74C76E5A3E /* Pods-Aquaz Widget-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Aquaz Widget-acknowledgements.markdown"; sourceTree = "<group>"; };
-		3CDE4CDB63CDD4BB4B47118DDBF20EFB /* VungleSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VungleSDK.framework; path = APDVungleAdapter.embeddedframework/VungleSDK.framework; sourceTree = "<group>"; };
-		3D0A922EDB4EA91C54C776DC0C095F25 /* vg_privacy.png */ = {isa = PBXFileReference; includeInIndex = 1; name = vg_privacy.png; path = APDVungleAdapter.embeddedframework/Resources/vg_privacy.png; sourceTree = "<group>"; };
-		3EA4FE6DF366B6C795BE0A6D43FF086B /* MPCloseBtn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPCloseBtn@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn@2x.png"; sourceTree = "<group>"; };
-		4052ABE72FD61E128136DEDD4AFBFEA6 /* MPCloseButtonX@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPCloseButtonX@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseButtonX@3x.png"; sourceTree = "<group>"; };
+		3BA655E4ACEB6A830CD57DF973E5152B /* ALAdType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdType.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdType.h; sourceTree = "<group>"; };
+		3BB3EE1328721CDB33EB341C3EDB7EE9 /* MPStreamAdPlacementData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPStreamAdPlacementData.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPStreamAdPlacementData.h; sourceTree = "<group>"; };
+		3C7CA6FCD9C25D088D31F7D21B636770 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdColony.framework; path = APDAdColonyAdapter.embeddedframework/AdColony.framework; sourceTree = "<group>"; };
+		3CB02F5E76DE9A366F59BDD138392796 /* MPMutedBtn@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPMutedBtn@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPMutedBtn@3x.png"; sourceTree = "<group>"; };
+		3E4953A529002C693572323B8B593FA2 /* ALPostbackDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALPostbackDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALPostbackDelegate.h; sourceTree = "<group>"; };
+		40FCA0CCD43A22981934754A82E524E8 /* ALNativeAdPrecacheDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALNativeAdPrecacheDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALNativeAdPrecacheDelegate.h; sourceTree = "<group>"; };
+		4127B431ED9A91D45757E96F0CEAAD89 /* MPRewardedVideoError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPRewardedVideoError.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPRewardedVideoError.h; sourceTree = "<group>"; };
+		416AA2F67EA033DE4617EF4316DEB9D2 /* ALAdVideoPlaybackDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdVideoPlaybackDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdVideoPlaybackDelegate.h; sourceTree = "<group>"; };
+		417A89ED2AF735C9AC773BCA6B4B2D90 /* MoPub.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MoPub.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MoPub.h; sourceTree = "<group>"; };
+		417F6B0FB789C36922025504636E9074 /* MPNativeAdConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdConstants.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdConstants.h; sourceTree = "<group>"; };
 		41C21F23A00041BC7D298A1243FD14A0 /* Pods-AquazPro-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AquazPro-resources.sh"; sourceTree = "<group>"; };
 		4382677DDA17BFF943558F276CCBA600 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		451B4ECA6E11D68A7850E9F558D170C6 /* Appodeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Appodeal.framework; sourceTree = "<group>"; };
+		43E777CF4BE27CDA9502106CA811A23A /* MPPlayBtn.png */ = {isa = PBXFileReference; includeInIndex = 1; name = MPPlayBtn.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPPlayBtn.png; sourceTree = "<group>"; };
+		4417BAF348DB382ABF3EDB57EBAAE4EF /* MPDAAIcon@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPDAAIcon@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPDAAIcon@3x.png"; sourceTree = "<group>"; };
 		454F7FBFDE1AF3816E0756F4AA4A1AB2 /* Pods-Aquaz Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz Widget.debug.xcconfig"; sourceTree = "<group>"; };
+		45D9DE75FB3B574B8B450B4EF45975EF /* MPCloseButtonX@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPCloseButtonX@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseButtonX@3x.png"; sourceTree = "<group>"; };
 		45F5DCB7E4FA154E190EE8E777E4065A /* CLSStackFrame.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSStackFrame.h; path = iOS/Crashlytics.framework/Headers/CLSStackFrame.h; sourceTree = "<group>"; };
+		46FF88DFB4AC02B30DBCA7ACB0628191 /* vg_mute_off.png */ = {isa = PBXFileReference; includeInIndex = 1; name = vg_mute_off.png; path = APDVungleAdapter.embeddedframework/Resources/vg_mute_off.png; sourceTree = "<group>"; };
 		47596EACCB4310D0D55C141DC8566D90 /* MMWormhole.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormhole.m; path = Source/MMWormhole.m; sourceTree = "<group>"; };
 		485F1370FD4F30DCD5518CBACD3D392C /* SDStatusBarOverriderPre8_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPre8_3.h; path = SDStatusBarManager/SDStatusBarOverriderPre8_3.h; sourceTree = "<group>"; };
 		4A616B3A932C67C459A6DC656ED589FC /* Pods-AquazPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AquazPro.release.xcconfig"; sourceTree = "<group>"; };
+		4A751A4B42FE1881DC2BC43DDDAE0DF6 /* MOPUBPlayerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBPlayerView.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBPlayerView.h; sourceTree = "<group>"; };
+		4B83E8A6B1EDAEA04FDAC24C8490042F /* MRConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRConstants.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MRConstants.h; sourceTree = "<group>"; };
+		4CEE83791825BA2C87F16BD82B6589C4 /* MPNativeAdRendererSettings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdRendererSettings.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdRendererSettings.h; sourceTree = "<group>"; };
 		4D5C106B55A8FF5ABFEA738C3EFDE731 /* MMWormholeCoordinatedFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeCoordinatedFileTransiting.h; path = Source/MMWormholeCoordinatedFileTransiting.h; sourceTree = "<group>"; };
+		4D7775580D897ED12CC6FD3E147AB6C9 /* MPPrivateInterstitialCustomEventDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPPrivateInterstitialCustomEventDelegate.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPPrivateInterstitialCustomEventDelegate.h; sourceTree = "<group>"; };
 		4E5F053ADBCC6ADC74D4D809CAC4DD06 /* Pods-AquazPro Widget-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AquazPro Widget-dummy.m"; sourceTree = "<group>"; };
-		4ED48F6CDEDC0E263E5FB3F729CB6B4E /* ALPostbackDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALPostbackDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALPostbackDelegate.h; sourceTree = "<group>"; };
-		51E8C8C9EC429BE34B61756934D34F9E /* MPCloseButtonX.png */ = {isa = PBXFileReference; includeInIndex = 1; name = MPCloseButtonX.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseButtonX.png; sourceTree = "<group>"; };
-		52F969A9725993D57D5FDBED7F2DCC11 /* ALAdView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdView.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdView.h; sourceTree = "<group>"; };
+		4EA229310EF5F5F491121DB6C1252561 /* MPNativeAdRendererConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdRendererConstants.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdRendererConstants.h; sourceTree = "<group>"; };
+		50E3D3FA762A2626A4DF251315817404 /* MPActivityViewControllerHelper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPActivityViewControllerHelper.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPActivityViewControllerHelper.h; sourceTree = "<group>"; };
+		51CC76C724DE3A62225C4801FBA02549 /* ALPostbackService.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALPostbackService.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALPostbackService.h; sourceTree = "<group>"; };
+		53723D0E8577C6E8EEDD9C15F357141C /* libAPDInMobyAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDInMobyAdapter.a; path = APDInMobyAdapter.embeddedframework/libAPDInMobyAdapter.a; sourceTree = "<group>"; };
 		565114DF35EB66CB83BEFF6378A99767 /* SimulatorStatusMagic-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SimulatorStatusMagic-umbrella.h"; sourceTree = "<group>"; };
 		56DDCDD74A15E299CBF32FBC9ADC9EF5 /* Pods-Aquaz-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz-resources.sh"; sourceTree = "<group>"; };
-		588AC979EC00B08FC1055015EE593DD9 /* libAPDChartboostAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDChartboostAdapter.a; path = APDChartboostAdapter.embeddedframework/libAPDChartboostAdapter.a; sourceTree = "<group>"; };
+		58220F66F00167F8C93E50D0FE9FE8CB /* MOPUBNativeVideoAdAdapter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBNativeVideoAdAdapter.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBNativeVideoAdAdapter.h; sourceTree = "<group>"; };
+		58CBE8DD956A5276C1B51079D8724347 /* MPLastResortDelegate+EventKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MPLastResortDelegate+EventKit.h"; path = "APDTwitterMoPubAdapter.embeddedframework/Headers/MPLastResortDelegate+EventKit.h"; sourceTree = "<group>"; };
+		595C7A813CD00A225070D495787C265F /* UIButton+MPAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+MPAdditions.h"; path = "APDTwitterMoPubAdapter.embeddedframework/Headers/UIButton+MPAdditions.h"; sourceTree = "<group>"; };
 		5A755465BE2947DD1538D7DD0ADA3F83 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		5AEC7838D43D4F8165A9D97EFF624569 /* MRNativeCommandHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRNativeCommandHandler.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MRNativeCommandHandler.h; sourceTree = "<group>"; };
 		5BE7D421342B77EC97181112C1DB0BFC /* Pods-AquazPro Widget-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AquazPro Widget-resources.sh"; sourceTree = "<group>"; };
-		5DCBFBBD7B542C416815CC21126AEFBE /* MPCloseButtonX@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPCloseButtonX@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseButtonX@2x.png"; sourceTree = "<group>"; };
 		5DD8258049B1533C0C58A6F1B30AA990 /* SimulatorStatusMagic.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SimulatorStatusMagic.modulemap; sourceTree = "<group>"; };
-		60633D5886507551D4F8161E8E77D502 /* ALErrorCodes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALErrorCodes.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALErrorCodes.h; sourceTree = "<group>"; };
+		5EE78684F413991916FE1C8A511342D0 /* MPRewardedVideo+Internal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MPRewardedVideo+Internal.h"; path = "APDTwitterMoPubAdapter.embeddedframework/Headers/MPRewardedVideo+Internal.h"; sourceTree = "<group>"; };
+		5F08F85F1347E7182E18AB265232F6D7 /* MPTableViewAdPlacer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPTableViewAdPlacer.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPTableViewAdPlacer.h; sourceTree = "<group>"; };
+		5FCBD44FA88757D5104853531E6F746B /* MPNativeAdDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdDelegate.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdDelegate.h; sourceTree = "<group>"; };
+		5FF475CC5530E9700E2CC64215D2F2A9 /* MPRewardedVideoAdapter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPRewardedVideoAdapter.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPRewardedVideoAdapter.h; sourceTree = "<group>"; };
+		60173AE98425CF261D909850CCC0776A /* Appodeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Appodeal.framework; sourceTree = "<group>"; };
+		60647D201F865524028E05AB133A7918 /* MPUnmutedBtn@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPUnmutedBtn@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPUnmutedBtn@3x.png"; sourceTree = "<group>"; };
+		62481433B81CDEFF5A01CEA03AA68B33 /* MPNativeAdData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdData.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdData.h; sourceTree = "<group>"; };
+		62FC74D5678E9997142DB16188A9418D /* MPNativeCustomEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeCustomEvent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeCustomEvent.h; sourceTree = "<group>"; };
 		632948AC722744CB10BA9CE6A423705F /* MMWormhole-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMWormhole-prefix.pch"; sourceTree = "<group>"; };
+		63E7B21ED1067A05D45D8D7D7374B766 /* MPNativeCustomEventDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeCustomEventDelegate.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeCustomEventDelegate.h; sourceTree = "<group>"; };
+		650681527283EDA9D5067DA769DE9B50 /* ALAdUpdateDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdUpdateDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdUpdateDelegate.h; sourceTree = "<group>"; };
+		656D9AFF14C5CC3122AEE361ED801FF1 /* MPVASTCreative.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTCreative.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTCreative.h; sourceTree = "<group>"; };
 		65777BF8DED603C4C1EEBFB8E1CD65F7 /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Aquaz.framework; path = "Pods-Aquaz.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6593348E8C455376C5214C80B1AD4B07 /* MPSessionTracker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPSessionTracker.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPSessionTracker.h; sourceTree = "<group>"; };
 		687C00EEF93D2EB35DE7EF3D9A9749AD /* Pods-AquazPro Widget-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AquazPro Widget-acknowledgements.plist"; sourceTree = "<group>"; };
+		690216B90F8AAA8A86DA4D61576D8551 /* MPServerAdPositioning.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPServerAdPositioning.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPServerAdPositioning.h; sourceTree = "<group>"; };
+		691AB0A51B5276E2C5072D98946EACFD /* MPVASTLinearAd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTLinearAd.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTLinearAd.h; sourceTree = "<group>"; };
+		6962DB4A914C83E6A4C77CDBCBBDF049 /* __vungle.db */ = {isa = PBXFileReference; includeInIndex = 1; name = __vungle.db; path = APDVungleAdapter.embeddedframework/Resources/__vungle.db; sourceTree = "<group>"; };
 		6ACCFA15CEE6B3D26E3355920B33AFBA /* MMWormhole.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MMWormhole.xcconfig; sourceTree = "<group>"; };
-		6B0B5AD467D7DEE59D78CF0E895112B6 /* vg_mute_off.png */ = {isa = PBXFileReference; includeInIndex = 1; name = vg_mute_off.png; path = APDVungleAdapter.embeddedframework/Resources/vg_mute_off.png; sourceTree = "<group>"; };
-		6B4E5EA593DC135D41174E6AC9FAC604 /* ALAdRewardDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdRewardDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdRewardDelegate.h; sourceTree = "<group>"; };
+		6AE1C484764D4A1E2531AA797139AF18 /* MOPUBReplayView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBReplayView.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBReplayView.h; sourceTree = "<group>"; };
+		6AE5543DE81D1DF134CCA3E1661EAC80 /* MPEnhancedDeeplinkRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPEnhancedDeeplinkRequest.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPEnhancedDeeplinkRequest.h; sourceTree = "<group>"; };
+		6BC6567D8939FDFC2B5C0393A8FB7441 /* ALErrorCodes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALErrorCodes.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALErrorCodes.h; sourceTree = "<group>"; };
 		6C0ED278302234EE6904A5C4D26D4F33 /* MMWormholeSessionContextTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionContextTransiting.m; path = Source/MMWormholeSessionContextTransiting.m; sourceTree = "<group>"; };
 		6DD93D285B9AA463BF1B7173770ACAD6 /* Crashlytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Crashlytics.h; path = iOS/Crashlytics.framework/Headers/Crashlytics.h; sourceTree = "<group>"; };
-		70B30BE7B8FDEAE36832E973D50BA442 /* libAPDAdColonyAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDAdColonyAdapter.a; path = APDAdColonyAdapter.embeddedframework/libAPDAdColonyAdapter.a; sourceTree = "<group>"; };
+		6F1B6D5206037EC0B46029C82D9D30D6 /* MPQRunLoopOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPQRunLoopOperation.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPQRunLoopOperation.h; sourceTree = "<group>"; };
+		6FFEC11F5BBED015127E8028D7622B56 /* MPBannerAdManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPBannerAdManager.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPBannerAdManager.h; sourceTree = "<group>"; };
 		71A3C312B0B338407EE97CAC3A9D3BFE /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
 		7286EF679D1875626104AC35BB95EAD8 /* SDStatusBarOverriderPost9_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost9_3.m; path = SDStatusBarManager/SDStatusBarOverriderPost9_3.m; sourceTree = "<group>"; };
-		7794A8FC602E3DCAAA9EB4D71F6F4DF9 /* MPDAAIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPDAAIcon@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPDAAIcon@2x.png"; sourceTree = "<group>"; };
-		7976E29A924C4299156445A4F17F61E4 /* Appodeal.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; path = Appodeal.bundle; sourceTree = "<group>"; };
-		7A0951455374006C3BB4FFE51AA27082 /* ALNativeAdPrecacheDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALNativeAdPrecacheDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALNativeAdPrecacheDelegate.h; sourceTree = "<group>"; };
+		734A8A98DB29FECE749D55854689BEC5 /* MPAdWebView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAdWebView.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAdWebView.h; sourceTree = "<group>"; };
+		73536E4297D597DACC2D4604CD6D6B60 /* libAPDTwitterMoPubAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDTwitterMoPubAdapter.a; path = APDTwitterMoPubAdapter.embeddedframework/libAPDTwitterMoPubAdapter.a; sourceTree = "<group>"; };
+		7471746A6E63958F9E2AB5CDD7E7A340 /* MRController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRController.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MRController.h; sourceTree = "<group>"; };
+		74F6356666C58C68DBDE2BA4FD03DEB5 /* StartApp.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = StartApp.bundle; path = APDStartAppAdapter.embeddedframework/Resources/StartApp.bundle; sourceTree = "<group>"; };
+		76EE5A03A57E34E7EBC51A9889F957F5 /* ALAdRewardDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdRewardDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdRewardDelegate.h; sourceTree = "<group>"; };
+		780833095484D218FD5D505ECC7767A6 /* MPNativeAdError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdError.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdError.h; sourceTree = "<group>"; };
+		791A0C6DE1CC229E978B0A38E6F85085 /* MPNetworkManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNetworkManager.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNetworkManager.h; sourceTree = "<group>"; };
+		79BCE9B33CE31A09DA687EE4E0E9FB4E /* MPTableViewAdPlacerCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPTableViewAdPlacerCell.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPTableViewAdPlacerCell.h; sourceTree = "<group>"; };
+		7AAF3026787B6E9FCCB2A5B55C668522 /* MPAdPositioning.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAdPositioning.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAdPositioning.h; sourceTree = "<group>"; };
+		7ABC5A2C5508FD0B5D9BEFA356CA2697 /* ALNativeAd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALNativeAd.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALNativeAd.h; sourceTree = "<group>"; };
+		7B368C00E6ECC4CD58DC061CC939D4E8 /* MPImageDownloadQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPImageDownloadQueue.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPImageDownloadQueue.h; sourceTree = "<group>"; };
 		7B3B5EBA827A69BE9549E0B6BCCD8312 /* MMWormholeSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSession.m; path = Source/MMWormholeSession.m; sourceTree = "<group>"; };
-		7D58219B26830BCF91FC4039D44181D9 /* InMobiSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InMobiSDK.framework; path = APDInMobyAdapter.embeddedframework/InMobiSDK.framework; sourceTree = "<group>"; };
-		7EFFEF71073A7A197742FC41183A11D5 /* __vungle.db */ = {isa = PBXFileReference; includeInIndex = 1; name = __vungle.db; path = APDVungleAdapter.embeddedframework/Resources/__vungle.db; sourceTree = "<group>"; };
-		7F3F2251DD87417A2E558A10FD4AB9DE /* ALPostbackService.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALPostbackService.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALPostbackService.h; sourceTree = "<group>"; };
+		7BAFB738501D1E2D6E42436881603020 /* NSJSONSerialization+MPAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSJSONSerialization+MPAdditions.h"; path = "APDTwitterMoPubAdapter.embeddedframework/Headers/NSJSONSerialization+MPAdditions.h"; sourceTree = "<group>"; };
+		7C0D3B92AE907723ECD19AA935B22317 /* MRBridge.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRBridge.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MRBridge.h; sourceTree = "<group>"; };
+		7D873B5D33042DFD39016F77742D3400 /* MOPUBNativeVideoImpressionAgent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBNativeVideoImpressionAgent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBNativeVideoImpressionAgent.h; sourceTree = "<group>"; };
+		7D98D59F44AF7D68B9DF88255CED8824 /* MPNativeAdRequest+MPNativeAdSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MPNativeAdRequest+MPNativeAdSource.h"; path = "APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdRequest+MPNativeAdSource.h"; sourceTree = "<group>"; };
+		7DA8839D7D4C8D60CFD08680390B3121 /* MPNativeAdRendering.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdRendering.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdRendering.h; sourceTree = "<group>"; };
+		7E4BBCC96BD45D63F25B355EA6D63AA2 /* MPRewardedVideoConnection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPRewardedVideoConnection.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPRewardedVideoConnection.h; sourceTree = "<group>"; };
+		7E720C22308B527527968F1260247A6C /* MPInstanceProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPInstanceProvider.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPInstanceProvider.h; sourceTree = "<group>"; };
 		7F7E85950A03564304B347A459B4C311 /* Pods-Aquaz Widget.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Aquaz Widget.modulemap"; sourceTree = "<group>"; };
 		7FD4C01868059F391914370617E498EF /* SimulatorStatusMagic-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SimulatorStatusMagic-prefix.pch"; sourceTree = "<group>"; };
 		7FDA87EC6D85E220D93465C423865400 /* Pods_AquazPro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AquazPro_Widget.framework; path = "Pods-AquazPro Widget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FED6D5498541B30F52F63196EFA43F9 /* MRExpandModalViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRExpandModalViewController.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MRExpandModalViewController.h; sourceTree = "<group>"; };
 		80CE70C163457D6089E79CE527B7A7B5 /* Pods-Aquaz-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Aquaz-acknowledgements.markdown"; sourceTree = "<group>"; };
-		811C5D8F21ED7384281460CDC6788412 /* libAPDAppLovinAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDAppLovinAdapter.a; path = APDAppLovinAdapter.embeddedframework/libAPDAppLovinAdapter.a; sourceTree = "<group>"; };
+		80D249EDBAFF274EE0CC7CD57B0B877F /* MPMRAIDBannerCustomEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPMRAIDBannerCustomEvent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPMRAIDBannerCustomEvent.h; sourceTree = "<group>"; };
 		816C95766057F45B0248F8FEEEEF7F57 /* MMWormholeSessionMessageTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionMessageTransiting.h; path = Source/MMWormholeSessionMessageTransiting.h; sourceTree = "<group>"; };
-		827CFEC348B4D2389D82BD6D9B90A361 /* MPPlayBtn.png */ = {isa = PBXFileReference; includeInIndex = 1; name = MPPlayBtn.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPPlayBtn.png; sourceTree = "<group>"; };
-		847FC7C1171CBEEB0517F3A328E7E80D /* MPDAAIcon@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPDAAIcon@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPDAAIcon@3x.png"; sourceTree = "<group>"; };
+		817976D0458B8000C9C22C5024781470 /* MPTableViewCellImpressionTracker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPTableViewCellImpressionTracker.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPTableViewCellImpressionTracker.h; sourceTree = "<group>"; };
+		82D8175386B275D129EC05B259415089 /* MPStreamAdPlacer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPStreamAdPlacer.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPStreamAdPlacer.h; sourceTree = "<group>"; };
+		840FD6CC387B616CEC62322A8BA032D4 /* NSHTTPURLResponse+MPAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSHTTPURLResponse+MPAdditions.h"; path = "APDTwitterMoPubAdapter.embeddedframework/Headers/NSHTTPURLResponse+MPAdditions.h"; sourceTree = "<group>"; };
+		8485A8B8B204DC280D81406E7A0CF50B /* MPCollectionViewAdPlacerCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPCollectionViewAdPlacerCell.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPCollectionViewAdPlacerCell.h; sourceTree = "<group>"; };
 		84AB5F75D00F619DABBC8E208FE0C798 /* MMWormholeSessionContextTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionContextTransiting.h; path = Source/MMWormholeSessionContextTransiting.h; sourceTree = "<group>"; };
+		84FEEACFDFA54A782D186889D3412205 /* MPVASTDurationOffset.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTDurationOffset.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTDurationOffset.h; sourceTree = "<group>"; };
+		85063217EC79F8601C928F3D9CFC191C /* MPAdAlertGestureRecognizer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAdAlertGestureRecognizer.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAdAlertGestureRecognizer.h; sourceTree = "<group>"; };
 		85E60037428357BBD68F30DFAB7DFAE5 /* SimulatorStatusMagic.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SimulatorStatusMagic.xcconfig; sourceTree = "<group>"; };
-		86B3DEB741DF482F76642855D48654A4 /* ALSwiftHeaders.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALSwiftHeaders.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALSwiftHeaders.h; sourceTree = "<group>"; };
+		86A78F30D3229A8D0CE88BBC3FA91B81 /* MPCloseButtonX.png */ = {isa = PBXFileReference; includeInIndex = 1; name = MPCloseButtonX.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseButtonX.png; sourceTree = "<group>"; };
 		86D1FAA51857531DC35356705042425A /* Pods-Aquaz-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Aquaz-dummy.m"; sourceTree = "<group>"; };
-		872ECB35C8042FB500C96F3E0D28645A /* MPPlayBtn@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPPlayBtn@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPPlayBtn@3x.png"; sourceTree = "<group>"; };
+		87BE73709450A4B4C219D9C74B87EA8B /* ALNativeAdLoadDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALNativeAdLoadDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALNativeAdLoadDelegate.h; sourceTree = "<group>"; };
 		8823CA0E4A83C2751E95E2323B6402B5 /* Pods-Aquaz-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Aquaz-acknowledgements.plist"; sourceTree = "<group>"; };
-		8974C653D5C9E7F4084ECE0AEF0CFE8D /* ALAdUpdateDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdUpdateDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdUpdateDelegate.h; sourceTree = "<group>"; };
+		8998BECB03F6781DAB26AEE8285C5D9F /* MPClientAdPositioning.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPClientAdPositioning.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPClientAdPositioning.h; sourceTree = "<group>"; };
+		89F62D464DADB52B7810B6A1E923325F /* MPBannerCustomEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPBannerCustomEvent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPBannerCustomEvent.h; sourceTree = "<group>"; };
 		8B7F57D7EE1030F2423AFD31CD1C637D /* SDStatusBarOverriderPost9_0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost9_0.h; path = SDStatusBarManager/SDStatusBarOverriderPost9_0.h; sourceTree = "<group>"; };
-		8CA65CE2ED12B37A713C4FB481AF1D0D /* libAPDVungleAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDVungleAdapter.a; path = APDVungleAdapter.embeddedframework/libAPDVungleAdapter.a; sourceTree = "<group>"; };
+		8C138108296F884A82BC177E0134C8B0 /* MPAnalyticsTracker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAnalyticsTracker.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAnalyticsTracker.h; sourceTree = "<group>"; };
+		8C216CDEE1D0BB2F0420518F04D1675D /* MPMutedBtn.png */ = {isa = PBXFileReference; includeInIndex = 1; name = MPMutedBtn.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPMutedBtn.png; sourceTree = "<group>"; };
+		8C464E880B9557F9B8F044BF75F9C41B /* MPInternalUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPInternalUtils.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPInternalUtils.h; sourceTree = "<group>"; };
 		8D47FF29B0B392A0B49AE6BFDD26DBF7 /* SDStatusBarOverriderPost8_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost8_3.m; path = SDStatusBarManager/SDStatusBarOverriderPost8_3.m; sourceTree = "<group>"; };
-		8E959D3AEE01D4526C76B2446E8294B2 /* MRAID.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = MRAID.bundle; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MRAID.bundle; sourceTree = "<group>"; };
 		8EBB99C1A216617583B2D3D83E8C6D7D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		91179B564F4C6619A2D7C09566D23E73 /* ALAdType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdType.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdType.h; sourceTree = "<group>"; };
-		92409355A02D08A4FA2505992B56DDC7 /* ALInterstitialAd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALInterstitialAd.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALInterstitialAd.h; sourceTree = "<group>"; };
+		8FD97BD51762FA253338CC1B97D1A1DC /* MPAdView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAdView.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAdView.h; sourceTree = "<group>"; };
+		902DE98879567F962247DE1386186436 /* MPInterstitialCustomEventAdapter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPInterstitialCustomEventAdapter.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPInterstitialCustomEventAdapter.h; sourceTree = "<group>"; };
+		909B38B885FDCD1CE8489FB48DD461C7 /* MPVASTAd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTAd.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTAd.h; sourceTree = "<group>"; };
+		91691137D70D17CEE74222E8CBC5C0AD /* MPXMLParser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPXMLParser.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPXMLParser.h; sourceTree = "<group>"; };
+		919916797D43E3E4637E03D28FA84D65 /* libAppLovinSdk.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAppLovinSdk.a; path = APDAppLovinAdapter.embeddedframework/libAppLovinSdk.a; sourceTree = "<group>"; };
 		925D27FC5C92356439EE39ED1C2D97FA /* Pods-Aquaz-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz-frameworks.sh"; sourceTree = "<group>"; };
 		938A12900B5069E169BAA7A04B3808FB /* SDStatusBarManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarManager.m; path = SDStatusBarManager/SDStatusBarManager.m; sourceTree = "<group>"; };
+		93935EF10C2B0042DEDF38D94ACD175E /* MPNativeAdSourceQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdSourceQueue.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdSourceQueue.h; sourceTree = "<group>"; };
+		939BA087850CED32FE54F2C618F1D49E /* MRCommand.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRCommand.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MRCommand.h; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		944C2855EFB9F75204BA6548F79EE64C /* ALAdLoadDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdLoadDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdLoadDelegate.h; sourceTree = "<group>"; };
+		95063C61C245495BAC9C8148BDB2A038 /* MOPUBNativeVideoAdRenderer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBNativeVideoAdRenderer.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBNativeVideoAdRenderer.h; sourceTree = "<group>"; };
+		952D785E8998B409CFC254D96E64C0F4 /* ALSwiftHeaders.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALSwiftHeaders.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALSwiftHeaders.h; sourceTree = "<group>"; };
+		956983AC09E6CF484E99749811C71B31 /* TapjoyResources.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = TapjoyResources.bundle; path = APDTapjoyAdapter.embeddedframework/Resources/TapjoyResources.bundle; sourceTree = "<group>"; };
 		96BE1A6A8F392B843C4031EDED6D35E6 /* Pods-Aquaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.release.xcconfig"; sourceTree = "<group>"; };
+		9920F4E40BA4721CD370D0C0079FE4FC /* UIView+MPAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+MPAdditions.h"; path = "APDTwitterMoPubAdapter.embeddedframework/Headers/UIView+MPAdditions.h"; sourceTree = "<group>"; };
+		9A287CDBFA169E1F4F4AC9215BE5FBE6 /* MPFacebookKeywordProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPFacebookKeywordProvider.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPFacebookKeywordProvider.h; sourceTree = "<group>"; };
+		9A55C86FD7FBE4D573630BB7BD533B79 /* ALEventTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALEventTypes.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALEventTypes.h; sourceTree = "<group>"; };
+		9A8818B74C602E0BA632832B064CA9FE /* VungleSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VungleSDK.framework; path = APDVungleAdapter.embeddedframework/VungleSDK.framework; sourceTree = "<group>"; };
+		9AE4EA60E2D69C27A164C3B366DCF6CF /* MPNativeAdRendererConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdRendererConfiguration.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdRendererConfiguration.h; sourceTree = "<group>"; };
+		9AF9EE53A7E14FBBD934AD3433DF9ABA /* libAPDUnityAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDUnityAdapter.a; path = APDUnityAdapter.embeddedframework/libAPDUnityAdapter.a; sourceTree = "<group>"; };
+		9B0E51CEAED24B22000754BED07A1FD2 /* MPPrivateRewardedVideoCustomEventDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPPrivateRewardedVideoCustomEventDelegate.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPPrivateRewardedVideoCustomEventDelegate.h; sourceTree = "<group>"; };
 		9BA76181983AD734818C5B434D7A1FF8 /* SDStatusBarOverriderPost8_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost8_3.h; path = SDStatusBarManager/SDStatusBarOverriderPost8_3.h; sourceTree = "<group>"; };
+		9C162929E179BD4C4942FC7942554256 /* ALNativeAdService.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALNativeAdService.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALNativeAdService.h; sourceTree = "<group>"; };
 		9C9B211BD7787F7177D06571CAF82F57 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9FCD0C9F6E82BB8D5F9CB185FEA5452B /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tapjoy.framework; path = APDTapjoyAdapter.embeddedframework/Tapjoy.framework; sourceTree = "<group>"; };
-		A1CF4F60FB69603678B4FFA2066F2A61 /* MPDAAIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; name = MPDAAIcon.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPDAAIcon.png; sourceTree = "<group>"; };
-		A38B609C53A16C0783FE1A4A93416F72 /* MPCloseBtn@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPCloseBtn@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn@3x.png"; sourceTree = "<group>"; };
+		9E9EBEE2C7595E7928B4C646AA6838F0 /* MPNativeAdRendererImageHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdRendererImageHandler.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdRendererImageHandler.h; sourceTree = "<group>"; };
+		9ECF9D689340F9A687D72C25D86650AC /* MPActivityViewControllerHelper+TweetShare.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MPActivityViewControllerHelper+TweetShare.h"; path = "APDTwitterMoPubAdapter.embeddedframework/Headers/MPActivityViewControllerHelper+TweetShare.h"; sourceTree = "<group>"; };
+		9EF853DC950CB71B45322EF709F88822 /* MPLogProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPLogProvider.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPLogProvider.h; sourceTree = "<group>"; };
+		9FCA5DDD5E29C110A0E123777288BDFF /* Appodeal.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; path = Appodeal.bundle; sourceTree = "<group>"; };
+		A08F3B2A901B66806988E180D2861CD3 /* MPNativeAdRequestTargeting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdRequestTargeting.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdRequestTargeting.h; sourceTree = "<group>"; };
+		A12B65BC05AF95F707833F4002F9FAAC /* MPRewardedVideoReward.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPRewardedVideoReward.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPRewardedVideoReward.h; sourceTree = "<group>"; };
+		A31ABD5F95B6D6A2A4656DA535280E44 /* MPAdDestinationDisplayAgent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAdDestinationDisplayAgent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAdDestinationDisplayAgent.h; sourceTree = "<group>"; };
+		A47D90B1BEBB59324E1F3D472A11163B /* MPDAAIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; name = MPDAAIcon.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPDAAIcon.png; sourceTree = "<group>"; };
 		A4F3932712025E4199B71600F8767847 /* MMWormholeFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeFileTransiting.m; path = Source/MMWormholeFileTransiting.m; sourceTree = "<group>"; };
+		A5158B0F68A4B52B2C4D0BCBFA3DB1CB /* MPKeywordProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPKeywordProvider.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPKeywordProvider.h; sourceTree = "<group>"; };
+		A5657BAE113A3D3AC3DC3DC73FB477F7 /* MPUnmutedBtn.png */ = {isa = PBXFileReference; includeInIndex = 1; name = MPUnmutedBtn.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPUnmutedBtn.png; sourceTree = "<group>"; };
+		A7194B743AB1ABBC4A996FE763DD8D81 /* MPHTMLInterstitialViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPHTMLInterstitialViewController.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPHTMLInterstitialViewController.h; sourceTree = "<group>"; };
+		A734912EF732507553F08CA157991E29 /* MPInterstitialViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPInterstitialViewController.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPInterstitialViewController.h; sourceTree = "<group>"; };
 		A8B0D60BDCF96C5E854010C3E0CCBBEF /* SimulatorStatusMagic-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SimulatorStatusMagic-dummy.m"; sourceTree = "<group>"; };
-		AA168F8016578E7AC0052025CCF5A55E /* UnityAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UnityAds.framework; path = APDUnityAdapter.embeddedframework/UnityAds.framework; sourceTree = "<group>"; };
+		A8FA44B5C7A1F779B4DD2EDC61581895 /* MPBaseBannerAdapter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPBaseBannerAdapter.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPBaseBannerAdapter.h; sourceTree = "<group>"; };
+		AABEF041461B465846FA8461C6260283 /* MPNativeView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeView.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeView.h; sourceTree = "<group>"; };
+		ABDEAA78F4D7CA9160EBA09454D0A9E1 /* MPDiskLRUCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPDiskLRUCache.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPDiskLRUCache.h; sourceTree = "<group>"; };
 		AC69E72B684162BAB1F72B42B8EC950D /* CLSReport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSReport.h; path = iOS/Crashlytics.framework/Headers/CLSReport.h; sourceTree = "<group>"; };
+		AD79C20424CED37E738BE300B44A3B8E /* MPVASTInline.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTInline.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTInline.h; sourceTree = "<group>"; };
 		AE6D97A1F05A3C4EBC3EEBEC4AED9489 /* Pods-Aquaz Widget-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Aquaz Widget-umbrella.h"; sourceTree = "<group>"; };
+		AE7FFB64F533A856EC00ED1F395C981F /* MOPUBAVPlayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBAVPlayer.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBAVPlayer.h; sourceTree = "<group>"; };
 		AE8720EC1B7BBBAC6E2034A6FF0202E5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		AF6CB5A49741B815D3B834D7C32BEAAE /* MMWormholeCoordinatedFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeCoordinatedFileTransiting.m; path = Source/MMWormholeCoordinatedFileTransiting.m; sourceTree = "<group>"; };
+		AFB1EFD4E3126FB84EA682AD1BDD2FCF /* MPLastResortDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPLastResortDelegate.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPLastResortDelegate.h; sourceTree = "<group>"; };
 		B1391392E03BDA1E344FF72EE42E3C1B /* SDStatusBarManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarManager.h; path = SDStatusBarManager/SDStatusBarManager.h; sourceTree = "<group>"; };
 		B21360E7C694F15A15746C37245962C4 /* Pods-Aquaz.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Aquaz.modulemap"; sourceTree = "<group>"; };
-		B22C8917FCC24BAABDC58685E4239063 /* vg_mute_on.png */ = {isa = PBXFileReference; includeInIndex = 1; name = vg_mute_on.png; path = APDVungleAdapter.embeddedframework/Resources/vg_mute_on.png; sourceTree = "<group>"; };
 		B46AD2470BFA65F76C0EEB8DD716EB51 /* Pods-AquazPro-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AquazPro-dummy.m"; sourceTree = "<group>"; };
-		B5DDA0A9946298428786A3E50A263F83 /* libAPDTapjoyAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDTapjoyAdapter.a; path = APDTapjoyAdapter.embeddedframework/libAPDTapjoyAdapter.a; sourceTree = "<group>"; };
-		B681DE145F86E723C4ACB581E3AE493E /* ALEventService.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALEventService.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALEventService.h; sourceTree = "<group>"; };
-		B7CC58A35F4ACBABE390992BDB709A20 /* MPUnmutedBtn@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPUnmutedBtn@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPUnmutedBtn@3x.png"; sourceTree = "<group>"; };
-		B84949054013B04370258A623C32499F /* MPMutedBtn.png */ = {isa = PBXFileReference; includeInIndex = 1; name = MPMutedBtn.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPMutedBtn.png; sourceTree = "<group>"; };
+		B48100B8C66FCF564162FBBDDB778635 /* InMobiSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InMobiSDK.framework; path = APDInMobyAdapter.embeddedframework/InMobiSDK.framework; sourceTree = "<group>"; };
+		B4B3ED133C9292C8664F165D44E94F83 /* MPNativeAdRenderer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdRenderer.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdRenderer.h; sourceTree = "<group>"; };
+		B6C24C4F323525919405BC29FF15E9FA /* MPCoreInstanceProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPCoreInstanceProvider.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPCoreInstanceProvider.h; sourceTree = "<group>"; };
+		B78B83EEAF1925DFD1CCD228F1B2DA55 /* MPGeolocationProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPGeolocationProvider.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPGeolocationProvider.h; sourceTree = "<group>"; };
 		B905983A05169F68EB0A2D6F47605D48 /* CLSAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSAttributes.h; path = iOS/Crashlytics.framework/Headers/CLSAttributes.h; sourceTree = "<group>"; };
-		B995FAEC1939BDD515D4DD3649B42CCF /* vg_close.png */ = {isa = PBXFileReference; includeInIndex = 1; name = vg_close.png; path = APDVungleAdapter.embeddedframework/Resources/vg_close.png; sourceTree = "<group>"; };
+		B9517BB7936A2A18F3D3D5C34E25923E /* MPAdServerCommunicator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAdServerCommunicator.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAdServerCommunicator.h; sourceTree = "<group>"; };
+		BA0CC5788E3EFC989766608862B88374 /* MOPUBActivityIndicatorView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBActivityIndicatorView.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBActivityIndicatorView.h; sourceTree = "<group>"; };
+		BA4557793B808B2ABBD796DA248EF893 /* MPAdConversionTracker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAdConversionTracker.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAdConversionTracker.h; sourceTree = "<group>"; };
+		BA507F8B465A498DA1738E7747F4C347 /* MPVASTStringUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTStringUtilities.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTStringUtilities.h; sourceTree = "<group>"; };
+		BB94A9BB66F4FA8657730F03E33F8696 /* MPAdServerURLBuilder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAdServerURLBuilder.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAdServerURLBuilder.h; sourceTree = "<group>"; };
+		BBD2A149DFD157E36C4B5E988035B53D /* MPVASTModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTModel.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTModel.h; sourceTree = "<group>"; };
 		BC21D27C624DC955E461B84187F69134 /* Pods-AquazPro-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AquazPro-umbrella.h"; sourceTree = "<group>"; };
+		BC8167ABD4234697243E2C0834E69CA1 /* MPConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPConstants.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPConstants.h; sourceTree = "<group>"; };
+		BCA288E630CE7B48108F2890C0760DAB /* MPNativeAd+Internal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MPNativeAd+Internal.h"; path = "APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAd+Internal.h"; sourceTree = "<group>"; };
+		BCC4E0CBCB2BF14AA931B1D9C12EE8E0 /* MPMoPubNativeCustomEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPMoPubNativeCustomEvent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPMoPubNativeCustomEvent.h; sourceTree = "<group>"; };
+		BD4D52ADA30614EDB8B1E8AE921DB8FE /* libAPDTapjoyAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDTapjoyAdapter.a; path = APDTapjoyAdapter.embeddedframework/libAPDTapjoyAdapter.a; sourceTree = "<group>"; };
+		BD9F8346433D954B4083828495A51BA0 /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Tapjoy.framework; path = APDTapjoyAdapter.embeddedframework/Tapjoy.framework; sourceTree = "<group>"; };
+		BDB6A6B6366AB5BFE354F683110F50EF /* MPCloseBtn@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPCloseBtn@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn@3x.png"; sourceTree = "<group>"; };
+		BECD677352ED9A83B291CFC4811A8752 /* ALIncentivizedInterstitialAd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALIncentivizedInterstitialAd.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALIncentivizedInterstitialAd.h; sourceTree = "<group>"; };
+		BF5525CD02F314540A0AB351CEE1F3EF /* MPRewardedVideoAdManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPRewardedVideoAdManager.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPRewardedVideoAdManager.h; sourceTree = "<group>"; };
+		C02482462651DF150B0E698EB18D6D0D /* MPCollectionViewAdPlacer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPCollectionViewAdPlacer.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPCollectionViewAdPlacer.h; sourceTree = "<group>"; };
+		C06BCEB5DB720FDBB3346CAB7C4F4DF6 /* MPError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPError.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPError.h; sourceTree = "<group>"; };
+		C2BF23860E46922C531FFDE77678B0D0 /* MPBaseInterstitialAdapter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPBaseInterstitialAdapter.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPBaseInterstitialAdapter.h; sourceTree = "<group>"; };
 		C2DA621A4F763E7330F589BFD7EAA2C6 /* Pods_Aquaz_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Aquaz_Widget.framework; path = "Pods-Aquaz Widget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C35DA1F3877F9A93809003812401C35A /* MPLogEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPLogEvent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPLogEvent.h; sourceTree = "<group>"; };
+		C4BB65B67F452BE0DEC36E70F0D5C0E3 /* MPInterstitialAdController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPInterstitialAdController.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPInterstitialAdController.h; sourceTree = "<group>"; };
+		C581D3A356732624C80482B8315AA980 /* ALAdService.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdService.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdService.h; sourceTree = "<group>"; };
+		C7230B92ACECD6F07365A27E82342455 /* MPPrivateBannerCustomEventDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPPrivateBannerCustomEventDelegate.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPPrivateBannerCustomEventDelegate.h; sourceTree = "<group>"; };
+		C79BAC6B021331C61432D0C02A6AC799 /* MPNativeAdRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdRequest.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdRequest.h; sourceTree = "<group>"; };
+		C90A46DD3B551869E4D91DD64DE1A589 /* MPLogEventCommunicator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPLogEventCommunicator.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPLogEventCommunicator.h; sourceTree = "<group>"; };
+		C91A764D8EDC4ECDB033ED8C78D1BD19 /* MRError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRError.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MRError.h; sourceTree = "<group>"; };
+		C945765B717252D372485155C3FBA412 /* MPNativePositionSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativePositionSource.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativePositionSource.h; sourceTree = "<group>"; };
 		CADD2A900E0F95F3CF5A2475443B3ED4 /* SDStatusBarOverriderPost9_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost9_3.h; path = SDStatusBarManager/SDStatusBarOverriderPost9_3.h; sourceTree = "<group>"; };
+		CCF2743157E21EB2A72981187F5A1C62 /* MPVASTCompanionAd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTCompanionAd.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTCompanionAd.h; sourceTree = "<group>"; };
+		CDDE3088EE67FBC209A0F0B3B5B6FE38 /* MOPUBFullscreenPlayerViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBFullscreenPlayerViewController.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBFullscreenPlayerViewController.h; sourceTree = "<group>"; };
+		CDEF19BACA4E87810AF31239562E927B /* libAPDAppLovinAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDAppLovinAdapter.a; path = APDAppLovinAdapter.embeddedframework/libAPDAppLovinAdapter.a; sourceTree = "<group>"; };
 		CE13F336FF12398DF4FC5727F320559B /* Pods-AquazPro Widget-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AquazPro Widget-umbrella.h"; sourceTree = "<group>"; };
-		CE5D8047E2A63CE00E48BA9D7D9AE1A6 /* ALAdDisplayDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdDisplayDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdDisplayDelegate.h; sourceTree = "<group>"; };
 		CEBB5E92FAEADE79586BF067C540198B /* Pods-AquazPro-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AquazPro-acknowledgements.markdown"; sourceTree = "<group>"; };
-		CEED7D50D6BF7DEE96E5A2BE88E888C9 /* vg_cta.png */ = {isa = PBXFileReference; includeInIndex = 1; name = vg_cta.png; path = APDVungleAdapter.embeddedframework/Resources/vg_cta.png; sourceTree = "<group>"; };
-		CF1BF957C798E4BD67FE403224D496D7 /* StartApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StartApp.framework; path = APDStartAppAdapter.embeddedframework/StartApp.framework; sourceTree = "<group>"; };
 		CF53B88AC58BD4188434F9FC8DCDA622 /* Pods-Aquaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.debug.xcconfig"; sourceTree = "<group>"; };
+		CF739A5F2F8C8CD03BB2D73794226D22 /* MPVASTIndustryIcon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTIndustryIcon.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTIndustryIcon.h; sourceTree = "<group>"; };
+		D0671AFCC13AC3D0C8EB5F2AA26A0796 /* MPRetryingHTTPOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPRetryingHTTPOperation.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPRetryingHTTPOperation.h; sourceTree = "<group>"; };
+		D101F7F5042541B8E4353DB0B40CC1C1 /* MPMRAIDInterstitialCustomEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPMRAIDInterstitialCustomEvent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPMRAIDInterstitialCustomEvent.h; sourceTree = "<group>"; };
 		D24B99AC44E20FE347BC6D69C631560A /* SDStatusBarOverriderPost9_0.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost9_0.m; path = SDStatusBarManager/SDStatusBarOverriderPost9_0.m; sourceTree = "<group>"; };
-		D458399B85B34960FBB4A2964ED18BFA /* ALNativeAd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALNativeAd.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALNativeAd.h; sourceTree = "<group>"; };
-		D47619900CE2CC0D93E9A8CE2A8B0970 /* ALSdkSettings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALSdkSettings.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALSdkSettings.h; sourceTree = "<group>"; };
+		D2C0B230584F2F3AC77AEE52D601BFD6 /* MPInterstitialAdManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPInterstitialAdManager.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPInterstitialAdManager.h; sourceTree = "<group>"; };
+		D2EC6B6658A4B34FD44C3F975865C99C /* MPIdentityProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPIdentityProvider.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPIdentityProvider.h; sourceTree = "<group>"; };
 		D5E5A550038022941EA7F095F3D301F0 /* MMWormholeSessionFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionFileTransiting.h; path = Source/MMWormholeSessionFileTransiting.h; sourceTree = "<group>"; };
 		D61A8ED6F64665186ECE5F8CC8E519EC /* MMWormholeSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSession.h; path = Source/MMWormholeSession.h; sourceTree = "<group>"; };
-		D75F229203C73EF7EA1D2ED30F933160 /* ALEventTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALEventTypes.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALEventTypes.h; sourceTree = "<group>"; };
+		D6CFF19235A2771D2C0D8EA84EC7A8AE /* MPVideoConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVideoConfig.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVideoConfig.h; sourceTree = "<group>"; };
 		D7BAE25ACCFFF6A4748FBD3385779FEB /* Pods-Aquaz-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Aquaz-umbrella.h"; sourceTree = "<group>"; };
+		D83D1E5627C65545067AC7BF083B2EBE /* libAPDStartAppAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDStartAppAdapter.a; path = APDStartAppAdapter.embeddedframework/libAPDStartAppAdapter.a; sourceTree = "<group>"; };
+		D8A20013F17FC19DB21DB5AB9287059B /* UIColor+MPAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+MPAdditions.h"; path = "APDTwitterMoPubAdapter.embeddedframework/Headers/UIColor+MPAdditions.h"; sourceTree = "<group>"; };
+		D923DF057891997CA45FCEF2DF46BCEC /* ALEventService.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALEventService.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALEventService.h; sourceTree = "<group>"; };
 		DA2E2733C197AA89EB529956BC36323D /* FABAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FABAttributes.h; path = iOS/Fabric.framework/Headers/FABAttributes.h; sourceTree = "<group>"; };
+		DBEDFC160530557D3A7621D3137EDA92 /* MOPUBPlayerViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBPlayerViewController.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBPlayerViewController.h; sourceTree = "<group>"; };
 		DCB942965715699762F439525D9F1B1E /* MMWormhole.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MMWormhole.framework; path = MMWormhole.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DE08FBB30D731973D3E3AF2461EAD974 /* MPCloseBtn.png */ = {isa = PBXFileReference; includeInIndex = 1; name = MPCloseBtn.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn.png; sourceTree = "<group>"; };
 		DE894A49ACB009963640A57B05F5D8EE /* Pods-AquazPro Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AquazPro Widget.release.xcconfig"; sourceTree = "<group>"; };
-		DFE0C23EC4452FA8021391A4659F40AB /* MPMutedBtn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPMutedBtn@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPMutedBtn@2x.png"; sourceTree = "<group>"; };
 		E01F1BC84BE202DE026CBA5AE14F1CA6 /* Pods-AquazPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AquazPro.debug.xcconfig"; sourceTree = "<group>"; };
-		E0C56C9598C275645EC020055A7FD16F /* ALIncentivizedInterstitialAd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALIncentivizedInterstitialAd.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALIncentivizedInterstitialAd.h; sourceTree = "<group>"; };
-		E10814166AA01D2F447659970DE4A827 /* ALTargetingData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALTargetingData.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALTargetingData.h; sourceTree = "<group>"; };
+		E0292747CE54CE879FFDB4C24181DFB9 /* MRBundleManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRBundleManager.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MRBundleManager.h; sourceTree = "<group>"; };
+		E122417F541D2F8C2524DA535F26EA41 /* MPMediationSettingsProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPMediationSettingsProtocol.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPMediationSettingsProtocol.h; sourceTree = "<group>"; };
+		E3003380B9C4F27A15BC93332089DC9C /* MPVASTMediaFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTMediaFile.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTMediaFile.h; sourceTree = "<group>"; };
 		E33F72774C00218062805E2C5E1261FF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E349A03C885FB90917E983C350E75429 /* ALAd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAd.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAd.h; sourceTree = "<group>"; };
+		E4CF7777AE6BFB5BD52C84E750A76C36 /* ALSdk.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALSdk.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALSdk.h; sourceTree = "<group>"; };
+		E4DAD915BE9DDB2A3A564ECDEE67141E /* ALAdLoadDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdLoadDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdLoadDelegate.h; sourceTree = "<group>"; };
+		E5623FBEAB9B82E9057DBE5E984DA059 /* ALAnnotations.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAnnotations.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAnnotations.h; sourceTree = "<group>"; };
 		E579EF47541CAE978665400D8AAD5EED /* MMWormhole-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MMWormhole-dummy.m"; sourceTree = "<group>"; };
-		E8EDDD9788EF4129ACF6835A8AD791F1 /* MPUnmutedBtn.png */ = {isa = PBXFileReference; includeInIndex = 1; name = MPUnmutedBtn.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPUnmutedBtn.png; sourceTree = "<group>"; };
-		EA67F7233B4661E91F5F804D9E49B834 /* UnityAds.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = UnityAds.bundle; path = APDUnityAdapter.embeddedframework/Resources/UnityAds.bundle; sourceTree = "<group>"; };
-		EC87A968517C5F09230FC7CBF9F440A7 /* libAPDUnityAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDUnityAdapter.a; path = APDUnityAdapter.embeddedframework/libAPDUnityAdapter.a; sourceTree = "<group>"; };
-		EFC333B7C7FD4D917B264D0FE18120DA /* ALNativeAdService.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALNativeAdService.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALNativeAdService.h; sourceTree = "<group>"; };
+		E5DA31BAF8392809AECDBBE4AFCAC5ED /* MPInterstitialCustomEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPInterstitialCustomEvent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPInterstitialCustomEvent.h; sourceTree = "<group>"; };
+		E663D31213AC30709C0E1B95A4CF603A /* MPNativeAdRenderingImageLoader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdRenderingImageLoader.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdRenderingImageLoader.h; sourceTree = "<group>"; };
+		E80BA71718C11C537260B5344227DB41 /* ALAdSize.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdSize.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdSize.h; sourceTree = "<group>"; };
+		E8276FB74EE5B0746F351C657E1D2FAD /* MPAdBrowserController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = MPAdBrowserController.xib; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPAdBrowserController.xib; sourceTree = "<group>"; };
+		E8863DE121E6CEAE728218EA277D32CE /* MPNativeCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeCache.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeCache.h; sourceTree = "<group>"; };
+		E8B5946F844701653A954329E98EE2C9 /* MPStoreKitProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPStoreKitProvider.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPStoreKitProvider.h; sourceTree = "<group>"; };
+		EC26BF3D078FC04EED42BEA2970AB345 /* MPGlobal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPGlobal.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPGlobal.h; sourceTree = "<group>"; };
+		ED13E6110DCD7937F8AF6F214C0644B7 /* MOPUBPlayerManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBPlayerManager.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBPlayerManager.h; sourceTree = "<group>"; };
+		EDD08002ABCBC9D596B25AC04ACDFFB4 /* vg_cta.png */ = {isa = PBXFileReference; includeInIndex = 1; name = vg_cta.png; path = APDVungleAdapter.embeddedframework/Resources/vg_cta.png; sourceTree = "<group>"; };
+		EE6E0DFC7E01355D1AB6BB077DE135D7 /* MOPUBNativeVideoAdRendererSettings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBNativeVideoAdRendererSettings.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBNativeVideoAdRendererSettings.h; sourceTree = "<group>"; };
 		F030BD0217972DD76EB65CA3438A2E53 /* Fabric.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Fabric.h; path = iOS/Fabric.framework/Headers/Fabric.h; sourceTree = "<group>"; };
-		F14461A994E5BB44A6942A570EBDD938 /* libAPDTwitterMoPubAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDTwitterMoPubAdapter.a; path = APDTwitterMoPubAdapter.embeddedframework/libAPDTwitterMoPubAdapter.a; sourceTree = "<group>"; };
+		F0A6C61B720458BBD4C50764036A1721 /* MPAPIEndpoints.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAPIEndpoints.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAPIEndpoints.h; sourceTree = "<group>"; };
+		F199B5E9912D397FCDA042E60E45EE90 /* MPURLActionInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPURLActionInfo.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPURLActionInfo.h; sourceTree = "<group>"; };
 		F1C0AABCFD247376C53C637FE1E6C035 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F310A2779E1E20C2E929907BAA382495 /* MPInterstitialCustomEventDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPInterstitialCustomEventDelegate.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPInterstitialCustomEventDelegate.h; sourceTree = "<group>"; };
+		F3448D424E156E2AF3B8EBB643C02409 /* MRAID.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = MRAID.bundle; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MRAID.bundle; sourceTree = "<group>"; };
+		F34C05273D99E8C1B9C7DD9D14644574 /* MPVASTTrackingEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTTrackingEvent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTTrackingEvent.h; sourceTree = "<group>"; };
 		F3EC39AB590D414BB86E7FAD3DADB214 /* CLSLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSLogging.h; path = iOS/Crashlytics.framework/Headers/CLSLogging.h; sourceTree = "<group>"; };
-		F5466D065ADB62D424F8F7CE8BED0A25 /* libAPDInMobyAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDInMobyAdapter.a; path = APDInMobyAdapter.embeddedframework/libAPDInMobyAdapter.a; sourceTree = "<group>"; };
+		F4019DAA58A9B5133D17675068B4AF11 /* StartApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StartApp.framework; path = APDStartAppAdapter.embeddedframework/StartApp.framework; sourceTree = "<group>"; };
 		F558F5FD65EB4361A2EBB8819922A54D /* MMWormholeTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeTransiting.h; path = Source/MMWormholeTransiting.h; sourceTree = "<group>"; };
+		F59096F7D2CE6A6C9B0BD253A680032B /* MPLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPLogging.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPLogging.h; sourceTree = "<group>"; };
+		F6D8FA938C5756A91C71CCD08D4B8881 /* MPAdWebViewAgent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPAdWebViewAgent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPAdWebViewAgent.h; sourceTree = "<group>"; };
 		F6F4D5C72BAB2CB32E0B4EBFC80ABE57 /* SDStatusBarOverrider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverrider.h; path = SDStatusBarManager/SDStatusBarOverrider.h; sourceTree = "<group>"; };
 		F75129E82189264851AB102393245A49 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = iOS/Crashlytics.framework; sourceTree = "<group>"; };
 		F78DCEEFABB1069BC974C253A72E71F3 /* Pods-Aquaz Widget-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Aquaz Widget-acknowledgements.plist"; sourceTree = "<group>"; };
-		FB36BEB11A466DF8DD82CA46259D4001 /* StartApp.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = StartApp.bundle; path = APDStartAppAdapter.embeddedframework/Resources/StartApp.bundle; sourceTree = "<group>"; };
-		FBB12B64C506C696A60212C3CCEEEA49 /* libAPDMyTargetAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDMyTargetAdapter.a; path = APDMyTargetAdapter.embeddedframework/libAPDMyTargetAdapter.a; sourceTree = "<group>"; };
+		F9F286ABFEA50D665AAF86B398C910FF /* UIWebView+MPAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIWebView+MPAdditions.h"; path = "APDTwitterMoPubAdapter.embeddedframework/Headers/UIWebView+MPAdditions.h"; sourceTree = "<group>"; };
+		FAF07C699976E6DBD8F508D368852ADB /* MPVASTManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTManager.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTManager.h; sourceTree = "<group>"; };
+		FB50AA998316949344A285B7526EBF17 /* MPUserInteractionGestureRecognizer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPUserInteractionGestureRecognizer.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPUserInteractionGestureRecognizer.h; sourceTree = "<group>"; };
+		FB8FCAC0B75808AC96D401BF59A9C69B /* vg_mute_on.png */ = {isa = PBXFileReference; includeInIndex = 1; name = vg_mute_on.png; path = APDVungleAdapter.embeddedframework/Resources/vg_mute_on.png; sourceTree = "<group>"; };
+		FBC9FA9DA809E192A23518AB1F972258 /* MPMoPubRewardedVideoCustomEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPMoPubRewardedVideoCustomEvent.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPMoPubRewardedVideoCustomEvent.h; sourceTree = "<group>"; };
+		FBE8EA8FAE893BC2C2401BA08A03C253 /* MRProperty.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRProperty.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MRProperty.h; sourceTree = "<group>"; };
+		FBEC0980FB1118D0A7C7FA2F230D9B33 /* MPRewardedVideo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPRewardedVideo.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPRewardedVideo.h; sourceTree = "<group>"; };
 		FCEC89BDFD5EB8F65F731376AB44403A /* MMWormhole.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = MMWormhole.modulemap; sourceTree = "<group>"; };
-		FD6618B17EEB14242F31164E9B2C6D39 /* ALAdService.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdService.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdService.h; sourceTree = "<group>"; };
-		FDD7717BFB75979D55053611D6A405B8 /* ALNativeAdLoadDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALNativeAdLoadDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALNativeAdLoadDelegate.h; sourceTree = "<group>"; };
-		FE4806CD8FB6CA3BD21D37D2A1ECF574 /* MPMutedBtn@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPMutedBtn@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPMutedBtn@3x.png"; sourceTree = "<group>"; };
+		FDCC35ECE9C4CF46995627B8F1035C2D /* ALAdDisplayDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdDisplayDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdDisplayDelegate.h; sourceTree = "<group>"; };
+		FE28B3FFEDE63B0C769903F0E78FE44A /* MPBannerAdManagerDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPBannerAdManagerDelegate.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPBannerAdManagerDelegate.h; sourceTree = "<group>"; };
 		FE7E2257C7A57CF04274FB14B7D89AF3 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FFBDFD96086578324FB740DA1EE31B31 /* ALAd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAd.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAd.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,39 +505,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		011015980C3685CFA5DEE9CD2E2929D4 /* MyTargetAdapter */ = {
+		06901045B9F4EAF781FD23A4EAC8D687 /* AppLovinAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				F09CE95E9F3FC8585C9AAC29CCC1EC4A /* Frameworks */,
+				E349A03C885FB90917E983C350E75429 /* ALAd.h */,
+				FDCC35ECE9C4CF46995627B8F1035C2D /* ALAdDisplayDelegate.h */,
+				E4DAD915BE9DDB2A3A564ECDEE67141E /* ALAdLoadDelegate.h */,
+				76EE5A03A57E34E7EBC51A9889F957F5 /* ALAdRewardDelegate.h */,
+				C581D3A356732624C80482B8315AA980 /* ALAdService.h */,
+				E80BA71718C11C537260B5344227DB41 /* ALAdSize.h */,
+				3BA655E4ACEB6A830CD57DF973E5152B /* ALAdType.h */,
+				650681527283EDA9D5067DA769DE9B50 /* ALAdUpdateDelegate.h */,
+				416AA2F67EA033DE4617EF4316DEB9D2 /* ALAdVideoPlaybackDelegate.h */,
+				04C9D79FAD6C2031B17DC2732A338F91 /* ALAdView.h */,
+				E5623FBEAB9B82E9057DBE5E984DA059 /* ALAnnotations.h */,
+				6BC6567D8939FDFC2B5C0393A8FB7441 /* ALErrorCodes.h */,
+				D923DF057891997CA45FCEF2DF46BCEC /* ALEventService.h */,
+				9A55C86FD7FBE4D573630BB7BD533B79 /* ALEventTypes.h */,
+				BECD677352ED9A83B291CFC4811A8752 /* ALIncentivizedInterstitialAd.h */,
+				36F73B3AB45A5EC52B3074CD84E3F4A0 /* ALInterstitialAd.h */,
+				7ABC5A2C5508FD0B5D9BEFA356CA2697 /* ALNativeAd.h */,
+				87BE73709450A4B4C219D9C74B87EA8B /* ALNativeAdLoadDelegate.h */,
+				40FCA0CCD43A22981934754A82E524E8 /* ALNativeAdPrecacheDelegate.h */,
+				9C162929E179BD4C4942FC7942554256 /* ALNativeAdService.h */,
+				3E4953A529002C693572323B8B593FA2 /* ALPostbackDelegate.h */,
+				51CC76C724DE3A62225C4801FBA02549 /* ALPostbackService.h */,
+				E4CF7777AE6BFB5BD52C84E750A76C36 /* ALSdk.h */,
+				2BBEDAFB43F1878D1CA3010766DC6B89 /* ALSdkSettings.h */,
+				952D785E8998B409CFC254D96E64C0F4 /* ALSwiftHeaders.h */,
+				29AE2EFAF2557DCD98999AE47D1B030A /* ALTargetingData.h */,
+				742A30E440F0705AD09874D295431978 /* Frameworks */,
 			);
-			name = MyTargetAdapter;
+			name = AppLovinAdapter;
 			sourceTree = "<group>";
 		};
-		084775649E49F99D8F9CC3AC5BDA83CC /* InMobyAdapter */ = {
+		092773378DAE8594365BDEC1CE5AB763 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				537ACFF7E60AEE5AAC0926CD19CE9EC2 /* Frameworks */,
+				177A94F1922A55691F8D5246115167BA /* libAPDMyTargetAdapter.a */,
+				2D525C46AF73DA959F1739D833160DFC /* MyTargetSDK.framework */,
 			);
-			name = InMobyAdapter;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		0A1008DF17C62064F1053BB31DF431F4 /* Appodeal */ = {
+		0E285FD584714AACA04EDC310163A270 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DEEBDF99DFF493642175AC08B7B05FB7 /* AdColonyAdapter */,
-				62271A4D4B28B9F5EAD800556774C54B /* AppLovinAdapter */,
-				A4F82A537708CD33933F27F143A284A4 /* ChartboostAdapter */,
-				42EF80CF0616C8ADF21BB906664CBD36 /* Core */,
-				084775649E49F99D8F9CC3AC5BDA83CC /* InMobyAdapter */,
-				011015980C3685CFA5DEE9CD2E2929D4 /* MyTargetAdapter */,
-				DE6A4A7CB265DEFC8DB4C8C5171C2EAC /* StartAppAdapter */,
-				A44186957E57EA3F1F76B1AEC1ED216A /* TapjoyAdapter */,
-				713DC9D664243A015B42601EBA221C03 /* TwitterMoPubAdapter */,
-				8880EFDB12D5F74D4DA526DAD8E4367B /* UnityAdapter */,
-				3F755CCC343F1FADE1871BEDA374BFBC /* VungleAdapter */,
+				9FCA5DDD5E29C110A0E123777288BDFF /* Appodeal.bundle */,
 			);
-			name = Appodeal;
-			path = Appodeal;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		120FE909ED5291FB2843A57D59A1F367 /* Pods-AquazPro */ = {
@@ -388,14 +582,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1B9EB385FED2A9F2CFE7C34C5631E88E /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				FB36BEB11A466DF8DD82CA46259D4001 /* StartApp.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		1D6BDBFADA9D5BC730194252B05271F8 /* Pods-AquazPro Widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,26 +599,49 @@
 			path = "Target Support Files/Pods-AquazPro Widget";
 			sourceTree = "<group>";
 		};
-		2200EDB4FA3E9F5D00B39B46565715AA /* Frameworks */ = {
+		1EAF96E3DD53BF6905311E404E727246 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				145E605AC38CFFD17A4B5B951CD2934B /* libAPDStartAppAdapter.a */,
-				CF1BF957C798E4BD67FE403224D496D7 /* StartApp.framework */,
+				E8276FB74EE5B0746F351C657E1D2FAD /* MPAdBrowserController.xib */,
+				2D218D56A22A9723E9007E186A6B0C32 /* MPCloseBtn.png */,
+				238A4C9F92C5E9694B4AE5AB5C44ED89 /* MPCloseBtn@2x.png */,
+				BDB6A6B6366AB5BFE354F683110F50EF /* MPCloseBtn@3x.png */,
+				86A78F30D3229A8D0CE88BBC3FA91B81 /* MPCloseButtonX.png */,
+				348D0ED654BA78D0B55348F4D175AF08 /* MPCloseButtonX@2x.png */,
+				45D9DE75FB3B574B8B450B4EF45975EF /* MPCloseButtonX@3x.png */,
+				A47D90B1BEBB59324E1F3D472A11163B /* MPDAAIcon.png */,
+				25F5D70FE778EDA3EA661FA4BDCEBF09 /* MPDAAIcon@2x.png */,
+				4417BAF348DB382ABF3EDB57EBAAE4EF /* MPDAAIcon@3x.png */,
+				8C216CDEE1D0BB2F0420518F04D1675D /* MPMutedBtn.png */,
+				137867412AE70819CA0F94FE24548DA7 /* MPMutedBtn@2x.png */,
+				3CB02F5E76DE9A366F59BDD138392796 /* MPMutedBtn@3x.png */,
+				43E777CF4BE27CDA9502106CA811A23A /* MPPlayBtn.png */,
+				11EEE929B3AC7BAC33C1CE877A00C5C4 /* MPPlayBtn@2x.png */,
+				0303FDEB421C8A2E68484304856D0416 /* MPPlayBtn@3x.png */,
+				A5657BAE113A3D3AC3DC3DC73FB477F7 /* MPUnmutedBtn.png */,
+				0F2FAA0C43DBC1FFCDFEED3FD895F980 /* MPUnmutedBtn@2x.png */,
+				60647D201F865524028E05AB133A7918 /* MPUnmutedBtn@3x.png */,
+				F3448D424E156E2AF3B8EBB643C02409 /* MRAID.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		22B01489115EEAE7DFDDB5149B8E60FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B48100B8C66FCF564162FBBDDB778635 /* InMobiSDK.framework */,
+				53723D0E8577C6E8EEDD9C15F357141C /* libAPDInMobyAdapter.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2B95F908E98A08F6DA420F1533019132 /* Resources */ = {
+		26431B538D8EF3A9E31DB8295324544F /* VungleAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				7EFFEF71073A7A197742FC41183A11D5 /* __vungle.db */,
-				B995FAEC1939BDD515D4DD3649B42CCF /* vg_close.png */,
-				CEED7D50D6BF7DEE96E5A2BE88E888C9 /* vg_cta.png */,
-				6B0B5AD467D7DEE59D78CF0E895112B6 /* vg_mute_off.png */,
-				B22C8917FCC24BAABDC58685E4239063 /* vg_mute_on.png */,
-				3D0A922EDB4EA91C54C776DC0C095F25 /* vg_privacy.png */,
+				57A11498123735FF0B54AF5067B85007 /* Frameworks */,
+				3A6286F0CEC8E9DDB377E8490296FC64 /* Resources */,
 			);
-			name = Resources;
+			name = VungleAdapter;
 			sourceTree = "<group>";
 		};
 		31E9A42528363BD372B6A5172FD10BDE /* Frameworks */ = {
@@ -457,21 +666,17 @@
 			path = "../Target Support Files/MMWormhole";
 			sourceTree = "<group>";
 		};
-		39FDB5F58C8692F9C9F9B536213F0387 /* Resources */ = {
+		3A6286F0CEC8E9DDB377E8490296FC64 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7976E29A924C4299156445A4F17F61E4 /* Appodeal.bundle */,
+				6962DB4A914C83E6A4C77CDBCBBDF049 /* __vungle.db */,
+				11B84F4B4C92FB11F71910B92AB179AA /* vg_close.png */,
+				EDD08002ABCBC9D596B25AC04ACDFFB4 /* vg_cta.png */,
+				46FF88DFB4AC02B30DBCA7ACB0628191 /* vg_mute_off.png */,
+				FB8FCAC0B75808AC96D401BF59A9C69B /* vg_mute_on.png */,
+				1E3CEC52123EA176E1C0BE9CCD043DD0 /* vg_privacy.png */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		3F755CCC343F1FADE1871BEDA374BFBC /* VungleAdapter */ = {
-			isa = PBXGroup;
-			children = (
-				D10448B73BF7B718274CE9209FB136D8 /* Frameworks */,
-				2B95F908E98A08F6DA420F1533019132 /* Resources */,
-			);
-			name = VungleAdapter;
 			sourceTree = "<group>";
 		};
 		3FD66E444F82FEA2F41953A559854029 /* Targets Support Files */ = {
@@ -485,64 +690,48 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		42EF80CF0616C8ADF21BB906664CBD36 /* Core */ = {
+		40BD3A523E63F9F68BEE6D1F62653B20 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				C00E7211B6AD02D010DC1E19FB87FA47 /* Frameworks */,
-				39FDB5F58C8692F9C9F9B536213F0387 /* Resources */,
+				FE2D986CD581B0A9196826727862239F /* Frameworks */,
+				0E285FD584714AACA04EDC310163A270 /* Resources */,
 			);
 			name = Core;
 			sourceTree = "<group>";
 		};
-		4CF438C241302F78FED6BBC7FB62CA1F /* Resources */ = {
+		47B82F9DBDED2E8CA93C231BB3484B0C /* TapjoyAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				1BF6FCBB962310AE2A74E51AE7E7987A /* TapjoyResources.bundle */,
+				A0D2475A8E682EE21AB439CBA7D787EC /* Frameworks */,
+				E31E4775D1A5D04C32097B065EFCD511 /* Resources */,
 			);
-			name = Resources;
+			name = TapjoyAdapter;
 			sourceTree = "<group>";
 		};
-		537ACFF7E60AEE5AAC0926CD19CE9EC2 /* Frameworks */ = {
+		55C6AFCEC5619E38173F6164CA340249 /* MyTargetAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				7D58219B26830BCF91FC4039D44181D9 /* InMobiSDK.framework */,
-				F5466D065ADB62D424F8F7CE8BED0A25 /* libAPDInMobyAdapter.a */,
+				092773378DAE8594365BDEC1CE5AB763 /* Frameworks */,
+			);
+			name = MyTargetAdapter;
+			sourceTree = "<group>";
+		};
+		57A11498123735FF0B54AF5067B85007 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2F7BCEFAA96D5A01174B82D4C1E32144 /* libAPDVungleAdapter.a */,
+				9A8818B74C602E0BA632832B064CA9FE /* VungleSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		62271A4D4B28B9F5EAD800556774C54B /* AppLovinAdapter */ = {
+		64801D9FCFF6F99B93863B853A5A2176 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FFBDFD96086578324FB740DA1EE31B31 /* ALAd.h */,
-				CE5D8047E2A63CE00E48BA9D7D9AE1A6 /* ALAdDisplayDelegate.h */,
-				944C2855EFB9F75204BA6548F79EE64C /* ALAdLoadDelegate.h */,
-				6B4E5EA593DC135D41174E6AC9FAC604 /* ALAdRewardDelegate.h */,
-				FD6618B17EEB14242F31164E9B2C6D39 /* ALAdService.h */,
-				113797AAD27B1C616BCED3C13D83652A /* ALAdSize.h */,
-				91179B564F4C6619A2D7C09566D23E73 /* ALAdType.h */,
-				8974C653D5C9E7F4084ECE0AEF0CFE8D /* ALAdUpdateDelegate.h */,
-				1FC2BA785F18B9DD3B1948FA0B4D2215 /* ALAdVideoPlaybackDelegate.h */,
-				52F969A9725993D57D5FDBED7F2DCC11 /* ALAdView.h */,
-				3A9A9CE7CF5D4701BD6ABD1C5CFFA7A8 /* ALAnnotations.h */,
-				60633D5886507551D4F8161E8E77D502 /* ALErrorCodes.h */,
-				B681DE145F86E723C4ACB581E3AE493E /* ALEventService.h */,
-				D75F229203C73EF7EA1D2ED30F933160 /* ALEventTypes.h */,
-				E0C56C9598C275645EC020055A7FD16F /* ALIncentivizedInterstitialAd.h */,
-				92409355A02D08A4FA2505992B56DDC7 /* ALInterstitialAd.h */,
-				D458399B85B34960FBB4A2964ED18BFA /* ALNativeAd.h */,
-				FDD7717BFB75979D55053611D6A405B8 /* ALNativeAdLoadDelegate.h */,
-				7A0951455374006C3BB4FFE51AA27082 /* ALNativeAdPrecacheDelegate.h */,
-				EFC333B7C7FD4D917B264D0FE18120DA /* ALNativeAdService.h */,
-				4ED48F6CDEDC0E263E5FB3F729CB6B4E /* ALPostbackDelegate.h */,
-				7F3F2251DD87417A2E558A10FD4AB9DE /* ALPostbackService.h */,
-				107411FD6ACB26D3D9A385F6058E5D60 /* ALSdk.h */,
-				D47619900CE2CC0D93E9A8CE2A8B0970 /* ALSdkSettings.h */,
-				86B3DEB741DF482F76642855D48654A4 /* ALSwiftHeaders.h */,
-				E10814166AA01D2F447659970DE4A827 /* ALTargetingData.h */,
-				9732EAAFFCD8E51224F881EB9D41535F /* Frameworks */,
+				0ADA4AF22E6B20B732FEE2B4B8B3871E /* Chartboost.framework */,
+				3621985AAFD9732577708E69B3E65A52 /* libAPDChartboostAdapter.a */,
 			);
-			name = AppLovinAdapter;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		6A799AB67CAD939E3A8BCEBBB2B37A44 /* Core */ = {
@@ -567,15 +756,6 @@
 			name = Core;
 			sourceTree = "<group>";
 		};
-		713DC9D664243A015B42601EBA221C03 /* TwitterMoPubAdapter */ = {
-			isa = PBXGroup;
-			children = (
-				ADA17A507D535A5E027C40406AFD1DF4 /* Frameworks */,
-				B1DC950C5B0306D0CF7319D4ED874FF5 /* Resources */,
-			);
-			name = TwitterMoPubAdapter;
-			sourceTree = "<group>";
-		};
 		7243F34CD996EF3E319E58286F578AA2 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,20 +770,28 @@
 			path = "../Target Support Files/SimulatorStatusMagic";
 			sourceTree = "<group>";
 		};
-		7BD751060255D0AEBF319825DEAF86F8 /* Frameworks */ = {
+		73F86680DA78176EE103E8DFC6E41F62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				317B142FE22A2A636A94754DC8121FED /* Chartboost.framework */,
-				588AC979EC00B08FC1055015EE593DD9 /* libAPDChartboostAdapter.a */,
+				9AF9EE53A7E14FBBD934AD3433DF9ABA /* libAPDUnityAdapter.a */,
+				21D175F2CD4B70205859BE82FF50718D /* UnityAds.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7C31881606E479860470F078FB9F8DA2 /* Frameworks */ = {
+		742A30E440F0705AD09874D295431978 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B5DDA0A9946298428786A3E50A263F83 /* libAPDTapjoyAdapter.a */,
-				9FCD0C9F6E82BB8D5F9CB185FEA5452B /* Tapjoy.framework */,
+				CDEF19BACA4E87810AF31239562E927B /* libAPDAppLovinAdapter.a */,
+				919916797D43E3E4637E03D28FA84D65 /* libAppLovinSdk.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7AFFC25C1FF71D19C9652C1425C9BA57 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				73536E4297D597DACC2D4604CD6D6B60 /* libAPDTwitterMoPubAdapter.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -617,6 +805,15 @@
 				D5209EF0B82243D4D99F84FF0839E941 /* Products */,
 				3FD66E444F82FEA2F41953A559854029 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		7E03408AF7D80341CF9E7FEF784DD187 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D83D1E5627C65545067AC7BF083B2EBE /* libAPDStartAppAdapter.a */,
+				F4019DAA58A9B5133D17675068B4AF11 /* StartApp.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		834394AE3415266D49CC9A8D40BA6B9D /* SimulatorStatusMagic */ = {
@@ -641,15 +838,6 @@
 			path = SimulatorStatusMagic;
 			sourceTree = "<group>";
 		};
-		8880EFDB12D5F74D4DA526DAD8E4367B /* UnityAdapter */ = {
-			isa = PBXGroup;
-			children = (
-				C11CFF00608F76565C32CB21201746C7 /* Frameworks */,
-				F4637D83881B8DF0A58697843C1A5190 /* Resources */,
-			);
-			name = UnityAdapter;
-			sourceTree = "<group>";
-		};
 		8AF325A177BE630696D716C063CFA866 /* MMWormhole */ = {
 			isa = PBXGroup;
 			children = (
@@ -660,13 +848,32 @@
 			path = MMWormhole;
 			sourceTree = "<group>";
 		};
-		9732EAAFFCD8E51224F881EB9D41535F /* Frameworks */ = {
+		8FAEAC6F78C75D2A2C6D0BFC5A521773 /* StartAppAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				811C5D8F21ED7384281460CDC6788412 /* libAPDAppLovinAdapter.a */,
-				01687686DEC138F1288D7E1E5C68C1E5 /* libAppLovinSdk.a */,
+				7E03408AF7D80341CF9E7FEF784DD187 /* Frameworks */,
+				9CEB292EC6748FC5CA0AA6134F99E084 /* Resources */,
 			);
-			name = Frameworks;
+			name = StartAppAdapter;
+			sourceTree = "<group>";
+		};
+		9728804F9FB969BA978309E232A1678B /* Appodeal */ = {
+			isa = PBXGroup;
+			children = (
+				CD2AC2C6CC3618F6CDAC80F3475E6FE9 /* AdColonyAdapter */,
+				06901045B9F4EAF781FD23A4EAC8D687 /* AppLovinAdapter */,
+				9C38CAF45FF04087C9B750CCEBF2A1C9 /* ChartboostAdapter */,
+				40BD3A523E63F9F68BEE6D1F62653B20 /* Core */,
+				EE0BFFE4580BFFD9809F2CFEBE897AE7 /* InMobiAdapter */,
+				55C6AFCEC5619E38173F6164CA340249 /* MyTargetAdapter */,
+				8FAEAC6F78C75D2A2C6D0BFC5A521773 /* StartAppAdapter */,
+				47B82F9DBDED2E8CA93C231BB3484B0C /* TapjoyAdapter */,
+				B0E182AE271B0756B9DE2E1C0BA2EE90 /* TwitterMoPubAdapter */,
+				B9BF769B18675D963563ABC978AFB367 /* UnityAdapter */,
+				26431B538D8EF3A9E31DB8295324544F /* VungleAdapter */,
+			);
+			name = Appodeal;
+			path = Appodeal;
 			sourceTree = "<group>";
 		};
 		9AB83FB8DA90AC1482EC6597B26AB6EC /* iOS */ = {
@@ -687,21 +894,38 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A44186957E57EA3F1F76B1AEC1ED216A /* TapjoyAdapter */ = {
+		9C38CAF45FF04087C9B750CCEBF2A1C9 /* ChartboostAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				7C31881606E479860470F078FB9F8DA2 /* Frameworks */,
-				4CF438C241302F78FED6BBC7FB62CA1F /* Resources */,
-			);
-			name = TapjoyAdapter;
-			sourceTree = "<group>";
-		};
-		A4F82A537708CD33933F27F143A284A4 /* ChartboostAdapter */ = {
-			isa = PBXGroup;
-			children = (
-				7BD751060255D0AEBF319825DEAF86F8 /* Frameworks */,
+				64801D9FCFF6F99B93863B853A5A2176 /* Frameworks */,
 			);
 			name = ChartboostAdapter;
+			sourceTree = "<group>";
+		};
+		9CEB292EC6748FC5CA0AA6134F99E084 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				74F6356666C58C68DBDE2BA4FD03DEB5 /* StartApp.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A0D2475A8E682EE21AB439CBA7D787EC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BD4D52ADA30614EDB8B1E8AE921DB8FE /* libAPDTapjoyAdapter.a */,
+				BD9F8346433D954B4083828495A51BA0 /* Tapjoy.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A7E20E0C31E0013C15060643D1485EE8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3C7CA6FCD9C25D088D31F7D21B636770 /* AdColony.framework */,
+				090E2D572FD2795C30582A00FF796057 /* libAPDAdColonyAdapter.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		AD15BFFC33219F6518EB25CF49B533CA /* Pods-Aquaz */ = {
@@ -722,39 +946,208 @@
 			path = "Target Support Files/Pods-Aquaz";
 			sourceTree = "<group>";
 		};
-		ADA17A507D535A5E027C40406AFD1DF4 /* Frameworks */ = {
+		B0E182AE271B0756B9DE2E1C0BA2EE90 /* TwitterMoPubAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				F14461A994E5BB44A6942A570EBDD938 /* libAPDTwitterMoPubAdapter.a */,
+				417A89ED2AF735C9AC773BCA6B4B2D90 /* MoPub.h */,
+				0A11434EC90F156F9B30FF46EE57A12A /* MoPub-Bridging-Header.h */,
+				BA0CC5788E3EFC989766608862B88374 /* MOPUBActivityIndicatorView.h */,
+				AE7FFB64F533A856EC00ED1F395C981F /* MOPUBAVPlayer.h */,
+				18D98A97373608E8D8EC13B491EEB835 /* MOPUBAVPlayerView.h */,
+				CDDE3088EE67FBC209A0F0B3B5B6FE38 /* MOPUBFullscreenPlayerViewController.h */,
+				58220F66F00167F8C93E50D0FE9FE8CB /* MOPUBNativeVideoAdAdapter.h */,
+				08D8F80DD082917E2B6FA15FC9E26AC3 /* MOPUBNativeVideoAdConfigValues.h */,
+				95063C61C245495BAC9C8148BDB2A038 /* MOPUBNativeVideoAdRenderer.h */,
+				EE6E0DFC7E01355D1AB6BB077DE135D7 /* MOPUBNativeVideoAdRendererSettings.h */,
+				0A6F45400D7084CBA64FCEFC78ADA3DD /* MOPUBNativeVideoCustomEvent.h */,
+				7D873B5D33042DFD39016F77742D3400 /* MOPUBNativeVideoImpressionAgent.h */,
+				ED13E6110DCD7937F8AF6F214C0644B7 /* MOPUBPlayerManager.h */,
+				4A751A4B42FE1881DC2BC43DDDAE0DF6 /* MOPUBPlayerView.h */,
+				DBEDFC160530557D3A7621D3137EDA92 /* MOPUBPlayerViewController.h */,
+				6AE1C484764D4A1E2531AA797139AF18 /* MOPUBReplayView.h */,
+				50E3D3FA762A2626A4DF251315817404 /* MPActivityViewControllerHelper.h */,
+				9ECF9D689340F9A687D72C25D86650AC /* MPActivityViewControllerHelper+TweetShare.h */,
+				85063217EC79F8601C928F3D9CFC191C /* MPAdAlertGestureRecognizer.h */,
+				236B0311CC702A2959FC56EF3B75D533 /* MPAdAlertManager.h */,
+				2CA549CCFDECE35EE8C2156E10C96800 /* MPAdBrowserController.h */,
+				1B816D631337818906AE8E355B1E824A /* MPAdConfiguration.h */,
+				BA4557793B808B2ABBD796DA248EF893 /* MPAdConversionTracker.h */,
+				A31ABD5F95B6D6A2A4656DA535280E44 /* MPAdDestinationDisplayAgent.h */,
+				37192A5D33A23041CB2EB3378A78179F /* MPAdPlacerInvocation.h */,
+				7AAF3026787B6E9FCCB2A5B55C668522 /* MPAdPositioning.h */,
+				B9517BB7936A2A18F3D3D5C34E25923E /* MPAdServerCommunicator.h */,
+				BB94A9BB66F4FA8657730F03E33F8696 /* MPAdServerURLBuilder.h */,
+				8FD97BD51762FA253338CC1B97D1A1DC /* MPAdView.h */,
+				734A8A98DB29FECE749D55854689BEC5 /* MPAdWebView.h */,
+				F6D8FA938C5756A91C71CCD08D4B8881 /* MPAdWebViewAgent.h */,
+				8C138108296F884A82BC177E0134C8B0 /* MPAnalyticsTracker.h */,
+				F0A6C61B720458BBD4C50764036A1721 /* MPAPIEndpoints.h */,
+				6FFEC11F5BBED015127E8028D7622B56 /* MPBannerAdManager.h */,
+				FE28B3FFEDE63B0C769903F0E78FE44A /* MPBannerAdManagerDelegate.h */,
+				89F62D464DADB52B7810B6A1E923325F /* MPBannerCustomEvent.h */,
+				158B7AED41004C9AC6710193B500AF82 /* MPBannerCustomEventAdapter.h */,
+				0B1F6273B2CBACB8E6F4DD0C2C3170D9 /* MPBannerCustomEventDelegate.h */,
+				A8FA44B5C7A1F779B4DD2EDC61581895 /* MPBaseBannerAdapter.h */,
+				C2BF23860E46922C531FFDE77678B0D0 /* MPBaseInterstitialAdapter.h */,
+				8998BECB03F6781DAB26AEE8285C5D9F /* MPClientAdPositioning.h */,
+				16B80C4083FAE24FD91C86FD09EB0760 /* MPClosableView.h */,
+				C02482462651DF150B0E698EB18D6D0D /* MPCollectionViewAdPlacer.h */,
+				8485A8B8B204DC280D81406E7A0CF50B /* MPCollectionViewAdPlacerCell.h */,
+				BC8167ABD4234697243E2C0834E69CA1 /* MPConstants.h */,
+				B6C24C4F323525919405BC29FF15E9FA /* MPCoreInstanceProvider.h */,
+				ABDEAA78F4D7CA9160EBA09454D0A9E1 /* MPDiskLRUCache.h */,
+				6AE5543DE81D1DF134CCA3E1661EAC80 /* MPEnhancedDeeplinkRequest.h */,
+				C06BCEB5DB720FDBB3346CAB7C4F4DF6 /* MPError.h */,
+				9A287CDBFA169E1F4F4AC9215BE5FBE6 /* MPFacebookKeywordProvider.h */,
+				1F398411985C0E6ACA667F1BBABBEAE7 /* MPForceableOrientationProtocol.h */,
+				B78B83EEAF1925DFD1CCD228F1B2DA55 /* MPGeolocationProvider.h */,
+				EC26BF3D078FC04EED42BEA2970AB345 /* MPGlobal.h */,
+				0BA8AF84A66FA681246FA4B35F051B23 /* MPHTMLBannerCustomEvent.h */,
+				09311A7549235FEC49E7B2048793F9B9 /* MPHTMLInterstitialCustomEvent.h */,
+				A7194B743AB1ABBC4A996FE763DD8D81 /* MPHTMLInterstitialViewController.h */,
+				D2EC6B6658A4B34FD44C3F975865C99C /* MPIdentityProvider.h */,
+				7B368C00E6ECC4CD58DC061CC939D4E8 /* MPImageDownloadQueue.h */,
+				7E720C22308B527527968F1260247A6C /* MPInstanceProvider.h */,
+				8C464E880B9557F9B8F044BF75F9C41B /* MPInternalUtils.h */,
+				C4BB65B67F452BE0DEC36E70F0D5C0E3 /* MPInterstitialAdController.h */,
+				D2C0B230584F2F3AC77AEE52D601BFD6 /* MPInterstitialAdManager.h */,
+				2731B85A6679A72DE3B1CF9420D7989D /* MPInterstitialAdManagerDelegate.h */,
+				E5DA31BAF8392809AECDBBE4AFCAC5ED /* MPInterstitialCustomEvent.h */,
+				902DE98879567F962247DE1386186436 /* MPInterstitialCustomEventAdapter.h */,
+				F310A2779E1E20C2E929907BAA382495 /* MPInterstitialCustomEventDelegate.h */,
+				A734912EF732507553F08CA157991E29 /* MPInterstitialViewController.h */,
+				A5158B0F68A4B52B2C4D0BCBFA3DB1CB /* MPKeywordProvider.h */,
+				AFB1EFD4E3126FB84EA682AD1BDD2FCF /* MPLastResortDelegate.h */,
+				58CBE8DD956A5276C1B51079D8724347 /* MPLastResortDelegate+EventKit.h */,
+				C35DA1F3877F9A93809003812401C35A /* MPLogEvent.h */,
+				225A044BF419EA5F56596552033B041C /* MPLogEvent+NativeVideo.h */,
+				C90A46DD3B551869E4D91DD64DE1A589 /* MPLogEventCommunicator.h */,
+				11F7E6D25B81CB0BF46A3C98B7F570FA /* MPLogEventRecorder.h */,
+				F59096F7D2CE6A6C9B0BD253A680032B /* MPLogging.h */,
+				9EF853DC950CB71B45322EF709F88822 /* MPLogProvider.h */,
+				E122417F541D2F8C2524DA535F26EA41 /* MPMediationSettingsProtocol.h */,
+				15982FB2746FBCFE00005B0EB18CA352 /* MPMoPubNativeAdAdapter.h */,
+				BCC4E0CBCB2BF14AA931B1D9C12EE8E0 /* MPMoPubNativeCustomEvent.h */,
+				FBC9FA9DA809E192A23518AB1F972258 /* MPMoPubRewardedVideoCustomEvent.h */,
+				80D249EDBAFF274EE0CC7CD57B0B877F /* MPMRAIDBannerCustomEvent.h */,
+				D101F7F5042541B8E4353DB0B40CC1C1 /* MPMRAIDInterstitialCustomEvent.h */,
+				050F10EC0F08176B893B67D5EBCA33FE /* MPMRAIDInterstitialViewController.h */,
+				26F72EAE24C93EC4BABBE88FC0D8D87E /* MPNativeAd.h */,
+				BCA288E630CE7B48108F2890C0760DAB /* MPNativeAd+Internal.h */,
+				145B537036AB393A07BE76DEB55D1076 /* MPNativeAdAdapter.h */,
+				417F6B0FB789C36922025504636E9074 /* MPNativeAdConstants.h */,
+				62481433B81CDEFF5A01CEA03AA68B33 /* MPNativeAdData.h */,
+				5FCBD44FA88757D5104853531E6F746B /* MPNativeAdDelegate.h */,
+				780833095484D218FD5D505ECC7767A6 /* MPNativeAdError.h */,
+				B4B3ED133C9292C8664F165D44E94F83 /* MPNativeAdRenderer.h */,
+				9AE4EA60E2D69C27A164C3B366DCF6CF /* MPNativeAdRendererConfiguration.h */,
+				4EA229310EF5F5F491121DB6C1252561 /* MPNativeAdRendererConstants.h */,
+				9E9EBEE2C7595E7928B4C646AA6838F0 /* MPNativeAdRendererImageHandler.h */,
+				4CEE83791825BA2C87F16BD82B6589C4 /* MPNativeAdRendererSettings.h */,
+				7DA8839D7D4C8D60CFD08680390B3121 /* MPNativeAdRendering.h */,
+				E663D31213AC30709C0E1B95A4CF603A /* MPNativeAdRenderingImageLoader.h */,
+				C79BAC6B021331C61432D0C02A6AC799 /* MPNativeAdRequest.h */,
+				7D98D59F44AF7D68B9DF88255CED8824 /* MPNativeAdRequest+MPNativeAdSource.h */,
+				A08F3B2A901B66806988E180D2861CD3 /* MPNativeAdRequestTargeting.h */,
+				196743A6CE1CFEF608371867A707E21F /* MPNativeAdSource.h */,
+				21F9C2914E067C50740BCC86C08D5587 /* MPNativeAdSourceDelegate.h */,
+				93935EF10C2B0042DEDF38D94ACD175E /* MPNativeAdSourceQueue.h */,
+				2BBD3304FD4FB59429CCBDAA61EF0746 /* MPNativeAdUtils.h */,
+				E8863DE121E6CEAE728218EA277D32CE /* MPNativeCache.h */,
+				62FC74D5678E9997142DB16188A9418D /* MPNativeCustomEvent.h */,
+				63E7B21ED1067A05D45D8D7D7374B766 /* MPNativeCustomEventDelegate.h */,
+				31AA7215F9922BDADAB27ADDB0FC4065 /* MPNativePositionResponseDeserializer.h */,
+				C945765B717252D372485155C3FBA412 /* MPNativePositionSource.h */,
+				AABEF041461B465846FA8461C6260283 /* MPNativeView.h */,
+				791A0C6DE1CC229E978B0A38E6F85085 /* MPNetworkManager.h */,
+				C7230B92ACECD6F07365A27E82342455 /* MPPrivateBannerCustomEventDelegate.h */,
+				4D7775580D897ED12CC6FD3E147AB6C9 /* MPPrivateInterstitialCustomEventDelegate.h */,
+				9B0E51CEAED24B22000754BED07A1FD2 /* MPPrivateRewardedVideoCustomEventDelegate.h */,
+				0F40795BE33A4D85E7973194EC7AC2BE /* MPProgressOverlayView.h */,
+				6F1B6D5206037EC0B46029C82D9D30D6 /* MPQRunLoopOperation.h */,
+				10ED6C34A1D6AF1DBF9C4EAFA4299A3F /* MPReachability.h */,
+				D0671AFCC13AC3D0C8EB5F2AA26A0796 /* MPRetryingHTTPOperation.h */,
+				FBEC0980FB1118D0A7C7FA2F230D9B33 /* MPRewardedVideo.h */,
+				5EE78684F413991916FE1C8A511342D0 /* MPRewardedVideo+Internal.h */,
+				5FF475CC5530E9700E2CC64215D2F2A9 /* MPRewardedVideoAdapter.h */,
+				BF5525CD02F314540A0AB351CEE1F3EF /* MPRewardedVideoAdManager.h */,
+				7E4BBCC96BD45D63F25B355EA6D63AA2 /* MPRewardedVideoConnection.h */,
+				235E61A8CA72EACF00813459CFE414BA /* MPRewardedVideoCustomEvent.h */,
+				4127B431ED9A91D45757E96F0CEAAD89 /* MPRewardedVideoError.h */,
+				A12B65BC05AF95F707833F4002F9FAAC /* MPRewardedVideoReward.h */,
+				690216B90F8AAA8A86DA4D61576D8551 /* MPServerAdPositioning.h */,
+				6593348E8C455376C5214C80B1AD4B07 /* MPSessionTracker.h */,
+				2079C7BD8197DABBB26A1C6FBEBE284E /* MPStaticNativeAdImpressionTimer.h */,
+				14BDC0FF19F776EDA9FE21354AF3B586 /* MPStaticNativeAdRenderer.h */,
+				361683AE35781E03A0688041B3E4DA5D /* MPStaticNativeAdRendererSettings.h */,
+				E8B5946F844701653A954329E98EE2C9 /* MPStoreKitProvider.h */,
+				3BB3EE1328721CDB33EB341C3EDB7EE9 /* MPStreamAdPlacementData.h */,
+				82D8175386B275D129EC05B259415089 /* MPStreamAdPlacer.h */,
+				5F08F85F1347E7182E18AB265232F6D7 /* MPTableViewAdPlacer.h */,
+				79BCE9B33CE31A09DA687EE4E0E9FB4E /* MPTableViewAdPlacerCell.h */,
+				817976D0458B8000C9C22C5024781470 /* MPTableViewCellImpressionTracker.h */,
+				15519456242661061144C0C42F26C057 /* MPTimer.h */,
+				F199B5E9912D397FCDA042E60E45EE90 /* MPURLActionInfo.h */,
+				34F720BFE8DED0FCE09346839A020D04 /* MPURLResolver.h */,
+				FB50AA998316949344A285B7526EBF17 /* MPUserInteractionGestureRecognizer.h */,
+				909B38B885FDCD1CE8489FB48DD461C7 /* MPVASTAd.h */,
+				CCF2743157E21EB2A72981187F5A1C62 /* MPVASTCompanionAd.h */,
+				656D9AFF14C5CC3122AEE361ED801FF1 /* MPVASTCreative.h */,
+				84FEEACFDFA54A782D186889D3412205 /* MPVASTDurationOffset.h */,
+				CF739A5F2F8C8CD03BB2D73794226D22 /* MPVASTIndustryIcon.h */,
+				AD79C20424CED37E738BE300B44A3B8E /* MPVASTInline.h */,
+				691AB0A51B5276E2C5072D98946EACFD /* MPVASTLinearAd.h */,
+				3693D92817E263087AF21CFCB6BC1496 /* MPVASTMacroProcessor.h */,
+				FAF07C699976E6DBD8F508D368852ADB /* MPVASTManager.h */,
+				E3003380B9C4F27A15BC93332089DC9C /* MPVASTMediaFile.h */,
+				BBD2A149DFD157E36C4B5E988035B53D /* MPVASTModel.h */,
+				1A164B8BBF1EAA6F9CF2517947CB8EDE /* MPVASTResource.h */,
+				2E5B5203B3A4693541EB2D5CCE92483A /* MPVASTResponse.h */,
+				BA507F8B465A498DA1738E7747F4C347 /* MPVASTStringUtilities.h */,
+				0176D952EE53B87ADB38FD9BE4E8FE77 /* MPVASTTracking.h */,
+				F34C05273D99E8C1B9C7DD9D14644574 /* MPVASTTrackingEvent.h */,
+				1C90DE2A47F85451F1AF368C551024D5 /* MPVASTWrapper.h */,
+				D6CFF19235A2771D2C0D8EA84EC7A8AE /* MPVideoConfig.h */,
+				91691137D70D17CEE74222E8CBC5C0AD /* MPXMLParser.h */,
+				7C0D3B92AE907723ECD19AA935B22317 /* MRBridge.h */,
+				E0292747CE54CE879FFDB4C24181DFB9 /* MRBundleManager.h */,
+				939BA087850CED32FE54F2C618F1D49E /* MRCommand.h */,
+				4B83E8A6B1EDAEA04FDAC24C8490042F /* MRConstants.h */,
+				7471746A6E63958F9E2AB5CDD7E7A340 /* MRController.h */,
+				C91A764D8EDC4ECDB033ED8C78D1BD19 /* MRError.h */,
+				7FED6D5498541B30F52F63196EFA43F9 /* MRExpandModalViewController.h */,
+				2DBB5932694E68B0600747D6E369C3BF /* MRImageDownloader.h */,
+				5AEC7838D43D4F8165A9D97EFF624569 /* MRNativeCommandHandler.h */,
+				FBE8EA8FAE893BC2C2401BA08A03C253 /* MRProperty.h */,
+				0BEB459165CC11424B9453272A91B2E6 /* MRVideoPlayerManager.h */,
+				840FD6CC387B616CEC62322A8BA032D4 /* NSHTTPURLResponse+MPAdditions.h */,
+				7BAFB738501D1E2D6E42436881603020 /* NSJSONSerialization+MPAdditions.h */,
+				1FE92F7B057FCCE94A76C41AE6E690D3 /* NSURL+MPAdditions.h */,
+				595C7A813CD00A225070D495787C265F /* UIButton+MPAdditions.h */,
+				D8A20013F17FC19DB21DB5AB9287059B /* UIColor+MPAdditions.h */,
+				9920F4E40BA4721CD370D0C0079FE4FC /* UIView+MPAdditions.h */,
+				F9F286ABFEA50D665AAF86B398C910FF /* UIWebView+MPAdditions.h */,
+				7AFFC25C1FF71D19C9652C1425C9BA57 /* Frameworks */,
+				1EAF96E3DD53BF6905311E404E727246 /* Resources */,
 			);
-			name = Frameworks;
+			name = TwitterMoPubAdapter;
 			sourceTree = "<group>";
 		};
-		B1DC950C5B0306D0CF7319D4ED874FF5 /* Resources */ = {
+		B2A1DFF15802B7D80E148326028C1CFA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0137C6BBDE81F8F141D69764438415BA /* MPAdBrowserController.xib */,
-				DE08FBB30D731973D3E3AF2461EAD974 /* MPCloseBtn.png */,
-				3EA4FE6DF366B6C795BE0A6D43FF086B /* MPCloseBtn@2x.png */,
-				A38B609C53A16C0783FE1A4A93416F72 /* MPCloseBtn@3x.png */,
-				51E8C8C9EC429BE34B61756934D34F9E /* MPCloseButtonX.png */,
-				5DCBFBBD7B542C416815CC21126AEFBE /* MPCloseButtonX@2x.png */,
-				4052ABE72FD61E128136DEDD4AFBFEA6 /* MPCloseButtonX@3x.png */,
-				A1CF4F60FB69603678B4FFA2066F2A61 /* MPDAAIcon.png */,
-				7794A8FC602E3DCAAA9EB4D71F6F4DF9 /* MPDAAIcon@2x.png */,
-				847FC7C1171CBEEB0517F3A328E7E80D /* MPDAAIcon@3x.png */,
-				B84949054013B04370258A623C32499F /* MPMutedBtn.png */,
-				DFE0C23EC4452FA8021391A4659F40AB /* MPMutedBtn@2x.png */,
-				FE4806CD8FB6CA3BD21D37D2A1ECF574 /* MPMutedBtn@3x.png */,
-				827CFEC348B4D2389D82BD6D9B90A361 /* MPPlayBtn.png */,
-				3635247D78A92E5A0FDA038386D5CD85 /* MPPlayBtn@2x.png */,
-				872ECB35C8042FB500C96F3E0D28645A /* MPPlayBtn@3x.png */,
-				E8EDDD9788EF4129ACF6835A8AD791F1 /* MPUnmutedBtn.png */,
-				0D3941E792E4893350DA23D59287998F /* MPUnmutedBtn@2x.png */,
-				B7CC58A35F4ACBABE390992BDB709A20 /* MPUnmutedBtn@3x.png */,
-				8E959D3AEE01D4526C76B2446E8294B2 /* MRAID.bundle */,
+				313DC3A9AD6E59C54CC5BE7247398B30 /* UnityAds.bundle */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		B9BF769B18675D963563ABC978AFB367 /* UnityAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				73F86680DA78176EE103E8DFC6E41F62 /* Frameworks */,
+				B2A1DFF15802B7D80E148326028C1CFA /* Resources */,
+			);
+			name = UnityAdapter;
 			sourceTree = "<group>";
 		};
 		BB34268CF4C9F29620BD77ACB75A625B /* Fabric */ = {
@@ -766,23 +1159,6 @@
 			);
 			name = Fabric;
 			path = Fabric;
-			sourceTree = "<group>";
-		};
-		C00E7211B6AD02D010DC1E19FB87FA47 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				451B4ECA6E11D68A7850E9F558D170C6 /* Appodeal.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C11CFF00608F76565C32CB21201746C7 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				EC87A968517C5F09230FC7CBF9F440A7 /* libAPDUnityAdapter.a */,
-				AA168F8016578E7AC0052025CCF5A55E /* UnityAds.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C1DCAF5B067450A26D1D82B4AA5085AD /* Pods-Aquaz Widget */ = {
@@ -805,7 +1181,7 @@
 		CC3F8A874502468048F56BBC0D590691 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0A1008DF17C62064F1053BB31DF431F4 /* Appodeal */,
+				9728804F9FB969BA978309E232A1678B /* Appodeal */,
 				E7871C636A61000272E884534A47B17D /* Crashlytics */,
 				BB34268CF4C9F29620BD77ACB75A625B /* Fabric */,
 				8AF325A177BE630696D716C063CFA866 /* MMWormhole */,
@@ -814,13 +1190,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		D10448B73BF7B718274CE9209FB136D8 /* Frameworks */ = {
+		CD2AC2C6CC3618F6CDAC80F3475E6FE9 /* AdColonyAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				8CA65CE2ED12B37A713C4FB481AF1D0D /* libAPDVungleAdapter.a */,
-				3CDE4CDB63CDD4BB4B47118DDBF20EFB /* VungleSDK.framework */,
+				A7E20E0C31E0013C15060643D1485EE8 /* Frameworks */,
 			);
-			name = Frameworks;
+			name = AdColonyAdapter;
 			sourceTree = "<group>";
 		};
 		D5209EF0B82243D4D99F84FF0839E941 /* Products */ = {
@@ -836,21 +1211,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DE6A4A7CB265DEFC8DB4C8C5171C2EAC /* StartAppAdapter */ = {
+		E31E4775D1A5D04C32097B065EFCD511 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2200EDB4FA3E9F5D00B39B46565715AA /* Frameworks */,
-				1B9EB385FED2A9F2CFE7C34C5631E88E /* Resources */,
+				956983AC09E6CF484E99749811C71B31 /* TapjoyResources.bundle */,
 			);
-			name = StartAppAdapter;
-			sourceTree = "<group>";
-		};
-		DEEBDF99DFF493642175AC08B7B05FB7 /* AdColonyAdapter */ = {
-			isa = PBXGroup;
-			children = (
-				FDECC8289E71D678ADF32C678148C681 /* Frameworks */,
-			);
-			name = AdColonyAdapter;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		E7871C636A61000272E884534A47B17D /* Crashlytics */ = {
@@ -869,28 +1235,18 @@
 			path = Crashlytics;
 			sourceTree = "<group>";
 		};
-		F09CE95E9F3FC8585C9AAC29CCC1EC4A /* Frameworks */ = {
+		EE0BFFE4580BFFD9809F2CFEBE897AE7 /* InMobiAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				FBB12B64C506C696A60212C3CCEEEA49 /* libAPDMyTargetAdapter.a */,
-				25CA32C568013A9996F443E6F9E79C9B /* MyTargetSDK.framework */,
+				22B01489115EEAE7DFDDB5149B8E60FC /* Frameworks */,
 			);
-			name = Frameworks;
+			name = InMobiAdapter;
 			sourceTree = "<group>";
 		};
-		F4637D83881B8DF0A58697843C1A5190 /* Resources */ = {
+		FE2D986CD581B0A9196826727862239F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EA67F7233B4661E91F5F804D9E49B834 /* UnityAds.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		FDECC8289E71D678ADF32C678148C681 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				035684B489AB99607C39136826A40300 /* AdColony.framework */,
-				70B30BE7B8FDEAE36832E973D50BA442 /* libAPDAdColonyAdapter.a */,
+				60173AE98425CF261D909850CCC0776A /* Appodeal.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1315,7 +1671,7 @@
 			};
 			name = Debug;
 		};
-		1AA89130ED272B08482E02CC261B989E /* Debug */ = {
+		324458298C077E554527C63400B71D31 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6ACCFA15CEE6B3D26E3355920B33AFBA /* MMWormhole.xcconfig */;
 			buildSettings = {
@@ -1324,7 +1680,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1337,16 +1693,16 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) /Applications/Xcode.app/Contents/Developer/Toolchains/Swift_2.3.xctoolchain/usr/lib/swift/iphonesimulator";
 				MODULEMAP_FILE = "Target Support Files/MMWormhole/MMWormhole.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = MMWormhole;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		44CDBB6D11DE06DB64D6268622BDC47E /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1388,7 +1744,7 @@
 			};
 			name = Release;
 		};
-		569227D0BA181D473BB408FD9686D798 /* Debug */ = {
+		5B62FFE15855A535B14C10EDDA0EEAB8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 85E60037428357BBD68F30DFAB7DFAE5 /* SimulatorStatusMagic.xcconfig */;
 			buildSettings = {
@@ -1413,12 +1769,44 @@
 				PRODUCT_NAME = SimulatorStatusMagic;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		6BBB4BE4ADDA07E9A49C1E63C4FFBA78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85E60037428357BBD68F30DFAB7DFAE5 /* SimulatorStatusMagic.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SimulatorStatusMagic/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) /Applications/Xcode.app/Contents/Developer/Toolchains/Swift_2.3.xctoolchain/usr/lib/swift/iphonesimulator";
+				MODULEMAP_FILE = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SimulatorStatusMagic;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		8024F04D35122E7392EF6A84E7362267 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1456,7 +1844,7 @@
 			};
 			name = Debug;
 		};
-		A3B9CB13EF28BD3464CF5D27F21B48AD /* Release */ = {
+		B5113775CADD48EB3BC6CA70D2171828 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6ACCFA15CEE6B3D26E3355920B33AFBA /* MMWormhole.xcconfig */;
 			buildSettings = {
@@ -1465,7 +1853,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1478,16 +1866,16 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) /Applications/Xcode.app/Contents/Developer/Toolchains/Swift_2.3.xctoolchain/usr/lib/swift/iphonesimulator";
 				MODULEMAP_FILE = "Target Support Files/MMWormhole/MMWormhole.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = MMWormhole;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		C1F39E930C24294A5E597329825040F0 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1666,38 +2054,6 @@
 			};
 			name = Release;
 		};
-		FD0E853D3BE637A6D7760A0CAFECAA77 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 85E60037428357BBD68F30DFAB7DFAE5 /* SimulatorStatusMagic.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SimulatorStatusMagic/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) /Applications/Xcode.app/Contents/Developer/Toolchains/Swift_2.3.xctoolchain/usr/lib/swift/iphonesimulator";
-				MODULEMAP_FILE = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SimulatorStatusMagic;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0.1;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1740,8 +2096,8 @@
 		579B463267A43A144FA6F91A0084515A /* Build configuration list for PBXNativeTarget "SimulatorStatusMagic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				569227D0BA181D473BB408FD9686D798 /* Debug */,
-				FD0E853D3BE637A6D7760A0CAFECAA77 /* Release */,
+				5B62FFE15855A535B14C10EDDA0EEAB8 /* Debug */,
+				6BBB4BE4ADDA07E9A49C1E63C4FFBA78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1758,8 +2114,8 @@
 		F1F8E2C3A06916EC368E358A033534A0 /* Build configuration list for PBXNativeTarget "MMWormhole" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1AA89130ED272B08482E02CC261B989E /* Debug */,
-				A3B9CB13EF28BD3464CF5D27F21B48AD /* Release */,
+				B5113775CADD48EB3BC6CA70D2171828 /* Debug */,
+				324458298C077E554527C63400B71D31 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
