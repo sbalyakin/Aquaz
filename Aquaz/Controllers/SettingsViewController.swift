@@ -223,7 +223,7 @@ class SettingsViewController: OmegaSettingsViewController {
   
   fileprivate func stringFromWaterGoal(_ waterGoal: Double) -> String {
     let volumeUnit = Settings.sharedInstance.generalVolumeUnits.value
-    let text = Units.sharedInstance.formatMetricAmountToText(metricAmount: waterGoal, unitType: .volume, roundPrecision: volumeUnit.precision, decimals: volumeUnit.decimals, displayUnits: true)
+    let text = Units.sharedInstance.formatMetricAmountToText(metricAmount: waterGoal, unitType: .volume, roundPrecision: volumeUnit.precision, fractionDigits: volumeUnit.decimals, displayUnits: true)
     return text
   }
   

@@ -437,6 +437,8 @@
 		A5EE36261AAD9DAA0038C844 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EE36251AAD9DAA0038C844 /* Logger.swift */; };
 		A5EF375D1A81618F00854A8D /* WaterGoalCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF375C1A81618F00854A8D /* WaterGoalCalculator.swift */; };
 		A5F582F21BF217BC0049AD3A /* UIControlsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F582F11BF217BC0049AD3A /* UIControlsExtensions.swift */; };
+		A5FD96781E36A5F20036B30D /* PredefinedAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FD96771E36A5F20036B30D /* PredefinedAmountViewController.swift */; };
+		A5FD96791E36A5F20036B30D /* PredefinedAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FD96771E36A5F20036B30D /* PredefinedAmountViewController.swift */; };
 		B722A889811802AE6C9CC6A1 /* Pods_Aquaz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47E8A4061BC876BE8F73EE8F /* Pods_Aquaz.framework */; };
 		BB748F45B992D8871CDE452C /* Pods_AquazPro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398200AD38E923CC4155B19B /* Pods_AquazPro.framework */; };
 /* End PBXBuildFile section */
@@ -828,6 +830,7 @@
 		A5F582F11BF217BC0049AD3A /* UIControlsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIControlsExtensions.swift; sourceTree = "<group>"; };
 		A5F62E9A1B558D6F002F91BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A5F62E9B1B558D80002F91BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A5FD96771E36A5F20036B30D /* PredefinedAmountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredefinedAmountViewController.swift; sourceTree = "<group>"; };
 		B09AEEBCB8E2BA5DD363DE1F /* Pods-AquazPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro.debug.xcconfig"; sourceTree = "<group>"; };
 		E195771F27452BBCA81B0EE5 /* Pods-Aquaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz.debug.xcconfig"; sourceTree = "<group>"; };
 		E29171CF1C152F5814D28249 /* Pods-AquazPro Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro Widget/Pods-AquazPro Widget.release.xcconfig"; sourceTree = "<group>"; };
@@ -993,6 +996,7 @@
 				8478253619EAC8C200588FE3 /* IntakeViewController.swift */,
 				84F9DD971A16574E003D6444 /* PickTimeViewController.swift */,
 				A5275F861A1216090088AF47 /* CalendarViewController.swift */,
+				A5FD96771E36A5F20036B30D /* PredefinedAmountViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2391,6 +2395,7 @@
 				847D0E281A824D6700966538 /* UnitItems.swift in Sources */,
 				84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */,
 				A57F5E6B1AC968A6005C4F46 /* GlobalConstants.swift in Sources */,
+				A5FD96781E36A5F20036B30D /* PredefinedAmountViewController.swift in Sources */,
 				A5C8946A1AF4B75C0042B6DF /* UILabel+JDFTooltips.m in Sources */,
 				A5B017B81BEFBD6200E3F8AB /* UIExtensions.swift in Sources */,
 				84D251B41AD26489001E6644 /* CoreDataStack.swift in Sources */,
@@ -2566,6 +2571,7 @@
 				A58DE6F41DD90F3900F65990 /* YearStatisticsViewController.swift in Sources */,
 				A58DE6F61DD90F3900F65990 /* PickerTableCell.swift in Sources */,
 				A58DE6F71DD90F3900F65990 /* IntakeViewController.swift in Sources */,
+				A5FD96791E36A5F20036B30D /* PredefinedAmountViewController.swift in Sources */,
 				A58DE6F81DD90F3900F65990 /* JDFSequentialTooltipManager.m in Sources */,
 				A58DE6F91DD90F3900F65990 /* NamedEntity.swift in Sources */,
 				A58DE6FA1DD90F3900F65990 /* WeekStatisticsView.swift in Sources */,

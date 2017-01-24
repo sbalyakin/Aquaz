@@ -364,7 +364,7 @@ extension WeekStatisticsViewController: WeekStatisticsViewDataSource {
   
   func weekStatisticsViewGetTitleForValue(_ value: CGFloat) -> String {
     let quantity = Quantity(unit: Settings.sharedInstance.generalVolumeUnits.value.unit, amount: Double(value))
-    let title = quantity.getDescription(Settings.sharedInstance.generalVolumeUnits.value.decimals, displayUnits: true)
+    let title = quantity.getDescription(fractionDigits: Settings.sharedInstance.generalVolumeUnits.value.decimals, displayUnits: true)
 
     return title
   }

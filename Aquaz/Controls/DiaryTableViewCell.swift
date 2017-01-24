@@ -54,8 +54,8 @@ class DiaryTableViewCell: UITableViewCell {
     
     DispatchQueue.main.async {
       let drinkTitle = intakeInfo.drinkName
-      let amountTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intakeInfo.amount, unitType: .volume, roundPrecision: self.amountPrecision, decimals: self.amountDecimals, displayUnits: true)
-      let waterBalanceTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intakeInfo.waterBalance, unitType: .volume, roundPrecision: self.amountPrecision, decimals: self.amountDecimals, displayUnits: true)
+      let amountTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intakeInfo.amount, unitType: .volume, roundPrecision: self.amountPrecision, fractionDigits: self.amountDecimals, displayUnits: true)
+      let waterBalanceTitle = Units.sharedInstance.formatMetricAmountToText(metricAmount: intakeInfo.waterBalance, unitType: .volume, roundPrecision: self.amountPrecision, fractionDigits: self.amountDecimals, displayUnits: true)
       
       let formatter = DateFormatter()
       formatter.dateStyle = .none

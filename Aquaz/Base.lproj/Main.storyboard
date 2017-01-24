@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11761" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TfJ-uT-fXU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TfJ-uT-fXU">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -249,6 +249,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoF-aO-Mum" customClass="RoundedButton" customModule="Aquaz" customModuleProvider="target">
                                 <rect key="frame" x="37.5" y="338" width="75" height="75"/>
                                 <color key="backgroundColor" red="0.48085978159452591" green="0.71272731469806072" blue="0.91973080842391308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hoF-aO-Mum" secondAttribute="height" multiplier="1:1" id="PzV-V5-X8d"/>
                                 </constraints>
@@ -262,6 +263,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="applySmallIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="ebN-Sa-j0P"/>
+                                    <outletCollection property="gestureRecognizers" destination="0vg-ou-cl2" appends="YES" id="S7M-20-rG2"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0h0-m7-z4v" userLabel="Gap 2">
@@ -271,6 +273,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXw-gW-sSA" customClass="RoundedButton" customModule="Aquaz" customModuleProvider="target">
                                 <rect key="frame" x="150" y="338" width="75" height="75"/>
                                 <color key="backgroundColor" red="0.48085978159452591" green="0.71272731469806072" blue="0.91973080842391308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vXw-gW-sSA" secondAttribute="height" multiplier="1:1" id="tNu-aH-OJP"/>
                                 </constraints>
@@ -284,6 +287,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="applyMediumIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="E76-LZ-JlQ"/>
+                                    <outletCollection property="gestureRecognizers" destination="Ba3-az-4VC" appends="YES" id="qGf-ky-UVi"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k8o-7o-NcI" userLabel="Gap 3">
@@ -293,6 +297,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xm-eq-yWQ" customClass="RoundedButton" customModule="Aquaz" customModuleProvider="target">
                                 <rect key="frame" x="262.5" y="338" width="75" height="75"/>
                                 <color key="backgroundColor" red="0.48085978159452591" green="0.71272731469806072" blue="0.91973080842391308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="7xm-eq-yWQ" secondAttribute="height" multiplier="1:1" id="Brh-NI-aXw"/>
                                 </constraints>
@@ -306,6 +311,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="applyLargeIntake:" destination="JfU-Cw-4n3" eventType="touchUpInside" id="pJv-e2-GoY"/>
+                                    <outletCollection property="gestureRecognizers" destination="6sv-uT-RgF" appends="YES" id="8hF-Xj-YAa"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61a-by-wpw" userLabel="Gap 4">
@@ -467,9 +473,27 @@
                         <outlet property="navigationTitleLabel" destination="g9K-Ug-min" id="9xs-zi-bz6"/>
                         <outlet property="pickTimeButton" destination="3j1-xd-PoU" id="7re-fd-JHZ"/>
                         <outlet property="smallAmountButton" destination="hoF-aO-Mum" id="24Z-Dt-iaO"/>
+                        <segue destination="rym-uZ-Nyw" kind="popoverPresentation" identifier="ChangePredefinedAmount" popoverAnchorView="vXw-gW-sSA" id="aXz-Rj-ewj">
+                            <popoverArrowDirection key="popoverArrowDirection" down="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huJ-Ju-VE1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="0vg-ou-cl2">
+                    <connections>
+                        <action selector="changePredefinedAmount:" destination="JfU-Cw-4n3" id="SkL-Kq-XQN"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Ba3-az-4VC">
+                    <connections>
+                        <action selector="changePredefinedAmount:" destination="JfU-Cw-4n3" id="rKG-I1-aw1"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="6sv-uT-RgF">
+                    <connections>
+                        <action selector="changePredefinedAmount:" destination="JfU-Cw-4n3" id="TdD-zm-Pqx"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="5100" y="-1196"/>
         </scene>
@@ -1909,6 +1933,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAf-sO-uy2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5876" y="-1196"/>
+        </scene>
+        <!--Predefined Amount View Controller-->
+        <scene sceneID="lqy-FP-3LT">
+            <objects>
+                <viewController modalPresentationStyle="currentContext" id="bjg-Ri-bO5" customClass="PredefinedAmountViewController" customModule="Aquaz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HHk-rY-ebj"/>
+                        <viewControllerLayoutGuide type="bottom" id="mFA-pq-3eY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dXe-vY-VIJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RoE-Wi-s6b">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="bjg-Ri-bO5" id="hd3-K4-BaK"/>
+                                    <outlet property="delegate" destination="bjg-Ri-bO5" id="s0w-11-LIk"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="RoE-Wi-s6b" firstAttribute="bottom" secondItem="mFA-pq-3eY" secondAttribute="top" id="DRR-Ju-0zk"/>
+                            <constraint firstItem="RoE-Wi-s6b" firstAttribute="leading" secondItem="dXe-vY-VIJ" secondAttribute="leading" id="as3-1l-WuM"/>
+                            <constraint firstItem="RoE-Wi-s6b" firstAttribute="top" secondItem="dXe-vY-VIJ" secondAttribute="top" id="otf-C3-FhB"/>
+                            <constraint firstAttribute="trailing" secondItem="RoE-Wi-s6b" secondAttribute="trailing" id="yO8-ir-0LE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="7ow-eV-t9b"/>
+                    <connections>
+                        <outlet property="pickerView" destination="RoE-Wi-s6b" id="wPJ-I4-AZ8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V1Y-nS-oBC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6039.1999999999998" y="-419.64017991004499"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TZw-su-Ycl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="rym-uZ-Nyw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UXk-uX-MKP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bjg-Ri-bO5" kind="relationship" relationship="rootViewController" id="hXT-cC-Kme"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fWU-Bi-TAd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5100" y="-419.64017991004499"/>
         </scene>
     </scenes>
     <resources>

@@ -72,8 +72,9 @@ class IntakeViewController: UIViewController {
 
   fileprivate var timeIsChoosen = false
   
-  fileprivate struct Constants {
-    static let pickTimeSegue = "PickTime"
+  fileprivate struct Seques {
+    static let pickTime = "PickTime"
+    static let changePredefinedAmount = "ChangePredefinedAmount"
   }
   
   func changeTimeForCurrentDate(_ time: Date) {
@@ -99,6 +100,11 @@ class IntakeViewController: UIViewController {
       selector: #selector(self.preferredContentSizeChanged),
       name: NSNotification.Name.UIContentSizeCategoryDidChange,
       object: nil)
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    checkHelpTip()
   }
 
   #if AQUAZLITE
@@ -160,10 +166,9 @@ class IntakeViewController: UIViewController {
   }
 
   fileprivate func setupPredefinedAmountButtons() {
-    // Predefined amount is always non-fractional values, so we will format amount skipping fraction part
-    smallAmountButton.setTitle(formatAmount(predefinedAmounts.small, precision: 1.0, decimals: 0), for: UIControlState())
-    mediumAmountButton.setTitle(formatAmount(predefinedAmounts.medium, precision: 1.0, decimals: 0), for: UIControlState())
-    largeAmountButton.setTitle(formatAmount(predefinedAmounts.large, precision: 1.0, decimals: 0), for: UIControlState())
+    smallAmountButton.setTitle(formatAmount(predefinedAmountSmall, minimumFractionDigits: 0), for: .normal)
+    mediumAmountButton.setTitle(formatAmount(predefinedAmountMedium, minimumFractionDigits: 0), for: .normal)
+    largeAmountButton.setTitle(formatAmount(predefinedAmountLarge, minimumFractionDigits: 0), for: .normal)
   }
   
   fileprivate func setupAmountRelatedControlsWithInitialAmount() {
@@ -215,6 +220,8 @@ class IntakeViewController: UIViewController {
   }
   
   fileprivate func setupSlider() {
+    amountSlider.minimumValue = Float(Settings.sharedInstance.generalVolumeUnits.value.minimumAmount)
+    amountSlider.maximumValue = Float(Settings.sharedInstance.generalVolumeUnits.value.maximumAmount)
     amountSlider.tintColor = drinkType.mainColor
     amountSlider.maximumTrackTintColor = UIColor(white: 0.8, alpha: 1)
   }
@@ -242,23 +249,66 @@ class IntakeViewController: UIViewController {
   }
   
   @IBAction func applySmallIntake(_ sender: Any) {
-    applyIntake(predefinedAmounts.small)
+    applyIntake(predefinedAmountSmall)
   }
   
   @IBAction func applyMediumIntake(_ sender: Any) {
-    applyIntake(predefinedAmounts.medium)
+    applyIntake(predefinedAmountMedium)
   }
   
   @IBAction func applyLargeIntake(_ sender: Any) {
-    applyIntake(predefinedAmounts.large)
+    applyIntake(predefinedAmountLarge)
+  }
+  
+  @IBAction func changePredefinedAmount(_ gestureRecognizer: UILongPressGestureRecognizer) {
+    if gestureRecognizer.state == .began {
+      performSegue(withIdentifier: "ChangePredefinedAmount", sender: gestureRecognizer.view)
+    }
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == Constants.pickTimeSegue {
+    switch segue.identifier! {
+    case Seques.pickTime:
       if let pickTimeViewController = segue.destination.contentViewController as? PickTimeViewController {
         pickTimeViewController.intakeViewController = self
         pickTimeViewController.time = date
       }
+      
+    case Seques.changePredefinedAmount:
+      if let navigationController = segue.destination as? UINavigationController,
+         let viewController = navigationController.topViewController as? PredefinedAmountViewController,
+         let popoverController = navigationController.popoverPresentationController
+      {
+        let senderView = sender as! UIView
+        let predefinedAmountType = getPredefinedAmountType(buttonView: senderView)
+        
+        viewController.didSelectRowFunction = { amount in
+          let button = sender as! RoundedButton
+          let title = self.formatAmount(amount, minimumFractionDigits: 0)
+          button.setTitle(title, for: .normal)
+          Settings.sharedInstance.generalPredefinedAmounts[(predefinedAmountType, self.drinkType)] = amount
+        }
+        
+        viewController.preferredContentSize = CGSize(width: 200, height: 216) // 216 is default height for UIPickerView
+        viewController.amount = Settings.sharedInstance.generalPredefinedAmounts[(predefinedAmountType, drinkType)]
+        popoverController.sourceView = senderView
+        popoverController.sourceRect = senderView.bounds
+        popoverController.delegate = self
+      }
+      
+    default:
+      break
+    }
+  }
+  
+  private func getPredefinedAmountType(buttonView: UIView!) -> Settings.PredefinedAmountType {
+    switch buttonView {
+    case smallAmountButton: return .small
+    case mediumAmountButton: return .medium
+    case largeAmountButton: return .large
+    default:
+      assertionFailure("Unexpected button for predefined amount type recognition")
+      return .small
     }
   }
   
@@ -309,10 +359,17 @@ class IntakeViewController: UIViewController {
     navigationController?.dismiss(animated: true, completion: nil)
   }
 
-  fileprivate func formatAmount(_ amount: Double, precision: Double? = nil, decimals: Int? = nil) -> String {
-    let finalPrecision = precision ?? amountPrecision
-    let finalDecimals = decimals ?? amountDecimals
-    return Units.sharedInstance.formatMetricAmountToText(metricAmount: amount, unitType: .volume, roundPrecision: finalPrecision, decimals: finalDecimals)
+  fileprivate func formatAmount(_ amount: Double) -> String {
+    return formatAmount(amount, minimumFractionDigits: amountDecimals)
+  }
+  
+  fileprivate func formatAmount(_ amount: Double, minimumFractionDigits: Int) -> String {
+    return Units.sharedInstance.formatMetricAmountToText(metricAmount: amount,
+                                                         unitType: .volume,
+                                                         roundPrecision: amountPrecision,
+                                                         minimumFractionDigits: minimumFractionDigits,
+                                                         maximumFractionDigits: amountDecimals,
+                                                         displayUnits: true)
   }
   
   fileprivate func setAmountLabel(_ amount: Double) {
@@ -326,13 +383,48 @@ class IntakeViewController: UIViewController {
   fileprivate var viewMode: Mode {
     return intake == nil ? .add : .edit
   }
+
+  fileprivate func checkHelpTip() {
+    if Settings.sharedInstance.uiIntakeHelpTipIsShown.value || view.window == nil {
+      return
+    }
+    
+    showHelpTipForView(mediumAmountButton)
+  }
   
-  fileprivate var predefinedAmounts: (small: Double, medium: Double, large: Double) { return Settings.sharedInstance.generalVolumeUnits.value.predefinedAmounts }
-  fileprivate var amountPrecision: Double { return Settings.sharedInstance.generalVolumeUnits.value.precision }
-  fileprivate var amountDecimals: Int { return Settings.sharedInstance.generalVolumeUnits.value.decimals }
+  fileprivate func showHelpTipForView(_ view: UIView) {
+    SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
+      if self.view.window == nil {
+        return
+      }
+      
+      let text = NSLocalizedString("IVC:Use long press to adjust an amount",
+                                   value: "Use long press to adjust an amount",
+                                   comment: "IntakeViewController: Text for help tip about long press for predefined amounts buttons")
+      
+      if let helpTip = JDFTooltipView(targetView: view, hostView: self.view, tooltipText: text, arrowDirection: .down, width: self.view.frame.width / 2) {
+        UIHelper.showHelpTip(helpTip)
+        Settings.sharedInstance.uiIntakeHelpTipIsShown.value = true
+      }
+    }
+  }
+
+  fileprivate var predefinedAmountSmall: Double { return Settings.sharedInstance.generalPredefinedAmounts[(.small, drinkType)] }
+  fileprivate var predefinedAmountMedium: Double { return Settings.sharedInstance.generalPredefinedAmounts[(.medium, drinkType)] }
+  fileprivate var predefinedAmountLarge: Double { return Settings.sharedInstance.generalPredefinedAmounts[(.large, drinkType)] }
+
+  fileprivate let amountPrecision = Settings.sharedInstance.generalVolumeUnits.value.precision
+  fileprivate let amountDecimals = Settings.sharedInstance.generalVolumeUnits.value.decimals
   
   fileprivate var isCurrentDayToday: Bool = false
 
+}
+
+extension IntakeViewController: UIPopoverPresentationControllerDelegate {
+  
+  func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+    return .none
+  }
 }
 
 // MARK: Units.Volume extension -
@@ -351,10 +443,17 @@ private extension Units.Volume {
     }
   }
   
-  var predefinedAmounts: (small: Double, medium: Double, large: Double) {
+  var minimumAmount: Double {
     switch self {
-    case .millilitres: return (small: 200.0, medium: 330.0, large: 500.0)
-    case .fluidOunces: return (small: 236.5882365, medium: 354.8821875 , large: 502.7500025625) // 8, 12 and 17 fl oz
+    case .millilitres: return 50
+    case .fluidOunces: return Quantity.convert(amount: 1, unitFrom: FluidOunceUnit(), unitTo: MilliliterUnit())
+    }
+  }
+
+  var maximumAmount: Double {
+    switch self {
+    case .millilitres: return 1000
+    case .fluidOunces: return Quantity.convert(amount: 34, unitFrom: FluidOunceUnit(), unitTo: MilliliterUnit())
     }
   }
 }

@@ -318,7 +318,9 @@ class TodayViewController: UIViewController {
       metricAmount: value,
       unitType: .volume,
       roundPrecision: Settings.sharedInstance.generalVolumeUnits.value.precision,
-      decimals: Settings.sharedInstance.generalVolumeUnits.value.decimals)
+      minimumFractionDigits: 0,
+      maximumFractionDigits: Settings.sharedInstance.generalVolumeUnits.value.decimals,
+      displayUnits: displayUnits)
   }
   
   @IBAction func drink1WasTapped(_ sender: UITapGestureRecognizer) {

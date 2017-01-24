@@ -84,6 +84,61 @@ final class Settings {
     case no
   }
 
+  enum PredefinedAmountType: Int, CustomStringConvertible {
+    case small = 0
+    case medium
+    case large
+    
+    var description: String {
+      switch self {
+      case .small: return "Small"
+      case .medium: return "Medium"
+      case .large: return "Large"
+      }
+    }
+    
+    var defaultAmount: Double {
+      switch Settings.sharedInstance.generalVolumeUnits.value {
+      case .millilitres:
+        switch self {
+        case .small: return 200
+        case .medium: return 330
+        case .large: return 500
+        }
+      case .fluidOunces:
+        switch self {
+        case .small: return Quantity.convert(amount: 8, unitFrom: FluidOunceUnit(), unitTo: MilliliterUnit())
+        case .medium: return Quantity.convert(amount: 12, unitFrom: FluidOunceUnit(), unitTo: MilliliterUnit())
+        case .large: return Quantity.convert(amount: 17, unitFrom: FluidOunceUnit(), unitTo: MilliliterUnit())
+        }
+      }
+    }
+  }
+  
+  final class PredefinedAmounts {
+    
+    private func getSettingsKey(predefinedAmountType: PredefinedAmountType, drinkType: DrinkType) -> String {
+      return "General - Predefined \(predefinedAmountType.description) amount for drink \(drinkType.rawValue)"
+    }
+    
+    subscript (index: (predefinedAmountType: PredefinedAmountType, drinkType: DrinkType)) -> Double {
+      get {
+        let key = getSettingsKey(predefinedAmountType: index.predefinedAmountType, drinkType: index.drinkType)
+        
+        if let amount = Settings.userDefaults.value(forKey: key) as? Double {
+          return amount
+        }
+        
+        return index.predefinedAmountType.defaultAmount
+      }
+      set(newAmount) {
+        let key = getSettingsKey(predefinedAmountType: index.predefinedAmountType, drinkType: index.drinkType)
+        Settings.userDefaults.set(newAmount, forKey: key)
+        Settings.userDefaults.synchronize()
+      }
+    }
+  }
+  
   // MARK: General
   
   lazy var generalHasLaunchedOnce: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
@@ -110,6 +165,8 @@ final class Settings {
     key: "General - High activity extra factor", initialValue: 0.5,
     userDefaults: userDefaults)
 
+  lazy var generalPredefinedAmounts = PredefinedAmounts()
+  
   #if AQUAZLITE
   lazy var generalFullVersion: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "General - Full version", initialValue: false,
@@ -195,6 +252,11 @@ final class Settings {
   lazy var uiIntakesCountTillShowWritingReviewAlert: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
     key: "UI - Intakes count till show writing review alert", initialValue: GlobalConstants.numberOfIntakesToShowReviewAlert,
     userDefaults: userDefaults)
+
+  lazy var uiIntakeHelpTipIsShown = SettingsOrdinalItem<Bool>(
+    key: "UI - Intake page help tip is shown", initialValue: false,
+    userDefaults: userDefaults)
+  
 
   lazy var uiDiaryPageHelpTipIsShown: SettingsOrdinalItem<Bool> = SettingsOrdinalItem(
     key: "UI - Diary page help tip is shown", initialValue: false,

@@ -130,7 +130,7 @@ class CurrentStateInterfaceController: WKInterfaceController {
       metricAmount: amount,
       unitType: .volume,
       roundPrecision: amountPrecision,
-      decimals: amountDecimals,
+      fractionDigits: amountDecimals,
       displayUnits: false)
   }
   

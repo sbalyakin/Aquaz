@@ -666,7 +666,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
         metricAmount: totalHydrationAmount,
         unitType: .volume,
         roundPrecision: amountPrecision,
-        decimals: amountDecimals,
+        fractionDigits: amountDecimals,
         displayUnits: false)
     }
     
@@ -674,7 +674,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
       metricAmount: waterGoalAmount,
       unitType: .volume,
       roundPrecision: amountPrecision,
-      decimals: amountDecimals)
+      fractionDigits: amountDecimals,
+      displayUnits: true)
     
     let text = String.localizedStringWithFormat(localizedStrings.intakeButtonTextTemplate, intakeText, waterGoalText)
     

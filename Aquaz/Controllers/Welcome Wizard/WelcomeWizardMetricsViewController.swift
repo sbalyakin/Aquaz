@@ -251,12 +251,12 @@ final class WelcomeWizardMetricsViewController: OmegaSettingsViewController {
   
   fileprivate class func stringFromHeight(_ value: Double) -> String {
     let unit = Settings.sharedInstance.generalHeightUnits.value
-    return Units.sharedInstance.formatMetricAmountToText(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision, decimals: unit.decimals, displayUnits: true)
+    return Units.sharedInstance.formatMetricAmountToText(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision, fractionDigits: unit.decimals, displayUnits: true)
   }
   
   fileprivate class func stringFromWeight(_ value: Double) -> String {
     let unit = Settings.sharedInstance.generalWeightUnits.value
-    return Units.sharedInstance.formatMetricAmountToText(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision, decimals: unit.decimals, displayUnits: true)
+    return Units.sharedInstance.formatMetricAmountToText(metricAmount: value, unitType: unit.unit.type, roundPrecision: unit.precision, fractionDigits: unit.decimals, displayUnits: true)
   }
   
   fileprivate class func stringFromAge(_ value: Int) -> String {

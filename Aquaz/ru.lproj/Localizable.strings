@@ -170,6 +170,9 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* IntakeViewController: Subtitle of view if user adds intake for today */
 "IVC:Now" = "Сейчас";
 
+/* IntakeViewController: Text for help tip about long press for predefined amounts buttons */
+"IVC:Use long press to adjust an amount" = "Длительное нажатие позволит изменить объем";
+
 /* MonthStatisticsViewController: Text for help tip about tapping an active day for details */
 "MSVC:Tap an active day to see details" = "Нажмите на активную кнопку дня, чтобы посмотреть подробности";
 

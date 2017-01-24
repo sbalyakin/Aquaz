@@ -97,7 +97,11 @@ class Units {
   /// Returns specified amount as formatted string taking into account current units settings.
   /// Amount should be specified in metric units.
   /// It's possible to specify final precision and numbers of decimals of formatted text.
-  func formatMetricAmountToText(metricAmount: Double, unitType: UnitType, roundPrecision: Double = 1, decimals: Int = 0, displayUnits: Bool = true) -> String {
+  func formatMetricAmountToText(metricAmount: Double, unitType: UnitType, roundPrecision: Double, fractionDigits: Int, displayUnits: Bool) -> String {
+    return formatMetricAmountToText(metricAmount: metricAmount, unitType: unitType, roundPrecision: roundPrecision, minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits, displayUnits: displayUnits)
+  }
+
+  func formatMetricAmountToText(metricAmount: Double, unitType: UnitType, roundPrecision: Double, minimumFractionDigits: Int, maximumFractionDigits: Int, displayUnits: Bool) -> String {
     if roundPrecision <= 0 {
       assert(false, "Round precision should be positive number")
       return ""
@@ -106,7 +110,7 @@ class Units {
     let displayedAmount = convertMetricAmountToDisplayed(metricAmount: metricAmount, unitType: unitType, roundPrecision: roundPrecision)
     let units = getUnits(unitType)
     let quantity = Quantity(unit: units.displayedUnit, amount: displayedAmount)
-    return quantity.getDescription(decimals, displayUnits: displayUnits)
+    return quantity.getDescription(minimumFractionDigits: minimumFractionDigits, maximumFractionDigits: maximumFractionDigits, displayUnits: displayUnits)
   }
   
   fileprivate func getUnits(_ unitType: UnitType) -> (metricUnit: Unit, displayedUnit: Unit) {

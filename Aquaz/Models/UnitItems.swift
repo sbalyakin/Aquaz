@@ -53,16 +53,20 @@ class Quantity: CustomStringConvertible {
   }
   
   var description: String {
-    return getDescription(0)
+    return getDescription(fractionDigits: 0)
   }
-  
-  func getDescription(_ decimals: Int, displayUnits: Bool = true) -> String {
+
+  func getDescription(fractionDigits: Int, displayUnits: Bool = true) -> String {
+    return getDescription(minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits, displayUnits: displayUnits)
+  }
+
+  func getDescription(minimumFractionDigits: Int, maximumFractionDigits: Int, displayUnits: Bool = true) -> String {
     struct Static {
       static let numberFormatter = NumberFormatter()
     }
     
-    Static.numberFormatter.minimumFractionDigits = decimals
-    Static.numberFormatter.maximumFractionDigits = decimals
+    Static.numberFormatter.minimumFractionDigits = minimumFractionDigits
+    Static.numberFormatter.maximumFractionDigits = maximumFractionDigits
     Static.numberFormatter.minimumIntegerDigits = 1
     Static.numberFormatter.numberStyle = .decimal
     
@@ -75,12 +79,22 @@ class Quantity: CustomStringConvertible {
     return description
   }
   
+  static func convert(amount: Double, unitFrom: Unit, unitTo: Unit) -> Double {
+    if unitFrom.type != unitTo.type {
+      assert(false, "Incompatible unit is specified")
+      return Double.nan
+    }
+    
+    return amount * unitFrom.factor / unitTo.factor
+  }
+  
   func convertFrom(amount: Double, unit: Unit) {
     if unit.type != self.unit.type {
       assert(false, "Incompatible unit is specified")
       return
     }
-    self.amount = amount * unit.factor / self.unit.factor
+    
+    self.amount = Quantity.convert(amount: amount, unitFrom: unit, unitTo: self.unit)
   }
   
   func convertFrom(quantity: Quantity) {
