@@ -96,6 +96,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0108A7BB8EF3DEFF261F0B0E3B6FCBDB /* InMobiSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InMobiSDK.framework; path = APDInMobiAdapter.embeddedframework/InMobiSDK.framework; sourceTree = "<group>"; };
 		0176D952EE53B87ADB38FD9BE4E8FE77 /* MPVASTTracking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPVASTTracking.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPVASTTracking.h; sourceTree = "<group>"; };
 		02FD6FF0BC89702A7084A8388E518849 /* SimulatorStatusMagic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SimulatorStatusMagic.framework; path = SimulatorStatusMagic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0303FDEB421C8A2E68484304856D0416 /* MPPlayBtn@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "MPPlayBtn@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPPlayBtn@3x.png"; sourceTree = "<group>"; };
@@ -212,7 +213,6 @@
 		4EA229310EF5F5F491121DB6C1252561 /* MPNativeAdRendererConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdRendererConstants.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdRendererConstants.h; sourceTree = "<group>"; };
 		50E3D3FA762A2626A4DF251315817404 /* MPActivityViewControllerHelper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPActivityViewControllerHelper.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPActivityViewControllerHelper.h; sourceTree = "<group>"; };
 		51CC76C724DE3A62225C4801FBA02549 /* ALPostbackService.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALPostbackService.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALPostbackService.h; sourceTree = "<group>"; };
-		53723D0E8577C6E8EEDD9C15F357141C /* libAPDInMobyAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDInMobyAdapter.a; path = APDInMobyAdapter.embeddedframework/libAPDInMobyAdapter.a; sourceTree = "<group>"; };
 		565114DF35EB66CB83BEFF6378A99767 /* SimulatorStatusMagic-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SimulatorStatusMagic-umbrella.h"; sourceTree = "<group>"; };
 		56DDCDD74A15E299CBF32FBC9ADC9EF5 /* Pods-Aquaz-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Aquaz-resources.sh"; sourceTree = "<group>"; };
 		58220F66F00167F8C93E50D0FE9FE8CB /* MOPUBNativeVideoAdAdapter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MOPUBNativeVideoAdAdapter.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MOPUBNativeVideoAdAdapter.h; sourceTree = "<group>"; };
@@ -347,7 +347,6 @@
 		B1391392E03BDA1E344FF72EE42E3C1B /* SDStatusBarManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarManager.h; path = SDStatusBarManager/SDStatusBarManager.h; sourceTree = "<group>"; };
 		B21360E7C694F15A15746C37245962C4 /* Pods-Aquaz.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Aquaz.modulemap"; sourceTree = "<group>"; };
 		B46AD2470BFA65F76C0EEB8DD716EB51 /* Pods-AquazPro-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AquazPro-dummy.m"; sourceTree = "<group>"; };
-		B48100B8C66FCF564162FBBDDB778635 /* InMobiSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InMobiSDK.framework; path = APDInMobyAdapter.embeddedframework/InMobiSDK.framework; sourceTree = "<group>"; };
 		B4B3ED133C9292C8664F165D44E94F83 /* MPNativeAdRenderer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPNativeAdRenderer.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAdRenderer.h; sourceTree = "<group>"; };
 		B6C24C4F323525919405BC29FF15E9FA /* MPCoreInstanceProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPCoreInstanceProvider.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPCoreInstanceProvider.h; sourceTree = "<group>"; };
 		B78B83EEAF1925DFD1CCD228F1B2DA55 /* MPGeolocationProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPGeolocationProvider.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPGeolocationProvider.h; sourceTree = "<group>"; };
@@ -446,6 +445,7 @@
 		FBE8EA8FAE893BC2C2401BA08A03C253 /* MRProperty.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRProperty.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MRProperty.h; sourceTree = "<group>"; };
 		FBEC0980FB1118D0A7C7FA2F230D9B33 /* MPRewardedVideo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPRewardedVideo.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPRewardedVideo.h; sourceTree = "<group>"; };
 		FCEC89BDFD5EB8F65F731376AB44403A /* MMWormhole.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = MMWormhole.modulemap; sourceTree = "<group>"; };
+		FD461ACCF3B757935904F96394F40AD8 /* libAPDInMobyAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDInMobyAdapter.a; path = APDInMobiAdapter.embeddedframework/libAPDInMobyAdapter.a; sourceTree = "<group>"; };
 		FDCC35ECE9C4CF46995627B8F1035C2D /* ALAdDisplayDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ALAdDisplayDelegate.h; path = APDAppLovinAdapter.embeddedframework/Headers/ALAdDisplayDelegate.h; sourceTree = "<group>"; };
 		FE28B3FFEDE63B0C769903F0E78FE44A /* MPBannerAdManagerDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPBannerAdManagerDelegate.h; path = APDTwitterMoPubAdapter.embeddedframework/Headers/MPBannerAdManagerDelegate.h; sourceTree = "<group>"; };
 		FE7E2257C7A57CF04274FB14B7D89AF3 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -624,15 +624,6 @@
 				F3448D424E156E2AF3B8EBB643C02409 /* MRAID.bundle */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		22B01489115EEAE7DFDDB5149B8E60FC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				B48100B8C66FCF564162FBBDDB778635 /* InMobiSDK.framework */,
-				53723D0E8577C6E8EEDD9C15F357141C /* libAPDInMobyAdapter.a */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		26431B538D8EF3A9E31DB8295324544F /* VungleAdapter */ = {
@@ -1178,6 +1169,15 @@
 			path = "Target Support Files/Pods-Aquaz Widget";
 			sourceTree = "<group>";
 		};
+		C25A8B710616F3C530681512DC086E4C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0108A7BB8EF3DEFF261F0B0E3B6FCBDB /* InMobiSDK.framework */,
+				FD461ACCF3B757935904F96394F40AD8 /* libAPDInMobyAdapter.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CC3F8A874502468048F56BBC0D590691 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1238,7 +1238,7 @@
 		EE0BFFE4580BFFD9809F2CFEBE897AE7 /* InMobiAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				22B01489115EEAE7DFDDB5149B8E60FC /* Frameworks */,
+				C25A8B710616F3C530681512DC086E4C /* Frameworks */,
 			);
 			name = InMobiAdapter;
 			sourceTree = "<group>";
