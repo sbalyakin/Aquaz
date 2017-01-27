@@ -337,6 +337,8 @@ class IntakeViewController: UIViewController {
   fileprivate func addIntake(amount: Double) {
     CoreDataStack.performOnPrivateContext { privateContext in
       let drink = try! privateContext.existingObject(with: self.drink.objectID) as! Drink
+      drink.recentAmount.amount = amount
+
       _ = Intake.addEntity(drink: drink, amount: amount, date: self.computeIntakeDate(), managedObjectContext: privateContext)
     }
     
