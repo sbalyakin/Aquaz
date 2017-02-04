@@ -66,6 +66,6 @@ if [ "${PARAM_BUNDLE_KEY}" = "ShortVersion" ] ; then
 elif [ "${PARAM_BUNDLE_KEY}" = "BuildNumber" ] ; then
   setBundleKeyForAll "${PARAM_VALUE}" "CFBundleVersion" "Build number"
 else
-  echo "${COLOR_RED}Error: Unknown bundle key${COLOR_NONE}"
+  echo "${COLOR_RED}Error: Unknown bundle key${COLOR_NONE}\n\nSyntax:\n${COLOR_GREEN}sh SetForAllTargets.sh BUNLE_KEY VALUE${COLOR_NONE}\n\nSupported BUNDLE_KEY:\n${COLOR_BLUE}ShortVersion${COLOR_NONE} - set short version\n${COLOR_BLUE}BuildNumber${COLOR_NONE} - set build number\n"
 fi
 
