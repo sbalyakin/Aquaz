@@ -114,11 +114,11 @@ class FullVersionViewController: UIViewController {
     }
   }
   
-  func fullVersionIsPurchased(_ notification: NSNotification) {
+  @objc func fullVersionIsPurchased(_ notification: NSNotification) {
     _ = navigationController?.popViewController(animated: true)
   }
   
-  func fullVersionPurchaseStateDidChange(_ notification: NSNotification) {
+  @objc func fullVersionPurchaseStateDidChange(_ notification: NSNotification) {
     checkDeferredState()
   }
   

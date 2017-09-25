@@ -118,7 +118,7 @@ final class StatisticsViewController: UIViewController {
     fullVersionBannerView!.show(animated: true, parentView: view)
   }
   
-  func fullVersionIsPurchased(_ notification: NSNotification) {
+  @objc func fullVersionIsPurchased(_ notification: NSNotification) {
     hideDemoOverlay()
     hideFullVersionBanner()
   }

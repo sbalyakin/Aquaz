@@ -44,7 +44,7 @@ class UISwitchTableViewCell: UITableViewCell {
     }
   }
   
-  func switchControlValueChanged(_ switchControl: UISwitch) {
+  @objc func switchControlValueChanged(_ switchControl: UISwitch) {
     delegate?.switchControlValueChanged(switchControl, on: switchControl.isOn)
   }
 }

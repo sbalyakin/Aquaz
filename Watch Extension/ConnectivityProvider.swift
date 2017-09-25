@@ -41,7 +41,7 @@ class ConnectivityProvider: NSObject {
   
   // MARK: Private properties
   
-  fileprivate let session: WCSession? = WCSession.isSupported() ? WCSession.default() : nil
+  fileprivate let session: WCSession? = WCSession.isSupported() ? WCSession.default : nil
 
   fileprivate var reachableSession: WCSession? {
     if let session = session, session.activationState == .activated && session.isReachable {

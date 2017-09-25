@@ -115,7 +115,7 @@
     return self;
 }
 
-- (instancetype)initWithTargetView:(UIView *)targetView hostView:(UIView *)hostView tooltipText:(NSString *)tooltipText arrowDirection:(JDFTooltipViewArrowDirection)arrowDirection width:(CGFloat)width showCompletionBlock:(void (^)())showCompletionBlock hideCompletionBlock:(void (^)())hideCompletionBlock
+- (instancetype)initWithTargetView:(UIView *)targetView hostView:(UIView *)hostView tooltipText:(NSString *)tooltipText arrowDirection:(JDFTooltipViewArrowDirection)arrowDirection width:(CGFloat)width showCompletionBlock:(void (^)(void))showCompletionBlock hideCompletionBlock:(void (^)(void))hideCompletionBlock
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {

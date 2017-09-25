@@ -110,7 +110,7 @@ class InfoBannerView: BannerView {
     parentView.addConstraints("V:|-\(minY)-[banner(\(height))]", views: views)
   }
   
-  func bannerWasTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+  @objc func bannerWasTapped(_ gestureRecognizer: UITapGestureRecognizer) {
     if gestureRecognizer.state == .ended {
       bannerWasTappedFunction?(self)
     }

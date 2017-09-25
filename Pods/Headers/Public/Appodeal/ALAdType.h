@@ -1,1 +1,0 @@
-../../../Appodeal/APDAppLovinAdapter.embeddedframework/Headers/ALAdType.h

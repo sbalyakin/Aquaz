@@ -214,7 +214,7 @@ class SettingsViewController: OmegaSettingsViewController {
   }
   
   #if AQUAZLITE
-  func fullVersionIsPurchased(_ notification: NSNotification) {
+  @objc func fullVersionIsPurchased(_ notification: NSNotification) {
     fullVersionCell.title = localizedStrings.fullVersionIsPurchasedTitle
     fullVersionCell.accessoryType = nil
     fullVersionCell.activationChangedFunction = nil

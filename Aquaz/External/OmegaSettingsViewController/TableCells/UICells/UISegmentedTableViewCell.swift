@@ -47,7 +47,7 @@ class UISegmentedTableViewCell: UITableViewCell {
     }
   }
   
-  func segmentedControlValueChanged(_ segmentedControl: UISegmentedControl) {
+  @objc func segmentedControlValueChanged(_ segmentedControl: UISegmentedControl) {
     delegate?.segmentedControlValueChanged(segmentedControl, segmentIndex: segmentedControl.selectedSegmentIndex)
   }
 }

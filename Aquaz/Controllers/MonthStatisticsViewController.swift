@@ -92,7 +92,7 @@ class MonthStatisticsViewController: UIViewController {
     }
   }
 
-  func managedObjectContextDidChange(_ notification: Notification) {
+  @objc func managedObjectContextDidChange(_ notification: Notification) {
     #if AQUAZLITE
     if !Settings.sharedInstance.generalFullVersion.value {
       return
@@ -104,7 +104,7 @@ class MonthStatisticsViewController: UIViewController {
     }
   }
   
-  func preferredContentSizeChanged() {
+  @objc func preferredContentSizeChanged() {
     monthLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
     monthStatisticsView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
     monthStatisticsView.weekDayFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
@@ -113,7 +113,7 @@ class MonthStatisticsViewController: UIViewController {
   }
 
   #if AQUAZLITE
-  func fullVersionIsPurchased(_ notification: NSNotification) {
+  @objc func fullVersionIsPurchased(_ notification: NSNotification) {
     monthStatisticsView.refresh()
   }
   #endif
@@ -222,7 +222,7 @@ extension MonthStatisticsViewController: MonthStatisticsViewDataSource {
       var date = beginDate
       
       while date.isEarlierThan(endDate) {
-        let value = sin(Double(index % 28) / 28 * M_PI)
+        let value = sin(Double(index % 28) / 28 * Double.pi)
         values.append(value)
         index += 1
         date = DateHelper.nextDayFrom(date)

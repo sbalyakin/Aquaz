@@ -113,8 +113,8 @@ class IntakeViewController: UIViewController {
       return
     }
     
-    if Appodeal.isReadyForShow(with: .skippableVideo) {
-      Appodeal.showAd(.skippableVideo, rootViewController: self.navigationController)
+    if Appodeal.isReadyForShow(with: .nonSkippableVideo) {
+      Appodeal.showAd(.nonSkippableVideo, rootViewController: self.navigationController)
       Settings.sharedInstance.generalAdCounter.value = GlobalConstants.numberOfIntakesToShowAd
     }
   }
@@ -160,7 +160,7 @@ class IntakeViewController: UIViewController {
     view.frame.size.height -= deltaY
   }
 
-  func preferredContentSizeChanged() {
+  @objc func preferredContentSizeChanged() {
     amountLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
     view.invalidateIntrinsicContentSize()
   }

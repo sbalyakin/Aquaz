@@ -134,7 +134,7 @@ class WeekStatisticsViewController: UIViewController {
     }
   }
   
-  func managedObjectContextDidChange(_ notification: Notification) {
+  @objc func managedObjectContextDidChange(_ notification: Notification) {
     #if AQUAZLITE
       if !Settings.sharedInstance.generalFullVersion.value {
         return
@@ -144,7 +144,7 @@ class WeekStatisticsViewController: UIViewController {
     updateWeekStatisticsView(animated: true)
   }
 
-  func preferredContentSizeChanged() {
+  @objc func preferredContentSizeChanged() {
     datePeriodLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
     weekStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
     weekStatisticsView.daysFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
@@ -152,7 +152,7 @@ class WeekStatisticsViewController: UIViewController {
   }
 
   #if AQUAZLITE
-  func fullVersionIsPurchased(_ notification: NSNotification) {
+  @objc func fullVersionIsPurchased(_ notification: NSNotification) {
     updateWeekStatisticsView(animated: false)
   }
   #endif
@@ -171,13 +171,13 @@ class WeekStatisticsViewController: UIViewController {
     switchToNextWeek()
   }
   
-  func leftSwipeGestureIsRecognized(_ gestureRecognizer: UISwipeGestureRecognizer) {
+  @objc func leftSwipeGestureIsRecognized(_ gestureRecognizer: UISwipeGestureRecognizer) {
     if gestureRecognizer.state == .ended {
       switchToNextWeek()
     }
   }
   
-  func rightSwipeGestureIsRecognized(_ gestureRecognizer: UISwipeGestureRecognizer) {
+  @objc func rightSwipeGestureIsRecognized(_ gestureRecognizer: UISwipeGestureRecognizer) {
     if gestureRecognizer.state == .ended {
       switchToPreviousWeek()
     }

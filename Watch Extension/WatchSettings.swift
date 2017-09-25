@@ -91,36 +91,36 @@ final class WatchSettings {
   // MARK: General
   
   lazy var generalWeightUnits: SettingsEnumItem<Units.Weight> = SettingsEnumItem(
-    key: "General - Weight units", initialValue: isMetric ? .kilograms : .pounds,
-    userDefaults: userDefaults)
+    key: "General - Weight units", initialValue: WatchSettings.isMetric ? .kilograms : .pounds,
+    userDefaults: WatchSettings.userDefaults)
   
   lazy var generalHeightUnits: SettingsEnumItem<Units.Length> = SettingsEnumItem(
-    key: "General - Height units", initialValue: isMetric ? .centimeters : .feet,
-    userDefaults: userDefaults)
+    key: "General - Height units", initialValue: WatchSettings.isMetric ? .centimeters : .feet,
+    userDefaults: WatchSettings.userDefaults)
   
   lazy var generalVolumeUnits: SettingsEnumItem<Units.Volume> = SettingsEnumItem(
-    key: "General - Volume units", initialValue: isMetric ? .millilitres : .fluidOunces,
-    userDefaults: userDefaults)
+    key: "General - Volume units", initialValue: WatchSettings.isMetric ? .millilitres : .fluidOunces,
+    userDefaults: WatchSettings.userDefaults)
 
   // MARK: Current state
 
   lazy var stateWaterGoal = SettingsOrdinalItem<Double>(
     key: "State - Water Goal", initialValue: 2100,
-    userDefaults: userDefaults)
+    userDefaults: WatchSettings.userDefaults)
 
   lazy var stateHydration = SettingsOrdinalItem<Double>(
     key: "State - Hydration", initialValue: 0,
-    userDefaults: userDefaults)
+    userDefaults: WatchSettings.userDefaults)
   
   lazy var stateCurrentDate = SettingsOrdinalItem<Date>(
     key: "State - Current Date", initialValue: DateHelper.startOfDay(Date()),
-    userDefaults: userDefaults)
+    userDefaults: WatchSettings.userDefaults)
   
   // MARK: Intake parameters
   
   lazy var recentDrinkType = SettingsEnumItem<DrinkType>(
     key: "State - Recent Drink Type", initialValue: .water,
-    userDefaults: userDefaults)
+    userDefaults: WatchSettings.userDefaults)
   
   lazy var recentAmounts = RecentDrinkAmounts()
   

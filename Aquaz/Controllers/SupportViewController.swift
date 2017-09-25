@@ -105,7 +105,7 @@ class SupportViewController: UIViewController {
     NotificationCenter.default.removeObserver(self)
   }
   
-  func preferredContentSizeChanged() {
+  @objc func preferredContentSizeChanged() {
     applicationTitle.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1)
     tellToFriendTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
     reviewTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)

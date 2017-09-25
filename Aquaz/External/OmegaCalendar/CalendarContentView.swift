@@ -92,6 +92,17 @@ class CalendarContentView: UIView {
     super.layoutSubviews()
     collectionView?.frame = bounds
   }
+
+  // Moved here from extension CalendarContentView: UICollectionViewDataSource because
+  // this method is overriden in descendants. It's prohibited to override methods declared in extensions.
+  func getCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellIdentifier, for: indexPath) as! CalendarContentViewCell
+    
+    cell.backgroundColor = backgroundColor // remove blending
+    cell.setDayInfo(daysInfo[(indexPath as NSIndexPath).row], calendarContentView: self)
+    
+    return cell
+  }
   
 }
 
@@ -121,15 +132,6 @@ extension CalendarContentView: UICollectionViewDataSource {
     }
   }
   
-  func getCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellIdentifier, for: indexPath) as! CalendarContentViewCell
-
-    cell.backgroundColor = backgroundColor // remove blending
-    cell.setDayInfo(daysInfo[(indexPath as NSIndexPath).row], calendarContentView: self)
-
-    return cell
-  }
-
   func getTitleCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.titleCellIdentifier, for: indexPath) as! CalendarContentViewTitleCell
     

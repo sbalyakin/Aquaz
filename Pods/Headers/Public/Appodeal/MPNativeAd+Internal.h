@@ -1,1 +1,0 @@
-../../../Appodeal/APDTwitterMoPubAdapter.embeddedframework/Headers/MPNativeAd+Internal.h

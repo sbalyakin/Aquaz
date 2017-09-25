@@ -340,7 +340,7 @@ protocol WeekStatisticsViewDelegate: class {
   
   fileprivate func calcSizeForText(_ text: String, font: UIFont) -> CGSize {
     let textStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-    let fontAttributes = [NSFontAttributeName: font, NSParagraphStyleAttributeName: textStyle]
+    let fontAttributes = [NSAttributedStringKey.font: font, NSAttributedStringKey.paragraphStyle: textStyle]
     let infiniteSize = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
     let rect = text.boundingRect(with: infiniteSize, options: .usesLineFragmentOrigin, attributes: fontAttributes, context: nil)
     return rect.size
@@ -476,7 +476,7 @@ protocol WeekStatisticsViewDelegate: class {
     updateBars(animate: animate)
   }
   
-  func dayButtonTapped(_ sender: UIButton) {
+  @objc func dayButtonTapped(_ sender: UIButton) {
     delegate?.weekStatisticsViewDaySelected(sender.tag)
   }
 

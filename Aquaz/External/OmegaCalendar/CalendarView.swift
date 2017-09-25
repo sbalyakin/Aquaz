@@ -159,7 +159,7 @@ extension CalendarView: InfiniteScrollViewDataSource {
     return viewContent
   }
   
-  func createCalendarViewContent() -> CalendarContentView {
+  @objc func createCalendarViewContent() -> CalendarContentView {
     return CalendarContentView(frame: bounds)
   }
 

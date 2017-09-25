@@ -93,7 +93,7 @@ final class AmountInterfaceController: WKInterfaceController {
     let upTitle = WatchSettings.sharedInstance.generalVolumeUnits.value.description
     let fontSizes = WKInterfaceDevice.currentResolution().fontSizes
     
-    let titleItem    = ProgressHelper.TextProgressItem(text: title, color: UIColor.white, font: UIFont.systemFont(ofSize: fontSizes.title, weight: UIFontWeightMedium))
+    let titleItem    = ProgressHelper.TextProgressItem(text: title, color: UIColor.white, font: UIFont.systemFont(ofSize: fontSizes.title, weight: UIFont.Weight.medium))
     let subTitleItem = ProgressHelper.TextProgressItem(text: subTitle, color: drinkType.darkColor, font: UIFont.systemFont(ofSize: fontSizes.subTitle))
     let upTitleItem  = ProgressHelper.TextProgressItem(text: upTitle, color: UIColor.gray, font: UIFont.systemFont(ofSize: fontSizes.upTitle))
 

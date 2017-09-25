@@ -118,7 +118,7 @@ class CurrentStateInterfaceController: WKInterfaceController {
       repeats: false)
   }
   
-  func tomorrowTimerIsFired(_ timer: Timer) {
+  @objc func tomorrowTimerIsFired(_ timer: Timer) {
     if timer == tomorrowTimer {
       updateUI()
       setupTomorrowTimer()
@@ -179,7 +179,7 @@ class CurrentStateInterfaceController: WKInterfaceController {
     let subTitle = String.localizedStringWithFormat(subTitleTemplate, newWaterGoalText)
     let fontSizes = self.fontSizes // it can be overriden in descendants and probably transformed to complex computed property
     
-    let titleItem    = ProgressHelper.TextProgressItem(text: newHydrationAmountText, color: UIColor.white, font: UIFont.systemFont(ofSize: fontSizes.title, weight: UIFontWeightMedium))
+    let titleItem    = ProgressHelper.TextProgressItem(text: newHydrationAmountText, color: UIColor.white, font: UIFont.systemFont(ofSize: fontSizes.title, weight: UIFont.Weight.medium))
     let subTitleItem = ProgressHelper.TextProgressItem(text: subTitle, color: StyleKit.waterColor, font: UIFont.systemFont(ofSize: fontSizes.subTitle))
     let upTitleItem  = ProgressHelper.TextProgressItem(text: upTitle, color: UIColor.gray, font: UIFont.systemFont(ofSize: fontSizes.upTitle))
     
@@ -190,7 +190,7 @@ class CurrentStateInterfaceController: WKInterfaceController {
     progressGroup.setBackgroundImage(backgroundImage)
   }
   
-  func currentStateNotificationIsReceived(_ notification: Notification) {
+  @objc func currentStateNotificationIsReceived(_ notification: Notification) {
     guard let message = notification.object as? ConnectivityMessageCurrentState else {
       return
     }

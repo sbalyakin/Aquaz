@@ -345,7 +345,7 @@ final class HealthKitProvider: NSObject {
   
   // MARK: Synchronization with CoreData
   
-  func contextDidSaveContext(_ notification: Notification) {
+  @objc func contextDidSaveContext(_ notification: Notification) {
     let waterChangesAuthorized = healthKitStore.authorizationStatus(for: waterQuantityType) == .sharingAuthorized
     let caffeineChangesAuthorized = healthKitStore.authorizationStatus(for: caffeineQuantityType) == .sharingAuthorized
     

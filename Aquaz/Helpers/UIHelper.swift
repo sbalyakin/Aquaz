@@ -43,7 +43,7 @@ class UIHelper {
     navigationBar.barTintColor = StyleKit.barBackgroundColor
     navigationBar.barStyle = .black
     navigationBar.tintColor = StyleKit.barTextColor
-    navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: StyleKit.barTextColor]
+    navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: StyleKit.barTextColor]
     navigationBar.isTranslucent = false
     navigationBar.tintAdjustmentMode = .normal
   }

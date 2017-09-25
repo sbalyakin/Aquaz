@@ -49,7 +49,7 @@ class UIDatePickerTableViewCell: UITableViewCell {
     }
   }
   
-  func datePickerValueDidChange(_ datePicker: UIDatePicker) {
+  @objc func datePickerValueDidChange(_ datePicker: UIDatePicker) {
     delegate?.datePickerValueDidChange(datePicker)
   }
   

@@ -126,7 +126,7 @@ class TodayViewController: UIViewController {
     }
   }
   
-  func managedObjectContextDidSave(_ notification: Notification) {
+  @objc func managedObjectContextDidSave(_ notification: Notification) {
     // By unknown reason existance of "managedObjectContext" key produces an exception during passing massage object through wormhole
     var clearedNotification = notification
     _ = clearedNotification.userInfo?.removeValue(forKey: "managedObjectContext")

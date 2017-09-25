@@ -26,15 +26,15 @@ final class ProgressHelper {
     let color: UIColor
     let font: UIFont
     
-    var attributes: [String: Any] {
+    var attributes: [NSAttributedStringKey: Any] {
       return [
-        NSFontAttributeName: font,
-        NSForegroundColorAttributeName: color
+        .font: font,
+        .foregroundColor: color
       ]
     }
     
     var size: CGSize {
-      return text.size(attributes: attributes)
+      return text.size(withAttributes: attributes)
     }
   }
   

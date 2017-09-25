@@ -80,7 +80,7 @@ class OmegaSettingsViewController: UIViewController {
     value: TValue,
     collection: TCollection,
     stringFromValueFunction: @escaping ((TValue) -> String)) -> SegmentedTableCell<TValue, TCollection>
-    where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int
+    where TValue: Equatable, TCollection.Index == Int
   {
     let cell = SegmentedTableCell(title: title, value: value, collection: collection, container: self)
     cell.stringFromValueFunction = stringFromValueFunction
@@ -92,7 +92,7 @@ class OmegaSettingsViewController: UIViewController {
     settingsItem: SettingsItemBase<TValue>,
     collection: TCollection,
     stringFromValueFunction: @escaping ((TValue) -> String)) -> SegmentedTableCell<TValue, TCollection>
-    where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int
+    where TCollection.Index == Int
   {
     let cell = SegmentedTableCell(title: title, value: settingsItem.value, collection: collection, container: self)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
@@ -168,7 +168,7 @@ class OmegaSettingsViewController: UIViewController {
     collection: TCollection,
     stringFromValueFunction: @escaping ((TValue) -> String),
     pickerTableCellHeight: UIPickerViewHeight = .medium) -> RightDetailTableCell<TValue>
-    where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int, TCollection.IndexDistance == Int
+    where TCollection.Iterator.Element == TValue, TCollection.Index == Int, TCollection.IndexDistance == Int
   {
     let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: .none)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
@@ -202,7 +202,7 @@ class OmegaSettingsViewController: UIViewController {
     settingsItem: SettingsItemBase<TValue>,
     stringFromValueFunction: @escaping ((TValue) -> String),
     pickerTableCellHeight: UIPickerViewHeight = .medium) -> RightDetailTableCell<TValue>
-    where TValue: CustomStringConvertible, TValue: Equatable, TValue.RawValue == Int
+    where TValue: CustomStringConvertible, TValue.RawValue == Int
   {
     return createRangedRightDetailTableCell(
       title: title,
@@ -338,7 +338,7 @@ class OmegaSettingsViewController: UIViewController {
     notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
   }
   
-  func handleKeyboardWillShowNotification(_ notification: Notification) {
+  @objc func handleKeyboardWillShowNotification(_ notification: Notification) {
     let userInfo = notification.userInfo!
     
     let infoRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
@@ -358,7 +358,7 @@ class OmegaSettingsViewController: UIViewController {
     })
   }
   
-  func handleKeyboardWillHideNotification(_ notification: Notification) {
+  @objc func handleKeyboardWillHideNotification(_ notification: Notification) {
     tableView.contentInset = UIEdgeInsets.zero
     tableView.scrollIndicatorInsets = UIEdgeInsets.zero
   }

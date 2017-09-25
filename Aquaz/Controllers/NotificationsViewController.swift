@@ -236,7 +236,7 @@ class NotificationsViewController: OmegaSettingsViewController {
   }
   
   #if AQUAZLITE
-  func fullVersionIsPurchased(_ notification: NSNotification) {
+  @objc func fullVersionIsPurchased(_ notification: NSNotification) {
     hideFullVersionBanner()
   }
   #endif

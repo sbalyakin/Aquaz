@@ -69,7 +69,7 @@ class SelectDrinkViewController: UIViewController {
       object: nil)
   }
   
-  func preferredContentSizeChanged() {
+  @objc func preferredContentSizeChanged() {
     collectionView.reloadData()
   }
   
@@ -89,7 +89,7 @@ class SelectDrinkViewController: UIViewController {
       })
   }
   
-  func handleDrinkCellLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+  @objc func handleDrinkCellLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
     switch gestureRecognizer.state {
     case .began:
       handleLongPressBegin(gestureRecognizer)
@@ -129,7 +129,7 @@ class SelectDrinkViewController: UIViewController {
     }
   }
   
-  func handleDrinkCellTap(_ gestureRecognizer: UIGestureRecognizer) {
+  @objc func handleDrinkCellTap(_ gestureRecognizer: UIGestureRecognizer) {
     if popupViewManager.popupIsShown {
       return
     }
@@ -312,7 +312,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     popupView = nil
   }
   
-  func preferredContentSizeChanged() {
+  @objc func preferredContentSizeChanged() {
     popupCollectionView.reloadData()
   }
 
@@ -356,7 +356,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     selectDrinkViewController.changeAlcoholicDrinkTo(drinkType: drinkType)
   }
   
-  func handlePopupViewTap(_ gestureRecognizer: UIGestureRecognizer) {
+  @objc func handlePopupViewTap(_ gestureRecognizer: UIGestureRecognizer) {
     if popupCollectionView == nil {
       return
     }
@@ -369,7 +369,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     }
   }
   
-  func handlePopupViewPan(_ gestureRecognizer: UIGestureRecognizer) {
+  @objc func handlePopupViewPan(_ gestureRecognizer: UIGestureRecognizer) {
     switch gestureRecognizer.state {
     case .changed:
       handleLongPressChanged(gestureRecognizer)

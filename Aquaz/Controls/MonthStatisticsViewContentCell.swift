@@ -100,8 +100,8 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
   fileprivate func layoutArcLayer(_ rect: CGRect) {
     if let arcLayer = arcLayer {
       let centerPoint = CGPoint(x: rect.midX, y: rect.midY)
-      let startAngle = CGFloat(-M_PI_2)
-      let endAngle = CGFloat(M_PI * 2 - M_PI_2)
+      let startAngle = -CGFloat.pi * 0.5
+      let endAngle = CGFloat.pi * 1.5
       let radius = rect.width / 2 - arcLayer.lineWidth / 2
       
       let arcPath = UIBezierPath(arcCenter: centerPoint, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)

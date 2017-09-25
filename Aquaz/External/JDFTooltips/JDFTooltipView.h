@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, JDFTooltipViewArrowDirection){
 /**
  *  Completion block for JDFTooltipView animation completions. No paramaters, no return value.
  */
-typedef void (^JDFTooltipViewCompletionBlock)();
+typedef void (^JDFTooltipViewCompletionBlock)(void);
 
 
 
@@ -96,8 +96,8 @@ typedef void (^JDFTooltipViewCompletionBlock)();
  */
 @property (nonatomic) BOOL dismissOnTouch;
 
-@property (nonatomic, copy) void (^showCompletionBlock)();
-@property (nonatomic, copy) void (^hideCompletionBlock)();
+@property (nonatomic, copy) void (^showCompletionBlock)(void);
+@property (nonatomic, copy) void (^hideCompletionBlock)(void);
 
 
 #pragma mark Initialisation

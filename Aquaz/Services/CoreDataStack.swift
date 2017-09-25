@@ -77,7 +77,7 @@ final class CoreDataStack: NSObject {
   
   // MARK: - Notifications
   
-  func contextDidSaveContext(_ notification: Notification) {
+  @objc func contextDidSaveContext(_ notification: Notification) {
     if let context = notification.object as? NSManagedObjectContext,
        context !== privateContext
     {

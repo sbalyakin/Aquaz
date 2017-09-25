@@ -222,7 +222,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  func managedObjectContextDidChange(_ notification: Notification) {
+  @objc func managedObjectContextDidChange(_ notification: Notification) {
     updateSummaryBar(animated: true) {
       #if AQUAZLITE
       self.checkCounterForInterstitialAds(notification: notification)
@@ -376,7 +376,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   // MARK: Day selection -
   
-  func leftSwipeGestureIsRecognized(_ gestureRecognizer: UISwipeGestureRecognizer) {
+  @objc func leftSwipeGestureIsRecognized(_ gestureRecognizer: UISwipeGestureRecognizer) {
     if gestureRecognizer.state == .ended {
       let daysTillToday = DateHelper.calendarDays(fromDate: date, toDate: Date())
         
@@ -386,7 +386,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  func rightSwipeGestureIsRecognized(_ gestureRecognizer: UISwipeGestureRecognizer) {
+  @objc func rightSwipeGestureIsRecognized(_ gestureRecognizer: UISwipeGestureRecognizer) {
     if gestureRecognizer.state == .ended {
       switchToPreviousDay()
     }
@@ -708,14 +708,14 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   fileprivate func makeColoredText(_ text: NSString, mainColor: UIColor, coloredParts: [(text: String, color: UIColor)]) -> NSAttributedString {
-    let attributes = [NSForegroundColorAttributeName: mainColor]
+    let attributes = [NSAttributedStringKey.foregroundColor: mainColor]
     let coloredText = NSMutableAttributedString(string: text as String, attributes: attributes)
     coloredText.beginEditing()
     
     for (textPart, color) in coloredParts {
       let range = text.range(of: textPart)
       if range.length > 0 {
-        coloredText.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
+        coloredText.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: range)
       }
     }
     

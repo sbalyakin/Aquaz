@@ -1,1 +1,0 @@
-../../../Appodeal/APDTwitterMoPubAdapter.embeddedframework/Headers/MPImageDownloadQueue.h

@@ -103,8 +103,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     #if DEBUG
     Appodeal.setTestingEnabled(true)
     #endif
-    Appodeal.setAutocache(true, types: .skippableVideo)
-    Appodeal.initialize(withApiKey: GlobalConstants.appodealApiKey, types: .skippableVideo)
+    Appodeal.setAutocache(true, types: .nonSkippableVideo)
+    Appodeal.initialize(withApiKey: GlobalConstants.appodealApiKey, types: .nonSkippableVideo)
     Appodeal.setUserId(Settings.sharedInstance.generalAdUserId.value)
     Appodeal.setUserAge(UInt(Settings.sharedInstance.userAge.value))
     
@@ -124,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
   }
 
-  func updateNotifications(_ notification: Notification) {
+  @objc func updateNotifications(_ notification: Notification) {
     if !Settings.sharedInstance.notificationsEnabled.value {
       return
     }

@@ -17,7 +17,7 @@ final class ConnectivityProvider: NSObject {
   
   static let sharedInstance = ConnectivityProvider()
   
-  fileprivate let session: WCSession? = WCSession.isSupported() ? WCSession.default() : nil
+  fileprivate let session: WCSession? = WCSession.isSupported() ? WCSession.default : nil
   
   fileprivate var validSession: WCSession? {
     if let session = session, session.isPaired && session.isWatchAppInstalled {
@@ -116,7 +116,7 @@ final class ConnectivityProvider: NSObject {
     }
   }
   
-  func managedObjectContextDidSave() {
+  @objc func managedObjectContextDidSave() {
     if isManagedObjectContextSavingIgnored() {
       return
     }
