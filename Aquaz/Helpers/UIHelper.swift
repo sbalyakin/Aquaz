@@ -16,11 +16,17 @@ class UIHelper {
     
     UISegmentedControl.appearance().tintColor = StyleKit.controlTintColor
     
+    UINavigationBar.appearance().tintColor = StyleKit.barTextColor
+    
     UIButton.appearance().tintColor = StyleKit.controlTintColor
     
     UISwitch.appearance().onTintColor = StyleKit.controlTintColor
     
     UITabBar.appearance().tintColor = StyleKit.controlTintColor
+    
+    if #available(iOS 11.0, *) {
+      UIButton.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).tintColor = StyleKit.barTextColor
+    }
   }
   
   class func applyStyleToViewController(_ viewController: UIViewController) {
