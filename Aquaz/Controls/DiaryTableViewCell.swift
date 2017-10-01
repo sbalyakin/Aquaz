@@ -47,8 +47,9 @@ class DiaryTableViewCell: UITableViewCell {
     drinkLabel.text = ""
     amountLabel.text = ""
     waterBalanceLabel.text = ""
+    backgroundColor = StyleKit.pageBackgroundColor
   }
-  
+
   fileprivate func applyIntake() {
     let intakeInfo = getIntakeInfo()
     

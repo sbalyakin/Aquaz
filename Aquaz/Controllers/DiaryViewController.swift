@@ -20,6 +20,13 @@ class DiaryViewController: UIViewController {
   fileprivate var volumeObserver: SettingsObserver?
   fileprivate let isIOS8AndLater = UIDevice.current.systemVersion.compare("8.0.0", options: NSString.CompareOptions.numeric) != .orderedAscending
 
+  fileprivate var insertRowIndexPaths = [IndexPath]()
+  fileprivate var deleteRowIndexPaths = [IndexPath]()
+  fileprivate var reloadRowIndexPaths = [IndexPath]()
+  
+  fileprivate var innerRowDeletion = false
+
+  
   fileprivate struct Constants {
     static let diaryCellIdentifier = "DiaryTableViewCell"
     static let editIntakeSegue = "Edit Intake"
@@ -39,6 +46,9 @@ class DiaryViewController: UIViewController {
       tableView.rowHeight = UITableViewAutomaticDimension
       tableView.estimatedRowHeight = 54
     }
+    
+    // Remove separators for empty rows
+    tableView.tableFooterView = UIView()
   }
 
   deinit {
@@ -212,22 +222,40 @@ extension DiaryViewController: UITableViewDataSource {
     }
   }
 
-  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-    return true
-  }
-  
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle != .delete {
       return
     }
     
-    CoreDataStack.performOnPrivateContext { _ in
+    innerRowDeletion = true
+    
+    CoreDataStack.performOnPrivateContextAndWait { _ in
       if let intake = self.getIntakeAtIndexPath(indexPath) {
         intake.deleteEntity(saveImmediately: true)
       }
     }
+    
+    applyRowChanges()
+    
+    innerRowDeletion = false
   }
   
+  fileprivate func applyRowChanges() {
+    if #available(iOS 11.0, *) {
+      self.tableView?.performBatchUpdates({
+        self.tableView?.insertRows(at: self.insertRowIndexPaths, with: .automatic)
+        self.tableView?.deleteRows(at: self.deleteRowIndexPaths, with: .automatic)
+        self.tableView?.reloadRows(at: self.reloadRowIndexPaths, with: .automatic)
+      }, completion: nil)
+    } else {
+      self.tableView?.beginUpdates()
+      self.tableView?.insertRows(at: self.insertRowIndexPaths, with: .automatic)
+      self.tableView?.deleteRows(at: self.deleteRowIndexPaths, with: .automatic)
+      self.tableView?.reloadRows(at: self.reloadRowIndexPaths, with: .automatic)
+      self.tableView?.endUpdates()
+    }
+  }
+
 }
 
 // MARK: UITableViewDelegate
@@ -279,7 +307,7 @@ extension DiaryViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 54 // Estimated height is taken from storyboard
+    return 54 // Estimated height was taken from storyboard
   }
   
 }
@@ -288,59 +316,44 @@ extension DiaryViewController: UITableViewDelegate {
 extension DiaryViewController: NSFetchedResultsControllerDelegate {
   
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    SystemHelper.performBlockAsyncOnMainQueueAndWait {
-      self.tableView?.beginUpdates()
-    }
+    insertRowIndexPaths.removeAll()
+    deleteRowIndexPaths.removeAll()
+    reloadRowIndexPaths.removeAll()
   }
 
-  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-    SystemHelper.performBlockAsyncOnMainQueueAndWait {
-      switch type {
-      case .insert:
-        self.tableView?.insertSections(IndexSet(integer: sectionIndex), with: .fade)
-        
-      case .delete:
-        self.tableView?.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
-        
-      default:
-        break
-      }
-    }
-  }
-  
   func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-    SystemHelper.performBlockAsyncOnMainQueueAndWait {
-      switch type {
-      case .insert:
-        if let newIndexPath = newIndexPath {
-          self.tableView?.insertRows(at: [newIndexPath], with: .fade)
-        }
-        
-      case .delete:
-        if let indexPath = indexPath {
-          self.tableView?.deleteRows(at: [indexPath], with: .fade)
-        }
-        
-      case .update:
-        if let indexPath = indexPath {
-          self.tableView?.reloadRows(at: [indexPath], with: .fade)
-        }
+    switch type {
+    case .insert:
+      if let newIndexPath = newIndexPath {
+        insertRowIndexPaths += [newIndexPath]
+      }
+      
+    case .delete:
+      if let indexPath = indexPath {
+        deleteRowIndexPaths += [indexPath]
+      }
+      
+    case .update:
+      if let indexPath = indexPath {
+        reloadRowIndexPaths += [indexPath]
+      }
 
-      case .move:
-        if let indexPath = indexPath {
-          self.tableView?.deleteRows(at: [indexPath], with: .fade)
-        }
-        
-        if let newIndexPath = newIndexPath {
-          self.tableView?.insertRows(at: [newIndexPath], with: .fade)
-        }
+    case .move:
+      if let indexPath = indexPath {
+        deleteRowIndexPaths += [indexPath]
+      }
+      
+      if let newIndexPath = newIndexPath {
+        insertRowIndexPaths += [newIndexPath]
       }
     }
   }
 
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    SystemHelper.performBlockAsyncOnMainQueueAndWait {
-      self.tableView?.endUpdates()
+    if !innerRowDeletion {
+      DispatchQueue.main.async {
+        self.applyRowChanges()
+      }
     }
   }
 }
