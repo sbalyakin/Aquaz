@@ -269,7 +269,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   fileprivate func setupCurrentDate() {
     if mode == .general && Settings.sharedInstance.uiUseCustomDateForDayView.value {
-      date = Settings.sharedInstance.uiCustomDateForDayView.value as Date!
+      date = Settings.sharedInstance.uiCustomDateForDayView.value
     } else {
       if date == nil {
         date = Date()

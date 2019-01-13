@@ -9,7 +9,7 @@
 import UIKit
 
 class PickerTableCell<TValue: CustomStringConvertible, TCollection: Collection>: TableCellWithValue<TValue>, UIPickerTableViewCellDataSource, UIPickerTableViewCellDelegate
-where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int, TCollection.IndexDistance == Int {
+where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int {
   
   let collection: TCollection
   let height: UIPickerViewHeight

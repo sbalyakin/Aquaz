@@ -13,7 +13,7 @@ class UIHelper {
   
   class func applyStylization() {
     UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
-    
+
     UISegmentedControl.appearance().tintColor = StyleKit.controlTintColor
     
     UINavigationBar.appearance().tintColor = StyleKit.barTextColor

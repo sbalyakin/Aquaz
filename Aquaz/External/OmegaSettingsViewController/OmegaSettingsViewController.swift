@@ -168,7 +168,7 @@ class OmegaSettingsViewController: UIViewController {
     collection: TCollection,
     stringFromValueFunction: @escaping ((TValue) -> String),
     pickerTableCellHeight: UIPickerViewHeight = .medium) -> RightDetailTableCell<TValue>
-    where TCollection.Iterator.Element == TValue, TCollection.Index == Int, TCollection.IndexDistance == Int
+    where TCollection.Iterator.Element == TValue, TCollection.Index == Int
   {
     let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: .none)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
@@ -186,7 +186,7 @@ class OmegaSettingsViewController: UIViewController {
     collection: TCollection,
     stringFromValueFunction: @escaping ((TValue) -> String),
     pickerTableCellHeight: UIPickerViewHeight = .medium) -> RightDetailTableCell<TValue>
-    where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int, TCollection.IndexDistance == Int
+    where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int
   {
     let cell = RightDetailTableCell(title: title, value: value, container: self, accessoryType: .none)
     cell.supportingTableCell = PickerTableCell(value: value, collection: collection, container: self, height: pickerTableCellHeight)

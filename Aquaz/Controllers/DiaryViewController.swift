@@ -18,7 +18,6 @@ class DiaryViewController: UIViewController {
   fileprivate var fetchedResultsController: NSFetchedResultsController<Intake>?
   fileprivate var sizingCell: DiaryTableViewCell!
   fileprivate var volumeObserver: SettingsObserver?
-  fileprivate let isIOS8AndLater = UIDevice.current.systemVersion.compare("8.0.0", options: NSString.CompareOptions.numeric) != .orderedAscending
 
   fileprivate var insertRowIndexPaths = [IndexPath]()
   fileprivate var deleteRowIndexPaths = [IndexPath]()
@@ -42,10 +41,8 @@ class DiaryViewController: UIViewController {
       self?.tableView?.reloadData()
     }
     
-    if isIOS8AndLater {
-      tableView.rowHeight = UITableViewAutomaticDimension
-      tableView.estimatedRowHeight = 54
-    }
+    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.estimatedRowHeight = 54
     
     // Remove separators for empty rows
     tableView.tableFooterView = UIView()
@@ -286,24 +283,7 @@ extension DiaryViewController: UITableViewDelegate {
   }
 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if isIOS8AndLater {
-      return UITableViewAutomaticDimension
-    } else {
-      if sizingCell == nil {
-        sizingCell = tableView.dequeueReusableCell(withIdentifier: Constants.diaryCellIdentifier) as! DiaryTableViewCell
-      }
-
-      sizingCell.updateFonts()
-      
-      sizingCell.bounds = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: sizingCell.bounds.height)
-      
-      sizingCell.setNeedsLayout()
-      sizingCell.layoutIfNeeded()
-      
-      let height = sizingCell.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
-      
-      return height
-    }
+    return UITableViewAutomaticDimension
   }
   
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

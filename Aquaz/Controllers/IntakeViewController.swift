@@ -61,7 +61,7 @@ class IntakeViewController: UIViewController {
         if let intake = self.intake {
           self.drinkType = intake.drink.drinkType
           self.drink = intake.drink
-          self.date = intake.date as Date!
+          self.date = intake.date
           self.timeIsChoosen = true
         } else {
           self.timeIsChoosen = false
@@ -114,7 +114,7 @@ class IntakeViewController: UIViewController {
     }
     
     if Appodeal.isReadyForShow(with: .nonSkippableVideo) {
-      Appodeal.showAd(.nonSkippableVideo, rootViewController: self.navigationController)
+      Appodeal.showAd(.nonSkippableVideo, rootViewController: self.navigationController!)
       Settings.sharedInstance.generalAdCounter.value = GlobalConstants.numberOfIntakesToShowAd
     }
   }
