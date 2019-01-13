@@ -160,7 +160,20 @@
 - (void)willAttachToView:(UIView *)view;
 
 /**
- * This method will be called if your implementation provides a DAA icon through the properties dictionary
+ * This method will be called when your ad's content is about to be loaded into a view; subviews which contain ad
+ * contents are also included.
+ *
+ * Note: If both this method and `willAttachToView:` are implemented, ONLY this method will be called.
+ *
+ * @param view A view that will contain the ad content.
+ * @param adContentViews Array of views that contains the ad's content views.
+ *
+ * You should implement this method if the underlying third-party ad object needs to be informed of this event.
+ */
+- (void)willAttachToView:(UIView *)view withAdContentViews:(NSArray *)adContentViews;
+
+/**
+ * This method will be called if your implementation provides a privacy icon through the properties dictionary
  * and the user has tapped the icon.
  */
 - (void)displayContentForDAAIconTap;
@@ -180,5 +193,14 @@
  * the main media asset.
  */
 - (UIView *)mainMediaView;
+
+/**
+ * Return your ad's icon view.
+ *
+ * You should implement this method if your ad supplies its own view for the icon view which is typically
+ * an image. If you implement this method, the SDK will not make any other attempts at retrieving
+ * the icon asset.
+ */
+- (UIView *)iconMediaView;
 
 @end

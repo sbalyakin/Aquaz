@@ -1,0 +1,6 @@
+framework module AppodealAdExchangeSDK {
+  umbrella header "AppodealAdExchangeSDK.h"
+
+  export *
+  module * { export * }
+}

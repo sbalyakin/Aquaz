@@ -4,6 +4,7 @@
 #import "AdColonyInterstitial.h"
 #import "AdColonyAdRequestError.h"
 #import "AdColonyUserMetadata.h"
+#import "AdColonyEventTracker.h"
 #import "AdColonyNativeAdView.h"
 #import <Foundation/Foundation.h>
 
@@ -59,6 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param zoneID The AdColony zone identifier string indicating which zone the ad request is for.
  @param size The desired width and height of the native ad view.
  @param options An AdColonyAdOptions object used to set configurable aspects of the ad request.
+ @param viewController Host view controller
  @param success A block of code to be executed if the ad request succeeds. Dispatched on main thread.
  @param failure (optional) A block of code to be executed if the ad request does not succeed. Dispatched on main thread.
  @see AdColonyAdOptions
@@ -90,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return The device's current advertising identifier.
  */
 + (NSString *)getAdvertisingID;
- 
+
 /**
  @abstract Retrieves a custom identifier for the current user if it has been set.
  @discussion This is an arbitrary, application-specific identifier string for the current user.
@@ -108,7 +110,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract Sets the current, global set of AdColonyAppOptions.
  @discussion Use the object's option-setting methods to configure currently-supported options.
  @param options The AdColonyAppOptions object to be used for configuring global options such as a custom user identifier.
- @see Option Keys
+ @see AdColonyAppOptions
  */
 + (void)setAppOptions:(AdColonyAppOptions *)options;
 
