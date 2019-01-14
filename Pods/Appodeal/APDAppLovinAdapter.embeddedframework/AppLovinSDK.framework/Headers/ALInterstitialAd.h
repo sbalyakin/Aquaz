@@ -1,16 +1,16 @@
 //
 //  ALInterstitialAd.h
 //
-//  Created by Matt Szaro on 8/1/13.
-//  Copyright (c) 2013, AppLovin Corporation. All rights reserved.
 //
+//  Copyright © 2018 AppLovin Corporation. All rights reserved.
+//
+
 #import <UIKit/UIKit.h>
-#import "ALAnnotations.h"
 
 #import "ALSdk.h"
 #import "ALAdService.h"
 
-AL_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  This class is used to display full-screen ads to the user.
@@ -22,17 +22,17 @@ AL_ASSUME_NONNULL_BEGIN
 /**
  *  An object conforming to the ALAdLoadDelegate protocol, which, if set, will be notified of ad load events.
  */
-@property (strong, nonatomic, alnullable) id <ALAdLoadDelegate> adLoadDelegate;
+@property (strong, nonatomic, nullable) id <ALAdLoadDelegate> adLoadDelegate;
 
 /**
  *  An object conforming to the ALAdDisplayDelegate protocol, which, if set, will be notified of ad show/hide events.
  */
-@property (strong, nonatomic, alnullable) id <ALAdDisplayDelegate> adDisplayDelegate;
+@property (strong, nonatomic, nullable) id <ALAdDisplayDelegate> adDisplayDelegate;
 
 /**
  *  An object conforming to the ALAdVideoPlaybackDelegate protocol, which, if set, will be notified of video start/finish events.
  */
-@property (strong, nonatomic, alnullable) id <ALAdVideoPlaybackDelegate> adVideoPlaybackDelegate;
+@property (strong, nonatomic, nullable) id <ALAdVideoPlaybackDelegate> adVideoPlaybackDelegate;
 
 #pragma mark - Loading and Showing Ads, Class Methods
 
@@ -142,12 +142,12 @@ AL_ASSUME_NONNULL_BEGIN
 @interface ALInterstitialAd (ALDeprecated)
 - (instancetype)initInterstitialAdWithSdk:(ALSdk *)sdk __deprecated_msg("Use initWithSdk: instead.");
 - (void)showOverPlacement:(NSString *)placement __deprecated_msg("Placements have been deprecated and will be removed in a future SDK version. Please configure zones from the UI and use them instead.");
-+ (ALInterstitialAd *)showOverPlacement:(alnullable NSString *)placement __deprecated_msg("Placements have been deprecated and will be removed in a future SDK version. Please configure zones from the UI and use them instead.");
-- (void)showOver:(UIWindow *)window placement:(alnullable NSString *)placement andRender:(ALAd *)ad __deprecated_msg("Placements have been deprecated and will be removed in a future SDK version. Please configure zones from the UI and use them instead.");
-+ (ALInterstitialAd *)showOver:(UIWindow *)window placement:(alnullable NSString* )placement __deprecated_msg("Placements have been deprecated and will be removed in a future SDK version. Please configure zones from the UI and use them instead.");
++ (ALInterstitialAd *)showOverPlacement:(nullable NSString *)placement __deprecated_msg("Placements have been deprecated and will be removed in a future SDK version. Please configure zones from the UI and use them instead.");
+- (void)showOver:(UIWindow *)window placement:(nullable NSString *)placement andRender:(ALAd *)ad __deprecated_msg("Placements have been deprecated and will be removed in a future SDK version. Please configure zones from the UI and use them instead.");
++ (ALInterstitialAd *)showOver:(UIWindow *)window placement:(nullable NSString* )placement __deprecated_msg("Placements have been deprecated and will be removed in a future SDK version. Please configure zones from the UI and use them instead.");
 + (BOOL)isReadyForDisplay __deprecated_msg("Checking whether an ad is ready for display has been deprecated and will be removed in a future SDK version. Please use `show`, `showOver:` or `showOver:andRender:` to display an ad.");
 @property (readonly, atomic, getter=isReadyForDisplay) BOOL readyForDisplay __deprecated_msg("Checking whether an ad is ready for display has been deprecated and will be removed in a future SDK version. Please use `show`, `showOver:` or `showOver:andRender:` to display an ad.");
 @end
 
-AL_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END
 

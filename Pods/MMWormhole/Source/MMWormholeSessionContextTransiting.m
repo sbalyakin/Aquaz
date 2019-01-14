@@ -25,7 +25,6 @@
 
 #import <WatchConnectivity/WatchConnectivity.h>
 
-API_AVAILABLE(ios(9.0))
 @interface MMWormholeSessionContextTransiting ()
 @property (nonatomic, strong) WCSession *session;
 @property (nonatomic, strong) NSMutableDictionary *lastContext;
@@ -37,11 +36,7 @@ API_AVAILABLE(ios(9.0))
                                  optionalDirectory:(nullable NSString *)directory {
     if ((self = [super initWithApplicationGroupIdentifier:identifier optionalDirectory:directory])) {
         // Setup transiting with the default session
-      if (@available(iOS 9.0, *)) {
         _session = [WCSession defaultSession];
-      } else {
-        // Fallback on earlier versions
-      }
         
         // Ensure that the MMWormholeSession's delegate is set to enable message sending
         NSAssert(_session.delegate != nil, @"WCSession's delegate is required to be set before you can send messages. Please initialize the MMWormholeSession sharedListeningSession object prior to creating a separate wormhole using the MMWormholeSessionTransiting classes.");

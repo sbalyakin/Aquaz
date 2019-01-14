@@ -143,6 +143,7 @@
 		424804422CD2CC2873ECBA87079A6A25 /* SDStatusBarOverriderPost12_0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost12_0.h; path = SDStatusBarManager/SDStatusBarOverriderPost12_0.h; sourceTree = "<group>"; };
 		43FE9AB2EB5A4A917E5F8B73462E9DBB /* MMWormholeSessionContextTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionContextTransiting.m; path = Source/MMWormholeSessionContextTransiting.m; sourceTree = "<group>"; };
 		4807F9F2DEE5CE520C2EBF936821569C /* MyTargetSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MyTargetSDK.framework; path = APDMyTargetAdapter.embeddedframework/MyTargetSDK.framework; sourceTree = "<group>"; };
+		4925C40E7FFE280BF2C861BB8673B3A5 /* MTGSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MTGSDK.framework; path = APDMobvistaAdapter.embeddedframework/MTGSDK.framework; sourceTree = "<group>"; };
 		4EF64022AB7CC478C2FF8CE31418F8FB /* SDStatusBarOverriderPre8_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPre8_3.h; path = SDStatusBarManager/SDStatusBarOverriderPre8_3.h; sourceTree = "<group>"; };
 		4F01B35AB2C724D77B6BD26CEA000D85 /* Pods-Aquaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.release.xcconfig"; sourceTree = "<group>"; };
 		5075CCD62D75884E920AE59754AF5552 /* SDStatusBarOverriderPost10_0.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPost10_0.m; path = SDStatusBarManager/SDStatusBarOverriderPost10_0.m; sourceTree = "<group>"; };
@@ -174,7 +175,6 @@
 		74D36C8A728A55518919C9DF3EF37458 /* MPDAAIcon@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "MPDAAIcon@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPDAAIcon@3x.png"; sourceTree = "<group>"; };
 		781A9A89C734CCE13943E1651120E6A1 /* ANSCompatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ANSCompatibility.h; path = iOS/Crashlytics.framework/Headers/ANSCompatibility.h; sourceTree = "<group>"; };
 		797CD4CD04FD88CF0655C055DD9191B9 /* MMWormhole-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMWormhole-umbrella.h"; sourceTree = "<group>"; };
-		7BEB280B923FE179EA776F1B0677D183 /* libAPDMobvistaAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDMobvistaAdapter.a; path = APDMobvistaAdapter.embeddedframework/libAPDMobvistaAdapter.a; sourceTree = "<group>"; };
 		7C41032F11D227212200BA5E850AC479 /* Pods-Aquaz.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Aquaz.modulemap"; sourceTree = "<group>"; };
 		7DF962534F19BE579AE94927ACE8BD17 /* MMWormholeSessionFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionFileTransiting.m; path = Source/MMWormholeSessionFileTransiting.m; sourceTree = "<group>"; };
 		7FDA87EC6D85E220D93465C423865400 /* Pods_AquazPro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -228,6 +228,7 @@
 		CA363002A89B413806218293270CA659 /* Answers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Answers.h; path = iOS/Crashlytics.framework/Headers/Answers.h; sourceTree = "<group>"; };
 		CDF004F967787A8E71BCD73738E40755 /* SDStatusBarOverriderPost10_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost10_3.h; path = SDStatusBarManager/SDStatusBarOverriderPost10_3.h; sourceTree = "<group>"; };
 		CF74F015E4E171C34ADDCC67BDDECDFB /* MMWormholeSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSession.h; path = Source/MMWormholeSession.h; sourceTree = "<group>"; };
+		D2267A0AF1DF9FF0686C14F795AFDD42 /* libAPDMobvistaAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDMobvistaAdapter.a; path = APDMobvistaAdapter.embeddedframework/libAPDMobvistaAdapter.a; sourceTree = "<group>"; };
 		D708A74794EC58886EA28C7267C52906 /* SimulatorStatusMagic-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SimulatorStatusMagic-dummy.m"; sourceTree = "<group>"; };
 		D717A26FBCFB2EECFDBD7D9BAE3F09E2 /* TapjoyResources.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = TapjoyResources.bundle; path = APDTapjoyAdapter.embeddedframework/Resources/TapjoyResources.bundle; sourceTree = "<group>"; };
 		DCB942965715699762F439525D9F1B1E /* MMWormhole.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MMWormhole.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,7 +236,6 @@
 		DDE59AE76BDE32DEF9A206716B0ECCF9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE6AC42E0B4D3BE11419EB1A77D54949 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		E11930B9C2CED44DD54DB79D06339C10 /* MMWormhole-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMWormhole-prefix.pch"; sourceTree = "<group>"; };
-		E1B983356BBC0D81B488E3BE745F98BE /* MVSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MVSDK.framework; path = APDMobvistaAdapter.embeddedframework/MVSDK.framework; sourceTree = "<group>"; };
 		E47D96506756C409A19D772E47A0EBF8 /* StartApp.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = StartApp.bundle; path = APDStartAppAdapter.embeddedframework/Resources/StartApp.bundle; sourceTree = "<group>"; };
 		E47FDC21B8E4C26D6C386E5D49AE505D /* AppodealAdExchangeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppodealAdExchangeSDK.framework; path = APDAppodealAdExchangeAdapter.embeddedframework/AppodealAdExchangeSDK.framework; sourceTree = "<group>"; };
 		E5F7378B46DEDFFD0BE00E461A9B46A6 /* MMWormholeFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeFileTransiting.h; path = Source/MMWormholeFileTransiting.h; sourceTree = "<group>"; };
@@ -501,7 +501,7 @@
 		7724C6CDAACBB7449E78F8BFD83FAD85 /* MobvistaAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				A4DDA6473A11C44B43FDD9535A0AB678 /* Frameworks */,
+				9004C12B5B8477177A4A61700AF3A675 /* Frameworks */,
 			);
 			name = MobvistaAdapter;
 			sourceTree = "<group>";
@@ -591,6 +591,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9004C12B5B8477177A4A61700AF3A675 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D2267A0AF1DF9FF0686C14F795AFDD42 /* libAPDMobvistaAdapter.a */,
+				4925C40E7FFE280BF2C861BB8673B3A5 /* MTGSDK.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		95B8AB40A9879110C99D264C748126B4 /* Pods-Aquaz Widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -628,15 +637,6 @@
 			children = (
 				9D58BF3691D2C43731D1C3333384831A /* AdColony.framework */,
 				9CB604AA34463E98FC68D961CB47C4D7 /* libAPDAdColonyAdapter.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A4DDA6473A11C44B43FDD9535A0AB678 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7BEB280B923FE179EA776F1B0677D183 /* libAPDMobvistaAdapter.a */,
-				E1B983356BBC0D81B488E3BE745F98BE /* MVSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

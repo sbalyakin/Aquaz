@@ -2,7 +2,7 @@
 //  AppLovinSdk.h
 //
 //  Created by Basil Shikin on 2/1/12.
-//  Copyright (c) 2013, AppLovin Corporation. All rights reserved.
+//  Copyright © 2018 AppLovin Corporation. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,12 +13,13 @@
 #import "ALNativeAdService.h"
 #import "ALPostbackService.h"
 #import "ALEventService.h"
-
-#import "ALAnnotations.h"
+#import "ALVariableService.h"
+#import "ALUserService.h"
+#import "ALSdkConfiguration.h"
 #import "ALErrorCodes.h"
 #import "ALMediationProvider.h"
 
-AL_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * This is a base class for the AppLovin iOS SDK.
@@ -52,7 +53,7 @@ AL_ASSUME_NONNULL_BEGIN
 /**
  * Set mediation provider using one of the provided strings in ALMediationProvider.h, or your own if not defined.
  */
-@property (atomic, copy, alnullable) NSString *mediationProvider;
+@property (atomic, copy, nullable) NSString *mediationProvider;
 
 /**
  * @name SDK Information
@@ -107,23 +108,47 @@ AL_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly) ALEventService *eventService;
 
 /**
+ * Service object for performing user-related tasks.
+ *
+ * @return User service. Guaranteed not to be null.
+ */
+@property (strong, nonatomic, readonly) ALUserService *userService;
+
+/**
+ * Get an instance of the AppLovin variable service. This service is used to perform various AB tests that you have set up on your AppLovin dashboard on your users.
+ *
+ * @return Variable service. Guaranteed not to be null.
+ */
+@property (strong, nonatomic, readonly) ALVariableService *variableService;
+
+/**
  * Set a string which identifies the current user, which will be passed through to your server via our optional S2S postbacks.
  *
  * If you're using reward validation, you can optionally set a user identifier to be included with
  * currency validation postbacks. For example, a user name. We'll include this in the postback when we
  * ping your currency endpoint from our server.
  */
-@property (copy, nonatomic, alnullable) NSString *userIdentifier;
+@property (copy, nonatomic, nullable) NSString *userIdentifier;
 
 /**
  * @name SDK Initialization
  */
 
+typedef void (^ALSdkInitializationCompletionHandler)(ALSdkConfiguration *configuration);
+
 /**
- * Initialize current version of the SDK.
- *
+ * Initialize the SDK.
  */
 - (void)initializeSdk;
+
+/**
+ * Initialize the SDK with a given completion block.
+ *
+ * The callback will be invoked on the main thread.
+ *
+ * @param completionHandler The callback that will be run when the SDK finishes initializing.
+ */
+- (void)initializeSdkWithCompletionHandler:(nullable ALSdkInitializationCompletionHandler)completionHandler;
 
 /**
  * Initialize the default instance of AppLovin SDK.
@@ -132,6 +157,16 @@ AL_ASSUME_NONNULL_BEGIN
  * <code>Info.plist</code> includes a property 'AppLovinSdkKey' that is set to provided SDK key.
  */
 + (void)initializeSdk;
+
+/**
+ * Initialize the default instance of AppLovin SDK.
+ *
+ * Please make sure that application's
+ * <code>Info.plist</code> includes a property 'AppLovinSdkKey' that is set to provided SDK key.
+ *
+ * @param completionHandler The callback that will be run when the SDK finishes initializing.
+ */
++ (void)initializeSdkWithCompletionHandler:(nullable ALSdkInitializationCompletionHandler)completionHandler;
 
 /**
  * @name Getting SDK Instances
@@ -145,7 +180,7 @@ AL_ASSUME_NONNULL_BEGIN
  *
  * @return An instance of AppLovinSDK
  */
-+ (alnullable ALSdk *)shared;
++ (nullable ALSdk *)shared;
 
 /**
  * Get an instance of AppLovin SDK using default SDK settings.
@@ -154,7 +189,7 @@ AL_ASSUME_NONNULL_BEGIN
  *
  * @return An instance of AppLovinSDK
  */
-+ (alnullable ALSdk *)sharedWithKey:(NSString *)sdkKey;
++ (nullable ALSdk *)sharedWithKey:(NSString *)sdkKey;
 
 /**
  * Get an instance of AppLovin SDK.
@@ -164,10 +199,10 @@ AL_ASSUME_NONNULL_BEGIN
  * 
  * @return An instance of AppLovinSDK
  */
-+ (alnullable ALSdk *)sharedWithKey:(NSString *)sdkKey settings:(ALSdkSettings *)settings;
++ (nullable ALSdk *)sharedWithKey:(NSString *)sdkKey settings:(ALSdkSettings *)settings;
 
 - (id)init __attribute__((unavailable("Use [ALSdk shared] instead of alloc-init pattern.")));
 
 @end
 
-AL_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

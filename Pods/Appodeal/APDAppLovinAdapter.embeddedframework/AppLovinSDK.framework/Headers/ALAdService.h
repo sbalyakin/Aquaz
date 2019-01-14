@@ -3,11 +3,10 @@
 //  sdk
 //
 //  Created by Basil on 2/27/12.
-//  Copyright (c) 2013, AppLovin Corporation. All rights reserved.
+//  Copyright © 2018 AppLovin Corporation. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "ALAnnotations.h"
 
 #import "ALAd.h"
 #import "ALAdSize.h"
@@ -16,7 +15,7 @@
 #import "ALAdUpdateDelegate.h"
 #import "ALAdVideoPlaybackDelegate.h"
 
-AL_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * This class is responsible for providing and displaying ads.
@@ -70,6 +69,11 @@ AL_ASSUME_NONNULL_BEGIN
 @interface ALAdService(ALMultizoneSupport)
 
 /**
+ * Generates a token used for advanced header bidding.
+ */
+@property (nonatomic, copy, readonly) NSString *bidToken;
+
+/**
  * Fetch a new ad for the given ad token. Provided ad token must be received from AppLovin S2S API.
  *
  * <b>Please note:</b> this method is designed to be called by SDK mediation providers. Please use
@@ -107,7 +111,7 @@ AL_ASSUME_NONNULL_BEGIN
  *        applovin://com.applovin.sdk/adservice/next_ad
  * </pre>
  */
-extern NSString *const ALSdkUriNextAd;
+extern NSString *const ALDeepLinkCommandNextAd;
 
 /**
  * This is an endpoint name for custom AppLovin URL for forcing
@@ -116,7 +120,7 @@ extern NSString *const ALSdkUriNextAd;
  *        applovin://com.applovin.sdk/adservice/close_ad
  * </pre>
  */
-extern NSString *const ALSdkCloseAd;
+extern NSString *const ALDeepLinkCommandCloseAd;
 
 /**
  * This is an endpoint name for custom AppLovin URL for forcing
@@ -125,7 +129,7 @@ extern NSString *const ALSdkCloseAd;
  *        applovin://com.applovin.sdk/adservice/expand_ad
  * </pre>
  */
-extern NSString *const ALSdkExpandAd;
+extern NSString *const ALDeepLinkCommandExpandAd;
 
 /**
  * This is an endpoint name for custom AppLovin URL for forcing
@@ -134,6 +138,6 @@ extern NSString *const ALSdkExpandAd;
  *        applovin://com.applovin.sdk/adservice/contract_ad
  * </pre>
  */
-extern NSString *const ALSdkContractAd;
+extern NSString *const ALDeepLinkCommandContractAd;
 
-AL_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END
