@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-@testable import Aquaz
+@testable import AquazPro
 
 class SettingsTests: XCTestCase {
   

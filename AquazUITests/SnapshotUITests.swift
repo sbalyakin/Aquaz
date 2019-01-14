@@ -8,6 +8,7 @@
 
 import XCTest
 
+@available(iOS 9.3, *)
 class SnapshotUITests: XCTestCase {
   
   override func setUp() {

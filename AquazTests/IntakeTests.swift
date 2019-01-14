@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 import XCTest
-@testable import Aquaz
+@testable import AquazPro
 
 class IntakeTests: XCTestCase {
 
@@ -390,7 +390,7 @@ class IntakeTests: XCTestCase {
   }
   
   fileprivate func areDoublesEqual(_ value1: Double, _ value2: Double) -> Bool {
-    return abs(value1 - value2) < DBL_MIN || abs(value1 - value2) < 100 * DBL_EPSILON * abs(value1 + value2)
+    return abs(value1 - value2) < Double.leastNormalMagnitude || abs(value1 - value2) < 100 * Double.ulpOfOne * abs(value1 + value2)
   }
   
   fileprivate var managedObjectContext: NSManagedObjectContext { return CoreDataSupport.sharedInstance.managedObjectContext }
