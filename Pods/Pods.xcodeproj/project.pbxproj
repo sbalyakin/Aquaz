@@ -106,7 +106,7 @@
 		0111ED1731C50CE8A912FA91F77B14F7 /* MPUnmutedBtn.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = MPUnmutedBtn.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPUnmutedBtn.png; sourceTree = "<group>"; };
 		01543F93274E9D61D75B2027A1EA2027 /* Pods-AquazPro Widget-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AquazPro Widget-acknowledgements.plist"; sourceTree = "<group>"; };
 		015596BA89CB120B64281CE9E64FE49A /* libAPDAppodealAdExchangeAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDAppodealAdExchangeAdapter.a; path = APDAppodealAdExchangeAdapter.embeddedframework/libAPDAppodealAdExchangeAdapter.a; sourceTree = "<group>"; };
-		02FD6FF0BC89702A7084A8388E518849 /* SimulatorStatusMagic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SimulatorStatusMagic.framework; path = SimulatorStatusMagic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		02FD6FF0BC89702A7084A8388E518849 /* SimulatorStatusMagic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SimulatorStatusMagic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		052F222077C5E4E2549790B7B0C43502 /* Pods-AquazPro-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AquazPro-acknowledgements.plist"; sourceTree = "<group>"; };
 		06E589C77AD4E51B1D1D218C5E34D394 /* Pods-Aquaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.debug.xcconfig"; sourceTree = "<group>"; };
 		0797462266FAB846BF5265803C373AC4 /* Appodeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Appodeal.framework; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 		24F7456375231A10846C21DDBA7915FA /* CLSLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSLogging.h; path = iOS/Crashlytics.framework/Headers/CLSLogging.h; sourceTree = "<group>"; };
 		255183AF3768832E75E920C23E13B392 /* Pods-Aquaz Widget-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Aquaz Widget-dummy.m"; sourceTree = "<group>"; };
 		2609D53D7ACDAED9CD1B5CCC276F3CB0 /* IronSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IronSource.framework; path = APDIronSourceAdapter.embeddedframework/IronSource.framework; sourceTree = "<group>"; };
-		2672F628FFEF8B27845636D450C23A89 /* Pods_AquazPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AquazPro.framework; path = "Pods-AquazPro.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2672F628FFEF8B27845636D450C23A89 /* Pods_AquazPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		275A51B445870C19273F03277840C023 /* Pods-AquazPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AquazPro.release.xcconfig"; sourceTree = "<group>"; };
 		2C9809CAC35F4A5C0BF5D41BBE92A7C2 /* MPUnmutedBtn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "MPUnmutedBtn@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPUnmutedBtn@2x.png"; sourceTree = "<group>"; };
 		2D352FA10EDBA9F989E818DB246F4F4E /* MMWormhole-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MMWormhole-dummy.m"; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 		60C055738D9F2995FEDDCF30A8E3AD55 /* Pods-AquazPro Widget-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AquazPro Widget-resources.sh"; sourceTree = "<group>"; };
 		635F8687FB386CB1DDCFE04896FEFF15 /* MPCloseBtn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "MPCloseBtn@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn@2x.png"; sourceTree = "<group>"; };
 		63B928C5D32A3BA648EFDBC758DDDF68 /* Fabric.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Fabric.h; path = iOS/Fabric.framework/Headers/Fabric.h; sourceTree = "<group>"; };
-		65777BF8DED603C4C1EEBFB8E1CD65F7 /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Aquaz.framework; path = "Pods-Aquaz.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		65777BF8DED603C4C1EEBFB8E1CD65F7 /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A9EEF418C183E0B68CE6C3BD76495B3 /* SDStatusBarOverriderPost8_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost8_3.h; path = SDStatusBarManager/SDStatusBarOverriderPost8_3.h; sourceTree = "<group>"; };
 		6B7FA7417EE94A3007A470403ED2526A /* Pods-AquazPro Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AquazPro Widget.release.xcconfig"; sourceTree = "<group>"; };
 		6D802F941C63FC49D57ADF6E6E483168 /* libAPDAppLovinAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDAppLovinAdapter.a; path = APDAppLovinAdapter.embeddedframework/libAPDAppLovinAdapter.a; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 		7BEB280B923FE179EA776F1B0677D183 /* libAPDMobvistaAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDMobvistaAdapter.a; path = APDMobvistaAdapter.embeddedframework/libAPDMobvistaAdapter.a; sourceTree = "<group>"; };
 		7C41032F11D227212200BA5E850AC479 /* Pods-Aquaz.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Aquaz.modulemap"; sourceTree = "<group>"; };
 		7DF962534F19BE579AE94927ACE8BD17 /* MMWormholeSessionFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionFileTransiting.m; path = Source/MMWormholeSessionFileTransiting.m; sourceTree = "<group>"; };
-		7FDA87EC6D85E220D93465C423865400 /* Pods_AquazPro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AquazPro_Widget.framework; path = "Pods-AquazPro Widget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FDA87EC6D85E220D93465C423865400 /* Pods_AquazPro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		807E0130CF4932E9CE76C5729E81B36C /* VungleSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VungleSDK.framework; path = APDVungleAdapter.embeddedframework/VungleSDK.framework; sourceTree = "<group>"; };
 		84F2367AD6426B342BEA87764C9C97AD /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87904B073DD9D590E0BA644E9BC0079C /* SimulatorStatusMagic-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SimulatorStatusMagic-prefix.pch"; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 		8B60B9E8723B8D3BD0E63D0979AB714F /* SDStatusBarOverriderPost11_0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost11_0.h; path = SDStatusBarManager/SDStatusBarOverriderPost11_0.h; sourceTree = "<group>"; };
 		8ED80B478ECC701B42C9D72BB527B5C3 /* Pods-AquazPro-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AquazPro-umbrella.h"; sourceTree = "<group>"; };
 		938E8C1062C1AC790BA033F6F92DBA84 /* Crashlytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Crashlytics.h; path = iOS/Crashlytics.framework/Headers/Crashlytics.h; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9584B1408A329008BF51A54F14422C1C /* SimulatorStatusMagic.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SimulatorStatusMagic.modulemap; sourceTree = "<group>"; };
 		9588A46115632DCA27CE1F2FC82C5ECD /* SDStatusBarOverriderPre8_3.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarOverriderPre8_3.m; path = SDStatusBarManager/SDStatusBarOverriderPre8_3.m; sourceTree = "<group>"; };
 		95953931BE5DEB867182A97BDE982ED8 /* MMWormhole.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MMWormhole.modulemap; sourceTree = "<group>"; };
@@ -219,7 +219,7 @@
 		BBE7327B429B39D8E30726B5AE7B83BE /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
 		BE46285B58AAA7FDA20F3CC1ED92A28F /* Pods-Aquaz-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Aquaz-acknowledgements.markdown"; sourceTree = "<group>"; };
 		BE6536E304C995F14F4A5038B7DA4727 /* MPCloseButtonX@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "MPCloseButtonX@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseButtonX@2x.png"; sourceTree = "<group>"; };
-		C2DA621A4F763E7330F589BFD7EAA2C6 /* Pods_Aquaz_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Aquaz_Widget.framework; path = "Pods-Aquaz Widget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2DA621A4F763E7330F589BFD7EAA2C6 /* Pods_Aquaz_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C48E82C99D825C77C9BDF62D630D11F9 /* Pods-Aquaz Widget.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Aquaz Widget.modulemap"; sourceTree = "<group>"; };
 		C830453D1AD9418ABDD567AD1B6492E4 /* SDStatusBarManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarManager.h; path = SDStatusBarManager/SDStatusBarManager.h; sourceTree = "<group>"; };
 		C899ADC41A774BE872D7E5D0922B34AD /* SDStatusBarOverriderPost9_0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost9_0.h; path = SDStatusBarManager/SDStatusBarOverriderPost9_0.h; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 		CF74F015E4E171C34ADDCC67BDDECDFB /* MMWormholeSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSession.h; path = Source/MMWormholeSession.h; sourceTree = "<group>"; };
 		D708A74794EC58886EA28C7267C52906 /* SimulatorStatusMagic-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SimulatorStatusMagic-dummy.m"; sourceTree = "<group>"; };
 		D717A26FBCFB2EECFDBD7D9BAE3F09E2 /* TapjoyResources.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = TapjoyResources.bundle; path = APDTapjoyAdapter.embeddedframework/Resources/TapjoyResources.bundle; sourceTree = "<group>"; };
-		DCB942965715699762F439525D9F1B1E /* MMWormhole.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MMWormhole.framework; path = MMWormhole.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCB942965715699762F439525D9F1B1E /* MMWormhole.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MMWormhole.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD8A766BE7BC03FAE22292C666634142 /* MPMutedBtn@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "MPMutedBtn@2x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPMutedBtn@2x.png"; sourceTree = "<group>"; };
 		DDE59AE76BDE32DEF9A206716B0ECCF9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE6AC42E0B4D3BE11419EB1A77D54949 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -397,7 +397,6 @@
 				844D337990D9BED51BAB74E37334083C /* Core */,
 				26B5C7C1B9D979A766AB4F90F944434F /* Support Files */,
 			);
-			name = MMWormhole;
 			path = MMWormhole;
 			sourceTree = "<group>";
 		};
@@ -621,7 +620,6 @@
 				938E8C1062C1AC790BA033F6F92DBA84 /* Crashlytics.h */,
 				491CD938260BE1260BB95D4BCE683466 /* Frameworks */,
 			);
-			name = Crashlytics;
 			path = Crashlytics;
 			sourceTree = "<group>";
 		};
@@ -701,7 +699,6 @@
 				9588A46115632DCA27CE1F2FC82C5ECD /* SDStatusBarOverriderPre8_3.m */,
 				1B7AE96721637221CB0738B926F837BA /* Support Files */,
 			);
-			name = SimulatorStatusMagic;
 			path = SimulatorStatusMagic;
 			sourceTree = "<group>";
 		};
@@ -785,7 +782,6 @@
 				63B928C5D32A3BA648EFDBC758DDDF68 /* Fabric.h */,
 				87E018015B8A6218182C809A4DD04B22 /* Frameworks */,
 			);
-			name = Fabric;
 			path = Fabric;
 			sourceTree = "<group>";
 		};
@@ -815,7 +811,6 @@
 				D0C2B7DDB235BE335948D91155A7F507 /* UnityAdapter */,
 				1AD6161FB491C7E18F47DBB4F2D30125 /* VungleAdapter */,
 			);
-			name = Appodeal;
 			path = Appodeal;
 			sourceTree = "<group>";
 		};
@@ -1296,7 +1291,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MMWormhole/MMWormhole-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MMWormhole/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MMWormhole/MMWormhole.modulemap";
 				PRODUCT_MODULE_NAME = MMWormhole;
@@ -1362,7 +1357,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MMWormhole/MMWormhole-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MMWormhole/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MMWormhole/MMWormhole.modulemap";
 				PRODUCT_MODULE_NAME = MMWormhole;
@@ -1433,8 +1428,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -1489,7 +1483,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SimulatorStatusMagic/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic.modulemap";
 				PRODUCT_MODULE_NAME = SimulatorStatusMagic;
@@ -1723,7 +1717,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SimulatorStatusMagic/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic.modulemap";
 				PRODUCT_MODULE_NAME = SimulatorStatusMagic;
