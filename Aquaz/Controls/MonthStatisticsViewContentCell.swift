@@ -30,7 +30,7 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
       if getDayInfo().isCurrentMonth && !getDayInfo().isFuture {
         circleLayer = CAShapeLayer()
         circleLayer.lineWidth = monthStatisticsContentView.dayIntakeLineWidth
-        circleLayer.lineCap = kCALineCapRound
+        circleLayer.lineCap = CAShapeLayerLineCap.round
         circleLayer.fillColor = nil
         circleLayer.strokeColor = monthStatisticsContentView.dayIntakeBackgroundColor.cgColor
         contentView.layer.addSublayer(circleLayer)
@@ -38,7 +38,7 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
         if let value = value {
           arcLayer = CAShapeLayer()
           arcLayer.lineWidth = monthStatisticsContentView.dayIntakeLineWidth
-          arcLayer.lineCap = kCALineCapRound
+          arcLayer.lineCap = CAShapeLayerLineCap.round
           arcLayer.fillColor = nil
           arcLayer.strokeStart = 0
           if value < 1 {
@@ -59,8 +59,8 @@ class MonthStatisticsContentViewCell: CalendarContentViewCell {
             animation.duration = 0.4
             animation.fromValue = 0
             animation.toValue = value
-            animation.fillMode = kCAFillModeForwards
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            animation.fillMode = CAMediaTimingFillMode.forwards
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
             animation.isRemovedOnCompletion = false
             arcLayer.strokeEnd = CGFloat(value)
             arcLayer.add(animation, forKey: "animateStrokeEnd")

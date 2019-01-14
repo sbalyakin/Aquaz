@@ -44,7 +44,7 @@ import UIKit
       let imageSize = calcThumbImageSize()
       let thumbRect = CGRect(origin: CGPoint.zero, size: imageSize)
       let thumbImage = StyleImages.imageOfThumb(frame: thumbRect)
-      setThumbImage(thumbImage, for: UIControlState())
+      setThumbImage(thumbImage, for: UIControl.State())
     }
   }
   

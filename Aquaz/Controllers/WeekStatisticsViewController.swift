@@ -92,8 +92,8 @@ class WeekStatisticsViewController: UIViewController {
     weekStatisticsView.backgroundColor = StyleKit.pageBackgroundColor
     weekStatisticsView.barsColor = StyleKit.weekStatisticsChartColor
     weekStatisticsView.goalLineColor = StyleKit.weekStatisticsGoalColor
-    weekStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
-    weekStatisticsView.daysFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    weekStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
+    weekStatisticsView.daysFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
     weekStatisticsView.daysColor = UIColor.darkGray
     weekStatisticsView.todayColor = StyleKit.weekStatisticsTodayTextColor
     weekStatisticsView.scaleMargin = 10
@@ -109,7 +109,7 @@ class WeekStatisticsViewController: UIViewController {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: NSNotification.Name.UIContentSizeCategoryDidChange,
+      name: UIContentSizeCategory.didChangeNotification,
       object: nil)
     
     #if AQUAZLITE
@@ -145,9 +145,9 @@ class WeekStatisticsViewController: UIViewController {
   }
 
   @objc func preferredContentSizeChanged() {
-    datePeriodLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
-    weekStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
-    weekStatisticsView.daysFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    datePeriodLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
+    weekStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
+    weekStatisticsView.daysFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
     view.invalidateIntrinsicContentSize()
   }
 

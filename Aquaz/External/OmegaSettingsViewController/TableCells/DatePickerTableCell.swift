@@ -13,7 +13,7 @@ enum DatePickerTableCellMode {
   case date // Displays month, day, and year depending on the locale setting (e.g. November | 15 | 2007)
   case dateAndTime // Displays date, hour, minute, and optionally AM/PM designation depending on the locale setting (e.g. Wed Nov 15 | 6 | 53 | PM)
   
-  var datePickerMode: UIDatePickerMode {
+  var datePickerMode: UIDatePicker.Mode {
     switch self {
     case .time: return .time
     case .date: return .date

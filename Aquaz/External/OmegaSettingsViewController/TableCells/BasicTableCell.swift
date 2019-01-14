@@ -13,10 +13,10 @@ class BasicTableCell: TableCell {
   var title: String { didSet { uiCell?.textLabel?.text = title } }
   var textColor: UIColor? { didSet { uiCell?.textLabel?.textColor = textColor ?? UIColor.black } }
   var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
-  var accessoryType: UITableViewCellAccessoryType? { didSet { uiCell?.accessoryType = accessoryType ?? .none } }
+  var accessoryType: UITableViewCell.AccessoryType? { didSet { uiCell?.accessoryType = accessoryType ?? .none } }
   var uiCell: UITableViewCell?
   
-  init(title: String, container: TableCellsContainer, accessoryType: UITableViewCellAccessoryType? = nil) {
+  init(title: String, container: TableCellsContainer, accessoryType: UITableViewCell.AccessoryType? = nil) {
     self.title = title
     self.accessoryType = accessoryType
     super.init(container: container)

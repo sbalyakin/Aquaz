@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let welcomeViewController = "Welcome Wizard"
   }
   
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     Fabric.with([Crashlytics()])
     
     #if DEBUG
@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       Settings.sharedInstance.generalHasLaunchedOnce.value = true
     } else {
       if let options = launchOptions {
-        if let _ = options[UIApplicationLaunchOptionsKey.localNotification] as? UILocalNotification {
+        if let _ = options[UIApplication.LaunchOptionsKey.localNotification] as? UILocalNotification {
           showDayViewControllerForToday()
         }
       }

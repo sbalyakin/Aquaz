@@ -195,7 +195,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     
     setupMultiprogressControl()
     
-    intakeButton.setTitle("", for: UIControlState())
+    intakeButton.setTitle("", for: UIControl.State())
     
     updateUIRelatedToCurrentDate(animated: false)
     
@@ -680,14 +680,14 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     let text = String.localizedStringWithFormat(localizedStrings.intakeButtonTextTemplate, intakeText, waterGoalText)
     
     if totalDehydrationAmount == 0 {
-      intakeButton.setAttributedTitle(nil, for: UIControlState())
+      intakeButton.setAttributedTitle(nil, for: UIControl.State())
 
       if animated {
-        intakeButton.setTitle(text, for: UIControlState())
+        intakeButton.setTitle(text, for: UIControl.State())
         intakeButton.layoutIfNeeded()
       } else {
         UIView.performWithoutAnimation {
-          self.intakeButton.setTitle(text, for: UIControlState())
+          self.intakeButton.setTitle(text, for: UIControl.State())
           self.intakeButton.layoutIfNeeded()
         }
       }
@@ -696,11 +696,11 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
       // In order to make it noticeable paint water goal part of title with different color.
       let coloredText = makeColoredText(text as NSString, mainColor: UIColor.darkGray, coloredParts: [(text: waterGoalText, color: StyleKit.wineColor)])
       if animated {
-        intakeButton.setAttributedTitle(coloredText, for: UIControlState())
+        intakeButton.setAttributedTitle(coloredText, for: UIControl.State())
         intakeButton.layoutIfNeeded()
       } else {
         UIView.performWithoutAnimation {
-          self.intakeButton.setAttributedTitle(coloredText, for: UIControlState())
+          self.intakeButton.setAttributedTitle(coloredText, for: UIControl.State())
           self.intakeButton.layoutIfNeeded()
         }
       }
@@ -708,14 +708,14 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   fileprivate func makeColoredText(_ text: NSString, mainColor: UIColor, coloredParts: [(text: String, color: UIColor)]) -> NSAttributedString {
-    let attributes = [NSAttributedStringKey.foregroundColor: mainColor]
+    let attributes = [NSAttributedString.Key.foregroundColor: mainColor]
     let coloredText = NSMutableAttributedString(string: text as String, attributes: attributes)
     coloredText.beginEditing()
     
     for (textPart, color) in coloredParts {
       let range = text.range(of: textPart)
       if range.length > 0 {
-        coloredText.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: range)
+        coloredText.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
       }
     }
     

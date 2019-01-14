@@ -33,7 +33,7 @@ class CalendarViewController: UIViewController {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: NSNotification.Name.UIContentSizeCategoryDidChange,
+      name: UIContentSizeCategory.didChangeNotification,
       object: nil)
   }
   
@@ -53,8 +53,8 @@ class CalendarViewController: UIViewController {
     calendarView.selectedDayBackgroundColor = StyleKit.calendarSelectedDayBackgroundColor
     calendarView.todayBackgroundColor = StyleKit.calendarTodayBackgroundColor
     calendarView.todayTextColor = StyleKit.calendarTodayTextColor
-    calendarView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-    calendarView.weekDayFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    calendarView.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+    calendarView.weekDayFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
     calendarView.futureDaysTransparency = 0.1
     calendarView.resetToDisplayMonthDate(date)
     calendarView.selectedDate = date
@@ -66,9 +66,9 @@ class CalendarViewController: UIViewController {
   }
   
   @objc func preferredContentSizeChanged() {
-    currentMonthLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
-    calendarView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-    calendarView.weekDayFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    currentMonthLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
+    calendarView.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+    calendarView.weekDayFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
     calendarView.refresh()
     view.invalidateIntrinsicContentSize()
   }

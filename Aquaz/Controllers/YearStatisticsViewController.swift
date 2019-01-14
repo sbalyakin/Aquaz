@@ -52,7 +52,7 @@ class YearStatisticsViewController: UIViewController {
     yearStatisticsView.scaleTextColor = UIColor.darkGray
     yearStatisticsView.gridColor = UIColor(red: 230/255, green: 231/255, blue: 232/255, alpha: 1.0)
     yearStatisticsView.pinsColor = UIColor.white
-    yearStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    yearStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
     yearStatisticsView.dataSource = self
     
     yearLabel.backgroundColor = StyleKit.pageBackgroundColor // remove blending
@@ -64,7 +64,7 @@ class YearStatisticsViewController: UIViewController {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: NSNotification.Name.UIContentSizeCategoryDidChange,
+      name: UIContentSizeCategory.didChangeNotification,
       object: nil)
     
     #if AQUAZLITE
@@ -126,8 +126,8 @@ class YearStatisticsViewController: UIViewController {
   }
 
   @objc func preferredContentSizeChanged() {
-    yearLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
-    yearStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    yearLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
+    yearStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
     view.invalidateIntrinsicContentSize()
   }
   

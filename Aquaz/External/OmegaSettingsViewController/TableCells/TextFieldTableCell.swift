@@ -14,7 +14,7 @@ class TextFieldTableCell<Value: CustomStringConvertible>: TableCellWithValue<Val
   var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
   var uiCell: UITextFieldTableViewCell?
   
-  var textFieldBorderStyle: UITextBorderStyle {
+  var textFieldBorderStyle: UITextField.BorderStyle {
     didSet {
       uiCell?.textField.borderStyle = textFieldBorderStyle
     }
@@ -36,7 +36,7 @@ class TextFieldTableCell<Value: CustomStringConvertible>: TableCellWithValue<Val
 
   typealias ValueFromStringFunction = (String) -> Value?
   
-  init(title: String, value: Value, valueFromStringFunction: @escaping ValueFromStringFunction, container: TableCellsContainer, keyboardType: UIKeyboardType = .default, textFieldBorderStyle: UITextBorderStyle = .none) {
+  init(title: String, value: Value, valueFromStringFunction: @escaping ValueFromStringFunction, container: TableCellsContainer, keyboardType: UIKeyboardType = .default, textFieldBorderStyle: UITextField.BorderStyle = .none) {
     self.title = title
     self.textFieldBorderStyle = textFieldBorderStyle
     self.keyboardType = keyboardType

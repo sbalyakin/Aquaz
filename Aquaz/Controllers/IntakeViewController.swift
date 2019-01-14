@@ -98,7 +98,7 @@ class IntakeViewController: UIViewController {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: NSNotification.Name.UIContentSizeCategoryDidChange,
+      name: UIContentSizeCategory.didChangeNotification,
       object: nil)
   }
   
@@ -161,7 +161,7 @@ class IntakeViewController: UIViewController {
   }
 
   @objc func preferredContentSizeChanged() {
-    amountLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+    amountLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
     view.invalidateIntrinsicContentSize()
   }
 
@@ -189,7 +189,7 @@ class IntakeViewController: UIViewController {
   
   fileprivate func setupApplyButton() {
     let title = (viewMode == .add) ? localizedStrings.addButtonTitle : localizedStrings.applyButtonTitle
-    applyButton.setTitle(title, for: UIControlState())
+    applyButton.setTitle(title, for: UIControl.State())
   }
 
   fileprivate func applyColorScheme() {

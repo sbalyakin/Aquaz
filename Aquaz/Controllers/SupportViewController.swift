@@ -97,7 +97,7 @@ class SupportViewController: UIViewController {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: NSNotification.Name.UIContentSizeCategoryDidChange,
+      name: UIContentSizeCategory.didChangeNotification,
       object: nil)
   }
 
@@ -106,9 +106,9 @@ class SupportViewController: UIViewController {
   }
   
   @objc func preferredContentSizeChanged() {
-    applicationTitle.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1)
-    tellToFriendTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-    reviewTextView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+    applicationTitle.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
+    tellToFriendTextView.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+    reviewTextView.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
     view.invalidateIntrinsicContentSize()
   }
 

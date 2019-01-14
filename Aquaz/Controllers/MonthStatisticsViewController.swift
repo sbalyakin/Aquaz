@@ -39,8 +39,8 @@ class MonthStatisticsViewController: UIViewController {
 
   fileprivate func setupUI() {
     monthStatisticsView.backgroundColor = StyleKit.pageBackgroundColor
-    monthStatisticsView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-    monthStatisticsView.weekDayFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    monthStatisticsView.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+    monthStatisticsView.weekDayFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
     monthStatisticsView.workDayTextColor = StyleKit.calendarWorkDayTextColor
     monthStatisticsView.workDayBackgroundColor = UIColor.white
     monthStatisticsView.weekendBackgroundColor = UIColor.white
@@ -68,7 +68,7 @@ class MonthStatisticsViewController: UIViewController {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(preferredContentSizeChanged),
-      name: NSNotification.Name.UIContentSizeCategoryDidChange,
+      name: UIContentSizeCategory.didChangeNotification,
       object: nil)
     
     #if AQUAZLITE
@@ -105,9 +105,9 @@ class MonthStatisticsViewController: UIViewController {
   }
   
   @objc func preferredContentSizeChanged() {
-    monthLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
-    monthStatisticsView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-    monthStatisticsView.weekDayFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    monthLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
+    monthStatisticsView.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+    monthStatisticsView.weekDayFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
     monthStatisticsView.refresh()
     view.invalidateIntrinsicContentSize()
   }
