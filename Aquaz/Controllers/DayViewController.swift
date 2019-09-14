@@ -982,7 +982,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
 
   fileprivate func switchToNextHelpTip() {
-    Settings.sharedInstance.uiDayPageHelpTipToShow.value = (Settings.DayPageHelpTip(rawValue: Settings.sharedInstance.uiDayPageHelpTipToShow.value.rawValue + 1) ?? .none)!
+    Settings.sharedInstance.uiDayPageHelpTipToShow.value = (Settings.DayPageHelpTip(rawValue: Settings.sharedInstance.uiDayPageHelpTipToShow.value.rawValue + 1) ?? Settings.DayPageHelpTip.none)!
     
     // Reset help tips counter. Help tips should be shown after every 2 intakes.
     Settings.sharedInstance.uiDayPageIntakesCountTillHelpTip.value = 2

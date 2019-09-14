@@ -170,7 +170,7 @@ class OmegaSettingsViewController: UIViewController {
     pickerTableCellHeight: UIPickerViewHeight = .medium) -> RightDetailTableCell<TValue>
     where TCollection.Iterator.Element == TValue, TCollection.Index == Int
   {
-    let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: .none)
+    let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: UITableViewCell.AccessoryType.none)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     cell.supportingTableCell = PickerTableCell(value: settingsItem.value, collection: collection, container: self, height: pickerTableCellHeight)
     
@@ -188,7 +188,7 @@ class OmegaSettingsViewController: UIViewController {
     pickerTableCellHeight: UIPickerViewHeight = .medium) -> RightDetailTableCell<TValue>
     where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int
   {
-    let cell = RightDetailTableCell(title: title, value: value, container: self, accessoryType: .none)
+    let cell = RightDetailTableCell(title: title, value: value, container: self, accessoryType: UITableViewCell.AccessoryType.none)
     cell.supportingTableCell = PickerTableCell(value: value, collection: collection, container: self, height: pickerTableCellHeight)
     
     cell.stringFromValueFunction = stringFromValueFunction
