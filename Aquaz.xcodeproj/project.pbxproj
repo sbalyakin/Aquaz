@@ -302,7 +302,6 @@
 		A58DE75A1DD90F8400F65990 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DEB0601BA75B4B00ABD3C8 /* HealthKit.framework */; };
 		A58DE75B1DD90F8400F65990 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D251961AD2511E001E6644 /* NotificationCenter.framework */; };
 		A58DE75E1DD90F8400F65990 /* WidgetImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8443DF411B29737D00FDD294 /* WidgetImages.xcassets */; };
-		A58DE75F1DD90F8400F65990 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CE71B3854E600599D81 /* InfoPlist.strings */; };
 		A58DE7601DD90F8400F65990 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844B248D1B21991B0059E28A /* MainInterface.storyboard */; };
 		A58DE7611DD90F8400F65990 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 844B248A1B2195490059E28A /* Localizable.strings */; };
 		A58DE76E1DD90F9400F65990 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A583F5F41BEE5BC8000E3349 /* Assets.xcassets */; };
@@ -373,7 +372,6 @@
 		A5B8F9961A87DF3D00145705 /* magic.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98A1A87DF3D00145705 /* magic.caf */; };
 		A5B8F9971A87DF3D00145705 /* tiny-bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */; };
 		A5B8F9981A87DF3D00145705 /* whistle.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98C1A87DF3D00145705 /* whistle.caf */; };
-		A5C18C5D1DFA08D8003E9C7D /* Aquaz-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5C18C5C1DFA08D8003E9C7D /* Aquaz-Info.plist */; };
 		A5C18C641DFA0937003E9C7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5C18C621DFA0921003E9C7D /* InfoPlist.strings */; };
 		A5C70BBB1DEDC409006F7BFC /* FullVersionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70BB91DEDC409006F7BFC /* FullVersionController.swift */; };
 		A5C70BBE1DEDC47A006F7BFC /* InAppPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70BBC1DEDC47A006F7BFC /* InAppPurchaseManager.swift */; };
@@ -1810,6 +1808,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				Base,
 				ru,
 				en,
@@ -1843,7 +1842,6 @@
 				A5AAA1D91A77A9CF008C3C56 /* LaunchScreen.xib in Resources */,
 				840D5A821B29B7C500388920 /* InfoBannerView.xib in Resources */,
 				A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */,
-				A5C18C5D1DFA08D8003E9C7D /* Aquaz-Info.plist in Resources */,
 				A52E0CDB1B3854E500599D81 /* InfoPlist.strings in Resources */,
 				A57D2BEB1ACFDE0D00619D62 /* Welcome.storyboard in Resources */,
 				84669A7719DAD78D003C2263 /* Main.storyboard in Resources */,
@@ -1905,21 +1903,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5C70BBF1DEDF288006F7BFC /* Main.storyboard in Resources */,
-				A5C18C641DFA0937003E9C7D /* InfoPlist.strings in Resources */,
+				A58DE7291DD90F3900F65990 /* Images.xcassets in Resources */,
 				A58DE71B1DD90F3900F65990 /* Localizable.strings in Resources */,
-				A58DE71C1DD90F3900F65990 /* glass.caf in Resources */,
+				A58DE7281DD90F3900F65990 /* LaunchScreen.xib in Resources */,
 				A58DE71D1DD90F3900F65990 /* InfoBannerView.xib in Resources */,
+				A58DE7231DD90F3900F65990 /* DrinkCollectionViewCell.xib in Resources */,
+				A5C18C641DFA0937003E9C7D /* InfoPlist.strings in Resources */,
+				A58DE7211DD90F3900F65990 /* Welcome.storyboard in Resources */,
+				A5C70BBF1DEDF288006F7BFC /* Main.storyboard in Resources */,
+				A58DE71C1DD90F3900F65990 /* glass.caf in Resources */,
 				A58DE71E1DD90F3900F65990 /* tiny-bell.caf in Resources */,
 				A58DE71F1DD90F3900F65990 /* aqua.caf in Resources */,
 				A58DE7201DD90F3900F65990 /* chime.caf in Resources */,
-				A58DE7211DD90F3900F65990 /* Welcome.storyboard in Resources */,
-				A58DE7231DD90F3900F65990 /* DrinkCollectionViewCell.xib in Resources */,
 				A58DE7251DD90F3900F65990 /* chirp.caf in Resources */,
 				A58DE7261DD90F3900F65990 /* whistle.caf in Resources */,
 				A58DE7271DD90F3900F65990 /* magic.caf in Resources */,
-				A58DE7281DD90F3900F65990 /* LaunchScreen.xib in Resources */,
-				A58DE7291DD90F3900F65990 /* Images.xcassets in Resources */,
 				A58DE72A1DD90F3900F65990 /* bells.caf in Resources */,
 				A58DE72B1DD90F3900F65990 /* alarm.caf in Resources */,
 				A58DE72C1DD90F3900F65990 /* hand-bell.caf in Resources */,
@@ -1933,10 +1931,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A58DE75E1DD90F8400F65990 /* WidgetImages.xcassets in Resources */,
-				A58DE75F1DD90F8400F65990 /* InfoPlist.strings in Resources */,
+				A58D16171DFC8CA80020B106 /* InfoPlist.strings in Resources */,
 				A58DE7601DD90F8400F65990 /* MainInterface.storyboard in Resources */,
 				A58DE7611DD90F8400F65990 /* Localizable.strings in Resources */,
-				A58D16171DFC8CA80020B106 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3189,7 +3186,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -3216,7 +3213,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -3242,7 +3239,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -3268,7 +3265,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -3428,7 +3425,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -3456,7 +3453,7 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -3483,7 +3480,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -3510,7 +3507,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};

@@ -7,8 +7,9 @@
 //
 
 import WatchKit
+import UserNotifications
 
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
+class ExtensionDelegate: NSObject, WKExtensionDelegate, UNUserNotificationCenterDelegate {
   
   override init() {
     super.init()
@@ -34,4 +35,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     // Use this method to pause ongoing tasks, disable timers, etc.
   }
   
+  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    if let controller = WKExtension.shared().rootInterfaceController as? MainInterfaceController {
+        // Call to a custom method in the root interface controller to handle the notification
+      controller.customHandleAction(withIdentifier: response.actionIdentifier, for: response.notification)
+      completionHandler()
+    }
+  }
 }
