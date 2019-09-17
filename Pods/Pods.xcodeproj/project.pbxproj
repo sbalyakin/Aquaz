@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = Appodeal;
+			productName = Appodeal;
 		};
 		ABB048B191245233986A7CD75FE412A5 /* Fabric */ = {
 			isa = PBXAggregateTarget;
@@ -24,6 +25,7 @@
 			dependencies = (
 			);
 			name = Fabric;
+			productName = Fabric;
 		};
 		C0E41540D6862472ED7F2FA11669BE1F /* Crashlytics */ = {
 			isa = PBXAggregateTarget;
@@ -34,6 +36,7 @@
 				C9CEFEFAAAEDB8CD947737FA56C849D4 /* PBXTargetDependency */,
 			);
 			name = Crashlytics;
+			productName = Crashlytics;
 		};
 /* End PBXAggregateTarget section */
 
@@ -278,13 +281,13 @@
 		25BE8DCCBA6010279DDC8AE44DB9725F /* MMWormholeFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeFileTransiting.m; path = Source/MMWormholeFileTransiting.m; sourceTree = "<group>"; };
 		25C4D1FDA670CB87DA74F93E2B65E32E /* Pods-Aquaz-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Aquaz-acknowledgements.markdown"; sourceTree = "<group>"; };
 		26F01A8698426675B7CBB756EA7F77C5 /* Pods-AquazPro Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AquazPro Widget.debug.xcconfig"; sourceTree = "<group>"; };
-		28A6817605B0C8C643E72CDD35699E7B /* Pods_AquazPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AquazPro.framework; path = "Pods-AquazPro.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		28A6817605B0C8C643E72CDD35699E7B /* Pods_AquazPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		292D11127402DD61AA66F1F9B4F37B8F /* CLSAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSAttributes.h; path = iOS/Crashlytics.framework/Headers/CLSAttributes.h; sourceTree = "<group>"; };
 		2D8DA8BB910CCAB9448FA3981581B92C /* MMWormhole.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MMWormhole.xcconfig; sourceTree = "<group>"; };
 		2F1696CC9F0D65A9C7564FE72835187C /* MMWormholeSessionContextTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionContextTransiting.h; path = Source/MMWormholeSessionContextTransiting.h; sourceTree = "<group>"; };
 		32E34B181CAEFC89184A73DD8FCCB41A /* Pods-Aquaz-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Aquaz-dummy.m"; sourceTree = "<group>"; };
 		34DCA632CDB9F20CA8C2A4CA8A5F279E /* Pods-AquazPro.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-AquazPro.modulemap"; sourceTree = "<group>"; };
-		35B0931646046FCBDD0999EE36EA3D90 /* Pods_Aquaz_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Aquaz_Widget.framework; path = "Pods-Aquaz Widget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		35B0931646046FCBDD0999EE36EA3D90 /* Pods_Aquaz_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A85D60E361BC6948781B364275D4C21 /* Pods-AquazPro-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AquazPro-acknowledgements.plist"; sourceTree = "<group>"; };
 		3AFF9DF2CBF989FA3BC00E6E4C048D2D /* JDFTooltipManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JDFTooltipManager.m; path = Pod/Classes/JDFTooltipManager.m; sourceTree = "<group>"; };
 		3C4AE593B70D40A02F92C44876E33D9D /* MMWormhole-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMWormhole-umbrella.h"; sourceTree = "<group>"; };
@@ -327,10 +330,10 @@
 		75238B0789EF80CAD1F13E0E242E1B56 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
 		75857A7B5ACC140D992609BEEE2699E5 /* Pods-Aquaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.debug.xcconfig"; sourceTree = "<group>"; };
 		779D02FB286732A33E6649982FE68A9A /* MPCloseBtn.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = MPCloseBtn.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn.png; sourceTree = "<group>"; };
-		77F40BF55E0994DF2B97BEA4DD06E6D8 /* JDFTooltips.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = JDFTooltips.framework; path = JDFTooltips.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77F40BF55E0994DF2B97BEA4DD06E6D8 /* JDFTooltips.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JDFTooltips.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		789DDFEAAA260B560DD52D07F9199EBD /* SDStatusBarOverriderPost10_3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDStatusBarOverriderPost10_3.h; path = SDStatusBarManager/SDStatusBarOverriderPost10_3.h; sourceTree = "<group>"; };
 		7991CA894AC09CF8AE5E0DBA07E87391 /* JDFTooltips-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "JDFTooltips-Info.plist"; sourceTree = "<group>"; };
-		7F42EC94AFEDF8FBAC355A820F2F3FBD /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Aquaz.framework; path = "Pods-Aquaz.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F42EC94AFEDF8FBAC355A820F2F3FBD /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FC170AEFBF815A4B560A113E610BE83 /* MMWormholeSessionMessageTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionMessageTransiting.m; path = Source/MMWormholeSessionMessageTransiting.m; sourceTree = "<group>"; };
 		83619810E0E07594996D5B7B428A3229 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
 		851E37FAA7BBA15BDEFF6743EC0D6B49 /* MPCloseBtn@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "MPCloseBtn@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn@3x.png"; sourceTree = "<group>"; };
@@ -348,17 +351,17 @@
 		91D1CE6A9CE8CC830E8D80291602C782 /* MPDAAIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = MPDAAIcon.png; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MPDAAIcon.png; sourceTree = "<group>"; };
 		92D4C10519D60FFA21099F8BF12C52C1 /* MRAID.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = MRAID.bundle; path = APDTwitterMoPubAdapter.embeddedframework/Resources/MRAID.bundle; sourceTree = "<group>"; };
 		93A5D27C33919EAA8730C2A28CEA3AF2 /* UIView+JDFTooltips.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+JDFTooltips.m"; path = "Pod/Classes/UIView+JDFTooltips.m"; sourceTree = "<group>"; };
-		94788A2D4EB6338EE67E9FE4A23A438D /* Pods_AquazPro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AquazPro_Widget.framework; path = "Pods-AquazPro Widget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		94788A2D4EB6338EE67E9FE4A23A438D /* Pods_AquazPro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C9E39E0A09321DEDE8557BF93005276 /* AppodealAdExchangeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppodealAdExchangeSDK.framework; path = APDAppodealAdExchangeAdapter.embeddedframework/AppodealAdExchangeSDK.framework; sourceTree = "<group>"; };
 		9CAC58D03C6B7C52597A68AEDEF5D433 /* libAPDMyTargetAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDMyTargetAdapter.a; path = APDMyTargetAdapter.embeddedframework/libAPDMyTargetAdapter.a; sourceTree = "<group>"; };
 		9D5D170C857F9DDB8376F2DBB6CDBE0D /* libAPDStartAppAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDStartAppAdapter.a; path = APDStartAppAdapter.embeddedframework/libAPDStartAppAdapter.a; sourceTree = "<group>"; };
 		9D8DB0805C7CEA98228728C2168C714A /* CLSStackFrame.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSStackFrame.h; path = iOS/Crashlytics.framework/Headers/CLSStackFrame.h; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9FA55F64ABA8D3E2AFD91CE433A2AABF /* Appodeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Appodeal.framework; sourceTree = "<group>"; };
 		A1FAE41A4C6C03A342B9F694435B15C0 /* IronSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IronSource.framework; path = APDIronSourceAdapter.embeddedframework/IronSource.framework; sourceTree = "<group>"; };
 		A599EE6CD68B300FE09A018B24977E7D /* CLSReport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSReport.h; path = iOS/Crashlytics.framework/Headers/CLSReport.h; sourceTree = "<group>"; };
 		A61D3C017E1C3559B715A617D6E0DD90 /* libAPDUnityAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDUnityAdapter.a; path = APDUnityAdapter.embeddedframework/libAPDUnityAdapter.a; sourceTree = "<group>"; };
-		A787CDE742CEB6FDF5F73F556D790691 /* SimulatorStatusMagic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SimulatorStatusMagic.framework; path = SimulatorStatusMagic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A787CDE742CEB6FDF5F73F556D790691 /* SimulatorStatusMagic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SimulatorStatusMagic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8736DEED0CD0A29E637FA0824A08CA0 /* MMWormholeSessionFileTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionFileTransiting.h; path = Source/MMWormholeSessionFileTransiting.h; sourceTree = "<group>"; };
 		A8D2EEA2F24607D64B73108533CE4C28 /* MMWormholeSessionContextTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionContextTransiting.m; path = Source/MMWormholeSessionContextTransiting.m; sourceTree = "<group>"; };
 		A9DFFBF711DA35F34013419568BEDCAB /* SDStatusBarManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDStatusBarManager.m; path = SDStatusBarManager/SDStatusBarManager.m; sourceTree = "<group>"; };
@@ -397,7 +400,7 @@
 		D4A93B615E40631DE7F424E39FC87CB5 /* JDFTooltips-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JDFTooltips-prefix.pch"; sourceTree = "<group>"; };
 		D4BB8CA3F250138FA6FD9BD891B43F7A /* Appodeal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Appodeal.xcconfig; sourceTree = "<group>"; };
 		D5DE8CBA7B9A641563B6475195060662 /* MPMutedBtn@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "MPMutedBtn@3x.png"; path = "APDTwitterMoPubAdapter.embeddedframework/Resources/MPMutedBtn@3x.png"; sourceTree = "<group>"; };
-		D9C203AF2F5D868FFFED227C2527287F /* MMWormhole.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MMWormhole.framework; path = MMWormhole.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9C203AF2F5D868FFFED227C2527287F /* MMWormhole.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MMWormhole.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA0FF8220B1232997B11AD9638E73D7C /* libAPDAdColonyAdapter.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libAPDAdColonyAdapter.a; path = APDAdColonyAdapter.embeddedframework/libAPDAdColonyAdapter.a; sourceTree = "<group>"; };
 		DBD1A06E74082E2F326AD510FCF783B3 /* ANSCompatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ANSCompatibility.h; path = iOS/Crashlytics.framework/Headers/ANSCompatibility.h; sourceTree = "<group>"; };
 		DE85C67F3B6320C90E356175E80ABB48 /* Pods-Aquaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.release.xcconfig"; sourceTree = "<group>"; };
@@ -531,7 +534,6 @@
 				38B88B16925E8001FAC744BF36D39D50 /* Core */,
 				DB87DF52798EBD8689FE7307CA6FB6C8 /* Support Files */,
 			);
-			name = MMWormhole;
 			path = MMWormhole;
 			sourceTree = "<group>";
 		};
@@ -642,7 +644,6 @@
 				93A5D27C33919EAA8730C2A28CEA3AF2 /* UIView+JDFTooltips.m */,
 				6A9A2F726D6F8D87D324D11B5A4826F2 /* Support Files */,
 			);
-			name = JDFTooltips;
 			path = JDFTooltips;
 			sourceTree = "<group>";
 		};
@@ -786,7 +787,6 @@
 				8F834DE54046BB97827277787351DC8A /* SDStatusBarOverriderPre8_3.m */,
 				47B7CC6A494ABEA3DEEA87F754F7157C /* Support Files */,
 			);
-			name = SimulatorStatusMagic;
 			path = SimulatorStatusMagic;
 			sourceTree = "<group>";
 		};
@@ -823,7 +823,6 @@
 				97B63F92311A2644AAE5ECE7FA3A6FEA /* Frameworks */,
 				E81EE15F7C8DA25914F78BBD3A6090D0 /* Support Files */,
 			);
-			name = Fabric;
 			path = Fabric;
 			sourceTree = "<group>";
 		};
@@ -1024,7 +1023,6 @@
 				D3FE432AA0D91183165111CB923DF0A5 /* UnityAdapter */,
 				C76A989BACBA77580C2AD8225CEFF7C4 /* VungleAdapter */,
 			);
-			name = Appodeal;
 			path = Appodeal;
 			sourceTree = "<group>";
 		};
@@ -1113,7 +1111,6 @@
 				621A12081BD952BA7690E386D9D22791 /* Frameworks */,
 				13EA0D0EAFCC7F5A1CBE4A7A5967415F /* Support Files */,
 			);
-			name = Crashlytics;
 			path = Crashlytics;
 			sourceTree = "<group>";
 		};
@@ -1662,7 +1659,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic.modulemap";
 				PRODUCT_MODULE_NAME = SimulatorStatusMagic;
@@ -1694,7 +1691,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/JDFTooltips/JDFTooltips-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/JDFTooltips/JDFTooltips-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/JDFTooltips/JDFTooltips.modulemap";
 				PRODUCT_MODULE_NAME = JDFTooltips;
@@ -1726,7 +1723,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SimulatorStatusMagic/SimulatorStatusMagic.modulemap";
 				PRODUCT_MODULE_NAME = SimulatorStatusMagic;
@@ -1885,7 +1882,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1909,7 +1906,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/JDFTooltips/JDFTooltips-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/JDFTooltips/JDFTooltips-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/JDFTooltips/JDFTooltips.modulemap";
 				PRODUCT_MODULE_NAME = JDFTooltips;
@@ -2044,9 +2041,8 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
@@ -2145,7 +2141,7 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
@@ -2167,7 +2163,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MMWormhole/MMWormhole-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MMWormhole/MMWormhole-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MMWormhole/MMWormhole.modulemap";
 				PRODUCT_MODULE_NAME = MMWormhole;
@@ -2190,7 +2186,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2205,7 +2201,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2266,7 +2262,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2291,7 +2287,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MMWormhole/MMWormhole-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MMWormhole/MMWormhole-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MMWormhole/MMWormhole.modulemap";
 				PRODUCT_MODULE_NAME = MMWormhole;
