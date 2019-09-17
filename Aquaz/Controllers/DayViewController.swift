@@ -133,7 +133,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   var mode: Mode = .general
   
-  fileprivate var helpTip: JDFTooltipView?
+  fileprivate var helpTipManager: HelpTipManager = HelpTipManager()
   
   fileprivate struct Constants {
     static let selectDrinkViewControllerStoryboardID = "SelectDrinkViewController"
@@ -179,7 +179,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
-    helpTip?.hide(animated: true)
+    helpTipManager.hideHelpTip(animated: true)
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -504,7 +504,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
         UIHelper.adjustNavigationTitleViewSize(self.navigationItem)
       }
       
-      helpTip?.hide(animated: false)
+      helpTipManager.hideHelpTip(animated: false)
     }
   }
   
@@ -805,29 +805,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  fileprivate func showAlcoholicDehydrationHelpTip() {
-    DispatchQueue.main.async {
-      SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-        if self.view.window == nil || self.helpTip != nil {
-          return
-        }
-        
-        if let helpTip = JDFTooltipView(
-          targetView: self.intakeButton,
-          hostView: self.view,
-          tooltipText: self.localizedStrings.helpTipAlcoholicDehydration,
-          arrowDirection: .up,
-          width: self.view.frame.width / 2)
-        {
-          self.showHelpTip(helpTip)
-          Settings.sharedInstance.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value = true
-        }
-      }
-    }
-  }
-  
   fileprivate func showNextHelpTip() {
-    if helpTip != nil {
+    if helpTipManager.isHelpTipActive {
       return
     }
 
@@ -853,42 +832,60 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     case .none: break
     }
   }
+
+  fileprivate func showAlcoholicDehydrationHelpTip() {
+    DispatchQueue.main.async {
+      SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
+        if self.view.window == nil || self.helpTipManager.isHelpTipActive {
+          return
+        }
+        
+        self.helpTipManager.showHelpTip(
+          targetView: self.intakeButton,
+          hostView: self.view,
+          tooltipText: self.localizedStrings.helpTipAlcoholicDehydration,
+          arrowDirection: .up,
+          width: self.view.frame.width / 2)
+
+        Settings.sharedInstance.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value = true
+      }
+    }
+  }
   
+
   fileprivate func showHelpTipForSwipeToSeeDiary() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
       let bounds = self.selectDrinkViewController!.collectionView.bounds
       
-      if let helpTip = JDFTooltipView(
+      self.helpTipManager.showHelpTip(
         targetPoint: CGPoint(x: bounds.midX, y: bounds.height * 0.65),
         hostView: self.selectDrinkViewController!.collectionView,
         tooltipText: self.localizedStrings.helpTipSwipeToSeeDiary,
         arrowDirection: .up,
         width: self.view.frame.width / 2)
-      {
-        self.showHelpTip(helpTip)
-        self.switchToNextHelpTip()
-      }
+
+      self.switchToNextHelpTip()
     }
   }
   
   fileprivate func showHelpTipForSwipeToChangeDay() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
-      if let helpTip = JDFTooltipView(
-        targetView: self.navigationDateLabel,
-        hostView: self.navigationController?.view,
-        tooltipText: self.localizedStrings.helpTipSwipeToChangeDay,
-        arrowDirection: .up,
-        width: self.view.frame.width / 2)
-      {
-        self.showHelpTip(helpTip)
+      if let hostView = self.navigationController?.view {
+        self.helpTipManager.showHelpTip(
+          targetView: self.navigationDateLabel!,
+          hostView: hostView,
+          tooltipText: self.localizedStrings.helpTipSwipeToChangeDay,
+          arrowDirection: .up,
+          width: self.view.frame.width / 2)
+
         self.switchToNextHelpTip()
       }
     }
@@ -896,91 +893,75 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   fileprivate func showHelpTipForHighActivityMode() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
-      if let helpTip = JDFTooltipView(
+      self.helpTipManager.showHelpTip(
         targetView: self.highActivityButton,
         hostView: self.view,
         tooltipText: self.localizedStrings.helpTipHighActivityMode,
         arrowDirection: .up,
         width: self.view.frame.width / 2)
-      {
-        self.showHelpTip(helpTip)
-        self.switchToNextHelpTip()
-      }
+
+      self.switchToNextHelpTip()
     }
   }
   
   fileprivate func showHelpTipForHotWeatherMode() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
-      if let helpTip = JDFTooltipView(
+      self.helpTipManager.showHelpTip(
         targetView: self.hotDayButton,
         hostView: self.view,
         tooltipText: self.localizedStrings.helpTipHotWeatherMode,
         arrowDirection: .up,
         width: self.view.frame.width / 2)
-      {
-        self.showHelpTip(helpTip)
-        self.switchToNextHelpTip()
-      }
+
+      self.switchToNextHelpTip()
     }
   }
   
   fileprivate func showHelpTipForSwitchToPercentAndViceVersa() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
-      if let helpTip = JDFTooltipView(
+      self.helpTipManager.showHelpTip(
         targetView: self.intakeButton,
         hostView: self.view,
         tooltipText: self.localizedStrings.helpTipSwitchToPercentAndViceVersa,
         arrowDirection: .up,
         width: self.view.frame.width / 2)
-      {
-        self.showHelpTip(helpTip)
-        self.switchToNextHelpTip()
-      }
+
+      self.switchToNextHelpTip()
     }
   }
   
   fileprivate func showHelpTipForLongPressToChooseAlcohol() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
       let lastCellIndex = self.selectDrinkViewController!.collectionView.numberOfItems(inSection: 0) - 1
-      let cell = self.selectDrinkViewController!.collectionView.cellForItem(at: IndexPath(row: lastCellIndex, section: 0))
-      
-      if let tooltip = JDFTooltipView(
-        targetView: cell,
-        hostView: self.selectDrinkViewController!.collectionView,
-        tooltipText: self.localizedStrings.helpTipLongPressToChooseAlcohol,
-        arrowDirection: .down,
-        width: self.view.frame.width / 2)
-      {
-        self.showHelpTip(tooltip)
+      if let cell = self.selectDrinkViewController!.collectionView.cellForItem(at: IndexPath(row: lastCellIndex, section: 0)) {
+        self.helpTipManager.showHelpTip(
+          targetView: cell,
+          hostView: self.selectDrinkViewController!.collectionView,
+          tooltipText: self.localizedStrings.helpTipLongPressToChooseAlcohol,
+          arrowDirection: .down,
+          width: self.view.frame.width / 2)
+
         self.switchToNextHelpTip()
       }
     }
   }
   
-  fileprivate func showHelpTip(_ helpTip: JDFTooltipView) {
-    self.helpTip = helpTip
-
-    UIHelper.showHelpTip(helpTip) {
-      self.helpTip = nil
-    }
-  }
-
   fileprivate func switchToNextHelpTip() {
     Settings.sharedInstance.uiDayPageHelpTipToShow.value = (Settings.DayPageHelpTip(rawValue: Settings.sharedInstance.uiDayPageHelpTipToShow.value.rawValue + 1) ?? Settings.DayPageHelpTip.none)!
     

@@ -10,6 +10,7 @@ use_frameworks!
 def shared_pods
   pod 'Fabric'
   pod 'Crashlytics'
+  pod "JDFTooltips"
   pod 'MMWormhole', '~> 2.0.0'
 end
 

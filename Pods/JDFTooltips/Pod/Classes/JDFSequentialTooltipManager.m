@@ -3,7 +3,7 @@
 //  JoeTooltips
 //
 //  Created by Joe Fryer on 17/11/2014.
-//  Copyright © 2014 Joe Fryer. All rights reserved.
+//  Copyright (c) 2014 Joe Fryer. All rights reserved.
 //
 
 #import "JDFSequentialTooltipManager.h"
@@ -71,7 +71,9 @@
 
 - (void)handleTooltipTap:(UIGestureRecognizer *)gestureRecogniser
 {
-    [self showNextTooltip];
+    if (self.currentlyShowingTooltip.dismissOnTouch) {
+        [self showNextTooltip];
+    }
 }
 
 @end

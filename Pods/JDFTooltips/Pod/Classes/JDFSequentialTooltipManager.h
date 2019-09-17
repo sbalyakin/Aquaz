@@ -3,7 +3,7 @@
 //  JoeTooltips
 //
 //  Created by Joe Fryer on 17/11/2014.
-//  Copyright © 2014 Joe Fryer. All rights reserved.
+//  Copyright (c) 2014 Joe Fryer. All rights reserved.
 //
 
 #import "JDFTooltipManager.h"
@@ -15,14 +15,6 @@
  *  By default, tapping a tooltip or the backdrop triggers @c showNextTooltip (showing the next tooltip, or finishing the sequence and hiding everything).
  */
 @interface JDFSequentialTooltipManager : JDFTooltipManager
-
-#pragma mark - Options
-
-/**
- *  Indicates whether a tap on the backdropView triggers an action. For JDFSequentialTooltipManager, this action is showNextTooltip. Default is YES.
- */
-//@property (nonatomic) BOOL backdropTapActionEnabled;
-
 
 #pragma mark - Showing Tooltips
 /**

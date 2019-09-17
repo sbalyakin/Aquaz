@@ -26,7 +26,9 @@ class YearStatisticsViewController: UIViewController {
   fileprivate var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
   fileprivate var volumeObserver: SettingsObserver?
 
-  fileprivate let shortMonthSymbols = Calendar.current.shortMonthSymbols 
+  fileprivate let shortMonthSymbols = Calendar.current.shortMonthSymbols
+  
+  fileprivate let helpTipManager = HelpTipManager()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -268,7 +270,7 @@ class YearStatisticsViewController: UIViewController {
   
   fileprivate func showHelpTip() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
@@ -278,10 +280,14 @@ class YearStatisticsViewController: UIViewController {
       
       let point = CGPoint(x: self.yearStatisticsView.bounds.midX, y: self.yearStatisticsView.bounds.midY)
       
-      if let helpTip = JDFTooltipView(targetPoint: point, hostView: self.yearStatisticsView, tooltipText: text, arrowDirection: .down, width: self.view.frame.width / 2) {
-        UIHelper.showHelpTip(helpTip)
-        Settings.sharedInstance.uiYearStatisticsPageHelpTipIsShown.value = true
-      }
+      self.helpTipManager.showHelpTip(
+        targetPoint: point,
+        hostView: self.yearStatisticsView,
+        tooltipText: text,
+        arrowDirection: .down,
+        width: self.view.frame.width / 2)
+      
+      Settings.sharedInstance.uiYearStatisticsPageHelpTipIsShown.value = true
     }
   }
 

@@ -1,0 +1,6 @@
+framework module JDFTooltips {
+  umbrella header "JDFTooltips-umbrella.h"
+
+  export *
+  module * { export * }
+}

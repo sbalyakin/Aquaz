@@ -53,6 +53,7 @@ class IntakeViewController: UIViewController {
   var drinkType: DrinkType!
   
   fileprivate var drink: Drink!
+  fileprivate var helpTipManager = HelpTipManager()
   
   // Should be nil for add intake mode, and not nil for edit intake mode
   var intake: Intake? {
@@ -396,7 +397,7 @@ class IntakeViewController: UIViewController {
   
   fileprivate func showHelpTipForView(_ view: UIView) {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
@@ -404,10 +405,14 @@ class IntakeViewController: UIViewController {
                                    value: "Use long press to adjust an amount",
                                    comment: "IntakeViewController: Text for help tip about long press for predefined amounts buttons")
       
-      if let helpTip = JDFTooltipView(targetView: view, hostView: self.view, tooltipText: text, arrowDirection: .down, width: self.view.frame.width / 2) {
-        UIHelper.showHelpTip(helpTip)
-        Settings.sharedInstance.uiIntakeHelpTipIsShown.value = true
-      }
+      self.helpTipManager.showHelpTip(
+        targetView: view,
+        hostView: self.view,
+        tooltipText: text,
+        arrowDirection: .down,
+        width: self.view.frame.width / 2)
+      
+      Settings.sharedInstance.uiIntakeHelpTipIsShown.value = true
     }
   }
 

@@ -3,7 +3,7 @@
 //  JoeTooltips
 //
 //  Created by Joe Fryer on 12/11/2014.
-//  Copyright © 2014 Joe Fryer. All rights reserved.
+//  Copyright (c) 2014 Joe Fryer. All rights reserved.
 //
 
 #import "JDFTooltipManager.h"
@@ -54,11 +54,6 @@
 {
     self = [self initWithHostView:view tooltips:nil];
     return self;
-}
-
-- (instancetype)init;
-{
-  @throw nil;
 }
 
 - (void)commonInit
@@ -190,6 +185,27 @@
 {
     for (JDFTooltipView *tooltip in self.tooltips) {
         tooltip.textColour = colour;
+    }
+}
+
+- (void)setTextAlignmentForAllTooltips:(NSTextAlignment)alignment
+{
+    for (JDFTooltipView *tooltip in self.tooltips) {
+        tooltip.textAlignment = alignment;
+    }
+}
+
+- (void)setLineBreakModeForAllTooltips:(NSLineBreakMode)lineBreakMode
+{
+    for (JDFTooltipView *tooltip in self.tooltips) {
+        tooltip.lineBreakMode = lineBreakMode;
+    }
+}
+
+- (void)setNumberOfLinesForAllTooltips:(NSInteger)numberOfLines
+{
+    for (JDFTooltipView *tooltip in self.tooltips) {
+        tooltip.numberOfLines = numberOfLines;
     }
 }
 

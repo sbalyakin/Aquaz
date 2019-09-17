@@ -3,7 +3,7 @@
 //  JoeTooltips
 //
 //  Created by Joe Fryer on 13/11/2014.
-//  Copyright © 2014 Joe Fryer. All rights reserved.
+//  Copyright (c) 2014 Joe Fryer. All rights reserved.
 //
 
 #import "UIView+JDFTooltips.h"

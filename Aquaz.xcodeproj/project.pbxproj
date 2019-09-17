@@ -158,7 +158,6 @@
 		A58DE6B01DD90F3900F65990 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EE36251AAD9DAA0038C844 /* Logger.swift */; };
 		A58DE6B11DD90F3900F65990 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
 		A58DE6B21DD90F3900F65990 /* WaterGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840476561A35FE4A004F0FEF /* WaterGoalViewController.swift */; };
-		A58DE6B31DD90F3900F65990 /* JDFTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945F1AF4B75C0042B6DF /* JDFTooltipManager.m */; };
 		A58DE6B41DD90F3900F65990 /* UILoggedActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AD171BD68881000B48E9 /* UILoggedActions.swift */; };
 		A58DE6B51DD90F3900F65990 /* ConnectivityMessageAddIntake.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554B4FA1BE504360095593B /* ConnectivityMessageAddIntake.swift */; };
 		A58DE6B61DD90F3900F65990 /* DatePickerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E75F91AA9F508003B63E1 /* DatePickerTableCell.swift */; };
@@ -184,7 +183,6 @@
 		A58DE6CA1DD90F3900F65990 /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8404765A1A360273004F0FEF /* SupportViewController.swift */; };
 		A58DE6CB1DD90F3900F65990 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
 		A58DE6CC1DD90F3900F65990 /* NotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84039F171A4B103100C5391E /* NotificationsHelper.swift */; };
-		A58DE6CD1DD90F3900F65990 /* UIView+JDFTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894661AF4B75C0042B6DF /* UIView+JDFTooltips.m */; };
 		A58DE6CE1DD90F3900F65990 /* CodingManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CDC901AD8587100E92EF2 /* CodingManagedObject.swift */; };
 		A58DE6CF1DD90F3900F65990 /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B013E41AE27C7D00C372F8 /* UnitsViewController.swift */; };
 		A58DE6D01DD90F3900F65990 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */; };
@@ -193,7 +191,6 @@
 		A58DE6D31DD90F3900F65990 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B13BD1A31FE4F00249426 /* UIHelper.swift */; };
 		A58DE6D41DD90F3900F65990 /* CalendarContentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD974D1ABB2B960011623B /* CalendarContentViewCell.swift */; };
 		A58DE6D51DD90F3900F65990 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2B19E4195A0026398E /* Drink.swift */; };
-		A58DE6D61DD90F3900F65990 /* JDFTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894621AF4B75C0042B6DF /* JDFTooltipView.m */; };
 		A58DE6D71DD90F3900F65990 /* CalendarViewContentTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD974F1ABB2B960011623B /* CalendarViewContentTitleCell.swift */; };
 		A58DE6D81DD90F3900F65990 /* PickTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9DD971A16574E003D6444 /* PickTimeViewController.swift */; };
 		A58DE6D91DD90F3900F65990 /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA001A0A7009009C5C47 /* DiaryViewController.swift */; };
@@ -226,7 +223,6 @@
 		A58DE6F41DD90F3900F65990 /* YearStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */; };
 		A58DE6F61DD90F3900F65990 /* PickerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4151AA5D29700E3C989 /* PickerTableCell.swift */; };
 		A58DE6F71DD90F3900F65990 /* IntakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478253619EAC8C200588FE3 /* IntakeViewController.swift */; };
-		A58DE6F81DD90F3900F65990 /* JDFSequentialTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */; };
 		A58DE6F91DD90F3900F65990 /* NamedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1519E57D3500D0477B /* NamedEntity.swift */; };
 		A58DE6FA1DD90F3900F65990 /* WeekStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B639811A25D9EF00889438 /* WeekStatisticsView.swift */; };
 		A58DE6FB1DD90F3900F65990 /* WeekStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */; };
@@ -239,7 +235,6 @@
 		A58DE7031DD90F3900F65990 /* UnitItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E271A824D6700966538 /* UnitItems.swift */; };
 		A58DE7041DD90F3900F65990 /* YearStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B639821A25D9EF00889438 /* YearStatisticsView.swift */; };
 		A58DE7051DD90F3900F65990 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */; };
-		A58DE7061DD90F3900F65990 /* UILabel+JDFTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894641AF4B75C0042B6DF /* UILabel+JDFTooltips.m */; };
 		A58DE7071DD90F3900F65990 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B017B71BEFBD6200E3F8AB /* UIExtensions.swift */; };
 		A58DE7081DD90F3900F65990 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D251B31AD26489001E6644 /* CoreDataStack.swift */; };
 		A58DE7091DD90F3900F65990 /* RecentAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2919E4195A0026398E /* RecentAmount.swift */; };
@@ -372,6 +367,8 @@
 		A5B8F9961A87DF3D00145705 /* magic.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98A1A87DF3D00145705 /* magic.caf */; };
 		A5B8F9971A87DF3D00145705 /* tiny-bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */; };
 		A5B8F9981A87DF3D00145705 /* whistle.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98C1A87DF3D00145705 /* whistle.caf */; };
+		A5BF5B7B232E8E2B00764087 /* HelpTipManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BF5B7A232E8E2B00764087 /* HelpTipManager.swift */; };
+		A5BF5B7C232E8E2B00764087 /* HelpTipManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BF5B7A232E8E2B00764087 /* HelpTipManager.swift */; };
 		A5C18C641DFA0937003E9C7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5C18C621DFA0921003E9C7D /* InfoPlist.strings */; };
 		A5C70BBB1DEDC409006F7BFC /* FullVersionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70BB91DEDC409006F7BFC /* FullVersionController.swift */; };
 		A5C70BBE1DEDC47A006F7BFC /* InAppPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70BBC1DEDC47A006F7BFC /* InAppPurchaseManager.swift */; };
@@ -403,11 +400,6 @@
 		A5C70BF31DF445CF006F7BFC /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BF21DF445CF006F7BFC /* CoreBluetooth.framework */; };
 		A5C70BF51DF445DA006F7BFC /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BF41DF445DA006F7BFC /* GLKit.framework */; };
 		A5C70BF71DF445E4006F7BFC /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BF61DF445E4006F7BFC /* SafariServices.framework */; };
-		A5C894671AF4B75C0042B6DF /* JDFSequentialTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */; };
-		A5C894681AF4B75C0042B6DF /* JDFTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945F1AF4B75C0042B6DF /* JDFTooltipManager.m */; };
-		A5C894691AF4B75C0042B6DF /* JDFTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894621AF4B75C0042B6DF /* JDFTooltipView.m */; };
-		A5C8946A1AF4B75C0042B6DF /* UILabel+JDFTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894641AF4B75C0042B6DF /* UILabel+JDFTooltips.m */; };
-		A5C8946B1AF4B75C0042B6DF /* UIView+JDFTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894661AF4B75C0042B6DF /* UIView+JDFTooltips.m */; };
 		A5D3D4211AA5D29700E3C989 /* OmegaSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4121AA5D29700E3C989 /* OmegaSettingsViewController.swift */; };
 		A5D3D4221AA5D29700E3C989 /* BasicTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4141AA5D29700E3C989 /* BasicTableCell.swift */; };
 		A5D3D4231AA5D29700E3C989 /* PickerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4151AA5D29700E3C989 /* PickerTableCell.swift */; };
@@ -755,6 +747,7 @@
 		A5B8F98A1A87DF3D00145705 /* magic.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = magic.caf; sourceTree = "<group>"; };
 		A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiny-bell.caf"; sourceTree = "<group>"; };
 		A5B8F98C1A87DF3D00145705 /* whistle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whistle.caf; sourceTree = "<group>"; };
+		A5BF5B7A232E8E2B00764087 /* HelpTipManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTipManager.swift; sourceTree = "<group>"; };
 		A5C18C5C1DFA08D8003E9C7D /* Aquaz-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Aquaz-Info.plist"; sourceTree = "<group>"; };
 		A5C18C611DFA0921003E9C7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A5C18C651DFA09F7003E9C7D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -787,17 +780,6 @@
 		A5C70BF21DF445CF006F7BFC /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		A5C70BF41DF445DA006F7BFC /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		A5C70BF61DF445E4006F7BFC /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		A5C8945C1AF4B75C0042B6DF /* JDFSequentialTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFSequentialTooltipManager.h; sourceTree = "<group>"; };
-		A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFSequentialTooltipManager.m; sourceTree = "<group>"; };
-		A5C8945E1AF4B75C0042B6DF /* JDFTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFTooltipManager.h; sourceTree = "<group>"; };
-		A5C8945F1AF4B75C0042B6DF /* JDFTooltipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFTooltipManager.m; sourceTree = "<group>"; };
-		A5C894601AF4B75C0042B6DF /* JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFTooltips.h; sourceTree = "<group>"; };
-		A5C894611AF4B75C0042B6DF /* JDFTooltipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFTooltipView.h; sourceTree = "<group>"; };
-		A5C894621AF4B75C0042B6DF /* JDFTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFTooltipView.m; sourceTree = "<group>"; };
-		A5C894631AF4B75C0042B6DF /* UILabel+JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+JDFTooltips.h"; sourceTree = "<group>"; };
-		A5C894641AF4B75C0042B6DF /* UILabel+JDFTooltips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+JDFTooltips.m"; sourceTree = "<group>"; };
-		A5C894651AF4B75C0042B6DF /* UIView+JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JDFTooltips.h"; sourceTree = "<group>"; };
-		A5C894661AF4B75C0042B6DF /* UIView+JDFTooltips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JDFTooltips.m"; sourceTree = "<group>"; };
 		A5D3D4121AA5D29700E3C989 /* OmegaSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmegaSettingsViewController.swift; sourceTree = "<group>"; };
 		A5D3D4141AA5D29700E3C989 /* BasicTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTableCell.swift; sourceTree = "<group>"; };
 		A5D3D4151AA5D29700E3C989 /* PickerTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableCell.swift; sourceTree = "<group>"; };
@@ -1003,7 +985,6 @@
 			isa = PBXGroup;
 			children = (
 				84BFFF081BA2DE6600AE938B /* Aquaz-Bridging-Header.h */,
-				A5C8945B1AF4B75C0042B6DF /* JDFTooltips */,
 				84CD974B1ABB2B960011623B /* OmegaCalendar */,
 				A5D3D4111AA5D29700E3C989 /* OmegaSettingsViewController */,
 			);
@@ -1371,6 +1352,7 @@
 				84039F171A4B103100C5391E /* NotificationsHelper.swift */,
 				8444F1971B209250007577C8 /* SystemHelper.swift */,
 				A5A639BD1B2B219800E2DB60 /* ImageHelper.swift */,
+				A5BF5B7A232E8E2B00764087 /* HelpTipManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1413,24 +1395,6 @@
 				A5C70BB91DEDC409006F7BFC /* FullVersionController.swift */,
 			);
 			name = Settings;
-			sourceTree = "<group>";
-		};
-		A5C8945B1AF4B75C0042B6DF /* JDFTooltips */ = {
-			isa = PBXGroup;
-			children = (
-				A5C8945C1AF4B75C0042B6DF /* JDFSequentialTooltipManager.h */,
-				A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */,
-				A5C8945E1AF4B75C0042B6DF /* JDFTooltipManager.h */,
-				A5C8945F1AF4B75C0042B6DF /* JDFTooltipManager.m */,
-				A5C894601AF4B75C0042B6DF /* JDFTooltips.h */,
-				A5C894611AF4B75C0042B6DF /* JDFTooltipView.h */,
-				A5C894621AF4B75C0042B6DF /* JDFTooltipView.m */,
-				A5C894631AF4B75C0042B6DF /* UILabel+JDFTooltips.h */,
-				A5C894641AF4B75C0042B6DF /* UILabel+JDFTooltips.m */,
-				A5C894651AF4B75C0042B6DF /* UIView+JDFTooltips.h */,
-				A5C894661AF4B75C0042B6DF /* UIView+JDFTooltips.m */,
-			);
-			path = JDFTooltips;
 			sourceTree = "<group>";
 		};
 		A5D3D4111AA5D29700E3C989 /* OmegaSettingsViewController */ = {
@@ -2023,7 +1987,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Aquaz/Pods-Aquaz-resources.sh",
 				"${PODS_ROOT}/Appodeal/APDStartAppAdapter.embeddedframework/Resources/StartApp.bundle",
 				"${PODS_ROOT}/Appodeal/APDTapjoyAdapter.embeddedframework/Resources/TapjoyResources.bundle",
 				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPAdBrowserController.xib",
@@ -2074,7 +2038,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Aquaz/Pods-Aquaz-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A52170EB1DD125DB0041135F /* Show Environment Variables */ = {
@@ -2280,16 +2244,18 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Aquaz/Pods-Aquaz-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JDFTooltips/JDFTooltips.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JDFTooltips.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Aquaz/Pods-Aquaz-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E151E424973EA859961A94FD /* [CP] Embed Pods Frameworks */ = {
@@ -2298,18 +2264,20 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-AquazPro/Pods-AquazPro-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JDFTooltips/JDFTooltips.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
 				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JDFTooltips.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AquazPro/Pods-AquazPro-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2330,7 +2298,6 @@
 				A5EE36261AAD9DAA0038C844 /* Logger.swift in Sources */,
 				A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */,
 				840476571A35FE4A004F0FEF /* WaterGoalViewController.swift in Sources */,
-				A5C894681AF4B75C0042B6DF /* JDFTooltipManager.m in Sources */,
 				A587AD181BD68881000B48E9 /* UILoggedActions.swift in Sources */,
 				A58D16191DFD7F3D0020B106 /* WelcomeWizardAppleHealthViewController.swift in Sources */,
 				A554B4FD1BE504360095593B /* ConnectivityMessageAddIntake.swift in Sources */,
@@ -2357,7 +2324,6 @@
 				8404765B1A360273004F0FEF /* SupportViewController.swift in Sources */,
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
 				84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */,
-				A5C8946B1AF4B75C0042B6DF /* UIView+JDFTooltips.m in Sources */,
 				A59CDC911AD8587100E92EF2 /* CodingManagedObject.swift in Sources */,
 				A5B013E51AE27C7D00C372F8 /* UnitsViewController.swift in Sources */,
 				A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */,
@@ -2366,7 +2332,6 @@
 				841B13BE1A31FE4F00249426 /* UIHelper.swift in Sources */,
 				84CD97541ABB2B960011623B /* CalendarContentViewCell.swift in Sources */,
 				84380C2C19E4195A0026398E /* Drink.swift in Sources */,
-				A5C894691AF4B75C0042B6DF /* JDFTooltipView.m in Sources */,
 				84CD97561ABB2B960011623B /* CalendarViewContentTitleCell.swift in Sources */,
 				84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */,
 				8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */,
@@ -2392,6 +2357,7 @@
 				847E75F81AA9F502003B63E1 /* UIDatePickerTableViewCell.swift in Sources */,
 				84B0C7041AA75E36006889E9 /* UITimeIntervalPickerTableViewCell.swift in Sources */,
 				A5D3D4251AA5D29700E3C989 /* SegmentedTableCell.swift in Sources */,
+				A5BF5B7B232E8E2B00764087 /* HelpTipManager.swift in Sources */,
 				A5B013E31AE27C4900C372F8 /* ExtraFactorsViewController.swift in Sources */,
 				A57D2BF01ACFEA5A00619D62 /* WelcomeWizardPageViewController.swift in Sources */,
 				A52A7D871B245C88007A71ED /* NotificationSounds.swift in Sources */,
@@ -2399,7 +2365,6 @@
 				84C610BC1A31A98900433EF1 /* YearStatisticsViewController.swift in Sources */,
 				A5D3D4231AA5D29700E3C989 /* PickerTableCell.swift in Sources */,
 				8478253719EAC8C200588FE3 /* IntakeViewController.swift in Sources */,
-				A5C894671AF4B75C0042B6DF /* JDFSequentialTooltipManager.m in Sources */,
 				A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */,
 				84B639831A25D9EF00889438 /* WeekStatisticsView.swift in Sources */,
 				A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */,
@@ -2413,7 +2378,6 @@
 				84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */,
 				A57F5E6B1AC968A6005C4F46 /* GlobalConstants.swift in Sources */,
 				A5FD96781E36A5F20036B30D /* PredefinedAmountViewController.swift in Sources */,
-				A5C8946A1AF4B75C0042B6DF /* UILabel+JDFTooltips.m in Sources */,
 				A5B017B81BEFBD6200E3F8AB /* UIExtensions.swift in Sources */,
 				84D251B41AD26489001E6644 /* CoreDataStack.swift in Sources */,
 				84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */,
@@ -2518,7 +2482,6 @@
 				A58DE6B01DD90F3900F65990 /* Logger.swift in Sources */,
 				A58DE6B11DD90F3900F65990 /* CalendarViewController.swift in Sources */,
 				A58DE6B21DD90F3900F65990 /* WaterGoalViewController.swift in Sources */,
-				A58DE6B31DD90F3900F65990 /* JDFTooltipManager.m in Sources */,
 				A58DE6B41DD90F3900F65990 /* UILoggedActions.swift in Sources */,
 				A58DE6B51DD90F3900F65990 /* ConnectivityMessageAddIntake.swift in Sources */,
 				A58DE6B61DD90F3900F65990 /* DatePickerTableCell.swift in Sources */,
@@ -2545,7 +2508,6 @@
 				A58DE6CA1DD90F3900F65990 /* SupportViewController.swift in Sources */,
 				A58DE6CB1DD90F3900F65990 /* Settings.swift in Sources */,
 				A58DE6CC1DD90F3900F65990 /* NotificationsHelper.swift in Sources */,
-				A58DE6CD1DD90F3900F65990 /* UIView+JDFTooltips.m in Sources */,
 				A58DE6CE1DD90F3900F65990 /* CodingManagedObject.swift in Sources */,
 				A58DE6CF1DD90F3900F65990 /* UnitsViewController.swift in Sources */,
 				A58DE6D01DD90F3900F65990 /* DiaryTableViewCell.swift in Sources */,
@@ -2554,7 +2516,6 @@
 				A58DE6D31DD90F3900F65990 /* UIHelper.swift in Sources */,
 				A58DE6D41DD90F3900F65990 /* CalendarContentViewCell.swift in Sources */,
 				A58DE6D51DD90F3900F65990 /* Drink.swift in Sources */,
-				A58DE6D61DD90F3900F65990 /* JDFTooltipView.m in Sources */,
 				A58DE6D71DD90F3900F65990 /* CalendarViewContentTitleCell.swift in Sources */,
 				A58DE6D81DD90F3900F65990 /* PickTimeViewController.swift in Sources */,
 				A58DE6D91DD90F3900F65990 /* DiaryViewController.swift in Sources */,
@@ -2583,13 +2544,13 @@
 				A58DE6EF1DD90F3900F65990 /* SegmentedTableCell.swift in Sources */,
 				A58DE6F01DD90F3900F65990 /* ExtraFactorsViewController.swift in Sources */,
 				A58DE6F11DD90F3900F65990 /* WelcomeWizardPageViewController.swift in Sources */,
+				A5BF5B7C232E8E2B00764087 /* HelpTipManager.swift in Sources */,
 				A58DE6F21DD90F3900F65990 /* NotificationSounds.swift in Sources */,
 				A58DE6F31DD90F3900F65990 /* TimeIntervalPickerTableCell.swift in Sources */,
 				A58DE6F41DD90F3900F65990 /* YearStatisticsViewController.swift in Sources */,
 				A58DE6F61DD90F3900F65990 /* PickerTableCell.swift in Sources */,
 				A58DE6F71DD90F3900F65990 /* IntakeViewController.swift in Sources */,
 				A5FD96791E36A5F20036B30D /* PredefinedAmountViewController.swift in Sources */,
-				A58DE6F81DD90F3900F65990 /* JDFSequentialTooltipManager.m in Sources */,
 				A58DE6F91DD90F3900F65990 /* NamedEntity.swift in Sources */,
 				A58DE6FA1DD90F3900F65990 /* WeekStatisticsView.swift in Sources */,
 				A58DE6FB1DD90F3900F65990 /* WeekStatisticsViewController.swift in Sources */,
@@ -2603,7 +2564,6 @@
 				A58DE7041DD90F3900F65990 /* YearStatisticsView.swift in Sources */,
 				A58D161A1DFD7F3D0020B106 /* WelcomeWizardAppleHealthViewController.swift in Sources */,
 				A58DE7051DD90F3900F65990 /* GlobalConstants.swift in Sources */,
-				A58DE7061DD90F3900F65990 /* UILabel+JDFTooltips.m in Sources */,
 				A58DE7071DD90F3900F65990 /* UIExtensions.swift in Sources */,
 				A58DE7081DD90F3900F65990 /* CoreDataStack.swift in Sources */,
 				A58DE7091DD90F3900F65990 /* RecentAmount.swift in Sources */,

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class WeekStatisticsViewController: UIViewController {
   
@@ -27,7 +28,7 @@ class WeekStatisticsViewController: UIViewController {
   fileprivate var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
   fileprivate var volumeObserver: SettingsObserver?
   
-  fileprivate var helpTip: JDFTooltipView?
+  fileprivate var helpTipManager = HelpTipManager()
 
   fileprivate struct Constants {
     static let dayViewController = "DayViewController"
@@ -291,7 +292,7 @@ class WeekStatisticsViewController: UIViewController {
     }
     #endif
     
-    if helpTip != nil {
+    if helpTipManager.isHelpTipActive {
       return
     }
     
@@ -304,22 +305,18 @@ class WeekStatisticsViewController: UIViewController {
   
   fileprivate func showHelpTipForTapSeeDayDetails() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
 
       let dayButton = self.weekStatisticsView.getDayButtonWithIndex(0)
 
-      self.helpTip = JDFTooltipView(
+      self.helpTipManager.showHelpTip(
         targetView: dayButton,
         hostView: self.weekStatisticsView,
         tooltipText: self.localizedStrings.helpTipForTapSeeDayDetails,
         arrowDirection: .down,
         width: self.view.frame.width / 2)
-      
-      UIHelper.showHelpTip(self.helpTip!) {
-        self.helpTip = nil
-      }
       
       // Switch to the next help tip
       Settings.sharedInstance.uiWeekStatisticsPageHelpTipToShow.value =
@@ -329,22 +326,18 @@ class WeekStatisticsViewController: UIViewController {
   
   fileprivate func showHelpTipForSwipeToChangeWeek() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
 
       let point = CGPoint(x: self.weekStatisticsView.bounds.midX, y: self.weekStatisticsView.bounds.midY)
 
-      self.helpTip = JDFTooltipView(
+      self.helpTipManager.showHelpTip(
         targetPoint: point,
         hostView: self.weekStatisticsView,
         tooltipText: self.localizedStrings.helpTipForSwipeToChangeWeek,
         arrowDirection: .down,
         width: self.view.frame.width / 2)
-      
-      UIHelper.showHelpTip(self.helpTip!) {
-        self.helpTip = nil
-      }
 
       // Switch to the next help tip
       Settings.sharedInstance.uiWeekStatisticsPageHelpTipToShow.value =

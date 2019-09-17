@@ -15,6 +15,7 @@ class MonthStatisticsViewController: UIViewController {
   @IBOutlet weak var monthLabel: UILabel!
   
   fileprivate var date: Date = DateHelper.startOfMonth(Date())
+  fileprivate var helpTipManager = HelpTipManager()
 
   fileprivate struct Constants {
     static let dayViewController = "DayViewController"
@@ -156,7 +157,7 @@ class MonthStatisticsViewController: UIViewController {
   
   fileprivate func showHelpTip() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
@@ -167,10 +168,14 @@ class MonthStatisticsViewController: UIViewController {
       let dayRectWidth = self.monthStatisticsView.frame.width / CGFloat(self.monthStatisticsView.daysPerWeek)
       let point = CGPoint(x: self.monthStatisticsView.frame.width / 2, y: dayRectWidth * 2 + 5)
       
-      if let helpTip = JDFTooltipView(targetPoint: point, hostView: self.monthStatisticsView, tooltipText: text, arrowDirection: .up, width: self.view.frame.width / 2) {
-        UIHelper.showHelpTip(helpTip)
-        Settings.sharedInstance.uiMonthStatisticsPageHelpTipIsShown.value = true
-      }
+      self.helpTipManager.showHelpTip(
+        targetPoint: point,
+        hostView: self.monthStatisticsView,
+        tooltipText: text,
+        arrowDirection: .up,
+        width: self.view.frame.width / 2)
+      
+      Settings.sharedInstance.uiMonthStatisticsPageHelpTipIsShown.value = true
     }
   }
 

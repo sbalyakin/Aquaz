@@ -61,20 +61,5 @@ class UIHelper {
       navigationItem.titleView = titleView
     }
   }
-  
-  class func showHelpTip(_ helpTip: JDFTooltipView, hideCompletionHandler: (() -> ())? = nil) {
-    helpTip.tooltipBackgroundColour = StyleKit.helpTipsColor
-    helpTip.textColour = UIColor.black
-    
-    helpTip.showCompletionBlock = {
-      SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDisplayTime) {
-        helpTip.hide(animated: true)
-      }
-    }
-    
-    helpTip.hideCompletionBlock = hideCompletionHandler
-
-    helpTip.show()
-  }
 }
 

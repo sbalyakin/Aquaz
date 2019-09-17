@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class DiaryViewController: UIViewController {
 
@@ -24,6 +25,8 @@ class DiaryViewController: UIViewController {
   fileprivate var reloadRowIndexPaths = [IndexPath]()
   
   fileprivate var innerRowDeletion = false
+  
+  fileprivate var helpTipManager = HelpTipManager()
 
   
   fileprivate struct Constants {
@@ -206,16 +209,19 @@ extension DiaryViewController: UITableViewDataSource {
   
   fileprivate func showHelpTipForCell(_ cell: DiaryTableViewCell) {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
       let text = NSLocalizedString("DVC:Hydration effect of the intake", value: "Hydration effect of the intake", comment: "DiaryViewController: Text for help tip about hydration effect of an intake of a diary cell")
       
-      if let helpTip = JDFTooltipView(targetView: cell.waterBalanceLabel, hostView: self.tableView, tooltipText: text, arrowDirection: .up, width: self.view.frame.width / 2) {
-        UIHelper.showHelpTip(helpTip)
-        Settings.sharedInstance.uiDiaryPageHelpTipIsShown.value = true
-      }
+      self.helpTipManager.showHelpTip(
+        targetView: cell.waterBalanceLabel,
+        hostView: self.tableView,
+        tooltipText: text,
+        arrowDirection: .up, width: self.view.frame.width / 2)
+
+      Settings.sharedInstance.uiDiaryPageHelpTipIsShown.value = true
     }
   }
 

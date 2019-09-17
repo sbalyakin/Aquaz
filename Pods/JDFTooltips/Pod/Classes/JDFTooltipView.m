@@ -3,7 +3,7 @@
 //  JoeTooltips
 //
 //  Created by Joe Fryer on 12/11/2014.
-//  Copyright © 2014 Joe Fryer. All rights reserved.
+//  Copyright (c) 2014 Joe Fryer. All rights reserved.
 //
 
 #import "JDFTooltipView.h"
@@ -25,8 +25,8 @@
 @property (nonatomic, weak) UIView *targetView;
 @property (nonatomic, weak) UIBarButtonItem *targetBarButtonItem;
 
-//@property (nonatomic, copy) void (^showCompletionBlock)();
-//@property (nonatomic, copy) void (^hideCompletionBlock)();
+@property (nonatomic, copy) void (^showCompletionBlock)(void);
+@property (nonatomic, copy) void (^hideCompletionBlock)(void);
 
 @property (nonatomic, strong) UIGestureRecognizer *tapGestureRecogniser;
 
@@ -53,6 +53,24 @@
 {
     _textColour = textColour;
     self.tooltipTextLabel.textColor = textColour;
+}
+
+- (void)setTextAlignment:(NSTextAlignment)textAlignment
+{
+    _textAlignment = textAlignment;
+    self.tooltipTextLabel.textAlignment = textAlignment;
+}
+
+- (void)setLineBreakMode:(NSLineBreakMode)lineBreakMode
+{
+    _lineBreakMode = lineBreakMode;
+    self.tooltipTextLabel.lineBreakMode = lineBreakMode;
+}
+
+- (void)setNumberOfLines:(NSInteger)numberOfLines
+{
+    _numberOfLines = numberOfLines;
+    self.tooltipTextLabel.numberOfLines = numberOfLines;
 }
 
 - (void)setShadowEnabled:(BOOL)shadowEnabled
@@ -147,23 +165,6 @@
     return self;
 }
 
-- (instancetype)init;
-{
-  @throw nil;
-}
-
--(instancetype)initWithFrame:(CGRect)frame;
-{
-  @throw nil;
-  return [self initWithFrame:frame];
-}
-
--(instancetype)initWithCoder:(NSCoder *)aDecoder;
-{
-  @throw nil;
-  return [self initWithCoder:aDecoder];
-}
-  
 - (void)commonInit
 {
     // Options
@@ -172,16 +173,16 @@
     
     self.backgroundColor = [UIColor clearColor];
     self.tooltipBackgroundColour = [UIColor darkGrayColor];
-    self.textColour = [UIColor whiteColor];
     
     self.tooltipTextLabel = [[UILabel alloc] initWithFrame:self.bounds];
     self.tooltipTextLabel.text = self.tooltipText;
-    self.tooltipTextLabel.textAlignment = NSTextAlignmentCenter;
-    self.tooltipTextLabel.numberOfLines = 0;
-    self.tooltipTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.tooltipTextLabel.textColor = self.textColour;
-    self.font = [UIFont systemFontOfSize:14.0f];
     self.tooltipTextLabel.backgroundColor = [UIColor clearColor];
+
+    self.textColour = [UIColor whiteColor];
+    self.textAlignment = NSTextAlignmentCenter;
+    self.lineBreakMode = NSLineBreakByWordWrapping;
+    self.numberOfLines = 0;
+    self.font = [UIFont systemFontOfSize:14.0f];
     [self addSubview:self.tooltipTextLabel];
     
     self.layer.cornerRadius = 5.0f;
@@ -215,7 +216,8 @@
 {
     self.arrowDirection = arrowDirection;
     self.arrowPoint = point;
-  
+    self.alpha = 0.0f;
+    
     // Add ourselves to the view
     [view addSubview:self];
     
@@ -232,14 +234,16 @@
     [self.tooltipTextLabel jdftt_centerVerticallyInSuperview];
     
     [self sanitiseArrowPointWithWidth:width];
-
-    self.alpha = 0.0f;
-    self.layer.transform = CATransform3DMakeScale(0.7f, 0.7f, 0.7f);
-
+    
+    // Setup the starting point of animation
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    transform = CGAffineTransformScale(transform, 0.6f, 0.6f);
+    self.transform = transform;
+    
     // Perform the animation
-    [UIView animateWithDuration:0.5 delay:0.0 usingSpringWithDamping:0.5 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.3 delay:0.0 usingSpringWithDamping:0.6f initialSpringVelocity:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.transform = CGAffineTransformIdentity;
         self.alpha = 1.0f;
-        self.layer.transform = CATransform3DMakeScale(1.0f, 1.0f, 1.0f);
     } completion:^(BOOL finished) {
         if (self.showCompletionBlock) {
             self.showCompletionBlock();
@@ -263,14 +267,22 @@
 - (void)hideAnimated:(BOOL)animated
 {
     if (animated) {
-        [UIView animateWithDuration:0.5 delay:0.0 usingSpringWithDamping:1.0 initialSpringVelocity:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.alpha = 0.0f;
-            self.layer.transform = CATransform3DMakeScale(0.7f, 0.7f, 0.7f);
-        } completion:^(BOOL finished) {
-            [self removeFromSuperview];
-            if (self.hideCompletionBlock) {
-                self.hideCompletionBlock();
-            }
+        [UIView animateWithDuration:0.1 delay:0.0 usingSpringWithDamping:0.6 initialSpringVelocity:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            CGAffineTransform transform = CGAffineTransformIdentity;
+            transform = CGAffineTransformScale(transform, 1.05f, 1.05f);
+            self.transform = transform;
+        } completion:^(BOOL finished2) {
+            [UIView animateWithDuration:0.8 delay:0.0 usingSpringWithDamping:0.7 initialSpringVelocity:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                CGAffineTransform transform = CGAffineTransformIdentity;
+                transform = CGAffineTransformScale(transform, 0.3f, 0.3f);
+                self.transform = transform;
+                self.alpha = 0.0f;
+            } completion:^(BOOL finished3) {
+                [self removeFromSuperview];
+                if (self.hideCompletionBlock) {
+                    self.hideCompletionBlock();
+                }
+            }];
         }];
     } else {
         [self removeFromSuperview];
