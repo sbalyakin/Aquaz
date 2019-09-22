@@ -15,25 +15,23 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
   private struct LocalizedStrings {
     
     lazy var forbiddenPaymentsAlertMessage = NSLocalizedString("IAPM:It\'s forbidden to make payments due to parental controls",
-                                                                       value: "It\'s forbidden to make payments due to parental controls",
-                                                                       comment: "InAppPurchaseManager: Message shown to user if payments are forbidden according to parental controls")
+                                                               value: "It\'s forbidden to make payments due to parental controls",
+                                                               comment: "InAppPurchaseManager: Message shown to user if payments are forbidden according to parental controls")
     
     lazy var fullVersionRestoredAlertMessage = NSLocalizedString("IAPM:Full Version has been successfully restored",
-                                                                         value: "Full Version has been successfully restored",
-                                                                         comment: "InAppPurchaseManager: Message shown after successful restoring Full Version purchase")
+                                                                 value: "Full Version has been successfully restored",
+                                                                 comment: "InAppPurchaseManager: Message shown after successful restoring Full Version purchase")
     
     lazy var errorAlertTitle = NSLocalizedString("IAPM:Error", value: "Error",
-                                                         comment: "InAppPurchaseManager: Message title for alert shown if a purchase is failed")
-    
-    lazy var okButtonTitle = NSLocalizedString("IAPM:OK", value: "OK", comment: "InAppPurchaseManager: Title of OK button")
+                                                 comment: "InAppPurchaseManager: Message title for alert shown if a purchase is failed")
     
     lazy var transactionFailedClientInvalid = NSLocalizedString("IAPM:You is not allowed to perform the attempted action",
-                                                                        value: "You is not allowed to perform the attempted action",
-                                                                        comment: "InAppPurchaseManager: Message shown when payment transaction failed by reason: Client is not allowed to perform the attempted action")
+                                                                value: "You is not allowed to perform the attempted action",
+                                                                comment: "InAppPurchaseManager: Message shown when payment transaction failed by reason: Client is not allowed to perform the attempted action")
     
     lazy var transactionFailedUnknownError = NSLocalizedString("IAPM:An unknown error occured",
-                                                                       value: "An unknown error occured",
-                                                                       comment: "InAppPurchaseManager: Message shown when payment transaction failed by reason: An unknown error occured")
+                                                               value: "An unknown error occured",
+                                                               comment: "InAppPurchaseManager: Message shown when payment transaction failed by reason: An unknown error occured")
     
   }
   

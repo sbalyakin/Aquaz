@@ -38,11 +38,6 @@ class SupportViewController: UIViewController {
       value: "Cancel",
       comment: "SupportViewController: Title for cancel button")
 
-    lazy var ok: String = NSLocalizedString(
-      "SVC:OK",
-      value: "OK",
-      comment: "SupportViewController: Title for OK button")
-
     lazy var feedbackOfferAction: String = NSLocalizedString(
       "SVC:Send a suggestion",
       value: "Send a suggestion",
@@ -134,8 +129,7 @@ class SupportViewController: UIViewController {
       controller?.setInitialText(text)
       present(controller!, animated:true, completion:nil)
     } else {
-      let alert = UIAlertView(title: nil, message: localizedStrings.twitterNotFound, delegate: nil, cancelButtonTitle: localizedStrings.ok)
-      alert.show()
+      alertOkMessage(message: localizedStrings.twitterNotFound)
     }
   }
   
@@ -146,8 +140,7 @@ class SupportViewController: UIViewController {
       controller?.setInitialText(text)
       present(controller!, animated:true, completion:nil)
     } else {
-      let alert = UIAlertView(title: nil, message: localizedStrings.facebookNotFound, delegate: nil, cancelButtonTitle: localizedStrings.ok)
-      alert.show()
+      alertOkMessage(message: localizedStrings.facebookNotFound)
     }
   }
   
@@ -168,9 +161,7 @@ class SupportViewController: UIViewController {
       return true
     }
     
-    let alert = UIAlertView(title: localizedStrings.cantSendEmailsTitle, message: localizedStrings.cantSendEmailsBody, delegate: nil, cancelButtonTitle: localizedStrings.ok)
-    alert.show()
-    
+    alertOkMessage(message: localizedStrings.cantSendEmailsBody, title: localizedStrings.cantSendEmailsTitle)    
     return false
   }
   

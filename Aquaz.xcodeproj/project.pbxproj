@@ -369,6 +369,8 @@
 		A5B8F9981A87DF3D00145705 /* whistle.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98C1A87DF3D00145705 /* whistle.caf */; };
 		A5BF5B7B232E8E2B00764087 /* HelpTipManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BF5B7A232E8E2B00764087 /* HelpTipManager.swift */; };
 		A5BF5B7C232E8E2B00764087 /* HelpTipManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BF5B7A232E8E2B00764087 /* HelpTipManager.swift */; };
+		A5BF5B7E2338054E00764087 /* CommonLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BF5B7D2338054E00764087 /* CommonLocalizations.swift */; };
+		A5BF5B7F2338054E00764087 /* CommonLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BF5B7D2338054E00764087 /* CommonLocalizations.swift */; };
 		A5C18C641DFA0937003E9C7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5C18C621DFA0921003E9C7D /* InfoPlist.strings */; };
 		A5C70BBB1DEDC409006F7BFC /* FullVersionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70BB91DEDC409006F7BFC /* FullVersionController.swift */; };
 		A5C70BBE1DEDC47A006F7BFC /* InAppPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70BBC1DEDC47A006F7BFC /* InAppPurchaseManager.swift */; };
@@ -748,6 +750,7 @@
 		A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiny-bell.caf"; sourceTree = "<group>"; };
 		A5B8F98C1A87DF3D00145705 /* whistle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whistle.caf; sourceTree = "<group>"; };
 		A5BF5B7A232E8E2B00764087 /* HelpTipManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTipManager.swift; sourceTree = "<group>"; };
+		A5BF5B7D2338054E00764087 /* CommonLocalizations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonLocalizations.swift; sourceTree = "<group>"; };
 		A5C18C5C1DFA08D8003E9C7D /* Aquaz-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Aquaz-Info.plist"; sourceTree = "<group>"; };
 		A5C18C611DFA0921003E9C7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A5C18C651DFA09F7003E9C7D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1008,6 +1011,7 @@
 				847D0E241A824CA900966538 /* SettingItems.swift */,
 				A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */,
 				A52A7D861B245C88007A71ED /* NotificationSounds.swift */,
+				A5BF5B7D2338054E00764087 /* CommonLocalizations.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2336,6 +2340,7 @@
 				84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */,
 				8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */,
 				8444F1981B209250007577C8 /* SystemHelper.swift in Sources */,
+				A5BF5B7E2338054E00764087 /* CommonLocalizations.swift in Sources */,
 				84669A7219DAD78D003C2263 /* Aquaz.xcdatamodeld in Sources */,
 				A5D3D4291AA5D29700E3C989 /* TextFieldTableCell.swift in Sources */,
 				A5D740761B301CA100FC2BAF /* WelcomeWizardWelcomeViewController.swift in Sources */,
@@ -2558,6 +2563,7 @@
 				A58DE6FD1DD90F3900F65990 /* StatisticsPageViewController.swift in Sources */,
 				A58DE6FE1DD90F3900F65990 /* SettingsViewController.swift in Sources */,
 				A58DE6FF1DD90F3900F65990 /* RoundedButton.swift in Sources */,
+				A5BF5B7F2338054E00764087 /* CommonLocalizations.swift in Sources */,
 				A58DE7001DD90F3900F65990 /* HealthKitViewController.swift in Sources */,
 				A58DE7021DD90F3900F65990 /* DrinkType.swift in Sources */,
 				A58DE7031DD90F3900F65990 /* UnitItems.swift in Sources */,

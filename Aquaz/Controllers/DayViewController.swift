@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DayViewController: UIViewController, UIAlertViewDelegate {
+class DayViewController: UIViewController {
   
   // MARK: UI elements -
   
@@ -31,10 +31,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     lazy var welcomeToNextDayMessage: String = NSLocalizedString("DVC:Welcome to the next day",
       value: "Welcome to the next day",
       comment: "DayViewController: Title for alert displayed if tomorrow has come")
-    
-    lazy var okButtonTitle: String = NSLocalizedString("DVC:OK",
-      value: "OK",
-      comment: "DayViewController: Cancel button title for alert displayed if tomorrow has come")
     
     lazy var drinksTitle: String = NSLocalizedString("DVC:Drinks",
       value: "Drinks",
@@ -298,8 +294,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     
     if mode == .general && isCurrentDayToday && dayIsSwitched {
       if showAlert {
-        let alert = UIAlertView(title: nil, message: localizedStrings.welcomeToNextDayMessage, delegate: nil, cancelButtonTitle: localizedStrings.okButtonTitle)
-        alert.show()
+        alertOkMessage(message: localizedStrings.welcomeToNextDayMessage)
       }
 
       setCurrentDate(Date())
@@ -603,36 +598,39 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   fileprivate func showRateApplicationAlert() {
     DispatchQueue.main.async {
-      let alert = UIAlertView(
+      let alertController = UIAlertController(
         title: self.localizedStrings.rateApplicationAlertTitle,
         message: self.localizedStrings.rateApplicationAlertMessage,
-        delegate: self,
-        cancelButtonTitle: self.localizedStrings.rateApplicationAlertNoText,
-        otherButtonTitles: self.localizedStrings.rateApplicationAlertRateText,
-        self.localizedStrings.rateApplicationAlertRemindLaterText)
+        preferredStyle: UIAlertController.Style.alert)
 
-      alert.show()
+      // No, Thanks
+      let noAction = UIAlertAction(title: self.localizedStrings.rateApplicationAlertNoText, style: UIAlertAction.Style.cancel) {
+        (result : UIAlertAction) -> Void in
+        Settings.sharedInstance.uiWritingReviewAlertSelection.value = .no
+      }
+
+      // Rate It Now
+      let rateNowAction = UIAlertAction(title: self.localizedStrings.rateApplicationAlertRateText, style: UIAlertAction.Style.default) {
+        (result : UIAlertAction) -> Void in
+        if let url = URL(string: GlobalConstants.appReviewLink) {
+          UIApplication.shared.openURL(url)
+        }
+        Settings.sharedInstance.uiWritingReviewAlertSelection.value = .rateApplication
+      }
+
+      // Remind Me Later
+      let laterAction = UIAlertAction(title: self.localizedStrings.rateApplicationAlertRemindLaterText, style: UIAlertAction.Style.default) {
+        (result : UIAlertAction) -> Void in
+        Settings.sharedInstance.uiWritingReviewAlertSelection.value = .remindLater
+      }
+
+      alertController.addAction(noAction)
+      alertController.addAction(rateNowAction)
+      alertController.addAction(laterAction)
+      self.present(alertController, animated: true, completion: nil)
     }
   }
   
-  func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
-    switch buttonIndex {
-    case 0: // No, Thanks
-      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .no
-      
-    case 1: // Rate It Now
-      if let url = URL(string: GlobalConstants.appReviewLink) {
-        UIApplication.shared.openURL(url)
-      }
-      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .rateApplication
-      
-    case 2: // Remind Me Later
-      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .remindLater
-      
-    default: break
-    }
-  }
-
   fileprivate func showCongratulationsAboutWaterGoalReaching() {
     DispatchQueue.main.async {
       let banner = InfoBannerView.create()
