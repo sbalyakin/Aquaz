@@ -43,7 +43,7 @@ class SupportViewController: UIViewController {
       value: "Send a suggestion",
       comment: "SupportViewController: Title for [Send a suggestion] item in the action sheet used for choosing type of e-mail for developers")
     
-    lazy var feedbackBugAction: String = NSLocalizedString(
+    lazy var feedbackIssueAction: String = NSLocalizedString(
       "SVC:Report an issue",
       value: "Report an issue",
       comment: "SupportViewController: Title for [Report an issue] item in the action sheet used for choosing type of e-mail for developers")
@@ -149,11 +149,32 @@ class SupportViewController: UIViewController {
       return
     }
     
-    let actionSheet = UIActionSheet(title: nil, delegate: self,
-      cancelButtonTitle: localizedStrings.cancel,
-      destructiveButtonTitle: nil,
-      otherButtonTitles: localizedStrings.feedbackOfferAction, localizedStrings.feedbackBugAction, localizedStrings.feedbackHelpAction)
-    actionSheet.show(in: view)
+    let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+
+    let cancelAction = UIAlertAction(title: localizedStrings.cancel, style: UIAlertAction.Style.cancel)
+
+    let offerAction = UIAlertAction(title: localizedStrings.feedbackOfferAction, style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+      self.showEmailComposer(subject: "Aquaz: Suggestion", body: self.composeAboutInfo(), recipients: [GlobalConstants.developerMail])
+    }
+
+    let issueAction = UIAlertAction(title: localizedStrings.feedbackIssueAction, style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+      self.showEmailComposer(subject: "Aquaz: Issue", body: self.composeAboutInfo(), recipients: [GlobalConstants.developerMail])
+    }
+
+    let helpAction = UIAlertAction(title: localizedStrings.feedbackHelpAction, style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+      self.showEmailComposer(subject: "Aquaz: Help", body: self.composeAboutInfo(), recipients: [GlobalConstants.developerMail])
+    }
+
+    alertController.addAction(cancelAction)
+    alertController.addAction(offerAction)
+    alertController.addAction(issueAction)
+    alertController.addAction(helpAction)
+    self.present(alertController, animated: true, completion: nil)
+  }
+  
+  fileprivate func composeAboutInfo() -> String {
+    let applicationInfo = "Aquaz \(applicationVersion) (\(applicationBuild))"
+    return "<br><br>About: \(applicationInfo), \(systemInfo)"
   }
   
   fileprivate func checkSendingEmailAvailability() -> Bool {
@@ -161,7 +182,7 @@ class SupportViewController: UIViewController {
       return true
     }
     
-    alertOkMessage(message: localizedStrings.cantSendEmailsBody, title: localizedStrings.cantSendEmailsTitle)    
+    alertOkMessage(message: localizedStrings.cantSendEmailsBody, title: localizedStrings.cantSendEmailsTitle)
     return false
   }
   
@@ -200,31 +221,6 @@ class SupportViewController: UIViewController {
   fileprivate var systemInfo: String {
     return "\(UIDevice.current.systemName) \(UIDevice.current.systemVersion)"
   }
-}
-
-extension SupportViewController: UIActionSheetDelegate {
-  
-  func actionSheet(_ actionSheet: UIActionSheet, clickedButtonAt buttonIndex: Int) {
-    let subject: String
-
-    switch buttonIndex {
-    case 0: return // Cancel
-    case 1: subject = "Aquaz: Suggestion"
-    case 2: subject = "Aquaz: Issue"
-    case 3: subject = "Aquaz: Help"
-    default: return
-    }
-    
-    let body = "<br><br>About: \(composeAboutInfo())"
-    
-    showEmailComposer(subject: subject, body: body, recipients: [GlobalConstants.developerMail])
-  }
-
-  fileprivate func composeAboutInfo() -> String {
-    let applicationInfo = "Aquaz \(applicationVersion) (\(applicationBuild))"
-    return "\(applicationInfo), \(systemInfo)"
-  }
-  
 }
 
 extension SupportViewController: MFMailComposeViewControllerDelegate {
