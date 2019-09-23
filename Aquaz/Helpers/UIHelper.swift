@@ -61,5 +61,16 @@ class UIHelper {
       navigationItem.titleView = titleView
     }
   }
+  
+  class func showRootAlert(message: String, title: String? = nil, okHandler: ((UIAlertAction) -> Void)? = nil) {
+    var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+    if let navigationController = rootViewController as? UINavigationController {
+        rootViewController = navigationController.viewControllers.first
+    }
+    if let tabBarController = rootViewController as? UITabBarController {
+        rootViewController = tabBarController.selectedViewController
+    }
+    rootViewController?.alertOkMessage(message: message, title: title, okHandler: okHandler)
+  }
 }
 

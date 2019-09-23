@@ -99,8 +99,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     Logger.logDebug("purchaseFullVersion()")
     
     if !SKPaymentQueue.canMakePayments() {
-      let alert = UIAlertView(title: nil, message: localizedStrings.forbiddenPaymentsAlertMessage, delegate: nil, cancelButtonTitle: localizedStrings.okButtonTitle)
-      alert.show()
+      UIHelper.showRootAlert(message: localizedStrings.forbiddenPaymentsAlertMessage)
       return false
     }
     
@@ -147,8 +146,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
       Logger.logError("No products are available for in-app purchases", logDetails: details)
       
       // Show an alert about an unknown error to user to indicate an error somehow
-      let alert = UIAlertView(title: localizedStrings.errorAlertTitle, message: localizedStrings.transactionFailedUnknownError, delegate: nil, cancelButtonTitle: localizedStrings.okButtonTitle)
-      alert.show()
+      UIHelper.showRootAlert(message: localizedStrings.transactionFailedUnknownError, title: localizedStrings.errorAlertTitle)
     }
     
     // Price request
@@ -192,9 +190,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
       Logger.logDebug("requestDidFinish(:didFailWithError) for a purchase request", logDetails: error.localizedDescription)
       purchaseRequest = nil
       
-      let message = error.localizedDescription
-      let alert = UIAlertView(title: localizedStrings.errorAlertTitle, message: message, delegate: nil, cancelButtonTitle: localizedStrings.okButtonTitle)
-      alert.show()
+      UIHelper.showRootAlert(message: error.localizedDescription, title: localizedStrings.errorAlertTitle)
     } else {
       Logger.logDebug("requestDidFinish(:didFailWithError) for a price request", logDetails: error.localizedDescription)
       if let completion = priceRequests.removeValue(forKey: request as! SKProductsRequest) {
@@ -256,8 +252,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
   private func processRestoredTransaction(_ transaction: SKPaymentTransaction) {
     Logger.logDebug("processRestoredTransaction()")
     
-    let alert = UIAlertView(title: nil, message: localizedStrings.fullVersionRestoredAlertMessage, delegate: self, cancelButtonTitle: localizedStrings.okButtonTitle)
-    alert.show()
+    UIHelper.showRootAlert(message: localizedStrings.fullVersionRestoredAlertMessage)
     
     activateFullVersion()
     SKPaymentQueue.default().finishTransaction(transaction)
@@ -318,8 +313,7 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
     }
     
     if let message = message {
-      let alert = UIAlertView(title: localizedStrings.errorAlertTitle, message: message, delegate: nil, cancelButtonTitle: localizedStrings.okButtonTitle)
-      alert.show()
+      UIHelper.showRootAlert(message: message, title: localizedStrings.errorAlertTitle)
     }
   }
   
