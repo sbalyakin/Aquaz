@@ -11,10 +11,6 @@ import CoreData
 import Fabric
 import Crashlytics
 
-#if AQUAZLITE
-import Appodeal
-#endif
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
@@ -77,8 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     #if AQUAZLITE
     // General case
     if !Settings.sharedInstance.generalFullVersion.value {
-      setupAppodeal()
-      
       // Just for creating shared instance of in-app purchase manager and to start observing transaction states
       _ = InAppPurchaseManager.sharedInstance
     }
@@ -98,22 +92,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
   }
   
-  #if AQUAZLITE
-  fileprivate func setupAppodeal() {
-    #if DEBUG
-    Appodeal.setTestingEnabled(true)
-    #endif
-    Appodeal.setAutocache(true, types: .nonSkippableVideo)
-    Appodeal.initialize(withApiKey: GlobalConstants.appodealApiKey, types: .nonSkippableVideo)
-    Appodeal.setUserId(Settings.sharedInstance.generalAdUserId.value)
-    Appodeal.setUserAge(UInt(Settings.sharedInstance.userAge.value))
-    
-    let gender = Settings.sharedInstance.userGender.value == .man ? AppodealUserGender.male : AppodealUserGender.female
-    
-    Appodeal.setUserGender(gender)
-  }
-  #endif
-    
   fileprivate func setupSynchronizationWithCoreData() {
     CoreDataStack.performOnPrivateContext { privateContext in
       NotificationCenter.default.addObserver(

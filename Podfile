@@ -1,4 +1,3 @@
-source 'https://github.com/appodeal/CocoaPods.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 # Ignore all warnings from all pods
@@ -17,7 +16,6 @@ end
 # AquazPro
 target 'AquazPro' do
   shared_pods
-  pod 'SimulatorStatusMagic', :configurations => ['Debug']
 end
 
 target 'AquazPro Widget' do
@@ -27,7 +25,6 @@ end
 # Aquaz
 target 'Aquaz' do
   shared_pods
-  pod 'Appodeal/Video', '2.4.10'
 end
 
 target 'Aquaz Widget' do

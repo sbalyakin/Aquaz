@@ -163,7 +163,6 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/JDFTooltips/JDFTooltips.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/JDFTooltips/JDFTooltips.framework"

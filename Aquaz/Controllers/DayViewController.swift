@@ -220,10 +220,6 @@ class DayViewController: UIViewController {
   
   @objc func managedObjectContextDidChange(_ notification: Notification) {
     updateSummaryBar(animated: true) {
-      #if AQUAZLITE
-      self.checkCounterForInterstitialAds(notification: notification)
-      #endif
-      
       if !self.checkForCongratulationsAboutWaterGoalReaching(notification) {
         self.checkForHelpTip(notification)
       }
@@ -232,23 +228,6 @@ class DayViewController: UIViewController {
     }
   }
 
-  #if AQUAZLITE
-  private func checkCounterForInterstitialAds(notification: Notification) {
-    if Settings.sharedInstance.generalFullVersion.value || Settings.sharedInstance.generalAdCounter.value <= 0 {
-      return
-    }
-    
-    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
-      for insertedObject in insertedObjects {
-        if insertedObject is Intake {
-          Settings.sharedInstance.generalAdCounter.value -= 1
-          break
-        }
-      }
-    }
-  }
-  #endif
-  
   fileprivate func updateWaterGoalRelatedValues() {
     isWaterGoalForCurrentDay = waterGoal != nil ? DateHelper.areEqualDays(waterGoal!.date, date) : false
     

@@ -9,10 +9,6 @@
 import UIKit
 import CoreData
 
-#if AQUAZLITE
-import Appodeal
-#endif
-
 class IntakeViewController: UIViewController {
 
   @IBOutlet weak var amountSlider: CustomSlider!
@@ -88,12 +84,7 @@ class IntakeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    #if AQUAZLITE
-    checkForShowAds()
-    #endif
-    
     fetchDrink()
-    
     setupUI()
     
     NotificationCenter.default.addObserver(
@@ -108,19 +99,6 @@ class IntakeViewController: UIViewController {
     checkHelpTip()
   }
 
-  #if AQUAZLITE
-  private func checkForShowAds() {
-    if Settings.sharedInstance.generalFullVersion.value || Settings.sharedInstance.generalAdCounter.value > 0 {
-      return
-    }
-    
-    if Appodeal.isReadyForShow(with: .nonSkippableVideo) {
-      Appodeal.showAd(.nonSkippableVideo, rootViewController: self.navigationController!)
-      Settings.sharedInstance.generalAdCounter.value = GlobalConstants.numberOfIntakesToShowAd
-    }
-  }
-  #endif
-  
   fileprivate func fetchDrink() {
     if let _ = drink {
       return
