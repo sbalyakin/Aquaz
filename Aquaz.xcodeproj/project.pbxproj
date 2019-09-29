@@ -131,7 +131,6 @@
 		A587AAB31BD65224000B48E9 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB21BD65224000B48E9 /* MainInterfaceController.swift */; };
 		A587AAB51BD65224000B48E9 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB41BD65224000B48E9 /* ExtensionDelegate.swift */; };
 		A587AAB71BD65224000B48E9 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB61BD65224000B48E9 /* NotificationController.swift */; };
-		A587AAB91BD65224000B48E9 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB81BD65224000B48E9 /* GlanceController.swift */; };
 		A587AABB1BD65224000B48E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A587AABA1BD65224000B48E9 /* Assets.xcassets */; };
 		A587AABF1BD65224000B48E9 /* AquazPro Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A587AA9F1BD65224000B48E9 /* AquazPro Watch.app */; };
 		A587ABFB1BD65D6C000B48E9 /* ProgressHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587ABFA1BD65D6C000B48E9 /* ProgressHelper.swift */; };
@@ -317,7 +316,6 @@
 		A58DE7891DD90FA100F65990 /* ProgressHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587ABFA1BD65D6C000B48E9 /* ProgressHelper.swift */; };
 		A58DE78A1DD90FA100F65990 /* UnitItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E271A824D6700966538 /* UnitItems.swift */; };
 		A58DE78B1DD90FA100F65990 /* WatchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B255DA1BF877F4009AD8DA /* WatchSettings.swift */; };
-		A58DE78C1DD90FA100F65990 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB81BD65224000B48E9 /* GlanceController.swift */; };
 		A58DE78D1DD90FA100F65990 /* SettingItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E241A824CA900966538 /* SettingItems.swift */; };
 		A58DE78E1DD90FA100F65990 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406D78019FE9875001C54BF /* Units.swift */; };
 		A58DE78F1DD90FA100F65990 /* ConnectivityMessagePendingIntakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D67D451DD25625001FB7D0 /* ConnectivityMessagePendingIntakes.swift */; };
@@ -698,7 +696,6 @@
 		A587AAB21BD65224000B48E9 /* MainInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInterfaceController.swift; sourceTree = "<group>"; };
 		A587AAB41BD65224000B48E9 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		A587AAB61BD65224000B48E9 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		A587AAB81BD65224000B48E9 /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
 		A587AABA1BD65224000B48E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A587AABC1BD65224000B48E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A587ABFA1BD65D6C000B48E9 /* ProgressHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHelper.swift; sourceTree = "<group>"; };
@@ -1292,7 +1289,6 @@
 			isa = PBXGroup;
 			children = (
 				A587AAB21BD65224000B48E9 /* MainInterfaceController.swift */,
-				A587AAB81BD65224000B48E9 /* GlanceController.swift */,
 				A5B255E81BFCF998009AD8DA /* CurrentStateInterfaceController.swift */,
 				A516B1161BEBF76F00EC553A /* DrinksInterfaceController.swift */,
 				A58139D61BEE0D3C00B5D6A0 /* AmountInterfaceController.swift */,
@@ -2399,7 +2395,6 @@
 				A587ABFB1BD65D6C000B48E9 /* ProgressHelper.swift in Sources */,
 				A549A8561BF273CF00340486 /* UnitItems.swift in Sources */,
 				A5B255DB1BF877F4009AD8DA /* WatchSettings.swift in Sources */,
-				A587AAB91BD65224000B48E9 /* GlanceController.swift in Sources */,
 				A549A8571BF273E300340486 /* SettingItems.swift in Sources */,
 				A549A8551BF273B800340486 /* Units.swift in Sources */,
 				A5D67D471DD25E92001FB7D0 /* ConnectivityMessagePendingIntakes.swift in Sources */,
@@ -2572,7 +2567,6 @@
 				A58DE7891DD90FA100F65990 /* ProgressHelper.swift in Sources */,
 				A58DE78A1DD90FA100F65990 /* UnitItems.swift in Sources */,
 				A58DE78B1DD90FA100F65990 /* WatchSettings.swift in Sources */,
-				A58DE78C1DD90FA100F65990 /* GlanceController.swift in Sources */,
 				A58DE78D1DD90FA100F65990 /* SettingItems.swift in Sources */,
 				A58DE78E1DD90FA100F65990 /* Units.swift in Sources */,
 				A58DE78F1DD90FA100F65990 /* ConnectivityMessagePendingIntakes.swift in Sources */,
