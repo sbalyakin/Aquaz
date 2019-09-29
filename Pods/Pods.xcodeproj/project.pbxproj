@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = Fabric;
+			productName = Fabric;
 		};
 		C0E41540D6862472ED7F2FA11669BE1F /* Crashlytics */ = {
 			isa = PBXAggregateTarget;
@@ -25,6 +26,7 @@
 				C9CEFEFAAAEDB8CD947737FA56C849D4 /* PBXTargetDependency */,
 			);
 			name = Crashlytics;
+			productName = Crashlytics;
 		};
 /* End PBXAggregateTarget section */
 
@@ -218,7 +220,7 @@
 		23078C55B195EA72E26816473833BF64 /* CLSLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSLogging.h; path = iOS/Crashlytics.framework/Headers/CLSLogging.h; sourceTree = "<group>"; };
 		2363BDC42C01321C4089FD30ACB6CEBD /* JDFTooltipView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JDFTooltipView.h; path = Pod/Classes/JDFTooltipView.h; sourceTree = "<group>"; };
 		26877E1F7CE1193442CC8C12D343B167 /* Pods-Aquaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz.release.xcconfig"; sourceTree = "<group>"; };
-		28A6817605B0C8C643E72CDD35699E7B /* Pods_AquazPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AquazPro.framework; path = "Pods-AquazPro.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		28A6817605B0C8C643E72CDD35699E7B /* Pods_AquazPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		291320EB45FF01D904E26CE7B967E37F /* UILabel+JDFTooltips.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UILabel+JDFTooltips.h"; path = "Pod/Classes/UILabel+JDFTooltips.h"; sourceTree = "<group>"; };
 		29CA084EFAC68B222D181B3EEAC19B2A /* Pods-AquazPro Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AquazPro Widget.release.xcconfig"; sourceTree = "<group>"; };
 		2BB4A447F0AF454E355A0EC2C95FA092 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
@@ -226,7 +228,7 @@
 		30CEF98FD423C1A418B8A3158E85BAD1 /* Pods-AquazPro Widget.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-AquazPro Widget.modulemap"; sourceTree = "<group>"; };
 		33BAC9EE9DDBBAE4A94F7B63B96EA324 /* JDFTooltips-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JDFTooltips-prefix.pch"; sourceTree = "<group>"; };
 		354B3CC756A1F247465FB21DCF65B110 /* Crashlytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Crashlytics.h; path = iOS/Crashlytics.framework/Headers/Crashlytics.h; sourceTree = "<group>"; };
-		35B0931646046FCBDD0999EE36EA3D90 /* Pods_Aquaz_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Aquaz_Widget.framework; path = "Pods-Aquaz Widget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		35B0931646046FCBDD0999EE36EA3D90 /* Pods_Aquaz_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35E83352E23010D563CA04377839112B /* Pods-AquazPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AquazPro.release.xcconfig"; sourceTree = "<group>"; };
 		36CB71835D419AE16EB9DA4E4C94B1A4 /* Pods-AquazPro Widget-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AquazPro Widget-acknowledgements.markdown"; sourceTree = "<group>"; };
 		3DEBFEBE9F70693FA4157641F9E86A2F /* Pods-AquazPro Widget-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AquazPro Widget-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -244,11 +246,11 @@
 		728AD2F68A2D16D75284AC4B36D4546A /* FABAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FABAttributes.h; path = iOS/Fabric.framework/Headers/FABAttributes.h; sourceTree = "<group>"; };
 		755150D110120520079817DDCF03C651 /* JDFTooltips.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = JDFTooltips.modulemap; sourceTree = "<group>"; };
 		77941625D1A3217CFAB6E774B26E50C5 /* MMWormhole-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMWormhole-prefix.pch"; sourceTree = "<group>"; };
-		77F40BF55E0994DF2B97BEA4DD06E6D8 /* JDFTooltips.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = JDFTooltips.framework; path = JDFTooltips.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77F40BF55E0994DF2B97BEA4DD06E6D8 /* JDFTooltips.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JDFTooltips.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BAD48A6F2E1D0A52E4BFFC81370BD56 /* MMWormholeSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSession.m; path = Source/MMWormholeSession.m; sourceTree = "<group>"; };
 		7C56F02F7736D4371F6ABA48FC2392FE /* Pods-Aquaz Widget-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Aquaz Widget-umbrella.h"; sourceTree = "<group>"; };
 		7E2763A43E8099D965CCFFBBF10DE3ED /* Pods-Aquaz Widget.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Aquaz Widget.modulemap"; sourceTree = "<group>"; };
-		7F42EC94AFEDF8FBAC355A820F2F3FBD /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Aquaz.framework; path = "Pods-Aquaz.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F42EC94AFEDF8FBAC355A820F2F3FBD /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FE17C97B71E36E25F6766E2EB0D64C0 /* JDFSequentialTooltipManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JDFSequentialTooltipManager.h; path = Pod/Classes/JDFSequentialTooltipManager.h; sourceTree = "<group>"; };
 		80A32B1588DE04F2655DA9B569A9A03D /* Pods-AquazPro Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AquazPro Widget.debug.xcconfig"; sourceTree = "<group>"; };
 		81ABA4E321662250CE5299351CE4DBEA /* MMWormholeFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeFileTransiting.m; path = Source/MMWormholeFileTransiting.m; sourceTree = "<group>"; };
@@ -256,13 +258,13 @@
 		83619810E0E07594996D5B7B428A3229 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
 		903F10CE7B0F15AA05FAA9C4EBEE44A2 /* Pods-AquazPro-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AquazPro-acknowledgements.markdown"; sourceTree = "<group>"; };
 		931A32538D1166B0FF3CF793B3F7700A /* MMWormholeCoordinatedFileTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeCoordinatedFileTransiting.m; path = Source/MMWormholeCoordinatedFileTransiting.m; sourceTree = "<group>"; };
-		94788A2D4EB6338EE67E9FE4A23A438D /* Pods_AquazPro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AquazPro_Widget.framework; path = "Pods-AquazPro Widget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		94788A2D4EB6338EE67E9FE4A23A438D /* Pods_AquazPro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		965104D66FCE66EF25E9093D4A12E33F /* MMWormhole.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormhole.h; path = Source/MMWormhole.h; sourceTree = "<group>"; };
 		978F04DE7EE00CEDA1C7F8EBC8716175 /* JDFTooltips-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JDFTooltips-umbrella.h"; sourceTree = "<group>"; };
 		983C822DBA0DD4F9E99D9D5AD7B52F63 /* CLSReport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSReport.h; path = iOS/Crashlytics.framework/Headers/CLSReport.h; sourceTree = "<group>"; };
 		9AE7FEAFBC975055E2996F5714C7070F /* Pods-Aquaz Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Aquaz Widget.release.xcconfig"; sourceTree = "<group>"; };
 		9B5408D84345CF497699C947F2F75006 /* JDFTooltipManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JDFTooltipManager.m; path = Pod/Classes/JDFTooltipManager.m; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E7F80CEF617CB321D7B0CF7FC2C7B30 /* Pods-Aquaz Widget-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Aquaz Widget-acknowledgements.markdown"; sourceTree = "<group>"; };
 		A5E11943770A90D8204E5CA24C8E819D /* JDFTooltipView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JDFTooltipView.m; path = Pod/Classes/JDFTooltipView.m; sourceTree = "<group>"; };
 		A94A6F58237E7933353D6CB6F9CE3DA5 /* Pods-Aquaz-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Aquaz-Info.plist"; sourceTree = "<group>"; };
@@ -281,7 +283,7 @@
 		D17846DE6879026D8A5C9FE6C23CA1DA /* MMWormholeSessionContextTransiting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormholeSessionContextTransiting.m; path = Source/MMWormholeSessionContextTransiting.m; sourceTree = "<group>"; };
 		D29889E5E4A7F5EFB66AC56AAD4C859E /* Pods-Aquaz Widget-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Aquaz Widget-dummy.m"; sourceTree = "<group>"; };
 		D50321B0C4F9535685D6061C51FCE338 /* CLSStackFrame.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSStackFrame.h; path = iOS/Crashlytics.framework/Headers/CLSStackFrame.h; sourceTree = "<group>"; };
-		D9C203AF2F5D868FFFED227C2527287F /* MMWormhole.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MMWormhole.framework; path = MMWormhole.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9C203AF2F5D868FFFED227C2527287F /* MMWormhole.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MMWormhole.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCCAF906F34AEE76C0497E2B7D4A0EFB /* MMWormhole.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MMWormhole.m; path = Source/MMWormhole.m; sourceTree = "<group>"; };
 		DEE6815138F147A16D26A0B3F49CFBAA /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = iOS/Crashlytics.framework; sourceTree = "<group>"; };
 		E6CB556E1B8589F014D452E917BF7844 /* MMWormholeSessionContextTransiting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MMWormholeSessionContextTransiting.h; path = Source/MMWormholeSessionContextTransiting.h; sourceTree = "<group>"; };
@@ -409,7 +411,6 @@
 				F68CF890894E94F9C2FFA647019F9840 /* UIView+JDFTooltips.m */,
 				6A94072AB39A90F1750D34573765F9AA /* Support Files */,
 			);
-			name = JDFTooltips;
 			path = JDFTooltips;
 			sourceTree = "<group>";
 		};
@@ -419,7 +420,6 @@
 				33E1992B84FCCAAB08F756DBAB028F26 /* Core */,
 				925903668CC7A7B1CFEAAE574E78455A /* Support Files */,
 			);
-			name = MMWormhole;
 			path = MMWormhole;
 			sourceTree = "<group>";
 		};
@@ -550,7 +550,6 @@
 				103B13C8734669ECCB51771CF16A8BFD /* Frameworks */,
 				C0BB1589A46AFA5DCC68735FEEE81526 /* Support Files */,
 			);
-			name = Fabric;
 			path = Fabric;
 			sourceTree = "<group>";
 		};
@@ -620,7 +619,6 @@
 				4A7CFFE61AA5B5610753B95418BD39C0 /* Frameworks */,
 				B0BF216B372FD33C8CB4E48B2095A305 /* Support Files */,
 			);
-			name = Crashlytics;
 			path = Crashlytics;
 			sourceTree = "<group>";
 		};
@@ -1146,7 +1144,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/JDFTooltips/JDFTooltips-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/JDFTooltips/JDFTooltips-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/JDFTooltips/JDFTooltips.modulemap";
 				PRODUCT_MODULE_NAME = JDFTooltips;
@@ -1301,7 +1299,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1357,7 +1355,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MMWormhole/MMWormhole-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MMWormhole/MMWormhole-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MMWormhole/MMWormhole.modulemap";
 				PRODUCT_MODULE_NAME = MMWormhole;
@@ -1425,8 +1423,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -1512,7 +1509,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MMWormhole/MMWormhole-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MMWormhole/MMWormhole-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MMWormhole/MMWormhole.modulemap";
 				PRODUCT_MODULE_NAME = MMWormhole;
@@ -1534,7 +1531,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1548,7 +1545,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1562,7 +1559,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1585,7 +1582,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/JDFTooltips/JDFTooltips-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/JDFTooltips/JDFTooltips-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/JDFTooltips/JDFTooltips.modulemap";
 				PRODUCT_MODULE_NAME = JDFTooltips;
