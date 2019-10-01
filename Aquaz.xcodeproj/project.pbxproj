@@ -2968,7 +2968,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AquazPro.app/Aquaz";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AquazPro.app/AquazPro";
 			};
 			name = Debug;
 		};
@@ -2989,7 +2989,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AquazPro.app/Aquaz";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AquazPro.app/AquazPro";
 			};
 			name = Release;
 		};
