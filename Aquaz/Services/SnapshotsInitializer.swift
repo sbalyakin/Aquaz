@@ -9,10 +9,6 @@
 import Foundation
 import CoreData
 
-#if DEBUG
-  import SimulatorStatusMagic
-#endif
-
 @available(iOS 9.3, *)
 final class SnapshotsInitializer {
 
@@ -22,7 +18,6 @@ final class SnapshotsInitializer {
     setupExtraFactorsForWaterGoal()
     setupUI()
     setupNotifications()
-    setupStatusBar()
 
     deactivateHelpTips()
 
@@ -66,12 +61,6 @@ final class SnapshotsInitializer {
     Settings.sharedInstance.notificationsLimit.value = true
   }
   
-  fileprivate class func setupStatusBar() {
-    #if DEBUG && AQUAZPRO
-    SDStatusBarManager.sharedInstance().enableOverrides()
-    #endif
-  }
-
   fileprivate class func deactivateHelpTips() {
     Settings.sharedInstance.uiYearStatisticsPageHelpTipIsShown.value = true
     Settings.sharedInstance.uiMonthStatisticsPageHelpTipIsShown.value = true

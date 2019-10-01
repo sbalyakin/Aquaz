@@ -8,7 +8,7 @@
 
 import XCTest
 import CoreData
-@testable import Aquaz
+@testable import AquazPro
 
 class CoreDataSupport {
   

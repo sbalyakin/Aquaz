@@ -143,7 +143,7 @@ class NotificationsViewController: OmegaSettingsViewController {
       title: localizedStrings.soundTitle,
       settingsItem: Settings.sharedInstance.notificationsSound,
       stringFromValueFunction: NotificationsViewController.stringFromSoundFileName,
-      accessoryType: UITableViewCellAccessoryType.disclosureIndicator)
+      accessoryType: UITableViewCell.AccessoryType.disclosureIndicator)
     
     soundCell.activationChangedFunction = { [weak self] in self?.soundTableCellDidActivate($0, active: $1) }
     soundCell.valueChangedFunction = NotificationsViewController.tableCellValueAffectNotificationsDidChange

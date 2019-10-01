@@ -41,10 +41,10 @@ class UIDatePickerTableViewCell: UITableViewCell {
       datePicker.addTarget(
         self,
         action: #selector(self.datePickerValueDidChange(_:)),
-        for: UIControlEvents.valueChanged)
+        for: UIControl.Event.valueChanged)
       
       contentView.addSubview(datePicker)
-      contentView.sendSubview(toBack: datePicker)
+      contentView.sendSubviewToBack(datePicker)
       self.datePicker = datePicker
     }
   }

@@ -9,7 +9,7 @@
 import UIKit
 
 class MultiPickerTableCell<TValue: Equatable, TComponentCollection: Collection>: TableCellWithValue<TValue>, UIPickerTableViewCellDataSource, UIPickerTableViewCellDelegate
-where TComponentCollection.Iterator.Element: CustomStringConvertible, TComponentCollection.Index == Int, TComponentCollection.IndexDistance == Int {
+where TComponentCollection.Iterator.Element: CustomStringConvertible, TComponentCollection.Index == Int {
   
   let components: [Component]
   let height: UIPickerViewHeight

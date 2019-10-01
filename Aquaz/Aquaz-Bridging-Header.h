@@ -5,8 +5,6 @@
 //  Copyright © 2014 Sergey Balyakin. All rights reserved.
 //
 
-#import "External/JDFTooltips/JDFTooltips.h"
-
 #if defined(DEBUG) && defined(AQUAZPRO)
 #import <SimulatorStatusMagic/SDStatusBarManager.h>
 #endif

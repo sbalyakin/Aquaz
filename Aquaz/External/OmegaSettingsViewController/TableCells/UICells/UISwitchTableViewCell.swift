@@ -37,7 +37,7 @@ class UISwitchTableViewCell: UITableViewCell {
       switchControl.addTarget(
         self,
         action: #selector(self.switchControlValueChanged(_:)),
-        for: UIControlEvents.valueChanged)
+        for: UIControl.Event.valueChanged)
       
       self.accessoryView = switchControl
       self.switchControl = switchControl

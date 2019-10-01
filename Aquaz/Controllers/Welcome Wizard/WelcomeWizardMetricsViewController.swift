@@ -482,6 +482,8 @@ private extension Settings.Gender {
     case .female: self = .woman
     case .notSet: return
     case .other:  return
+    @unknown default:
+      fatalError("Unsupported member of HKBiologicalSex enum")
     }
   }
 }

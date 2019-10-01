@@ -26,7 +26,9 @@ class YearStatisticsViewController: UIViewController {
   fileprivate var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
   fileprivate var volumeObserver: SettingsObserver?
 
-  fileprivate let shortMonthSymbols = Calendar.current.shortMonthSymbols 
+  fileprivate let shortMonthSymbols = Calendar.current.shortMonthSymbols
+  
+  fileprivate let helpTipManager = HelpTipManager()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -52,7 +54,7 @@ class YearStatisticsViewController: UIViewController {
     yearStatisticsView.scaleTextColor = UIColor.darkGray
     yearStatisticsView.gridColor = UIColor(red: 230/255, green: 231/255, blue: 232/255, alpha: 1.0)
     yearStatisticsView.pinsColor = UIColor.white
-    yearStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    yearStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
     yearStatisticsView.dataSource = self
     
     yearLabel.backgroundColor = StyleKit.pageBackgroundColor // remove blending
@@ -64,7 +66,7 @@ class YearStatisticsViewController: UIViewController {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: NSNotification.Name.UIContentSizeCategoryDidChange,
+      name: UIContentSizeCategory.didChangeNotification,
       object: nil)
     
     #if AQUAZLITE
@@ -126,8 +128,8 @@ class YearStatisticsViewController: UIViewController {
   }
 
   @objc func preferredContentSizeChanged() {
-    yearLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
-    yearStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    yearLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
+    yearStatisticsView.titleFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
     view.invalidateIntrinsicContentSize()
   }
   
@@ -268,7 +270,7 @@ class YearStatisticsViewController: UIViewController {
   
   fileprivate func showHelpTip() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
@@ -278,10 +280,14 @@ class YearStatisticsViewController: UIViewController {
       
       let point = CGPoint(x: self.yearStatisticsView.bounds.midX, y: self.yearStatisticsView.bounds.midY)
       
-      if let helpTip = JDFTooltipView(targetPoint: point, hostView: self.yearStatisticsView, tooltipText: text, arrowDirection: .down, width: self.view.frame.width / 2) {
-        UIHelper.showHelpTip(helpTip)
-        Settings.sharedInstance.uiYearStatisticsPageHelpTipIsShown.value = true
-      }
+      self.helpTipManager.showHelpTip(
+        targetPoint: point,
+        hostView: self.yearStatisticsView,
+        tooltipText: text,
+        arrowDirection: .down,
+        width: self.view.frame.width / 2)
+      
+      Settings.sharedInstance.uiYearStatisticsPageHelpTipIsShown.value = true
     }
   }
 

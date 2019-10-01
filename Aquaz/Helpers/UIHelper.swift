@@ -12,8 +12,6 @@ import UIKit
 class UIHelper {
   
   class func applyStylization() {
-    UIApplication.shared.setStatusBarStyle(.lightContent, animated: false)
-    
     UISegmentedControl.appearance().tintColor = StyleKit.controlTintColor
     
     UINavigationBar.appearance().tintColor = StyleKit.barTextColor
@@ -49,7 +47,7 @@ class UIHelper {
     navigationBar.barTintColor = StyleKit.barBackgroundColor
     navigationBar.barStyle = .black
     navigationBar.tintColor = StyleKit.barTextColor
-    navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: StyleKit.barTextColor]
+    navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: StyleKit.barTextColor]
     navigationBar.isTranslucent = false
     navigationBar.tintAdjustmentMode = .normal
   }
@@ -59,24 +57,20 @@ class UIHelper {
       navigationItem.titleView = nil
       titleView.setNeedsLayout()
       titleView.layoutIfNeeded()
-      titleView.frame.size = titleView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+      titleView.frame.size = titleView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
       navigationItem.titleView = titleView
     }
   }
   
-  class func showHelpTip(_ helpTip: JDFTooltipView, hideCompletionHandler: (() -> ())? = nil) {
-    helpTip.tooltipBackgroundColour = StyleKit.helpTipsColor
-    helpTip.textColour = UIColor.black
-    
-    helpTip.showCompletionBlock = {
-      SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDisplayTime) {
-        helpTip.hide(animated: true)
-      }
+  class func showRootAlert(message: String, title: String? = nil, okHandler: ((UIAlertAction) -> Void)? = nil) {
+    var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+    if let navigationController = rootViewController as? UINavigationController {
+        rootViewController = navigationController.viewControllers.first
     }
-    
-    helpTip.hideCompletionBlock = hideCompletionHandler
-
-    helpTip.show()
+    if let tabBarController = rootViewController as? UITabBarController {
+        rootViewController = tabBarController.selectedViewController
+    }
+    rootViewController?.alertOkMessage(message: message, title: title, okHandler: okHandler)
   }
 }
 

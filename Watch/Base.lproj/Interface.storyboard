@@ -1,18 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
-    <device id="watch38" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14868" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38"/>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14643"/>
     </dependencies>
     <scenes>
         <!--Main Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="MainInterfaceController" customModuleProvider="target" >
+                <controller id="AgC-eL-Hgc" customClass="MainInterfaceController" customModule="AquazPro_Watch" customModuleProvider="target">
                     <items>
                         <group width="109" height="109" alignment="center" id="frh-W9-RKR">
                             <items>
@@ -37,7 +35,7 @@
         <!--DrinksInterfaceController-->
         <scene sceneID="LRv-Nu-MKq">
             <objects>
-                <controller identifier="DrinksInterfaceController" id="AM9-b2-pZ0" customClass="DrinksInterfaceController" customModuleProvider="target">
+                <controller identifier="DrinksInterfaceController" id="AM9-b2-pZ0" customClass="DrinksInterfaceController" customModule="AquazPro_Watch" customModuleProvider="target">
                     <items>
                         <picker width="82" height="82" alignment="center" style="stack" indicatorMode="shownWhileFocused" id="MI8-NV-rYM">
                             <variation key="device=watch42mm" height="105" width="105"/>
@@ -63,7 +61,7 @@
         <!--Amount Interface Controller-->
         <scene sceneID="RCg-de-BVc">
             <objects>
-                <controller id="1Fc-bJ-WRS" customClass="AmountInterfaceController" customModuleProvider="target">
+                <controller id="1Fc-bJ-WRS" customClass="AmountInterfaceController" customModule="AquazPro_Watch" customModuleProvider="target">
                     <items>
                         <group width="1" alignment="left" id="Nvl-ib-kOV" userLabel="Main Group">
                             <items>
@@ -100,39 +98,6 @@
             </objects>
             <point key="canvasLocation" x="647" y="347"/>
         </scene>
-        <!--Glance Interface Controller-->
-        <scene sceneID="BOz-TT-tkC">
-            <objects>
-                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModuleProvider="target">
-                    <items>
-                        <group alignment="left" id="1Sn-Qd-RJu">
-                            <items>
-                                <imageView width="47" height="47" alignment="left" image="GlanceLogo" id="Yes-oX-nmJ">
-                                    <variation key="device=watch42mm" height="52" width="52"/>
-                                </imageView>
-                                <label alignment="left" verticalAlignment="center" text="Aquaz" textAlignment="center" id="08b-v5-9vn"/>
-                            </items>
-                        </group>
-                        <group alignment="left" id="uCw-4Q-Ouw">
-                            <items>
-                                <group width="102" height="102" alignment="center" id="7Hp-hv-1az">
-                                    <items>
-                                        <imageView width="1" height="1" alignment="center" contentMode="scaleAspectFit" id="ZhL-ek-24O"/>
-                                    </items>
-                                    <variation key="device=watch42mm" height="114" width="114"/>
-                                </group>
-                            </items>
-                        </group>
-                    </items>
-                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
-                    <connections>
-                        <outlet property="progressGroup" destination="7Hp-hv-1az" id="OJF-zk-NUN"/>
-                        <outlet property="progressImage" destination="ZhL-ek-24O" id="sIa-W9-LvM"/>
-                    </connections>
-                </glanceController>
-            </objects>
-            <point key="canvasLocation" x="235" y="672"/>
-        </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
             <objects>
@@ -149,7 +114,10 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="235" y="1001"/>
+            <point key="canvasLocation" x="235" y="657"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AmountBackground" width="109" height="109"/>
+    </resources>
 </document>

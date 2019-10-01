@@ -148,7 +148,7 @@ protocol YearStatisticsViewDataSource: class {
     valuesLineLayer.strokeColor = valuesChartLineColor.cgColor
     valuesLineLayer.fillColor = nil
     valuesLineLayer.lineWidth = valuesChartLineWidth
-    valuesLineLayer.lineJoin = kCALineJoinRound
+    valuesLineLayer.lineJoin = CAShapeLayerLineJoin.round
     layer.addSublayer(valuesLineLayer)
   }
   
@@ -161,7 +161,7 @@ protocol YearStatisticsViewDataSource: class {
     valuesFillLayer.strokeColor = nil
     valuesFillLayer.fillColor = valuesChartFillColor.cgColor
     valuesFillLayer.lineWidth = 0
-    valuesFillLayer.lineJoin = kCALineJoinRound
+    valuesFillLayer.lineJoin = CAShapeLayerLineJoin.round
     layer.addSublayer(valuesFillLayer)
   }
   
@@ -174,7 +174,7 @@ protocol YearStatisticsViewDataSource: class {
     goalsLayer.strokeColor = goalsChartColor.cgColor
     goalsLayer.fillColor = nil
     goalsLayer.lineWidth = 1
-    goalsLayer.lineJoin = kCALineJoinRound
+    goalsLayer.lineJoin = CAShapeLayerLineJoin.round
     goalsLayer.lineDashPattern = [3, 3]
     layer.addSublayer(goalsLayer)
   }
@@ -209,7 +209,7 @@ protocol YearStatisticsViewDataSource: class {
     gridLayer.bounds = uiAreas.background
     gridLayer.strokeColor = gridColor.cgColor
     gridLayer.lineWidth = 1
-    gridLayer.lineCap = kCALineCapButt
+    gridLayer.lineCap = CAShapeLayerLineCap.butt
     layer.addSublayer(gridLayer)
   }
   
@@ -434,7 +434,7 @@ protocol YearStatisticsViewDataSource: class {
 
       let animation = CABasicAnimation(keyPath: "path")
       animation.duration = animationDuration
-      animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+      animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
       animation.fromValue = startPath
       shape.path = path
       animation.toValue = shape.path
@@ -460,7 +460,7 @@ protocol YearStatisticsViewDataSource: class {
       
       let animation = CABasicAnimation(keyPath: "position")
       animation.duration = animationDuration
-      animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+      animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
       animation.fromValue = NSValue(cgPoint: startRect.origin)
       shape.position = frame.origin
       animation.fromValue = NSValue(cgPoint: frame.origin)

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DayViewController: UIViewController, UIAlertViewDelegate {
+class DayViewController: UIViewController {
   
   // MARK: UI elements -
   
@@ -31,10 +31,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     lazy var welcomeToNextDayMessage: String = NSLocalizedString("DVC:Welcome to the next day",
       value: "Welcome to the next day",
       comment: "DayViewController: Title for alert displayed if tomorrow has come")
-    
-    lazy var okButtonTitle: String = NSLocalizedString("DVC:OK",
-      value: "OK",
-      comment: "DayViewController: Cancel button title for alert displayed if tomorrow has come")
     
     lazy var drinksTitle: String = NSLocalizedString("DVC:Drinks",
       value: "Drinks",
@@ -133,7 +129,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   var mode: Mode = .general
   
-  fileprivate var helpTip: JDFTooltipView?
+  fileprivate var helpTipManager: HelpTipManager = HelpTipManager()
   
   fileprivate struct Constants {
     static let selectDrinkViewControllerStoryboardID = "SelectDrinkViewController"
@@ -179,7 +175,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
-    helpTip?.hide(animated: true)
+    helpTipManager.hideHelpTip(animated: true)
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -195,7 +191,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     
     setupMultiprogressControl()
     
-    intakeButton.setTitle("", for: UIControlState())
+    intakeButton.setTitle("", for: UIControl.State())
     
     updateUIRelatedToCurrentDate(animated: false)
     
@@ -224,10 +220,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   @objc func managedObjectContextDidChange(_ notification: Notification) {
     updateSummaryBar(animated: true) {
-      #if AQUAZLITE
-      self.checkCounterForInterstitialAds(notification: notification)
-      #endif
-      
       if !self.checkForCongratulationsAboutWaterGoalReaching(notification) {
         self.checkForHelpTip(notification)
       }
@@ -236,23 +228,6 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
 
-  #if AQUAZLITE
-  private func checkCounterForInterstitialAds(notification: Notification) {
-    if Settings.sharedInstance.generalFullVersion.value || Settings.sharedInstance.generalAdCounter.value <= 0 {
-      return
-    }
-    
-    if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> {
-      for insertedObject in insertedObjects {
-        if insertedObject is Intake {
-          Settings.sharedInstance.generalAdCounter.value -= 1
-          break
-        }
-      }
-    }
-  }
-  #endif
-  
   fileprivate func updateWaterGoalRelatedValues() {
     isWaterGoalForCurrentDay = waterGoal != nil ? DateHelper.areEqualDays(waterGoal!.date, date) : false
     
@@ -269,7 +244,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   fileprivate func setupCurrentDate() {
     if mode == .general && Settings.sharedInstance.uiUseCustomDateForDayView.value {
-      date = Settings.sharedInstance.uiCustomDateForDayView.value as Date!
+      date = Settings.sharedInstance.uiCustomDateForDayView.value
     } else {
       if date == nil {
         date = Date()
@@ -298,8 +273,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     
     if mode == .general && isCurrentDayToday && dayIsSwitched {
       if showAlert {
-        let alert = UIAlertView(title: nil, message: localizedStrings.welcomeToNextDayMessage, delegate: nil, cancelButtonTitle: localizedStrings.okButtonTitle)
-        alert.show()
+        alertOkMessage(message: localizedStrings.welcomeToNextDayMessage)
       }
 
       setCurrentDate(Date())
@@ -504,7 +478,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
         UIHelper.adjustNavigationTitleViewSize(self.navigationItem)
       }
       
-      helpTip?.hide(animated: false)
+      helpTipManager.hideHelpTip(animated: false)
     }
   }
   
@@ -603,36 +577,39 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   fileprivate func showRateApplicationAlert() {
     DispatchQueue.main.async {
-      let alert = UIAlertView(
+      let alertController = UIAlertController(
         title: self.localizedStrings.rateApplicationAlertTitle,
         message: self.localizedStrings.rateApplicationAlertMessage,
-        delegate: self,
-        cancelButtonTitle: self.localizedStrings.rateApplicationAlertNoText,
-        otherButtonTitles: self.localizedStrings.rateApplicationAlertRateText,
-        self.localizedStrings.rateApplicationAlertRemindLaterText)
+        preferredStyle: UIAlertController.Style.alert)
 
-      alert.show()
+      // No, Thanks
+      let noAction = UIAlertAction(title: self.localizedStrings.rateApplicationAlertNoText, style: UIAlertAction.Style.cancel) {
+        (result : UIAlertAction) -> Void in
+        Settings.sharedInstance.uiWritingReviewAlertSelection.value = .no
+      }
+
+      // Rate It Now
+      let rateNowAction = UIAlertAction(title: self.localizedStrings.rateApplicationAlertRateText, style: UIAlertAction.Style.default) {
+        (result : UIAlertAction) -> Void in
+        if let url = URL(string: GlobalConstants.appReviewLink) {
+          UIApplication.shared.openURL(url)
+        }
+        Settings.sharedInstance.uiWritingReviewAlertSelection.value = .rateApplication
+      }
+
+      // Remind Me Later
+      let laterAction = UIAlertAction(title: self.localizedStrings.rateApplicationAlertRemindLaterText, style: UIAlertAction.Style.default) {
+        (result : UIAlertAction) -> Void in
+        Settings.sharedInstance.uiWritingReviewAlertSelection.value = .remindLater
+      }
+
+      alertController.addAction(noAction)
+      alertController.addAction(rateNowAction)
+      alertController.addAction(laterAction)
+      self.present(alertController, animated: true, completion: nil)
     }
   }
   
-  func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
-    switch buttonIndex {
-    case 0: // No, Thanks
-      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .no
-      
-    case 1: // Rate It Now
-      if let url = URL(string: GlobalConstants.appReviewLink) {
-        UIApplication.shared.openURL(url)
-      }
-      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .rateApplication
-      
-    case 2: // Remind Me Later
-      Settings.sharedInstance.uiWritingReviewAlertSelection.value = .remindLater
-      
-    default: break
-    }
-  }
-
   fileprivate func showCongratulationsAboutWaterGoalReaching() {
     DispatchQueue.main.async {
       let banner = InfoBannerView.create()
@@ -680,14 +657,14 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     let text = String.localizedStringWithFormat(localizedStrings.intakeButtonTextTemplate, intakeText, waterGoalText)
     
     if totalDehydrationAmount == 0 {
-      intakeButton.setAttributedTitle(nil, for: UIControlState())
+      intakeButton.setAttributedTitle(nil, for: UIControl.State())
 
       if animated {
-        intakeButton.setTitle(text, for: UIControlState())
+        intakeButton.setTitle(text, for: UIControl.State())
         intakeButton.layoutIfNeeded()
       } else {
         UIView.performWithoutAnimation {
-          self.intakeButton.setTitle(text, for: UIControlState())
+          self.intakeButton.setTitle(text, for: UIControl.State())
           self.intakeButton.layoutIfNeeded()
         }
       }
@@ -696,11 +673,11 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
       // In order to make it noticeable paint water goal part of title with different color.
       let coloredText = makeColoredText(text as NSString, mainColor: UIColor.darkGray, coloredParts: [(text: waterGoalText, color: StyleKit.wineColor)])
       if animated {
-        intakeButton.setAttributedTitle(coloredText, for: UIControlState())
+        intakeButton.setAttributedTitle(coloredText, for: UIControl.State())
         intakeButton.layoutIfNeeded()
       } else {
         UIView.performWithoutAnimation {
-          self.intakeButton.setAttributedTitle(coloredText, for: UIControlState())
+          self.intakeButton.setAttributedTitle(coloredText, for: UIControl.State())
           self.intakeButton.layoutIfNeeded()
         }
       }
@@ -708,14 +685,14 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   }
   
   fileprivate func makeColoredText(_ text: NSString, mainColor: UIColor, coloredParts: [(text: String, color: UIColor)]) -> NSAttributedString {
-    let attributes = [NSAttributedStringKey.foregroundColor: mainColor]
+    let attributes = [NSAttributedString.Key.foregroundColor: mainColor]
     let coloredText = NSMutableAttributedString(string: text as String, attributes: attributes)
     coloredText.beginEditing()
     
     for (textPart, color) in coloredParts {
       let range = text.range(of: textPart)
       if range.length > 0 {
-        coloredText.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: range)
+        coloredText.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
       }
     }
     
@@ -805,29 +782,8 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     }
   }
   
-  fileprivate func showAlcoholicDehydrationHelpTip() {
-    DispatchQueue.main.async {
-      SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-        if self.view.window == nil || self.helpTip != nil {
-          return
-        }
-        
-        if let helpTip = JDFTooltipView(
-          targetView: self.intakeButton,
-          hostView: self.view,
-          tooltipText: self.localizedStrings.helpTipAlcoholicDehydration,
-          arrowDirection: .up,
-          width: self.view.frame.width / 2)
-        {
-          self.showHelpTip(helpTip)
-          Settings.sharedInstance.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value = true
-        }
-      }
-    }
-  }
-  
   fileprivate func showNextHelpTip() {
-    if helpTip != nil {
+    if helpTipManager.isHelpTipActive {
       return
     }
 
@@ -853,42 +809,60 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
     case .none: break
     }
   }
+
+  fileprivate func showAlcoholicDehydrationHelpTip() {
+    DispatchQueue.main.async {
+      SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
+        if self.view.window == nil || self.helpTipManager.isHelpTipActive {
+          return
+        }
+        
+        self.helpTipManager.showHelpTip(
+          targetView: self.intakeButton,
+          hostView: self.view,
+          tooltipText: self.localizedStrings.helpTipAlcoholicDehydration,
+          arrowDirection: .up,
+          width: self.view.frame.width / 2)
+
+        Settings.sharedInstance.uiDayPageAlcoholicDehydratrionHelpTipIsShown.value = true
+      }
+    }
+  }
   
+
   fileprivate func showHelpTipForSwipeToSeeDiary() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
       let bounds = self.selectDrinkViewController!.collectionView.bounds
       
-      if let helpTip = JDFTooltipView(
+      self.helpTipManager.showHelpTip(
         targetPoint: CGPoint(x: bounds.midX, y: bounds.height * 0.65),
         hostView: self.selectDrinkViewController!.collectionView,
         tooltipText: self.localizedStrings.helpTipSwipeToSeeDiary,
         arrowDirection: .up,
         width: self.view.frame.width / 2)
-      {
-        self.showHelpTip(helpTip)
-        self.switchToNextHelpTip()
-      }
+
+      self.switchToNextHelpTip()
     }
   }
   
   fileprivate func showHelpTipForSwipeToChangeDay() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
-      if let helpTip = JDFTooltipView(
-        targetView: self.navigationDateLabel,
-        hostView: self.navigationController?.view,
-        tooltipText: self.localizedStrings.helpTipSwipeToChangeDay,
-        arrowDirection: .up,
-        width: self.view.frame.width / 2)
-      {
-        self.showHelpTip(helpTip)
+      if let hostView = self.navigationController?.view {
+        self.helpTipManager.showHelpTip(
+          targetView: self.navigationDateLabel!,
+          hostView: hostView,
+          tooltipText: self.localizedStrings.helpTipSwipeToChangeDay,
+          arrowDirection: .up,
+          width: self.view.frame.width / 2)
+
         self.switchToNextHelpTip()
       }
     }
@@ -896,93 +870,77 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
   
   fileprivate func showHelpTipForHighActivityMode() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
-      if let helpTip = JDFTooltipView(
+      self.helpTipManager.showHelpTip(
         targetView: self.highActivityButton,
         hostView: self.view,
         tooltipText: self.localizedStrings.helpTipHighActivityMode,
         arrowDirection: .up,
         width: self.view.frame.width / 2)
-      {
-        self.showHelpTip(helpTip)
-        self.switchToNextHelpTip()
-      }
+
+      self.switchToNextHelpTip()
     }
   }
   
   fileprivate func showHelpTipForHotWeatherMode() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
-      if let helpTip = JDFTooltipView(
+      self.helpTipManager.showHelpTip(
         targetView: self.hotDayButton,
         hostView: self.view,
         tooltipText: self.localizedStrings.helpTipHotWeatherMode,
         arrowDirection: .up,
         width: self.view.frame.width / 2)
-      {
-        self.showHelpTip(helpTip)
-        self.switchToNextHelpTip()
-      }
+
+      self.switchToNextHelpTip()
     }
   }
   
   fileprivate func showHelpTipForSwitchToPercentAndViceVersa() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
-      if let helpTip = JDFTooltipView(
+      self.helpTipManager.showHelpTip(
         targetView: self.intakeButton,
         hostView: self.view,
         tooltipText: self.localizedStrings.helpTipSwitchToPercentAndViceVersa,
         arrowDirection: .up,
         width: self.view.frame.width / 2)
-      {
-        self.showHelpTip(helpTip)
-        self.switchToNextHelpTip()
-      }
+
+      self.switchToNextHelpTip()
     }
   }
   
   fileprivate func showHelpTipForLongPressToChooseAlcohol() {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil || self.helpTip != nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
       let lastCellIndex = self.selectDrinkViewController!.collectionView.numberOfItems(inSection: 0) - 1
-      let cell = self.selectDrinkViewController!.collectionView.cellForItem(at: IndexPath(row: lastCellIndex, section: 0))
-      
-      if let tooltip = JDFTooltipView(
-        targetView: cell,
-        hostView: self.selectDrinkViewController!.collectionView,
-        tooltipText: self.localizedStrings.helpTipLongPressToChooseAlcohol,
-        arrowDirection: .down,
-        width: self.view.frame.width / 2)
-      {
-        self.showHelpTip(tooltip)
+      if let cell = self.selectDrinkViewController!.collectionView.cellForItem(at: IndexPath(row: lastCellIndex, section: 0)) {
+        self.helpTipManager.showHelpTip(
+          targetView: cell,
+          hostView: self.selectDrinkViewController!.collectionView,
+          tooltipText: self.localizedStrings.helpTipLongPressToChooseAlcohol,
+          arrowDirection: .down,
+          width: self.view.frame.width / 2)
+
         self.switchToNextHelpTip()
       }
     }
   }
   
-  fileprivate func showHelpTip(_ helpTip: JDFTooltipView) {
-    self.helpTip = helpTip
-
-    UIHelper.showHelpTip(helpTip) {
-      self.helpTip = nil
-    }
-  }
-
   fileprivate func switchToNextHelpTip() {
-    Settings.sharedInstance.uiDayPageHelpTipToShow.value = (Settings.DayPageHelpTip(rawValue: Settings.sharedInstance.uiDayPageHelpTipToShow.value.rawValue + 1) ?? .none)!
+    Settings.sharedInstance.uiDayPageHelpTipToShow.value = (Settings.DayPageHelpTip(rawValue: Settings.sharedInstance.uiDayPageHelpTipToShow.value.rawValue + 1) ?? Settings.DayPageHelpTip.none)!
     
     // Reset help tips counter. Help tips should be shown after every 2 intakes.
     Settings.sharedInstance.uiDayPageIntakesCountTillHelpTip.value = 2
@@ -1029,7 +987,7 @@ class DayViewController: UIViewController, UIAlertViewDelegate {
 extension DayViewController: UIPageViewControllerDataSource {
   
   func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-    if let index = pages.index(of: viewController) {
+    if let index = pages.firstIndex(of: viewController) {
       if index > 0 {
         return pages[index - 1]
       }
@@ -1039,7 +997,7 @@ extension DayViewController: UIPageViewControllerDataSource {
   }
   
   func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-    if let index = pages.index(of: viewController) {
+    if let index = pages.firstIndex(of: viewController) {
       if index < pages.count - 1 {
         return pages[index + 1]
       }
