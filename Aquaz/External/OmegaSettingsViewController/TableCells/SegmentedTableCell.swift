@@ -49,7 +49,7 @@ where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Ind
   }
   
   fileprivate func updateUICell() {
-    if let uiCell = uiCell, let row = collection.index(of: value) {
+    if let uiCell = uiCell, let row = collection.firstIndex(of: value) {
       uiCell.segmentedControl.selectedSegmentIndex = row
     }
   }

@@ -332,6 +332,9 @@ extension DiaryViewController: NSFetchedResultsControllerDelegate {
       if let newIndexPath = newIndexPath {
         insertRowIndexPaths += [newIndexPath]
       }
+      
+    @unknown default:
+      fatalError("Unsupported member of NSFetchedResultsChangeType enum")
     }
   }
 

@@ -225,6 +225,9 @@ class InAppPurchaseManager: NSObject, SKProductsRequestDelegate, SKPaymentTransa
         
       case .failed:
         processFailedTransaction(transaction)
+        
+      @unknown default:
+        fatalError("Unsupported member of SKPaymentTransactionState enum")
       }
       
       DispatchQueue.main.async {

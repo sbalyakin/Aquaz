@@ -56,7 +56,7 @@ where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Ind
       if let numberValue = value as? NSNumber {
         row = findRowWithNearestValue(numberValue)
       } else {
-        row = collection.index(of: value)
+        row = collection.firstIndex(of: value)
       }
       
       if let row = row {

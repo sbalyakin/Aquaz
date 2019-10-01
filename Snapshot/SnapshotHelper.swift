@@ -28,12 +28,15 @@ func snapshot(_ name: String, waitForLoadingIndicator: Bool = false)
 {
   class func setLanguage(_ app: XCUIApplication)
   {
-    let path = "/tmp/language.txt"
+    guard let path = URL(string: "/tmp/language.txt") else {
+        print("CacheDirectory is not set - probably running on a physical device?")
+        return
+    }
     
     do {
-      let locale = try NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue) as String
-      deviceLanguage = locale.substring(to: locale.characters.index(locale.startIndex, offsetBy: 2, limitedBy:locale.endIndex)!)
-      app.launchArguments += ["-AppleLanguages", "(\(deviceLanguage))", "-AppleLocale", "\"\(locale)\"","-ui_testing"]
+      let trimCharacterSet = CharacterSet.whitespacesAndNewlines
+      deviceLanguage = try String(contentsOf: path, encoding: .utf8).trimmingCharacters(in: trimCharacterSet)
+      app.launchArguments += ["-AppleLanguages", "(\(deviceLanguage))"]
     } catch {
       print("Couldn't detect/set language...")
     }
