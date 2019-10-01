@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class DiaryViewController: UIViewController {
 
@@ -18,13 +19,14 @@ class DiaryViewController: UIViewController {
   fileprivate var fetchedResultsController: NSFetchedResultsController<Intake>?
   fileprivate var sizingCell: DiaryTableViewCell!
   fileprivate var volumeObserver: SettingsObserver?
-  fileprivate let isIOS8AndLater = UIDevice.current.systemVersion.compare("8.0.0", options: NSString.CompareOptions.numeric) != .orderedAscending
 
   fileprivate var insertRowIndexPaths = [IndexPath]()
   fileprivate var deleteRowIndexPaths = [IndexPath]()
   fileprivate var reloadRowIndexPaths = [IndexPath]()
   
   fileprivate var innerRowDeletion = false
+  
+  fileprivate var helpTipManager = HelpTipManager()
 
   
   fileprivate struct Constants {
@@ -42,10 +44,8 @@ class DiaryViewController: UIViewController {
       self?.tableView?.reloadData()
     }
     
-    if isIOS8AndLater {
-      tableView.rowHeight = UITableViewAutomaticDimension
-      tableView.estimatedRowHeight = 54
-    }
+    tableView.rowHeight = UITableView.automaticDimension
+    tableView.estimatedRowHeight = 54
     
     // Remove separators for empty rows
     tableView.tableFooterView = UIView()
@@ -209,20 +209,23 @@ extension DiaryViewController: UITableViewDataSource {
   
   fileprivate func showHelpTipForCell(_ cell: DiaryTableViewCell) {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
       let text = NSLocalizedString("DVC:Hydration effect of the intake", value: "Hydration effect of the intake", comment: "DiaryViewController: Text for help tip about hydration effect of an intake of a diary cell")
       
-      if let helpTip = JDFTooltipView(targetView: cell.waterBalanceLabel, hostView: self.tableView, tooltipText: text, arrowDirection: .up, width: self.view.frame.width / 2) {
-        UIHelper.showHelpTip(helpTip)
-        Settings.sharedInstance.uiDiaryPageHelpTipIsShown.value = true
-      }
+      self.helpTipManager.showHelpTip(
+        targetView: cell.waterBalanceLabel,
+        hostView: self.tableView,
+        tooltipText: text,
+        arrowDirection: .up, width: self.view.frame.width / 2)
+
+      Settings.sharedInstance.uiDiaryPageHelpTipIsShown.value = true
     }
   }
 
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle != .delete {
       return
     }
@@ -286,24 +289,7 @@ extension DiaryViewController: UITableViewDelegate {
   }
 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if isIOS8AndLater {
-      return UITableViewAutomaticDimension
-    } else {
-      if sizingCell == nil {
-        sizingCell = tableView.dequeueReusableCell(withIdentifier: Constants.diaryCellIdentifier) as! DiaryTableViewCell
-      }
-
-      sizingCell.updateFonts()
-      
-      sizingCell.bounds = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: sizingCell.bounds.height)
-      
-      sizingCell.setNeedsLayout()
-      sizingCell.layoutIfNeeded()
-      
-      let height = sizingCell.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
-      
-      return height
-    }
+    return UITableView.automaticDimension
   }
   
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -346,6 +332,9 @@ extension DiaryViewController: NSFetchedResultsControllerDelegate {
       if let newIndexPath = newIndexPath {
         insertRowIndexPaths += [newIndexPath]
       }
+      
+    @unknown default:
+      fatalError("Unsupported member of NSFetchedResultsChangeType enum")
     }
   }
 

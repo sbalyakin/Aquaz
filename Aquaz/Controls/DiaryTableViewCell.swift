@@ -82,9 +82,9 @@ class DiaryTableViewCell: UITableViewCell {
   }
   
   func updateFonts() {
-    drinkLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-    timeLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)
-    amountLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+    drinkLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+    timeLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.footnote)
+    amountLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
     invalidateIntrinsicContentSize()
   }
   

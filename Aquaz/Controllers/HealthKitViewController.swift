@@ -26,8 +26,6 @@ final class HealthKitViewController: UIViewController {
     
     lazy var checkAppleHealthMessage = NSLocalizedString("HKVC:Check Apple Health settings in the Health app under the Sources tab", value: "Check Apple Health settings in the Health app under the Sources tab", comment: "HealthKitViewController: Message of alert displayed when Aquaz is not allowed to write data into Apple Health.")
     
-    lazy var okTitle = NSLocalizedString("HKVC:OK", value: "OK", comment: "HealthKitViewController: Title for OK button")
-    
   }
 
   
@@ -97,8 +95,7 @@ final class HealthKitViewController: UIViewController {
   
   @IBAction func exportToHealthKit() {
     if !HealthKitProvider.sharedInstance.waterSharingIsAuthorized && !HealthKitProvider.sharedInstance.caffeineSharingIsAuthorized {
-      let alert = UIAlertView(title: localizedStrings.checkAppleHealthTitle, message: localizedStrings.checkAppleHealthMessage, delegate: nil, cancelButtonTitle: localizedStrings.okTitle)
-      alert.show()
+      alertOkMessage(message: localizedStrings.checkAppleHealthMessage, title: localizedStrings.checkAppleHealthTitle)
       return
     }
     

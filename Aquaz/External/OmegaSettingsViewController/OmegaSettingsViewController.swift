@@ -57,7 +57,7 @@ class OmegaSettingsViewController: UIViewController {
   
   func createBasicTableCell(
     title: String,
-    accessoryType: UITableViewCellAccessoryType? = nil) -> BasicTableCell
+    accessoryType: UITableViewCell.AccessoryType? = nil) -> BasicTableCell
   {
     return BasicTableCell(title: title, container: self, accessoryType: accessoryType)
   }
@@ -145,7 +145,7 @@ class OmegaSettingsViewController: UIViewController {
     title: String,
     value: TValue,
     stringFromValueFunction: @escaping ((TValue) -> String),
-    accessoryType: UITableViewCellAccessoryType = .none) -> RightDetailTableCell<TValue>
+    accessoryType: UITableViewCell.AccessoryType = .none) -> RightDetailTableCell<TValue>
   {
     return RightDetailTableCell(title: title, value: value, container: self, accessoryType: accessoryType)
   }
@@ -154,7 +154,7 @@ class OmegaSettingsViewController: UIViewController {
     title: String,
     settingsItem: SettingsItemBase<TValue>,
     stringFromValueFunction: (@escaping ((TValue) -> String)),
-    accessoryType: UITableViewCellAccessoryType = .none) -> RightDetailTableCell<TValue>
+    accessoryType: UITableViewCell.AccessoryType = .none) -> RightDetailTableCell<TValue>
   {
     let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: accessoryType)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
@@ -168,9 +168,9 @@ class OmegaSettingsViewController: UIViewController {
     collection: TCollection,
     stringFromValueFunction: @escaping ((TValue) -> String),
     pickerTableCellHeight: UIPickerViewHeight = .medium) -> RightDetailTableCell<TValue>
-    where TCollection.Iterator.Element == TValue, TCollection.Index == Int, TCollection.IndexDistance == Int
+    where TCollection.Iterator.Element == TValue, TCollection.Index == Int
   {
-    let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: .none)
+    let cell = RightDetailTableCell(title: title, value: settingsItem.value, container: self, accessoryType: UITableViewCell.AccessoryType.none)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
     cell.supportingTableCell = PickerTableCell(value: settingsItem.value, collection: collection, container: self, height: pickerTableCellHeight)
     
@@ -186,9 +186,9 @@ class OmegaSettingsViewController: UIViewController {
     collection: TCollection,
     stringFromValueFunction: @escaping ((TValue) -> String),
     pickerTableCellHeight: UIPickerViewHeight = .medium) -> RightDetailTableCell<TValue>
-    where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int, TCollection.IndexDistance == Int
+    where TValue: Equatable, TCollection.Iterator.Element == TValue, TCollection.Index == Int
   {
-    let cell = RightDetailTableCell(title: title, value: value, container: self, accessoryType: .none)
+    let cell = RightDetailTableCell(title: title, value: value, container: self, accessoryType: UITableViewCell.AccessoryType.none)
     cell.supportingTableCell = PickerTableCell(value: value, collection: collection, container: self, height: pickerTableCellHeight)
     
     cell.stringFromValueFunction = stringFromValueFunction
@@ -291,7 +291,7 @@ class OmegaSettingsViewController: UIViewController {
     valueFromStringFunction: @escaping ((String) -> TValue?),
     stringFromValueFunction: @escaping ((TValue) -> String),
     keyboardType: UIKeyboardType = .default,
-    borderStyle: UITextBorderStyle = .none) -> TextFieldTableCell<TValue>
+    borderStyle: UITextField.BorderStyle = .none) -> TextFieldTableCell<TValue>
   {
     let cell = TextFieldTableCell(title: title, value: value, valueFromStringFunction: valueFromStringFunction, container: self, keyboardType: keyboardType, textFieldBorderStyle: borderStyle)
     cell.stringFromValueFunction = stringFromValueFunction
@@ -304,7 +304,7 @@ class OmegaSettingsViewController: UIViewController {
     valueFromStringFunction: @escaping ((String) -> TValue?),
     stringFromValueFunction: @escaping ((TValue) -> String),
     keyboardType: UIKeyboardType = .default,
-    borderStyle: UITextBorderStyle = .none) -> TextFieldTableCell<TValue>
+    borderStyle: UITextField.BorderStyle = .none) -> TextFieldTableCell<TValue>
   {
     let cell = TextFieldTableCell(title: title, value: settingsItem.value, valueFromStringFunction: valueFromStringFunction, container: self, keyboardType: keyboardType, textFieldBorderStyle: borderStyle)
     cell.valueExternalStorage = SettingsItemConnector(settingsItem: settingsItem, saveToSettingsOnValueUpdate: saveToSettingsOnValueUpdate)
@@ -318,13 +318,13 @@ class OmegaSettingsViewController: UIViewController {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.handleKeyboardWillShowNotification(_:)),
-      name: NSNotification.Name.UIKeyboardWillShow,
+      name: UIResponder.keyboardWillShowNotification,
       object: nil)
     
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.handleKeyboardWillHideNotification(_:)),
-      name: NSNotification.Name.UIKeyboardWillHide,
+      name: UIResponder.keyboardWillHideNotification,
       object: nil)
   }
   
@@ -334,24 +334,24 @@ class OmegaSettingsViewController: UIViewController {
     activateTableCell(nil)
 
     let notificationCenter = NotificationCenter.default
-    notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-    notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+    notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
   }
   
   @objc func handleKeyboardWillShowNotification(_ notification: Notification) {
     let userInfo = notification.userInfo!
     
-    let infoRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
+    let infoRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
     let size = infoRect!.size
     
     let contentInsets: UIEdgeInsets
-    if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+    if UIApplication.shared.statusBarOrientation.isPortrait {
       contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: size.height, right: 0)
     } else {
       contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: size.width, right: 0)
     }
     
-    let animationDuration: TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+    let animationDuration: TimeInterval = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
     UIView.animate(withDuration: animationDuration, animations: {
       self.tableView.contentInset = contentInsets
       self.tableView.scrollIndicatorInsets = contentInsets
@@ -402,7 +402,7 @@ extension OmegaSettingsViewController: TableCellsContainer {
     tableView.endUpdates()
     
     if insertedIndexPath != nil {
-      tableView.scrollToRow(at: insertedIndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+      tableView.scrollToRow(at: insertedIndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
     }
   }
   

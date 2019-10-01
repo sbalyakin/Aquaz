@@ -172,10 +172,6 @@ final class Settings {
     key: "General - Full version", initialValue: false,
     userDefaults: Settings.userDefaults)
   
-  lazy var generalAdCounter: SettingsOrdinalItem<Int> = SettingsOrdinalItem(
-    key: "General - Ad counter", initialValue: GlobalConstants.numberOfIntakesToShowAd,
-    userDefaults: Settings.userDefaults)
-  
   lazy var generalAdUserId = SettingsOrdinalItem(
     key: "General - Ad user id", initialValue: UUID().uuidString, userDefaults: Settings.userDefaults)
   #endif

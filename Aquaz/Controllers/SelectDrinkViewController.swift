@@ -65,7 +65,7 @@ class SelectDrinkViewController: UIViewController {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: NSNotification.Name.UIContentSizeCategoryDidChange,
+      name: UIContentSizeCategory.didChangeNotification,
       object: nil)
   }
   
@@ -186,7 +186,7 @@ extension SelectDrinkViewController: UICollectionViewDataSource {
     
     cell.backgroundColor = StyleKit.pageBackgroundColor
     cell.drinkLabel.text = drinkType.localizedName
-    cell.drinkLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)
+    cell.drinkLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.footnote)
     cell.drinkView.drinkType = drinkType
     cell.drinkView.isGroup = drinkIndex == displayedDrinkTypes.count - 1
     cell.invalidateIntrinsicContentSize()
@@ -236,7 +236,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: NSNotification.Name.UIContentSizeCategoryDidChange,
+      name: UIContentSizeCategory.didChangeNotification,
       object: nil)
 
     cleanPopupView()
@@ -281,7 +281,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     popupView.addGestureRecognizer(panGestureRecognizer)
     
     window = UIWindow(frame: UIScreen.main.bounds)
-    window.windowLevel = UIWindowLevelAlert
+    window.windowLevel = UIWindow.Level.alert
     window.isOpaque = false
     window.addSubview(popupView)
     window.makeKeyAndVisible()
@@ -334,7 +334,7 @@ class SelectDrinkPopupViewManager: NSObject, UICollectionViewDataSource, UIColle
     
     cell.backgroundColor = StyleKit.pageBackgroundColor
     cell.drinkLabel.text = drinkType.localizedName
-    cell.drinkLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)
+    cell.drinkLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.footnote)
     cell.drinkView.drinkType = drinkType
     cell.drinkView.isGroup = false
     cell.invalidateIntrinsicContentSize()

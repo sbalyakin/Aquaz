@@ -143,7 +143,7 @@ protocol WeekStatisticsViewDelegate: class {
       let dayButton = UIButton()
       dayButton.tag = dayIndex
       dayButton.titleLabel?.font = daysFont
-      dayButton.setTitle(title, for: UIControlState())
+      dayButton.setTitle(title, for: UIControl.State())
       dayButton.addTarget(self, action: #selector(self.dayButtonTapped(_:)), for: .touchUpInside)
       dayButton.backgroundColor = UIColor.clear
       dayButton.isUserInteractionEnabled = false // will be enabled later
@@ -181,7 +181,7 @@ protocol WeekStatisticsViewDelegate: class {
       }
       
       UIView.animate(withDuration: 0.4, animations: {
-        dayButton.setTitleColor(titleColor, for: UIControlState())
+        dayButton.setTitleColor(titleColor, for: UIControl.State())
         dayButton.backgroundColor = backgroundColor
         dayButton.titleLabel?.font = font
       }) 
@@ -237,7 +237,7 @@ protocol WeekStatisticsViewDelegate: class {
     goalsLayer.strokeColor = goalLineColor.cgColor
     goalsLayer.fillColor = nil
     goalsLayer.lineWidth = 1
-    goalsLayer.lineJoin = kCALineJoinRound
+    goalsLayer.lineJoin = CAShapeLayerLineJoin.round
     goalsLayer.lineDashPattern = [3, 3]
     layer.addSublayer(goalsLayer)
   }
@@ -340,7 +340,7 @@ protocol WeekStatisticsViewDelegate: class {
   
   fileprivate func calcSizeForText(_ text: String, font: UIFont) -> CGSize {
     let textStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-    let fontAttributes = [NSAttributedStringKey.font: font, NSAttributedStringKey.paragraphStyle: textStyle]
+    let fontAttributes = [NSAttributedString.Key.font: font, NSAttributedString.Key.paragraphStyle: textStyle]
     let infiniteSize = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
     let rect = text.boundingRect(with: infiniteSize, options: .usesLineFragmentOrigin, attributes: fontAttributes, context: nil)
     return rect.size
@@ -422,7 +422,7 @@ protocol WeekStatisticsViewDelegate: class {
 
       let animation = CABasicAnimation(keyPath: "path")
       animation.duration = animationDuration
-      animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+      animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
       animation.fromValue = startPath
       shape.path = path
       animation.toValue = path

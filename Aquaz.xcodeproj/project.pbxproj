@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4B24ECA46920E196EE473015 /* Pods_Aquaz_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E56DE86546C846B16969B44 /* Pods_Aquaz_Widget.framework */; };
-		620343965FD08DA7E26115A6 /* Pods_AquazPro_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B305005A042FE000EAB938 /* Pods_AquazPro_Widget.framework */; };
+		4C54BEB67C5F515E45C6E140 /* Pods_AquazPro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C2041208195900C63B11E5B /* Pods_AquazPro.framework */; };
+		70FC08E98C9762B0F08FD71A /* Pods_Aquaz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9D3E11BE405E2F8EADFA03E /* Pods_Aquaz.framework */; };
 		84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84039F171A4B103100C5391E /* NotificationsHelper.swift */; };
 		840476571A35FE4A004F0FEF /* WaterGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840476561A35FE4A004F0FEF /* WaterGoalViewController.swift */; };
 		840476591A35FE82004F0FEF /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840476581A35FE82004F0FEF /* NotificationsViewController.swift */; };
@@ -131,7 +131,6 @@
 		A587AAB31BD65224000B48E9 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB21BD65224000B48E9 /* MainInterfaceController.swift */; };
 		A587AAB51BD65224000B48E9 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB41BD65224000B48E9 /* ExtensionDelegate.swift */; };
 		A587AAB71BD65224000B48E9 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB61BD65224000B48E9 /* NotificationController.swift */; };
-		A587AAB91BD65224000B48E9 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB81BD65224000B48E9 /* GlanceController.swift */; };
 		A587AABB1BD65224000B48E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A587AABA1BD65224000B48E9 /* Assets.xcassets */; };
 		A587AABF1BD65224000B48E9 /* AquazPro Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A587AA9F1BD65224000B48E9 /* AquazPro Watch.app */; };
 		A587ABFB1BD65D6C000B48E9 /* ProgressHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587ABFA1BD65D6C000B48E9 /* ProgressHelper.swift */; };
@@ -158,7 +157,6 @@
 		A58DE6B01DD90F3900F65990 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EE36251AAD9DAA0038C844 /* Logger.swift */; };
 		A58DE6B11DD90F3900F65990 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5275F861A1216090088AF47 /* CalendarViewController.swift */; };
 		A58DE6B21DD90F3900F65990 /* WaterGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840476561A35FE4A004F0FEF /* WaterGoalViewController.swift */; };
-		A58DE6B31DD90F3900F65990 /* JDFTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945F1AF4B75C0042B6DF /* JDFTooltipManager.m */; };
 		A58DE6B41DD90F3900F65990 /* UILoggedActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AD171BD68881000B48E9 /* UILoggedActions.swift */; };
 		A58DE6B51DD90F3900F65990 /* ConnectivityMessageAddIntake.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554B4FA1BE504360095593B /* ConnectivityMessageAddIntake.swift */; };
 		A58DE6B61DD90F3900F65990 /* DatePickerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E75F91AA9F508003B63E1 /* DatePickerTableCell.swift */; };
@@ -184,7 +182,6 @@
 		A58DE6CA1DD90F3900F65990 /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8404765A1A360273004F0FEF /* SupportViewController.swift */; };
 		A58DE6CB1DD90F3900F65990 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E70A6F19E30BEE006E5FC0 /* Settings.swift */; };
 		A58DE6CC1DD90F3900F65990 /* NotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84039F171A4B103100C5391E /* NotificationsHelper.swift */; };
-		A58DE6CD1DD90F3900F65990 /* UIView+JDFTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894661AF4B75C0042B6DF /* UIView+JDFTooltips.m */; };
 		A58DE6CE1DD90F3900F65990 /* CodingManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59CDC901AD8587100E92EF2 /* CodingManagedObject.swift */; };
 		A58DE6CF1DD90F3900F65990 /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B013E41AE27C7D00C372F8 /* UnitsViewController.swift */; };
 		A58DE6D01DD90F3900F65990 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6094B1A6A690800786D15 /* DiaryTableViewCell.swift */; };
@@ -193,7 +190,6 @@
 		A58DE6D31DD90F3900F65990 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B13BD1A31FE4F00249426 /* UIHelper.swift */; };
 		A58DE6D41DD90F3900F65990 /* CalendarContentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD974D1ABB2B960011623B /* CalendarContentViewCell.swift */; };
 		A58DE6D51DD90F3900F65990 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2B19E4195A0026398E /* Drink.swift */; };
-		A58DE6D61DD90F3900F65990 /* JDFTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894621AF4B75C0042B6DF /* JDFTooltipView.m */; };
 		A58DE6D71DD90F3900F65990 /* CalendarViewContentTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CD974F1ABB2B960011623B /* CalendarViewContentTitleCell.swift */; };
 		A58DE6D81DD90F3900F65990 /* PickTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9DD971A16574E003D6444 /* PickTimeViewController.swift */; };
 		A58DE6D91DD90F3900F65990 /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424AA001A0A7009009C5C47 /* DiaryViewController.swift */; };
@@ -226,7 +222,6 @@
 		A58DE6F41DD90F3900F65990 /* YearStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C610BB1A31A98900433EF1 /* YearStatisticsViewController.swift */; };
 		A58DE6F61DD90F3900F65990 /* PickerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4151AA5D29700E3C989 /* PickerTableCell.swift */; };
 		A58DE6F71DD90F3900F65990 /* IntakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478253619EAC8C200588FE3 /* IntakeViewController.swift */; };
-		A58DE6F81DD90F3900F65990 /* JDFSequentialTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */; };
 		A58DE6F91DD90F3900F65990 /* NamedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B75A1519E57D3500D0477B /* NamedEntity.swift */; };
 		A58DE6FA1DD90F3900F65990 /* WeekStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B639811A25D9EF00889438 /* WeekStatisticsView.swift */; };
 		A58DE6FB1DD90F3900F65990 /* WeekStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A882CD1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift */; };
@@ -239,7 +234,6 @@
 		A58DE7031DD90F3900F65990 /* UnitItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E271A824D6700966538 /* UnitItems.swift */; };
 		A58DE7041DD90F3900F65990 /* YearStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B639821A25D9EF00889438 /* YearStatisticsView.swift */; };
 		A58DE7051DD90F3900F65990 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */; };
-		A58DE7061DD90F3900F65990 /* UILabel+JDFTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894641AF4B75C0042B6DF /* UILabel+JDFTooltips.m */; };
 		A58DE7071DD90F3900F65990 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B017B71BEFBD6200E3F8AB /* UIExtensions.swift */; };
 		A58DE7081DD90F3900F65990 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D251B31AD26489001E6644 /* CoreDataStack.swift */; };
 		A58DE7091DD90F3900F65990 /* RecentAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84380C2919E4195A0026398E /* RecentAmount.swift */; };
@@ -302,7 +296,6 @@
 		A58DE75A1DD90F8400F65990 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DEB0601BA75B4B00ABD3C8 /* HealthKit.framework */; };
 		A58DE75B1DD90F8400F65990 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D251961AD2511E001E6644 /* NotificationCenter.framework */; };
 		A58DE75E1DD90F8400F65990 /* WidgetImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8443DF411B29737D00FDD294 /* WidgetImages.xcassets */; };
-		A58DE75F1DD90F8400F65990 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52E0CE71B3854E600599D81 /* InfoPlist.strings */; };
 		A58DE7601DD90F8400F65990 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844B248D1B21991B0059E28A /* MainInterface.storyboard */; };
 		A58DE7611DD90F8400F65990 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 844B248A1B2195490059E28A /* Localizable.strings */; };
 		A58DE76E1DD90F9400F65990 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A583F5F41BEE5BC8000E3349 /* Assets.xcassets */; };
@@ -323,7 +316,6 @@
 		A58DE7891DD90FA100F65990 /* ProgressHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587ABFA1BD65D6C000B48E9 /* ProgressHelper.swift */; };
 		A58DE78A1DD90FA100F65990 /* UnitItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E271A824D6700966538 /* UnitItems.swift */; };
 		A58DE78B1DD90FA100F65990 /* WatchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B255DA1BF877F4009AD8DA /* WatchSettings.swift */; };
-		A58DE78C1DD90FA100F65990 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A587AAB81BD65224000B48E9 /* GlanceController.swift */; };
 		A58DE78D1DD90FA100F65990 /* SettingItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D0E241A824CA900966538 /* SettingItems.swift */; };
 		A58DE78E1DD90FA100F65990 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406D78019FE9875001C54BF /* Units.swift */; };
 		A58DE78F1DD90FA100F65990 /* ConnectivityMessagePendingIntakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D67D451DD25625001FB7D0 /* ConnectivityMessagePendingIntakes.swift */; };
@@ -373,7 +365,10 @@
 		A5B8F9961A87DF3D00145705 /* magic.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98A1A87DF3D00145705 /* magic.caf */; };
 		A5B8F9971A87DF3D00145705 /* tiny-bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */; };
 		A5B8F9981A87DF3D00145705 /* whistle.caf in Resources */ = {isa = PBXBuildFile; fileRef = A5B8F98C1A87DF3D00145705 /* whistle.caf */; };
-		A5C18C5D1DFA08D8003E9C7D /* Aquaz-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5C18C5C1DFA08D8003E9C7D /* Aquaz-Info.plist */; };
+		A5BF5B7B232E8E2B00764087 /* HelpTipManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BF5B7A232E8E2B00764087 /* HelpTipManager.swift */; };
+		A5BF5B7C232E8E2B00764087 /* HelpTipManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BF5B7A232E8E2B00764087 /* HelpTipManager.swift */; };
+		A5BF5B7E2338054E00764087 /* CommonLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BF5B7D2338054E00764087 /* CommonLocalizations.swift */; };
+		A5BF5B7F2338054E00764087 /* CommonLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BF5B7D2338054E00764087 /* CommonLocalizations.swift */; };
 		A5C18C641DFA0937003E9C7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5C18C621DFA0921003E9C7D /* InfoPlist.strings */; };
 		A5C70BBB1DEDC409006F7BFC /* FullVersionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70BB91DEDC409006F7BFC /* FullVersionController.swift */; };
 		A5C70BBE1DEDC47A006F7BFC /* InAppPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C70BBC1DEDC47A006F7BFC /* InAppPurchaseManager.swift */; };
@@ -405,11 +400,6 @@
 		A5C70BF31DF445CF006F7BFC /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BF21DF445CF006F7BFC /* CoreBluetooth.framework */; };
 		A5C70BF51DF445DA006F7BFC /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BF41DF445DA006F7BFC /* GLKit.framework */; };
 		A5C70BF71DF445E4006F7BFC /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5C70BF61DF445E4006F7BFC /* SafariServices.framework */; };
-		A5C894671AF4B75C0042B6DF /* JDFSequentialTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */; };
-		A5C894681AF4B75C0042B6DF /* JDFTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C8945F1AF4B75C0042B6DF /* JDFTooltipManager.m */; };
-		A5C894691AF4B75C0042B6DF /* JDFTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894621AF4B75C0042B6DF /* JDFTooltipView.m */; };
-		A5C8946A1AF4B75C0042B6DF /* UILabel+JDFTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894641AF4B75C0042B6DF /* UILabel+JDFTooltips.m */; };
-		A5C8946B1AF4B75C0042B6DF /* UIView+JDFTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C894661AF4B75C0042B6DF /* UIView+JDFTooltips.m */; };
 		A5D3D4211AA5D29700E3C989 /* OmegaSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4121AA5D29700E3C989 /* OmegaSettingsViewController.swift */; };
 		A5D3D4221AA5D29700E3C989 /* BasicTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4141AA5D29700E3C989 /* BasicTableCell.swift */; };
 		A5D3D4231AA5D29700E3C989 /* PickerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D3D4151AA5D29700E3C989 /* PickerTableCell.swift */; };
@@ -439,8 +429,8 @@
 		A5F582F21BF217BC0049AD3A /* UIControlsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F582F11BF217BC0049AD3A /* UIControlsExtensions.swift */; };
 		A5FD96781E36A5F20036B30D /* PredefinedAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FD96771E36A5F20036B30D /* PredefinedAmountViewController.swift */; };
 		A5FD96791E36A5F20036B30D /* PredefinedAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FD96771E36A5F20036B30D /* PredefinedAmountViewController.swift */; };
-		B722A889811802AE6C9CC6A1 /* Pods_Aquaz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47E8A4061BC876BE8F73EE8F /* Pods_Aquaz.framework */; };
-		BB748F45B992D8871CDE452C /* Pods_AquazPro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398200AD38E923CC4155B19B /* Pods_AquazPro.framework */; };
+		B5809676F68E47D9E579F3A3 /* Pods_AquazPro_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1D4F3F6331EF4F7BB9A9309 /* Pods_AquazPro_Widget.framework */; };
+		B6A3B7E3968BBFE88043C3B7 /* Pods_Aquaz_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D73D5E7657538DFD5EF3CD /* Pods_Aquaz_Widget.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -572,10 +562,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		33B305005A042FE000EAB938 /* Pods_AquazPro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		398200AD38E923CC4155B19B /* Pods_AquazPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C2041208195900C63B11E5B /* Pods_AquazPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40228D8261E67ED4AD5756F6 /* Pods-Aquaz Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Widget/Pods-Aquaz Widget.debug.xcconfig"; sourceTree = "<group>"; };
-		47E8A4061BC876BE8F73EE8F /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48DD03B8F72BAD45E4F034DF /* Pods-Aquaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz.release.xcconfig"; sourceTree = "<group>"; };
 		58019E5D5B0FBB923C036736 /* Pods-AquazPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro.release.xcconfig"; sourceTree = "<group>"; };
 		8111C4F9BFA177C9BC3397A4 /* Pods-AquazPro Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro Widget/Pods-AquazPro Widget.debug.xcconfig"; sourceTree = "<group>"; };
@@ -662,7 +650,6 @@
 		84ED8A201A84C8660042BAF2 /* UnitsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsTests.swift; sourceTree = "<group>"; };
 		84ED8A221A84ED9E0042BAF2 /* DrinkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkTests.swift; sourceTree = "<group>"; };
 		84F9DD971A16574E003D6444 /* PickTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTimeViewController.swift; sourceTree = "<group>"; };
-		8E56DE86546C846B16969B44 /* Pods_Aquaz_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F956C00FC6A32F4851C39B1 /* Pods-Aquaz Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz Widget/Pods-Aquaz Widget.release.xcconfig"; sourceTree = "<group>"; };
 		A516B1161BEBF76F00EC553A /* DrinksInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinksInterfaceController.swift; sourceTree = "<group>"; };
 		A51A65F91DD7C2D300B1A83F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -709,7 +696,6 @@
 		A587AAB21BD65224000B48E9 /* MainInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInterfaceController.swift; sourceTree = "<group>"; };
 		A587AAB41BD65224000B48E9 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		A587AAB61BD65224000B48E9 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		A587AAB81BD65224000B48E9 /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
 		A587AABA1BD65224000B48E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A587AABC1BD65224000B48E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A587ABFA1BD65D6C000B48E9 /* ProgressHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHelper.swift; sourceTree = "<group>"; };
@@ -760,6 +746,8 @@
 		A5B8F98A1A87DF3D00145705 /* magic.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = magic.caf; sourceTree = "<group>"; };
 		A5B8F98B1A87DF3D00145705 /* tiny-bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tiny-bell.caf"; sourceTree = "<group>"; };
 		A5B8F98C1A87DF3D00145705 /* whistle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whistle.caf; sourceTree = "<group>"; };
+		A5BF5B7A232E8E2B00764087 /* HelpTipManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTipManager.swift; sourceTree = "<group>"; };
+		A5BF5B7D2338054E00764087 /* CommonLocalizations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonLocalizations.swift; sourceTree = "<group>"; };
 		A5C18C5C1DFA08D8003E9C7D /* Aquaz-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Aquaz-Info.plist"; sourceTree = "<group>"; };
 		A5C18C611DFA0921003E9C7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A5C18C651DFA09F7003E9C7D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -792,17 +780,6 @@
 		A5C70BF21DF445CF006F7BFC /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		A5C70BF41DF445DA006F7BFC /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		A5C70BF61DF445E4006F7BFC /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		A5C8945C1AF4B75C0042B6DF /* JDFSequentialTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFSequentialTooltipManager.h; sourceTree = "<group>"; };
-		A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFSequentialTooltipManager.m; sourceTree = "<group>"; };
-		A5C8945E1AF4B75C0042B6DF /* JDFTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFTooltipManager.h; sourceTree = "<group>"; };
-		A5C8945F1AF4B75C0042B6DF /* JDFTooltipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFTooltipManager.m; sourceTree = "<group>"; };
-		A5C894601AF4B75C0042B6DF /* JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFTooltips.h; sourceTree = "<group>"; };
-		A5C894611AF4B75C0042B6DF /* JDFTooltipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFTooltipView.h; sourceTree = "<group>"; };
-		A5C894621AF4B75C0042B6DF /* JDFTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFTooltipView.m; sourceTree = "<group>"; };
-		A5C894631AF4B75C0042B6DF /* UILabel+JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+JDFTooltips.h"; sourceTree = "<group>"; };
-		A5C894641AF4B75C0042B6DF /* UILabel+JDFTooltips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+JDFTooltips.m"; sourceTree = "<group>"; };
-		A5C894651AF4B75C0042B6DF /* UIView+JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JDFTooltips.h"; sourceTree = "<group>"; };
-		A5C894661AF4B75C0042B6DF /* UIView+JDFTooltips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JDFTooltips.m"; sourceTree = "<group>"; };
 		A5D3D4121AA5D29700E3C989 /* OmegaSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmegaSettingsViewController.swift; sourceTree = "<group>"; };
 		A5D3D4141AA5D29700E3C989 /* BasicTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTableCell.swift; sourceTree = "<group>"; };
 		A5D3D4151AA5D29700E3C989 /* PickerTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableCell.swift; sourceTree = "<group>"; };
@@ -833,7 +810,10 @@
 		A5FD96771E36A5F20036B30D /* PredefinedAmountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredefinedAmountViewController.swift; sourceTree = "<group>"; };
 		B09AEEBCB8E2BA5DD363DE1F /* Pods-AquazPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro.debug.xcconfig"; sourceTree = "<group>"; };
 		E195771F27452BBCA81B0EE5 /* Pods-Aquaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aquaz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz.debug.xcconfig"; sourceTree = "<group>"; };
+		E1D4F3F6331EF4F7BB9A9309 /* Pods_AquazPro_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AquazPro_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29171CF1C152F5814D28249 /* Pods-AquazPro Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AquazPro Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-AquazPro Widget/Pods-AquazPro Widget.release.xcconfig"; sourceTree = "<group>"; };
+		F7D73D5E7657538DFD5EF3CD /* Pods_Aquaz_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9D3E11BE405E2F8EADFA03E /* Pods_Aquaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aquaz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -853,7 +833,7 @@
 				A5E898BC1BC094C500B9E4D6 /* Twitter.framework in Frameworks */,
 				A5DEB0611BA75B4B00ABD3C8 /* HealthKit.framework in Frameworks */,
 				A58A65F01A73C8BB0072164E /* AudioToolbox.framework in Frameworks */,
-				BB748F45B992D8871CDE452C /* Pods_AquazPro.framework in Frameworks */,
+				4C54BEB67C5F515E45C6E140 /* Pods_AquazPro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -870,7 +850,7 @@
 			files = (
 				A52BFC611BAF293400B76345 /* HealthKit.framework in Frameworks */,
 				84D251971AD2511E001E6644 /* NotificationCenter.framework in Frameworks */,
-				620343965FD08DA7E26115A6 /* Pods_AquazPro_Widget.framework in Frameworks */,
+				B5809676F68E47D9E579F3A3 /* Pods_AquazPro_Widget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -918,7 +898,7 @@
 				A58DE7151DD90F3900F65990 /* MessageUI.framework in Frameworks */,
 				A58DE7161DD90F3900F65990 /* Twitter.framework in Frameworks */,
 				A58DE7171DD90F3900F65990 /* HealthKit.framework in Frameworks */,
-				B722A889811802AE6C9CC6A1 /* Pods_Aquaz.framework in Frameworks */,
+				70FC08E98C9762B0F08FD71A /* Pods_Aquaz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,7 +908,7 @@
 			files = (
 				A58DE75A1DD90F8400F65990 /* HealthKit.framework in Frameworks */,
 				A58DE75B1DD90F8400F65990 /* NotificationCenter.framework in Frameworks */,
-				4B24ECA46920E196EE473015 /* Pods_Aquaz_Widget.framework in Frameworks */,
+				B6A3B7E3968BBFE88043C3B7 /* Pods_Aquaz_Widget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1005,7 +985,6 @@
 			isa = PBXGroup;
 			children = (
 				84BFFF081BA2DE6600AE938B /* Aquaz-Bridging-Header.h */,
-				A5C8945B1AF4B75C0042B6DF /* JDFTooltips */,
 				84CD974B1ABB2B960011623B /* OmegaCalendar */,
 				A5D3D4111AA5D29700E3C989 /* OmegaSettingsViewController */,
 			);
@@ -1029,6 +1008,7 @@
 				847D0E241A824CA900966538 /* SettingItems.swift */,
 				A57F5E6A1AC968A6005C4F46 /* GlobalConstants.swift */,
 				A52A7D861B245C88007A71ED /* NotificationSounds.swift */,
+				A5BF5B7D2338054E00764087 /* CommonLocalizations.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1192,10 +1172,10 @@
 				A5DEB0601BA75B4B00ABD3C8 /* HealthKit.framework */,
 				A58A65EF1A73C8BB0072164E /* AudioToolbox.framework */,
 				84D251961AD2511E001E6644 /* NotificationCenter.framework */,
-				47E8A4061BC876BE8F73EE8F /* Pods_Aquaz.framework */,
-				8E56DE86546C846B16969B44 /* Pods_Aquaz_Widget.framework */,
-				398200AD38E923CC4155B19B /* Pods_AquazPro.framework */,
-				33B305005A042FE000EAB938 /* Pods_AquazPro_Widget.framework */,
+				F9D3E11BE405E2F8EADFA03E /* Pods_Aquaz.framework */,
+				F7D73D5E7657538DFD5EF3CD /* Pods_Aquaz_Widget.framework */,
+				0C2041208195900C63B11E5B /* Pods_AquazPro.framework */,
+				E1D4F3F6331EF4F7BB9A9309 /* Pods_AquazPro_Widget.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1309,7 +1289,6 @@
 			isa = PBXGroup;
 			children = (
 				A587AAB21BD65224000B48E9 /* MainInterfaceController.swift */,
-				A587AAB81BD65224000B48E9 /* GlanceController.swift */,
 				A5B255E81BFCF998009AD8DA /* CurrentStateInterfaceController.swift */,
 				A516B1161BEBF76F00EC553A /* DrinksInterfaceController.swift */,
 				A58139D61BEE0D3C00B5D6A0 /* AmountInterfaceController.swift */,
@@ -1373,6 +1352,7 @@
 				84039F171A4B103100C5391E /* NotificationsHelper.swift */,
 				8444F1971B209250007577C8 /* SystemHelper.swift */,
 				A5A639BD1B2B219800E2DB60 /* ImageHelper.swift */,
+				A5BF5B7A232E8E2B00764087 /* HelpTipManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1415,24 +1395,6 @@
 				A5C70BB91DEDC409006F7BFC /* FullVersionController.swift */,
 			);
 			name = Settings;
-			sourceTree = "<group>";
-		};
-		A5C8945B1AF4B75C0042B6DF /* JDFTooltips */ = {
-			isa = PBXGroup;
-			children = (
-				A5C8945C1AF4B75C0042B6DF /* JDFSequentialTooltipManager.h */,
-				A5C8945D1AF4B75C0042B6DF /* JDFSequentialTooltipManager.m */,
-				A5C8945E1AF4B75C0042B6DF /* JDFTooltipManager.h */,
-				A5C8945F1AF4B75C0042B6DF /* JDFTooltipManager.m */,
-				A5C894601AF4B75C0042B6DF /* JDFTooltips.h */,
-				A5C894611AF4B75C0042B6DF /* JDFTooltipView.h */,
-				A5C894621AF4B75C0042B6DF /* JDFTooltipView.m */,
-				A5C894631AF4B75C0042B6DF /* UILabel+JDFTooltips.h */,
-				A5C894641AF4B75C0042B6DF /* UILabel+JDFTooltips.m */,
-				A5C894651AF4B75C0042B6DF /* UIView+JDFTooltips.h */,
-				A5C894661AF4B75C0042B6DF /* UIView+JDFTooltips.m */,
-			);
-			path = JDFTooltips;
 			sourceTree = "<group>";
 		};
 		A5D3D4111AA5D29700E3C989 /* OmegaSettingsViewController */ = {
@@ -1523,7 +1485,6 @@
 				A587AAC71BD65224000B48E9 /* Embed Watch Content */,
 				A571D50D1AB180B1006265C7 /* Fabric */,
 				E151E424973EA859961A94FD /* [CP] Embed Pods Frameworks */,
-				17BCFD4861B6350F4A7AC03E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1564,7 +1525,6 @@
 				84D251911AD2511E001E6644 /* Frameworks */,
 				84D251921AD2511E001E6644 /* Resources */,
 				8443DF271B29658100FDD294 /* Fabric */,
-				A4BA9EC72D1995F1EFEABD5D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1625,7 +1585,6 @@
 				A58DE7321DD90F3900F65990 /* Embed Watch Content */,
 				A58DE7341DD90F3900F65990 /* Fabric */,
 				BCA32A028802A4DC32E8C755 /* [CP] Embed Pods Frameworks */,
-				92184A75C2BAAB78BB24C781 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1648,7 +1607,6 @@
 				A58DE7591DD90F8400F65990 /* Frameworks */,
 				A58DE75D1DD90F8400F65990 /* Resources */,
 				A58DE7621DD90F8400F65990 /* Fabric */,
-				83D76332198517E15EA08266 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1722,13 +1680,13 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Sergey Balyakin";
 				TargetAttributes = {
 					84669A6819DAD78D003C2263 = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = BEWTR7XXXS;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1100;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1744,13 +1702,13 @@
 					84669A8019DAD78D003C2263 = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = BEWTR7XXXS;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1100;
 						TestTargetID = 84669A6819DAD78D003C2263;
 					};
 					84D251931AD2511E001E6644 = {
 						CreatedOnToolsVersion = 6.3;
 						DevelopmentTeam = BEWTR7XXXS;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1100;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1772,7 +1730,7 @@
 					A587AAAA1BD65224000B48E9 = {
 						CreatedOnToolsVersion = 7.0.1;
 						DevelopmentTeam = BEWTR7XXXS;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1100;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1781,7 +1739,7 @@
 					};
 					A58DE6A11DD90F3900F65990 = {
 						DevelopmentTeam = BEWTR7XXXS;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1100;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -1790,7 +1748,7 @@
 					};
 					A58DE73C1DD90F8400F65990 = {
 						DevelopmentTeam = BEWTR7XXXS;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1100;
 					};
 					A58DE7691DD90F9400F65990 = {
 						DevelopmentTeam = BEWTR7XXXS;
@@ -1798,18 +1756,19 @@
 					};
 					A58DE7791DD90FA100F65990 = {
 						DevelopmentTeam = BEWTR7XXXS;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1100;
 					};
 					A5AC5A501C0B149D0010898E = {
 						CreatedOnToolsVersion = 7.1.1;
-						LastSwiftMigration = 0800;
+						DevelopmentTeam = BEWTR7XXXS;
+						LastSwiftMigration = 1100;
 						TestTargetID = 84669A6819DAD78D003C2263;
 					};
 				};
 			};
 			buildConfigurationList = 84669A6419DAD78D003C2263 /* Build configuration list for PBXProject "Aquaz" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
@@ -1845,7 +1804,6 @@
 				A5AAA1D91A77A9CF008C3C56 /* LaunchScreen.xib in Resources */,
 				840D5A821B29B7C500388920 /* InfoBannerView.xib in Resources */,
 				A55F34A71A74D6AC00A529A5 /* DrinkCollectionViewCell.xib in Resources */,
-				A5C18C5D1DFA08D8003E9C7D /* Aquaz-Info.plist in Resources */,
 				A52E0CDB1B3854E500599D81 /* InfoPlist.strings in Resources */,
 				A57D2BEB1ACFDE0D00619D62 /* Welcome.storyboard in Resources */,
 				84669A7719DAD78D003C2263 /* Main.storyboard in Resources */,
@@ -1907,21 +1865,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5C70BBF1DEDF288006F7BFC /* Main.storyboard in Resources */,
-				A5C18C641DFA0937003E9C7D /* InfoPlist.strings in Resources */,
+				A58DE7291DD90F3900F65990 /* Images.xcassets in Resources */,
 				A58DE71B1DD90F3900F65990 /* Localizable.strings in Resources */,
-				A58DE71C1DD90F3900F65990 /* glass.caf in Resources */,
+				A58DE7281DD90F3900F65990 /* LaunchScreen.xib in Resources */,
 				A58DE71D1DD90F3900F65990 /* InfoBannerView.xib in Resources */,
+				A58DE7231DD90F3900F65990 /* DrinkCollectionViewCell.xib in Resources */,
+				A5C18C641DFA0937003E9C7D /* InfoPlist.strings in Resources */,
+				A58DE7211DD90F3900F65990 /* Welcome.storyboard in Resources */,
+				A5C70BBF1DEDF288006F7BFC /* Main.storyboard in Resources */,
+				A58DE71C1DD90F3900F65990 /* glass.caf in Resources */,
 				A58DE71E1DD90F3900F65990 /* tiny-bell.caf in Resources */,
 				A58DE71F1DD90F3900F65990 /* aqua.caf in Resources */,
 				A58DE7201DD90F3900F65990 /* chime.caf in Resources */,
-				A58DE7211DD90F3900F65990 /* Welcome.storyboard in Resources */,
-				A58DE7231DD90F3900F65990 /* DrinkCollectionViewCell.xib in Resources */,
 				A58DE7251DD90F3900F65990 /* chirp.caf in Resources */,
 				A58DE7261DD90F3900F65990 /* whistle.caf in Resources */,
 				A58DE7271DD90F3900F65990 /* magic.caf in Resources */,
-				A58DE7281DD90F3900F65990 /* LaunchScreen.xib in Resources */,
-				A58DE7291DD90F3900F65990 /* Images.xcassets in Resources */,
 				A58DE72A1DD90F3900F65990 /* bells.caf in Resources */,
 				A58DE72B1DD90F3900F65990 /* alarm.caf in Resources */,
 				A58DE72C1DD90F3900F65990 /* hand-bell.caf in Resources */,
@@ -1935,10 +1893,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A58DE75E1DD90F8400F65990 /* WidgetImages.xcassets in Resources */,
-				A58DE75F1DD90F8400F65990 /* InfoPlist.strings in Resources */,
+				A58D16171DFC8CA80020B106 /* InfoPlist.strings in Resources */,
 				A58DE7601DD90F8400F65990 /* MainInterface.storyboard in Resources */,
 				A58DE7611DD90F8400F65990 /* Localizable.strings in Resources */,
-				A58D16171DFC8CA80020B106 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1973,21 +1930,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		17BCFD4861B6350F4A7AC03E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		44B7D28156FC331C28E8CA22 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2024,21 +1966,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		83D76332198517E15EA08266 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz Widget/Pods-Aquaz Widget-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8443DF271B29658100FDD294 /* Fabric */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2052,63 +1979,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 05704a14be9c8590ae8ea81e57283c4e84ca67f3 55072d54e985e08a6262ca78f74607f2a5a5f546c18fb4b4623ed469a350539e";
-		};
-		92184A75C2BAAB78BB24C781 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz-resources.sh",
-				"${PODS_ROOT}/Appodeal/Appodeal.bundle",
-				"${PODS_ROOT}/Appodeal/APDIronSourceAdapter.embeddedframework/Resources/button-close-default.png",
-				"${PODS_ROOT}/Appodeal/APDIronSourceAdapter.embeddedframework/Resources/button-close-highlighted.png",
-				"${PODS_ROOT}/Appodeal/APDStartAppAdapter.embeddedframework/Resources/StartApp.bundle",
-				"${PODS_ROOT}/Appodeal/APDTapjoyAdapter.embeddedframework/Resources/TapjoyResources.bundle",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPAdBrowserController.xib",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn@2x.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn@3x.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseButtonX.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseButtonX@2x.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseButtonX@3x.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPDAAIcon.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPDAAIcon@2x.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPDAAIcon@3x.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPMutedBtn.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPMutedBtn@2x.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPMutedBtn@3x.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPPlayBtn.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPPlayBtn@2x.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPPlayBtn@3x.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPUnmutedBtn.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPUnmutedBtn@2x.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPUnmutedBtn@3x.png",
-				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MRAID.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A4BA9EC72D1995F1EFEABD5D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AquazPro Widget/Pods-AquazPro Widget-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		A52170EB1DD125DB0041135F /* Show Environment Variables */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2136,7 +2006,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# export";
+			shellScript = "# export\n";
 			showEnvVarsInLog = 0;
 		};
 		A52170ED1DD126B00041135F /* Show Environment Variables */ = {
@@ -2313,16 +2183,18 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Aquaz/Pods-Aquaz-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JDFTooltips/JDFTooltips.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JDFTooltips.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aquaz/Pods-Aquaz-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Aquaz/Pods-Aquaz-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E151E424973EA859961A94FD /* [CP] Embed Pods Frameworks */ = {
@@ -2331,18 +2203,18 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-AquazPro/Pods-AquazPro-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JDFTooltips/JDFTooltips.framework",
 				"${BUILT_PRODUCTS_DIR}/MMWormhole/MMWormhole.framework",
-				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JDFTooltips.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMWormhole.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AquazPro/Pods-AquazPro-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AquazPro/Pods-AquazPro-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2363,7 +2235,6 @@
 				A5EE36261AAD9DAA0038C844 /* Logger.swift in Sources */,
 				A5275F871A1216090088AF47 /* CalendarViewController.swift in Sources */,
 				840476571A35FE4A004F0FEF /* WaterGoalViewController.swift in Sources */,
-				A5C894681AF4B75C0042B6DF /* JDFTooltipManager.m in Sources */,
 				A587AD181BD68881000B48E9 /* UILoggedActions.swift in Sources */,
 				A58D16191DFD7F3D0020B106 /* WelcomeWizardAppleHealthViewController.swift in Sources */,
 				A554B4FD1BE504360095593B /* ConnectivityMessageAddIntake.swift in Sources */,
@@ -2390,7 +2261,6 @@
 				8404765B1A360273004F0FEF /* SupportViewController.swift in Sources */,
 				A5E70A7019E30BEE006E5FC0 /* Settings.swift in Sources */,
 				84039F181A4B103100C5391E /* NotificationsHelper.swift in Sources */,
-				A5C8946B1AF4B75C0042B6DF /* UIView+JDFTooltips.m in Sources */,
 				A59CDC911AD8587100E92EF2 /* CodingManagedObject.swift in Sources */,
 				A5B013E51AE27C7D00C372F8 /* UnitsViewController.swift in Sources */,
 				A5E6094C1A6A690800786D15 /* DiaryTableViewCell.swift in Sources */,
@@ -2399,11 +2269,11 @@
 				841B13BE1A31FE4F00249426 /* UIHelper.swift in Sources */,
 				84CD97541ABB2B960011623B /* CalendarContentViewCell.swift in Sources */,
 				84380C2C19E4195A0026398E /* Drink.swift in Sources */,
-				A5C894691AF4B75C0042B6DF /* JDFTooltipView.m in Sources */,
 				84CD97561ABB2B960011623B /* CalendarViewContentTitleCell.swift in Sources */,
 				84F9DD981A16574E003D6444 /* PickTimeViewController.swift in Sources */,
 				8424AA011A0A7009009C5C47 /* DiaryViewController.swift in Sources */,
 				8444F1981B209250007577C8 /* SystemHelper.swift in Sources */,
+				A5BF5B7E2338054E00764087 /* CommonLocalizations.swift in Sources */,
 				84669A7219DAD78D003C2263 /* Aquaz.xcdatamodeld in Sources */,
 				A5D3D4291AA5D29700E3C989 /* TextFieldTableCell.swift in Sources */,
 				A5D740761B301CA100FC2BAF /* WelcomeWizardWelcomeViewController.swift in Sources */,
@@ -2425,6 +2295,7 @@
 				847E75F81AA9F502003B63E1 /* UIDatePickerTableViewCell.swift in Sources */,
 				84B0C7041AA75E36006889E9 /* UITimeIntervalPickerTableViewCell.swift in Sources */,
 				A5D3D4251AA5D29700E3C989 /* SegmentedTableCell.swift in Sources */,
+				A5BF5B7B232E8E2B00764087 /* HelpTipManager.swift in Sources */,
 				A5B013E31AE27C4900C372F8 /* ExtraFactorsViewController.swift in Sources */,
 				A57D2BF01ACFEA5A00619D62 /* WelcomeWizardPageViewController.swift in Sources */,
 				A52A7D871B245C88007A71ED /* NotificationSounds.swift in Sources */,
@@ -2432,7 +2303,6 @@
 				84C610BC1A31A98900433EF1 /* YearStatisticsViewController.swift in Sources */,
 				A5D3D4231AA5D29700E3C989 /* PickerTableCell.swift in Sources */,
 				8478253719EAC8C200588FE3 /* IntakeViewController.swift in Sources */,
-				A5C894671AF4B75C0042B6DF /* JDFSequentialTooltipManager.m in Sources */,
 				A5B75A1619E57D3500D0477B /* NamedEntity.swift in Sources */,
 				84B639831A25D9EF00889438 /* WeekStatisticsView.swift in Sources */,
 				A5A882CE1A2CA8AF00B2A98A /* WeekStatisticsViewController.swift in Sources */,
@@ -2446,7 +2316,6 @@
 				84B639841A25D9EF00889438 /* YearStatisticsView.swift in Sources */,
 				A57F5E6B1AC968A6005C4F46 /* GlobalConstants.swift in Sources */,
 				A5FD96781E36A5F20036B30D /* PredefinedAmountViewController.swift in Sources */,
-				A5C8946A1AF4B75C0042B6DF /* UILabel+JDFTooltips.m in Sources */,
 				A5B017B81BEFBD6200E3F8AB /* UIExtensions.swift in Sources */,
 				84D251B41AD26489001E6644 /* CoreDataStack.swift in Sources */,
 				84380C2A19E4195A0026398E /* RecentAmount.swift in Sources */,
@@ -2526,7 +2395,6 @@
 				A587ABFB1BD65D6C000B48E9 /* ProgressHelper.swift in Sources */,
 				A549A8561BF273CF00340486 /* UnitItems.swift in Sources */,
 				A5B255DB1BF877F4009AD8DA /* WatchSettings.swift in Sources */,
-				A587AAB91BD65224000B48E9 /* GlanceController.swift in Sources */,
 				A549A8571BF273E300340486 /* SettingItems.swift in Sources */,
 				A549A8551BF273B800340486 /* Units.swift in Sources */,
 				A5D67D471DD25E92001FB7D0 /* ConnectivityMessagePendingIntakes.swift in Sources */,
@@ -2551,7 +2419,6 @@
 				A58DE6B01DD90F3900F65990 /* Logger.swift in Sources */,
 				A58DE6B11DD90F3900F65990 /* CalendarViewController.swift in Sources */,
 				A58DE6B21DD90F3900F65990 /* WaterGoalViewController.swift in Sources */,
-				A58DE6B31DD90F3900F65990 /* JDFTooltipManager.m in Sources */,
 				A58DE6B41DD90F3900F65990 /* UILoggedActions.swift in Sources */,
 				A58DE6B51DD90F3900F65990 /* ConnectivityMessageAddIntake.swift in Sources */,
 				A58DE6B61DD90F3900F65990 /* DatePickerTableCell.swift in Sources */,
@@ -2578,7 +2445,6 @@
 				A58DE6CA1DD90F3900F65990 /* SupportViewController.swift in Sources */,
 				A58DE6CB1DD90F3900F65990 /* Settings.swift in Sources */,
 				A58DE6CC1DD90F3900F65990 /* NotificationsHelper.swift in Sources */,
-				A58DE6CD1DD90F3900F65990 /* UIView+JDFTooltips.m in Sources */,
 				A58DE6CE1DD90F3900F65990 /* CodingManagedObject.swift in Sources */,
 				A58DE6CF1DD90F3900F65990 /* UnitsViewController.swift in Sources */,
 				A58DE6D01DD90F3900F65990 /* DiaryTableViewCell.swift in Sources */,
@@ -2587,7 +2453,6 @@
 				A58DE6D31DD90F3900F65990 /* UIHelper.swift in Sources */,
 				A58DE6D41DD90F3900F65990 /* CalendarContentViewCell.swift in Sources */,
 				A58DE6D51DD90F3900F65990 /* Drink.swift in Sources */,
-				A58DE6D61DD90F3900F65990 /* JDFTooltipView.m in Sources */,
 				A58DE6D71DD90F3900F65990 /* CalendarViewContentTitleCell.swift in Sources */,
 				A58DE6D81DD90F3900F65990 /* PickTimeViewController.swift in Sources */,
 				A58DE6D91DD90F3900F65990 /* DiaryViewController.swift in Sources */,
@@ -2616,13 +2481,13 @@
 				A58DE6EF1DD90F3900F65990 /* SegmentedTableCell.swift in Sources */,
 				A58DE6F01DD90F3900F65990 /* ExtraFactorsViewController.swift in Sources */,
 				A58DE6F11DD90F3900F65990 /* WelcomeWizardPageViewController.swift in Sources */,
+				A5BF5B7C232E8E2B00764087 /* HelpTipManager.swift in Sources */,
 				A58DE6F21DD90F3900F65990 /* NotificationSounds.swift in Sources */,
 				A58DE6F31DD90F3900F65990 /* TimeIntervalPickerTableCell.swift in Sources */,
 				A58DE6F41DD90F3900F65990 /* YearStatisticsViewController.swift in Sources */,
 				A58DE6F61DD90F3900F65990 /* PickerTableCell.swift in Sources */,
 				A58DE6F71DD90F3900F65990 /* IntakeViewController.swift in Sources */,
 				A5FD96791E36A5F20036B30D /* PredefinedAmountViewController.swift in Sources */,
-				A58DE6F81DD90F3900F65990 /* JDFSequentialTooltipManager.m in Sources */,
 				A58DE6F91DD90F3900F65990 /* NamedEntity.swift in Sources */,
 				A58DE6FA1DD90F3900F65990 /* WeekStatisticsView.swift in Sources */,
 				A58DE6FB1DD90F3900F65990 /* WeekStatisticsViewController.swift in Sources */,
@@ -2630,13 +2495,13 @@
 				A58DE6FD1DD90F3900F65990 /* StatisticsPageViewController.swift in Sources */,
 				A58DE6FE1DD90F3900F65990 /* SettingsViewController.swift in Sources */,
 				A58DE6FF1DD90F3900F65990 /* RoundedButton.swift in Sources */,
+				A5BF5B7F2338054E00764087 /* CommonLocalizations.swift in Sources */,
 				A58DE7001DD90F3900F65990 /* HealthKitViewController.swift in Sources */,
 				A58DE7021DD90F3900F65990 /* DrinkType.swift in Sources */,
 				A58DE7031DD90F3900F65990 /* UnitItems.swift in Sources */,
 				A58DE7041DD90F3900F65990 /* YearStatisticsView.swift in Sources */,
 				A58D161A1DFD7F3D0020B106 /* WelcomeWizardAppleHealthViewController.swift in Sources */,
 				A58DE7051DD90F3900F65990 /* GlobalConstants.swift in Sources */,
-				A58DE7061DD90F3900F65990 /* UILabel+JDFTooltips.m in Sources */,
 				A58DE7071DD90F3900F65990 /* UIExtensions.swift in Sources */,
 				A58DE7081DD90F3900F65990 /* CoreDataStack.swift in Sources */,
 				A58DE7091DD90F3900F65990 /* RecentAmount.swift in Sources */,
@@ -2702,7 +2567,6 @@
 				A58DE7891DD90FA100F65990 /* ProgressHelper.swift in Sources */,
 				A58DE78A1DD90FA100F65990 /* UnitItems.swift in Sources */,
 				A58DE78B1DD90FA100F65990 /* WatchSettings.swift in Sources */,
-				A58DE78C1DD90FA100F65990 /* GlanceController.swift in Sources */,
 				A58DE78D1DD90FA100F65990 /* SettingItems.swift in Sources */,
 				A58DE78E1DD90FA100F65990 /* Units.swift in Sources */,
 				A58DE78F1DD90FA100F65990 /* ConnectivityMessagePendingIntakes.swift in Sources */,
@@ -2920,12 +2784,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -2953,14 +2819,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -2978,12 +2844,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -3004,13 +2872,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -3021,7 +2889,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Aquaz/Aquaz.entitlements;
@@ -3032,7 +2900,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				INFOPLIST_FILE = Aquaz/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG -D AQUAZPRO -D AQUAZ";
@@ -3043,7 +2911,7 @@
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Aquaz/Aquaz-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -3053,7 +2921,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Aquaz/Aquaz.entitlements;
@@ -3065,7 +2933,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				INFOPLIST_FILE = Aquaz/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D AQUAZ -D AQUAZPRO";
@@ -3075,7 +2943,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Aquaz/Aquaz-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -3086,6 +2954,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -3098,8 +2967,8 @@
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aquaz.app/Aquaz";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AquazPro.app/AquazPro";
 			};
 			name = Debug;
 		};
@@ -3110,6 +2979,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				INFOPLIST_FILE = AquazTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.devmanifest.$(PRODUCT_NAME:rfc1034identifier)";
@@ -3118,8 +2988,8 @@
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aquaz.app/Aquaz";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AquazPro.app/AquazPro";
 			};
 			name = Release;
 		};
@@ -3135,12 +3005,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = Widget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG -D AQUAZPRO";
@@ -3151,7 +3022,7 @@
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Widget/Widget-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -3169,11 +3040,12 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Widget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D AQUAZPRO";
@@ -3183,7 +3055,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Widget/Widget-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -3208,9 +3080,9 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -3235,9 +3107,9 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -3249,6 +3121,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Watch Extension/Watch Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Watch Extension/Info.plist";
@@ -3260,9 +3133,9 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -3275,6 +3148,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				ENABLE_BITCODE = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Watch Extension/Info.plist";
@@ -3285,9 +3159,9 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -3297,7 +3171,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Aquaz/Aquaz.entitlements;
@@ -3309,7 +3183,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG -D AQUAZ -D AQUAZLITE";
@@ -3320,8 +3194,7 @@
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Aquaz/Aquaz-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -3331,7 +3204,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Aquaz/Aquaz.entitlements;
@@ -3344,7 +3217,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D AQUAZ -D AQUAZLITE";
@@ -3354,8 +3227,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Aquaz/Aquaz-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -3377,7 +3249,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz Widget-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG -D AQUAZLITE";
@@ -3388,8 +3260,7 @@
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Widget/Widget-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -3412,7 +3283,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "AquazLiteSpecific/Aquaz Widget-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D AQUAZLITE";
@@ -3422,8 +3293,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Widget/Widget-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -3449,9 +3319,9 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -3477,9 +3347,9 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -3504,10 +3374,9 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -3532,10 +3401,9 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -3543,15 +3411,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = AquazUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.Aquaz.AquazUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = Aquaz;
 				USES_XCTRUNNER = YES;
 			};
@@ -3562,13 +3431,14 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = BEWTR7XXXS;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = AquazUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devmanifest.Aquaz.AquazUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = Aquaz;
 				USES_XCTRUNNER = YES;
 			};

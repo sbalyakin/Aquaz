@@ -1,3 +1,6 @@
+/* CommonLocalizations: Title for OK button */
+"CL:OK" = "ОК";
+
 /* Drink: Title for beer */
 "D:Beer" = "Пиво";
 
@@ -61,9 +64,6 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 
 /* DayViewController: Title for alert\'s button allowing user to reject rating the applcation */
 "DVC:No, Thanks" = "Нет, Спасибо";
-
-/* DayViewController: Cancel button title for alert displayed if tomorrow has come */
-"DVC:OK" = "ОК";
 
 /* DayViewController: Alert\'s title suggesting user to rate the application */
 "DVC:Rate Aquaz" = "Оценить Aquaz";
@@ -137,9 +137,6 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 /* HealthKitViewController: Label title displaying number of intakes in Aquaz */
 "HKVC:Intakes in Aquaz: %@" = "Записей в Aquaz: %@";
 
-/* HealthKitViewController: Title for OK button */
-"HKVC:OK" = "ОК";
-
 /* InAppPurchaseManager: Message shown when payment transaction failed by reason: An unknown error occured */
 "IAPM:An unknown error occured" = "Произошла неизвестная ошибка";
 
@@ -151,9 +148,6 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 
 /* InAppPurchaseManager: Message shown to user if payments are forbidden according to parental controls */
 "IAPM:It's forbidden to make payments due to parental controls" = "Встроенные покупки запрещены в соответствии с настройками родительского контроля";
-
-/* InAppPurchaseManager: Title of OK button */
-"IAPM:OK" = "ОК";
 
 /* InAppPurchaseManager: Message shown when payment transaction failed by reason: Client is not allowed to perform the attempted action */
 "IAPM:You is not allowed to perform the attempted action" = "Вы не можете выполнить данную операцию";
@@ -301,9 +295,6 @@ Thanks for your support!" = "Если вам нравится Aquaz, могли 
 
 /* SettingsViewController: Table cell title for [Notifications] settings block */
 "SVC:Notifications" = "Оповещения";
-
-/* SupportViewController: Title for OK button */
-"SVC:OK" = "ОК";
 
 /* SupportViewController: Body of an alert shown if the device is not set up to send e-mails */
 "SVC:Please check your mail settings" = "Пожалуйста, проверьте настройки почты";

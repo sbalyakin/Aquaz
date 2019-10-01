@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-@testable import Aquaz
+@testable import AquazPro
 
 class UnitsTests: XCTestCase {
   
@@ -22,19 +22,19 @@ class UnitsTests: XCTestCase {
     super.tearDown()
   }
   
-  fileprivate func testQuantityDoubleConversion<From: Aquaz.Unit, To: Aquaz.Unit>(amount: Double, accuracy: Double, from fromUnit: From, to toUnit: To) {
+  fileprivate func testQuantityDoubleConversion<From: AquazPro.Unit, To: AquazPro.Unit>(amount: Double, accuracy: Double, from fromUnit: From, to toUnit: To) {
     let from = Quantity(unit: fromUnit, amount: amount)
     let to = Quantity(unit: toUnit)
     to.convertFrom(quantity: from)
     let check = Quantity(unit: fromUnit)
     check.convertFrom(quantity: to)
-    XCTAssertEqualWithAccuracy(from.amount, check.amount, accuracy: accuracy, "Double conversion test is failed: Unit type is \(from.unit.type.description), conversion from \(from.unit.contraction) to \(to.unit.contraction), amount \(amount)")
+    XCTAssertEqual(from.amount, check.amount, accuracy: accuracy, "Double conversion test is failed: Unit type is \(from.unit.type.description), conversion from \(from.unit.contraction) to \(to.unit.contraction), amount \(amount)")
   }
   
-  fileprivate func testConversion<From: Aquaz.Unit, To: Aquaz.Unit>(fromAmount: Double, expectedAmount: Double, accuracy: Double, from fromUnit: From, to toUnit: To) {
+  fileprivate func testConversion<From: AquazPro.Unit, To: AquazPro.Unit>(fromAmount: Double, expectedAmount: Double, accuracy: Double, from fromUnit: From, to toUnit: To) {
     let from = Quantity(unit: fromUnit, amount: fromAmount)
     let to = Quantity(ownUnit: toUnit, fromQuantity: from)
-    XCTAssertEqualWithAccuracy(to.amount, expectedAmount, accuracy: accuracy, "Conversion test is failed: \(from.amount) \(from.unit.contraction) is converted to \(to.amount) \(to.unit.contraction). It should be \(expectedAmount) \(to.unit.contraction)")
+    XCTAssertEqual(to.amount, expectedAmount, accuracy: accuracy, "Conversion test is failed: \(from.amount) \(from.unit.contraction) is converted to \(to.amount) \(to.unit.contraction). It should be \(expectedAmount) \(to.unit.contraction)")
   }
   
   func testVolumeUnits() {

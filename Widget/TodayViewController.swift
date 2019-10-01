@@ -175,7 +175,7 @@ class TodayViewController: UIViewController {
         
         drinkIndexesToDisplay += [index.intValue]
         
-        if let indexToRemove = drinkIndexes.index(of: index.intValue) {
+        if let indexToRemove = drinkIndexes.firstIndex(of: index.intValue) {
           drinkIndexes.remove(at: indexToRemove)
         }
       }

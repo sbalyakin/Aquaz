@@ -30,7 +30,7 @@ extension UIView {
     #endif
   }
   
-  func addConstraints(_ constraintsVisualFormat: String, views: [String: UIView], metrics: [String: Any]? = nil, options: NSLayoutFormatOptions = NSLayoutFormatOptions()) {
+  func addConstraints(_ constraintsVisualFormat: String, views: [String: UIView], metrics: [String: Any]? = nil, options: NSLayoutConstraint.FormatOptions = NSLayoutConstraint.FormatOptions()) {
     let constraints = NSLayoutConstraint.constraints(withVisualFormat: constraintsVisualFormat, options: options, metrics: metrics, views: views)
     self.addConstraints(constraints)
   }
@@ -46,12 +46,12 @@ extension UILabel {
     
     let duration: TimeInterval = 0.3
     
-    UIView.animate(withDuration: duration / 2, delay: 0, options: UIViewAnimationOptions(), animations: { self.alpha = 0 } ) {
+    UIView.animate(withDuration: duration / 2, delay: 0, options: UIView.AnimationOptions(), animations: { self.alpha = 0 } ) {
       (completed) -> Void in
       self.text = text
       callback?()
       
-      UIView.animate(withDuration: duration / 2, delay: 0, options: UIViewAnimationOptions(), animations: {
+      UIView.animate(withDuration: duration / 2, delay: 0, options: UIView.AnimationOptions(), animations: {
         self.alpha = 1
         }, completion: nil)
     }

@@ -29,14 +29,14 @@ final class WelcomeWizardWelcomeViewController: UIViewController {
       self.verticalSpaceMultiplierConstraint.constant = 0
       self.logo.setNeedsUpdateConstraints()
       
-      UIView.animate(withDuration: 1, delay: 0, options: UIViewAnimationOptions(), animations: {
+      UIView.animate(withDuration: 1, delay: 0, options: UIView.AnimationOptions(), animations: {
         self.logo.layoutIfNeeded()
       }, completion: { _ in
-        UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions(), animations: {
           self.welcomeLabel.alpha = 1
           }, completion: nil)
         
-        UIView.animate(withDuration: 0.5, delay: 0.25, options: UIViewAnimationOptions(), animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.25, options: UIView.AnimationOptions(), animations: {
           self.swipeLabel.alpha = 1
         }, completion: nil)
       })

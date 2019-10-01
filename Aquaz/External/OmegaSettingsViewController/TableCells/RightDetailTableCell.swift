@@ -12,7 +12,7 @@ class RightDetailTableCell<Value: CustomStringConvertible>: TableCellWithValue<V
   
   var title: String { didSet { uiCell?.textLabel?.text = title } }
   var image: UIImage? { didSet { uiCell?.imageView?.image = image } }
-  var accessoryType: UITableViewCellAccessoryType? { didSet { uiCell?.accessoryType = accessoryType ?? .none } }
+  var accessoryType: UITableViewCell.AccessoryType? { didSet { uiCell?.accessoryType = accessoryType ?? .none } }
   var uiCell: UITableViewCell?
   
   var supportingTableCell: TableCellWithValue<Value>? {
@@ -26,7 +26,7 @@ class RightDetailTableCell<Value: CustomStringConvertible>: TableCellWithValue<V
   override var supportsPermanentActivation: Bool { return supportingTableCell != nil }
 
   
-  init(title: String, value: Value, container: TableCellsContainer, accessoryType: UITableViewCellAccessoryType? = nil) {
+  init(title: String, value: Value, container: TableCellsContainer, accessoryType: UITableViewCell.AccessoryType? = nil) {
     self.title = title
     self.accessoryType = accessoryType
     super.init(value: value, container: container)

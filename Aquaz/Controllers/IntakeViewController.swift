@@ -9,10 +9,6 @@
 import UIKit
 import CoreData
 
-#if AQUAZLITE
-import Appodeal
-#endif
-
 class IntakeViewController: UIViewController {
 
   @IBOutlet weak var amountSlider: CustomSlider!
@@ -53,6 +49,7 @@ class IntakeViewController: UIViewController {
   var drinkType: DrinkType!
   
   fileprivate var drink: Drink!
+  fileprivate var helpTipManager = HelpTipManager()
   
   // Should be nil for add intake mode, and not nil for edit intake mode
   var intake: Intake? {
@@ -61,7 +58,7 @@ class IntakeViewController: UIViewController {
         if let intake = self.intake {
           self.drinkType = intake.drink.drinkType
           self.drink = intake.drink
-          self.date = intake.date as Date!
+          self.date = intake.date
           self.timeIsChoosen = true
         } else {
           self.timeIsChoosen = false
@@ -87,18 +84,13 @@ class IntakeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    #if AQUAZLITE
-    checkForShowAds()
-    #endif
-    
     fetchDrink()
-    
     setupUI()
     
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(self.preferredContentSizeChanged),
-      name: NSNotification.Name.UIContentSizeCategoryDidChange,
+      name: UIContentSizeCategory.didChangeNotification,
       object: nil)
   }
   
@@ -107,19 +99,6 @@ class IntakeViewController: UIViewController {
     checkHelpTip()
   }
 
-  #if AQUAZLITE
-  private func checkForShowAds() {
-    if Settings.sharedInstance.generalFullVersion.value || Settings.sharedInstance.generalAdCounter.value > 0 {
-      return
-    }
-    
-    if Appodeal.isReadyForShow(with: .nonSkippableVideo) {
-      Appodeal.showAd(.nonSkippableVideo, rootViewController: self.navigationController)
-      Settings.sharedInstance.generalAdCounter.value = GlobalConstants.numberOfIntakesToShowAd
-    }
-  }
-  #endif
-  
   fileprivate func fetchDrink() {
     if let _ = drink {
       return
@@ -161,7 +140,7 @@ class IntakeViewController: UIViewController {
   }
 
   @objc func preferredContentSizeChanged() {
-    amountLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+    amountLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
     view.invalidateIntrinsicContentSize()
   }
 
@@ -189,7 +168,7 @@ class IntakeViewController: UIViewController {
   
   fileprivate func setupApplyButton() {
     let title = (viewMode == .add) ? localizedStrings.addButtonTitle : localizedStrings.applyButtonTitle
-    applyButton.setTitle(title, for: UIControlState())
+    applyButton.setTitle(title, for: UIControl.State())
   }
 
   fileprivate func applyColorScheme() {
@@ -396,7 +375,7 @@ class IntakeViewController: UIViewController {
   
   fileprivate func showHelpTipForView(_ view: UIView) {
     SystemHelper.executeBlockWithDelay(GlobalConstants.helpTipDelayToShow) {
-      if self.view.window == nil {
+      if self.view.window == nil || self.helpTipManager.isHelpTipActive {
         return
       }
       
@@ -404,10 +383,14 @@ class IntakeViewController: UIViewController {
                                    value: "Use long press to adjust an amount",
                                    comment: "IntakeViewController: Text for help tip about long press for predefined amounts buttons")
       
-      if let helpTip = JDFTooltipView(targetView: view, hostView: self.view, tooltipText: text, arrowDirection: .down, width: self.view.frame.width / 2) {
-        UIHelper.showHelpTip(helpTip)
-        Settings.sharedInstance.uiIntakeHelpTipIsShown.value = true
-      }
+      self.helpTipManager.showHelpTip(
+        targetView: view,
+        hostView: self.view,
+        tooltipText: text,
+        arrowDirection: .down,
+        width: self.view.frame.width / 2)
+      
+      Settings.sharedInstance.uiIntakeHelpTipIsShown.value = true
     }
   }
 

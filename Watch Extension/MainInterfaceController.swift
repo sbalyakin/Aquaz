@@ -9,6 +9,7 @@
 import Foundation
 import WatchKit
 import WatchConnectivity
+import UserNotifications
 
 final class MainInterfaceController: CurrentStateInterfaceController {
 
@@ -22,13 +23,7 @@ final class MainInterfaceController: CurrentStateInterfaceController {
     return WKInterfaceDevice.currentResolution().fontSizes
   }
 
-  override func handleAction(withIdentifier identifier: String?, for localNotification: UILocalNotification) {
-    if identifier == "addIntakeAction" {
-      pushController(withName: "DrinksInterfaceController", context: nil)
-    }
-  }
-  
-  override func handleAction(withIdentifier identifier: String?, forRemoteNotification remoteNotification: [AnyHashable: Any]) {
+  func customHandleAction(withIdentifier identifier: String?, for localNotification: UNNotification) {
     if identifier == "addIntakeAction" {
       pushController(withName: "DrinksInterfaceController", context: nil)
     }

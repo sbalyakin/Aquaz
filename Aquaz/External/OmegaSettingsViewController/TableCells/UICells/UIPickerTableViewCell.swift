@@ -79,7 +79,7 @@ class UIPickerTableViewCell: UITableViewCell {
       pickerView.dataSource = self
       pickerViewDelegate = UIPickerTableViewCellInternalAttributedTitleDelegate(pickerTableViewCell: self)
       contentView.addSubview(pickerView)
-      contentView.sendSubview(toBack: pickerView)
+      contentView.sendSubviewToBack(pickerView)
     }
   }
   
@@ -162,12 +162,12 @@ class UIPickerTableViewCell: UITableViewCell {
     paragraphStyle.alignment = componentTitle.isEmpty ? .center : .right
     paragraphStyle.tailIndent = -componentTitleWidth
     
-    return NSAttributedString(string: rowTitle, attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle])
+    return NSAttributedString(string: rowTitle, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
   }
   
   fileprivate func computeSizeForText(_ text: String, font: UIFont) -> CGSize {
     let textStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-    let fontAttributes = [NSAttributedStringKey.font: font, NSAttributedStringKey.paragraphStyle: textStyle]
+    let fontAttributes = [NSAttributedString.Key.font: font, NSAttributedString.Key.paragraphStyle: textStyle]
     let infiniteSize = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
     let rect = text.boundingRect(with: infiniteSize, options: .usesLineFragmentOrigin, attributes: fontAttributes, context: nil)
     return CGSize(width: ceil(rect.width), height: ceil(rect.height))

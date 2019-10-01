@@ -19,4 +19,10 @@ extension UIViewController {
     }
   }
   
+  func alertOkMessage(message: String, title: String? = nil, okHandler: ((UIAlertAction) -> Void)? = nil) {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+    let okAction = UIAlertAction(title: CommonLocalizations.ok, style: .default, handler: okHandler)
+    alert.addAction(okAction)
+    present(alert, animated: true, completion: nil)
+  }
 }
